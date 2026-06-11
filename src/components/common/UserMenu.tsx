@@ -1,5 +1,13 @@
 import { useEffect, useState } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import {
+  ShieldCheck,
+  BadgeInfo,
+  PhoneCall,
+  UserRound,
+  LogOut,
+  Sparkles,
+} from "lucide-react";
 import { auth } from "../../lib/firebase";
 import "../../styles.css";
 
@@ -44,18 +52,24 @@ export default function UserMenu() {
     <div className="user-nav">
       {adminMode && (
         <a href="/admin" className="user-nav-link admin-top-link">
-          <span className="user-nav-icon">⌂</span>
+          <span className="user-nav-icon">
+            <ShieldCheck size={16} strokeWidth={2.4} />
+          </span>
           <small>Admin</small>
         </a>
       )}
 
       <a href={`/about${adminSuffix}`} className="user-nav-link">
-        <span className="user-nav-icon">i</span>
+        <span className="user-nav-icon">
+          <BadgeInfo size={16} strokeWidth={2.4} />
+        </span>
         <small>Giới thiệu</small>
       </a>
 
       <a href={`/contact${adminSuffix}`} className="user-nav-link">
-        <span className="user-nav-icon">☎</span>
+        <span className="user-nav-icon">
+          <PhoneCall size={16} strokeWidth={2.4} />
+        </span>
         <small>Liên hệ</small>
       </a>
 
@@ -64,14 +78,18 @@ export default function UserMenu() {
         className="user-nav-link user-button"
         onClick={() => setOpen((current) => !current)}
       >
-        <span className="user-nav-avatar">●</span>
+        <span className="user-nav-avatar">
+          <UserRound size={16} strokeWidth={2.4} />
+        </span>
         <small>Người dùng</small>
       </button>
 
       {open && (
         <div className="user-dropdown">
           <div className="user-dropdown-head">
-            <div className="user-avatar-mini">🎓</div>
+            <div className="user-avatar-mini">
+              <Sparkles size={22} strokeWidth={2.5} />
+            </div>
 
             <div>
               <strong>Hello, Người dùng</strong>
@@ -79,41 +97,18 @@ export default function UserMenu() {
             </div>
           </div>
 
-          <div className="user-dropdown-body">
-            {adminMode && (
-              <a href="/admin" className="admin-return-link">
-                <span>⌂</span>
-                <div>
-                  <strong>Quay về Admin</strong>
-                  <p>Trở lại Nexus Console để quản trị hệ thống</p>
-                </div>
-              </a>
-            )}
+<div className="user-dropdown-body compact">
+  <button type="button" onClick={handleLogout}>
+    <span>
+      <LogOut size={18} strokeWidth={2.5} />
+    </span>
 
-            <a href={`/about${adminSuffix}`}>
-              <span>✦</span>
-              <div>
-                <strong>Giới thiệu hệ thống</strong>
-                <p>Xem tầm nhìn và cấu trúc Cognitive Learn AI</p>
-              </div>
-            </a>
-
-            <a href={`/contact${adminSuffix}`}>
-              <span>✉</span>
-              <div>
-                <strong>Liên hệ hỗ trợ</strong>
-                <p>Gửi phản hồi hoặc yêu cầu hỗ trợ</p>
-              </div>
-            </a>
-
-            <button type="button" onClick={handleLogout}>
-              <span>↪</span>
-              <div>
-                <strong>Đăng xuất</strong>
-                <p>Thoát khỏi tài khoản hiện tại</p>
-              </div>
-            </button>
-          </div>
+    <div>
+      <strong>Đăng xuất</strong>
+      <p>Thoát khỏi tài khoản hiện tại</p>
+    </div>
+  </button>
+</div>
         </div>
       )}
     </div>

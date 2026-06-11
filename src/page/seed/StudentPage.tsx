@@ -1,9 +1,8 @@
-import { signOut } from "firebase/auth";
-import { auth } from "../../lib/firebase";
 import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
-import "../../styles.css";
 import ModuleClusterGrid from "../../components/common/ModuleClusterGrid";
+import "../../styles.css";
+
 const cognitiveScores = [
   {
     label: "SCI",
@@ -62,11 +61,6 @@ export default function TrangHocSinh() {
   const params = new URLSearchParams(window.location.search);
   const isAdminPreview = params.get("from") === "admin";
 
-  async function handleLogout() {
-    await signOut(auth);
-    window.location.href = "/";
-  }
-
   function goTo(path: string) {
     window.location.href = path;
   }
@@ -82,16 +76,6 @@ export default function TrangHocSinh() {
           >
             <img src={appLogo} alt="Cognitive Learn" />
           </a>
-
-          {isAdminPreview && (
-            <button
-              type="button"
-              className="student-back-admin"
-              onClick={() => goTo("/admin")}
-            >
-              Quay lại Admin
-            </button>
-          )}
         </div>
 
         <UserMenu />
@@ -111,13 +95,18 @@ export default function TrangHocSinh() {
 
             <div className="student-hero-actions">
               <button
-  type="button"
-  onClick={() =>
-    goTo(isAdminPreview ? "/student/profile?from=admin" : "/student/profile")
-  }
->
-  Nhập hồ sơ học tập
-</button>
+                type="button"
+                onClick={() =>
+                  goTo(
+                    isAdminPreview
+                      ? "/student/profile?from=admin"
+                      : "/student/profile"
+                  )
+                }
+              >
+                Nhập hồ sơ học tập
+              </button>
+
               <button type="button" className="secondary">
                 Xem báo cáo
               </button>
@@ -139,12 +128,14 @@ export default function TrangHocSinh() {
             </div>
           </div>
         </section>
+
         <ModuleClusterGrid
-  role="student"
-  isAdminPreview={isAdminPreview}
-  title="Cognitive Path cá nhân"
-  subtitle="Các cụm module học sinh được sử dụng để nhập hồ sơ, đánh giá nhận thức, mô phỏng tương lai, định hướng tuyển sinh và theo dõi tiến trình học tập."
-/>
+          role="student"
+          isAdminPreview={isAdminPreview}
+          title="Cognitive Path cá nhân"
+          subtitle="Các cụm module học sinh được sử dụng để nhập hồ sơ, đánh giá nhận thức, mô phỏng tương lai, định hướng tuyển sinh và theo dõi tiến trình học tập."
+        />
+
         <section className="student-overview-grid">
           {cognitiveScores.map((item) => (
             <article key={item.label} className="student-score-card">
@@ -172,7 +163,18 @@ export default function TrangHocSinh() {
                 <h2>Bảng điểm hiện tại</h2>
               </div>
 
-              <button type="button">Cập nhật</button>
+              <button
+                type="button"
+                onClick={() =>
+                  goTo(
+                    isAdminPreview
+                      ? "/student/profile?from=admin"
+                      : "/student/profile"
+                  )
+                }
+              >
+                Cập nhật
+              </button>
             </div>
 
             <div className="student-subject-list">
@@ -227,13 +229,17 @@ export default function TrangHocSinh() {
           </div>
 
           <button
-  type="button"
-  onClick={() =>
-    goTo(isAdminPreview ? "/student/profile?from=admin" : "/student/profile")
-  }
->
-  Tiếp tục bước nhập hồ sơ
-</button>
+            type="button"
+            onClick={() =>
+              goTo(
+                isAdminPreview
+                  ? "/student/profile?from=admin"
+                  : "/student/profile"
+              )
+            }
+          >
+            Tiếp tục bước nhập hồ sơ
+          </button>
         </section>
       </section>
     </main>

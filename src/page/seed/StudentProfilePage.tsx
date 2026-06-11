@@ -1,5 +1,4 @@
 import { FormEvent, useMemo, useState } from "react";
-import { signOut } from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { auth, db } from "../../lib/firebase";
 import appLogo from "../../assets/logo cla.png";
@@ -247,7 +246,6 @@ export default function TrangNhapHoSoHocTap() {
       setSelectedElectives((current) =>
         current.filter((item) => item !== subject)
       );
-
       return;
     }
 
@@ -329,11 +327,6 @@ export default function TrangNhapHoSoHocTap() {
 
   function goTo(path: string) {
     window.location.href = path;
-  }
-
-  async function handleLogout() {
-    await signOut(auth);
-    window.location.href = "/";
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -433,19 +426,9 @@ export default function TrangNhapHoSoHocTap() {
           >
             <img src={appLogo} alt="Cognitive Learn" />
           </a>
-
-          {isAdminPreview && (
-            <button
-              type="button"
-              className="profile-back-admin"
-              onClick={() => goTo("/admin")}
-            >
-              Quay lại Admin
-            </button>
-          )}
         </div>
 
-       <UserMenu />
+        <UserMenu />
       </div>
 
       <section className="profile-shell">
