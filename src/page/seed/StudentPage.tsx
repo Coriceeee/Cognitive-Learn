@@ -1,7 +1,45 @@
+import { useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "../../lib/firebase";
+
 import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
 import ModuleClusterGrid from "../../components/common/ModuleClusterGrid";
 import "../../styles.css";
+
+type Profile = {
+  fullName?: string;
+  className?: string;
+
+  targetMajor?: string;
+  targetUniversity?: string;
+
+  gpa10?: number;
+  gpa11?: number;
+  gpa12?: number;
+  gpaOverall?: number;
+
+  studyHoursPerWeek?: number;
+  practiceTestsPerWeek?: number;
+  planCompletionRate?: number;
+  motivationLevel?: number;
+};
+
+const defaultProfile: Profile = {
+  fullName: "Chưa có dữ liệu",
+  className: "--",
+  targetMajor: "--",
+  targetUniversity: "--",
+  gpa10: 0,
+  gpa11: 0,
+  gpa12: 0,
+  gpaOverall: 0,
+  studyHoursPerWeek: 0,
+  practiceTestsPerWeek: 0,
+  planCompletionRate: 0,
+  motivationLevel: 0,
+};
 
 const cognitiveScores = [
   {
@@ -57,12 +95,47 @@ const recommendationCards = [
   },
 ];
 
-export default function TrangHocSinh() {
+export default function StudentPage() {
+  const [profile, setProfile] = useState<Profile>(defaultProfile);
+  const [loading, setLoading] = useState(true);
+
   const params = new URLSearchParams(window.location.search);
   const isAdminPreview = params.get("from") === "admin";
 
   function goTo(path: string) {
     window.location.href = path;
+  }
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        setProfile(defaultProfile);
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const ref = doc(db, "learning_profiles", user.uid);
+        const snap = await getDoc(ref);
+
+        if (snap.exists()) {
+          setProfile({ ...defaultProfile, ...snap.data() });
+        } else {
+          setProfile(defaultProfile);
+        }
+      } catch (err) {
+        console.error("Firestore error:", err);
+        setProfile(defaultProfile);
+      }
+
+      setLoading(false);
+    });
+
+    return () => unsub();
+  }, []);
+
+  if (loading) {
+    return <div className="p-6 text-center">Đang tải dữ liệu...</div>;
   }
 
   return (
@@ -72,7 +145,6 @@ export default function TrangHocSinh() {
           <a
             className="student-home-logo"
             href={isAdminPreview ? "/student?from=admin" : "/student"}
-            aria-label="Về trang học sinh"
           >
             <img src={appLogo} alt="Cognitive Learn" />
           </a>
@@ -82,6 +154,7 @@ export default function TrangHocSinh() {
       </div>
 
       <section className="student-shell">
+        {/* HERO */}
         <section className="student-hero">
           <div className="student-hero-copy">
             <span>HỌC SINH</span>
@@ -90,12 +163,11 @@ export default function TrangHocSinh() {
 
             <p>
               Theo dõi năng lực hiện tại, trạng thái nhận thức, điểm dự báo và
-              chiến lược học tập phù hợp cho mục tiêu tuyển sinh.
+              chiến lược học tập phù hợp.
             </p>
 
             <div className="student-hero-actions">
               <button
-                type="button"
                 onClick={() =>
                   goTo(
                     isAdminPreview
@@ -107,35 +179,42 @@ export default function TrangHocSinh() {
                 Nhập hồ sơ học tập
               </button>
 
-              <button type="button" className="secondary">
-                Xem báo cáo
-              </button>
+              <button className="secondary">Xem báo cáo</button>
             </div>
           </div>
 
+          {/* PROFILE CARD (REAL DATA) */}
           <div className="student-profile-card">
-            <div className="student-avatar">A</div>
+            <div className="student-avatar">
+              {profile.fullName?.charAt(0) || "A"}
+            </div>
 
             <div>
-              <h2>Nguyễn Minh Anh</h2>
-              <p>Lớp 12A1 · Mục tiêu CNTT</p>
+              <h2>{profile.fullName}</h2>
+              <p>
+                {profile.className} · Mục tiêu {profile.targetMajor}
+              </p>
             </div>
 
             <div className="student-target-box">
-              <span>Điểm dự báo</span>
-              <strong>25.6</strong>
-              <p>Xác suất đạt mục tiêu: 72%</p>
+              <span>GPA</span>
+              <strong>{profile.gpaOverall}</strong>
+              <p>
+                Trường: {profile.targetUniversity}
+              </p>
             </div>
           </div>
         </section>
 
+        {/* MODULE */}
         <ModuleClusterGrid
           role="student"
           isAdminPreview={isAdminPreview}
           title="Cognitive Path cá nhân"
-          subtitle="Các cụm module học sinh được sử dụng để nhập hồ sơ, đánh giá nhận thức, mô phỏng tương lai, định hướng tuyển sinh và theo dõi tiến trình học tập."
+          subtitle="Các cụm module học sinh hỗ trợ phân tích học tập và định hướng tương lai."
         />
 
+        {/* SCORES */}
         <section className="student-overview-grid">
           {cognitiveScores.map((item) => (
             <article key={item.label} className="student-score-card">
@@ -155,26 +234,14 @@ export default function TrangHocSinh() {
           ))}
         </section>
 
+        {/* SUBJECT + PLAN */}
         <section className="student-main-grid">
           <article className="student-panel">
             <div className="student-panel-head">
               <div>
                 <span>ĐIỂM HỌC TẬP</span>
-                <h2>Bảng điểm hiện tại</h2>
+                <h2>Bảng điểm</h2>
               </div>
-
-              <button
-                type="button"
-                onClick={() =>
-                  goTo(
-                    isAdminPreview
-                      ? "/student/profile?from=admin"
-                      : "/student/profile"
-                  )
-                }
-              >
-                Cập nhật
-              </button>
             </div>
 
             <div className="student-subject-list">
@@ -191,14 +258,14 @@ export default function TrangHocSinh() {
           <article className="student-panel dark">
             <div className="student-panel-head">
               <div>
-                <span>CHIẾN LƯỢC HỌC</span>
-                <h2>Kế hoạch 14 ngày tới</h2>
+                <span>CHIẾN LƯỢC</span>
+                <h2>14 ngày tới</h2>
               </div>
             </div>
 
             <div className="student-plan-list">
               {learningPlans.map((item, index) => (
-                <div key={item} className="student-plan-item">
+                <div key={index} className="student-plan-item">
                   <strong>{index + 1}</strong>
                   <p>{item}</p>
                 </div>
@@ -207,6 +274,7 @@ export default function TrangHocSinh() {
           </article>
         </section>
 
+        {/* RECOMMEND */}
         <section className="student-recommend-grid">
           {recommendationCards.map((item) => (
             <article key={item.title} className="student-recommend-card">
@@ -215,31 +283,6 @@ export default function TrangHocSinh() {
               <p>{item.desc}</p>
             </article>
           ))}
-        </section>
-
-        <section className="student-roadmap-panel">
-          <div>
-            <span>LỘ TRÌNH TIẾP THEO</span>
-            <h2>Sau dashboard này sẽ làm form nhập hồ sơ học tập</h2>
-            <p>
-              Form sẽ thu thập điểm môn học, hành vi học tập, dữ liệu nhận thức,
-              mục tiêu tuyển sinh, tài chính, du học và học bổng để bắt đầu tính
-              SCI/MAS/CSL thật.
-            </p>
-          </div>
-
-          <button
-            type="button"
-            onClick={() =>
-              goTo(
-                isAdminPreview
-                  ? "/student/profile?from=admin"
-                  : "/student/profile"
-              )
-            }
-          >
-            Tiếp tục bước nhập hồ sơ
-          </button>
         </section>
       </section>
     </main>
