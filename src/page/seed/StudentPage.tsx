@@ -3,15 +3,15 @@ import { useEffect, useState } from "react";
 import ModuleClusterGrid from "../../components/common/ModuleClusterGrid";
 import "../../styles.css";
 
+import CognitiveInsightPanel from "./components/CognitiveInsightPanel";
+import CognitiveScoreGrid from "./components/CognitiveScoreGrid";
 import StudentHeader from "./components/StudentHeader";
 import StudentHero from "./components/StudentHero";
 import StudentLoading from "./components/StudentLoading";
-import CognitiveScoreGrid from "./components/CognitiveScoreGrid";
-import CognitiveInsightPanel from "./components/CognitiveInsightPanel";
-import StudentSubjectPanel from "./components/StudentSubjectPanel";
 import StudentPlanPanel from "./components/StudentPlanPanel";
-import StudentRecommendationGrid from "./components/StudentRecommendationGrid";
 import StudentProfileNoticeModal from "./components/StudentProfileNoticeModal";
+import StudentRecommendationGrid from "./components/StudentRecommendationGrid";
+import StudentSubjectPanel from "./components/StudentSubjectPanel";
 import { useStudentProfile } from "./hooks/useStudentProfile";
 
 export default function StudentPage() {
@@ -60,12 +60,7 @@ export default function StudentPage() {
           onNavigate={goTo}
         />
 
-        <ModuleClusterGrid
-          role="student"
-          isAdminPreview={isAdminPreview}
-          title="Cognitive Path cá nhân"
-          subtitle="Các cụm module học sinh hỗ trợ phân tích học tập và định hướng tương lai."
-        />
+        <ModuleClusterGrid variant="student" />
 
         <CognitiveScoreGrid cognitive={cognitive} />
 

@@ -1,21 +1,21 @@
-import nexusIcon from "../assets/modules/nexus-core.png";
-import seedIcon from "../assets/modules/seed-profile.png";
-import lumenIcon from "../assets/modules/lumen-intelligence.png";
-import orionIcon from "../assets/modules/orion-strategy.png";
 import atlasIcon from "../assets/modules/atlas-admission.png";
-import pulseIcon from "../assets/modules/pulse-monitor.png";
 import havenIcon from "../assets/modules/haven-support.png";
-
-export type UserRole = "student" | "teacher" | "parent" | "admin";
+import lumenIcon from "../assets/modules/lumen-intelligence.png";
+import nexusIcon from "../assets/modules/nexus-core.png";
+import orionIcon from "../assets/modules/orion-strategy.png";
+import pulseIcon from "../assets/modules/pulse-monitor.png";
+import seedIcon from "../assets/modules/seed-profile.png";
 
 export type ModuleKey =
   | "nexus"
   | "seed"
   | "lumen"
-  | "orion"
   | "atlas"
+  | "orion"
   | "pulse"
   | "haven";
+
+export type UserRoleScope = "student" | "parent" | "teacher" | "admin";
 
 export type ModuleAction = {
   label: string;
@@ -24,24 +24,44 @@ export type ModuleAction = {
 };
 
 export type ModuleCluster = {
+  /**
+   * Cấu trúc ban đầu dùng cho AdminPage.
+   */
   key: ModuleKey;
-  name: string;
   subtitle: string;
   meaning: string;
-  icon: string;
-  roles: UserRole[];
   actions: ModuleAction[];
+
+  /**
+   * Cấu trúc mới dùng cho ModuleClusterGrid / route module.
+   */
+  id: string;
+  name: string;
+  code: string;
+  tagline: string;
+  description: string;
+  icon: string;
+  href: string;
+  status: "ready" | "building" | "core";
+  visibleFor: UserRoleScope[];
 };
 
 export const moduleClusters: ModuleCluster[] = [
   {
     key: "nexus",
+    id: "nexus-core",
     name: "Nexus Core",
+    code: "NEXUS",
     subtitle: "Trung tâm điều phối",
+    tagline: "Trung tâm điều phối",
     meaning:
       "Nơi admin quan sát toàn bộ hệ thống, kiểm thử vai trò và điều phối các cụm chức năng.",
+    description:
+      "Quản lý người dùng, dữ liệu tuyển sinh, ngành học, trường đại học và kiểm thử toàn bộ vai trò trong hệ thống.",
     icon: nexusIcon,
-    roles: ["admin"],
+    href: "/admin",
+    status: "core",
+    visibleFor: ["admin"],
     actions: [
       {
         label: "Tổng quan hệ thống",
@@ -51,174 +71,254 @@ export const moduleClusters: ModuleCluster[] = [
       {
         label: "Xem như học sinh",
         description: "Mở giao diện học sinh để kiểm thử trải nghiệm.",
-        path: "/student?from=admin",
+        path: "/student",
       },
       {
         label: "Xem như giáo viên",
         description: "Mở giao diện giáo viên để kiểm thử góc nhìn lớp học.",
-        path: "/teacher?from=admin",
+        path: "/teacher",
       },
       {
         label: "Xem như phụ huynh",
-        description: "Mở giao diện phụ huynh để kiểm thử phần theo dõi học sinh.",
-        path: "/parent?from=admin",
+        description:
+          "Mở giao diện phụ huynh để kiểm thử phần theo dõi học sinh.",
+        path: "/parent",
       },
     ],
   },
   {
     key: "seed",
+    id: "seed-profile",
     name: "Seed Profile",
+    code: "SEED",
     subtitle: "Dữ liệu nền học sinh",
+    tagline: "Hồ sơ học sinh",
     meaning:
-      "Nơi hình thành hồ sơ học tập: chương trình GDPT 2018, môn lựa chọn, bảng điểm 3 năm và GPA.",
+      "Nơi hình thành hồ sơ học tập của học sinh: thông tin cá nhân, điểm số, GPA, môn lựa chọn và mục tiêu.",
+    description:
+      "Lưu hồ sơ học tập, điểm số, hành vi học tập và dữ liệu nền để các engine khác phân tích.",
     icon: seedIcon,
-    roles: ["admin", "student"],
+    href: "/student",
+    status: "core",
+    visibleFor: ["student", "teacher", "admin"],
     actions: [
       {
-        label: "Mở hồ sơ học tập",
+        label: "Mở dashboard học sinh",
         description:
-          "Nhập thông tin học sinh, môn học lựa chọn và mục tiêu cá nhân.",
+          "Kiểm thử giao diện học sinh và dữ liệu hồ sơ học tập hiện tại.",
+        path: "/student",
+      },
+      {
+        label: "Nhập hồ sơ học tập",
+        description:
+          "Mở form Seed Profile để nhập thông tin cá nhân, môn lựa chọn, điểm số và mục tiêu.",
         path: "/student/profile",
       },
       {
-        label: "Bảng điểm THPT",
-        description: "Quản lý điểm lớp 10, 11, 12 theo học kì và hệ số.",
-      },
-      {
-        label: "GPA học bạ",
-        description: "Tính GPA từng học kì, từng năm và toàn bộ THPT.",
+        label: "Kiểm tra dữ liệu nền",
+        description:
+          "Đánh giá dữ liệu học sinh trước khi đưa sang Lumen, Atlas, Orion và Pulse.",
       },
     ],
   },
   {
     key: "lumen",
+    id: "lumen-intelligence",
     name: "Lumen Intelligence",
+    code: "LUMEN",
     subtitle: "Ánh sáng nhận thức",
+    tagline: "Phân tích nhận thức",
     meaning:
-      "Phân tích trạng thái nhận thức, động lực, độ ổn định và khả năng tự định hướng của học sinh.",
+      "Phân tích chỉ số nhận thức học tập, mức độ ổn định, khả năng thích ứng và cảnh báo rủi ro học tập.",
+    description:
+      "Đánh giá SCI, MAS, CSL và mức độ sẵn sàng học tập dựa trên hồ sơ học sinh.",
     icon: lumenIcon,
-    roles: ["admin", "student", "teacher", "parent"],
+    href: "/student",
+    status: "core",
+    visibleFor: ["student", "teacher", "admin"],
     actions: [
       {
-        label: "Đánh giá nhận thức",
-        description: "Tính SCI, MAS, CSL và Cognitive State Vector.",
-      },
-      {
-        label: "Phân tích học tập",
+        label: "Xem phân tích nhận thức",
         description:
-          "Nhận diện điểm mạnh, điểm yếu, xu hướng tăng giảm của từng môn.",
+          "Kiểm thử SCI, MAS, CSL và các cảnh báo nhận thức trên trang học sinh.",
+        path: "/student",
       },
       {
-        label: "Cảnh báo sớm",
+        label: "Kiểm tra Cognitive Engine",
         description:
-          "Phát hiện học sinh có dấu hiệu mất động lực hoặc mất ổn định.",
-      },
-    ],
-  },
-  {
-    key: "orion",
-    name: "Orion Strategy",
-    subtitle: "Định hướng tương lai",
-    meaning:
-      "Mô phỏng tương lai và đề xuất chiến lược học tập để học sinh đi đúng hướng.",
-    icon: orionIcon,
-    roles: ["admin", "student"],
-    actions: [
-      {
-        label: "Mô phỏng tương lai",
-        description:
-          "Dự báo điểm nếu thay đổi giờ học, số đề luyện hoặc chiến lược.",
+          "Đánh giá kết quả rule-based cognitive engine từ dữ liệu Seed Profile.",
       },
       {
-        label: "Tối ưu môn thi",
-        description: "Tìm môn cần ưu tiên để tăng xác suất đạt mục tiêu.",
-      },
-      {
-        label: "Chiến lược học",
-        description: "Đề xuất kế hoạch học tập 7 ngày, 14 ngày hoặc 30 ngày.",
+        label: "Chuẩn bị dữ liệu ML",
+        description: "Đánh dấu dữ liệu cần dùng cho bước ML tự build sau này.",
       },
     ],
   },
   {
     key: "atlas",
+    id: "atlas-admission",
     name: "Atlas Admission",
+    code: "ATLAS",
     subtitle: "Bản đồ tuyển sinh",
+    tagline: "AI tuyển sinh",
     meaning:
-      "Gợi ý ngành, trường, tổ hợp xét tuyển và chiến lược nguyện vọng dựa trên dữ liệu học sinh.",
+      "Tìm dữ liệu tuyển sinh, ngành học, mã ngành, tổ hợp, phương thức xét tuyển, học phí, học bổng và link nguồn.",
+    description:
+      "Dùng Gemini lấy dữ liệu tuyển sinh, lưu vào Atlas Knowledge Base và chạy Admission Engine.",
     icon: atlasIcon,
-    roles: ["admin", "student", "teacher", "parent"],
+    href: "/atlas",
+    status: "ready",
+    visibleFor: ["student", "parent", "teacher", "admin"],
     actions: [
       {
-        label: "Định hướng nghề",
+        label: "Mở Atlas Admission",
         description:
-          "Gợi ý ngành phù hợp với năng lực, động lực và mục tiêu cá nhân.",
+          "Dùng Gemini lấy dữ liệu tuyển sinh, học phí, học bổng và link nguồn.",
+        path: "/atlas",
       },
       {
-        label: "Gợi ý trường",
-        description: "Chia trường theo nhóm an toàn, vừa sức và bứt phá.",
+        label: "Chạy Admission Engine",
+        description:
+          "Kiểm thử gợi ý ngành/trường theo điểm mô phỏng và dữ liệu Atlas.",
+        path: "/atlas#atlas-engine",
       },
       {
-        label: "Chiến lược nguyện vọng",
+        label: "Kiểm tra Knowledge Base",
         description:
-          "Sắp xếp nguyện vọng theo mức rủi ro và khả năng trúng tuyển.",
+          "Theo dõi ngành, mã ngành, tổ hợp, phương thức xét tuyển và nguồn dữ liệu.",
+        path: "/atlas#atlas-programs",
+      },
+    ],
+  },
+  {
+    key: "orion",
+    id: "orion-strategy",
+    name: "Orion Strategy",
+    code: "ORION",
+    subtitle: "Định hướng tương lai",
+    tagline: "Chiến lược học tập",
+    meaning:
+      "Mô phỏng chiến lược tăng điểm, rủi ro xét tuyển, số tuần còn lại và lộ trình hành động theo từng giai đoạn.",
+    description:
+      "Mô phỏng chiến lược tăng điểm, rủi ro xét tuyển và lộ trình hành động theo tuần.",
+    icon: orionIcon,
+    href: "/orion",
+    status: "ready",
+    visibleFor: ["student", "teacher", "admin"],
+    actions: [
+      {
+        label: "Mở Orion Strategy",
+        description:
+          "Mô phỏng chiến lược tăng điểm, mức sẵn sàng và lộ trình hành động.",
+        path: "/orion",
+      },
+      {
+        label: "Kiểm tra kịch bản học tập",
+        description: "So sánh chiến lược cân bằng, tập trung và bứt phá.",
+        path: "/orion",
+      },
+      {
+        label: "Theo dõi roadmap theo tuần",
+        description:
+          "Kiểm tra milestone học tập và hành động theo từng giai đoạn.",
+        path: "/orion",
       },
     ],
   },
   {
     key: "pulse",
+    id: "pulse-monitor",
     name: "Pulse Monitor",
+    code: "PULSE",
     subtitle: "Nhịp theo dõi tiến trình",
+    tagline: "Báo cáo cá nhân",
     meaning:
-      "Theo dõi tiến độ học tập, báo cáo cá nhân, cảnh báo thay đổi và trợ lý AI đồng hành.",
+      "Theo dõi tiến độ học tập, nhận thức, tuyển sinh, chiến lược và các việc nên làm tiếp theo.",
+    description:
+      "Tổng hợp dữ liệu từ Seed, Lumen, Atlas và Orion để tạo báo cáo tiến độ cho học sinh, phụ huynh, giáo viên.",
     icon: pulseIcon,
-    roles: ["admin", "student", "teacher", "parent"],
+    href: "/pulse",
+    status: "ready",
+    visibleFor: ["student", "parent", "teacher", "admin"],
     actions: [
       {
-        label: "Tiến trình học tập",
+        label: "Mở Pulse Monitor",
         description:
-          "Theo dõi mức hoàn thành kế hoạch và tiến bộ theo thời gian.",
+          "Xem báo cáo tiến độ học tập, nhận thức, tuyển sinh và hành động tiếp theo.",
+        path: "/pulse",
       },
       {
-        label: "Trợ lý AI",
-        description:
-          "Hỗ trợ hỏi đáp, giải thích báo cáo và gợi ý bước tiếp theo.",
+        label: "Kiểm thử báo cáo học sinh",
+        description: "Xem bản tóm tắt tiến độ cá nhân dành cho học sinh.",
+        path: "/pulse",
       },
       {
-        label: "Báo cáo",
-        description: "Tạo báo cáo cho học sinh, giáo viên và phụ huynh.",
+        label: "Theo dõi chỉ số rủi ro",
+        description: "Kiểm tra trend, risk level, metric score và cảnh báo.",
+        path: "/pulse",
       },
     ],
   },
   {
     key: "haven",
+    id: "haven-support",
     name: "Haven Support",
-    subtitle: "Hệ hỗ trợ và đồng hành",
+    code: "HAVEN",
+    subtitle: "Hỗ trợ và đồng hành",
+    tagline: "Học bổng / hỗ trợ tài chính",
     meaning:
-      "Không gian dành cho giáo viên, phụ huynh, học bổng, tài chính và quản lý người dùng.",
+      "Gợi ý học bổng, hỗ trợ tài chính, chi phí học đại học và kế hoạch giảm áp lực khi chọn trường/ngành.",
+    description:
+      "Gợi ý học bổng, hỗ trợ tài chính, chi phí học đại học và kế hoạch giảm áp lực cho học sinh.",
     icon: havenIcon,
-    roles: ["admin", "teacher", "parent"],
+    href: "/haven",
+    status: "ready",
+    visibleFor: ["student", "parent", "teacher", "admin"],
     actions: [
       {
-        label: "Góc nhìn giáo viên",
+        label: "Mở Haven Support",
         description:
-          "Theo dõi lớp học, học sinh nguy cơ cao và báo cáo từng học sinh.",
-        path: "/teacher",
+          "Kiểm thử học bổng, hỗ trợ tài chính và kế hoạch giảm áp lực cho học sinh.",
+        path: "/haven",
       },
       {
-        label: "Góc nhìn phụ huynh",
+        label: "Gợi ý học bổng",
         description:
-          "Theo dõi tiến độ của con và nhận khuyến nghị hỗ trợ tại nhà.",
-        path: "/parent",
+          "Đánh giá học bổng đầu vào, học bổng học tập và hỗ trợ tài chính.",
+        path: "/haven",
       },
       {
-        label: "Học bổng và tài chính",
+        label: "Chi phí học đại học",
         description:
-          "Gợi ý học bổng, chi phí học tập và mức phù hợp tài chính.",
+          "Xem áp lực học phí, nhu cầu tài chính và hướng chọn trường phù hợp hơn.",
+        path: "/haven",
       },
     ],
   },
 ];
 
-export function getModulesByRole(role: UserRole) {
-  return moduleClusters.filter((cluster) => cluster.roles.includes(role));
+export const studentModuleClusters = moduleClusters.filter((module) =>
+  module.visibleFor.includes("student")
+);
+
+export const parentModuleClusters = moduleClusters.filter((module) =>
+  module.visibleFor.includes("parent")
+);
+
+export const teacherModuleClusters = moduleClusters.filter((module) =>
+  module.visibleFor.includes("teacher")
+);
+
+export const adminModuleClusters = moduleClusters;
+
+export function getModulesByRole(role: UserRoleScope | "all") {
+  if (role === "all") return moduleClusters;
+
+  return moduleClusters.filter((module) => module.visibleFor.includes(role));
+}
+
+export function getModuleStatusLabel(status: ModuleCluster["status"]) {
+  if (status === "ready") return "Đã kết nối";
+  if (status === "core") return "Lõi hệ thống";
+  return "Đang phát triển";
 }

@@ -1,0 +1,359 @@
+.haven-page {
+  min-height: 100vh;
+  color: #071629;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(37, 99, 235, 0.12), transparent 28%),
+    radial-gradient(circle at 88% 18%, rgba(56, 189, 248, 0.14), transparent 30%),
+    linear-gradient(180deg, #f8fbff 0%, #eef6ff 100%);
+}
+
+.haven-floating-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 18px 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.haven-floating-header > * {
+  pointer-events: auto;
+}
+
+.haven-home-logo {
+  width: 58px;
+  height: 58px;
+  border-radius: 22px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(191, 219, 254, 0.9);
+  box-shadow: 0 18px 44px rgba(37, 99, 235, 0.12);
+  backdrop-filter: blur(18px);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.haven-home-logo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 52px rgba(37, 99, 235, 0.18);
+}
+
+.haven-home-logo img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.haven-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 22px 0 80px;
+}
+
+.haven-hero,
+.haven-control-panel,
+.haven-summary-grid article,
+.haven-support-card,
+.haven-scholarship-card,
+.haven-warning {
+  border: 1px solid rgba(191, 219, 254, 0.92);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(239, 248, 255, 0.86)),
+    rgba(255, 255, 255, 0.85);
+  box-shadow: 0 28px 90px rgba(37, 99, 235, 0.11);
+  backdrop-filter: blur(22px);
+}
+
+.haven-hero {
+  border-radius: 30px;
+  padding: 40px 36px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.haven-hero span,
+.haven-control-head span,
+.haven-summary-grid span,
+.haven-section-head span,
+.haven-support-card > span {
+  display: inline-flex;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.haven-hero h1 {
+  max-width: 760px;
+  margin: 14px 0 18px;
+  color: #071629;
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: 0.96;
+  letter-spacing: -0.075em;
+}
+
+.haven-hero p {
+  max-width: 760px;
+  margin: 0;
+  color: #475569;
+  font-size: 16px;
+  font-weight: 650;
+  line-height: 1.75;
+}
+
+.haven-hero aside {
+  border-radius: 26px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(191, 219, 254, 0.85);
+}
+
+.haven-hero aside span {
+  color: #64748b;
+  letter-spacing: 0.12em;
+}
+
+.haven-hero aside strong {
+  display: block;
+  margin-top: 14px;
+  color: #071629;
+  font-size: 46px;
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+
+.haven-risk {
+  margin-top: 16px;
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-style: normal;
+  font-size: 13px;
+  font-weight: 950;
+}
+
+.haven-risk.low {
+  color: #047857;
+  background: rgba(209, 250, 229, 0.95);
+}
+
+.haven-risk.medium {
+  color: #92400e;
+  background: rgba(254, 243, 199, 0.95);
+}
+
+.haven-risk.high {
+  color: #be123c;
+  background: rgba(255, 228, 230, 0.95);
+}
+
+.haven-control-panel {
+  margin-top: 22px;
+  border-radius: 30px;
+  padding: 30px;
+}
+
+.haven-control-head h2,
+.haven-summary-grid h2,
+.haven-section-head h2 {
+  margin: 8px 0 0;
+  color: #071629;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.05;
+  letter-spacing: -0.055em;
+}
+
+.haven-control-head p,
+.haven-summary-grid p {
+  max-width: 760px;
+  margin: 10px 0 0;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
+.haven-form-grid {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.haven-form-grid label {
+  display: grid;
+  gap: 8px;
+}
+
+.haven-form-grid span {
+  color: #475569;
+  font-size: 12px;
+  font-weight: 950;
+}
+
+.haven-form-grid input {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid rgba(191, 219, 254, 0.95);
+  border-radius: 16px;
+  padding: 0 14px;
+  color: #071629;
+  background: rgba(255, 255, 255, 0.92);
+  outline: none;
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.haven-form-grid input:focus {
+  border-color: rgba(37, 99, 235, 0.65);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+}
+
+.haven-summary-grid {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.haven-summary-grid article {
+  border-radius: 24px;
+  padding: 24px;
+}
+
+.haven-section {
+  margin-top: 38px;
+}
+
+.haven-section-head {
+  margin-bottom: 18px;
+}
+
+.haven-support-list,
+.haven-scholarship-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.haven-support-card,
+.haven-scholarship-card {
+  border-radius: 24px;
+  padding: 22px;
+}
+
+.haven-support-card em {
+  display: inline-flex;
+  min-height: 30px;
+  align-items: center;
+  padding: 0 12px;
+  border-radius: 999px;
+  color: #2563eb;
+  background: rgba(239, 246, 255, 0.96);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 950;
+}
+
+.haven-support-card > span {
+  margin-left: 8px;
+}
+
+.haven-support-card h3,
+.haven-scholarship-card h3 {
+  margin: 14px 0 0;
+  color: #071629;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.haven-support-card p,
+.haven-scholarship-card p {
+  margin: 10px 0 0;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.6;
+}
+
+.haven-scholarship-card > div > span {
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 950;
+}
+
+.haven-scholarship-card ul,
+.haven-warning ul {
+  margin: 14px 0 0;
+  padding-left: 20px;
+}
+
+.haven-scholarship-card li,
+.haven-warning li {
+  color: #475569;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.7;
+}
+
+.haven-warning {
+  margin-top: 22px;
+  border-radius: 24px;
+  padding: 22px;
+  color: #92400e;
+  background: rgba(254, 243, 199, 0.72);
+}
+
+.haven-warning strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 950;
+}
+
+@media (max-width: 980px) {
+  .haven-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .haven-form-grid,
+  .haven-summary-grid,
+  .haven-support-list,
+  .haven-scholarship-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .haven-shell,
+  .haven-floating-header {
+    width: min(100% - 20px, 1180px);
+  }
+
+  .haven-hero,
+  .haven-control-panel {
+    border-radius: 24px;
+    padding: 24px;
+  }
+
+  .haven-form-grid,
+  .haven-summary-grid,
+  .haven-support-list,
+  .haven-scholarship-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .haven-hero h1 {
+    font-size: 38px;
+  }
+}

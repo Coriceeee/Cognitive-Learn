@@ -10,8 +10,11 @@ const TrangNhapHoSoHocTap = lazy(
 );
 const GioiThieuPage = lazy(() => import("./page/main/AboutPage"));
 const LienHePage = lazy(() => import("./page/main/ContactPage"));
+
 const AtlasPage = lazy(() => import("./page/atlas/AtlasPage"));
 const OrionPage = lazy(() => import("./page/orion/OrionPage"));
+const PulsePage = lazy(() => import("./page/pulse/PulsePage"));
+const HavenPage = lazy(() => import("./page/haven/HavenPage"));
 
 function AppLoading() {
   return (
@@ -43,10 +46,14 @@ export default function App() {
     currentPage = <AtlasPage />;
   } else if (path === "/orion") {
     currentPage = <OrionPage />;
+  } else if (path === "/pulse") {
+    currentPage = <PulsePage />;
+  } else if (path === "/haven") {
+    currentPage = <HavenPage />;
   } else if (path === "/teacher") {
-    currentPage = <TrangVaiTro role="admin" />;
+    currentPage = <TrangVaiTro role="teacher" />;
   } else if (path === "/parent") {
-    currentPage = <TrangVaiTro role="admin" />;
+    currentPage = <TrangVaiTro role="parent" />;
   } else if (path === "/role") {
     currentPage = <TrangVaiTro role="admin" />;
   } else {
