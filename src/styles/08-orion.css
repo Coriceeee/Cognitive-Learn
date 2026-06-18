@@ -1,0 +1,461 @@
+.orion-page {
+  min-height: 100vh;
+  color: #071629;
+  background:
+    radial-gradient(circle at 10% 8%, rgba(37, 99, 235, 0.12), transparent 28%),
+    radial-gradient(circle at 90% 18%, rgba(56, 189, 248, 0.14), transparent 30%),
+    linear-gradient(180deg, #f8fbff 0%, #eef6ff 100%);
+}
+
+.orion-floating-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 18px 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.orion-floating-header > * {
+  pointer-events: auto;
+}
+
+.orion-home-logo {
+  width: 58px;
+  height: 58px;
+  border-radius: 22px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(191, 219, 254, 0.9);
+  box-shadow: 0 18px 44px rgba(37, 99, 235, 0.12);
+  backdrop-filter: blur(18px);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.orion-home-logo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 52px rgba(37, 99, 235, 0.18);
+}
+
+.orion-home-logo img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.orion-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 22px 0 80px;
+}
+
+.orion-hero,
+.orion-control-panel,
+.orion-summary-card,
+.orion-focus-card,
+.orion-scenario-card,
+.orion-timeline-card,
+.orion-warning {
+  border: 1px solid rgba(191, 219, 254, 0.92);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(239, 248, 255, 0.86)),
+    rgba(255, 255, 255, 0.85);
+  box-shadow: 0 28px 90px rgba(37, 99, 235, 0.11);
+  backdrop-filter: blur(22px);
+}
+
+.orion-hero {
+  border-radius: 30px;
+  padding: 40px 36px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.orion-hero span,
+.orion-control-head span,
+.orion-summary-card > span,
+.orion-focus-card > span,
+.orion-section-head span {
+  display: inline-flex;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.orion-hero h1 {
+  max-width: 760px;
+  margin: 14px 0 18px;
+  color: #071629;
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: 0.96;
+  letter-spacing: -0.075em;
+}
+
+.orion-hero p {
+  max-width: 760px;
+  margin: 0;
+  color: #475569;
+  font-size: 16px;
+  font-weight: 650;
+  line-height: 1.75;
+}
+
+.orion-hero aside {
+  border-radius: 26px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(191, 219, 254, 0.85);
+}
+
+.orion-hero aside span {
+  color: #64748b;
+  letter-spacing: 0.12em;
+}
+
+.orion-hero aside strong {
+  display: block;
+  margin-top: 14px;
+  color: #071629;
+  font-size: 46px;
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+
+.orion-risk {
+  margin-top: 16px;
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-style: normal;
+  font-size: 13px;
+  font-weight: 950;
+}
+
+.orion-risk.low {
+  color: #047857;
+  background: rgba(209, 250, 229, 0.95);
+}
+
+.orion-risk.medium {
+  color: #92400e;
+  background: rgba(254, 243, 199, 0.95);
+}
+
+.orion-risk.high {
+  color: #be123c;
+  background: rgba(255, 228, 230, 0.95);
+}
+
+.orion-control-panel {
+  margin-top: 22px;
+  border-radius: 30px;
+  padding: 30px;
+}
+
+.orion-control-head h2,
+.orion-summary-card h2,
+.orion-focus-card h2,
+.orion-section-head h2 {
+  margin: 8px 0 0;
+  color: #071629;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.05;
+  letter-spacing: -0.055em;
+}
+
+.orion-control-head p,
+.orion-summary-card p,
+.orion-section-head p {
+  max-width: 760px;
+  margin: 10px 0 0;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
+.orion-form-grid {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 180px;
+  gap: 14px;
+}
+
+.orion-form-grid label,
+.orion-score-table label {
+  display: grid;
+  gap: 8px;
+}
+
+.orion-form-grid label span,
+.orion-score-table label span {
+  color: #475569;
+  font-size: 12px;
+  font-weight: 950;
+}
+
+.orion-form-grid input,
+.orion-score-table input {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid rgba(191, 219, 254, 0.95);
+  border-radius: 16px;
+  padding: 0 14px;
+  color: #071629;
+  background: rgba(255, 255, 255, 0.92);
+  outline: none;
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.orion-form-grid input:focus,
+.orion-score-table input:focus {
+  border-color: rgba(37, 99, 235, 0.65);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+}
+
+.orion-score-table {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.orion-score-table > div {
+  padding: 16px;
+  border-radius: 20px;
+  background: rgba(248, 250, 252, 0.92);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+.orion-score-table > div > strong {
+  display: block;
+  margin-bottom: 12px;
+  color: #071629;
+  font-size: 15px;
+  font-weight: 950;
+}
+
+.orion-score-table > div {
+  display: grid;
+  gap: 12px;
+}
+
+.orion-result-grid {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: 18px;
+}
+
+.orion-summary-card,
+.orion-focus-card {
+  border-radius: 26px;
+  padding: 26px;
+}
+
+.orion-metrics {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.orion-metrics div,
+.orion-focus-list div {
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(248, 250, 252, 0.92);
+}
+
+.orion-metrics span,
+.orion-focus-list span {
+  display: block;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.orion-metrics strong,
+.orion-focus-list strong {
+  display: block;
+  margin-top: 6px;
+  color: #071629;
+  font-size: 20px;
+  font-weight: 950;
+}
+
+.orion-focus-list {
+  margin-top: 18px;
+  display: grid;
+  gap: 12px;
+}
+
+.orion-section {
+  margin-top: 38px;
+}
+
+.orion-section-head {
+  margin-bottom: 18px;
+}
+
+.orion-scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.orion-scenario-card {
+  border-radius: 24px;
+  padding: 22px;
+}
+
+.orion-scenario-card span {
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 950;
+}
+
+.orion-scenario-card h3 {
+  margin: 10px 0 0;
+  color: #071629;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.orion-scenario-card p {
+  margin: 10px 0 0;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.6;
+}
+
+.orion-chip-row {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.orion-chip-row span {
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 12px;
+  border-radius: 999px;
+  color: #071629;
+  background: rgba(241, 245, 249, 0.95);
+}
+
+.orion-timeline {
+  display: grid;
+  gap: 14px;
+}
+
+.orion-timeline-card {
+  border-radius: 24px;
+  padding: 22px;
+}
+
+.orion-timeline-card span {
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.orion-timeline-card h3 {
+  margin: 8px 0 0;
+  color: #071629;
+  font-size: 20px;
+}
+
+.orion-timeline-card p {
+  margin: 8px 0 0;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.6;
+}
+
+.orion-timeline-card ul,
+.orion-warning ul {
+  margin: 12px 0 0;
+  padding-left: 20px;
+}
+
+.orion-timeline-card li,
+.orion-warning li {
+  color: #475569;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.7;
+}
+
+.orion-warning {
+  margin-top: 22px;
+  border-radius: 24px;
+  padding: 22px;
+  color: #92400e;
+  background: rgba(254, 243, 199, 0.72);
+}
+
+.orion-warning strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 950;
+}
+
+@media (max-width: 980px) {
+  .orion-hero,
+  .orion-result-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .orion-score-table,
+  .orion-scenario-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .orion-metrics {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .orion-shell,
+  .orion-floating-header {
+    width: min(100% - 20px, 1180px);
+  }
+
+  .orion-hero,
+  .orion-control-panel {
+    border-radius: 24px;
+    padding: 24px;
+  }
+
+  .orion-form-grid,
+  .orion-score-table,
+  .orion-scenario-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .orion-hero h1 {
+    font-size: 38px;
+  }
+}
