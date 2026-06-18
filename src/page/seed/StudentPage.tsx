@@ -7,6 +7,7 @@ import StudentHeader from "./components/StudentHeader";
 import StudentHero from "./components/StudentHero";
 import StudentLoading from "./components/StudentLoading";
 import CognitiveScoreGrid from "./components/CognitiveScoreGrid";
+import CognitiveInsightPanel from "./components/CognitiveInsightPanel";
 import StudentSubjectPanel from "./components/StudentSubjectPanel";
 import StudentPlanPanel from "./components/StudentPlanPanel";
 import StudentRecommendationGrid from "./components/StudentRecommendationGrid";
@@ -67,6 +68,12 @@ export default function StudentPage() {
         />
 
         <CognitiveScoreGrid cognitive={cognitive} />
+
+        <CognitiveInsightPanel
+          cognitive={cognitive}
+          hasProfile={hasProfile}
+          onCreateProfile={() => goTo(profilePath)}
+        />
 
         <section className="student-main-grid">
           <StudentSubjectPanel onUpdate={() => goTo(profilePath)} />

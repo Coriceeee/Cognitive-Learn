@@ -668,3 +668,71 @@
 .user-dropdown-body.compact button {
   min-height: 62px;
 }
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-content {
+  flex: 1;
+}
+
+.app-footer {
+  width: 100%;
+  margin-top: auto;
+  padding: 18px 24px;
+  border-top: 1px solid rgba(148, 163, 184, 0.14);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(18px);
+}
+
+.app-footer-inner {
+  width: min(1080px, 100%);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.app-footer p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.app-footer strong {
+  color: #64748b;
+  font-weight: 850;
+}
+
+.app-footer nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.app-footer a {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 850;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.app-footer a:hover {
+  color: #2563eb;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 560px) {
+  .app-footer-inner {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+}
