@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import ModuleClusterGrid from "../../components/common/ModuleClusterGrid";
 import "../../styles.css";
 
@@ -8,19 +10,31 @@ import CognitiveScoreGrid from "./components/CognitiveScoreGrid";
 import StudentSubjectPanel from "./components/StudentSubjectPanel";
 import StudentPlanPanel from "./components/StudentPlanPanel";
 import StudentRecommendationGrid from "./components/StudentRecommendationGrid";
+import StudentProfileNoticeModal from "./components/StudentProfileNoticeModal";
 import { useStudentProfile } from "./hooks/useStudentProfile";
 
 export default function StudentPage() {
   const { profile, cognitive, loading, hasProfile, error, isAdminPreview } =
     useStudentProfile();
 
-  function goTo(path: string) {
-    window.location.href = path;
-  }
+  const [showProfileNotice, setShowProfileNotice] = useState(false);
 
   const profilePath = isAdminPreview
     ? "/student/profile?from=admin"
     : "/student/profile";
+
+  useEffect(() => {
+    if (!loading && !hasProfile && !error) {
+      setShowProfileNotice(true);
+      return;
+    }
+
+    setShowProfileNotice(false);
+  }, [loading, hasProfile, error]);
+
+  function goTo(path: string) {
+    window.location.href = path;
+  }
 
   if (loading) {
     return <StudentLoading />;
@@ -30,15 +44,14 @@ export default function StudentPage() {
     <main className="student-page">
       <StudentHeader isAdminPreview={isAdminPreview} />
 
+      <StudentProfileNoticeModal
+        open={showProfileNotice}
+        onClose={() => setShowProfileNotice(false)}
+        onCreateProfile={() => goTo(profilePath)}
+      />
+
       <section className="student-shell">
         {error && <div className="student-data-alert">{error}</div>}
-
-        {!hasProfile && (
-          <div className="student-data-alert">
-            Chưa có hồ sơ học tập. Hãy nhập hồ sơ để hệ thống bắt đầu phân tích
-            dữ liệu thật.
-          </div>
-        )}
 
         <StudentHero
           profile={profile}

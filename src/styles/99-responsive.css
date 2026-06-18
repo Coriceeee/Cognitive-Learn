@@ -1,0 +1,439 @@
+
+@media (max-width: 1180px) {
+  .login-page {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+
+  .profile-showcase-left {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .profile-showcase-card {
+    width: min(360px, 100%);
+  }
+
+  .auth-side {
+    width: 100%;
+  }
+
+  .login-card {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1100px) {
+  .profile-field-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 980px) {
+  .student-hero,
+  .student-main-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .student-overview-grid,
+  .student-recommend-grid,
+  .profile-gpa-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .student-roadmap-panel {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 900px) {
+  .role-topbar,
+  .admin-switcher {
+    flex-direction: column;
+  }
+
+  .role-landing {
+    grid-template-columns: 1fr;
+  }
+
+  .role-card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 860px) {
+  .role-page,
+  .student-page,
+  .profile-page {
+    padding: 70px 20px 20px;
+  }
+
+  .role-shell,
+  .student-shell,
+  .profile-shell {
+    min-height: calc(100vh - 90px);
+    padding: 24px;
+    border-radius: 30px;
+  }
+
+  .student-floating-header,
+  .profile-floating-header {
+    top: 16px;
+    left: 24px;
+    right: 24px;
+  }
+
+  .student-home-logo img,
+  .profile-home-logo img {
+    width: 104px;
+  }
+
+  .profile-head {
+    padding: 24px;
+    border-radius: 28px;
+  }
+}
+
+@media (max-width: 620px) {
+  .profile-field-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-field-grid label.wide {
+    grid-column: span 1;
+  }
+
+  .profile-submit-bar {
+    flex-direction: column;
+  }
+
+  .profile-submit-bar button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .login-page {
+    padding: 16px;
+  }
+
+  .login-card {
+    padding: 24px;
+    border-radius: 28px;
+  }
+
+  .auth-logo {
+    width: 240px;
+  }
+
+  .auth-logo-block h1 {
+    font-size: 26px;
+    max-width: 340px;
+  }
+
+  .login-card-head h2 {
+    font-size: 30px;
+  }
+
+  .role-tabs {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-showcase-left {
+    padding: 24px;
+    border-radius: 28px;
+  }
+
+  .showcase-copy h1 {
+    font-size: 42px;
+    letter-spacing: -1.8px;
+  }
+
+  .profile-showcase-card {
+    width: 100%;
+    padding: 24px 18px 18px;
+    border-radius: 28px;
+  }
+
+  .showcase-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .role-floating-header {
+    top: 16px;
+    left: 24px;
+    right: 24px;
+  }
+
+  .role-home-logo img {
+    width: 104px;
+  }
+
+  .back-admin-button,
+  .student-back-admin,
+  .profile-back-admin {
+    padding: 9px 12px;
+    font-size: 12px;
+  }
+
+  .floating-logout-button,
+  .student-logout-button,
+  .profile-logout-button {
+    padding: 12px 15px;
+    font-size: 13px;
+    border-radius: 15px;
+  }
+
+  .role-page {
+    padding-top: 70px;
+  }
+
+  .student-floating-header,
+  .profile-floating-header {
+    gap: 10px;
+  }
+
+  .student-floating-left,
+  .profile-floating-left {
+    gap: 10px;
+  }
+
+  .student-hero {
+    padding: 24px;
+    border-radius: 28px;
+  }
+
+  .student-hero-copy h1 {
+    font-size: 42px;
+    letter-spacing: -1.8px;
+  }
+
+  .student-subject-row {
+    grid-template-columns: 1fr;
+  }
+
+  .student-subject-row em {
+    justify-self: start;
+  }
+
+  .profile-head h1 {
+    font-size: 38px;
+    letter-spacing: -1.6px;
+  }
+
+  .profile-section-title h2 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 1120px) {
+  .nexus-page {
+    grid-template-columns: 1fr;
+  }
+
+  .nexus-rail {
+    position: relative;
+    min-height: auto;
+  }
+
+  .nexus-cluster-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .nexus-cluster-list::before {
+    display: none;
+  }
+
+  .nexus-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .nexus-hero-logo {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 860px) {
+  .nexus-workspace {
+    padding: 20px;
+  }
+
+  .nexus-action-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nexus-preview-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .nexus-mini-map {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 620px) {
+  .nexus-rail {
+    padding: 18px;
+  }
+
+  .nexus-cluster-list {
+    grid-template-columns: 1fr;
+  }
+
+  .nexus-hero {
+    padding: 26px;
+    border-radius: 30px;
+  }
+
+  .nexus-hero h1 {
+    font-size: 40px;
+    letter-spacing: -1.6px;
+  }
+
+  .nexus-hero-logo {
+    width: 140px;
+    height: 140px;
+  }
+
+  .nexus-hero-logo span {
+    font-size: 56px;
+  }
+}
+
+@media (max-width: 1180px) {
+  .module-gateway-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .module-gateway {
+    padding: 22px;
+    border-radius: 28px;
+  }
+
+  .module-gateway-head {
+    flex-direction: column;
+  }
+
+  .module-orbit-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .module-detail-main {
+    grid-template-columns: 1fr;
+  }
+
+  .module-detail-logo {
+    width: 112px;
+    height: 112px;
+  }
+
+  .module-action-item {
+    grid-template-columns: 1fr;
+  }
+
+  .module-action-item button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1180px) {
+  .about-hero-premium,
+  .contact-hero-premium,
+  .about-system-flow,
+  .contact-command-center,
+  .contact-form-premium {
+    grid-template-columns: 1fr;
+  }
+
+  .about-logo-showcase,
+  .contact-hero-card,
+  .contact-command-icons,
+  .about-flow-icons {
+    justify-self: start;
+  }
+
+  .about-identity-grid,
+  .about-mission-grid,
+  .contact-premium-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-identity-grid article.featured {
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 860px) {
+  .info-page {
+    padding: 70px 20px 20px;
+  }
+
+  .info-floating-header {
+    top: 16px;
+    left: 24px;
+    right: 24px;
+  }
+
+  .info-logo img {
+    width: 104px;
+  }
+
+  .info-shell {
+    min-height: calc(100vh - 90px);
+    padding: 24px;
+    border-radius: 30px;
+  }
+}
+
+@media (max-width: 720px) {
+  .about-hero-premium,
+  .contact-hero-premium {
+    padding: 26px;
+    border-radius: 30px;
+  }
+
+  .about-logo-orbit {
+    width: 280px;
+    height: 280px;
+  }
+
+  .about-logo-card {
+    width: 210px;
+    height: 210px;
+    border-radius: 32px;
+  }
+
+  .about-hero-copy h1,
+  .contact-hero-premium h1 {
+    font-size: 40px;
+    letter-spacing: -1.6px;
+  }
+
+  .about-identity-grid article {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-command-icons {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .contact-command-icons img {
+    width: 76px;
+    height: 76px;
+  }
+
+  .user-dropdown {
+    width: 286px;
+    right: -8px;
+  }
+}
+
+@media (max-width: 560px) {
+  .info-floating-header {
+    gap: 10px;
+  }
+}
