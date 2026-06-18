@@ -103,15 +103,6 @@ export default function TrangVaiTro({ role }: RolePageProps) {
             <img src={appLogo} alt="Cognitive Learn" />
           </a>
 
-          {isAdminPreview && role !== "admin" && (
-            <button
-              type="button"
-              className="back-admin-button"
-              onClick={() => goTo("/admin")}
-            >
-              Quay lại Admin
-            </button>
-          )}
         </div>
 
        <UserMenu />
