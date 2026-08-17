@@ -1,6 +1,6 @@
-import type { CognitiveResult } from "../../lib/cognitiveEngine";
+import type { CognitiveResult } from "../../engines/cognitive/cognitiveEngine";
 
-export type { CognitiveResult } from "../../lib/cognitiveEngine";
+export type { CognitiveResult } from "../../engines/cognitive/cognitiveEngine";
 
 export type StudentProfile = {
   fullName: string;
@@ -57,7 +57,7 @@ export const defaultCognitiveResult: CognitiveResult = {
   CSL: 0,
   overallScore: 0,
   riskLevel: "UNKNOWN",
-  trend: 0,
+  trend: "UNKNOWN",
   trendLabel: "Chưa có dữ liệu",
   confidenceScore: 0,
   summary: "Lumen chưa có đủ dữ liệu để đánh giá trạng thái học tập.",
@@ -87,4 +87,18 @@ export const defaultCognitiveResult: CognitiveResult = {
       description: "Độ ổn định của nhịp học, luyện tập và khả năng duy trì kế hoạch.",
     },
   ],
+  GVI: 0,
+  BDI: 0,
+  FRI: 0,
+  CRI: 0,
+  vector: {
+    SCI: 0,
+    MAS: 0,
+    CSL: 0,
+    GVI: 0,
+    BDI: 0,
+    FRI: 0,
+    CRI: 0,
+    timestamp: ""
+  }
 };
