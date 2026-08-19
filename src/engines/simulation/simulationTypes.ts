@@ -1,51 +1,191 @@
 export type ScenarioType =
   | "BASELINE"
-  | "INCREASE_STUDY"
-  | "IMPROVE_CONSISTENCY"
-  | "CHANGE_GOAL"
-  | "REDUCE_FATIGUE";
+  | "STUDY_INCREASE"
+  | "CONSISTENCY_BOOST"
+  | "MOTIVATION_BOOST"
+  | "FATIGUE_REDUCTION"
+  | "STRATEGY_IMPROVEMENT";
+
+
+
+export interface CognitiveChange {
+
+  SCI?: number;
+
+  MAS?: number;
+
+  CSL?: number;
+
+  GVI?: number;
+
+  BDI?: number;
+
+  FRI?: number;
+
+  CRI?: number;
+
+}
+
+
+
+export interface ScenarioChanges {
+
+  studyHoursDelta?: number;
+
+  completionDelta?: number;
+
+
+  cognitive?: CognitiveChange;
+
+}
+
 
 
 export interface SimulationScenario {
 
   id:string;
 
-  name:string;
-
   type:ScenarioType;
 
+  name:string;
 
-  changes:{
-    studyHoursDelta?:number;
+  description:string;
 
-    completionDelta?:number;
-
-    motivationDelta?:number;
-
-    fatigueDelta?:number;
-
-  };
+  changes:ScenarioChanges;
 
 }
 
 
+
+
+
+export interface SimulationInput {
+
+  currentScore:number;
+
+  targetScore:number;
+
+
+  cognitiveVector:{
+
+    SCI:number;
+
+    MAS:number;
+
+    CSL:number;
+
+    GVI:number;
+
+    BDI:number;
+
+    FRI:number;
+
+    CRI:number;
+
+  };
+
+
+  studyHoursPerWeek:number;
+
+  completionRate:number;
+
+}
+
+
+
+
+
+
+export interface CognitiveImpact {
+
+
+  SCI:number;
+
+  MAS:number;
+
+  CSL:number;
+
+  GVI:number;
+
+  BDI:number;
+
+  FRI:number;
+
+  CRI:number;
+
+
+}
+
+
+
+
+
+
+
 export interface SimulationResult {
 
-  scenario:string;
+
+  scenarioId:string;
+
+
+  scenarioType:ScenarioType;
+
+
+  scenarioName:string;
+
 
 
   predictedScore:number;
 
 
+  improvement:number;
+
+
   probability:number;
 
 
-  risk:string;
+  stability:number;
 
 
-  gain:number;
+
+  risk:
+  | "LOW"
+  | "MEDIUM"
+  | "HIGH";
+
+
+
+  utilityScore:number;
+
+
+
+  cognitiveImpact:CognitiveImpact;
+
 
 
   explanation:string[];
+
+
+
+  tradeoffs:string[];
+
+
+
+}
+
+
+
+
+
+
+
+export interface SimulationSummary {
+
+
+  results:SimulationResult[];
+
+
+  bestScenario:SimulationResult;
+
 
 }

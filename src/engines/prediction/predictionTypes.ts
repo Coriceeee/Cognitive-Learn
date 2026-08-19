@@ -33,6 +33,53 @@ export interface PredictionInput {
 
 
 
+export interface PredictionFeatures {
+
+
+  currentScore:number;
+
+
+  cognitiveStrength:number;
+
+
+  learningStability:number;
+
+
+  learningMomentum:number;
+
+
+  riskScore:number;
+
+
+  growthPotential:number;
+
+
+
+  SCI:number;
+
+  MAS:number;
+
+  CSL:number;
+
+  GVI:number;
+
+  BDI:number;
+
+  FRI:number;
+
+  CRI:number;
+
+
+
+  studyHoursPerWeek:number;
+
+
+  completionRate:number;
+
+}
+
+
+
 export interface PredictionResult {
 
 
@@ -48,16 +95,19 @@ export interface PredictionResult {
   improvement:number;
 
 
+
   probability:number;
 
 
   achievementProbability:number;
 
 
+
   risk:
     | "LOW"
     | "MEDIUM"
     | "HIGH";
+
 
 
   confidence:number;
@@ -67,9 +117,27 @@ export interface PredictionResult {
   stability:number;
 
 
+
+  growthPotential:number;
+
+
+
+  keyDrivers:string[];
+
+
+
+  riskFactors:string[];
+
+
+
   factors:string[];
 
 
+
   explanation:string[];
+
+
+
+  modelVersion:string;
 
 }

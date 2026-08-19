@@ -1,274 +1,355 @@
 import type {
   PredictionInput,
-  PredictionResult
+  PredictionResult,
 } from "./predictionTypes";
+
+import {
+  extractPredictionFeatures,
+} from "./predictionFeatures";
 
 
 
 function clamp(
- value:number,
- min=0,
- max=100
+  value:number,
+  min=0,
+  max=100
 ){
 
- return Math.max(
-  min,
-  Math.min(max,value)
- );
+  return Math.max(
+    min,
+    Math.min(max,value)
+  );
 
 }
+
+
 
 
 
 export function predictLearningOutcome(
- input:PredictionInput
+  input:PredictionInput
 ):PredictionResult {
 
 
 
-const vector =
-input.cognitiveVector;
+  const features =
+    extractPredictionFeatures(input);
 
 
 
-const cognitiveScore =
+  const gap =
+    Math.max(
+      0,
+      input.targetScore -
+      input.currentScore
+    );
 
-(
- vector.SCI * 0.2
-+
- vector.MAS * 0.15
-+
- vector.CSL * 0.15
-+
- vector.CRI * 0.2
-+
- (100-vector.GVI) * 0.1
-+
- (100-vector.BDI) * 0.1
-+
- (100-vector.FRI) * 0.1
 
-);
 
+  /**
+   * MVP prediction model
+   *
+   * Sau này thay bằng:
+   * XGBoost / ML API
+   */
+  const improvement =
 
+    (
+      features.cognitiveStrength * 0.35
+      +
+      features.learningMomentum * 0.25
+      +
+      features.growthPotential * 0.25
+      +
+      features.completionRate * 0.15
 
-const cognitiveFactor =
-cognitiveScore / 100;
+    )
+    /
+    100
+    *
+    2;
 
 
 
-const studyFactor =
-Math.min(
-1,
-input.studyHoursPerWeek / 30
-);
+  const predictedScore =
 
+    Math.min(
+      10,
+      input.currentScore +
+      improvement
+    );
 
 
-const completionFactor =
-input.completionRate / 100;
 
 
+  const achievementProbability =
 
-const gap =
-Math.max(
-0,
-input.targetScore-input.currentScore
-);
+    clamp(
 
+      100 -
 
+      (
+        Math.max(
+          0,
+          input.targetScore -
+          predictedScore
+        )
+        *
+        20
+      )
 
-const improvement =
+    );
 
-(
- cognitiveFactor * 1.8
-+
- studyFactor
-+
- completionFactor
 
-)
-*
-2;
 
 
+  let risk:
+    | "LOW"
+    | "MEDIUM"
+    | "HIGH";
 
-const predictedScore =
 
-Math.min(
-10,
-input.currentScore + improvement
-);
 
+  if(
+    features.riskScore >=70
+  ){
 
+    risk="HIGH";
 
-const achievementProbability =
+  }
 
-clamp(
+  else if(
+    features.riskScore >=40
+  ){
 
-100 -
-(
-Math.max(
-0,
-input.targetScore-predictedScore
-)
-*
-20
-)
+    risk="MEDIUM";
 
-);
+  }
 
+  else{
 
+    risk="LOW";
 
-let risk:
-"LOW"|"MEDIUM"|"HIGH";
+  }
 
 
-if(
-vector.FRI >=70 ||
-vector.BDI >=70
-){
 
-risk="HIGH";
 
-}
-else if(
-vector.FRI>=40 ||
-vector.BDI>=40
-){
 
-risk="MEDIUM";
+  const stability =
 
-}
-else{
+    clamp(
+      features.learningStability
+    );
 
-risk="LOW";
 
-}
 
 
 
-const stability =
+  const factors:string[]=[];
 
-clamp(
+  const keyDrivers:string[]=[];
 
-vector.CRI
--
-(
-vector.GVI*0.3
-)
--
-(
-vector.BDI*0.3
-)
+  const riskFactors:string[]=[];
 
-);
 
 
 
-const factors:string[]=[];
+  if(
+    features.SCI >=75
+  ){
 
+    factors.push(
+      "Tính ổn định học tập cao"
+    );
 
 
-if(vector.SCI>=75)
- factors.push(
-  "Tính ổn định học tập cao"
- );
+    keyDrivers.push(
+      "SCI tốt giúp duy trì tiến bộ"
+    );
 
+  }
 
-if(vector.CRI>=75)
- factors.push(
-  "Khả năng duy trì trạng thái tốt"
- );
 
 
-if(vector.GVI>=60)
- factors.push(
-  "Mục tiêu chưa ổn định"
- );
 
+  if(
+    features.CRI >=75
+  ){
 
-if(vector.FRI>=60)
- factors.push(
-  "Có nguy cơ quá tải"
- );
+    factors.push(
+      "Khả năng duy trì trạng thái tốt"
+    );
 
 
+    keyDrivers.push(
+      "CRI cao giúp giảm biến động"
+    );
 
-return {
+  }
 
 
- currentScore:
- input.currentScore,
 
 
- targetScore:
- input.targetScore,
+  if(
+    features.GVI >=60
+  ){
 
+    riskFactors.push(
+      "Mục tiêu học tập chưa ổn định"
+    );
 
- predictedScore:
- Number(
- predictedScore.toFixed(2)
- ),
+  }
 
 
- improvement:
- Number(
- improvement.toFixed(2)
- ),
 
 
+  if(
+    features.BDI >=60
+  ){
 
- probability:
- Math.round(
-  cognitiveFactor*100
- ),
+    riskFactors.push(
+      "Hành vi học tập có xu hướng lệch"
+    );
 
+  }
 
 
- achievementProbability:
- Math.round(
-  achievementProbability
- ),
 
 
+  if(
+    features.FRI >=60
+  ){
 
- risk,
+    riskFactors.push(
+      "Có nguy cơ quá tải"
+    );
 
+  }
 
- confidence:
- Math.round(
- (
- vector.CRI
- +
- input.completionRate
- )
- /2
- ),
 
 
 
- stability:
- Math.round(
- stability
- ),
 
+  return {
 
 
- factors,
+    currentScore:
+      input.currentScore,
 
 
+    targetScore:
+      input.targetScore,
 
- explanation:[
 
- "Dự đoán dựa trên Cognitive Vector 7 chiều.",
 
- "Mô hình kết hợp năng lực nhận thức, hành vi và mức ổn định.",
+    predictedScore:
 
- "Kết quả có thể dùng cho Simulation Engine."
+      Number(
+        predictedScore.toFixed(2)
+      ),
 
- ]
 
-};
+
+    improvement:
+
+      Number(
+        improvement.toFixed(2)
+      ),
+
+
+
+
+    probability:
+
+      Math.round(
+        features.cognitiveStrength
+      ),
+
+
+
+
+    achievementProbability:
+
+      Math.round(
+        achievementProbability
+      ),
+
+
+
+
+    risk,
+
+
+
+
+    confidence:
+
+      Math.round(
+
+        (
+          features.learningStability
+          +
+          input.completionRate
+
+        )
+        /
+        2
+
+      ),
+
+
+
+
+
+    stability:
+
+      Math.round(
+        stability
+      ),
+
+
+
+
+    growthPotential:
+
+      Math.round(
+        features.growthPotential
+      ),
+
+
+
+
+    factors,
+
+
+
+    keyDrivers,
+
+
+
+    riskFactors,
+
+
+
+
+    explanation:[
+
+      "Dự đoán dựa trên Cognitive Vector 7 chiều.",
+
+      "Feature Engineering kết hợp nhận thức, hành vi và tính ổn định.",
+
+      "Output có thể sử dụng cho Orion Simulation.",
+
+    ],
+
+
+
+
+    modelVersion:
+
+      "Prediction Engine v2.0-MVP"
+
+  };
 
 }
