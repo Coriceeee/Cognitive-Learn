@@ -1,0 +1,1752 @@
+.lumen-page {
+  min-height: 100vh;
+  color: #071629;
+
+  background:
+    radial-gradient(
+      circle at 8% 0%,
+      rgba(37, 99, 235, 0.1),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 92% 12%,
+      rgba(56, 189, 248, 0.08),
+      transparent 25%
+    ),
+    linear-gradient(
+      180deg,
+      #f8fbff 0%,
+      #f1f7ff 48%,
+      #edf5ff 100%
+    );
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.lumen-floating-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+
+  height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 34px;
+
+  border-bottom:
+    1px solid
+    rgba(148, 163, 184, 0.14);
+
+  background:
+    rgba(248, 251, 255, 0.78);
+
+  backdrop-filter:
+    blur(22px);
+
+  -webkit-backdrop-filter:
+    blur(22px);
+}
+
+
+.lumen-home-logo {
+  display: inline-flex;
+  align-items: center;
+
+  width: 92px;
+
+  text-decoration: none;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+
+.lumen-home-logo:hover {
+  transform: translateY(-1px);
+  opacity: 0.85;
+}
+
+
+.lumen-home-logo img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+}
+
+
+/* =========================================================
+   MAIN SHELL
+   ========================================================= */
+
+.lumen-shell {
+  width: min(
+    1180px,
+    calc(100% - 32px)
+  );
+
+  margin: 0 auto;
+
+  padding:
+    34px 0 80px;
+}
+
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+
+.lumen-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #2563eb;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  letter-spacing: 0.17em;
+
+  line-height: 1.2;
+
+  text-transform: uppercase;
+}
+
+
+.lumen-eyebrow::before {
+  content: "";
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background:
+    #38bdf8;
+
+  box-shadow:
+    0 0 0 4px
+    rgba(56, 189, 248, 0.1);
+}
+
+
+/* =========================================================
+   OVERVIEW / HERO
+   ========================================================= */
+
+.lumen-overview-card {
+  position: relative;
+  overflow: hidden;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    250px;
+
+  gap: 34px;
+
+  padding: 42px;
+
+  border:
+    1px solid
+    rgba(147, 197, 253, 0.4);
+
+  border-radius: 32px;
+
+  background:
+    rgba(255, 255, 255, 0.88);
+
+  box-shadow:
+    0 30px 90px
+    rgba(15, 60, 120, 0.08),
+    0 4px 20px
+    rgba(15, 60, 120, 0.035);
+
+  backdrop-filter:
+    blur(20px);
+
+  -webkit-backdrop-filter:
+    blur(20px);
+}
+
+
+.lumen-overview-card::before {
+  content: "";
+
+  position: absolute;
+
+  width: 420px;
+  height: 420px;
+
+  right: -220px;
+  top: -230px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(56, 189, 248, 0.15),
+      rgba(37, 99, 235, 0.04) 48%,
+      transparent 72%
+    );
+
+  pointer-events: none;
+}
+
+
+.lumen-overview-card::after {
+  content: "";
+
+  position: absolute;
+
+  left: -120px;
+  bottom: -180px;
+
+  width: 300px;
+  height: 300px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(37, 99, 235, 0.045);
+
+  filter:
+    blur(28px);
+
+  pointer-events: none;
+}
+
+
+.lumen-overview-copy {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+
+.lumen-overview-copy h1 {
+  margin:
+    14px 0 12px;
+
+  color:
+    #071629;
+
+  font-size:
+    clamp(
+      38px,
+      6vw,
+      68px
+    );
+
+  line-height:
+    0.96;
+
+  font-weight:
+    950;
+
+  letter-spacing:
+    -0.065em;
+}
+
+
+.lumen-overview-copy p {
+  max-width:
+    700px;
+
+  margin:
+    0;
+
+  color:
+    #64748b;
+
+  font-size:
+    15px;
+
+  line-height:
+    1.8;
+}
+
+
+/* =========================================================
+   SCORE ORB
+   ========================================================= */
+
+.lumen-score-orb {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height:
+    220px;
+
+  padding:
+    24px;
+
+  border:
+    1px solid
+    rgba(147, 197, 253, 0.48);
+
+  border-radius:
+    28px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff 0%,
+      #f4f9ff 55%,
+      #eaf4ff 100%
+    );
+
+  box-shadow:
+    inset 0 1px 0
+    rgba(255, 255, 255, 0.9),
+    0 18px 45px
+    rgba(37, 99, 235, 0.07);
+}
+
+
+.lumen-score-orb::before {
+  content: "";
+
+  position: absolute;
+
+  width: 145px;
+  height: 145px;
+
+  border-radius: 50%;
+
+  border:
+    1px solid
+    rgba(37, 99, 235, 0.1);
+
+  box-shadow:
+    0 0 0 12px
+    rgba(37, 99, 235, 0.025),
+    0 0 0 24px
+    rgba(56, 189, 248, 0.018);
+
+  pointer-events: none;
+}
+
+
+.lumen-score-orb small {
+  position: relative;
+  z-index: 2;
+
+  color:
+    #64748b;
+
+  font-size:
+    10px;
+
+  font-weight:
+    850;
+
+  letter-spacing:
+    0.12em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.lumen-score-orb strong {
+  position: relative;
+  z-index: 2;
+
+  margin-top:
+    8px;
+
+  color:
+    #071629;
+
+  font-size:
+    58px;
+
+  line-height:
+    1;
+
+  font-weight:
+    950;
+
+  letter-spacing:
+    -0.07em;
+}
+
+
+.lumen-score-orb span {
+  position: relative;
+  z-index: 2;
+
+  margin-top:
+    8px;
+
+  color:
+    #94a3b8;
+
+  font-size:
+    11px;
+
+  font-weight:
+    700;
+}
+
+
+/* =========================================================
+   GENERIC PANEL
+   ========================================================= */
+
+.lumen-panel {
+  position: relative;
+
+  margin-top:
+    22px;
+
+  padding:
+    30px;
+
+  border:
+    1px solid
+    rgba(191, 219, 254, 0.9);
+
+  border-radius:
+    28px;
+
+  background:
+    rgba(255, 255, 255, 0.9);
+
+  box-shadow:
+    0 20px 55px
+    rgba(15, 60, 120, 0.055);
+
+  backdrop-filter:
+    blur(16px);
+
+  -webkit-backdrop-filter:
+    blur(16px);
+}
+
+
+.lumen-panel-heading {
+  margin-bottom:
+    24px;
+}
+
+
+.lumen-panel-heading h2,
+.lumen-evidence-card h2 {
+  margin:
+    10px 0 8px;
+
+  color:
+    #071629;
+
+  font-size:
+    28px;
+
+  line-height:
+    1.12;
+
+  font-weight:
+    950;
+
+  letter-spacing:
+    -0.05em;
+}
+
+
+.lumen-panel-heading p {
+  max-width:
+    760px;
+
+  margin:
+    0;
+
+  color:
+    #64748b;
+
+  font-size:
+    14px;
+
+  line-height:
+    1.75;
+}
+
+
+/* =========================================================
+   COGNITIVE DIMENSIONS
+   ========================================================= */
+
+.lumen-dimension-grid {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap:
+    12px;
+}
+
+
+.lumen-dimension-card {
+  position: relative;
+
+  min-height:
+    124px;
+
+  padding:
+    20px;
+
+  overflow:
+    hidden;
+
+  border:
+    1px solid
+    #dbeafe;
+
+  border-radius:
+    20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #f7fbff
+    );
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+
+.lumen-dimension-card:hover {
+  transform:
+    translateY(-2px);
+
+  border-color:
+    #bfdbfe;
+
+  box-shadow:
+    0 14px 30px
+    rgba(37, 99, 235, 0.07);
+}
+
+
+.lumen-dimension-card strong {
+  display:
+    block;
+
+  margin-top:
+    17px;
+
+  color:
+    #071629;
+
+  font-size:
+    27px;
+
+  line-height:
+    1;
+
+  font-weight:
+    950;
+
+  letter-spacing:
+    -0.04em;
+}
+
+
+.lumen-meter {
+  height:
+    5px;
+
+  margin-top:
+    15px;
+
+  overflow:
+    hidden;
+
+  border-radius:
+    999px;
+
+  background:
+    #e8f0fa;
+}
+
+
+.lumen-meter i {
+  display:
+    block;
+
+  height:
+    100%;
+
+  min-width:
+    3px;
+
+  border-radius:
+    inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      #2563eb,
+      #38bdf8
+    );
+}
+
+
+/* =========================================================
+   INSIGHT GRID
+   ========================================================= */
+
+.lumen-insight-grid {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap:
+    14px;
+
+  margin-top:
+    20px;
+}
+
+
+.lumen-insight-card {
+  padding:
+    22px;
+
+  border:
+    1px solid
+    #dbeafe;
+
+  border-radius:
+    22px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #f8fbff
+    );
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.lumen-insight-card:hover {
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 16px 35px
+    rgba(15, 60, 120, 0.06);
+}
+
+
+.lumen-insight-card h3 {
+  margin:
+    12px 0 8px;
+
+  color:
+    #071629;
+
+  font-size:
+    18px;
+
+  line-height:
+    1.25;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    -0.025em;
+}
+
+
+.lumen-insight-card p {
+  margin:
+    0;
+
+  color:
+    #64748b;
+
+  font-size:
+    13px;
+
+  line-height:
+    1.65;
+}
+
+
+.lumen-card-tag {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  min-height:
+    26px;
+
+  padding:
+    0 9px;
+
+  border:
+    1px solid
+    #bfdbfe;
+
+  border-radius:
+    999px;
+
+  color:
+    #2563eb;
+
+  background:
+    #eff6ff;
+
+  font-size:
+    9px;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.1em;
+}
+
+
+/* =========================================================
+   DECISION
+   ========================================================= */
+
+.lumen-decision-grid {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap:
+    14px;
+}
+
+
+.lumen-decision-card {
+  min-height:
+    150px;
+
+  padding:
+    22px;
+
+  border:
+    1px solid
+    #dbeafe;
+
+  border-radius:
+    22px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #f8fbff
+    );
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+
+.lumen-decision-card:hover {
+  transform:
+    translateY(-2px);
+
+  border-color:
+    #bfdbfe;
+
+  box-shadow:
+    0 15px 35px
+    rgba(37, 99, 235, 0.055);
+}
+
+
+.lumen-decision-card.is-wide {
+  grid-column:
+    1 / -1;
+
+  min-height:
+    auto;
+}
+
+
+.lumen-decision-card > span {
+  display:
+    inline-flex;
+
+  color:
+    #2563eb;
+
+  font-size:
+    10px;
+
+  font-weight:
+    900;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    0.12em;
+}
+
+
+.lumen-decision-card strong {
+  display:
+    block;
+
+  margin-top:
+    14px;
+
+  color:
+    #071629;
+
+  font-size:
+    28px;
+
+  line-height:
+    1.15;
+
+  font-weight:
+    950;
+
+  letter-spacing:
+    -0.045em;
+}
+
+
+.lumen-decision-card p {
+  margin:
+    12px 0 0;
+
+  color:
+    #64748b;
+
+  line-height:
+    1.65;
+
+  font-size:
+    13px;
+}
+
+
+.lumen-decision-card ul {
+  margin:
+    13px 0 0;
+
+  padding-left:
+    19px;
+}
+
+
+.lumen-decision-card li {
+  margin-bottom:
+    8px;
+
+  color:
+    #475569;
+
+  font-size:
+    13px;
+
+  line-height:
+    1.6;
+}
+
+
+.lumen-decision-card li:last-child {
+  margin-bottom:
+    0;
+}
+
+
+/* =========================================================
+   EVIDENCE
+   ========================================================= */
+
+.lumen-evidence-card {
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(0, 0.8fr)
+    minmax(0, 1.2fr);
+
+  gap:
+    30px;
+
+  margin-top:
+    22px;
+
+  padding:
+    30px;
+
+  border:
+    1px solid
+    #dbeafe;
+
+  border-radius:
+    28px;
+
+  background:
+    rgba(255, 255, 255, 0.94);
+
+  box-shadow:
+    0 18px 50px
+    rgba(15, 60, 120, 0.045);
+}
+
+
+.lumen-evidence-card h2 {
+  margin-top:
+    10px;
+}
+
+
+.lumen-evidence-list {
+  display:
+    grid;
+
+  gap:
+    10px;
+}
+
+
+.lumen-evidence-list > div {
+  display:
+    grid;
+
+  grid-template-columns:
+    10px minmax(0, 1fr) auto;
+
+  align-items:
+    center;
+
+  gap:
+    12px;
+
+  min-height:
+    52px;
+
+  padding:
+    0 15px;
+
+  border:
+    1px solid
+    #dbeafe;
+
+  border-radius:
+    15px;
+
+  background:
+    #fbfdff;
+}
+
+
+.lumen-evidence-list i {
+  width:
+    7px;
+
+  height:
+    7px;
+
+  border-radius:
+    50%;
+
+  background:
+    #94a3b8;
+}
+
+
+.lumen-evidence-list i.is-on {
+  background:
+    #22c55e;
+
+  box-shadow:
+    0 0 0 4px
+    rgba(34, 197, 94, 0.1);
+}
+
+
+/* =========================================================
+   AI EXPLANATION
+   ========================================================= */
+
+.lumen-ai-explanation {
+  margin-top:
+    26px;
+}
+
+
+.lumen-ai-explanation h2 {
+  margin:
+    10px 0 14px;
+
+  color:
+    #071629;
+
+  font-size:
+    24px;
+
+  line-height:
+    1.2;
+
+  font-weight:
+    950;
+
+  letter-spacing:
+    -0.04em;
+}
+
+
+.lumen-ai-explanation-card {
+  padding:
+    20px 22px;
+
+  border:
+    1px solid
+    #dbeafe;
+
+  border-radius:
+    20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f8fbff,
+      #ffffff
+    );
+}
+
+
+.lumen-ai-explanation-card p,
+.lumen-ai-explanation-card li {
+  color:
+    #475569;
+
+  font-size:
+    13px;
+
+  line-height:
+    1.7;
+}
+
+
+.lumen-ai-explanation-card ul {
+  margin:
+    0;
+
+  padding-left:
+    20px;
+}
+
+
+.lumen-ai-explanation-card li {
+  margin-bottom:
+    8px;
+}
+
+
+/* =========================================================
+   STRATEGY / ORION
+   ========================================================= */
+
+.lumen-panel .lumen-insight-grid + .lumen-ai-explanation {
+  margin-top:
+    30px;
+}
+
+
+.lumen-strategy-highlight {
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  padding:
+    24px;
+
+  border:
+    1px solid
+    rgba(147, 197, 253, 0.5);
+
+  border-radius:
+    24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f8fbff,
+      #eff6ff
+    );
+}
+
+
+.lumen-strategy-highlight::after {
+  content: "";
+
+  position: absolute;
+
+  width:
+    180px;
+
+  height:
+    180px;
+
+  right:
+    -80px;
+
+  top:
+    -90px;
+
+  border-radius:
+    50%;
+
+  background:
+    rgba(56, 189, 248, 0.1);
+
+  filter:
+    blur(8px);
+}
+
+
+/* =========================================================
+   EMPTY / ERROR
+   ========================================================= */
+
+.lumen-empty-card,
+.lumen-error-card {
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  padding:
+    58px 40px;
+
+  text-align:
+    center;
+
+  border:
+    1px solid
+    #dbeafe;
+
+  border-radius:
+    30px;
+
+  background:
+    rgba(255, 255, 255, 0.92);
+
+  box-shadow:
+    0 25px 70px
+    rgba(15, 60, 120, 0.06);
+}
+
+
+.lumen-empty-icon {
+  width:
+    62px;
+
+  height:
+    62px;
+
+  margin:
+    0 auto 20px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border:
+    1px solid
+    #bfdbfe;
+
+  border-radius:
+    20px;
+
+  background:
+    #eff6ff;
+
+  color:
+    #2563eb;
+
+  font-size:
+    24px;
+
+  box-shadow:
+    0 10px 30px
+    rgba(37, 99, 235, 0.08);
+}
+
+
+.lumen-empty-card h1,
+.lumen-error-card h1 {
+  margin:
+    12px 0 8px;
+
+  color:
+    #071629;
+
+  font-size:
+    30px;
+
+  font-weight:
+    950;
+
+  letter-spacing:
+    -0.045em;
+}
+
+
+.lumen-empty-card p,
+.lumen-error-card p {
+  max-width:
+    560px;
+
+  margin:
+    0 auto;
+
+  color:
+    #64748b;
+
+  font-size:
+    14px;
+
+  line-height:
+    1.7;
+}
+
+
+.lumen-primary-action {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+  justify-content:
+    center;
+
+  margin-top:
+    24px;
+
+  min-height:
+    44px;
+
+  padding:
+    0 22px;
+
+  border:
+    1px solid
+    #2563eb;
+
+  border-radius:
+    14px;
+
+  color:
+    #ffffff;
+
+  background:
+    #2563eb;
+
+  text-decoration:
+    none;
+
+  font-size:
+    13px;
+
+  font-weight:
+    850;
+
+  box-shadow:
+    0 10px 25px
+    rgba(37, 99, 235, 0.18);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+
+.lumen-primary-action:hover {
+  transform:
+    translateY(-2px);
+
+  background:
+    #1d4ed8;
+
+  box-shadow:
+    0 14px 30px
+    rgba(37, 99, 235, 0.22);
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.lumen-page-loading {
+  min-height:
+    70vh;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    16px;
+
+  color:
+    #475569;
+}
+
+
+.lumen-page-loading strong {
+  font-size:
+    13px;
+
+  font-weight:
+    800;
+}
+
+
+.lumen-loading-orb {
+  position:
+    relative;
+
+  width:
+    64px;
+
+  height:
+    64px;
+
+  border:
+    2px solid
+    rgba(37, 99, 235, 0.18);
+
+  border-top-color:
+    #2563eb;
+
+  border-radius:
+    50%;
+
+  animation:
+    lumenSpin
+    1s
+    linear
+    infinite;
+}
+
+
+.lumen-loading-orb::after {
+  content: "";
+
+  position:
+    absolute;
+
+  inset:
+    9px;
+
+  border:
+    1px solid
+    rgba(56, 189, 248, 0.25);
+
+  border-radius:
+    50%;
+}
+
+
+@keyframes lumenSpin {
+
+  to {
+    transform:
+      rotate(360deg);
+  }
+
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.lumen-footer {
+  display:
+    flex;
+
+  align-items:
+    flex-end;
+
+  justify-content:
+    space-between;
+
+  gap:
+    20px;
+
+  margin-top:
+    32px;
+
+  padding:
+    0 4px;
+
+  color:
+    #64748b;
+
+  font-size:
+    11px;
+}
+
+
+.lumen-footer div {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    4px;
+}
+
+
+.lumen-footer strong {
+  color:
+    #2563eb;
+
+  font-size:
+    10px;
+
+  font-weight:
+    950;
+
+  letter-spacing:
+    0.14em;
+}
+
+
+.lumen-footer span {
+  color:
+    #94a3b8;
+
+  font-size:
+    9px;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    0.12em;
+}
+
+
+.lumen-footer small {
+  color:
+    #94a3b8;
+
+  font-size:
+    10px;
+
+  font-weight:
+    700;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .lumen-overview-card {
+    grid-template-columns:
+      1fr 210px;
+
+    gap:
+      24px;
+
+    padding:
+      32px;
+  }
+
+
+  .lumen-dimension-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+
+  .lumen-insight-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  .lumen-floating-header {
+    height:
+      64px;
+
+    padding:
+      0 18px;
+  }
+
+
+  .lumen-home-logo {
+    width:
+      80px;
+  }
+
+
+  .lumen-shell {
+    width:
+      calc(100% - 24px);
+
+    padding:
+      22px 0 60px;
+  }
+
+
+  .lumen-overview-card {
+    grid-template-columns:
+      1fr;
+
+    gap:
+      24px;
+
+    padding:
+      26px;
+
+    border-radius:
+      26px;
+  }
+
+
+  .lumen-overview-copy h1 {
+    font-size:
+      clamp(
+        38px,
+        13vw,
+        56px
+      );
+  }
+
+
+  .lumen-overview-copy p {
+    font-size:
+      14px;
+  }
+
+
+  .lumen-score-orb {
+    min-height:
+      180px;
+  }
+
+
+  .lumen-score-orb strong {
+    font-size:
+      52px;
+  }
+
+
+  .lumen-panel {
+    padding:
+      24px;
+
+    border-radius:
+      24px;
+  }
+
+
+  .lumen-panel-heading h2,
+  .lumen-evidence-card h2 {
+    font-size:
+      25px;
+  }
+
+
+  .lumen-decision-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .lumen-decision-card.is-wide {
+    grid-column:
+      auto;
+  }
+
+
+  .lumen-evidence-card {
+    grid-template-columns:
+      1fr;
+
+    padding:
+      24px;
+
+    gap:
+      22px;
+  }
+
+
+  .lumen-insight-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .lumen-footer {
+    flex-direction:
+      column;
+
+    align-items:
+      flex-start;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .lumen-floating-header {
+    padding:
+      0 14px;
+  }
+
+
+  .lumen-shell {
+    width:
+      calc(100% - 20px);
+  }
+
+
+  .lumen-overview-card,
+  .lumen-panel,
+  .lumen-evidence-card {
+    padding:
+      20px;
+  }
+
+
+  .lumen-dimension-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .lumen-dimension-card {
+    min-height:
+      112px;
+  }
+
+
+  .lumen-decision-card {
+    min-height:
+      135px;
+
+    padding:
+      19px;
+  }
+
+
+  .lumen-empty-card,
+  .lumen-error-card {
+    padding:
+      42px 22px;
+  }
+
+
+  .lumen-empty-card h1,
+  .lumen-error-card h1 {
+    font-size:
+      26px;
+  }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .lumen-home-logo,
+  .lumen-dimension-card,
+  .lumen-insight-card,
+  .lumen-decision-card,
+  .lumen-primary-action {
+    transition:
+      none;
+  }
+
+
+  .lumen-loading-orb {
+    animation:
+      none;
+  }
+
+}

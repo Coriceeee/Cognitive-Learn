@@ -180,14 +180,13 @@ function cleanLabel(value?: string, fallback = "Chưa có dữ liệu") {
   return text;
 }
 
-function getStatusFromDraft(draft: GeminiAdmissionDraft): AtlasSourceStatus {
-  const confidence = Number(draft.confidence) || 0;
-  const hasSource = Boolean(draft.sourceUrl?.trim());
-  const hasPrograms = Boolean(draft.programs?.length);
-
-  if (hasSource && hasPrograms && confidence >= 50) {
-    return "verified";
-  }
+function getStatusFromDraft(
+  draft: GeminiAdmissionDraft
+): AtlasSourceStatus {
+  const hasPrograms =
+    Boolean(
+      draft.programs?.length
+    );
 
   if (hasPrograms) {
     return "pending";
