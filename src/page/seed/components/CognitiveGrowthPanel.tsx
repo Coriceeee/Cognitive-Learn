@@ -35,6 +35,16 @@ function formatDelta(delta: number) {
   return value;
 }
 
+function beneficialDirection(
+  code: CognitiveDimensionCode,
+  direction: "UP" | "DOWN" | "STABLE"
+): "UP" | "DOWN" | "STABLE" {
+  if (!["GVI", "BDI", "FRI"].includes(code) || direction === "STABLE") {
+    return direction;
+  }
+  return direction === "UP" ? "DOWN" : "UP";
+}
+
 function directionLabel(
   direction: "UP" | "DOWN" | "STABLE"
 ) {
@@ -52,7 +62,13 @@ function directionLabel(
 export default function CognitiveGrowthPanel({
   analytics,
 }: Props) {
-  if (!analytics) {
+  // No genuine comparison must never be rendered as a flat 0-point trend.
+  if (
+    !analytics ||
+    analytics.overall.previous === null ||
+    analytics.observationDays <= 0 ||
+    analytics.dimensions.length === 0
+  ) {
     return (
       <section className="cognitive-growth-panel">
         <div className="cognitive-growth-empty">
@@ -118,7 +134,7 @@ export default function CognitiveGrowthPanel({
                 <strong>{formatNumber(item.current)}</strong>
               </div>
 
-              <b className={`is-${item.direction.toLowerCase()}`}>
+              <b className={`is-${beneficialDirection(item.code, item.direction).toLowerCase()}`}>
                 {formatDelta(item.delta)}
               </b>
             </div>
@@ -138,7 +154,7 @@ export default function CognitiveGrowthPanel({
               <span>
                 Previous {formatNumber(item.previous)}
               </span>
-              <em>{directionLabel(item.direction)}</em>
+              <em>{directionLabel(beneficialDirection(item.code, item.direction))}</em>
             </div>
           </article>
         ))}

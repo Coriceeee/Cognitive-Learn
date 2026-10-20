@@ -322,8 +322,15 @@ export function analyzeCognitiveGrowth(
 
 
 
+  // Compare only dimensions actually measured in both snapshots.
+  // Legacy records without explicit metadata should not be treated as complete
+  // when mixed with the new provenance-aware snapshots.
+  const comparableCodes = DIMENSIONS.filter(code =>
+    !(current.missingDimensions ?? []).includes(code) &&
+    !(previous.missingDimensions ?? []).includes(code)
+  );
   const changes:CognitiveChange[] =
-    DIMENSIONS.map(
+    comparableCodes.map(
       (code)=>{
 
         const currentValue =
@@ -392,16 +399,14 @@ export function analyzeCognitiveGrowth(
 
 
 
-  const improving =
-    changes.filter(
-      item=>item.direction==="UP"
-    );
+  const riskCodes: CognitiveDimensionCode[] = ["GVI", "BDI", "FRI"];
+  // Lower risk indices are better. Raw direction stays UP/DOWN for charts.
+  function beneficialDelta(item: CognitiveChange) {
+    return riskCodes.includes(item.code) ? -item.delta : item.delta;
+  }
 
-
-  const declining =
-    changes.filter(
-      item=>item.direction==="DOWN"
-    );
+  const improving = changes.filter(item => beneficialDelta(item) > 2);
+  const declining = changes.filter(item => beneficialDelta(item) < -2);
 
 
   const stable =
@@ -440,9 +445,7 @@ export function analyzeCognitiveGrowth(
     improving.length
     ?
     [...improving]
-      .sort(
-        (a,b)=>b.delta-a.delta
-      )[0]
+      .sort((a,b)=>beneficialDelta(b)-beneficialDelta(a))[0]
     :
     null;
 
@@ -452,24 +455,17 @@ export function analyzeCognitiveGrowth(
     declining.length
     ?
     [...declining]
-      .sort(
-        (a,b)=>a.delta-b.delta
-      )[0]
+      .sort((a,b)=>beneficialDelta(a)-beneficialDelta(b))[0]
     :
     null;
 
 
 
-  const dataQuality =
-    days>=28
-    ?
-    "SUFFICIENT"
-    :
-    days>=7
-    ?
-    "EMERGING"
-    :
-    "LIMITED";
+  // Two observations can show a direction but do not establish a
+  // sufficiently validated longitudinal trajectory.
+  const dataQuality = days >= 7 && comparableCodes.length >= 3
+    ? "EMERGING"
+    : "LIMITED";
 
 
 
@@ -577,7 +573,7 @@ export function summarizeGrowth(
   const positiveAverage =
     average(
       analytics.improving.map(
-        item=>item.delta
+        item=>Math.abs(item.delta)
       )
     );
 

@@ -35,7 +35,7 @@ export default function CognitiveInsightPanel({
       <div className="student-insight-metrics">
         <div>
           <span>Điểm tổng</span>
-          <strong>{cognitive.overallScore}</strong>
+          <strong>{cognitive.scoreAvailable === false ? "—" : cognitive.overallScore}</strong>
         </div>
 
         <div>
@@ -49,8 +49,8 @@ export default function CognitiveInsightPanel({
         </div>
 
         <div>
-          <span>Độ tin cậy</span>
-          <strong>{cognitive.confidenceScore}%</strong>
+          <span>Độ bao phủ dữ liệu (không phải xác suất tin cậy)</span>
+          <strong>{cognitive.dataCoverageScore ?? 0}%</strong>
         </div>
       </div>
 

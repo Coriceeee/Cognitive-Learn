@@ -21,6 +21,10 @@ export type CognitiveSnapshot = {
   practiceTestsPerWeek: number;
   planCompletionRate: number;
   motivationLevel: number;
+  scoreAvailable?: boolean;
+  dataCoverageScore?: number;
+  missingDimensions?: string[];
+  mappingVersion?: string;
 };
 
 export type CognitiveDimensionCode =

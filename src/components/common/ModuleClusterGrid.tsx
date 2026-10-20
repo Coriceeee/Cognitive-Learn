@@ -49,12 +49,12 @@ const roleDisplayMap: Partial<
 > = {
   student: {
     "seed-profile": {
-      name: "Seed Profile",
-      tagline: "Hồ sơ học sinh",
+      name: "Hồ sơ học sinh",
+      tagline: "Seed Profile",
     },
     "lumen-intelligence": {
-      name: "Lumen Intelligence",
-      tagline: "Phân tích nhận thức",
+      name: "Phân tích nhận thức",
+      tagline: "Lumen Intelligence",
     },
     "atlas-admission": {
       name: "Atlas Admission",

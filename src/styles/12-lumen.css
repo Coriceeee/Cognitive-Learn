@@ -1750,3 +1750,103 @@
   }
 
 }
+
+/* LUMEN GEMINI — on-demand explanation, separate from deterministic evidence. */
+.lumen-data-warning {
+  margin-bottom: 22px;
+  border: 1px solid #f4cf8d;
+  border-radius: 15px;
+  padding: 15px 19px;
+  background: #fff9ec;
+  color: #825517;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.lumen-data-warning p { margin: 4px 0 0; }
+.lumen-gemini-panel {
+  margin-top: 24px;
+  padding: clamp(20px, 3vw, 30px);
+  background: #ffffff;
+  border: 1px solid #dbeafe;
+  border-radius: 24px;
+  box-shadow: 0 16px 40px rgba(15, 60, 120, 0.055);
+}
+.lumen-gemini-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+.lumen-gemini-heading h2 {
+  margin: 10px 0;
+  font-size: clamp(21px, 2.4vw, 28px);
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+  color: #0b2343;
+}
+.lumen-gemini-heading p {
+  margin: 0;
+  max-width: 740px;
+  color: #596f8a;
+  font-size: 13px;
+  line-height: 1.75;
+}
+.lumen-gemini-label {
+  background: #edf5ff;
+  color: #245aa0;
+  font-size: 11px;
+  font-weight: 750;
+  white-space: nowrap;
+  border-radius: 999px;
+  padding: 8px 12px;
+}
+.lumen-gemini-button { margin-top: 20px; cursor: pointer; }
+.lumen-gemini-button:disabled { opacity: 0.68; cursor: wait; transform: none; }
+.lumen-gemini-result { margin-top: 14px; }
+.lumen-gemini-info {
+  color: #476c9f;
+  font-size: 13px;
+}
+.lumen-gemini-message {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #f1d5a7;
+  background: #fffaf0;
+  color: #775225;
+  font-size: 13px;
+  line-height: 1.65;
+}
+.lumen-gemini-message p { margin: 5px 0 0; }
+.lumen-gemini-answer {
+  padding: 20px;
+  background: linear-gradient(145deg, #f4f8ff, #fff);
+  border-radius: 16px;
+  border: 1px solid #dce9fc;
+  color: #29415f;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.lumen-gemini-answer-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 14px;
+  align-items: center;
+  justify-content: space-between;
+}
+.lumen-gemini-answer-header strong { color: #0d3769; font-size: 15px; }
+.lumen-gemini-answer-header span { color: #69819f; font-size: 11px; }
+.lumen-gemini-answer h3 { color: #143861; font-size: 14px; margin: 18px 0 7px; }
+.lumen-gemini-answer ul { padding-left: 22px; margin: 6px 0 12px; }
+.lumen-gemini-answer li + li { margin-top: 5px; }
+.lumen-gemini-answer .lumen-gemini-note {
+  font-size: 11px;
+  color: #657d99;
+  padding-top: 14px;
+  border-top: 1px solid #dce9fc;
+  margin: 18px 0 0;
+}
+@media (max-width: 650px) {
+  .lumen-gemini-heading { flex-direction: column; gap: 10px; }
+  .lumen-gemini-panel { border-radius: 18px; padding: 18px; }
+  .lumen-gemini-answer { padding: 15px; }
+}

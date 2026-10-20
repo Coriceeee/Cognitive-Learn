@@ -3,58 +3,34 @@ import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 
 import { auth, db } from "../../../lib/firebase";
-
-import {
-  calculateCognitive,
-} from "../../../engines/cognitive/cognitiveEngine";
-
+import { calculateCognitive } from "../../../engines/cognitive/cognitiveEngine";
+import { getCognitiveHistory } from "../../../engines/history/cognitiveHistoryRepository";
+import { createSnapshotFromResult } from "../../../engines/history/cognitiveHistoryEngine";
 import {
   analyzeCognitiveGrowth,
   type CognitiveGrowthAnalytics,
 } from "../../../engines/history/cognitiveGrowthAnalytics";
 
 import {
-  getLatestCognitiveSnapshot,
-} from "../../../engines/history/cognitiveHistoryRepository";
-
-import {
-  createSnapshotFromResult,
-} from "../../../engines/history/cognitiveHistoryEngine";
-
-import {
   defaultCognitiveResult,
   defaultStudentProfile,
   type CognitiveResult,
-  type OrionSubjectInput,
   type StudentProfile,
 } from "../types";
 
 
+function getValue(source: any, path: string) {
+  return path.split(".").reduce((current, key) => {
+    if (
+      current &&
+      typeof current === "object" &&
+      key in current
+    ) {
+      return current[key];
+    }
 
-function getValue(
-  source: any,
-  path: string
-) {
-
-  return path
-    .split(".")
-    .reduce(
-      (current, key) => {
-
-        if (
-          current &&
-          typeof current === "object" &&
-          key in current
-        ) {
-          return current[key];
-        }
-
-        return undefined;
-
-      },
-      source
-    );
-
+    return undefined;
+  }, source);
 }
 
 
@@ -67,11 +43,11 @@ function pickString(
 
   for (const path of paths) {
 
-    const value =
-      getValue(
-        source,
-        path
-      );
+    const value = getValue(
+      source,
+      path
+    );
+
 
     if (
       typeof value === "string" &&
@@ -83,6 +59,7 @@ function pickString(
     }
 
   }
+
 
   return fallback;
 
@@ -98,11 +75,11 @@ function pickNumber(
 
   for (const path of paths) {
 
-    const value =
-      getValue(
-        source,
-        path
-      );
+    const value = getValue(
+      source,
+      path
+    );
+
 
     if (
       typeof value === "number" &&
@@ -113,6 +90,7 @@ function pickNumber(
 
     }
 
+
     if (
       typeof value === "string" &&
       value.trim()
@@ -120,6 +98,7 @@ function pickNumber(
 
       const parsed =
         Number(value);
+
 
       if (
         Number.isFinite(parsed)
@@ -133,129 +112,34 @@ function pickNumber(
 
   }
 
+
   return fallback;
 
 }
 
 
 
-function normalizeOrionSubjects(
-  raw: any
-): OrionSubjectInput[] | undefined {
 
-  const source =
-    getValue(
-      raw,
-      "orion.subjects"
-    ) ??
-    getValue(
-      raw,
-      "orionSubjects"
-    );
-
-  if (
-    !Array.isArray(source)
-  ) {
-
-    return undefined;
-
+/** Preserve missing measurements instead of turning absent fields into 0. */
+function pickOptionalNumber(source: unknown, paths: string[]): number | undefined {
+  for (const path of paths) {
+    const value = getValue(source, path);
+    if (typeof value === "number" && Number.isFinite(value)) return value;
+    if (typeof value === "string" && value.trim() !== "") {
+      const numberValue = Number(value);
+      if (Number.isFinite(numberValue)) return numberValue;
+    }
   }
-
-  const subjects =
-    source
-      .map((item) => {
-
-        if (
-          !item ||
-          typeof item !== "object"
-        ) {
-
-          return null;
-
-        }
-
-        const currentScore =
-          Number(
-            item.currentScore
-          );
-
-        const targetScore =
-          Number(
-            item.targetScore
-          );
-
-        const importance =
-          Number(
-            item.importance
-          );
-
-        if (
-          typeof item.subject !==
-            "string" ||
-          typeof item.label !==
-            "string" ||
-          !Number.isFinite(
-            currentScore
-          ) ||
-          !Number.isFinite(
-            targetScore
-          ) ||
-          !Number.isFinite(
-            importance
-          )
-        ) {
-
-          return null;
-
-        }
-
-        return {
-
-          subject:
-            item.subject,
-
-          label:
-            item.label,
-
-          currentScore,
-
-          targetScore,
-
-          importance,
-
-        };
-
-      })
-      .filter(
-        (
-          item
-        ): item is OrionSubjectInput =>
-          item !== null
-      );
-
-  return subjects.length > 0
-    ? subjects
-    : undefined;
-
+  return undefined;
 }
 
-
-
 function normalizeStudentProfile(
-  raw: any
-): StudentProfile {
+  raw:any
+):StudentProfile {
 
-  const orionWeeksLeft =
-    pickNumber(
-      raw,
-      [
-        "orion.weeksLeft",
-        "orionWeeksLeft",
-      ],
-      0
-    );
 
   return {
+
 
     fullName:
       pickString(
@@ -269,6 +153,8 @@ function normalizeStudentProfile(
         defaultStudentProfile.fullName
       ),
 
+
+
     className:
       pickString(
         raw,
@@ -280,6 +166,8 @@ function normalizeStudentProfile(
         ],
         defaultStudentProfile.className
       ),
+
+
 
     targetMajor:
       pickString(
@@ -293,6 +181,8 @@ function normalizeStudentProfile(
         defaultStudentProfile.targetMajor
       ),
 
+
+
     targetUniversity:
       pickString(
         raw,
@@ -304,6 +194,8 @@ function normalizeStudentProfile(
         ],
         defaultStudentProfile.targetUniversity
       ),
+
+
 
     gpa10:
       pickNumber(
@@ -318,6 +210,8 @@ function normalizeStudentProfile(
         defaultStudentProfile.gpa10
       ),
 
+
+
     gpa11:
       pickNumber(
         raw,
@@ -330,6 +224,8 @@ function normalizeStudentProfile(
         ],
         defaultStudentProfile.gpa11
       ),
+
+
 
     gpa12:
       pickNumber(
@@ -344,6 +240,8 @@ function normalizeStudentProfile(
         defaultStudentProfile.gpa12
       ),
 
+
+
     gpaOverall:
       pickNumber(
         raw,
@@ -357,6 +255,8 @@ function normalizeStudentProfile(
         defaultStudentProfile.gpaOverall
       ),
 
+
+
     studyHoursPerWeek:
       pickNumber(
         raw,
@@ -366,6 +266,8 @@ function normalizeStudentProfile(
         ],
         defaultStudentProfile.studyHoursPerWeek
       ),
+
+
 
     practiceTestsPerWeek:
       pickNumber(
@@ -377,6 +279,8 @@ function normalizeStudentProfile(
         defaultStudentProfile.practiceTestsPerWeek
       ),
 
+
+
     planCompletionRate:
       pickNumber(
         raw,
@@ -386,6 +290,8 @@ function normalizeStudentProfile(
         ],
         defaultStudentProfile.planCompletionRate
       ),
+
+
 
     motivationLevel:
       pickNumber(
@@ -397,15 +303,23 @@ function normalizeStudentProfile(
         defaultStudentProfile.motivationLevel
       ),
 
-    orionSubjects:
-      normalizeOrionSubjects(
-        raw
-      ),
+    goalSwitchFrequency: pickOptionalNumber(raw, [
+      "goalSwitchFrequency",
+      "behavior.goalSwitchFrequency",
+    ]),
 
-    orionWeeksLeft:
-      orionWeeksLeft > 0
-        ? orionWeeksLeft
-        : undefined,
+    taskAbandonmentRate: pickOptionalNumber(raw, [
+      "taskAbandonmentRate",
+      "behavior.taskAbandonmentRate",
+    ]),
+    contextSwitchRate: pickOptionalNumber(raw, [
+      "contextSwitchRate",
+      "behavior.contextSwitchRate",
+    ]),
+    learningStrategy: pickOptionalNumber(raw, [
+      "learningStrategy",
+      "behavior.learningStrategy",
+    ]),
 
   };
 
@@ -413,9 +327,13 @@ function normalizeStudentProfile(
 
 
 
+
+
+
 function normalizeCognitiveResult(
-  result: CognitiveResult
-): CognitiveResult {
+ result:CognitiveResult
+):CognitiveResult {
+
 
   return {
 
@@ -423,26 +341,34 @@ function normalizeCognitiveResult(
 
     ...result,
 
+
     SCI:
       result.SCI ?? 0,
+
 
     MAS:
       result.MAS ?? 0,
 
+
     CSL:
       result.CSL ?? 0,
+
 
     GVI:
       result.GVI ?? 0,
 
+
     BDI:
       result.BDI ?? 0,
+
 
     FRI:
       result.FRI ?? 0,
 
+
     CRI:
       result.CRI ?? 0,
+
 
   };
 
@@ -450,11 +376,23 @@ function normalizeCognitiveResult(
 
 
 
+
+
+
+function createLimitedGrowthAnalytics(
+  profile: StudentProfile,
+  cognitive: CognitiveResult
+): CognitiveGrowthAnalytics {
+  const current = createSnapshotFromResult("current", profile, cognitive);
+  return analyzeCognitiveGrowth(current, null);
+}
+
 export function useStudentProfile() {
+
 
   const [
     profile,
-    setProfile,
+    setProfile
   ] =
     useState<StudentProfile>(
       defaultStudentProfile
@@ -464,7 +402,7 @@ export function useStudentProfile() {
 
   const [
     cognitive,
-    setCognitive,
+    setCognitive
   ] =
     useState<CognitiveResult>(
       defaultCognitiveResult
@@ -472,19 +410,18 @@ export function useStudentProfile() {
 
 
 
+  
+
+
   const [
     growthAnalytics,
-    setGrowthAnalytics,
+    setGrowthAnalytics
   ] =
     useState<CognitiveGrowthAnalytics | null>(
       null
-    );
-
-
-
-  const [
+    );const [
     loading,
-    setLoading,
+    setLoading
   ] =
     useState(true);
 
@@ -492,7 +429,7 @@ export function useStudentProfile() {
 
   const [
     hasProfile,
-    setHasProfile,
+    setHasProfile
   ] =
     useState(false);
 
@@ -500,7 +437,7 @@ export function useStudentProfile() {
 
   const [
     error,
-    setError,
+    setError
   ] =
     useState("");
 
@@ -512,20 +449,20 @@ export function useStudentProfile() {
     );
 
 
-
   const isAdminPreview =
-    params.get(
-      "from"
-    ) === "admin";
+    params.get("from") === "admin";
+
 
 
 
   useEffect(() => {
 
+
     const unsub =
       onAuthStateChanged(
         auth,
-        async (user) => {
+        async(user)=>{
+
 
           setLoading(true);
 
@@ -533,27 +470,24 @@ export function useStudentProfile() {
 
 
 
-          if (!user) {
+          if(!user){
+
 
             setProfile(
               defaultStudentProfile
             );
 
+
             setCognitive(
               defaultCognitiveResult
             );
 
-            setGrowthAnalytics(
-              null
-            );
+            setGrowthAnalytics(null);
 
-            setHasProfile(
-              false
-            );
 
-            setLoading(
-              false
-            );
+            setHasProfile(false);
+
+            setLoading(false);
 
             return;
 
@@ -561,7 +495,9 @@ export function useStudentProfile() {
 
 
 
+
           try {
+
 
             const ref =
               doc(
@@ -573,37 +509,34 @@ export function useStudentProfile() {
 
 
             const snap =
-              await getDoc(
-                ref
-              );
+              await getDoc(ref);
 
 
 
-            if (!snap.exists()) {
+
+            if(!snap.exists()){
+
 
               setProfile(
                 defaultStudentProfile
               );
 
+
               setCognitive(
                 defaultCognitiveResult
               );
 
-              setGrowthAnalytics(
-                null
-              );
+              setGrowthAnalytics(null);
+              setHasProfile(false);
 
-              setHasProfile(
-                false
-              );
 
-              setLoading(
-                false
-              );
+              setLoading(false);
+
 
               return;
 
             }
+
 
 
 
@@ -619,12 +552,14 @@ export function useStudentProfile() {
 
 
 
+            // Prefer the exact measurement committed atomically alongside
+            // the Firestore profile. Legacy profiles fall back to calculation.
+            const storedMeasurement = rawData.cognitiveMeasurement as CognitiveResult | undefined;
             const cognitiveResult =
-              normalizeCognitiveResult(
-                calculateCognitive(
-                  normalizedProfile
-                )
-              );
+              storedMeasurement?.mappingVersion === "cla-cognitive-proxy-v2" &&
+              Array.isArray(storedMeasurement.dimensions)
+                ? storedMeasurement
+                : calculateCognitive(normalizedProfile);
 
 
 
@@ -634,91 +569,56 @@ export function useStudentProfile() {
 
 
 
+            const normalizedCognitive =
+              normalizeCognitiveResult(
+                cognitiveResult
+              );
+
             setCognitive(
-              cognitiveResult
+              normalizedCognitive
             );
 
-
-
-            setHasProfile(
-              true
-            );
-
-
-
-            /*
-             * Longitudinal Growth
-             *
-             * Không tự tạo dữ liệu lịch sử.
-             * Chỉ phân tích khi hệ thống thực sự
-             * có snapshot trước đó trong
-             * cognitive_history.
-             */
-
+            let history: Awaited<ReturnType<typeof getCognitiveHistory>> = [];
             try {
-
-              const previousSnapshot =
-                await getLatestCognitiveSnapshot(
-                  user.uid
-                );
-
-
-
-              if (!previousSnapshot) {
-
-                setGrowthAnalytics(
-                  null
-                );
-
-              } else {
-
-                const currentSnapshot =
-                  createSnapshotFromResult(
-                    user.uid,
-                    normalizedProfile,
-                    cognitiveResult
-                  );
-
-
-
-                const analytics =
-                  analyzeCognitiveGrowth(
-                    currentSnapshot,
-                    previousSnapshot
-                  );
-
-
-
-                setGrowthAnalytics(
-                  analytics
-                );
-
-              }
-
-            } catch (
-              growthError
-            ) {
-
-              console.error(
-                "Cognitive growth error:",
-                growthError
-              );
-
-              /*
-               * Growth là lớp phân tích bổ sung.
-               * Nếu history chưa đọc được,
-               * không làm hỏng toàn bộ Student Dashboard.
-               */
-
-              setGrowthAnalytics(
-                null
-              );
-
+              history = await getCognitiveHistory(user.uid);
+            } catch (historyError) {
+              // Profile is valid even if subcollection read is denied or offline.
+              console.error("Cognitive History read failed:", historyError);
+              setError("Đã tải hồ sơ, nhưng không đọc được Cognitive History. Kiểm tra quyền Firestore.");
             }
 
-          } catch (
-            err
-          ) {
+            const comparableHistory = history.filter(
+              (entry) => entry.scoreAvailable === true
+            );
+            if (comparableHistory.length > 0) {
+              const currentSnapshot = comparableHistory[0];
+              const previousSnapshot =
+                comparableHistory.length > 1
+                  ? comparableHistory[1]
+                  : null;
+
+              setGrowthAnalytics(
+                analyzeCognitiveGrowth(
+                  currentSnapshot,
+                  previousSnapshot
+                )
+              );
+            } else {
+              setGrowthAnalytics(
+                createLimitedGrowthAnalytics(
+                  normalizedProfile,
+                  normalizedCognitive
+                )
+              );
+            }
+
+            setHasProfile(true);
+
+
+
+          }
+          catch(err){
+
 
             console.error(
               "Firestore error:",
@@ -731,17 +631,15 @@ export function useStudentProfile() {
               defaultStudentProfile
             );
 
+
             setCognitive(
               defaultCognitiveResult
             );
 
-            setGrowthAnalytics(
-              null
-            );
+            setGrowthAnalytics(null);
 
-            setHasProfile(
-              false
-            );
+
+            setHasProfile(false);
 
 
 
@@ -753,9 +651,8 @@ export function useStudentProfile() {
 
 
 
-          setLoading(
-            false
-          );
+          setLoading(false);
+
 
         }
       );
@@ -765,7 +662,10 @@ export function useStudentProfile() {
     return () =>
       unsub();
 
-  }, []);
+
+
+  },[]);
+
 
 
 
@@ -786,5 +686,6 @@ export function useStudentProfile() {
     isAdminPreview,
 
   };
+
 
 }

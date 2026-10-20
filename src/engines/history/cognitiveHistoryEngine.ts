@@ -38,6 +38,13 @@ export function createCognitiveSnapshot(
     practiceTestsPerWeek: input.profile.practiceTestsPerWeek,
     planCompletionRate: input.profile.planCompletionRate,
     motivationLevel: input.profile.motivationLevel,
+    scoreAvailable: input.cognitive.scoreAvailable ?? true,
+    ...(input.cognitive.dataCoverageScore !== undefined
+      ? { dataCoverageScore: input.cognitive.dataCoverageScore } : {}),
+    ...(input.cognitive.missingDimensions !== undefined
+      ? { missingDimensions: input.cognitive.missingDimensions } : {}),
+    ...(input.cognitive.mappingVersion !== undefined
+      ? { mappingVersion: input.cognitive.mappingVersion } : {}),
   };
 }
 

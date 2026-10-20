@@ -3,6 +3,7 @@ type Props = {
   targetMajor: string;
   targetUniversity: string;
   overallScore: number;
+  scoreAvailable?: boolean;
 };
 
 export default function LumenOverview({
@@ -10,6 +11,7 @@ export default function LumenOverview({
   targetMajor,
   targetUniversity,
   overallScore,
+  scoreAvailable = true,
 }: Props) {
   return (
     <section className="lumen-overview-card">
@@ -54,10 +56,10 @@ export default function LumenOverview({
         </small>
 
         <strong>
-          {Math.round(overallScore)}
+          {scoreAvailable ? Math.round(overallScore) : "—"}
         </strong>
 
-        <span>/ 100</span>
+        <span>{scoreAvailable ? "/ 100" : "Chưa đủ dữ liệu"}</span>
       </div>
 
     </section>

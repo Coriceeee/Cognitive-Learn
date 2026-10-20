@@ -1,3 +1,5 @@
+import type { LumenGrowthEvidence } from "../../../engines/lumen/lumenEngine";
+
 import type {
   AIExplanation,
 } from "../../../engines/ai/aiTypes";
@@ -6,6 +8,7 @@ import type {
 type Props = {
 
   hasHistory:boolean;
+  growthEvidence?: LumenGrowthEvidence;
 
   aiExplanation?:AIExplanation;
 
@@ -16,7 +19,7 @@ type Props = {
 export default function LumenEvidencePanel({
 
   hasHistory,
-
+  growthEvidence,
   aiExplanation,
 
 }:Props) {
@@ -42,13 +45,24 @@ export default function LumenEvidencePanel({
         <p>
           Lumen phân biệt giữa dữ liệu
           quan sát, engine output và
-          bằng chứng nghiên cứu.
+          bằng chứng nghiên cứu. Chỉ số tin cậy nội bộ hiện là quy tắc
+          thử nghiệm, không phải xác suất đã hiệu chuẩn.
         </p>
 
       </div>
 
 
 
+
+      {growthEvidence && (
+        <p className="lumen-growth-evidence-note">
+          <strong>Growth · {growthEvidence.dataQuality}:</strong>{" "}
+          {growthEvidence.message}
+          {growthEvidence.status !== "NO_COMPARISON" && (
+            <> · Khoảng quan sát: {growthEvidence.observationDays} ngày.</>
+          )}
+        </p>
+      )}
 
       <div className="lumen-evidence-list">
 

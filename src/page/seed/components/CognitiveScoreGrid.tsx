@@ -35,13 +35,13 @@ export default function CognitiveScoreGrid({
               <p>{item.name}</p>
             </div>
 
-            <strong>{item.value}</strong>
+            <strong>{item.available === false ? "—" : item.value}</strong>
 
             <div className="student-progress">
-              <i style={{ width: `${item.value}%` }}></i>
+              <i style={{ width: `${item.available === false ? 0 : item.value}%` }}></i>
             </div>
 
-            <p>{item.description}</p>
+            <p>{item.available === false ? "Chưa có phép đo hợp lệ cho chỉ số này." : item.description}</p>
           </article>
         ))}
       </div>

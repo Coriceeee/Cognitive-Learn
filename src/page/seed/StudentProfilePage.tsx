@@ -1,6 +1,10 @@
-import { FormEvent, useMemo, useState } from "react";
-import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { FormEvent, useEffect, useMemo, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { collection, doc, getDoc, serverTimestamp, writeBatch } from "firebase/firestore";
 import { auth, db } from "../../lib/firebase";
+import { calculateCognitive } from "../../engines/cognitive/cognitiveEngine";
+import { createCognitiveSnapshot } from "../../engines/history/cognitiveHistoryEngine";
+import type { StudentProfile } from "./types";
 import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
 import "../../styles.css";
@@ -31,6 +35,8 @@ type LearningProfile = {
   planCompletionRate: string;
   goalSwitchFrequency: string;
   taskAbandonmentRate: string;
+  contextSwitchRate: string;
+  learningStrategy: string;
   motivationLevel: string;
   educationBudget: string;
   maxTuition: string;
@@ -64,20 +70,22 @@ const electiveSubjects = [
 ];
 
 const initialProfile: LearningProfile = {
-  fullName: "Nguyễn Minh Anh",
-  className: "12A1",
-  area: "Hà Nội",
-  targetMajor: "Công nghệ thông tin",
-  targetUniversity: "Học viện Công nghệ Bưu chính Viễn thông",
+  fullName: "",
+  className: "",
+  area: "",
+  targetMajor: "",
+  targetUniversity: "",
   foreignLanguage: "Tiếng Anh",
-  studyHoursPerWeek: "18",
-  practiceTestsPerWeek: "5",
-  planCompletionRate: "75",
-  goalSwitchFrequency: "2",
-  taskAbandonmentRate: "20",
-  motivationLevel: "70",
-  educationBudget: "120000000",
-  maxTuition: "35000000",
+  studyHoursPerWeek: "",
+  practiceTestsPerWeek: "",
+  planCompletionRate: "",
+  goalSwitchFrequency: "",
+  taskAbandonmentRate: "",
+  contextSwitchRate: "",
+  learningStrategy: "",
+  motivationLevel: "",
+  educationBudget: "",
+  maxTuition: "",
   studyAbroadInterest: "Không",
   targetCountry: "",
   scholarshipInterest: "Không",
@@ -115,9 +123,9 @@ function createInitialTranscript(): TranscriptScores {
 
   sampleSubjects.forEach((subject) => {
     scores.grade12.semester1[subject] = {
-      regular: ["8", "7.5", "8.2", "", ""],
-      midterm: "7.8",
-      final: "8.4",
+      regular: ["", "", "", "", ""],
+      midterm: "",
+      final: "",
     };
   });
 
@@ -172,9 +180,59 @@ export default function TrangNhapHoSoHocTap() {
   );
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [profileReadFailed, setProfileReadFailed] = useState(false);
+  const [profileReady, setProfileReady] = useState(false);
+  const [previousPlanCompletionRate, setPreviousPlanCompletionRate] = useState<number | undefined>(undefined);
 
   const params = new URLSearchParams(window.location.search);
   const isAdminPreview = params.get("from") === "admin";
+
+  // Prefill edits from Firestore. Avoid overwriting real data with demo defaults.
+  useEffect(() => {
+    let active = true;
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      setProfileReady(false);
+      if (!user) return;
+      try {
+        const saved = await getDoc(doc(db, "learning_profiles", user.uid));
+        if (!active) return;
+        if (!saved.exists()) {
+          setProfileReady(true);
+          return;
+        }
+        const value = saved.data();
+        const oldBehavior = value.behavior as { planCompletionRate?: number } | undefined;
+        setPreviousPlanCompletionRate(
+          typeof oldBehavior?.planCompletionRate === "number"
+            ? oldBehavior.planCompletionRate : undefined
+        );
+        const oldProfile = value.profile as Partial<LearningProfile> | undefined;
+        if (oldProfile) {
+          setProfile(current => ({
+            ...current,
+            ...Object.fromEntries(
+              Object.entries(oldProfile).map(([key, entry]) => [key, entry == null ? "" : String(entry)])
+            ),
+          }));
+        }
+        const curriculum = value.curriculum as { selectedElectives?: string[] } | undefined;
+        if (Array.isArray(curriculum?.selectedElectives)) {
+          setSelectedElectives(curriculum.selectedElectives);
+        }
+        if (value.transcript && typeof value.transcript === "object") {
+          setTranscriptScores(value.transcript as TranscriptScores);
+        }
+        setProfileReady(true);
+      } catch (error) {
+        if (active) {
+          console.error("Không tải được hồ sơ để chỉnh sửa:", error);
+          setProfileReadFailed(true);
+          setMessage("Không thể tải hồ sơ đã lưu. Không nên ghi đè cho đến khi kiểm tra kết nối.");
+        }
+      }
+    });
+    return () => { active = false; unsubscribe(); };
+  }, []);
 
   const gradedSubjects = useMemo(
     () => [
@@ -332,6 +390,11 @@ export default function TrangNhapHoSoHocTap() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    if (profileReadFailed || !profileReady) {
+      setMessage("Chưa tải xong hồ sơ hiện có; không thể lưu để tránh ghi đè dữ liệu.");
+      return;
+    }
+
     if (selectedElectives.length !== 4) {
       setMessage("Bạn cần chọn đúng 4 môn học lựa chọn.");
       return;
@@ -348,9 +411,20 @@ export default function TrangNhapHoSoHocTap() {
         return;
       }
 
-      await setDoc(
-        doc(db, "learning_profiles", currentUser.uid),
-        {
+      const gpaSummary = buildGpaSummary();
+
+      const behavior = {
+        studyHoursPerWeek: Number(profile.studyHoursPerWeek),
+        practiceTestsPerWeek: Number(profile.practiceTestsPerWeek),
+        planCompletionRate: Number(profile.planCompletionRate),
+        goalSwitchFrequency: Number(profile.goalSwitchFrequency),
+        taskAbandonmentRate: Number(profile.taskAbandonmentRate),
+        contextSwitchRate: Number(profile.contextSwitchRate),
+        learningStrategy: Number(profile.learningStrategy),
+        motivationLevel: Number(profile.motivationLevel),
+      };
+
+      const profileWrite = {
           userId: currentUser.uid,
           email: currentUser.email,
           profile,
@@ -370,15 +444,8 @@ export default function TrangNhapHoSoHocTap() {
             selectedElectives,
           },
           transcript: buildTranscriptForSave(),
-          gpaSummary: buildGpaSummary(),
-          behavior: {
-            studyHoursPerWeek: Number(profile.studyHoursPerWeek),
-            practiceTestsPerWeek: Number(profile.practiceTestsPerWeek),
-            planCompletionRate: Number(profile.planCompletionRate),
-            goalSwitchFrequency: Number(profile.goalSwitchFrequency),
-            taskAbandonmentRate: Number(profile.taskAbandonmentRate),
-            motivationLevel: Number(profile.motivationLevel),
-          },
+          gpaSummary,
+          behavior,
           finance: {
             educationBudget: Number(profile.educationBudget),
             maxTuition: Number(profile.maxTuition),
@@ -394,11 +461,62 @@ export default function TrangNhapHoSoHocTap() {
                 : profile.scholarshipGoal,
           },
           updatedAt: serverTimestamp(),
-        },
-        { merge: true }
-      );
+      };
 
-      setMessage("Đã lưu hồ sơ học tập thành công.");
+      /*
+       * IMPORTANT:
+       * A cognitive snapshot is created only after the student explicitly
+       * submits updated profile data. We do NOT write snapshots on every
+       * dashboard mount/refresh, which keeps longitudinal history meaningful.
+       */
+      const cognitiveProfile: StudentProfile = {
+        fullName: profile.fullName,
+        className: profile.className,
+        targetMajor: profile.targetMajor,
+        targetUniversity: profile.targetUniversity,
+        gpa10: gpaSummary.grade10 ?? 0,
+        gpa11: gpaSummary.grade11 ?? 0,
+        gpa12: gpaSummary.grade12 ?? 0,
+        gpaOverall: gpaSummary.overall ?? 0,
+        studyHoursPerWeek: behavior.studyHoursPerWeek,
+        practiceTestsPerWeek: behavior.practiceTestsPerWeek,
+        planCompletionRate: behavior.planCompletionRate,
+        motivationLevel: behavior.motivationLevel,
+        goalSwitchFrequency: behavior.goalSwitchFrequency,
+        taskAbandonmentRate: behavior.taskAbandonmentRate,
+        contextSwitchRate: behavior.contextSwitchRate,
+        learningStrategy: behavior.learningStrategy,
+        previousPlanCompletionRate,
+      };
+
+      const cognitiveResult =
+        calculateCognitive(cognitiveProfile);
+
+      // Single atomic Firestore commit: the profile and the associated
+      // assessment snapshot either both persist or neither does.
+      // We never generate a snapshot just from reading/mounting the dashboard.
+      const historyRef = doc(
+        collection(db, "learning_profiles", currentUser.uid, "cognitive_history")
+      );
+      const cognitiveSnapshot = createCognitiveSnapshot({
+        studentId: currentUser.uid,
+        profile: cognitiveProfile,
+        cognitive: cognitiveResult,
+        id: historyRef.id, // Firestore-generated unique ID avoids millisecond collisions.
+      });
+      const batch = writeBatch(db);
+      // Store the exact result used to create the snapshot so dashboard reads
+      // the same measurement rather than silently recalculating a different BDI.
+      batch.set(doc(db, "learning_profiles", currentUser.uid), {
+        ...profileWrite,
+        cognitiveMeasurement: JSON.parse(JSON.stringify(cognitiveResult)),
+      }, { merge: true });
+      batch.set(historyRef, { ...cognitiveSnapshot, createdAt: serverTimestamp() });
+      await batch.commit();
+
+      setMessage(
+        "Đã lưu hồ sơ và cập nhật Cognitive History thành công."
+      );
 
       setTimeout(() => {
         goTo(isAdminPreview ? "/student?from=admin" : "/student");
@@ -796,6 +914,34 @@ export default function TrangNhapHoSoHocTap() {
                   value={profile.taskAbandonmentRate}
                   onChange={(event) =>
                     updateField("taskAbandonmentRate", event.target.value)
+                  }
+                  required
+                />
+              </label>
+
+              <label>
+                Tỷ lệ chuyển đổi tác vụ % (tự đánh giá, chưa kiểm định)
+                <input
+                  type="number"
+                  min="0"
+                  max="100"
+                  value={profile.contextSwitchRate}
+                  onChange={(event) =>
+                    updateField("contextSwitchRate", event.target.value)
+                  }
+                  required
+                />
+              </label>
+
+              <label>
+                Mức sử dụng chiến lược học tập % (tự đánh giá, chưa kiểm định)
+                <input
+                  type="number"
+                  min="0"
+                  max="100"
+                  value={profile.learningStrategy}
+                  onChange={(event) =>
+                    updateField("learningStrategy", event.target.value)
                   }
                   required
                 />

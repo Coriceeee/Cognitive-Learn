@@ -27,6 +27,14 @@ export type StudentProfile = {
   planCompletionRate: number;
   motivationLevel: number;
 
+  // Optional measured behavior indicators from Seed form.
+  // Undefined means not measured; it must not be silently treated as 0.
+  goalSwitchFrequency?: number; // Number of goal changes per month
+  taskAbandonmentRate?: number; // Percentage 0-100
+  contextSwitchRate?: number; // Self-reported 0-100 (provisional)
+  learningStrategy?: number; // Self-reported 0-100 (provisional)
+  previousPlanCompletionRate?: number; // Previous recorded observation, if present
+
   orionSubjects?: OrionSubjectInput[];
   orionWeeksLeft?: number;
 };
