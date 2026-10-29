@@ -3,6 +3,17 @@ import { getIdToken } from "firebase/auth";
 import { auth } from "./firebase";
 import type { AIReasoningResult, AIStudentContext } from "../engines/ai/aiTypes";
 
+function getApiBaseUrl(): string {
+  const value = (import.meta.env.VITE_API_BASE_URL || "").trim().replace(/\/+$/, "");
+  if (!value && import.meta.env.PROD) {
+    throw new Error("Chưa cấu hình VITE_API_BASE_URL cho website Firebase trước khi build.");
+  }
+  if (value && !/^https:\/\/[^/?#]+$/i.test(value)) {
+    throw new Error("VITE_API_BASE_URL phải là URL HTTPS dạng https://domain, không kèm đường dẫn.");
+  }
+  return value; // local vercel dev can continue using same-origin /api/...
+}
+
 export type GeminiLumenExplanation = {
   summary: string;
   reasons: string[];
@@ -55,7 +66,6 @@ function cleanStrings(value: unknown, maxEntries = 4, maxLength = 350): string[]
   return value.slice(0, maxEntries).map(item => cleanText(item, maxLength)).filter((item): item is string => Boolean(item));
 }
 
-/** Only measured dimensions are sent; a 0 placeholder is not a measurement. */
 export function buildGeminiLumenRequest(
   context: AIStudentContext,
   reasoning: AIReasoningResult
@@ -118,11 +128,6 @@ function parseExplanation(value: unknown): GeminiLumenExplanation {
   return { summary, reasons, nextActions, limitations };
 }
 
-/**
- * The browser never calls Google Gemini directly and never stores an API key.
- * Backend response contract: { ok: true, result: { summary, reasons,
- * nextActions, limitations } }. HTTP 4xx/5xx or invalid responses throw.
- */
 export async function requestGeminiLumenExplanation(
   context: AIStudentContext,
   reasoning: AIReasoningResult,
@@ -132,7 +137,13 @@ export async function requestGeminiLumenExplanation(
   if (!user) throw new Error("Bạn cần đăng nhập để dùng Gemini Lumen.");
   const body = buildGeminiLumenRequest(context, reasoning);
   const token = await getIdToken(user);
-  const response = await fetch("/api/gemini-lumen", {
+  const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL ||
+  "https://cognitive-learn.vercel.app";
+
+const response = await fetch(
+  `${API_BASE_URL}/api/gemini-lumen`,
+  {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -140,9 +151,9 @@ export async function requestGeminiLumenExplanation(
     },
     body: JSON.stringify(body),
     signal,
-  });
-  // Read a structured response for BOTH errors and success, so students see
-  // actionable messages (permissions, rate limit, configuration).
+  }
+);
+
   const responseText = await response.text();
   if (responseText.length > 20_000) {
     throw new Error("Phản hồi Gemini quá lớn để kiểm tra an toàn.");

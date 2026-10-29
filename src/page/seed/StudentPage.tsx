@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 
 import ModuleClusterGrid from "../../components/common/ModuleClusterGrid";
+import StudentLinkManager from "../../components/common/StudentLinkManager";
+import SharedReportPanel from "../../components/common/SharedReportPanel";
 import "../../styles.css";
 
 import CognitiveGrowthPanel from "./components/CognitiveGrowthPanel";
@@ -303,10 +305,30 @@ export default function StudentPage() {
             ))}
           </div>
           <div className="student-dash-extra-links">
+            <a href="/student/transcript">Bảng điểm THPT · Dữ liệu đã lưu <span aria-hidden="true">↗</span></a>
             <a href="/pulse">Pulse · Theo dõi tiến độ <span aria-hidden="true">↗</span></a>
             <a href="/haven">Haven · Hỗ trợ học tập <span aria-hidden="true">↗</span></a>
           </div>
         </section>
+
+        {/* Actual Firestore grades; no mock scores in the main dashboard. */}
+        <div className="cla-transcript-dashboard">
+          <StudentSubjectPanel onUpdate={() => goTo(profilePath)} />
+        </div>
+
+        {/* Connections are strictly opt-in: never expose student records automatically. */}
+        {!isAdminPreview && (
+          <details className="student-dash-disclosure cla-student-sharing">
+            <summary>
+              <span><strong>Liên kết giáo viên và phụ huynh</strong><small>Chủ động cấp hoặc thu hồi liên kết Firestore</small></span>
+              <span className="student-dash-chevron" aria-hidden="true">⌄</span>
+            </summary>
+            <div className="student-dash-disclosure-content">
+              <StudentLinkManager mode="student" />
+              <SharedReportPanel mode="student" />
+            </div>
+          </details>
+        )}
 
         {/* 4. Deep analysis is available, but not open by default. */}
         <section className="student-dash-details" aria-labelledby="student-dash-details-title">
@@ -369,17 +391,16 @@ export default function StudentPage() {
 
           <details className="student-dash-disclosure">
             <summary>
-              <span><strong>Dữ liệu minh họa giao diện</strong><small>Bảng điểm, kế hoạch và gợi ý mẫu — không phải dữ liệu học sinh</small></span>
+              <span><strong>Dữ liệu minh họa giao diện</strong><small>Kế hoạch và gợi ý mẫu — không phải dữ liệu học sinh</small></span>
               <span className="student-dash-chevron" aria-hidden="true">⌄</span>
             </summary>
             <div className="student-dash-disclosure-content">
               <p className="student-dash-research-note">
-                Nội dung bên dưới đến từ <code>studentDashboardData.ts</code>, chỉ để
+                Các kế hoạch và gợi ý dưới đây đến từ <code>studentDashboardData.ts</code>, chỉ để
                 kiểm tra giao diện. Không sử dụng những giá trị này cho phân tích,
                 khuyến nghị chính thức hay nghiên cứu.
               </p>
               <div className="student-main-grid">
-                <StudentSubjectPanel onUpdate={() => goTo(profilePath)} />
                 <StudentPlanPanel />
               </div>
               <StudentRecommendationGrid />

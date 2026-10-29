@@ -5,18 +5,20 @@ import { auth, db } from "../../lib/firebase";
 import { calculateCognitive } from "../../engines/cognitive/cognitiveEngine";
 import { createCognitiveSnapshot } from "../../engines/history/cognitiveHistoryEngine";
 import type { StudentProfile } from "./types";
+import {
+  calculateCompletedYearsAverage,
+  calculateProvisionalAverage,
+  calculateSemesterAverage,
+  calculateYearAverage,
+  summarizeSemesterScores,
+  type ScoreRow,
+} from "../../engines/academic-semester-engine";
 import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
 import "../../styles.css";
 
 type GradeKey = "grade10" | "grade11" | "grade12";
 type SemesterKey = "semester1" | "semester2";
-
-type ScoreRow = {
-  regular: string[];
-  midterm: string;
-  final: string;
-};
 
 type TranscriptScores = Record<
   GradeKey,
@@ -132,42 +134,6 @@ function createInitialTranscript(): TranscriptScores {
   return scores;
 }
 
-function toNumber(value: string) {
-  const number = Number(value);
-  return Number.isFinite(number) ? number : null;
-}
-
-function roundScore(value: number) {
-  return Math.round(value * 100) / 100;
-}
-
-function calculateSemesterAverage(row: ScoreRow) {
-  const regularScores = row.regular
-    .map((score) => toNumber(score))
-    .filter((score): score is number => score !== null);
-
-  const midterm = toNumber(row.midterm);
-  const final = toNumber(row.final);
-
-  if (regularScores.length === 0 || midterm === null || final === null) {
-    return null;
-  }
-
-  const regularTotal = regularScores.reduce((sum, score) => sum + score, 0);
-  const total = regularTotal + midterm * 2 + final * 3;
-  const weight = regularScores.length + 2 + 3;
-
-  return roundScore(total / weight);
-}
-
-function average(values: number[]) {
-  if (values.length === 0) {
-    return null;
-  }
-
-  return roundScore(values.reduce((sum, value) => sum + value, 0) / values.length);
-}
-
 export default function TrangNhapHoSoHocTap() {
   const [profile, setProfile] = useState<LearningProfile>(initialProfile);
   const [selectedElectives, setSelectedElectives] =
@@ -257,7 +223,7 @@ export default function TrangNhapHoSoHocTap() {
     semester: SemesterKey,
     subject: string
   ): ScoreRow {
-    return transcriptScores[grade][semester][subject] || emptyScoreRow();
+    return transcriptScores[grade]?.[semester]?.[subject] || emptyScoreRow();
   }
 
   function updateScore(
@@ -269,7 +235,9 @@ export default function TrangNhapHoSoHocTap() {
     regularIndex?: number
   ) {
     setTranscriptScores((current) => {
-      const currentRow = current[grade][semester][subject] || emptyScoreRow();
+      const currentGrade = current[grade] ?? { semester1: {}, semester2: {} };
+      const currentSemester = currentGrade[semester] ?? {};
+      const currentRow = currentSemester[subject] || emptyScoreRow();
 
       const nextRow: ScoreRow =
         field === "regular"
@@ -287,9 +255,9 @@ export default function TrangNhapHoSoHocTap() {
       return {
         ...current,
         [grade]: {
-          ...current[grade],
+          ...currentGrade,
           [semester]: {
-            ...current[grade][semester],
+            ...currentSemester,
             [subject]: nextRow,
           },
         },
@@ -315,41 +283,23 @@ export default function TrangNhapHoSoHocTap() {
     setSelectedElectives((current) => [...current, subject]);
   }
 
-  function getSemesterGpa(grade: GradeKey, semester: SemesterKey) {
-    const values = gradedSubjects
-      .map((subject) =>
-        calculateSemesterAverage(getScoreRow(grade, semester, subject))
-      )
-      .filter((score): score is number => score !== null);
-
-    return average(values);
+  function getSemesterSummary(grade: GradeKey, semester: SemesterKey) {
+    return summarizeSemesterScores(
+      gradedSubjects.map((subject) => getScoreRow(grade, semester, subject))
+    );
   }
 
   function getYearGpa(grade: GradeKey) {
-    const semester1 = getSemesterGpa(grade, "semester1");
-    const semester2 = getSemesterGpa(grade, "semester2");
-
-    if (semester1 !== null && semester2 !== null) {
-      return roundScore((semester1 + semester2 * 2) / 3);
-    }
-
-    if (semester1 !== null) {
-      return semester1;
-    }
-
-    if (semester2 !== null) {
-      return semester2;
-    }
-
-    return null;
+    return calculateYearAverage(
+      getSemesterSummary(grade, "semester1"),
+      getSemesterSummary(grade, "semester2")
+    );
   }
 
   function getOverallGpa() {
-    const values = gradeOptions
-      .map((grade) => getYearGpa(grade.key))
-      .filter((score): score is number => score !== null);
-
-    return average(values);
+    return calculateCompletedYearsAverage(
+      gradeOptions.map((grade) => getYearGpa(grade.key))
+    );
   }
 
   function buildTranscriptForSave() {
@@ -359,7 +309,11 @@ export default function TrangNhapHoSoHocTap() {
       result[grade.key] = {} as Record<SemesterKey, Record<string, ScoreRow>>;
 
       semesterOptions.forEach((semester) => {
-        result[grade.key][semester.key] = {};
+        // Preserve subjects from previous years even when electives change;
+        // otherwise saving a new selection would silently erase historic grades.
+        result[grade.key][semester.key] = {
+          ...(transcriptScores[grade.key]?.[semester.key] ?? {}),
+        };
 
         gradedSubjects.forEach((subject) => {
           result[grade.key][semester.key][subject] = getScoreRow(
@@ -374,12 +328,34 @@ export default function TrangNhapHoSoHocTap() {
     return result;
   }
 
+  // Persist an absent numeric input as null; zero is only an observed zero.
+  function optionalNumber(value: string): number | null {
+    if (!value.trim()) return null;
+    const parsed = Number(value.replace(",", "."));
+    return Number.isFinite(parsed) ? parsed : null;
+  }
+
   function buildGpaSummary() {
     return {
       grade10: getYearGpa("grade10"),
       grade11: getYearGpa("grade11"),
       grade12: getYearGpa("grade12"),
       overall: getOverallGpa(),
+      calculationVersion: "cla-academic-semester-v1",
+      coverage: {
+        grade10: {
+          semester1: getSemesterSummary("grade10", "semester1"),
+          semester2: getSemesterSummary("grade10", "semester2"),
+        },
+        grade11: {
+          semester1: getSemesterSummary("grade11", "semester1"),
+          semester2: getSemesterSummary("grade11", "semester2"),
+        },
+        grade12: {
+          semester1: getSemesterSummary("grade12", "semester1"),
+          semester2: getSemesterSummary("grade12", "semester2"),
+        },
+      },
     };
   }
 
@@ -414,14 +390,14 @@ export default function TrangNhapHoSoHocTap() {
       const gpaSummary = buildGpaSummary();
 
       const behavior = {
-        studyHoursPerWeek: Number(profile.studyHoursPerWeek),
-        practiceTestsPerWeek: Number(profile.practiceTestsPerWeek),
-        planCompletionRate: Number(profile.planCompletionRate),
-        goalSwitchFrequency: Number(profile.goalSwitchFrequency),
-        taskAbandonmentRate: Number(profile.taskAbandonmentRate),
-        contextSwitchRate: Number(profile.contextSwitchRate),
-        learningStrategy: Number(profile.learningStrategy),
-        motivationLevel: Number(profile.motivationLevel),
+        studyHoursPerWeek: optionalNumber(profile.studyHoursPerWeek),
+        practiceTestsPerWeek: optionalNumber(profile.practiceTestsPerWeek),
+        planCompletionRate: optionalNumber(profile.planCompletionRate),
+        goalSwitchFrequency: optionalNumber(profile.goalSwitchFrequency),
+        taskAbandonmentRate: optionalNumber(profile.taskAbandonmentRate),
+        contextSwitchRate: optionalNumber(profile.contextSwitchRate),
+        learningStrategy: optionalNumber(profile.learningStrategy),
+        motivationLevel: optionalNumber(profile.motivationLevel),
       };
 
       const profileWrite = {
@@ -447,8 +423,8 @@ export default function TrangNhapHoSoHocTap() {
           gpaSummary,
           behavior,
           finance: {
-            educationBudget: Number(profile.educationBudget),
-            maxTuition: Number(profile.maxTuition),
+            educationBudget: optionalNumber(profile.educationBudget),
+            maxTuition: optionalNumber(profile.maxTuition),
             studyAbroadInterest: profile.studyAbroadInterest,
             targetCountry:
               profile.studyAbroadInterest === "Không"
@@ -478,19 +454,29 @@ export default function TrangNhapHoSoHocTap() {
         gpa11: gpaSummary.grade11 ?? 0,
         gpa12: gpaSummary.grade12 ?? 0,
         gpaOverall: gpaSummary.overall ?? 0,
-        studyHoursPerWeek: behavior.studyHoursPerWeek,
-        practiceTestsPerWeek: behavior.practiceTestsPerWeek,
-        planCompletionRate: behavior.planCompletionRate,
-        motivationLevel: behavior.motivationLevel,
-        goalSwitchFrequency: behavior.goalSwitchFrequency,
-        taskAbandonmentRate: behavior.taskAbandonmentRate,
-        contextSwitchRate: behavior.contextSwitchRate,
-        learningStrategy: behavior.learningStrategy,
+        studyHoursPerWeek: behavior.studyHoursPerWeek ?? 0,
+        practiceTestsPerWeek: behavior.practiceTestsPerWeek ?? 0,
+        planCompletionRate: behavior.planCompletionRate ?? 0,
+        motivationLevel: behavior.motivationLevel ?? 0,
+        goalSwitchFrequency: behavior.goalSwitchFrequency ?? undefined,
+        taskAbandonmentRate: behavior.taskAbandonmentRate ?? undefined,
+        contextSwitchRate: behavior.contextSwitchRate ?? undefined,
+        learningStrategy: behavior.learningStrategy ?? undefined,
         previousPlanCompletionRate,
       };
 
-      const cognitiveResult =
-        calculateCognitive(cognitiveProfile);
+      // The existing UI/history StudentProfile type requires numeric fields.
+      // Only pass actually observed numbers to the score engine; missing values
+      // must not become zero-valued measurements.
+      const cognitiveResult = calculateCognitive({
+        ...cognitiveProfile,
+        planCompletionRate: behavior.planCompletionRate ?? undefined,
+        motivationLevel: behavior.motivationLevel ?? undefined,
+        learningStrategy: behavior.learningStrategy ?? undefined,
+        goalSwitchFrequency: behavior.goalSwitchFrequency ?? undefined,
+        taskAbandonmentRate: behavior.taskAbandonmentRate ?? undefined,
+        contextSwitchRate: behavior.contextSwitchRate ?? undefined,
+      });
 
       // Single atomic Firestore commit: the profile and the associated
       // assessment snapshot either both persist or neither does.
@@ -529,9 +515,11 @@ export default function TrangNhapHoSoHocTap() {
     }
   }
 
-  const activeSemesterGpa = getSemesterGpa(activeGrade, activeSemester);
+  const activeSemesterSummary = getSemesterSummary(activeGrade, activeSemester);
+  const activeSemesterGpa = activeSemesterSummary.gpa;
   const activeYearGpa = getYearGpa(activeGrade);
   const overallGpa = getOverallGpa();
+  const completedYearCount = gradeOptions.filter(grade => getYearGpa(grade.key) !== null).length;
 
   return (
     <main className="profile-page">
@@ -559,6 +547,8 @@ export default function TrangNhapHoSoHocTap() {
             tập, SCI/MAS/CSL và dự báo tuyển sinh.
           </p>
         </header>
+
+        <div className="cla-transcript-page-actions"><a href="/student/transcript">Xem bảng điểm đã lưu →</a></div>
 
         <form className="profile-form" onSubmit={handleSubmit}>
           <section className="profile-form-section">
@@ -700,6 +690,15 @@ export default function TrangNhapHoSoHocTap() {
               </p>
             </div>
 
+            <div className="profile-note-box">
+              <strong>Dành cho học sinh đang học lớp 12</strong>
+              <p>
+                Không cần nhập đủ 6 học kỳ. Điểm chưa có hãy để trống; điểm 0 chỉ nhập khi thực sự nhận 0.
+                Các điểm hiện có được ghi là tạm tính, không được xem là GPA học kỳ/năm chính thức.
+                GPA năm chỉ tính khi hai học kỳ đã đủ cột điểm của các môn được chấm điểm.
+              </p>
+            </div>
+
             <div className="profile-grade-tabs">
               {gradeOptions.map((grade) => (
                 <button
@@ -728,17 +727,19 @@ export default function TrangNhapHoSoHocTap() {
 
             <div className="profile-gpa-summary">
               <article>
-                <span>GPA học kì đang chọn</span>
-                <strong>{activeSemesterGpa ?? "—"}</strong>
+                <span>Trung bình học kỳ đang chọn</span>
+                <strong>{activeSemesterGpa ?? (activeSemesterSummary.provisionalAverage !== null
+                  ? `${activeSemesterSummary.provisionalAverage} (tạm)` : "—")}</strong>
+                <small>{activeSemesterSummary.completedSubjects}/{activeSemesterSummary.expectedSubjects} môn đủ cột điểm</small>
               </article>
 
               <article>
-                <span>GPA năm đang chọn</span>
+                <span>Trung bình năm (đủ 2 học kỳ)</span>
                 <strong>{activeYearGpa ?? "—"}</strong>
               </article>
 
               <article>
-                <span>GPA toàn THPT</span>
+                <span>TB các năm hoàn chỉnh ({completedYearCount}/3)</span>
                 <strong>{overallGpa ?? "—"}</strong>
               </article>
             </div>
@@ -767,6 +768,7 @@ export default function TrangNhapHoSoHocTap() {
                       subject
                     );
                     const semesterAverage = calculateSemesterAverage(row);
+                    const provisionalAverage = calculateProvisionalAverage(row);
 
                     return (
                       <tr key={subject}>
@@ -835,7 +837,8 @@ export default function TrangNhapHoSoHocTap() {
                         </td>
 
                         <td>
-                          <b>{semesterAverage ?? "—"}</b>
+                          <b>{semesterAverage ?? (provisionalAverage !== null
+                            ? `${provisionalAverage} (tạm)` : "—")}</b>
                         </td>
                       </tr>
                     );

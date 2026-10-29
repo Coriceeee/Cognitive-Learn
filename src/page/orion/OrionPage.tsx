@@ -1,3 +1,9 @@
+import { useRef } from "react";
+import { readNumber, isBlankOrValid } from "../../lib/inputValidation";
+import { useStudentTranscript } from "../seed/hooks/useStudentTranscript";
+import { getLatestSubjectGrades } from "../seed/services/transcriptData";
+import { useEffect } from "react";
+import { useModuleDraft } from "../../lib/useModuleDraft";
 import { useMemo, useState } from "react";
 import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
@@ -25,31 +31,9 @@ const subjectLabels: Record<ScoreKey, string> = {
   biology: "Sinh",
 };
 
-const defaultScores: Record<ScoreKey, string> = {
-  math: "8",
-  literature: "7",
-  english: "8",
-  physics: "7.5",
-  chemistry: "7.5",
-  biology: "7",
-};
+const defaultScores: Record<ScoreKey, string> = { math: "", literature: "", english: "", physics: "", chemistry: "", biology: "" };
 
-const defaultTargets: Record<ScoreKey, string> = {
-  math: "8.8",
-  literature: "8",
-  english: "8.8",
-  physics: "8.4",
-  chemistry: "8.2",
-  biology: "7.8",
-};
-
-function toNumber(value: string) {
-  const parsed = Number(value.replace(",", "."));
-
-  if (!Number.isFinite(parsed)) return 0;
-
-  return Math.min(10, Math.max(0, parsed));
-}
+const defaultTargets: Record<ScoreKey, string> = { math: "", literature: "", english: "", physics: "", chemistry: "", biology: "" };
 
 function getRiskLabel(riskLevel: OrionRiskLevel) {
   if (riskLevel === "LOW") return "Ổn định";
@@ -64,31 +48,78 @@ function getRiskClass(riskLevel: OrionRiskLevel) {
 }
 
 export default function OrionPage() {
-  const [targetMajor, setTargetMajor] = useState("Công nghệ thông tin");
-  const [weeksLeft, setWeeksLeft] = useState("16");
+  const [targetMajor, setTargetMajor] = useState("");
+  const [weeksLeft, setWeeksLeft] = useState("");
   const [scores, setScores] = useState<Record<ScoreKey, string>>(defaultScores);
   const [targets, setTargets] =
     useState<Record<ScoreKey, string>>(defaultTargets);
 
+  const { draft: savedDraft, status: saveStatus, error: draftError, save: saveDraft } = useModuleDraft<{targetMajor:string;weeksLeft:string;scores:Record<ScoreKey,string>;targets:Record<ScoreKey,string>}>("orion");
+  const transcript = useStudentTranscript();
+  const seededFromTranscript = useRef(false);
+  useEffect(() => {
+    if (seededFromTranscript.current || saveStatus !== "empty" || !transcript.data) return;
+    seededFromTranscript.current = true;
+    const keyBySubject: Record<string, ScoreKey> = {
+      "Toán": "math", "Ngữ văn": "literature", "Tiếng Anh": "english",
+      "Vật lý": "physics", "Hóa học": "chemistry", "Sinh học": "biology",
+    };
+    const grades = getLatestSubjectGrades(transcript.data);
+    setScores(current => {
+      const next = { ...current };
+      for (const grade of grades) {
+        const key = keyBySubject[grade.subject];
+        if (key && !next[key] && grade.provisional !== null) next[key] = String(grade.provisional);
+      }
+      return next;
+    });
+  }, [transcript.data, saveStatus]);
+
+  const [saveNotice, setSaveNotice] = useState("");
+  const [saving, setSaving] = useState(false);
+  useEffect(() => {
+    if (!savedDraft) return;
+    setTargetMajor(savedDraft.targetMajor);
+    setWeeksLeft(savedDraft.weeksLeft);
+    setScores(savedDraft.scores);
+    setTargets(savedDraft.targets);
+  }, [savedDraft]);
+  async function saveCurrentDraft() {
+    setSaving(true);
+    setSaveNotice("");
+    try {
+      if (!isBlankOrValid(weeksLeft, 1, 104, true) ||
+          ![...Object.values(scores), ...Object.values(targets)].every(v => isBlankOrValid(v, 0, 10))) {
+        throw new Error("Điểm phải từ 0–10; số tuần phải là số nguyên từ 1–104.");
+      }
+      await saveDraft({targetMajor, weeksLeft, scores, targets});
+      setSaveNotice("Đã lưu dữ liệu lên Firestore của tài khoản đang đăng nhập.");
+    } catch (error) {
+      setSaveNotice(error instanceof Error ? error.message : "Không thể lưu Firestore.");
+    } finally { setSaving(false); }
+  }
+
   const subjects: OrionSubjectScore[] = useMemo(() => {
-    return (Object.keys(subjectLabels) as ScoreKey[]).map((key) => ({
-      subject: key,
-      label: subjectLabels[key],
-      currentScore: toNumber(scores[key]),
-      targetScore: toNumber(targets[key]),
-      importance:
-        key === "math" || key === "english"
-          ? 1.2
-          : key === "physics" || key === "chemistry"
-            ? 1.1
-            : 1,
-    }));
+    return (Object.keys(subjectLabels) as ScoreKey[]).flatMap((key): OrionSubjectScore[] => {
+      const current = readNumber(scores[key], 0, 10);
+      const target = readNumber(targets[key], 0, 10);
+      // Incomplete subjects must NOT enter the engine as observed zeros.
+      if (current === null || target === null) return [];
+      return [{
+        subject: key,
+        label: subjectLabels[key],
+        currentScore: current,
+        targetScore: target,
+        importance: key === "math" || key === "english" ? 1.2 :
+          key === "physics" || key === "chemistry" ? 1.1 : 1,
+      }];
+    });
   }, [scores, targets]);
 
   const strategy = useMemo(() => {
     return runOrionStrategy({
       subjects,
-      weeksLeft: Math.max(1, Number(weeksLeft) || 1),
+      weeksLeft: readNumber(weeksLeft, 1, 104, true) ?? 1,
       targetMajor,
     });
   }, [subjects, weeksLeft, targetMajor]);
@@ -106,6 +137,9 @@ export default function OrionPage() {
       [key]: value,
     }));
   }
+
+  const hasInputs = readNumber(weeksLeft, 1, 104, true) !== null && subjects.length > 0 &&
+    [...Object.values(scores), ...Object.values(targets)].every(value => isBlankOrValid(value, 0, 10));
 
   return (
     <main className="orion-page">
@@ -135,9 +169,9 @@ export default function OrionPage() {
 
           <aside>
             <span>Readiness</span>
-            <strong>{strategy.readinessScore}/100</strong>
+            <strong>{hasInputs ? `${strategy.readinessScore}/100` : "Chưa đủ dữ liệu"}</strong>
             <em className={`orion-risk ${getRiskClass(strategy.riskLevel)}`}>
-              {getRiskLabel(strategy.riskLevel)}
+              {hasInputs ? getRiskLabel(strategy.riskLevel) : "Chưa đánh giá"}
             </em>
           </aside>
         </section>
@@ -148,12 +182,17 @@ export default function OrionPage() {
               <span>INPUT</span>
               <h2>Dữ liệu mô phỏng</h2>
               <p>
-                Hiện tại nhập nhanh để demo. Sau này Orion sẽ tự lấy điểm từ
-                Seed Profile và dữ liệu ngành từ Atlas.
+                Điểm hiện tại được đề xuất từ bảng điểm đã lưu khi có dữ liệu. Bạn có thể chỉnh mục tiêu, lưu bản nháp trên Firestore. Kết quả mô phỏng không mang ý nghĩa nhân quả.
               </p>
             </div>
           </div>
 
+          <div className="cla-firestore-save" role="status" style={{display:"flex",flexWrap:"wrap",alignItems:"center",gap:12,margin:"12px 0"}}>
+            <button type="button" disabled={saving || saveStatus === "loading" || saveStatus === "error" || saveStatus === "signed-out"} onClick={() => void saveCurrentDraft()}>
+              {saving ? "Đang lưu Firestore…" : "Lưu dữ liệu vào Firestore"}
+            </button>
+            <span>{saveNotice || draftError || (saveStatus === "ready" ? "Đã tải bản lưu từ Firestore" : saveStatus === "loading" ? "Đang tải dữ liệu đã lưu…" : "Chưa có bản lưu trên Firestore")}</span>
+          </div>
           <div className="orion-form-grid">
             <label>
               <span>Ngành mục tiêu</span>
@@ -199,6 +238,7 @@ export default function OrionPage() {
           </div>
         </section>
 
+        {hasInputs ? (<>
         <section className="orion-result-grid">
           <article className="orion-summary-card">
             <span>KẾT QUẢ ORION</span>
@@ -301,6 +341,7 @@ export default function OrionPage() {
             </ul>
           </section>
         )}
+        </>) : <section className="cla-transcript-hint" role="status">Chưa đủ dữ liệu hợp lệ để đưa ra kết quả. Hãy hoàn thiện các ô đầu vào và lưu vào Firestore. Đây là công cụ mô phỏng theo giả định, không phải bằng chứng hiệu quả hoặc xác suất thành công.</section>}
       </section>
     </main>
   );

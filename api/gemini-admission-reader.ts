@@ -619,13 +619,114 @@ async function callGemini({
   return { response, data };
 }
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+/**
+ * Exact-origin CORS allowlist for Firebase Hosting → Vercel API.
+ * Configure CORS_ALLOWED_ORIGINS on Vercel as a comma-separated list of
+ * origins (no paths), e.g. https://your-project.web.app.
+ * CORS is a browser boundary; it does NOT replace backend authentication
+ * or rate-limiting for non-browser callers.
+ */
+function allowConfiguredOrigin(req: VercelRequest, res: VercelResponse): boolean {
+  res.setHeader("Vary", "Origin");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  res.setHeader("Content-Type", "application/json");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.setHeader("Access-Control-Max-Age", "600");
 
+  const requestOrigin = req.headers.origin;
+  if (!requestOrigin) return true; // e.g. diagnostic curl; not an authorization check.
+  if (typeof requestOrigin !== "string") return false;
+
+  const allowed = (process.env.CORS_ALLOWED_ORIGINS ?? "")
+    .split(",")
+    .map((value) => value.trim().replace(/\/$/, ""))
+    .filter(Boolean);
+  if (!allowed.includes(requestOrigin)) return false;
+  res.setHeader("Access-Control-Allow-Origin", requestOrigin);
+  return true;
+}
+
+/** Authenticated admission source extraction. Mirrors the Lumen trust boundary. */
+class AdmissionApiError extends Error {
+  readonly statusCode: number;
+  constructor(statusCode: number, message: string) { super(message); this.statusCode = statusCode; }
+}
+
+async function lookupFirebaseUser(token: string, webApiKey: string): Promise<string> {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 10_000);
+  try {
+    const response = await fetch(
+      `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${encodeURIComponent(webApiKey)}`,
+      { method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idToken: token }), signal: controller.signal },
+    );
+    if (response.status === 400 || response.status === 401 || response.status === 403) {
+      throw new AdmissionApiError(401, "Phiên Firebase đã hết hạn hoặc không hợp lệ.");
+    }
+    if (!response.ok) throw new AdmissionApiError(502, "Không thể xác minh đăng nhập Firebase.");
+    const data = await response.json() as { users?: Array<{ localId?: string; disabled?: boolean }> };
+    const user = data.users?.[0];
+    if (!user || user.disabled || typeof user.localId !== "string" || !/^[a-zA-Z0-9:_-]+$/.test(user.localId)) {
+      throw new AdmissionApiError(401, "Tài khoản Firebase không hợp lệ.");
+    }
+    return user.localId;
+  } finally { clearTimeout(timeout); }
+}
+
+async function verifyActiveStudent(token: string, projectId: string, uid: string): Promise<void> {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 10_000);
+  try {
+    const response = await fetch(
+      `https://firestore.googleapis.com/v1/projects/${encodeURIComponent(projectId)}/databases/(default)/documents/users/${encodeURIComponent(uid)}`,
+      { headers: { Authorization: `Bearer ${token}` }, signal: controller.signal },
+    );
+    if (response.status === 401 || response.status === 403 || response.status === 404) {
+      throw new AdmissionApiError(403, "Không có quyền sử dụng API tuyển sinh.");
+    }
+    if (!response.ok) throw new AdmissionApiError(502, "Không thể kiểm tra vai trò tài khoản CLA.");
+    const data = await response.json() as { fields?: { role?: { stringValue?: string }; active?: { booleanValue?: boolean } } };
+    const role = data.fields?.role?.stringValue;
+    if (data.fields?.active?.booleanValue === false || (role !== "student" && role !== "admin")) {
+      throw new AdmissionApiError(403, "Tài khoản không được phép sử dụng API tuyển sinh.");
+    }
+  } finally { clearTimeout(timeout); }
+}
+
+const ADMISSION_MIN_INTERVAL_MS = 30_000;
+const ADMISSION_MAX_CALLS_PER_HOUR = 15;
+const admissionLimiter = new Map<string, { lastCall: number; windowStart: number; count: number }>();
+function enforceAdmissionLimit(uid: string): void {
+  const now = Date.now();
+  if (admissionLimiter.size > 4000) {
+    for (const [key, value] of admissionLimiter) {
+      if (now - value.windowStart >= 3_600_000) admissionLimiter.delete(key);
+    }
+  }
+  const previous = admissionLimiter.get(uid);
+  if (previous && now - previous.lastCall < ADMISSION_MIN_INTERVAL_MS) {
+    throw new AdmissionApiError(429, "Vui lòng đợi 30 giây trước lần gọi Gemini tiếp theo.");
+  }
+  const reset = !previous || now - previous.windowStart >= 3_600_000;
+  if (!reset && previous.count >= ADMISSION_MAX_CALLS_PER_HOUR) {
+    throw new AdmissionApiError(429, "Đã đạt giới hạn Gemini trong giờ này.");
+  }
+  admissionLimiter.set(uid, {
+    lastCall: now,
+    windowStart: reset ? now : previous.windowStart,
+    count: reset ? 1 : previous.count + 1,
+  });
+}
+
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  res.setHeader("Content-Type", "application/json; charset=utf-8");
+  res.setHeader("Cache-Control", "no-store");
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  if (!allowConfiguredOrigin(req, res)) {
+    return res.status(403).json({ ok: false, message: "Domain gọi API chưa được phép. Kiểm tra CORS_ALLOWED_ORIGINS." });
+  }
   if (req.method === "OPTIONS") {
-    return res.status(200).json({ ok: true });
+    return res.status(204).end();
   }
 
   if (req.method !== "POST") {
@@ -636,24 +737,35 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   const apiKey = process.env.GEMINI_API_KEY?.trim();
+  const firebaseWebKey = (process.env.FIREBASE_WEB_API_KEY || process.env.VITE_FIREBASE_API_KEY || "").trim();
+  const firebaseProjectId = (process.env.FIREBASE_PROJECT_ID || process.env.VITE_FIREBASE_PROJECT_ID || "").trim();
   const model = process.env.GEMINI_MODEL?.trim() || "gemini-2.5-flash";
-
-  if (!apiKey) {
-    return res.status(500).json({
-      ok: false,
-      message: "Thiếu GEMINI_API_KEY trên server Vercel.",
-    });
+  if (!apiKey || !firebaseWebKey || !firebaseProjectId || !/^[a-zA-Z0-9-]+$/.test(firebaseProjectId)) {
+    return res.status(503).json({ ok: false, message: "Server thiếu cấu hình Gemini/Firebase hợp lệ." });
   }
 
-  const body = parseBody(req);
-  const rawInput = body.universityName?.trim() || "";
-  const requestedYear = Number(body.sourceYear) || new Date().getFullYear();
+  const authorization = req.headers.authorization;
+  const bearer = typeof authorization === "string" ? /^Bearer ([\w.-]+)$/.exec(authorization) : null;
+  if (!bearer) return res.status(401).json({ ok: false, message: "Cần đăng nhập để dùng Gemini tuyển sinh." });
 
-  if (!rawInput) {
-    return res.status(400).json({
-      ok: false,
-      message: "Cần nhập tên trường.",
-    });
+  let body: AdmissionReaderRequest;
+  let rawInput: string;
+  let requestedYear: number;
+  try {
+    const uid = await lookupFirebaseUser(bearer[1], firebaseWebKey);
+    await verifyActiveStudent(bearer[1], firebaseProjectId, uid);
+    body = parseBody(req);
+    rawInput = typeof body.universityName === "string" ? body.universityName.trim() : "";
+    requestedYear = body.sourceYear == null ? new Date().getFullYear() : Number(body.sourceYear);
+    if (!rawInput || rawInput.length > 120 || !Number.isInteger(requestedYear) || requestedYear < 2020 || requestedYear > 2100) {
+      throw new AdmissionApiError(400, "Tên trường hoặc năm tuyển sinh không hợp lệ.");
+    }
+    enforceAdmissionLimit(uid);
+  } catch (error) {
+    if (error instanceof AdmissionApiError) {
+      return res.status(error.statusCode).json({ ok: false, message: error.message });
+    }
+    return res.status(502).json({ ok: false, message: "Không thể kiểm tra quyền truy cập API tuyển sinh." });
   }
 
   const resolvedUniversity = resolveUniversityAlias(rawInput);

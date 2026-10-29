@@ -16,6 +16,11 @@ export default function AtlasPage() {
     universityMap,
     addGeminiDraft,
     clearAtlasData,
+    importLegacyAtlasData,
+    legacyAvailable,
+    storageStatus,
+    storageError,
+    saving,
   } = useAtlasKnowledge();
 
   function scrollToGemini() {
@@ -68,7 +73,7 @@ export default function AtlasPage() {
               </button>
 
               {programs.length > 0 && (
-                <button type="button" className="danger" onClick={clearAtlasData}>
+                <button type="button" className="danger" onClick={() => { if (window.confirm("Xóa toàn bộ bản nháp Atlas của tài khoản này trên Firestore?")) void clearAtlasData().catch(() => {}); }} disabled={storageStatus !== "ready" || saving}>
                   Xóa dữ liệu hiện tại
                 </button>
               )}
@@ -94,6 +99,13 @@ export default function AtlasPage() {
           Atlas ưu tiên dữ liệu có link nguồn tuyển sinh. Nếu Gemini không trả
           được nguồn, hệ thống vẫn lưu bản nháp nhưng giảm độ tin cậy để tránh
           dùng dữ liệu thiếu căn cứ.
+        </div>
+
+        <div role="status" className="atlas-warning">
+          {storageError || (storageStatus === "ready" ? "Atlas đang dùng Firestore của tài khoản hiện tại." : "Đang xác minh và đồng bộ Atlas Firestore…")}
+          {legacyAvailable && storageStatus === "ready" && <button type="button" disabled={saving} onClick={() => void importLegacyAtlasData().catch(error => window.alert(error instanceof Error ? error.message : "Nhập dữ liệu cũ thất bại."))}>
+            Chuyển dữ liệu Atlas cũ trên trình duyệt lên Firestore (chỉ khi Firestore trống)
+          </button>}
         </div>
 
         <div id="atlas-gemini-reader">

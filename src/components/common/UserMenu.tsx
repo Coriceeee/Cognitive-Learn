@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 import {
   ShieldCheck,
   BadgeInfo,
@@ -8,42 +9,44 @@ import {
   LogOut,
   Sparkles,
 } from "lucide-react";
-import { auth } from "../../lib/firebase";
+import { auth, db } from "../../lib/firebase";
 import "../../styles.css";
 
 export default function UserMenu() {
   const [open, setOpen] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+  const [userName, setUserName] = useState("");
   const [adminMode, setAdminMode] = useState(false);
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const isAdminPreview = params.get("from") === "admin";
-    const isAdminPage = window.location.pathname === "/admin";
-    const savedAdminMode = localStorage.getItem("cla_admin_mode") === "true";
-
-    if (isAdminPreview || isAdminPage || savedAdminMode) {
-      localStorage.setItem("cla_admin_mode", "true");
-      setAdminMode(true);
-    }
-
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      const email = user?.email || "";
-      setUserEmail(email);
-
-      if (email === "admin@gmail.com") {
-        localStorage.setItem("cla_admin_mode", "true");
-        setAdminMode(true);
+    let active = true;
+    let requestId = 0;
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      const thisRequest = ++requestId;
+      if (!active) return;
+      setUserEmail(user?.email || "");
+      setUserName(user?.displayName || "Người dùng");
+      setAdminMode(false);
+      if (!user) return;
+      try {
+        const snapshot = await getDoc(doc(db, "users", user.uid));
+        if (active && thisRequest === requestId) {
+          setAdminMode(snapshot.exists() && snapshot.data().role === "admin" && snapshot.data().active !== false);
+        }
+      } catch (error) {
+        console.error("Unable to verify admin role:", error);
       }
     });
-
-    return () => unsubscribe();
+    return () => {
+      active = false;
+      requestId += 1;
+      unsubscribe();
+    };
   }, []);
 
   const adminSuffix = adminMode ? "?from=admin" : "";
 
   async function handleLogout() {
-    localStorage.removeItem("cla_admin_mode");
     await signOut(auth);
     window.location.href = "/";
   }
@@ -92,8 +95,8 @@ export default function UserMenu() {
             </div>
 
             <div>
-              <strong>Hello, Người dùng</strong>
-              <p>{userEmail || "demo@cognitivelearn.ai"}</p>
+              <strong>{userName}</strong>
+              <p>{userEmail || "Chưa có email"}</p>
             </div>
           </div>
 

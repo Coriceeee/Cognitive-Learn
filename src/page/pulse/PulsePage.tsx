@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+import { allValid, isBlankOrValid } from "../../lib/inputValidation";
+import { useModuleDraft } from "../../lib/useModuleDraft";
 import { useMemo, useState } from "react";
 import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
@@ -31,14 +34,44 @@ function getTrendClass(trend: PulseTrend) {
 }
 
 export default function PulsePage() {
-  const [cognitiveScore, setCognitiveScore] = useState("72");
-  const [previousCognitiveScore, setPreviousCognitiveScore] = useState("68");
-  const [admissionReadiness, setAdmissionReadiness] = useState("64");
-  const [orionReadiness, setOrionReadiness] = useState("70");
-  const [atlasProgramCount, setAtlasProgramCount] = useState("6");
-  const [aspirationCount, setAspirationCount] = useState("5");
-  const [weeklyStudyHours, setWeeklyStudyHours] = useState("9");
-  const [targetWeeklyHours, setTargetWeeklyHours] = useState("12");
+  const [cognitiveScore, setCognitiveScore] = useState("");
+  const [previousCognitiveScore, setPreviousCognitiveScore] = useState("");
+  const [admissionReadiness, setAdmissionReadiness] = useState("");
+  const [orionReadiness, setOrionReadiness] = useState("");
+  const [atlasProgramCount, setAtlasProgramCount] = useState("");
+  const [aspirationCount, setAspirationCount] = useState("");
+  const [weeklyStudyHours, setWeeklyStudyHours] = useState("");
+  const [targetWeeklyHours, setTargetWeeklyHours] = useState("");
+
+  const { draft: savedDraft, status: saveStatus, error: draftError, save: saveDraft } = useModuleDraft<{cognitiveScore:string;previousCognitiveScore:string;admissionReadiness:string;orionReadiness:string;atlasProgramCount:string;aspirationCount:string;weeklyStudyHours:string;targetWeeklyHours:string}>("pulse");
+  const [saveNotice, setSaveNotice] = useState("");
+  const [saving, setSaving] = useState(false);
+  useEffect(() => {
+    if (!savedDraft) return;
+    setCognitiveScore(savedDraft.cognitiveScore);
+    setPreviousCognitiveScore(savedDraft.previousCognitiveScore);
+    setAdmissionReadiness(savedDraft.admissionReadiness);
+    setOrionReadiness(savedDraft.orionReadiness);
+    setAtlasProgramCount(savedDraft.atlasProgramCount);
+    setAspirationCount(savedDraft.aspirationCount);
+    setWeeklyStudyHours(savedDraft.weeklyStudyHours);
+    setTargetWeeklyHours(savedDraft.targetWeeklyHours);
+  }, [savedDraft]);
+  async function saveCurrentDraft() {
+    setSaving(true);
+    setSaveNotice("");
+    try {
+      if (![cognitiveScore, previousCognitiveScore, admissionReadiness, orionReadiness].every(v => isBlankOrValid(v, 0, 100)) ||
+          ![atlasProgramCount, aspirationCount].every(v => isBlankOrValid(v, 0, 10000, true)) ||
+          ![weeklyStudyHours, targetWeeklyHours].every(v => isBlankOrValid(v, 0, 168))) {
+        throw new Error("Có dữ liệu ngoài khoảng hợp lệ. Kiểm tra thang 0–100, số lượng và giờ/tuần.");
+      }
+      await saveDraft({cognitiveScore, previousCognitiveScore, admissionReadiness, orionReadiness, atlasProgramCount, aspirationCount, weeklyStudyHours, targetWeeklyHours});
+      setSaveNotice("Đã lưu dữ liệu lên Firestore của tài khoản đang đăng nhập.");
+    } catch (error) {
+      setSaveNotice(error instanceof Error ? error.message : "Không thể lưu Firestore.");
+    } finally { setSaving(false); }
+  }
 
   const report = useMemo(() => {
     return runPulseReport({
@@ -60,6 +93,13 @@ export default function PulsePage() {
     aspirationCount,
     weeklyStudyHours,
     targetWeeklyHours,
+  ]);
+
+  const hasInputs = allValid([
+    [cognitiveScore, 0, 100], [previousCognitiveScore, 0, 100],
+    [admissionReadiness, 0, 100], [orionReadiness, 0, 100],
+    [atlasProgramCount, 0, 10000, true], [aspirationCount, 0, 10000, true],
+    [weeklyStudyHours, 0, 168], [targetWeeklyHours, 0, 168],
   ]);
 
   return (
@@ -90,12 +130,12 @@ export default function PulsePage() {
 
           <aside>
             <span>Tổng quan</span>
-            <strong>{report.overallScore}/100</strong>
+            <strong>{hasInputs ? `${report.overallScore}/100` : "Chưa đủ dữ liệu"}</strong>
             <em className={`pulse-risk ${getRiskClass(report.riskLevel)}`}>
-              {getPulseRiskLabel(report.riskLevel)}
+              {hasInputs ? getPulseRiskLabel(report.riskLevel) : "Chưa đánh giá"}
             </em>
             <em className={`pulse-trend ${getTrendClass(report.trend)}`}>
-              {getPulseTrendLabel(report.trend)}
+              {hasInputs ? getPulseTrendLabel(report.trend) : "Chưa đánh giá"}
             </em>
           </aside>
         </section>
@@ -106,12 +146,17 @@ export default function PulsePage() {
               <span>SIMULATION INPUT</span>
               <h2>Dữ liệu mô phỏng báo cáo</h2>
               <p>
-                Bản hiện tại cho phép chỉnh nhanh để demo. Sau này Pulse sẽ tự
-                lấy dữ liệu từ các module đã hoàn thành.
+                Nhập các chỉ số có căn cứ và lưu bản nháp lên Firestore. Những ô chưa có dữ liệu không được mặc định là số 0; báo cáo chưa phải bằng chứng nghiên cứu.
               </p>
             </div>
           </div>
 
+          <div className="cla-firestore-save" role="status" style={{display:"flex",flexWrap:"wrap",alignItems:"center",gap:12,margin:"12px 0"}}>
+            <button type="button" disabled={saving || saveStatus === "loading" || saveStatus === "error" || saveStatus === "signed-out"} onClick={() => void saveCurrentDraft()}>
+              {saving ? "Đang lưu Firestore…" : "Lưu dữ liệu vào Firestore"}
+            </button>
+            <span>{saveNotice || draftError || (saveStatus === "ready" ? "Đã tải bản lưu từ Firestore" : saveStatus === "loading" ? "Đang tải dữ liệu đã lưu…" : "Chưa có bản lưu trên Firestore")}</span>
+          </div>
           <div className="pulse-form-grid">
             <label>
               <span>Lumen hiện tại</span>
@@ -183,7 +228,7 @@ export default function PulsePage() {
           </div>
         </section>
 
-        <section className="pulse-metric-grid">
+        {hasInputs && <section className="pulse-metric-grid">
           {report.metrics.map((metric) => (
             <article className="pulse-metric-card" key={metric.id}>
               <div>
@@ -205,8 +250,9 @@ export default function PulsePage() {
               <p>{metric.description}</p>
             </article>
           ))}
-        </section>
+        </section>}
 
+        {hasInputs ? (<>
         <section className="pulse-summary-grid">
           <article>
             <span>HỌC SINH</span>
@@ -256,6 +302,7 @@ export default function PulsePage() {
             </ul>
           </section>
         )}
+        </>) : <section className="cla-transcript-hint" role="status">Chưa đủ dữ liệu thực để đưa ra kết quả. Hãy hoàn thiện các ô đầu vào và lưu vào Firestore. Đây là công cụ mô phỏng theo giả định, không phải bằng chứng hiệu quả hoặc xác suất thành công.</section>}
       </section>
     </main>
   );

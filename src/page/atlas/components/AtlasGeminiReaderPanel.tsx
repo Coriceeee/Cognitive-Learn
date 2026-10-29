@@ -5,7 +5,7 @@ import {
 } from "../../../lib/geminiAdmissionClient";
 
 type AtlasGeminiReaderPanelProps = {
-  onAddGeminiDraft: (draft: GeminiAdmissionDraft) => void;
+  onAddGeminiDraft: (draft: GeminiAdmissionDraft) => Promise<void>;
 };
 
 function getValue(value?: string | number) {
@@ -72,11 +72,15 @@ export default function AtlasGeminiReaderPanel({
     }
   }
 
-  function handleSaveToAtlas() {
-    if (!draft) return;
-
-    onAddGeminiDraft(draft);
-    setMessage("Đã lưu dữ liệu vào Atlas Knowledge Base.");
+  async function handleSaveToAtlas() {
+    if (!draft || loading) return;
+    setLoading(true);
+    try {
+      await onAddGeminiDraft(draft);
+      setMessage("Đã lưu dữ liệu Atlas lên Firestore.");
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : "Không thể lưu dữ liệu lên Firestore.");
+    } finally { setLoading(false); }
   }
 
   return (

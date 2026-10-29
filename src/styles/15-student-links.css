@@ -1,0 +1,46 @@
+.cla-link-panel {
+  margin: 22px 0;
+  padding: clamp(18px, 3vw, 28px);
+  border-radius: 22px;
+  border: 1px solid #dbeafe;
+  background: #fff;
+  box-shadow: 0 16px 42px rgba(29, 73, 126, 0.05);
+  color: #173453;
+}
+.cla-link-eyebrow { font-size: 10px; font-weight: 800; letter-spacing: .14em; color: #2563eb; }
+.cla-link-heading h2 { margin: 9px 0; font-size: clamp(21px, 3vw, 28px); letter-spacing: -.035em; }
+.cla-link-heading p { color: #64748b; font-size: 13px; line-height: 1.7; max-width: 790px; }
+.cla-link-identity {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+  padding: 14px; margin-top: 17px; background: #f5f9ff;
+  border: 1px solid #e1ebfa; border-radius: 15px;
+}
+.cla-link-identity span { font-size: 12px; color: #617a94; width: 100%; }
+.cla-link-identity code { font-size: 12px; overflow-wrap: anywhere; flex: 1; color: #183b64; }
+.cla-link-identity button, .cla-link-form button, .cla-link-list button {
+  background: #2563eb; border: 1px solid #2563eb; border-radius: 10px;
+  color: #fff; font-weight: 750; font-size: 12px; padding: 10px 14px; cursor: pointer;
+}
+.cla-link-identity button:disabled, .cla-link-form button:disabled, .cla-link-list button:disabled { opacity: .5; cursor: not-allowed; }
+.cla-link-guide { color: #536d89; line-height: 1.6; font-size: 13px; }
+.cla-link-form {
+  display: grid; grid-template-columns: minmax(0, 2fr) minmax(150px, 1fr) auto;
+  align-items: end; gap: 12px; margin: 20px 0 4px;
+}
+.cla-link-form label { display: grid; gap: 7px; font-size: 12px; font-weight: 750; color: #3a5878; }
+.cla-link-form input, .cla-link-form select {
+  min-width: 0; width: 100%; box-sizing: border-box; border-radius: 10px;
+  padding: 10px 12px; border: 1px solid #c9d9ee; font: inherit; background: #fff;
+  color: #173453;
+}
+.cla-link-feedback { background: #f1f6ff; border: 1px solid #d9e6fb; border-radius: 12px; padding: 12px 15px; color: #24518b; line-height: 1.6; font-size: 13px; }
+.cla-link-list { margin-top: 23px; }
+.cla-link-list h3 { font-size: 15px; margin: 0 0 10px; }
+.cla-link-list > p { font-size: 13px; color: #748499; }
+.cla-link-list ul { list-style: none; padding: 0; display: grid; gap: 10px; }
+.cla-link-list li { display: flex; justify-content: space-between; align-items: center; gap: 14px; border: 1px solid #e2ebf8; border-radius: 13px; padding: 12px 14px; }
+.cla-link-list li div { display: grid; gap: 5px; min-width: 0; }
+.cla-link-list li strong { font-size: 13px; }
+.cla-link-list li small { font-size: 11px; color: #607b9a; overflow-wrap: anywhere; }
+.cla-link-list button { color: #a02e38; border-color: #f2c6cc; background: #fff6f6; }
+@media (max-width: 740px) { .cla-link-form { grid-template-columns: 1fr; } .cla-link-list li { align-items: flex-start; } }

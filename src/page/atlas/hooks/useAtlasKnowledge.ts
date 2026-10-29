@@ -1,3 +1,6 @@
+import { onAuthStateChanged } from "firebase/auth";
+import { doc, onSnapshot, serverTimestamp, setDoc } from "firebase/firestore";
+import { auth, db } from "../../../lib/firebase";
 import { useEffect, useMemo, useState } from "react";
 import type { GeminiAdmissionDraft } from "../../../lib/geminiAdmissionClient";
 import {
@@ -66,12 +69,6 @@ function loadAtlasStorage(): AtlasStorageData {
   } catch {
     return emptyAtlasData;
   }
-}
-
-function saveAtlasStorage(data: AtlasStorageData) {
-  if (typeof window === "undefined") return;
-
-  localStorage.setItem(ATLAS_STORAGE_KEY, JSON.stringify(data));
 }
 
 function normalizeText(value: string) {
@@ -285,25 +282,69 @@ function buildProgramsFromDraft({
 }
 
 export function useAtlasKnowledge() {
-  const initialData = useMemo(() => loadAtlasStorage(), []);
-
-  const [universities, setUniversities] = useState<AtlasUniversity[]>(
-    initialData.universities
-  );
-  const [sources, setSources] = useState<AtlasAdmissionSource[]>(
-    initialData.sources
-  );
-  const [programs, setPrograms] = useState<AtlasProgram[]>(
-    initialData.programs
-  );
+  const [universities, setUniversities] = useState<AtlasUniversity[]>([]);
+  const [sources, setSources] = useState<AtlasAdmissionSource[]>([]);
+  const [programs, setPrograms] = useState<AtlasProgram[]>([]);
+  const [uid, setUid] = useState("");
+  const [storageStatus, setStorageStatus] = useState<"loading" | "ready" | "error" | "signed-out">("loading");
+  const [storageError, setStorageError] = useState("");
+  const [saving, setSaving] = useState(false);
+  const legacyAvailable = useMemo(() => {
+    const data = loadAtlasStorage();
+    return data.universities.length + data.sources.length + data.programs.length > 0;
+  }, []);
 
   useEffect(() => {
-    saveAtlasStorage({
-      universities,
-      sources,
-      programs,
-    });
-  }, [universities, sources, programs]);
+    let stopDoc: (() => void) | undefined;
+    const stopAuth = onAuthStateChanged(auth, user => {
+      stopDoc?.();
+      stopDoc = undefined;
+      setUid(user?.uid ?? "");
+      setUniversities([]); setSources([]); setPrograms([]);
+      setStorageError("");
+      if (!user) { setStorageStatus("signed-out"); return; }
+      setStorageStatus("loading");
+      stopDoc = onSnapshot(doc(db, "atlas_workspaces", user.uid), snapshot => {
+        const raw = snapshot.exists() ? snapshot.data() : {};
+        setUniversities(Array.isArray(raw.universities) ? raw.universities as AtlasUniversity[] : []);
+        setSources(Array.isArray(raw.sources) ? raw.sources as AtlasAdmissionSource[] : []);
+        setPrograms(Array.isArray(raw.programs) ? raw.programs as AtlasProgram[] : []);
+        setStorageStatus("ready");
+      }, error => {
+        setStorageStatus("error");
+        setStorageError(error.code === "permission-denied"
+          ? "Không có quyền đọc Atlas từ Firestore. Cần kiểm tra Security Rules."
+          : "Không thể kết nối Atlas Knowledge Base đến Firestore.");
+      });
+    }, () => { setStorageStatus("error"); setStorageError("Firebase Auth không hoạt động."); });
+    return () => { stopDoc?.(); stopAuth(); };
+  }, []);
+
+  async function persist(data: AtlasStorageData) {
+    if (!uid || auth.currentUser?.uid !== uid || storageStatus !== "ready" || saving)
+      throw new Error("Atlas chưa tải xong hoặc chưa được xác thực; không lưu đè dữ liệu.");
+    setSaving(true);
+    setStorageError("");
+    try {
+      await setDoc(doc(db, "atlas_workspaces", uid), {
+        userId: uid, schemaVersion: 1,
+        universities: data.universities, sources: data.sources, programs: data.programs,
+        updatedAt: serverTimestamp(),
+      });
+      // The onSnapshot listener owns canonical state: no success UI on write failure.
+    } catch (error) {
+      setStorageError(error instanceof Error ? error.message : "Lưu Firestore thất bại.");
+      throw error;
+    } finally { setSaving(false); }
+  }
+
+  async function importLegacyAtlasData() {
+    if (!legacyAvailable) return;
+    if (universities.length || sources.length || programs.length) {
+      throw new Error("Atlas trên Firestore đã có dữ liệu. Không thể tự động ghi đè bằng bản local cũ.");
+    }
+    await persist(loadAtlasStorage());
+  }
 
   const universityMap = useMemo(() => {
     return universities.reduce<Record<string, AtlasUniversity>>(
@@ -319,7 +360,7 @@ export function useAtlasKnowledge() {
     return getAtlasStats(universities, programs, sources);
   }, [universities, programs, sources]);
 
-  function addGeminiDraft(draft: GeminiAdmissionDraft) {
+  async function addGeminiDraft(draft: GeminiAdmissionDraft) {
     const universityName = cleanLabel(
       draft.universityName,
       "Trường chưa xác định"
@@ -355,36 +396,15 @@ export function useAtlasKnowledge() {
       sourceStatus,
     });
 
-    setUniversities((current) => {
-      const withoutOld = current.filter((item) => item.id !== universityId);
-      return [university, ...withoutOld];
-    });
-
-    setSources((current) => {
-      const withoutOld = current.filter(
-        (item) => item.universityId !== universityId
-      );
-
-      return [source, ...withoutOld];
-    });
-
-    setPrograms((current) => {
-      const withoutOld = current.filter(
-        (item) => item.universityId !== universityId
-      );
-
-      return [...nextPrograms, ...withoutOld];
+    await persist({
+      universities: [university, ...universities.filter(item => item.id !== universityId)],
+      sources: [source, ...sources.filter(item => item.universityId !== universityId)],
+      programs: [...nextPrograms, ...programs.filter(item => item.universityId !== universityId)],
     });
   }
 
-  function clearAtlasData() {
-    setUniversities([]);
-    setSources([]);
-    setPrograms([]);
-
-    if (typeof window !== "undefined") {
-      localStorage.removeItem(ATLAS_STORAGE_KEY);
-    }
+  async function clearAtlasData() {
+    await persist(emptyAtlasData);
   }
 
   return {
@@ -395,5 +415,10 @@ export function useAtlasKnowledge() {
     universityMap,
     addGeminiDraft,
     clearAtlasData,
+    importLegacyAtlasData,
+    legacyAvailable,
+    storageStatus,
+    storageError,
+    saving,
   };
 }

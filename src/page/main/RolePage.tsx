@@ -1,7 +1,7 @@
-import { signOut } from "firebase/auth";
 import { auth } from "../../lib/firebase";
 import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
+import StudentLinkManager from "../../components/common/StudentLinkManager";
 import "../../styles.css";
 type UserRole = "student" | "teacher" | "parent" | "admin";
 
@@ -17,9 +17,9 @@ const roleContent = {
       "Theo dõi năng lực hiện tại, trạng thái nhận thức, điểm dự báo và chiến lược học tập phù hợp.",
     mainAction: "Bắt đầu đánh giá",
     cards: [
-      ["SCI", "78", "Mức nhất quán giữa mục tiêu, kế hoạch và hành động."],
-      ["MAS", "64", "Mức độ gắn kết động lực với mục tiêu học tập."],
-      ["CSL", "82", "Độ ổn định trong hành vi và quyết định học tập."],
+      ["Hồ sơ", "Theo tài khoản", "Chỉ hiển thị thông tin đã lưu và được phép truy cập."],
+      ["Cognitive", "Cần phép đo", "Chỉ số được tính khi có dữ liệu hợp lệ."],
+      ["Growth", "Cần lịch sử", "Cần đủ các lần đo để so sánh."],
     ],
   },
   teacher: {
@@ -27,11 +27,11 @@ const roleContent = {
     title: "Theo dõi lớp học",
     description:
       "Quan sát tiến trình học sinh, phát hiện sớm học sinh mất định hướng và xem xu hướng lớp học.",
-    mainAction: "Xem danh sách lớp",
+    mainAction: "Xem học sinh liên kết",
     cards: [
-      ["Lớp", "12A1", "Theo dõi trạng thái học tập theo từng học sinh."],
-      ["Nguy cơ", "06", "Số học sinh cần được giáo viên quan tâm thêm."],
-      ["Báo cáo", "24", "Báo cáo học tập được cập nhật trong tháng."],
+      ["Học sinh", "Từ Firestore", "Chỉ hiển thị khi học sinh chủ động cấp liên kết."],
+      ["Đánh giá", "Chưa chia sẻ", "Chưa truy cập Cognitive hoặc điểm số riêng tư."],
+      ["Phản hồi", "Chuẩn bị", "Chức năng nhận xét sẽ được kết nối sau khi hoàn thiện quyền dữ liệu."],
     ],
   },
   parent: {
@@ -39,11 +39,11 @@ const roleContent = {
     title: "Đồng hành cùng học sinh",
     description:
       "Theo dõi tiến độ, nhận cảnh báo sớm và xem gợi ý hỗ trợ học sinh tại nhà.",
-    mainAction: "Xem tiến độ của con",
+    mainAction: "Xem liên kết của con",
     cards: [
-      ["Tiến độ", "72%", "Mức hoàn thành kế hoạch học tập gần đây."],
-      ["Ổn định", "Tốt", "Tình trạng duy trì thói quen học tập."],
-      ["Cảnh báo", "02", "Vấn đề cần phụ huynh chú ý trong tuần này."],
+      ["Học sinh", "Từ Firestore", "Chỉ xuất hiện khi học sinh chủ động cấp liên kết."],
+      ["Tiến độ", "Chưa chia sẻ", "Chưa được phép xem lịch sử hoặc điểm cá nhân."],
+      ["Phản hồi", "Chuẩn bị", "Khu vực phối hợp kế hoạch sẽ được triển khai sau."],
     ],
   },
   admin: {
@@ -53,9 +53,9 @@ const roleContent = {
       "Quản lý người dùng, dữ liệu tuyển sinh, ngành học, trường đại học và test toàn bộ vai trò trong hệ thống.",
     mainAction: "Quản lý hệ thống",
     cards: [
-      ["Users", "128", "Tổng số tài khoản trong hệ thống demo."],
-      ["Roles", "04", "Học sinh, giáo viên, phụ huynh và quản trị viên."],
-      ["Data", "Ready", "Dữ liệu tuyển sinh và hồ sơ học tập mẫu."],
+      ["Tài khoản", "Xem trong Nexus", "Không hiển thị số lượng giả."],
+      ["Phân quyền", "Cần kiểm chứng", "Quyền dữ liệu phải được kiểm tra từ Firestore Rules."],
+      ["Dữ liệu", "Cần kiểm thử", "Kiểm tra trạng thái lưu trữ và tính toàn vẹn."],
     ],
   },
 } satisfies Record<
@@ -73,10 +73,16 @@ export default function TrangVaiTro({ role }: RolePageProps) {
   const content = roleContent[role];
   const params = new URLSearchParams(window.location.search);
   const isAdminPreview = params.get("from") === "admin";
-
-  async function handleLogout() {
-    await signOut(auth);
-    window.location.href = "/";
+  const roleTasks: Record<UserRole, string[]> = {
+    student: ["Hoàn thiện hồ sơ Seed", "Xem Cognitive có căn cứ", "Theo dõi kế hoạch học tập"],
+    teacher: ["Gửi UID tài khoản cho học sinh", "Chờ học sinh tự cấp liên kết", "Xem báo cáo khi CLA triển khai quyền chia sẻ riêng"],
+    parent: ["Gửi UID cho con", "Chờ học sinh tự cấp liên kết", "Đồng hành khi có dữ liệu được chia sẻ"],
+    admin: ["Kiểm tra quyền người dùng", "Rà soát dữ liệu", "Kiểm thử giao diện từng vai trò"],
+  };
+  function handleMainAction() {
+    if (role === "student") goTo("/student/profile");
+    else if (role === "admin") goTo("/admin");
+    else document.getElementById("cla-student-links")?.scrollIntoView({ behavior: "smooth" });
   }
 
   function goTo(path: string) {
@@ -145,12 +151,12 @@ export default function TrangVaiTro({ role }: RolePageProps) {
 
             <h2>{content.description}</h2>
 
-            <button type="button">{content.mainAction}</button>
+            <button type="button" onClick={handleMainAction}>{content.mainAction}</button>
           </div>
 
           <div className="role-preview-card">
             <div className="role-preview-head">
-              <span>LIVE PROFILE</span>
+              <span>TÀI KHOẢN ĐÃ ĐĂNG NHẬP</span>
               <strong>{role.toUpperCase()}</strong>
             </div>
 
@@ -167,19 +173,24 @@ export default function TrangVaiTro({ role }: RolePageProps) {
 
               <div>
                 <h3>
-                  {role === "admin"
-                    ? "Administrator"
-                    : role === "student"
-                      ? "Nguyễn Minh Anh"
-                      : role === "teacher"
-                        ? "Giáo viên chủ nhiệm"
-                        : "Phụ huynh học sinh"}
+                  {auth.currentUser?.displayName || auth.currentUser?.email || content.label}
                 </h3>
                 <p>{content.label}</p>
               </div>
             </div>
           </div>
         </section>
+
+        <section className="role-task-section" aria-labelledby="cla-role-task-heading">
+          <h2 id="cla-role-task-heading">Các bước theo vai trò</h2>
+          <ol>{roleTasks[role].map(task => <li key={task}>{task}</li>)}</ol>
+        </section>
+
+        {(role === "teacher" || role === "parent") && (
+          <div id="cla-student-links">
+            <StudentLinkManager mode={role} preview={isAdminPreview} />
+          </div>
+        )}
 
         <section className="role-card-grid">
           {content.cards.map(([label, value, desc]) => (

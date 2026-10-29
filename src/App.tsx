@@ -5,6 +5,7 @@ import {
 } from "react";
 
 import AppFooter from "./components/common/AppFooter";
+import AccessGate from "./components/common/AccessGate";
 
 const TrangDangNhap = lazy(
   () => import("./page/auth/LoginPage")
@@ -27,6 +28,10 @@ const TrangNhapHoSoHocTap = lazy(
     import(
       "./page/seed/StudentProfilePage"
     )
+);
+
+const StudentTranscriptPage = lazy(
+  () => import("./page/seed/StudentTranscriptPage")
 );
 
 const GioiThieuPage = lazy(
@@ -104,6 +109,10 @@ export default function App() {
     currentPage = (
       <TrangNhapHoSoHocTap />
     );
+  } else if (path === "/student/transcript") {
+    currentPage = (
+      <StudentTranscriptPage />
+    );
   } else if (path === "/atlas") {
     currentPage = (
       <AtlasPage />
@@ -156,7 +165,11 @@ export default function App() {
         }
       >
         <div className="app-content">
-          {currentPage}
+          {path === "/" || path === "/about" || path === "/contact" ? (
+            currentPage
+          ) : (
+            <AccessGate path={path}>{currentPage}</AccessGate>
+          )}
         </div>
       </Suspense>
 

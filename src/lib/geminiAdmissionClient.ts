@@ -1,3 +1,17 @@
+import { getIdToken } from "firebase/auth";
+import { auth } from "./firebase";
+/** Backend runs on Vercel while the SPA is hosted by Firebase Hosting. */
+function getApiBaseUrl(): string {
+  const value = (import.meta.env.VITE_API_BASE_URL || "").trim().replace(/\/+$/, "");
+  if (!value && import.meta.env.PROD) {
+    throw new Error("Chưa cấu hình VITE_API_BASE_URL cho website Firebase trước khi build.");
+  }
+  if (value && !/^https:\/\/[^/?#]+$/i.test(value)) {
+    throw new Error("VITE_API_BASE_URL phải là URL HTTPS dạng https://domain, không kèm đường dẫn.");
+  }
+  return value; 
+}
+
 export type GeminiAdmissionProgramDraft = {
   majorName?: string;
   majorCode?: string;
@@ -68,10 +82,14 @@ function isQuotaMessage(message: string) {
 export async function extractAdmissionData(
   input: GeminiAdmissionReaderInput
 ): Promise<GeminiAdmissionReaderResponse> {
-  const response = await fetch("/api/gemini-admission-reader", {
+  const user = auth.currentUser;
+  if (!user) throw new Error("Bạn cần đăng nhập để dùng Gemini tuyển sinh.");
+  const token = await getIdToken(user);
+  const response = await fetch(`${getApiBaseUrl()}/api/gemini-admission-reader`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(input),
   });

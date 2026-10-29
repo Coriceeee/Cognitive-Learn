@@ -1,0 +1,21 @@
+.cla-transcript-dashboard { margin-top: 22px; }
+.cla-transcript-dashboard .student-panel { width: 100%; }
+.cla-transcript-dashboard .student-subject-row { grid-template-columns: minmax(0, 1fr) 90px 100px; }
+.cla-live-score-row small { display: block; font-size: 12px; font-weight: 500; margin-top: 5px; color: #64748b; }
+.cla-live-score-row em { font-size: 12px; color: #475569; text-align: right; }
+.cla-transcript-actions { margin-top: 18px; }
+.cla-transcript-actions a, .cla-transcript-page-actions a { display: inline-flex; align-items: center; border-radius: 14px; border: 1px solid #bfdbfe; padding: 11px 16px; text-decoration: none; background: #eff6ff; color: #1d4ed8; font-weight: 750; }
+.cla-transcript-page-actions { display:flex; flex-wrap:wrap; gap:12px; margin: 14px 0 25px; }
+.cla-transcript-hint { margin-top: 12px; color: #64748b; font-size: 13px; line-height: 1.6; }
+.cla-transcript-meta { display:flex; gap:10px; flex-wrap:wrap; justify-content:space-between; margin: 18px 0; color:#475569; font-size:13px; }
+.cla-transcript-meta code { word-break: break-word; }
+.cla-transcript-year-status { display:flex; justify-content:space-between; gap:14px; border:1px solid #dbeafe; border-radius:22px; background:#f6faff; padding:18px 24px; margin: 18px 0; align-items:center; }
+.cla-transcript-year-status strong { color:#0f3675; font-size:21px; }
+.cla-transcript-term { border:1px solid #dbeafe; border-radius:24px; padding:18px; margin:18px 0; background:white; }
+.cla-transcript-term-head { display:flex; align-items:center; justify-content:space-between; gap:18px; margin-bottom:16px; }
+.cla-transcript-term-head h2 { margin:0; color:#0f3675; font-size:23px; }
+.cla-transcript-term-head p { margin:6px 0 0; color:#64748b; font-size:13px; }
+.cla-transcript-term-head > strong { color:#0f3675; font-size:22px; }
+.cla-transcript-page .profile-transcript-table td { text-align:center; }
+.cla-transcript-page .profile-transcript-table td:first-child { text-align:left; }
+@media(max-width:600px) { .cla-transcript-dashboard .student-subject-row { grid-template-columns: minmax(0,1fr) 58px 78px; padding:10px; gap:6px; } .cla-live-score-row em { font-size:11px; } .cla-transcript-term { padding:10px; } .cla-transcript-year-status { flex-direction: column; align-items: flex-start; } }

@@ -1,3 +1,9 @@
+import { useRef } from "react";
+import { allValid, isBlankOrValid } from "../../lib/inputValidation";
+import { useStudentTranscript } from "../seed/hooks/useStudentTranscript";
+import { getLatestSubjectGrades } from "../seed/services/transcriptData";
+import { useEffect } from "react";
+import { useModuleDraft } from "../../lib/useModuleDraft";
 import { useMemo, useState } from "react";
 import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
@@ -23,12 +29,52 @@ function getRiskClass(riskLevel: HavenRiskLevel) {
 }
 
 export default function HavenPage() {
-  const [gpa, setGpa] = useState("8.1");
-  const [englishScore, setEnglishScore] = useState("7.5");
-  const [tuitionPressure, setTuitionPressure] = useState("55");
-  const [studyPressure, setStudyPressure] = useState("60");
-  const [admissionRisk, setAdmissionRisk] = useState("58");
-  const [financialNeed, setFinancialNeed] = useState("50");
+  const [gpa, setGpa] = useState("");
+  const [englishScore, setEnglishScore] = useState("");
+  const [tuitionPressure, setTuitionPressure] = useState("");
+  const [studyPressure, setStudyPressure] = useState("");
+  const [admissionRisk, setAdmissionRisk] = useState("");
+  const [financialNeed, setFinancialNeed] = useState("");
+
+  const { draft: savedDraft, status: saveStatus, error: draftError, save: saveDraft } = useModuleDraft<{gpa:string;englishScore:string;tuitionPressure:string;studyPressure:string;admissionRisk:string;financialNeed:string}>("haven");
+  const transcript = useStudentTranscript();
+  const seededFromTranscript = useRef(false);
+  useEffect(() => {
+    if (seededFromTranscript.current || saveStatus !== "empty" || !transcript.data) return;
+    seededFromTranscript.current = true;
+    const yearly = Object.values(transcript.data.yearly).filter((x): x is number => x !== null);
+    if (yearly.length) setGpa(current => current || String(Math.round(yearly.reduce((a,b)=>a+b,0)/yearly.length*100)/100));
+    const english = getLatestSubjectGrades(transcript.data).find(x => x.subject === "Tiếng Anh");
+    if (english?.provisional !== null && english?.provisional !== undefined) {
+      setEnglishScore(current => current || String(english.provisional));
+    }
+  }, [transcript.data, saveStatus]);
+
+  const [saveNotice, setSaveNotice] = useState("");
+  const [saving, setSaving] = useState(false);
+  useEffect(() => {
+    if (!savedDraft) return;
+    setGpa(savedDraft.gpa);
+    setEnglishScore(savedDraft.englishScore);
+    setTuitionPressure(savedDraft.tuitionPressure);
+    setStudyPressure(savedDraft.studyPressure);
+    setAdmissionRisk(savedDraft.admissionRisk);
+    setFinancialNeed(savedDraft.financialNeed);
+  }, [savedDraft]);
+  async function saveCurrentDraft() {
+    setSaving(true);
+    setSaveNotice("");
+    try {
+      if (![gpa, englishScore].every(v => isBlankOrValid(v, 0, 10)) ||
+          ![tuitionPressure, studyPressure, admissionRisk, financialNeed].every(v => isBlankOrValid(v, 0, 100))) {
+        throw new Error("GPA/tiếng Anh phải từ 0–10; chỉ số hỗ trợ phải từ 0–100.");
+      }
+      await saveDraft({gpa, englishScore, tuitionPressure, studyPressure, admissionRisk, financialNeed});
+      setSaveNotice("Đã lưu dữ liệu lên Firestore của tài khoản đang đăng nhập.");
+    } catch (error) {
+      setSaveNotice(error instanceof Error ? error.message : "Không thể lưu Firestore.");
+    } finally { setSaving(false); }
+  }
 
   const result = useMemo(() => {
     return runHavenSupport({
@@ -46,6 +92,12 @@ export default function HavenPage() {
     studyPressure,
     admissionRisk,
     financialNeed,
+  ]);
+
+  const hasInputs = allValid([
+    [gpa, 0, 10], [englishScore, 0, 10],
+    [tuitionPressure, 0, 100], [studyPressure, 0, 100],
+    [admissionRisk, 0, 100], [financialNeed, 0, 100],
   ]);
 
   return (
@@ -75,9 +127,9 @@ export default function HavenPage() {
 
           <aside>
             <span>Support Readiness</span>
-            <strong>{result.supportReadinessScore}/100</strong>
+            <strong>{hasInputs ? `${result.supportReadinessScore}/100` : "Chưa đủ dữ liệu"}</strong>
             <em className={`haven-risk ${getRiskClass(result.riskLevel)}`}>
-              {getHavenRiskLabel(result.riskLevel)}
+              {hasInputs ? getHavenRiskLabel(result.riskLevel) : "Chưa đánh giá"}
             </em>
           </aside>
         </section>
@@ -88,12 +140,17 @@ export default function HavenPage() {
               <span>SUPPORT INPUT</span>
               <h2>Dữ liệu mô phỏng hỗ trợ</h2>
               <p>
-                Bản hiện tại nhập nhanh để demo. Sau này Haven sẽ lấy dữ liệu từ
-                Seed Profile, Atlas, Orion và Pulse.
+                Khi có dữ liệu điểm đã lưu, Haven có thể đề xuất điền GPA và điểm tiếng Anh. Các chỉ số áp lực là tự nhập, chưa phải thang đo được xác thực.
               </p>
             </div>
           </div>
 
+          <div className="cla-firestore-save" role="status" style={{display:"flex",flexWrap:"wrap",alignItems:"center",gap:12,margin:"12px 0"}}>
+            <button type="button" disabled={saving || saveStatus === "loading" || saveStatus === "error" || saveStatus === "signed-out"} onClick={() => void saveCurrentDraft()}>
+              {saving ? "Đang lưu Firestore…" : "Lưu dữ liệu vào Firestore"}
+            </button>
+            <span>{saveNotice || draftError || (saveStatus === "ready" ? "Đã tải bản lưu từ Firestore" : saveStatus === "loading" ? "Đang tải dữ liệu đã lưu…" : "Chưa có bản lưu trên Firestore")}</span>
+          </div>
           <div className="haven-form-grid">
             <label>
               <span>GPA</span>
@@ -142,6 +199,7 @@ export default function HavenPage() {
           </div>
         </section>
 
+        {hasInputs ? (<>
         <section className="haven-summary-grid">
           <article>
             <span>PHỤ HUYNH</span>
@@ -222,6 +280,7 @@ export default function HavenPage() {
             </ul>
           </section>
         )}
+        </>) : <section className="cla-transcript-hint" role="status">Chưa đủ dữ liệu thực để đưa ra kết quả. Hãy hoàn thiện các ô đầu vào và lưu vào Firestore. Đây là công cụ mô phỏng theo giả định, không phải bằng chứng hiệu quả hoặc xác suất thành công.</section>}
       </section>
     </main>
   );

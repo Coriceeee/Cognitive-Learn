@@ -1,12 +1,70 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
-  "framework": null,
-  "buildCommand": null,
-  "outputDirectory": "public",
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "functions": {
     "api/*.ts": {
       "maxDuration": 45
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/student",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/student/profile",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/student/transcript",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/teacher",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/parent",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/role",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/atlas",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/lumen",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/orion",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/pulse",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/haven",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/index.html"
+    }
+  ]
 }

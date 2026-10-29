@@ -14,8 +14,6 @@ type UserRole = "student" | "teacher" | "parent" | "admin";
 type SelectableRole = "student" | "teacher" | "parent";
 type AuthMode = "login" | "register";
 
-const ADMIN_EMAIL = "admin@gmail.com";
-
 const roleLabels: Record<SelectableRole, string> = {
   student: "Học sinh",
   teacher: "Giáo viên",
@@ -27,7 +25,7 @@ export default function LoginPage() {
   const [selectedRole, setSelectedRole] = useState<SelectableRole>("student");
 
   const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("admin@gmail.com");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -36,10 +34,6 @@ export default function LoginPage() {
 
   function normalizeEmail(value: string) {
     return value.trim().toLowerCase();
-  }
-
-  function isAdminEmail(value: string | null) {
-    return normalizeEmail(value || "") === ADMIN_EMAIL;
   }
 
   async function createUserProfile(
@@ -98,19 +92,7 @@ export default function LoginPage() {
       const userSnapshot = await getDoc(userRef);
 
       if (!userSnapshot.exists()) {
-        if (isAdminEmail(credential.user.email)) {
-          const adminProfile = await createUserProfile(
-            credential.user.uid,
-            credential.user.email,
-            "admin",
-            "Administrator"
-          );
-
-          await redirectByRole(adminProfile.role as UserRole, selectedRole);
-          return;
-        }
-
-        setMessage("Tài khoản đã đăng nhập nhưng chưa có hồ sơ người dùng.");
+        setMessage("Tài khoản chưa có hồ sơ. Liên hệ quản trị viên để được cấp quyền.");
         return;
       }
 
@@ -138,9 +120,9 @@ export default function LoginPage() {
       setMessage("Đang tạo tài khoản...");
 
       const normalizedEmail = normalizeEmail(email);
-      const role: UserRole = isAdminEmail(normalizedEmail)
-        ? "admin"
-        : selectedRole;
+      // New registrations cannot create an administrator account.
+      // Admin access must be provisioned by a trusted server/admin process.
+      const role: UserRole = selectedRole;
 
       const credential = await createUserWithEmailAndPassword(
         auth,
@@ -152,10 +134,10 @@ export default function LoginPage() {
         credential.user.uid,
         credential.user.email,
         role,
-        role === "admin" ? "Administrator" : fullName
+        fullName
       );
 
-      window.location.href = role === "admin" ? "/admin" : `/${role}`;
+      window.location.href = `/${role}`;
     } catch (error) {
       console.error(error);
       setMessage("Không thể tạo tài khoản. Email có thể đã được sử dụng.");
@@ -172,15 +154,13 @@ export default function LoginPage() {
       const provider = new GoogleAuthProvider();
       const credential = await signInWithPopup(auth, provider);
 
-      const role: UserRole = isAdminEmail(credential.user.email)
-        ? "admin"
-        : selectedRole;
+      const role: UserRole = selectedRole;
 
       const profile = await createUserProfile(
         credential.user.uid,
         credential.user.email,
         role,
-        role === "admin" ? "Administrator" : credential.user.displayName
+        credential.user.displayName
       );
 
       if (profile.active === false) {
