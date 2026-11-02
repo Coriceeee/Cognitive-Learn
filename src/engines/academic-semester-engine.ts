@@ -17,7 +17,9 @@ export type SemesterScoreSummary = {
 
 export function parseEnteredScore(value: string): number | null {
   if (typeof value !== "string" || value.trim() === "") return null;
-  const number = Number(value);
+  const normalized = value.trim().replace(",", ".");
+  if (!/^(?:\d+(?:\.\d*)?|\.\d+)$/.test(normalized)) return null;
+  const number = Number(normalized);
   return Number.isFinite(number) && number >= 0 && number <= 10
     ? number
     : null;
@@ -33,7 +35,6 @@ function average(values: number[]): number | null {
     : null;
 }
 
-/** Term average based only on observed weights; NOT a finalized term grade. */
 export function calculateProvisionalAverage(row: ScoreRow): number | null {
   const regular = row.regular
     .map(parseEnteredScore)
@@ -47,7 +48,6 @@ export function calculateProvisionalAverage(row: ScoreRow): number | null {
   return round2(weightedSum / weight);
 }
 
-/** Only calculate a complete term result when TX, GK and CK are all present. */
 export function calculateSemesterAverage(row: ScoreRow): number | null {
   const regular = row.regular
     .map(parseEnteredScore)
@@ -80,7 +80,6 @@ export function summarizeSemesterScores(rows: ScoreRow[]): SemesterScoreSummary 
   };
 }
 
-/** Requires BOTH completed semester summaries; the second term has weight 2. */
 export function calculateYearAverage(
   firstSemester: SemesterScoreSummary,
   secondSemester: SemesterScoreSummary,
@@ -89,7 +88,6 @@ export function calculateYearAverage(
   return round2((firstSemester.gpa + 2 * secondSemester.gpa) / 3);
 }
 
-/** Describes completed years only, never the final 3-year GPA until all are present. */
 export function calculateCompletedYearsAverage(yearAverages: Array<number | null>): number | null {
   return average(yearAverages.filter((x): x is number => x !== null));
 }

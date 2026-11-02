@@ -15,12 +15,11 @@ function isRole(value: unknown): value is Role {
   return value === "student" || value === "teacher" || value === "parent" || value === "admin";
 }
 
-/** UI navigation restrictions only. Firestore Rules must enforce data ownership. */
 export function mayVisit(role: Role, path: string): boolean {
   if (role === "admin") return true;
   if (path === "/teacher") return role === "teacher";
   if (path === "/parent") return role === "parent";
-  if (path === "/admin" || path === "/role") return false;
+  if (path === "/admin" || path.startsWith("/admin/") || path === "/role") return false;
   return role === "student";
 }
 
@@ -54,7 +53,7 @@ export default function AccessGate({ path, children }: AccessGateProps) {
             return;
           }
           const account = snapshot.data();
-          if (account.active === false) {
+          if (account.active !== true) {
             setStatus("inactive");
             return;
           }
@@ -68,8 +67,7 @@ export default function AccessGate({ path, children }: AccessGateProps) {
             setStatus("denied");
             return;
           }
-          // A query parameter is NOT proof of admin rights. Strip it for
-          // other roles before mounting pages which inspect from=admin.
+
           if (actualRole !== "admin") {
             const current = new URL(window.location.href);
             if (current.searchParams.get("from") === "admin") {

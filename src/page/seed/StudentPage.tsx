@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-import ModuleClusterGrid from "../../components/common/ModuleClusterGrid";
 import StudentLinkManager from "../../components/common/StudentLinkManager";
 import SharedReportPanel from "../../components/common/SharedReportPanel";
 import "../../styles.css";
@@ -308,6 +307,7 @@ export default function StudentPage() {
             <a href="/student/transcript">Bảng điểm THPT · Dữ liệu đã lưu <span aria-hidden="true">↗</span></a>
             <a href="/pulse">Pulse · Theo dõi tiến độ <span aria-hidden="true">↗</span></a>
             <a href="/haven">Haven · Hỗ trợ học tập <span aria-hidden="true">↗</span></a>
+            <a href="/student/modules">Xem tất cả 6 phân hệ <span aria-hidden="true">↗</span></a>
           </div>
         </section>
 
@@ -407,15 +407,7 @@ export default function StudentPage() {
             </div>
           </details>
 
-          <details className="student-dash-disclosure">
-            <summary>
-              <span><strong>Danh mục tất cả phân hệ</strong><small>Khám phá đầy đủ các tính năng CLA</small></span>
-              <span className="student-dash-chevron" aria-hidden="true">⌄</span>
-            </summary>
-            <div className="student-dash-disclosure-content">
-              <ModuleClusterGrid variant="student" />
-            </div>
-          </details>
+
         </section>
       </section>
     </main>

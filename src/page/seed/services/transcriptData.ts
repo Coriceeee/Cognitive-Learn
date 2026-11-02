@@ -1,3 +1,4 @@
+import { getNineGradedSubjects } from "./academicCurriculum";
 import {
   calculateProvisionalAverage,
   calculateSemesterAverage,
@@ -34,6 +35,7 @@ export type TermGrade = {
 export type TranscriptView = {
   terms: TermGrade[];
   subjects: string[];
+  currentSubjects: string[];
   yearly: Record<GradeKey, number | null>;
   updatedAt: Date | null;
 };
@@ -65,19 +67,21 @@ function timestampToDate(value: unknown): Date | null {
   return null;
 }
 
-/** Read the exact existing learning_profiles/{uid}.transcript structure.
- * No migration, duplicated collection, inferred grades or mock values.
- */
+/** Read the transcript schema from student_transcripts/{uid}; supports legacy learning_profiles/{uid}. */
 export function buildTranscriptView(raw: unknown): TranscriptView {
   const doc = asObject(raw);
   const curriculum = asObject(doc.curriculum);
   const transcript = asObject(doc.transcript);
-  const chosen = Array.isArray(curriculum.gradedSubjects)
-    ? curriculum.gradedSubjects.filter((item): item is string => typeof item === "string" && item.trim().length > 0)
+  const electives = Array.isArray(curriculum.selectedElectives)
+    ? curriculum.selectedElectives.filter((item): item is string => typeof item === "string")
     : [];
-  const discovered = GRADES.flatMap(({ key }) => SEMESTERS.flatMap(({ key: term }) =>
-    Object.keys(asObject(asObject(transcript[key])[term]))));
-  const subjects = [...new Set([...chosen, ...discovered])];
+  const foreignLanguage = typeof curriculum.foreignLanguage === "string"
+    ? curriculum.foreignLanguage
+    : Array.isArray(curriculum.gradedSubjects) && typeof curriculum.gradedSubjects[2] === "string"
+      ? curriculum.gradedSubjects[2]
+      : "Tiếng Anh";
+  const subjects = getNineGradedSubjects(foreignLanguage, electives);
+  const currentSubjects = subjects;
   const terms = GRADES.flatMap(({ key: grade }) => SEMESTERS.map(({ key: semester }): TermGrade => {
     const storedRows = asObject(asObject(transcript[grade])[semester]);
     const rows = subjects.map((subject): SubjectGrade => {
@@ -95,15 +99,16 @@ export function buildTranscriptView(raw: unknown): TranscriptView {
     const s2 = terms.find(t => t.grade === key && t.semester === "semester2")!;
     yearly[key] = calculateYearAverage(s1.summary, s2.summary);
   });
-  return { terms, subjects, yearly, updatedAt: timestampToDate(doc.updatedAt) };
+  return { terms, subjects, currentSubjects, yearly, updatedAt: timestampToDate(doc.updatedAt) };
 }
 
 /** Select observed grades from newest available term; do not invent deltas. */
 export function getLatestSubjectGrades(view: TranscriptView): Array<SubjectGrade & { label: string }> {
   const newestFirst = [...view.terms].reverse();
-  return view.subjects.flatMap(subject => {
+  return view.currentSubjects.flatMap(subject => {
     const term = newestFirst.find(t => t.subjects.some(row => row.subject === subject && row.provisional !== null));
-    if (!term) return [];
+    if (!term) return [{ subject, row: safeRow(null), average: null, provisional: null,
+      status: "MISSING" as const, label: "Chưa nhập điểm" }];
     const row = term.subjects.find(r => r.subject === subject)!;
     const grade = GRADES.find(g => g.key === term.grade)!.name;
     const semester = SEMESTERS.find(s => s.key === term.semester)!.name;

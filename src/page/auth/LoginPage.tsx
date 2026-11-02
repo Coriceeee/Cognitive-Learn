@@ -20,6 +20,32 @@ const roleLabels: Record<SelectableRole, string> = {
   parent: "Phụ huynh",
 };
 
+function describeSignInError(error: unknown): string {
+  const code =
+    typeof error === "object" && error !== null && "code" in error
+      ? String(error.code)
+      : "unknown";
+
+  switch (code) {
+    case "auth/invalid-credential":
+    case "auth/wrong-password":
+    case "auth/user-not-found":
+      return "Thông tin đăng nhập chưa đúng. Hãy kiểm tra email và mật khẩu.";
+    case "auth/user-disabled":
+      return "Tài khoản Firebase Authentication đã bị vô hiệu hóa. Hãy kiểm tra trong Firebase Console.";
+    case "auth/too-many-requests":
+      return "Firebase tạm giới hạn đăng nhập do có nhiều yêu cầu. Hãy thử lại sau.";
+    case "auth/network-request-failed":
+      return "Không kết nối được Firebase Authentication. Hãy kiểm tra mạng.";
+    case "permission-denied":
+      return "Đăng nhập Firebase đã qua bước xác thực nhưng Firestore từ chối đọc vai trò tại users/{uid}. Hãy kiểm tra Security Rules.";
+    case "unavailable":
+      return "Firestore hiện không phản hồi. Hãy kiểm tra kết nối và thử lại.";
+    default:
+      return "Không thể hoàn tất đăng nhập. Kiểm tra Console để xác định lỗi Firebase (" + code + ").";
+  }
+}
+
 export default function LoginPage() {
   const [mode, setMode] = useState<AuthMode>("login");
   const [selectedRole, setSelectedRole] = useState<SelectableRole>("student");
@@ -106,7 +132,7 @@ export default function LoginPage() {
       await redirectByRole(profile.role as UserRole, selectedRole);
     } catch (error) {
       console.error(error);
-      setMessage("Email hoặc mật khẩu không chính xác.");
+      setMessage(describeSignInError(error));
     } finally {
       setLoading(false);
     }
@@ -171,7 +197,7 @@ export default function LoginPage() {
       await redirectByRole(profile.role as UserRole, selectedRole);
     } catch (error) {
       console.error(error);
-      setMessage("Không thể đăng nhập bằng Google.");
+      setMessage(describeSignInError(error));
     } finally {
       setLoading(false);
     }
@@ -267,7 +293,9 @@ export default function LoginPage() {
             </h2>
 
             <span>
-              Chọn vai trò của bạn để bắt đầu sử dụng hệ thống.
+              {mode === "login"
+                ? "Đăng nhập bằng tài khoản hiện có; nếu được cấp vai trò Admin, hệ thống tự chuyển đến trang quản trị."
+                : "Chọn vai trò để tạo tài khoản Student, Teacher hoặc Parent."}
             </span>
           </div>
 

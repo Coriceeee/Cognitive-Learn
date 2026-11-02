@@ -4,7 +4,7 @@ import { getLatestSubjectGrades } from "../services/transcriptData";
 type StudentSubjectPanelProps = { onUpdate: () => void };
 
 export default function StudentSubjectPanel({ onUpdate }: StudentSubjectPanelProps) {
-  const { data, status, error } = useStudentTranscript();
+  const { data, status, error, source } = useStudentTranscript();
   const rows = data ? getLatestSubjectGrades(data) : [];
   return (
     <article className="student-panel cla-live-transcript-panel">
@@ -23,13 +23,14 @@ export default function StudentSubjectPanel({ onUpdate }: StudentSubjectPanelPro
             <div key={item.subject} className="student-subject-row cla-live-score-row">
               <span>{item.subject}<small>{item.label}</small></span>
               <strong>{item.average ?? item.provisional ?? "—"}</strong>
-              <em>{item.status === "COMPLETE" ? "Đủ dữ liệu" : "Tạm tính"}</em>
+              <em>{item.status === "COMPLETE" ? "Đã tính điểm" : item.status === "PARTIAL" ? "Tạm tính" : "Chưa có điểm"}</em>
             </div>
           ))}
         </div>
       )}
+      {source === "legacy" && status === "ready" && <p className="cla-transcript-hint" role="status">Điểm đang được đọc từ hồ sơ Firestore cũ. Vào trang nhập điểm rồi nhấn Lưu để chuyển sang collection student_transcripts riêng.</p>}
       <div className="cla-transcript-actions"><a href="/student/transcript">Xem bảng điểm 3 năm và 6 học kỳ →</a></div>
-      <p className="cla-transcript-hint">Điểm được lấy từ hồ sơ đã lưu; chưa có dữ liệu sẽ không tự động hiện thành 0. Điểm tạm tính không phải kết quả học kỳ chính thức.</p>
+      <p className="cla-transcript-hint">Điểm được lấy từ kho bảng điểm Firestore riêng; chưa có dữ liệu sẽ không tự động hiện thành 0. Điểm tạm tính không phải kết quả học kỳ chính thức.</p>
     </article>
   );
 }

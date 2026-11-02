@@ -1,0 +1,6 @@
+model_id,source,purpose,revision,license_review,status
+Gemini_current,existing CLA API,production explanation,TO_PIN,terms_to_review,BASELINE_NOT_EVALUATED
+Qwen3-4B,https://huggingface.co/Qwen/Qwen3-4B,open-weight comparator,TO_PIN,VERIFY_REVISION,NOT_DOWNLOADED
+PhoBERT,https://huggingface.co/vinai/phobert-base,Vietnamese NLP encoder,TO_PIN,VERIFY_REVISION,NOT_DOWNLOADED
+BGE-M3,https://huggingface.co/BAAI/bge-m3,multilingual RAG retrieval,TO_PIN,VERIFY_REVISION,NOT_DOWNLOADED
+Multilingual-E5,https://huggingface.co/intfloat/multilingual-e5-base,RAG retrieval baseline,TO_PIN,VERIFY_REVISION,NOT_DOWNLOADED

@@ -6,7 +6,7 @@ import { GRADES, SEMESTERS, type GradeKey } from "./services/transcriptData";
 import "../../styles.css";
 
 export default function StudentTranscriptPage() {
-  const { data, status, error } = useStudentTranscript();
+  const { data, status, error, source } = useStudentTranscript();
   const [grade, setGrade] = useState<GradeKey>("grade12");
   const gradeName = GRADES.find(g => g.key === grade)!.name;
   return (
@@ -19,9 +19,9 @@ export default function StudentTranscriptPage() {
         <header className="profile-head">
           <span>KHO BẢNG ĐIỂM · FIRESTORE</span>
           <h1>Bảng điểm THPT đã lưu</h1>
-          <p>Đây là trang lưu trữ và xem lại dữ liệu từ hồ sơ học tập của bạn. Chỉnh sửa điểm tại trang nhập hồ sơ; Dashboard tự đồng bộ từ cùng một nguồn Firestore.</p>
+          <p>Kho điểm hiển thị 9 môn hiện đang học, gồm Giáo dục quốc phòng và an ninh. Điểm của môn từng học trước đây vẫn được giữ trong cơ sở dữ liệu, nhưng không cộng vào trung bình của tổ hợp hiện tại.</p>
         </header>
-        <div className="cla-transcript-page-actions"><a href="/student">← Dashboard</a><a href="/student/profile">Nhập / sửa bảng điểm →</a></div>
+        <div className="cla-transcript-page-actions"><a href="/student/profile">Nhập / sửa bảng điểm →</a></div>
         {status === "loading" && <p role="status">Đang đọc bảng điểm từ Firestore…</p>}
         {status === "signed-out" && <p>Hãy đăng nhập bằng tài khoản học sinh để xem bảng điểm.</p>}
         {status === "empty" && <p>Chưa có bảng điểm trong hồ sơ. Hãy vào trang nhập hồ sơ để lưu dữ liệu.</p>}
@@ -29,7 +29,7 @@ export default function StudentTranscriptPage() {
         {data && status === "ready" && (
           <>
             <div className="cla-transcript-meta">
-              <span>Nguồn: <code>learning_profiles/UID · trường transcript</code> (trường transcript của tài liệu hồ sơ)</span>
+              <span>Nguồn: <code>{source === "legacy" ? "learning_profiles/{uid}" : "student_transcripts/{uid}"}</code>{source === "legacy" ? " · Dữ liệu cũ chưa chuyển: vào trang nhập điểm và nhấn Lưu." : " · Kho bảng điểm riêng của tài khoản."}</span>
               <span>Lần cập nhật: {data.updatedAt ? data.updatedAt.toLocaleString("vi-VN") : "Chưa xác định"}</span>
             </div>
             <nav className="profile-grade-tabs" aria-label="Chọn năm học">

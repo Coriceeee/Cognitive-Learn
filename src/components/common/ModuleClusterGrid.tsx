@@ -128,8 +128,8 @@ const moduleDetails: Record<string, ModuleDetail> = {
       },
       {
         title: "Bảng điểm THPT",
-        description: "Quản lý điểm lớp 10, 11, 12 theo học kì và hệ số.",
-        disabled: true,
+        description: "Xem điểm đã lưu của lớp 10, 11, 12 theo học kỳ.",
+        href: "/student/transcript",
       },
       {
         title: "GPA học bạ",
@@ -148,7 +148,7 @@ const moduleDetails: Record<string, ModuleDetail> = {
       {
         title: "Xem chỉ số nhận thức",
         description: "Xem SCI, MAS, CSL và insight học tập hiện tại.",
-        href: "/student",
+        href: "/lumen",
       },
       {
         title: "Điểm mạnh học tập",

@@ -100,7 +100,8 @@ function getClusterActions(cluster: ModuleCluster): AdminAction[] {
         label: "Tổng quan hệ thống",
         description:
           "Theo dõi trạng thái dữ liệu, module, engine và lộ trình phát triển toàn bộ Cognitive Learn AI.",
-        status: "soon",
+        path: "/admin/diagnostics?view=health",
+        status: "ready",
       },
       {
         label: "Xem như học sinh",
@@ -146,7 +147,8 @@ function getClusterActions(cluster: ModuleCluster): AdminAction[] {
         label: "Kiểm tra dữ liệu nền",
         description:
           "Đánh giá dữ liệu học sinh trước khi đưa sang Lumen, Atlas, Orion và Pulse.",
-        status: "soon",
+        path: "/admin/diagnostics?view=seed",
+        status: "ready",
       },
     ];
   }
@@ -157,19 +159,21 @@ function getClusterActions(cluster: ModuleCluster): AdminAction[] {
         label: "Xem phân tích nhận thức",
         description:
           "Kiểm thử SCI, MAS, CSL và các cảnh báo nhận thức trên trang học sinh.",
-        path: "/student",
+        path: "/lumen",
         status: "ready",
       },
       {
         label: "Kiểm tra Cognitive Engine",
         description:
           "Đánh giá kết quả rule-based cognitive engine từ dữ liệu Seed Profile.",
-        status: "soon",
+        path: "/admin/diagnostics?view=cognitive",
+        status: "ready",
       },
       {
         label: "Chuẩn bị dữ liệu ML",
         description: "Đánh dấu dữ liệu cần dùng cho bước ML tự build sau này.",
-        status: "soon",
+        path: "/admin/diagnostics?view=ml",
+        status: "ready",
       },
     ];
   }

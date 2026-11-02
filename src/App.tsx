@@ -18,6 +18,9 @@ const TrangVaiTro = lazy(
 const TrangQuanTri = lazy(
   () => import("./page/nexus/AdminPage")
 );
+const AdminDiagnosticsPage = lazy(
+  () => import("./page/nexus/AdminDiagnosticsPage")
+);
 
 const TrangHocSinh = lazy(
   () => import("./page/seed/StudentPage")
@@ -32,6 +35,12 @@ const TrangNhapHoSoHocTap = lazy(
 
 const StudentTranscriptPage = lazy(
   () => import("./page/seed/StudentTranscriptPage")
+);
+const StudentModulesPage = lazy(
+  () => import("./page/seed/StudentModulesPage")
+);
+const StudentStorageStatusPage = lazy(
+  () => import("./page/seed/StudentStorageStatusPage")
 );
 
 const GioiThieuPage = lazy(
@@ -99,6 +108,10 @@ export default function App() {
     currentPage = (
       <TrangQuanTri />
     );
+  } else if (path === "/admin/diagnostics") {
+    currentPage = (
+      <AdminDiagnosticsPage />
+    );
   } else if (path === "/student") {
     currentPage = (
       <TrangHocSinh />
@@ -112,6 +125,14 @@ export default function App() {
   } else if (path === "/student/transcript") {
     currentPage = (
       <StudentTranscriptPage />
+    );
+  } else if (path === "/student/modules") {
+    currentPage = (
+      <StudentModulesPage />
+    );
+  } else if (path === "/student/storage") {
+    currentPage = (
+      <StudentStorageStatusPage />
     );
   } else if (path === "/atlas") {
     currentPage = (

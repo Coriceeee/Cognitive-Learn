@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, doc, getDoc, serverTimestamp, writeBatch } from "firebase/firestore";
+import { collection, doc, getDocFromServer, serverTimestamp, writeBatch } from "firebase/firestore";
 import { auth, db } from "../../lib/firebase";
 import { calculateCognitive } from "../../engines/cognitive/cognitiveEngine";
 import { createCognitiveSnapshot } from "../../engines/history/cognitiveHistoryEngine";
@@ -13,6 +13,12 @@ import {
   summarizeSemesterScores,
   type ScoreRow,
 } from "../../engines/academic-semester-engine";
+import {
+  ELECTIVE_SUBJECTS,
+  NATIONAL_DEFENSE_SUBJECT,
+  getNineGradedSubjects,
+  isValidElectiveSelection,
+} from "./services/academicCurriculum";
 import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
 import "../../styles.css";
@@ -59,17 +65,7 @@ const semesterOptions: { key: SemesterKey; label: string }[] = [
   { key: "semester2", label: "Học kì 2" },
 ];
 
-const electiveSubjects = [
-  "Vật lý",
-  "Hóa học",
-  "Sinh học",
-  "Địa lý",
-  "Giáo dục kinh tế và pháp luật",
-  "Tin học",
-  "Công nghệ",
-  "Âm nhạc",
-  "Mĩ thuật",
-];
+const electiveSubjects: readonly string[] = ELECTIVE_SUBJECTS;
 
 const initialProfile: LearningProfile = {
   fullName: "",
@@ -94,7 +90,7 @@ const initialProfile: LearningProfile = {
   scholarshipGoal: "",
 };
 
-const initialElectives = ["Vật lý", "Hóa học", "Sinh học", "Địa lý"];
+const initialElectives: string[] = [];
 
 function emptyScoreRow(): ScoreRow {
   return {
@@ -115,13 +111,7 @@ function createInitialTranscript(): TranscriptScores {
     });
   });
 
-  const sampleSubjects = [
-    "Toán",
-    "Ngữ văn",
-    "Tiếng Anh",
-    "Lịch sử",
-    ...initialElectives,
-  ];
+  const sampleSubjects = getNineGradedSubjects("Tiếng Anh", initialElectives);
 
   sampleSubjects.forEach((subject) => {
     scores.grade12.semester1[subject] = {
@@ -148,25 +138,80 @@ export default function TrangNhapHoSoHocTap() {
   const [message, setMessage] = useState("");
   const [profileReadFailed, setProfileReadFailed] = useState(false);
   const [profileReady, setProfileReady] = useState(false);
+  const [profileReadError, setProfileReadError] = useState("");
+  const [loadAttempt, setLoadAttempt] = useState(0);
+  const [loadedUid, setLoadedUid] = useState<string | null>(null);
+  const [isAdminDemo, setIsAdminDemo] = useState(false);
+  const [lockedElectives, setLockedElectives] = useState<string[] | null>(null);
   const [previousPlanCompletionRate, setPreviousPlanCompletionRate] = useState<number | undefined>(undefined);
 
   const params = new URLSearchParams(window.location.search);
   const isAdminPreview = params.get("from") === "admin";
 
-  // Prefill edits from Firestore. Avoid overwriting real data with demo defaults.
+  // Load the *current user's* profile from the server before allowing writes.
+  // Never silently ignore an unreadable collection: doing so can overwrite data.
   useEffect(() => {
     let active = true;
+    let requestId = 0;
+    const fail = (description: string) => {
+      if (!active) return;
+      setProfileReadFailed(true);
+      setProfileReadError(description);
+      setMessage(description);
+    };
+
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      const currentRequest = ++requestId;
+      if (!active) return;
       setProfileReady(false);
-      if (!user) return;
+      setProfileReadFailed(false);
+      setProfileReadError("");
+      setLoadedUid(null);
+      setIsAdminDemo(false);
+      // Clear the previous account's in-memory values before loading a new UID.
+      setProfile({ ...initialProfile });
+      setSelectedElectives([...initialElectives]);
+      setLockedElectives(null);
+      setTranscriptScores(createInitialTranscript());
+      setPreviousPlanCompletionRate(undefined);
+      setMessage("Đang tải hồ sơ và bảng điểm đã lưu từ Firestore...");
+
+      if (!user) {
+        fail("Bạn cần đăng nhập bằng tài khoản Student trước khi nhập hoặc lưu điểm.");
+        return;
+      }
+
+      const read = async (collectionName: string) => {
+        try {
+          return await getDocFromServer(doc(db, collectionName, user.uid));
+        } catch (error) {
+          const code = typeof error === "object" && error !== null && "code" in error
+            ? String(error.code) : "unknown";
+          throw new Error(`${collectionName}: ${code}`);
+        }
+      };
+
       try {
-        const saved = await getDoc(doc(db, "learning_profiles", user.uid));
-        if (!active) return;
-        if (!saved.exists()) {
-          setProfileReady(true);
+        // Admin demo can edit only documents under its OWN authenticated UID.
+        // It never impersonates a student's UID or writes student-owned records.
+        const account = await read("users");
+        if (!active || currentRequest !== requestId) return;
+        const accountData = account.exists() ? account.data() : null;
+        const role = accountData?.role;
+        if (!accountData || accountData.active !== true || (role !== "student" && role !== "admin")) {
+          fail("Tài khoản cần có vai trò Student hoặc Admin đã kích hoạt (users/UID: role, active=true) để sử dụng hồ sơ này.");
           return;
         }
-        const value = saved.data();
+        setIsAdminDemo(role === "admin");
+
+        const [saved, savedTranscript] = await Promise.all([
+          read("learning_profiles"),
+          read("student_transcripts"),
+        ]);
+        if (!active || currentRequest !== requestId) return;
+
+        const value = saved.exists() ? saved.data() : {};
+        const academic = savedTranscript.exists() ? savedTranscript.data() : value;
         const oldBehavior = value.behavior as { planCompletionRate?: number } | undefined;
         setPreviousPlanCompletionRate(
           typeof oldBehavior?.planCompletionRate === "number"
@@ -181,33 +226,49 @@ export default function TrangNhapHoSoHocTap() {
             ),
           }));
         }
-        const curriculum = value.curriculum as { selectedElectives?: string[] } | undefined;
-        if (Array.isArray(curriculum?.selectedElectives)) {
-          setSelectedElectives(curriculum.selectedElectives);
+        const curriculum = academic.curriculum as { selectedElectives?: string[] } | undefined;
+        const legacyCurriculum = value.curriculum as { selectedElectives?: string[] } | undefined;
+        if (Array.isArray(curriculum?.selectedElectives)
+            && Array.isArray(legacyCurriculum?.selectedElectives)
+            && JSON.stringify(curriculum.selectedElectives) !== JSON.stringify(legacyCurriculum.selectedElectives)) {
+          fail("Hai collection đang lưu tổ hợp môn khác nhau. Cần đối chiếu dữ liệu cũ trước khi chỉnh sửa.");
+          return;
         }
-        if (value.transcript && typeof value.transcript === "object") {
-          setTranscriptScores(value.transcript as TranscriptScores);
+        const savedSelection = curriculum?.selectedElectives ?? legacyCurriculum?.selectedElectives;
+        if (Array.isArray(savedSelection)) {
+          if (!isValidElectiveSelection(savedSelection)) {
+            fail("Tổ hợp môn trong Firestore không hợp lệ. Cần quản trị viên kiểm tra dữ liệu trước khi lưu.");
+            return;
+          }
+          setSelectedElectives([...savedSelection]);
+          setLockedElectives([...savedSelection]);
         }
+        if (academic.transcript && typeof academic.transcript === "object") {
+          setTranscriptScores(academic.transcript as TranscriptScores);
+        }
+        setLoadedUid(user.uid);
         setProfileReady(true);
+        setMessage("");
       } catch (error) {
-        if (active) {
-          console.error("Không tải được hồ sơ để chỉnh sửa:", error);
-          setProfileReadFailed(true);
-          setMessage("Không thể tải hồ sơ đã lưu. Không nên ghi đè cho đến khi kiểm tra kết nối.");
+        if (!active || currentRequest !== requestId) return;
+        const detail = error instanceof Error ? error.message : "unknown";
+        console.error("Không tải được hồ sơ để chỉnh sửa:", error);
+        if (detail.includes("permission-denied")) {
+          fail(`Firestore từ chối đọc ${detail}. Kiểm tra Rules đã Publish và vai trò Student của tài khoản; không mở quyền công khai.`);
+        } else if (detail.includes("unavailable")) {
+          fail(`Không kết nối được Firestore (${detail}). Kiểm tra mạng và thử tải lại; không ghi đè dữ liệu khi offline.`);
+        } else {
+          fail(`Không tải được dữ liệu đã lưu (${detail}). Kiểm tra kết nối, dự án Firebase và thử tải lại.`);
         }
       }
+    }, (error) => {
+      fail(`Không xác minh được phiên đăng nhập Firebase (${error.message}).`);
     });
-    return () => { active = false; unsubscribe(); };
-  }, []);
+    return () => { active = false; requestId++; unsubscribe(); };
+  }, [loadAttempt]);
 
   const gradedSubjects = useMemo(
-    () => [
-      "Toán",
-      "Ngữ văn",
-      profile.foreignLanguage,
-      "Lịch sử",
-      ...selectedElectives,
-    ],
+    () => getNineGradedSubjects(profile.foreignLanguage, selectedElectives),
     [profile.foreignLanguage, selectedElectives]
   );
 
@@ -226,6 +287,16 @@ export default function TrangNhapHoSoHocTap() {
     return transcriptScores[grade]?.[semester]?.[subject] || emptyScoreRow();
   }
 
+  // Validate both while editing and before saving to Firestore.
+  // Empty is unknown, not a numeric zero.
+  function validScore(value: string): boolean {
+    if (value.trim() === "") return true;
+    const normalized = value.trim().replace(",", ".");
+    if (!/^(?:\d+(?:\.\d*)?|\.\d+)$/.test(normalized)) return false;
+    const score = Number(normalized);
+    return Number.isFinite(score) && score >= 0 && score <= 10;
+  }
+
   function updateScore(
     grade: GradeKey,
     semester: SemesterKey,
@@ -234,6 +305,13 @@ export default function TrangNhapHoSoHocTap() {
     value: string,
     regularIndex?: number
   ) {
+    if (!validScore(value)) {
+      setMessage("Điểm phải từ 0 đến 10. Có thể để trống khi chưa có điểm.");
+      return;
+    }
+    // Store decimal values in a format understood by the GPA engine.
+    const normalizedValue = value.replace(",", ".");
+    setMessage((current) => current.startsWith("Điểm phải từ 0 đến 10") ? "" : current);
     setTranscriptScores((current) => {
       const currentGrade = current[grade] ?? { semester1: {}, semester2: {} };
       const currentSemester = currentGrade[semester] ?? {};
@@ -244,12 +322,12 @@ export default function TrangNhapHoSoHocTap() {
           ? {
               ...currentRow,
               regular: currentRow.regular.map((score, index) =>
-                index === regularIndex ? value : score
+                index === regularIndex ? normalizedValue : score
               ),
             }
           : {
               ...currentRow,
-              [field]: value,
+              [field]: normalizedValue,
             };
 
       return {
@@ -266,6 +344,10 @@ export default function TrangNhapHoSoHocTap() {
   }
 
   function toggleElective(subject: string) {
+    if (lockedElectives) {
+      setMessage("Tổ hợp 4 môn đã được xác nhận và khóa cho ba năm THPT; không thể tự thay đổi.");
+      return;
+    }
     setMessage("");
 
     if (selectedElectives.includes(subject)) {
@@ -341,7 +423,7 @@ export default function TrangNhapHoSoHocTap() {
       grade11: getYearGpa("grade11"),
       grade12: getYearGpa("grade12"),
       overall: getOverallGpa(),
-      calculationVersion: "cla-academic-semester-v1",
+      calculationVersion: "cla-academic-semester-v2-nine-subjects",
       coverage: {
         grade10: {
           semester1: getSemesterSummary("grade10", "semester1"),
@@ -366,14 +448,31 @@ export default function TrangNhapHoSoHocTap() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (profileReadFailed || !profileReady) {
-      setMessage("Chưa tải xong hồ sơ hiện có; không thể lưu để tránh ghi đè dữ liệu.");
+    if (profileReadFailed || !profileReady || loadedUid !== auth.currentUser?.uid) {
+      setMessage(profileReadError || "Hồ sơ chưa tải xong hoặc phiên đăng nhập đã thay đổi. Hãy thử tải lại trước khi lưu.");
       return;
     }
 
-    if (selectedElectives.length !== 4) {
-      setMessage("Bạn cần chọn đúng 4 môn học lựa chọn.");
+    if (!isValidElectiveSelection(selectedElectives)) {
+      setMessage("Bạn cần chọn đúng 4 môn học lựa chọn khác nhau, thuộc danh sách của chương trình.");
       return;
+    }
+    if (lockedElectives && lockedElectives.some((subject, index) => subject !== selectedElectives[index])) {
+      setMessage("Không thể đổi tổ hợp đã khóa. Hãy liên hệ quản trị viên nếu cần điều chỉnh theo hồ sơ nhà trường.");
+      return;
+    }
+
+    // Guard all grades and terms, including historical subjects no longer selected.
+    for (const grade of gradeOptions) {
+      for (const semester of semesterOptions) {
+        const rows = transcriptScores[grade.key]?.[semester.key] ?? {};
+        for (const [subject, row] of Object.entries(rows)) {
+          if (![...row.regular, row.midterm, row.final].every(validScore)) {
+            setMessage(`Điểm môn ${subject} (${grade.label}, ${semester.label}) phải từ 0 đến 10.`);
+            return;
+          }
+        }
+      }
     }
 
     try {
@@ -403,6 +502,7 @@ export default function TrangNhapHoSoHocTap() {
       const profileWrite = {
           userId: currentUser.uid,
           email: currentUser.email,
+          dataScope: isAdminDemo ? "demo" : "student",
           profile,
           curriculum: {
             program: "GDPT 2018",
@@ -418,8 +518,10 @@ export default function TrangNhapHoSoHocTap() {
             ],
             gradedSubjects,
             selectedElectives,
+            foreignLanguage: profile.foreignLanguage,
+            electiveSelectionLocked: true,
           },
-          transcript: buildTranscriptForSave(),
+          // Other modules read gpaSummary from learning_profiles; transcript lives separately.
           gpaSummary,
           behavior,
           finance: {
@@ -497,11 +599,25 @@ export default function TrangNhapHoSoHocTap() {
         ...profileWrite,
         cognitiveMeasurement: JSON.parse(JSON.stringify(cognitiveResult)),
       }, { merge: true });
-      batch.set(historyRef, { ...cognitiveSnapshot, createdAt: serverTimestamp() });
+      batch.set(doc(db, "student_transcripts", currentUser.uid), {
+        userId: currentUser.uid,
+        schemaVersion: 1,
+        dataScope: isAdminDemo ? "demo" : "student",
+        curriculum: profileWrite.curriculum,
+        transcript: buildTranscriptForSave(),
+        gpaSummary,
+        updatedAt: serverTimestamp(),
+      });
+      batch.set(historyRef, {
+        ...cognitiveSnapshot,
+        dataScope: isAdminDemo ? "demo" : "student",
+        createdAt: serverTimestamp(),
+      });
       await batch.commit();
+      setLockedElectives([...selectedElectives]);
 
       setMessage(
-        "Đã lưu hồ sơ và cập nhật Cognitive History thành công."
+        "Đã lưu hồ sơ, kho bảng điểm riêng và Cognitive History trên Firestore."
       );
 
       setTimeout(() => {
@@ -547,6 +663,13 @@ export default function TrangNhapHoSoHocTap() {
             tập, SCI/MAS/CSL và dự báo tuyển sinh.
           </p>
         </header>
+
+        {isAdminDemo && profileReady && (
+          <p className="profile-message" role="status">
+            CHẾ ĐỘ DEMO ADMIN — bạn có thể nhập và lưu dữ liệu mẫu thuộc UID Admin này.
+            Dữ liệu demo không phải kết quả của học sinh tham gia nghiên cứu.
+          </p>
+        )}
 
         <div className="cla-transcript-page-actions"><a href="/student/transcript">Xem bảng điểm đã lưu →</a></div>
 
@@ -623,8 +746,9 @@ export default function TrangNhapHoSoHocTap() {
               <strong>Cấu trúc môn học</strong>
               <p>
                 Học sinh THPT có 8 môn học/hoạt động bắt buộc và chọn 4 môn học
-                lựa chọn. Phần tính GPA sẽ tập trung vào các môn có điểm: Toán,
-                Ngữ văn, Ngoại ngữ 1, Lịch sử và 4 môn lựa chọn.
+                lựa chọn. Bảng điểm gồm 9 môn tính theo thang 10: Toán,
+                Ngữ văn, Ngoại ngữ 1, Lịch sử, Giáo dục quốc phòng và an ninh,
+                và 4 môn lựa chọn. Hai môn thi tự chọn tốt nghiệp là lựa chọn riêng.
               </p>
             </div>
 
@@ -652,7 +776,7 @@ export default function TrangNhapHoSoHocTap() {
               <div className="profile-picker-head">
                 <div>
                   <span>MÔN HỌC LỰA CHỌN</span>
-                  <h3>Chọn đúng 4 môn theo định hướng nghề nghiệp</h3>
+                  <h3>Chọn đúng 4 môn học ổn định trong 3 năm THPT</h3>
                 </div>
 
                 <strong>{selectedElectives.length}/4</strong>
@@ -667,11 +791,18 @@ export default function TrangNhapHoSoHocTap() {
                       selectedElectives.includes(subject) ? "active" : ""
                     }
                     onClick={() => toggleElective(subject)}
+                    disabled={lockedElectives !== null || !profileReady}
+                    aria-pressed={selectedElectives.includes(subject)}
                   >
                     {subject}
                   </button>
                 ))}
               </div>
+              <p className="profile-note-box" role="status">
+                {lockedElectives
+                  ? "Tổ hợp đã được khóa sau lần lưu đầu tiên và được giữ nguyên cho cả lớp 10, 11, 12. Nếu trường chính thức điều chỉnh, cần quy trình quản trị riêng."
+                  : "Sau lần lưu hồ sơ đầu tiên, 4 môn đã chọn sẽ được khóa và không thể tự sửa. Hãy kiểm tra kỹ trước khi xác nhận."}
+              </p>
             </div>
           </section>
 
@@ -780,7 +911,7 @@ export default function TrangNhapHoSoHocTap() {
                           <td key={`${subject}-regular-${index}`}>
                             <input
                               type="number"
-                              step="0.1"
+                              step="any"
                               min="0"
                               max="10"
                               value={score}
@@ -801,7 +932,7 @@ export default function TrangNhapHoSoHocTap() {
                         <td>
                           <input
                             type="number"
-                            step="0.1"
+                            step="any"
                             min="0"
                             max="10"
                             value={row.midterm}
@@ -820,7 +951,7 @@ export default function TrangNhapHoSoHocTap() {
                         <td>
                           <input
                             type="number"
-                            step="0.1"
+                            step="any"
                             min="0"
                             max="10"
                             value={row.final}
@@ -969,7 +1100,7 @@ export default function TrangNhapHoSoHocTap() {
           <section className="profile-form-section">
             <div className="profile-section-title">
               <span>05</span>
-              <h2>Tài chính, du học và học bổng</h2>
+              <h2>Tài chính, du học và học bổng (không bắt buộc)</h2>
             </div>
 
             <div className="profile-field-grid">
@@ -982,7 +1113,6 @@ export default function TrangNhapHoSoHocTap() {
                   onChange={(event) =>
                     updateField("educationBudget", event.target.value)
                   }
-                  required
                 />
               </label>
 
@@ -995,7 +1125,6 @@ export default function TrangNhapHoSoHocTap() {
                   onChange={(event) =>
                     updateField("maxTuition", event.target.value)
                   }
-                  required
                 />
               </label>
 
@@ -1101,7 +1230,12 @@ export default function TrangNhapHoSoHocTap() {
             </button>
           </div>
 
-          {message && <p className="profile-message">{message}</p>}
+          {message && <p className="profile-message" role={profileReadFailed ? "alert" : "status"}>{message}</p>}
+          {profileReadFailed && (
+            <button type="button" onClick={() => setLoadAttempt(value => value + 1)}>
+              Thử tải lại hồ sơ
+            </button>
+          )}
         </form>
       </section>
     </main>

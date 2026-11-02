@@ -1,0 +1,18 @@
+source_id,source_name,homepage,purpose,permission_status,cohort_type,allowed_for_training,allowed_for_evaluation,limitations
+S01,Hugging Face Datasets,https://huggingface.co/datasets,discovery,VERIFY,directory,no,no,Each asset needs its own source license
+S02,VNHSGE,https://github.com/Xdao85/VNHSGE,LLM Vietnamese exam benchmark,VERIFY,exam questions,no,pending,Not student outcomes
+S03,OULAD,https://analyse.kmi.open.ac.uk/open_dataset,learning analytics baseline,VERIFY,university,no,pending,Domain mismatch THPT Vietnam
+S04,EdNet,https://github.com/riiid/ednet,knowledge tracing baseline,VERIFY,TOEIC,no,pending,Check license and student-level splits
+S05,ASSISTments,https://sites.google.com/site/assistmentsdata/,learning analytics baseline,VERIFY,K-12,no,pending,Use agreement and permitted splits
+S06,OECD PISA,https://www.oecd.org/en/data/datasets/pisa-2022-database.html,educational context,VERIFY,cross-sectional,no,pending,Plausible values and replicate weights
+S07,IEA TIMSS,https://www.iea.nl/data-tools/repository,educational context,VERIFY,grade 4 and 8,no,pending,Sampling and grade mismatch
+S08,World Bank EdStats,https://databank.worldbank.org/source/education-statistics-%5E-all-indicators,education context,VERIFY,aggregate,no,pending,Not person-level outcomes
+S09,Vietnam NSO,https://www.nso.gov.vn/,local education context,VERIFY,aggregate,no,pending,No ecological inference
+S10,MoET official portal,https://moet.gov.vn/,admissions and policy,VERIFY,official text,no,pending,Observe years and source validity
+S11,VMLU,https://huggingface.co/datasets,LLM Vietnamese benchmark,VERIFY,text QA,no,pending,Find exact revision and contamination gate
+S12,Zenodo,https://zenodo.org/,research dataset search,VERIFY,repository,no,pending,Dataset-specific license
+S13,Harvard Dataverse,https://dataverse.harvard.edu/,research dataset search,VERIFY,repository,no,pending,Dataset-specific terms
+S14,UCI,https://archive.ics.uci.edu/,secondary methods data,VERIFY,repository,no,pending,Validate data provenance
+S15,UNESCO UIS,https://uis.unesco.org/,educational context,VERIFY,aggregate,no,pending,Not learner outcomes
+S16,OpenAlex,https://openalex.org/,research literature,VERIFY,bibliography,no,pending,Not a learner dataset
+S17,CLA Firestore,LOCAL_PRIVATE,personalized evidence,NOT_APPROVED,student records,no,no,Exclude until permission and pseudonymization confirmed
