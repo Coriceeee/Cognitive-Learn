@@ -280,7 +280,7 @@ export default function OrionPage() {
           </article>
         </section>
 
-        <section className="orion-section">
+        <section id="orion-scenarios" className="orion-section">
           <div className="orion-section-head">
             <div>
               <span>SCENARIOS</span>
@@ -306,7 +306,7 @@ export default function OrionPage() {
           </div>
         </section>
 
-        <section className="orion-section">
+        <section id="orion-roadmap" className="orion-section">
           <div className="orion-section-head">
             <div>
               <span>ROADMAP</span>
@@ -341,7 +341,7 @@ export default function OrionPage() {
             </ul>
           </section>
         )}
-        </>) : <section className="cla-transcript-hint" role="status">Chưa đủ dữ liệu hợp lệ để đưa ra kết quả. Hãy hoàn thiện các ô đầu vào và lưu vào Firestore. Đây là công cụ mô phỏng theo giả định, không phải bằng chứng hiệu quả hoặc xác suất thành công.</section>}
+        </>) : <section className="cla-transcript-hint" role="status"><span id="orion-scenarios" /><span id="orion-roadmap" />Chưa đủ dữ liệu hợp lệ để đưa ra kết quả. Hãy hoàn thiện các ô đầu vào và lưu vào Firestore. Đây là công cụ mô phỏng theo giả định, không phải bằng chứng hiệu quả hoặc xác suất thành công.</section>}
       </section>
     </main>
   );

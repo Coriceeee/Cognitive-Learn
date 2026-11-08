@@ -1,6 +1,6 @@
 import { resolve } from "node:path";
 import { config as loadEnv } from "dotenv";
-import type { VercelRequest, VercelResponse } from "@vercel/node";
+import type { VercelRequest, VercelResponse } from "./vercelTypes";
 
 loadEnv({ path: resolve(process.cwd(), ".env.local") });
 loadEnv({ path: resolve(process.cwd(), ".env") });

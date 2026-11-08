@@ -200,7 +200,7 @@ export default function HavenPage() {
         </section>
 
         {hasInputs ? (<>
-        <section className="haven-summary-grid">
+        <section id="haven-support-roles" className="haven-summary-grid">
           <article>
             <span>PHỤ HUYNH</span>
             <h2>Tóm tắt cho phụ huynh</h2>
@@ -223,7 +223,7 @@ export default function HavenPage() {
           </article>
         </section>
 
-        <section className="haven-section">
+        <section id="haven-support-plan" className="haven-section">
           <div className="haven-section-head">
             <div>
               <span>SUPPORT PLAN</span>
@@ -243,7 +243,7 @@ export default function HavenPage() {
           </div>
         </section>
 
-        <section className="haven-section">
+        <section id="haven-scholarships" className="haven-section">
           <div className="haven-section-head">
             <div>
               <span>SCHOLARSHIP</span>
@@ -280,7 +280,7 @@ export default function HavenPage() {
             </ul>
           </section>
         )}
-        </>) : <section className="cla-transcript-hint" role="status">Chưa đủ dữ liệu thực để đưa ra kết quả. Hãy hoàn thiện các ô đầu vào và lưu vào Firestore. Đây là công cụ mô phỏng theo giả định, không phải bằng chứng hiệu quả hoặc xác suất thành công.</section>}
+        </>) : <section className="cla-transcript-hint" role="status"><span id="haven-support-roles" /><span id="haven-scholarships" />Chưa đủ dữ liệu thực để đưa ra kết quả. Hãy hoàn thiện các ô đầu vào và lưu vào Firestore. Đây là công cụ mô phỏng theo giả định, không phải bằng chứng hiệu quả hoặc xác suất thành công.</section>}
       </section>
     </main>
   );

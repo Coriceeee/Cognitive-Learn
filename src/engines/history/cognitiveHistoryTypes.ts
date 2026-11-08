@@ -16,11 +16,11 @@ export type CognitiveSnapshot = {
   BDI: number;
   FRI: number;
   CRI: number;
-  gpaOverall: number;
-  studyHoursPerWeek: number;
-  practiceTestsPerWeek: number;
-  planCompletionRate: number;
-  motivationLevel: number;
+  gpaOverall: number | null;
+  studyHoursPerWeek: number | null;
+  practiceTestsPerWeek: number | null;
+  planCompletionRate: number | null;
+  motivationLevel: number | null;
   scoreAvailable?: boolean;
   dataCoverageScore?: number;
   missingDimensions?: string[];

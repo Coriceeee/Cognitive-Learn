@@ -216,14 +216,14 @@ function getClusterActions(cluster: ModuleCluster): AdminAction[] {
       {
         label: "Kiểm tra kịch bản học tập",
         description: "So sánh chiến lược cân bằng, tập trung và bứt phá.",
-        path: "/orion",
+        path: "/orion#orion-scenarios",
         status: "ready",
       },
       {
         label: "Theo dõi roadmap theo tuần",
         description:
           "Kiểm tra milestone học tập và hành động theo từng giai đoạn.",
-        path: "/orion",
+        path: "/orion#orion-roadmap",
         status: "ready",
       },
     ];
@@ -241,13 +241,13 @@ function getClusterActions(cluster: ModuleCluster): AdminAction[] {
       {
         label: "Kiểm thử báo cáo học sinh",
         description: "Xem bản tóm tắt tiến độ cá nhân dành cho học sinh.",
-        path: "/pulse",
+        path: "/pulse#pulse-report",
         status: "ready",
       },
       {
         label: "Theo dõi chỉ số rủi ro",
         description: "Kiểm tra trend, risk level, metric score và cảnh báo.",
-        path: "/pulse",
+        path: "/pulse#pulse-risk",
         status: "ready",
       },
     ];
@@ -266,14 +266,14 @@ function getClusterActions(cluster: ModuleCluster): AdminAction[] {
         label: "Gợi ý học bổng",
         description:
           "Đánh giá học bổng đầu vào, học bổng học tập và hỗ trợ tài chính.",
-        path: "/haven",
+        path: "/haven#haven-scholarships",
         status: "ready",
       },
       {
         label: "Hỗ trợ phụ huynh / giáo viên",
         description:
           "Kiểm tra góc nhìn phụ huynh và giáo viên về tiến độ, áp lực và hỗ trợ học sinh.",
-        path: "/haven",
+        path: "/haven#haven-support-roles",
         status: "ready",
       },
     ];

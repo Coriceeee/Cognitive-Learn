@@ -1,4 +1,37 @@
-node_modules
-.vercel
-.env*
-dist
+# Credentials and local environments
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.pfx
+*service-account*.json
+
+# Build outputs and tooling state
+node_modules/
+dist/
+.vercel/
+.firebase/
+*.tsbuildinfo
+coverage/
+.DS_Store
+
+# Research data must remain private and approved
+research/data/raw_private/
+research/data/processed_private/
+research/data/staging_private/
+research/data/splits_private/
+research/evidence/private/
+research/reports/private/
+reports/security/*.log
+
+# Python-generated artifacts
+__pycache__/
+*.pyc
+
+# Local emulator diagnostics
+firestore-debug.log
+firebase-debug.log
+ui-debug.log
+java_pid*.hprof
+hs_err_pid*.log

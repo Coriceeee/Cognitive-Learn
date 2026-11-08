@@ -115,6 +115,9 @@ async function runChecks(user: User, view: View): Promise<Check[]> {
     `Scope hồ sơ: ${String(profile.dataScope ?? "thiếu")}; scope bảng điểm: ${String(transcript.dataScope ?? "thiếu")}.`));
   checks.push(check("UID sở hữu nhất quán", profile.userId === user.uid && transcript.userId === user.uid,
     "Chỉ so sánh UID của tài khoản đang đăng nhập; không truy vấn học sinh khác."));
+  checks.push({ name: "Phiên bản schema hồ sơ/bảng điểm",
+    status: profile.schemaVersion === 1 && transcript.schemaVersion === 1 ? "PASS" : "WARN",
+    detail: `learning_profiles v${String(profile.schemaVersion ?? "legacy")}; student_transcripts v${String(transcript.schemaVersion ?? "legacy")}. Hồ sơ cũ cần được chuyển đổi trước khi xác nhận.` });
   checks.push(...evaluateTranscript(profile, transcript));
   if (view === "seed") return checks;
   if (view === "cognitive") {

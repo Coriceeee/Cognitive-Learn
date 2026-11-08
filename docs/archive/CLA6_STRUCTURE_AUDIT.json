@@ -1,0 +1,49 @@
+{
+  "source_archive": "CLA(6).zip",
+  "sha256_archive": "2336cba38639de15fd5f68b5961c0dd7ef962b57086a1dd964da59178cafbdf0",
+  "source_files_extracted": 187,
+  "excluded_from_clean_bundle": 39709,
+  "verified_duplicate_groups": [
+    [
+      "evidence/RESEARCH_SCOPE_DAY1.md",
+      "data/evidence/RESEARCH_SCOPE_DAY1.md"
+    ],
+    [
+      "evidence/CLAIM_EVIDENCE_DAY1.md",
+      "data/evidence/CLAIM_EVIDENCE_DAY1.md"
+    ],
+    [
+      "RUN_RULES_CHECKPOINT21.ps1",
+      "evidence/RUN_RULES_CHECKPOINT21.ps1",
+      "data/evidence/RUN_RULES_CHECKPOINT21.ps1"
+    ],
+    [
+      "firebase.emulator.cp21.json",
+      "evidence/firebase.emulator.cp21.json",
+      "data/evidence/firebase.emulator.cp21.json"
+    ]
+  ],
+  "source_movements": {
+    "evidence/RESEARCH_SCOPE_DAY1.md": "research/protocol/RESEARCH_SCOPE_DAY1.md",
+    "evidence/CLAIM_EVIDENCE_DAY1.md": "research/evidence/CLAIM_EVIDENCE_DAY1.md",
+    "benchmarks/cla_llm_120_cases_DRAFT.jsonl": "research/benchmarks/cla_llm_120_cases_DRAFT.jsonl",
+    "src/audit_dataset.py": "research/src/audit_dataset.py",
+    "src/baseline_next_term.py": "research/src/baseline_next_term.py"
+  },
+  "cp21_firebase_tests_added": [
+    "tests/firestore.rules.cp21.test.mjs",
+    "tests/cp21.rules.contract.test.cjs",
+    "firestore.rules.CANDIDATE_CP21"
+  ],
+  "security_exclusions": [
+    ".env",
+    ".env.local",
+    ".git/",
+    "node_modules/",
+    "dist/",
+    ".vercel/",
+    ".firebase/"
+  ],
+  "deployment": "NOT DEPLOYED",
+  "emulator": "NOT RUN"
+}

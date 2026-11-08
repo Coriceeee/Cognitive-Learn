@@ -1,0 +1,16 @@
+{
+  "status": "TEMPLATE_MANIFEST_PASS",
+  "cases_total": 120,
+  "by_module": {
+    "lumen": 20,
+    "atlas": 20,
+    "orion": 15,
+    "pulse": 15,
+    "haven": 15,
+    "security": 15,
+    "vietnamese_edge": 20
+  },
+  "model_evaluation": "NOT RUN",
+  "gold_criteria_review": "NOT DONE",
+  "scientific_claim": "NOT EVALUABLE"
+}

@@ -5,9 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite --open",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && tsc -p tsconfig.api.json && vite build",
     "preview": "vite preview",
-    "test": "node tests/academic.test.cjs"
+    "test": "node tests/academic.test.cjs && node tests/cognitive-observation.test.cjs && node tests/admin-deeplink.test.cjs",
+    "typecheck:api": "tsc -p tsconfig.api.json",
+    "test:rules": "node --test tests/firestore.rules.cp21.test.mjs",
+    "test:rules:emulator": "firebase emulators:exec --project demo-cla-cp21-security --config firebase.emulator.cp21.json --only firestore \"npm run test:rules\"",
+    "test:rules:static": "node --test tests/cp21.rules.contract.test.cjs",
+    "check:layout": "node tools/check-cla-layout.cjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
@@ -20,14 +25,17 @@
     "recharts": "latest"
   },
   "devDependencies": {
+    "@firebase/rules-unit-testing": "5.0.2",
+    "@types/node": "^22.16.0",
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "@vercel/node": "^4.0.0",
     "autoprefixer": "latest",
     "postcss": "latest",
     "tailwindcss": "latest",
     "typescript": "latest",
-    "vercel": "^54.14.2",
     "vite": "latest"
+  },
+  "overrides": {
+    "@grpc/grpc-js": "1.14.7"
   }
 }

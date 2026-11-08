@@ -1,0 +1,198 @@
+rules_version = '2';
+
+// CLA Checkpoint 06 - review candidate; DO NOT DEPLOY without emulator tests
+// and comparison with current production rules.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function userPath(uid) {
+      return /databases/$(database)/documents/users/$(uid);
+    }
+
+    function activeRole(role) {
+      return signedIn()
+        && exists(userPath(request.auth.uid))
+        && get(userPath(request.auth.uid)).data.active == true
+        && get(userPath(request.auth.uid)).data.role == role;
+    }
+
+    function studentOwns(uid) {
+      return signedIn() && request.auth.uid == uid && activeRole('student');
+    }
+
+    function activeSelf() {
+      return signedIn()
+        && exists(userPath(request.auth.uid))
+        && get(userPath(request.auth.uid)).data.active == true;
+    }
+
+    function validUserCreate(uid) {
+      return signedIn()
+        && request.auth.uid == uid
+        && request.auth.token.email is string
+        && request.resource.data.keys().hasOnly(['email', 'role', 'fullName', 'active', 'createdAt'])
+        && request.resource.data.keys().hasAll(['email', 'role', 'fullName', 'active', 'createdAt'])
+        && request.resource.data.email is string
+        && request.resource.data.email == request.auth.token.email.lower()
+        && request.resource.data.role in ['student', 'teacher', 'parent']
+        && request.resource.data.fullName is string
+        && request.resource.data.fullName.size() > 0
+        && request.resource.data.fullName.size() <= 120
+        && request.resource.data.active == true
+        && request.resource.data.createdAt is string
+        && request.resource.data.createdAt.size() <= 64;
+    }
+
+    // A user may select a client role on first registration. This is NOT
+    // verified teacher/parent identity; privileges still require student opt-in.
+    // No client may self-provision admin or update role/active fields later.
+    match /users/{uid} {
+      allow get: if signedIn() && request.auth.uid == uid;
+      allow list: if false;
+      allow create: if validUserCreate(uid);
+      allow update, delete: if false;
+    }
+
+    // An authenticated student owns only their own academic profile/history.
+    match /learning_profiles/{uid} {
+      allow get: if studentOwns(uid);
+      allow list: if false;
+      allow create, update: if studentOwns(uid);
+      allow delete: if false;
+
+      match /cognitive_history/{snapshotId} {
+        allow get, list: if studentOwns(uid);
+        allow create: if studentOwns(uid)
+          && request.resource.data.studentId == uid;
+        allow update, delete: if false;
+      }
+    }
+
+    function validLinkId(linkId, studentId, viewerId) {
+      return linkId == studentId + '_' + viewerId
+        && studentId is string
+        && viewerId is string
+        && studentId.size() >= 6 && studentId.size() <= 128
+        && viewerId.size() >= 6 && viewerId.size() <= 128
+        && studentId != viewerId;
+    }
+
+    function viewerHasRole(viewerId, viewerRole) {
+      return exists(userPath(viewerId))
+        && get(userPath(viewerId)).data.active == true
+        && get(userPath(viewerId)).data.role == viewerRole;
+    }
+
+    function linkReadAllowed(data) {
+      // Query-compatible ownership rule. Viewer role is verified on link
+      // creation and again on each report GET or review.
+      return activeSelf()
+        && (data.studentId == request.auth.uid
+            || data.viewerId == request.auth.uid);
+    }
+
+    function linkPath(linkId) {
+      return /databases/$(database)/documents/student_links/$(linkId);
+    }
+
+    function validLinkCreate(linkId) {
+      return signedIn()
+        && activeRole('student')
+        && request.resource.data.keys().hasOnly(['studentId', 'viewerId', 'viewerRole', 'studentName', 'createdAt'])
+        && request.resource.data.keys().hasAll(['studentId', 'viewerId', 'viewerRole', 'studentName', 'createdAt'])
+        && request.resource.data.studentId == request.auth.uid
+        && request.resource.data.viewerRole in ['teacher', 'parent']
+        && validLinkId(linkId, request.resource.data.studentId, request.resource.data.viewerId)
+        && viewerHasRole(request.resource.data.viewerId, request.resource.data.viewerRole)
+        && request.resource.data.studentName is string
+        && request.resource.data.studentName.size() <= 80
+        && request.resource.data.createdAt == request.time;
+    }
+
+    match /student_links/{linkId} {
+      allow get: if linkReadAllowed(resource.data);
+      // Both queries in the app use where(studentId/viewerId == uid), limit(40).
+      allow list: if signedIn() && request.query.limit <= 40
+        && linkReadAllowed(resource.data);
+      allow create: if validLinkCreate(linkId);
+      allow update: if false;
+      // Remove explicitly shared report first; avoids stale report resurfacing.
+      allow delete: if studentOwns(resource.data.studentId)
+        && !exists(/databases/$(database)/documents/student_shared_reports/$(linkId));
+    }
+
+    function validReportLink(linkId, data) {
+      return exists(linkPath(linkId))
+        && get(linkPath(linkId)).data.studentId == data.studentId
+        && get(linkPath(linkId)).data.viewerId == data.viewerId
+        && get(linkPath(linkId)).data.viewerRole == data.viewerRole;
+    }
+
+    function allowedReportFields() {
+      return ['studentId', 'viewerId', 'viewerRole', 'title', 'summary',
+        'nextStep', 'status', 'feedback', 'reviewedAt', 'createdAt'];
+    }
+
+    function validReportCreate(linkId) {
+      let data = request.resource.data;
+      return studentOwns(data.studentId)
+        && data.keys().hasOnly(allowedReportFields())
+        && data.keys().hasAll(allowedReportFields())
+        && validReportLink(linkId, data)
+        && data.title is string && data.title.size() >= 5 && data.title.size() <= 70
+        && data.summary is string && data.summary.size() >= 10 && data.summary.size() <= 900
+        && data.nextStep is string && data.nextStep.size() <= 400
+        && data.status == 'shared' && data.feedback == ''
+        && data.reviewedAt == null
+        && data.createdAt == request.time;
+    }
+
+    function canReadReport(linkId) {
+      return signedIn()
+        && validReportLink(linkId, resource.data)
+        && (studentOwns(resource.data.studentId)
+           || (resource.data.viewerId == request.auth.uid
+               && activeRole(resource.data.viewerRole)
+               && resource.data.viewerRole in ['teacher', 'parent']));
+    }
+
+    function validOneTimeReview(linkId) {
+      return signedIn()
+        && resource.data.status == 'shared'
+        && resource.data.feedback == ''
+        && resource.data.viewerId == request.auth.uid
+        && resource.data.viewerRole in ['teacher', 'parent']
+        && activeRole(resource.data.viewerRole)
+        && validReportLink(linkId, resource.data)
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['feedback', 'status', 'reviewedAt'])
+        && request.resource.data.status == 'reviewed'
+        && request.resource.data.feedback is string
+        && request.resource.data.feedback.size() >= 5
+        && request.resource.data.feedback.size() <= 600
+        && request.resource.data.reviewedAt == request.time;
+    }
+
+    match /student_shared_reports/{linkId} {
+      allow get: if canReadReport(linkId);
+      allow list: if false;
+      allow create: if validReportCreate(linkId);
+      allow update: if validOneTimeReview(linkId);
+      // On a missing report, the student can still delete by linked ID.
+      allow delete: if signedIn()
+        && exists(linkPath(linkId))
+        && studentOwns(get(linkPath(linkId)).data.studentId)
+        && (resource == null || resource.data.studentId == request.auth.uid);
+    }
+
+    // No public writes for health documents. Use /api/health for service checks.
+    match /system_health/{document} {
+      allow read, write: if false;
+    }
+
+    // Unknown collections are denied by default.
+  }
+}

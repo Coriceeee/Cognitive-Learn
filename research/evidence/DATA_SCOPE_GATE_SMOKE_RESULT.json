@@ -1,0 +1,14 @@
+{
+  "source_sha256": "6de42dc6eaa893091a5a606f7eb9812ed4c0fba4974455d48a7821209a99f630",
+  "row_count": 40,
+  "missing_columns": [],
+  "counts": {
+    "excluded_demo_or_synthetic": 40
+  },
+  "eligible_n": 0,
+  "unique_eligible_participants": 0,
+  "status": "BLOCKED",
+  "notes": [
+    "No eligible non-demo observations. No performance claims allowed."
+  ]
+}

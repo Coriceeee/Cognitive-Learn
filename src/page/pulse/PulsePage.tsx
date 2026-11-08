@@ -228,7 +228,7 @@ export default function PulsePage() {
           </div>
         </section>
 
-        {hasInputs && <section className="pulse-metric-grid">
+        {hasInputs && <section id="pulse-risk" className="pulse-metric-grid">
           {report.metrics.map((metric) => (
             <article className="pulse-metric-card" key={metric.id}>
               <div>
@@ -253,7 +253,7 @@ export default function PulsePage() {
         </section>}
 
         {hasInputs ? (<>
-        <section className="pulse-summary-grid">
+        <section id="pulse-report" className="pulse-summary-grid">
           <article>
             <span>HỌC SINH</span>
             <h2>Bản tóm tắt cho học sinh</h2>
@@ -302,7 +302,7 @@ export default function PulsePage() {
             </ul>
           </section>
         )}
-        </>) : <section className="cla-transcript-hint" role="status">Chưa đủ dữ liệu thực để đưa ra kết quả. Hãy hoàn thiện các ô đầu vào và lưu vào Firestore. Đây là công cụ mô phỏng theo giả định, không phải bằng chứng hiệu quả hoặc xác suất thành công.</section>}
+        </>) : <section className="cla-transcript-hint" role="status"><span id="pulse-risk" /><span id="pulse-report" />Chưa đủ dữ liệu thực để đưa ra kết quả. Hãy hoàn thiện các ô đầu vào và lưu vào Firestore. Đây là công cụ mô phỏng theo giả định, không phải bằng chứng hiệu quả hoặc xác suất thành công.</section>}
       </section>
     </main>
   );

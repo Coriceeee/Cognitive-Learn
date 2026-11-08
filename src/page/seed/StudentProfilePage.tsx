@@ -3,7 +3,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { collection, doc, getDocFromServer, serverTimestamp, writeBatch } from "firebase/firestore";
 import { auth, db } from "../../lib/firebase";
 import { calculateCognitive } from "../../engines/cognitive/cognitiveEngine";
-import { createCognitiveSnapshot } from "../../engines/history/cognitiveHistoryEngine";
+import { attachObservedSnapshotMetrics, createCognitiveSnapshot } from "../../engines/history/cognitiveHistoryEngine";
 import type { StudentProfile } from "./types";
 import {
   calculateCompletedYearsAverage,
@@ -500,6 +500,7 @@ export default function TrangNhapHoSoHocTap() {
       };
 
       const profileWrite = {
+          schemaVersion: 1,
           userId: currentUser.uid,
           email: currentUser.email,
           dataScope: isAdminDemo ? "demo" : "student",
@@ -609,7 +610,13 @@ export default function TrangNhapHoSoHocTap() {
         updatedAt: serverTimestamp(),
       });
       batch.set(historyRef, {
-        ...cognitiveSnapshot,
+        ...attachObservedSnapshotMetrics(cognitiveSnapshot, {
+          gpaOverall: gpaSummary.overall,
+          studyHoursPerWeek: behavior.studyHoursPerWeek,
+          practiceTestsPerWeek: behavior.practiceTestsPerWeek,
+          planCompletionRate: behavior.planCompletionRate,
+          motivationLevel: behavior.motivationLevel,
+        }),
         dataScope: isAdminDemo ? "demo" : "student",
         createdAt: serverTimestamp(),
       });

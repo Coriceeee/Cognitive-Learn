@@ -48,6 +48,24 @@ export function createCognitiveSnapshot(
   };
 }
 
+/**
+ * Persist the numbers that were ACTUALLY observed in the submitted form.
+ * The legacy StudentProfile calculation adapter uses numeric defaults, so
+ * its zero placeholders must not be mistaken for observed measurements.
+ * Null denotes unknown; an observed numeric 0 remains exactly 0.
+ */
+export type ObservedSnapshotMetrics = Pick<CognitiveSnapshot,
+  "gpaOverall" | "studyHoursPerWeek" | "practiceTestsPerWeek" |
+  "planCompletionRate" | "motivationLevel"
+>;
+
+export function attachObservedSnapshotMetrics(
+  snapshot: CognitiveSnapshot,
+  observed: ObservedSnapshotMetrics,
+): CognitiveSnapshot {
+  return { ...snapshot, ...observed };
+}
+
 export function createSnapshotFromResult(
   studentId: string,
   profile: StudentProfile,
