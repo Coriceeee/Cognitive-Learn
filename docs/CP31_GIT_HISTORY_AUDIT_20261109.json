@@ -1,0 +1,50 @@
+{
+  "checkpoint": "CP31",
+  "source_archive": "CLA(9).zip",
+  "commit_count": 15,
+  "reachable_blobs_scanned": 610,
+  "sensitive_path_occurrences": 30,
+  "paths_seen": [
+    ".env",
+    ".env.example"
+  ],
+  "google_api_key_pattern_hits": 5,
+  "matched_paths": [
+    {
+      "path": ".env",
+      "variable_name": "VITE_FIREBASE_API_KEY",
+      "classification": "Firebase Web API client configuration; value suppressed"
+    },
+    {
+      "path": "dist/assets/index-43ZoVB_o.js",
+      "classification": "Historical compiled client bundle; value suppressed"
+    },
+    {
+      "path": "dist/assets/index-BU4E6xSx.js",
+      "classification": "Historical compiled client bundle; value suppressed"
+    },
+    {
+      "path": "dist/assets/index-C97VF3Ob.js",
+      "classification": "Historical compiled client bundle; value suppressed"
+    },
+    {
+      "path": "dist/assets/index-Dy5zKZEt.js",
+      "classification": "Historical compiled client bundle; value suppressed"
+    }
+  ],
+  "private_key_pattern_hits": 0,
+  "service_account_private_key_hits": 0,
+  "github_token_hits": 0,
+  "openai_token_hits": 0,
+  "slack_token_hits": 0,
+  "aws_access_key_hits": 0,
+  "git_remote_embedded_credentials": false,
+  "classification": "A Firebase Web API key pattern was found in historical client configuration and bundles. Firebase Web API keys are client configuration, not service-account private keys. This scan does not establish whether the key is restricted in Google Cloud Console.",
+  "required_follow_up": [
+    "Verify API restrictions and HTTP referrer restrictions in Google Cloud Console.",
+    "Verify quota and billing alerts.",
+    "If the key is unrestricted or used by unintended APIs, restrict/rotate through the project owner.",
+    "Do not redistribute the old CLA(9).zip archive."
+  ],
+  "current_cp31_package_scan": "No .env/.git/node_modules or known private-token/private-key pattern found in current CP31 package scan."
+}

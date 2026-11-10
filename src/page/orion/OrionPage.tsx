@@ -1,3 +1,4 @@
+import ModuleSectionNav from "../../components/common/ModuleSectionNav";
 import { useRef } from "react";
 import { readNumber, isBlankOrValid } from "../../lib/inputValidation";
 import { useStudentTranscript } from "../seed/hooks/useStudentTranscript";
@@ -13,6 +14,7 @@ import {
   type OrionSubjectScore,
 } from "../../lib/orionStrategyEngine";
 import "../../styles.css";
+import OrionScenarioTradeoff from "./OrionScenarioTradeoff";
 
 type ScoreKey =
   | "math"
@@ -176,7 +178,9 @@ export default function OrionPage() {
           </aside>
         </section>
 
-        <section className="orion-control-panel">
+        <ModuleSectionNav moduleKey="orion" />
+
+        <section id="orion-input" className="orion-control-panel">
           <div className="orion-control-head">
             <div>
               <span>INPUT</span>
@@ -304,6 +308,7 @@ export default function OrionPage() {
               </article>
             ))}
           </div>
+          <OrionScenarioTradeoff scenarios={strategy.scenarios} />
         </section>
 
         <section id="orion-roadmap" className="orion-section">

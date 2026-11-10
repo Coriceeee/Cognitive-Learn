@@ -124,6 +124,47 @@ function createInitialTranscript(): TranscriptScores {
   return scores;
 }
 
+// Deterministic synthetic transcript for a repeatable technical demo only.
+// It is never loaded automatically and is never persisted by this helper.
+function createSyntheticDemoTranscript(electives: readonly string[]): TranscriptScores {
+  const subjects = getNineGradedSubjects("Tiếng Anh", electives);
+  const baseline: Record<string, number> = {
+    "Toán": 6.7,
+    "Ngữ văn": 7.2,
+    "Tiếng Anh": 7.8,
+    "Lịch sử": 7.4,
+    "Giáo dục quốc phòng và an ninh": 8.2,
+    "Vật lý": 6.6,
+    "Hóa học": 6.9,
+    "Sinh học": 7.1,
+    "Địa lý": 7.6,
+    "Giáo dục kinh tế và pháp luật": 7.7,
+    "Tin học": 8.0,
+    "Công nghệ": 7.8,
+    "Âm nhạc": 8.3,
+    "Mĩ thuật": 8.1,
+  };
+  const result = {} as TranscriptScores;
+  gradeOptions.forEach((grade, gradeIndex) => {
+    result[grade.key] = {} as Record<SemesterKey, Record<string, ScoreRow>>;
+    semesterOptions.forEach((semester, semesterIndex) => {
+      const termOffset = gradeIndex * 0.28 + semesterIndex * 0.12;
+      const rows: Record<string, ScoreRow> = {};
+      subjects.forEach((subject) => {
+        const score = Math.min(9.8, (baseline[subject] ?? 7.0) + termOffset);
+        const round = (value: number) => String(Math.round(value * 10) / 10);
+        rows[subject] = {
+          regular: [round(score - 0.2), round(score), round(score + 0.1), "", ""],
+          midterm: round(score + 0.05),
+          final: round(score + 0.2),
+        };
+      });
+      result[grade.key][semester.key] = rows;
+    });
+  });
+  return result;
+}
+
 export default function TrangNhapHoSoHocTap() {
   const [profile, setProfile] = useState<LearningProfile>(initialProfile);
   const [selectedElectives, setSelectedElectives] =
@@ -445,6 +486,48 @@ export default function TrangNhapHoSoHocTap() {
     window.location.href = path;
   }
 
+  function handleLoadDemoPreset() {
+    if (!isAdminDemo || !profileReady) return;
+    if (lockedElectives !== null) {
+      setMessage("Tổ hợp môn của hồ sơ này đã khóa. Không nạp bộ demo đè lên dữ liệu hiện có.");
+      return;
+    }
+    const confirmed = window.confirm(
+      "Nạp hồ sơ synthetic CLA 3 năm vào biểu mẫu hiện tại? Dữ liệu chưa được lưu lên Firestore. Bạn vẫn cần xem lại và chủ động nhấn Lưu hồ sơ."
+    );
+    if (!confirmed) return;
+
+    const demoElectives = ["Vật lý", "Hóa học", "Tin học", "Địa lý"];
+    setProfile({
+      fullName: "Học sinh minh họa CLA",
+      className: "12A1 · DEMO",
+      area: "TP. Hồ Chí Minh",
+      targetMajor: "Khoa học dữ liệu / Trí tuệ nhân tạo",
+      targetUniversity: "UIT / HCMUS / HCMUT · mục tiêu minh họa",
+      foreignLanguage: "Tiếng Anh",
+      studyHoursPerWeek: "14",
+      practiceTestsPerWeek: "3",
+      planCompletionRate: "72",
+      goalSwitchFrequency: "2",
+      taskAbandonmentRate: "18",
+      contextSwitchRate: "32",
+      learningStrategy: "68",
+      motivationLevel: "75",
+      educationBudget: "150000000",
+      maxTuition: "60000000",
+      studyAbroadInterest: "Đang cân nhắc",
+      targetCountry: "Singapore",
+      scholarshipInterest: "Có",
+      scholarshipGoal: "Học bổng đầu vào và học bổng học tập · DEMO",
+    });
+    setSelectedElectives(demoElectives);
+    setTranscriptScores(createSyntheticDemoTranscript(demoElectives));
+    setActiveGrade("grade12");
+    setActiveSemester("semester1");
+    setPreviousPlanCompletionRate(undefined);
+    setMessage("Đã nạp hồ sơ synthetic 3 năm. Chưa có gì được ghi lên Firestore. Kiểm tra dữ liệu rồi chủ động nhấn Lưu hồ sơ để lưu vào UID Admin hiện tại.");
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -672,10 +755,21 @@ export default function TrangNhapHoSoHocTap() {
         </header>
 
         {isAdminDemo && profileReady && (
-          <p className="profile-message" role="status">
-            CHẾ ĐỘ DEMO ADMIN — bạn có thể nhập và lưu dữ liệu mẫu thuộc UID Admin này.
-            Dữ liệu demo không phải kết quả của học sinh tham gia nghiên cứu.
-          </p>
+          <>
+            <p className="profile-message" role="status">
+              CHẾ ĐỘ DEMO ADMIN — dữ liệu synthetic chỉ thuộc UID Admin hiện tại; không phải kết quả của học sinh tham gia nghiên cứu.
+            </p>
+            <section className="cla-demo-prefill" aria-label="Nạp hồ sơ demo">
+              <div>
+                <strong>CLA · SYNTHETIC DEMO PRESET</strong>
+                <p>Nạp hồ sơ minh họa lớp 10–12, 6 học kỳ và 9 môn để chạy thử Seed → Lumen → Orion → Atlas/Haven → Pulse. Chỉ điền vào biểu mẫu; không tự ghi Firestore.</p>
+              </div>
+              <button type="button" onClick={handleLoadDemoPreset} disabled={lockedElectives !== null}>
+                {lockedElectives !== null ? "Hồ sơ đã khóa môn" : "Nạp hồ sơ demo 3 năm"}
+              </button>
+            </section>
+            <p className="profile-note-box">Chưa có gì được ghi lên Firestore khi nạp preset. Hãy xem lại toàn bộ dữ liệu và nhấn “Lưu hồ sơ học tập” riêng nếu muốn lưu synthetic vào UID Admin hiện tại.</p>
+          </>
         )}
 
         <div className="cla-transcript-page-actions"><a href="/student/transcript">Xem bảng điểm đã lưu →</a></div>

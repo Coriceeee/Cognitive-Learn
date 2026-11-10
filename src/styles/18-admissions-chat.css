@@ -1,0 +1,123 @@
+/* CP25: additive, isolated international/admission discovery and floating Gemini chat UI */
+.cla-source-explorer,.cla-study-panel,.cla-study-hero,.cla-haven-study-link { border:1px solid rgba(148,163,184,.24); border-radius:22px; background:rgba(16,30,53,.77); color:#e7eefb; padding:clamp(18px,3vw,32px); box-shadow:0 16px 40px rgba(2,8,23,.22); }
+.cla-source-explorer { margin:32px 0; }
+.cla-source-explorer h2,.cla-study-page h2,.cla-study-panel h2,.cla-study-hero h1 { margin:7px 0 12px; font-weight:750; line-height:1.25; color:#f8fafc; }
+.cla-source-explorer h2 { font-size:clamp(1.3rem,2.3vw,2rem); }
+.cla-explorer-heading p,.cla-study-hero p,.cla-study-panel p { color:#cad6e9; line-height:1.65; }
+.cla-eyebrow { font-size:.76rem; letter-spacing:.14em; text-transform:uppercase; color:#67e8f9; font-weight:780; }
+.cla-explorer-filters { display:grid;grid-template-columns:minmax(220px,2fr) repeat(2,minmax(145px,1fr));gap:12px;margin:20px 0; }
+.cla-explorer-filters label { display:flex;flex-direction:column;gap:8px; font-size:.84rem; font-weight:700; color:#cbd5e1; }
+.cla-explorer-filters input,.cla-explorer-filters select { box-sizing:border-box;width:100%;border:1px solid #536881;border-radius:12px;padding:13px;background:#10253f;color:#f8fafc;font-size:.93rem; min-height:46px; }
+.cla-explorer-filters input:focus-visible,.cla-explorer-filters select:focus-visible,.cla-chat-root :focus-visible,.cla-study-page :focus-visible { outline:3px solid #67e8f9;outline-offset:2px; }
+.cla-source-count { color:#7dd3fc;font-size:.9rem;margin:14px 0; }
+.cla-source-cards { display:grid;grid-template-columns:repeat(auto-fit,minmax(min(290px,100%),1fr));gap:16px; }
+.cla-source-card { border:1px solid #3a4c69;border-radius:18px;padding:20px;background:#101f34; }
+.cla-source-card h3 { color:#fff;margin:0;font-size:1.13rem; }
+.cla-source-card p { color:#cbd5e1;font-size:.88rem;line-height:1.6; }
+.cla-source-card-head { display:flex;justify-content:space-between;gap:10px;align-items:start; }
+.cla-source-card-head>span { font-size:.75rem;color:#a5d8ff;border:1px solid #476783;border-radius:999px;padding:5px 9px;white-space:nowrap; }
+.cla-source-tags { display:flex;flex-wrap:wrap;gap:7px;margin:14px 0; }
+.cla-source-tags>span { color:#c9f7f6;background:#17455d;border-radius:999px;padding:6px 10px;font-size:.74rem; }
+.cla-source-tags>button { border-radius:100px; background:#213f5d;color:#e2efff;border:1px solid #47758d;padding:8px 13px;cursor:pointer; }
+.cla-source-tags>button[aria-pressed=true] { background:#0e7490;color:white;border-color:#67e8f9; }
+.cla-source-links { display:flex;flex-wrap:wrap;gap:9px;margin:18px 0 12px; }
+.cla-source-links>a,.cla-study-actions>a,.cla-study-school>a,.cla-study-official,.cla-haven-study-link>a,.cla-study-jump { display:inline-flex;align-items:center;gap:5px;border:1px solid #4b9dc3;border-radius:12px;padding:10px 12px;color:#b9f1ff;text-decoration:none;font-weight:730;font-size:.82rem;background:#0e364c; }
+.cla-source-links>a:hover,.cla-study-actions>a:hover,.cla-study-school>a:hover,.cla-study-official:hover,.cla-haven-study-link>a:hover { background:#155e75;color:white; }
+.cla-source-caution,.cla-source-footnote { color:#c1cad9;font-size:.8rem;line-height:1.6;display:block; }
+.cla-source-empty { padding:20px;border:1px dashed #64748b;border-radius:12px;color:#cbd5e1; }
+.cla-compare-toggle { margin:25px 0 12px; color:#dfedff; }
+.cla-compare-toggle label { display:flex;align-items:center;gap:10px; }
+.cla-source-compare { max-width:100%;overflow:auto;border:1px solid #49627e;border-radius:14px; }
+.cla-source-compare table { width:100%;border-collapse:collapse;min-width:730px;font-size:.84rem; }
+.cla-source-compare th,.cla-source-compare td { text-align:left;vertical-align:top;padding:14px 12px;border-bottom:1px solid #36506a; }
+.cla-source-compare th { color:#fff;background:rgba(45,69,99,.6); }
+.cla-source-compare td { color:#cbd5e1; }
+.cla-source-compare a { display:block;color:#a5f3fc;margin-bottom:6px; }
+.cla-source-compare small { color:#adbdcf;line-height:1.5;display:block; }
+.cla-source-footnote { margin:20px 0 0; }
+.cla-study-abroad-page { min-height:100vh;background:linear-gradient(165deg,#061222,#0e2744 55%,#081629);color:white; }
+.cla-study-header { max-width:1220px;margin:auto;padding:12px 30px;display:flex;align-items:center;justify-content:space-between; }
+.cla-study-header img { width:64px;height:64px;object-fit:contain; }
+.cla-study-shell { max-width:1220px;margin:0 auto;padding:12px 24px 80px; }
+.cla-study-hero { padding:35px; background:radial-gradient(circle at 90% 5%,#155c74,#122640 56%,#0d1b30); }
+.cla-study-hero h1 { max-width:850px;font-size:clamp(1.7rem,4vw,3rem); }
+.cla-study-hero p { max-width:760px; }
+.cla-study-actions { display:flex;flex-wrap:wrap;gap:12px;margin-top:20px; }
+.cla-study-panel { margin:20px 0; }
+.cla-study-columns { display:grid;grid-template-columns:1fr 1.08fr;gap:20px; }
+.cla-study-columns .cla-study-panel { margin-top:0; }
+.cla-study-panel h2 { font-size:1.4rem; }
+.cla-study-panel h3 { font-size:1rem;margin:22px 0 10px;color:#f0f9ff; }
+.cla-study-school { border:1px solid #41607c;border-radius:13px;padding:15px;margin:13px 0; }
+.cla-study-school h3 { margin:0 0 10px; }
+.cla-study-school>a { margin:4px 8px 4px 0; }
+.cla-requirement-list { list-style:none;padding:0;margin:0; }
+.cla-requirement-list li { margin:0 0 8px;border-bottom:1px solid rgba(148,163,184,.19);padding:8px 0; }
+.cla-requirement-list label { display:flex;align-items:start;gap:10px;line-height:1.55;color:#e2e8f0;cursor:pointer; }
+.cla-requirement-list input { flex:none;width:18px;height:18px;accent-color:#0891b2;margin-top:2px; }
+.cla-requirement-list input:checked+span { text-decoration:line-through;color:#9db2c5; }
+.cla-study-checkpoints { display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:13px; }
+.cla-study-checkpoints article { padding:14px;border-radius:12px;border:1px solid #3b647c;background:#102a40; }
+.cla-study-checkpoints p { font-size:.85rem;color:#cbd5e1;line-height:1.5; }
+.cla-haven-study-link { margin:20px 0; }
+.cla-haven-study-link strong { color:white;font-size:1.15rem; }
+.cla-haven-study-link p { color:#d6e9f8;margin:8px 0; }
+.cla-chat-root { position:fixed;z-index:1100;right:max(16px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:end;gap:12px;font-family:inherit; }
+/* Floating CLA mascot: image remains visible in both closed and opened states. */
+.cla-chat-launcher { position:relative;flex:0 0 auto;width:92px;height:92px;aspect-ratio:1;border:3px solid #62e9ff;border-radius:50%;padding:0;overflow:visible;background:#143b9b;box-shadow:0 0 0 4px rgba(73,177,255,.2),0 12px 32px rgba(4,37,110,.42),0 0 24px rgba(27,197,255,.48);cursor:pointer;display:grid;place-items:center;transition:transform .18s ease,box-shadow .18s ease; }
+.cla-chat-launcher:hover { transform:translateY(-3px) scale(1.04);box-shadow:0 0 0 5px rgba(73,177,255,.26),0 16px 38px rgba(4,37,110,.48),0 0 34px rgba(27,197,255,.55); }
+.cla-chat-launcher:active { transform:scale(.97); }
+.cla-chat-launcher-image { display:block;width:100%;height:100%;object-fit:cover;object-position:center;border-radius:50%;pointer-events:none;user-select:none; }
+.cla-chat-launcher-close { position:absolute;top:-6px;right:-6px;display:grid;place-items:center;width:27px;height:27px;border:2px solid #c4f5ff;border-radius:50%;color:#fff;background:#154383;box-shadow:0 3px 10px rgba(0,0,0,.35);font-size:1.15rem;font-weight:800;line-height:1;pointer-events:none; }
+@media (max-width:480px) { .cla-chat-launcher { width:74px;height:74px;border-width:2px; } .cla-chat-launcher-close { width:25px;height:25px; } }
+@media (prefers-reduced-motion:reduce) { .cla-chat-launcher { transition:none; } .cla-chat-launcher:hover,.cla-chat-launcher:active { transform:none; } }
+.cla-chat-panel { width:min(402px,calc(100vw - 28px));height:min(595px,calc(100dvh - 110px));background:#0c1b2e;color:#e9f2ff;border:1px solid #496a8c;border-radius:21px;box-shadow:0 20px 60px rgba(0,0,0,.48);display:flex;flex-direction:column;overflow:hidden; }
+.cla-chat-header { background:linear-gradient(120deg,#075985,#164e63);padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px; }
+.cla-chat-header>div { display:flex;flex-direction:column;gap:4px; }
+.cla-chat-header strong { font-size:1.06rem; }
+.cla-chat-header span { color:#e0f2fe;font-size:.75rem; }
+.cla-chat-header button { border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.12);border-radius:10px;color:white;width:33px;height:33px;cursor:pointer;font-size:1.3rem; }
+.cla-chat-messages { flex:1;overflow:auto;padding:14px;overscroll-behavior:contain; }
+.cla-chat-intro { color:#afc6dc;font-size:.83rem;line-height:1.6; }
+.cla-chat-message { margin:12px 0;max-width:92%;padding:12px;border-radius:13px;background:#213750;border:1px solid #40536b; }
+.cla-chat-message.is-user { margin-left:auto;background:#075985;border-color:#238db2; }
+.cla-chat-message>span { font-size:.68rem;font-weight:800;color:#a5f3fc;letter-spacing:.05em; }
+.cla-chat-message p { margin:6px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.56;font-size:.87rem; }
+.cla-chat-thinking { font-size:.83rem;color:#e0f2fe; }
+.cla-chat-suggestions { display:flex;flex-wrap:wrap;gap:6px;padding:8px 12px;max-height:90px;overflow:auto; }
+.cla-chat-suggestions button { background:#153d59;border:1px solid #2d6988;color:#d9f8fc;border-radius:8px;padding:6px 9px;font-size:.72rem;cursor:pointer; }
+.cla-chat-notice { margin:0 12px 7px;padding:9px;border:1px solid #e5a867;border-radius:9px;color:#fed7aa;background:#563020;font-size:.8rem; }
+.cla-chat-form { display:flex;align-items:end;gap:9px;padding:12px 12px 8px;border-top:1px solid #334c6b; }
+.cla-chat-form textarea { resize:vertical;flex:1;min-width:0;max-height:120px;min-height:44px;border-radius:11px;border:1px solid #576c80;background:#112b41;color:#fff;padding:10px;font:inherit;font-size:.86rem; }
+.cla-chat-form button { border:none;border-radius:10px;min-height:44px;background:#0891b2;color:white;padding:9px 12px;font-weight:800;cursor:pointer; }
+.cla-chat-form button:disabled { background:#536478;cursor:not-allowed; }
+.cla-chat-footer { display:flex;flex-wrap:wrap;gap:10px;padding:3px 13px 13px;font-size:.72rem; }
+.cla-chat-footer a { color:#a5f3fc; }
+.cla-chat-footer button { background:none;border:none;color:#c7d2fe;text-decoration:underline;cursor:pointer;font-size:inherit; }
+@media(max-width:800px) { .cla-explorer-filters { grid-template-columns:1fr 1fr; } .cla-explorer-filters label:first-child { grid-column:1/-1; } .cla-study-columns { grid-template-columns:1fr; } }
+@media(max-width:480px) { .cla-explorer-filters { grid-template-columns:1fr; } .cla-explorer-filters label:first-child { grid-column:auto; } .cla-source-explorer { padding:15px; } .cla-chat-root { right:10px;bottom:max(12px,env(safe-area-inset-bottom)); } .cla-chat-panel { width:calc(100vw - 20px);height:min(76dvh,610px); } .cla-study-shell { padding:5px 12px 60px; } .cla-study-hero { padding:23px; } }
+@media(prefers-reduced-motion:reduce) { .cla-chat-root *, .cla-source-explorer * { scroll-behavior:auto!important; } }
+.cla-major-history { margin-top:26px;padding-top:22px;border-top:1px solid rgba(148,163,184,.35); }
+.cla-major-history h3 { color:white;font-size:1.27rem; }
+.cla-major-history>p { color:#cbd5e1;line-height:1.6; }
+.cla-score-label { display:flex;flex-direction:column;gap:8px;font-weight:700;color:#e2e8f0;max-width:340px;margin:15px 0 20px;font-size:.84rem; }
+.cla-score-label input { border-radius:10px;background:#112d45;color:#f8fafc;border:1px solid #597795;padding:11px; }
+.cla-major-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:14px; }
+.cla-major-card { display:flex;flex-direction:column;gap:8px;padding:16px;border:1px solid #41607c;background:#10283d;border-radius:15px; }
+.cla-major-card>strong { color:#fff;line-height:1.4; }
+.cla-major-card>small { color:#92bad3; }
+.cla-major-card p { margin:0;color:#cadae9;font-size:.83rem;line-height:1.55; }
+.cla-major-cutoffs { display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:5px 0; }
+.cla-major-cutoffs>div { background:#0b1e31;border:1px solid #31566b;padding:11px;border-radius:11px; }
+.cla-major-cutoffs span,.cla-major-cutoffs small { display:block;font-size:.72rem;color:#b5cadd; }
+.cla-major-cutoffs a { display:block;color:#7dd3fc;font-size:1.13rem;font-weight:800;margin:5px 0; }
+.cla-major-scheme { font-size:.8rem;color:#a5f3fc;text-decoration:underline;margin-top:auto; }
+/* Haven owns international destinations; Atlas owns admission programmes in Viet Nam. */
+.cla-haven-module-nav{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0;padding:15px;border:1px solid rgba(148,163,184,.35);border-radius:14px;background:rgba(15,45,66,.6)}
+.cla-haven-module-nav a{padding:10px 13px;border:1px solid rgba(125,211,252,.4);background:#102f47;color:#e0f2fe;border-radius:10px;text-decoration:none;font-weight:700;font-size:.84rem}
+.cla-haven-module-nav a:hover,.cla-haven-module-nav a:focus-visible{outline:2px solid #67e8f9;outline-offset:2px}
+.cla-unverified-destination{padding:18px;border-radius:13px;border:1px solid #c99045;background:rgba(120,75,31,.2)}
+.cla-unverified-destination strong{color:#fed7aa}
+.cla-unverified-destination p{color:#e2e8f0;line-height:1.65}
+.cla-unverified-destination a{display:inline-block;margin:8px 0;color:#a5f3fc}
+.cla-explorer-filters select{max-width:100%;width:100%}

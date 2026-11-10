@@ -15,6 +15,9 @@ const cases = [
   ['scope validation', /function validDataScope\(/],
   ['append-only cognitive history', /match \/cognitive_history\/\{snapshotId\}/],
   ['teacher/parent report review constrained', /function validOneTimeReview\(/],
+  ['cp24 append-only provenance collection', /match \/pipeline_evidence\/\{uid\}\/checks\/\{checkId\}/],
+  ['cp24 forbid update and delete provenance', /match \/pipeline_evidence\/\{uid\}\/checks\/\{checkId\}[\s\S]*?allow update, delete: if false;/],
+  ['cp24 no PII through schema whitelist', /function validPipelineEvidence\(uid\)[\s\S]*?data\.keys\(\)\.hasOnly/],
   ['no public system health access', /match \/system_health\/\{document\}\s*\{\s*allow read, write: if false;/],
 ];
 for (const [name, pattern] of cases) {

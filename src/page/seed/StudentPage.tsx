@@ -14,6 +14,12 @@ import StudentProfileNoticeModal from "./components/StudentProfileNoticeModal";
 import StudentRecommendationGrid from "./components/StudentRecommendationGrid";
 import StudentSubjectPanel from "./components/StudentSubjectPanel";
 import LearningIntelligencePanel from "./components/LearningIntelligencePanel";
+import seedIcon from "../../assets/modules/seed-profile.png";
+import lumenIcon from "../../assets/modules/lumen-intelligence.png";
+import atlasIcon from "../../assets/modules/atlas-admission.png";
+import orionIcon from "../../assets/modules/orion-strategy.png";
+import pulseIcon from "../../assets/modules/pulse-monitor.png";
+import havenIcon from "../../assets/modules/haven-support.png";
 
 import { useStudentProfile } from "./hooks/useStudentProfile";
 import { useLearningIntelligence } from "./hooks/useLearningIntelligence";
@@ -23,33 +29,18 @@ type ModuleLink = {
   title: string;
   summary: string;
   href: string;
+  icon: string;
+  category: string;
 };
 
+// Six student-facing modules. Admin/Research tasks are deliberately excluded.
 const coreModules: ModuleLink[] = [
-  {
-    code: "01 / SEED",
-    title: "Hồ sơ học tập",
-    summary: "Điểm số, mục tiêu và dữ liệu cá nhân",
-    href: "/student/profile",
-  },
-  {
-    code: "02 / LUMEN",
-    title: "Phân tích học tập",
-    summary: "Nhận thức, xu hướng và giải thích kết quả",
-    href: "/lumen",
-  },
-  {
-    code: "03 / ATLAS",
-    title: "Tuyển sinh",
-    summary: "Ngành, trường và nguồn dữ liệu xét tuyển",
-    href: "/atlas",
-  },
-  {
-    code: "04 / ORION",
-    title: "Chiến lược",
-    summary: "Mục tiêu, kịch bản và lộ trình hành động",
-    href: "/orion",
-  },
+  { code: "01 / SEED", title: "Hồ sơ học tập", summary: "Thông tin cá nhân, điểm số, GPA và mục tiêu học tập.", href: "/student/profile", icon: seedIcon, category: "Dữ liệu cá nhân" },
+  { code: "02 / LUMEN", title: "Phân tích năng lực", summary: "SCI, MAS, CSL, lịch sử đo và giải thích kết quả.", href: "/lumen", icon: lumenIcon, category: "Phân tích học tập" },
+  { code: "03 / ATLAS", title: "Tuyển sinh & du học", summary: "Tra cứu ngành, trường, phương thức và lộ trình quốc tế.", href: "/atlas", icon: atlasIcon, category: "Định hướng" },
+  { code: "04 / ORION", title: "Kế hoạch & chiến lược", summary: "Mục tiêu, mô phỏng các phương án và lộ trình theo tuần.", href: "/orion", icon: orionIcon, category: "Lập kế hoạch" },
+  { code: "05 / PULSE", title: "Theo dõi tiến độ", summary: "Theo dõi kết quả, báo cáo cá nhân và việc cần làm.", href: "/pulse", icon: pulseIcon, category: "Theo dõi" },
+  { code: "06 / HAVEN", title: "Học bổng & tài chính", summary: "Điều kiện học bổng, chi phí và kế hoạch ngân sách.", href: "/haven", icon: havenIcon, category: "Hỗ trợ tài chính" },
 ];
 
 function getRiskText(riskLevel: string): string {
@@ -296,18 +287,20 @@ export default function StudentPage() {
                 href={module.href === "/student/profile" ? profilePath : module.href}
                 key={module.code}
               >
-                <span className="student-dash-module-code">{module.code}</span>
+                <span className="student-dash-module-top">
+                  <span className="student-dash-module-icon"><img src={module.icon} alt="" aria-hidden="true" /></span>
+                  <span className="student-dash-module-code">{module.code}</span>
+                </span>
+                <span className="student-dash-module-category">{module.category}</span>
                 <strong>{module.title}</strong>
                 <p>{module.summary}</p>
-                <span className="student-dash-module-arrow">Xem chi tiết ↗</span>
+                <span className="student-dash-module-arrow">Mở phân hệ <span aria-hidden="true">↗</span></span>
               </a>
             ))}
           </div>
           <div className="student-dash-extra-links">
-            <a href="/student/transcript">Bảng điểm THPT · Dữ liệu đã lưu <span aria-hidden="true">↗</span></a>
-            <a href="/pulse">Pulse · Theo dõi tiến độ <span aria-hidden="true">↗</span></a>
-            <a href="/haven">Haven · Hỗ trợ học tập <span aria-hidden="true">↗</span></a>
-            <a href="/student/modules">Xem tất cả 6 phân hệ <span aria-hidden="true">↗</span></a>
+            <a href="/student/transcript">Mở bảng điểm THPT <span aria-hidden="true">↗</span></a>
+            <a href="/student/modules">Xem các chức năng nhỏ của 6 phân hệ <span aria-hidden="true">↗</span></a>
           </div>
         </section>
 

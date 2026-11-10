@@ -10,7 +10,11 @@ export default function StudentModulesPage() {
         <nav aria-label="Điều hướng phân hệ" style={{ marginBottom: "1rem" }}>
           <a href="/student">← Trở về Dashboard học sinh</a>
         </nav>
-        <ModuleClusterGrid variant="student" />
+        <ModuleClusterGrid
+          variant="student"
+          title="Cognitive Path cá nhân"
+          subtitle="Chọn một module chính để mở các chức năng học tập, định hướng và hỗ trợ. Mỗi nhóm hiển thị 3 mục trước, phần còn lại ở Xem thêm."
+        />
       </section>
     </main>
   );

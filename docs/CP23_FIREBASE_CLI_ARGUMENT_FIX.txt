@@ -1,0 +1,29 @@
+COGNITIVE LEARN AI CP23 - Firebase CLI Windows quoting fix (2026-11-08)
+
+ERROR:
+  Error: Too many arguments. Run firebase help emulators:exec for usage instructions
+
+CAUSE:
+  Windows cmd.exe stripped grouping quotes around "npm run test:rules".
+  firebase emulators:exec expects exactly one positional script argument.
+
+PATCH:
+  Replace C:\Gạo\Cognitive-Learn\tools\run-firestore-ascii.cjs
+  with tools/run-firestore-ascii.cjs from this ZIP.
+
+COMMANDS:
+  cd "C:\Gạo\Cognitive-Learn"
+  node --check .\tools\run-firestore-ascii.cjs
+  node .\tools\run-firestore-ascii.cjs --prepare-only
+  node .\tools\run-firestore-ascii.cjs
+
+THE CHANGE:
+  On Windows create a temporary CLA_FIRESTORE_TEST.cmd in the ASCII workspace,
+  containing "call npm run test:rules". Pass the path ".\\CLA_FIRESTORE_TEST.cmd"
+  as a single argument to firebase emulators:exec. Remove the batch file
+  after completion. Java auto-discovery and demo project restrictions unchanged.
+
+VERIFICATION:
+  Node syntax PASS and simulated Windows invocation PASS. Actual Windows
+  Emulator 33-case runtime tests NOT executed here; inspect terminal output.
+  No production deployments, no secrets in this package.

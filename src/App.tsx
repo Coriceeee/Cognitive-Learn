@@ -4,6 +4,7 @@ import {
   type ReactNode,
 } from "react";
 
+import FloatingAdvisorChat from "./components/common/FloatingAdvisorChat";
 import AppFooter from "./components/common/AppFooter";
 import AccessGate from "./components/common/AccessGate";
 
@@ -67,21 +68,18 @@ const PulsePage = lazy(
   () => import("./page/pulse/PulsePage")
 );
 
+const StudyAbroadPage = lazy(() => import("./page/study-abroad/StudyAbroadPage"));
+
 const HavenPage = lazy(
   () => import("./page/haven/HavenPage")
 );
 
 function AppLoading() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-950 text-white">
-      <div className="rounded-3xl border border-white/10 bg-white/10 px-6 py-4 shadow-2xl backdrop-blur-xl">
-        <div className="text-sm font-semibold tracking-wide">
-          Đang tải...
-        </div>
-
-        <div className="mt-1 text-xs text-slate-300">
-          COGNITIVE LEARN AI
-        </div>
+    <div className="cla-app-loading" role="status" aria-live="polite">
+      <div className="cla-app-loading-card">
+        <strong>Đang tải...</strong>
+        <small>COGNITIVE LEARN AI</small>
       </div>
     </div>
   );
@@ -150,6 +148,8 @@ export default function App() {
     currentPage = (
       <PulsePage />
     );
+  } else if (path === "/atlas/study-abroad" || path === "/study-abroad" || path === "/haven/study-abroad") {
+    currentPage = (<StudyAbroadPage />);
   } else if (path === "/haven") {
     currentPage = (
       <HavenPage />
@@ -195,6 +195,7 @@ export default function App() {
       </Suspense>
 
       <AppFooter />
+      <FloatingAdvisorChat />
     </div>
   );
 }

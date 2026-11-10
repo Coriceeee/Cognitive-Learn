@@ -1,0 +1,2 @@
+entry_id,date,tool_or_model,purpose,artifact_or_scope,human_verification,notes
+AI-CP31-001,2026-11-09,ChatGPT GPT-6,"Assisted drafting of SAP candidate, baseline script, report-ready content and test fixtures",CP31 research artifacts,Pending project-owner review,"Scientific claims remain bounded by source evidence; no human outcome data generated"

@@ -1,0 +1,156 @@
+/* CLA V7 UX pass: clearer student navigation, nested module actions and contextual assistant. */
+
+/* Student dashboard: six equally weighted destinations with visual identity. */
+.student-dash-modules { margin-top: 34px; }
+.student-dash-module-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.student-dash-module {
+  min-height: 218px;
+  padding: 19px;
+  border-color: #dce8f8;
+  background: linear-gradient(155deg, #fff 0%, #f7fbff 100%);
+  box-shadow: 0 9px 25px rgba(19, 55, 105, .045);
+}
+.student-dash-module-top { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.student-dash-module-icon {
+  width:52px; height:52px; flex:0 0 52px; display:grid; place-items:center;
+  border:1px solid #d6e7ff; border-radius:16px;
+  background:radial-gradient(circle at 50% 45%, #e3f4ff, #fff 72%);
+  box-shadow:0 5px 15px rgba(37,99,235,.09);
+}
+.student-dash-module-icon img { width:43px; height:43px; object-fit:contain; }
+.student-dash-module-code { color:#56749c; font-size:10px; letter-spacing:.11em; font-weight:850; }
+.student-dash-module-category {
+  display:block; margin-top:17px; color:#3974b9; font-size:10px; font-weight:850;
+  letter-spacing:.09em; text-transform:uppercase;
+}
+.student-dash-module strong { display:block; margin-top:6px; color:#142b4a; font-size:17px; line-height:1.3; }
+.student-dash-module p { color:#647792; margin:8px 0 17px; line-height:1.6; font-size:12px; }
+.student-dash-module-arrow { display:flex; align-items:center; justify-content:space-between; gap:10px; width:100%; margin-top:auto; padding-top:12px; border-top:1px solid #e6eef9; color:#1d5cb4; font-size:12px; font-weight:850; }
+.student-dash-module:hover { transform:translateY(-3px); border-color:#9ec5ff; box-shadow:0 15px 32px rgba(37,99,235,.11); }
+.student-dash-module:focus-visible { outline:3px solid #60a5fa; outline-offset:3px; }
+.student-dash-extra-links { margin-top:16px; }
+.student-dash-extra-links a { background:#fff; border-color:#dbe7f6; }
+
+/* Module map: searchable, status-aware actions and more predictable hierarchy. */
+.module-path-v7 { padding:clamp(19px,2.5vw,30px); }
+.module-path-v7 .module-path-head { align-items:center; }
+.module-path-v7 .module-path-head > strong { box-shadow:none; }
+.module-path-v7 .module-path-layout { grid-template-columns:minmax(330px,.88fr) minmax(0,1.52fr); gap:18px; }
+.module-path-v7 .module-path-list { gap:11px; }
+.module-path-v7 .module-path-tab {
+  min-height:94px; gap:12px; padding:13px; border-radius:17px;
+  box-shadow:0 7px 20px rgba(37,99,235,.045);
+}
+.module-path-v7 .module-path-tab:hover,
+.module-path-v7 .module-path-tab.active { transform:translateY(-1px); box-shadow:0 10px 25px rgba(37,99,235,.11); }
+.module-path-v7 .module-path-tab .module-path-tab-icon {
+  width:48px; height:48px; flex:0 0 48px; display:grid; place-items:center;
+  border-radius:50%; border:1px solid #d7e8ff; background:#fff;
+}
+.module-path-v7 .module-path-tab-icon img { width:39px; height:39px; object-fit:contain; }
+.module-path-v7 .module-path-tab .module-path-tab-copy {
+  display:block; flex:1; min-width:0; width:auto; height:auto; background:none; border:0; box-shadow:none;
+}
+.module-path-v7 .module-path-tab-copy strong { font-size:13px; line-height:1.35; }
+.module-path-v7 .module-path-tab-copy em { font-size:10px; line-height:1.35; }
+.module-path-v7 .module-path-tab .module-path-tab-count {
+  width:25px; height:25px; flex:0 0 25px; display:grid; place-items:center;
+  border-radius:50%; color:#315f9d; background:#edf5ff; border:1px solid #dbeafe;
+  font-size:10px; font-style:normal; font-weight:850; box-shadow:none;
+}
+.module-path-v7 .module-path-detail { min-height:0; padding:25px; border-radius:23px; }
+.module-path-v7 .module-path-detail::before { inset:10px; border-radius:18px; }
+.module-path-v7 .module-path-detail-hero { grid-template-columns:76px minmax(0,1fr); gap:16px; }
+.module-path-v7 .module-path-detail-icon { width:76px; height:76px; }
+.module-path-v7 .module-path-detail-icon img { width:58px; height:58px; }
+.module-path-v7 .module-path-detail-hero h3 { font-size:clamp(25px,3vw,38px); line-height:1.05; letter-spacing:-.045em; }
+.module-path-v7 .module-path-detail-hero p { margin-top:8px; font-size:13px; font-weight:550; }
+.module-path-action-tools { position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:7px 12px; align-items:center; margin:21px 0 12px; }
+.module-path-action-tools label { color:#dbeafe; font-size:11px; font-weight:800; }
+.module-path-action-tools input {
+  grid-column:1/-1; width:100%; min-height:43px; box-sizing:border-box; padding:10px 13px;
+  border:1px solid rgba(219,234,254,.42); border-radius:12px; outline:none;
+  color:#fff; background:rgba(8,28,72,.35); font:inherit; font-size:12px;
+}
+.module-path-action-tools input::placeholder { color:#b7ccec; }
+.module-path-action-tools input:focus-visible { outline:3px solid #7dd3fc; outline-offset:2px; }
+.module-path-action-tools > span { color:#bfdbfe; font-size:10px; text-align:right; }
+.module-path-v7 .module-path-actions { margin-top:0; gap:9px; }
+.module-path-v7 .module-path-action { min-height:0; padding:13px 14px; border-radius:14px; grid-template-columns:minmax(0,1fr) auto; }
+.module-path-action-meta { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-bottom:6px; }
+.module-path-action-meta > span:first-child:not(.module-path-status) { color:#c4ddff; font-size:9px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; }
+.module-path-status { border-radius:999px; padding:3px 7px; font-size:9px; line-height:1.3; font-weight:750; }
+.module-path-status.is-available { color:#d1fae5; background:rgba(16,185,129,.18); }
+.module-path-status.is-partial { color:#fef3c7; background:rgba(245,158,11,.16); }
+.module-path-status.is-planned { color:#dbeafe; background:rgba(148,163,184,.2); }
+.module-path-action-copy { min-width:0; }
+.module-path-v7 .module-path-action strong { font-size:13px; line-height:1.35; }
+.module-path-v7 .module-path-action p { margin-top:4px; font-size:11px; font-weight:500; line-height:1.5; }
+.module-path-action-open {
+  display:inline-flex; align-items:center; justify-content:center; gap:6px; min-height:38px;
+  padding:0 12px; border-radius:999px; color:#153e7d; background:#e4f0ff;
+  font-size:11px; font-weight:850; text-decoration:none; white-space:nowrap;
+}
+.module-path-action-open:hover { background:#fff; transform:translateY(-1px); }
+.module-path-action-open:focus-visible { outline:3px solid #7dd3fc; outline-offset:3px; }
+.module-path-action-disabled { color:#dbeafe; font-size:10px; font-weight:750; white-space:nowrap; }
+.module-path-v7 .module-path-more { width:100%; margin-top:2px; }
+.module-path-empty { padding:20px; border:1px dashed rgba(219,234,254,.4); border-radius:14px; text-align:center; color:#fff; }
+.module-path-empty strong { font-size:13px; }
+.module-path-empty p { margin:6px 0 12px; color:#dbeafe; font-size:11px; }
+.module-path-empty button { border:1px solid rgba(255,255,255,.45); border-radius:999px; padding:8px 13px; color:#fff; background:rgba(255,255,255,.1); cursor:pointer; font-weight:750; font-size:11px; }
+.module-path-footnote { margin:13px 2px 0; color:#6b7e98; font-size:10px; line-height:1.5; }
+
+/* CLA Assistant: compact identity, page context and task-specific prompts. */
+.cla-chat-panel { border-color:#4e779b; box-shadow:0 22px 65px rgba(1,13,35,.42); }
+.cla-chat-header { min-height:76px; padding:12px 14px; background:linear-gradient(120deg,#0b2d70,#075985 62%,#0e7490); }
+.cla-chat-header-mascot { width:48px; height:48px; flex:0 0 48px; border:1px solid rgba(165,243,252,.5); border-radius:50%; object-fit:cover; background:#123c91; box-shadow:0 0 0 4px rgba(125,211,252,.12); }
+.cla-chat-header-copy { min-width:0; flex:1; display:flex; flex-direction:column; gap:3px; }
+.cla-chat-header-copy strong { font-size:15px; letter-spacing:-.02em; }
+.cla-chat-header-copy span { color:#e0f2fe; font-size:10px; }
+.cla-chat-header-copy small { display:block; width:fit-content; max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin-top:3px; padding:4px 7px; border:1px solid rgba(186,230,253,.25); border-radius:999px; color:#c9f5ff; background:rgba(8,47,73,.3); font-size:9px; }
+.cla-chat-intro { margin:0 0 12px; padding:11px 12px; border:1px solid #2e526d; border-radius:12px; background:#122b43; color:#c5d9ea; font-size:11px; line-height:1.55; }
+.cla-chat-auth-note { margin:0; padding:10px 13px; color:#fcdba9; background:#3f2c20; border-top:1px solid #76502e; font-size:10px; line-height:1.5; }
+.cla-chat-suggestions-wrap { padding:9px 12px 10px; border-top:1px solid #29445f; }
+.cla-chat-suggestions-wrap > span { display:block; margin:0 0 7px; color:#8dbbd5; font-size:9px; font-weight:850; letter-spacing:.1em; }
+.cla-chat-suggestions { max-height:110px; padding:0; }
+.cla-chat-suggestions button { padding:7px 10px; border-radius:999px; background:#153d59; border-color:#39718d; font-size:10px; line-height:1.35; }
+.cla-chat-suggestions button:hover { background:#0e7490; border-color:#67e8f9; }
+.cla-chat-message { border-radius:14px 14px 14px 5px; }
+.cla-chat-message.is-user { border-radius:14px 14px 5px 14px; }
+.cla-chat-form { background:#0a192a; }
+.cla-chat-form textarea { resize:none; }
+.cla-chat-form textarea:focus-visible { outline:2px solid #67e8f9; outline-offset:1px; }
+.cla-chat-form button { min-width:58px; }
+.cla-chat-footer { border-top:1px solid rgba(51,76,107,.5); padding-top:9px; }
+.cla-chat-footer a { text-decoration:none; border:1px solid #31556e; border-radius:999px; padding:5px 8px; }
+.cla-chat-footer a:hover { background:#153d59; }
+
+@media (max-width:1080px) {
+  .module-path-v7 .module-path-layout { grid-template-columns:1fr; }
+  .module-path-v7 .module-path-list { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media (max-width:900px) {
+  .student-dash-module-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media (max-width:720px) {
+  .module-path-v7 .module-path-list { grid-template-columns:1fr; }
+  .module-path-v7 .module-path-tab { min-height:78px; }
+  .module-path-v7 .module-path-detail-hero { grid-template-columns:58px minmax(0,1fr); gap:12px; }
+  .module-path-v7 .module-path-detail-icon { width:58px; height:58px; }
+  .module-path-v7 .module-path-detail-icon img { width:44px; height:44px; }
+  .module-path-v7 .module-path-detail-hero h3 { font-size:27px; }
+  .module-path-v7 .module-path-action { grid-template-columns:1fr; }
+  .module-path-action-open { width:100%; box-sizing:border-box; }
+}
+@media (max-width:640px) {
+  .student-dash-module-grid { grid-template-columns:1fr; }
+  .student-dash-module { min-height:185px; }
+}
+@media (max-width:480px) {
+  .cla-chat-header-mascot { width:42px; height:42px; flex-basis:42px; }
+  .cla-chat-panel { height:min(78dvh,650px); }
+}
+@media (prefers-reduced-motion:reduce) {
+  .student-dash-module, .module-path-v7 *, .cla-chat-panel * { transition:none!important; animation:none!important; scroll-behavior:auto!important; }
+}

@@ -299,7 +299,9 @@ export default function LoginPage() {
             </span>
           </div>
 
-          <div className="role-tabs">
+          <div className="role-selector">
+            <span className="role-selector-label">{mode === "login" ? "Vai trò tài khoản" : "Chọn vai trò tài khoản"}</span>
+            <div className="role-tabs" role="group" aria-label="Chọn vai trò tài khoản">
             <button
               type="button"
               onClick={() => setSelectedRole("student")}
@@ -323,6 +325,7 @@ export default function LoginPage() {
             >
               Phụ huynh
             </button>
+            </div>
           </div>
 
           <form

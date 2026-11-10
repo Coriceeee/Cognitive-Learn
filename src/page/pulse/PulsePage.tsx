@@ -1,6 +1,9 @@
+import ModuleSectionNav from "../../components/common/ModuleSectionNav";
+import { useIsAdmin } from "../../lib/useIsAdmin";
 import { useEffect } from "react";
 import { allValid, isBlankOrValid } from "../../lib/inputValidation";
 import { useModuleDraft } from "../../lib/useModuleDraft";
+import { usePipelineEvidence } from "../../lib/usePipelineEvidence";
 import { useMemo, useState } from "react";
 import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
@@ -12,6 +15,8 @@ import {
   type PulseTrend,
 } from "../../lib/pulseReportEngine";
 import "../../styles.css";
+import PulseMetricOrbit from "./PulseMetricOrbit";
+import PulseEvidenceCircuit from "./PulseEvidenceCircuit";
 
 function toNumber(value: string) {
   const parsed = Number(value.replace(",", "."));
@@ -34,6 +39,8 @@ function getTrendClass(trend: PulseTrend) {
 }
 
 export default function PulsePage() {
+  const isAdmin = useIsAdmin();
+  const pipelineEvidence = usePipelineEvidence();
   const [cognitiveScore, setCognitiveScore] = useState("");
   const [previousCognitiveScore, setPreviousCognitiveScore] = useState("");
   const [admissionReadiness, setAdmissionReadiness] = useState("");
@@ -122,9 +129,8 @@ export default function PulsePage() {
             <span>PULSE MONITOR</span>
             <h1>Báo cáo tiến độ học tập và tuyển sinh</h1>
             <p>
-              Pulse tổng hợp dữ liệu từ Seed Profile, Lumen Cognitive, Atlas
-              Admission và Orion Strategy để tạo báo cáo ngắn gọn cho học sinh,
-              phụ huynh và giáo viên.
+              Pulse tổng hợp dữ liệu học tập từ Seed, Lumen, Atlas và Orion để
+              học sinh theo dõi tiến độ và báo cáo cá nhân của mình.
             </p>
           </div>
 
@@ -139,6 +145,50 @@ export default function PulsePage() {
             </em>
           </aside>
         </section>
+
+        <ModuleSectionNav moduleKey="pulse" />
+
+        {isAdmin && <section id="pulse-pipeline" className="pulse-control-panel" aria-labelledby="cp23-pipeline-title">
+          <div className="pulse-control-head">
+            <div>
+              <span>CP23 · DATA LINEAGE</span>
+              <h2 id="cp23-pipeline-title">Kiểm tra liên thông Seed → Lumen → Orion → Pulse</h2>
+              <p>Đọc đúng bốn nguồn Firestore thuộc UID đang đăng nhập. Đây là kiểm tra nguồn dữ liệu, không tự điền điểm, không đánh giá hiệu quả học tập.</p>
+            </div>
+          </div>
+          <div className="cla-firestore-save" style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+            <button type="button" onClick={() => { void pipelineEvidence.refresh(); }} disabled={pipelineEvidence.status === "loading"}>
+              {pipelineEvidence.status === "loading" ? "Đang đọc từ Firestore..." : "Kiểm tra nguồn liên thông"}
+            </button>
+            <button type="button" onClick={() => { void pipelineEvidence.persist(); }}
+              disabled={!pipelineEvidence.result || pipelineEvidence.result.scope === "unknown" || pipelineEvidence.status !== "idle" || pipelineEvidence.recordStatus === "saving" || pipelineEvidence.recordStatus === "saved"}>
+              {pipelineEvidence.recordStatus === "saving" ? "Đang lưu minh chứng..." : pipelineEvidence.recordStatus === "saved" ? "Đã lưu Evidence Record" : "Lưu Evidence Record (không lưu tên/điểm)"}
+            </button>
+            <span role="status" aria-live="polite">{pipelineEvidence.recordMessage}</span>
+            <span role="status" aria-live="polite">{pipelineEvidence.status === "error" ? pipelineEvidence.error : pipelineEvidence.result
+              ? `Đã kiểm tra ${new Date(pipelineEvidence.result.checkedAt).toLocaleString("vi-VN")}. Chưa xác nhận luồng E2E.`
+              : "Chưa kiểm tra trong phiên đăng nhập này."}</span>
+          </div>
+          {pipelineEvidence.result && (
+            <div className="pulse-metric-grid" aria-label="Tình trạng các nguồn liên thông">
+              {pipelineEvidence.result.stages.map(item => (
+                <article className="pulse-metric-card" key={item.stage}>
+                  <strong>{item.stage.toUpperCase()} — {item.status}</strong>
+                  <p>{item.source}</p>
+                  <p>{item.reason}</p>
+                </article>
+              ))}
+              <article className="pulse-metric-card">
+                <strong>LỊCH SỬ COGNITIVE — {pipelineEvidence.result.history.status}</strong>
+                <p>{pipelineEvidence.result.history.reason}</p>
+                <p>{pipelineEvidence.result.history.count} snapshot hợp lệ trong tối đa 10 bản mới nhất.</p>
+              </article>
+              <p role="note">{pipelineEvidence.result.scope === "demo" ? "DEMO — Không dùng làm kết quả nghiên cứu. " : ""}
+                Bản nháp là dữ liệu nhập, không phải outcome đo thực; không có tuyên bố nhân quả.</p>
+            </div>
+          )}
+          {pipelineEvidence.result && <PulseEvidenceCircuit evidence={pipelineEvidence.result} />}
+        </section>}
 
         <section className="pulse-control-panel">
           <div className="pulse-control-head">
@@ -251,6 +301,7 @@ export default function PulsePage() {
             </article>
           ))}
         </section>}
+        {hasInputs && <PulseMetricOrbit metrics={report.metrics} overallScore={report.overallScore} />}
 
         {hasInputs ? (<>
         <section id="pulse-report" className="pulse-summary-grid">
@@ -260,20 +311,21 @@ export default function PulsePage() {
             <p>{report.studentSummary}</p>
           </article>
 
+          {isAdmin && <>
           <article>
-            <span>PHỤ HUYNH</span>
+            <span>PHỤ HUYNH · KIỂM THỬ ADMIN</span>
             <h2>Bản tóm tắt cho phụ huynh</h2>
             <p>{report.parentSummary}</p>
           </article>
-
           <article>
-            <span>GIÁO VIÊN</span>
+            <span>GIÁO VIÊN · KIỂM THỬ ADMIN</span>
             <h2>Bản tóm tắt cho giáo viên</h2>
             <p>{report.teacherSummary}</p>
           </article>
+          </>}
         </section>
 
-        <section className="pulse-section">
+        <section id="pulse-actions" className="pulse-section">
           <div className="pulse-section-head">
             <div>
               <span>ACTION PLAN</span>

@@ -17,6 +17,15 @@ export default function UserMenu() {
   const [userEmail, setUserEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [adminMode, setAdminMode] = useState(false);
+  const [accountRole, setAccountRole] = useState<"student" | "teacher" | "parent" | "admin" | null>(null);
+
+  const roleLabels = {
+    student: "Học sinh",
+    teacher: "Giáo viên",
+    parent: "Phụ huynh",
+    admin: "Quản trị viên",
+  } as const;
+  const roleLabel = accountRole ? roleLabels[accountRole] : "Chưa xác định";
 
   useEffect(() => {
     let active = true;
@@ -27,11 +36,16 @@ export default function UserMenu() {
       setUserEmail(user?.email || "");
       setUserName(user?.displayName || "Người dùng");
       setAdminMode(false);
+      setAccountRole(null);
       if (!user) return;
       try {
         const snapshot = await getDoc(doc(db, "users", user.uid));
         if (active && thisRequest === requestId) {
-          setAdminMode(snapshot.exists() && snapshot.data().role === "admin" && snapshot.data().active !== false);
+          const profile = snapshot.exists() ? snapshot.data() : null;
+          const role = profile?.role;
+          const validRole = role === "student" || role === "teacher" || role === "parent" || role === "admin";
+          setAccountRole(validRole ? role : null);
+          setAdminMode(validRole && role === "admin" && profile?.active === true);
         }
       } catch (error) {
         console.error("Unable to verify admin role:", error);
@@ -84,7 +98,7 @@ export default function UserMenu() {
         <span className="user-nav-avatar">
           <UserRound size={16} strokeWidth={2.4} />
         </span>
-        <small>Người dùng</small>
+        <small>{roleLabel}</small>
       </button>
 
       {open && (
@@ -97,6 +111,10 @@ export default function UserMenu() {
             <div>
               <strong>{userName}</strong>
               <p>{userEmail || "Chưa có email"}</p>
+              <span className={`user-role-badge role-${accountRole || "unknown"}`}>
+                <span className="user-role-badge-label">Vai trò hiện tại</span>
+                <strong>{roleLabel}</strong>
+              </span>
             </div>
           </div>
 

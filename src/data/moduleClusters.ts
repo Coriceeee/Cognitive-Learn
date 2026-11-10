@@ -57,7 +57,7 @@ export const moduleClusters: ModuleCluster[] = [
     meaning:
       "Nơi admin quan sát toàn bộ hệ thống, kiểm thử vai trò và điều phối các cụm chức năng.",
     description:
-      "Quản lý người dùng, dữ liệu tuyển sinh, ngành học, trường đại học và kiểm thử toàn bộ vai trò trong hệ thống.",
+      "Điều phối, phân quyền, chẩn đoán và kiểm thử hệ thống; dữ liệu tuyển sinh được quản lý theo nghiệp vụ Atlas.",
     icon: nexusIcon,
     href: "/admin",
     status: "core",
@@ -133,7 +133,7 @@ export const moduleClusters: ModuleCluster[] = [
     description:
       "Đánh giá SCI, MAS, CSL và mức độ sẵn sàng học tập dựa trên hồ sơ học sinh.",
     icon: lumenIcon,
-    href: "/student",
+    href: "/lumen",
     status: "core",
     visibleFor: ["student", "teacher", "admin"],
     actions: [
@@ -162,9 +162,9 @@ export const moduleClusters: ModuleCluster[] = [
     subtitle: "Bản đồ tuyển sinh",
     tagline: "AI tuyển sinh",
     meaning:
-      "Tìm dữ liệu tuyển sinh, ngành học, mã ngành, tổ hợp, phương thức xét tuyển, học phí, học bổng và link nguồn.",
+      "Tuyển sinh Việt Nam, du học mọi quốc gia, chương trình liên kết và chiến lược nguyện vọng; từng nhóm có trang riêng.",
     description:
-      "Dùng Gemini lấy dữ liệu tuyển sinh, lưu vào Atlas Knowledge Base và chạy Admission Engine.",
+      "Tra cứu ngành/trường trong nước và quốc tế, điều kiện nhập học theo nguồn, chương trình liên kết và nguyện vọng.",
     icon: atlasIcon,
     href: "/atlas",
     status: "ready",
@@ -173,7 +173,7 @@ export const moduleClusters: ModuleCluster[] = [
       {
         label: "Mở Atlas Admission",
         description:
-          "Dùng Gemini lấy dữ liệu tuyển sinh, học phí, học bổng và link nguồn.",
+          "Tra cứu tuyển sinh đại học tại Việt Nam, ngành, trường và nguồn chính thức.",
         path: "/atlas",
       },
       {
@@ -187,6 +187,11 @@ export const moduleClusters: ModuleCluster[] = [
         description:
           "Theo dõi ngành, mã ngành, tổ hợp, phương thức xét tuyển và nguồn dữ liệu.",
         path: "/atlas#atlas-programs",
+      },
+      {
+        label: "Tra cứu du học toàn cầu",
+        description: "Khám phá quốc gia, trường và điều kiện ứng tuyển; không bịa thông tin chưa có nguồn.",
+        path: "/atlas/study-abroad",
       },
     ],
   },
@@ -267,9 +272,9 @@ export const moduleClusters: ModuleCluster[] = [
     subtitle: "Hỗ trợ và đồng hành",
     tagline: "Học bổng / hỗ trợ tài chính",
     meaning:
-      "Gợi ý học bổng, hỗ trợ tài chính, chi phí học đại học và kế hoạch giảm áp lực khi chọn trường/ngành.",
+      "Học bổng trong nước/quốc tế, chi phí giáo dục, khả năng tài chính và phương án hỗ trợ.",
     description:
-      "Gợi ý học bổng, hỗ trợ tài chính, chi phí học đại học và kế hoạch giảm áp lực cho học sinh.",
+      "Phân tích học bổng, tài chính và hỗ trợ; chuyển tra cứu trường và điều kiện du học sang Atlas.",
     icon: havenIcon,
     href: "/haven",
     status: "ready",
@@ -288,10 +293,10 @@ export const moduleClusters: ModuleCluster[] = [
         path: "/haven",
       },
       {
-        label: "Chi phí học đại học",
+        label: "Tài chính & khả năng chi trả",
         description:
-          "Xem áp lực học phí, nhu cầu tài chính và hướng chọn trường phù hợp hơn.",
-        path: "/haven",
+          "Ngân sách học tập, học phí và hỗ trợ tài chính thuộc Haven.",
+        path: "/haven#haven-financial",
       },
     ],
   },

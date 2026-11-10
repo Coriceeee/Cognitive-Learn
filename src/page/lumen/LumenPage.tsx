@@ -1,8 +1,7 @@
+import ModuleSectionNav from "../../components/common/ModuleSectionNav";
 import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
 
-import "../../styles/12-lumen.css";
-import "../../styles/11-cognitive-growth.css";
 
 import {
   useStudentProfile,
@@ -18,6 +17,7 @@ import LumenDecisionPanel from "./components/LumenDecisionPanel";
 import LumenEvidencePanel from "./components/LumenEvidencePanel";
 import LumenStrategyPanel from "./components/LumenStrategyPanel";
 import CognitiveGrowthPanel from "../seed/components/CognitiveGrowthPanel";
+import LumenSignalAtlas from "./components/LumenSignalAtlas";
 
 
 export default function LumenPage() {
@@ -112,6 +112,7 @@ export default function LumenPage() {
 
 
       <section className="lumen-shell">
+        <ModuleSectionNav moduleKey="lumen" />
 
         {
           error && !hasProfile ? (
@@ -172,7 +173,7 @@ export default function LumenPage() {
                 </div>
               )}
 
-              <LumenOverview
+              <div id="lumen-indices"><LumenOverview
                 fullName={
                   profile.fullName
                 }
@@ -184,14 +185,16 @@ export default function LumenPage() {
                 }
                 overallScore={cognitive.overallScore}
                 scoreAvailable={cognitive.scoreAvailable === true}
-              />
+              /></div>
 
 
-              <div className="lumen-growth-section">
+              <div id="lumen-growth" className="lumen-growth-section">
                 <CognitiveGrowthPanel analytics={growthAnalytics} />
               </div>
 
-              {cognitive.scoreAvailable === true ? (
+              <LumenSignalAtlas cognitive={cognitive} growth={growthAnalytics} />
+
+              <div id="lumen-insights">{cognitive.scoreAvailable === true ? (
                 <LumenInsightPanel
                   insights={intelligence.insights}
                   aiInsights={intelligence.ai.reasoning.insights}
@@ -210,6 +213,8 @@ export default function LumenPage() {
               )}
 
 
+              </div>
+
               <LumenEvidencePanel
                 hasHistory={intelligence.growthEvidence.status === "OBSERVED"}
                 growthEvidence={intelligence.growthEvidence}
@@ -220,7 +225,7 @@ export default function LumenPage() {
 
 
               {cognitive.scoreAvailable === true && (
-                <section className="lumen-gemini-panel" aria-labelledby="lumen-gemini-title">
+                <section id="lumen-gemini" className="lumen-gemini-panel" aria-labelledby="lumen-gemini-title">
                   <div className="lumen-gemini-heading">
                     <div>
                       <span className="lumen-eyebrow">GEMINI · DIỄN GIẢI BỔ SUNG</span>

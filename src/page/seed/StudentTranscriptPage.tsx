@@ -3,6 +3,7 @@ import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
 import { useStudentTranscript } from "./hooks/useStudentTranscript";
 import { GRADES, SEMESTERS, type GradeKey } from "./services/transcriptData";
+import TranscriptResearchView from "./components/TranscriptResearchView";
 import "../../styles.css";
 
 export default function StudentTranscriptPage() {
@@ -36,6 +37,7 @@ export default function StudentTranscriptPage() {
               {GRADES.map(item => <button type="button" key={item.key} className={grade === item.key ? "active" : ""} onClick={() => setGrade(item.key)}>{item.name}</button>)}
             </nav>
             <div className="cla-transcript-year-status"><span>{gradeName} · Trung bình năm</span><strong>{data.yearly[grade] ?? "Chưa đủ hai học kỳ"}</strong></div>
+            <TranscriptResearchView data={data} />
             {SEMESTERS.map(({ key, name }) => {
               const term = data.terms.find(t => t.grade === grade && t.semester === key)!;
               return (

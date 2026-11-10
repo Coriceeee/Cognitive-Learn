@@ -8,13 +8,18 @@ import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
 import "../../styles.css";
 
-type View = "health" | "seed" | "cognitive" | "ml";
+type View = "health" | "roles" | "seed" | "cognitive" | "ml" | "atlas" | "orion" | "pulse" | "haven";
 type Check = { name: string; status: "PASS" | "WARN" | "FAIL" | "NOT TESTED"; detail: string };
 type Result = { at: string; checks: Check[] };
 type Data = Record<string, unknown>;
 
 const views: Record<View, { title: string; subtitle: string }> = {
   health: { title: "Tổng quan hệ thống", subtitle: "Kiểm tra kết nối thật; không tạo KPI hoặc trạng thái giả." },
+  roles: { title: "Kiểm tra quyền vai trò", subtitle: "Kiểm tra đúng tài khoản Admin; quyền các vai trò khác cần Firebase Emulator." },
+  atlas: { title: "Kiểm tra dữ liệu Atlas", subtitle: "Chỉ kiểm tra trạng thái workspace Admin; nguồn tuyển sinh chưa tự động được chứng thực." },
+  orion: { title: "Kiểm tra dữ liệu Orion", subtitle: "Dữ liệu mô phỏng, policy và nhãn outcome cần được kiểm định riêng." },
+  pulse: { title: "Kiểm tra dữ liệu Pulse", subtitle: "Không suy diễn tiến bộ nếu thiếu dữ liệu đo theo thời gian." },
+  haven: { title: "Kiểm tra dữ liệu Haven", subtitle: "Phân biệt ngân sách chưa nhập với số 0 và nguồn học bổng chưa xác minh." },
   seed: { title: "Kiểm tra dữ liệu nền", subtitle: "Kiểm tra hồ sơ và bảng điểm của UID Admin Demo hiện tại." },
   cognitive: { title: "Kiểm tra Cognitive Engine", subtitle: "Kiểm thử tính xác định của engine và snapshot hiện có; chỉ số còn mang tính thăm dò." },
   ml: { title: "Chuẩn bị dữ liệu ML", subtitle: "Kiểm tra schema, tính đầy đủ và điều kiện nghiên cứu; không xuất hồ sơ cá nhân." },
@@ -27,7 +32,7 @@ function toStatus(ok: boolean): Check["status"] { return ok ? "PASS" : "FAIL"; }
 function check(name: string, ok: boolean, detail: string): Check { return { name, status: toStatus(ok), detail }; }
 function currentView(): View {
   const value = new URLSearchParams(window.location.search).get("view");
-  return value === "seed" || value === "cognitive" || value === "ml" ? value : "health";
+  return value && Object.prototype.hasOwnProperty.call(views, value) ? value as View : "health";
 }
 function evaluateTranscript(profile: Data, scores: Data): Check[] {
   const curriculum = asRecord(Object.keys(asRecord(scores.curriculum)).length ? scores.curriculum : profile.curriculum);
@@ -101,6 +106,32 @@ async function runChecks(user: User, view: View): Promise<Check[]> {
     checks.push({ name: "Tình trạng tất cả tài khoản", status: "NOT TESTED",
       detail: "Không được đọc toàn bộ users từ client; cần backend Admin đã xác thực và ghi audit." });
     return checks;
+  }
+  if (view === "roles") {
+    const account = await readOwn(user, "users");
+    return [
+      check("Tài khoản Admin đang hoạt động", account?.role === "admin" && account.active === true,
+        "Đọc trực tiếp tài liệu users/{ownUid}; không tin role truyền từ trình duyệt."),
+      { name: "Ma trận quyền Student / Teacher / Parent", status: "NOT TESTED",
+        detail: "Cần Firebase Emulator allow/deny cho từng vai trò và kiểm tra truy cập chéo UID." },
+      { name: "Quản trị người dùng", status: "NOT TESTED",
+        detail: "Chưa có backend đặc quyền có audit log. Client không được liệt kê hoặc thay đổi tài khoản người khác." },
+    ];
+  }
+  if (view === "atlas" || view === "orion" || view === "pulse" || view === "haven") {
+    const collectionByView = {
+      atlas: "atlas_workspaces", orion: "orion_drafts", pulse: "pulse_drafts", haven: "haven_drafts",
+    } as const;
+    const collection = collectionByView[view];
+    const record = await readOwn(user, collection);
+    return [
+      { name: `Dữ liệu ${collection}/{ownUid}`, status: record ? "PASS" : "WARN",
+        detail: record ? "Đã đọc tài liệu của chính UID Admin, chưa kiểm tra tính đầy đủ của nghiệp vụ." : "Chưa có bản ghi Admin Demo; không được tự điền dữ liệu thay thế." },
+      { name: "Phiên bản & nguồn gốc", status: "NOT TESTED",
+        detail: "Cần kiểm tra schemaVersion, nguồn/timestamp từng fact và chính sách lưu trữ thực tế." },
+      { name: "Kiểm định nghiệp vụ", status: "NOT TESTED",
+        detail: "Bản ghi tồn tại không chứng minh engine đúng, dữ liệu có nguồn chính thức hay khuyến nghị có hiệu lực." },
+    ];
   }
   const [profile, transcript] = await Promise.all([readOwn(user, "learning_profiles"), readOwn(user, "student_transcripts")]);
   const checks: Check[] = [

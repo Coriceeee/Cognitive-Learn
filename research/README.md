@@ -1,25 +1,64 @@
-# CLA Research — cấu trúc chuẩn CP21/CP22
+# CLA Research — structure and execution status
 
-Nguồn hiện tại: bản CLA(6).zip cung cấp trong hội thoại, đã chỉnh đường dẫn, **chưa có kết quả thực chứng**.
+Nguồn code hiện hành: CP30 chat-readability source. Research assets are separate from the React/Vite app.
 
-- `registry/`: metadata nguồn/mô hình, không đồng nghĩa đã được cấp phép tải dữ liệu.
-- `protocol/`: câu hỏi nghiên cứu, giới hạn kết luận và phương pháp.
-- `data/synthetic_demo/`: dữ liệu mô phỏng để kiểm thử kỹ thuật, **không dùng train/evaluation cho claim học sinh thực**.
-- `src/`: pipeline Python độc lập với React/Vite.
-- `benchmarks/`: 120 tình huống LLM **bản nháp, chưa đánh giá model**.
-- `evidence/`: bằng chứng kỹ thuật và claim-evidence. File ngày đầu không phải kết quả cuối cùng.
+- `registry/`: source/model/license registers and data cards. A listed source is not automatically approved for every use.
+- `protocol/`: research scope, validation protocol and candidate SAP. The SAP candidate is not frozen or approved.
+- `data/synthetic_demo/`: synthetic fixtures for technical tests only; never use them to train/evaluate student outcomes.
+- `data/external/`: intake instructions only. Raw datasets are not committed.
+- `src/`: reproducible Python analysis and data-scope scripts.
+- `tests/`: technical tests for gates and leakage-aware scripts.
+- `benchmarks/`: 120-case LLM inventory, draft only; no gold review/model evaluation yet.
+- `evidence/`: machine-readable validation results and technical evidence; not human-subject results.
+- `logs/`: templates/readme for append-only decision, negative-result, AI-usage and contribution logs.
 
-Chạy kiểm tra scope data khi có Python:
+## Data scope gate
 
 ```bash
 python research/src/audit_dataset.py --input research/data/synthetic_demo/scope_gate_smoke.csv --output research/evidence/DATA_SCOPE_GATE_SMOKE_RESULT.json
+python -m unittest discover -s tests -p "test_research_scope.py" -v
 ```
 
-Trạng thái mong đợi: `BLOCKED` và eligible=0, vì tất cả các dòng là synthetic/demo. Việc không huấn luyện trên dữ liệu này là đúng. Trước khi đưa dữ liệu thật vào research, phải xác minh legal basis, quyền nghiên cứu, dữ liệu ẩn danh và nhãn outcome có thật.
+Expected: `BLOCKED`, eligible=0 because every row is synthetic/demo. This is a successful privacy/validity gate, not a missing model result to work around.
 
-Kiểm tra 120 template (không đánh giá LLM):
+## LLM benchmark inventory
 
 ```bash
 python research/src/validate_benchmark.py
-python -m unittest discover -s tests -p "test_research_scope.py" -v
 ```
+
+This validates 120 draft case IDs and module counts only. It does not evaluate a model.
+
+## External Hugging Face baseline (UCI Student Performance)
+
+The UCI Student Performance mirror is CC BY 4.0 and may be used for an external-domain methods baseline with attribution. It is not Vietnamese CLA outcome evidence. Download files manually using the instructions in `data/external/README.md`, pin the full HF commit SHA, record SHA-256 and review the license before running.
+
+```bash
+python research/src/baseline_uci_student_performance.py \
+  --input research/data/external/uci_student_performance/student-mat.csv \
+  --subject math \
+  --source-revision FULL_HF_COMMIT_SHA \
+  --source-verified \
+  --output research/evidence/uci_math_external_baseline.json
+```
+
+Run `student-mat.csv` and `student-por.csv` separately. The script separates context/behavior-only, +G1, and +G1+G2 information cutoffs; it does not mix subjects. Its 100-row technical floor is not a power calculation. The output must be labelled external-domain feasibility only.
+
+```bash
+python -m unittest discover -s research/tests -p "test_uci_baseline.py" -v
+```
+
+## Research boundaries
+
+- Do not use CLA Firestore student records until lawful basis, consent/assent, pseudonymization, retention and access review are verified.
+- Keep T (technical), S (synthetic), O (observational) and E (external) evidence separate.
+- Do not report psychometric validity, ML performance, Adaptive effectiveness or causal effects without eligible outcomes and an approved design.
+
+## Closed-loop synthetic technical replay
+
+```bash
+node --experimental-strip-types research/src/closed_loop_replay_demo.mjs
+node --experimental-strip-types --test research/tests/closed_loop_replay_demo.test.mjs
+```
+
+This runs the current Orion strategy engine through eight traceable demo stages. Every input and the outcome are synthetic; the outcome is marked `SIMULATED_NOT_OBSERVED`, `dataScope=synthetic`, and `complete=false`. It is not persisted to Firestore and is not a learning-effectiveness result.

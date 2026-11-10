@@ -122,7 +122,7 @@ export default function LearningIntelligencePanel({
           <div className="student-intelligence-eyebrow">
             <span className="student-intelligence-dot" />
             Learning Intelligence
-            <span className="student-intelligence-live">LIVE PROFILE</span>
+            <span className="student-intelligence-live">CHỈ SỐ THỬ NGHIỆM</span>
           </div>
 
           <h2>
@@ -142,8 +142,8 @@ export default function LearningIntelligencePanel({
               <strong>{careerName}</strong>
             </div>
             <div>
-              <span>Readiness</span>
-              <strong>{readiness !== null ? `${readiness}%` : "--"}</strong>
+              <span>Chỉ số sẵn sàng (quy tắc)</span>
+              <strong>{readiness !== null ? `${readiness}/100` : "--"}</strong>
             </div>
           </div>
         </div>
@@ -151,8 +151,8 @@ export default function LearningIntelligencePanel({
         <div className="student-readiness-orbit">
           <div className="student-readiness-ring">
             <div className="student-readiness-ring-inner">
-              <strong>{readiness !== null ? `${readiness}%` : "--"}</strong>
-              <span>readiness</span>
+              <strong>{readiness !== null ? `${readiness}/100` : "--"}</strong>
+              <span>chỉ số thử nghiệm</span>
             </div>
           </div>
           <div className="student-readiness-label">
@@ -161,6 +161,8 @@ export default function LearningIntelligencePanel({
           </div>
         </div>
       </div>
+
+      <p className="student-dash-research-note" role="note">Các điểm phù hợp, sẵn sàng và hỗ trợ dữ liệu chỉ là chỉ số quy tắc thử nghiệm trên hồ sơ hiện có; không phải xác suất trúng tuyển, dự báo nghề nghiệp đã kiểm định hoặc kết luận thay cho học sinh.</p>
 
       <div className="student-career-focus">
         <div className="student-career-focus-copy">
@@ -177,9 +179,9 @@ export default function LearningIntelligencePanel({
 
         <div className="student-career-score-stack">
           <div className="student-career-score-card student-career-score-primary">
-            <span>Compatibility</span>
+            <span>Mức phù hợp ngành (score)</span>
             <strong>
-              {compatibility !== null ? `${compatibility}%` : "--"}
+              {compatibility !== null ? `${compatibility}/100` : "--"}
             </strong>
             <div className="student-score-line">
               <i style={{ width: `${compatibility ?? 0}%` }} />
@@ -187,9 +189,9 @@ export default function LearningIntelligencePanel({
           </div>
 
           <div className="student-career-score-card">
-            <span>Confidence</span>
+            <span>Độ hỗ trợ dữ liệu (ước lượng)</span>
             <strong>
-              {confidence !== null ? `${confidence}%` : "--"}
+              {confidence !== null ? `${confidence}/100` : "--"}
             </strong>
             <div className="student-score-line">
               <i style={{ width: `${confidence ?? 0}%` }} />
@@ -359,8 +361,7 @@ export default function LearningIntelligencePanel({
             <span>Future Prediction</span>
             <strong>{prediction?.predictedScore ?? "--"}</strong>
             <p>
-              Achievement probability{" "}
-              {prediction?.achievementProbability ?? "--"}%
+              Điểm kịch bản theo mô hình hiện tại; chưa có xác suất đạt mục tiêu được hiệu chuẩn từ kết quả thực tế.
             </p>
           </div>
         </article>

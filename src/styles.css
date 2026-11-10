@@ -1,27 +1,28 @@
+/* Cognitive Learn AI — global style entrypoint. Keep component CSS ordered. */
 @import "./styles/00-base.css";
-
 @import "./styles/01-auth.css";
-
 @import "./styles/02-role.css";
-
 @import "./styles/03-seed.css";
-
 @import "./styles/04-nexus.css";
-
 @import "./styles/05-common.css";
-
 @import "./styles/06-info.css";
-
 @import "./styles/07-atlas.css";
-
 @import "./styles/08-orion.css";
-
 @import "./styles/09-pulse.css";
-
 @import "./styles/10-haven.css";
-
-@import "./styles/99-responsive.css";
-
+@import "./styles/11-cognitive-growth.css";
+@import "./styles/12-lumen.css";
 @import "./styles/14-access-and-roles.css";
 @import "./styles/15-student-links.css";
+@import "./styles/16-shared-reports.css";
 @import "./styles/17-transcript.css";
+@import "./styles/18-admissions-chat.css";
+@import "./styles/19-module-subnav.css";
+@import "./styles/20-ux-v7.css";
+@import "./styles/99-responsive.css";
+/* Final layer owns brand tokens and cross-page normalization. */
+@import "./styles/21-cla-design-system.css";
+/* CP30: legibility of the CLA floating assistant only. Loaded after CP28 theme. */
+@import "./styles/22-cla-chat-readability.css";
+/* CP32/CP33: scientific charts, evidence maps and data observability. */
+@import "./styles/23-scientific-visuals.css";

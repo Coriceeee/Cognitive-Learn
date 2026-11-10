@@ -1,3 +1,7 @@
+> **Kiến trúc module cập nhật (08/11/2026):** [7 module lớn → phân hệ nhỏ, Du học trong Atlas, học bổng/tài chính trong Haven](docs/specifications/CLA_MODULE_HIERARCHY_V4_20261108.md).
+
+> **CP25 (08/11/2026):** Có thêm chatbot nổi, Atlas tra tuyển sinh 2024–2026 và lộ trình du học; xem [hướng dẫn CP25](docs/CP25_ADMISSIONS_CHAT_RELEASE_NOTES.md) và [checklist 145 mục](docs/CP25_CHECKLIST_GAPS_20261108.md). Chưa nghiệm thu API Gemini live, E2E/production hoặc nghiên cứu thực chứng.
+
 # COGNITIVE LEARN AI (CLA) — mã nguồn chuẩn hóa CLA(7)
 
 **Trạng thái 08/11/2026:** bản nguồn đã sửa vị trí tệp và loại artifacts/secret khỏi ZIP bàn giao. **Chưa triển khai production.** Quyền Firestore, E2E, kiểm định khoa học chưa được nghiệm thu hoàn chỉnh.
@@ -48,3 +52,14 @@ File khác nội dung không bị ghi đè; script đưa bản cũ vào `docs/ar
 ## Nghiên cứu và tỷ lệ nghiệm thu
 
 Dữ liệu demo/synthetic chỉ dùng cho kiểm thử kỹ thuật. Bộ 120 LLM case là bản nháp chưa đánh giá mô hình. Xem `docs/BAO_CAO_TOAN_DIEN_CLA7_20261108.md` và `docs/TRACKER_145_STATUS_AS_OF_CLA7.csv`.
+
+## CP24 — Evidence Record (08/11/2026)
+
+Pulse có thể kiểm tra trạng thái 4 nguồn theo UID và lưu bản ghi metadata vào Firestore
+`pipeline_evidence/{uid}/checks/{autoId}` (append-only, server timestamp),
+không lưu tên/điểm/nội dung nháp trong document body. Đây chỉ là nhật ký nguồn,
+không phải đo lường kết quả giáo dục. Xem `docs/CP24_PROGRESS_20261108.md`.
+
+Trước khi thử nghiệm, chạy `npm ci && npm run verify:cp24`. Các Rules mới
+**chưa được nghiệm thu Emulator** tại thời điểm đóng gói CP24; KHÔNG deploy
+production cho đến khi 42 bài kiểm thử Emulator đều PASS.

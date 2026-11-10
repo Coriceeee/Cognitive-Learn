@@ -115,8 +115,8 @@ export default function AtlasProgramCard({
         </div>
 
         <div>
-          <span>Học bổng</span>
-          <strong>{getDisplayValue(program.scholarshipLabel)}</strong>
+          <span>Học bổng và hỗ trợ</span>
+          <strong><a href="/haven#haven-scholarships">Xem trong Haven Support ↗</a></strong>
         </div>
 
         <div>

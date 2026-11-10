@@ -1,0 +1,5 @@
+decision_id,date,decision,rationale,protocol_version,owner,review_status,timing
+DEC-CP31-001,2026-11-09,Exclude all synthetic/demo rows from research outcome analysis,Data scope gate shows eligible_n=0 and synthetic data cannot support learner outcome claims,SAP_CANDIDATE_v1_20261109,project_owner_to_confirm,PROPOSED,pre-outcome
+DEC-CP31-002,2026-11-09,Hold VNHSGE for training/redistribution pending exact license variant,HF card exposes generic cc metadata without a specific variant,SAP_CANDIDATE_v1_20261109,project_owner_to_confirm,PROPOSED,pre-outcome
+DEC-CP31-003,2026-11-09,Limit UCI Student Performance to external method baseline,Official UCI cohort is two Portuguese schools and not a Vietnamese CLA cohort,SAP_CANDIDATE_v1_20261109,project_owner_to_confirm,PROPOSED,pre-outcome
+DEC-CP31-004,2026-11-09,Keep SAP as candidate and do not inspect final outcomes before freeze,Primary outcome and design require supervisor review,SAP_CANDIDATE_v1_20261109,project_owner_to_confirm,PROPOSED,pre-outcome

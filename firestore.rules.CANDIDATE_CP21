@@ -333,6 +333,51 @@ service cloud.firestore {
       allow list, create, update, delete: if false;
     }
 
+    // CP24: strictly schema-bound, append-only per-owner technical lineage.
+    // No arbitrary text, UID, name, academic scores, claims or model outputs are accepted.
+    function validPipelineStatus(status) {
+      return status in ['MISSING', 'LIMITED', 'PRESENT', 'INVALID'];
+    }
+
+    function validPipelineEvidence(uid) {
+      let data = request.resource.data;
+      return selfAcademicOwner(uid)
+        && data.keys().hasOnly([
+          'schemaVersion', 'evidenceVersion', 'recordType', 'dataScope',
+          'checkedAt', 'createdAt', 'complete', 'stages', 'historyStatus', 'historyCount'])
+        && data.keys().hasAll([
+          'schemaVersion', 'evidenceVersion', 'recordType', 'dataScope',
+          'checkedAt', 'createdAt', 'complete', 'stages', 'historyStatus', 'historyCount'])
+        && data.schemaVersion == 1
+        && data.evidenceVersion == 'cla-pipeline-evidence-v1'
+        && data.recordType == 'technical-lineage'
+        && validDataScope(uid, data)
+        && data.complete == false
+        && data.checkedAt is string
+        && data.checkedAt.size() >= 20 && data.checkedAt.size() <= 35
+        && data.createdAt == request.time
+        && data.stages is map
+        && data.stages.keys().hasOnly(['seed','lumen','orion','pulse'])
+        && data.stages.keys().hasAll(['seed','lumen','orion','pulse'])
+        && validPipelineStatus(data.stages.seed)
+        && validPipelineStatus(data.stages.lumen)
+        && validPipelineStatus(data.stages.orion)
+        && validPipelineStatus(data.stages.pulse)
+        && data.historyStatus in ['NONE', 'SINGLE', 'MULTIPLE', 'INCONSISTENT']
+        && data.historyCount is int
+        && data.historyCount >= 0 && data.historyCount <= 10
+        && (data.historyStatus != 'NONE' || data.historyCount == 0)
+        && (data.historyStatus != 'SINGLE' || data.historyCount == 1)
+        && (!(data.historyStatus in ['MULTIPLE','INCONSISTENT']) || data.historyCount >= 2);
+    }
+
+    match /pipeline_evidence/{uid}/checks/{checkId} {
+      allow get: if selfAcademicOwner(uid);
+      allow list: if selfAcademicOwner(uid) && request.query.limit != null && request.query.limit <= 20;
+      allow create: if validPipelineEvidence(uid);
+      allow update, delete: if false;
+    }
+
     match /system_health/{document} {
       allow read, write: if false;
     }

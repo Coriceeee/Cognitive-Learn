@@ -1,0 +1,3 @@
+entry_id,date,category,attempt,observed_result,interpretation,next_action,owner
+NEG-CP31-001,2026-11-09,technical_blocker,npm run build,Build blocked because local dependencies are absent and npm registry DNS is unavailable,Not a code-quality result; build status remains NOT TESTED/ BLOCKED,Run npm ci and build in connected CI environment,project_owner_to_confirm
+NEG-CP31-002,2026-11-09,technical_blocker,Hugging Face file retrieval,Dataset download failed in this environment,No dataset metrics can be produced or claimed,Download via HF CLI on connected machine; pin full revision and SHA-256,project_owner_to_confirm

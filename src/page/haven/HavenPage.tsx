@@ -1,3 +1,5 @@
+import ModuleSectionNav from "../../components/common/ModuleSectionNav";
+import { useIsAdmin } from "../../lib/useIsAdmin";
 import { useRef } from "react";
 import { allValid, isBlankOrValid } from "../../lib/inputValidation";
 import { useStudentTranscript } from "../seed/hooks/useStudentTranscript";
@@ -13,6 +15,7 @@ import {
   type HavenRiskLevel,
 } from "../../lib/havenSupportEngine";
 import "../../styles.css";
+import HavenPressureTopology from "./HavenPressureTopology";
 
 function toNumber(value: string) {
   const parsed = Number(value.replace(",", "."));
@@ -29,6 +32,7 @@ function getRiskClass(riskLevel: HavenRiskLevel) {
 }
 
 export default function HavenPage() {
+  const isAdmin = useIsAdmin();
   const [gpa, setGpa] = useState("");
   const [englishScore, setEnglishScore] = useState("");
   const [tuitionPressure, setTuitionPressure] = useState("");
@@ -118,10 +122,10 @@ export default function HavenPage() {
         <section className="haven-hero">
           <div>
             <span>HAVEN SUPPORT</span>
-            <h1>Hỗ trợ phụ huynh, giáo viên và học bổng</h1>
+            <h1>Học bổng và hỗ trợ tài chính</h1>
             <p>
-              Haven phân tích áp lực tài chính, học tập và tuyển sinh để đề xuất
-              hướng hỗ trợ phù hợp cho học sinh, phụ huynh và giáo viên.
+              Haven tập trung vào học bổng, ngân sách, khả năng chi trả và các phương án hỗ trợ học sinh, phụ huynh.
+              Tuyển sinh trong nước, chương trình liên kết và du học quốc tế đều được tra cứu trong Atlas.
             </p>
           </div>
 
@@ -134,7 +138,14 @@ export default function HavenPage() {
           </aside>
         </section>
 
-        <section className="haven-control-panel">
+        <ModuleSectionNav moduleKey="haven" />
+        <section id="haven-scholarships" className="cla-haven-study-link">
+          <strong>Học bổng và điều kiện</strong>
+          <p>Haven đánh giá điều kiện học bổng và nhu cầu hỗ trợ tài chính. Mỗi học bổng cụ thể phải có nguồn cấp, thời hạn, yêu cầu chứng chỉ và năm; không tự coi chỉ số phù hợp là xác suất nhận học bổng.</p>
+          <a href="/atlas/study-abroad">Mở Atlas để tra quốc gia, trường và điều kiện du học ↗</a>
+        </section>
+
+        <section id="haven-financial" className="haven-control-panel">
           <div className="haven-control-head">
             <div>
               <span>SUPPORT INPUT</span>
@@ -199,8 +210,15 @@ export default function HavenPage() {
           </div>
         </section>
 
+        {hasInputs && <HavenPressureTopology values={{
+          tuitionPressure: toNumber(tuitionPressure),
+          studyPressure: toNumber(studyPressure),
+          admissionRisk: toNumber(admissionRisk),
+          financialNeed: toNumber(financialNeed),
+        }} result={result} />}
+
         {hasInputs ? (<>
-        <section id="haven-support-roles" className="haven-summary-grid">
+        {isAdmin && <section id="haven-support-roles" className="haven-summary-grid">
           <article>
             <span>PHỤ HUYNH</span>
             <h2>Tóm tắt cho phụ huynh</h2>
@@ -221,7 +239,7 @@ export default function HavenPage() {
               sinh và nhu cầu tài chính.
             </p>
           </article>
-        </section>
+        </section>}
 
         <section id="haven-support-plan" className="haven-section">
           <div className="haven-section-head">
@@ -243,19 +261,20 @@ export default function HavenPage() {
           </div>
         </section>
 
-        <section id="haven-scholarships" className="haven-section">
+        <section id="haven-scholarship-scenarios" className="haven-section">
           <div className="haven-section-head">
             <div>
-              <span>SCHOLARSHIP</span>
-              <h2>Gợi ý học bổng / hỗ trợ tài chính</h2>
+              <span>SUPPORT POLICY ARCHETYPES</span>
+              <h2>Nhóm chính sách hỗ trợ nên đối chiếu</h2>
             </div>
           </div>
+          <p className="haven-scholarship-note">Các mục dưới đây là nhóm chính sách minh họa do quy tắc Haven phân loại, không phải danh mục học bổng cụ thể đã xác minh. Chỉ được coi là cơ hội có thể nộp khi có URL chính thức, đơn vị cấp, năm tuyển, tiêu chí, chứng chỉ, hạn nộp và ngày kiểm tra.</p>
 
           <div className="haven-scholarship-grid">
             {result.scholarshipOptions.map((option) => (
               <article className="haven-scholarship-card" key={option.title}>
                 <div>
-                  <span>{option.fitScore}/100 phù hợp</span>
+                  <span>{option.fitScore}/100 · mức phù hợp theo quy tắc</span>
                   <h3>{option.title}</h3>
                   <p>{option.reason}</p>
                 </div>
@@ -280,7 +299,7 @@ export default function HavenPage() {
             </ul>
           </section>
         )}
-        </>) : <section className="cla-transcript-hint" role="status"><span id="haven-support-roles" /><span id="haven-scholarships" />Chưa đủ dữ liệu thực để đưa ra kết quả. Hãy hoàn thiện các ô đầu vào và lưu vào Firestore. Đây là công cụ mô phỏng theo giả định, không phải bằng chứng hiệu quả hoặc xác suất thành công.</section>}
+        </>) : <section className="cla-transcript-hint" role="status"> <span id="haven-support-roles" />Chưa đủ dữ liệu thực để đưa ra kết quả. Hãy hoàn thiện các ô đầu vào và lưu vào Firestore. Đây là công cụ mô phỏng theo giả định, không phải bằng chứng hiệu quả hoặc xác suất thành công.</section>}
       </section>
     </main>
   );

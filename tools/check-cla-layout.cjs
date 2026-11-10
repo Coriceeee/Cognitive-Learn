@@ -19,11 +19,18 @@ const mandatory=[
 ];
 const legacy=[
  'src/audit_dataset.py','src/baseline_next_term.py',
+ 'registry/model_register.csv','registry/source_register.csv',
+ 'data/synthetic_demo/scope_gate_smoke.csv',
  'benchmarks/cla_llm_120_cases_DRAFT.jsonl',
  'evidence/CLAIM_EVIDENCE_DAY1.md','evidence/firebase.emulator.cp21.json',
  'evidence/RESEARCH_SCOPE_DAY1.md','evidence/RUN_RULES_CHECKPOINT21.ps1',
  'data/evidence/CLAIM_EVIDENCE_DAY1.md','data/evidence/firebase.emulator.cp21.json',
- 'data/evidence/RESEARCH_SCOPE_DAY1.md','data/evidence/RUN_RULES_CHECKPOINT21.ps1'
+ 'data/evidence/RESEARCH_SCOPE_DAY1.md','data/evidence/RUN_RULES_CHECKPOINT21.ps1',
+ 'protocol/RESEARCH_SCOPE_DAY1.md',
+ 'protocol/data/evidence/CLAIM_EVIDENCE_DAY1.md',
+ 'protocol/data/evidence/RESEARCH_SCOPE_DAY1.md',
+ 'protocol/data/evidence/firebase.emulator.cp21.json',
+ 'protocol/data/evidence/RUN_RULES_CHECKPOINT21.ps1'
 ];
 for(const file of mandatory)assert(exists(file),'MISSING '+file);
 for(const file of legacy)assert(!exists(file),'MISPLACED '+file);

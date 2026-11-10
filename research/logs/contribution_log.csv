@@ -1,0 +1,4 @@
+entry_id,date,contributor,contribution,artifact,verification_or_review
+CON-CP31-001,2026-11-09,AI-assisted draft (ChatGPT GPT-6),Created candidate SAP and research metadata, research/protocol/SAP_CANDIDATE_v1_20261109.md; research/registry/*,Human project owner to review and confirm final authorship
+CON-CP31-002,2026-11-09,AI-assisted draft (ChatGPT GPT-6),Implemented leakage-aware external baseline scaffold and synthetic tests,research/src/baseline_uci_student_performance.py; research/tests/test_uci_baseline.py,Tests pass on synthetic fixtures; real dataset not downloaded
+CON-CP31-003,2026-11-09,AI-assisted draft (ChatGPT GPT-6),Created synthetic closed-loop replay using current Orion engine,research/src/closed_loop_replay_demo.mjs; research/evidence/closed_loop_demo_trace.json,Four tests pass; outcome is simulated not observed; human project owner to review

@@ -150,8 +150,8 @@ function toAdmissionPrograms(
         tuitionLabel:
           program.tuitionLabel,
 
-        scholarshipLabel:
-          program.scholarshipLabel,
+        // Scholarship fit/eligibility is not part of Atlas' admission calculations.
+        scholarshipLabel: undefined,
 
         isPedagogy:
           normalizedMajorName.includes(

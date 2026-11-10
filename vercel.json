@@ -77,6 +77,18 @@
     {
       "source": "/contact",
       "destination": "/index.html"
+    },
+    {
+      "source": "/atlas/study-abroad",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/study-abroad",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/haven/study-abroad",
+      "destination": "/index.html"
     }
   ]
 }

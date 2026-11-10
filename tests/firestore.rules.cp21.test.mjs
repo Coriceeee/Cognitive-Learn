@@ -333,3 +333,77 @@ test('L06 revoke report first then link; link cannot be deleted while shared', a
   await assertSucceeds(deleteDoc(link));
   await assertFails(getDoc(ref(dbAs(UID.teacher), 'student_shared_reports', linkId(UID.student, UID.teacher))));
 });
+
+
+// CP24 — persisted pipeline provenance: privacy/minimal payload, owner-only and append-only.
+const auditRef = (db, uid, id = 'audit_001') => doc(db, 'pipeline_evidence', uid, 'checks', id);
+const auditRecord = (scope = 'student', extra = {}) => ({
+  schemaVersion: 1, evidenceVersion: 'cla-pipeline-evidence-v1',
+  recordType: 'technical-lineage', dataScope: scope,
+  checkedAt: '2026-11-08T08:15:00.000Z', createdAt: serverTimestamp(),
+  complete: false,
+  stages: { seed:'PRESENT', lumen:'LIMITED', orion:'MISSING', pulse:'MISSING' },
+  historyStatus:'NONE', historyCount:0, ...extra,
+});
+test('E01 student creates and reads back own technical evidence', async () => {
+  const db = dbAs(UID.student);
+  await assertSucceeds(setDoc(auditRef(db,UID.student),auditRecord()));
+  const loaded = await assertSucceeds(getDoc(auditRef(db,UID.student)));
+  assert.equal(loaded.data().recordType,'technical-lineage');
+  assert.equal(loaded.data().complete,false);
+  assert.equal('userId' in loaded.data(),false);
+});
+test('E02 unauthenticated, other student, teacher and parent cannot read evidence', async () => {
+  await assertSucceeds(setDoc(auditRef(dbAs(UID.student),UID.student),auditRecord()));
+  for (const db of [anonymous(),dbAs(UID.other),dbAs(UID.teacher),dbAs(UID.parent),dbAs(UID.admin)]) {
+    await assertFails(getDoc(auditRef(db,UID.student)));
+  }
+});
+test('E03 no cross-UID create, including admin', async () => {
+  for (const uid of [UID.other,UID.teacher,UID.parent,UID.admin]) {
+    await assertFails(setDoc(auditRef(dbAs(uid),UID.student),auditRecord()));
+  }
+});
+test('E04 admin own demo is allowed but mislabeled student evidence is denied', async () => {
+  const db=dbAs(UID.admin);
+  await assertSucceeds(setDoc(auditRef(db,UID.admin,'demo_valid'),auditRecord('demo')));
+  await assertFails(setDoc(auditRef(db,UID.admin,'demo_forged'),auditRecord('student')));
+  await assertFails(setDoc(auditRef(dbAs(UID.student),UID.student,'student_forged'),auditRecord('demo')));
+});
+test('E05 false completion, arbitrary scores and user details cannot be stored', async () => {
+  const db=dbAs(UID.student);
+  for (const extra of [{complete:true},{studentName:'SENSITIVE'},{overallScore:100},{recordType:'validated-outcome'}]) {
+    await assertFails(setDoc(auditRef(db,UID.student,'fake_'+Object.keys(extra)[0]),auditRecord('student',extra)));
+  }
+});
+test('E06 technical record is append-only and cannot be erased', async () => {
+  const db=dbAs(UID.student),record=auditRef(db,UID.student);
+  await assertSucceeds(setDoc(record,auditRecord()));
+  await assertFails(updateDoc(record,{historyCount:10}));
+  await assertFails(deleteDoc(record));
+});
+test('E07 invalid stage schema, history count, timestamp, versions are rejected', async () => {
+  const db=dbAs(UID.student);
+  const errors=[
+    {stages:{seed:'PRESENT',lumen:'LIMITED',orion:'MISSING',pulse:'EFFECTIVE'}},
+    {stages:{seed:'PRESENT',lumen:'LIMITED',orion:'MISSING',pulse:'MISSING',name:'private'}},
+    {historyStatus:'NONE',historyCount:1},
+    {historyCount:100},
+    {schemaVersion:2},
+    {checkedAt:12345},
+  ];
+  for(let i=0;i<errors.length;i++) {
+    await assertFails(setDoc(auditRef(db,UID.student,'invalid_'+i),auditRecord('student',errors[i])));
+  }
+});
+test('E08 owner can list max 20 evidence records, strangers cannot list', async () => {
+  const db=dbAs(UID.student);
+  await assertSucceeds(setDoc(auditRef(db,UID.student),auditRecord()));
+  const own=collection(db,'pipeline_evidence',UID.student,'checks');
+  await assertSucceeds(getDocs(query(own,limit(20))));
+  await assertFails(getDocs(query(own,limit(21))));
+  await assertFails(getDocs(query(collection(dbAs(UID.other),'pipeline_evidence',UID.student,'checks'),limit(10))));
+});
+test('E09 disabled student may not persist technical evidence', async () => {
+  await assertFails(setDoc(auditRef(dbAs(UID.inactive),UID.inactive),auditRecord()));
+});

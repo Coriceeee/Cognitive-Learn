@@ -7,33 +7,39 @@
     "dev": "vite --open",
     "build": "tsc -b && tsc -p tsconfig.api.json && vite build",
     "preview": "vite preview",
-    "test": "node tests/academic.test.cjs && node tests/cognitive-observation.test.cjs && node tests/admin-deeplink.test.cjs",
+    "test": "node tests/academic.test.cjs && node tests/cognitive-observation.test.cjs && node tests/admin-deeplink.test.cjs && node tests/module-hierarchy.test.cjs && node tests/ux-v7.test.cjs && node tests/student-role-isolation.test.cjs && node --experimental-strip-types --test tests/pipeline-evidence.test.mjs tests/pipeline-evidence-record.test.mjs && node --experimental-strip-types --test tests/admissions-and-chat.test.mjs && node --test tests/chat-launcher-mascot.test.cjs && node --test tests/cp29-release-contract.test.cjs && node --test tests/cp30-chat-readability.test.cjs && node --experimental-strip-types --test research/tests/closed_loop_replay_demo.test.mjs && node --test tests/scientific-visuals.test.cjs",
     "typecheck:api": "tsc -p tsconfig.api.json",
     "test:rules": "node --test tests/firestore.rules.cp21.test.mjs",
     "test:rules:emulator": "firebase emulators:exec --project demo-cla-cp21-security --config firebase.emulator.cp21.json --only firestore \"npm run test:rules\"",
     "test:rules:static": "node --test tests/cp21.rules.contract.test.cjs",
-    "check:layout": "node tools/check-cla-layout.cjs"
+    "check:layout": "node tools/check-cla-layout.cjs",
+    "verify:cp24": "node tools/verify-cp24.cjs",
+    "verify:cp25:static": "node --experimental-strip-types --test tests/admissions-and-chat.test.mjs && npm run test:rules:static && npm run check:layout",
+    "verify:cp25": "node tools/verify-cp25.cjs",
+    "test:visuals": "node --test tests/scientific-visuals.test.cjs",
+    "verify:cp33": "npm test && npm run test:rules:static && npm run check:layout && npm run typecheck:api && npm run build",
+    "verify:cp34": "npm test && npm run test:rules:static && npm run check:layout && python -m unittest research.tests.test_uci_baseline -v && npm run typecheck:api && npm run build"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "latest",
+    "@vitejs/plugin-react": "6.0.2",
     "dotenv": "^17.4.2",
     "firebase": "^12.14.0",
     "lucide-react": "^1.17.0",
-    "react": "latest",
-    "react-dom": "latest",
-    "react-router-dom": "latest",
-    "recharts": "latest"
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "react-router-dom": "7.18.5",
+    "recharts": "3.8.1"
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "5.0.2",
     "@types/node": "^22.16.0",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
-    "autoprefixer": "latest",
-    "postcss": "latest",
-    "tailwindcss": "latest",
-    "typescript": "latest",
-    "vite": "latest"
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "autoprefixer": "10.5.0",
+    "postcss": "8.5.32",
+    "tailwindcss": "4.3.0",
+    "typescript": "6.0.3",
+    "vite": "8.3.5"
   },
   "overrides": {
     "@grpc/grpc-js": "1.14.7"

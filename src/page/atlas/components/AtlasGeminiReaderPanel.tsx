@@ -89,8 +89,8 @@ export default function AtlasGeminiReaderPanel({
       <h2>Tìm dữ liệu tuyển sinh bằng AI</h2>
       <p>
         Nhập tên trường hoặc viết tắt như CTU, HCMUT, HUST, NEU. Gemini sẽ cố
-        gắng trả về ngành, mã ngành, tổ hợp, phương thức, học phí, học bổng và
-        link nguồn để Atlas sử dụng.
+        gắng trả về ngành, mã ngành, tổ hợp, phương thức, học phí và
+        nguồn tuyển sinh trong nước. Du học quốc tế được tra trong phân hệ Atlas Du học; học bổng và khả năng tài chính do Haven phụ trách.
       </p>
 
       <div className="atlas-gemini-search">
@@ -195,7 +195,7 @@ export default function AtlasGeminiReaderPanel({
                     <p>Tổ hợp: {getArrayText(program.combinations)}</p>
                     <p>Phương thức: {getArrayText(program.methods)}</p>
                     <p>Học phí: {getValue(program.tuitionLabel)}</p>
-                    <p>Học bổng: {getValue(program.scholarshipLabel)}</p>
+                    <p>Học bổng: <a href="/haven#haven-scholarships">Tra điều kiện và nguồn tại Haven ↗</a></p>
                     {program.notes && <p>Ghi chú: {program.notes}</p>}
                   </div>
                 ))}

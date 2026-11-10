@@ -979,6 +979,18 @@
   gap: 12px;
 }
 
+.module-path-more {
+  border: 1px solid rgba(255,255,255,.4);
+  background: rgba(255,255,255,.09);
+  border-radius: 14px;
+  padding: 12px 18px;
+  color: #fff;
+  font-weight: 750;
+  cursor: pointer;
+  text-align: center;
+}
+.module-path-more:focus-visible { outline: 3px solid #93c5fd; outline-offset: 3px; }
+
 .module-path-action {
   min-height: 66px;
   display: grid;
@@ -1073,3 +1085,15 @@
     width: 100%;
   }
 }
+/* CP25 V5 - Nexus shows real submodules first; test actions remain collapsed. */
+.nexus-submodule-workspace { margin: 24px 0; }
+.nexus-submodule-heading { margin: 0 0 18px; }
+.nexus-submodule-heading span { font-size: 12px; letter-spacing: .12em; font-weight: 900; color: #2563eb; }
+.nexus-submodule-heading h2 { margin: 7px 0; font-size: clamp(22px,2.8vw,32px); color: #0f172a; }
+.nexus-submodule-heading p { font-size: 14px; color: #475569; line-height: 1.6; }
+.nexus-submodule-more { margin: 18px 0; border-radius: 18px; border: 1px solid #bfdbfe; background: #f8fafc; padding: 13px 16px; }
+.nexus-submodule-more summary { cursor: pointer; color: #1d4ed8; font-size: 14px; font-weight: 800; }
+.nexus-submodule-more .nexus-action-grid { margin-top: 18px; }
+.nexus-submodule-open { display: inline-flex; width: fit-content; align-items: center; text-decoration: none; background: #1d4ed8; color: white !important; font-weight: 800; font-size: 13px; padding: 11px 16px; border-radius: 999px; }
+.nexus-submodule-pending { color: #92400e; font-size: 13px; font-weight: 800; }
+.nexus-submodule-open:focus-visible, .nexus-submodule-more summary:focus-visible { outline: 3px solid #38bdf8; outline-offset: 3px; }

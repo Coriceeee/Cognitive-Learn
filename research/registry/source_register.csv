@@ -1,6 +1,6 @@
 source_id,source_name,homepage,purpose,permission_status,cohort_type,allowed_for_training,allowed_for_evaluation,limitations
 S01,Hugging Face Datasets,https://huggingface.co/datasets,discovery,VERIFY,directory,no,no,Each asset needs its own source license
-S02,VNHSGE,https://github.com/Xdao85/VNHSGE,LLM Vietnamese exam benchmark,VERIFY,exam questions,no,pending,Not student outcomes
+S02,VNHSGE on Hugging Face,https://huggingface.co/datasets/roshansk23/Vietnam_HighSchool_Exam_Dataset,LLM Vietnamese exam QA benchmark,HOLD_LICENSE_REVIEW,exam questions,no,pending,"HF card shows generic cc only; exact license variant unresolved; 6,663 MCQs / 8 subjects; not learner outcomes"
 S03,OULAD,https://analyse.kmi.open.ac.uk/open_dataset,learning analytics baseline,VERIFY,university,no,pending,Domain mismatch THPT Vietnam
 S04,EdNet,https://github.com/riiid/ednet,knowledge tracing baseline,VERIFY,TOEIC,no,pending,Check license and student-level splits
 S05,ASSISTments,https://sites.google.com/site/assistmentsdata/,learning analytics baseline,VERIFY,K-12,no,pending,Use agreement and permitted splits
@@ -16,3 +16,4 @@ S14,UCI,https://archive.ics.uci.edu/,secondary methods data,VERIFY,repository,no
 S15,UNESCO UIS,https://uis.unesco.org/,educational context,VERIFY,aggregate,no,pending,Not learner outcomes
 S16,OpenAlex,https://openalex.org/,research literature,VERIFY,bibliography,no,pending,Not a learner dataset
 S17,CLA Firestore,LOCAL_PRIVATE,personalized evidence,NOT_APPROVED,student records,no,no,Exclude until permission and pseudonymization confirmed
+S18,UCI Student Performance HF mirror,https://huggingface.co/datasets/DElmazi/Student_Performance,external ML method baseline,LICENSE_VERIFIED_CC_BY_4.0,Portuguese secondary school,yes,yes,"External-domain feasibility only; UCI reports 649 instances from two Portuguese schools; G3 strongly correlated with G1/G2; not Vietnamese CLA effectiveness"

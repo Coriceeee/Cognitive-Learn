@@ -33,9 +33,9 @@ export type CognitiveResult = {
 };
 
 const DESCRIPTIONS: Record<CognitiveCode, { name: string; description: string }> = {
-  SCI: { name: "Study Consistency Index (proxy)", description: "Chỉ dấu nhất quán hành vi học tập; thang đo chưa được kiểm định." },
-  MAS: { name: "Motivation & Attitude Score (proxy)", description: "Chỉ dấu động lực tự báo cáo; không phải điểm tâm lý đã chuẩn hóa." },
-  CSL: { name: "Cognitive Strategy Level (proxy)", description: "Chỉ dấu chiến lược học tập; cần dữ liệu đo riêng." },
+  SCI: { name: "Self Coherence Index (proxy thử nghiệm)", description: "Chỉ báo thay thế từ nhất quán hành động/hoàn thành kế hoạch; chưa đo đầy đủ mục tiêu–kế hoạch–hành động hoặc kiểm định tâm trắc." },
+  MAS: { name: "Meaning Alignment Score (proxy thử nghiệm)", description: "Hiện mới có tín hiệu động lực tự báo cáo, chưa đo đủ kiên trì/khả năng bỏ dở; không phải thang tâm lý đã chuẩn hóa." },
+  CSL: { name: "Cognitive Stability Level (proxy thử nghiệm)", description: "Biến hiện tại phản ánh chiến lược học tập, chưa đủ đo ổn định hành vi/ra quyết định; cần bổ sung đo lường và kiểm định." },
   GVI: { name: "Goal Volatility Index (proxy)", description: "Tần suất đổi mục tiêu; giá trị lớn là tín hiệu cần xem xét." },
   BDI: { name: "Behavior Drift Index (proxy)", description: "Biến động giữa hai lần đo có dữ liệu hợp lệ." },
   FRI: { name: "Fatigue Risk Index (proxy)", description: "Tín hiệu nguy cơ dựa trên hành vi, không dùng để chẩn đoán." },

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "checkpoint": "CP24",
+  "generatedAt": "2026-11-08T08:29:49.873Z",
+  "environment": "local-commands-only",
+  "status": "INCOMPLETE",
+  "results": [
+    {
+      "id": "layout",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 208
+    },
+    {
+      "id": "node",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 1465
+    },
+    {
+      "id": "rules_static",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 324
+    },
+    {
+      "id": "typecheck_api",
+      "status": "NOT_RUN",
+      "reason": "explicitly skipped"
+    },
+    {
+      "id": "production_build",
+      "status": "NOT_RUN",
+      "reason": "explicitly skipped"
+    },
+    {
+      "id": "firestore_emulator",
+      "status": "NOT_RUN",
+      "reason": "explicitly skipped"
+    }
+  ]
+}
