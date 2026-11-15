@@ -53,7 +53,8 @@ export interface PredictionState {
 
   predictedScore:number;
 
-  achievementProbability:number;
+  /** Chỉ số chênh lệch mục tiêu theo rule, không phải xác suất thống kê. */
+  goalGapReadinessIndex:number;
 
   stability:number;
 

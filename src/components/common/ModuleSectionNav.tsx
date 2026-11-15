@@ -1,67 +1,52 @@
-import { useEffect, useState } from "react";
 import { getStudentSubmodules, type StudentModuleKey } from "../../data/moduleSubmodules";
 
+const moduleLabels: Record<StudentModuleKey, { name: string; home: string; eyebrow: string }> = {
+  seed: { name: "Hồ sơ học tập", home: "/student", eyebrow: "SEED PROFILE" },
+  lumen: { name: "Phân tích năng lực", home: "/lumen", eyebrow: "LUMEN INTELLIGENCE" },
+  atlas: { name: "Tuyển sinh & du học", home: "/atlas", eyebrow: "ATLAS ADMISSION" },
+  orion: { name: "Chiến lược học tập", home: "/orion", eyebrow: "ORION STRATEGY" },
+  pulse: { name: "Theo dõi tiến độ", home: "/pulse", eyebrow: "PULSE MONITOR" },
+  haven: { name: "Học bổng & tài chính", home: "/haven", eyebrow: "HAVEN SUPPORT" },
+};
+
 /**
- * Shared small-module navigator. A nested workspace belongs to exactly one
- * main module. Unimplemented functionality is explicit and not clickable.
+ * Student-facing subnavigation. Each implemented function owns a dedicated
+ * route; admin/research actions live only in the Nexus console directory.
  */
 export default function ModuleSectionNav({ moduleKey }: { moduleKey: StudentModuleKey }) {
   const items = getStudentSubmodules(moduleKey);
-  const [expanded, setExpanded] = useState(false);
-  const [selectedHash, setSelectedHash] = useState(() => window.location.hash);
-  const visible = expanded ? items : items.slice(0, 3);
-
-  useEffect(() => {
-    const syncHash = () => {
-      const hash = window.location.hash;
-      setSelectedHash(hash);
-      if (!hash) return;
-      // Allow lazy-loaded page sections to mount before jumping to an anchor.
-      window.requestAnimationFrame(() => {
-        const section = document.getElementById(decodeURIComponent(hash.slice(1)));
-        section?.scrollIntoView({ block: "start", behavior: "auto" });
-      });
-    };
-    window.addEventListener("hashchange", syncHash);
-    if (window.location.hash) window.requestAnimationFrame(syncHash);
-    return () => window.removeEventListener("hashchange", syncHash);
-  }, []);
+  const module = moduleLabels[moduleKey];
+  const currentPath = window.location.pathname.replace(/\/$/, "") || "/";
+  const onHome = currentPath === module.home;
 
   return (
-    <nav className="cla-submodule-nav" aria-label="Chức năng nhỏ của module hiện tại">
-      <div className="cla-submodule-head">
+    <nav className="cla-module-subnav" aria-label={`Chức năng ${module.name}`}>
+      <div className="cla-module-subnav-head">
         <div>
-          <span>KHÔNG GIAN CHỨC NĂNG</span>
-          <h2>Chọn mục bạn cần</h2>
-          <p>Các mục được tách riêng theo nghiệp vụ, không phải module lớn mới.</p>
+          <span>{module.eyebrow} · KHÔNG GIAN HỌC SINH</span>
+          <strong>{onHome ? "Chọn chức năng cần sử dụng" : module.name}</strong>
+          <p>Mỗi chức năng mở ở một trang riêng; dữ liệu và quyền truy cập vẫn theo tài khoản của bạn.</p>
         </div>
-        <a className="cla-submodule-all" href="/student/modules">← Các module của học sinh</a>
+        <a className="cla-module-overview-link" href={module.home} aria-current={onHome ? "page" : undefined}>
+          Tổng quan
+        </a>
       </div>
-      <div className="cla-submodule-grid">
-        {visible.map((item) => {
-          const active = Boolean(item.href && item.href.includes("#") && item.href.endsWith(selectedHash) && selectedHash);
-          return (
-            <article className={`cla-submodule-card ${active ? "is-active" : ""}`} key={item.id}>
-              <span className="cla-submodule-category">{item.group}</span>
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-              <div className="cla-submodule-foot">
-                {item.href && item.status !== "planned" ? (
-                  <a href={item.href} aria-current={active ? "location" : undefined}>Mở chức năng</a>
-                ) : (
-                  <span className="cla-submodule-unavailable">Đang phát triển</span>
-                )}
-                {item.status === "partial" && <small>Đang hoàn thiện dữ liệu / kiểm thử</small>}
-              </div>
-            </article>
+      <div className="cla-module-subnav-links">
+        {items.map((item) => {
+          const active = Boolean(item.href && (currentPath === item.href ||
+            (item.href === "/atlas/study-abroad" && currentPath.startsWith("/atlas/study-abroad/"))));
+          return item.href && item.status !== "planned" ? (
+            <a key={item.id} href={item.href} className={active ? "is-active" : ""} aria-current={active ? "page" : undefined}>
+              <span>{item.title}</span>
+              {item.status === "partial" && <small>Đang hoàn thiện</small>}
+            </a>
+          ) : (
+            <span key={item.id} className="is-disabled" aria-disabled="true">
+              <span>{item.title}</span><small>Chưa khả dụng</small>
+            </span>
           );
         })}
       </div>
-      {items.length > 3 && (
-        <button type="button" className="cla-submodule-toggle" onClick={() => setExpanded(value => !value)} aria-expanded={expanded}>
-          {expanded ? "Thu gọn các mục" : `Xem thêm ${items.length - 3} mục`}
-        </button>
-      )}
     </nav>
   );
 }

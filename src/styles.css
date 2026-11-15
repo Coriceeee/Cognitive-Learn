@@ -26,3 +26,26 @@
 @import "./styles/22-cla-chat-readability.css";
 /* CP32/CP33: scientific charts, evidence maps and data observability. */
 @import "./styles/23-scientific-visuals.css";
+
+/* CP35: dedicated module pages and unified navigation. */
+@import "./styles/24-cla-subpages-ui.css";
+
+/* CP36: task-first Cognitive Path and official scholarship source library. */
+@import "./styles/25-p1-task-scholarship.css";
+
+/* CP37: explain the real operating workflow and data dependencies. */
+@import "./styles/26-operating-guide.css";
+
+/* P0: product-consent onboarding and withdrawal, not research enrolment. */
+@import "./styles/27-student-consent.css";
+
+/* Daily Companion: shared web/mobile companion surface. */
+@import "./styles/28-daily-companion.css";
+
+/* Learner-controlled Atlas 2026 aspiration draft. */
+@import "./styles/29-atlas-aspiration-editor.css";
+
+@import "./styles/30-exam-reminder-board.css";
+
+/* Toast feedback and notification inbox shared across authorized routes. */
+@import "./styles/31-notification-center.css";

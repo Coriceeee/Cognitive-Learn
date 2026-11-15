@@ -1,0 +1,23 @@
+{
+  "purpose": "LLM Vietnamese MCQ benchmark only",
+  "input_sha256": "1411da928a795e66f99a22900130994e26ccadb6d9cf278b0c0ac7f55d12503a",
+  "created_at_utc": "2026-11-15T09:13:20.248181+00:00",
+  "seed": 20261115,
+  "valid_rows_before_dedup": 6543,
+  "quarantined_conflicting_fingerprints": 0,
+  "removed_exact_duplicate_rows": 5,
+  "split_rows": {
+    "test": 1326,
+    "val": 636,
+    "train": 4576
+  },
+  "split_source_groups": {
+    "test": 35,
+    "val": 17,
+    "train": 122
+  },
+  "source_group_key": "file_name; fallback=question fingerprint if missing",
+  "warning": "Group split mitigates exam-file overlap only; pretrained LLM test contamination and semantic near-duplicates still require audit",
+  "model_evaluated": false,
+  "empirical_student_outcome": false
+}

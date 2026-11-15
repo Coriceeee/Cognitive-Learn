@@ -16,6 +16,8 @@ export default function StudentHeader({ isAdminPreview }: StudentHeaderProps) {
         >
           <img src={appLogo} alt="Cognitive Learn" />
         </a>
+        {!isAdminPreview && <a href="/student/companion" className="cla-consent-nav-link">Đồng hành mỗi ngày</a>}
+        {!isAdminPreview && <a href="/student/consent" className="cla-consent-nav-link">Quyền dữ liệu</a>}
       </div>
 
       <UserMenu />

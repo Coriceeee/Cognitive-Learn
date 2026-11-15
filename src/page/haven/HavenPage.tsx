@@ -16,6 +16,7 @@ import {
 } from "../../lib/havenSupportEngine";
 import "../../styles.css";
 import HavenPressureTopology from "./HavenPressureTopology";
+import HavenScholarshipExplorer from "./HavenScholarshipExplorer";
 
 function toNumber(value: string) {
   const parsed = Number(value.replace(",", "."));
@@ -74,9 +75,9 @@ export default function HavenPage() {
         throw new Error("GPA/tiếng Anh phải từ 0–10; chỉ số hỗ trợ phải từ 0–100.");
       }
       await saveDraft({gpa, englishScore, tuitionPressure, studyPressure, admissionRisk, financialNeed});
-      setSaveNotice("Đã lưu dữ liệu lên Firestore của tài khoản đang đăng nhập.");
+      setSaveNotice("Đã lưu vào hồ sơ của bạn.");
     } catch (error) {
-      setSaveNotice(error instanceof Error ? error.message : "Không thể lưu Firestore.");
+      setSaveNotice(error instanceof Error ? error.message : "Không thể lưu dữ liệu. Hãy kiểm tra kết nối và thử lại.");
     } finally { setSaving(false); }
   }
 
@@ -143,6 +144,7 @@ export default function HavenPage() {
           <strong>Học bổng và điều kiện</strong>
           <p>Haven đánh giá điều kiện học bổng và nhu cầu hỗ trợ tài chính. Mỗi học bổng cụ thể phải có nguồn cấp, thời hạn, yêu cầu chứng chỉ và năm; không tự coi chỉ số phù hợp là xác suất nhận học bổng.</p>
           <a href="/atlas/study-abroad">Mở Atlas để tra quốc gia, trường và điều kiện du học ↗</a>
+          <HavenScholarshipExplorer />
         </section>
 
         <section id="haven-financial" className="haven-control-panel">
@@ -158,9 +160,9 @@ export default function HavenPage() {
 
           <div className="cla-firestore-save" role="status" style={{display:"flex",flexWrap:"wrap",alignItems:"center",gap:12,margin:"12px 0"}}>
             <button type="button" disabled={saving || saveStatus === "loading" || saveStatus === "error" || saveStatus === "signed-out"} onClick={() => void saveCurrentDraft()}>
-              {saving ? "Đang lưu Firestore…" : "Lưu dữ liệu vào Firestore"}
+              {saving ? "Đang lưu…" : "Lưu dữ liệu"}
             </button>
-            <span>{saveNotice || draftError || (saveStatus === "ready" ? "Đã tải bản lưu từ Firestore" : saveStatus === "loading" ? "Đang tải dữ liệu đã lưu…" : "Chưa có bản lưu trên Firestore")}</span>
+            <span>{saveNotice || draftError || (saveStatus === "ready" ? "Đã đồng bộ dữ liệu đã lưu" : saveStatus === "loading" ? "Đang tải dữ liệu đã lưu…" : "Chưa có dữ liệu đã lưu")}</span>
           </div>
           <div className="haven-form-grid">
             <label>
@@ -299,7 +301,7 @@ export default function HavenPage() {
             </ul>
           </section>
         )}
-        </>) : <section className="cla-transcript-hint" role="status"> <span id="haven-support-roles" />Chưa đủ dữ liệu thực để đưa ra kết quả. Hãy hoàn thiện các ô đầu vào và lưu vào Firestore. Đây là công cụ mô phỏng theo giả định, không phải bằng chứng hiệu quả hoặc xác suất thành công.</section>}
+        </>) : <section className="cla-transcript-hint" role="status"> <span id="haven-support-roles" />Chưa đủ dữ liệu thực để đưa ra kết quả. Hãy hoàn thiện các ô đầu vào và lưu hồ sơ. Đây là công cụ mô phỏng theo giả định, không phải bằng chứng hiệu quả hoặc xác suất thành công.</section>}
       </section>
     </main>
   );

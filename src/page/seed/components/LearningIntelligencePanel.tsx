@@ -361,8 +361,14 @@ export default function LearningIntelligencePanel({
             <span>Future Prediction</span>
             <strong>{prediction?.predictedScore ?? "--"}</strong>
             <p>
-              Điểm kịch bản theo mô hình hiện tại; chưa có xác suất đạt mục tiêu được hiệu chuẩn từ kết quả thực tế.
+              Điểm kịch bản theo công thức thử nghiệm; chưa có xác suất đạt mục tiêu được hiệu chuẩn từ kết quả thực tế.
             </p>
+            {prediction?.resultKind === "RULE_BASED_SCENARIO" && (
+              <p role="note">
+                Chỉ số khoảng cách mục tiêu: {prediction.goalGapReadinessIndex}/100 (quy tắc thử nghiệm, không phải phần trăm cơ hội đạt).
+                Độ tin cậy thống kê: chưa được đánh giá.
+              </p>
+            )}
           </div>
         </article>
 

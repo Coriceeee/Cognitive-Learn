@@ -7,6 +7,7 @@ import {
 import FloatingAdvisorChat from "./components/common/FloatingAdvisorChat";
 import AppFooter from "./components/common/AppFooter";
 import AccessGate from "./components/common/AccessGate";
+import AppNotificationCenter from "./components/common/AppNotificationCenter";
 
 const TrangDangNhap = lazy(
   () => import("./page/auth/LoginPage")
@@ -23,6 +24,8 @@ const AdminDiagnosticsPage = lazy(
   () => import("./page/nexus/AdminDiagnosticsPage")
 );
 
+const DailyCompanionPage = lazy(() => import("./page/companion/DailyCompanionPage"));
+
 const TrangHocSinh = lazy(
   () => import("./page/seed/StudentPage")
 );
@@ -34,11 +37,18 @@ const TrangNhapHoSoHocTap = lazy(
     )
 );
 
+const StudentConsentPage = lazy(
+  () => import("./page/seed/StudentConsentPage")
+);
+
 const StudentTranscriptPage = lazy(
   () => import("./page/seed/StudentTranscriptPage")
 );
 const StudentModulesPage = lazy(
   () => import("./page/seed/StudentModulesPage")
+);
+const StudentGuidePage = lazy(
+  () => import("./page/seed/StudentGuidePage")
 );
 const StudentStorageStatusPage = lazy(
   () => import("./page/seed/StudentStorageStatusPage")
@@ -110,6 +120,8 @@ export default function App() {
     currentPage = (
       <AdminDiagnosticsPage />
     );
+  } else if (path === "/student/companion") {
+    currentPage = <DailyCompanionPage />;
   } else if (path === "/student") {
     currentPage = (
       <TrangHocSinh />
@@ -120,6 +132,8 @@ export default function App() {
     currentPage = (
       <TrangNhapHoSoHocTap />
     );
+  } else if (path === "/student/consent") {
+    currentPage = <StudentConsentPage />;
   } else if (path === "/student/transcript") {
     currentPage = (
       <StudentTranscriptPage />
@@ -128,32 +142,26 @@ export default function App() {
     currentPage = (
       <StudentModulesPage />
     );
+  } else if (path === "/student/guide") {
+    currentPage = <StudentGuidePage />;
   } else if (path === "/student/storage") {
     currentPage = (
       <StudentStorageStatusPage />
     );
-  } else if (path === "/atlas") {
-    currentPage = (
-      <AtlasPage />
-    );
-  } else if (path === "/lumen") {
+  } else if (["/atlas", "/atlas/vietnam", "/atlas/joint", "/atlas/recommendations", "/atlas/sources"].includes(path)) {
+    currentPage = <AtlasPage />;
+  } else if (["/lumen", "/lumen/indices", "/lumen/history", "/lumen/insights", "/lumen/assistant"].includes(path)) {
     currentPage = (
       <LumenPage />
     );
-  } else if (path === "/orion") {
-    currentPage = (
-      <OrionPage />
-    );
-  } else if (path === "/pulse") {
-    currentPage = (
-      <PulsePage />
-    );
-  } else if (path === "/atlas/study-abroad" || path === "/study-abroad" || path === "/haven/study-abroad") {
-    currentPage = (<StudyAbroadPage />);
-  } else if (path === "/haven") {
-    currentPage = (
-      <HavenPage />
-    );
+  } else if (["/orion", "/orion/inputs", "/orion/scenarios", "/orion/roadmap"].includes(path)) {
+    currentPage = <OrionPage />;
+  } else if (["/pulse", "/pulse/progress", "/pulse/reports", "/pulse/actions"].includes(path)) {
+    currentPage = <PulsePage />;
+  } else if (path === "/atlas/study-abroad" || path.startsWith("/atlas/study-abroad/") || path === "/study-abroad" || path === "/haven/study-abroad") {
+    currentPage = <StudyAbroadPage />;
+  } else if (["/haven", "/haven/scholarships", "/haven/finance", "/haven/plan"].includes(path)) {
+    currentPage = <HavenPage />;
   } else if (path === "/teacher") {
     currentPage = (
       <TrangVaiTro
@@ -185,17 +193,20 @@ export default function App() {
           <AppLoading />
         }
       >
-        <div className="app-content">
+        <div className="app-content" data-cla-route={path}>
           {path === "/" || path === "/about" || path === "/contact" ? (
             currentPage
           ) : (
-            <AccessGate path={path}>{currentPage}</AccessGate>
+            <AccessGate path={path}>
+              <AppNotificationCenter />
+              {currentPage}
+              {path !== "/student/consent" && <FloatingAdvisorChat />}
+            </AccessGate>
           )}
         </div>
       </Suspense>
 
       <AppFooter />
-      <FloatingAdvisorChat />
     </div>
   );
 }

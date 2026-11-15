@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import { pushAppNotice } from "../../lib/appNotices";
+import { auth } from "../../lib/firebase";
 
 import StudentLinkManager from "../../components/common/StudentLinkManager";
+import ExamReminderBoard from "../../components/student/ExamReminderBoard";
 import SharedReportPanel from "../../components/common/SharedReportPanel";
 import "../../styles.css";
 
@@ -85,6 +88,30 @@ export default function StudentPage() {
     setShowProfileNotice(!loading && !hasProfile && !error);
   }, [loading, hasProfile, error]);
 
+  useEffect(() => {
+    if (!loading && error) pushAppNotice({kind:"error", title:"Không tải được hồ sơ học tập", detail:"Dữ liệu trên Dashboard chưa sẵn sàng. Kiểm tra kết nối hoặc quyền truy cập rồi tải lại."});
+  }, [loading, error]);
+
+  useEffect(() => {
+    if (loading || error || !hasProfile) return;
+    const uid = auth.currentUser?.uid;
+    if (!uid) return;
+    try {
+      const key = `cla-seed-save-flash:${uid}`;
+      if (window.sessionStorage.getItem(key) !== "saved") return;
+      window.sessionStorage.removeItem(key);
+      pushAppNotice({kind:"success", title:"Hồ sơ đã được cập nhật", detail:"Hồ sơ và bảng điểm mới đã lưu vào Firebase. Bạn có thể mở Lumen để xem phân tích dựa trên dữ liệu mới."});
+    } catch { /* Private browsing may block storage, without affecting the dashboard. */ }
+  }, [loading, error, hasProfile]);
+
+  useEffect(() => {
+    if (loading || window.location.hash !== "#cla-exam-reminders") return;
+    const frame = window.requestAnimationFrame(() => {
+      document.getElementById("cla-exam-reminders")?.scrollIntoView({block: "start"});
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [loading]);
+
   function goTo(path: string) {
     window.location.href = path;
   }
@@ -99,7 +126,7 @@ export default function StudentPage() {
         {
           title: "Xem cách CLA hoạt động",
           detail: "Tìm hiểu từng phân hệ trước khi sử dụng.",
-          href: "/about",
+          href: "/student/guide",
         },
       ]
     : [
@@ -174,6 +201,12 @@ export default function StudentPage() {
               </button>
               <a href="/lumen" className="student-dash-secondary-link">
                 Xem phân tích Lumen <span aria-hidden="true">→</span>
+              </a>
+              <a href="/student/companion" className="student-dash-secondary-link">
+                Đồng hành mỗi ngày <span aria-hidden="true">→</span>
+              </a>
+              <a href="/student/guide" className="student-dash-secondary-link">
+                Hướng dẫn sử dụng CLA <span aria-hidden="true">→</span>
               </a>
             </div>
           </div>
@@ -272,6 +305,9 @@ export default function StudentPage() {
           </aside>
         </section>
 
+        {/* Student-chosen exam milestones sit below the hero AND the priority/status cards. */}
+        {!isAdminPreview && <ExamReminderBoard />}
+
         {/* 3. Four primary destinations, plus two lightweight secondary links. */}
         <section className="student-dash-modules" aria-labelledby="student-dash-modules-title">
           <div className="student-dash-heading">
@@ -294,13 +330,14 @@ export default function StudentPage() {
                 <span className="student-dash-module-category">{module.category}</span>
                 <strong>{module.title}</strong>
                 <p>{module.summary}</p>
-                <span className="student-dash-module-arrow">Mở phân hệ <span aria-hidden="true">↗</span></span>
+                <span className="student-dash-module-arrow">Khám phá <span aria-hidden="true">↗</span></span>
               </a>
             ))}
           </div>
           <div className="student-dash-extra-links">
             <a href="/student/transcript">Mở bảng điểm THPT <span aria-hidden="true">↗</span></a>
-            <a href="/student/modules">Xem các chức năng nhỏ của 6 phân hệ <span aria-hidden="true">↗</span></a>
+            <a href="/student/modules">Tìm nhanh chức năng cần dùng <span aria-hidden="true">↗</span></a>
+            <a href="/student/guide">Hướng dẫn vận hành từng bước <span aria-hidden="true">↗</span></a>
           </div>
         </section>
 
@@ -313,7 +350,7 @@ export default function StudentPage() {
         {!isAdminPreview && (
           <details className="student-dash-disclosure cla-student-sharing">
             <summary>
-              <span><strong>Liên kết giáo viên và phụ huynh</strong><small>Chủ động cấp hoặc thu hồi liên kết Firestore</small></span>
+              <span><strong>Liên kết giáo viên và phụ huynh</strong><small>Chủ động cấp hoặc thu hồi quyền chia sẻ dữ liệu</small></span>
               <span className="student-dash-chevron" aria-hidden="true">⌄</span>
             </summary>
             <div className="student-dash-disclosure-content">
@@ -382,6 +419,7 @@ export default function StudentPage() {
             </div>
           </details>
 
+          {isAdminPreview && (
           <details className="student-dash-disclosure">
             <summary>
               <span><strong>Dữ liệu minh họa giao diện</strong><small>Kế hoạch và gợi ý mẫu — không phải dữ liệu học sinh</small></span>
@@ -399,6 +437,7 @@ export default function StudentPage() {
               <StudentRecommendationGrid />
             </div>
           </details>
+          )}
 
 
         </section>

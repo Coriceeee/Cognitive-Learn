@@ -1,0 +1,51 @@
+{
+  "schema_version": "cla.oulad.public-evidence.v1",
+  "dataset": "Open University Learning Analytics Dataset (OULAD)",
+  "source": "https://archive.ics.uci.edu/dataset/349/open+university+learning+analytics+dataset",
+  "doi": "10.24432/C5KK69",
+  "license": "CC BY 4.0",
+  "cohort": "UK online university courses; not Vietnamese high-school students",
+  "outcome": "Pass or Distinction vs Fail or Withdrawn (end of course)",
+  "cutoff_day": 30,
+  "audit_status": "PASS",
+  "audit_timestamp_utc": "2026-11-15T09:58:52.733686+00:00",
+  "test_count": 5445,
+  "split_counts": {
+    "train": 19245,
+    "val": 2753,
+    "test": 5445
+  },
+  "models": {
+    "academic_only": {
+      "roc_auc": 0.686911,
+      "brier": 0.221667,
+      "log_loss": 0.634377,
+      "accuracy_at_0.5": 0.64096
+    },
+    "academic_plus_behavior": {
+      "roc_auc": 0.716291,
+      "brier": 0.212542,
+      "log_loss": 0.614167,
+      "accuracy_at_0.5": 0.67254
+    }
+  },
+  "comparison": {
+    "brier_improvement": 0.009125,
+    "learner_cluster_bootstrap_ci95": [
+      0.00669,
+      0.011249
+    ]
+  },
+  "provenance": {
+    "archive_sha256": "f2ed1902616c1fe8d2824d872c0b7d2d72be435bf0124d077044fe4be2c6d3e4",
+    "features_sha256": "f06d5e3c814f0b681ac481ccdb6e812e60b08b3e70750f6ef3f62b8f34222f39",
+    "method": "Day-30 holdout; participant-level split; independent CP22 file audit"
+  },
+  "limitations": [
+    "Research-level aggregate benchmark only; not an individual student prediction.",
+    "OULAD university data does not validate grade forecasts for Vietnamese high-school students.",
+    "Predictive associations do not establish causal effects of CLA interventions.",
+    "SCI/MAS/CSL validity and Static vs Adaptive effectiveness are not established.",
+    "The audit checks data consistency and reported metrics; it is not an independent model refit."
+  ]
+}

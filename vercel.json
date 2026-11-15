@@ -15,6 +15,14 @@
       "destination": "/index.html"
     },
     {
+      "source": "/student/companion",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/student/consent",
+      "destination": "/index.html"
+    },
+    {
       "source": "/student",
       "destination": "/index.html"
     },
@@ -88,6 +96,90 @@
     },
     {
       "source": "/haven/study-abroad",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/atlas/vietnam",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/atlas/joint",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/atlas/recommendations",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/atlas/sources",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/lumen/indices",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/lumen/history",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/lumen/insights",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/lumen/assistant",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/orion/inputs",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/orion/scenarios",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/orion/roadmap",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/pulse/progress",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/pulse/reports",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/pulse/actions",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/haven/scholarships",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/haven/finance",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/haven/plan",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/atlas/study-abroad/programs",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/atlas/study-abroad/requirements",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/atlas/study-abroad/sources",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/student/guide",
       "destination": "/index.html"
     }
   ]

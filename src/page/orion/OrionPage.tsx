@@ -15,6 +15,7 @@ import {
 } from "../../lib/orionStrategyEngine";
 import "../../styles.css";
 import OrionScenarioTradeoff from "./OrionScenarioTradeoff";
+import ClosedLoopPanel from "../../components/journey/ClosedLoopPanel";
 
 type ScoreKey =
   | "math"
@@ -61,15 +62,19 @@ export default function OrionPage() {
   const seededFromTranscript = useRef(false);
   useEffect(() => {
     if (seededFromTranscript.current || saveStatus !== "empty" || !transcript.data) return;
-    seededFromTranscript.current = true;
     const keyBySubject: Record<string, ScoreKey> = {
       "Toán": "math", "Ngữ văn": "literature", "Tiếng Anh": "english",
       "Vật lý": "physics", "Hóa học": "chemistry", "Sinh học": "biology",
     };
     const grades = getLatestSubjectGrades(transcript.data);
+    // An empty transcript must not consume the one-time prefill.
+    // A later Firestore snapshot with observed grades can still populate Orion.
+    const supportedGrades = grades.filter(grade => keyBySubject[grade.subject] && grade.provisional !== null);
+    if (supportedGrades.length === 0) return;
+    seededFromTranscript.current = true;
     setScores(current => {
       const next = { ...current };
-      for (const grade of grades) {
+      for (const grade of supportedGrades) {
         const key = keyBySubject[grade.subject];
         if (key && !next[key] && grade.provisional !== null) next[key] = String(grade.provisional);
       }
@@ -95,9 +100,9 @@ export default function OrionPage() {
         throw new Error("Điểm phải từ 0–10; số tuần phải là số nguyên từ 1–104.");
       }
       await saveDraft({targetMajor, weeksLeft, scores, targets});
-      setSaveNotice("Đã lưu dữ liệu lên Firestore của tài khoản đang đăng nhập.");
+      setSaveNotice("Đã lưu vào hồ sơ của bạn.");
     } catch (error) {
-      setSaveNotice(error instanceof Error ? error.message : "Không thể lưu Firestore.");
+      setSaveNotice(error instanceof Error ? error.message : "Không thể lưu dữ liệu. Hãy kiểm tra kết nối và thử lại.");
     } finally { setSaving(false); }
   }
 
@@ -186,16 +191,16 @@ export default function OrionPage() {
               <span>INPUT</span>
               <h2>Dữ liệu mô phỏng</h2>
               <p>
-                Điểm hiện tại được đề xuất từ bảng điểm đã lưu khi có dữ liệu. Bạn có thể chỉnh mục tiêu, lưu bản nháp trên Firestore. Kết quả mô phỏng không mang ý nghĩa nhân quả.
+                Điểm hiện tại được đề xuất từ bảng điểm đã lưu khi có dữ liệu. Bạn có thể chỉnh mục tiêu, lưu bản nháp vào hồ sơ. Kết quả mô phỏng không mang ý nghĩa nhân quả.
               </p>
             </div>
           </div>
 
           <div className="cla-firestore-save" role="status" style={{display:"flex",flexWrap:"wrap",alignItems:"center",gap:12,margin:"12px 0"}}>
             <button type="button" disabled={saving || saveStatus === "loading" || saveStatus === "error" || saveStatus === "signed-out"} onClick={() => void saveCurrentDraft()}>
-              {saving ? "Đang lưu Firestore…" : "Lưu dữ liệu vào Firestore"}
+              {saving ? "Đang lưu…" : "Lưu dữ liệu"}
             </button>
-            <span>{saveNotice || draftError || (saveStatus === "ready" ? "Đã tải bản lưu từ Firestore" : saveStatus === "loading" ? "Đang tải dữ liệu đã lưu…" : "Chưa có bản lưu trên Firestore")}</span>
+            <span>{saveNotice || draftError || (saveStatus === "ready" ? "Đã đồng bộ dữ liệu đã lưu" : saveStatus === "loading" ? "Đang tải dữ liệu đã lưu…" : "Chưa có dữ liệu đã lưu")}</span>
           </div>
           <div className="orion-form-grid">
             <label>
@@ -346,7 +351,11 @@ export default function OrionPage() {
             </ul>
           </section>
         )}
-        </>) : <section className="cla-transcript-hint" role="status"><span id="orion-scenarios" /><span id="orion-roadmap" />Chưa đủ dữ liệu hợp lệ để đưa ra kết quả. Hãy hoàn thiện các ô đầu vào và lưu vào Firestore. Đây là công cụ mô phỏng theo giả định, không phải bằng chứng hiệu quả hoặc xác suất thành công.</section>}
+        </>) : <section className="cla-transcript-hint" role="status"><span id="orion-scenarios" /><span id="orion-roadmap" />Chưa đủ dữ liệu hợp lệ để đưa ra kết quả. Hãy hoàn thiện các ô đầu vào và lưu hồ sơ. Đây là công cụ mô phỏng theo giả định, không phải bằng chứng hiệu quả hoặc xác suất thành công.</section>}
+        <ClosedLoopPanel mode="orion" plan={hasInputs ? { targetMajor,
+          weeksLeft: readNumber(weeksLeft, 1, 104, true) ?? 1,
+          subjects: subjects.map(s => ({key:s.subject,label:s.label,baseline:s.currentScore,target:s.targetScore})),
+          scenarios: strategy.scenarios } : undefined} />
       </section>
     </main>
   );

@@ -1,0 +1,15 @@
+CLA CP37 — FULL SOURCE GỘP BƯỚC 02–04 | 12/11/2026
+
+BAO GỒM TOÀN BỘ SOURCE GỐC CP37 + patch Lumen/Atlas từ bước 02, 03, 04.
+KHÔNG BAO GỒM BƯỚC 05 (SEED). KHÔNG CHỨA node_modules hoặc .env.
+
+CÁCH DÙNG:
+  1. Sao lưu dự án C:\Gạo\Cognitive-Learn.
+  2. Giải nén ZIP này vào một thư mục tạm.
+  3. Copy TOÀN BỘ NỘI DUNG bên trong (src, public, tests, package.json, ...)
+     sang C:\Gạo\Cognitive-Learn (không copy thêm thư mục bao ngoài).
+  4. Tại PowerShell: npm run build; npm run dev.
+  5. Kiểm tra Lumen và Atlas trên trình duyệt.
+
+ĐỌC BAO_CAO_BUOC02_04.md để xem trạng thái test và các bước chờ nghiệm thu.
+LƯU Ý: Nếu project của bạn đã có source mới hơn CP37, đừng copy đè khi chưa backup.

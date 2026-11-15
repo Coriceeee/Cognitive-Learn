@@ -59,6 +59,6 @@ export const recommendationCards: RecommendationCard[] = [
   {
     title: "Nhóm trường",
     value: "Vừa sức",
-    desc: "Ưu tiên PTIT, Bách khoa, Công nghiệp Hà Nội theo mức rủi ro.",
+    desc: "Chưa xếp hạng trường. Cần đối chiếu điểm thực, ngành mục tiêu, phương thức và dữ liệu tuyển sinh từng trường.",
   },
 ];

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import {
@@ -11,9 +11,12 @@ import {
 } from "lucide-react";
 import { auth, db } from "../../lib/firebase";
 import "../../styles.css";
+import { NotificationBell } from "./AppNotificationCenter";
+import { clearAppNotices } from "../../lib/appNotices";
 
 export default function UserMenu() {
   const [open, setOpen] = useState(false);
+  const noticeAccount = useRef(auth.currentUser?.uid ?? null);
   const [userEmail, setUserEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [adminMode, setAdminMode] = useState(false);
@@ -33,6 +36,12 @@ export default function UserMenu() {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       const thisRequest = ++requestId;
       if (!active) return;
+      // Prevent messages from a different signed-in student appearing in this menu.
+      const nextUid = user?.uid ?? null;
+      if (noticeAccount.current !== nextUid) {
+        clearAppNotices();
+        noticeAccount.current = nextUid;
+      }
       setUserEmail(user?.email || "");
       setUserName(user?.displayName || "Người dùng");
       setAdminMode(false);
@@ -62,6 +71,7 @@ export default function UserMenu() {
 
   async function handleLogout() {
     await signOut(auth);
+    clearAppNotices();
     window.location.href = "/";
   }
 
@@ -100,6 +110,8 @@ export default function UserMenu() {
         </span>
         <small>{roleLabel}</small>
       </button>
+
+      <NotificationBell />
 
       {open && (
         <div className="user-dropdown">

@@ -36,10 +36,10 @@ function getErrorMessage(error: unknown): string {
   const code = typeof error === "object" && error !== null && "code" in error
     ? String(error.code) : "";
   if (code === "permission-denied") {
-    return "Firestore từ chối quyền. Kiểm tra Rules student_links, vai trò tài khoản và UID người được liên kết.";
+    return "Không thể đọc danh sách chia sẻ. Kiểm tra quyền tài khoản hoặc liên hệ hỗ trợ.";
   }
   if (code === "failed-precondition") {
-    return "Truy vấn chưa có cấu hình cần thiết trên Firestore. Kiểm tra index và Rules.";
+    return "Chưa thể tải danh sách chia sẻ do cấu hình dữ liệu. Hãy thử lại sau.";
   }
   return "Chưa thể truy cập dữ liệu liên kết. Hãy kiểm tra kết nối Firebase và thử lại.";
 }
@@ -127,7 +127,7 @@ export default function StudentLinkManager({ mode, preview = false }: { mode: Mo
     event.preventDefault();
     const target = viewerId.trim();
     if (!uid || !safeUid(target) || target === uid) {
-      setNotice("UID chưa hợp lệ hoặc trùng tài khoản học sinh.");
+      setNotice("Mã kết nối không hợp lệ hoặc trùng tài khoản học sinh.");
       return;
     }
     setBusy(true);
@@ -172,7 +172,7 @@ export default function StudentLinkManager({ mode, preview = false }: { mode: Mo
     <section className="cla-link-panel" aria-label={student ? "Quản lý liên kết học sinh" : "Học sinh được liên kết"}>
       <div className="cla-link-heading">
         <div>
-          <span className="cla-link-eyebrow">CLA · FIRESTORE</span>
+          <span className="cla-link-eyebrow">CLA · QUYỀN CHIA SẺ</span>
           <h2>{student ? "Ai được đồng hành với bạn?" : "Danh sách học sinh đã liên kết"}</h2>
           <p>{student
             ? "Bạn chủ động cấp và thu hồi liên kết cho tài khoản giáo viên hoặc phụ huynh. Mới chia sẻ tên hiển thị, chưa chia sẻ chỉ số Cognitive, điểm số hay lịch sử."
@@ -185,17 +185,17 @@ export default function StudentLinkManager({ mode, preview = false }: { mode: Mo
       ) : (
         <>
           <div className="cla-link-identity">
-            <span>UID tài khoản {student ? "học sinh" : mode === "teacher" ? "giáo viên" : "phụ huynh"}</span>
+            <span>Mã kết nối tài khoản {student ? "học sinh" : mode === "teacher" ? "giáo viên" : "phụ huynh"}</span>
             <code>{uid || "Đang tải…"}</code>
-            <button type="button" onClick={() => void copyUid()} disabled={!uid}>Sao chép UID</button>
+            <button type="button" onClick={() => void copyUid()} disabled={!uid}>Sao chép mã kết nối</button>
           </div>
 
-          {!student && <p className="cla-link-guide">Gửi UID này cho học sinh. Học sinh đăng nhập vào Seed và tự cấp liên kết cho bạn. Không yêu cầu học sinh gửi mật khẩu.</p>}
+          {!student && <p className="cla-link-guide">Gửi mã kết nối này cho học sinh. Học sinh đăng nhập vào Seed và chủ động cấp quyền chia sẻ. Không yêu cầu học sinh gửi mật khẩu.</p>}
 
           {student && status === "ready" && (
             <form className="cla-link-form" onSubmit={event => { void createLink(event); }}>
-              <label>UID của người được liên kết
-                <input value={viewerId} onChange={event => setViewerId(event.target.value)} placeholder="Dán UID giáo viên/phụ huynh" maxLength={128} required />
+              <label>Mã kết nối của người được liên kết
+                <input value={viewerId} onChange={event => setViewerId(event.target.value)} placeholder="Nhập mã kết nối giáo viên/phụ huynh" maxLength={128} required />
               </label>
               <label>Vai trò tài khoản
                 <select value={viewerRole} onChange={event => setViewerRole(event.target.value as ViewerRole)}>
@@ -207,9 +207,9 @@ export default function StudentLinkManager({ mode, preview = false }: { mode: Mo
             </form>
           )}
 
-          {status === "loading" && <p className="cla-link-feedback" role="status">Đang tải các liên kết từ Firestore…</p>}
+          {status === "loading" && <p className="cla-link-feedback" role="status">Đang tải các liên kết đã cấp…</p>}
           {status === "not-signed-in" && <p className="cla-link-feedback" role="alert">Vui lòng đăng nhập để xem liên kết.</p>}
-          {status === "error" && <p className="cla-link-feedback" role="alert">Không tải được danh sách liên kết. Kiểm tra Firestore Rules trước khi tiếp tục.</p>}
+          {status === "error" && <p className="cla-link-feedback" role="alert">Không tải được danh sách liên kết. Hãy kiểm tra kết nối và thử lại.</p>}
           {notice && <p className="cla-link-feedback" role="status">{notice}</p>}
           {status === "ready" && (
             <div className="cla-link-list">
@@ -221,7 +221,7 @@ export default function StudentLinkManager({ mode, preview = false }: { mode: Mo
                   {links.map(link => <li key={link.id}>
                     <div>
                       <strong>{student ? (link.viewerRole === "teacher" ? "Giáo viên" : "Phụ huynh") : link.studentName}</strong>
-                      <small>{student ? link.viewerId : `UID học sinh: ${link.studentId}`}</small>
+                      <small>{student ? link.viewerId : `Mã kết nối học sinh: ${link.studentId}`}</small>
                     </div>
                     {student && <button type="button" disabled={busy} onClick={() => void revoke(link.id)}>Thu hồi</button>}
                   </li>)}

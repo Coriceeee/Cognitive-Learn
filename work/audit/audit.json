@@ -1,0 +1,28 @@
+{
+  "input": "work/source.jsonl",
+  "input_sha256": "1411da928a795e66f99a22900130994e26ccadb6d9cf278b0c0ac7f55d12503a",
+  "utc": "2026-11-15T09:13:19.682584+00:00",
+  "row_count": 6663,
+  "valid_schema_count": 6543,
+  "schema_issues": {
+    "not_four_options": 120
+  },
+  "exact_duplicate_excess_rows": 5,
+  "conflicting_answer_fingerprints": 0,
+  "by_category_valid_rows": {
+    "Biology": 175,
+    "Chemistry": 198,
+    "Civic Education": 1767,
+    "English": 205,
+    "Geography": 1884,
+    "History": 1919,
+    "Mathematics": 220,
+    "Physics": 175
+  },
+  "manual_review_required": [
+    "original licensing",
+    "answer key accuracy",
+    "semantic near-duplicates",
+    "pretraining contamination"
+  ]
+}

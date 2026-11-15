@@ -57,7 +57,7 @@ test('CP32-06: synthetic demo preset is Admin-only, preview-before-save and scop
   const source = read('src/page/seed/StudentProfilePage.tsx');
   assert.match(source, /if \(!isAdminDemo \|\| !profileReady\) return/);
   assert.match(source, /window\.confirm/);
-  assert.match(source, /Chưa có gì được ghi lên Firestore/);
+  assert.match(source, /Nạp dữ liệu mẫu chỉ điền vào biểu mẫu/);
   assert.match(source, /dataScope: isAdminDemo \? "demo" : "student"/);
   assert.match(source, /Nạp hồ sơ demo 3 năm/);
 });
@@ -132,7 +132,7 @@ test('CP34-01: Admin synthetic preset only fills local form state and cannot wri
   assert.match(handler[1], /setTranscriptScores\(createSyntheticDemoTranscript/);
   assert.doesNotMatch(handler[1], /writeBatch|batch\.set|setDoc|updateDoc|saveDraft/);
   assert.match(source, /dataScope: isAdminDemo \? "demo" : "student"/);
-  assert.match(source, /Chưa có gì được ghi lên Firestore/);
+  assert.match(source, /Nạp dữ liệu mẫu chỉ điền vào biểu mẫu/);
 });
 
 test('CP34-02: Haven labels scholarship cards as rule archetypes, not verified opportunities', () => {

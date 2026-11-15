@@ -456,17 +456,20 @@ export function useStudentProfile() {
 
 
   useEffect(() => {
+    // A profile/history read can finish after logout or an account switch.
+    // Never show a previous account's results in a new authenticated session.
+    let active = true;
+    let requestId = 0;
+    const unsub = onAuthStateChanged(auth, async (user) => {
+      const currentRequest = ++requestId;
+      const isCurrent = () => active && currentRequest === requestId && auth.currentUser?.uid === user?.uid;
 
-
-    const unsub =
-      onAuthStateChanged(
-        auth,
-        async(user)=>{
-
-
-          setLoading(true);
-
-          setError("");
+      setLoading(true);
+      setError("");
+      setProfile(defaultStudentProfile);
+      setCognitive(defaultCognitiveResult);
+      setGrowthAnalytics(null);
+      setHasProfile(false);
 
 
 
@@ -511,8 +514,7 @@ export function useStudentProfile() {
             const snap =
               await getDoc(ref);
 
-
-
+            if (!isCurrent()) return;
 
             if(!snap.exists()){
 
@@ -582,11 +584,13 @@ export function useStudentProfile() {
             try {
               history = await getCognitiveHistory(user.uid);
             } catch (historyError) {
+              if (!isCurrent()) return;
               // Profile is valid even if subcollection read is denied or offline.
               console.error("Cognitive History read failed:", historyError);
-              setError("Đã tải hồ sơ, nhưng không đọc được Cognitive History. Kiểm tra quyền Firestore.");
+              setError("Đã tải hồ sơ, nhưng chưa đọc được lịch sử học tập. Hãy thử lại sau.");
             }
 
+            if (!isCurrent()) return;
             const comparableHistory = history.filter(
               (entry) => entry.scoreAvailable === true
             );
@@ -618,7 +622,7 @@ export function useStudentProfile() {
 
           }
           catch(err){
-
+            if (!isCurrent()) return;
 
             console.error(
               "Firestore error:",
@@ -651,16 +655,16 @@ export function useStudentProfile() {
 
 
 
-          setLoading(false);
-
+          if (isCurrent()) setLoading(false);
 
         }
       );
 
-
-
-    return () =>
+    return () => {
+      active = false;
+      requestId++;
       unsub();
+    };
 
 
 

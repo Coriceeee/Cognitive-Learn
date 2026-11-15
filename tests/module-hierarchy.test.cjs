@@ -19,15 +19,16 @@ assert.match(admin,/adminConsoleDirectory/);
 assert.doesNotMatch(admin,/moduleSubmoduleDirectory/);
 assert.doesNotMatch(admin,/nexus-legacy-tests/);
 assert.match(admin,/CHỨC NĂNG QUẢN TRỊ/);
-assert.match(nav,/items\.slice\(0, 3\)/);
+assert.match(nav,/cla-module-subnav-links/);
 assert.match(nav,/item\.status === "partial"/);
-const ownedAtlas = catalog.slice(catalog.indexOf('  atlas: {'),catalog.indexOf('  orion: {'));
-const ownedHaven = catalog.slice(catalog.indexOf('  haven: {'),catalog.indexOf('\n};', catalog.indexOf('  haven: {')));
+const studentCatalog = catalog.slice(catalog.indexOf("export const studentSubmoduleDirectory:"));
+const ownedAtlas = studentCatalog.slice(studentCatalog.indexOf('  atlas: {'), studentCatalog.indexOf('  orion: {'));
+const ownedHaven = studentCatalog.slice(studentCatalog.indexOf('  haven: {'), studentCatalog.indexOf('\n};', studentCatalog.indexOf('  haven: {')));
 assert.match(ownedAtlas,/href: "\/atlas\/study-abroad"/);
-assert.match(ownedAtlas,/href: "\/atlas#atlas-joint-programs"/);
+assert.match(ownedAtlas,/href: "\/atlas\/joint"/);
 assert.doesNotMatch(ownedHaven,/href: "\/atlas\/study-abroad"/);
-assert.match(ownedHaven,/href: "\/haven#haven-scholarships"/);
-assert.match(ownedHaven,/href: "\/haven#haven-financial"/);
+assert.match(ownedHaven,/href: "\/haven\/scholarships"/);
+assert.match(ownedHaven,/href: "\/haven\/finance"/);
 const routes = {
  'src/page/atlas/AtlasPage.tsx': ['atlas-joint-programs','atlas-gemini-reader','atlas-programs','atlas-engine'],
  'src/page/lumen/LumenPage.tsx': ['lumen-indices','lumen-growth','lumen-insights','lumen-gemini'],
@@ -47,8 +48,9 @@ console.log('MODULE HIERARCHY CONTRACT: seven main modules, catalog, ownership a
 
 const student = read('src/page/seed/StudentModulesPage.tsx');
 const study = read('src/page/study-abroad/StudyAbroadPage.tsx');
-assert.match(student,/Cognitive Path cá nhân/);
+assert.match(student,/Bạn muốn làm việc gì/);
+assert.doesNotMatch(student,/ModuleClusterGrid/);
 assert.match(grid,/chức năng/);
-assert.match(nav,/Các module của học sinh/);
-assert.match(study,/Các module của học sinh/);
+assert.match(nav,/Chức năng/);
+assert.match(study,/ModuleSectionNav moduleKey="atlas"/);
 console.log('STUDENT EXPERIENCE: six major modules, student-only children and correctly named return links PASS');

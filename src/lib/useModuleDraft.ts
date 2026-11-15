@@ -33,7 +33,7 @@ export function useModuleDraft<T extends Record<string, unknown>>(moduleName: Mo
         setStatus("error");
         setError(err.code === "permission-denied"
           ? `Firestore từ chối truy cập ${collections[moduleName]}. Kiểm tra Security Rules.`
-          : "Không thể tải bản nháp từ Firestore.");
+          : "Không thể tải dữ liệu đã lưu. Hãy kiểm tra kết nối và thử lại.");
       };
       stopPrimary = onSnapshot(doc(db, collections[moduleName], user.uid), snap => {
         stopLegacy?.(); stopLegacy = undefined;

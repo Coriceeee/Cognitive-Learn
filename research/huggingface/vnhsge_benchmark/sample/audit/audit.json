@@ -1,0 +1,19 @@
+{
+  "input": "sample/fixture_synthetic.jsonl",
+  "input_sha256": "7bde7e1f081fe6a743b95b39a8d115eaa61b72f4c916866ee4250545efc97f51",
+  "utc": "2026-11-15T08:21:42.691044+00:00",
+  "row_count": 3,
+  "valid_schema_count": 3,
+  "schema_issues": {},
+  "exact_duplicate_excess_rows": 0,
+  "conflicting_answer_fingerprints": 0,
+  "by_category_valid_rows": {
+    "Math": 3
+  },
+  "manual_review_required": [
+    "original licensing",
+    "answer key accuracy",
+    "semantic near-duplicates",
+    "pretraining contamination"
+  ]
+}

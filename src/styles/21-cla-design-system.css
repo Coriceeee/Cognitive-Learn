@@ -148,6 +148,17 @@ body {
   letter-spacing: .02em;
 }
 .role-selector .role-tabs { margin: 0; }
+.login-role-hint {
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid #d5e7ff;
+  border-radius: 15px;
+  background: #eff6ff;
+  color: #355579;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 .role-tabs button:focus-visible,
 .nexus-role-card:focus-visible,
 .user-nav-link:focus-visible {

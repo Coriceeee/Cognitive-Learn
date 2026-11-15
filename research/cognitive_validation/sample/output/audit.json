@@ -1,0 +1,112 @@
+{
+  "status": "EXPERIMENTAL_PROXY_NOT_VALIDATED",
+  "mapping_version": "cla-indices-research-cp24-v1",
+  "rows": 24,
+  "unique_participants": 12,
+  "minimum_events": 7,
+  "required_fraction": 0.7,
+  "index_status_counts": {
+    "SCI": {
+      "AVAILABLE": 24,
+      "INSUFFICIENT_DATA": 0
+    },
+    "MAS": {
+      "AVAILABLE": 24,
+      "INSUFFICIENT_DATA": 0
+    },
+    "CSL": {
+      "AVAILABLE": 24,
+      "INSUFFICIENT_DATA": 0
+    }
+  },
+  "invalid_numeric_cells": {
+    "action_consistency": 0,
+    "behavior_consistency": 0,
+    "context_switch_rate": 0,
+    "goal_action_alignment": 0,
+    "goal_switch_rate": 0,
+    "motivation_self_report": 0,
+    "plan_completion_rate": 0,
+    "task_abandonment_rate": 0,
+    "task_persistence_rate": 0
+  },
+  "sensitivity": {
+    "SCI": {
+      "complete_case_rows": 24,
+      "weight_perturbation_spearman": {
+        "plan_completion_rate:-20%": 0.996514,
+        "plan_completion_rate:+20%": 0.982563,
+        "action_consistency:-20%": 0.991294,
+        "action_consistency:+20%": 0.993471,
+        "goal_action_alignment:-20%": 0.98694,
+        "goal_action_alignment:+20%": 0.996518
+      },
+      "leave_one_out_spearman": {
+        "plan_completion_rate": 0.671752,
+        "action_consistency": 0.827376,
+        "goal_action_alignment": 0.890253
+      },
+      "note": "Not test-retest reliability or psychometric validation; complete cases only"
+    },
+    "MAS": {
+      "complete_case_rows": 24,
+      "weight_perturbation_spearman": {
+        "motivation_self_report:-20%": 0.998695,
+        "motivation_self_report:+20%": 0.998695,
+        "task_persistence_rate:-20%": 0.998695,
+        "task_persistence_rate:+20%": 0.998695,
+        "task_abandonment_rate:-20%": 0.998695,
+        "task_abandonment_rate:+20%": 0.993471
+      },
+      "leave_one_out_spearman": {
+        "motivation_self_report": 0.793242,
+        "task_persistence_rate": 0.793242,
+        "task_abandonment_rate": 0.937451
+      },
+      "note": "Not test-retest reliability or psychometric validation; complete cases only"
+    },
+    "CSL": {
+      "complete_case_rows": 24,
+      "weight_perturbation_spearman": {
+        "behavior_consistency:-20%": 1.0,
+        "behavior_consistency:+20%": 1.0,
+        "goal_switch_rate:-20%": 1.0,
+        "goal_switch_rate:+20%": 1.0,
+        "context_switch_rate:-20%": 1.0,
+        "context_switch_rate:+20%": 1.0
+      },
+      "leave_one_out_spearman": {
+        "behavior_consistency": 1.0,
+        "goal_switch_rate": null,
+        "context_switch_rate": null
+      },
+      "note": "Not test-retest reliability or psychometric validation; complete cases only"
+    }
+  },
+  "repeated_window_exploration": {
+    "SCI": {
+      "paired_participants": 12,
+      "exploratory_rank_association": 1.0,
+      "warning": "Window ordering is lexicographic: use ISO dates or sortable window IDs; this is not test-retest reliability"
+    },
+    "MAS": {
+      "paired_participants": 12,
+      "exploratory_rank_association": 1.0,
+      "warning": "Window ordering is lexicographic: use ISO dates or sortable window IDs; this is not test-retest reliability"
+    },
+    "CSL": {
+      "paired_participants": 12,
+      "exploratory_rank_association": 1.0,
+      "warning": "Window ordering is lexicographic: use ISO dates or sortable window IDs; this is not test-retest reliability"
+    }
+  },
+  "unmet_validity_gates": [
+    "content validity and construct definitions",
+    "reference sample and score calibration",
+    "reliability with confidence intervals",
+    "convergent/discriminant validity",
+    "external validation in Vietnamese THPT",
+    "ethics and participant consent"
+  ],
+  "input_sha256": "ddf7d8bf130bb8389420fcbc664bab765016d7cf0db3fe6610e37e53f51f6d0e"
+}

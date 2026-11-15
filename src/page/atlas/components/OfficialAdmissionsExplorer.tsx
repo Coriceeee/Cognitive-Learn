@@ -74,8 +74,10 @@ export default function OfficialAdmissionsExplorer() {
           })}</tr>)}
         </tbody></table>
       </div>}
+      <details className="cla-major-history-disclosure">
+        <summary>Bộ dữ liệu điểm chuẩn chi tiết đã đối chiếu: PTIT BVH · 10 ngành · 2024–2025</summary>
       <section className="cla-major-history" aria-labelledby="cla-major-title">
-        <h3 id="cla-major-title">Tra điểm ngành với kết quả đã xác minh tại PTIT — cơ sở Hà Nội (BVH)</h3>
+        <h3 id="cla-major-title">Ví dụ tra điểm ngành đã xác minh tại PTIT — cơ sở Hà Nội (BVH)</h3>
         <p>Các ngành dưới đây đã đối chiếu được mã ngành và điểm lịch sử 2024–2025 trên trang trường. Không quy đổi điểm các kỳ thi TSA/HSA/SAT thành thang THPT; bảng điểm chuẩn 2026 đã được PTIT công bố chính thức nhưng CLA chưa nhập số từ bảng ảnh khi chưa đối chiếu từng dòng/thang điểm.</p>
         <p><a href="https://tuyensinh.ptit.edu.vn/thong-bao-diem-chuan-trung-tuyen-vao-dai-hoc-he-chinh-quy-nam-2026/" target="_blank" rel="noopener noreferrer">Xem bảng điểm chuẩn PTIT 2026 chính thức theo từng phương thức ↗</a></p>
         <label className="cla-score-label">Tổng điểm thi THPT của bạn (thang 30, chưa cộng ưu tiên)
@@ -100,6 +102,7 @@ export default function OfficialAdmissionsExplorer() {
         {relevantPrograms.length === 0 && <p className="cla-source-empty">Chưa có mã ngành và điểm lịch sử đã xác minh cho tên này trong danh mục thí điểm.</p>}
         <p className="cla-source-caution">Chênh lệch với điểm trúng tuyển lịch sử KHÔNG phải dự báo đỗ/trượt: năm tuyển sinh, chỉ tiêu, cách quy đổi điểm, đối tượng ưu tiên, thứ tự nguyện vọng và cách xét tuyển có thể thay đổi. Nếu xét trường khác, hãy dùng link đề án chính thức phía trên.</p>
       </section>
+      </details>
       <p className="cla-source-footnote">Cập nhật kiểm tra nguồn: 08/11/2026. Dữ liệu lịch sử chỉ để tham khảo; phương thức và ngưỡng năm sau có thể thay đổi. Đề án gốc của từng trường luôn có ưu tiên cao hơn thông tin tóm tắt trong CLA.</p>
     </section>
   );

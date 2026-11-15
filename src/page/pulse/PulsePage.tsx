@@ -17,6 +17,7 @@ import {
 import "../../styles.css";
 import PulseMetricOrbit from "./PulseMetricOrbit";
 import PulseEvidenceCircuit from "./PulseEvidenceCircuit";
+import ClosedLoopPanel from "../../components/journey/ClosedLoopPanel";
 
 function toNumber(value: string) {
   const parsed = Number(value.replace(",", "."));
@@ -74,9 +75,9 @@ export default function PulsePage() {
         throw new Error("Có dữ liệu ngoài khoảng hợp lệ. Kiểm tra thang 0–100, số lượng và giờ/tuần.");
       }
       await saveDraft({cognitiveScore, previousCognitiveScore, admissionReadiness, orionReadiness, atlasProgramCount, aspirationCount, weeklyStudyHours, targetWeeklyHours});
-      setSaveNotice("Đã lưu dữ liệu lên Firestore của tài khoản đang đăng nhập.");
+      setSaveNotice("Đã lưu vào hồ sơ của bạn.");
     } catch (error) {
-      setSaveNotice(error instanceof Error ? error.message : "Không thể lưu Firestore.");
+      setSaveNotice(error instanceof Error ? error.message : "Không thể lưu dữ liệu. Hãy kiểm tra kết nối và thử lại.");
     } finally { setSaving(false); }
   }
 
@@ -153,12 +154,12 @@ export default function PulsePage() {
             <div>
               <span>CP23 · DATA LINEAGE</span>
               <h2 id="cp23-pipeline-title">Kiểm tra liên thông Seed → Lumen → Orion → Pulse</h2>
-              <p>Đọc đúng bốn nguồn Firestore thuộc UID đang đăng nhập. Đây là kiểm tra nguồn dữ liệu, không tự điền điểm, không đánh giá hiệu quả học tập.</p>
+              <p>Đọc trạng thái bốn nguồn dữ liệu thuộc tài khoản đang đăng nhập. Đây là kiểm tra liên thông, không tự điền điểm và không đánh giá hiệu quả học tập.</p>
             </div>
           </div>
           <div className="cla-firestore-save" style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
             <button type="button" onClick={() => { void pipelineEvidence.refresh(); }} disabled={pipelineEvidence.status === "loading"}>
-              {pipelineEvidence.status === "loading" ? "Đang đọc từ Firestore..." : "Kiểm tra nguồn liên thông"}
+              {pipelineEvidence.status === "loading" ? "Đang kiểm tra dữ liệu..." : "Kiểm tra nguồn liên thông"}
             </button>
             <button type="button" onClick={() => { void pipelineEvidence.persist(); }}
               disabled={!pipelineEvidence.result || pipelineEvidence.result.scope === "unknown" || pipelineEvidence.status !== "idle" || pipelineEvidence.recordStatus === "saving" || pipelineEvidence.recordStatus === "saved"}>
@@ -190,22 +191,24 @@ export default function PulsePage() {
           {pipelineEvidence.result && <PulseEvidenceCircuit evidence={pipelineEvidence.result} />}
         </section>}
 
-        <section className="pulse-control-panel">
+        <ClosedLoopPanel mode="pulse" />
+
+        <section id="pulse-input" className="pulse-control-panel">
           <div className="pulse-control-head">
             <div>
               <span>SIMULATION INPUT</span>
               <h2>Dữ liệu mô phỏng báo cáo</h2>
               <p>
-                Nhập các chỉ số có căn cứ và lưu bản nháp lên Firestore. Những ô chưa có dữ liệu không được mặc định là số 0; báo cáo chưa phải bằng chứng nghiên cứu.
+                Nhập các chỉ số có căn cứ và lưu bản nháp vào hồ sơ. Những ô chưa có dữ liệu không được mặc định là số 0; báo cáo chưa phải bằng chứng nghiên cứu.
               </p>
             </div>
           </div>
 
           <div className="cla-firestore-save" role="status" style={{display:"flex",flexWrap:"wrap",alignItems:"center",gap:12,margin:"12px 0"}}>
             <button type="button" disabled={saving || saveStatus === "loading" || saveStatus === "error" || saveStatus === "signed-out"} onClick={() => void saveCurrentDraft()}>
-              {saving ? "Đang lưu Firestore…" : "Lưu dữ liệu vào Firestore"}
+              {saving ? "Đang lưu…" : "Lưu dữ liệu"}
             </button>
-            <span>{saveNotice || draftError || (saveStatus === "ready" ? "Đã tải bản lưu từ Firestore" : saveStatus === "loading" ? "Đang tải dữ liệu đã lưu…" : "Chưa có bản lưu trên Firestore")}</span>
+            <span>{saveNotice || draftError || (saveStatus === "ready" ? "Đã đồng bộ dữ liệu đã lưu" : saveStatus === "loading" ? "Đang tải dữ liệu đã lưu…" : "Chưa có dữ liệu đã lưu")}</span>
           </div>
           <div className="pulse-form-grid">
             <label>
@@ -354,7 +357,7 @@ export default function PulsePage() {
             </ul>
           </section>
         )}
-        </>) : <section className="cla-transcript-hint" role="status"><span id="pulse-risk" /><span id="pulse-report" />Chưa đủ dữ liệu thực để đưa ra kết quả. Hãy hoàn thiện các ô đầu vào và lưu vào Firestore. Đây là công cụ mô phỏng theo giả định, không phải bằng chứng hiệu quả hoặc xác suất thành công.</section>}
+        </>) : <section className="cla-transcript-hint" role="status"><span id="pulse-risk" /><span id="pulse-report" />Chưa đủ dữ liệu thực để đưa ra kết quả. Hãy hoàn thiện các ô đầu vào và lưu hồ sơ. Đây là công cụ mô phỏng theo giả định, không phải bằng chứng hiệu quả hoặc xác suất thành công.</section>}
       </section>
     </main>
   );

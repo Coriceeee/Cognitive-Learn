@@ -19,8 +19,8 @@ export default function AtlasCutoffField() {
   return (
     <section className="atlas-cutoff-field" aria-labelledby="atlas-cutoff-field-title">
       <div className="atlas-cutoff-field-heading">
-        <div><span>ATLAS · ADMISSION EVIDENCE MAP</span><h2 id="atlas-cutoff-field-title">Trường điểm chuẩn 2024 → 2025</h2><p>So sánh điểm THPT đã đối chiếu cho 10 ngành tại PTIT – cơ sở Hà Nội (BVH). Mỗi đường nối hai mốc công bố của cùng ngành.</p></div>
-        <span className="atlas-cutoff-stamp">SOURCE-VERIFIED · BVH</span>
+        <div><span>ATLAS · BỘ DỮ LIỆU THÍ ĐIỂM</span><h2 id="atlas-cutoff-field-title">Ví dụ dữ liệu điểm chuẩn 2024 → 2025 · PTIT BVH</h2><p>Bộ dữ liệu thí điểm đã đối chiếu cho 10 ngành tại PTIT – cơ sở Hà Nội (BVH). Đây chỉ là một trường trong danh mục, không đại diện toàn bộ tuyển sinh Việt Nam.</p></div>
+        <span className="atlas-cutoff-stamp">PHẠM VI HẸP · BVH</span>
       </div>
       <div className="atlas-cutoff-legend"><span><i className="is-2024" />2024</span><span><i className="is-2025" />2025</span><span><i className="is-down" />Giảm so với 2024</span><span><i className="is-up" />Tăng so với 2024</span></div>
       <div className="atlas-cutoff-chart-wrap">

@@ -25,8 +25,8 @@ export function prepareAdvisorMessage(value: unknown): string {
  * by their evidence-backed modules. This deterministic gate is applied on both
  * browser and API; it does not call a language model or invent source facts.
  */
-export type AdvisorRoute = { destination: "/atlas#atlas-official-admissions" | "/atlas#atlas-joint-programs" | "/atlas/study-abroad" | "/haven#haven-scholarships"; label: string; answer: string };
-export const ADVISOR_ALLOWED_DESTINATIONS = ["/atlas#atlas-official-admissions", "/atlas#atlas-joint-programs", "/atlas/study-abroad", "/haven#haven-scholarships"] as const;
+export type AdvisorRoute = { destination: "/atlas/vietnam" | "/atlas/joint" | "/atlas/study-abroad" | "/haven/scholarships"; label: string; answer: string };
+export const ADVISOR_ALLOWED_DESTINATIONS = ["/atlas/vietnam", "/atlas/joint", "/atlas/study-abroad", "/haven/scholarships"] as const;
 
 function normalisedForRouting(value: string): string {
   return value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d");
@@ -36,11 +36,11 @@ export function routeAdvisorQuestion(value: string): AdvisorRoute | null {
   const text = normalisedForRouting(value);
   // Scholarship questions take precedence over general study-abroad routes.
   if (/hoc bong|scholarship|tro cap|tai tro|mien hoc phi/.test(text)) return {
-    destination: "/haven#haven-scholarships", label: "Mở mục học bổng tại Haven",
+    destination: "/haven/scholarships", label: "Mở mục học bổng tại Haven",
     answer: "Thông tin học bổng và điều kiện từng chương trình nằm trong Haven Support. Hãy mở mục Học bổng để xem nguồn, hạn và checklist; trợ lý nổi không tự cung cấp thông tin tuyển chọn.",
   };
   if (/lien ket quoc te|chuong trinh lien ket|dao tao lien ket|hoc tai viet nam lien ket/.test(text)) return {
-    destination: "/atlas#atlas-joint-programs", label: "Mở chương trình liên kết tại Atlas",
+    destination: "/atlas/joint", label: "Mở chương trình liên kết tại Atlas",
     answer: "Các chương trình liên kết tuyển sinh tại Việt Nam nằm trong Atlas Admission. Hãy mở đúng mục chương trình để kiểm tra phương thức xét tuyển và thông báo từ trường.",
   };
   if (/du hoc|truong quoc te|nus\b|mit\b|harvard|educationusa|nhap hoc quoc te|visa du hoc|ielts|toefl|sat\b|act\b|jlpt|topik|eju|studienkolleg/.test(text)) return {
@@ -48,7 +48,7 @@ export function routeAdvisorQuestion(value: string): AdvisorRoute | null {
     answer: "Atlas phụ trách tra cứu trường, ngành và điều kiện du học theo từng quốc gia. Học bổng và phân tích khả năng chi trả nằm ở Haven; trợ lý chỉ giúp mở đúng chức năng.",
   };
   if (/tuyen sinh|xet tuyen|ptit\b|hust\b|ftu\b|tdtu\b|hcmut\b|neu\b|ueh\b|hutech\b|bach khoa|ngoai thuong|diem chuan|diem trung tuyen|nguyen vong|to hop|ma nganh|ma truong|chi tieu|hoc ba|danh gia nang luc|hsa\b|tsa\b|chon nganh|chon truong|nganh nao|truong nao|tu van nganh|tu van truong|dai hoc nao|phuong thuc/.test(text)) return {
-    destination: "/atlas#atlas-official-admissions", label: "Mở Atlas tuyển sinh",
+    destination: "/atlas/vietnam", label: "Mở Atlas tuyển sinh",
     answer: "Hãy mở Atlas Admission để tra cứu ngành, trường, phương thức, điểm chuẩn theo năm và liên kết chính thức. Trợ lý nổi không đưa số liệu tuyển sinh hay thay thế công cụ Atlas.",
   };
   return null;
@@ -96,12 +96,12 @@ export function advisorPageContextFromPath(pathname: string): AdvisorPageContext
   if (path === "/student") return "student-dashboard";
   if (path === "/admin/diagnostics") return "admin-diagnostics";
   if (path === "/admin") return "admin";
-  if (path === "/atlas/study-abroad" || path === "/study-abroad" || path === "/haven/study-abroad") return "study-abroad";
-  if (path === "/atlas") return "atlas";
-  if (path === "/lumen") return "lumen";
-  if (path === "/orion") return "orion";
-  if (path === "/pulse") return "pulse";
-  if (path === "/haven") return "haven";
+  if (path.startsWith("/atlas/study-abroad") || path === "/study-abroad" || path === "/haven/study-abroad") return "study-abroad";
+  if (path.startsWith("/atlas")) return "atlas";
+  if (path.startsWith("/lumen")) return "lumen";
+  if (path.startsWith("/orion")) return "orion";
+  if (path.startsWith("/pulse")) return "pulse";
+  if (path.startsWith("/haven")) return "haven";
   if (path === "/teacher") return "teacher";
   if (path === "/parent") return "parent";
   return "general";

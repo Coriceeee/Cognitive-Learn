@@ -93,7 +93,7 @@ export default function FloatingAdvisorChat() {
         <textarea id="cla-chat-input" ref={inputRef} rows={2} maxLength={1500} value={question} onChange={e => setQuestion(e.target.value)} onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void send(); } }} placeholder={authenticated ? "Nhập câu hỏi… (Enter để gửi)" : "Đăng nhập để trò chuyện"} disabled={loading || !authenticated} />
         <button type="submit" disabled={loading || !authenticated || question.trim().length < 2}>{loading ? "Đang gửi" : "Gửi"}</button>
       </form>
-      <div className="cla-chat-footer"><a href="/atlas#atlas-official-admissions">Atlas</a><a href="/atlas/study-abroad">Du học</a><a href="/haven#haven-scholarships">Học bổng</a><button type="button" onClick={() => { controllerRef.current?.abort(); setTurns([]); setNotice(""); }}>Xóa hội thoại</button></div>
+      <div className="cla-chat-footer"><a href="/atlas/vietnam">Atlas</a><a href="/atlas/study-abroad">Du học</a><a href="/haven/scholarships">Học bổng</a><button type="button" onClick={() => { controllerRef.current?.abort(); setTurns([]); setNotice(""); }}>Xóa hội thoại</button></div>
     </section>}
     <button
       className={`cla-chat-launcher${open ? " is-open" : ""}`}

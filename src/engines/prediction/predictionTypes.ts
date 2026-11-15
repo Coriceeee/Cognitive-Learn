@@ -96,10 +96,12 @@ export interface PredictionResult {
 
 
 
-  probability:number;
+  /** Chỉ số tổng hợp nhận thức theo công thức thử nghiệm; KHÔNG là probability. */
+  cognitiveStrengthIndex:number;
 
 
-  achievementProbability:number;
+  /** 0–100: quy đổi khoảng cách còn lại đến mục tiêu theo giả định, không phải cơ hội đạt. */
+  goalGapReadinessIndex:number;
 
 
 
@@ -110,7 +112,12 @@ export interface PredictionResult {
 
 
 
-  confidence:number;
+  /** Trung bình stability và completion; không đo độ tin cậy thống kê. */
+  stabilityCompletionIndex:number;
+
+  resultKind:"RULE_BASED_SCENARIO";
+  calibrationStatus:"NOT_CALIBRATED";
+  limitations:string[];
 
 
 

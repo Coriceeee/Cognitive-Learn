@@ -1,0 +1,8 @@
+﻿item_id,prompt
+vnhsge-000001,"Chọn đáp án đúng duy nhất cho câu hỏi dưới đây. Chỉ trả về một ký tự A, B, C hoặc D; không giải thích.
+
+[TEST ONLY] 2 + 2 = ?
+A. 1
+B. 2
+C. 3
+D. 4"

@@ -1,0 +1,16 @@
+{
+  "source": "roshansk23/Vietnam_HighSchool_Exam_Dataset",
+  "requested_revision": "current main",
+  "resolved_revision": "7be3037ae73e507932be4e4518bc4482a45e45f6",
+  "verification": "sha before/after; viewer endpoint may serve separately cached revision",
+  "source_is_strictly_revision_pinned": false,
+  "config": "default",
+  "split": "train",
+  "rows": 6663,
+  "artifact": "source.jsonl",
+  "sha256": "1411da928a795e66f99a22900130994e26ccadb6d9cf278b0c0ac7f55d12503a",
+  "fetched_at_utc": "2026-11-15T09:13:06.947603+00:00",
+  "dataset_license_status": "UNVERIFIED; do not redistribute without verification",
+  "research_use_approved": false,
+  "population": "Vietnamese high-school exam MCQs; not individual learning outcomes"
+}

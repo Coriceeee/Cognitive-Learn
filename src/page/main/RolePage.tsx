@@ -29,7 +29,7 @@ const roleContent = {
       "Quan sát tiến trình học sinh, phát hiện sớm học sinh mất định hướng và xem xu hướng lớp học.",
     mainAction: "Xem học sinh liên kết",
     cards: [
-      ["Học sinh", "Từ Firestore", "Chỉ hiển thị khi học sinh chủ động cấp liên kết."],
+      ["Học sinh", "Từ hồ sơ đã lưu", "Chỉ hiển thị khi học sinh chủ động cấp liên kết."],
       ["Đánh giá", "Chưa chia sẻ", "Chưa truy cập Cognitive hoặc điểm số riêng tư."],
       ["Phản hồi", "Chuẩn bị", "Chức năng nhận xét sẽ được kết nối sau khi hoàn thiện quyền dữ liệu."],
     ],
@@ -41,7 +41,7 @@ const roleContent = {
       "Theo dõi tiến độ, nhận cảnh báo sớm và xem gợi ý hỗ trợ học sinh tại nhà.",
     mainAction: "Xem liên kết của con",
     cards: [
-      ["Học sinh", "Từ Firestore", "Chỉ xuất hiện khi học sinh chủ động cấp liên kết."],
+      ["Học sinh", "Từ hồ sơ đã lưu", "Chỉ xuất hiện khi học sinh chủ động cấp liên kết."],
       ["Tiến độ", "Chưa chia sẻ", "Chưa được phép xem lịch sử hoặc điểm cá nhân."],
       ["Phản hồi", "Chuẩn bị", "Khu vực phối hợp kế hoạch sẽ được triển khai sau."],
     ],
@@ -54,7 +54,7 @@ const roleContent = {
     mainAction: "Quản lý hệ thống",
     cards: [
       ["Tài khoản", "Xem trong Nexus", "Không hiển thị số lượng giả."],
-      ["Phân quyền", "Cần kiểm chứng", "Quyền dữ liệu phải được kiểm tra từ Firestore Rules."],
+      ["Phân quyền", "Cần kiểm chứng", "Quyền dữ liệu phải được kiểm tra theo vai trò tài khoản."],
       ["Dữ liệu", "Cần kiểm thử", "Kiểm tra trạng thái lưu trữ và tính toàn vẹn."],
     ],
   },
@@ -75,8 +75,8 @@ export default function TrangVaiTro({ role }: RolePageProps) {
   const isAdminPreview = params.get("from") === "admin";
   const roleTasks: Record<UserRole, string[]> = {
     student: ["Hoàn thiện hồ sơ Seed", "Xem Cognitive có căn cứ", "Theo dõi kế hoạch học tập"],
-    teacher: ["Gửi UID tài khoản cho học sinh", "Chờ học sinh tự cấp liên kết", "Xem báo cáo khi CLA triển khai quyền chia sẻ riêng"],
-    parent: ["Gửi UID cho con", "Chờ học sinh tự cấp liên kết", "Đồng hành khi có dữ liệu được chia sẻ"],
+    teacher: ["Gửi mã kết nối tài khoản cho học sinh", "Chờ học sinh tự cấp quyền chia sẻ", "Xem báo cáo khi học sinh đã chia sẻ"],
+    parent: ["Gửi mã kết nối cho con", "Chờ học sinh tự cấp quyền chia sẻ", "Đồng hành khi có dữ liệu được chia sẻ"],
     admin: ["Kiểm tra quyền người dùng", "Rà soát dữ liệu", "Kiểm thử giao diện từng vai trò"],
   };
   function handleMainAction() {

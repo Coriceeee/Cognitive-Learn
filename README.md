@@ -63,3 +63,19 @@ không phải đo lường kết quả giáo dục. Xem `docs/CP24_PROGRESS_2026
 Trước khi thử nghiệm, chạy `npm ci && npm run verify:cp24`. Các Rules mới
 **chưa được nghiệm thu Emulator** tại thời điểm đóng gói CP24; KHÔNG deploy
 production cho đến khi 42 bài kiểm thử Emulator đều PASS.
+
+## CLA Daily Companion — nhánh phát triển Web → Mobile
+
+Hướng khai thác sản phẩm: **Web CLA để phân tích/lập kế hoạch; CLA Mobile để nhắc việc và check-in hằng ngày**, dùng chung Firebase và engine, không viết lại website. Xem trang `/student/companion` (preview mặc định), file `START_HERE_DAILY_COMPANION_20261113.md` và `docs/mobile/CLA_MOBILE_EXPANSION_ROADMAP.md`. Đây **chưa phải APK/iOS app** và **chưa có background push**; các Rules mới phải qua Emulator trước khi bật đồng bộ.
+
+## Nhánh mobile/web companion — Web Push V2 (14/11/2026)
+
+Source hiện có `/student/companion` và mã nguồn Web Push nền **opt-in**, nhưng gửi nền chỉ hoạt động sau khi hoàn thành cấu hình VAPID, Security Rules, consent và Cloud Functions. Tính năng **tắt mặc định**, không tự triển khai lên production. Chạy `npm run test:companion-push` để kiểm tra policy; hướng dẫn: `START_HERE_MOBILE_WEB_PUSH_20261114.md` và `docs/mobile/CLA_WEB_PUSH_PWA_V2_IMPLEMENTATION.md`.
+
+## Bản bổ sung 14/11/2026 — Lịch thi của tôi
+Dashboard học sinh `/student` có bảng chọn kỳ thi và đếm ngược tới hạn đăng ký/ngày thi. Xem `START_HERE_EXAM_CALENDAR_20261114.md` và `docs/atlas/CLA_EXAM_CALENDAR_V1_ARCHITECTURE.md`. Lịch thi V1 do học sinh nhập, chỉ lưu trên trình duyệt theo UID, chưa tự đồng bộ và chưa có push nền.
+
+
+## Research addon — Hugging Face VNHSGE (2026-11-15)
+
+The full-source release includes `research/huggingface/vnhsge_benchmark/` for offline Vietnamese exam QA auditing and evaluation. See [`research/huggingface/README.md`](research/huggingface/README.md). It does not modify any existing web module, Firebase Rules, routes, or production model. License status for the upstream MCQ dataset remains **HOLD**. Synthetic fixture output is not scientific evidence.

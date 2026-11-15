@@ -104,7 +104,7 @@ export default function LienHePage() {
             <span>GỬI PHẢN HỒI</span>
             <h2>Bạn cần hỗ trợ điều gì?</h2>
             <p>
-              Form này là giao diện mẫu. Sau này có thể nối Firestore để lưu
+              Form này là giao diện mẫu. Sau này có thể kết nối hệ thống lưu trữ để lưu
               phản hồi thật, phân loại yêu cầu và hiển thị trong Admin Nexus.
             </p>
 

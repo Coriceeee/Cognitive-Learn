@@ -1,3 +1,4 @@
+import { pushAppNotice } from "../../../lib/appNotices";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { StudentProfile, CognitiveResult } from "../../seed/types";
 import {
@@ -112,6 +113,7 @@ export function useLumenIntelligence(
   const generateGeminiExplanation = useCallback(async () => {
     if (cognitive.scoreAvailable !== true) {
       setGeminiState({ status: "FALLBACK", explanation: null, error: "Cognitive chưa đủ dữ liệu để giải thích bằng Gemini." });
+      pushAppNotice({kind:"info", title:"Chưa đủ dữ liệu phân tích", detail:"Hãy hoàn thiện hồ sơ Seed và phép đo Cognitive trước khi yêu cầu Gemini."});
       return;
     }
 
@@ -124,6 +126,7 @@ export function useLumenIntelligence(
       const explanation = await requestGeminiLumenExplanation(aiContext, ai.reasoning, controller.signal);
       if (!controller.signal.aborted) {
         setGeminiState({ status: "SUCCESS", explanation, error: null });
+        pushAppNotice({kind:"success", title:"Phân tích Lumen đã hoàn tất", detail:"Gemini đã trả phần giải thích. Kết quả định lượng vẫn theo engine nội bộ; hãy mở phần phân tích để xem chi tiết."});
       }
     } catch (error) {
       if (!controller.signal.aborted) {
@@ -132,8 +135,10 @@ export function useLumenIntelligence(
           explanation: null,
           error: error instanceof Error ? error.message : "Gemini không khả dụng.",
         });
+        pushAppNotice({kind:"error", title:"Không thể hoàn tất giải thích Gemini", detail:"Yêu cầu có thể bị gián đoạn do mạng hoặc dịch vụ AI. Bạn vẫn có thể xem phân tích nội bộ và thử lại."});
       } else if (controllerRef.current === controller) {
         setGeminiState({ status: "FALLBACK", explanation: null, error: "Gemini phản hồi quá chậm hoặc yêu cầu đã được hủy." });
+        pushAppNotice({kind:"error", title:"Gemini phản hồi quá chậm", detail:"Yêu cầu phân tích bị hủy khi quá thời gian. Kiểm tra mạng hoặc thử lại."});
       }
     } finally {
       clearTimeout(timeout);

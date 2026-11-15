@@ -24,10 +24,13 @@ function contrast(foreground, background) {
 }
 
 test('CP30 chat readability layer loads after the final CP28 theme', () => {
-  const last = entry.trim().split('\n').filter(line => line.startsWith('@import')).at(-1);
-  assert.match(last, /23-scientific-visuals\.css/);
+  // CP37 and later layers may follow CP30: verify relative order, not the last import.
+  assert.ok(entry.indexOf('25-p1-task-scholarship.css') < entry.indexOf('26-operating-guide.css'));
+  assert.match(entry, /26-operating-guide\.css/);
   assert.ok(entry.indexOf('21-cla-design-system.css') < entry.indexOf('22-cla-chat-readability.css'));
   assert.ok(entry.indexOf('22-cla-chat-readability.css') < entry.indexOf('23-scientific-visuals.css'));
+  assert.ok(entry.indexOf('23-scientific-visuals.css') < entry.indexOf('24-cla-subpages-ui.css'));
+  assert.ok(entry.indexOf('24-cla-subpages-ui.css') < entry.indexOf('25-p1-task-scholarship.css'));
   assert.match(entry, /22-cla-chat-readability\.css/);
   assert.match(css, /\.cla-chat-root \{/);
 });

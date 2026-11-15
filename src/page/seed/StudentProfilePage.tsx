@@ -1,3 +1,4 @@
+import { pushAppNotice } from "../../lib/appNotices";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, doc, getDocFromServer, serverTimestamp, writeBatch } from "firebase/firestore";
@@ -5,6 +6,7 @@ import { auth, db } from "../../lib/firebase";
 import { calculateCognitive } from "../../engines/cognitive/cognitiveEngine";
 import { attachObservedSnapshotMetrics, createCognitiveSnapshot } from "../../engines/history/cognitiveHistoryEngine";
 import type { StudentProfile } from "./types";
+import { countryCatalog } from "../../data/globalCountryCatalog";
 import {
   calculateCompletedYearsAverage,
   calculateProvisionalAverage,
@@ -13,6 +15,7 @@ import {
   summarizeSemesterScores,
   type ScoreRow,
 } from "../../engines/academic-semester-engine";
+import { validateSeedNumericInput } from "./services/profileInputValidation";
 import {
   ELECTIVE_SUBJECTS,
   NATIONAL_DEFENSE_SUBJECT,
@@ -215,7 +218,7 @@ export default function TrangNhapHoSoHocTap() {
       setLockedElectives(null);
       setTranscriptScores(createInitialTranscript());
       setPreviousPlanCompletionRate(undefined);
-      setMessage("Đang tải hồ sơ và bảng điểm đã lưu từ Firestore...");
+      setMessage("Đang tải hồ sơ và bảng điểm đã lưu…");
 
       if (!user) {
         fail("Bạn cần đăng nhập bằng tài khoản Student trước khi nhập hoặc lưu điểm.");
@@ -240,7 +243,7 @@ export default function TrangNhapHoSoHocTap() {
         const accountData = account.exists() ? account.data() : null;
         const role = accountData?.role;
         if (!accountData || accountData.active !== true || (role !== "student" && role !== "admin")) {
-          fail("Tài khoản cần có vai trò Student hoặc Admin đã kích hoạt (users/UID: role, active=true) để sử dụng hồ sơ này.");
+          fail("Tài khoản chưa có vai trò Học sinh hoặc Quản trị viên đang hoạt động. Vui lòng liên hệ quản trị viên.");
           return;
         }
         setIsAdminDemo(role === "admin");
@@ -272,13 +275,13 @@ export default function TrangNhapHoSoHocTap() {
         if (Array.isArray(curriculum?.selectedElectives)
             && Array.isArray(legacyCurriculum?.selectedElectives)
             && JSON.stringify(curriculum.selectedElectives) !== JSON.stringify(legacyCurriculum.selectedElectives)) {
-          fail("Hai collection đang lưu tổ hợp môn khác nhau. Cần đối chiếu dữ liệu cũ trước khi chỉnh sửa.");
+          fail("Hai bản hồ sơ đang có tổ hợp môn khác nhau. Cần đối chiếu dữ liệu cũ trước khi chỉnh sửa.");
           return;
         }
         const savedSelection = curriculum?.selectedElectives ?? legacyCurriculum?.selectedElectives;
         if (Array.isArray(savedSelection)) {
           if (!isValidElectiveSelection(savedSelection)) {
-            fail("Tổ hợp môn trong Firestore không hợp lệ. Cần quản trị viên kiểm tra dữ liệu trước khi lưu.");
+            fail("Tổ hợp môn trong hồ sơ không hợp lệ. Hãy liên hệ quản trị viên trước khi lưu.");
             return;
           }
           setSelectedElectives([...savedSelection]);
@@ -295,9 +298,9 @@ export default function TrangNhapHoSoHocTap() {
         const detail = error instanceof Error ? error.message : "unknown";
         console.error("Không tải được hồ sơ để chỉnh sửa:", error);
         if (detail.includes("permission-denied")) {
-          fail(`Firestore từ chối đọc ${detail}. Kiểm tra Rules đã Publish và vai trò Student của tài khoản; không mở quyền công khai.`);
+          fail(`Không thể đọc dữ liệu đã lưu ${detail}. Hãy kiểm tra kết nối và quyền tài khoản; không chia sẻ dữ liệu công khai.`);
         } else if (detail.includes("unavailable")) {
-          fail(`Không kết nối được Firestore (${detail}). Kiểm tra mạng và thử tải lại; không ghi đè dữ liệu khi offline.`);
+          fail(`Không thể kết nối hệ thống dữ liệu (${detail}). Kiểm tra mạng và thử tải lại; không ghi đè dữ liệu khi mất kết nối.`);
         } else {
           fail(`Không tải được dữ liệu đã lưu (${detail}). Kiểm tra kết nối, dự án Firebase và thử tải lại.`);
         }
@@ -493,7 +496,7 @@ export default function TrangNhapHoSoHocTap() {
       return;
     }
     const confirmed = window.confirm(
-      "Nạp hồ sơ synthetic CLA 3 năm vào biểu mẫu hiện tại? Dữ liệu chưa được lưu lên Firestore. Bạn vẫn cần xem lại và chủ động nhấn Lưu hồ sơ."
+      "Nạp hồ sơ demo CLA 3 năm vào biểu mẫu hiện tại? Dữ liệu chưa được lưu. Hãy xem lại trước khi chủ động nhấn Lưu hồ sơ."
     );
     if (!confirmed) return;
 
@@ -525,7 +528,7 @@ export default function TrangNhapHoSoHocTap() {
     setActiveGrade("grade12");
     setActiveSemester("semester1");
     setPreviousPlanCompletionRate(undefined);
-    setMessage("Đã nạp hồ sơ synthetic 3 năm. Chưa có gì được ghi lên Firestore. Kiểm tra dữ liệu rồi chủ động nhấn Lưu hồ sơ để lưu vào UID Admin hiện tại.");
+    setMessage("Đã nạp hồ sơ demo 3 năm vào biểu mẫu. Chưa có dữ liệu nào được lưu. Hãy kiểm tra và chỉ lưu trong tài khoản demo quản trị.");
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -556,6 +559,14 @@ export default function TrangNhapHoSoHocTap() {
           }
         }
       }
+    }
+
+    // Validate the values once at the data-write boundary, not only via HTML
+    // input attributes (which may be bypassed by programmatic form updates).
+    const numericInputError = validateSeedNumericInput(profile);
+    if (numericInputError) {
+      setMessage(numericInputError);
+      return;
     }
 
     try {
@@ -705,9 +716,12 @@ export default function TrangNhapHoSoHocTap() {
       });
       await batch.commit();
       setLockedElectives([...selectedElectives]);
+      pushAppNotice({kind:"success", title:"Đã lưu hồ sơ học tập", detail:"Hồ sơ, bảng điểm và bản đo Cognitive đã lưu thành công. CLA sẽ chuyển về Dashboard."});
+      // The app uses full-page navigation; replay this *generic* success once on the destination page.
+      try { window.sessionStorage.setItem(`cla-seed-save-flash:${currentUser.uid}`, "saved"); } catch { /* In-app toast above still works if session storage is unavailable. */ }
 
       setMessage(
-        "Đã lưu hồ sơ, kho bảng điểm riêng và Cognitive History trên Firestore."
+        "Đã lưu hồ sơ, bảng điểm và lịch sử học tập của bạn."
       );
 
       setTimeout(() => {
@@ -715,7 +729,8 @@ export default function TrangNhapHoSoHocTap() {
       }, 800);
     } catch (error) {
       console.error(error);
-      setMessage("Không thể lưu hồ sơ. Hãy kiểm tra Firestore Rules.");
+      setMessage("Không thể lưu hồ sơ. Hãy kiểm tra kết nối hoặc liên hệ hỗ trợ.");
+      pushAppNotice({kind:"error", title:"Lưu hồ sơ thất bại", detail:"Dữ liệu chưa được xác nhận đã lưu. Kiểm tra Internet và quyền truy cập Firebase, rồi thử lại."});
     } finally {
       setLoading(false);
     }
@@ -757,18 +772,18 @@ export default function TrangNhapHoSoHocTap() {
         {isAdminDemo && profileReady && (
           <>
             <p className="profile-message" role="status">
-              CHẾ ĐỘ DEMO ADMIN — dữ liệu synthetic chỉ thuộc UID Admin hiện tại; không phải kết quả của học sinh tham gia nghiên cứu.
+              CHẾ ĐỘ DEMO QUẢN TRỊ — dữ liệu minh họa chỉ thuộc tài khoản quản trị hiện tại; không phải kết quả của học sinh tham gia nghiên cứu.
             </p>
             <section className="cla-demo-prefill" aria-label="Nạp hồ sơ demo">
               <div>
                 <strong>CLA · SYNTHETIC DEMO PRESET</strong>
-                <p>Nạp hồ sơ minh họa lớp 10–12, 6 học kỳ và 9 môn để chạy thử Seed → Lumen → Orion → Atlas/Haven → Pulse. Chỉ điền vào biểu mẫu; không tự ghi Firestore.</p>
+                <p>Nạp hồ sơ minh họa lớp 10–12, 6 học kỳ và 9 môn để chạy thử Seed → Lumen → Orion → Atlas/Haven → Pulse. Dữ liệu chỉ điền vào biểu mẫu; không tự lưu.</p>
               </div>
               <button type="button" onClick={handleLoadDemoPreset} disabled={lockedElectives !== null}>
                 {lockedElectives !== null ? "Hồ sơ đã khóa môn" : "Nạp hồ sơ demo 3 năm"}
               </button>
             </section>
-            <p className="profile-note-box">Chưa có gì được ghi lên Firestore khi nạp preset. Hãy xem lại toàn bộ dữ liệu và nhấn “Lưu hồ sơ học tập” riêng nếu muốn lưu synthetic vào UID Admin hiện tại.</p>
+            <p className="profile-note-box">Nạp dữ liệu mẫu chỉ điền vào biểu mẫu. Hãy kiểm tra kỹ trước khi lưu; dữ liệu mẫu chỉ dùng trong tài khoản demo quản trị.</p>
           </>
         )}
 
@@ -1277,14 +1292,13 @@ export default function TrangNhapHoSoHocTap() {
                       }
                     >
                       <option value="">Chưa chọn</option>
-                      <option>Nhật Bản</option>
-                      <option>Hàn Quốc</option>
-                      <option>Singapore</option>
-                      <option>Hoa Kỳ</option>
-                      <option>Đức</option>
-                      <option>Anh</option>
-                      <option>Úc</option>
+                      {countryCatalog.map((country) => (
+                        <option key={country.code} value={country.name}>
+                          {country.name}
+                        </option>
+                      ))}
                     </select>
+                    <small>Danh mục gồm 249 quốc gia/vùng lãnh thổ. Đây là lựa chọn sở thích; điều kiện tuyển sinh phải tra cứu riêng trong Atlas.</small>
                   </label>
                 </div>
               </div>

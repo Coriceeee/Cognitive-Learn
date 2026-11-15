@@ -42,10 +42,10 @@ function getError(error: unknown): string {
   const code = error !== null && typeof error === "object" && "code" in error
     ? String(error.code) : "";
   if (code === "permission-denied") {
-    return "Firestore đã từ chối quyền. Hãy kiểm tra Rules cho student_shared_reports và student_links.";
+    return "Bạn chưa có quyền xem báo cáo được chia sẻ. Hãy liên hệ người đã chia sẻ hoặc quản trị viên.";
   }
   if (code === "failed-precondition") {
-    return "Truy vấn Firestore cần index hoặc Rules phù hợp.";
+    return "Chưa thể tải báo cáo do cấu hình dữ liệu. Hãy thử lại sau.";
   }
   return "Không thể đồng bộ báo cáo. Kiểm tra kết nối hoặc thử lại.";
 }
@@ -306,7 +306,7 @@ export default function SharedReportPanel({ mode, preview = false }: { mode: Mod
       ) : state === "loading" ? (
         <p className="cla-report-message" role="status">Đang tải liên kết…</p>
       ) : state === "error" ? (
-        <p className="cla-report-message" role="alert">Không thể tải liên kết. Kiểm tra Firestore Rules.</p>
+        <p className="cla-report-message" role="alert">Không thể tải liên kết. Hãy kiểm tra kết nối và thử lại.</p>
       ) : links.length === 0 ? (
         <p className="cla-report-message">Chưa có học sinh/người xem được liên kết. Hãy hoàn tất bước liên kết ở phía trên.</p>
       ) : (
@@ -324,7 +324,7 @@ export default function SharedReportPanel({ mode, preview = false }: { mode: Mod
             </select>
           </label>
           {reportState === "loading" ? <p className="cla-report-message">Đang đọc báo cáo được chia sẻ…</p> : null}
-          {reportState === "error" ? <p className="cla-report-message" role="alert">Chưa đọc được báo cáo từ Firestore. Kiểm tra quyền và thử lại.</p> : null}
+          {reportState === "error" ? <p className="cla-report-message" role="alert">Chưa đọc được báo cáo. Hãy kiểm tra kết nối và thử lại.</p> : null}
           {reportState === "ready" && !report && mode === "student" && (
             <form className="cla-report-form" onSubmit={(event) => { void shareReport(event); }}>
               <label>Tiêu đề báo cáo

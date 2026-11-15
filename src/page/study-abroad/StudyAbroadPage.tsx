@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
+import ModuleSectionNav from "../../components/common/ModuleSectionNav";
 import { countryCatalog, findCountry, searchCountries } from "../../data/globalCountryCatalog";
 import { internationalRoutes } from "../../data/internationalPathways";
 import "../../styles.css";
@@ -14,12 +15,12 @@ import "../../styles.css";
  */
 export default function StudyAbroadPage() {
   useEffect(() => {
-    // Preserve bookmarked legacy URLs without keeping study abroad inside Haven.
-    if (window.location.pathname !== "/atlas/study-abroad") {
+    // Preserve legacy bookmarks while keeping study-abroad routes under Atlas.
+    if (window.location.pathname === "/study-abroad" || window.location.pathname === "/haven/study-abroad") {
       window.history.replaceState(window.history.state, "", `/atlas/study-abroad${window.location.search}${window.location.hash}`);
     }
   }, []);
-  const [countryCode, setCountryCode] = useState("SG");
+  const [countryCode, setCountryCode] = useState(() => new URLSearchParams(window.location.search).get("country") || "");
   const [countrySearch, setCountrySearch] = useState("");
   const [fieldSearch, setFieldSearch] = useState("");
   const [checked, setChecked] = useState<string[]>([]);
@@ -43,6 +44,10 @@ export default function StudyAbroadPage() {
   function chooseCountry(code: string) {
     setCountryCode(code);
     setChecked([]);
+    const url = new URL(window.location.href);
+    if (code) url.searchParams.set("country", code);
+    else url.searchParams.delete("country");
+    window.history.replaceState(window.history.state, "", url.pathname + url.search + url.hash);
   }
   function renderRequirement(item: string) {
     return <li key={item}><label><input type="checkbox" checked={checked.includes(item)} onChange={event => setChecked(current => event.target.checked ? [...current, item] : current.filter(value => value !== item))}/><span>{item}</span></label></li>;
@@ -55,16 +60,14 @@ export default function StudyAbroadPage() {
         <span className="cla-eyebrow">ATLAS ADMISSION · DU HỌC TOÀN CẦU</span>
         <h1>Tra cứu quốc gia, chương trình du học và điều kiện chuẩn bị</h1>
         <p>Chọn bất kỳ quốc gia/vùng lãnh thổ nào trong danh mục ISO 3166-1. Với những điểm đến đã có nguồn tham khảo, Atlas hiển thị trường, hướng nộp hồ sơ và danh sách chứng chỉ cần kiểm tra. Nơi chưa có dữ liệu xác minh sẽ được ghi rõ, không tạo trường, học phí, yêu cầu hay học bổng giả.</p>
-        <nav className="cla-study-actions" aria-label="Điều hướng chức năng">
-          <a href="/atlas">Tổng quan Atlas</a>
-          <a href="#study-destinations">Chọn quốc gia</a>
-          <a href="#study-programs">Trường & chương trình</a>
-          <a href="#study-requirements">Điều kiện & chứng chỉ</a>
-          <a href="/atlas#atlas-joint-programs">Liên kết tại Việt Nam</a>
-          <a href="/haven#haven-scholarships">Học bổng · Haven</a>
-          <a href="/student/modules">Các module của học sinh</a>
+        <nav className="cla-study-actions" aria-label="Các trang tra cứu du học">
+          <a href={`/atlas/study-abroad${countryCode ? `?country=${countryCode}` : ""}`}>Chọn quốc gia</a>
+          <a href={`/atlas/study-abroad/programs${countryCode ? `?country=${countryCode}` : ""}`}>Trường & chương trình</a>
+          <a href={`/atlas/study-abroad/requirements${countryCode ? `?country=${countryCode}` : ""}`}>Điều kiện & chứng chỉ</a>
+          <a href={`/atlas/study-abroad/sources${countryCode ? `?country=${countryCode}` : ""}`}>Nguồn & quy trình</a>
         </nav>
       </div>
+      <ModuleSectionNav moduleKey="atlas" />
 
       <section id="study-destinations" className="cla-study-panel" aria-label="Bộ lọc điểm đến du học">
         <div className="cla-explorer-filters">
@@ -73,6 +76,7 @@ export default function StudyAbroadPage() {
           </label>
           <label>Chọn điểm đến ({countryCatalog.length} mục ISO)
             <select aria-label="Quốc gia hoặc vùng lãnh thổ du học" value={countryCode} onChange={event => chooseCountry(event.target.value)}>
+              <option value="">Chọn quốc gia/vùng lãnh thổ…</option>
               {countriesToShow.map(entry => <option key={entry.code} value={entry.code}>{entry.name} ({entry.code}){internationalRoutes.some(route => route.isoCode === entry.code) ? " · Đã có nguồn" : " · Chờ dữ liệu"}</option>)}
             </select>
           </label>
@@ -91,8 +95,8 @@ export default function StudyAbroadPage() {
       <div className="cla-study-columns">
         <section id="study-programs" className="cla-study-panel" aria-live="polite">
           <span className="cla-eyebrow">TRƯỜNG / CHƯƠNG TRÌNH / NGUỒN</span>
-          <h2>{selectedCountry?.name ?? "Điểm đến chưa xác định"}</h2>
-          {selectedRoute ? <>
+          <h2>{selectedCountry?.name ?? "Chưa chọn điểm đến"}</h2>
+          {!countryCode ? <div className="cla-unverified-destination" role="status"><strong>Chọn một quốc gia để bắt đầu.</strong><p>CLA không tự chọn quốc gia thay bạn. Chỉ các điểm đến có hồ sơ nguồn mới hiển thị thông tin chi tiết; các điểm đến còn lại được ghi rõ là chưa có dữ liệu xác minh.</p></div> : selectedRoute ? <>
             <p className="cla-source-count">Có danh sách nguồn tham khảo ban đầu; chưa kiểm định đủ điều kiện theo chương trình hoặc năm nhập học.</p>
             <p><strong>Nhóm ngành tham khảo:</strong> {selectedRoute.studyFields.join(" · ")}</p>
             {selectedRoute.targetInstitutions.map(inst => <article key={inst.name} className="cla-study-school">
@@ -143,7 +147,7 @@ export default function StudyAbroadPage() {
           <article><strong>04 · Học bổng</strong><p>Mức tài trợ, điều kiện, giấy tờ, deadline và đường dẫn cấp học bổng chính thức.</p></article>
         </div>
       </section>
-      <p className="cla-source-footnote">Tra cứu học bổng và khả năng tài chính chi tiết tại <a href="/haven#haven-scholarships">Haven Support</a>. Atlas không tự xác nhận đủ điều kiện nộp hồ sơ. Danh mục điểm đến: mã ISO 3166-1, tên hiển thị tiếng Việt. IAU WHED là nguồn tra hệ thống giáo dục và các cơ sở giáo dục được công nhận, không thay thế cổng nộp hồ sơ. Các lộ trình có nguồn minh họa được tích hợp từ ngày 08/11/2026, không tự động cập nhật; cần kiểm tra lại năm tuyển sinh khi nộp đơn.</p>
+      <p className="cla-source-footnote">Tra cứu học bổng và khả năng tài chính chi tiết tại <a href="/haven/scholarships">Haven Support</a>. Atlas không tự xác nhận đủ điều kiện nộp hồ sơ. Danh mục điểm đến: mã ISO 3166-1, tên hiển thị tiếng Việt. IAU WHED là nguồn tra hệ thống giáo dục và các cơ sở giáo dục được công nhận, không thay thế cổng nộp hồ sơ. Các lộ trình có nguồn minh họa được tích hợp từ ngày 08/11/2026, không tự động cập nhật; cần kiểm tra lại năm tuyển sinh khi nộp đơn.</p>
     </section>
   </main>;
 }

@@ -141,7 +141,10 @@ export interface SimulationResult {
   improvement:number;
 
 
-  probability:number;
+  /** Mức gần mục tiêu theo giả định, không phải xác suất đạt. */
+  goalGapReadinessIndex:number;
+  resultKind:"HEURISTIC_SCENARIO";
+  limitations:string[];
 
 
   stability:number;

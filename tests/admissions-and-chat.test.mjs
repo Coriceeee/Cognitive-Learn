@@ -8,10 +8,15 @@ import { domesticInternationalPrograms } from "../src/data/domesticInternational
 import { ADVISOR_PAGE_CONTEXTS, advisorPageContextFromPath, advisorSuggestionsFor, normaliseAdvisorHistory, prepareAdvisorMessage, routeAdvisorQuestion, safeAdvisorDestination, safeAdvisorPageContext } from "../src/lib/advisorChatPolicy.ts";
 import { readFileSync } from "node:fs";
 
-test("CP25-01: Curated universities each link 2024, 2025, 2026", () => {
-  assert.equal(officialUniversities.length, 4);
-  for (const item of officialUniversities) {
+test("CP25-01: Curated universities have sourced years without inventing unverified archives", () => {
+  assert.equal(officialUniversities.length, 10);
+  const threeYearSources = officialUniversities.filter(item => item.years.length === 3);
+  assert.equal(threeYearSources.length, 7);
+  for (const item of threeYearSources) {
     assert.deepEqual(item.years.map(entry => entry.year).sort(), [2024, 2025, 2026]);
+  }
+  for (const item of officialUniversities) {
+    assert.ok(item.years.length >= 1 && item.years.length <= 3);
     for (const year of item.years) {
       assert.match(year.schemeUrl, /^https:\/\//);
       assert.ok(year.methods.length || year.detailsStatus === "official_archive_only");
@@ -75,7 +80,7 @@ test("CP25-09: Chat rejects invalid content and unauthorized roles in history", 
 test("CP25-10: UI routes and protected chat endpoint exist", () => {
   const app = readFileSync(new URL("../src/App.tsx", import.meta.url), "utf8");
   const chat = readFileSync(new URL("../api/gemini-chat.ts", import.meta.url), "utf8");
-  assert.ok(app.includes('path === "/atlas/study-abroad" || path === "/study-abroad" || path === "/haven/study-abroad"'));
+  assert.ok(app.includes('path === "/atlas/study-abroad" || path.startsWith("/atlas/study-abroad/") || path === "/study-abroad" || path === "/haven/study-abroad"'));
   assert.ok(app.includes("<FloatingAdvisorChat"));
   assert.ok(chat.includes("authenticatedRole(") && chat.includes("active !== true") && chat.includes("CORS_ALLOWED_ORIGINS"));
 });
@@ -98,12 +103,12 @@ test("CP25-12: Chat supports same-origin secure deployment and optional CORS ori
 
 test("ROUND-01: Floating assistant routes specialist questions to their owning modules", () => {
   const cases = [
-    ["Điểm chuẩn Bách khoa năm 2026?", "/atlas#atlas-official-admissions"],
-    ["Tổ hợp xét tuyển ngành CNTT", "/atlas#atlas-official-admissions"],
-    ["Học bổng NUS có deadline nào?", "/haven#haven-scholarships"],
+    ["Điểm chuẩn Bách khoa năm 2026?", "/atlas/vietnam"],
+    ["Tổ hợp xét tuyển ngành CNTT", "/atlas/vietnam"],
+    ["Học bổng NUS có deadline nào?", "/haven/scholarships"],
     ["Du học Nhật cần JLPT không?", "/atlas/study-abroad"],
-    ["Tuyển sinh ngành nào tốt?", "/atlas#atlas-official-admissions"],
-    ["Diem chuan dai hoc", "/atlas#atlas-official-admissions"],
+    ["Tuyển sinh ngành nào tốt?", "/atlas/vietnam"],
+    ["Diem chuan dai hoc", "/atlas/vietnam"],
     ["IELTS để nộp trường Anh?", "/atlas/study-abroad"],
   ];
   for (const [question, path] of cases) {
@@ -116,7 +121,7 @@ test("ROUND-01: Floating assistant routes specialist questions to their owning m
 });
 
 test("ROUND-02: Only internal known destinations may appear in chat responses", () => {
-  assert.equal(safeAdvisorDestination("/atlas#atlas-official-admissions"), "/atlas#atlas-official-admissions");
+  assert.equal(safeAdvisorDestination("/atlas/vietnam"), "/atlas/vietnam");
   assert.equal(safeAdvisorDestination("javascript:alert(1)"), undefined);
   assert.equal(safeAdvisorDestination("https://fake-school.example"), undefined);
   assert.equal(safeAdvisorDestination("/admin"), undefined);
@@ -146,7 +151,7 @@ test("ROUND-05: United States and domestic international pathways have official 
   assert.ok(us.targetInstitutions.length >= 2);
   assert.equal(domesticInternationalPrograms.length, 2);
   assert.match(domesticInternationalPrograms[0].admissionsUrl, /^https:\/\/www\.hutech\.edu\.vn/);
-  assert.equal(routeAdvisorQuestion("chương trình liên kết quốc tế")?.destination, "/atlas#atlas-joint-programs");
+  assert.equal(routeAdvisorQuestion("chương trình liên kết quốc tế")?.destination, "/atlas/joint");
 });
 
 test("ROUND-06: TDTU three-year schemes distinguish score scales", () => {
@@ -206,12 +211,12 @@ test("GLOBAL-03: Atlas owns domestic and international admissions; Haven owns sc
   assert.ok(atlas.includes("domesticInternationalPrograms.map"));
   assert.ok(haven.includes('href="/atlas/study-abroad"'));
   assert.ok(haven.includes('id="haven-scholarships"'));
-  assert.ok(submodules.includes('href: "/atlas#atlas-joint-programs"'));
+  assert.ok(submodules.includes('href: "/atlas/joint"'));
   assert.ok(submodules.includes('href: "/atlas/study-abroad"'));
   assert.ok(modules.includes("moduleSubmoduleDirectory"));
   assert.equal(routeAdvisorQuestion("Du học Canada")?.destination, "/atlas/study-abroad");
-  assert.equal(routeAdvisorQuestion("Học bổng Canada")?.destination, "/haven#haven-scholarships");
-  assert.equal(routeAdvisorQuestion("đào tạo liên kết quốc tế tại Việt Nam")?.destination, "/atlas#atlas-joint-programs");
+  assert.equal(routeAdvisorQuestion("Học bổng Canada")?.destination, "/haven/scholarships");
+  assert.equal(routeAdvisorQuestion("đào tạo liên kết quốc tế tại Việt Nam")?.destination, "/atlas/joint");
 });
 
 
@@ -231,7 +236,7 @@ test("MODULE-01: 7 main modules remain while study abroad is an Atlas submodule"
   assert.ok(modules.includes('showAllSubmodules'));
   assert.ok(modules.includes('Xem thêm ${filteredActions.length - 3} chức năng'));
   assert.ok(!policy.includes('destination: "/haven/study-abroad"'));
-  assert.equal(routeAdvisorQuestion("Học bổng du học Canada")?.destination, "/haven#haven-scholarships");
+  assert.equal(routeAdvisorQuestion("Học bổng du học Canada")?.destination, "/haven/scholarships");
   assert.equal(routeAdvisorQuestion("Du học Canada")?.destination, "/atlas/study-abroad");
 });
 

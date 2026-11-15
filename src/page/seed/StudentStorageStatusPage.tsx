@@ -6,61 +6,72 @@ import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
 import "../../styles.css";
 
-type Row = { label: string; collection: string; status: string; details: string };
+type Row = { label: string; status: "Đã lưu" | "Chưa lưu" | "Chưa kiểm tra" | "Chưa thể đồng bộ" };
 const sources = [
-  ["Tài khoản", "users"], ["Hồ sơ", "learning_profiles"],
-  ["Bảng điểm", "student_transcripts"], ["Atlas", "atlas_workspaces"],
-  ["Orion", "orion_drafts"], ["Pulse", "pulse_drafts"], ["Haven", "haven_drafts"],
-  ["Bản nháp cũ", "module_drafts"],
+  ["Thông tin tài khoản", "users"], ["Hồ sơ học tập", "learning_profiles"],
+  ["Bảng điểm", "student_transcripts"], ["Nguyện vọng & tra cứu", "atlas_workspaces"],
+  ["Kế hoạch học tập", "orion_drafts"], ["Theo dõi tiến độ", "pulse_drafts"],
+  ["Hỗ trợ tài chính", "haven_drafts"], ["Bản nháp cũ", "module_drafts"],
 ] as const;
 
-/** Diagnostic page. Read-only: no dummy writes or collections are created. */
+/** Student-friendly status view. Technical collection names and project identifiers stay private. */
 export default function StudentStorageStatusPage() {
   const [user, setUser] = useState<User | null>(auth.currentUser);
-  const [rows, setRows] = useState<Row[]>([]);
+  const [rows, setRows] = useState<Row[]>(sources.map(([label]) => ({ label, status: "Chưa kiểm tra" })));
   const [busy, setBusy] = useState(false);
+  const [checkedAt, setCheckedAt] = useState<string>("");
   useEffect(() => onAuthStateChanged(auth, setUser), []);
 
   async function inspect() {
     if (!user) return;
     setBusy(true);
     try {
-      const results = await Promise.all(sources.map(async ([label, coll]): Promise<Row> => {
+      const results = await Promise.all(sources.map(async ([label, collectionName]): Promise<Row> => {
         try {
-          const snap = await getDocFromServer(doc(db, coll, user.uid));
-          const data = snap.data();
-          return { label, collection: coll, status: snap.exists() ? "Có tài liệu" : "Chưa lưu",
-            details: data ? `Trường dữ liệu: ${Object.keys(data).join(", ")}` : "" };
-        } catch (err) {
-          const code = typeof err === "object" && err !== null && "code" in err ? String(err.code) : "unknown";
-          return { label, collection: coll, status: code === "permission-denied" ? "Bị từ chối quyền" : "Lỗi kết nối", details: code };
+          const snap = await getDocFromServer(doc(db, collectionName, user.uid));
+          return { label, status: snap.exists() ? "Đã lưu" : "Chưa lưu" };
+        } catch {
+          return { label, status: "Chưa thể đồng bộ" };
         }
       }));
       setRows(results);
-    } finally { setBusy(false); }
+      setCheckedAt(new Date().toLocaleString("vi-VN"));
+    } finally {
+      setBusy(false);
+    }
   }
+
+  const savedCount = rows.filter(row => row.status === "Đã lưu").length;
   return (
     <main className="profile-page cla-transcript-page">
       <div className="profile-floating-header">
         <a className="profile-home-logo" href="/student"><img src={appLogo} alt="Cognitive Learn" /></a>
         <UserMenu />
       </div>
-      <section className="profile-shell">
-        <header className="profile-head"><span>FIRESTORE · KIỂM TRA DỮ LIỆU</span>
-          <h1>Lưu trữ của tài khoản</h1>
-          <p>Mỗi collection có một tài liệu mang UID của bạn. Chỉ khi lưu thành công, tài liệu mới xuất hiện. Kiểm tra này chỉ đọc từ server.</p>
+      <section className="profile-shell cla-my-data-page">
+        <header className="profile-head">
+          <span>HỒ SƠ CỦA BẠN · ĐỒNG BỘ DỮ LIỆU</span>
+          <h1>Dữ liệu của tôi</h1>
+          <p>Kiểm tra những phần thông tin đã lưu trong tài khoản của bạn. Chỉ dữ liệu thuộc tài khoản đang đăng nhập mới được kiểm tra.</p>
         </header>
-        <p>Project: <code>{db.app.options.projectId || "Chưa xác định"}</code></p>
-        <button type="button" disabled={!user || busy} onClick={() => void inspect()}>{busy ? "Đang kiểm tra…" : "Kiểm tra Firestore"}</button>
-        {!user && <p>Hãy đăng nhập để xem trạng thái dữ liệu.</p>}
-        <div style={{display:"grid",gap:12,marginTop:20}}>
-          {rows.map(row => <article key={row.collection} className="student-panel" style={{padding:16}}>
-            <strong>{row.label}: {row.status}</strong>
-            <p><code>{row.collection}/{"{uid}"}</code></p>
-            {row.details && <p>{row.details}</p>}
-          </article>)}
+        <div className="cla-my-data-summary">
+          <strong>{savedCount}/{rows.length}</strong>
+          <span>nhóm dữ liệu đã lưu</span>
+          <button type="button" disabled={!user || busy} onClick={() => void inspect()}>
+            {busy ? "Đang kiểm tra…" : "Kiểm tra trạng thái đồng bộ"}
+          </button>
         </div>
-        <p><a href="/student/transcript">Kho bảng điểm</a> · <a href="/student/profile">Nhập điểm</a> · <a href="/student">Dashboard</a></p>
+        {!user && <p role="status">Hãy đăng nhập để xem trạng thái dữ liệu.</p>}
+        <div className="cla-my-data-grid">
+          {rows.map(row => (
+            <article key={row.label} className="cla-my-data-card">
+              <span>{row.label}</span>
+              <strong className={`is-${row.status === "Đã lưu" ? "saved" : row.status === "Chưa thể đồng bộ" ? "error" : "pending"}`}>{row.status}</strong>
+            </article>
+          ))}
+        </div>
+        {checkedAt && <p className="cla-my-data-footnote">Lần kiểm tra gần nhất: {checkedAt}. Trạng thái này chỉ xác nhận khả năng đọc dữ liệu, không thay thế việc kiểm tra nội dung hồ sơ.</p>}
+        <p><a href="/student/transcript">Bảng điểm</a> · <a href="/student/profile">Hồ sơ học tập</a> · <a href="/student">Dashboard</a></p>
       </section>
     </main>
   );

@@ -1,0 +1,20 @@
+{
+  "utc": "2026-11-15T08:22:00.251800+00:00",
+  "gold_sha256": "9a6efb8c45778edfa13f6e26abd7ac03a16af2f6291f6fede7d7aa473b79d5bf",
+  "predictions_sha256": "cb7d39465ed84e6e645304a28ba5ba1eeb9af4ec75ebbfd6f9d847c8de7e6cb7",
+  "n": 1,
+  "n_answered": 1,
+  "n_correct": 0,
+  "accuracy_all_questions": 0.0,
+  "answer_coverage": 1.0,
+  "accuracy_on_answered": 0.0,
+  "per_category": {
+    "Math": {
+      "n": 1,
+      "correct": 0,
+      "answered": 1,
+      "accuracy_all_questions": 0.0
+    }
+  },
+  "warning": "Results describe answering this dataset only, not learning gains or CLA intervention efficacy"
+}

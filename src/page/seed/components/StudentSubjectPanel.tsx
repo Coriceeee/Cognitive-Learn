@@ -9,7 +9,7 @@ export default function StudentSubjectPanel({ onUpdate }: StudentSubjectPanelPro
   return (
     <article className="student-panel cla-live-transcript-panel">
       <div className="student-panel-head">
-        <div><span>ĐIỂM HỌC TẬP · FIRESTORE</span><h2>Bảng điểm của bạn</h2></div>
+        <div><span>ĐIỂM HỌC TẬP · HỒ SƠ CỦA BẠN</span><h2>Bảng điểm của bạn</h2></div>
         <button type="button" onClick={onUpdate}>Nhập / cập nhật</button>
       </div>
       {status === "loading" && <p role="status">Đang đồng bộ bảng điểm…</p>}
@@ -28,9 +28,9 @@ export default function StudentSubjectPanel({ onUpdate }: StudentSubjectPanelPro
           ))}
         </div>
       )}
-      {source === "legacy" && status === "ready" && <p className="cla-transcript-hint" role="status">Điểm đang được đọc từ hồ sơ Firestore cũ. Vào trang nhập điểm rồi nhấn Lưu để chuyển sang collection student_transcripts riêng.</p>}
+      {source === "legacy" && status === "ready" && <p className="cla-transcript-hint" role="status">Điểm đang được lấy từ hồ sơ cũ. Vào trang nhập điểm và lưu lại để chuẩn hóa kho bảng điểm.</p>}
       <div className="cla-transcript-actions"><a href="/student/transcript">Xem bảng điểm 3 năm và 6 học kỳ →</a></div>
-      <p className="cla-transcript-hint">Điểm được lấy từ kho bảng điểm Firestore riêng; chưa có dữ liệu sẽ không tự động hiện thành 0. Điểm tạm tính không phải kết quả học kỳ chính thức.</p>
+      <p className="cla-transcript-hint">Điểm được lấy từ hồ sơ đã lưu; dữ liệu còn thiếu sẽ không tự động chuyển thành 0. Điểm tạm tính không phải kết quả học kỳ chính thức.</p>
     </article>
   );
 }

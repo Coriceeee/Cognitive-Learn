@@ -82,7 +82,7 @@ export function predictLearningOutcome(
 
 
 
-  const achievementProbability =
+  const goalGapReadinessIndex =
 
     clamp(
 
@@ -160,12 +160,12 @@ export function predictLearningOutcome(
   ){
 
     factors.push(
-      "Tính ổn định học tập cao"
+      "SCI ở ngưỡng cao theo quy tắc thử nghiệm"
     );
 
 
     keyDrivers.push(
-      "SCI tốt giúp duy trì tiến bộ"
+      "SCI là yếu tố đóng góp trong công thức thử nghiệm"
     );
 
   }
@@ -178,12 +178,12 @@ export function predictLearningOutcome(
   ){
 
     factors.push(
-      "Khả năng duy trì trạng thái tốt"
+      "CRI ở ngưỡng cao theo quy tắc thử nghiệm"
     );
 
 
     keyDrivers.push(
-      "CRI cao giúp giảm biến động"
+      "CRI là yếu tố đóng góp trong công thức thử nghiệm"
     );
 
   }
@@ -260,7 +260,7 @@ export function predictLearningOutcome(
 
 
 
-    probability:
+    cognitiveStrengthIndex:
 
       Math.round(
         features.cognitiveStrength
@@ -269,10 +269,10 @@ export function predictLearningOutcome(
 
 
 
-    achievementProbability:
+    goalGapReadinessIndex:
 
       Math.round(
-        achievementProbability
+        goalGapReadinessIndex
       ),
 
 
@@ -283,7 +283,7 @@ export function predictLearningOutcome(
 
 
 
-    confidence:
+    stabilityCompletionIndex:
 
       Math.round(
 
@@ -335,20 +335,25 @@ export function predictLearningOutcome(
 
     explanation:[
 
-      "Dự đoán dựa trên Cognitive Vector 7 chiều.",
+      "Ước tính kịch bản dựa trên Cognitive Vector 7 chiều và các trọng số thử nghiệm.",
 
-      "Feature Engineering kết hợp nhận thức, hành vi và tính ổn định.",
+      "Chỉ số khoảng cách mục tiêu được tính từ chênh lệch điểm, KHÔNG phải xác suất đạt mục tiêu.",
 
-      "Output có thể sử dụng cho Orion Simulation.",
+      "Orion chỉ so sánh các kịch bản theo cùng giả định; không chứng minh hiệu quả can thiệp.",
 
     ],
 
-
-
+    resultKind:"RULE_BASED_SCENARIO",
+    calibrationStatus:"NOT_CALIBRATED",
+    limitations:[
+      "Không có mô hình xác suất được hiệu chuẩn bằng outcome thực tế.",
+      "Điểm dự kiến là kết quả công thức giả lập, không phải dự báo ML đã qua validation.",
+      "Các trọng số và mức độ rủi ro là giả định của prototype, không phải ngưỡng lâm sàng.",
+    ],
 
     modelVersion:
 
-      "Prediction Engine v2.0-MVP"
+      "Prediction Rule Engine v2.1.0-heuristic"
 
   };
 

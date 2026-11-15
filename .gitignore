@@ -24,6 +24,7 @@ research/data/splits_private/
 research/evidence/private/
 research/reports/private/
 reports/security/*.log
+reports/security/*.json
 
 # Python-generated artifacts
 __pycache__/
@@ -35,3 +36,18 @@ firebase-debug.log
 ui-debug.log
 java_pid*.hprof
 hs_err_pid*.log
+
+# Optional Web Push deployment credentials and local runtime state
+functions/.env
+functions/.env.*
+!functions/.env.example
+functions/node_modules/
+functions/.runtimeconfig.json
+
+# External Hugging Face datasets and predictions must not be committed
+research/huggingface/**/work/
+research/huggingface/**/.venv/
+
+# Real OULAD research data and derivatives — never commit or publish
+research/oulad/data/
+research/oulad/work/

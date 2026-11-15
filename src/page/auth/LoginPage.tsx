@@ -1,30 +1,28 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDocFromServer, setDoc } from "firebase/firestore";
 import { auth, db } from "../../lib/firebase";
+import {
+  checkAccountDocument,
+  firebaseErrorCode,
+  readAccountDocumentWithRetry,
+  type AccountRole,
+} from "../../lib/accountVerification";
 import appLogo from "../../assets/logo cla.png";
 import "../../styles.css";
 
-type UserRole = "student" | "teacher" | "parent" | "admin";
+type UserRole = AccountRole;
 type SelectableRole = "student" | "teacher" | "parent";
 type AuthMode = "login" | "register";
 
-const roleLabels: Record<SelectableRole, string> = {
-  student: "Học sinh",
-  teacher: "Giáo viên",
-  parent: "Phụ huynh",
-};
-
-function describeSignInError(error: unknown): string {
-  const code =
-    typeof error === "object" && error !== null && "code" in error
-      ? String(error.code)
-      : "unknown";
+function describeSignInError(error: unknown, authenticated = false): string {
+  const code = firebaseErrorCode(error);
 
   switch (code) {
     case "auth/invalid-credential":
@@ -38,9 +36,13 @@ function describeSignInError(error: unknown): string {
     case "auth/network-request-failed":
       return "Không kết nối được Firebase Authentication. Hãy kiểm tra mạng.";
     case "permission-denied":
-      return "Đăng nhập Firebase đã qua bước xác thực nhưng Firestore từ chối đọc vai trò tại users/{uid}. Hãy kiểm tra Security Rules.";
+      return "Đã xác thực tài khoản, nhưng Firestore từ chối đọc hồ sơ vai trò. Kiểm tra Firestore Rules của users/{uid}.";
     case "unavailable":
-      return "Firestore hiện không phản hồi. Hãy kiểm tra kết nối và thử lại.";
+    case "deadline-exceeded":
+    case "aborted":
+      return authenticated
+        ? "Đã xác thực tài khoản, nhưng Cloud Firestore chưa phản hồi để xác minh quyền. Hãy thử lại xác minh quyền; kiểm tra mạng, Firestore Database và Firebase Project nếu vẫn lỗi."
+        : "Cloud Firestore chưa phản hồi. Kiểm tra mạng và Firebase Project.";
     default:
       return "Không thể hoàn tất đăng nhập. Kiểm tra Console để xác định lỗi Firebase (" + code + ").";
   }
@@ -57,6 +59,16 @@ export default function LoginPage() {
 
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [hasAuthenticatedSession, setHasAuthenticatedSession] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (user) => setHasAuthenticatedSession(Boolean(user)),
+      () => setHasAuthenticatedSession(false),
+    );
+    return unsubscribe;
+  }, []);
 
   function normalizeEmail(value: string) {
     return value.trim().toLowerCase();
@@ -69,7 +81,7 @@ export default function LoginPage() {
     name?: string | null
   ) {
     const userRef = doc(db, "users", uid);
-    const userSnapshot = await getDoc(userRef);
+    const userSnapshot = await readAccountDocumentWithRetry(() => getDocFromServer(userRef));
 
     if (userSnapshot.exists()) {
       return userSnapshot.data();
@@ -87,52 +99,64 @@ export default function LoginPage() {
     return profile;
   }
 
-  async function redirectByRole(role: UserRole, selected: SelectableRole) {
-    if (role === "admin") {
-      window.location.href = "/admin";
+  function redirectByRole(role: UserRole) {
+    // Login role always comes from a fresh Firestore read, never a UI tab or email.
+    window.location.href = role === "admin" ? "/admin" : `/${role}`;
+  }
+
+  async function verifyAndRedirect(uid: string) {
+    const snapshot = await readAccountDocumentWithRetry(() =>
+      getDocFromServer(doc(db, "users", uid)),
+    );
+    const account = checkAccountDocument(snapshot.exists(), snapshot.exists() ? snapshot.data() : null);
+    if (account.status !== "ready") {
+      if (account.status === "no-profile") {
+        setMessage("Firebase đã xác thực, nhưng chưa có hồ sơ users/{uid}. Cần cấp hồ sơ hợp lệ trong đúng Firebase Project.");
+      } else if (account.status === "inactive") {
+        setMessage("Tài khoản chưa có active: true hoặc đang bị khóa. Hãy kiểm tra hồ sơ trong Firestore.");
+      } else {
+        setMessage("Vai trò tài khoản không hợp lệ. Cần kiểm tra trường role trong Firestore.");
+      }
       return;
     }
+    redirectByRole(account.role);
+  }
 
-    if (role !== selected) {
-      setMessage(`Tài khoản này không thuộc vai trò ${roleLabels[selected]}.`);
+  async function handleResumeVerification() {
+    const user = auth.currentUser;
+    if (!user) {
+      setMessage("Phiên đăng nhập không còn hiệu lực. Hãy đăng nhập lại.");
       return;
     }
-
-    window.location.href = `/${role}`;
+    try {
+      setLoading(true);
+      setMessage("Đang xác minh lại vai trò từ Firestore...");
+      await verifyAndRedirect(user.uid);
+    } catch (error) {
+      console.error("CLA role verification failed:", error);
+      setMessage(describeSignInError(error, true));
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function handleLogin(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
+    let authenticated = false;
     try {
       setLoading(true);
-      setMessage("Đang kiểm tra tài khoản...");
-
+      setMessage("Đang xác thực tài khoản với Firebase...");
       const credential = await signInWithEmailAndPassword(
         auth,
         normalizeEmail(email),
-        password
+        password,
       );
-
-      const userRef = doc(db, "users", credential.user.uid);
-      const userSnapshot = await getDoc(userRef);
-
-      if (!userSnapshot.exists()) {
-        setMessage("Tài khoản chưa có hồ sơ. Liên hệ quản trị viên để được cấp quyền.");
-        return;
-      }
-
-      const profile = userSnapshot.data();
-
-      if (profile.active === false) {
-        setMessage("Tài khoản này hiện đang bị khóa.");
-        return;
-      }
-
-      await redirectByRole(profile.role as UserRole, selectedRole);
+      authenticated = true;
+      setMessage("Đã xác thực. Đang kiểm tra vai trò từ Firestore...");
+      await verifyAndRedirect(credential.user.uid);
     } catch (error) {
-      console.error(error);
-      setMessage(describeSignInError(error));
+      console.error("CLA login failed:", error);
+      setMessage(describeSignInError(error, authenticated));
     } finally {
       setLoading(false);
     }
@@ -189,12 +213,12 @@ export default function LoginPage() {
         credential.user.displayName
       );
 
-      if (profile.active === false) {
-        setMessage("Tài khoản này hiện đang bị khóa.");
+      const check = checkAccountDocument(true, profile);
+      if (check.status !== "ready") {
+        setMessage("Hồ sơ tài khoản không hợp lệ hoặc chưa được kích hoạt. Kiểm tra role và active: true trong Firestore.");
         return;
       }
-
-      await redirectByRole(profile.role as UserRole, selectedRole);
+      redirectByRole(check.role);
     } catch (error) {
       console.error(error);
       setMessage(describeSignInError(error));
@@ -300,7 +324,10 @@ export default function LoginPage() {
           </div>
 
           <div className="role-selector">
-            <span className="role-selector-label">{mode === "login" ? "Vai trò tài khoản" : "Chọn vai trò tài khoản"}</span>
+            <span className="role-selector-label">Vai trò tài khoản</span>
+            {mode === "login" ? (
+              <p className="login-role-hint">CLA tự xác minh vai trò theo Firestore. Admin sẽ vào trang quản trị mà không cần chọn tab Học sinh.</p>
+            ) : (
             <div className="role-tabs" role="group" aria-label="Chọn vai trò tài khoản">
             <button
               type="button"
@@ -326,6 +353,7 @@ export default function LoginPage() {
               Phụ huynh
             </button>
             </div>
+            )}
           </div>
 
           <form
@@ -420,7 +448,12 @@ export default function LoginPage() {
               </button>
             </p>
 
-            {message && <p className="login-message">{message}</p>}
+            {hasAuthenticatedSession && mode === "login" && (
+              <button type="button" className="google-button" onClick={handleResumeVerification} disabled={loading}>
+                Thử lại xác minh quyền (không cần nhập mật khẩu)
+              </button>
+            )}
+            {message && <p className="login-message" role="status" aria-live="polite">{message}</p>}
           </form>
         </section>
       </section>

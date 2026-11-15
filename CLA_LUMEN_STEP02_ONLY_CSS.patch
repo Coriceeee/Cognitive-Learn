@@ -1,0 +1,32 @@
+--- a/src/styles/24-cla-subpages-ui.css
++++ b/src/styles/24-cla-subpages-ui.css
+@@ -159,7 +159,6 @@
+ 
+ /* Dedicated page isolation: overview shows the module identity and route choices only. */
+ .app-content[data-cla-route="/atlas"] .atlas-shell > :not(.atlas-hero):not(.cla-module-subnav):not(.atlas-warning),
+-.app-content[data-cla-route="/lumen"] .lumen-shell > :not(.cla-module-subnav):not(#lumen-indices):not(.lumen-error-card):not(.lumen-empty-card),
+ .app-content[data-cla-route="/orion"] .orion-shell > :not(.orion-hero):not(.cla-module-subnav),
+ .app-content[data-cla-route="/pulse"] .pulse-shell > :not(.pulse-hero):not(.cla-module-subnav),
+ .app-content[data-cla-route="/haven"] .haven-shell > :not(.haven-hero):not(.cla-module-subnav) {
+@@ -204,12 +203,15 @@
+   font-size: 12px;
+ }
+ 
+-/* Lumen: isolate indices, longitudinal history, insights and assistant explanation. */
+-.app-content[data-cla-route="/lumen/indices"] .lumen-shell > :not(.cla-module-subnav):not(#lumen-indices):not(.lumen-error-card):not(.lumen-empty-card),
+-.app-content[data-cla-route="/lumen"] .lumen-shell > :not(.cla-module-subnav):not(#lumen-indices):not(.lumen-error-card):not(.lumen-empty-card) { display: none !important; }
+-.app-content[data-cla-route="/lumen/history"] .lumen-shell > :not(.cla-module-subnav):not(#lumen-growth):not(.lumen-error-card):not(.lumen-empty-card) { display: none !important; }
+-.app-content[data-cla-route="/lumen/insights"] .lumen-shell > :not(.cla-module-subnav):not(#lumen-insights):not(.lumen-error-card):not(.lumen-empty-card) { display: none !important; }
+-.app-content[data-cla-route="/lumen/assistant"] .lumen-shell > :not(.cla-module-subnav):not(#lumen-gemini):not(.lumen-error-card):not(.lumen-empty-card) { display: none !important; }
++/* Lumen: show each focused task together with its evidence and data-quality context.
++ * The direct children below come from LumenPage.tsx; no engine logic is changed.
++ * Keep warnings and footer visible on every route so missing data is explainable.
++ */
++.app-content[data-cla-route="/lumen"] .lumen-shell > :not(.cla-module-subnav):not(#lumen-indices):not(.cla-signal-atlas):not(.lumen-evidence-card):not(.lumen-data-warning):not(.lumen-error-card):not(.lumen-empty-card):not(.lumen-footer),
++.app-content[data-cla-route="/lumen/indices"] .lumen-shell > :not(.cla-module-subnav):not(#lumen-indices):not(.cla-signal-atlas):not(.lumen-evidence-card):not(.lumen-data-warning):not(.lumen-error-card):not(.lumen-empty-card):not(.lumen-footer) { display: none !important; }
++.app-content[data-cla-route="/lumen/history"] .lumen-shell > :not(.cla-module-subnav):not(#lumen-growth):not(.cla-signal-atlas):not(.lumen-evidence-card):not(.lumen-data-warning):not(.lumen-error-card):not(.lumen-empty-card):not(.lumen-footer) { display: none !important; }
++.app-content[data-cla-route="/lumen/insights"] .lumen-shell > :not(.cla-module-subnav):not(#lumen-insights):not(.lumen-panel):not(.lumen-evidence-card):not(.lumen-data-warning):not(.lumen-error-card):not(.lumen-empty-card):not(.lumen-footer) { display: none !important; }
++.app-content[data-cla-route="/lumen/assistant"] .lumen-shell > :not(.cla-module-subnav):not(#lumen-gemini):not(.lumen-evidence-card):not(.lumen-data-warning):not(.lumen-error-card):not(.lumen-empty-card):not(.lumen-footer) { display: none !important; }
+ 
+ /* Orion: input, scenario comparison and weekly roadmap are distinct screens. */
+ .app-content[data-cla-route="/orion/inputs"] .orion-shell > :not(.orion-hero):not(.cla-module-subnav):not(#orion-input):not(.orion-warning) { display: none !important; }

@@ -23,15 +23,28 @@ function round2(value: number) {
   return Math.round(value * 100) / 100;
 }
 
+/**
+ * A valid observed subject mark is a number in [0,10].
+ * Missing and malformed marks stay absent; 0 is a valid observed mark.
+ * Commas in student-entered decimal strings are accepted.
+ */
+export function parseSubjectScore(value: unknown): number | undefined {
+  if (typeof value === "number") {
+    return Number.isFinite(value) && value >= 0 && value <= 10 ? value : undefined;
+  }
+  if (typeof value !== "string") return undefined;
+  const trimmed = value.trim();
+  if (!/^(?:\d{1,2})(?:[.,]\d+)?$/.test(trimmed)) return undefined;
+  const parsed = Number(trimmed.replace(",", "."));
+  return Number.isFinite(parsed) && parsed >= 0 && parsed <= 10 ? parsed : undefined;
+}
+
 function toNumber(value: unknown) {
   if (typeof value === "number" && Number.isFinite(value)) return value;
-
-  if (typeof value === "string" && value.trim() !== "") {
+  if (typeof value === "string" && value.trim()) {
     const parsed = Number(value);
-
     if (Number.isFinite(parsed)) return parsed;
   }
-
   return 0;
 }
 
@@ -44,15 +57,14 @@ function hasSubjectScore(
   subjectScores: SubjectScoreMap,
   subject: SubjectCode
 ) {
-  const score = toNumber(subjectScores[subject]);
-  return score > 0;
+  return parseSubjectScore(subjectScores[subject]) !== undefined;
 }
 
 function getSubjectScore(
   subjectScores: SubjectScoreMap,
   subject: SubjectCode
 ) {
-  return clamp(toNumber(subjectScores[subject]), 0, 10);
+  return parseSubjectScore(subjectScores[subject]) ?? 0;
 }
 
 export function calculateCombinationScore(
@@ -145,29 +157,22 @@ export function convertExternalExamScore(
 
 function buildBestOption(
   combinationOptions: CombinationScoreResult[],
-  externalOptions: ExternalScoreResult[]
+  _externalOptions: ExternalScoreResult[]
 ): ScoreConversionReport["bestOption"] {
-  const combinationCandidates = combinationOptions.map((option) => ({
-    label: option.combinationCode,
-    method: "COMBINATION" as const,
-    score: option.convertedScore,
-    normalizedScore: option.normalizedScore,
-  }));
+  // Do not rank incomplete combinations (partial sums) or compare unrelated
+  // external-exam scales without institution-specific conversion rules.
+  const completeCombinations = combinationOptions
+    .filter((option) => option.missingSubjects.length === 0)
+    .map((option) => ({
+      label: option.combinationCode,
+      method: "COMBINATION" as const,
+      score: option.convertedScore,
+      normalizedScore: option.normalizedScore,
+    }));
 
-  const externalCandidates = externalOptions.map((option) => ({
-    label: option.methodLabel,
-    method: option.method,
-    score: option.convertedScore ?? option.rawScore,
-    normalizedScore: option.normalizedScore,
-  }));
-
-  const allCandidates = [...combinationCandidates, ...externalCandidates];
-
-  if (allCandidates.length === 0) return null;
-
-  return allCandidates.sort(
+  return completeCombinations.sort(
     (a, b) => b.normalizedScore - a.normalizedScore
-  )[0];
+  )[0] ?? null;
 }
 
 export function buildScoreConversionReport({

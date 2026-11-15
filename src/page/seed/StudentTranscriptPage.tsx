@@ -18,19 +18,19 @@ export default function StudentTranscriptPage() {
       </div>
       <section className="profile-shell">
         <header className="profile-head">
-          <span>KHO BẢNG ĐIỂM · FIRESTORE</span>
+          <span>KHO BẢNG ĐIỂM · HỒ SƠ CỦA BẠN</span>
           <h1>Bảng điểm THPT đã lưu</h1>
           <p>Kho điểm hiển thị 9 môn hiện đang học, gồm Giáo dục quốc phòng và an ninh. Điểm của môn từng học trước đây vẫn được giữ trong cơ sở dữ liệu, nhưng không cộng vào trung bình của tổ hợp hiện tại.</p>
         </header>
         <div className="cla-transcript-page-actions"><a href="/student/profile">Nhập / sửa bảng điểm →</a></div>
-        {status === "loading" && <p role="status">Đang đọc bảng điểm từ Firestore…</p>}
+        {status === "loading" && <p role="status">Đang tải bảng điểm đã lưu…</p>}
         {status === "signed-out" && <p>Hãy đăng nhập bằng tài khoản học sinh để xem bảng điểm.</p>}
         {status === "empty" && <p>Chưa có bảng điểm trong hồ sơ. Hãy vào trang nhập hồ sơ để lưu dữ liệu.</p>}
         {status === "error" && <p role="alert">{error}</p>}
         {data && status === "ready" && (
           <>
             <div className="cla-transcript-meta">
-              <span>Nguồn: <code>{source === "legacy" ? "learning_profiles/{uid}" : "student_transcripts/{uid}"}</code>{source === "legacy" ? " · Dữ liệu cũ chưa chuyển: vào trang nhập điểm và nhấn Lưu." : " · Kho bảng điểm riêng của tài khoản."}</span>
+              <span>{source === "legacy" ? "Bảng điểm đang ở định dạng lưu cũ · Hãy mở trang nhập điểm và lưu lại để chuẩn hóa." : "Bảng điểm đã được lưu trong hồ sơ của bạn."}</span>
               <span>Lần cập nhật: {data.updatedAt ? data.updatedAt.toLocaleString("vi-VN") : "Chưa xác định"}</span>
             </div>
             <nav className="profile-grade-tabs" aria-label="Chọn năm học">

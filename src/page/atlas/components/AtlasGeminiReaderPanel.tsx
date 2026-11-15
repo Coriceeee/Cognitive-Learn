@@ -1,3 +1,4 @@
+import { pushAppNotice } from "../../../lib/appNotices";
 import { useState } from "react";
 import {
   extractAdmissionData,
@@ -54,11 +55,13 @@ export default function AtlasGeminiReaderPanel({
 
       if (!result.draft) {
         setMessage("Gemini chưa trả về dữ liệu tuyển sinh.");
+        pushAppNotice({kind:"info", title:"Chưa có dữ liệu để phân tích", detail:"Gemini chưa trả về kết quả. Hãy thử lại hoặc kiểm tra tên trường."});
         return;
       }
 
       setDraft(result.draft);
       setRawText(result.rawText || "");
+      pushAppNotice({kind:"success", title:"Đã hoàn tất tra cứu Atlas", detail:"Gemini đã trả bản nháp tuyển sinh. Hãy kiểm tra năm, ngành và nguồn gốc trước khi sử dụng."});
 
       setMessage(
         result.usedSearch
@@ -67,6 +70,7 @@ export default function AtlasGeminiReaderPanel({
       );
     } catch (error) {
       setMessage(error instanceof Error ? error.message : String(error));
+      pushAppNotice({kind:"error", title:"Tra cứu Atlas không thành công", detail:"Không thể nhận kết quả từ Gemini. Kiểm tra kết nối hoặc trạng thái API rồi thử lại."});
     } finally {
       setLoading(false);
     }
@@ -77,9 +81,11 @@ export default function AtlasGeminiReaderPanel({
     setLoading(true);
     try {
       await onAddGeminiDraft(draft);
-      setMessage("Đã lưu dữ liệu Atlas lên Firestore.");
+      setMessage("Đã lưu dữ liệu tuyển sinh vào kho Atlas.");
+      pushAppNotice({kind:"success", title:"Đã lưu bản nháp tuyển sinh", detail:"Dữ liệu đã được lưu vào kho Atlas ở trạng thái chờ xác minh, không phải quy định đã duyệt."});
     } catch (error) {
-      setMessage(error instanceof Error ? error.message : "Không thể lưu dữ liệu lên Firestore.");
+      setMessage(error instanceof Error ? error.message : "Không thể lưu dữ liệu tuyển sinh vào kho Atlas.");
+      pushAppNotice({kind:"error", title:"Không lưu được dữ liệu Atlas", detail:"Kiểm tra kết nối và quyền truy cập, sau đó thử lại."});
     } finally { setLoading(false); }
   }
 
@@ -195,7 +201,7 @@ export default function AtlasGeminiReaderPanel({
                     <p>Tổ hợp: {getArrayText(program.combinations)}</p>
                     <p>Phương thức: {getArrayText(program.methods)}</p>
                     <p>Học phí: {getValue(program.tuitionLabel)}</p>
-                    <p>Học bổng: <a href="/haven#haven-scholarships">Tra điều kiện và nguồn tại Haven ↗</a></p>
+                    <p>Học bổng: <a href="/haven/scholarships">Tra điều kiện và nguồn tại Haven ↗</a></p>
                     {program.notes && <p>Ghi chú: {program.notes}</p>}
                   </div>
                 ))}

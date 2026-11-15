@@ -15,9 +15,11 @@ import LumenOverview from "./components/LumenOverview";
 import LumenInsightPanel from "./components/LumenInsightPanel";
 import LumenDecisionPanel from "./components/LumenDecisionPanel";
 import LumenEvidencePanel from "./components/LumenEvidencePanel";
+import LumenResearchEvidence from "./components/LumenResearchEvidence";
 import LumenStrategyPanel from "./components/LumenStrategyPanel";
 import CognitiveGrowthPanel from "../seed/components/CognitiveGrowthPanel";
 import LumenSignalAtlas from "./components/LumenSignalAtlas";
+import ClosedLoopPanel from "../../components/journey/ClosedLoopPanel";
 
 
 export default function LumenPage() {
@@ -113,6 +115,8 @@ export default function LumenPage() {
 
       <section className="lumen-shell">
         <ModuleSectionNav moduleKey="lumen" />
+        <ClosedLoopPanel mode="lumen" />
+        <LumenResearchEvidence />
 
         {
           error && !hasProfile ? (

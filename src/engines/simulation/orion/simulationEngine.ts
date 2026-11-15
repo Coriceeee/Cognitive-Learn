@@ -161,7 +161,7 @@ prediction:{
 
 predictedScore:number;
 
-probability:number;
+cognitiveStrengthIndex:number;
 
 stability:number;
 
@@ -216,7 +216,7 @@ gain
 
 +
 
-prediction.probability*0.4
+prediction.cognitiveStrengthIndex*0.4
 
 +
 
@@ -303,7 +303,7 @@ const result:string[]=[];
 if(impact.SCI>0)
 
 result.push(
-"Khả năng duy trì học tập được cải thiện."
+"Chỉ số SCI tăng trong kịch bản giả định; chưa có kết quả quan sát."
 );
 
 
@@ -311,7 +311,7 @@ result.push(
 if(impact.FRI>0)
 
 result.push(
-"Có nguy cơ tăng áp lực học tập."
+"Chỉ số FRI tăng trong kịch bản, cần xem xét giả định áp lực."
 );
 
 
@@ -319,7 +319,7 @@ result.push(
 if(impact.BDI<0)
 
 result.push(
-"Hành vi học tập ổn định hơn."
+"Chỉ số BDI giảm trong kịch bản giả định; chưa có kết quả quan sát."
 );
 
 
@@ -327,7 +327,7 @@ result.push(
 if(impact.CRI>0)
 
 result.push(
-"Độ tin cậy nhận thức tăng."
+"Chỉ số CRI tăng theo giả định, không phải độ tin cậy thống kê."
 );
 
 
@@ -335,7 +335,7 @@ result.push(
 if(result.length===0)
 
 result.push(
-"Không có thay đổi đáng kể."
+"Không có thay đổi theo những chỉ báo đang được so sánh."
 );
 
 
@@ -448,9 +448,15 @@ input.currentScore
 
 
 
-probability:
+goalGapReadinessIndex:
 
-prediction.achievementProbability,
+prediction.goalGapReadinessIndex,
+
+resultKind:"HEURISTIC_SCENARIO",
+limitations:[
+  ...prediction.limitations,
+  "Điểm ưu tiên kịch bản là điểm tiện ích tương đối theo trọng số thử nghiệm.",
+],
 
 
 
@@ -497,7 +503,7 @@ explanation:[
 ...prediction.explanation,
 
 
-`Intervention: ${scenario.description}`
+`Kịch bản giả định: ${scenario.description}`
 
 
 ],
