@@ -1,0 +1,30 @@
+
+> cognitive-learn-ai@0.1.0 build
+> tsc -b && tsc -p tsconfig.api.json && vite build
+
+src/App.tsx(5,8): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/App.tsx(88,5): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/App.tsx(88,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/App.tsx(89,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/App.tsx(90,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/App.tsx(90,28): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/App.tsx(91,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/App.tsx(91,34): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/App.tsx(92,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/App.tsx(93,5): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/App.tsx(174,5): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/App.tsx(180,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/App.tsx(190,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/App.tsx(194,5): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/components/common/AccessGate.tsx(1,53): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/components/common/AccessGate.tsx(2,36): error TS2307: Cannot find module 'firebase/auth' or its corresponding type declarations.
+src/components/common/AccessGate.tsx(3,69): error TS2307: Cannot find module 'firebase/firestore' or its corresponding type declarations.
+src/components/common/AccessGate.tsx(57,14): error TS7006: Parameter 'user' implicitly has an 'any' type.
+src/components/common/AccessGate.tsx(72,48): error TS18046: 'snapshot' is of type 'unknown'.
+src/components/common/AccessGate.tsx(72,67): error TS18046: 'snapshot' is of type 'unknown'.
+src/components/common/AccessGate.tsx(72,87): error TS18046: 'snapshot' is of type 'unknown'.
+src/components/common/AccessGate.tsx(92,15): error TS18046: 'consentSnapshot' is of type 'unknown'.
+src/components/common/AccessGate.tsx(92,42): error TS18046: 'consentSnapshot' is of type 'unknown'.
+src/components/common/AccessGate.tsx(135,13): error TS7006: Parameter 'snapshot' implicitly has an 'any' type.
+src/components/common/AccessGate.tsx(158,13): error TS7006: Parameter 'error' implicitly has an 'any' type.
+src/components/common/AccessGate.tsx(170,15): error TS7006: Parameter 'snapshot' implicitly has an 'any' type.

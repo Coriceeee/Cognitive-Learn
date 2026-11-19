@@ -55,18 +55,6 @@ const roleDisplayMap: Partial<Record<UserRoleScope | "all", Partial<Record<strin
     "pulse-monitor": { name: "Theo dõi tiến độ", tagline: "Pulse Monitor" },
     "haven-support": { name: "Học bổng & tài chính", tagline: "Haven Support" },
   },
-  parent: {
-    "atlas-admission": { name: "Tuyển sinh", tagline: "Trường / ngành / học phí" },
-    "pulse-monitor": { name: "Báo cáo con em", tagline: "Theo dõi tiến độ" },
-    "haven-support": { name: "Haven Support", tagline: "Hỗ trợ phụ huynh" },
-  },
-  teacher: {
-    "seed-profile": { name: "Hồ sơ học sinh", tagline: "Dữ liệu lớp học" },
-    "lumen-intelligence": { name: "Lumen Intelligence", tagline: "Theo dõi nhận thức" },
-    "orion-strategy": { name: "Orion Strategy", tagline: "Chiến lược học tập" },
-    "pulse-monitor": { name: "Pulse Monitor", tagline: "Báo cáo lớp học" },
-    "haven-support": { name: "Haven Support", tagline: "Hỗ trợ học sinh" },
-  },
 };
 
 function getResolvedRole({ variant, role }: { variant?: UserRoleScope | "all"; role?: UserRoleScope | "all" }) {
@@ -97,22 +85,6 @@ function getModuleDetail(module: ModuleCluster, role: UserRoleScope | "all"): Mo
     ? studentSubmoduleDirectory[module.key as StudentModuleKey]
     : moduleSubmoduleDirectory[module.key];
 
-  if (role === "teacher" || role === "parent") {
-    const roleLabel = role === "teacher" ? "giáo viên" : "phụ huynh";
-    return {
-      eyebrow: directory.title,
-      title: getModuleDisplay(module, role).name,
-      description: `${directory.description} Tài khoản ${roleLabel} chỉ xem được phần học sinh đã cho phép chia sẻ.`,
-      actions: [{
-        title: `Mở khu vực ${roleLabel}`,
-        description: "Xem liên kết và báo cáo đã được chia sẻ; không tự mở hồ sơ học sinh.",
-        href: role === "teacher" ? "/teacher" : "/parent",
-        group: "Không gian vai trò",
-        status: "available",
-      }],
-    };
-  }
-
   return {
     eyebrow: directory.title,
     title: getModuleDisplay(module, role).name,
@@ -129,8 +101,6 @@ function getModuleDetail(module: ModuleCluster, role: UserRoleScope | "all"): Mo
 }
 
 function getDefaultSubtitle(role: UserRoleScope | "all") {
-  if (role === "parent") return "Không gian phụ huynh: tuyển sinh, báo cáo tiến độ, học phí, học bổng và hỗ trợ học sinh.";
-  if (role === "teacher") return "Không gian giáo viên: hồ sơ được chia sẻ, nhận thức, chiến lược học tập và báo cáo.";
   if (role === "admin" || role === "all") return "Các cụm module quản trị để kiểm thử hệ thống, dữ liệu, vai trò và engine.";
   return "Sáu phân hệ dành cho học sinh. Chọn một phân hệ để xem các chức năng nhỏ và mở đúng tác vụ cần dùng.";
 }

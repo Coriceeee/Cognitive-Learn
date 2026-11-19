@@ -1,0 +1,823 @@
+COMMAND node --experimental-strip-types --test tests/cp33-cognitive-readiness.test.mjs
+TAP version 13
+# (node:35674) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: valid zero retained; missing zero never displayed
+ok 1 - valid zero retained; missing zero never displayed
+  ---
+  duration_ms: 5.885354
+  type: 'test'
+  ...
+# Subtest: unsupported version and malformed values remain unavailable
+ok 2 - unsupported version and malformed values remain unavailable
+  ---
+  duration_ms: 0.491292
+  type: 'test'
+  ...
+# Subtest: disagreeing provenance fails closed
+ok 3 - disagreeing provenance fails closed
+  ---
+  duration_ms: 0.263672
+  type: 'test'
+  ...
+# Subtest: duplicate dimensions and nonfinite values rejected
+ok 4 - duplicate dimensions and nonfinite values rejected
+  ---
+  duration_ms: 0.431976
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1893.094123
+COMMAND npm run test:cp34:knowledge-xai
+
+> cognitive-learn-ai@0.1.0 test:cp34:knowledge-xai
+> node --experimental-strip-types --test tests/cp34-knowledge-xai.test.mjs
+
+TAP version 13
+# (node:35990) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: retrieval exact IDs, public source citation and unvalidated wording
+ok 1 - retrieval exact IDs, public source citation and unvalidated wording
+  ---
+  duration_ms: 8.394838
+  type: 'test'
+  ...
+# Subtest: multi-intent retrieval and diacritic normalization
+ok 2 - multi-intent retrieval and diacritic normalization
+  ---
+  duration_ms: 0.839815
+  type: 'test'
+  ...
+# Subtest: reject unrelated, personal and explicit injection in this path
+ok 3 - reject unrelated, personal and explicit injection in this path
+  ---
+  duration_ms: 1.308295
+  type: 'test'
+  ...
+# Subtest: selection schema rejects invented, duplicate and unpermitted IDs and arbitrary answer
+ok 4 - selection schema rejects invented, duplicate and unpermitted IDs and arbitrary answer
+  ---
+  duration_ms: 0.390526
+  type: 'test'
+  ...
+# Subtest: source IDs are unique and bounded
+ok 5 - source IDs are unique and bounded
+  ---
+  duration_ms: 2.800295
+  type: 'test'
+  ...
+# Subtest: explanation preserves valid zero and exact weighted sum
+ok 6 - explanation preserves valid zero and exact weighted sum
+  ---
+  duration_ms: 1.409134
+  type: 'test'
+  ...
+# Subtest: missing dimension prevents composite even if top-level claims available
+ok 7 - missing dimension prevents composite even if top-level claims available
+  ---
+  duration_ms: 0.578548
+  type: 'test'
+  ...
+# Subtest: mismatched composite does not publish contribution
+ok 8 - mismatched composite does not publish contribution
+  ---
+  duration_ms: 0.644605
+  type: 'test'
+  ...
+# Subtest: duplicate, invalid and legacy evidence fails closed
+ok 9 - duplicate, invalid and legacy evidence fails closed
+  ---
+  duration_ms: 0.860168
+  type: 'test'
+  ...
+# Subtest: client and authenticated server use same knowledge module; Lumen uses local XAI
+ok 10 - client and authenticated server use same knowledge module; Lumen uses local XAI
+  ---
+  duration_ms: 25.862181
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1046.327607
+COMMAND npm run test:cp34:career-decision
+
+> cognitive-learn-ai@0.1.0 test:cp34:career-decision
+> node --experimental-strip-types --test tests/cp34-career-decision.test.mjs
+
+TAP version 13
+# (node:36156) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: nine domains, no implicit preferences and no ranking without explicit weight
+ok 1 - nine domains, no implicit preferences and no ranking without explicit weight
+  ---
+  duration_ms: 87.748681
+  type: 'test'
+  ...
+# Subtest: valid zero is observed; missing rating and missing subject do not become zero
+ok 2 - valid zero is observed; missing rating and missing subject do not become zero
+  ---
+  duration_ms: 0.741077
+  type: 'test'
+  ...
+# Subtest: weight chosen by learner, two axes and transparent contribution
+ok 3 - weight chosen by learner, two axes and transparent contribution
+  ---
+  duration_ms: 0.75723
+  type: 'test'
+  ...
+# Subtest: no fixed academic mapping for creative and education; no exclusion
+ok 4 - no fixed academic mapping for creative and education; no exclusion
+  ---
+  duration_ms: 0.68882
+  type: 'test'
+  ...
+# Subtest: invalid data fails closed; no combining without trusted term metadata
+ok 5 - invalid data fails closed; no combining without trusted term metadata
+  ---
+  duration_ms: 2.293226
+  type: 'test'
+  ...
+# Subtest: ties retained among complete groups, not incomplete groups
+ok 6 - ties retained among complete groups, not incomplete groups
+  ---
+  duration_ms: 0.769721
+  type: 'test'
+  ...
+# Subtest: Pareto preserves tradeoffs and identifies domination reasons
+ok 7 - Pareto preserves tradeoffs and identifies domination reasons
+  ---
+  duration_ms: 29.115782
+  type: 'test'
+  ...
+# Subtest: budget and risk are hard constraints, inclusive boundaries
+ok 8 - budget and risk are hard constraints, inclusive boundaries
+  ---
+  duration_ms: 1.003291
+  type: 'test'
+  ...
+# Subtest: invalid/duplicate options and invalid constraints cannot win
+ok 9 - invalid/duplicate options and invalid constraints cannot win
+  ---
+  duration_ms: 0.898264
+  type: 'test'
+  ...
+# Subtest: equivalent options stay, comparison independent of input order
+ok 10 - equivalent options stay, comparison independent of input order
+  ---
+  duration_ms: 17.394088
+  type: 'test'
+  ...
+# Subtest: legacy weights normalized without changing relative weights
+ok 11 - legacy weights normalized without changing relative weights
+  ---
+  duration_ms: 2.052333
+  type: 'test'
+  ...
+# Subtest: UI uses opted-in same-term evidence and does not persist or call AI; Orion uses actual scenario list
+ok 12 - UI uses opted-in same-term evidence and does not persist or call AI; Orion uses actual scenario list
+  ---
+  duration_ms: 1.000486
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1626.554611
+COMMAND npm run test:cp34:adaptive-decision
+
+> cognitive-learn-ai@0.1.0 test:cp34:adaptive-decision
+> node --experimental-strip-types --test tests/cp34-adaptive-next-cycle.test.mjs
+
+TAP version 13
+# (node:36409) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: low adherence chooses bounded lighter existing option, no automatic assignment
+ok 1 - low adherence chooses bounded lighter existing option, no automatic assignment
+  ---
+  duration_ms: 6.728401
+  type: 'test'
+  ...
+# Subtest: sufficient completion and reported hours retain workload
+ok 2 - sufficient completion and reported hours retain workload
+  ---
+  duration_ms: 2.350658
+  type: 'test'
+  ...
+# Subtest: score change not used to alter workload, even negative
+ok 3 - score change not used to alter workload, even negative
+  ---
+  duration_ms: 1.60479
+  type: 'test'
+  ...
+# Subtest: low hours alone reduces load
+ok 4 - low hours alone reduces load
+  ---
+  duration_ms: 1.67734
+  type: 'test'
+  ...
+# Subtest: zero reported hours yields manual review not fabricated plan
+ok 5 - zero reported hours yields manual review not fabricated plan
+  ---
+  duration_ms: 0.873222
+  type: 'test'
+  ...
+# Subtest: over-budget options are not recommended even with full completion
+ok 6 - over-budget options are not recommended even with full completion
+  ---
+  duration_ms: 0.651997
+  type: 'test'
+  ...
+# Subtest: partial reassessment abstains
+ok 7 - partial reassessment abstains
+  ---
+  duration_ms: 0.834873
+  type: 'test'
+  ...
+# Subtest: one check-in is insufficient
+ok 8 - one check-in is insufficient
+  ---
+  duration_ms: 0.772024
+  type: 'test'
+  ...
+# Subtest: cache and other owners cannot obtain advice
+ok 9 - cache and other owners cannot obtain advice
+  ---
+  duration_ms: 0.713479
+  type: 'test'
+  ...
+# Subtest: modified evidence and T0 fail closed
+ok 10 - modified evidence and T0 fail closed
+  ---
+  duration_ms: 0.811977
+  type: 'test'
+  ...
+# Subtest: legacy cycles remain untraceable
+ok 11 - legacy cycles remain untraceable
+  ---
+  duration_ms: 0.529236
+  type: 'test'
+  ...
+# Subtest: active cycle never gives a new-cycle suggestion
+ok 12 - active cycle never gives a new-cycle suggestion
+  ---
+  duration_ms: 0.300481
+  type: 'test'
+  ...
+# Subtest: invalid, duplicate, and empty options rejected
+ok 13 - invalid, duplicate, and empty options rejected
+  ---
+  duration_ms: 2.095525
+  type: 'test'
+  ...
+# Subtest: replay is deterministic, input remains untouched and changed result is rejected
+ok 14 - replay is deterministic, input remains untouched and changed result is rejected
+  ---
+  duration_ms: 7.243596
+  type: 'test'
+  ...
+# Subtest: Orion integration selects draft only and preserves explicit start
+ok 15 - Orion integration selects draft only and preserves explicit start
+  ---
+  duration_ms: 0.718144
+  type: 'test'
+  ...
+# Subtest: selected advice can start a second frozen cycle without mutating prior review
+ok 16 - selected advice can start a second frozen cycle without mutating prior review
+  ---
+  duration_ms: 0.993751
+  type: 'test'
+  ...
+# Subtest: Firestore listener requests metadata changes so cached snapshots do not count as server-confirmed
+ok 17 - Firestore listener requests metadata changes so cached snapshots do not count as server-confirmed
+  ---
+  duration_ms: 0.255344
+  type: 'test'
+  ...
+1..17
+# tests 17
+# suites 0
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 976.607659
+COMMAND npm run test:cp36:adaptive-lineage
+
+> cognitive-learn-ai@0.1.0 test:cp36:adaptive-lineage
+> node --experimental-strip-types --test tests/cp36-adaptive-lineage.test.mjs
+
+TAP version 13
+# (node:36562) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: explicit acceptance freezes source, options and selection; legacy no trace remains valid
+ok 1 - explicit acceptance freezes source, options and selection; legacy no trace remains valid
+  ---
+  duration_ms: 88.933604
+  type: 'test'
+  ...
+# Subtest: explicit rejection records an alternative without false assignment
+ok 2 - explicit rejection records an alternative without false assignment
+  ---
+  duration_ms: 29.337827
+  type: 'test'
+  ...
+# Subtest: manual choice same as recommendation is not a rejection
+ok 3 - manual choice same as recommendation is not a rejection
+  ---
+  duration_ms: 27.969532
+  type: 'test'
+  ...
+# Subtest: owner, missing server, wrong prior and changed evidence fail closed
+ok 4 - owner, missing server, wrong prior and changed evidence fail closed
+  ---
+  duration_ms: 16.810082
+  type: 'test'
+  ...
+# Subtest: forged refs, options and recommendations rejected
+ok 5 - forged refs, options and recommendations rejected
+  ---
+  duration_ms: 14.666787
+  type: 'test'
+  ...
+# Subtest: replay survives Firestore map key reordering; altered policy options detected when recommendation changes
+ok 6 - replay survives Firestore map key reordering; altered policy options detected when recommendation changes
+  ---
+  duration_ms: 15.493422
+  type: 'test'
+  ...
+# Subtest: chronology enforced and non-server contexts cannot freeze
+ok 7 - chronology enforced and non-server contexts cannot freeze
+  ---
+  duration_ms: 7.824589
+  type: 'test'
+  ...
+# Subtest: transaction reads source before writing; candidate rules only allow frozen lineage on create (static only)
+ok 8 - transaction reads source before writing; candidate rules only allow frozen lineage on create (static only)
+  ---
+  duration_ms: 2.407433
+  type: 'test'
+  ...
+# Subtest: freshness uses exact co-commit server timestamp, not a client clock or cached order
+ok 9 - freshness uses exact co-commit server timestamp, not a client clock or cached order
+  ---
+  duration_ms: 8.301417
+  type: 'test'
+  ...
+# Subtest: equal timestamps and malformed next timestamps cannot freeze a trace
+ok 10 - equal timestamps and malformed next timestamps cannot freeze a trace
+  ---
+  duration_ms: 36.972786
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1524.869074
+COMMAND npm run test:cp37-38:dynamic
+
+> cognitive-learn-ai@0.1.0 test:cp37-38:dynamic
+> node --experimental-strip-types --test tests/cp37-38-dynamic-temporal.test.mjs
+
+TAP version 13
+# (node:36684) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: current state uses structured data only, preserves valid zero and unknown
+ok 1 - current state uses structured data only, preserves valid zero and unknown
+  ---
+  duration_ms: 23.920848
+  type: 'test'
+  ...
+# Subtest: scope owner server and source time gates
+ok 2 - scope owner server and source time gates
+  ---
+  duration_ms: 0.489062
+  type: 'test'
+  ...
+# Subtest: legacy placeholder numbers not promoted
+ok 3 - legacy placeholder numbers not promoted
+  ---
+  duration_ms: 0.699748
+  type: 'test'
+  ...
+# Subtest: wrong vector mapping, duplicate dimensions and conflicting value reject proxies
+ok 4 - wrong vector mapping, duplicate dimensions and conflicting value reject proxies
+  ---
+  duration_ms: 0.816805
+  type: 'test'
+  ...
+# Subtest: source timestamp is explicit; impossible timestamp rejected
+ok 5 - source timestamp is explicit; impossible timestamp rejected
+  ---
+  duration_ms: 0.250469
+  type: 'test'
+  ...
+# Subtest: exact time weighted EMA, zero valid and no causal result
+ok 6 - exact time weighted EMA, zero valid and no causal result
+  ---
+  duration_ms: 88.031981
+  type: 'test'
+  ...
+# Subtest: same day latest only, no false sample inflation
+ok 7 - same day latest only, no false sample inflation
+  ---
+  duration_ms: 0.526752
+  type: 'test'
+  ...
+# Subtest: missing latest data resets series, no interpolation
+ok 8 - missing latest data resets series, no interpolation
+  ---
+  duration_ms: 12.725128
+  type: 'test'
+  ...
+# Subtest: gap >28 days breaks series
+ok 9 - gap >28 days breaks series
+  ---
+  duration_ms: 33.592651
+  type: 'test'
+  ...
+# Subtest: short time span cannot publish a trend
+ok 10 - short time span cannot publish a trend
+  ---
+  duration_ms: 1.202419
+  type: 'test'
+  ...
+# Subtest: scope mixing, owner mismatch, duplicate IDs or time, future timestamp blocked
+ok 11 - scope mixing, owner mismatch, duplicate IDs or time, future timestamp blocked
+  ---
+  duration_ms: 0.33628
+  type: 'test'
+  ...
+# Subtest: bounded window discloses truncation
+ok 12 - bounded window discloses truncation
+  ---
+  duration_ms: 0.280155
+  type: 'test'
+  ...
+# Subtest: inputs immutable and repeat deterministic
+ok 13 - inputs immutable and repeat deterministic
+  ---
+  duration_ms: 9.715169
+  type: 'test'
+  ...
+# Subtest: out of range, string and inconsistent cognitive mapping not used
+ok 14 - out of range, string and inconsistent cognitive mapping not used
+  ---
+  duration_ms: 0.446396
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1399.969592
+COMMAND npm run test:cp39-41:bayes
+
+> cognitive-learn-ai@0.1.0 test:cp39-41:bayes
+> node --experimental-strip-types --test tests/cp39-41-bayesian-shadow.test.mjs
+
+TAP version 13
+# (node:36855) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: weekly Bernoulli not per-task count; posterior exact and sensitivity
+ok 1 - weekly Bernoulli not per-task count; posterior exact and sensitivity
+  ---
+  duration_ms: 34.471961
+  type: 'test'
+  ...
+# Subtest: prior sensitivity and zero completions valid
+ok 2 - prior sensitivity and zero completions valid
+  ---
+  duration_ms: 15.911531
+  type: 'test'
+  ...
+# Subtest: reject cache or cross owner
+ok 3 - reject cache or cross owner
+  ---
+  duration_ms: 1.857631
+  type: 'test'
+  ...
+# Subtest: two weeks insufficient
+ok 4 - two weeks insufficient
+  ---
+  duration_ms: 8.122863
+  type: 'test'
+  ...
+# Subtest: same-day/backfilled weeks blocked
+ok 5 - same-day/backfilled weeks blocked
+  ---
+  duration_ms: 22.489417
+  type: 'test'
+  ...
+# Subtest: irregular spacing blocked
+ok 6 - irregular spacing blocked
+  ---
+  duration_ms: 7.182817
+  type: 'test'
+  ...
+# Subtest: tampered evidence blocked
+ok 7 - tampered evidence blocked
+  ---
+  duration_ms: 0.981122
+  type: 'test'
+  ...
+# Subtest: policy is not changed and student panel does not display posterior probability
+ok 8 - policy is not changed and student panel does not display posterior probability
+  ---
+  duration_ms: 1.509136
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1458.657886
+COMMAND npm run test:chart-first
+
+> cognitive-learn-ai@0.1.0 test:chart-first
+> node --experimental-strip-types --test tests/cp39-chart-first.test.mjs
+
+TAP version 13
+# (node:37005) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: bars preserve zero but abstain for missing and invalid points
+ok 1 - bars preserve zero but abstain for missing and invalid points
+  ---
+  duration_ms: 1.521904
+  type: 'test'
+  ...
+# Subtest: temporal chart respects irregular time and same EMA as existing engine
+ok 2 - temporal chart respects irregular time and same EMA as existing engine
+  ---
+  duration_ms: 13.766741
+  type: 'test'
+  ...
+# Subtest: no short, out-of-order, invalid or missing history line
+ok 3 - no short, out-of-order, invalid or missing history line
+  ---
+  duration_ms: 1.461323
+  type: 'test'
+  ...
+# Subtest: live plots gated by existing temporal and evidence status
+ok 4 - live plots gated by existing temporal and evidence status
+  ---
+  duration_ms: 1.328826
+  type: 'test'
+  ...
+# Subtest: career and decision visualization reads engine output and keeps user controls
+ok 5 - career and decision visualization reads engine output and keeps user controls
+  ---
+  duration_ms: 0.633395
+  type: 'test'
+  ...
+# Subtest: no Bayesian posterior probability displayed to students
+ok 6 - no Bayesian posterior probability displayed to students
+  ---
+  duration_ms: 10.083221
+  type: 'test'
+  ...
+# Subtest: readable graphics are responsive, no motion or hidden numeric values
+ok 7 - readable graphics are responsive, no motion or hidden numeric values
+  ---
+  duration_ms: 1.18977
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 873.658432
+COMMAND npm run test:cp40:allocation
+
+> cognitive-learn-ai@0.1.0 test:cp40:allocation
+> node --experimental-strip-types --test tests/cp40-allocation-charts.test.mjs
+
+TAP version 13
+# (node:37169) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: budget conserved, maintenance guaranteed, zero gap gets no extra
+ok 1 - budget conserved, maintenance guaranteed, zero gap gets no extra
+  ---
+  duration_ms: 11.818795
+  type: 'test'
+  ...
+# Subtest: zero observed score is valid; zero budget is valid
+ok 2 - zero observed score is valid; zero budget is valid
+  ---
+  duration_ms: 0.399901
+  type: 'test'
+  ...
+# Subtest: invalid or duplicate or missing data does not allocate
+ok 3 - invalid or duplicate or missing data does not allocate
+  ---
+  duration_ms: 0.314965
+  type: 'test'
+  ...
+# Subtest: invalid time and impossible minimum rejected
+ok 4 - invalid time and impossible minimum rejected
+  ---
+  duration_ms: 0.379392
+  type: 'test'
+  ...
+# Subtest: all goals met retains unused budget and avoids needless work
+ok 5 - all goals met retains unused budget and avoids needless work
+  ---
+  duration_ms: 0.448375
+  type: 'test'
+  ...
+# Subtest: tie resolution deterministic and invariant to input order
+ok 6 - tie resolution deterministic and invariant to input order
+  ---
+  duration_ms: 3.67296
+  type: 'test'
+  ...
+# Subtest: greedy matches exhaustive optimum on small budgets
+ok 7 - greedy matches exhaustive optimum on small budgets
+  ---
+  duration_ms: 8.726131
+  type: 'test'
+  ...
+# Subtest: shared user constraints drive plot and workbench; only feasible scenarios can allocate
+ok 8 - shared user constraints drive plot and workbench; only feasible scenarios can allocate
+  ---
+  duration_ms: 6.780897
+  type: 'test'
+  ...
+# Subtest: scatter uses actual three-dimensional frontier, no misleading connected curve
+ok 9 - scatter uses actual three-dimensional frontier, no misleading connected curve
+  ---
+  duration_ms: 0.935511
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 988.448615
+COMMAND npm run test:cp40:student-only
+
+> cognitive-learn-ai@0.1.0 test:cp40:student-only
+> node --experimental-strip-types --test tests/cp40-student-only.test.mjs
+
+TAP version 13
+# (node:37332) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: Student-only account roles are fail closed
+ok 1 - Student-only account roles are fail closed
+  ---
+  duration_ms: 2.911594
+  type: 'test'
+  ...
+# Subtest: Retired workspace components removed, student dashboard not linked to them
+ok 2 - Retired workspace components removed, student dashboard not linked to them
+  ---
+  duration_ms: 6.836264
+  type: 'test'
+  ...
+# Subtest: Registration and Google profile create only Student
+ok 3 - Registration and Google profile create only Student
+  ---
+  duration_ms: 1.062985
+  type: 'test'
+  ...
+# Subtest: API role restrictions match Student-only client
+ok 4 - API role restrictions match Student-only client
+  ---
+  duration_ms: 20.980518
+  type: 'test'
+  ...
+# Subtest: Pulse and Haven display personal summaries only
+ok 5 - Pulse and Haven display personal summaries only
+  ---
+  duration_ms: 10.189622
+  type: 'test'
+  ...
+# Subtest: candidate closes legacy share access and writes, owner cleanup remains
+ok 6 - candidate closes legacy share access and writes, owner cleanup remains
+  ---
+  duration_ms: 5.485384
+  type: 'test'
+  ...
+# Subtest: Student-only scope keeps pedagogy and guardian privacy safeguards
+ok 7 - Student-only scope keeps pedagogy and guardian privacy safeguards
+  ---
+  duration_ms: 0.698905
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 744.423215
+COMMAND npm run test:cp41:policy
+
+> cognitive-learn-ai@0.1.0 test:cp41:policy
+> node --test tests/cp41-contextual-policy.test.mjs
+
+TAP version 13
+# Subtest: synthetic cohorts are reproducible and disjoint
+ok 1 - synthetic cohorts are reproducible and disjoint
+  ---
+  duration_ms: 77.959445
+  type: 'test'
+  ...
+# Subtest: mask never increases load and overload only reduces
+ok 2 - mask never increases load and overload only reduces
+  ---
+  duration_ms: 23.699488
+  type: 'test'
+  ...
+# Subtest: policy learns stable maintain and strained reduce in authored simulator
+ok 3 - policy learns stable maintain and strained reduce in authored simulator
+  ---
+  duration_ms: 12.28849
+  type: 'test'
+  ...
+# Subtest: low support falls back to baseline
+ok 4 - low support falls back to baseline
+  ---
+  duration_ms: 0.327592
+  type: 'test'
+  ...
+# Subtest: reject non synthetic or duplicate records
+ok 5 - reject non synthetic or duplicate records
+  ---
+  duration_ms: 1.262444
+  type: 'test'
+  ...
+# Subtest: reject mismatched split and malformed logging propensities
+ok 6 - reject mismatched split and malformed logging propensities
+  ---
+  duration_ms: 34.674191
+  type: 'test'
+  ...
+# Subtest: reject unsafe manual policy and reward mismatch
+ok 7 - reject unsafe manual policy and reward mismatch
+  ---
+  duration_ms: 46.705548
+  type: 'test'
+  ...
+# Subtest: IPS SNIPS and ESS hand-checked
+ok 8 - IPS SNIPS and ESS hand-checked
+  ---
+  duration_ms: 0.314193
+  type: 'test'
+  ...
+# Subtest: report deterministic and nondeployable; intervals and support present
+ok 9 - report deterministic and nondeployable; intervals and support present
+  ---
+  duration_ms: 453.232079
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1448.205653

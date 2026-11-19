@@ -1,0 +1,104 @@
+{
+  "schema": "cla.cp36.local-release.v1",
+  "scope": "LOCAL_TECHNICAL_ONLY",
+  "source": {
+    "sha256": "a9ad57d65374ac222eb8e6aadcfad38378823709856a40e6184b504ee13c91b4",
+    "fileCount": 364
+  },
+  "sourceUnchangedDuringRun": true,
+  "generatedAt": "2026-11-18T08:19:52.681Z",
+  "gates": [
+    {
+      "id": "demo-final",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 6625,
+      "log": "demo-final.log",
+      "error": null
+    },
+    {
+      "id": "atlas-retrieval",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 712,
+      "log": "atlas-retrieval.log",
+      "error": null
+    },
+    {
+      "id": "knowledge-retrieval",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 436,
+      "log": "knowledge-retrieval.log",
+      "error": null
+    },
+    {
+      "id": "node-regression",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 40237,
+      "log": "node-regression.log",
+      "error": null
+    },
+    {
+      "id": "rules-static",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 308,
+      "log": "rules-static.log",
+      "error": null
+    },
+    {
+      "id": "layout",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 242,
+      "log": "layout.log",
+      "error": null
+    },
+    {
+      "id": "cognitive",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 1708,
+      "log": "cognitive.log",
+      "error": null
+    },
+    {
+      "id": "adaptive",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 1192,
+      "log": "adaptive.log",
+      "error": null
+    },
+    {
+      "id": "uci-ml",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 8437,
+      "log": "uci-ml.log",
+      "error": null
+    },
+    {
+      "id": "build",
+      "status": "FAIL",
+      "exitCode": 1,
+      "durationMs": 5118,
+      "log": "build.log",
+      "error": null
+    }
+  ],
+  "localStatus": "LOCAL_NOT_ALL_PASS",
+  "productionAcceptance": "NOT_EVALUATED",
+  "externalGates": {
+    "firebaseEmulator": "NOT_RUN",
+    "browserE2E": "NOT_RUN",
+    "productionDeployment": "NOT_RUN",
+    "realMl": "NOT_RUN",
+    "liveLlm": "NOT_RUN",
+    "psychometrics": "NOT_EVALUABLE_BY_LOCAL_GATE",
+    "adaptiveEffectiveness": "NOT_EVALUABLE_BY_LOCAL_GATE"
+  },
+  "reviewerAccepted": false
+}

@@ -124,7 +124,7 @@ export default function DailyCompanionPage() {
         <span className="cla-companion-kicker">COGNITIVE LEARN AI / DAILY COMPANION · V1</span>
         <h1>Học mỗi ngày, có CLA đồng hành.</h1>
         <p>Lập kế hoạch ở Orion, ghi hành động tại Pulse, xem tiến bộ trong Lumen. Daily Companion giúp bạn nhớ thời điểm và ghi nhận việc đã làm — không tạo áp lực bằng những thông báo liên tục.</p>
-        <div className="cla-companion-links"><a href="/orion#cla-closed-loop">Kế hoạch Orion</a><a href="/pulse#cla-closed-loop">Theo dõi Pulse</a><a href="/lumen#cla-closed-loop">Đánh giá Lumen</a><a href="/student#cla-exam-reminders">Lịch thi & đếm ngược</a></div>
+        <div className="cla-companion-links"><a href="/orion/scenarios#cla-closed-loop">Kế hoạch Orion</a><a href="/pulse/checkin#cla-closed-loop">Theo dõi Pulse</a><a href="/lumen/evidence#cla-closed-loop">Đánh giá Lumen</a><a href="/student/exams#cla-exam-reminders">Lịch thi & đếm ngược</a></div>
       </section>
       {(companion.status === "loading" || journey.status === "loading") && <p role="status">Đang đồng bộ kế hoạch và quyền dữ liệu…</p>}
       {companion.status === "preview" && <p className="cla-companion-notice" role="status">Daily Companion đang ở chế độ xem trước. Để lưu và nhắc học, cần kiểm thử Rules bằng Emulator, triển khai đúng Rules ứng viên rồi bật <code>VITE_CLA_STUDENT_CONSENT_GATE=true</code> và xác nhận quyền dữ liệu ở Seed. Không tự động bật để tránh làm gián đoạn tài khoản hiện tại.</p>}
@@ -146,7 +146,7 @@ export default function DailyCompanionPage() {
           </div>
           <button type="button" disabled={companion.busy || companion.status !== "ready" || !companion.consentAccepted || doneToday}
             onClick={() => void checkIn()}>{doneToday ? "Đã ghi nhận hôm nay" : "Tôi đã học hôm nay"}</button>
-          <p className="cla-companion-small">Lưu lịch nhắc một lần trước khi check-in. Check-in này chỉ xác nhận học sinh tự báo cáo đã học. Số giờ, nhiệm vụ và điểm đo lại tiếp tục ghi ở <a href="/pulse#cla-closed-loop">Pulse</a>.</p>
+          <p className="cla-companion-small">Lưu lịch nhắc một lần trước khi check-in. Check-in này chỉ xác nhận học sinh tự báo cáo đã học. Số giờ, nhiệm vụ và điểm đo lại tiếp tục ghi ở <a href="/pulse/checkin#cla-closed-loop">Pulse</a>.</p>
         </section>
         <section className="cla-companion-card">
           <span className="cla-companion-kicker">02 / NHỊP SINH HOẠT</span>

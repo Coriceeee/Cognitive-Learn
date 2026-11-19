@@ -73,6 +73,10 @@ class UciBaselineGateTest(unittest.TestCase):
             self.assertNotIn("G2", result["metrics"]["after_first_period_G1"]["features"])
             self.assertIn("G2", result["metrics"]["after_second_period_G1_G2"]["features"])
             self.assertNotIn("G3", result["metrics"]["after_second_period_G1_G2"]["features"])
+            self.assertNotIn("absences", result["metrics"]["context_behavior_only"]["features"])
+            self.assertIn("academic_only_ridge", result["metrics"]["after_first_period_G1"])
+            self.assertIn("academic_only_ridge", result["metrics"]["after_second_period_G1_G2"])
+            self.assertEqual(result["master_protocol_evidence_type"], "S_SECONDARY_EXTERNAL")
             self.assertEqual(result["evidence_class"], "E_EXTERNAL")
         finally:
             temp.cleanup()

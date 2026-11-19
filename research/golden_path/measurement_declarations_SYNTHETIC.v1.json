@@ -1,0 +1,110 @@
+{
+  "schema": "cla.journey.measurement-declarations.v1",
+  "source": "student_declared_unverified",
+  "declarations": [
+    {
+      "cycleId": "synthetic_cycle_0001",
+      "subjectKey": "math",
+      "timepoint": "T0",
+      "score": 0,
+      "linkedAt": "2026-10-01T08:00:00.000Z",
+      "source": "student_self_report",
+      "instrumentId": "synthetic_math_quiz",
+      "instrumentVersion": "version_001",
+      "formId": "form_math_a",
+      "scoringProtocolId": "rubric_v1",
+      "scaleId": "score-0-to-10"
+    },
+    {
+      "cycleId": "synthetic_cycle_0001",
+      "subjectKey": "math",
+      "timepoint": "T1",
+      "score": 0,
+      "linkedAt": "2026-10-13T08:00:00.000Z",
+      "source": "student_self_report",
+      "instrumentId": "synthetic_math_quiz",
+      "instrumentVersion": "version_001",
+      "formId": "form_math_a",
+      "scoringProtocolId": "rubric_v1",
+      "scaleId": "score-0-to-10"
+    },
+    {
+      "cycleId": "synthetic_cycle_0001",
+      "subjectKey": "english",
+      "timepoint": "T0",
+      "score": 7,
+      "linkedAt": "2026-10-01T08:00:00.000Z",
+      "source": "student_self_report",
+      "instrumentId": "synthetic_english_quiz",
+      "instrumentVersion": "version_001",
+      "formId": "form_english_a",
+      "scoringProtocolId": "rubric_v1",
+      "scaleId": "score-0-to-10"
+    },
+    {
+      "cycleId": "synthetic_cycle_0001",
+      "subjectKey": "english",
+      "timepoint": "T1",
+      "score": 8,
+      "linkedAt": "2026-10-13T08:00:00.000Z",
+      "source": "student_self_report",
+      "instrumentId": "synthetic_english_quiz",
+      "instrumentVersion": "version_001",
+      "formId": "form_english_a",
+      "scoringProtocolId": "rubric_v1",
+      "scaleId": "score-0-to-10"
+    },
+    {
+      "cycleId": "synthetic_cycle_0002",
+      "subjectKey": "math",
+      "timepoint": "T0",
+      "score": 0,
+      "linkedAt": "2026-10-18T08:00:00.000Z",
+      "source": "student_self_report",
+      "instrumentId": "synthetic_math_quiz",
+      "instrumentVersion": "version_001",
+      "formId": "form_math_a",
+      "scoringProtocolId": "rubric_v1",
+      "scaleId": "score-0-to-10"
+    },
+    {
+      "cycleId": "synthetic_cycle_0002",
+      "subjectKey": "math",
+      "timepoint": "T1",
+      "score": 2,
+      "linkedAt": "2026-11-02T08:00:00.000Z",
+      "source": "student_self_report",
+      "instrumentId": "synthetic_math_quiz",
+      "instrumentVersion": "version_001",
+      "formId": "form_math_a",
+      "scoringProtocolId": "rubric_v1",
+      "scaleId": "score-0-to-10"
+    },
+    {
+      "cycleId": "synthetic_cycle_0002",
+      "subjectKey": "english",
+      "timepoint": "T0",
+      "score": 8,
+      "linkedAt": "2026-10-18T08:00:00.000Z",
+      "source": "student_self_report",
+      "instrumentId": "synthetic_english_quiz",
+      "instrumentVersion": "version_001",
+      "formId": "form_english_a",
+      "scoringProtocolId": "rubric_v1",
+      "scaleId": "score-0-to-10"
+    },
+    {
+      "cycleId": "synthetic_cycle_0002",
+      "subjectKey": "english",
+      "timepoint": "T1",
+      "score": 8,
+      "linkedAt": "2026-11-02T08:00:00.000Z",
+      "source": "student_self_report",
+      "instrumentId": "synthetic_english_quiz",
+      "instrumentVersion": "version_001",
+      "formId": "form_english_a",
+      "scoringProtocolId": "rubric_v1",
+      "scaleId": "score-0-to-10"
+    }
+  ]
+}

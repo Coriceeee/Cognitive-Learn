@@ -1,0 +1,31 @@
+{
+  "release": "CLA CP29 batch 2 academic lock",
+  "date": "2026-11-15",
+  "base_source_zip": "CLA_FULL_SOURCE_CP29_BATCH1_LIVE_AUTH_20261115.zip",
+  "previous_full_source_sha256": "5f4220d0494192dae703818435e6c0a291739b5ec31d4bc9da4832aa9ec0c2a6",
+  "changed_file_sha256": {
+    "START_HERE_CP29_BATCH2_20261115.md": "81b9316f51c6854e74ce9c6b49aca370c7cb6ea52169c4748e212b01813f31d1",
+    "docs/CP29/CP29_BATCH2_ACADEMIC_LOCK_REPORT_20261115.md": "1537535e27e4c467bba1400118972554bdf49b36afd47947eed370037aaf6651",
+    "firestore.rules.CANDIDATE_CP21": "8f6c3a6d1b37abc0f5d4669c276c035c9f3eef64a48bb74ce0cce0c08dc1e3d3",
+    "package.json": "cc9bbac2e15dc9ad03c8044b7418e46d423113062891e9b9cd8cb12af41aa4c6",
+    "src/page/seed/StudentProfilePage.tsx": "5f2e066ebc1176642d08ce96faf69ec214d31f6dfd55bef6a439e1953dfda0ac",
+    "src/page/seed/services/academicIdentity.ts": "3c75fa46892baa6c66d18c985ce8b0e9e77b80d200ddb59a57841ab7c0b9be31",
+    "tests/cp29-academic-lock.behavior.test.mjs": "f4260a25201e32a7433ae862183b56bdd6062fe5420494ca184721e8590979a4",
+    "tests/cp29-academic-lock.contract.test.cjs": "f2708f69e3e5a69290aa560ae6199eced56eafc95f7ce362608bbf1e6d15098a",
+    "tests/firestore.rules.cp21.test.mjs": "6cc1edddfba3c28405fc6d8cf4356677628f6641d3885d0c2668c4c02fefa1c5"
+  },
+  "new_emulator_test_cases": [
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27
+  ],
+  "emulator_suite_expected_count": 83,
+  "local_tests": "npm test PASS; verify:cp29:batch2 PASS; 14/14 new tests PASS",
+  "emulator_retest": "NOT RUN IN CURRENT ENVIRONMENT",
+  "production": "NOT DEPLOYED"
+}

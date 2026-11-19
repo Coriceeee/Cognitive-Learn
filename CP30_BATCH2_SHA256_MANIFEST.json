@@ -1,0 +1,24 @@
+{
+  "release": "CP30_BATCH2_REALTIME_PROFILE_20261115",
+  "base": "CLA_FULL_SOURCE_CP30_BATCH1_REALTIME_SEED_20261115.zip",
+  "scope": "Frontend profile realtime + server verified Cognitive history; no Firebase production change",
+  "tests": {
+    "test:cp30:profile": "12/12 PASS",
+    "verify:cp30:batch2": "PASS",
+    "npm test": "BLOCKED missing @types in local shared node_modules",
+    "build": "NOT_RUN",
+    "firestore_emulator": "NOT_RUN",
+    "browser_e2e": "NOT_RUN"
+  },
+  "changed_from_base": {
+    "START_HERE_CP30_BATCH2_20261115.md": "9d98bdeb4388f5e6ed411c17b61fdac1082254b0c787c0259264503c67c6c3e1",
+    "docs/CP30/CP30_BATCH2_PROFILE_REALTIME_REPORT_20261115.md": "e45f4ce436d187fa45cf89ea399cfeb457431c79bc8c046b4eb05a3cdcfa641e",
+    "package.json": "8b409033bf4af0b103199a797de5f0e14cf2a3878fe6e4d9fafe9d22c27f5cc5",
+    "src/engines/history/cognitiveHistoryRepository.ts": "4ccc5ab7ce2f6cad8e795a8bcde04aeaa22437a4f3ac763f00f657319ba7febe",
+    "src/page/lumen/LumenPage.tsx": "5cb7d2f52cd8cd27d30c1badd182ce04fb79cab6e1a3955b50f12d23e89c3380",
+    "src/page/seed/StudentPage.tsx": "8abe1d12399898e51ce2a4abf5b730019c8db48fa90c563b1d5282aebff6ce21",
+    "src/page/seed/hooks/useStudentProfile.ts": "fbe155a9501966884d1268b7427d8ebddf5ad8fdbb332521a472abc2ece1760b",
+    "tests/cp30-profile-realtime.test.cjs": "33d9fc4fa7eb13da7277e8a161e477eaee004925bcfe3f40a39be52ef9b7e720"
+  },
+  "checklist_reviewer": "PENDING"
+}

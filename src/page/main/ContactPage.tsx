@@ -14,14 +14,14 @@ const contactCards = [
     desc: "Hỗ trợ nhập hồ sơ học tập, bảng điểm, môn lựa chọn, GPA và mục tiêu tuyển sinh.",
   },
   {
-    label: "Giáo viên",
-    title: "Teacher Support",
-    desc: "Hỗ trợ theo dõi lớp học, cảnh báo học sinh nguy cơ cao và báo cáo học tập.",
+    label: "Tiến độ học tập",
+    title: "Learning Support",
+    desc: "Hỗ trợ bạn theo dõi tiến độ, đọc báo cáo và điều chỉnh chiến lược học tập.",
   },
   {
-    label: "Phụ huynh",
-    title: "Parent Support",
-    desc: "Hỗ trợ xem tiến trình của con, trạng thái học tập, tài chính và học bổng.",
+    label: "Cơ hội giáo dục",
+    title: "Opportunity Support",
+    desc: "Hỗ trợ bạn tra cứu tuyển sinh, tài chính, du học và học bổng.",
   },
 ];
 
@@ -58,8 +58,7 @@ export default function LienHePage() {
             <span>CONTACT CENTER</span>
             <h1>Kết nối với Cognitive Learn AI</h1>
             <p>
-              Nơi tiếp nhận phản hồi, hỗ trợ người dùng và kết nối học sinh,
-              giáo viên, phụ huynh với hệ thống phân tích học tập thông minh.
+              Nơi tiếp nhận phản hồi, hỗ trợ người dùng và kết nối học sinh với hệ thống phân tích học tập thông minh.
             </p>
           </div>
 
@@ -76,7 +75,7 @@ export default function LienHePage() {
             <h2>Chọn đúng kênh hỗ trợ để xử lý nhanh hơn</h2>
             <p>
               Các kênh liên hệ được chia theo vai trò để hệ thống có thể hỗ trợ
-              đúng vấn đề: hồ sơ học tập, theo dõi lớp, phụ huynh, tuyển sinh,
+              đúng vấn đề: hồ sơ học tập, tiến độ cá nhân, tuyển sinh,
               tài chính và học bổng.
             </p>
           </div>
@@ -129,8 +128,6 @@ export default function LienHePage() {
               Vai trò
               <select>
                 <option>Học sinh</option>
-                <option>Giáo viên</option>
-                <option>Phụ huynh</option>
                 <option>Quản trị viên</option>
               </select>
             </label>

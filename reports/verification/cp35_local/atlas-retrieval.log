@@ -1,0 +1,8 @@
+
+> cognitive-learn-ai@0.1.0 research:atlas:lookup
+> node --experimental-strip-types tools/atlas_lookup_benchmark.mjs
+
+ATLAS LOOKUP FIDELITY 848/848 (deterministic, NOT LLM evaluation)
+
+(node:12716) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)

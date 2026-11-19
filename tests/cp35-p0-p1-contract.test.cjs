@@ -60,13 +60,12 @@ test("CP35-03: study-abroad starts with no country selected and preserves countr
 test("CP35-04: student data status and transcript screens do not expose backend collection names", () => {
   const storage = read("src/page/seed/StudentStorageStatusPage.tsx");
   const transcript = read("src/page/seed/StudentTranscriptPage.tsx");
-  const linkManager = read("src/components/common/StudentLinkManager.tsx");
+  const student = read("src/page/seed/StudentPage.tsx");
   assert.match(storage, /Dữ liệu của tôi/);
   assert.doesNotMatch(storage, /projectId|Firestore|row\.collection|row\.details|<code>/);
   assert.ok(!transcript.includes("learning_profiles/{uid}") && !transcript.includes("student_transcripts/{uid}"));
   assert.match(transcript, /Bảng điểm đã được lưu trong hồ sơ/);
-  assert.match(linkManager, /Mã kết nối/);
-  assert.doesNotMatch(linkManager, /UID tài khoản|Sao chép UID|UID của người được liên kết/);
+  assert.doesNotMatch(student, /StudentLinkManager|SharedReportPanel|Mã kết nối/);
 });
 
 test("CP35-05: Admin-only system tools remain outside the student route allowlist", () => {
@@ -100,8 +99,10 @@ test("CP35-07: focused pages use the shared CLA design layer and SPA rewrites", 
   const styles = read("src/styles.css");
   const vercel = JSON.parse(read("vercel.json"));
   assert.ok(styles.includes("24-cla-subpages-ui.css"));
-  for (const route of ["/atlas/vietnam", "/lumen/history", "/orion/scenarios", "/pulse/reports", "/haven/finance"]) {
-    assert.ok(css.includes(`data-cla-route="${route}"`), `focused CSS missing ${route}`);
+  assert.ok(css.includes(".cla-focus-nav"));
+  assert.doesNotMatch(css, /\[data-cla-route=/);
+  for (const [route, page] of [["/atlas/vietnam", "atlas/AtlasPage"], ["/lumen/history", "lumen/LumenPage"], ["/orion/scenarios", "orion/OrionPage"], ["/pulse/reports", "pulse/PulsePage"], ["/haven/finance", "haven/HavenPage"]]) {
+    assert.ok(read(`src/page/${page}.tsx`).includes(`view === "${route}"`), `React route guard missing ${route}`);
     assert.ok(vercel.rewrites.some(item => item.source === route && item.destination === "/index.html"), `SPA rewrite missing ${route}`);
   }
 });

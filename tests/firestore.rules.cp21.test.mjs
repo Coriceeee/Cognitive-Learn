@@ -8,8 +8,8 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { initializeTestEnvironment, assertFails, assertSucceeds } from '@firebase/rules-unit-testing';
 import {
-  collection, deleteDoc, doc, getDoc, getDocs, limit, query, serverTimestamp,
-  setDoc, updateDoc, where, writeBatch,
+  collection, deleteDoc, doc, getDoc, getDocFromServer, getDocs, limit, query, serverTimestamp,
+  setDoc, updateDoc, where, writeBatch, runTransaction,
 } from 'firebase/firestore';
 
 const PROJECT_ID = 'demo-cla-cp21-security';
@@ -112,8 +112,7 @@ test('U03 list users denied even to admin', async () => {
 test('U04 student may register but not self-register admin', async () => {
   const good = 'newstudent_001';
   await assertSucceeds(setDoc(ref(dbAs(good), 'users', good), account(good, 'student')));
-  const bad = 'newadmin_001';
-  await assertFails(setDoc(ref(dbAs(bad), 'users', bad), account(bad, 'admin')));
+  for(const role of ['admin','teacher','parent']) {const id=`new${role}_001`;await assertFails(setDoc(ref(dbAs(id),'users',id),account(id,role)));}
 });
 test('U05 role, active and account deletion cannot be modified client-side', async () => {
   await assertFails(updateDoc(ref(dbAs(UID.student), 'users', UID.student), { role: 'admin' }));
@@ -298,50 +297,41 @@ test('M03 unknown collections and public system_health writes are denied', async
   await assertFails(setDoc(ref(dbAs(UID.admin), 'system_health', 'status'), { healthy: true }));
 });
 
-// Student-authorized link/report flow, teacher one-time feedback and revocation.
-test('L01 only student can create link to actual teacher or parent role', async () => {
-  await assertSucceeds(writeLink(dbAs(UID.student)));
-  await assertSucceeds(writeLink(dbAs(UID.student), UID.student, UID.parent, 'parent'));
-  await assertFails(writeLink(dbAs(UID.student), UID.student, UID.teacher, 'parent'));
-  await assertFails(writeLink(dbAs(UID.teacher), UID.student, UID.parent, 'parent'));
+// Student-only scope: historic records may be removed by their owner, never viewed by retired roles.
+const seedOldShare = () => env.withSecurityRulesDisabled(async context=>{const db=context.firestore();await writeLink(db);await writeReport(db);});
+test('L01 no account can create new sharing links', async()=>{
+ for(const uid of [UID.student,UID.teacher,UID.parent,UID.admin]) await assertFails(writeLink(dbAs(uid)));
+ await assertFails(writeLink(dbAs(UID.student),UID.student,UID.parent,'parent'));
 });
-test('L02 Teacher can list only their links, not other user links', async () => {
-  await assertSucceeds(writeLink(dbAs(UID.student)));
-  await assertSucceeds(getDocs(query(collection(dbAs(UID.teacher), 'student_links'),
-    where('viewerId', '==', UID.teacher), limit(40))));
-  await assertFails(getDocs(query(collection(dbAs(UID.other), 'student_links'),
-    where('viewerId', '==', UID.teacher), limit(40))));
+test('L14 owner can clean legacy records after consent withdrawal',async()=>{
+ await seedOldShare();const db=dbAs(UID.student);const id=linkId(UID.student,UID.teacher);
+ await assertSucceeds(setDoc(ref(db,'student_consents',UID.student),studentConsent(UID.student,false)));
+ await assertFails(getDoc(ref(dbAs(UID.teacher),'student_shared_reports',id)));
+ await assertSucceeds(getDocs(query(collection(db,'student_links'),where('studentId','==',UID.student),limit(40))));
+ await assertSucceeds(deleteDoc(ref(db,'student_shared_reports',id)));
+ await assertSucceeds(deleteDoc(ref(db,'student_links',id)));
+ assert.equal((await assertSucceeds(getDocs(query(collection(db,'student_links'),where('studentId','==',UID.student),limit(40))))).size,0);
 });
-test('L03 viewer cannot read report without explicit link', async () => {
-  await assertFails(writeReport(dbAs(UID.student)));
+test('L02 retired viewers cannot list links',async()=>{
+ await seedOldShare();for(const uid of [UID.teacher,UID.parent,UID.other,UID.admin]) await assertFails(getDocs(query(collection(dbAs(uid),'student_links'),where('viewerId','==',UID.teacher),limit(40))));
 });
-test('L04 only student can share report; intended viewer can read', async () => {
-  await writeLink(dbAs(UID.student));
-  await assertSucceeds(writeReport(dbAs(UID.student)));
-  await assertSucceeds(getDoc(ref(dbAs(UID.teacher), 'student_shared_reports', linkId(UID.student, UID.teacher))));
-  await assertFails(getDoc(ref(dbAs(UID.parent), 'student_shared_reports', linkId(UID.student, UID.teacher))));
-  await assertFails(getDoc(ref(dbAs(UID.admin), 'student_shared_reports', linkId(UID.student, UID.teacher))));
+test('L03 legacy record does not authorize new report creation',async()=>{
+ await env.withSecurityRulesDisabled(async c=>writeLink(c.firestore()));await assertFails(writeReport(dbAs(UID.student)));
 });
-test('L05 teacher can review once but cannot edit report summary', async () => {
-  await writeLink(dbAs(UID.student)); await writeReport(dbAs(UID.student));
-  const report = ref(dbAs(UID.teacher), 'student_shared_reports', linkId(UID.student, UID.teacher));
-  await assertFails(updateDoc(report, { summary: 'Forged', feedback: 'Tốt lắm',
-    status: 'reviewed', reviewedAt: serverTimestamp() }));
-  await assertSucceeds(updateDoc(report, { feedback: 'Hoàn thành tốt',
-    status: 'reviewed', reviewedAt: serverTimestamp() }));
-  await assertFails(updateDoc(report, { feedback: 'Một lần nữa',
-    status: 'reviewed', reviewedAt: serverTimestamp() }));
+test('L04 only student owner can read legacy reports and links',async()=>{
+ await seedOldShare();const id=linkId(UID.student,UID.teacher);
+ for(const col of ['student_links','student_shared_reports']){
+  await assertSucceeds(getDoc(ref(dbAs(UID.student),col,id)));
+  for(const uid of [UID.teacher,UID.parent,UID.other,UID.admin]) await assertFails(getDoc(ref(dbAs(uid),col,id)));
+ }
 });
-test('L06 revoke report first then link; link cannot be deleted while shared', async () => {
-  await writeLink(dbAs(UID.student)); await writeReport(dbAs(UID.student));
-  const link = ref(dbAs(UID.student), 'student_links', linkId(UID.student, UID.teacher));
-  const report = ref(dbAs(UID.student), 'student_shared_reports', linkId(UID.student, UID.teacher));
-  await assertFails(deleteDoc(link));
-  await assertSucceeds(deleteDoc(report));
-  await assertSucceeds(deleteDoc(link));
-  await assertFails(getDoc(ref(dbAs(UID.teacher), 'student_shared_reports', linkId(UID.student, UID.teacher))));
+test('L05 no account can review or edit legacy report',async()=>{
+ await seedOldShare();for(const uid of [UID.student,UID.teacher,UID.parent,UID.admin]) await assertFails(updateDoc(ref(dbAs(uid),'student_shared_reports',linkId(UID.student,UID.teacher)),{feedback:'Hoàn thành tốt',status:'reviewed',reviewedAt:serverTimestamp()}));
 });
-
+test('L06 revoke report first then link; link cannot be deleted while shared',async()=>{
+ await seedOldShare();const id=linkId(UID.student,UID.teacher),db=dbAs(UID.student);const link=ref(db,'student_links',id),report=ref(db,'student_shared_reports',id);
+ await assertFails(deleteDoc(link));await assertFails(deleteDoc(ref(dbAs(UID.teacher),'student_shared_reports',id)));await assertSucceeds(deleteDoc(report));await assertSucceeds(deleteDoc(link));
+});
 
 // CP24 — persisted pipeline provenance: privacy/minimal payload, owner-only and append-only.
 const auditRef = (db, uid, id = 'audit_001') => doc(db, 'pipeline_evidence', uid, 'checks', id);
@@ -460,8 +450,7 @@ test('C06 consent cannot be deleted or created by inactive user or admin', async
 });
 test('C07 after withdrawal existing shared report becomes unreadable to teacher', async () => {
   const studentDb = dbAs(UID.student);
-  await assertSucceeds(writeLink(studentDb));
-  await assertSucceeds(writeReport(studentDb));
+  await seedOldShare();
   await assertSucceeds(setDoc(ref(studentDb, 'student_consents', UID.student), studentConsent(UID.student, false)));
   await assertFails(getDoc(ref(dbAs(UID.teacher), 'student_shared_reports', linkId(UID.student, UID.teacher))));
   await assertSucceeds(getDoc(ref(studentDb, 'student_shared_reports', linkId(UID.student, UID.teacher))));
@@ -473,14 +462,23 @@ test('C08 Admin own demo draft remains possible without student consent', async 
 });
 
 // Closed-Loop P0: client journey records must be student-owned, consent-bound and append-only.
-const cyclePayload = (uid = UID.student, id = 'cycle_001') => ({
-  id, userId: uid, schemaVersion: 1, origin: 'orion_simulation',
-  scenarioId: 'balanced', scenarioTitle: 'Chiến lược cân bằng', targetMajor: 'Công nghệ',
-  subjects: [{ key: 'math', label: 'Toán', baseline: 7, target: 8 }],
-  plannedWeeklyHours: 10, weeksLeft: 8, startedAt: '2026-11-13T07:00:00.000Z',
-  status: 'ACTIVE', checkIns: [], reassessment: null,
-  createdAt: serverTimestamp(), updatedAt: serverTimestamp(),
-});
+const cyclePayload = (uid = UID.student, id = 'cycle_001') => {
+  const subjects = [{ key: 'math', label: 'Toán', baseline: 7, target: 8 }];
+  const startedAt = '2026-11-13T07:00:00.000Z';
+  return {
+    id, userId: uid, schemaVersion: 1, origin: 'orion_simulation',
+    scenarioId: 'balanced', scenarioTitle: 'Chiến lược cân bằng', targetMajor: 'Công nghệ',
+    subjects, plannedWeeklyHours: 10, weeksLeft: 8, startedAt,
+    t0Snapshot: {
+      schemaVersion: 1, policyVersion: 'cla-t0-descriptive-gap-v1', frozenAt: startedAt,
+      inputSource: 'student_self_report', scenarioId: 'balanced', subjects: subjects.map(s => ({ ...s })),
+      plannedWeeklyHours: 10, weeksLeft: 8, planGapPoints: 1,
+      forecastStatus: 'NOT_ESTIMATED', predictedOutcome: null, calibratedProbability: null,
+    },
+    status: 'ACTIVE', checkIns: [], reassessment: null,
+    createdAt: serverTimestamp(), updatedAt: serverTimestamp(),
+  };
+};
 const cycleRef = (db, uid = UID.student, id = 'cycle_001') =>
   doc(db, 'learning_journeys', uid, 'cycles', id);
 const stateRef = (db, uid = UID.student) => doc(db, 'learning_journeys', uid, 'state', 'current');
@@ -751,4 +749,264 @@ test('WP-E06 delivery claim ledger is server-only, including owner and admin',as
     await assertFails(getDoc(doc(db,...path)));
     await assertFails(setDoc(doc(db,...path),{claimedAt:serverTimestamp()}));
   }
+});
+
+// CP29 C4/D3: real Firestore Emulator authorization, NOT merely source regex.
+test('S20 locked profile cannot switch foreign language while retaining four electives', async () => {
+  const db = dbAs(UID.student);
+  await assertSucceeds(setDoc(ref(db, 'learning_profiles', UID.student), profile(UID.student)));
+  const french = profile(UID.student);
+  french.curriculum.foreignLanguage = 'Tiếng Pháp';
+  french.curriculum.gradedSubjects[2] = 'Tiếng Pháp';
+  await assertFails(setDoc(ref(db, 'learning_profiles', UID.student), french));
+});
+test('S21 locked transcript cannot switch foreign language in another year', async () => {
+  const db = dbAs(UID.student);
+  await assertSucceeds(setDoc(ref(db, 'student_transcripts', UID.student), transcript(UID.student)));
+  const french = transcript(UID.student);
+  french.curriculum.foreignLanguage = 'Tiếng Pháp';
+  french.curriculum.gradedSubjects[2] = 'Tiếng Pháp';
+  await assertFails(setDoc(ref(db, 'student_transcripts', UID.student), french));
+});
+test('S22 grade10, grade11, grade12 cannot insert unselected academic subjects', async () => {
+  const db = dbAs(UID.student);
+  for (const grade of ['grade10','grade11','grade12']) {
+    const bad = transcript(UID.student);
+    bad.transcript[grade] = {semester1: {'Địa lý':{regular:['9'],midterm:'',final:''}}, semester2:{}};
+    await assertFails(setDoc(ref(db, 'student_transcripts', UID.student), bad));
+  }
+});
+test('S23 malformed extra grades or semesters cannot forge 3-year transcript', async () => {
+  const db = dbAs(UID.student);
+  const extraGrade = transcript(UID.student);
+  extraGrade.transcript.grade13 = {semester1:{},semester2:{}};
+  await assertFails(setDoc(ref(db, 'student_transcripts', UID.student), extraGrade));
+  const extraTerm = transcript(UID.student);
+  extraTerm.transcript.grade12.semester3 = {'Toán':{regular:['10'],midterm:'',final:''}};
+  await assertFails(setDoc(ref(db, 'student_transcripts', UID.student), extraTerm));
+});
+test('S24 profile/transcript must agree on both 4 electives AND foreign language', async () => {
+  const db = dbAs(UID.student);
+  await assertSucceeds(setDoc(ref(db, 'learning_profiles', UID.student), profile(UID.student)));
+  const mismatched = transcript(UID.student);
+  mismatched.curriculum.foreignLanguage = 'Tiếng Pháp';
+  mismatched.curriculum.gradedSubjects[2] = 'Tiếng Pháp';
+  await assertFails(setDoc(ref(db, 'student_transcripts', UID.student), mismatched));
+});
+test('S25 legal same-identity grade updates work across all 3 years', async () => {
+  const db = dbAs(UID.student);
+  const first = transcript(UID.student);
+  await assertSucceeds(setDoc(ref(db, 'student_transcripts', UID.student), first));
+  const next = transcript(UID.student);
+  next.transcript.grade10 = {semester1:{'Vật lý':{regular:['0'],midterm:'',final:''}},semester2:{}};
+  next.transcript.grade11 = {semester1:{'Hóa học':{regular:['8.5'],midterm:'',final:''}},semester2:{}};
+  await assertSucceeds(setDoc(ref(db, 'student_transcripts', UID.student), next));
+});
+test('S26 malformed legacy curriculum cannot be silently overwritten', async () => {
+  const db = dbAs(UID.student);
+  await env.withSecurityRulesDisabled(async context => {
+    await setDoc(ref(context.firestore(), 'learning_profiles', UID.student), {
+      userId:UID.student, schemaVersion:1, dataScope:'student', profile:{fullName:'Legacy'},
+    });
+  });
+  await assertFails(setDoc(ref(db, 'learning_profiles', UID.student), profile(UID.student)));
+  await assertFails(setDoc(ref(db, 'student_transcripts', UID.student), transcript(UID.student)));
+});
+
+test('S27 first atomic batch cannot create different subject identities', async () => {
+  const db = dbAs(UID.student);
+  const batch = writeBatch(db);
+  batch.set(ref(db, 'learning_profiles', UID.student), profile(UID.student));
+  batch.set(ref(db, 'student_transcripts', UID.student), transcript(UID.student, ALT_ELECTIVES));
+  await assertFails(batch.commit());
+  const afterProfile = await assertSucceeds(getDoc(ref(db, 'learning_profiles', UID.student)));
+  const afterTranscript = await assertSucceeds(getDoc(ref(db, 'student_transcripts', UID.student)));
+  assert.equal(afterProfile.exists(), false);
+  assert.equal(afterTranscript.exists(), false);
+});
+
+// CP30 Batch 4 — real, separate Firestore Emulator clients; NOT a browser E2E.
+test('N01 two student sessions observe the same server-committed profile after concurrent read', async () => {
+  const first = dbAs(UID.student);
+  const second = dbAs(UID.student);
+  const firstRef = ref(first, 'learning_profiles', UID.student);
+  const secondRef = ref(second, 'learning_profiles', UID.student);
+  await assertSucceeds(setDoc(firstRef, profile(UID.student)));
+  const [beforeFirst, beforeSecond] = await Promise.all([
+    assertSucceeds(getDocFromServer(firstRef)), assertSucceeds(getDocFromServer(secondRef)),
+  ]);
+  assert.equal(beforeFirst.data().profile.fullName, beforeSecond.data().profile.fullName);
+  await assertSucceeds(updateDoc(firstRef, {
+    'profile.fullName': 'Học sinh phiên A cập nhật', updatedAt: serverTimestamp(),
+  }));
+  const seenInSecond = await assertSucceeds(getDocFromServer(secondRef));
+  assert.equal(seenInSecond.data().profile.fullName, 'Học sinh phiên A cập nhật');
+});
+
+test('N02 a stale optimistic transaction cannot overwrite a second session edit', async () => {
+  const first = dbAs(UID.student);
+  const second = dbAs(UID.student);
+  const firstRef = ref(first, 'learning_profiles', UID.student);
+  const secondRef = ref(second, 'learning_profiles', UID.student);
+  await assertSucceeds(setDoc(firstRef, profile(UID.student)));
+  const baseline = (await assertSucceeds(getDocFromServer(firstRef))).data().updatedAt.toMillis();
+  let injected = false;
+  let attemptCount = 0;
+  await assert.rejects(runTransaction(first, async tx => {
+    attemptCount++;
+    const snap = await tx.get(firstRef);
+    if (snap.data()?.updatedAt?.toMillis() !== baseline) {
+      throw new Error('CLA_SEED_CONFLICT');
+    }
+    if (!injected) {
+      injected = true;
+      await assertSucceeds(updateDoc(secondRef, {
+        'profile.fullName': 'Phiên B đã lưu', updatedAt: serverTimestamp(),
+      }));
+    }
+    tx.update(firstRef, {
+      'profile.fullName': 'Phiên A ghi đè', updatedAt: serverTimestamp(),
+    });
+  }), /CLA_SEED_CONFLICT/);
+  assert.ok(attemptCount >= 2, 'transaction must re-read after the competing write');
+  const latest = await assertSucceeds(getDocFromServer(secondRef));
+  assert.equal(latest.data().profile.fullName, 'Phiên B đã lưu');
+});
+
+test('N03 an already-open student session loses server reads after account suspension', async () => {
+  const first = dbAs(UID.student);
+  const second = dbAs(UID.student);
+  const firstRef = ref(first, 'student_transcripts', UID.student);
+  await assertSucceeds(setDoc(firstRef, transcript(UID.student)));
+  await assertSucceeds(getDocFromServer(ref(second, 'student_transcripts', UID.student)));
+  await env.withSecurityRulesDisabled(async ctx => {
+    await updateDoc(ref(ctx.firestore(), 'users', UID.student), { active: false });
+  });
+  await assertFails(getDocFromServer(ref(second, 'student_transcripts', UID.student)));
+  await assertFails(setDoc(firstRef, transcript(UID.student)));
+});
+
+// CP31 Batch 10. Server-side enforcement runs only inside isolated Firestore Emulator.
+test('J14 new T0 snapshot rejects post-treatment prediction, mismatch and missing freeze', async () => {
+  const original = cyclePayload();
+  const { t0Snapshot, ...withoutT0 } = original;
+  await assertFails(createCycleAtomic(UID.student, 'cycle_001', { t0Snapshot: null }));
+  await assertFails(createCycleAtomic(UID.student, 'cycle_001', { t0Snapshot: { ...t0Snapshot, predictedOutcome: 9 } }));
+  await assertFails(createCycleAtomic(UID.student, 'cycle_001', { t0Snapshot: { ...t0Snapshot, calibratedProbability: .9 } }));
+  await assertFails(createCycleAtomic(UID.student, 'cycle_001', { t0Snapshot: { ...t0Snapshot, frozenAt: '2026-11-30T07:00:00.000Z' } }));
+  await assertFails(createCycleAtomic(UID.student, 'cycle_001', { t0Snapshot: { ...t0Snapshot, subjects: [{ ...t0Snapshot.subjects[0], baseline: 9 }] } }));
+  await assertFails(createCycleAtomic(UID.student, 'cycle_001', { t0Snapshot: { ...t0Snapshot, forgedModel: 'validated' } }));
+});
+test('J15 T0 immutable under check-in and review, legacy T0 absence can be read', async () => {
+  await assertSucceeds(createCycleAtomic());
+  const reference = cycleRef(dbAs(UID.student));
+  const original = cyclePayload().t0Snapshot;
+  await assertFails(updateDoc(reference, { t0Snapshot: { ...original, planGapPoints: 9 }, updatedAt: serverTimestamp() }));
+  await assertFails(updateDoc(reference, { subjects: [{ key: 'math', label: 'Toán', baseline: 0, target: 8 }], updatedAt: serverTimestamp() }));
+  await assertSucceeds(updateDoc(reference, { checkIns: [checkin], updatedAt: serverTimestamp() }));
+  await assertFails(updateDoc(reference, { t0Snapshot: null, updatedAt: serverTimestamp() }));
+  await assertSucceeds(reviewCycleAtomic(dbAs(UID.student)));
+  await assertFails(updateDoc(reference, { t0Snapshot: null, updatedAt: serverTimestamp() }));
+  await env.withSecurityRulesDisabled(async ctx => {
+    const legacy = cyclePayload(UID.student, 'cycle_legacy_001');
+    delete legacy.t0Snapshot;
+    await setDoc(cycleRef(ctx.firestore(), UID.student, 'cycle_legacy_001'), legacy);
+  });
+  await assertSucceeds(getDoc(cycleRef(dbAs(UID.student), UID.student, 'cycle_legacy_001')));
+});
+
+// CP31 Batch 14 — runtime checks for immutable source-of-score declarations.
+const measurementRef=(db,uid=UID.student,key='math',timepoint='T0')=>
+  doc(db,'learning_journeys',uid,'measurement_declarations',`cycle_001~${key}~${timepoint}`);
+const measurementPayload=(uid=UID.student,timepoint='T0',overrides={})=>({
+  schemaVersion:1,userId:uid,cycleId:'cycle_001',subjectKey:'math',
+  subjectIndex:0,observationIndex:timepoint==='T0'?-1:0,timepoint,
+  score:timepoint==='T0'?7:7.5,
+  linkedAt:timepoint==='T0'?cyclePayload().startedAt:review.recordedAt,
+  source:'student_self_report',instrumentId:'math_quiz',instrumentVersion:'version_001',
+  formId:'form_a',scoringProtocolId:'rubric_v1',scaleId:'score-0-to-10',
+  declaredAt:serverTimestamp(),...overrides,
+});
+test('J16 student can append one T0 declaration after consent, with owner-bound read including zero',async()=>{
+  const original=cyclePayload();const subjects=[{...original.subjects[0],baseline:0}];
+  await assertSucceeds(createCycleAtomic(UID.student,'cycle_001',{subjects,t0Snapshot:{...original.t0Snapshot,subjects,planGapPoints:8}}));
+  const db=dbAs(UID.student),target=measurementRef(db);
+  await assertSucceeds(setDoc(target,measurementPayload(UID.student,'T0',{score:0})));
+  assert.equal((await assertSucceeds(getDoc(target))).data().score,0);
+  await assertFails(getDoc(measurementRef(dbAs(UID.other))));
+  await assertFails(getDoc(measurementRef(dbAs(UID.teacher))));
+  await assertFails(getDoc(measurementRef(anonymous())));
+  await assertSucceeds(getDocs(query(collection(db,'learning_journeys',UID.student,'measurement_declarations'),limit(96))));
+  await assertFails(getDocs(collection(db,'learning_journeys',UID.student,'measurement_declarations')));
+});
+test('J17 T1 declaration requires a reviewed outcome and matching exact score/time',async()=>{
+  await assertSucceeds(createCycleAtomic());
+  const db=dbAs(UID.student),target=measurementRef(db,UID.student,'math','T1');
+  await assertFails(setDoc(target,measurementPayload(UID.student,'T1')));
+  await assertSucceeds(updateDoc(cycleRef(db),{checkIns:[checkin],updatedAt:serverTimestamp()}));
+  await assertSucceeds(reviewCycleAtomic(db));
+  await assertSucceeds(setDoc(target,measurementPayload(UID.student,'T1')));
+  await assertFails(setDoc(measurementRef(db,UID.student,'english','T1'),measurementPayload(UID.student,'T1',{subjectKey:'english'})));
+});
+test('J18 declaration is create-once; client cannot edit, overwrite or delete',async()=>{
+  await assertSucceeds(createCycleAtomic());
+  const db=dbAs(UID.student),target=measurementRef(db);
+  await assertSucceeds(setDoc(target,measurementPayload()));
+  await assertFails(updateDoc(target,{instrumentId:'forged_quiz'}));
+  await assertFails(setDoc(target,measurementPayload(UID.student,'T0',{instrumentVersion:'version_002'})));
+  await assertFails(deleteDoc(target));
+});
+test('J19 reject wrong score, cycle/subject, index, timestamp, source, PII and scale',async()=>{
+  await assertSucceeds(createCycleAtomic());
+  const target=measurementRef(dbAs(UID.student));
+  for(const patch of [{score:8},{linkedAt:'2026-10-01T08:00:00.000Z'},{subjectIndex:1},
+    {observationIndex:0},{cycleId:'cycle_002'},{subjectKey:'english'},
+    {source:'teacher_verified'},{scaleId:'percentage'},{instrumentId:'<script>'},
+    {studentName:'untrusted'},{declaredAt:'2026-10-01T00:00:00.000Z'}]) {
+    await assertFails(setDoc(target,measurementPayload(UID.student,'T0',patch)));
+  }
+  await assertFails(setDoc(measurementRef(dbAs(UID.other)),measurementPayload(UID.student)));
+});
+test('J20 consent withdrawal prevents new declarations while preserving reads',async()=>{
+  await assertSucceeds(createCycleAtomic());
+  const db=dbAs(UID.student),target=measurementRef(db);
+  await assertSucceeds(setDoc(target,measurementPayload()));
+  await assertSucceeds(updateDoc(cycleRef(db),{checkIns:[checkin],updatedAt:serverTimestamp()}));
+  await assertSucceeds(reviewCycleAtomic(db));
+  await assertSucceeds(setDoc(ref(db,'student_consents',UID.student),studentConsent(UID.student,false)));
+  await assertSucceeds(getDoc(target));
+  // The T1 source would be valid if consent were active: denial specifically tests revocation.
+  await assertFails(setDoc(measurementRef(db,UID.student,'math','T1'),measurementPayload(UID.student,'T1')));
+});
+
+
+// CP36 candidate runtime acceptance: must run in the demo Firebase Emulator.
+const lineage=(source='cycle_001',extra={})=>({schemaVersion:1,policyVersion:'cla-adaptive-next-cycle-v1',sourceCycleId:source,inputSnapshotId:source,reviewEvidenceId:source+'-review',disposition:'ACCEPTED',recommendedId:'balanced',recommendedHours:10,optionHours:{balanced:10,focused:12,breakthrough:18},...extra});
+const finishTwoCheckins=async(db,id='cycle_001')=>{
+ const first={...checkin,actualHours:10,completedActions:3};
+ const second={...checkin,id:'check_002',week:2,recordedAt:'2026-11-20T07:00:00.000Z',actualHours:10,completedActions:3};
+ await assertSucceeds(updateDoc(cycleRef(db,UID.student,id),{checkIns:[first],updatedAt:serverTimestamp()}));
+ await assertSucceeds(updateDoc(cycleRef(db,UID.student,id),{checkIns:[first,second],updatedAt:serverTimestamp()}));
+ await assertSucceeds(reviewCycleAtomic(db,UID.student,id));
+};
+const nextOverrides=(trace)=>{const a=cyclePayload();const startedAt='2026-11-22T07:00:00.000Z';return {startedAt,t0Snapshot:{...a.t0Snapshot,frozenAt:startedAt},decisionTrace:trace};};
+test('J21 adaptive lineage accepted only with current reviewed source and remains immutable',async()=>{
+ const db=dbAs(UID.student);await assertSucceeds(createCycleAtomic());await finishTwoCheckins(db);
+ await assertSucceeds(createCycleAtomic(UID.student,'cycle_002',nextOverrides(lineage())));
+ const next=cycleRef(db,UID.student,'cycle_002');
+ assert.equal((await getDoc(next)).data().decisionTrace.sourceCycleId,'cycle_001');
+ await assertFails(updateDoc(next,{decisionTrace:lineage('cycle_999'),updatedAt:serverTimestamp()}));
+ await assertFails(getDoc(cycleRef(dbAs(UID.other),UID.student,'cycle_002')));
+});
+test('J22 adaptive lineage denies unknown source, forged references, and stale prior after another review',async()=>{
+ const db=dbAs(UID.student);await assertSucceeds(createCycleAtomic());await finishTwoCheckins(db);
+ for(const t of [lineage('cycle_missing'),lineage('cycle_001',{inputSnapshotId:'wrong'}),lineage('cycle_001',{disposition:'DECLINED'}),lineage('cycle_001',{probability:.9})])await assertFails(createCycleAtomic(UID.student,'cycle_002',nextOverrides(t)));
+ await assertSucceeds(createCycleAtomic(UID.student,'cycle_002'));await finishTwoCheckins(db,'cycle_002');
+ await assertFails(createCycleAtomic(UID.student,'cycle_003',nextOverrides(lineage())));
+});
+test('J23 adaptive lineage fails after revocation; manual legacy cycle still needs consent',async()=>{
+ const db=dbAs(UID.student);await assertSucceeds(createCycleAtomic());await finishTwoCheckins(db);
+ await assertSucceeds(setDoc(ref(db,'student_consents',UID.student),studentConsent(UID.student,false)));
+ await assertFails(createCycleAtomic(UID.student,'cycle_002',nextOverrides(lineage())));
+ await assertFails(createCycleAtomic(UID.student,'cycle_002'));
 });

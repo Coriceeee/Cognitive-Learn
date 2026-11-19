@@ -29,10 +29,10 @@ test('P1 scholarship search filters by country and label without claiming eligib
 });
 
 test('P1 Atlas provenance distinguishes 3-year records from 2026-only additions', () => {
-  assert.equal(officialUniversities.length, 10);
+  assert.equal(officialUniversities.length, 32);
   const yearRecords = officialUniversities.flatMap(item => item.years);
-  assert.equal(yearRecords.length, 24);
-  assert.equal(officialUniversities.filter(item => item.years.length === 3).length, 7);
+  assert.equal(yearRecords.length, 57);
+  assert.equal(officialUniversities.filter(item => item.years.length === 3).length, 12);
   assert.equal(admissionYears.length, 3);
   const ids = new Set();
   for (const school of officialUniversities) {

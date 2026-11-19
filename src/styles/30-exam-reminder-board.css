@@ -1,50 +1,50 @@
 /* CLA Exam Calendar V1 — high-visibility student dashboard companion, responsive */
-.cla-exam-board { margin: 0 0 22px; padding: clamp(18px,3vw,28px); color:#1c3f53; border:1px solid #cfe5ee; background:linear-gradient(128deg,#fff 5%,#f0f9ff 100%); border-radius:22px; box-shadow:0 12px 30px #0d506010; }
+.cla-exam-board { margin: 0 0 22px; padding: clamp(18px,3vw,28px); color:rgb(var(--tc-tx-1c3f53)); border:1px solid rgb(var(--tc-bd-cfe5ee)); background:linear-gradient(128deg,rgb(var(--tc-bg-ffffff)) 5%,rgb(var(--tc-bg-f0f9ff)) 100%); border-radius:22px; box-shadow:0 12px 30px rgb(var(--tc-sh-0d5060) / calc(0.063 * var(--k-sh))); }
 .cla-exam-board * { box-sizing:border-box; }
 .cla-exam-heading { display:flex;align-items:center;justify-content:space-between;gap:20px; }
-.cla-exam-eyebrow {color:#237b9e;font-weight:800;letter-spacing:.11em;font-size:11px;}
-.cla-exam-heading h2{font-size:clamp(22px,3vw,30px);line-height:1.2;margin:7px 0 5px;color:#123b55;}
-.cla-exam-heading p{font-size:14px;line-height:1.5;margin:0;color:#486c7b;}
+.cla-exam-eyebrow {color:rgb(var(--tc-tx-237b9e));font-weight:800;letter-spacing:.11em;font-size:11px;}
+.cla-exam-heading h2{font-size:clamp(22px,3vw,30px);line-height:1.2;margin:7px 0 5px;color:rgb(var(--tc-tx-123b55));}
+.cla-exam-heading p{font-size:14px;line-height:1.5;margin:0;color:rgb(var(--tc-tx-486c7b));}
 .cla-exam-countdown{background:#12475d;color:white;border-radius:16px;padding:15px 18px;min-width:205px;max-width:270px;display:grid;gap:4px;}
 .cla-exam-countdown strong{font-size:clamp(19px,2.5vw,26px);line-height:1.2;}
 .cla-exam-countdown small{line-height:1.4;color:#d3eff7;}
-.cla-exam-alert{margin-top:15px;border:1px solid #f2d5a1;background:#fffaf0;color:#654e22;border-radius:13px;padding:12px 16px;}
+.cla-exam-alert{margin-top:15px;border:1px solid rgb(var(--tc-bd-f2d5a1));background:rgb(var(--tc-bg-fffaf0));color:rgb(var(--tc-tx-654e22));border-radius:13px;padding:12px 16px;}
 .cla-exam-alert>strong{font-size:14px;}
 .cla-exam-alert p{font-size:13px;line-height:1.45;margin:5px 0 0;}
-.cla-exam-empty{margin-top:17px;border:1px dashed #afd0e0;border-radius:14px;padding:18px;color:#4a6777;background:#fff;}
+.cla-exam-empty{margin-top:17px;border:1px dashed rgb(var(--tc-bd-afd0e0));border-radius:14px;padding:18px;color:rgb(var(--tc-tx-4a6777));background:rgb(var(--tc-bg-ffffff));}
 .cla-exam-items{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:11px;margin-top:16px;}
-.cla-exam-item{border-radius:16px;background:#fff;border:1px solid #d6e6ed;padding:15px;min-width:0;}
-.cla-exam-item.is-soon{border-color:#dda751;background:#fffdf8;}
+.cla-exam-item{border-radius:16px;background:rgb(var(--tc-bg-ffffff));border:1px solid rgb(var(--tc-bd-d6e6ed));padding:15px;min-width:0;}
+.cla-exam-item.is-soon{border-color:rgb(var(--tc-bd-dda751));background:rgb(var(--tc-bg-fffdf8));}
 .cla-exam-item-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
 .cla-exam-item-top>div{display:grid;gap:3px;min-width:0;}
-.cla-exam-item-top strong{font-size:17px;color:#17394f;overflow-wrap:anywhere;}
-.cla-exam-item-top small{font-size:12px;color:#6b8190;}
-.cla-exam-time{display:inline-flex;padding:7px 9px;background:#e7f4fa;border-radius:999px;color:#105679;font-size:12px;font-weight:750;white-space:nowrap;}
-.cla-exam-item.is-soon .cla-exam-time{background:#ffe8bb;color:#78490c;}
-.cla-exam-item-meta{display:grid;gap:5px;margin:13px 0 12px;font-size:13px;color:#4b6d7a;}
-.cla-exam-item-meta b{color:#24485f;}
+.cla-exam-item-top strong{font-size:17px;color:rgb(var(--tc-tx-17394f));overflow-wrap:anywhere;}
+.cla-exam-item-top small{font-size:12px;color:rgb(var(--tc-tx-6b8190));}
+.cla-exam-time{display:inline-flex;padding:7px 9px;background:rgb(var(--tc-bg-e7f4fa));border-radius:999px;color:rgb(var(--tc-tx-105679));font-size:12px;font-weight:750;white-space:nowrap;}
+.cla-exam-item.is-soon .cla-exam-time{background:rgb(var(--tc-bg-ffe8bb));color:rgb(var(--tc-tx-78490c));}
+.cla-exam-item-meta{display:grid;gap:5px;margin:13px 0 12px;font-size:13px;color:rgb(var(--tc-tx-4b6d7a));}
+.cla-exam-item-meta b{color:rgb(var(--tc-tx-24485f));}
 .cla-exam-actions{display:flex;flex-wrap:wrap;gap:7px;align-items:center;}
-.cla-exam-actions button,.cla-exam-actions a{border:1px solid #bed5e0;color:#0e5a7d;background:#f0f8fb;padding:8px 10px;line-height:1.3;text-decoration:none;border-radius:9px;font:inherit;font-size:12px;font-weight:700;cursor:pointer;}
-.cla-exam-actions .cla-exam-remove{color:#9a4944;background:#fff;border-color:#eed8d3;}
-.cla-exam-editor{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px;padding-top:14px;border-top:1px solid #dbe8ed;}
-.cla-exam-editor label{font-size:12px;font-weight:700;color:#355c6c;display:grid;gap:5px;min-width:0;}
-.cla-exam-editor input:not([type=checkbox]){width:100%;border:1px solid #bbd2dd;border-radius:9px;padding:9px;font:inherit;font-size:13px;color:#1c3f53;background:white;}
+.cla-exam-actions button,.cla-exam-actions a{border:1px solid rgb(var(--tc-bd-bed5e0));color:rgb(var(--tc-tx-0e5a7d));background:rgb(var(--tc-bg-f0f8fb));padding:8px 10px;line-height:1.3;text-decoration:none;border-radius:9px;font:inherit;font-size:12px;font-weight:700;cursor:pointer;}
+.cla-exam-actions .cla-exam-remove{color:rgb(var(--tc-tx-9a4944));background:rgb(var(--tc-bg-ffffff));border-color:rgb(var(--tc-bd-eed8d3));}
+.cla-exam-editor{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px;padding-top:14px;border-top:1px solid rgb(var(--tc-bd-dbe8ed));}
+.cla-exam-editor label{font-size:12px;font-weight:700;color:rgb(var(--tc-tx-355c6c));display:grid;gap:5px;min-width:0;}
+.cla-exam-editor input:not([type=checkbox]){width:100%;border:1px solid rgb(var(--tc-bd-bbd2dd));border-radius:9px;padding:9px;font:inherit;font-size:13px;color:rgb(var(--tc-tx-1c3f53));background:rgb(var(--tc-bg-ffffff));}
 .cla-exam-editor .cla-exam-done{display:flex;align-items:center;gap:7px;grid-column:1/-1;}
 .cla-exam-editor .cla-exam-done input{width:17px;height:17px;}
-.cla-exam-help{grid-column:1/-1;font-size:12px;color:#647e88;margin:0;line-height:1.5;}
-.cla-exam-chooser{margin-top:16px;border:1px solid #cde4ee;background:white;border-radius:13px;padding:13px;}
-.cla-exam-chooser summary{font-weight:800;color:#0d5e88;cursor:pointer;line-height:1.4;}
+.cla-exam-help{grid-column:1/-1;font-size:12px;color:rgb(var(--tc-tx-647e88));margin:0;line-height:1.5;}
+.cla-exam-chooser{margin-top:16px;border:1px solid rgb(var(--tc-bd-cde4ee));background:rgb(var(--tc-bg-ffffff));border-radius:13px;padding:13px;}
+.cla-exam-chooser summary{font-weight:800;color:rgb(var(--tc-tx-0d5e88));cursor:pointer;line-height:1.4;}
 .cla-exam-catalog{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:9px;margin-top:12px;}
-.cla-exam-catalog button{display:grid;gap:4px;text-align:left;align-content:center;border-radius:11px;background:#f0f8fb;border:1px solid #c8dfeb;padding:11px;color:#22516a;min-height:62px;cursor:pointer;}
-.cla-exam-catalog button:hover,.cla-exam-actions button:hover{background:#e1f3fb;}
+.cla-exam-catalog button{display:grid;gap:4px;text-align:left;align-content:center;border-radius:11px;background:rgb(var(--tc-bg-f0f8fb));border:1px solid rgb(var(--tc-bd-c8dfeb));padding:11px;color:rgb(var(--tc-tx-22516a));min-height:62px;cursor:pointer;}
+.cla-exam-catalog button:hover,.cla-exam-actions button:hover{background:rgb(var(--tc-bg-e1f3fb));}
 .cla-exam-catalog button:disabled{opacity:.48;cursor:not-allowed;}
-.cla-exam-catalog small{font-size:11px;color:#617987;line-height:1.3;}
-.cla-exam-notice{margin:12px 0 0;padding:9px 11px;border:1px solid #d0e9f0;background:#ecf9ff;border-radius:10px;font-size:13px;}
-.cla-exam-privacy{font-size:12px;color:#57707d;line-height:1.6;margin:14px 0 0;}
+.cla-exam-catalog small{font-size:11px;color:rgb(var(--tc-tx-617987));line-height:1.3;}
+.cla-exam-notice{margin:12px 0 0;padding:9px 11px;border:1px solid rgb(var(--tc-bd-d0e9f0));background:rgb(var(--tc-bg-ecf9ff));border-radius:10px;font-size:13px;}
+.cla-exam-privacy{font-size:12px;color:rgb(var(--tc-tx-57707d));line-height:1.6;margin:14px 0 0;}
 @media(max-width:680px){.cla-exam-heading{align-items:stretch;flex-direction:column;gap:12px;}.cla-exam-countdown{max-width:none;min-width:0;}.cla-exam-editor{grid-template-columns:1fr;}.cla-exam-board{border-radius:16px;}.cla-exam-item-top{flex-wrap:wrap;}.cla-exam-catalog{grid-template-columns:repeat(2,minmax(0,1fr));}}
 
 .cla-exam-editor-actions{display:flex;flex-wrap:wrap;gap:9px;grid-column:1/-1;}
 .cla-exam-editor-actions button{padding:9px 15px;border:0;background:#14618a;color:white;font-weight:750;border-radius:9px;cursor:pointer;}
-.cla-exam-editor-actions button.cancel{background:#ecf2f5;color:#345567;}
+.cla-exam-editor-actions button.cancel{background:rgb(var(--tc-bg-ecf2f5));color:rgb(var(--tc-tx-345567));}
 
-.cla-exam-reset{padding:8px 11px;border:1px solid #c58578;border-radius:10px;background:#fff2ee;color:#8e4438;cursor:pointer;font:inherit;font-size:13px;font-weight:700;margin-top:8px;}
+.cla-exam-reset{padding:8px 11px;border:1px solid #c58578;border-radius:10px;background:rgb(var(--tc-bg-fff2ee));color:rgb(var(--tc-tx-8e4438));cursor:pointer;font:inherit;font-size:13px;font-weight:700;margin-top:8px;}

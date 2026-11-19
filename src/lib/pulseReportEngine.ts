@@ -25,8 +25,6 @@ export type PulseReportResult = {
   trend: PulseTrend;
   metrics: PulseMetric[];
   studentSummary: string;
-  parentSummary: string;
-  teacherSummary: string;
   actions: PulseAction[];
   warnings: string[];
 };
@@ -136,30 +134,6 @@ function buildStudentSummary(score: number, riskLevel: PulseRiskLevel) {
   return `Bạn đang ở nhóm rủi ro với điểm tổng ${score}/100. Cần ưu tiên kế hoạch tăng điểm, cập nhật hồ sơ và chọn thêm phương án an toàn.`;
 }
 
-function buildParentSummary(score: number, riskLevel: PulseRiskLevel) {
-  if (riskLevel === "GOOD") {
-    return `Học sinh đang có tiến độ ổn định. Phụ huynh nên hỗ trợ duy trì lịch học, theo dõi học phí/học bổng và chuẩn bị hồ sơ tuyển sinh.`;
-  }
-
-  if (riskLevel === "WATCH") {
-    return `Học sinh cần được hỗ trợ theo dõi sát hơn trong giai đoạn tới. Nên xem lại mục tiêu ngành, lịch học và phương án xét tuyển dự phòng.`;
-  }
-
-  return `Học sinh đang có dấu hiệu rủi ro. Phụ huynh nên cùng học sinh điều chỉnh mục tiêu, giảm áp lực không cần thiết và tăng phương án an toàn.`;
-}
-
-function buildTeacherSummary(score: number, riskLevel: PulseRiskLevel) {
-  if (riskLevel === "GOOD") {
-    return `Học sinh có nền tảng khá tốt. Giáo viên có thể giao nhiệm vụ nâng cao và định hướng thêm chiến lược xét tuyển.`;
-  }
-
-  if (riskLevel === "WATCH") {
-    return `Học sinh cần được theo dõi ở một số chỉ số. Giáo viên nên ưu tiên sửa lỗi sai lặp lại và kiểm tra tiến độ theo tuần.`;
-  }
-
-  return `Học sinh cần can thiệp sớm. Giáo viên nên xác định môn trọng tâm, giảm dàn trải và tạo kế hoạch học tập ngắn hạn.`;
-}
-
 export function runPulseReport({
   cognitiveScore,
   previousCognitiveScore,
@@ -264,8 +238,6 @@ export function runPulseReport({
     trend,
     metrics,
     studentSummary: buildStudentSummary(overallScore, riskLevel),
-    parentSummary: buildParentSummary(overallScore, riskLevel),
-    teacherSummary: buildTeacherSummary(overallScore, riskLevel),
     actions: buildActions(metrics),
     warnings,
   };

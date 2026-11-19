@@ -4,7 +4,10 @@ import { auth } from "../../lib/firebase";
 import claChatMascot from "../../assets/cla-chat-mascot.webp";
 import { ADVISOR_PAGE_CONTEXTS, advisorPageContextFromPath, advisorSuggestionsFor, normaliseAdvisorHistory, prepareAdvisorMessage, routeAdvisorQuestion, safeAdvisorDestination, type AdvisorTurn, type AdvisorRoute } from "../../lib/advisorChatPolicy";
 
-type AdvisorDisplayTurn = AdvisorTurn & { destination?: AdvisorRoute["destination"]; linkLabel?: string };
+import { answerClaKnowledge } from "../../lib/claKnowledgeRetrieval";
+import { answerVerifiedCutoff, safeCutoffSource } from "../../lib/atlasDecisionComparison";
+
+type AdvisorDisplayTurn = AdvisorTurn & { source?: string; destination?: AdvisorRoute["destination"]; linkLabel?: string };
 function apiBase() {
   const base = (import.meta.env.VITE_API_BASE_URL || "").trim().replace(/\/+$/, "");
   if (base && !/^https:\/\/[^/?#]+$/.test(base)) throw new Error("VITE_API_BASE_URL phải là URL HTTPS không chứa đường dẫn.");
@@ -41,6 +44,16 @@ export default function FloatingAdvisorChat() {
     let message: string;
     try { message = prepareAdvisorMessage(raw); } catch (error) { setNotice(error instanceof Error ? error.message : "Câu hỏi chưa hợp lệ."); return; }
     if (!authenticated) { setNotice("Bạn cần đăng nhập để trò chuyện với trợ lý CLA."); return; }
+    const verified = answerVerifiedCutoff(message);
+    if (verified) {
+      setTurns(current => [...current, { role: "user", text: message }, { role: "model", text: verified.answer, source: verified.source, destination: "/atlas/vietnam", linkLabel: "Xem Atlas" }]);
+      setQuestion(""); setNotice(""); return;
+    }
+    const knowledge = answerClaKnowledge(message);
+    if (knowledge) {
+      setTurns(current => [...current, { role: "user", text: message }, { role: "model", text: knowledge.answer }]);
+      setQuestion(""); setNotice(""); return;
+    }
     const localRedirect = routeAdvisorQuestion(message);
     if (localRedirect) {
       setTurns(current => [...current, { role: "user", text: message }, { role: "model", text: localRedirect.answer, destination: localRedirect.destination, linkLabel: localRedirect.label }]);
@@ -62,11 +75,11 @@ export default function FloatingAdvisorChat() {
       });
       const rawResponse = await response.text();
       if (rawResponse.length > 15000) throw new Error("Phản hồi trợ lý vượt giới hạn an toàn.");
-      let payload: { ok?: boolean; answer?: string; message?: string; destination?: unknown; linkLabel?: string };
+      let payload: { ok?: boolean; answer?: string; message?: string; destination?: unknown; linkLabel?: string; source?: unknown };
       try { payload = JSON.parse(rawResponse); } catch { throw new Error("Máy chủ chưa trả JSON. Kiểm tra cấu hình API Gemini trên Vercel."); }
       if (!response.ok || !payload.ok || typeof payload.answer !== "string") throw new Error(payload.message || `Chatbot chưa khả dụng (HTTP ${response.status}).`);
       const destination = safeAdvisorDestination(payload.destination);
-      setTurns(current => [...current, { role: "model", text: payload.answer!.slice(0, 4000), destination, linkLabel: destination && typeof payload.linkLabel === "string" ? payload.linkLabel.slice(0, 90) : undefined }]);
+      setTurns(current => [...current, { role: "model", text: payload.answer!.slice(0, 4000), destination, source: safeCutoffSource(payload.source), linkLabel: destination && typeof payload.linkLabel === "string" ? payload.linkLabel.slice(0, 90) : undefined }]);
     } catch (error) {
       if (!controller.signal.aborted) setNotice(error instanceof Error ? error.message : "Chưa kết nối được trợ lý Gemini.");
     } finally { setLoading(false); controllerRef.current = null; }
@@ -80,8 +93,8 @@ export default function FloatingAdvisorChat() {
         <button type="button" aria-label="Đóng trò chuyện" onClick={() => setOpen(false)}>×</button>
       </header>
       <div className="cla-chat-messages" role="log" aria-live="polite" aria-relevant="additions text">
-        <p className="cla-chat-intro">Mình có thể hướng dẫn thao tác, giải thích cách dùng chức năng và đưa bạn đến đúng khu vực. Thông tin tuyển sinh / du học thuộc Atlas; học bổng và tài chính thuộc Haven. Trợ lý không tự cung cấp số liệu chuyên ngành.</p>
-        {turns.map((turn, index) => <div key={index} className={`cla-chat-message ${turn.role === "user" ? "is-user" : "is-model"}`}><span>{turn.role === "user" ? "Bạn" : "CLA"}</span><p>{turn.text}</p>{turn.destination && <a className="cla-chat-context-link" href={turn.destination}>{turn.linkLabel || "Mở chức năng liên quan"} ↗</a>}</div>)}
+        <p className="cla-chat-intro">Mình có thể hướng dẫn thao tác, giải thích các khái niệm CLA từ thẻ kiến thức có mã nguồn tham chiếu (CLA-K01–K10), và đưa bạn đến đúng khu vực. Thông tin tuyển sinh / du học thuộc Atlas; học bổng và tài chính thuộc Haven. Tra cứu điểm đã nhập từ nguồn trường: Điểm chuẩn CTU CNTT 2024 THPT; Điểm chuẩn CTU CNTT 2025 chung; Điểm chuẩn CTU CNTT 2026 chung; Điểm chuẩn AGU CNTT 2026 tổng hợp; Điểm chuẩn HUST EE2 2026 THPT A00; Điểm chuẩn PTIT BVH CNTT 2026 THPT; Điểm chuẩn UET CN12 2026 chung; Điểm chuẩn QHX QHX21 2026 THPT D01; Điểm chuẩn QHY 7720101 2026 chung. Ngoài dữ liệu đã xác minh, trợ lý chuyển bạn đến đúng phân hệ.</p>
+        {turns.map((turn, index) => <div key={index} className={`cla-chat-message ${turn.role === "user" ? "is-user" : "is-model"}`}><span>{turn.role === "user" ? "Bạn" : "CLA"}</span><p>{turn.text}</p>{turn.source && <a className="cla-chat-context-link" href={turn.source} target="_blank" rel="noopener noreferrer">Nguồn công bố chính thức ↗</a>}{turn.destination && <a className="cla-chat-context-link" href={turn.destination}>{turn.linkLabel || "Mở chức năng liên quan"} ↗</a>}</div>)}
         {loading && <p className="cla-chat-thinking" role="status">Đang tạo câu trả lời…</p>}
         <div ref={scrollAnchor} />
       </div>

@@ -1,3 +1,6 @@
+import { currentFocusedPath } from "../../lib/focusedModuleRoute";
+import PublicSourceSearchPanel from "../../components/common/PublicSourceSearchPanel";
+import NationalSourceDiscoveryPanel from "../../components/common/NationalSourceDiscoveryPanel";
 import ModuleSectionNav from "../../components/common/ModuleSectionNav";
 import { useIsAdmin } from "../../lib/useIsAdmin";
 import { domesticInternationalPrograms } from "../../data/domesticInternationalPrograms";
@@ -11,10 +14,13 @@ import AtlasAdmissionEnginePanel from "./components/AtlasAdmissionEnginePanel";
 import AtlasGeminiReaderPanel from "./components/AtlasGeminiReaderPanel";
 import AtlasKnowledgeStats from "./components/AtlasKnowledgeStats";
 import AtlasProgramCard from "./components/AtlasProgramCard";
+import AtlasProgramDiscoveryPanel from "./components/AtlasProgramDiscoveryPanel";
+import AtlasDecisionComparisonPanel from "./components/AtlasDecisionComparisonPanel";
 import AtlasCutoffField from "./components/AtlasCutoffField";
 import { useAtlasKnowledge } from "./hooks/useAtlasKnowledge";
 
 export default function AtlasPage() {
+  const view = currentFocusedPath();
   const isAdmin = useIsAdmin();
   const {
     programs,
@@ -45,7 +51,8 @@ export default function AtlasPage() {
       </header>
 
       <section className="atlas-shell">
-        <section className="atlas-hero">
+        {view === "/atlas" && <>
+          <section className="atlas-hero">
           <div className="atlas-hero-copy">
             <span>ATLAS ADMISSION AI</span>
             <h1>Tuyển sinh Việt Nam & du học quốc tế</h1>
@@ -55,22 +62,14 @@ export default function AtlasPage() {
             </p>
 
             <div className="atlas-hero-actions">
-              <a className="cla-study-jump" href="#atlas-engine">Khám phá môn thi → chương trình có nguồn</a>
-              <a className="cla-study-jump" href="/student#cla-exam-reminders">Lịch thi của tôi · Đếm ngược HSA / V-ACT / V-SAT</a>
-              {isAdmin ? <a className="cla-study-jump" href="/admin/diagnostics?view=atlas">Nhập và kiểm tra đề án · Admin</a>
-                : <a className="cla-study-jump" href="/atlas/vietnam">Tra cứu tuyển sinh Việt Nam</a>}
+              <a className="cla-study-jump" href="/student/exams#cla-exam-reminders">Lịch thi của tôi · Đếm ngược HSA / V-ACT / V-SAT</a>
+              <a className="cla-study-jump" href="/atlas/vietnam">Tra cứu tuyển sinh Việt Nam</a>
+              <a className="cla-study-jump" href="/atlas/subjects">Khám phá môn thi → chương trình có nguồn</a>
+              {isAdmin && <a className="cla-study-jump" href="/atlas/library">Kho nhập nguồn · Admin</a>}
 
-              <a className="cla-study-jump" href="/atlas/study-abroad">Du học quốc tế · Atlas ↗</a>
 
-              <a className="cla-study-jump" href="/atlas/recommendations">
-                Gợi ý ngành & trường
-              </a>
 
-              {isAdmin && programs.length > 0 && (
-                <button type="button" className="danger" onClick={() => { if (window.confirm("Xóa toàn bộ bản nháp Atlas của tài khoản này?")) void clearAtlasData().catch(() => {}); }} disabled={storageStatus !== "ready" || saving}>
-                  Xóa dữ liệu hiện tại
-                </button>
-              )}
+
             </div>
           </div>
 
@@ -87,30 +86,37 @@ export default function AtlasPage() {
               <strong>{isAdmin ? "Admission Engine" : "Gợi ý phù hợp với hồ sơ"}</strong>
             </div>
           </div>
-        </section>
+        </section></>}
 
+        <ModuleSectionNav moduleKey="atlas" />
         <div className="atlas-warning">
           Tra cứu từ trang tuyển sinh chính thức; kiểm tra năm, ngành và phương thức của từng trường.
           Thông tin chưa đủ nguồn không được coi là đã xác minh.
         </div>
 
-        {isAdmin && <div role="status" className="atlas-warning">
+        {view === "/atlas/library" && isAdmin && <div role="status" className="atlas-warning">
           {storageError || (storageStatus === "ready" ? "Atlas đang kết nối kho dữ liệu của tài khoản hiện tại." : "Đang xác minh và đồng bộ dữ liệu Atlas…" )}
           {legacyAvailable && storageStatus === "ready" && <button type="button" disabled={saving} onClick={() => void importLegacyAtlasData().catch(error => window.alert(error instanceof Error ? error.message : "Nhập dữ liệu cũ thất bại."))}>
             Chuyển dữ liệu Atlas cũ trên trình duyệt vào kho Atlas (chỉ khi kho hiện tại trống)
           </button>}
         </div>}
 
-        <ModuleSectionNav moduleKey="atlas" />
+        {view === "/atlas/library" && !isAdmin && <p role="status">Đang xác minh quyền quản trị…</p>}
+        {view === "/atlas/library" && isAdmin && <p><a href="/admin/diagnostics?view=atlas">Chẩn đoán kho Atlas (Admin)</a></p>}
 
-        <OfficialAdmissionsExplorer />
-        <AtlasOfficialSourceRegistry />
-        <details className="cla-evidence-sample">
-          <summary>Xem ví dụ dữ liệu lịch sử đã đối chiếu · PTIT BVH</summary>
+        {view === "/atlas/recommendations" && <AtlasProgramDiscoveryPanel />}
+        {view === "/atlas/compare" && <AtlasDecisionComparisonPanel />}
+        {view === "/atlas/vietnam" && <OfficialAdmissionsExplorer />}
+        {view === "/atlas/sources" && <><div id="atlas-public-source-search"><NationalSourceDiscoveryPanel /><details className="cla-evidence-sample"><summary>Tra cứu nguồn một năm (nâng cao)</summary><PublicSourceSearchPanel topic="admission" /></details></div><AtlasOfficialSourceRegistry /></>}
+        {["/atlas/vietnam", "/atlas/recommendations"].includes(view) && <p className="cla-focus-notice"><a href="/atlas/sources#atlas-public-source-search">Tìm nguồn của mọi trường trên toàn quốc, kể cả trường ngoài kho →</a></p>}
+        {view === "/atlas/compare" && <>
+          <details className="cla-evidence-sample">
+          <summary>Xem biểu đồ điểm công bố ba năm · tất cả trường có dữ liệu</summary>
           <AtlasCutoffField />
-        </details>
+        </details></>}
 
-        <section id="atlas-joint-programs" className="cla-source-explorer" aria-label="Chương trình liên kết quốc tế tại Việt Nam">
+        {view === "/atlas/joint" && <>
+          <section id="atlas-joint-programs" className="cla-source-explorer" aria-label="Chương trình liên kết quốc tế tại Việt Nam">
           <span className="cla-eyebrow">ATLAS · TUYỂN SINH TẠI VIỆT NAM</span>
           <h2>Chương trình liên kết quốc tế tuyển sinh tại Việt Nam</h2>
           <p>Các chương trình do trường tại Việt Nam tiếp nhận hồ sơ thuộc Atlas, kể cả chương trình có đối tác hoặc chuyển tiếp nước ngoài. Hình thức học, văn bằng, chứng chỉ, phương thức và thời hạn phải kiểm tra theo từng chương trình và năm.</p>
@@ -124,9 +130,10 @@ export default function AtlasPage() {
             ))}
           </div>
           <p>Du học quốc tế: <a href="/atlas/study-abroad">mở Atlas Du học</a>. Học bổng và khả năng chi trả: <a href="/haven/scholarships">mở Haven Support</a>.</p>
-        </section>
+        </section></>}
 
-        {isAdmin && <>
+        {view === "/atlas/library" && isAdmin && <>
+        {isAdmin && programs.length > 0 && <button type="button" className="danger" onClick={() => { if (window.confirm("Xóa toàn bộ bản nháp Atlas của tài khoản này?")) void clearAtlasData().catch(() => {}); }} disabled={storageStatus !== "ready" || saving}>Xóa dữ liệu hiện tại</button>}
         <div id="atlas-gemini-reader">
           <AtlasGeminiReaderPanel onAddGeminiDraft={addGeminiDraft} />
         </div>
@@ -167,13 +174,14 @@ export default function AtlasPage() {
 
         </>}
 
-        <div id="atlas-engine">
+        {view === "/atlas/subjects" && <>
+          <div id="atlas-engine">
           <AtlasAdmissionEnginePanel
             programs={programs}
             sources={sources}
             universityMap={universityMap}
           />
-        </div>
+        </div></>}
       </section>
     </main>
   );

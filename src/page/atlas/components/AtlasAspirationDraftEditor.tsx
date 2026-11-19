@@ -1,21 +1,26 @@
 import {useMemo, useState} from 'react';
-import type {PublishedProgramMatch} from '../../../lib/ptitAdmissionPathways2026';
+import {filterNationalPathways,officialPathwaySchools,pathwayStatusLabel,type PathwayEntry} from '../../../lib/nationalAdmissionPathways2026';
 import {ADMISSION_POLICY_2026} from '../../../lib/aspirationPlanner';
-import {addDraftChoice, createManualDraftChoice, createPtitDraftChoice,
+import {addDraftChoice, createManualDraftChoice, createNationalDraftChoice,
   makeAspirationDraftExport, importAspirationDraftExport, moveDraftChoice, removeDraftChoice, reviewAspirationDraft,
   type AspirationDraftChoice} from '../../../lib/atlasAspirationDraft2026';
 
 /** Learner-controlled worksheet. Intentionally no automatic storage or submission. */
-export default function AtlasAspirationDraftEditor({matches}:{matches:readonly PublishedProgramMatch[]}) {
+export default function AtlasAspirationDraftEditor({entries}:{entries:readonly PathwayEntry[]}) {
   const [items,setItems]=useState<AspirationDraftChoice[]>([]);
   const [selectedProgramId,setSelectedProgramId]=useState('');
+  const [school,setSchool]=useState('');
+  const [query,setQuery]=useState('');
+  const [onlyMatched,setOnlyMatched]=useState(false);
+  const schools=useMemo(()=>Array.from(new Map([...entries.map(p=>({id:p.universityId,name:p.universityName,source:p.sourceUrl})),...officialPathwaySchools].map(p=>[p.id,p])).values()).sort((a,b)=>a.name.localeCompare(b.name,'vi')),[entries]);
+  const visible=useMemo(()=>filterNationalPathways(entries,query,school,onlyMatched),[entries,query,school,onlyMatched]);
   const [university,setUniversity]=useState('');
   const [major,setMajor]=useState('');
   const [majorCode,setMajorCode]=useState('');
   const [teacherTraining,setTeacherTraining]=useState(false);
   const [notice,setNotice]=useState('');
   const review=useMemo(()=>reviewAspirationDraft(items),[items]);
-  const selected=matches.find(item=>item.programId===selectedProgramId);
+  const selected=visible.find(item=>item.id===selectedProgramId);
   function add(choice:AspirationDraftChoice|null) {
     const change=addDraftChoice(items,choice);
     if(change.error){setNotice(change.error);return;}
@@ -48,14 +53,24 @@ export default function AtlasAspirationDraftEditor({matches}:{matches:readonly P
     </div>
     <div className="atlas-aspiration-editor-inputs">
       <div className="atlas-aspiration-editor-add">
-        <label htmlFor="atlas-aspiration-ptit">Chọn chương trình PTIT BVH có nguồn, theo cặp môn bạn đang xem</label>
-        <select id="atlas-aspiration-ptit" value={selectedProgramId} onChange={e=>setSelectedProgramId(e.target.value)}>
-          <option value="">— Chọn ngành PTIT —</option>
-          {matches.map(item=><option key={item.programId} value={item.programId}>{item.majorName} · {item.majorCode}</option>)}
+        <label htmlFor="atlas-aspiration-school">Chọn trường từ tất cả nguồn Atlas</label>
+        <select id="atlas-aspiration-school" value={school} onChange={e=>{setSchool(e.target.value);setSelectedProgramId('');}}>
+          <option value="">Tất cả trường</option>
+          {schools.map(s=><option key={s.id} value={s.id}>{s.name} ({entries.filter(p=>p.universityId===s.id).length})</option>)}
         </select>
+        <label htmlFor="atlas-aspiration-search">Tìm ngành, mã ngành hoặc tên trường</label>
+        <input id="atlas-aspiration-search" value={query} onChange={e=>{setQuery(e.target.value);setSelectedProgramId('');}} placeholder="VD: CNTT, 7480201, Cần Thơ…"/>
+        <label className="atlas-aspiration-editor-check"><input type="checkbox" checked={onlyMatched} onChange={e=>{setOnlyMatched(e.target.checked);setSelectedProgramId('');}}/> Chỉ hiển thị ngành khớp cặp môn đang xem</label>
+        <label htmlFor="atlas-aspiration-program">Chọn chương trình có nguồn · {visible.length}/{entries.length}</label>
+        <select id="atlas-aspiration-program" value={selected?.id??''} onChange={e=>setSelectedProgramId(e.target.value)}>
+          <option value="">— Chọn trường/ngành —</option>
+          {visible.map(item=><option key={item.id} value={item.id}>{item.universityName} · {item.majorName} ({item.majorCode}, {item.campus}) · {pathwayStatusLabel(item.status)}</option>)}
+        </select>
+        {school && !entries.some(p=>p.universityId===school) && <p>Trường này có cổng nguồn nhưng chưa có bản ghi cấp ngành trong kho. <a href={schools.find(s=>s.id===school)?.source} target="_blank" rel="noopener noreferrer">Tra cứu đề án chính thức</a> rồi thêm thủ công nếu cần.</p>}
+        {selected && <p>{pathwayStatusLabel(selected.status)} · {selected.matches.map(m=>m.code).join(', ')||'Chưa có tổ hợp khớp'} · <a href={selected.sourceUrl} target="_blank" rel="noopener noreferrer">Xem nguồn</a></p>}
         <button type="button" disabled={!selected || items.length>=15} onClick={()=>{
-          if(selected) add(createPtitDraftChoice(selected));
-        }}>Thêm ngành từ nguồn PTIT</button>
+          if(selected) add(createNationalDraftChoice(selected.id,entries));
+        }}>Thêm ngành từ nguồn tuyển sinh</button>
       </div>
       <form className="atlas-aspiration-editor-add" onSubmit={e=>{
         e.preventDefault();const choice=createManualDraftChoice(university,major,majorCode,teacherTraining);
@@ -77,7 +92,7 @@ export default function AtlasAspirationDraftEditor({matches}:{matches:readonly P
       {items.map((item,index)=><li key={item.id}>
         <div className="atlas-aspiration-editor-index">NV{index+1}</div>
         <div className="atlas-aspiration-editor-entry"><strong>{item.majorName}</strong><span>{item.universityName} · {item.majorCode}</span>
-          <small>{item.origin==='ptit_bvh_source_2026'?'Có nguồn PTIT BVH 2026 (chưa kiểm tra hồ sơ)':'Học sinh tự khai báo · chưa xác minh'}
+          <small>{item.origin==='national_source_2026'?`Có nguồn 2026 · ${item.sourceKind==='cutoff'?'bản ghi điểm chuẩn':item.sourceKind==='scheme'?'danh mục tuyển sinh':'nguồn đã duyệt'} · khi thêm: ${pathwayStatusLabel(item.matchStatus??'NO_PAIR')} (chưa kiểm tra hồ sơ)`:item.origin==='ptit_bvh_source_2026'?'Có nguồn tuyển sinh 2026 (chưa kiểm tra hồ sơ)':'Học sinh tự khai báo · chưa xác minh'}
             {item.teacherTraining?' · Đào tạo giáo viên':''}</small>
           {item.sourceUrl && <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer">Xem nguồn trường</a>}</div>
         <div className="atlas-aspiration-editor-controls">

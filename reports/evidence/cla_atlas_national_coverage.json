@@ -1,0 +1,3849 @@
+{
+  "local": {
+    "scope": "LOCAL_REGISTRY_ONLY",
+    "nationalDenominator": null,
+    "rows": [
+      {
+        "id": "tdtu",
+        "name": "Trường Đại học Tôn Đức Thắng (TDTU)",
+        "portal": "https://admission.tdtu.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://admission.tdtu.edu.vn/dai-hoc/thong-bao-phuong-thuc-tuyen-sinh-dai-hoc-nam-2026",
+            "methodReviewed": true,
+            "cutoffRecords": 0,
+            "programRecords": 0,
+            "combinationRecords": 0,
+            "mappedCombinationRecords": 0,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": "https://admission.tdtu.edu.vn/dai-hoc/tuyen-sinh/phuong-thuc-2025",
+            "methodReviewed": true,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": "https://admission.tdtu.edu.vn/dai-hoc/tuyen-sinh/phuong-thuc-2024",
+            "methodReviewed": true,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "hust",
+        "name": "Đại học Bách khoa Hà Nội (HUST)",
+        "portal": "https://ts-hn.hust.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://ts.hust.edu.vn/tin-tuc/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026",
+            "methodReviewed": true,
+            "cutoffRecords": 24,
+            "programRecords": 12,
+            "combinationRecords": 12,
+            "mappedCombinationRecords": 12,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": "https://ts.hust.edu.vn/tin-tuc/thong-tin-tuyen-sinh-dai-hoc-nam-2025",
+            "methodReviewed": true,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": "https://ts.hust.edu.vn/index.php/tin-tuc/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2024",
+            "methodReviewed": true,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "ftu",
+        "name": "Trường Đại học Ngoại thương (FTU)",
+        "portal": "https://qldt.ftu.edu.vn/category/tuyen-sinh/tuyen-sinh-dai-hoc-chinh-quy-2025/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://qldt.ftu.edu.vn/category/tuyen-sinh/tuyen-sinh-dai-hoc-chinh-quy-2025/thong-tin-tuyen-sinh-chung-2026/",
+            "methodReviewed": true,
+            "cutoffRecords": 0,
+            "programRecords": 0,
+            "combinationRecords": 0,
+            "mappedCombinationRecords": 0,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": "https://qldt.ftu.edu.vn/category/tuyen-sinh/tuyen-sinh-dai-hoc-chinh-quy-2025/thong-tin-tuyen-sinh-chung-2025/",
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": "https://qldt.ftu.edu.vn/category/tuyen-sinh/luu-tru-tuyen-sinh/tuyen-sinh-dai-hoc-chinh-quy-2024/",
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "ptit",
+        "name": "Học viện Công nghệ Bưu chính Viễn thông (PTIT)",
+        "portal": "https://tuyensinh.ptit.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://tuyensinh.ptit.edu.vn/de-an-tuyen-sinh/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026/",
+            "methodReviewed": true,
+            "cutoffRecords": 90,
+            "programRecords": 10,
+            "combinationRecords": 10,
+            "mappedCombinationRecords": 10,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": "https://tuyensinh.ptit.edu.vn/de-an-tuyen-sinh/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2025/",
+            "methodReviewed": true,
+            "cutoffRecords": 10,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": "https://tuyensinh.ptit.edu.vn/de-an-tuyen-sinh/de-an-2024/",
+            "methodReviewed": true,
+            "cutoffRecords": 10,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "hcmus",
+        "name": "Trường Đại học Khoa học tự nhiên – ĐHQG-HCM (HCMUS)",
+        "portal": "https://tuyensinh.hcmus.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://tuyensinh.hcmus.edu.vn/2026-thong-tin-tuyen-sinh/",
+            "methodReviewed": true,
+            "cutoffRecords": 0,
+            "programRecords": 0,
+            "combinationRecords": 0,
+            "mappedCombinationRecords": 0,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": "https://tuyensinh.hcmus.edu.vn/2025-thong-tin-tuyen-sinh/",
+            "methodReviewed": true,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": "https://tuyensinh.hcmus.edu.vn/th%C3%B4ng-tin-tuy%E1%BB%83n-sinh/phuongthuctuyensinh",
+            "methodReviewed": true,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "uit",
+        "name": "Trường Đại học Công nghệ Thông tin – ĐHQG-HCM (UIT)",
+        "portal": "https://tuyensinh.uit.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://tuyensinh.uit.edu.vn/2026-du-kien-phuong-huong-tuyen-sinh-dai-hoc-chinh-quy-nam-2026",
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": 0,
+            "combinationRecords": 0,
+            "mappedCombinationRecords": 0,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": "https://tuyensinh.uit.edu.vn/2025-phuong-thuc-tuyen-sinh-nam-2025",
+            "methodReviewed": true,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": "https://tuyensinh.uit.edu.vn/node/2663",
+            "methodReviewed": true,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "hcmut",
+        "name": "Trường Đại học Bách khoa – ĐHQG-HCM (HCMUT)",
+        "portal": "https://hcmut.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://hcmut.edu.vn/tintuc/cong-bo-thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026",
+            "methodReviewed": true,
+            "cutoffRecords": 0,
+            "programRecords": 0,
+            "combinationRecords": 0,
+            "mappedCombinationRecords": 0,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": "https://geopet.hcmut.edu.vn/tin-tuc/bai-viet-302",
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": "https://oisp.hcmut.edu.vn/wp-content/uploads/2024/05/0.-DHBK-Thong-tin-tuyen-sinh-2024.pdf",
+            "methodReviewed": true,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "uet",
+        "name": "Trường Đại học Công nghệ – ĐHQG Hà Nội (UET)",
+        "portal": "https://tuyensinh.uet.vnu.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://tuyensinh.uet.vnu.edu.vn/ban-nen-biet/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026/",
+            "methodReviewed": false,
+            "cutoffRecords": 20,
+            "programRecords": 20,
+            "combinationRecords": 0,
+            "mappedCombinationRecords": 0,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "uel",
+        "name": "Trường Đại học Kinh tế – Luật – ĐHQG-HCM (UEL)",
+        "portal": "https://tuyensinh.uel.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://tuyensinh.uel.edu.vn/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-2026/",
+            "methodReviewed": true,
+            "cutoffRecords": 0,
+            "programRecords": 0,
+            "combinationRecords": 0,
+            "mappedCombinationRecords": 0,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "ueh",
+        "name": "Đại học Kinh tế Thành phố Hồ Chí Minh (UEH)",
+        "portal": "https://tuyensinh.ueh.edu.vn/cu-nhan-chinh-quy/dai-hoc-chinh-quy/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://www.ueh.edu.vn/tuyen-sinh/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-khoa-52-nam-2026-76935",
+            "methodReviewed": true,
+            "cutoffRecords": 0,
+            "programRecords": 0,
+            "combinationRecords": 0,
+            "mappedCombinationRecords": 0,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "agu",
+        "name": "Trường Đại học An Giang (AGU)",
+        "portal": "https://tuyensinh.agu.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://tuyensinh.agu.edu.vn/tuyen-sinh",
+            "methodReviewed": true,
+            "cutoffRecords": 43,
+            "programRecords": 43,
+            "combinationRecords": 43,
+            "mappedCombinationRecords": 42,
+            "unmappedOrConditionalRecords": 22,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": "https://tuyensinh.agu.edu.vn/tin-tuc/quyet-dinh-cong-bo-diem-chuan-trung-tuyen-dai-hoc-hinh-thuc-giao-duc-chinh-quy-nam-2025",
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": "https://tuyensinh.agu.edu.vn/tin-tuc/quyet-dinh-cong-bo-diem-chuan-trung-tuyen-dai-hoc-hinh-thuc-chinh-quy-xet-tuyen-dua-tren-ket-qua-ky-thi-tot-nghiep-thpt-2024",
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "ctu",
+        "name": "Đại học Cần Thơ (CTU)",
+        "portal": "https://tuyensinh.ctu.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://tuyensinh.ctu.edu.vn/dai-hoc-chinh-quy/thong-tin-tuyen-sinh",
+            "methodReviewed": true,
+            "cutoffRecords": 127,
+            "programRecords": 127,
+            "combinationRecords": 127,
+            "mappedCombinationRecords": 124,
+            "unmappedOrConditionalRecords": 16,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": "https://tuyensinh.ctu.edu.vn/images/upload/TT_TS/2025/TB2939_Thong-bao-bang-quy-doi-diem-Hoc-ba-nam-2025.pdf",
+            "methodReviewed": true,
+            "cutoffRecords": 121,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": "https://tuyensinh.ctu.edu.vn/images/upload/TT_TS/2024/diemchuanhocba.pdf",
+            "methodReviewed": true,
+            "cutoffRecords": 109,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "hueuni",
+        "name": "Đại học Huế",
+        "portal": "https://tuyensinh.hueuni.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://tuyensinh.hueuni.edu.vn/",
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": 0,
+            "combinationRecords": 0,
+            "mappedCombinationRecords": 0,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "ued",
+        "name": "Trường Đại học Sư phạm – Đại học Đà Nẵng",
+        "portal": "https://tuyensinh.ued.udn.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://tuyensinh.ued.udn.vn/index.php/dai-hoc-chinh-quy/tuyen-sinh-dai-hoc-chinh-quy/",
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": 0,
+            "combinationRecords": 0,
+            "mappedCombinationRecords": 0,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "neu",
+        "name": "Đại học Kinh tế Quốc dân (NEU)",
+        "portal": "https://neu.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://fit.neu.edu.vn/post/diem-chuan-dai-hoc-chinh-quy-2026-toan-bo-nganh",
+            "methodReviewed": false,
+            "cutoffRecords": 88,
+            "programRecords": 88,
+            "combinationRecords": 0,
+            "mappedCombinationRecords": 0,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "hnue",
+        "name": "Trường Đại học Sư phạm Hà Nội (HNUE)",
+        "portal": "https://tuyensinh.hnue.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://tuyensinh.hnue.edu.vn/tuyensinh2026",
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": 0,
+            "combinationRecords": 0,
+            "mappedCombinationRecords": 0,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "ump",
+        "name": "Đại học Y Dược Thành phố Hồ Chí Minh (UMP)",
+        "portal": "https://ump.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://ump.edu.vn/tin-tuc-su-kien/tin-tuc/thong-tin-tuyen-sinh-dai-hoc-he-chinh-quy-nam-2026/10140",
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": 0,
+            "combinationRecords": 0,
+            "mappedCombinationRecords": 0,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": "https://ump.edu.vn/tin-tuc-su-kien/thong-bao/thong-bao-diem-trung-tuyen-dai-hoc-he-chinh-quy-nam-2025/9062",
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "ctump",
+        "name": "Trường Đại học Y Dược Cần Thơ (CTUMP)",
+        "portal": "https://tuyensinh.ctump.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://news.ctump.edu.vn/thong-bao-tuyen-sinh-ai-hoc-nam-2026-37329",
+            "methodReviewed": true,
+            "cutoffRecords": 0,
+            "programRecords": 0,
+            "combinationRecords": 0,
+            "mappedCombinationRecords": 0,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "ufm",
+        "name": "Trường Đại học Tài chính - Marketing (UFM)",
+        "portal": "https://ufm.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://dacc.ufm.edu.vn/ufm-cong-bo-thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026--148.html",
+            "methodReviewed": true,
+            "cutoffRecords": 0,
+            "programRecords": 0,
+            "combinationRecords": 0,
+            "mappedCombinationRecords": 0,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "hus",
+        "name": "Trường Đại học Khoa học Tự nhiên – ĐHQGHN",
+        "portal": "https://tuyensinh.hus.vnu.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://hus.vnu.edu.vn/thong-bao/dao-tao-tuyen-sinh/thong-bao-diem-chuan-trung-tuyen-vao-cac-nganh-chuong-trinh-dao-tao-dai-hoc-chinh-quy-nam-2026-145795",
+            "methodReviewed": false,
+            "cutoffRecords": 28,
+            "programRecords": 28,
+            "combinationRecords": 0,
+            "mappedCombinationRecords": 0,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "ulis",
+        "name": "Trường Đại học Ngoại ngữ – ĐHQGHN",
+        "portal": "https://ulis.vnu.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://vnu.edu.vn/diem-chuan-diem-trung-tuyen-dai-hoc-chinh-quy-nam-2026-post40358.html-0",
+            "methodReviewed": false,
+            "cutoffRecords": 17,
+            "programRecords": 17,
+            "combinationRecords": 0,
+            "mappedCombinationRecords": 0,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "vnuump",
+        "name": "Trường Đại học Y Dược – ĐHQGHN",
+        "portal": "https://ump.vnu.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://vnu.edu.vn/diem-chuan-diem-trung-tuyen-dai-hoc-chinh-quy-nam-2026-post40358.html-0",
+            "methodReviewed": false,
+            "cutoffRecords": 6,
+            "programRecords": 6,
+            "combinationRecords": 0,
+            "mappedCombinationRecords": 0,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "vju",
+        "name": "Trường Đại học Việt Nhật – ĐHQGHN",
+        "portal": "https://vju.ac.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://vnu.edu.vn/diem-chuan-diem-trung-tuyen-dai-hoc-chinh-quy-nam-2026-post40358.html-0",
+            "methodReviewed": false,
+            "cutoffRecords": 9,
+            "programRecords": 9,
+            "combinationRecords": 0,
+            "mappedCombinationRecords": 0,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "ueb",
+        "name": "Trường Đại học Kinh tế – ĐHQGHN",
+        "portal": "https://ueb.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://vnu.edu.vn/diem-chuan-diem-trung-tuyen-dai-hoc-chinh-quy-nam-2026-post40358.html-0",
+            "methodReviewed": false,
+            "cutoffRecords": 12,
+            "programRecords": 8,
+            "combinationRecords": 0,
+            "mappedCombinationRecords": 0,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "vnuis",
+        "name": "Trường Quốc tế – ĐHQGHN",
+        "portal": "https://www.is.vnu.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://vnu.edu.vn/diem-chuan-diem-trung-tuyen-dai-hoc-chinh-quy-nam-2026-post40358.html-0",
+            "methodReviewed": false,
+            "cutoffRecords": 14,
+            "programRecords": 14,
+            "combinationRecords": 0,
+            "mappedCombinationRecords": 0,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "vnulaw",
+        "name": "Trường Đại học Luật – ĐHQGHN",
+        "portal": "https://law.vnu.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://law.vnu.edu.vn/diem-trung-tuyen-danh-sach-trung-tuyen-dai-hoc-chinh-quy-nam-2026-cua-truong-dai-hoc-luat-dai-hoc-quoc-gia-ha-noi/",
+            "methodReviewed": false,
+            "cutoffRecords": 3,
+            "programRecords": 3,
+            "combinationRecords": 0,
+            "mappedCombinationRecords": 0,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "vnuued",
+        "name": "Trường Đại học Giáo dục – ĐHQGHN",
+        "portal": "https://education.vnu.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://education.vnu.edu.vn/tuyen-sinh/dai-hoc-chinh-quy/diem-chuan-trung-tuyen-vao-dai-hoc-chinh-quy-nam-2026-cua-truong-dai-hoc-giao-duc-hqghn/",
+            "methodReviewed": false,
+            "cutoffRecords": 12,
+            "programRecords": 12,
+            "combinationRecords": 0,
+            "mappedCombinationRecords": 0,
+            "unmappedOrConditionalRecords": 0,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "tnue",
+        "name": "Trường Đại học Sư phạm – Đại học Thái Nguyên",
+        "portal": "https://tuyensinh.tnue.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://tuyensinh.tnue.edu.vn/thong-bao-diem-trung-tuyen-dai-hoc-chinh-quy-nam-2026",
+            "methodReviewed": false,
+            "cutoffRecords": 22,
+            "programRecords": 22,
+            "combinationRecords": 22,
+            "mappedCombinationRecords": 17,
+            "unmappedOrConditionalRecords": 5,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "usshhn",
+        "name": "Trường Đại học Khoa học Xã hội và Nhân văn – ĐHQGHN",
+        "portal": "https://tuyensinh.ussh.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://ussh.vnu.edu.vn/vi/news/dao-tao/thong-bao-diem-trung-tuyen-dai-hoc-chinh-quy-nam-2026-truong-dai-hoc-khoa-hoc-xa-hoi-va-nhan-van-dhqghn-24295.html",
+            "methodReviewed": false,
+            "cutoffRecords": 73,
+            "programRecords": 29,
+            "combinationRecords": 29,
+            "mappedCombinationRecords": 29,
+            "unmappedOrConditionalRecords": 4,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": null,
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "htu",
+        "name": "Trường Đại học Hà Tĩnh (HTU)",
+        "portal": "https://tuyensinh.htu.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://tuyensinh.htu.edu.vn/ts-dh/tuyen-sinh-dh-2026",
+            "methodReviewed": true,
+            "cutoffRecords": 0,
+            "programRecords": 20,
+            "combinationRecords": 20,
+            "mappedCombinationRecords": 19,
+            "unmappedOrConditionalRecords": 16,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": "https://ts.htu.edu.vn/ts-dh/xet-tuyen-bs-2025",
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": "https://tuyensinh.htu.edu.vn/ts-dh/de-an-ts-2024",
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "qnu",
+        "name": "Trường Đại học Quy Nhơn (QNU)",
+        "portal": "https://tuyensinh.qnu.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://tuyensinh.qnu.edu.vn/vi/tuyen-sinh-dai-hoc-chinh-quy-2027/tb-1906-thong-tin-tuyen-sinh-dai-hoc-nam-2026-cap-nhat-hinh-thuc-dao-tao-chinh-quy-1208",
+            "methodReviewed": true,
+            "cutoffRecords": 0,
+            "programRecords": 53,
+            "combinationRecords": 53,
+            "mappedCombinationRecords": 51,
+            "unmappedOrConditionalRecords": 11,
+            "programmeMethodRecords": 0
+          },
+          {
+            "year": 2025,
+            "source": "https://tuyensinh.qnu.edu.vn/vi/tuyen-sinh-dai-hoc-chinh-quy-2027/tb-1906-thong-tin-tuyen-sinh-dai-hoc-nam-2026-cap-nhat-hinh-thuc-dao-tao-chinh-quy-1208",
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": "https://tuyensinh.qnu.edu.vn/vi/tuyen-sinh-dai-hoc-chinh-quy-2027/tb-1906-thong-tin-tuyen-sinh-dai-hoc-nam-2026-cap-nhat-hinh-thuc-dao-tao-chinh-quy-1208",
+            "methodReviewed": false,
+            "cutoffRecords": 0,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      },
+      {
+        "id": "dthu",
+        "name": "Trường Đại học Đồng Tháp (DThU)",
+        "portal": "https://tuyensinh.dthu.edu.vn/",
+        "years": [
+          {
+            "year": 2026,
+            "source": "https://qao.dthu.edu.vn/Media/Files/SPD-thong-tin-tuyen-sinh-dai-hoc-cao-dang-2026.pdf",
+            "methodReviewed": true,
+            "cutoffRecords": 208,
+            "programRecords": 58,
+            "combinationRecords": 57,
+            "mappedCombinationRecords": 52,
+            "unmappedOrConditionalRecords": 6,
+            "programmeMethodRecords": 57
+          },
+          {
+            "year": 2025,
+            "source": "https://qao.dthu.edu.vn/tuyen-sinh/diem-trung-tuyen",
+            "methodReviewed": true,
+            "cutoffRecords": 200,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          },
+          {
+            "year": 2024,
+            "source": "https://qao.dthu.edu.vn/tuyen-sinh/diem-trung-tuyen",
+            "methodReviewed": true,
+            "cutoffRecords": 126,
+            "programRecords": null,
+            "combinationRecords": null,
+            "mappedCombinationRecords": null,
+            "unmappedOrConditionalRecords": null,
+            "programmeMethodRecords": null
+          }
+        ]
+      }
+    ],
+    "summary": [
+      {
+        "year": 2026,
+        "registrySchools": 32,
+        "sourceSchools": 32,
+        "methodSchools": 15,
+        "cutoffSchools": 17,
+        "programSchools": 19,
+        "combinationSchools": 9
+      },
+      {
+        "year": 2025,
+        "registrySchools": 32,
+        "sourceSchools": 13,
+        "methodSchools": 7,
+        "cutoffSchools": 3,
+        "programSchools": null,
+        "combinationSchools": null
+      },
+      {
+        "year": 2024,
+        "registrySchools": 32,
+        "sourceSchools": 12,
+        "methodSchools": 8,
+        "cutoffSchools": 3,
+        "programSchools": null,
+        "combinationSchools": null
+      }
+    ],
+    "tasks": [
+      {
+        "schoolId": "tdtu",
+        "school": "Trường Đại học Tôn Đức Thắng (TDTU)",
+        "year": 2026,
+        "source": "https://admission.tdtu.edu.vn/dai-hoc/thong-bao-phuong-thuc-tuyen-sinh-dai-hoc-nam-2026",
+        "missing": [
+          "cutoffs",
+          "combinations"
+        ]
+      },
+      {
+        "schoolId": "tdtu",
+        "school": "Trường Đại học Tôn Đức Thắng (TDTU)",
+        "year": 2025,
+        "source": "https://admission.tdtu.edu.vn/dai-hoc/tuyen-sinh/phuong-thuc-2025",
+        "missing": [
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "tdtu",
+        "school": "Trường Đại học Tôn Đức Thắng (TDTU)",
+        "year": 2024,
+        "source": "https://admission.tdtu.edu.vn/dai-hoc/tuyen-sinh/phuong-thuc-2024",
+        "missing": [
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "hust",
+        "school": "Đại học Bách khoa Hà Nội (HUST)",
+        "year": 2025,
+        "source": "https://ts.hust.edu.vn/tin-tuc/thong-tin-tuyen-sinh-dai-hoc-nam-2025",
+        "missing": [
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "hust",
+        "school": "Đại học Bách khoa Hà Nội (HUST)",
+        "year": 2024,
+        "source": "https://ts.hust.edu.vn/index.php/tin-tuc/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2024",
+        "missing": [
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "ftu",
+        "school": "Trường Đại học Ngoại thương (FTU)",
+        "year": 2026,
+        "source": "https://qldt.ftu.edu.vn/category/tuyen-sinh/tuyen-sinh-dai-hoc-chinh-quy-2025/thong-tin-tuyen-sinh-chung-2026/",
+        "missing": [
+          "cutoffs",
+          "combinations"
+        ]
+      },
+      {
+        "schoolId": "ftu",
+        "school": "Trường Đại học Ngoại thương (FTU)",
+        "year": 2025,
+        "source": "https://qldt.ftu.edu.vn/category/tuyen-sinh/tuyen-sinh-dai-hoc-chinh-quy-2025/thong-tin-tuyen-sinh-chung-2025/",
+        "missing": [
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "ftu",
+        "school": "Trường Đại học Ngoại thương (FTU)",
+        "year": 2024,
+        "source": "https://qldt.ftu.edu.vn/category/tuyen-sinh/luu-tru-tuyen-sinh/tuyen-sinh-dai-hoc-chinh-quy-2024/",
+        "missing": [
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "hcmus",
+        "school": "Trường Đại học Khoa học tự nhiên – ĐHQG-HCM (HCMUS)",
+        "year": 2026,
+        "source": "https://tuyensinh.hcmus.edu.vn/2026-thong-tin-tuyen-sinh/",
+        "missing": [
+          "cutoffs",
+          "combinations"
+        ]
+      },
+      {
+        "schoolId": "hcmus",
+        "school": "Trường Đại học Khoa học tự nhiên – ĐHQG-HCM (HCMUS)",
+        "year": 2025,
+        "source": "https://tuyensinh.hcmus.edu.vn/2025-thong-tin-tuyen-sinh/",
+        "missing": [
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "hcmus",
+        "school": "Trường Đại học Khoa học tự nhiên – ĐHQG-HCM (HCMUS)",
+        "year": 2024,
+        "source": "https://tuyensinh.hcmus.edu.vn/th%C3%B4ng-tin-tuy%E1%BB%83n-sinh/phuongthuctuyensinh",
+        "missing": [
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "uit",
+        "school": "Trường Đại học Công nghệ Thông tin – ĐHQG-HCM (UIT)",
+        "year": 2026,
+        "source": "https://tuyensinh.uit.edu.vn/2026-du-kien-phuong-huong-tuyen-sinh-dai-hoc-chinh-quy-nam-2026",
+        "missing": [
+          "methods",
+          "cutoffs",
+          "combinations"
+        ]
+      },
+      {
+        "schoolId": "uit",
+        "school": "Trường Đại học Công nghệ Thông tin – ĐHQG-HCM (UIT)",
+        "year": 2025,
+        "source": "https://tuyensinh.uit.edu.vn/2025-phuong-thuc-tuyen-sinh-nam-2025",
+        "missing": [
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "uit",
+        "school": "Trường Đại học Công nghệ Thông tin – ĐHQG-HCM (UIT)",
+        "year": 2024,
+        "source": "https://tuyensinh.uit.edu.vn/node/2663",
+        "missing": [
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "hcmut",
+        "school": "Trường Đại học Bách khoa – ĐHQG-HCM (HCMUT)",
+        "year": 2026,
+        "source": "https://hcmut.edu.vn/tintuc/cong-bo-thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026",
+        "missing": [
+          "cutoffs",
+          "combinations"
+        ]
+      },
+      {
+        "schoolId": "hcmut",
+        "school": "Trường Đại học Bách khoa – ĐHQG-HCM (HCMUT)",
+        "year": 2025,
+        "source": "https://geopet.hcmut.edu.vn/tin-tuc/bai-viet-302",
+        "missing": [
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "hcmut",
+        "school": "Trường Đại học Bách khoa – ĐHQG-HCM (HCMUT)",
+        "year": 2024,
+        "source": "https://oisp.hcmut.edu.vn/wp-content/uploads/2024/05/0.-DHBK-Thong-tin-tuyen-sinh-2024.pdf",
+        "missing": [
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "uet",
+        "school": "Trường Đại học Công nghệ – ĐHQG Hà Nội (UET)",
+        "year": 2026,
+        "source": "https://tuyensinh.uet.vnu.edu.vn/ban-nen-biet/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026/",
+        "missing": [
+          "methods",
+          "combinations"
+        ]
+      },
+      {
+        "schoolId": "uet",
+        "school": "Trường Đại học Công nghệ – ĐHQG Hà Nội (UET)",
+        "year": 2025,
+        "source": "https://tuyensinh.uet.vnu.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "uet",
+        "school": "Trường Đại học Công nghệ – ĐHQG Hà Nội (UET)",
+        "year": 2024,
+        "source": "https://tuyensinh.uet.vnu.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "uel",
+        "school": "Trường Đại học Kinh tế – Luật – ĐHQG-HCM (UEL)",
+        "year": 2026,
+        "source": "https://tuyensinh.uel.edu.vn/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-2026/",
+        "missing": [
+          "cutoffs",
+          "combinations"
+        ]
+      },
+      {
+        "schoolId": "uel",
+        "school": "Trường Đại học Kinh tế – Luật – ĐHQG-HCM (UEL)",
+        "year": 2025,
+        "source": "https://tuyensinh.uel.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "uel",
+        "school": "Trường Đại học Kinh tế – Luật – ĐHQG-HCM (UEL)",
+        "year": 2024,
+        "source": "https://tuyensinh.uel.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "ueh",
+        "school": "Đại học Kinh tế Thành phố Hồ Chí Minh (UEH)",
+        "year": 2026,
+        "source": "https://www.ueh.edu.vn/tuyen-sinh/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-khoa-52-nam-2026-76935",
+        "missing": [
+          "cutoffs",
+          "combinations"
+        ]
+      },
+      {
+        "schoolId": "ueh",
+        "school": "Đại học Kinh tế Thành phố Hồ Chí Minh (UEH)",
+        "year": 2025,
+        "source": "https://tuyensinh.ueh.edu.vn/cu-nhan-chinh-quy/dai-hoc-chinh-quy/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "ueh",
+        "school": "Đại học Kinh tế Thành phố Hồ Chí Minh (UEH)",
+        "year": 2024,
+        "source": "https://tuyensinh.ueh.edu.vn/cu-nhan-chinh-quy/dai-hoc-chinh-quy/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "agu",
+        "school": "Trường Đại học An Giang (AGU)",
+        "year": 2026,
+        "source": "https://tuyensinh.agu.edu.vn/tuyen-sinh",
+        "missing": [
+          "combination_mapping_or_conditions"
+        ]
+      },
+      {
+        "schoolId": "agu",
+        "school": "Trường Đại học An Giang (AGU)",
+        "year": 2025,
+        "source": "https://tuyensinh.agu.edu.vn/tin-tuc/quyet-dinh-cong-bo-diem-chuan-trung-tuyen-dai-hoc-hinh-thuc-giao-duc-chinh-quy-nam-2025",
+        "missing": [
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "agu",
+        "school": "Trường Đại học An Giang (AGU)",
+        "year": 2024,
+        "source": "https://tuyensinh.agu.edu.vn/tin-tuc/quyet-dinh-cong-bo-diem-chuan-trung-tuyen-dai-hoc-hinh-thuc-chinh-quy-xet-tuyen-dua-tren-ket-qua-ky-thi-tot-nghiep-thpt-2024",
+        "missing": [
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "ctu",
+        "school": "Đại học Cần Thơ (CTU)",
+        "year": 2026,
+        "source": "https://tuyensinh.ctu.edu.vn/dai-hoc-chinh-quy/thong-tin-tuyen-sinh",
+        "missing": [
+          "combination_mapping_or_conditions"
+        ]
+      },
+      {
+        "schoolId": "hueuni",
+        "school": "Đại học Huế",
+        "year": 2026,
+        "source": "https://tuyensinh.hueuni.edu.vn/",
+        "missing": [
+          "methods",
+          "cutoffs",
+          "combinations"
+        ]
+      },
+      {
+        "schoolId": "hueuni",
+        "school": "Đại học Huế",
+        "year": 2025,
+        "source": "https://tuyensinh.hueuni.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "hueuni",
+        "school": "Đại học Huế",
+        "year": 2024,
+        "source": "https://tuyensinh.hueuni.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "ued",
+        "school": "Trường Đại học Sư phạm – Đại học Đà Nẵng",
+        "year": 2026,
+        "source": "https://tuyensinh.ued.udn.vn/index.php/dai-hoc-chinh-quy/tuyen-sinh-dai-hoc-chinh-quy/",
+        "missing": [
+          "methods",
+          "cutoffs",
+          "combinations"
+        ]
+      },
+      {
+        "schoolId": "ued",
+        "school": "Trường Đại học Sư phạm – Đại học Đà Nẵng",
+        "year": 2025,
+        "source": "https://tuyensinh.ued.udn.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "ued",
+        "school": "Trường Đại học Sư phạm – Đại học Đà Nẵng",
+        "year": 2024,
+        "source": "https://tuyensinh.ued.udn.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "neu",
+        "school": "Đại học Kinh tế Quốc dân (NEU)",
+        "year": 2026,
+        "source": "https://fit.neu.edu.vn/post/diem-chuan-dai-hoc-chinh-quy-2026-toan-bo-nganh",
+        "missing": [
+          "methods",
+          "combinations"
+        ]
+      },
+      {
+        "schoolId": "neu",
+        "school": "Đại học Kinh tế Quốc dân (NEU)",
+        "year": 2025,
+        "source": "https://neu.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "neu",
+        "school": "Đại học Kinh tế Quốc dân (NEU)",
+        "year": 2024,
+        "source": "https://neu.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "hnue",
+        "school": "Trường Đại học Sư phạm Hà Nội (HNUE)",
+        "year": 2026,
+        "source": "https://tuyensinh.hnue.edu.vn/tuyensinh2026",
+        "missing": [
+          "methods",
+          "cutoffs",
+          "combinations"
+        ]
+      },
+      {
+        "schoolId": "hnue",
+        "school": "Trường Đại học Sư phạm Hà Nội (HNUE)",
+        "year": 2025,
+        "source": "https://tuyensinh.hnue.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "hnue",
+        "school": "Trường Đại học Sư phạm Hà Nội (HNUE)",
+        "year": 2024,
+        "source": "https://tuyensinh.hnue.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "ump",
+        "school": "Đại học Y Dược Thành phố Hồ Chí Minh (UMP)",
+        "year": 2026,
+        "source": "https://ump.edu.vn/tin-tuc-su-kien/tin-tuc/thong-tin-tuyen-sinh-dai-hoc-he-chinh-quy-nam-2026/10140",
+        "missing": [
+          "methods",
+          "cutoffs",
+          "combinations"
+        ]
+      },
+      {
+        "schoolId": "ump",
+        "school": "Đại học Y Dược Thành phố Hồ Chí Minh (UMP)",
+        "year": 2025,
+        "source": "https://ump.edu.vn/tin-tuc-su-kien/thong-bao/thong-bao-diem-trung-tuyen-dai-hoc-he-chinh-quy-nam-2025/9062",
+        "missing": [
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "ump",
+        "school": "Đại học Y Dược Thành phố Hồ Chí Minh (UMP)",
+        "year": 2024,
+        "source": "https://ump.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "ctump",
+        "school": "Trường Đại học Y Dược Cần Thơ (CTUMP)",
+        "year": 2026,
+        "source": "https://news.ctump.edu.vn/thong-bao-tuyen-sinh-ai-hoc-nam-2026-37329",
+        "missing": [
+          "cutoffs",
+          "combinations"
+        ]
+      },
+      {
+        "schoolId": "ctump",
+        "school": "Trường Đại học Y Dược Cần Thơ (CTUMP)",
+        "year": 2025,
+        "source": "https://tuyensinh.ctump.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "ctump",
+        "school": "Trường Đại học Y Dược Cần Thơ (CTUMP)",
+        "year": 2024,
+        "source": "https://tuyensinh.ctump.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "ufm",
+        "school": "Trường Đại học Tài chính - Marketing (UFM)",
+        "year": 2026,
+        "source": "https://dacc.ufm.edu.vn/ufm-cong-bo-thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026--148.html",
+        "missing": [
+          "cutoffs",
+          "combinations"
+        ]
+      },
+      {
+        "schoolId": "ufm",
+        "school": "Trường Đại học Tài chính - Marketing (UFM)",
+        "year": 2025,
+        "source": "https://ufm.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "ufm",
+        "school": "Trường Đại học Tài chính - Marketing (UFM)",
+        "year": 2024,
+        "source": "https://ufm.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "hus",
+        "school": "Trường Đại học Khoa học Tự nhiên – ĐHQGHN",
+        "year": 2026,
+        "source": "https://hus.vnu.edu.vn/thong-bao/dao-tao-tuyen-sinh/thong-bao-diem-chuan-trung-tuyen-vao-cac-nganh-chuong-trinh-dao-tao-dai-hoc-chinh-quy-nam-2026-145795",
+        "missing": [
+          "methods",
+          "combinations"
+        ]
+      },
+      {
+        "schoolId": "hus",
+        "school": "Trường Đại học Khoa học Tự nhiên – ĐHQGHN",
+        "year": 2025,
+        "source": "https://tuyensinh.hus.vnu.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "hus",
+        "school": "Trường Đại học Khoa học Tự nhiên – ĐHQGHN",
+        "year": 2024,
+        "source": "https://tuyensinh.hus.vnu.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "ulis",
+        "school": "Trường Đại học Ngoại ngữ – ĐHQGHN",
+        "year": 2026,
+        "source": "https://vnu.edu.vn/diem-chuan-diem-trung-tuyen-dai-hoc-chinh-quy-nam-2026-post40358.html-0",
+        "missing": [
+          "methods",
+          "combinations"
+        ]
+      },
+      {
+        "schoolId": "ulis",
+        "school": "Trường Đại học Ngoại ngữ – ĐHQGHN",
+        "year": 2025,
+        "source": "https://ulis.vnu.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "ulis",
+        "school": "Trường Đại học Ngoại ngữ – ĐHQGHN",
+        "year": 2024,
+        "source": "https://ulis.vnu.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "vnuump",
+        "school": "Trường Đại học Y Dược – ĐHQGHN",
+        "year": 2026,
+        "source": "https://vnu.edu.vn/diem-chuan-diem-trung-tuyen-dai-hoc-chinh-quy-nam-2026-post40358.html-0",
+        "missing": [
+          "methods",
+          "combinations"
+        ]
+      },
+      {
+        "schoolId": "vnuump",
+        "school": "Trường Đại học Y Dược – ĐHQGHN",
+        "year": 2025,
+        "source": "https://ump.vnu.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "vnuump",
+        "school": "Trường Đại học Y Dược – ĐHQGHN",
+        "year": 2024,
+        "source": "https://ump.vnu.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "vju",
+        "school": "Trường Đại học Việt Nhật – ĐHQGHN",
+        "year": 2026,
+        "source": "https://vnu.edu.vn/diem-chuan-diem-trung-tuyen-dai-hoc-chinh-quy-nam-2026-post40358.html-0",
+        "missing": [
+          "methods",
+          "combinations"
+        ]
+      },
+      {
+        "schoolId": "vju",
+        "school": "Trường Đại học Việt Nhật – ĐHQGHN",
+        "year": 2025,
+        "source": "https://vju.ac.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "vju",
+        "school": "Trường Đại học Việt Nhật – ĐHQGHN",
+        "year": 2024,
+        "source": "https://vju.ac.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "ueb",
+        "school": "Trường Đại học Kinh tế – ĐHQGHN",
+        "year": 2026,
+        "source": "https://vnu.edu.vn/diem-chuan-diem-trung-tuyen-dai-hoc-chinh-quy-nam-2026-post40358.html-0",
+        "missing": [
+          "methods",
+          "combinations"
+        ]
+      },
+      {
+        "schoolId": "ueb",
+        "school": "Trường Đại học Kinh tế – ĐHQGHN",
+        "year": 2025,
+        "source": "https://ueb.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "ueb",
+        "school": "Trường Đại học Kinh tế – ĐHQGHN",
+        "year": 2024,
+        "source": "https://ueb.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "vnuis",
+        "school": "Trường Quốc tế – ĐHQGHN",
+        "year": 2026,
+        "source": "https://vnu.edu.vn/diem-chuan-diem-trung-tuyen-dai-hoc-chinh-quy-nam-2026-post40358.html-0",
+        "missing": [
+          "methods",
+          "combinations"
+        ]
+      },
+      {
+        "schoolId": "vnuis",
+        "school": "Trường Quốc tế – ĐHQGHN",
+        "year": 2025,
+        "source": "https://www.is.vnu.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "vnuis",
+        "school": "Trường Quốc tế – ĐHQGHN",
+        "year": 2024,
+        "source": "https://www.is.vnu.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "vnulaw",
+        "school": "Trường Đại học Luật – ĐHQGHN",
+        "year": 2026,
+        "source": "https://law.vnu.edu.vn/diem-trung-tuyen-danh-sach-trung-tuyen-dai-hoc-chinh-quy-nam-2026-cua-truong-dai-hoc-luat-dai-hoc-quoc-gia-ha-noi/",
+        "missing": [
+          "methods",
+          "combinations"
+        ]
+      },
+      {
+        "schoolId": "vnulaw",
+        "school": "Trường Đại học Luật – ĐHQGHN",
+        "year": 2025,
+        "source": "https://law.vnu.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "vnulaw",
+        "school": "Trường Đại học Luật – ĐHQGHN",
+        "year": 2024,
+        "source": "https://law.vnu.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "vnuued",
+        "school": "Trường Đại học Giáo dục – ĐHQGHN",
+        "year": 2026,
+        "source": "https://education.vnu.edu.vn/tuyen-sinh/dai-hoc-chinh-quy/diem-chuan-trung-tuyen-vao-dai-hoc-chinh-quy-nam-2026-cua-truong-dai-hoc-giao-duc-hqghn/",
+        "missing": [
+          "methods",
+          "combinations"
+        ]
+      },
+      {
+        "schoolId": "vnuued",
+        "school": "Trường Đại học Giáo dục – ĐHQGHN",
+        "year": 2025,
+        "source": "https://education.vnu.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "vnuued",
+        "school": "Trường Đại học Giáo dục – ĐHQGHN",
+        "year": 2024,
+        "source": "https://education.vnu.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "tnue",
+        "school": "Trường Đại học Sư phạm – Đại học Thái Nguyên",
+        "year": 2026,
+        "source": "https://tuyensinh.tnue.edu.vn/thong-bao-diem-trung-tuyen-dai-hoc-chinh-quy-nam-2026",
+        "missing": [
+          "methods",
+          "combination_mapping_or_conditions"
+        ]
+      },
+      {
+        "schoolId": "tnue",
+        "school": "Trường Đại học Sư phạm – Đại học Thái Nguyên",
+        "year": 2025,
+        "source": "https://tuyensinh.tnue.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "tnue",
+        "school": "Trường Đại học Sư phạm – Đại học Thái Nguyên",
+        "year": 2024,
+        "source": "https://tuyensinh.tnue.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "usshhn",
+        "school": "Trường Đại học Khoa học Xã hội và Nhân văn – ĐHQGHN",
+        "year": 2026,
+        "source": "https://ussh.vnu.edu.vn/vi/news/dao-tao/thong-bao-diem-trung-tuyen-dai-hoc-chinh-quy-nam-2026-truong-dai-hoc-khoa-hoc-xa-hoi-va-nhan-van-dhqghn-24295.html",
+        "missing": [
+          "methods",
+          "combination_mapping_or_conditions"
+        ]
+      },
+      {
+        "schoolId": "usshhn",
+        "school": "Trường Đại học Khoa học Xã hội và Nhân văn – ĐHQGHN",
+        "year": 2025,
+        "source": "https://tuyensinh.ussh.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "usshhn",
+        "school": "Trường Đại học Khoa học Xã hội và Nhân văn – ĐHQGHN",
+        "year": 2024,
+        "source": "https://tuyensinh.ussh.edu.vn/",
+        "missing": [
+          "source",
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "htu",
+        "school": "Trường Đại học Hà Tĩnh (HTU)",
+        "year": 2026,
+        "source": "https://tuyensinh.htu.edu.vn/ts-dh/tuyen-sinh-dh-2026",
+        "missing": [
+          "cutoffs",
+          "combination_mapping_or_conditions"
+        ]
+      },
+      {
+        "schoolId": "htu",
+        "school": "Trường Đại học Hà Tĩnh (HTU)",
+        "year": 2025,
+        "source": "https://ts.htu.edu.vn/ts-dh/xet-tuyen-bs-2025",
+        "missing": [
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "htu",
+        "school": "Trường Đại học Hà Tĩnh (HTU)",
+        "year": 2024,
+        "source": "https://tuyensinh.htu.edu.vn/ts-dh/de-an-ts-2024",
+        "missing": [
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "qnu",
+        "school": "Trường Đại học Quy Nhơn (QNU)",
+        "year": 2026,
+        "source": "https://tuyensinh.qnu.edu.vn/vi/tuyen-sinh-dai-hoc-chinh-quy-2027/tb-1906-thong-tin-tuyen-sinh-dai-hoc-nam-2026-cap-nhat-hinh-thuc-dao-tao-chinh-quy-1208",
+        "missing": [
+          "cutoffs",
+          "combination_mapping_or_conditions"
+        ]
+      },
+      {
+        "schoolId": "qnu",
+        "school": "Trường Đại học Quy Nhơn (QNU)",
+        "year": 2025,
+        "source": "https://tuyensinh.qnu.edu.vn/vi/tuyen-sinh-dai-hoc-chinh-quy-2027/tb-1906-thong-tin-tuyen-sinh-dai-hoc-nam-2026-cap-nhat-hinh-thuc-dao-tao-chinh-quy-1208",
+        "missing": [
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "qnu",
+        "school": "Trường Đại học Quy Nhơn (QNU)",
+        "year": 2024,
+        "source": "https://tuyensinh.qnu.edu.vn/vi/tuyen-sinh-dai-hoc-chinh-quy-2027/tb-1906-thong-tin-tuyen-sinh-dai-hoc-nam-2026-cap-nhat-hinh-thuc-dao-tao-chinh-quy-1208",
+        "missing": [
+          "methods",
+          "cutoffs"
+        ]
+      },
+      {
+        "schoolId": "dthu",
+        "school": "Trường Đại học Đồng Tháp (DThU)",
+        "year": 2026,
+        "source": "https://qao.dthu.edu.vn/Media/Files/SPD-thong-tin-tuyen-sinh-dai-hoc-cao-dang-2026.pdf",
+        "missing": [
+          "combinations",
+          "combination_mapping_or_conditions"
+        ]
+      }
+    ]
+  },
+  "inventory": null,
+  "discovery": {
+    "scope": "PARTIAL_DISCOVERY_INDEX",
+    "nationalDenominator": null,
+    "entries": 108,
+    "surveyEntries": 99,
+    "registryEntries": 32,
+    "discoveryOnly": 76,
+    "explicitlyLinked": 23,
+    "source": {
+      "id": "moet-survey-oct2026",
+      "url": "https://hubt.edu.vn/wp-content/uploads/CV-370.pdf",
+      "label": "Danh sách cơ sở giáo dục đại học thực hiện khảo sát (Bộ GD&ĐT, tháng 10/2026)",
+      "pages": "2–4",
+      "asOf": "2026-10",
+      "reviewedAt": "2026-11-18",
+      "scope": "PARTIAL_SURVEY_INSTITUTION_LIST"
+    },
+    "queue": [
+      {
+        "directoryId": "moet-survey-oct2026:1",
+        "name": "Đại học Quốc gia Hà Nội",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:1",
+        "name": "Đại học Quốc gia Hà Nội",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:1",
+        "name": "Đại học Quốc gia Hà Nội",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:2",
+        "name": "Đại học Quốc gia Thành phố Hồ Chí Minh",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:2",
+        "name": "Đại học Quốc gia Thành phố Hồ Chí Minh",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:2",
+        "name": "Đại học Quốc gia Thành phố Hồ Chí Minh",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:3",
+        "name": "Đại học Đà Nẵng",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:3",
+        "name": "Đại học Đà Nẵng",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:3",
+        "name": "Đại học Đà Nẵng",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:5",
+        "name": "Đại học Thái Nguyên",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:5",
+        "name": "Đại học Thái Nguyên",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:5",
+        "name": "Đại học Thái Nguyên",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:10",
+        "name": "Trường Đại học Vinh",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:10",
+        "name": "Trường Đại học Vinh",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:10",
+        "name": "Trường Đại học Vinh",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:12",
+        "name": "Trường Đại học Nha Trang",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:12",
+        "name": "Trường Đại học Nha Trang",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:12",
+        "name": "Trường Đại học Nha Trang",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:13",
+        "name": "Trường Đại học Xây dựng Hà Nội",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:13",
+        "name": "Trường Đại học Xây dựng Hà Nội",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:13",
+        "name": "Trường Đại học Xây dựng Hà Nội",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:14",
+        "name": "Trường Đại học Giao thông vận tải",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:14",
+        "name": "Trường Đại học Giao thông vận tải",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:14",
+        "name": "Trường Đại học Giao thông vận tải",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:15",
+        "name": "Trường Đại học Mỏ - Địa chất",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:15",
+        "name": "Trường Đại học Mỏ - Địa chất",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:15",
+        "name": "Trường Đại học Mỏ - Địa chất",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:16",
+        "name": "Trường Đại học Thủy lợi",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:16",
+        "name": "Trường Đại học Thủy lợi",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:16",
+        "name": "Trường Đại học Thủy lợi",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:18",
+        "name": "Trường Đại học Y Hà Nội",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:18",
+        "name": "Trường Đại học Y Hà Nội",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:18",
+        "name": "Trường Đại học Y Hà Nội",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:19",
+        "name": "Trường Đại học Dược Hà Nội",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:19",
+        "name": "Trường Đại học Dược Hà Nội",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:19",
+        "name": "Trường Đại học Dược Hà Nội",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:21",
+        "name": "Học viện Nông nghiệp Việt Nam",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:21",
+        "name": "Học viện Nông nghiệp Việt Nam",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:21",
+        "name": "Học viện Nông nghiệp Việt Nam",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:22",
+        "name": "Trường Đại học Nông Lâm Thành phố Hồ Chí Minh",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:22",
+        "name": "Trường Đại học Nông Lâm Thành phố Hồ Chí Minh",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:22",
+        "name": "Trường Đại học Nông Lâm Thành phố Hồ Chí Minh",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:24",
+        "name": "Trường Đại học Sư phạm Thành phố Hồ Chí Minh",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:24",
+        "name": "Trường Đại học Sư phạm Thành phố Hồ Chí Minh",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:24",
+        "name": "Trường Đại học Sư phạm Thành phố Hồ Chí Minh",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:25",
+        "name": "Trường Đại học VinUni",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:25",
+        "name": "Trường Đại học VinUni",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:25",
+        "name": "Trường Đại học VinUni",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:26",
+        "name": "Đại học Phenikaa",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:26",
+        "name": "Đại học Phenikaa",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:26",
+        "name": "Đại học Phenikaa",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:27",
+        "name": "Trường Đại học FPT",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:27",
+        "name": "Trường Đại học FPT",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:27",
+        "name": "Trường Đại học FPT",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:28",
+        "name": "Trường Đại học Thăng Long",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:28",
+        "name": "Trường Đại học Thăng Long",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:28",
+        "name": "Trường Đại học Thăng Long",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:29",
+        "name": "Đại học Duy Tân",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:29",
+        "name": "Đại học Duy Tân",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:29",
+        "name": "Đại học Duy Tân",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:30",
+        "name": "Trường Đại học Đông Á",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:30",
+        "name": "Trường Đại học Đông Á",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:30",
+        "name": "Trường Đại học Đông Á",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:31",
+        "name": "Trường Đại học Nguyễn Tất Thành",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:31",
+        "name": "Trường Đại học Nguyễn Tất Thành",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:31",
+        "name": "Trường Đại học Nguyễn Tất Thành",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:32",
+        "name": "Trường Đại học Văn Lang",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:32",
+        "name": "Trường Đại học Văn Lang",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:32",
+        "name": "Trường Đại học Văn Lang",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:33",
+        "name": "Trường Đại học Công nghệ Thành phố Hồ Chí Minh",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:33",
+        "name": "Trường Đại học Công nghệ Thành phố Hồ Chí Minh",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:33",
+        "name": "Trường Đại học Công nghệ Thành phố Hồ Chí Minh",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:34",
+        "name": "Trường Đại học Hoa Sen",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:34",
+        "name": "Trường Đại học Hoa Sen",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:34",
+        "name": "Trường Đại học Hoa Sen",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:35",
+        "name": "Trường Đại học Quốc tế Hồng Bàng",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:35",
+        "name": "Trường Đại học Quốc tế Hồng Bàng",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:35",
+        "name": "Trường Đại học Quốc tế Hồng Bàng",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:36",
+        "name": "Trường Đại học Tư thục Quốc tế Sài Gòn",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:36",
+        "name": "Trường Đại học Tư thục Quốc tế Sài Gòn",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:36",
+        "name": "Trường Đại học Tư thục Quốc tế Sài Gòn",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:37",
+        "name": "Trường Đại học Lạc Hồng",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:37",
+        "name": "Trường Đại học Lạc Hồng",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:37",
+        "name": "Trường Đại học Lạc Hồng",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:38",
+        "name": "Trường Đại học Tân Tạo",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:38",
+        "name": "Trường Đại học Tân Tạo",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:38",
+        "name": "Trường Đại học Tân Tạo",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:47",
+        "name": "Trường Đại học Khoa học Xã hội và Nhân văn, ĐHQG TP. Hồ Chí Minh",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:47",
+        "name": "Trường Đại học Khoa học Xã hội và Nhân văn, ĐHQG TP. Hồ Chí Minh",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:47",
+        "name": "Trường Đại học Khoa học Xã hội và Nhân văn, ĐHQG TP. Hồ Chí Minh",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:49",
+        "name": "Trường Đại học Quốc tế, ĐHQG TP. Hồ Chí Minh",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:49",
+        "name": "Trường Đại học Quốc tế, ĐHQG TP. Hồ Chí Minh",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:49",
+        "name": "Trường Đại học Quốc tế, ĐHQG TP. Hồ Chí Minh",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:50",
+        "name": "Trường Đại học Khoa học, Đại học Huế",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:50",
+        "name": "Trường Đại học Khoa học, Đại học Huế",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:50",
+        "name": "Trường Đại học Khoa học, Đại học Huế",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:51",
+        "name": "Trường Đại học Y Dược, Đại học Huế",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:51",
+        "name": "Trường Đại học Y Dược, Đại học Huế",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:51",
+        "name": "Trường Đại học Y Dược, Đại học Huế",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:52",
+        "name": "Trường Đại học Nông Lâm, Đại học Huế",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:52",
+        "name": "Trường Đại học Nông Lâm, Đại học Huế",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:52",
+        "name": "Trường Đại học Nông Lâm, Đại học Huế",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:53",
+        "name": "Trường Đại học Sư phạm, Đại học Huế",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:53",
+        "name": "Trường Đại học Sư phạm, Đại học Huế",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:53",
+        "name": "Trường Đại học Sư phạm, Đại học Huế",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:54",
+        "name": "Trường Đại học Kinh tế, Đại học Huế",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:54",
+        "name": "Trường Đại học Kinh tế, Đại học Huế",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:54",
+        "name": "Trường Đại học Kinh tế, Đại học Huế",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:55",
+        "name": "Trường Đại học Y Dược, Đại học Thái Nguyên",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:55",
+        "name": "Trường Đại học Y Dược, Đại học Thái Nguyên",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:55",
+        "name": "Trường Đại học Y Dược, Đại học Thái Nguyên",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:56",
+        "name": "Trường Đại học Kỹ thuật Công nghiệp, Đại học Thái Nguyên",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:56",
+        "name": "Trường Đại học Kỹ thuật Công nghiệp, Đại học Thái Nguyên",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:56",
+        "name": "Trường Đại học Kỹ thuật Công nghiệp, Đại học Thái Nguyên",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:57",
+        "name": "Trường Đại học Nông Lâm, Đại học Thái Nguyên",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:57",
+        "name": "Trường Đại học Nông Lâm, Đại học Thái Nguyên",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:57",
+        "name": "Trường Đại học Nông Lâm, Đại học Thái Nguyên",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:59",
+        "name": "Trường Đại học Khoa học, Đại học Thái Nguyên",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:59",
+        "name": "Trường Đại học Khoa học, Đại học Thái Nguyên",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:59",
+        "name": "Trường Đại học Khoa học, Đại học Thái Nguyên",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:60",
+        "name": "Trường Đại học Kinh tế, Đại học Đà Nẵng",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:60",
+        "name": "Trường Đại học Kinh tế, Đại học Đà Nẵng",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:60",
+        "name": "Trường Đại học Kinh tế, Đại học Đà Nẵng",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:62",
+        "name": "Học viện Khoa học và Công nghệ, Viện Hàn lâm KH&CN Việt Nam",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:62",
+        "name": "Học viện Khoa học và Công nghệ, Viện Hàn lâm KH&CN Việt Nam",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:62",
+        "name": "Học viện Khoa học và Công nghệ, Viện Hàn lâm KH&CN Việt Nam",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:63",
+        "name": "Trường Đại học Khoa học và Công nghệ Hà Nội",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:63",
+        "name": "Trường Đại học Khoa học và Công nghệ Hà Nội",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:63",
+        "name": "Trường Đại học Khoa học và Công nghệ Hà Nội",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:64",
+        "name": "Đại học Công nghiệp Hà Nội",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:64",
+        "name": "Đại học Công nghiệp Hà Nội",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:64",
+        "name": "Đại học Công nghiệp Hà Nội",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:65",
+        "name": "Trường Đại học Công nghiệp Thành phố Hồ Chí Minh",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:65",
+        "name": "Trường Đại học Công nghiệp Thành phố Hồ Chí Minh",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:65",
+        "name": "Trường Đại học Công nghiệp Thành phố Hồ Chí Minh",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:67",
+        "name": "Trường Đại học Công nghệ Kỹ thuật Thành phố Hồ Chí Minh",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:67",
+        "name": "Trường Đại học Công nghệ Kỹ thuật Thành phố Hồ Chí Minh",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:67",
+        "name": "Trường Đại học Công nghệ Kỹ thuật Thành phố Hồ Chí Minh",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:68",
+        "name": "Trường Đại học Giao thông vận tải Thành phố Hồ Chí Minh",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:68",
+        "name": "Trường Đại học Giao thông vận tải Thành phố Hồ Chí Minh",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:68",
+        "name": "Trường Đại học Giao thông vận tải Thành phố Hồ Chí Minh",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:69",
+        "name": "Trường Đại học Kiến trúc Hà Nội",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:69",
+        "name": "Trường Đại học Kiến trúc Hà Nội",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:69",
+        "name": "Trường Đại học Kiến trúc Hà Nội",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:70",
+        "name": "Trường Đại học Kiến trúc Thành phố Hồ Chí Minh",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:70",
+        "name": "Trường Đại học Kiến trúc Thành phố Hồ Chí Minh",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:70",
+        "name": "Trường Đại học Kiến trúc Thành phố Hồ Chí Minh",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:71",
+        "name": "Trường Đại học Hàng hải Việt Nam",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:71",
+        "name": "Trường Đại học Hàng hải Việt Nam",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:71",
+        "name": "Trường Đại học Hàng hải Việt Nam",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:72",
+        "name": "Trường Đại học Điện lực",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:72",
+        "name": "Trường Đại học Điện lực",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:72",
+        "name": "Trường Đại học Điện lực",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:73",
+        "name": "Trường Đại học Lâm nghiệp",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:73",
+        "name": "Trường Đại học Lâm nghiệp",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:73",
+        "name": "Trường Đại học Lâm nghiệp",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:74",
+        "name": "Trường Đại học Tài nguyên và Môi trường Hà Nội",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:74",
+        "name": "Trường Đại học Tài nguyên và Môi trường Hà Nội",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:74",
+        "name": "Trường Đại học Tài nguyên và Môi trường Hà Nội",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:75",
+        "name": "Trường Đại học Thương mại",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:75",
+        "name": "Trường Đại học Thương mại",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:75",
+        "name": "Trường Đại học Thương mại",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:77",
+        "name": "Học viện Tài chính",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:77",
+        "name": "Học viện Tài chính",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:77",
+        "name": "Học viện Tài chính",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:78",
+        "name": "Học viện Ngân hàng",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:78",
+        "name": "Học viện Ngân hàng",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:78",
+        "name": "Học viện Ngân hàng",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:79",
+        "name": "Trường Đại học Ngân hàng Thành phố Hồ Chí Minh",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:79",
+        "name": "Trường Đại học Ngân hàng Thành phố Hồ Chí Minh",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:79",
+        "name": "Trường Đại học Ngân hàng Thành phố Hồ Chí Minh",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:80",
+        "name": "Trường Đại học Luật Hà Nội",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:80",
+        "name": "Trường Đại học Luật Hà Nội",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:80",
+        "name": "Trường Đại học Luật Hà Nội",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:81",
+        "name": "Trường Đại học Luật Thành phố Hồ Chí Minh",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:81",
+        "name": "Trường Đại học Luật Thành phố Hồ Chí Minh",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:81",
+        "name": "Trường Đại học Luật Thành phố Hồ Chí Minh",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:82",
+        "name": "Trường Đại học Lao động - Xã hội",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:82",
+        "name": "Trường Đại học Lao động - Xã hội",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:82",
+        "name": "Trường Đại học Lao động - Xã hội",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:84",
+        "name": "Trường Đại học Y Dược Hải Phòng",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:84",
+        "name": "Trường Đại học Y Dược Hải Phòng",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:84",
+        "name": "Trường Đại học Y Dược Hải Phòng",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:85",
+        "name": "Trường Đại học Y Dược Thái Bình",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:85",
+        "name": "Trường Đại học Y Dược Thái Bình",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:85",
+        "name": "Trường Đại học Y Dược Thái Bình",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:86",
+        "name": "Trường Đại học Y tế Công cộng",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:86",
+        "name": "Trường Đại học Y tế Công cộng",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:86",
+        "name": "Trường Đại học Y tế Công cộng",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:87",
+        "name": "Học viện Y Dược học cổ truyền Việt Nam",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:87",
+        "name": "Học viện Y Dược học cổ truyền Việt Nam",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:87",
+        "name": "Học viện Y Dược học cổ truyền Việt Nam",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:88",
+        "name": "Trường Đại học Y khoa Phạm Ngọc Thạch",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:88",
+        "name": "Trường Đại học Y khoa Phạm Ngọc Thạch",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:88",
+        "name": "Trường Đại học Y khoa Phạm Ngọc Thạch",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:89",
+        "name": "Trường Đại học Đà Lạt",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:89",
+        "name": "Trường Đại học Đà Lạt",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:89",
+        "name": "Trường Đại học Đà Lạt",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:90",
+        "name": "Trường Đại học Tây Nguyên",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:90",
+        "name": "Trường Đại học Tây Nguyên",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:90",
+        "name": "Trường Đại học Tây Nguyên",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:91",
+        "name": "Trường Đại học Hồng Đức",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:91",
+        "name": "Trường Đại học Hồng Đức",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:91",
+        "name": "Trường Đại học Hồng Đức",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:92",
+        "name": "Trường Đại học Thủ Dầu Một",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:92",
+        "name": "Trường Đại học Thủ Dầu Một",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:92",
+        "name": "Trường Đại học Thủ Dầu Một",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:93",
+        "name": "Đại học Trà Vinh",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:93",
+        "name": "Đại học Trà Vinh",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:93",
+        "name": "Đại học Trà Vinh",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:94",
+        "name": "Trường Đại học Sài Gòn",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:94",
+        "name": "Trường Đại học Sài Gòn",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:94",
+        "name": "Trường Đại học Sài Gòn",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:95",
+        "name": "Trường Đại học Mở Thành phố Hồ Chí Minh",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:95",
+        "name": "Trường Đại học Mở Thành phố Hồ Chí Minh",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:95",
+        "name": "Trường Đại học Mở Thành phố Hồ Chí Minh",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:96",
+        "name": "Trường Đại học Hà Nội",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:96",
+        "name": "Trường Đại học Hà Nội",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:96",
+        "name": "Trường Đại học Hà Nội",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:97",
+        "name": "Trường Đại học Sư phạm Hà Nội 2",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:97",
+        "name": "Trường Đại học Sư phạm Hà Nội 2",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:97",
+        "name": "Trường Đại học Sư phạm Hà Nội 2",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:98",
+        "name": "Học viện Quản lý giáo dục",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:98",
+        "name": "Học viện Quản lý giáo dục",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:98",
+        "name": "Học viện Quản lý giáo dục",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:99",
+        "name": "Trường Đại học Bình Dương",
+        "year": 2026,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:99",
+        "name": "Trường Đại học Bình Dương",
+        "year": 2025,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      },
+      {
+        "directoryId": "moet-survey-oct2026:99",
+        "name": "Trường Đại học Bình Dương",
+        "year": 2024,
+        "status": "FIND_AND_VERIFY_ADMISSION_SOURCE",
+        "admissionCode": null
+      }
+    ]
+  }
+}

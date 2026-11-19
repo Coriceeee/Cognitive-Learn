@@ -1,0 +1,39 @@
+{
+  "status": "PASS_DESCRIPTIVE_ONLY",
+  "evidence_level": "DESCRIPTIVE_NOT_CAUSAL",
+  "total_rows": 12,
+  "valid_rows": 12,
+  "failure_count": 0,
+  "failure_codes": {},
+  "failures": [],
+  "assignment_methods": {
+    "observational": 12
+  },
+  "groups": {
+    "static": {
+      "n_records": 6,
+      "n_participants": 6,
+      "baseline_mean": 6.0,
+      "outcome_mean": 7.0,
+      "mean_change": 1.0
+    },
+    "adaptive": {
+      "n_records": 6,
+      "n_participants": 6,
+      "baseline_mean": 6.0,
+      "outcome_mean": 7.5,
+      "mean_change": 1.5
+    }
+  },
+  "mean_change_difference_adaptive_minus_static": 0.5,
+  "cautions": [
+    "observational_assignment_cannot_support_causal_claim"
+  ],
+  "claim_gate": {
+    "can_claim_feasibility": true,
+    "can_claim_adaptive_causal_effect": false,
+    "reason": "Prospective registered and independently audited randomized trial with pre-specified analysis and verified outcome required"
+  },
+  "source_sha256": "710b2c5d76beb87e4e8061bac4aa32a827459e637e7cb36f1b748db9f81ab79a",
+  "input_file": "fixture_SYNTHETIC.csv"
+}

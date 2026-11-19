@@ -1,0 +1,192 @@
+{
+  "base": "CLA_FULL_SOURCE_CP42_HOLISTIC_TEMPORAL_20261118.zip",
+  "base_sha256": "f58040d2cf81c875dee1b9d522b3a4ceccc11742397e64d997b31c82b8668633",
+  "changes": {
+    "START_HERE_CP42_FOCUSED_WORKSPACES_20261119.md": {
+      "old_sha256": null,
+      "sha256": "d68603c89077a27f9b52ff3b28d6b81c5aef2125a241a02ef13d99613b0105ab"
+    },
+    "package.json": {
+      "old_sha256": "6a12cad215676611dca2849c1d73532634d2b2516e93ab6c56ecd8803d9d9d4b",
+      "sha256": "f4aadd8198871d4782bccf70614674c63bcd3ae51e0fc58f1bf522931335c61a"
+    },
+    "reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html": {
+      "old_sha256": "cc2be21f81e6e094a050a3e74aa8c46df95da49f238f102c8b39016d9fb020ac",
+      "sha256": "056f0195dbf4b4e65d42860eecaa2a332f57839d326bf54fef6097c2e13b9f9a"
+    },
+    "reports/demo/cla_batch16_offline_readiness.json": {
+      "old_sha256": "66d94cc83f2c06f02b2c3dbd7d38ad7151b0745a78003ac671c63c7bff4e818f",
+      "sha256": "f2d146155e5851c5771b8c8f377fd96690a1354ce7061b7fb7203abaf8678e0e"
+    },
+    "reports/evidence/atlas_lookup_fidelity.json": {
+      "old_sha256": "4b7bde651ee17b48221ce8028695829f8bbb41b5ec1c9a437f3367508e604cc6",
+      "sha256": "74c16bdcb56140d16dfa1cc0378a1f8cbe48b6466a87b74c3fa6c3f15b1e01e4"
+    },
+    "reports/evidence/cla_golden_path_SYNTHETIC.json": {
+      "old_sha256": "1ff20dcc0ccdfc71e7111bea2eb09aba5bdc56cb298694bee41af726dce02aed",
+      "sha256": "ede7b34ea77c40012afda622870102d627420ca3bb2ff7bc24141aa668fd5d86"
+    },
+    "reports/evidence/cla_measurement_SYNTHETIC.json": {
+      "old_sha256": "2088260f33d35df8ca8ddcd49bd0e8f14c1fb4342d7857d3a9bccd6576ed18cb",
+      "sha256": "21b88ceeea61a3be284bbe062096241abeb51607d160b1ea695a246efdda066a"
+    },
+    "reports/evidence/cla_multicycle_SYNTHETIC.json": {
+      "old_sha256": "d7aa5660afa4437ebf629c56fa8eb79883451a126b7af4a61a8de55db5d6d8d5",
+      "sha256": "779a709a09d322f85d70b489b1a0290a12ac7f18ebff3054d963ffe7242f5e14"
+    },
+    "reports/verification/cp42_focused_workspaces/build-summary.log": {
+      "old_sha256": null,
+      "sha256": "21f4f04a678e3b221110b537c5076332112ad087d1448650888b732246b7252c"
+    },
+    "reports/verification/cp42_focused_workspaces/offline-demo.log": {
+      "old_sha256": null,
+      "sha256": "1a22525af71f16eaaead71cd9c00c79eda29b2bd985fb341123642d9539b046f"
+    },
+    "reports/verification/cp42_focused_workspaces/regression.log": {
+      "old_sha256": null,
+      "sha256": "307d5799e654fbc2bdc48d436ab4f7a3723000668061d6f47af9cc9be4d6395b"
+    },
+    "reports/verification/cp42_focused_workspaces/syntax.log": {
+      "old_sha256": null,
+      "sha256": "fc4fb4bfac227ae0b8c4e4e7d4e7a2ce87e1b57abee880f0528a18d8d4a5a0c6"
+    },
+    "src/App.tsx": {
+      "old_sha256": "1197a0b4e5e1ddb46355e973e4849be255b08bad8db928ea69227caca3b65e26",
+      "sha256": "9ca850c49f65cbb7f98aa3675f1904d975a54867bc199e8513ae0ce197d801db"
+    },
+    "src/components/common/AccessGate.tsx": {
+      "old_sha256": "3c762571140b976ce294d40141945a70009750d2ca2e8e6f7d05da342a3eb36a",
+      "sha256": "277c35b5c31ab18deea2f8b129c0bba21cbbc9b76468b5d21faf4d6c24d72bd8"
+    },
+    "src/components/common/ModuleSectionNav.tsx": {
+      "old_sha256": "6384f3f70054cc13a056b2b92bb5727b44b2872b13d4d2673d20cedbc8bba9c9",
+      "sha256": "bcfbebf698471365dcba965e9b6a5e2621172700a8fe05aed2cf3066a15e3a54"
+    },
+    "src/components/journey/ClosedLoopPanel.tsx": {
+      "old_sha256": "b8f89bd13e6488c7cdb71af86f00b32d806fcc596da071d8f89d03a94fdc2950",
+      "sha256": "756696c58007374c05f030d42b68f01a7a6ca7be30b82528e41be4ca2435e274"
+    },
+    "src/data/moduleSubmodules.ts": {
+      "old_sha256": "1cc71a4c12009b5c8ffc78f11e204ee8c6940d0480fa3cc0d48f8004de1fc033",
+      "sha256": "f8eaa19bf8cb51175dc1cd4e311d9e96f9260f8410cb6c54647b28661db0f46b"
+    },
+    "src/lib/advisorChatPolicy.ts": {
+      "old_sha256": "7d43435b61c0d0e9ab8792becdb92aa48cf3eac83a3a63544d3bf514efeb66e9",
+      "sha256": "5d93283d8606ae5b0689606232d0a4fb1ba2d0426c88780b54203b08732c603e"
+    },
+    "src/lib/focusedModuleRoute.ts": {
+      "old_sha256": null,
+      "sha256": "51920b4a4b6efb679ecebb266b4ff740f5f8f971025de175e9eb26a9ca7ea741"
+    },
+    "src/lib/holisticRoadmap.ts": {
+      "old_sha256": "25dba43ea99f4e7be4acfd7d3863c71dd76ebcce28fcffa59fd47d1481139b2f",
+      "sha256": "f794012fa7001e1307e9f6c8ebab5ffe73fc629084b981aa8169915e60ef3146"
+    },
+    "src/lib/nexusEvidenceBaseline.ts": {
+      "old_sha256": "00110ba208cabf6dab1aac07fb448eb0c29c5d6c667042c36fcb59386602de61",
+      "sha256": "72c5133aef80482ba2256896c473d29c06216bb67476f3419cd6bc2b05aa806e"
+    },
+    "src/page/atlas/AtlasPage.tsx": {
+      "old_sha256": "b0cc11ff0acc3823b89c3ee4e49c8895a7d87365d086f2548b9031711db0e377",
+      "sha256": "63b8c9d55bdee405bd3b147512ab4c00bd35cd06e5657ea1f90250f985f8b3d6"
+    },
+    "src/page/atlas/components/AtlasNationalPathways.tsx": {
+      "old_sha256": "45332d29cfc48da724ebbdb277a20808441ae27453d50afa44aa7d2bbf869805",
+      "sha256": "274887b921e15452f3235053d8d1e07511aa9913099e3fe91b4527f7128ef21c"
+    },
+    "src/page/atlas/components/AtlasProgramDiscoveryPanel.tsx": {
+      "old_sha256": "a4b5135b822a97348f0c3b8ec3e9085a214877284896b9c73676705a05434ba2",
+      "sha256": "1e1f3d794991ae27ef681ebed27c158f8763bb47b464d497da4d82dec8ae1d3c"
+    },
+    "src/page/atlas/components/OfficialAdmissionsExplorer.tsx": {
+      "old_sha256": "7f66b56be322e1d682418560631717ce25dc88188d5f5db0b563f8794ccea3c5",
+      "sha256": "5ae549b0fb0aa80b77212254d9eb5d154be8a75f676e4369d453d7595ef6c13f"
+    },
+    "src/page/companion/DailyCompanionPage.tsx": {
+      "old_sha256": "542b7c56def36ac5ede91b15adf189976e53c8a69eb747db88a498728ab7c421",
+      "sha256": "20258f27e3effffdb759b900abf6f14665dd56349b96b244fc82074d0402d327"
+    },
+    "src/page/haven/HavenPage.tsx": {
+      "old_sha256": "636a574e3a01010fb8c931d0baa8c6bd248058d70deddeb32b92d9e36dff1926",
+      "sha256": "a2dbefec8af2f45cc451750d30c9dbfe5fd4420d8dc80f61316c03acea2ea990"
+    },
+    "src/page/lumen/LumenPage.tsx": {
+      "old_sha256": "85b4fd48288e28a656d6667764db61e6b91e0184f1061ef6579a88c4b887f661",
+      "sha256": "3e8c4fde3ff78541c9e3f19a9cb5557aa911ed2f6593895ad0ff6d0e21416903"
+    },
+    "src/page/lumen/components/LumenDynamicState.tsx": {
+      "old_sha256": "eada6940cf310c9f5d158916d8469d48aa5e05747f7f4c3c3e21a93cd083c87c",
+      "sha256": "f472de075bf5dde76cce61a995815d162d9e5c33bd77689ff6d6093dd3aa87f8"
+    },
+    "src/page/lumen/components/LumenSignalAtlas.tsx": {
+      "old_sha256": "fabf3adc080ff3dc71cb3f1d0d0f8b5b02372b58ea029519c1a0eb1d8c6da543",
+      "sha256": "e7ef5d831373412842770cf51d8eabc6da211d1e2a77b4f4e9f3175d1b6f4c37"
+    },
+    "src/page/nexus/AdminPage.tsx": {
+      "old_sha256": "cf3ecb860b579ad3df8a1af81dd01e63a209f07d5f11f231430a9ceafe0e9b43",
+      "sha256": "40f30f5965a9c46bfd8722b565db4df28defc95d28ee67154c89dd02f3346e5c"
+    },
+    "src/page/orion/OrionPage.tsx": {
+      "old_sha256": "d1cb1f2f43126194f8ee3d278ea971876a1fe79f839e539a12191f00240bbb2a",
+      "sha256": "049f24e68bd5fa085be7434aea21bc6d881a9e68af05eea8a9914e8952666aba"
+    },
+    "src/page/pulse/PulsePage.tsx": {
+      "old_sha256": "1c7c4b5b5c43db438a85678d3976327f73fd3f56a7aabadadc0688171e815d8a",
+      "sha256": "e6c56e3756a79cc5f41cca06ab4e26f4c9a04dac6f7e8f8dbc47ecbee3defe7d"
+    },
+    "src/page/seed/StudentPage.tsx": {
+      "old_sha256": "0754a3b7ae6aeb109029da21a682eed3a7e05cbb0e82447a942983cf19c367ce",
+      "sha256": "cd26920c31afc479f382b0da210220a9dc298777cd83ffd323df84ef0bed75eb"
+    },
+    "src/page/seed/StudentProfilePage.tsx": {
+      "old_sha256": "fcb1a7049807b1d373abde29c02725a5e3a3a3f094531ccf2cc68cf2eaa2ccbb",
+      "sha256": "fa4afd2f69849e21e9ccee61cc356f3d7f65553ef638c73bed984c8e98e7428b"
+    },
+    "src/page/seed/StudentStorageStatusPage.tsx": {
+      "old_sha256": "37b8001873068375d9856aecd4460605e4f7c211e4035c8dd5e960c2951a86c9",
+      "sha256": "fbace75d180363c75cf28e2fa1049e9726ffb2417f7101cc983f374d717e6af0"
+    },
+    "src/page/seed/StudentTranscriptPage.tsx": {
+      "old_sha256": "581fc48fb75374b8cc99615fcb5e7111f37eac198d278b8bdcfd028283c5502d",
+      "sha256": "f1a47b3b0eea047b333b8198de42e4136c980cfdfd47328a4aa60007e72cf25b"
+    },
+    "src/page/seed/components/LearningIntelligencePanel.tsx": {
+      "old_sha256": "6613717c4cf083d9c22e2da810a1a3f6e544020b32147747fafeacd2cc124590",
+      "sha256": "839ab54aa8383cf6ae77431f9df9e4563d2af5b35b01866565c5e6a60a87d1db"
+    },
+    "src/page/study-abroad/StudyAbroadPage.tsx": {
+      "old_sha256": "2efe6264877e9e1bb5c4ff24410b8b9b6cef29cec6b1ed2787dcc145490ecede",
+      "sha256": "3366f9b92be831e982d68022536550f0708bea060cb71f83636b2d01058d771e"
+    },
+    "src/styles/24-cla-subpages-ui.css": {
+      "old_sha256": "9b155989e6259815b8c25c24f737c316648a5e84da99e2bc1c8b3a800f0f7d77",
+      "sha256": "db89b30bd8a94e9ac1dcd4bf45d872ac2a359d554d87cd382700e168ca7c48be"
+    },
+    "tests/cp35-p0-p1-contract.test.cjs": {
+      "old_sha256": "3d9f037126115fb10de7a045e5dd18bccb9926e4daf8c6b286bfdcec04324388",
+      "sha256": "a853362858cf9b9b0c44ea69d6b8eaccba1e952aca5b931f01975633c0d740f1"
+    },
+    "tests/cp42-focused-workspaces.test.mjs": {
+      "old_sha256": null,
+      "sha256": "ca7ca96c19d150738b0b55b32aba1b43884663a5e91e8ae3ce420cf22414ca3d"
+    },
+    "tests/cp42-national-source-discovery.test.mjs": {
+      "old_sha256": "ab7dcaa26e636f8c09f67e0e09184241805541e7696cd2ddc7e1623e7cb85cce",
+      "sha256": "c08ef67066dcef8de95f587dcc9ba8ee1315b046aea31631930da9d092f9eccd"
+    },
+    "tests/step09-ptit-official-pathways.test.cjs": {
+      "old_sha256": "13d89f3a73608c7adcd85012577d56ac38053daef5a1b94c35a7e3fee0ce70ee",
+      "sha256": "191feb1e74e1f20a06f8fb4c3934b1284d39fd83360d5fee72658ae6743212c1"
+    },
+    "tests/step17-exam-reminders.test.mjs": {
+      "old_sha256": "926f642bb29551195c9813e75b7a883e7620f5c411c439faa21ff35928c304cb",
+      "sha256": "7007c9ddf86f7f37ff7d0a37ae93dbd6d221eb6b62b13e95912ec1ef831af200"
+    },
+    "vercel.json": {
+      "old_sha256": "c7eb27439421a7dbe747de4da837d714c3a20f47f6d8980a3431b22d124dc795",
+      "sha256": "32df93496db7cbb0b1b2a558901549b58a176f415523f1463e33396351878e0d"
+    }
+  },
+  "deleted": [],
+  "note": "Manifest excludes itself."
+}

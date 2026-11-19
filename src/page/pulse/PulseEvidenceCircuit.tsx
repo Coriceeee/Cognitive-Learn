@@ -45,8 +45,8 @@ export default function PulseEvidenceCircuit({ evidence }: Props) {
           <defs>
             <linearGradient id="pulseCircuitLine" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0%" stopColor="#22a7c7" />
-              <stop offset="55%" stopColor="#377ce0" />
-              <stop offset="100%" stopColor="#765acb" />
+              <stop offset="55%" stopColor="rgb(var(--tc-fl-377ce0))" />
+              <stop offset="100%" stopColor="rgb(var(--tc-fl-765acb))" />
             </linearGradient>
           </defs>
           {stages.slice(0, 3).map((stage, index) => {

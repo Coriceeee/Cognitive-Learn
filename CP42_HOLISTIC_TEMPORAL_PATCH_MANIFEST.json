@@ -1,0 +1,152 @@
+{
+  "base": "CLA_FULL_SOURCE_CP42_ROBUST_DECISION_20261118.zip",
+  "baseSha256": "3e047c62b1f69a97fab83061ad31dbd11c31c74cb89b94d2ce57daa49b48c312",
+  "scope": "CP42 Holistic Temporal / local engineering; no production deployment",
+  "removed": [],
+  "added": [
+    "START_HERE_CP42_HOLISTIC_TEMPORAL_20261118.md",
+    "reports/verification/cp42_holistic_temporal/gates.log",
+    "reports/verification/cp42_holistic_temporal/regression.log",
+    "reports/verification/cp42_holistic_temporal/targeted.log",
+    "src/lib/annualBudgetScenario.ts",
+    "src/lib/holisticRoadmap.ts",
+    "src/lib/temporalDiagnostics.ts",
+    "src/page/haven/HavenBudgetScenario.tsx",
+    "src/page/lumen/components/LumenAdaptiveRoadmap.tsx",
+    "tests/cp42-holistic-temporal.test.mjs",
+    "CP42_HOLISTIC_TEMPORAL_PATCH_MANIFEST.json"
+  ],
+  "changed": [
+    "package.json",
+    "reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html",
+    "reports/demo/cla_batch16_offline_readiness.json",
+    "reports/evidence/atlas_lookup_fidelity.json",
+    "reports/evidence/cla_golden_path_SYNTHETIC.json",
+    "reports/evidence/cla_measurement_SYNTHETIC.json",
+    "reports/evidence/cla_multicycle_SYNTHETIC.json",
+    "research/protocol/CLA_ADAPTIVE_ROADMAP_V4_20261118.md",
+    "src/lib/nexusEvidenceBaseline.ts",
+    "src/page/haven/HavenPage.tsx",
+    "src/page/lumen/LumenPage.tsx",
+    "src/page/lumen/components/LumenDynamicState.tsx",
+    "src/page/lumen/components/lumen-dynamic-state.css"
+  ],
+  "files": [
+    {
+      "path": "START_HERE_CP42_HOLISTIC_TEMPORAL_20261118.md",
+      "sha256": "42be34c90d799a70d2600237113b2a959db6c5bf134c2e6a962bcb7723f5692e",
+      "previousSha256": null
+    },
+    {
+      "path": "package.json",
+      "sha256": "6a12cad215676611dca2849c1d73532634d2b2516e93ab6c56ecd8803d9d9d4b",
+      "previousSha256": "22afc61efc32faac0204de82ba88d4d2039f106026ab52179d6f680d3109be56"
+    },
+    {
+      "path": "reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html",
+      "sha256": "cc2be21f81e6e094a050a3e74aa8c46df95da49f238f102c8b39016d9fb020ac",
+      "previousSha256": "78b5e22d00af8f4f582a82a5e0354b0f53e32e9464bfd428fc6cfa48ba6decd5"
+    },
+    {
+      "path": "reports/demo/cla_batch16_offline_readiness.json",
+      "sha256": "66d94cc83f2c06f02b2c3dbd7d38ad7151b0745a78003ac671c63c7bff4e818f",
+      "previousSha256": "83eac024729f2382a0d3f2aa08373047f019e6e04dad99110c69f2805caef00a"
+    },
+    {
+      "path": "reports/evidence/atlas_lookup_fidelity.json",
+      "sha256": "4b7bde651ee17b48221ce8028695829f8bbb41b5ec1c9a437f3367508e604cc6",
+      "previousSha256": "456e36d480b1f3c051337a2a6f35f96662a567bdc4ccb63402edeb9bde02a13a"
+    },
+    {
+      "path": "reports/evidence/cla_golden_path_SYNTHETIC.json",
+      "sha256": "1ff20dcc0ccdfc71e7111bea2eb09aba5bdc56cb298694bee41af726dce02aed",
+      "previousSha256": "b4045ba579360e217f93c3bb80d609a0b9fa12a2ab49d4ac3f2703e304b298db"
+    },
+    {
+      "path": "reports/evidence/cla_measurement_SYNTHETIC.json",
+      "sha256": "2088260f33d35df8ca8ddcd49bd0e8f14c1fb4342d7857d3a9bccd6576ed18cb",
+      "previousSha256": "ad87b056745cd61022f8e9718cb558a667f122302c762800cc687d02b9ccf52e"
+    },
+    {
+      "path": "reports/evidence/cla_multicycle_SYNTHETIC.json",
+      "sha256": "d7aa5660afa4437ebf629c56fa8eb79883451a126b7af4a61a8de55db5d6d8d5",
+      "previousSha256": "81cc8031fc8cdef5e3830fd99934854de9886c2c91181d0d3b43ceb5a9f99788"
+    },
+    {
+      "path": "reports/verification/cp42_holistic_temporal/gates.log",
+      "sha256": "665b518e885e34df8c45f6c348b9ab804b68ddf6ebb29d2f82ffe125e95fc609",
+      "previousSha256": null
+    },
+    {
+      "path": "reports/verification/cp42_holistic_temporal/regression.log",
+      "sha256": "ab88efbdc35a202c092060f916066621e922d412e0cb5d476135cfc790697cb7",
+      "previousSha256": null
+    },
+    {
+      "path": "reports/verification/cp42_holistic_temporal/targeted.log",
+      "sha256": "0482e58caebcdb2b9e45f41ce39d12c40d877ba3b6e5fd557b98f2e25d1d1663",
+      "previousSha256": null
+    },
+    {
+      "path": "research/protocol/CLA_ADAPTIVE_ROADMAP_V4_20261118.md",
+      "sha256": "38cf88dd110c6e2c16bf08ffbfcb812cc1df2ee686be65e2a7c26f74680f1482",
+      "previousSha256": "c46477b171e139e470717d6395b83622b06aa408bff78fc0bc61482ba213bf0e"
+    },
+    {
+      "path": "src/lib/annualBudgetScenario.ts",
+      "sha256": "c1c4a02281a9c7234a186b61b4f5e407978c3b13e420a1e3c44bac6724a97d21",
+      "previousSha256": null
+    },
+    {
+      "path": "src/lib/holisticRoadmap.ts",
+      "sha256": "25dba43ea99f4e7be4acfd7d3863c71dd76ebcce28fcffa59fd47d1481139b2f",
+      "previousSha256": null
+    },
+    {
+      "path": "src/lib/nexusEvidenceBaseline.ts",
+      "sha256": "00110ba208cabf6dab1aac07fb448eb0c29c5d6c667042c36fcb59386602de61",
+      "previousSha256": "8c26b16417d0241277b7a0fae4c950d7403532e57df9396d847cb06786258cd4"
+    },
+    {
+      "path": "src/lib/temporalDiagnostics.ts",
+      "sha256": "9cc6cae3d30d0c7d6db95739a1e7df1d22dc468a3d38450293a6ebcca0427694",
+      "previousSha256": null
+    },
+    {
+      "path": "src/page/haven/HavenBudgetScenario.tsx",
+      "sha256": "fb75fa497525469f86d341d3067cfa7af6d75afa33f2a1e38375603a03ca2de4",
+      "previousSha256": null
+    },
+    {
+      "path": "src/page/haven/HavenPage.tsx",
+      "sha256": "636a574e3a01010fb8c931d0baa8c6bd248058d70deddeb32b92d9e36dff1926",
+      "previousSha256": "8e344d3ac9cf82d11954071e2eb5d6265568e0c21d96851cb6282b55318245a3"
+    },
+    {
+      "path": "src/page/lumen/LumenPage.tsx",
+      "sha256": "85b4fd48288e28a656d6667764db61e6b91e0184f1061ef6579a88c4b887f661",
+      "previousSha256": "dd400e5a975c09e7ebcba94acc85a6c632bb33b86573a10bce193c9c8c4cd9ae"
+    },
+    {
+      "path": "src/page/lumen/components/LumenAdaptiveRoadmap.tsx",
+      "sha256": "88d04b0cba38adce4d324230485b0438c9e6ca3b9cc2a960829f674c2b774d9e",
+      "previousSha256": null
+    },
+    {
+      "path": "src/page/lumen/components/LumenDynamicState.tsx",
+      "sha256": "eada6940cf310c9f5d158916d8469d48aa5e05747f7f4c3c3e21a93cd083c87c",
+      "previousSha256": "58bfa735b54e10eae3b135274140459dbfe2f1b8a564c2842a25e49aa04a7c01"
+    },
+    {
+      "path": "src/page/lumen/components/lumen-dynamic-state.css",
+      "sha256": "0f36e687d7db60f47376d9a2407c8660b0aba58b8efac77d56b0b941c42d4092",
+      "previousSha256": "c92836708ad99dacdcf80282e7b6bbb3f530233b3d62bd9d7685196610174550"
+    },
+    {
+      "path": "tests/cp42-holistic-temporal.test.mjs",
+      "sha256": "72a0f20460a65d1d968f86cb0b426ede63be5bc9704d0b36a3809c457bcfd17d",
+      "previousSha256": null
+    }
+  ],
+  "notes": "Manifest excludes its own hash. Full source contains original files plus patch; no deletions."
+}

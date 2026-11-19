@@ -1,3 +1,4 @@
+import { currentFocusedPath } from "../../lib/focusedModuleRoute";
 import ModuleSectionNav from "../../components/common/ModuleSectionNav";
 import { useIsAdmin } from "../../lib/useIsAdmin";
 import { useEffect } from "react";
@@ -40,6 +41,7 @@ function getTrendClass(trend: PulseTrend) {
 }
 
 export default function PulsePage() {
+  const view = currentFocusedPath();
   const isAdmin = useIsAdmin();
   const pipelineEvidence = usePipelineEvidence();
   const [cognitiveScore, setCognitiveScore] = useState("");
@@ -125,7 +127,8 @@ export default function PulsePage() {
       </header>
 
       <section className="pulse-shell">
-        <section className="pulse-hero">
+        {view === "/pulse" && <>
+          <section className="pulse-hero">
           <div>
             <span>PULSE MONITOR</span>
             <h1>Báo cáo tiến độ học tập và tuyển sinh</h1>
@@ -145,11 +148,12 @@ export default function PulsePage() {
               {hasInputs ? getPulseTrendLabel(report.trend) : "Chưa đánh giá"}
             </em>
           </aside>
-        </section>
+        </section></>}
 
         <ModuleSectionNav moduleKey="pulse" />
 
-        {isAdmin && <section id="pulse-pipeline" className="pulse-control-panel" aria-labelledby="cp23-pipeline-title">
+        {view === "/pulse/audit" && !isAdmin && <p role="status">Đang xác minh quyền quản trị…</p>}
+        {view === "/pulse/audit" && isAdmin && <section id="pulse-pipeline" className="pulse-control-panel" aria-labelledby="cp23-pipeline-title">
           <div className="pulse-control-head">
             <div>
               <span>CP23 · DATA LINEAGE</span>
@@ -191,9 +195,10 @@ export default function PulsePage() {
           {pipelineEvidence.result && <PulseEvidenceCircuit evidence={pipelineEvidence.result} />}
         </section>}
 
-        <ClosedLoopPanel mode="pulse" />
+        {view === "/pulse/checkin" && <ClosedLoopPanel mode="pulse" />}
 
-        <section id="pulse-input" className="pulse-control-panel">
+        {view === "/pulse/inputs" && <>
+          <section id="pulse-input" className="pulse-control-panel">
           <div className="pulse-control-head">
             <div>
               <span>SIMULATION INPUT</span>
@@ -279,9 +284,10 @@ export default function PulsePage() {
               />
             </label>
           </div>
-        </section>
+        </section></>}
 
-        {hasInputs && <section id="pulse-risk" className="pulse-metric-grid">
+        {view === "/pulse/progress" && hasInputs && <PulseMetricOrbit metrics={report.metrics} overallScore={report.overallScore} />}
+        {view === "/pulse/progress" && hasInputs && <details className="cla-focus-disclosure"><summary>Xem chi tiết các chỉ số</summary><section id="pulse-risk" className="pulse-metric-grid">
           {report.metrics.map((metric) => (
             <article className="pulse-metric-card" key={metric.id}>
               <div>
@@ -303,32 +309,21 @@ export default function PulsePage() {
               <p>{metric.description}</p>
             </article>
           ))}
-        </section>}
-        {hasInputs && <PulseMetricOrbit metrics={report.metrics} overallScore={report.overallScore} />}
+        </section></details>}
 
-        {hasInputs ? (<>
-        <section id="pulse-report" className="pulse-summary-grid">
+        {["/pulse/progress", "/pulse/reports", "/pulse/actions"].includes(view) && (hasInputs ? (<>
+        {view === "/pulse/reports" && <>
+          <section id="pulse-report" className="pulse-summary-grid">
           <article>
             <span>HỌC SINH</span>
             <h2>Bản tóm tắt cho học sinh</h2>
             <p>{report.studentSummary}</p>
           </article>
 
-          {isAdmin && <>
-          <article>
-            <span>PHỤ HUYNH · KIỂM THỬ ADMIN</span>
-            <h2>Bản tóm tắt cho phụ huynh</h2>
-            <p>{report.parentSummary}</p>
-          </article>
-          <article>
-            <span>GIÁO VIÊN · KIỂM THỬ ADMIN</span>
-            <h2>Bản tóm tắt cho giáo viên</h2>
-            <p>{report.teacherSummary}</p>
-          </article>
-          </>}
-        </section>
+        </section></>}
 
-        <section id="pulse-actions" className="pulse-section">
+        {view === "/pulse/actions" && <>
+          <section id="pulse-actions" className="pulse-section">
           <div className="pulse-section-head">
             <div>
               <span>ACTION PLAN</span>
@@ -345,7 +340,7 @@ export default function PulsePage() {
               </article>
             ))}
           </div>
-        </section>
+        </section></>}
 
         {report.warnings.length > 0 && (
           <section className="pulse-warning">
@@ -357,7 +352,9 @@ export default function PulsePage() {
             </ul>
           </section>
         )}
-        </>) : <section className="cla-transcript-hint" role="status"><span id="pulse-risk" /><span id="pulse-report" />Chưa đủ dữ liệu thực để đưa ra kết quả. Hãy hoàn thiện các ô đầu vào và lưu hồ sơ. Đây là công cụ mô phỏng theo giả định, không phải bằng chứng hiệu quả hoặc xác suất thành công.</section>}
+        </>) : <section className="cla-transcript-hint" role="status"><span id="pulse-risk" /><span id="pulse-report" />Chưa đủ dữ liệu thực để đưa ra kết quả. Hãy hoàn thiện các ô đầu vào và lưu hồ sơ. Đây là công cụ mô phỏng theo giả định, không phải bằng chứng hiệu quả hoặc xác suất thành công. <a href="/pulse/inputs">Mở dữ liệu báo cáo</a>.</section>)}
+        {view === "/pulse/inputs" && <p className="cla-focus-notice">Lưu dữ liệu trước khi chuyển trang. <a href="/pulse/progress">Xem tiến độ học tập →</a></p>}
+        {view === "/pulse/progress" && hasInputs && <p className="cla-focus-notice"><a href="/pulse/inputs">Cập nhật dữ liệu báo cáo</a> · <a href="/pulse/checkin">Mở nhật ký thực hiện</a></p>}
       </section>
     </main>
   );

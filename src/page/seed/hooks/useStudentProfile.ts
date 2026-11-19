@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, onSnapshot, type Unsubscribe } from "firebase/firestore";
 
 import { auth, db } from "../../../lib/firebase";
+import { buildDynamicStudentState, type DynamicStudentState } from "../../../lib/dynamicStudentState";
+import { analyzeStudentTemporal, type TemporalStudentReport } from "../../../lib/temporalStudentIntelligence";
 import { calculateCognitive } from "../../../engines/cognitive/cognitiveEngine";
-import { getCognitiveHistory } from "../../../engines/history/cognitiveHistoryRepository";
+import { getVerifiedCognitiveHistory } from "../../../engines/history/cognitiveHistoryRepository";
+import { isMatchingAccountRecord, isServerConfirmedSnapshot } from "../services/realtimeReadPolicy";
 import { createSnapshotFromResult } from "../../../engines/history/cognitiveHistoryEngine";
 import {
   analyzeCognitiveGrowth,
@@ -455,221 +458,138 @@ export function useStudentProfile() {
 
 
 
-  useEffect(() => {
-    // A profile/history read can finish after logout or an account switch.
-    // Never show a previous account's results in a new authenticated session.
-    let active = true;
-    let requestId = 0;
-    const unsub = onAuthStateChanged(auth, async (user) => {
-      const currentRequest = ++requestId;
-      const isCurrent = () => active && currentRequest === requestId && auth.currentUser?.uid === user?.uid;
+  const [syncing, setSyncing] = useState(false);
+  const [historyLoading, setHistoryLoading] = useState(false);
+  const [dynamicState, setDynamicState] = useState<DynamicStudentState | null>(null);
+  const [temporalReport, setTemporalReport] = useState<TemporalStudentReport | null>(null);
 
-      setLoading(true);
-      setError("");
+  useEffect(() => {
+    // Server-confirmed realtime profile. Two generations prevent stale results:
+    // sessionEpoch on A -> B -> A and snapshotEpoch for same-UID updates.
+    let mounted = true;
+    let sessionEpoch = 0;
+    let snapshotEpoch = 0;
+    let activeUid: string | null = null;
+    let stopProfile: Unsubscribe | undefined;
+
+    const resetView = () => {
       setProfile(defaultStudentProfile);
       setCognitive(defaultCognitiveResult);
       setGrowthAnalytics(null);
       setHasProfile(false);
-
-
-
-          if(!user){
-
-
-            setProfile(
-              defaultStudentProfile
-            );
-
-
-            setCognitive(
-              defaultCognitiveResult
-            );
-
-            setGrowthAnalytics(null);
-
-
-            setHasProfile(false);
-
-            setLoading(false);
-
-            return;
-
-          }
-
-
-
-
-          try {
-
-
-            const ref =
-              doc(
-                db,
-                "learning_profiles",
-                user.uid
-              );
-
-
-
-            const snap =
-              await getDoc(ref);
-
-            if (!isCurrent()) return;
-
-            if(!snap.exists()){
-
-
-              setProfile(
-                defaultStudentProfile
-              );
-
-
-              setCognitive(
-                defaultCognitiveResult
-              );
-
-              setGrowthAnalytics(null);
-              setHasProfile(false);
-
-
-              setLoading(false);
-
-
-              return;
-
-            }
-
-
-
-
-            const rawData =
-              snap.data();
-
-
-
-            const normalizedProfile =
-              normalizeStudentProfile(
-                rawData
-              );
-
-
-
-            // Prefer the exact measurement committed atomically alongside
-            // the Firestore profile. Legacy profiles fall back to calculation.
-            const storedMeasurement = rawData.cognitiveMeasurement as CognitiveResult | undefined;
-            const cognitiveResult =
-              storedMeasurement?.mappingVersion === "cla-cognitive-proxy-v2" &&
-              Array.isArray(storedMeasurement.dimensions)
-                ? storedMeasurement
-                : calculateCognitive(normalizedProfile);
-
-
-
-            setProfile(
-              normalizedProfile
-            );
-
-
-
-            const normalizedCognitive =
-              normalizeCognitiveResult(
-                cognitiveResult
-              );
-
-            setCognitive(
-              normalizedCognitive
-            );
-
-            let history: Awaited<ReturnType<typeof getCognitiveHistory>> = [];
-            try {
-              history = await getCognitiveHistory(user.uid);
-            } catch (historyError) {
-              if (!isCurrent()) return;
-              // Profile is valid even if subcollection read is denied or offline.
-              console.error("Cognitive History read failed:", historyError);
-              setError("Đã tải hồ sơ, nhưng chưa đọc được lịch sử học tập. Hãy thử lại sau.");
-            }
-
-            if (!isCurrent()) return;
-            const comparableHistory = history.filter(
-              (entry) => entry.scoreAvailable === true
-            );
-            if (comparableHistory.length > 0) {
-              const currentSnapshot = comparableHistory[0];
-              const previousSnapshot =
-                comparableHistory.length > 1
-                  ? comparableHistory[1]
-                  : null;
-
-              setGrowthAnalytics(
-                analyzeCognitiveGrowth(
-                  currentSnapshot,
-                  previousSnapshot
-                )
-              );
-            } else {
-              setGrowthAnalytics(
-                createLimitedGrowthAnalytics(
-                  normalizedProfile,
-                  normalizedCognitive
-                )
-              );
-            }
-
-            setHasProfile(true);
-
-
-
-          }
-          catch(err){
-            if (!isCurrent()) return;
-
-            console.error(
-              "Firestore error:",
-              err
-            );
-
-
-
-            setProfile(
-              defaultStudentProfile
-            );
-
-
-            setCognitive(
-              defaultCognitiveResult
-            );
-
-            setGrowthAnalytics(null);
-
-
-            setHasProfile(false);
-
-
-
-            setError(
-              "Không thể tải dữ liệu học sinh."
-            );
-
-          }
-
-
-
-          if (isCurrent()) setLoading(false);
-
-        }
-      );
-
-    return () => {
-      active = false;
-      requestId++;
-      unsub();
+      setHistoryLoading(false);
+      setDynamicState(null);
+      setTemporalReport(null);
+    };
+    const reportFailure = (code?: string) => {
+      resetView();
+      setLoading(false);
+      setSyncing(false);
+      setError(code === "permission-denied"
+        ? "Không có quyền đọc hồ sơ học sinh. Hãy kiểm tra tài khoản hoặc consent."
+        : code === "invalid-owner"
+          ? "Hồ sơ không khớp tài khoản đăng nhập. Đã ngừng hiển thị dữ liệu."
+          : "Không thể xác minh hồ sơ từ Firestore. Hãy kiểm tra kết nối và tải lại.");
     };
 
+    const stopAuth = onAuthStateChanged(auth, user => {
+      ++sessionEpoch;
+      ++snapshotEpoch;
+      stopProfile?.(); stopProfile = undefined;
+      activeUid = user?.uid ?? null;
+      resetView(); setError(""); setSyncing(false);
+      setLoading(Boolean(user));
+      if (!user) return;
 
+      const uid = user.uid;
+      const thisSession = sessionEpoch;
+      const isCurrentSession = () => mounted && thisSession === sessionEpoch
+        && activeUid === uid && auth.currentUser?.uid === uid;
 
-  },[]);
+      stopProfile = onSnapshot(doc(db, "learning_profiles", uid),
+        { includeMetadataChanges: true }, snapshot => {
+          if (!isCurrentSession()) return;
+          const thisSnapshot = ++snapshotEpoch;
+          const isCurrent = () => isCurrentSession() && thisSnapshot === snapshotEpoch;
 
+          // Never promote offline cache or uncommitted local writes into verified
+          // cognitive/academic information, even after a previously verified read.
+          if (!isServerConfirmedSnapshot(snapshot.metadata)) {
+            resetView(); setError(""); setSyncing(true); setLoading(false);
+            return;
+          }
+          setSyncing(false);
+          setError("");
+          if (!snapshot.exists()) {
+            resetView(); setLoading(false);
+            return;
+          }
+          const rawData = snapshot.data();
+          if (!isMatchingAccountRecord(rawData, uid)) {
+            reportFailure("invalid-owner"); return;
+          }
+
+          try {
+            const normalizedProfile = normalizeStudentProfile(rawData);
+            // Use the exact measurement persisted with this version of Seed;
+            // old schema may only expose the deterministic experimental proxy.
+            const storedMeasurement = rawData.cognitiveMeasurement as CognitiveResult | undefined;
+            const cognitiveResult = storedMeasurement?.mappingVersion === "cla-cognitive-proxy-v2"
+              && Array.isArray(storedMeasurement.dimensions)
+              ? storedMeasurement : calculateCognitive(normalizedProfile);
+            const normalizedCognitive = normalizeCognitiveResult(cognitiveResult);
+            const dynamic = buildDynamicStudentState(rawData, uid, true);
+            setDynamicState(dynamic);
+            setTemporalReport(null);
+            setProfile(normalizedProfile);
+            setCognitive(normalizedCognitive);
+            setGrowthAnalytics(null); // Never retain an older snapshot's growth.
+            setHasProfile(true);
+            setLoading(false);
+            setHistoryLoading(true);
+
+            // History is read from the server, not an old browser cache. It is
+            // deliberately supplemental: failure cannot erase a valid profile.
+            void (async () => {
+              try {
+                const history = await getVerifiedCognitiveHistory(uid);
+                if (!isCurrent()) return;
+                if (dynamic) setTemporalReport(analyzeStudentTemporal(history.slice(0, 11), uid, dynamic.scope, true, dynamic.observedAt));
+                const comparable = history.filter(entry => entry.scoreAvailable === true);
+                const analytics = comparable.length > 0
+                  ? analyzeCognitiveGrowth(comparable[0], comparable[1] ?? null)
+                  : createLimitedGrowthAnalytics(normalizedProfile, normalizedCognitive);
+                setGrowthAnalytics(analytics);
+              } catch {
+                if (!isCurrent()) return;
+                setTemporalReport(null);
+                setGrowthAnalytics(createLimitedGrowthAnalytics(normalizedProfile, normalizedCognitive));
+                setError("Hồ sơ đã đồng bộ nhưng chưa xác minh được lịch sử Cognitive từ máy chủ.");
+              } finally {
+                if (isCurrent()) setHistoryLoading(false);
+              }
+            })();
+          } catch {
+            if (isCurrent()) reportFailure("invalid-profile");
+          }
+        }, failure => {
+          if (!isCurrentSession()) return;
+          ++snapshotEpoch;
+          reportFailure(failure?.code);
+        });
+    }, () => {
+      ++sessionEpoch; ++snapshotEpoch; activeUid = null;
+      stopProfile?.(); resetView(); setSyncing(false); setLoading(false);
+      setError("Không xác minh được trạng thái đăng nhập.");
+    });
+
+    return () => {
+      mounted = false;
+      ++sessionEpoch; ++snapshotEpoch;
+      activeUid = null;
+      stopProfile?.(); stopAuth();
+    };
+  }, []);
 
 
 
@@ -680,8 +600,14 @@ export function useStudentProfile() {
     cognitive,
 
     growthAnalytics,
+    dynamicState,
+    temporalReport,
 
     loading,
+
+    syncing,
+
+    historyLoading,
 
     hasProfile,
 

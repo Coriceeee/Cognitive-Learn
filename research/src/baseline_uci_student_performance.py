@@ -26,7 +26,7 @@ SEED = 20261109
 TARGET = "G3"
 CONTEXT_BEHAVIOR = [
     "studytime", "failures", "schoolsup", "famsup", "paid", "activities",
-    "traveltime", "absences", "freetime", "goout", "internet", "higher",
+    "traveltime", "freetime", "goout", "internet", "higher",
 ]
 REQUIRED = set(CONTEXT_BEHAVIOR + ["G1", "G2", "G3"])
 
@@ -100,6 +100,7 @@ def run(input_path: str | Path, subject: str, seed: int = SEED, source_revision:
         "n_rows": int(len(frame)), "missing_required_columns": missing,
         "metrics": None,
         "evidence_class": "E_EXTERNAL",
+        "master_protocol_evidence_type": "S_SECONDARY_EXTERNAL",
         "claim_scope": "METHOD_FEASIBILITY_ONLY_NOT_CLA_EFFECTIVENESS",
         "limitations": [
             "Two Portuguese schools; not a Vietnamese THPT cohort.",
@@ -107,6 +108,7 @@ def run(input_path: str | Path, subject: str, seed: int = SEED, source_revision:
             "No participant ID in the public CSV; split is row-level and repeated-person identity cannot be audited within this file.",
             "Math and Portuguese files must be analyzed separately; do not merge without a cross-file participant key.",
             "G3 is strongly correlated with G1/G2; feature cutoffs must be reported explicitly.",
+            "No exact context-feature collection timestamps; retrospective associations only. Cumulative absences excluded to reduce potential future leakage.",
         ],
     }
     if not source_verified or not source_revision:
@@ -152,6 +154,7 @@ def run(input_path: str | Path, subject: str, seed: int = SEED, source_revision:
         first_pred = _fit_ridge(first_train[first_cols], first_train[TARGET], first_test[first_cols])
         metrics["after_first_period_G1"] = {
             "ridge": _metrics(first_test[TARGET].to_numpy(), first_pred, seed + 3),
+            "academic_only_ridge": _metrics(first_test[TARGET].to_numpy(), _fit_ridge(first_train[["G1"]], first_train[TARGET], first_test[["G1"]]), seed + 3),
             "last_score_G1_baseline": _metrics(first_test[TARGET].to_numpy(), first_test["G1"].to_numpy(), seed + 4),
             "features": first_cols,
             "n_train": int(len(first_train)), "n_test": int(len(first_test)),
@@ -167,6 +170,7 @@ def run(input_path: str | Path, subject: str, seed: int = SEED, source_revision:
         second_pred = _fit_ridge(second_train[second_cols], second_train[TARGET], second_test[second_cols])
         metrics["after_second_period_G1_G2"] = {
             "ridge": _metrics(second_test[TARGET].to_numpy(), second_pred, seed + 5),
+            "academic_only_ridge": _metrics(second_test[TARGET].to_numpy(), _fit_ridge(second_train[["G1", "G2"]], second_train[TARGET], second_test[["G1", "G2"]]), seed + 5),
             "last_score_G2_baseline": _metrics(second_test[TARGET].to_numpy(), second_test["G2"].to_numpy(), seed + 6),
             "features": second_cols,
             "n_train": int(len(second_train)), "n_test": int(len(second_test)),

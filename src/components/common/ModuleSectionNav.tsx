@@ -1,4 +1,5 @@
 import { getStudentSubmodules, type StudentModuleKey } from "../../data/moduleSubmodules";
+import { currentFocusedPath } from "../../lib/focusedModuleRoute";
 
 const moduleLabels: Record<StudentModuleKey, { name: string; home: string; eyebrow: string }> = {
   seed: { name: "Hồ sơ học tập", home: "/student", eyebrow: "SEED PROFILE" },
@@ -9,44 +10,33 @@ const moduleLabels: Record<StudentModuleKey, { name: string; home: string; eyebr
   haven: { name: "Học bổng & tài chính", home: "/haven", eyebrow: "HAVEN SUPPORT" },
 };
 
-/**
- * Student-facing subnavigation. Each implemented function owns a dedicated
- * route; admin/research actions live only in the Nexus console directory.
+/** One compact navigation band, with only implemented destinations.
+ * Route-scoped content is mounted by each page, not hidden using CSS.
  */
 export default function ModuleSectionNav({ moduleKey }: { moduleKey: StudentModuleKey }) {
   const items = getStudentSubmodules(moduleKey);
   const module = moduleLabels[moduleKey];
-  const currentPath = window.location.pathname.replace(/\/$/, "") || "/";
+  const currentPath = currentFocusedPath();
   const onHome = currentPath === module.home;
-
+  const activeItem = items.find(item => item.href !== module.home && (currentPath === item.href ||
+    (item.href === "/atlas/study-abroad" && currentPath.startsWith("/atlas/study-abroad/"))));
+  const title = onHome ? module.name : activeItem?.title ?? (currentPath === "/atlas/library" ? "Kho dữ liệu Atlas · Admin" : currentPath === "/pulse/audit" ? "Kiểm tra liên thông · Admin" : module.name);
   return (
-    <nav className="cla-module-subnav" aria-label={`Chức năng ${module.name}`}>
+    <nav className="cla-module-subnav cla-focus-nav" aria-label={`Chức năng ${module.name}`}>
       <div className="cla-module-subnav-head">
-        <div>
-          <span>{module.eyebrow} · KHÔNG GIAN HỌC SINH</span>
-          <strong>{onHome ? "Chọn chức năng cần sử dụng" : module.name}</strong>
-          <p>Mỗi chức năng mở ở một trang riêng; dữ liệu và quyền truy cập vẫn theo tài khoản của bạn.</p>
-        </div>
-        <a className="cla-module-overview-link" href={module.home} aria-current={onHome ? "page" : undefined}>
-          Tổng quan
-        </a>
+        <span>{module.eyebrow} / {onHome ? "TỔNG QUAN" : title}</span>
+        <a href="/student" className="cla-focus-home">Không gian học sinh</a>
       </div>
       <div className="cla-module-subnav-links">
-        {items.map((item) => {
-          const active = Boolean(item.href && (currentPath === item.href ||
-            (item.href === "/atlas/study-abroad" && currentPath.startsWith("/atlas/study-abroad/"))));
-          return item.href && item.status !== "planned" ? (
-            <a key={item.id} href={item.href} className={active ? "is-active" : ""} aria-current={active ? "page" : undefined}>
-              <span>{item.title}</span>
-              {item.status === "partial" && <small>Đang hoàn thiện</small>}
-            </a>
-          ) : (
-            <span key={item.id} className="is-disabled" aria-disabled="true">
-              <span>{item.title}</span><small>Chưa khả dụng</small>
-            </span>
-          );
+        <a className={onHome ? "is-active" : ""} href={module.home} aria-current={onHome ? "page" : undefined}>Tổng quan</a>
+        {items.filter(item => item.href && item.href !== module.home && item.status !== "planned").map(item => {
+          const active = item === activeItem;
+          return <a key={item.id} href={item.href} className={active ? "is-active" : ""}
+            aria-current={active ? (currentPath === item.href ? "page" : "location") : undefined}
+            title={item.status === "partial" ? `${item.description} (Đang hoàn thiện)` : item.description}>{item.title}</a>;
         })}
       </div>
+      {!onHome && (moduleKey !== "seed" || currentPath === "/student/exams") && <div className="cla-focus-heading"><h1>{title}</h1>{activeItem && <p>{activeItem.description}</p>}</div>}
     </nav>
   );
 }

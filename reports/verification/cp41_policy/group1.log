@@ -1,0 +1,1152 @@
+COMMAND node --experimental-strip-types --test research/tests/closed_loop_replay_demo.test.mjs
+TAP version 13
+# (node:35664) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: synthetic replay traverses all eight stages in order
+ok 1 - synthetic replay traverses all eight stages in order
+  ---
+  duration_ms: 7.364213
+  type: 'test'
+  ...
+# Subtest: synthetic replay never claims an observed outcome or completion
+ok 2 - synthetic replay never claims an observed outcome or completion
+  ---
+  duration_ms: 0.727643
+  type: 'test'
+  ...
+# Subtest: low synthetic adherence triggers a deterministic adaptation
+ok 3 - low synthetic adherence triggers a deterministic adaptation
+  ---
+  duration_ms: 4.495011
+  type: 'test'
+  ...
+# Subtest: all trace references point to known stage IDs
+ok 4 - all trace references point to known stage IDs
+  ---
+  duration_ms: 0.382826
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1115.057371
+COMMAND node --test tests/scientific-visuals.test.cjs
+TAP version 13
+# Subtest: CP32-01: Lumen signal radar only plots dimensions explicitly marked available
+ok 1 - CP32-01: Lumen signal radar only plots dimensions explicitly marked available
+  ---
+  duration_ms: 2.576845
+  type: 'test'
+  ...
+# Subtest: CP32-02: longitudinal delta chart abstains without two comparable snapshots
+ok 2 - CP32-02: longitudinal delta chart abstains without two comparable snapshots
+  ---
+  duration_ms: 0.642327
+  type: 'test'
+  ...
+# Subtest: CP32-03: Orion trade-off plot is sourced from strategy scenarios and disclaims heuristic values
+ok 3 - CP32-03: Orion trade-off plot is sourced from strategy scenarios and disclaims heuristic values
+  ---
+  duration_ms: 5.254607
+  type: 'test'
+  ...
+# Subtest: CP32-04: Atlas historical slope field uses the verified PTIT 2024-2025 records only
+ok 4 - CP32-04: Atlas historical slope field uses the verified PTIT 2024-2025 records only
+  ---
+  duration_ms: 0.695073
+  type: 'test'
+  ...
+# Subtest: CP32-05: scientific visualization layer is imported and responsive
+ok 5 - CP32-05: scientific visualization layer is imported and responsive
+  ---
+  duration_ms: 1.912335
+  type: 'test'
+  ...
+# Subtest: CP32-06: synthetic demo preset is Admin-only, preview-before-save and scoped as demo
+ok 6 - CP32-06: synthetic demo preset is Admin-only, preview-before-save and scoped as demo
+  ---
+  duration_ms: 0.939134
+  type: 'test'
+  ...
+# Subtest: CP32-07: transcript trajectory and heatmap read saved term/subject records
+ok 7 - CP32-07: transcript trajectory and heatmap read saved term/subject records
+  ---
+  duration_ms: 1.147837
+  type: 'test'
+  ...
+# Subtest: CP33-01: Haven pressure topology plots only the four entered support signals and labels their self-reported scope
+ok 8 - CP33-01: Haven pressure topology plots only the four entered support signals and labels their self-reported scope
+  ---
+  duration_ms: 0.624217
+  type: 'test'
+  ...
+# Subtest: CP33-02: Pulse orbit derives all six progress rings from Pulse engine metrics
+ok 9 - CP33-02: Pulse orbit derives all six progress rings from Pulse engine metrics
+  ---
+  duration_ms: 0.929646
+  type: 'test'
+  ...
+# Subtest: CP33-03: Admin evidence circuit visualizes actual stage statuses and explicitly disclaims end-to-end completion
+ok 10 - CP33-03: Admin evidence circuit visualizes actual stage statuses and explicitly disclaims end-to-end completion
+  ---
+  duration_ms: 2.276916
+  type: 'test'
+  ...
+# Subtest: CP33-04: Haven and Pulse scientific visuals have responsive and reduced-motion styling
+ok 11 - CP33-04: Haven and Pulse scientific visuals have responsive and reduced-motion styling
+  ---
+  duration_ms: 0.606608
+  type: 'test'
+  ...
+# Subtest: CP34-01: Admin synthetic preset only fills local form state and cannot write Firestore
+ok 12 - CP34-01: Admin synthetic preset only fills local form state and cannot write Firestore
+  ---
+  duration_ms: 0.819342
+  type: 'test'
+  ...
+# Subtest: CP34-02: Haven labels scholarship cards as rule archetypes, not verified opportunities
+ok 13 - CP34-02: Haven labels scholarship cards as rule archetypes, not verified opportunities
+  ---
+  duration_ms: 0.236391
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 560.022918
+COMMAND node --test tests/cp36-p1.test.cjs
+TAP version 13
+# Subtest: CP36: Student Cognitive Path is task-first, no duplicate six-module selector
+ok 1 - CP36: Student Cognitive Path is task-first, no duplicate six-module selector
+  ---
+  duration_ms: 3.098404
+  type: 'test'
+  ...
+# Subtest: CP36: Haven separates sourced opportunities from heuristic score
+ok 2 - CP36: Haven separates sourced opportunities from heuristic score
+  ---
+  duration_ms: 0.530765
+  type: 'test'
+  ...
+# Subtest: CP36: seven scholarships have official URLs and no default guaranteed eligibility or deadlines
+ok 3 - CP36: seven scholarships have official URLs and no default guaranteed eligibility or deadlines
+  ---
+  duration_ms: 0.890283
+  type: 'test'
+  ...
+# Subtest: CP36: Atlas has three added official 2026 sources, no synthetic prior-year entries
+ok 4 - CP36: Atlas has three added official 2026 sources, no synthetic prior-year entries
+  ---
+  duration_ms: 2.285336
+  type: 'test'
+  ...
+# Subtest: CP36: final CSS layer is loaded and high-contrast inputs remain visible
+ok 5 - CP36: final CSS layer is loaded and high-contrast inputs remain visible
+  ---
+  duration_ms: 0.924564
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 370.790083
+COMMAND node --experimental-strip-types --test tests/cp36-source-registry.test.mjs
+TAP version 13
+# (node:35957) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: P1 source provenance: no duplicate scholarship IDs, source URLs and conditions present
+ok 1 - P1 source provenance: no duplicate scholarship IDs, source URLs and conditions present
+  ---
+  duration_ms: 9.28975
+  type: 'test'
+  ...
+# Subtest: P1 scholarship search filters by country and label without claiming eligibility
+ok 2 - P1 scholarship search filters by country and label without claiming eligibility
+  ---
+  duration_ms: 2.202177
+  type: 'test'
+  ...
+# Subtest: P1 Atlas provenance distinguishes 3-year records from 2026-only additions
+ok 3 - P1 Atlas provenance distinguishes 3-year records from 2026-only additions
+  ---
+  duration_ms: 5.239787
+  type: 'test'
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 3
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1534.52408
+COMMAND node --test tests/cp37-operating-guide.test.cjs
+TAP version 13
+# Subtest: CP37-01: student guide route is registered and allowed for students
+ok 1 - CP37-01: student guide route is registered and allowed for students
+  ---
+  duration_ms: 1.764413
+  type: 'test'
+  ...
+# Subtest: CP37-02: dashboard and task finder link to the practical operating guide
+ok 2 - CP37-02: dashboard and task finder link to the practical operating guide
+  ---
+  duration_ms: 0.799477
+  type: 'test'
+  ...
+# Subtest: CP37-03: guide distinguishes real student data, Admin synthetic demo, and incomplete integrations
+ok 3 - CP37-03: guide distinguishes real student data, Admin synthetic demo, and incomplete integrations
+  ---
+  duration_ms: 0.629601
+  type: 'test'
+  ...
+# Subtest: CP37-04: guide CSS is imported after CP36 styles
+ok 4 - CP37-04: guide CSS is imported after CP36 styles
+  ---
+  duration_ms: 6.950216
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 465.534721
+COMMAND node --test tests/atlas-aspiration-policy-2026.test.cjs tests/step06-subject-score-contract.test.cjs tests/step07-admin-auth-recovery.test.cjs
+TAP version 13
+# Subtest: P26-01 official policy is versioned and capped at 15 / teacher NV1-5
+ok 1 - P26-01 official policy is versioned and capped at 15 / teacher NV1-5
+  ---
+  duration_ms: 1.532337
+  type: 'test'
+  ...
+# Subtest: P26-02 classifier catches teacher-training by major code or explicit flag
+ok 2 - P26-02 classifier catches teacher-training by major code or explicit flag
+  ---
+  duration_ms: 0.612998
+  type: 'test'
+  ...
+# Subtest: P26-03 classifier catches teacher names without misleading other education majors
+ok 3 - P26-03 classifier catches teacher names without misleading other education majors
+  ---
+  duration_ms: 0.740972
+  type: 'test'
+  ...
+# Subtest: P26-04 >5 teacher-training candidates never spill into NV6-NV15
+ok 4 - P26-04 >5 teacher-training candidates never spill into NV6-NV15
+  ---
+  duration_ms: 1.076458
+  type: 'test'
+  ...
+# Subtest: P26-05 recommendations cannot contain more than 15 applications
+ok 5 - P26-05 recommendations cannot contain more than 15 applications
+  ---
+  duration_ms: 0.529865
+  type: 'test'
+  ...
+# Subtest: P26-06 user-chosen maximum below five also constrains teacher-training count
+ok 6 - P26-06 user-chosen maximum below five also constrains teacher-training count
+  ---
+  duration_ms: 1.322747
+  type: 'test'
+  ...
+# Subtest: P26-07 historical sources cannot silently become 2026 policy inputs
+ok 7 - P26-07 historical sources cannot silently become 2026 policy inputs
+  ---
+  duration_ms: 0.994512
+  type: 'test'
+  ...
+# Subtest: P26-08 invalid or missing-benchmark results are not offered
+ok 8 - P26-08 invalid or missing-benchmark results are not offered
+  ---
+  duration_ms: 0.21212
+  type: 'test'
+  ...
+# Subtest: P26-09 ten non-teacher programmes preserve model ranking; no auto teacher bias score
+ok 9 - P26-09 ten non-teacher programmes preserve model ranking; no auto teacher bias score
+  ---
+  duration_ms: 0.40187
+  type: 'test'
+  ...
+# Subtest: P26-10 unparseable cap falls back to legal maximum
+ok 10 - P26-10 unparseable cap falls back to legal maximum
+  ---
+  duration_ms: 0.531661
+  type: 'test'
+  ...
+# Subtest: P26-11 no valid candidates produces no fabricated places
+ok 11 - P26-11 no valid candidates produces no fabricated places
+  ---
+  duration_ms: 0.20934
+  type: 'test'
+  ...
+# Subtest: P26-12 UI displays source, cap and teaching limitation even before recommendations
+ok 12 - P26-12 UI displays source, cap and teaching limitation even before recommendations
+  ---
+  duration_ms: 0.405144
+  type: 'test'
+  ...
+# Subtest: P26-13 integrated Admission Engine enforces teaching NV1–NV5 after real eligibility calculation
+ok 13 - P26-13 integrated Admission Engine enforces teaching NV1–NV5 after real eligibility calculation
+  ---
+  duration_ms: 331.967129
+  type: 'test'
+  ...
+# Subtest: P26-14 integrated engine abstains if cutoff is unverified, despite policy-compliant ordering
+ok 14 - P26-14 integrated engine abstains if cutoff is unverified, despite policy-compliant ordering
+  ---
+  duration_ms: 313.530107
+  type: 'test'
+  ...
+# Subtest: 06.01 zero is a legitimate observed score, absent is not zero
+ok 15 - 06.01 zero is a legitimate observed score, absent is not zero
+  ---
+  duration_ms: 19.253866
+  type: 'test'
+  ...
+# Subtest: 06.02 impossible or malformed subject scores are not silently clamped
+ok 16 - 06.02 impossible or malformed subject scores are not silently clamped
+  ---
+  duration_ms: 0.890969
+  type: 'test'
+  ...
+# Subtest: 06.03 D01 uses exactly its three observed subjects
+ok 17 - 06.03 D01 uses exactly its three observed subjects
+  ---
+  duration_ms: 8.092743
+  type: 'test'
+  ...
+# Subtest: 06.04 genuine zero does not make a complete combination incomplete
+ok 18 - 06.04 genuine zero does not make a complete combination incomplete
+  ---
+  duration_ms: 0.352385
+  type: 'test'
+  ...
+# Subtest: 06.05 blank or invalid remains missing in the exact combination
+ok 19 - 06.05 blank or invalid remains missing in the exact combination
+  ---
+  duration_ms: 0.74182
+  type: 'test'
+  ...
+# Subtest: 06.06 partial sum is never the winning option
+ok 20 - 06.06 partial sum is never the winning option
+  ---
+  duration_ms: 1.20285
+  type: 'test'
+  ...
+# Subtest: 06.07 no external scale is silently ranked against school combinations
+ok 21 - 06.07 no external scale is silently ranked against school combinations
+  ---
+  duration_ms: 0.915234
+  type: 'test'
+  ...
+# Subtest: 06.08 a three-subject zero score remains an eligible combination, not a missing record
+ok 22 - 06.08 a three-subject zero score remains an eligible combination, not a missing record
+  ---
+  duration_ms: 14.103964
+  type: 'test'
+  ...
+# Subtest: 06.09 invalid or missing subjects cannot qualify for a verified benchmark
+ok 23 - 06.09 invalid or missing subjects cannot qualify for a verified benchmark
+  ---
+  duration_ms: 0.907434
+  type: 'test'
+  ...
+# Subtest: 06.10 Studio only admits official self-declared THPT 2026 scores into cutoff comparison
+ok 24 - 06.10 Studio only admits official self-declared THPT 2026 scores into cutoff comparison
+  ---
+  duration_ms: 9.505577
+  type: 'test'
+  ...
+# Subtest: 06.11 visual explanation is based on computed engine combinations, not hardcoded examples
+ok 25 - 06.11 visual explanation is based on computed engine combinations, not hardcoded examples
+  ---
+  duration_ms: 0.700852
+  type: 'test'
+  ...
+# Subtest: 06.12 supported input subjects are visible but extra combinations are not invented
+ok 26 - 06.12 supported input subjects are visible but extra combinations are not invented
+  ---
+  duration_ms: 0.572962
+  type: 'test'
+  ...
+# Subtest: 06.13 Studio styling supports mobile and reduced motion
+ok 27 - 06.13 Studio styling supports mobile and reduced motion
+  ---
+  duration_ms: 30.252013
+  type: 'test'
+  ...
+# Subtest: AUTH-01: explicit active Admin role is accepted
+ok 28 - AUTH-01: explicit active Admin role is accepted
+  ---
+  duration_ms: 1.846291
+  type: 'test'
+  ...
+# Subtest: AUTH-02: only student non-Admin role is accepted
+ok 29 - AUTH-02: only student non-Admin role is accepted
+  ---
+  duration_ms: 0.565315
+  type: 'test'
+  ...
+# Subtest: AUTH-03: absent profile or null data does not grant access
+ok 30 - AUTH-03: absent profile or null data does not grant access
+  ---
+  duration_ms: 0.232922
+  type: 'test'
+  ...
+# Subtest: AUTH-04: missing, false, and string active flags are denied
+ok 31 - AUTH-04: missing, false, and string active flags are denied
+  ---
+  duration_ms: 8.184627
+  type: 'test'
+  ...
+# Subtest: AUTH-05: malformed roles and email-based spoofing do not grant Admin
+ok 32 - AUTH-05: malformed roles and email-based spoofing do not grant Admin
+  ---
+  duration_ms: 0.28853
+  type: 'test'
+  ...
+# Subtest: AUTH-06: transient Firestore unavailable retries and returns server profile
+ok 33 - AUTH-06: transient Firestore unavailable retries and returns server profile
+  ---
+  duration_ms: 0.500959
+  type: 'test'
+  ...
+# Subtest: AUTH-07: stop after three transient failures and preserve the error
+ok 34 - AUTH-07: stop after three transient failures and preserve the error
+  ---
+  duration_ms: 0.818966
+  type: 'test'
+  ...
+# Subtest: AUTH-08: permission-denied is never retried or bypassed
+ok 35 - AUTH-08: permission-denied is never retried or bypassed
+  ---
+  duration_ms: 0.194385
+  type: 'test'
+  ...
+# Subtest: AUTH-09: error classifier handles Firestore-prefixed errors, not arbitrary failures
+ok 36 - AUTH-09: error classifier handles Firestore-prefixed errors, not arbitrary failures
+  ---
+  duration_ms: 0.419458
+  type: 'test'
+  ...
+# Subtest: AUTH-10: both login and route guard verify the latest server role, not cache
+ok 37 - AUTH-10: both login and route guard verify the latest server role, not cache
+  ---
+  duration_ms: 1.21544
+  type: 'test'
+  ...
+# Subtest: AUTH-11: existing admin redirects to /admin after server verification
+ok 38 - AUTH-11: existing admin redirects to /admin after server verification
+  ---
+  duration_ms: 479.394943
+  type: 'test'
+  ...
+# Subtest: AUTH-12: non-admin cannot be redirected to /admin by using the same login form
+ok 39 - AUTH-12: non-admin cannot be redirected to /admin by using the same login form
+  ---
+  duration_ms: 317.762143
+  type: 'test'
+  ...
+# Subtest: AUTH-13: blocked or missing Admin profile cannot navigate despite valid Firebase Auth
+ok 40 - AUTH-13: blocked or missing Admin profile cannot navigate despite valid Firebase Auth
+  ---
+  duration_ms: 393.865236
+  type: 'test'
+  ...
+# Subtest: AUTH-14: transient failure recovers during login without bypassing verification
+ok 41 - AUTH-14: transient failure recovers during login without bypassing verification
+  ---
+  duration_ms: 1303.944859
+  type: 'test'
+  ...
+# Subtest: AUTH-15: a failed role read retains the Auth session and exposes a retry button
+ok 42 - AUTH-15: a failed role read retains the Auth session and exposes a retry button
+  ---
+  duration_ms: 1353.956945
+  type: 'test'
+  ...
+# Subtest: AUTH-16: LoginPage role is strictly narrowed to ready before redirect
+ok 43 - AUTH-16: LoginPage role is strictly narrowed to ready before redirect
+  ---
+  duration_ms: 2144.46669
+  type: 'test'
+  ...
+1..43
+# tests 43
+# suites 0
+# pass 43
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 8028.617614
+COMMAND node --test tests/step07-seed-atlas-bridge.test.cjs
+TAP version 13
+# Subtest: 07-01: same-term D01 8+7+9 gives 24, no exam or probability label
+ok 1 - 07-01: same-term D01 8+7+9 gives 24, no exam or probability label
+  ---
+  duration_ms: 30.909923
+  type: 'test'
+  ...
+# Subtest: 07-02: zero really is an observed completed score
+ok 2 - 07-02: zero really is an observed completed score
+  ---
+  duration_ms: 1.479451
+  type: 'test'
+  ...
+# Subtest: 07-03: partial scores are never promoted to completed semester averages
+ok 3 - 07-03: partial scores are never promoted to completed semester averages
+  ---
+  duration_ms: 1.273699
+  type: 'test'
+  ...
+# Subtest: 07-04: cannot combine subjects from different semesters to fabricate D01
+ok 4 - 07-04: cannot combine subjects from different semesters to fabricate D01
+  ---
+  duration_ms: 4.076042
+  type: 'test'
+  ...
+# Subtest: 07-05: prefers most recent term with a complete supported combination
+ok 5 - 07-05: prefers most recent term with a complete supported combination
+  ---
+  duration_ms: 3.0425
+  type: 'test'
+  ...
+# Subtest: 07-06: returns null on transcript with no completed subject grades
+ok 6 - 07-06: returns null on transcript with no completed subject grades
+  ---
+  duration_ms: 5.316393
+  type: 'test'
+  ...
+# Subtest: 07-07: mapping covers new-programme electives and excludes unrelated subjects
+ok 7 - 07-07: mapping covers new-programme electives and excludes unrelated subjects
+  ---
+  duration_ms: 1.443541
+  type: 'test'
+  ...
+# Subtest: 07-08: non-English foreign language is not silently mapped to English
+ok 8 - 07-08: non-English foreign language is not silently mapped to English
+  ---
+  duration_ms: 5.297968
+  type: 'test'
+  ...
+# Subtest: 07-09: read-only adapter does not mutate Seed transcript
+ok 9 - 07-09: read-only adapter does not mutate Seed transcript
+  ---
+  duration_ms: 1.725203
+  type: 'test'
+  ...
+# Subtest: 07-10: Atlas reads user-bound Seed hook, only for school marks
+ok 10 - 07-10: Atlas reads user-bound Seed hook, only for school marks
+  ---
+  duration_ms: 6.628697
+  type: 'test'
+  ...
+# Subtest: 07-11: changing score basis clears old marks and never reuses school marks as official THPT
+ok 11 - 07-11: changing score basis clears old marks and never reuses school marks as official THPT
+  ---
+  duration_ms: 2.038133
+  type: 'test'
+  ...
+# Subtest: 07-12: hook clears account-specific data and blocks callbacks from old UID
+ok 12 - 07-12: hook clears account-specific data and blocks callbacks from old UID
+  ---
+  duration_ms: 5.400303
+  type: 'test'
+  ...
+# Subtest: 07-13: delayed Firestore snapshot for a signed-out account cannot overwrite new student
+ok 13 - 07-13: delayed Firestore snapshot for a signed-out account cannot overwrite new student
+  ---
+  duration_ms: 535.386849
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3054.778427
+COMMAND node --test tests/step08-subject-optimizer.test.cjs
+TAP version 13
+# Subtest: 08.01 policy states two compulsory plus two elective subjects, source and year
+ok 1 - 08.01 policy states two compulsory plus two elective subjects, source and year
+  ---
+  duration_ms: 19.324411
+  type: 'test'
+  ...
+# Subtest: 08.02 no confirmed grade-12 courses means abstain; marks alone are not enrollment
+ok 2 - 08.02 no confirmed grade-12 courses means abstain; marks alone are not enrollment
+  ---
+  duration_ms: 1.721852
+  type: 'test'
+  ...
+# Subtest: 08.03 one confirmed elective cannot form a pair
+ok 3 - 08.03 one confirmed elective cannot form a pair
+  ---
+  duration_ms: 0.322957
+  type: 'test'
+  ...
+# Subtest: 08.04 two confirmed choices produce exactly one pair
+ok 4 - 08.04 two confirmed choices produce exactly one pair
+  ---
+  duration_ms: 1.766334
+  type: 'test'
+  ...
+# Subtest: 08.05 only the confirmed grade-12 list contributes, other high scores excluded
+ok 5 - 08.05 only the confirmed grade-12 list contributes, other high scores excluded
+  ---
+  duration_ms: 0.755197
+  type: 'test'
+  ...
+# Subtest: 08.06 incomplete elective scores are null, never silently zero
+ok 6 - 08.06 incomplete elective scores are null, never silently zero
+  ---
+  duration_ms: 0.438201
+  type: 'test'
+  ...
+# Subtest: 08.07 actual zero remains valid input
+ok 7 - 08.07 actual zero remains valid input
+  ---
+  duration_ms: 0.535772
+  type: 'test'
+  ...
+# Subtest: 08.08 invalid and negative marks cannot manufacture an observed-score comparison
+ok 8 - 08.08 invalid and negative marks cannot manufacture an observed-score comparison
+  ---
+  duration_ms: 0.754404
+  type: 'test'
+  ...
+# Subtest: 08.09 does not claim no admission possible when project catalogue has no combo
+ok 9 - 08.09 does not claim no admission possible when project catalogue has no combo
+  ---
+  duration_ms: 1.141587
+  type: 'test'
+  ...
+# Subtest: 08.10 technology streams are distinct and generic technology grade is not reused
+ok 10 - 08.10 technology streams are distinct and generic technology grade is not reused
+  ---
+  duration_ms: 0.800954
+  type: 'test'
+  ...
+# Subtest: 08.11 duplicates are deduplicated and are not counted as two different electives
+ok 11 - 08.11 duplicates are deduplicated and are not counted as two different electives
+  ---
+  duration_ms: 0.437604
+  type: 'test'
+  ...
+# Subtest: 08.12 never invents verified university matches from exploratory combinations
+ok 12 - 08.12 never invents verified university matches from exploratory combinations
+  ---
+  duration_ms: 0.177645
+  type: 'test'
+  ...
+# Subtest: 08.13 only explicitly supplied verified program data is considered a matching opportunity
+ok 13 - 08.13 only explicitly supplied verified program data is considered a matching opportunity
+  ---
+  duration_ms: 1.216356
+  type: 'test'
+  ...
+# Subtest: 08.14 unmatched target cannot be fabricated by substring scoring or mock sources
+ok 14 - 08.14 unmatched target cannot be fabricated by substring scoring or mock sources
+  ---
+  duration_ms: 0.670436
+  type: 'test'
+  ...
+# Subtest: 08.15 three studied electives creates three pairs and sorts by coverage then grades
+ok 15 - 08.15 three studied electives creates three pairs and sorts by coverage then grades
+  ---
+  duration_ms: 1.238991
+  type: 'test'
+  ...
+# Subtest: 08.16 combining a pair with mandatory subjects only uses supported academic combinations
+ok 16 - 08.16 combining a pair with mandatory subjects only uses supported academic combinations
+  ---
+  duration_ms: 0.655897
+  type: 'test'
+  ...
+# Subtest: 08.17 two technological streams are never assumed to share a common grade
+ok 17 - 08.17 two technological streams are never assumed to share a common grade
+  ---
+  duration_ms: 0.381148
+  type: 'test'
+  ...
+# Subtest: 08.18 UI requires explicit confirmation and exposes policy/source/limits
+ok 18 - 08.18 UI requires explicit confirmation and exposes policy/source/limits
+  ---
+  duration_ms: 1.022411
+  type: 'test'
+  ...
+# Subtest: 08.19 previously established Seed and school-score safety gates remain untouched
+ok 19 - 08.19 previously established Seed and school-score safety gates remain untouched
+  ---
+  duration_ms: 1.491476
+  type: 'test'
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 19
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1683.642468
+COMMAND node --test tests/step09-ptit-official-pathways.test.cjs
+TAP version 13
+# Subtest: 09.01 published mappings include X06 and X26, not a guessed synonym
+ok 1 - 09.01 published mappings include X06 and X26, not a guessed synonym
+  ---
+  duration_ms: 6.251278
+  type: 'test'
+  ...
+# Subtest: 09.02 abstains until exactly two distinct electives confirmed
+ok 2 - 09.02 abstains until exactly two distinct electives confirmed
+  ---
+  duration_ms: 0.445147
+  type: 'test'
+  ...
+# Subtest: 09.03 English + Informatics unlocks officially published X26, outside nine-code trial catalog
+ok 3 - 09.03 English + Informatics unlocks officially published X26, outside nine-code trial catalog
+  ---
+  duration_ms: 24.708283
+  type: 'test'
+  ...
+# Subtest: 09.04 Physics + Informatics matches X06 and not X26
+ok 4 - 09.04 Physics + Informatics matches X06 and not X26
+  ---
+  duration_ms: 1.209355
+  type: 'test'
+  ...
+# Subtest: 09.05 Physics + English matches A01, and D01 only when literature and English exist
+ok 5 - 09.05 Physics + English matches A01, and D01 only when literature and English exist
+  ---
+  duration_ms: 4.789288
+  type: 'test'
+  ...
+# Subtest: 09.06 Physics + Chemistry matches only A00
+ok 6 - 09.06 Physics + Chemistry matches only A00
+  ---
+  duration_ms: 0.389407
+  type: 'test'
+  ...
+# Subtest: 09.07 History + geography have no PTIT match in this bounded sample, not a nationwide exclusion
+ok 7 - 09.07 History + geography have no PTIT match in this bounded sample, not a nationwide exclusion
+  ---
+  duration_ms: 0.603883
+  type: 'test'
+  ...
+# Subtest: 09.08 missing Informatics leaves X26 observable score null, not 0
+ok 8 - 09.08 missing Informatics leaves X26 observable score null, not 0
+  ---
+  duration_ms: 0.434254
+  type: 'test'
+  ...
+# Subtest: 09.09 real zero accepted when three scores observed
+ok 9 - 09.09 real zero accepted when three scores observed
+  ---
+  duration_ms: 0.52922
+  type: 'test'
+  ...
+# Subtest: 09.10 invalid score cannot be used for a total
+ok 10 - 09.10 invalid score cannot be used for a total
+  ---
+  duration_ms: 0.79425
+  type: 'test'
+  ...
+# Subtest: 09.11 target major identifies matching records but does not exclude other majors
+ok 11 - 09.11 target major identifies matching records but does not exclude other majors
+  ---
+  duration_ms: 4.767613
+  type: 'test'
+  ...
+# Subtest: 09.12 different source year is excluded
+ok 12 - 09.12 different source year is excluded
+  ---
+  duration_ms: 0.168791
+  type: 'test'
+  ...
+# Subtest: 09.13 untrusted host is excluded despite copied combinations
+ok 13 - 09.13 untrusted host is excluded despite copied combinations
+  ---
+  duration_ms: 0.109508
+  type: 'test'
+  ...
+# Subtest: 09.14 campus BVS is not mislabeled BVH
+ok 14 - 09.14 campus BVS is not mislabeled BVH
+  ---
+  duration_ms: 0.312043
+  type: 'test'
+  ...
+# Subtest: 09.15 outside the PTIT published five codes does not create arbitrary official combinations
+ok 15 - 09.15 outside the PTIT published five codes does not create arbitrary official combinations
+  ---
+  duration_ms: 0.135326
+  type: 'test'
+  ...
+# Subtest: 09.16 output includes source URL, method, campus, year and program code
+ok 16 - 09.16 output includes source URL, method, campus, year and program code
+  ---
+  duration_ms: 0.503658
+  type: 'test'
+  ...
+# Subtest: 09.17 integration is visualized only after the student selects a pair
+ok 17 - 09.17 integration is visualized only after the student selects a pair
+  ---
+  duration_ms: 6.812619
+  type: 'test'
+  ...
+# Subtest: 09.18 protects admission comparison from school/tryout scores
+ok 18 - 09.18 protects admission comparison from school/tryout scores
+  ---
+  duration_ms: 0.666394
+  type: 'test'
+  ...
+# Subtest: 09.19 rejects prior-year official page even when a program wrongly claims year 2026
+ok 19 - 09.19 rejects prior-year official page even when a program wrongly claims year 2026
+  ---
+  duration_ms: 0.248503
+  type: 'test'
+  ...
+# Subtest: 09.20 excludes a program without a 2026 THPT admission method
+ok 20 - 09.20 excludes a program without a 2026 THPT admission method
+  ---
+  duration_ms: 0.161942
+  type: 'test'
+  ...
+# Subtest: 09.21 official-pathway exploration is discoverable from Atlas hero
+ok 21 - 09.21 official-pathway exploration is discoverable from Atlas hero
+  ---
+  duration_ms: 0.182944
+  type: 'test'
+  ...
+1..21
+# tests 21
+# suites 0
+# pass 21
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1287.648502
+COMMAND node --test tests/firestore-security-gate.test.cjs
+TAP version 13
+# Subtest: SG01 accepts only reviewed candidate Rules in localhost emulator
+ok 1 - SG01 accepts only reviewed candidate Rules in localhost emulator
+  ---
+  duration_ms: 41.690656
+  type: 'test'
+  ...
+# Subtest: SG02 rejects production or another demo Firebase project
+ok 2 - SG02 rejects production or another demo Firebase project
+  ---
+  duration_ms: 1.921069
+  type: 'test'
+  ...
+# Subtest: SG03 rejects a different Rules file, including a production Rules path
+ok 3 - SG03 rejects a different Rules file, including a production Rules path
+  ---
+  duration_ms: 10.435237
+  type: 'test'
+  ...
+# Subtest: SG04 rejects emulator host binding on all interfaces or external network
+ok 4 - SG04 rejects emulator host binding on all interfaces or external network
+  ---
+  duration_ms: 0.4634
+  type: 'test'
+  ...
+# Subtest: SG05 rejects invalid ports and enabled Emulator UI
+ok 5 - SG05 rejects invalid ports and enabled Emulator UI
+  ---
+  duration_ms: 9.022249
+  type: 'test'
+  ...
+# Subtest: SG06 rejects external/injected FIRESTORE_EMULATOR_HOST
+ok 6 - SG06 rejects external/injected FIRESTORE_EMULATOR_HOST
+  ---
+  duration_ms: 0.568637
+  type: 'test'
+  ...
+# Subtest: SG07 allows only local FIRESTORE_EMULATOR_HOST values or unset
+ok 7 - SG07 allows only local FIRESTORE_EMULATOR_HOST values or unset
+  ---
+  duration_ms: 0.796707
+  type: 'test'
+  ...
+# Subtest: SG08 overall PASS requires static AND emulator authorization tests PASS
+ok 8 - SG08 overall PASS requires static AND emulator authorization tests PASS
+  ---
+  duration_ms: 0.197474
+  type: 'test'
+  ...
+# Subtest: SG09 package scripts use fixed demo CLI and cannot invoke deployment
+ok 9 - SG09 package scripts use fixed demo CLI and cannot invoke deployment
+  ---
+  duration_ms: 1.420768
+  type: 'test'
+  ...
+# Subtest: SG10 production firebase.json does not silently deploy candidate Rules
+ok 10 - SG10 production firebase.json does not silently deploy candidate Rules
+  ---
+  duration_ms: 5.4639
+  type: 'test'
+  ...
+# Subtest: SG11 emulator test source fails closed on non-loopback endpoints
+ok 11 - SG11 emulator test source fails closed on non-loopback endpoints
+  ---
+  duration_ms: 3.956045
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 591.871364
+COMMAND npm run test:student-consent
+
+> cognitive-learn-ai@0.1.0 test:student-consent
+> node --test tests/step10-student-consent.test.cjs
+
+TAP version 13
+# Subtest: SC01 new, missing consent is never accepted
+ok 1 - SC01 new, missing consent is never accepted
+  ---
+  duration_ms: 1.533518
+  type: 'test'
+  ...
+# Subtest: SC02 same UID and notice required
+ok 2 - SC02 same UID and notice required
+  ---
+  duration_ms: 0.333097
+  type: 'test'
+  ...
+# Subtest: SC03 withdrawn consent is not active
+ok 3 - SC03 withdrawn consent is not active
+  ---
+  duration_ms: 0.112552
+  type: 'test'
+  ...
+# Subtest: SC04 product consent never enrolls in research
+ok 4 - SC04 product consent never enrolls in research
+  ---
+  duration_ms: 0.1892
+  type: 'test'
+  ...
+# Subtest: SC05 helper rejects blank identity
+ok 5 - SC05 helper rejects blank identity
+  ---
+  duration_ms: 0.555512
+  type: 'test'
+  ...
+# Subtest: SC06 root routing includes student consent page
+ok 6 - SC06 root routing includes student consent page
+  ---
+  duration_ms: 0.277292
+  type: 'test'
+  ...
+# Subtest: SC07 student consent route allowed by role gate
+ok 7 - SC07 student consent route allowed by role gate
+  ---
+  duration_ms: 0.30025
+  type: 'test'
+  ...
+# Subtest: SC08 protected student pages read consent from server
+ok 8 - SC08 protected student pages read consent from server
+  ---
+  duration_ms: 0.181892
+  type: 'test'
+  ...
+# Subtest: SC09 UI has separate acceptance and withdrawal controls
+ok 9 - SC09 UI has separate acceptance and withdrawal controls
+  ---
+  duration_ms: 8.644466
+  type: 'test'
+  ...
+# Subtest: SC10 UI requires explicit acknowledgment
+ok 10 - SC10 UI requires explicit acknowledgment
+  ---
+  duration_ms: 0.535453
+  type: 'test'
+  ...
+# Subtest: SC11 UI never silently enrolls research
+ok 11 - SC11 UI never silently enrolls research
+  ---
+  duration_ms: 0.342551
+  type: 'test'
+  ...
+# Subtest: SC12 Rules include consent owner-only and strict schema
+ok 12 - SC12 Rules include consent owner-only and strict schema
+  ---
+  duration_ms: 0.152075
+  type: 'test'
+  ...
+# Subtest: SC13 Rules gate academic writes, including profile and transcript
+ok 13 - SC13 Rules gate academic writes, including profile and transcript
+  ---
+  duration_ms: 0.295964
+  type: 'test'
+  ...
+# Subtest: SC14 legacy shares closed regardless of consent
+ok 14 - SC14 legacy shares closed regardless of consent
+  ---
+  duration_ms: 0.257462
+  type: 'test'
+  ...
+# Subtest: SC15 UI warns guardian identity is unverified
+ok 15 - SC15 UI warns guardian identity is unverified
+  ---
+  duration_ms: 0.089476
+  type: 'test'
+  ...
+# Subtest: SC16 safe rollout stays off unless explicitly enabled
+ok 16 - SC16 safe rollout stays off unless explicitly enabled
+  ---
+  duration_ms: 0.267669
+  type: 'test'
+  ...
+# Subtest: SC17 assistant cannot mount outside the protected route gate
+ok 17 - SC17 assistant cannot mount outside the protected route gate
+  ---
+  duration_ms: 0.585506
+  type: 'test'
+  ...
+1..17
+# tests 17
+# suites 0
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1274.334363
+COMMAND npm run test:prediction-safety
+
+> cognitive-learn-ai@0.1.0 test:prediction-safety
+> node --test tests/step11-prediction-semantics.test.cjs
+
+TAP version 13
+# Subtest: PRED-01 three heuristic indices have distinct, explicit semantics
+ok 1 - PRED-01 three heuristic indices have distinct, explicit semantics
+  ---
+  duration_ms: 1.967533
+  type: 'test'
+  ...
+# Subtest: PRED-02 no probability or statistically calibrated confidence in engine output
+ok 2 - PRED-02 no probability or statistically calibrated confidence in engine output
+  ---
+  duration_ms: 0.568755
+  type: 'test'
+  ...
+# Subtest: PRED-03 distance index is a bounded transformation of score gap, not an event probability
+ok 3 - PRED-03 distance index is a bounded transformation of score gap, not an event probability
+  ---
+  duration_ms: 0.377334
+  type: 'test'
+  ...
+# Subtest: PRED-04 a higher target cannot improve the gap index with unchanged prediction inputs
+ok 4 - PRED-04 a higher target cannot improve the gap index with unchanged prediction inputs
+  ---
+  duration_ms: 1.179388
+  type: 'test'
+  ...
+# Subtest: PRED-05 already reached target yields 100 index but NEVER 100% success claim
+ok 5 - PRED-05 already reached target yields 100 index but NEVER 100% success claim
+  ---
+  duration_ms: 0.470226
+  type: 'test'
+  ...
+# Subtest: PRED-06 distance index lower bound remains 0
+ok 6 - PRED-06 distance index lower bound remains 0
+  ---
+  duration_ms: 0.3597
+  type: 'test'
+  ...
+# Subtest: PRED-07 stability/completion weighted index is not an uncertainty interval
+ok 7 - PRED-07 stability/completion weighted index is not an uncertainty interval
+  ---
+  duration_ms: 0.598669
+  type: 'test'
+  ...
+# Subtest: SIM-01 Orion scenario propagates named heuristic gap index only
+ok 8 - SIM-01 Orion scenario propagates named heuristic gap index only
+  ---
+  duration_ms: 1.990935
+  type: 'test'
+  ...
+# Subtest: SIM-02 utility uses descriptive cognitive index, not a probability field
+ok 9 - SIM-02 utility uses descriptive cognitive index, not a probability field
+  ---
+  duration_ms: 1.422919
+  type: 'test'
+  ...
+# Subtest: SIM-03 scenario lists maintain comparative sorting under renamed semantics
+ok 10 - SIM-03 scenario lists maintain comparative sorting under renamed semantics
+  ---
+  duration_ms: 1.100748
+  type: 'test'
+  ...
+# Subtest: CONTRACT-01 TypeScript strict compiles prediction + simulation contract together
+ok 11 - CONTRACT-01 TypeScript strict compiles prediction + simulation contract together
+  ---
+  duration_ms: 1588.405516
+  type: 'test'
+  ...
+# Subtest: CONTRACT-02 UI exposes heuristic semantics and calibrated absence
+ok 12 - CONTRACT-02 UI exposes heuristic semantics and calibrated absence
+  ---
+  duration_ms: 1.423597
+  type: 'test'
+  ...
+# Subtest: CONTRACT-03 result types cannot silently reintroduce probability/confidence fields
+ok 13 - CONTRACT-03 result types cannot silently reintroduce probability/confidence fields
+  ---
+  duration_ms: 0.481839
+  type: 'test'
+  ...
+# Subtest: CONTRACT-04 model version is bumped and terms say scenario, not validated ML
+ok 14 - CONTRACT-04 model version is bumped and terms say scenario, not validated ML
+  ---
+  duration_ms: 0.333104
+  type: 'test'
+  ...
+# Subtest: SIM-04 explanations do not equate an assumed cognitive adjustment with observed benefit
+ok 15 - SIM-04 explanations do not equate an assumed cognitive adjustment with observed benefit
+  ---
+  duration_ms: 0.4618
+  type: 'test'
+  ...
+1..15
+# tests 15
+# suites 0
+# pass 15
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3473.588814

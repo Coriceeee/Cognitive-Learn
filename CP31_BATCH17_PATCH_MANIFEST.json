@@ -1,0 +1,94 @@
+{
+  "schema": "cla.cp31.batch17.patch.v1",
+  "date": "2026-11-16",
+  "baseArchive": "CLA_FULL_SOURCE_CP31_BATCH16_DEMO_READY_20261116.zip",
+  "baseArchiveSha256": "7efaed4a6c71ee124b5ad9fc388ab40c557c318e23bc37a6d87ac36ad92e5771",
+  "baseFileCount": 713,
+  "baseRequired": "CP31 Batch 16 FULL SOURCE, exact bytes for replaced files",
+  "scientificScope": "SYNTHETIC_OFFLINE_DEMO_ONLY",
+  "changes": [
+    {
+      "path": "START_HERE_CP31_BATCH17_20261116.md",
+      "action": "add",
+      "baseSha256": null,
+      "sha256": "2039ae5b5d9d7b23ac8a421e85de92328b598a5ed449b55c5bcced843631a2a7"
+    },
+    {
+      "path": "docs/CP31/CLA_REAUDIT_164_CP31_BATCH17_20261116.csv",
+      "action": "add",
+      "baseSha256": null,
+      "sha256": "6fdc5cd12058e038725d747e26ae43e482f3c85a1c53afaa443dc91948f45448"
+    },
+    {
+      "path": "docs/CP31/CLA_TAI_CHAM_CHI_TIET_164_CP31_BATCH17_20261116.xlsx",
+      "action": "add",
+      "baseSha256": null,
+      "sha256": "640c9fd2a989af7e66b7bfeb3a03727ee9a1ce27ce51e21f6b32f6f9db4f1d83"
+    },
+    {
+      "path": "docs/CP31/CP31_BATCH17_DEMO_BACKUP_REPORT_20261116.md",
+      "action": "add",
+      "baseSha256": null,
+      "sha256": "afa2290ecd1992601c0920e109518fb18a2f63d6a0010db61912433a32aea0eb"
+    },
+    {
+      "path": "package.json",
+      "action": "replace",
+      "baseSha256": "d2ac53e248f1fdd0d66b50f132776aa08ef54bc273487e494eab2440cc0b0d3e",
+      "sha256": "80e46234488761a07b54ca84981ef33616b5bf42ca0e6e3edb25c36e54d7c17b"
+    },
+    {
+      "path": "reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html",
+      "action": "add",
+      "baseSha256": null,
+      "sha256": "3e469be1615d734a185ea828a496ebebbcf10eac4117d3a698bc0093c0ba9cd5"
+    },
+    {
+      "path": "reports/demo/cla_batch16_offline_readiness.json",
+      "action": "add",
+      "baseSha256": null,
+      "sha256": "abca38ef130c63c41c4e9bd94b484c89e989fc396337964c0041b97fe4d9bd90"
+    },
+    {
+      "path": "reports/evidence/cla_golden_path_SYNTHETIC.json",
+      "action": "add",
+      "baseSha256": null,
+      "sha256": "944665f6ecdf92ffadd49ba63626c6c2ccbcc24733d3e9f7c4ad82c1c4347ffc"
+    },
+    {
+      "path": "reports/evidence/cla_measurement_SYNTHETIC.json",
+      "action": "add",
+      "baseSha256": null,
+      "sha256": "4451a5f0d58e87d99bbeb51b5b4ca0695681aa52fc1ea399cd4c7109b7c7b2c8"
+    },
+    {
+      "path": "reports/evidence/cla_multicycle_SYNTHETIC.json",
+      "action": "add",
+      "baseSha256": null,
+      "sha256": "02693c450e7ec50c7af97fa4f4965eed22b9d9917d66f97852cfe1bb1f15fd4a"
+    },
+    {
+      "path": "src/lib/nexusEvidenceBaseline.ts",
+      "action": "replace",
+      "baseSha256": "bea4815ec41fd53f37e5e39cede8225b1aaae24d316b51cb2b904b5cb2e4b0be",
+      "sha256": "4fcfc95acba725f821ed55e81fc69c339281ef3fcf4996e82c2ea5d724b2b9b4"
+    },
+    {
+      "path": "tests/cp31-batch17-demo-backup.test.mjs",
+      "action": "add",
+      "baseSha256": null,
+      "sha256": "7572bbb994fa131aa6bb2808974cd346abbfe1c6b7a7991f1115ff4b1cd7452d"
+    },
+    {
+      "path": "tools/cla_demo_backup.mjs",
+      "action": "add",
+      "baseSha256": null,
+      "sha256": "e606db14b781f48b92679adf731d13c7b9be2bff41bc6285c8315429a388c9c1"
+    }
+  ],
+  "requiresWindowsConfirmation": [
+    "npm run build",
+    "npm run test:rules:emulator",
+    "72 browser E2E cases"
+  ]
+}

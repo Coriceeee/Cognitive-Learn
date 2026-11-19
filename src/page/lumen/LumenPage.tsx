@@ -1,3 +1,8 @@
+import LearningIntelligencePanel from "../seed/components/LearningIntelligencePanel";
+import CognitiveScoreGrid from "../seed/components/CognitiveScoreGrid";
+import CognitiveInsightPanel from "../seed/components/CognitiveInsightPanel";
+import { useLearningIntelligence } from "../seed/hooks/useLearningIntelligence";
+import { currentFocusedPath } from "../../lib/focusedModuleRoute";
 import ModuleSectionNav from "../../components/common/ModuleSectionNav";
 import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
@@ -16,19 +21,28 @@ import LumenInsightPanel from "./components/LumenInsightPanel";
 import LumenDecisionPanel from "./components/LumenDecisionPanel";
 import LumenEvidencePanel from "./components/LumenEvidencePanel";
 import LumenResearchEvidence from "./components/LumenResearchEvidence";
+import LumenExternalMlEvidence from "./components/LumenExternalMlEvidence";
+import LumenCognitiveResearchReadiness from "./components/LumenCognitiveResearchReadiness";
 import LumenStrategyPanel from "./components/LumenStrategyPanel";
 import CognitiveGrowthPanel from "../seed/components/CognitiveGrowthPanel";
 import LumenSignalAtlas from "./components/LumenSignalAtlas";
+import LumenAdaptiveRoadmap from "./components/LumenAdaptiveRoadmap";
+import LumenDynamicState from "./components/LumenDynamicState";
 import ClosedLoopPanel from "../../components/journey/ClosedLoopPanel";
 
 
 export default function LumenPage() {
+  const view = currentFocusedPath();
 
   const {
     profile,
     cognitive,
     growthAnalytics,
+    dynamicState,
+    temporalReport,
     loading,
+    syncing,
+    historyLoading,
     hasProfile,
     error,
   } = useStudentProfile();
@@ -43,6 +57,8 @@ export default function LumenPage() {
     );
 
 
+
+  const advanced = useLearningIntelligence(profile, cognitive, growthAnalytics);
 
   if (loading) {
 
@@ -88,6 +104,14 @@ export default function LumenPage() {
 
 
 
+  if (syncing) return (
+    <main className="lumen-page">
+      <section className="lumen-page-loading" role="status" aria-live="polite">
+        Đang chờ Firestore xác minh hồ sơ và dữ liệu nhận thức. Kết quả lưu trong cache không được dùng để phân tích.
+      </section>
+    </main>
+  );
+
   return (
 
     <main className="lumen-page">
@@ -115,8 +139,10 @@ export default function LumenPage() {
 
       <section className="lumen-shell">
         <ModuleSectionNav moduleKey="lumen" />
-        <ClosedLoopPanel mode="lumen" />
-        <LumenResearchEvidence />
+        {view === "/lumen/evidence" && <ClosedLoopPanel mode="lumen" />}
+        {hasProfile && ["/lumen/state", "/lumen/history"].includes(view) && <LumenDynamicState state={dynamicState} temporal={temporalReport} historyLoading={historyLoading} mode={view === "/lumen/state" ? "state" : "history"} />}
+        {view === "/lumen/roadmap" && hasProfile && <LumenAdaptiveRoadmap state={dynamicState} temporal={historyLoading?null:temporalReport} />}
+        {view === "/lumen/evidence" && <details className="cla-focus-disclosure"><summary>Phương pháp đo và bằng chứng nghiên cứu tổng hợp</summary><LumenResearchEvidence /><LumenExternalMlEvidence />{hasProfile && !error && <LumenCognitiveResearchReadiness cognitive={cognitive} />}</details>}
 
         {
           error && !hasProfile ? (
@@ -177,7 +203,8 @@ export default function LumenPage() {
                 </div>
               )}
 
-              <div id="lumen-indices"><LumenOverview
+        {view === "/lumen" && <>
+          <div><LumenOverview
                 fullName={
                   profile.fullName
                 }
@@ -189,16 +216,24 @@ export default function LumenPage() {
                 }
                 overallScore={cognitive.overallScore}
                 scoreAvailable={cognitive.scoreAvailable === true}
-              /></div>
+              /></div></>}
 
 
-              <div id="lumen-growth" className="lumen-growth-section">
+              {view === "/lumen/history" && historyLoading && (
+                <p className="lumen-data-warning" role="status">
+                  Đang đối chiếu lịch sử Cognitive từ Firestore. Chưa kết luận xu hướng cho đến khi nhận được dữ liệu máy chủ.
+                </p>
+              )}
+        {view === "/lumen/history" && <>
+          <div id="lumen-growth" className="lumen-growth-section">
                 <CognitiveGrowthPanel analytics={growthAnalytics} />
-              </div>
+              </div></>}
 
-              <LumenSignalAtlas cognitive={cognitive} growth={growthAnalytics} />
+              {view === "/lumen/indices" && <div id="lumen-indices"><LumenSignalAtlas cognitive={cognitive} growth={growthAnalytics} mode="indices" /><details className="cla-focus-disclosure"><summary>Chi tiết các chỉ số</summary><CognitiveScoreGrid cognitive={cognitive} /></details></div>}
+              {view === "/lumen/history" && <LumenSignalAtlas cognitive={cognitive} growth={growthAnalytics} mode="history" />}
 
-              <div id="lumen-insights">{cognitive.scoreAvailable === true ? (
+        {view === "/lumen/insights" && <>
+          <div id="lumen-insights">{cognitive.scoreAvailable === true ? (
                 <LumenInsightPanel
                   insights={intelligence.insights}
                   aiInsights={intelligence.ai.reasoning.insights}
@@ -217,18 +252,20 @@ export default function LumenPage() {
               )}
 
 
-              </div>
+              </div></>}
 
-              <LumenEvidencePanel
+              {view === "/lumen/insights" && <details className="cla-focus-disclosure"><summary>Nhận xét chi tiết theo từng chỉ số</summary><CognitiveInsightPanel cognitive={cognitive} hasProfile={hasProfile} onCreateProfile={() => {window.location.href="/student/profile";}} /></details>}
+              {view === "/lumen/evidence" && <LumenEvidencePanel
                 hasHistory={intelligence.growthEvidence.status === "OBSERVED"}
                 growthEvidence={intelligence.growthEvidence}
                 aiExplanation={cognitive.scoreAvailable === true
                   ? intelligence.ai.explanation
                   : undefined}
-              />
+              />}
 
 
-              {cognitive.scoreAvailable === true && (
+              {view === "/lumen/assistant" && cognitive.scoreAvailable !== true && <p className="cla-transcript-hint">Chưa đủ dữ liệu để giải thích bằng AI. <a href="/student/profile">Bổ sung hồ sơ</a>.</p>}
+              {view === "/lumen/assistant" && cognitive.scoreAvailable === true && (
                 <section id="lumen-gemini" className="lumen-gemini-panel" aria-labelledby="lumen-gemini-title">
                   <div className="lumen-gemini-heading">
                     <div>
@@ -279,7 +316,7 @@ export default function LumenPage() {
                       <div className="lumen-gemini-answer">
                         <div className="lumen-gemini-answer-header">
                           <strong>Giải thích hỗ trợ từ Gemini</strong>
-                          <span>Không thay thế đánh giá của giáo viên</span>
+                          <span>Không thay thế đánh giá chuyên môn</span>
                         </div>
                         <p>{intelligence.gemini.explanation.summary}</p>
                         <h3>Căn cứ giải thích</h3>
@@ -318,10 +355,11 @@ export default function LumenPage() {
                 </section>
               )}
 
-              {cognitive.scoreAvailable === true && (
+              {view === "/lumen/advanced" && (cognitive.scoreAvailable === true ? <LearningIntelligencePanel intelligence={advanced} /> : <p className="cla-transcript-hint">Chưa đủ dữ liệu Cognitive hợp lệ. <a href="/student/profile">Bổ sung hồ sơ</a>.</p>)}
+              {view === "/lumen/insights" && cognitive.scoreAvailable === true && (
                 <>
                   <LumenDecisionPanel intelligence={intelligence} />
-                  <LumenStrategyPanel strategy={intelligence.strategy} />
+                  <details className="cla-focus-disclosure"><summary>Chiến lược học tập tham khảo</summary><LumenStrategyPanel strategy={intelligence.strategy} /></details>
                 </>
               )}
 

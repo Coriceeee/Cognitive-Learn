@@ -1,0 +1,58 @@
+
+> cognitive-learn-ai@0.1.0 test:cp40:student-only
+> node --experimental-strip-types --test tests/cp40-student-only.test.mjs
+
+TAP version 13
+# (node:33034) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: Student-only account roles are fail closed
+ok 1 - Student-only account roles are fail closed
+  ---
+  duration_ms: 5.28356
+  type: 'test'
+  ...
+# Subtest: Retired workspace components removed, student dashboard not linked to them
+ok 2 - Retired workspace components removed, student dashboard not linked to them
+  ---
+  duration_ms: 2.709413
+  type: 'test'
+  ...
+# Subtest: Registration and Google profile create only Student
+ok 3 - Registration and Google profile create only Student
+  ---
+  duration_ms: 0.588224
+  type: 'test'
+  ...
+# Subtest: API role restrictions match Student-only client
+ok 4 - API role restrictions match Student-only client
+  ---
+  duration_ms: 0.515567
+  type: 'test'
+  ...
+# Subtest: Pulse and Haven display personal summaries only
+ok 5 - Pulse and Haven display personal summaries only
+  ---
+  duration_ms: 3.012551
+  type: 'test'
+  ...
+# Subtest: candidate closes legacy share access and writes, owner cleanup remains
+ok 6 - candidate closes legacy share access and writes, owner cleanup remains
+  ---
+  duration_ms: 2.004581
+  type: 'test'
+  ...
+# Subtest: Student-only scope keeps pedagogy and guardian privacy safeguards
+ok 7 - Student-only scope keeps pedagogy and guardian privacy safeguards
+  ---
+  duration_ms: 1.276729
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 252.589536

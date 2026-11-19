@@ -2,7 +2,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useStudentTranscript } from "../../seed/hooks/useStudentTranscript";
 import { chooseSeedAtlasScoreSnapshot, toSeedAtlasScoreSnapshot, SEED_ATLAS_SUBJECT_CODES, type SeedAtlasScoreSnapshot } from "../../../lib/seedAtlasScoreAdapter";
 import { EXAM_ELECTIVES_2026, EXAM_POLICY_2026, optimizeExamChoices2026, type ExamElective2026 } from "../../../lib/examChoiceEngine";
-import { matchPtitPublishedPathways2026 } from "../../../lib/ptitAdmissionPathways2026";
+import { buildNationalPathwayCatalogue, matchNationalPathways2026 } from "../../../lib/nationalAdmissionPathways2026";
+import AtlasNationalPathways from "./AtlasNationalPathways";
 
 import { runAdmissionEngine } from "../../../lib/admissionEngine";
 import { ADMISSION_POLICY_2026 } from "../../../lib/aspirationPlanner";
@@ -310,19 +311,16 @@ export default function AtlasAdmissionEnginePanel({
     confirmedGrade12Subjects, subjectScores: scoreMap, targetMajor, verifiedPrograms: sourceVerifiedPrograms,
   }), [confirmedGrade12Subjects, scoreMap, targetMajor, sourceVerifiedPrograms]);
 
-  // 2026 PTIT BVH is a separately source-backed, BOUNDED program sample.
-  // These matches never enter a cutoff/risk calculation or silently become
-  // a nationwide ranking. Includes X06/X26 from PTIT's published scheme.
-  const publishedPtitByPair = useMemo(() => new Map(examChoiceReport.options.map(option => [
-    option.id,
-    matchPtitPublishedPathways2026({
-      selectedElectives: option.electives,
-      scores: scoreMap,
-      targetMajor,
-    }),
-  ] as const)), [examChoiceReport, scoreMap, targetMajor]);
-  const selectedPtitPublished = selectedExamPairId
-    ? publishedPtitByPair.get(selectedExamPairId) : undefined;
+  const nationalCatalogue = useMemo(() => buildNationalPathwayCatalogue(programs,sources,universityMap), [programs,sources,universityMap]);
+  const nationalByPair = useMemo(() => new Map(examChoiceReport.options.map(option => [option.id,
+    matchNationalPathways2026(nationalCatalogue,option.electives,scoreMap,targetMajor),
+  ] as const)),[examChoiceReport,nationalCatalogue,scoreMap,targetMajor]);
+  const nationalOptions = useMemo(() => [...examChoiceReport.options].sort((a,b) => {
+    const x=nationalByPair.get(a.id),y=nationalByPair.get(b.id);
+    return (y?.targetMatches??0)-(x?.targetMatches??0)||(y?.matches.length??0)-(x?.matches.length??0);
+  }),[examChoiceReport,nationalByPair]);
+  const noPairNational = useMemo(()=>matchNationalPathways2026(nationalCatalogue,[],scoreMap,targetMajor),[nationalCatalogue,scoreMap,targetMajor]);
+  const selectedNational = nationalByPair.get(selectedExamPairId)??noPairNational;
 
   // Curriculum subjects from Seed are only suggestions to review. The learner
   // must click the explicit confirmation control; grades are not evidence of
@@ -699,12 +697,12 @@ export default function AtlasAdmissionEnginePanel({
           <small>Hồ sơ Seed không ghi rõ việc học từng môn trong từng năm. Chỉ dùng nút xác nhận nếu danh sách khớp đúng môn đã học lớp 12. Quy định Ngoại ngữ khác môn đã học có ngoại lệ; phiên bản này chưa đánh giá các ngoại ngữ ngoài tiếng Anh. Hai định hướng Công nghệ cần được xác nhận riêng, không sử dụng điểm Công nghệ chung để quy đổi.</small>
         </div>
         <div className="atlas-exam-choice-results">
-          <div className="atlas-exam-choice-title"><b>Bước 2 · Khám phá hai môn thi tự chọn</b><span>Ưu tiên: chương trình có nguồn duyệt → độ phủ 9 tổ hợp → điểm quan sát</span></div>
+          <div className="atlas-exam-choice-title"><b>Bước 2 · Khám phá hai môn thi tự chọn</b><span>Ưu tiên: ngành mục tiêu có tổ hợp nguồn → số mã khớp trong toàn kho → tiêu chí tham khảo</span></div>
           {examChoiceReport.status === "NEED_COURSE_CONFIRMATION" ? (
             <p className="atlas-exam-choice-empty" role="status">Chọn ít nhất hai môn bạn đã học ở lớp 12 để xem các cặp môn thi khả dụng.</p>
           ) : (
             <div className="atlas-exam-choice-cards">
-              {(showAllExamOptions ? examChoiceReport.options : examChoiceReport.options.slice(0, 8)).map((option, index) => <button
+              {(showAllExamOptions ? nationalOptions : nationalOptions.slice(0, 8)).map((option, index) => <button
                 className={`atlas-exam-choice-card ${selectedExamPairId === option.id ? "is-picked" : ""}`}
                 key={option.id} type="button" onClick={() => setSelectedExamPairId(option.id)}
                 aria-pressed={selectedExamPairId === option.id}>
@@ -717,10 +715,7 @@ export default function AtlasAdmissionEnginePanel({
                   <small>{option.electiveScoreSum !== null
                     ? `Tổng hai môn tự chọn theo điểm đang nhập: ${option.electiveScoreSum.toFixed(2)}/20`
                     : "Chưa đủ hai điểm quan sát cùng nguồn"}</small>
-                  <small>{option.sourceVerifiedMatches.length ? `${option.sourceVerifiedMatches.length} chương trình trong kho Atlas có nguồn duyệt` : "Kho Atlas cá nhân chưa có chương trình nguồn duyệt"}</small>
-                  <small className="atlas-ptit-count">{publishedPtitByPair.get(option.id)?.matches.length
-                    ? `PTIT BVH 2026: ${publishedPtitByPair.get(option.id)?.matches.length} chương trình khớp tổ hợp đã công bố`
-                    : "PTIT BVH 2026: chưa có chương trình khớp trong tập nguồn"}</small>
+                  <small className="atlas-national-count">{nationalByPair.get(option.id)?.matches.length??0} chương trình khớp tổ hợp · {nationalByPair.get(option.id)?.schools.filter(s=>s.matched>0).length??0} trường trong toàn kho</small>
                 </button>)}
             </div>
           )}
@@ -732,45 +727,17 @@ export default function AtlasAdmissionEnginePanel({
             if (!chosen) return null;
             return <div className="atlas-exam-choice-selected" role="status">
               <b>Phương án đang xem: {chosen.labels.join(" + ")}</b>
-              <p>Hai môn bắt buộc vẫn là Toán và Ngữ văn. Các tổ hợp từ danh mục tham khảo: {chosen.exploratoryCombinations.join(", ") || "chưa có"}.</p>
+              <p>Hai môn bắt buộc vẫn là Toán và Ngữ văn. Các tổ hợp từ danh mục 9 mã tham khảo: {chosen.exploratoryCombinations.join(", ") || "chưa có"}.</p>
               {chosen.completedCombinations.length > 0 && <p>Tổng điểm đủ ba môn theo nguồn hiện tại: {chosen.completedCombinations.map(item => `${item.code} ${item.score.toFixed(2)}/30`).join(" · ")}.</p>}
               {chosen.limitations.map(note => <p key={note}>{note}</p>)}
               <p>Đây là lựa chọn đang khám phá, không phải đăng ký môn thi hay nguyện vọng chính thức.</p>
             </div>;
           })()}
         </div>
-        {selectedPtitPublished && <section className="atlas-official-pathways" aria-label="Đối chiếu chương trình PTIT 2026 theo môn thi">
-          <div className="atlas-official-pathways-head">
-            <div>
-              <span>ATLAS · OFFICIAL PATHWAY MATCH</span>
-              <h4>Từ hai môn thi đến chương trình có nguồn</h4>
-              <p>Đối chiếu thí điểm <b>PTIT · cơ sở Hà Nội BVH · tuyển sinh 2026 · phương thức THPT</b>. Đây là 10 chương trình trong tập dữ liệu đã đối chiếu, <b>không phải toàn bộ trường/ngành Việt Nam</b>.</p>
-            </div>
-            <div className="atlas-official-pathways-stats"><strong>{selectedPtitPublished.matches.length}</strong><small>chương trình khớp cặp môn</small></div>
-          </div>
-          <div className="atlas-official-pathways-tags">
-            {selectedPtitPublished.supportedCombinations.length > 0
-              ? selectedPtitPublished.supportedCombinations.map(code => <span key={code}>{code} · Đề án PTIT 2026</span>)
-              : <span>Không có tổ hợp trùng trong tập PTIT BVH đang đối chiếu</span>}
-          </div>
-          {selectedPtitPublished.matches.length ? <div className="atlas-official-pathways-list">
-            {selectedPtitPublished.matches.map(match => <article className={`atlas-official-pathway-card ${match.matchesTarget ? "is-target" : ""}`} key={match.programId}>
-              <div className="atlas-official-pathway-main">
-                <small>{match.matchesTarget ? "Khớp từ khóa ngành mục tiêu · " : "Chương trình trong tập nguồn · "}Mã ngành {match.majorCode} · {match.campus}</small>
-                <strong>{match.majorName}</strong>
-                <p>{match.combinations.map(combo => `${combo.code}: ${combo.observedScore === null ? "chưa đủ điểm quan sát" : `${combo.observedScore.toFixed(2)}/30 (điểm ${scoreBasis === "school" ? "học bạ" : scoreBasis === "practice" ? "thi thử/tự đánh giá" : "THPT tự khai báo"})`}`).join(" · ")}</p>
-              </div>
-              <a href={match.officialSource} target="_blank" rel="noopener noreferrer">Xem đề án PTIT 2026 ↗</a>
-            </article>)}
-          </div> : <p className="atlas-official-pathways-empty">Không tìm thấy tổ hợp phù hợp trong <b>tập PTIT BVH được đối chiếu</b>. Điều này không có nghĩa các trường khác không nhận tổ hợp này.</p>}
-          {targetMajor.trim() && selectedPtitPublished.matches.length > 0 && selectedPtitPublished.targetMatches === 0 &&
-            <p className="atlas-official-pathways-empty">Chưa có chương trình khớp tên ngành mục tiêu bạn nhập trong tập PTIT này. Các chương trình khác được giữ để bạn tham khảo, không tự coi là phù hợp ngành.</p>}
-          <p className="atlas-official-pathways-disclaimer"><b>Giới hạn bằng chứng:</b> đối chiếu tổ hợp do trường công bố, không xác nhận hồ sơ đã đủ điều kiện, không đối chiếu điểm chuẩn, không dự báo trúng tuyển. Điểm học bạ/thi thử chỉ là tổng tham khảo; điểm THPT nếu có vẫn do người dùng tự khai báo. Nguồn được kiểm tra trong CLA ngày 08/11/2026. Không dùng danh mục này để kết luận trúng tuyển hay tự sắp xếp nguyện vọng.</p>
-          <a className="atlas-official-pathways-source" href="https://tuyensinh.ptit.edu.vn/de-an-tuyen-sinh/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026/" target="_blank" rel="noopener noreferrer">Mở văn bản tuyển sinh gốc của PTIT (2026) ↗</a>
-        </section>}
-        <AtlasAspirationDraftEditor matches={selectedPtitPublished?.matches ?? []} />
+        <AtlasNationalPathways report={selectedNational} scoreBasis={scoreBasis} />
+        <AtlasAspirationDraftEditor entries={selectedNational.entries} />
         <p className="atlas-exam-choice-source"><b>Nguồn chính sách:</b> <a href={EXAM_POLICY_2026.policySource} target="_blank" rel="noreferrer">{EXAM_POLICY_2026.reference}</a>. Tổ hợp được hiển thị là danh mục mẫu của CLA; tổ hợp trường chấp nhận phải kiểm tra đề án tuyển sinh từng năm.</p>
-        {examChoiceReport.warnings.filter(message => !message.startsWith("Điểm học bạ/")).map(warning => <p className="atlas-exam-choice-warning" key={warning}>{warning}</p>)}
+        {examChoiceReport.warnings.filter(message => !message.startsWith("Điểm học bạ/") && !message.startsWith("Chưa có chương trình đã được duyệt nguồn khớp ngành mục tiêu")).map(warning => <p className="atlas-exam-choice-warning" key={warning}>{warning}</p>)}
       </section>
 
       {!engineResult ? (

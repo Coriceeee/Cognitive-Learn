@@ -47,12 +47,12 @@ export default function HavenPressureTopology({ values, result }: Props) {
             <defs>
               <linearGradient id="havenPressureArea" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="#35a8dc" stopOpacity=".25" />
-                <stop offset="100%" stopColor="#3476d8" stopOpacity=".035" />
+                <stop offset="100%" stopColor="rgb(var(--tc-fl-3476d8))" stopOpacity=".035" />
               </linearGradient>
               <linearGradient id="havenPressureLine" x1="0" y1="0" x2="1" y2="0">
                 <stop offset="0%" stopColor="#25a7c7" />
-                <stop offset="55%" stopColor="#3477df" />
-                <stop offset="100%" stopColor="#7259c8" />
+                <stop offset="55%" stopColor="rgb(var(--tc-fl-3477df))" />
+                <stop offset="100%" stopColor="rgb(var(--tc-fl-7259c8))" />
               </linearGradient>
             </defs>
             <rect x="56" y={y(100)} width="664" height={y(75) - y(100)} rx="9" className="haven-pressure-zone is-high" />

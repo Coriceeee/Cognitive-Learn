@@ -1,0 +1,27 @@
+{
+  "schema": "cla.golden-path.synthetic-fixture.v1",
+  "dataScope": "SYNTHETIC_ONLY",
+  "researchConsent": "NOT_APPLICABLE_SYNTHETIC",
+  "cycle": {
+    "id": "synthetic_cycle_0002",
+    "scenarioId": "balanced",
+    "scenarioTitle": "Cân bằng (dữ liệu tổng hợp)",
+    "targetMajor": "",
+    "subjects": [
+      { "key": "math", "label": "Toán (giả lập)", "baseline": 0, "target": 5 },
+      { "key": "english", "label": "Anh (giả lập)", "baseline": 8, "target": 9 }
+    ],
+    "plannedWeeklyHours": 10,
+    "weeksLeft": 4,
+    "startedAt": "2026-10-18T08:00:00.000Z"
+  },
+  "checkIns": [
+    { "id": "synthetic_check_003", "week": 1, "actualHours": 3, "completedActions": 2, "plannedActions": 4, "note": "", "recordedAt": "2026-10-19T08:00:00.000Z" },
+    { "id": "synthetic_check_004", "week": 2, "actualHours": 6, "completedActions": 4, "plannedActions": 4, "note": "", "recordedAt": "2026-10-26T08:00:00.000Z" }
+  ],
+  "reassessment": {
+    "observations": [{ "key": "math", "score": 2 }, { "key": "english", "score": 8 }],
+    "note": "",
+    "recordedAt": "2026-11-02T08:00:00.000Z"
+  }
+}

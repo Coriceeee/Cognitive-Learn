@@ -1,0 +1,6 @@
+
+> cognitive-learn-ai@0.1.0 check:layout
+> node tools/check-cla-layout.cjs
+
+CLA LAYOUT PASS: 22 required files and 19 legacy misplacements absent
+

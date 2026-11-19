@@ -1,0 +1,4 @@
+# CP40 Chart-first + Student-only
+Baseline: CP39 Chart-first 18/11/2026. Giữ nguyên sáu workspace học sinh và Nexus quản trị. Tích hợp CP40 Pareto đúng và phân bổ thời lượng theo môn cùng thay đổi scope Student-only. Ba màn chia sẻ/vai trò cũ bị loại khỏi src. Dùng FULL SOURCE ở thư mục mới hoặc áp dụng diff có danh sách file xóa; không overlay ZIP lên workspace cũ rồi coi là đã xóa. Giữ `.env.local` riêng (không gửi khóa).
+
+Chạy: `npm ci`, `npm test`, `npm run test:cp40:allocation`, `npm run test:rules:static`, `npm run check:layout`, `npm run demo:final`, `npm run build`. Emulator chạy trên project demo biệt lập với `npm run test:rules:emulator` (cần Firebase CLI và Java); E2E trên staging riêng. Không deploy Rules candidate nếu chưa nghiệm thu. Các tài khoản QA role cũ chỉ dùng kiểm thử deny. Tài khoản thật chưa bị thay đổi, không xóa hồ sơ, không tự chuyển role.

@@ -174,7 +174,7 @@ export default function GioiThieuPage() {
             <p>
               Dữ liệu học sinh được chuyển thành phân tích nhận thức, dự báo
               điểm, mô phỏng kịch bản, gợi ý ngành/trường và báo cáo tổng hợp
-              cho học sinh, giáo viên, phụ huynh.
+              dành riêng cho học sinh.
             </p>
           </div>
 

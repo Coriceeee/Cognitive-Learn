@@ -1,6 +1,9 @@
 import type { VercelRequest, VercelResponse } from "./vercelTypes";
 import { ADVISOR_PAGE_CONTEXTS, normaliseAdvisorHistory, prepareAdvisorMessage, routeAdvisorQuestion, safeAdvisorPageContext } from "../src/lib/advisorChatPolicy";
 
+import { answerClaKnowledge } from "../src/lib/claKnowledgeRetrieval";
+import { answerVerifiedCutoff } from "../src/lib/atlasDecisionComparison";
+
 type Plain = Record<string, unknown>;
 const asRecord = (x: unknown): Plain | null => x && typeof x === "object" && !Array.isArray(x) ? x as Plain : null;
 const limiter = new Map<string, { count: number; start: number; last: number }>();
@@ -58,7 +61,7 @@ async function authenticatedRole(token: string, firebaseKey: string, projectId: 
   const fields = asRecord(asRecord(doc.payload)?.fields);
   const active = asRecord(fields?.active)?.booleanValue;
   const role = asRecord(fields?.role)?.stringValue;
-  if (active !== true || !["student", "teacher", "parent", "admin"].includes(String(role))) throw new ApiFault(403, "Tài khoản chưa được kích hoạt hoặc không có vai trò hợp lệ.");
+  if (active !== true || !["student", "admin"].includes(String(role))) throw new ApiFault(403, "Tài khoản chưa được kích hoạt hoặc không có vai trò hợp lệ.");
   return uid;
 }
 
@@ -95,6 +98,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const uid = await authenticatedRole(bearer[1], firebaseKey, project);
     limit(uid);
     // Deterministic navigation works even if Gemini is unavailable, after auth checks.
+    const verified = answerVerifiedCutoff(question);
+    if (verified) return res.status(200).json({ ok: true, answer: verified.answer, source: verified.source, destination: "/atlas/vietnam", linkLabel: "Xem Atlas" });
+    const knowledge = answerClaKnowledge(question);
+    if (knowledge) return res.status(200).json({ ok: true, ...knowledge });
     const redirect = routeAdvisorQuestion(question);
     if (redirect) return res.status(200).json({ ok: true, answer: redirect.answer, destination: redirect.destination, linkLabel: redirect.label });
     if (!key) throw new ApiFault(503, "Server chưa cấu hình Gemini.");

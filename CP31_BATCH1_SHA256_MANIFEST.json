@@ -1,0 +1,77 @@
+{
+  "release": "CLA_CP31_BATCH1_NEXUS_AUDIT_20261115",
+  "base": "CP30_BATCH4_LEGACY_OFFLINE_20261115",
+  "changed_count_without_manifest": 13,
+  "changed_files": [
+    {
+      "file": "CP31_BATCH1_SHA256_MANIFEST.json",
+      "sha256": "f81100568cfc1640938a3b3ec1fba227ba11493e90a89c8461ed1eeb7205c9a5",
+      "type": "new"
+    },
+    {
+      "file": "START_HERE_CP31_BATCH1_20261115.md",
+      "sha256": "67131245bfdc907924d57f00f99d67b766c620d57282c1f5990494fd625b53aa",
+      "type": "new"
+    },
+    {
+      "file": "docs/CP31/CP31_BATCH1_NEXUS_22_ACTIONS_REPORT_20261115.md",
+      "sha256": "0b978576180635ba729a1946fb952cab0c1656cb56463e98314aace2a927f972",
+      "type": "new"
+    },
+    {
+      "file": "package.json",
+      "sha256": "1837d2b895b4901291abdb7691b06d2f62f2255a1e6401cc8651ab11d995edb1",
+      "type": "updated"
+    },
+    {
+      "file": "src/App.tsx",
+      "sha256": "a4084835a4ff2500ae6c5f91b3a9b0c16952d19d9d5e6e0042a076914f15f200",
+      "type": "updated"
+    },
+    {
+      "file": "src/lib/nexusAuditPolicy.ts",
+      "sha256": "012b766872e2d14da8fc654686c5f1f012ef24c6a2d43855998f2c193247f4c7",
+      "type": "new"
+    },
+    {
+      "file": "src/page/nexus/AdminAuditPage.tsx",
+      "sha256": "2bfc729fff198fa2fb3c455ba0f646e446118b0b14c49922d378ec047260ed46",
+      "type": "new"
+    },
+    {
+      "file": "src/page/nexus/AdminDiagnosticsPage.tsx",
+      "sha256": "369fc8979788db26f2081a08d4f6a25a6aafc6d8666c602ae03f0536d5f4e6ed",
+      "type": "updated"
+    },
+    {
+      "file": "src/page/nexus/AdminPage.tsx",
+      "sha256": "6fed357a59aabc5e6363569bea22f1c181d59251502d13dd47d31cb36a5c8885",
+      "type": "updated"
+    },
+    {
+      "file": "src/styles.css",
+      "sha256": "7bcd5e534a11889d1c30f849f60957bc4116b1aab0218927113997483d8adc47",
+      "type": "updated"
+    },
+    {
+      "file": "src/styles/32-nexus-audit.css",
+      "sha256": "c2dab2722b4b370e6d81601b649d4e38d864ba02467ed9edb5d953be1301d560",
+      "type": "new"
+    },
+    {
+      "file": "tests/cp31-nexus-review.test.mjs",
+      "sha256": "c9a4dcd1990fed1fcea0794d4276ad0e7a7ecf6a320cc68c10384840d23b24c9",
+      "type": "new"
+    },
+    {
+      "file": "vercel.json",
+      "sha256": "06314a8e3f436f418293bb6bd2009c64fd6767c4a10eb2d76112160d7fd30a61",
+      "type": "updated"
+    }
+  ],
+  "deleted_files": [],
+  "reviewer_pass_newly_claimed": 0,
+  "live_diagnostic_pages": 10,
+  "unimplemented_nexus_tools": 12,
+  "test_scope": "Unit/contract only; emulator and browser E2E not yet rerun"
+}

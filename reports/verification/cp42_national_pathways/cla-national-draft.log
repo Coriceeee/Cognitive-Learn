@@ -1,0 +1,196 @@
+TAP version 13
+# Subtest: 16.01 manual choice requires university, major and code
+ok 1 - 16.01 manual choice requires university, major and code
+  ---
+  duration_ms: 5.458385
+  type: 'test'
+  ...
+# Subtest: 16.02 retains user entered data provenance and no source URL
+ok 2 - 16.02 retains user entered data provenance and no source URL
+  ---
+  duration_ms: 1.567015
+  type: 'test'
+  ...
+# Subtest: 16.03 trusted PTIT sample contains official source and 2026 only
+ok 3 - 16.03 trusted PTIT sample contains official source and 2026 only
+  ---
+  duration_ms: 2.477131
+  type: 'test'
+  ...
+# Subtest: 16.04 rejects stale year and invalid campus even with PTIT host
+ok 4 - 16.04 rejects stale year and invalid campus even with PTIT host
+  ---
+  duration_ms: 0.325557
+  type: 'test'
+  ...
+# Subtest: 16.05 rejects foreign and http source
+ok 5 - 16.05 rejects foreign and http source
+  ---
+  duration_ms: 0.269527
+  type: 'test'
+  ...
+# Subtest: 16.06 rejects source bearing credentials or wrong path
+ok 6 - 16.06 rejects source bearing credentials or wrong path
+  ---
+  duration_ms: 0.198888
+  type: 'test'
+  ...
+# Subtest: 16.07 rejects mismatch between PTIT id and major code
+ok 7 - 16.07 rejects mismatch between PTIT id and major code
+  ---
+  duration_ms: 0.273526
+  type: 'test'
+  ...
+# Subtest: 16.08 add appends and NEVER sorts by marks or risk levels
+ok 8 - 16.08 add appends and NEVER sorts by marks or risk levels
+  ---
+  duration_ms: 0.405607
+  type: 'test'
+  ...
+# Subtest: 16.09 duplicate id is rejected
+ok 9 - 16.09 duplicate id is rejected
+  ---
+  duration_ms: 1.319838
+  type: 'test'
+  ...
+# Subtest: 16.10 duplicate school + major code rejected even if ID varies
+ok 10 - 16.10 duplicate school + major code rejected even if ID varies
+  ---
+  duration_ms: 0.790751
+  type: 'test'
+  ...
+# Subtest: 16.11 maximum 15 preferences, 16th rejected without mutation
+ok 11 - 16.11 maximum 15 preferences, 16th rejected without mutation
+  ---
+  duration_ms: 0.659517
+  type: 'test'
+  ...
+# Subtest: 16.12 moving up/down preserves contents and only changes one step
+ok 12 - 16.12 moving up/down preserves contents and only changes one step
+  ---
+  duration_ms: 0.495584
+  type: 'test'
+  ...
+# Subtest: 16.13 boundary and unknown move are no-op
+ok 13 - 16.13 boundary and unknown move are no-op
+  ---
+  duration_ms: 0.461246
+  type: 'test'
+  ...
+# Subtest: 16.14 removal preserves preference ordering
+ok 14 - 16.14 removal preserves preference ordering
+  ---
+  duration_ms: 0.627816
+  type: 'test'
+  ...
+# Subtest: 16.15 teacher NV6 warns, does not move or remove it
+ok 15 - 16.15 teacher NV6 warns, does not move or remove it
+  ---
+  duration_ms: 0.691357
+  type: 'test'
+  ...
+# Subtest: 16.16 teacher NV5 allowed at boundary
+ok 16 - 16.16 teacher NV5 allowed at boundary
+  ---
+  duration_ms: 0.30295
+  type: 'test'
+  ...
+# Subtest: 16.17 teacher-training code and name recognized conservatively
+ok 17 - 16.17 teacher-training code and name recognized conservatively
+  ---
+  duration_ms: 0.116051
+  type: 'test'
+  ...
+# Subtest: 16.18 self-entered schools always show verification caution
+ok 18 - 16.18 self-entered schools always show verification caution
+  ---
+  duration_ms: 0.2861
+  type: 'test'
+  ...
+# Subtest: 16.19 empty draft is explicitly a draft
+ok 19 - 16.19 empty draft is explicitly a draft
+  ---
+  duration_ms: 0.10242
+  type: 'test'
+  ...
+# Subtest: 16.20 export contains no personal scores, UID, or official-submission claim
+ok 20 - 16.20 export contains no personal scores, UID, or official-submission claim
+  ---
+  duration_ms: 1.150809
+  type: 'test'
+  ...
+# Subtest: 16.21 exported orders match reordered user list
+ok 21 - 16.21 exported orders match reordered user list
+  ---
+  duration_ms: 0.206098
+  type: 'test'
+  ...
+# Subtest: 16.22 UI is available without official THPT scores and no auto-selection
+ok 22 - 16.22 UI is available without official THPT scores and no auto-selection
+  ---
+  duration_ms: 1.821998
+  type: 'test'
+  ...
+# Subtest: 16.23 UI displays warnings rather than reordering teacher program
+ok 23 - 16.23 UI displays warnings rather than reordering teacher program
+  ---
+  duration_ms: 0.454847
+  type: 'test'
+  ...
+# Subtest: 16.24 workspace linked to 2026 policy, no direct save to Firebase
+ok 24 - 16.24 workspace linked to 2026 policy, no direct save to Firebase
+  ---
+  duration_ms: 0.328894
+  type: 'test'
+  ...
+# Subtest: 16.25 Vercel serves all explicit React route paths including consent/companion, preserving API functions
+ok 25 - 16.25 Vercel serves all explicit React route paths including consent/companion, preserving API functions
+  ---
+  duration_ms: 0.596881
+  type: 'test'
+  ...
+# Subtest: 16.26 CSS asset and test command present
+ok 26 - 16.26 CSS asset and test command present
+  ---
+  duration_ms: 1.999479
+  type: 'test'
+  ...
+# Subtest: 16.27 import/export preserves ordering but downgrades claims to unverified
+ok 27 - 16.27 import/export preserves ordering but downgrades claims to unverified
+  ---
+  duration_ms: 0.831399
+  type: 'test'
+  ...
+# Subtest: 16.28 import rejects wrong schema, old year, or excessive entries
+ok 28 - 16.28 import rejects wrong schema, old year, or excessive entries
+  ---
+  duration_ms: 0.287926
+  type: 'test'
+  ...
+# Subtest: 16.29 invalid or repeated file entries are rejected atomically
+ok 29 - 16.29 invalid or repeated file entries are rejected atomically
+  ---
+  duration_ms: 0.317897
+  type: 'test'
+  ...
+# Subtest: 16.30 import UI explicitly warns that source claims are not trusted
+ok 30 - 16.30 import UI explicitly warns that source claims are not trusted
+  ---
+  duration_ms: 0.728222
+  type: 'test'
+  ...
+# Subtest: 16.31 national draft uses source registry identity across schools and rejects missing/stale/insecure entries
+ok 31 - 16.31 national draft uses source registry identity across schools and rejects missing/stale/insecure entries
+  ---
+  duration_ms: 2.471853
+  type: 'test'
+  ...
+1..31
+# tests 31
+# suites 0
+# pass 31
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1190.584275

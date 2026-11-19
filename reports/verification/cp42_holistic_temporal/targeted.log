@@ -1,0 +1,90 @@
+TAP version 13
+# (node:17838) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: Theil–Sen exact linear slope, robust to a single central spike
+ok 1 - Theil–Sen exact linear slope, robust to a single central spike
+  ---
+  duration_ms: 3.813608
+  type: 'test'
+  ...
+# Subtest: elapsed time, not row number, defines the slope
+ok 2 - elapsed time, not row number, defines the slope
+  ---
+  duration_ms: 0.345661
+  type: 'test'
+  ...
+# Subtest: change candidate requires two sufficiently supported segments
+ok 3 - change candidate requires two sufficiently supported segments
+  ---
+  duration_ms: 1.131285
+  type: 'test'
+  ...
+# Subtest: latest observation excluded from baseline, minimum MAD threshold
+ok 4 - latest observation excluded from baseline, minimum MAD threshold
+  ---
+  duration_ms: 0.250197
+  type: 'test'
+  ...
+# Subtest: invalid rows do not produce temporal results
+ok 5 - invalid rows do not produce temporal results
+  ---
+  duration_ms: 0.270968
+  type: 'test'
+  ...
+# Subtest: zero is valid, constant series no fabricated change
+ok 6 - zero is valid, constant series no fabricated change
+  ---
+  duration_ms: 0.128995
+  type: 'test'
+  ...
+# Subtest: roadmap tasks bound to selected time horizon, no forced options
+ok 7 - roadmap tasks bound to selected time horizon, no forced options
+  ---
+  duration_ms: 0.795489
+  type: 'test'
+  ...
+# Subtest: review reacts to selected priorities and behavioral signal without triggering writes
+ok 8 - review reacts to selected priorities and behavioral signal without triggering writes
+  ---
+  duration_ms: 0.296417
+  type: 'test'
+  ...
+# Subtest: unknown finance/goals cause review rather than inferred outcome
+ok 9 - unknown finance/goals cause review rather than inferred outcome
+  ---
+  duration_ms: 0.514996
+  type: 'test'
+  ...
+# Subtest: budget scenarios separate hypothetical funding, stress and tuition ceiling
+ok 10 - budget scenarios separate hypothetical funding, stress and tuition ceiling
+  ---
+  duration_ms: 0.685333
+  type: 'test'
+  ...
+# Subtest: no data imputation, invalid grants and stress rejected, zero permitted
+ok 11 - no data imputation, invalid grants and stress rejected, zero permitted
+  ---
+  duration_ms: 0.306432
+  type: 'test'
+  ...
+# Subtest: deterministic engines do not mutate inputs
+ok 12 - deterministic engines do not mutate inputs
+  ---
+  duration_ms: 0.740686
+  type: 'test'
+  ...
+# Subtest: live page integrations and all roadmap routes exist; no new external request or storage
+ok 13 - live page integrations and all roadmap routes exist; no new external request or storage
+  ---
+  duration_ms: 2.579218
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 237.427703

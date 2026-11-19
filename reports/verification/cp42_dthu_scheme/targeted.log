@@ -1,0 +1,284 @@
+TAP version 13
+# (node:8133) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: transcribed three-year numeric row counts; all keys distinct; no college programme
+ok 1 - transcribed three-year numeric row counts; all keys distinct; no college programme
+  ---
+  duration_ms: 1.881015
+  type: 'test'
+  ...
+# Subtest: spot check official CNTT three-year history, no VSAT record in 2024
+ok 2 - spot check official CNTT three-year history, no VSAT record in 2024
+  ---
+  duration_ms: 2.721041
+  type: 'test'
+  ...
+# Subtest: missing columns are never zero; same scale comparison only; aptitude method wording retained as limitation
+ok 3 - missing columns are never zero; same scale comparison only; aptitude method wording retained as limitation
+  ---
+  duration_ms: 3.246532
+  type: 'test'
+  ...
+# Subtest: school-code search and chatbot return exact method-labelled record
+ok 4 - school-code search and chatbot return exact method-labelled record
+  ---
+  duration_ms: 1.771099
+  type: 'test'
+  ...
+# Subtest: scheme joined to exact codes; unmatched code remains searchable
+ok 5 - scheme joined to exact codes; unmatched code remains searchable
+  ---
+  duration_ms: 48.703938
+  type: 'test'
+  ...
+# Subtest: reviewed table parser rejects duplicates, prototype-like key, blank row, missing columns, nonnumeric or overflow
+ok 6 - reviewed table parser rejects duplicates, prototype-like key, blank row, missing columns, nonnumeric or overflow
+  ---
+  duration_ms: 4.977782
+  type: 'test'
+  ...
+# Subtest: source structure fail closed; legitimate numeric zero preserved; no claim of authenticity
+ok 7 - source structure fail closed; legitimate numeric zero preserved; no claim of authenticity
+  ---
+  duration_ms: 0.521666
+  type: 'test'
+  ...
+# Subtest: coverage counts DTHU once per year; missing combinations remain a task
+ok 8 - coverage counts DTHU once per year; missing combinations remain a task
+  ---
+  duration_ms: 16.703302
+  type: 'test'
+  ...
+# (node:8134) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: 57 university scheme codes uniquely join 58 cutoff catalogue codes; no college or rewritten scores
+ok 9 - 57 university scheme codes uniquely join 58 cutoff catalogue codes; no college or rewritten scores
+  ---
+  duration_ms: 1.457486
+  type: 'test'
+  ...
+# Subtest: published programme methods and proposed quota are not inferred from historical scores
+ok 10 - published programme methods and proposed quota are not inferred from historical scores
+  ---
+  duration_ms: 0.36503
+  type: 'test'
+  ...
+# Subtest: NL1 is separately labelled, never a three subject combination
+ok 11 - NL1 is separately labelled, never a three subject combination
+  ---
+  duration_ms: 0.20555
+  type: 'test'
+  ...
+# Subtest: five aptitude-review programmes are never ordinary three-subject matches; preserve listed codes
+ok 12 - five aptitude-review programmes are never ordinary three-subject matches; preserve listed codes
+  ---
+  duration_ms: 0.853196
+  type: 'test'
+  ...
+# Subtest: explicit school X codes distinguish technology streams and Chinese language is unmapped
+ok 13 - explicit school X codes distinguish technology streams and Chinese language is unmapped
+  ---
+  duration_ms: 0.412111
+  type: 'test'
+  ...
+# Subtest: discovery shares the same catalogue evidence and never assigns eligibility
+ok 14 - discovery shares the same catalogue evidence and never assigns eligibility
+  ---
+  duration_ms: 0.998284
+  type: 'test'
+  ...
+# Subtest: coverage separates having sources, mappable records and conditions; older years remain unknown
+ok 15 - coverage separates having sources, mappable records and conditions; older years remain unknown
+  ---
+  duration_ms: 7.081597
+  type: 'test'
+  ...
+# Subtest: scheme parser rejects unknown codes, duplicate entries, malformed quota and methods
+ok 16 - scheme parser rejects unknown codes, duplicate entries, malformed quota and methods
+  ---
+  duration_ms: 0.699404
+  type: 'test'
+  ...
+# (node:8140) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: catalogue spans all current national records without changing cutoff facts
+ok 17 - catalogue spans all current national records without changing cutoff facts
+  ---
+  duration_ms: 1.595034
+  type: 'test'
+  ...
+# Subtest: CTU and AGU official code additions exactly reconcile with 2026 inventory
+ok 18 - CTU and AGU official code additions exactly reconcile with 2026 inventory
+  ---
+  duration_ms: 2.187046
+  type: 'test'
+  ...
+# Subtest: physics English returns multiple schools, not PTIT only
+ok 19 - physics English returns multiple schools, not PTIT only
+  ---
+  duration_ms: 3.76865
+  type: 'test'
+  ...
+# Subtest: social pair can return entirely non-PTIT schools
+ok 20 - social pair can return entirely non-PTIT schools
+  ---
+  duration_ms: 18.334421
+  type: 'test'
+  ...
+# Subtest: no pair or duplicate electives leaves all sourced programmes selectable
+ok 21 - no pair or duplicate electives leaves all sourced programmes selectable
+  ---
+  duration_ms: 6.733238
+  type: 'test'
+  ...
+# Subtest: zero is a valid observed score; missing is not
+ok 22 - zero is a valid observed score; missing is not
+  ---
+  duration_ms: 3.215796
+  type: 'test'
+  ...
+# Subtest: technology streams cannot borrow a generic technology grade
+ok 23 - technology streams cannot borrow a generic technology grade
+  ---
+  duration_ms: 0.971785
+  type: 'test'
+  ...
+# Subtest: AGU composite and HUST base evidence never become THPT eligibility
+ok 24 - AGU composite and HUST base evidence never become THPT eligibility
+  ---
+  duration_ms: 1.175662
+  type: 'test'
+  ...
+# Subtest: search admits unconfirmed programmes and keeps school identity
+ok 25 - search admits unconfirmed programmes and keeps school identity
+  ---
+  duration_ms: 4.355974
+  type: 'test'
+  ...
+# Subtest: reviewed record must have matching school, year, verified source and official host
+ok 26 - reviewed record must have matching school, year, verified source and official host
+  ---
+  duration_ms: 9.546537
+  type: 'test'
+  ...
+# Subtest: reviewed programme does not invent THPT evidence for other methods
+ok 27 - reviewed programme does not invent THPT evidence for other methods
+  ---
+  duration_ms: 1.1543
+  type: 'test'
+  ...
+# (node:8166) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: national lookup has no school whitelist and supports field or code
+ok 28 - national lookup has no school whitelist and supports field or code
+  ---
+  duration_ms: 2.212124
+  type: 'test'
+  ...
+# Subtest: private fields and accidental PII rejected
+ok 29 - private fields and accidental PII rejected
+  ---
+  duration_ms: 0.23261
+  type: 'test'
+  ...
+# Subtest: three years separate and direct links cover school outside registry
+ok 30 - three years separate and direct links cover school outside registry
+  ---
+  duration_ms: 1.109402
+  type: 'test'
+  ...
+# Subtest: local links preserve original year and unknown institutions do not get invented data
+ok 31 - local links preserve original year and unknown institutions do not get invented data
+  ---
+  duration_ms: 1.096092
+  type: 'test'
+  ...
+# Subtest: provider errors isolated and no student profile transmitted
+ok 32 - provider errors isolated and no student profile transmitted
+  ---
+  duration_ms: 0.990032
+  type: 'test'
+  ...
+# Subtest: year mismatch and duplicates fail closed
+ok 33 - year mismatch and duplicates fail closed
+  ---
+  duration_ms: 0.219611
+  type: 'test'
+  ...
+# Subtest: Brave adapter requires separate approval and its own key
+ok 34 - Brave adapter requires separate approval and its own key
+  ---
+  duration_ms: 0.215124
+  type: 'test'
+  ...
+# Subtest: Brave fixed-origin web search display only, strict safe search, no private payload
+ok 35 - Brave fixed-origin web search display only, strict safe search, no private payload
+  ---
+  duration_ms: 0.573545
+  type: 'test'
+  ...
+# Subtest: national search is visible on three focused Atlas routes; no browser database writes
+ok 36 - national search is visible on three focused Atlas routes; no browser database writes
+  ---
+  duration_ms: 0.962971
+  type: 'test'
+  ...
+# (node:8177) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: 73 scheme codes independent of cutoff; published quota sums match transcribed rows
+ok 37 - 73 scheme codes independent of cutoff; published quota sums match transcribed rows
+  ---
+  duration_ms: 1.740372
+  type: 'test'
+  ...
+# Subtest: QNU named triples retain names and no invented standard codes
+ok 38 - QNU named triples retain names and no invented standard codes
+  ---
+  duration_ms: 0.429166
+  type: 'test'
+  ...
+# Subtest: ambiguous technology or aptitude never mapped to student elective
+ok 39 - ambiguous technology or aptitude never mapped to student elective
+  ---
+  duration_ms: 0.242516
+  type: 'test'
+  ...
+# Subtest: HTU explicit X14 X21 mapping and legacy C14 not guessed
+ok 40 - HTU explicit X14 X21 mapping and legacy C14 not guessed
+  ---
+  duration_ms: 0.926747
+  type: 'test'
+  ...
+# Subtest: scheme-only results searchable without fabricating cutoff or eligibility
+ok 41 - scheme-only results searchable without fabricating cutoff or eligibility
+  ---
+  duration_ms: 2.391174
+  type: 'test'
+  ...
+# Subtest: new school programmes available for elective matching and explicit zero
+ok 42 - new school programmes available for elective matching and explicit zero
+  ---
+  duration_ms: 2.432456
+  type: 'test'
+  ...
+# Subtest: coverage counts remain local and separate from national denominator
+ok 43 - coverage counts remain local and separate from national denominator
+  ---
+  duration_ms: 6.669
+  type: 'test'
+  ...
+# Subtest: official published school codes work in three-year discovery
+ok 44 - official published school codes work in three-year discovery
+  ---
+  duration_ms: 18.576075
+  type: 'test'
+  ...
+1..44
+# tests 44
+# suites 0
+# pass 44
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 706.546925

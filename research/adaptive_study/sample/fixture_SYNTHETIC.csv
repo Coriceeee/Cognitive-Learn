@@ -1,0 +1,13 @@
+participant_id,cycle_id,assigned_arm,assignment_method,assignment_timestamp,baseline_timestamp,baseline_score,policy_version,recommendation_id,human_approved,exposure_timestamp,outcome_timestamp,outcome_score,outcome_scale,outcome_verified,consent_status
+synthetic_001,week_1,static,observational,2026-10-02T00:00:00Z,2026-10-01T00:00:00Z,5,cla-shadow-policy-v1,demo_r_0,yes,2026-10-03T00:00:00Z,2026-10-10T00:00:00Z,6,SYNTHETIC_equal_scale_0_10,yes,granted
+synthetic_002,week_1,adaptive,observational,2026-10-02T00:00:00Z,2026-10-01T00:00:00Z,6,cla-shadow-policy-v1,demo_r_1,yes,2026-10-03T00:00:00Z,2026-10-10T00:00:00Z,7.5,SYNTHETIC_equal_scale_0_10,yes,granted
+synthetic_003,week_1,static,observational,2026-10-02T00:00:00Z,2026-10-01T00:00:00Z,7,cla-shadow-policy-v1,demo_r_2,yes,2026-10-03T00:00:00Z,2026-10-10T00:00:00Z,8,SYNTHETIC_equal_scale_0_10,yes,granted
+synthetic_004,week_1,adaptive,observational,2026-10-02T00:00:00Z,2026-10-01T00:00:00Z,5,cla-shadow-policy-v1,demo_r_3,yes,2026-10-03T00:00:00Z,2026-10-10T00:00:00Z,6.5,SYNTHETIC_equal_scale_0_10,yes,granted
+synthetic_005,week_1,static,observational,2026-10-02T00:00:00Z,2026-10-01T00:00:00Z,6,cla-shadow-policy-v1,demo_r_4,yes,2026-10-03T00:00:00Z,2026-10-10T00:00:00Z,7,SYNTHETIC_equal_scale_0_10,yes,granted
+synthetic_006,week_1,adaptive,observational,2026-10-02T00:00:00Z,2026-10-01T00:00:00Z,7,cla-shadow-policy-v1,demo_r_5,yes,2026-10-03T00:00:00Z,2026-10-10T00:00:00Z,8.5,SYNTHETIC_equal_scale_0_10,yes,granted
+synthetic_007,week_1,static,observational,2026-10-02T00:00:00Z,2026-10-01T00:00:00Z,5,cla-shadow-policy-v1,demo_r_6,yes,2026-10-03T00:00:00Z,2026-10-10T00:00:00Z,6,SYNTHETIC_equal_scale_0_10,yes,granted
+synthetic_008,week_1,adaptive,observational,2026-10-02T00:00:00Z,2026-10-01T00:00:00Z,6,cla-shadow-policy-v1,demo_r_7,yes,2026-10-03T00:00:00Z,2026-10-10T00:00:00Z,7.5,SYNTHETIC_equal_scale_0_10,yes,granted
+synthetic_009,week_1,static,observational,2026-10-02T00:00:00Z,2026-10-01T00:00:00Z,7,cla-shadow-policy-v1,demo_r_8,yes,2026-10-03T00:00:00Z,2026-10-10T00:00:00Z,8,SYNTHETIC_equal_scale_0_10,yes,granted
+synthetic_010,week_1,adaptive,observational,2026-10-02T00:00:00Z,2026-10-01T00:00:00Z,5,cla-shadow-policy-v1,demo_r_9,yes,2026-10-03T00:00:00Z,2026-10-10T00:00:00Z,6.5,SYNTHETIC_equal_scale_0_10,yes,granted
+synthetic_011,week_1,static,observational,2026-10-02T00:00:00Z,2026-10-01T00:00:00Z,6,cla-shadow-policy-v1,demo_r_10,yes,2026-10-03T00:00:00Z,2026-10-10T00:00:00Z,7,SYNTHETIC_equal_scale_0_10,yes,granted
+synthetic_012,week_1,adaptive,observational,2026-10-02T00:00:00Z,2026-10-01T00:00:00Z,7,cla-shadow-policy-v1,demo_r_11,yes,2026-10-03T00:00:00Z,2026-10-10T00:00:00Z,8.5,SYNTHETIC_equal_scale_0_10,yes,granted

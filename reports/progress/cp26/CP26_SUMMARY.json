@@ -1,0 +1,41 @@
+{
+  "checkpoint": "CP26",
+  "scope": "164 canonical tasks",
+  "source_file": "CLA_REBASELINE_164_NOTIFICATIONS_20261114.csv",
+  "source_sha256": "de390c5e7cc7faca36dd87bd078fdac99d231d2fd57bdb77113cef93b39bc253",
+  "total": 164,
+  "evidence_linked": 53,
+  "accepted_by_cp26": 0,
+  "removed_from_backlog": 0,
+  "baseline_mean_pct": 37.2,
+  "group_baseline": {
+    "Website MVP": {
+      "count": 76,
+      "baseline_mean_pct": 48.68,
+      "evidence_linked": 18
+    },
+    "Nghiên cứu": {
+      "count": 69,
+      "baseline_mean_pct": 24.28,
+      "evidence_linked": 33
+    },
+    "Tuyển sinh/Chat": {
+      "count": 18,
+      "baseline_mean_pct": 36.11,
+      "evidence_linked": 2
+    },
+    "UI/mascot": {
+      "count": 1,
+      "baseline_mean_pct": 75.0,
+      "evidence_linked": 0
+    }
+  },
+  "test_evidence": "38/38 Python unit tests passed in container for CP25(12), CP24(9), OULAD(13), HF(4). Synthetic/technical tests, not research validation.",
+  "guardrails": [
+    "No automatic percentage increases",
+    "No 164-task completion from synthetic tests",
+    "No causal claim for Adaptive",
+    "No psychometric validation claims",
+    "Full npm build / emulator / browser E2E not re-verified here"
+  ]
+}

@@ -1,7 +1,7 @@
 import type { StudentProfile } from "../../page/seed/types";
 import type { CognitiveResult } from "../cognitive/cognitiveEngine";
 import { CAREER_PROFILES } from "./careerMapping";
-import { scoreCareer } from "./careerScoring";
+import { scoreCareer, LEGACY_CAREER_RUBRIC_VERSION } from "./careerScoring";
 import type { CareerIntelligenceResult } from "./careerTypes";
 
 function clamp(value: number): number {
@@ -83,10 +83,11 @@ export function calculateCareerIntelligence(
   }
 
   const summary = primaryCareer
-    ? `Hướng nghề nghiệp nổi bật hiện tại là ${primaryCareer.career.name}, với mức tương thích ${primaryCareer.compatibility}% và mức sẵn sàng ${primaryCareer.readiness}%.`
+    ? `Hướng nghề nghiệp nổi bật hiện tại là ${primaryCareer.career.name}, với điểm rubric thử nghiệm ${primaryCareer.compatibility}/100 và chỉ số sẵn sàng ${primaryCareer.readiness}/100.`
     : "Chưa đủ dữ liệu để xác định hướng nghề nghiệp.";
 
   return {
+    rubricVersion: LEGACY_CAREER_RUBRIC_VERSION,
     primaryCareer,
     matches: matches.slice(0, 5),
     currentReadiness,

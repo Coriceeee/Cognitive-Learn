@@ -93,14 +93,16 @@ test('09.16 output includes source URL, method, campus, year and program code',(
   assert.match(match.officialSource,/^https:\/\/tuyensinh\.ptit\.edu\.vn\/de-an-tuyen-sinh\//);
   assert.ok(match.majorCode);
 });
-test('09.17 integration is visualized only after the student selects a pair',()=>{
+test('09.17 national explorer replaces the bounded PTIT picker and exposes all registered programmes',()=>{
   const ui=fs.readFileSync(path.join(root,'src/page/atlas/components/AtlasAdmissionEnginePanel.tsx'),'utf8');
-  for(const snippet of ['matchPtitPublishedPathways2026','selectedExamPairId','atlas-official-pathways','officialSource','Mã ngành','2026']) assert.ok(ui.includes(snippet),snippet);
+  for(const snippet of ['buildNationalPathwayCatalogue','matchNationalPathways2026','selectedExamPairId','AtlasNationalPathways','selectedNational.entries']) assert.ok(ui.includes(snippet),snippet);
+  assert.ok(!ui.includes('matchPtitPublishedPathways2026'));
 });
 test('09.18 protects admission comparison from school/tryout scores',()=>{
   const ui=fs.readFileSync(path.join(root,'src/page/atlas/components/AtlasAdmissionEnginePanel.tsx'),'utf8');
+  const national=fs.readFileSync(path.join(root,'src/page/atlas/components/AtlasNationalPathways.tsx'),'utf8');
   assert.ok(ui.includes('scoreBasis === "official_thpt_2026"'));
-  assert.ok(ui.includes('Không dùng danh mục này để kết luận trúng tuyển'));
+  assert.ok(national.includes('Không so tổng môn với điểm chuẩn'));
 });
 
 test('09.19 rejects prior-year official page even when a program wrongly claims year 2026',()=>{
@@ -114,6 +116,6 @@ test('09.20 excludes a program without a 2026 THPT admission method',()=>{
 
 test('09.21 official-pathway exploration is discoverable from Atlas hero',()=>{
   const page=fs.readFileSync(path.join(root,'src/page/atlas/AtlasPage.tsx'),'utf8');
-  assert.ok(page.includes('href="#atlas-engine"'));
+  assert.ok(page.includes('href="/atlas/subjects"'));
   assert.ok(page.includes('Khám phá môn thi → chương trình có nguồn'));
 });

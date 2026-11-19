@@ -3,16 +3,16 @@
   display: grid;
   place-items: center;
   padding: 28px 16px;
-  background: linear-gradient(150deg, #f3f8ff, #eef3fb);
+  background: linear-gradient(150deg, rgb(var(--tc-bg-f3f8ff)), rgb(var(--tc-bg-eef3fb)));
 }
 .cla-access-panel {
   width: min(520px, 100%);
-  border: 1px solid #d9e7f9;
-  background: #fff;
+  border: 1px solid rgb(var(--tc-bd-d9e7f9));
+  background: rgb(var(--tc-bg-ffffff));
   border-radius: 24px;
-  box-shadow: 0 22px 55px rgba(16, 40, 76, 0.09);
+  box-shadow: 0 22px 55px rgb(var(--tc-sh-10284c) / calc(0.09 * var(--k-sh)));
   padding: clamp(24px, 5vw, 38px);
-  color: #16365e;
+  color: rgb(var(--tc-tx-16365e));
 }
 .cla-access-panel h1 {
   font-size: clamp(24px, 4vw, 32px);
@@ -20,12 +20,12 @@
   line-height: 1.2;
   margin: 13px 0;
 }
-.cla-access-panel p { color: #58708d; line-height: 1.7; }
-.cla-access-eyebrow { color: #2463b6; font-weight: 800; letter-spacing: .11em; font-size: 10px; }
+.cla-access-panel p { color: rgb(var(--tc-tx-58708d)); line-height: 1.7; }
+.cla-access-eyebrow { color: rgb(var(--tc-tx-2463b6)); font-weight: 800; letter-spacing: .11em; font-size: 10px; }
 .cla-access-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
 .cla-access-actions a,
 .cla-access-actions button {
-  border: 1px solid #bdd4f3;
+  border: 1px solid rgb(var(--tc-bd-bdd4f3));
   border-radius: 12px;
   padding: 11px 17px;
   font: inherit;
@@ -33,26 +33,26 @@
   font-weight: 750;
   cursor: pointer;
   text-decoration: none;
-  background: #edf5ff;
-  color: #1a57a3;
+  background: rgb(var(--tc-bg-edf5ff));
+  color: rgb(var(--tc-tx-1a57a3));
 }
 .cla-access-actions a { background: #2563eb; border-color: #2563eb; color: white; }
 .role-workflow-notice {
   margin: 24px 0 0;
   padding: 16px 20px;
-  background: #fff9ed;
-  color: #785524;
+  background: rgb(var(--tc-bg-fff9ed));
+  color: rgb(var(--tc-tx-785524));
   line-height: 1.65;
-  border: 1px solid #f0d9a6;
+  border: 1px solid rgb(var(--tc-bd-f0d9a6));
   border-radius: 16px;
 }
 .role-task-section {
   margin-top: 24px;
   padding: clamp(20px, 3vw, 28px);
-  border: 1px solid #dbeafe;
+  border: 1px solid rgb(var(--tc-bd-dbeafe));
   border-radius: 22px;
-  background: #f7faff;
+  background: rgb(var(--tc-bg-f7faff));
   scroll-margin-top: 30px;
 }
-.role-task-section h2 { font-size: clamp(18px, 3vw, 23px); color: #0a2448; margin: 0 0 12px; }
-.role-task-section ol { padding-left: 21px; margin: 0; display: grid; gap: 10px; color: #395570; line-height: 1.6; }
+.role-task-section h2 { font-size: clamp(18px, 3vw, 23px); color: rgb(var(--tc-tx-0a2448)); margin: 0 0 12px; }
+.role-task-section ol { padding-left: 21px; margin: 0; display: grid; gap: 10px; color: rgb(var(--tc-tx-395570)); line-height: 1.6; }

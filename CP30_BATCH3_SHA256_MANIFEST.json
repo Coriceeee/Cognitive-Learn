@@ -1,0 +1,51 @@
+{
+  "release": "CP30 Batch 3 GPA Integrity",
+  "date": "2026-11-15",
+  "parent_full_source_zip": "CLA_FULL_SOURCE_CP30_BATCH2_PROFILE_REALTIME_20261115.zip",
+  "parent_sha256": "72424fc968bd114693df5bffdefdf8d00a2656b95e53c544e0ccf9883ddf1df5",
+  "files": [
+    {
+      "path": "src/page/seed/services/academicGpaIntegrity.ts",
+      "sha256": "45ec7fa9589b6a6473f0597762dcb7166952c7e45b11ffe993f627b05bdfd007"
+    },
+    {
+      "path": "src/page/seed/hooks/useAcademicGpaIntegrity.ts",
+      "sha256": "7e25d77dc904b62bd259a2d9c56bd248a1de73c5e332c16ccd0d00da800731ba"
+    },
+    {
+      "path": "src/page/seed/StudentTranscriptPage.tsx",
+      "sha256": "e06029c7bd781536dbee0aeb7d380d656a7c84de88fbd2455d8cec57d5c7ffee"
+    },
+    {
+      "path": "src/page/seed/StudentPage.tsx",
+      "sha256": "52784c9b1893d64f462d647fc0d6664248bf5e7037258fe48b8f185b60639b44"
+    },
+    {
+      "path": "tests/cp30-gpa-integrity.test.cjs",
+      "sha256": "23e2351f5e9e3fa6b9b5a6ea5172b7e4acba61a000df5f3dd3e64a7a5242d872"
+    },
+    {
+      "path": "tests/cp30-gpa-listener.test.cjs",
+      "sha256": "ecd324ae0298b55d80df8305f94e6b8fcaafcdf24e8ae5e37bab0ebfa0cc4aa4"
+    },
+    {
+      "path": "package.json",
+      "sha256": "653c1bb9044266310d82f6dcebaf7db2ccdfe6746c2acfeab9d43aa8f17f2488"
+    },
+    {
+      "path": "docs/CP30/CP30_BATCH3_GPA_INTEGRITY_REPORT_20261115.md",
+      "sha256": "1872f347ec1d7081ee4b399ed4886922153157b2ada2ea4a48604bec15bfab66"
+    },
+    {
+      "path": "START_HERE_CP30_BATCH3_20261115.md",
+      "sha256": "8e459555cdc6643ae917158a8e85f295c17821fc4b0ec3b2f12f289da11ef1ad"
+    }
+  ],
+  "local_test_results": {
+    "new_tests_pass": "28/28",
+    "verify_cp30_batch3": "PASS",
+    "npm_test": "BLOCKED_BY_INCOMPLETE_DEPENDENCIES",
+    "typescript_build": "NOT_VERIFIED",
+    "firestore_emulator": "NOT_RUN_HERE"
+  }
+}

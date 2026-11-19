@@ -8,7 +8,7 @@
   "outcome": "Pass or Distinction vs Fail or Withdrawn (end of course)",
   "cutoff_day": 30,
   "audit_status": "PASS",
-  "audit_timestamp_utc": "2026-11-15T09:58:52.733686+00:00",
+  "audit_timestamp_utc": "2026-11-15T10:33:27.566146+00:00",
   "test_count": 5445,
   "split_counts": {
     "train": 19245,

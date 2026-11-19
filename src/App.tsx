@@ -1,9 +1,12 @@
+import ThemeToggle from "./components/common/ThemeToggle";
 import {
   Suspense,
   lazy,
+  useEffect,
   type ReactNode,
 } from "react";
 
+import { currentFocusedPath } from "./lib/focusedModuleRoute";
 import FloatingAdvisorChat from "./components/common/FloatingAdvisorChat";
 import AppFooter from "./components/common/AppFooter";
 import AccessGate from "./components/common/AccessGate";
@@ -13,15 +16,14 @@ const TrangDangNhap = lazy(
   () => import("./page/auth/LoginPage")
 );
 
-const TrangVaiTro = lazy(
-  () => import("./page/main/RolePage")
-);
-
 const TrangQuanTri = lazy(
   () => import("./page/nexus/AdminPage")
 );
 const AdminDiagnosticsPage = lazy(
   () => import("./page/nexus/AdminDiagnosticsPage")
+);
+const AdminAuditPage = lazy(
+  () => import("./page/nexus/AdminAuditPage")
 );
 
 const DailyCompanionPage = lazy(() => import("./page/companion/DailyCompanionPage"));
@@ -96,11 +98,12 @@ function AppLoading() {
 }
 
 export default function App() {
-  const path =
-    window.location.pathname.replace(
-      /\/$/,
-      ""
-    ) || "/";
+  const path = currentFocusedPath();
+  useEffect(() => {
+    if (window.location.pathname !== path) {
+      window.history.replaceState(window.history.state, "", path + window.location.search + window.location.hash);
+    }
+  }, [path]);
 
   let currentPage: ReactNode;
 
@@ -120,9 +123,11 @@ export default function App() {
     currentPage = (
       <AdminDiagnosticsPage />
     );
+  } else if (path === "/admin/audit") {
+    currentPage = <AdminAuditPage />;
   } else if (path === "/student/companion") {
     currentPage = <DailyCompanionPage />;
-  } else if (path === "/student") {
+  } else if (["/student", "/student/exams"].includes(path)) {
     currentPage = (
       <TrangHocSinh />
     );
@@ -148,38 +153,21 @@ export default function App() {
     currentPage = (
       <StudentStorageStatusPage />
     );
-  } else if (["/atlas", "/atlas/vietnam", "/atlas/joint", "/atlas/recommendations", "/atlas/sources"].includes(path)) {
+  } else if (["/atlas", "/atlas/vietnam", "/atlas/joint", "/atlas/recommendations", "/atlas/sources", "/atlas/subjects", "/atlas/compare", "/atlas/library"].includes(path)) {
     currentPage = <AtlasPage />;
-  } else if (["/lumen", "/lumen/indices", "/lumen/history", "/lumen/insights", "/lumen/assistant"].includes(path)) {
+  } else if (["/lumen", "/lumen/indices", "/lumen/history", "/lumen/insights", "/lumen/assistant", "/lumen/state", "/lumen/roadmap", "/lumen/evidence", "/lumen/advanced"].includes(path)) {
     currentPage = (
       <LumenPage />
     );
   } else if (["/orion", "/orion/inputs", "/orion/scenarios", "/orion/roadmap"].includes(path)) {
     currentPage = <OrionPage />;
-  } else if (["/pulse", "/pulse/progress", "/pulse/reports", "/pulse/actions"].includes(path)) {
+  } else if (["/pulse", "/pulse/progress", "/pulse/reports", "/pulse/actions", "/pulse/inputs", "/pulse/checkin", "/pulse/audit"].includes(path)) {
     currentPage = <PulsePage />;
   } else if (path === "/atlas/study-abroad" || path.startsWith("/atlas/study-abroad/") || path === "/study-abroad" || path === "/haven/study-abroad") {
     currentPage = <StudyAbroadPage />;
   } else if (["/haven", "/haven/scholarships", "/haven/finance", "/haven/plan"].includes(path)) {
     currentPage = <HavenPage />;
-  } else if (path === "/teacher") {
-    currentPage = (
-      <TrangVaiTro
-        role="teacher"
-      />
-    );
-  } else if (path === "/parent") {
-    currentPage = (
-      <TrangVaiTro
-        role="parent"
-      />
-    );
-  } else if (path === "/role") {
-    currentPage = (
-      <TrangVaiTro
-        role="admin"
-      />
-    );
+
   } else {
     currentPage = (
       <TrangDangNhap />
@@ -207,6 +195,7 @@ export default function App() {
       </Suspense>
 
       <AppFooter />
+      <ThemeToggle />
     </div>
   );
 }

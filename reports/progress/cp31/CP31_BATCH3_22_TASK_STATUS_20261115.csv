@@ -1,0 +1,23 @@
+﻿task_id,cluster,task_title,diagnostic_path,source_status,reviewer_status,note
+health,nexus,Tình trạng API & Firestore,/admin/diagnostics?view=health,limited,PENDING,Diagnostic route does not imply acceptance PASS
+roles,nexus,Kiểm tra quyền vai trò,/admin/diagnostics?view=roles,limited,PENDING,Diagnostic route does not imply acceptance PASS
+accounts,nexus,Quản trị người dùng,/admin/diagnostics?view=accounts,limited,PENDING,Diagnostic route does not imply acceptance PASS
+release,nexus,Giám sát phát hành,,planned,PENDING,Diagnostic route does not imply acceptance PASS
+seed-audit,seed,Kiểm toán hồ sơ Admin Demo,/admin/diagnostics?view=seed,limited,PENDING,Diagnostic route does not imply acceptance PASS
+seed-rules,seed,Kiểm định quyền dữ liệu,,planned,PENDING,Diagnostic route does not imply acceptance PASS
+seed-migration,seed,Kiểm soát phiên bản dữ liệu,/admin/diagnostics?view=seed-migration,limited,PENDING,Diagnostic route does not imply acceptance PASS
+cognitive,lumen,Kiểm tra Cognitive Engine,/admin/diagnostics?view=cognitive,limited,PENDING,Diagnostic route does not imply acceptance PASS
+ml,lumen,Kiểm toán dữ liệu ML,/admin/diagnostics?view=ml,limited,PENDING,Diagnostic route does not imply acceptance PASS
+model-eval,lumen,Đánh giá mô hình dự báo,,planned,PENDING,Diagnostic route does not imply acceptance PASS
+atlas-data,atlas,Kiểm tra kho dữ liệu Atlas,/admin/diagnostics?view=atlas,limited,PENDING,Diagnostic route does not imply acceptance PASS
+atlas-approve,atlas,Duyệt đề án và nguồn chính thức,,planned,PENDING,Diagnostic route does not imply acceptance PASS
+atlas-fresh,atlas,Giám sát dữ liệu hết hiệu lực,/admin/diagnostics?view=atlas-fresh,limited,PENDING,Diagnostic route does not imply acceptance PASS
+orion-audit,orion,Kiểm tra dữ liệu Orion,/admin/diagnostics?view=orion,limited,PENDING,Diagnostic route does not imply acceptance PASS
+orion-policy,orion,Kiểm định adaptation policy,,planned,PENDING,Diagnostic route does not imply acceptance PASS
+orion-scenarios,orion,Kiểm thử kịch bản,,planned,PENDING,Diagnostic route does not imply acceptance PASS
+pulse-audit,pulse,Kiểm tra dữ liệu Pulse,/admin/diagnostics?view=pulse,limited,PENDING,Diagnostic route does not imply acceptance PASS
+pulse-evidence,pulse,Đối chiếu Evidence Record,,planned,PENDING,Diagnostic route does not imply acceptance PASS
+pulse-trends,pulse,Kiểm tra sai số và xu hướng,,planned,PENDING,Diagnostic route does not imply acceptance PASS
+haven-audit,haven,Kiểm tra dữ liệu Haven,/admin/diagnostics?view=haven,limited,PENDING,Diagnostic route does not imply acceptance PASS
+haven-sources,haven,Duyệt nguồn học bổng,/admin/diagnostics?view=haven-sources,limited,PENDING,Diagnostic route does not imply acceptance PASS
+haven-finance,haven,Kiểm toán giả định tài chính,,planned,PENDING,Diagnostic route does not imply acceptance PASS

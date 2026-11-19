@@ -2,6 +2,7 @@ import { auth } from "../../lib/firebase";
 import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
 import StudentLinkManager from "../../components/common/StudentLinkManager";
+import OrbitHero from "../../components/common/OrbitHero";
 import "../../styles.css";
 type UserRole = "student" | "teacher" | "parent" | "admin";
 
@@ -180,6 +181,8 @@ export default function TrangVaiTro({ role }: RolePageProps) {
             </div>
           </div>
         </section>
+
+        {(role === "student" || role === "admin") && <OrbitHero isAdmin={role === "admin"} />}
 
         <section className="role-task-section" aria-labelledby="cla-role-task-heading">
           <h2 id="cla-role-task-heading">Các bước theo vai trò</h2>

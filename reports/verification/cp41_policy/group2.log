@@ -1,0 +1,1396 @@
+COMMAND npm run test:closed-loop
+
+> cognitive-learn-ai@0.1.0 test:closed-loop
+> node --experimental-strip-types --test tests/step12-closed-loop-journey.test.mjs
+
+TAP version 13
+# (node:35733) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CL01 creates a versioned cycle and preserves valid baseline zero
+ok 1 - CL01 creates a versioned cycle and preserves valid baseline zero
+  ---
+  duration_ms: 11.24206
+  type: 'test'
+  ...
+# Subtest: CL02 rejects missing/NaN, invalid and duplicate baseline scores
+ok 2 - CL02 rejects missing/NaN, invalid and duplicate baseline scores
+  ---
+  duration_ms: 0.535193
+  type: 'test'
+  ...
+# Subtest: CL03 no outcome is inferred merely from an Orion strategy
+ok 3 - CL03 no outcome is inferred merely from an Orion strategy
+  ---
+  duration_ms: 6.600434
+  type: 'test'
+  ...
+# Subtest: CL04 check-in records self-report but is not an outcome
+ok 4 - CL04 check-in records self-report but is not an outcome
+  ---
+  duration_ms: 0.787196
+  type: 'test'
+  ...
+# Subtest: CL05 zero actual hours and zero completed tasks are observed zeros
+ok 5 - CL05 zero actual hours and zero completed tasks are observed zeros
+  ---
+  duration_ms: 0.196582
+  type: 'test'
+  ...
+# Subtest: CL06 rejects duplicate week and check-in ID
+ok 6 - CL06 rejects duplicate week and check-in ID
+  ---
+  duration_ms: 0.530636
+  type: 'test'
+  ...
+# Subtest: CL07 rejects invalid time and impossible completion
+ok 7 - CL07 rejects invalid time and impossible completion
+  ---
+  duration_ms: 7.651889
+  type: 'test'
+  ...
+# Subtest: CL08 reassessment is blocked until one actual check-in exists
+ok 8 - CL08 reassessment is blocked until one actual check-in exists
+  ---
+  duration_ms: 0.349298
+  type: 'test'
+  ...
+# Subtest: CL09 reassessment only accepts observed subjects, 0 is valid
+ok 9 - CL09 reassessment only accepts observed subjects, 0 is valid
+  ---
+  duration_ms: 0.646354
+  type: 'test'
+  ...
+# Subtest: CL10 prevents unknown subject/NaN, absent score and duplicate score
+ok 10 - CL10 prevents unknown subject/NaN, absent score and duplicate score
+  ---
+  duration_ms: 0.698347
+  type: 'test'
+  ...
+# Subtest: CL11 review calculates matched before-after delta without imputation
+ok 11 - CL11 review calculates matched before-after delta without imputation
+  ---
+  duration_ms: 27.052122
+  type: 'test'
+  ...
+# Subtest: CL12 closed cycles cannot be edited, measured again, or check-in again
+ok 12 - CL12 closed cycles cannot be edited, measured again, or check-in again
+  ---
+  duration_ms: 0.540397
+  type: 'test'
+  ...
+# Subtest: CL13 rejects corrupted documents, does not silently overwrite them
+ok 13 - CL13 rejects corrupted documents, does not silently overwrite them
+  ---
+  duration_ms: 0.162651
+  type: 'test'
+  ...
+# Subtest: CL14 Orion, Pulse and Lumen all mount the same shared journey
+ok 14 - CL14 Orion, Pulse and Lumen all mount the same shared journey
+  ---
+  duration_ms: 0.675615
+  type: 'test'
+  ...
+# Subtest: CL15 Firestore hook uses authenticated ownership and transaction-based updates
+ok 15 - CL15 Firestore hook uses authenticated ownership and transaction-based updates
+  ---
+  duration_ms: 0.286911
+  type: 'test'
+  ...
+# Subtest: CL16 candidate rules restrict student ownership, product consent, and immutable baselines
+ok 16 - CL16 candidate rules restrict student ownership, product consent, and immutable baselines
+  ---
+  duration_ms: 0.340484
+  type: 'test'
+  ...
+# Subtest: CL17 no claim that self-report is externally verified or causal proof
+ok 17 - CL17 no claim that self-report is externally verified or causal proof
+  ---
+  duration_ms: 18.55608
+  type: 'test'
+  ...
+# Subtest: CL18 module never writes its own outcomes into Seed as proven grades
+ok 18 - CL18 module never writes its own outcomes into Seed as proven grades
+  ---
+  duration_ms: 0.333834
+  type: 'test'
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1129.31546
+COMMAND npm run test:journey-reliability
+
+> cognitive-learn-ai@0.1.0 test:journey-reliability
+> node --experimental-strip-types --test tests/step13-journey-reliability.test.mjs
+
+TAP version 13
+# (node:35908) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: JR01 new cycle has no evidence before reassessment
+ok 1 - JR01 new cycle has no evidence before reassessment
+  ---
+  duration_ms: 51.980851
+  type: 'test'
+  ...
+# Subtest: JR02 evidence is persisted as a derived property of reviewed cycle
+ok 2 - JR02 evidence is persisted as a derived property of reviewed cycle
+  ---
+  duration_ms: 53.919968
+  type: 'test'
+  ...
+# Subtest: JR03 scores of zero stay zero, missing outcomes are not imputed
+ok 3 - JR03 scores of zero stay zero, missing outcomes are not imputed
+  ---
+  duration_ms: 0.790576
+  type: 'test'
+  ...
+# Subtest: JR04 evidence discloses provenance and no causal/confidence claim
+ok 4 - JR04 evidence discloses provenance and no causal/confidence claim
+  ---
+  duration_ms: 1.583338
+  type: 'test'
+  ...
+# Subtest: JR05 evidence record matches §26.1 mandatory contract fields
+ok 5 - JR05 evidence record matches §26.1 mandatory contract fields
+  ---
+  duration_ms: 43.202199
+  type: 'test'
+  ...
+# Subtest: JR06 corrupted lineage cannot silently be accepted
+ok 6 - JR06 corrupted lineage cannot silently be accepted
+  ---
+  duration_ms: 14.827456
+  type: 'test'
+  ...
+# Subtest: JR07 old v1 records without evidenceRecord still readable
+ok 7 - JR07 old v1 records without evidenceRecord still readable
+  ---
+  duration_ms: 1.080478
+  type: 'test'
+  ...
+# Subtest: JR08 lock validates ownership and supports released state
+ok 8 - JR08 lock validates ownership and supports released state
+  ---
+  duration_ms: 0.254014
+  type: 'test'
+  ...
+# Subtest: JR09 create uses transaction with fixed lock and server legacy ACTIVE preflight
+ok 9 - JR09 create uses transaction with fixed lock and server legacy ACTIVE preflight
+  ---
+  duration_ms: 23.415433
+  type: 'test'
+  ...
+# Subtest: JR10 review releases state atomically and stores evidence; check-in does not release
+ok 10 - JR10 review releases state atomically and stores evidence; check-in does not release
+  ---
+  duration_ms: 0.9345
+  type: 'test'
+  ...
+# Subtest: JR11 Rules enforce paired cycle+state updates using getAfter
+ok 11 - JR11 Rules enforce paired cycle+state updates using getAfter
+  ---
+  duration_ms: 1.000696
+  type: 'test'
+  ...
+# Subtest: JR12 UI shows limitation and engine lineage, not calibrated probabilities
+ok 12 - JR12 UI shows limitation and engine lineage, not calibrated probabilities
+  ---
+  duration_ms: 1.280694
+  type: 'test'
+  ...
+# Subtest: JR13 evidence cannot be created before review or after malformed observations
+ok 13 - JR13 evidence cannot be created before review or after malformed observations
+  ---
+  duration_ms: 0.610621
+  type: 'test'
+  ...
+# Subtest: JR14 rapid double-click is synchronously guarded in hook
+ok 14 - JR14 rapid double-click is synchronously guarded in hook
+  ---
+  duration_ms: 0.275998
+  type: 'test'
+  ...
+# Subtest: JR15 legacy lock can be claimed after a previous lock is released
+ok 15 - JR15 legacy lock can be claimed after a previous lock is released
+  ---
+  duration_ms: 39.845098
+  type: 'test'
+  ...
+1..15
+# tests 15
+# suites 0
+# pass 15
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1716.310646
+COMMAND npm run test:daily-companion
+
+> cognitive-learn-ai@0.1.0 test:daily-companion
+> node --experimental-strip-types --test tests/step14-daily-companion.test.mjs
+
+TAP version 13
+# (node:36157) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: DC01 only valid 24h times are accepted
+ok 1 - DC01 only valid 24h times are accepted
+  ---
+  duration_ms: 11.028532
+  type: 'test'
+  ...
+# Subtest: DC02 quiet hours wrap around midnight
+ok 2 - DC02 quiet hours wrap around midnight
+  ---
+  duration_ms: 0.52649
+  type: 'test'
+  ...
+# Subtest: DC03 same quiet boundaries turn quiet mode off, never mute all day
+ok 3 - DC03 same quiet boundaries turn quiet mode off, never mute all day
+  ---
+  duration_ms: 0.128389
+  type: 'test'
+  ...
+# Subtest: DC04 invalid schedules are fail-closed
+ok 4 - DC04 invalid schedules are fail-closed
+  ---
+  duration_ms: 0.270366
+  type: 'test'
+  ...
+# Subtest: DC05 reminder due only at requested local minute
+ok 5 - DC05 reminder due only at requested local minute
+  ---
+  duration_ms: 1.442512
+  type: 'test'
+  ...
+# Subtest: DC06 reminder disabled or completed today never fires
+ok 6 - DC06 reminder disabled or completed today never fires
+  ---
+  duration_ms: 0.211546
+  type: 'test'
+  ...
+# Subtest: DC07 quiet hours suppress matching reminders
+ok 7 - DC07 quiet hours suppress matching reminders
+  ---
+  duration_ms: 0.202991
+  type: 'test'
+  ...
+# Subtest: DC08 midnight boundary yields correct local date
+ok 8 - DC08 midnight boundary yields correct local date
+  ---
+  duration_ms: 0.165578
+  type: 'test'
+  ...
+# Subtest: DC09 invalid day keys rejected, including invalid calendar days
+ok 9 - DC09 invalid day keys rejected, including invalid calendar days
+  ---
+  duration_ms: 7.092487
+  type: 'test'
+  ...
+# Subtest: DC10 daily check-in is idempotent
+ok 10 - DC10 daily check-in is idempotent
+  ---
+  duration_ms: 0.45496
+  type: 'test'
+  ...
+# Subtest: DC11 daily check-in keeps only 14 most recent days
+ok 11 - DC11 daily check-in keeps only 14 most recent days
+  ---
+  duration_ms: 0.298127
+  type: 'test'
+  ...
+# Subtest: DC12 data validation enforces account ownership and consent boundaries in rules
+ok 12 - DC12 data validation enforces account ownership and consent boundaries in rules
+  ---
+  duration_ms: 0.106969
+  type: 'test'
+  ...
+# Subtest: DC13 recent activity returns seven calendar days
+ok 13 - DC13 recent activity returns seven calendar days
+  ---
+  duration_ms: 0.147319
+  type: 'test'
+  ...
+# Subtest: DC14 route, protected roles and navigation are integrated
+ok 14 - DC14 route, protected roles and navigation are integrated
+  ---
+  duration_ms: 0.581631
+  type: 'test'
+  ...
+# Subtest: DC15 no notification permission requested without user gesture
+ok 15 - DC15 no notification permission requested without user gesture
+  ---
+  duration_ms: 0.270403
+  type: 'test'
+  ...
+# Subtest: DC16 background web push is opt-in, generic, and never caches student data
+ok 16 - DC16 background web push is opt-in, generic, and never caches student data
+  ---
+  duration_ms: 0.736161
+  type: 'test'
+  ...
+# Subtest: DC17 Firestore candidate rules scope records to student and product consent
+ok 17 - DC17 Firestore candidate rules scope records to student and product consent
+  ---
+  duration_ms: 0.314174
+  type: 'test'
+  ...
+# Subtest: DC18 manifests use real bundled icons and do not bundle app-store claim
+ok 18 - DC18 manifests use real bundled icons and do not bundle app-store claim
+  ---
+  duration_ms: 0.176458
+  type: 'test'
+  ...
+# Subtest: DC19 preview is fail-closed until consent gate and rules are deployed
+ok 19 - DC19 preview is fail-closed until consent gate and rules are deployed
+  ---
+  duration_ms: 0.104951
+  type: 'test'
+  ...
+# Subtest: DC20 consent withdrawal stops foreground reminders in the open page
+ok 20 - DC20 consent withdrawal stops foreground reminders in the open page
+  ---
+  duration_ms: 0.291744
+  type: 'test'
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 20
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 676.05437
+COMMAND npm run test:companion-push
+
+> cognitive-learn-ai@0.1.0 test:companion-push
+> node --test tests/step15-companion-web-push.test.mjs
+
+TAP version 13
+# Subtest: WP01 server evaluates time in device IANA zone, not UTC
+ok 1 - WP01 server evaluates time in device IANA zone, not UTC
+  ---
+  duration_ms: 121.632416
+  type: 'test'
+  ...
+# Subtest: WP02 five-minute lookback handles scheduler delays, not arbitrary late sends
+ok 2 - WP02 five-minute lookback handles scheduler delays, not arbitrary late sends
+  ---
+  duration_ms: 40.87038
+  type: 'test'
+  ...
+# Subtest: WP03 notifications disabled by account setting and quiet hours
+ok 3 - WP03 notifications disabled by account setting and quiet hours
+  ---
+  duration_ms: 17.84593
+  type: 'test'
+  ...
+# Subtest: WP04 completed day suppresses notifications
+ok 4 - WP04 completed day suppresses notifications
+  ---
+  duration_ms: 1.051971
+  type: 'test'
+  ...
+# Subtest: WP05 quiet periods spanning midnight work
+ok 5 - WP05 quiet periods spanning midnight work
+  ---
+  duration_ms: 0.218749
+  type: 'test'
+  ...
+# Subtest: WP06 reject invalid timezone and schedule (fail-closed)
+ok 6 - WP06 reject invalid timezone and schedule (fail-closed)
+  ---
+  duration_ms: 0.712385
+  type: 'test'
+  ...
+# Subtest: WP07 DST repeated local wall time does not create different delivery key
+ok 7 - WP07 DST repeated local wall time does not create different delivery key
+  ---
+  duration_ms: 13.569828
+  type: 'test'
+  ...
+# Subtest: WP08 new-day boundary across UTC and device time
+ok 8 - WP08 new-day boundary across UTC and device time
+  ---
+  duration_ms: 1.51313
+  type: 'test'
+  ...
+# Subtest: WP09 only active student and verified opt-in product consent qualify
+ok 9 - WP09 only active student and verified opt-in product consent qualify
+  ---
+  duration_ms: 0.468596
+  type: 'test'
+  ...
+# Subtest: WP10 only recognized secure push service endpoints are accepted (SSRF guard)
+ok 10 - WP10 only recognized secure push service endpoints are accepted (SSRF guard)
+  ---
+  duration_ms: 0.848954
+  type: 'test'
+  ...
+# Subtest: WP11 malformed device owner/keys/zone cannot dispatch
+ok 11 - WP11 malformed device owner/keys/zone cannot dispatch
+  ---
+  duration_ms: 17.688786
+  type: 'test'
+  ...
+# Subtest: WP12 delivery key is deterministic and scoped to device/date/kind
+ok 12 - WP12 delivery key is deterministic and scoped to device/date/kind
+  ---
+  duration_ms: 43.938941
+  type: 'test'
+  ...
+# Subtest: WP13 payload is generic, does not include student data or remote URLs
+ok 13 - WP13 payload is generic, does not include student data or remote URLs
+  ---
+  duration_ms: 0.968791
+  type: 'test'
+  ...
+# Subtest: WP14 worker receives Web Push but does not cache authenticated pages or trust external redirect
+ok 14 - WP14 worker receives Web Push but does not cache authenticated pages or trust external redirect
+  ---
+  duration_ms: 8.992809
+  type: 'test'
+  ...
+# Subtest: WP15 opt-in and opt-out are distinct user-gesture actions
+ok 15 - WP15 opt-in and opt-out are distinct user-gesture actions
+  ---
+  duration_ms: 0.562277
+  type: 'test'
+  ...
+# Subtest: WP16 server dispatch is disabled by default and is separately deployed
+ok 16 - WP16 server dispatch is disabled by default and is separately deployed
+  ---
+  duration_ms: 18.015161
+  type: 'test'
+  ...
+# Subtest: WP17 rules restrict subscription ownership and deny client delivery ledger access
+ok 17 - WP17 rules restrict subscription ownership and deny client delivery ledger access
+  ---
+  duration_ms: 0.386175
+  type: 'test'
+  ...
+# Subtest: WP18 service worker does not claim guaranteed background delivery
+ok 18 - WP18 service worker does not claim guaranteed background delivery
+  ---
+  duration_ms: 0.676349
+  type: 'test'
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 890.273599
+COMMAND npm run test:aspiration-draft
+
+> cognitive-learn-ai@0.1.0 test:aspiration-draft
+> node --test tests/step16-atlas-aspiration-editor.test.cjs
+
+TAP version 13
+# Subtest: 16.01 manual choice requires university, major and code
+ok 1 - 16.01 manual choice requires university, major and code
+  ---
+  duration_ms: 10.495665
+  type: 'test'
+  ...
+# Subtest: 16.02 retains user entered data provenance and no source URL
+ok 2 - 16.02 retains user entered data provenance and no source URL
+  ---
+  duration_ms: 0.959964
+  type: 'test'
+  ...
+# Subtest: 16.03 trusted PTIT sample contains official source and 2026 only
+ok 3 - 16.03 trusted PTIT sample contains official source and 2026 only
+  ---
+  duration_ms: 10.762269
+  type: 'test'
+  ...
+# Subtest: 16.04 rejects stale year and invalid campus even with PTIT host
+ok 4 - 16.04 rejects stale year and invalid campus even with PTIT host
+  ---
+  duration_ms: 0.360428
+  type: 'test'
+  ...
+# Subtest: 16.05 rejects foreign and http source
+ok 5 - 16.05 rejects foreign and http source
+  ---
+  duration_ms: 0.373459
+  type: 'test'
+  ...
+# Subtest: 16.06 rejects source bearing credentials or wrong path
+ok 6 - 16.06 rejects source bearing credentials or wrong path
+  ---
+  duration_ms: 0.338409
+  type: 'test'
+  ...
+# Subtest: 16.07 rejects mismatch between PTIT id and major code
+ok 7 - 16.07 rejects mismatch between PTIT id and major code
+  ---
+  duration_ms: 0.483926
+  type: 'test'
+  ...
+# Subtest: 16.08 add appends and NEVER sorts by marks or risk levels
+ok 8 - 16.08 add appends and NEVER sorts by marks or risk levels
+  ---
+  duration_ms: 0.470311
+  type: 'test'
+  ...
+# Subtest: 16.09 duplicate id is rejected
+ok 9 - 16.09 duplicate id is rejected
+  ---
+  duration_ms: 0.986303
+  type: 'test'
+  ...
+# Subtest: 16.10 duplicate school + major code rejected even if ID varies
+ok 10 - 16.10 duplicate school + major code rejected even if ID varies
+  ---
+  duration_ms: 0.904558
+  type: 'test'
+  ...
+# Subtest: 16.11 maximum 15 preferences, 16th rejected without mutation
+ok 11 - 16.11 maximum 15 preferences, 16th rejected without mutation
+  ---
+  duration_ms: 21.542565
+  type: 'test'
+  ...
+# Subtest: 16.12 moving up/down preserves contents and only changes one step
+ok 12 - 16.12 moving up/down preserves contents and only changes one step
+  ---
+  duration_ms: 0.308188
+  type: 'test'
+  ...
+# Subtest: 16.13 boundary and unknown move are no-op
+ok 13 - 16.13 boundary and unknown move are no-op
+  ---
+  duration_ms: 0.370154
+  type: 'test'
+  ...
+# Subtest: 16.14 removal preserves preference ordering
+ok 14 - 16.14 removal preserves preference ordering
+  ---
+  duration_ms: 0.277299
+  type: 'test'
+  ...
+# Subtest: 16.15 teacher NV6 warns, does not move or remove it
+ok 15 - 16.15 teacher NV6 warns, does not move or remove it
+  ---
+  duration_ms: 0.726849
+  type: 'test'
+  ...
+# Subtest: 16.16 teacher NV5 allowed at boundary
+ok 16 - 16.16 teacher NV5 allowed at boundary
+  ---
+  duration_ms: 0.429616
+  type: 'test'
+  ...
+# Subtest: 16.17 teacher-training code and name recognized conservatively
+ok 17 - 16.17 teacher-training code and name recognized conservatively
+  ---
+  duration_ms: 0.258243
+  type: 'test'
+  ...
+# Subtest: 16.18 self-entered schools always show verification caution
+ok 18 - 16.18 self-entered schools always show verification caution
+  ---
+  duration_ms: 0.359474
+  type: 'test'
+  ...
+# Subtest: 16.19 empty draft is explicitly a draft
+ok 19 - 16.19 empty draft is explicitly a draft
+  ---
+  duration_ms: 0.362455
+  type: 'test'
+  ...
+# Subtest: 16.20 export contains no personal scores, UID, or official-submission claim
+ok 20 - 16.20 export contains no personal scores, UID, or official-submission claim
+  ---
+  duration_ms: 0.705932
+  type: 'test'
+  ...
+# Subtest: 16.21 exported orders match reordered user list
+ok 21 - 16.21 exported orders match reordered user list
+  ---
+  duration_ms: 0.42863
+  type: 'test'
+  ...
+# Subtest: 16.22 UI is available without official THPT scores and no auto-selection
+ok 22 - 16.22 UI is available without official THPT scores and no auto-selection
+  ---
+  duration_ms: 0.530804
+  type: 'test'
+  ...
+# Subtest: 16.23 UI displays warnings rather than reordering teacher program
+ok 23 - 16.23 UI displays warnings rather than reordering teacher program
+  ---
+  duration_ms: 0.262826
+  type: 'test'
+  ...
+# Subtest: 16.24 workspace linked to 2026 policy, no direct save to Firebase
+ok 24 - 16.24 workspace linked to 2026 policy, no direct save to Firebase
+  ---
+  duration_ms: 0.27494
+  type: 'test'
+  ...
+# Subtest: 16.25 Vercel serves all explicit React route paths including consent/companion, preserving API functions
+ok 25 - 16.25 Vercel serves all explicit React route paths including consent/companion, preserving API functions
+  ---
+  duration_ms: 0.738505
+  type: 'test'
+  ...
+# Subtest: 16.26 CSS asset and test command present
+ok 26 - 16.26 CSS asset and test command present
+  ---
+  duration_ms: 1.489458
+  type: 'test'
+  ...
+# Subtest: 16.27 import/export preserves ordering but downgrades claims to unverified
+ok 27 - 16.27 import/export preserves ordering but downgrades claims to unverified
+  ---
+  duration_ms: 4.830659
+  type: 'test'
+  ...
+# Subtest: 16.28 import rejects wrong schema, old year, or excessive entries
+ok 28 - 16.28 import rejects wrong schema, old year, or excessive entries
+  ---
+  duration_ms: 0.452064
+  type: 'test'
+  ...
+# Subtest: 16.29 invalid or repeated file entries are rejected atomically
+ok 29 - 16.29 invalid or repeated file entries are rejected atomically
+  ---
+  duration_ms: 0.258927
+  type: 'test'
+  ...
+# Subtest: 16.30 import UI explicitly warns that source claims are not trusted
+ok 30 - 16.30 import UI explicitly warns that source claims are not trusted
+  ---
+  duration_ms: 0.423842
+  type: 'test'
+  ...
+1..30
+# tests 30
+# suites 0
+# pass 30
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2839.287047
+COMMAND npm run test:exam-calendar
+
+> cognitive-learn-ai@0.1.0 test:exam-calendar
+> node --experimental-strip-types --test tests/step17-exam-reminders.test.mjs
+
+TAP version 13
+# (node:36732) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: EX01 catalog offers HSA, V-ACT, TSA, V-SAT, THPT and certificates
+ok 1 - EX01 catalog offers HSA, V-ACT, TSA, V-SAT, THPT and certificates
+  ---
+  duration_ms: 6.102687
+  type: 'test'
+  ...
+# Subtest: EX02 no invented exam or registration dates by default
+ok 2 - EX02 no invented exam or registration dates by default
+  ---
+  duration_ms: 0.343748
+  type: 'test'
+  ...
+# Subtest: EX03 leap years and invalid dates rejected
+ok 3 - EX03 leap years and invalid dates rejected
+  ---
+  duration_ms: 0.686758
+  type: 'test'
+  ...
+# Subtest: EX04 countdown is calendar-day based over New Year
+ok 4 - EX04 countdown is calendar-day based over New Year
+  ---
+  duration_ms: 0.721871
+  type: 'test'
+  ...
+# Subtest: EX05 DST-safe date-difference avoids elapsed-hour anomalies
+ok 5 - EX05 DST-safe date-difference avoids elapsed-hour anomalies
+  ---
+  duration_ms: 2.852925
+  type: 'test'
+  ...
+# Subtest: EX06 local date key uses local calendar instead of ISO UTC date
+ok 6 - EX06 local date key uses local calendar instead of ISO UTC date
+  ---
+  duration_ms: 0.813239
+  type: 'test'
+  ...
+# Subtest: EX07 invalid countdown inputs never produce NaN
+ok 7 - EX07 invalid countdown inputs never produce NaN
+  ---
+  duration_ms: 0.138449
+  type: 'test'
+  ...
+# Subtest: EX08 multiple sittings of the same exam are supported
+ok 8 - EX08 multiple sittings of the same exam are supported
+  ---
+  duration_ms: 0.602212
+  type: 'test'
+  ...
+# Subtest: EX09 update does not append duplicate events
+ok 9 - EX09 update does not append duplicate events
+  ---
+  duration_ms: 4.663802
+  type: 'test'
+  ...
+# Subtest: EX10 cap prevents excessive local student records
+ok 10 - EX10 cap prevents excessive local student records
+  ---
+  duration_ms: 1.368422
+  type: 'test'
+  ...
+# Subtest: EX11 registration deadline cannot come after exam date
+ok 11 - EX11 registration deadline cannot come after exam date
+  ---
+  duration_ms: 0.61823
+  type: 'test'
+  ...
+# Subtest: EX12 source links must be HTTPS, never javascript or embedded credentials
+ok 12 - EX12 source links must be HTTPS, never javascript or embedded credentials
+  ---
+  duration_ms: 0.351612
+  type: 'test'
+  ...
+# Subtest: EX13 wrong-account calendar cannot be loaded
+ok 13 - EX13 wrong-account calendar cannot be loaded
+  ---
+  duration_ms: 0.158533
+  type: 'test'
+  ...
+# Subtest: EX14 corrupt storage and wrong version are rejected
+ok 14 - EX14 corrupt storage and wrong version are rejected
+  ---
+  duration_ms: 0.231698
+  type: 'test'
+  ...
+# Subtest: EX15 no-data reminder does not emit a countdown or warning
+ok 15 - EX15 no-data reminder does not emit a countdown or warning
+  ---
+  duration_ms: 0.226992
+  type: 'test'
+  ...
+# Subtest: EX16 nearest future milestone is registration deadline rather than exam
+ok 16 - EX16 nearest future milestone is registration deadline rather than exam
+  ---
+  duration_ms: 0.63904
+  type: 'test'
+  ...
+# Subtest: EX17 when registered, registration reminders are suppressed
+ok 17 - EX17 when registered, registration reminders are suppressed
+  ---
+  duration_ms: 0.136943
+  type: 'test'
+  ...
+# Subtest: EX18 upcoming alerts capped at 14 days, past milestones excluded
+ok 18 - EX18 upcoming alerts capped at 14 days, past milestones excluded
+  ---
+  duration_ms: 0.095299
+  type: 'test'
+  ...
+# Subtest: EX19 expired registrations do not mask an upcoming exam
+ok 19 - EX19 expired registrations do not mask an upcoming exam
+  ---
+  duration_ms: 0.262934
+  type: 'test'
+  ...
+# Subtest: EX20 deterministic sorting handles same day registration and exam
+ok 20 - EX20 deterministic sorting handles same day registration and exam
+  ---
+  duration_ms: 31.403148
+  type: 'test'
+  ...
+# Subtest: EX21 invalid custom names, broken ids and extra-long urls are rejected
+ok 21 - EX21 invalid custom names, broken ids and extra-long urls are rejected
+  ---
+  duration_ms: 0.281118
+  type: 'test'
+  ...
+# Subtest: EX22 format is stable Vietnamese day/month/year
+ok 22 - EX22 format is stable Vietnamese day/month/year
+  ---
+  duration_ms: 0.233846
+  type: 'test'
+  ...
+# Subtest: EX23 student dashboard places exam board after hero and priority cards
+ok 23 - EX23 student dashboard places exam board after hero and priority cards
+  ---
+  duration_ms: 0.622984
+  type: 'test'
+  ...
+# Subtest: EX24 student selects visible exams, can remove or edit their own calendar
+ok 24 - EX24 student selects visible exams, can remove or edit their own calendar
+  ---
+  duration_ms: 0.535993
+  type: 'test'
+  ...
+# Subtest: EX25 browser storage is explicit, versioned, cannot overwrite corrupt source silently
+ok 25 - EX25 browser storage is explicit, versioned, cannot overwrite corrupt source silently
+  ---
+  duration_ms: 0.24562
+  type: 'test'
+  ...
+# Subtest: EX26 reminder board never claims background push works
+ok 26 - EX26 reminder board never claims background push works
+  ---
+  duration_ms: 0.3855
+  type: 'test'
+  ...
+# Subtest: EX27 custom exam and manual source URL are editable with a save action
+ok 27 - EX27 custom exam and manual source URL are editable with a save action
+  ---
+  duration_ms: 29.615522
+  type: 'test'
+  ...
+# Subtest: EX28 stylesheet included and responsive
+ok 28 - EX28 stylesheet included and responsive
+  ---
+  duration_ms: 3.561042
+  type: 'test'
+  ...
+# Subtest: EX29 Atlas and Companion can navigate to the student countdown board
+ok 29 - EX29 Atlas and Companion can navigate to the student countdown board
+  ---
+  duration_ms: 9.295236
+  type: 'test'
+  ...
+# Subtest: EX30 unsafe or modified date inputs cannot be persisted via save
+ok 30 - EX30 unsafe or modified date inputs cannot be persisted via save
+  ---
+  duration_ms: 0.43456
+  type: 'test'
+  ...
+1..30
+# tests 30
+# suites 0
+# pass 30
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 764.72713
+COMMAND npm run test:notifications
+
+> cognitive-learn-ai@0.1.0 test:notifications
+> node --experimental-strip-types --test tests/step18-notification-center.test.mjs
+
+TAP version 13
+# (node:36861) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: NC01 toast store starts empty and ignores blank messages
+ok 1 - NC01 toast store starts empty and ignores blank messages
+  ---
+  duration_ms: 7.949926
+  type: 'test'
+  ...
+# Subtest: NC02 notice broadcasts, includes type, and allows manual dismissal
+ok 2 - NC02 notice broadcasts, includes type, and allows manual dismissal
+  ---
+  duration_ms: 0.613286
+  type: 'test'
+  ...
+# Subtest: NC03 duplicate events are suppressed within 45s
+ok 3 - NC03 duplicate events are suppressed within 45s
+  ---
+  duration_ms: 0.357645
+  type: 'test'
+  ...
+# Subtest: NC04 notifications respect size limits and history cap
+ok 4 - NC04 notifications respect size limits and history cap
+  ---
+  duration_ms: 0.73789
+  type: 'test'
+  ...
+# Subtest: NC05 opening inbox marks current notices read
+ok 5 - NC05 opening inbox marks current notices read
+  ---
+  duration_ms: 0.271274
+  type: 'test'
+  ...
+# Subtest: NC06 all authorized routes share the same notification viewport
+ok 6 - NC06 all authorized routes share the same notification viewport
+  ---
+  duration_ms: 0.78563
+  type: 'test'
+  ...
+# Subtest: NC07 popup is below navigation and is mobile responsive
+ok 7 - NC07 popup is below navigation and is mobile responsive
+  ---
+  duration_ms: 9.215536
+  type: 'test'
+  ...
+# Subtest: NC08 no fake analysis completed on initial page mount
+ok 8 - NC08 no fake analysis completed on initial page mount
+  ---
+  duration_ms: 24.099602
+  type: 'test'
+  ...
+# Subtest: NC09 save success only after Firestore commit, error on failure
+ok 9 - NC09 save success only after Firestore commit, error on failure
+  ---
+  duration_ms: 1.101801
+  type: 'test'
+  ...
+# Subtest: NC10 exam reminders use real saved milestones and session dedupe
+ok 10 - NC10 exam reminders use real saved milestones and session dedupe
+  ---
+  duration_ms: 1.110293
+  type: 'test'
+  ...
+# Subtest: NC11 network events are handled without claiming Firebase save success
+ok 11 - NC11 network events are handled without claiming Firebase save success
+  ---
+  duration_ms: 0.946712
+  type: 'test'
+  ...
+# Subtest: NC12 no notification persists in server or between user logouts
+ok 12 - NC12 no notification persists in server or between user logouts
+  ---
+  duration_ms: 0.379184
+  type: 'test'
+  ...
+# Subtest: NC13 success notification remains visible after the profile-to-dashboard redirect
+ok 13 - NC13 success notification remains visible after the profile-to-dashboard redirect
+  ---
+  duration_ms: 13.634444
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1056.576023
+COMMAND npm run test:shadow
+
+> cognitive-learn-ai@0.1.0 test:shadow
+> node --experimental-strip-types --test tests/step19-decision-evidence-shadow.test.mjs
+
+TAP version 13
+# (node:36974) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: S19-01 incomplete cycle abstains and cannot imply a measured effect
+ok 1 - S19-01 incomplete cycle abstains and cannot imply a measured effect
+  ---
+  duration_ms: 6.555075
+  type: 'test'
+  ...
+# Subtest: S19-02 below engineering completion threshold differs from frozen static policy
+ok 2 - S19-02 below engineering completion threshold differs from frozen static policy
+  ---
+  duration_ms: 45.51517
+  type: 'test'
+  ...
+# Subtest: S19-03 positive delta with completed actions maintains both policies
+ok 3 - S19-03 positive delta with completed actions maintains both policies
+  ---
+  duration_ms: 1.018744
+  type: 'test'
+  ...
+# Subtest: S19-04 nonpositive score delta produces replan, including valid score zero
+ok 4 - S19-04 nonpositive score delta produces replan, including valid score zero
+  ---
+  duration_ms: 4.796874
+  type: 'test'
+  ...
+# Subtest: S19-05 tampering in recorded decisions is detected on replay
+ok 5 - S19-05 tampering in recorded decisions is detected on replay
+  ---
+  duration_ms: 0.679971
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 778.188209
+COMMAND npm run test:consent-share-revocation
+
+> cognitive-learn-ai@0.1.0 test:consent-share-revocation
+> node --experimental-strip-types --test tests/step20-consent-share-revocation.test.mjs
+
+TAP version 13
+# (node:37120) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: SR01 withdrawal cleanup queries again and verifies empty server result
+ok 1 - SR01 withdrawal cleanup queries again and verifies empty server result
+  ---
+  duration_ms: 4.216731
+  type: 'test'
+  ...
+# Subtest: SR02 student report must be removed BEFORE corresponding link
+ok 2 - SR02 student report must be removed BEFORE corresponding link
+  ---
+  duration_ms: 0.719326
+  type: 'test'
+  ...
+# Subtest: SR03 cross-account link from untrusted snapshot fails closed
+ok 3 - SR03 cross-account link from untrusted snapshot fails closed
+  ---
+  duration_ms: 3.503721
+  type: 'test'
+  ...
+# Subtest: SR04 switching account aborts without deleting remaining links
+ok 4 - SR04 switching account aborts without deleting remaining links
+  ---
+  duration_ms: 0.388807
+  type: 'test'
+  ...
+# Subtest: SR05 delete report error blocks link removal, no misleading success
+ok 5 - SR05 delete report error blocks link removal, no misleading success
+  ---
+  duration_ms: 0.585897
+  type: 'test'
+  ...
+# Subtest: SR06 nonempty 25th page never yields verifiedEmpty=true
+ok 6 - SR06 nonempty 25th page never yields verifiedEmpty=true
+  ---
+  duration_ms: 0.362417
+  type: 'test'
+  ...
+# Subtest: SR07 disallow invalid UID and oversized query pages
+ok 7 - SR07 disallow invalid UID and oversized query pages
+  ---
+  duration_ms: 3.241477
+  type: 'test'
+  ...
+# Subtest: SR08 user withdrawal is committed BEFORE best-effort share cleanup
+ok 8 - SR08 user withdrawal is committed BEFORE best-effort share cleanup
+  ---
+  duration_ms: 0.330504
+  type: 'test'
+  ...
+# Subtest: SR09 UI shows retry on partial cleanup and warns about residual data
+ok 9 - SR09 UI shows retry on partial cleanup and warns about residual data
+  ---
+  duration_ms: 0.304408
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 787.228765
+COMMAND npm run test:consent-server-cleanup
+
+> cognitive-learn-ai@0.1.0 test:consent-server-cleanup
+> node --test tests/step21-consent-server-cleanup.test.mjs
+
+TAP version 13
+# Subtest: CS01 accepts only transition accepted -> withdrawn for same valid student and policy version
+ok 1 - CS01 accepts only transition accepted -> withdrawn for same valid student and policy version
+  ---
+  duration_ms: 2.630382
+  type: 'test'
+  ...
+# Subtest: CS02 rejects malformed timestamps, UID and bounds instead of guessing
+ok 2 - CS02 rejects malformed timestamps, UID and bounds instead of guessing
+  ---
+  duration_ms: 1.5198
+  type: 'test'
+  ...
+# Subtest: CS03 deletes old report/link pairs and reports accurate completion
+ok 3 - CS03 deletes old report/link pairs and reports accurate completion
+  ---
+  duration_ms: 17.719972
+  type: 'test'
+  ...
+# Subtest: CS04 does NOT delete newly granted links after student reconsents
+ok 4 - CS04 does NOT delete newly granted links after student reconsents
+  ---
+  duration_ms: 0.617644
+  type: 'test'
+  ...
+# Subtest: CS05 page traversal does not starve old records behind newer ones
+ok 5 - CS05 page traversal does not starve old records behind newer ones
+  ---
+  duration_ms: 2.077159
+  type: 'test'
+  ...
+# Subtest: CS06 fail closed on foreign/malformed link, no subsequent delete
+ok 6 - CS06 fail closed on foreign/malformed link, no subsequent delete
+  ---
+  duration_ms: 0.485343
+  type: 'test'
+  ...
+# Subtest: CS07 fails and retries if conditional delete fails; cannot claim completion
+ok 7 - CS07 fails and retries if conditional delete fails; cannot claim completion
+  ---
+  duration_ms: 3.078114
+  type: 'test'
+  ...
+# Subtest: CS08 limit exhaustion never reports full cleanup
+ok 8 - CS08 limit exhaustion never reports full cleanup
+  ---
+  duration_ms: 0.754525
+  type: 'test'
+  ...
+# Subtest: CS09 idempotent repeat after completed cleanup returns deleted=0
+ok 9 - CS09 idempotent repeat after completed cleanup returns deleted=0
+  ---
+  duration_ms: 0.613658
+  type: 'test'
+  ...
+# Subtest: CS10 malformed page/cursor rejects without claiming success
+ok 10 - CS10 malformed page/cursor rejects without claiming success
+  ---
+  duration_ms: 0.870472
+  type: 'test'
+  ...
+# Subtest: CS11 deployment is isolated from default Firebase config; immutable source guarded
+ok 11 - CS11 deployment is isolated from default Firebase config; immutable source guarded
+  ---
+  duration_ms: 7.898093
+  type: 'test'
+  ...
+# Subtest: CS12 no accidental PII in server cleanup logs
+ok 12 - CS12 no accidental PII in server cleanup logs
+  ---
+  duration_ms: 0.464722
+  type: 'test'
+  ...
+# Subtest: CS13 privileged adapter deletes report+link atomically with update-time preconditions
+ok 13 - CS13 privileged adapter deletes report+link atomically with update-time preconditions
+  ---
+  duration_ms: 1.154609
+  type: 'test'
+  ...
+# Subtest: CS14 deleting old link with no report is safe and atomic
+ok 14 - CS14 deleting old link with no report is safe and atomic
+  ---
+  duration_ms: 0.465453
+  type: 'test'
+  ...
+# Subtest: CS15 refuses corrupt cross-account report before committing any deletion
+ok 15 - CS15 refuses corrupt cross-account report before committing any deletion
+  ---
+  duration_ms: 0.290548
+  type: 'test'
+  ...
+# Subtest: CS16 conditional batch conflict is surfaced for retry
+ok 16 - CS16 conditional batch conflict is surfaced for retry
+  ---
+  duration_ms: 0.57487
+  type: 'test'
+  ...
+# Subtest: CS17 adapter rejects missing timestamps; never does unconditional deletes
+ok 17 - CS17 adapter rejects missing timestamps; never does unconditional deletes
+  ---
+  duration_ms: 0.388035
+  type: 'test'
+  ...
+# Subtest: CS18 independent verification confirms empty set after actual deletes
+ok 18 - CS18 independent verification confirms empty set after actual deletes
+  ---
+  duration_ms: 1.039396
+  type: 'test'
+  ...
+# Subtest: CS19 verification detects old metadata left behind after false success
+ok 19 - CS19 verification detects old metadata left behind after false success
+  ---
+  duration_ms: 0.27823
+  type: 'test'
+  ...
+# Subtest: CS20 verification preserves later consent grants without false positives
+ok 20 - CS20 verification preserves later consent grants without false positives
+  ---
+  duration_ms: 0.182446
+  type: 'test'
+  ...
+# Subtest: CS21 legacy links with missing timestamp remain pending
+ok 21 - CS21 legacy links with missing timestamp remain pending
+  ---
+  duration_ms: 0.407559
+  type: 'test'
+  ...
+# Subtest: CS22 scan verification does not perform deletes or expose record details
+ok 22 - CS22 scan verification does not perform deletes or expose record details
+  ---
+  duration_ms: 0.401683
+  type: 'test'
+  ...
+# Subtest: CS23 refuses incomplete full-page audit instead of reporting success
+ok 23 - CS23 refuses incomplete full-page audit instead of reporting success
+  ---
+  duration_ms: 0.253708
+  type: 'test'
+  ...
+# Subtest: CS24 rejects malformed and foreign records in audit scan
+ok 24 - CS24 rejects malformed and foreign records in audit scan
+  ---
+  duration_ms: 0.737624
+  type: 'test'
+  ...
+# Subtest: CS25 deployed function gates completion on independent verification
+ok 25 - CS25 deployed function gates completion on independent verification
+  ---
+  duration_ms: 0.28518
+  type: 'test'
+  ...
+1..25
+# tests 25
+# suites 0
+# pass 25
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 528.299007
+COMMAND npm run test:cp29:access
+
+> cognitive-learn-ai@0.1.0 test:cp29:access
+> node --test tests/cp29-live-access-gate.test.cjs
+
+TAP version 13
+# Subtest: CP29-B2-01 starts fail-closed until server-backed role listener confirms
+ok 1 - CP29-B2-01 starts fail-closed until server-backed role listener confirms
+  ---
+  duration_ms: 356.740661
+  type: 'test'
+  ...
+# Subtest: CP29-B2-02 role revoked during open session unmounts private children
+ok 2 - CP29-B2-02 role revoked during open session unmounts private children
+  ---
+  duration_ms: 217.064315
+  type: 'test'
+  ...
+# Subtest: CP29-B2-03 role changed to Admin does not silently escalate session
+ok 3 - CP29-B2-03 role changed to Admin does not silently escalate session
+  ---
+  duration_ms: 135.527743
+  type: 'test'
+  ...
+# Subtest: CP29-B2-04 cached or pending-write account snapshots never authorize
+ok 4 - CP29-B2-04 cached or pending-write account snapshots never authorize
+  ---
+  duration_ms: 93.935175
+  type: 'test'
+  ...
+# Subtest: CP29-B2-05 live consent withdrawal immediately unmounts student pages
+ok 5 - CP29-B2-05 live consent withdrawal immediately unmounts student pages
+  ---
+  duration_ms: 87.106929
+  type: 'test'
+  ...
+# Subtest: CP29-B2-06 cached consent state cannot re-grant access
+ok 6 - CP29-B2-06 cached consent state cannot re-grant access
+  ---
+  duration_ms: 217.178979
+  type: 'test'
+  ...
+# Live account authorization failed: Error: firestore unavailable
+#     at Object.fail (/tmp/cla_cp41_now/tests/cp29-live-access-gate.test.cjs:78:73)
+#     at TestContext.<anonymous> (/tmp/cla_cp41_now/tests/cp29-live-access-gate.test.cjs:131:7)
+#     at async Test.run (node:internal/test_runner/test:1054:7)
+#     at async Test.processPendingSubtests (node:internal/test_runner/test:744:7) {
+#   code: 'unavailable'
+# }
+# Subtest: CP29-B2-07 listener failure fails closed and logout disposes old listeners
+ok 7 - CP29-B2-07 listener failure fails closed and logout disposes old listeners
+  ---
+  duration_ms: 140.954827
+  type: 'test'
+  ...
+# Subtest: CP29-B2-08 switching accounts disposes old listeners before new verification
+ok 8 - CP29-B2-08 switching accounts disposes old listeners before new verification
+  ---
+  duration_ms: 116.07026
+  type: 'test'
+  ...
+# Subtest: CP29-B2-09 consent management route stays usable to re-consent
+ok 9 - CP29-B2-09 consent management route stays usable to re-consent
+  ---
+  duration_ms: 85.146003
+  type: 'test'
+  ...
+# Firebase auth state error: Error: auth failure
+#     at Object.authFail (/tmp/cla_cp41_now/tests/cp29-live-access-gate.test.cjs:76:40)
+#     at TestContext.<anonymous> (/tmp/cla_cp41_now/tests/cp29-live-access-gate.test.cjs:154:7)
+#     at async Test.run (node:internal/test_runner/test:1054:7)
+#     at async Test.processPendingSubtests (node:internal/test_runner/test:744:7) {
+#   code: 'unavailable'
+# }
+# Subtest: CP29-B2-10 auth stream error revokes existing access and unsubscribes listeners
+ok 10 - CP29-B2-10 auth stream error revokes existing access and unsubscribes listeners
+  ---
+  duration_ms: 57.665179
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3060.11044
+COMMAND npm run test:cp29:routes
+
+> cognitive-learn-ai@0.1.0 test:cp29:routes
+> node --test tests/cp29-route-deeplink-contract.test.cjs
+
+TAP version 13
+# Subtest: CP29-A4-01 all 20 current critical paths are registered by the root app
+ok 1 - CP29-A4-01 all 20 current critical paths are registered by the root app
+  ---
+  duration_ms: 3.269548
+  type: 'test'
+  ...
+# Subtest: CP29-A4-02 Vercel rewrites every critical deep link to SPA without shadowing APIs
+ok 2 - CP29-A4-02 Vercel rewrites every critical deep link to SPA without shadowing APIs
+  ---
+  duration_ms: 0.573673
+  type: 'test'
+  ...
+# Subtest: CP29-A4-03 Firebase Hosting has SPA fallback
+ok 3 - CP29-A4-03 Firebase Hosting has SPA fallback
+  ---
+  duration_ms: 0.328115
+  type: 'test'
+  ...
+# Subtest: CP29-A4-04 route guard enforces student-only scope and retired route denial
+ok 4 - CP29-A4-04 route guard enforces student-only scope and retired route denial
+  ---
+  duration_ms: 0.534717
+  type: 'test'
+  ...
+# Subtest: CP29-A4-05 protected pages mount chatbot only inside AccessGate
+ok 5 - CP29-A4-05 protected pages mount chatbot only inside AccessGate
+  ---
+  duration_ms: 0.319433
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 385.360319

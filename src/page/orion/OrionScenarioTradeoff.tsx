@@ -1,73 +1,22 @@
-import type { OrionScenario } from "../../lib/orionStrategyEngine";
-
-type Props = { scenarios: OrionScenario[] };
-
-const RISK_LABEL: Record<OrionScenario["riskLevel"], string> = {
-  LOW: "Rủi ro thấp",
-  MEDIUM: "Cần cân nhắc",
-  HIGH: "Áp lực cao",
-};
-
-export default function OrionScenarioTradeoff({ scenarios }: Props) {
-  if (!scenarios.length) return null;
-  const width = 760;
-  const height = 370;
-  const left = 72;
-  const right = 28;
-  const top = 30;
-  const bottom = 68;
-  const plotWidth = width - left - right;
-  const plotHeight = height - top - bottom;
-  const maxGain = Math.max(2.5, ...scenarios.map((item) => item.expectedGain));
-  const x = (value: number) => left + (Math.max(0, Math.min(100, value)) / 100) * plotWidth;
-  const y = (value: number) => top + plotHeight - (Math.max(0, value) / maxGain) * plotHeight;
-  const ordered = [...scenarios].sort((a, b) => a.feasibility - b.feasibility);
-  const frontier = ordered.map((item) => `${x(item.feasibility)},${y(item.expectedGain)}`).join(" ");
-
-  return (
-    <section className="orion-tradeoff-panel" aria-labelledby="orion-tradeoff-title">
-      <div className="orion-tradeoff-heading">
-        <div><span>ORION · STRATEGY TOPOLOGY</span><h2 id="orion-tradeoff-title">Bản đồ đánh đổi chiến lược</h2><p>Mỗi điểm là một phương án; vị trí thể hiện mức khả thi và mức tăng điểm giả định do bộ quy tắc Orion tạo ra.</p></div>
-        <span className="orion-tradeoff-stamp">RULE-BASED MODEL</span>
-      </div>
-      <div className="orion-tradeoff-chart-wrap">
-        <svg className="orion-tradeoff-chart" viewBox={`0 0 ${width} ${height}`} role="img" aria-label="Biểu đồ đánh đổi giữa mức khả thi và mức tăng điểm giả định của ba chiến lược Orion">
-          {[0, 0.5, 1, 1.5, 2, 2.5].map((tick) => (
-            <g key={tick}>
-              <line x1={left} y1={y(tick)} x2={width - right} y2={y(tick)} className="orion-chart-gridline" />
-              <text x={left - 14} y={y(tick) + 4} textAnchor="end" className="orion-chart-tick">{tick.toFixed(1)}</text>
-            </g>
-          ))}
-          {[40, 60, 80, 100].map((tick) => (
-            <g key={tick}>
-              <line x1={x(tick)} y1={top} x2={x(tick)} y2={top + plotHeight} className="orion-chart-gridline is-vertical" />
-              <text x={x(tick)} y={top + plotHeight + 24} textAnchor="middle" className="orion-chart-tick">{tick}%</text>
-            </g>
-          ))}
-          <line x1={left} y1={top + plotHeight} x2={width - right} y2={top + plotHeight} className="orion-chart-axis" />
-          <line x1={left} y1={top} x2={left} y2={top + plotHeight} className="orion-chart-axis" />
-          <polyline points={frontier} className="orion-frontier-line" />
-          {scenarios.map((scenario) => {
-            const cx = x(scenario.feasibility);
-            const cy = y(scenario.expectedGain);
-            const radius = 10 + Math.max(0, Math.min(20, scenario.weeklyHours)) * 0.45;
-            const color = scenario.id === "balanced" ? "#0f9f91" : scenario.id === "focused" ? "#3478e5" : "#e28a38";
-            return (
-              <g key={scenario.id} className={`orion-tradeoff-point is-${scenario.id}`}>
-                <circle cx={cx} cy={cy} r={radius + 7} fill={color} opacity=".10" />
-                <circle cx={cx} cy={cy} r={radius} fill={color} stroke="#fff" strokeWidth="3"><title>{scenario.title}: khả thi {scenario.feasibility}%, tăng điểm giả định {scenario.expectedGain}, {scenario.weeklyHours} giờ/tuần</title></circle>
-                <text x={cx} y={cy - radius - 13} textAnchor="middle" className="orion-chart-point-label">{scenario.id === "balanced" ? "CÂN BẰNG" : scenario.id === "focused" ? "TẬP TRUNG" : "BỨT PHÁ"}</text>
-              </g>
-            );
-          })}
-          <text x={left + plotWidth / 2} y={height - 12} textAnchor="middle" className="orion-chart-axis-label">MỨC KHẢ THI THEO QUY TẮC (%) →</text>
-          <text x="18" y={top + plotHeight / 2} textAnchor="middle" transform={`rotate(-90 18 ${top + plotHeight / 2})`} className="orion-chart-axis-label">MỨC TĂNG ĐIỂM GIẢ ĐỊNH</text>
-        </svg>
-      </div>
-      <div className="orion-tradeoff-legend">
-        {scenarios.map((scenario) => <div key={scenario.id}><strong>{scenario.title}</strong><span>{scenario.expectedGain.toFixed(1)} điểm giả định · {scenario.weeklyHours} giờ/tuần</span><em>{RISK_LABEL[scenario.riskLevel]}</em></div>)}
-      </div>
-      <p className="orion-tradeoff-note">Lưu ý phương pháp: “mức tăng điểm” và “khả thi” là đầu ra heuristic của engine hiện tại, không phải xác suất đỗ, dự báo ML đã hiệu chuẩn hay hiệu quả can thiệp đã quan sát.</p>
-    </section>
-  );
+import type { OrionScenario,OrionRiskLevel } from '../../lib/orionStrategyEngine';
+import {evaluateScenarioChoices} from '../../lib/scenarioDecision';
+import {chartNumber} from '../../components/common/charts/AnalyticCharts';
+type Props={scenarios:OrionScenario[];maxHours?:number|null;maxRisk?:OrionRiskLevel|null};
+export default function OrionScenarioTradeoff({scenarios,maxHours=null,maxRisk=null}:Props){
+ const result=evaluateScenarioChoices(scenarios,maxHours,maxRisk);
+ const rows=result.rows.filter(r=>!r.reasons.includes('Dữ liệu phương án không hợp lệ'));
+ if(!rows.length)return <p role="status">Chưa có phương án hợp lệ để vẽ.</p>;
+ const ceiling=Math.max(1,Math.ceil(Math.max(...rows.map(r=>r.scenario.expectedGain))));
+ const x=(v:number)=>65+v/100*315, y=(v:number)=>216-v/ceiling*170;
+ const names=new Map(scenarios.map(s=>[s.id,s.title]));
+ const status=(id:string)=>{const r=rows.find(r=>r.scenario.id===id);return r?.reasons.length?'Ngoài ràng buộc':result.frontier.includes(id)?'Pareto':'Bị lấn át';};
+ return <section className="orion-tradeoff-panel" aria-labelledby="orion-tradeoff-title"><div className="orion-tradeoff-heading"><div><span>ORION · STRATEGY TOPOLOGY</span><h2 id="orion-tradeoff-title">Bản đồ đánh đổi chiến lược</h2><p>Phân loại Pareto theo ba chiều: tăng điểm giả định, khả thi theo quy tắc và thời lượng thấp. Hai trục chỉ biểu diễn hai chiều; không nối điểm thành đường biên.</p></div></div>
+ <figure className="cla-viz-figure"><svg className="cla-viz-plot" viewBox="0 0 420 262" role="img" aria-label="So sánh kịch bản theo khả thi và điểm tăng giả định; nhãn Pareto tính cả thời lượng">
+ {[0,.25,.5,.75,1].map(t=><g key={t}><line className="cla-viz-gridline" x1="65" x2="380" y1={y(t*ceiling)} y2={y(t*ceiling)}/><text x="56" y={y(t*ceiling)+4} textAnchor="end">{chartNumber(t*ceiling)}</text></g>)}
+ {[0,25,50,75,100].map(t=><g key={t}><line className="cla-viz-gridline" x1={x(t)} x2={x(t)} y1="46" y2="216"/><text x={x(t)} y="233" textAnchor="middle">{t}</text></g>)}
+ {rows.map(({scenario},i)=>{const state=status(scenario.id);const color=state==='Pareto'?'rgb(var(--tc-tx-14877e))':state==='Bị lấn át'?'#c08032':'#849bb4'; const cx=x(scenario.feasibility),cy=y(scenario.expectedGain);return <g key={scenario.id}><circle cx={cx} cy={cy} r="10" fill={state==='Ngoài ràng buộc'?'none':color} stroke={color} strokeWidth="2"/><text x={cx} y={cy-14} textAnchor="middle">{i+1}</text><title>{scenario.title}: {state}, {scenario.weeklyHours} giờ/tuần</title></g>;})}
+ <text x="222" y="252" textAnchor="middle">Khả thi theo quy tắc (%)</text><text x="65" y="20">Tăng điểm giả định</text></svg>
+ <figcaption className="cla-viz-legend"><span className="is-teal">Pareto</span><span className="is-amber">Bị lấn át</span><span className="is-excluded">Ngoài giới hạn</span></figcaption></figure>
+ <div className="cla-viz-plain-list">{rows.map((r,i)=><div className="cla-viz-row" key={r.scenario.id}><strong>{i+1}. {names.get(r.scenario.id)}</strong><span>{status(r.scenario.id)} · {r.scenario.weeklyHours} giờ · {chartNumber(r.scenario.expectedGain)} điểm · {chartNumber(r.scenario.feasibility)}% khả thi</span></div>)}</div>
+ <p className="orion-tradeoff-note">Các đầu ra heuristic không phải xác suất đỗ, dự báo ML đã hiệu chuẩn hay hiệu quả can thiệp thực tế.</p></section>;
 }

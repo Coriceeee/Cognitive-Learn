@@ -1,0 +1,394 @@
+TAP version 13
+# (node:5005) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP25-01: Curated universities have sourced years without inventing unverified archives
+ok 1 - CP25-01: Curated universities have sourced years without inventing unverified archives
+  ---
+  duration_ms: 2.042308
+  type: 'test'
+  ...
+# Subtest: CP25-02: Year-specific PTIT pathways do not leak year-specific methods
+ok 2 - CP25-02: Year-specific PTIT pathways do not leak year-specific methods
+  ---
+  duration_ms: 0.175805
+  type: 'test'
+  ...
+# Subtest: CP25-03: Exact campus and method provenance on historical cutoffs
+ok 3 - CP25-03: Exact campus and method provenance on historical cutoffs
+  ---
+  duration_ms: 0.338671
+  type: 'test'
+  ...
+# Subtest: CP25-04: Score conversion accepts actual zero but not missing or invalid inputs
+ok 4 - CP25-04: Score conversion accepts actual zero but not missing or invalid inputs
+  ---
+  duration_ms: 0.19229
+  type: 'test'
+  ...
+# Subtest: CP25-05: Historical gap is arithmetic, never chance-of-admission
+ok 5 - CP25-05: Historical gap is arithmetic, never chance-of-admission
+  ---
+  duration_ms: 0.153612
+  type: 'test'
+  ...
+# Subtest: CP25-06: Discovery matches year/method without inventing unsupported methods
+ok 6 - CP25-06: Discovery matches year/method without inventing unsupported methods
+  ---
+  duration_ms: 0.665543
+  type: 'test'
+  ...
+# Subtest: CP25-07: International requirements have direct official endpoints and certifications
+ok 7 - CP25-07: International requirements have direct official endpoints and certifications
+  ---
+  duration_ms: 0.167733
+  type: 'test'
+  ...
+# Subtest: CP25-08: Chat only keeps last eight bounded turns
+ok 8 - CP25-08: Chat only keeps last eight bounded turns
+  ---
+  duration_ms: 0.326212
+  type: 'test'
+  ...
+# Subtest: CP25-09: Chat rejects invalid content and unauthorized roles in history
+ok 9 - CP25-09: Chat rejects invalid content and unauthorized roles in history
+  ---
+  duration_ms: 0.540014
+  type: 'test'
+  ...
+# Subtest: CP25-10: UI routes and protected chat endpoint exist
+ok 10 - CP25-10: UI routes and protected chat endpoint exist
+  ---
+  duration_ms: 9.706961
+  type: 'test'
+  ...
+# Subtest: CP25-11: Study-abroad refresh uses Vercel SPA rewrite, preserving /api routes
+ok 11 - CP25-11: Study-abroad refresh uses Vercel SPA rewrite, preserving /api routes
+  ---
+  duration_ms: 0.693315
+  type: 'test'
+  ...
+# Subtest: CP25-12: Chat supports same-origin secure deployment and optional CORS origin list
+ok 12 - CP25-12: Chat supports same-origin secure deployment and optional CORS origin list
+  ---
+  duration_ms: 0.214493
+  type: 'test'
+  ...
+# Subtest: ROUND-01: Floating assistant routes specialist questions to their owning modules
+ok 13 - ROUND-01: Floating assistant routes specialist questions to their owning modules
+  ---
+  duration_ms: 0.85595
+  type: 'test'
+  ...
+# Subtest: ROUND-02: Only internal known destinations may appear in chat responses
+ok 14 - ROUND-02: Only internal known destinations may appear in chat responses
+  ---
+  duration_ms: 0.22561
+  type: 'test'
+  ...
+# Subtest: ROUND-03: Backend and frontend share specialist redirect gate
+ok 15 - ROUND-03: Backend and frontend share specialist redirect gate
+  ---
+  duration_ms: 0.315846
+  type: 'test'
+  ...
+# Subtest: ROUND-04: Do not show uncalibrated achievement probability on the dashboard
+ok 16 - ROUND-04: Do not show uncalibrated achievement probability on the dashboard
+  ---
+  duration_ms: 0.161813
+  type: 'test'
+  ...
+# Subtest: ROUND-05: United States and domestic international pathways have official links and clear limitations
+ok 17 - ROUND-05: United States and domestic international pathways have official links and clear limitations
+  ---
+  duration_ms: 0.143536
+  type: 'test'
+  ...
+# Subtest: ROUND-06: TDTU three-year schemes distinguish score scales
+ok 18 - ROUND-06: TDTU three-year schemes distinguish score scales
+  ---
+  duration_ms: 0.276527
+  type: 'test'
+  ...
+# Subtest: ROUND-07: Career-fit UI states experimental scores are not admission probabilities
+ok 19 - ROUND-07: Career-fit UI states experimental scores are not admission probabilities
+  ---
+  duration_ms: 0.161794
+  type: 'test'
+  ...
+# Subtest: ROUND-07: Career-fit UI states experimental scores are not admission probabilities
+ok 20 - ROUND-07: Career-fit UI states experimental scores are not admission probabilities
+  ---
+  duration_ms: 0.215295
+  type: 'test'
+  ...
+# Subtest: GLOBAL-01: every ISO 3166-1 alpha-2 country/territory is selectable without fabricated claims
+ok 21 - GLOBAL-01: every ISO 3166-1 alpha-2 country/territory is selectable without fabricated claims
+  ---
+  duration_ms: 2.681692
+  type: 'test'
+  ...
+# Subtest: GLOBAL-02: all-country UI abstains when programme-level evidence is unavailable
+ok 22 - GLOBAL-02: all-country UI abstains when programme-level evidence is unavailable
+  ---
+  duration_ms: 0.382777
+  type: 'test'
+  ...
+# Subtest: GLOBAL-03: Atlas owns domestic and international admissions; Haven owns scholarships and finance
+ok 23 - GLOBAL-03: Atlas owns domestic and international admissions; Haven owns scholarships and finance
+  ---
+  duration_ms: 0.342667
+  type: 'test'
+  ...
+# Subtest: MODULE-01: 7 main modules remain while study abroad is an Atlas submodule
+ok 24 - MODULE-01: 7 main modules remain while study abroad is an Atlas submodule
+  ---
+  duration_ms: 0.599313
+  type: 'test'
+  ...
+# Subtest: UX-V7-01: Assistant receives only allowlisted page context and page-specific prompts
+ok 25 - UX-V7-01: Assistant receives only allowlisted page context and page-specific prompts
+  ---
+  duration_ms: 0.33186
+  type: 'test'
+  ...
+# (node:5006) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: national catalog includes 17 schools and preserves 110 PTIT records, 1262 external numeric facts
+ok 26 - national catalog includes 17 schools and preserves 110 PTIT records, 1262 external numeric facts
+  ---
+  duration_ms: 14.862021
+  type: 'test'
+  ...
+# Subtest: all known scales compare equal values; unknown scales never compute gaps
+ok 27 - all known scales compare equal values; unknown scales never compute gaps
+  ---
+  duration_ms: 321.783973
+  type: 'test'
+  ...
+# Subtest: lookup uses school-specific method and exact code, no mismatched school or year
+ok 28 - lookup uses school-specific method and exact code, no mismatched school or year
+  ---
+  duration_ms: 243.763502
+  type: 'test'
+  ...
+# Subtest: independently checked numeric spot values and distinct campus codes
+ok 29 - independently checked numeric spot values and distinct campus codes
+  ---
+  duration_ms: 1.540312
+  type: 'test'
+  ...
+# Subtest: official links include central region, missing numeric sources remain missing
+ok 30 - official links include central region, missing numeric sources remain missing
+  ---
+  duration_ms: 0.234783
+  type: 'test'
+  ...
+# Subtest: CTU 2024 and 2025 preserve source, method and exact known values
+ok 31 - CTU 2024 and 2025 preserve source, method and exact known values
+  ---
+  duration_ms: 1.694845
+  type: 'test'
+  ...
+# Subtest: history isolates campus and code, preserves years and explicit missing slots
+ok 32 - history isolates campus and code, preserves years and explicit missing slots
+  ---
+  duration_ms: 4.804452
+  type: 'test'
+  ...
+# (node:5007) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: P1 source provenance: no duplicate scholarship IDs, source URLs and conditions present
+ok 33 - P1 source provenance: no duplicate scholarship IDs, source URLs and conditions present
+  ---
+  duration_ms: 1.862968
+  type: 'test'
+  ...
+# Subtest: P1 scholarship search filters by country and label without claiming eligibility
+ok 34 - P1 scholarship search filters by country and label without claiming eligibility
+  ---
+  duration_ms: 4.673814
+  type: 'test'
+  ...
+# Subtest: P1 Atlas provenance distinguishes 3-year records from 2026-only additions
+ok 35 - P1 Atlas provenance distinguishes 3-year records from 2026-only additions
+  ---
+  duration_ms: 2.405626
+  type: 'test'
+  ...
+# (node:5038) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: transcribed three-year numeric row counts; all keys distinct; no college programme
+ok 36 - transcribed three-year numeric row counts; all keys distinct; no college programme
+  ---
+  duration_ms: 1.263755
+  type: 'test'
+  ...
+# Subtest: spot check official CNTT three-year history, no VSAT record in 2024
+ok 37 - spot check official CNTT three-year history, no VSAT record in 2024
+  ---
+  duration_ms: 1.604418
+  type: 'test'
+  ...
+# Subtest: missing columns are never zero; same scale comparison only; aptitude method wording retained as limitation
+ok 38 - missing columns are never zero; same scale comparison only; aptitude method wording retained as limitation
+  ---
+  duration_ms: 0.6299
+  type: 'test'
+  ...
+# Subtest: school-code search and chatbot return exact method-labelled record
+ok 39 - school-code search and chatbot return exact method-labelled record
+  ---
+  duration_ms: 1.225157
+  type: 'test'
+  ...
+# Subtest: only CNTT combination evidence reviewed, unconfirmed others remain searchable
+ok 40 - only CNTT combination evidence reviewed, unconfirmed others remain searchable
+  ---
+  duration_ms: 18.694847
+  type: 'test'
+  ...
+# Subtest: reviewed table parser rejects duplicates, prototype-like key, blank row, missing columns, nonnumeric or overflow
+ok 41 - reviewed table parser rejects duplicates, prototype-like key, blank row, missing columns, nonnumeric or overflow
+  ---
+  duration_ms: 1.972333
+  type: 'test'
+  ...
+# Subtest: source structure fail closed; legitimate numeric zero preserved; no claim of authenticity
+ok 42 - source structure fail closed; legitimate numeric zero preserved; no claim of authenticity
+  ---
+  duration_ms: 0.514926
+  type: 'test'
+  ...
+# Subtest: coverage counts DTHU once per year; missing combinations remain a task
+ok 43 - coverage counts DTHU once per year; missing combinations remain a task
+  ---
+  duration_ms: 6.605456
+  type: 'test'
+  ...
+# (node:5049) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: catalogue spans all current national records without changing cutoff facts
+ok 44 - catalogue spans all current national records without changing cutoff facts
+  ---
+  duration_ms: 1.418328
+  type: 'test'
+  ...
+# Subtest: CTU and AGU official code additions exactly reconcile with 2026 inventory
+ok 45 - CTU and AGU official code additions exactly reconcile with 2026 inventory
+  ---
+  duration_ms: 5.632869
+  type: 'test'
+  ...
+# Subtest: physics English returns multiple schools, not PTIT only
+ok 46 - physics English returns multiple schools, not PTIT only
+  ---
+  duration_ms: 2.392807
+  type: 'test'
+  ...
+# Subtest: social pair can return entirely non-PTIT schools
+ok 47 - social pair can return entirely non-PTIT schools
+  ---
+  duration_ms: 1.437717
+  type: 'test'
+  ...
+# Subtest: no pair or duplicate electives leaves all sourced programmes selectable
+ok 48 - no pair or duplicate electives leaves all sourced programmes selectable
+  ---
+  duration_ms: 4.795488
+  type: 'test'
+  ...
+# Subtest: zero is a valid observed score; missing is not
+ok 49 - zero is a valid observed score; missing is not
+  ---
+  duration_ms: 4.996851
+  type: 'test'
+  ...
+# Subtest: technology streams cannot borrow a generic technology grade
+ok 50 - technology streams cannot borrow a generic technology grade
+  ---
+  duration_ms: 0.867037
+  type: 'test'
+  ...
+# Subtest: AGU composite and HUST base evidence never become THPT eligibility
+ok 51 - AGU composite and HUST base evidence never become THPT eligibility
+  ---
+  duration_ms: 0.821748
+  type: 'test'
+  ...
+# Subtest: search admits unconfirmed programmes and keeps school identity
+ok 52 - search admits unconfirmed programmes and keeps school identity
+  ---
+  duration_ms: 5.687723
+  type: 'test'
+  ...
+# Subtest: reviewed record must have matching school, year, verified source and official host
+ok 53 - reviewed record must have matching school, year, verified source and official host
+  ---
+  duration_ms: 11.894297
+  type: 'test'
+  ...
+# Subtest: reviewed programme does not invent THPT evidence for other methods
+ok 54 - reviewed programme does not invent THPT evidence for other methods
+  ---
+  duration_ms: 1.118957
+  type: 'test'
+  ...
+# (node:5060) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: 73 scheme codes independent of cutoff; published quota sums match transcribed rows
+ok 55 - 73 scheme codes independent of cutoff; published quota sums match transcribed rows
+  ---
+  duration_ms: 0.905074
+  type: 'test'
+  ...
+# Subtest: QNU named triples retain names and no invented standard codes
+ok 56 - QNU named triples retain names and no invented standard codes
+  ---
+  duration_ms: 0.228485
+  type: 'test'
+  ...
+# Subtest: ambiguous technology or aptitude never mapped to student elective
+ok 57 - ambiguous technology or aptitude never mapped to student elective
+  ---
+  duration_ms: 0.312411
+  type: 'test'
+  ...
+# Subtest: HTU explicit X14 X21 mapping and legacy C14 not guessed
+ok 58 - HTU explicit X14 X21 mapping and legacy C14 not guessed
+  ---
+  duration_ms: 1.097224
+  type: 'test'
+  ...
+# Subtest: scheme-only results searchable without fabricating cutoff or eligibility
+ok 59 - scheme-only results searchable without fabricating cutoff or eligibility
+  ---
+  duration_ms: 0.799134
+  type: 'test'
+  ...
+# Subtest: new school programmes available for elective matching and explicit zero
+ok 60 - new school programmes available for elective matching and explicit zero
+  ---
+  duration_ms: 2.369311
+  type: 'test'
+  ...
+# Subtest: coverage counts remain local and separate from national denominator
+ok 61 - coverage counts remain local and separate from national denominator
+  ---
+  duration_ms: 4.747856
+  type: 'test'
+  ...
+# Subtest: official published school codes work in three-year discovery
+ok 62 - official published school codes work in three-year discovery
+  ---
+  duration_ms: 15.885524
+  type: 'test'
+  ...
+1..62
+# tests 62
+# suites 0
+# pass 62
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 855.207479

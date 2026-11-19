@@ -1,0 +1,20 @@
+import { MetricBar } from '../../components/common/charts/AnalyticCharts';
+import OrionRobustPolicy from './OrionRobustPolicy';
+import OrionStudyAllocation from './OrionStudyAllocation';
+import type { AllocationSubject } from '../../lib/studyTimeAllocation';
+import type { OrionScenario, OrionRiskLevel } from '../../lib/orionStrategyEngine';
+import { evaluateScenarioChoices } from '../../lib/scenarioDecision';
+type Props={scenarios:OrionScenario[];subjects:readonly AllocationSubject[];hours:string;risk:OrionRiskLevel|'';setHours:(v:string)=>void;setRisk:(v:OrionRiskLevel|'')=>void};
+export default function OrionDecisionWorkbench({scenarios,subjects,hours,risk,setHours,setRisk}:Props){
+ const parsed=hours.trim()===''?null:Number(hours);
+ const result=evaluateScenarioChoices(scenarios,parsed,risk||null);
+ const names=new Map(scenarios.map(s=>[s.id,s.title]));
+ const maxGain=Math.max(1,...result.rows.filter(r=>!r.reasons.includes('Dữ liệu phương án không hợp lệ')).map(r=>r.scenario.expectedGain).filter(Number.isFinite));
+ const maxWork=Math.max(1,...result.rows.filter(r=>!r.reasons.includes('Dữ liệu phương án không hợp lệ')).map(r=>r.scenario.weeklyHours).filter(Number.isFinite));
+ return <><section className="orion-tradeoff-panel" aria-labelledby="orion-decision-workbench-title"><div className="orion-tradeoff-heading"><div><span>ORION · CONSTRAINED DECISION</span><h2 id="orion-decision-workbench-title">So sánh phương án theo giới hạn của bạn</h2><p>Không tự thay đổi kế hoạch đang lưu. Phương án Pareto là phương án không bị phương án hợp lệ khác vượt trên ít nhất một chiều mà không kém ở các chiều còn lại.</p></div><span className="orion-tradeoff-stamp">HEURISTIC</span></div>
+ <div className="orion-tradeoff-legend"><div><label>Giờ học tối đa mỗi tuần<input type="number" min="0" max="168" step="0.5" value={hours} placeholder="Chưa giới hạn" onChange={e=>setHours(e.target.value)}/></label></div><div><label>Mức áp lực tối đa<select value={risk} onChange={e=>setRisk(e.target.value as OrionRiskLevel|'')}><option value="">Chưa giới hạn</option><option value="LOW">Thấp</option><option value="MEDIUM">Vừa</option><option value="HIGH">Cao</option></select></label></div></div>
+ <p role="status">{!result.configValid?'Giới hạn không hợp lệ; cần nhập 0–168 giờ.':result.frontier.length?`${result.frontier.length} phương án không bị lấn át theo ba tiêu chí.`:'Không có phương án trong giới hạn; cân nhắc điều chỉnh thời lượng hoặc tìm hỗ trợ chuyên môn.'}</p>
+ <div className="cla-viz-legend"><span className="is-blue">Tăng điểm giả định (0–{maxGain})</span><span className="is-teal">Khả thi (0–100%)</span><span className="is-amber">Giờ / tuần (0–{maxWork})</span></div>
+ <div className="cla-viz-rows">{result.rows.map((r,i)=>{const invalid=r.reasons.includes('Dữ liệu phương án không hợp lệ');return <div className="cla-viz-row" key={`${r.scenario.id}-${i}`}><div><strong>{r.scenario.title}</strong><p className="cla-viz-compact">{r.reasons.length?r.reasons.join(' · '):r.dominatedBy.length?`Bị lấn át bởi ${r.dominatedBy.map(id=>names.get(id)??id).join(', ')}`:'Không bị lấn át'}</p></div><div className="cla-viz-pair"><MetricBar label={`${r.scenario.title} · tăng điểm giả định`} value={invalid?null:r.scenario.expectedGain} max={maxGain} unit=" điểm"/><MetricBar label={`${r.scenario.title} · khả thi`} value={invalid?null:r.scenario.feasibility} max={100} tone="teal" unit="%"/><MetricBar label={`${r.scenario.title} · thời lượng`} value={invalid?null:r.scenario.weeklyHours} max={maxWork} tone="amber" unit=" giờ"/></div></div>;})}</div>
+ <p className="orion-tradeoff-note">{result.version} · So sánh đầu ra kịch bản rule-based, không phải dự báo ML hay hiệu quả nhân quả. Ưu tiên tăng điểm giả định, khả thi và ít giờ học; mức áp lực là ràng buộc riêng. Không tự chọn thay bạn.</p></section><OrionRobustPolicy scenarios={scenarios} maxHours={parsed} maxRisk={risk||null}/><OrionStudyAllocation subjects={subjects} eligible={result.rows.filter(r=>!r.reasons.length).map(r=>r.scenario)}/></>;
+}

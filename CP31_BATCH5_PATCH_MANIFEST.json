@@ -1,0 +1,95 @@
+{
+  "release": "CP31 Batch 5",
+  "base": "CLA_FULL_SOURCE_CP31_BATCH4_EVIDENCE_CONSOLE_20261115.zip",
+  "sourceFiles": 652,
+  "changedOrAddedFiles": 17,
+  "files": [
+    {
+      "path": "START_HERE_CP31_BATCH5_20261115.md",
+      "sha256": "aca8a6e267a93bd3447e8fcd25680b995e6a9074b3ef629042d549b619d9cb59",
+      "action": "added"
+    },
+    {
+      "path": "docs/CP31/CLA_PROGRESS_REPORT_20261115.md",
+      "sha256": "23d00fffd2751e0e0fc017d6d459c993d4de7581adc9d5b7d29b735747186b5f",
+      "action": "added"
+    },
+    {
+      "path": "docs/CP31/CP31_BATCH5_GOVERNANCE_REPORT_20261115.md",
+      "sha256": "9856d502bed174f330fd6a6c31fce30f842f6cff4f762bce5ba9a7195fca9781",
+      "action": "added"
+    },
+    {
+      "path": "docs/CP31/CP31_BATCH5_INPUT_GUIDE_20261115.md",
+      "sha256": "128e7aeedeaaa7113b0498c69aee63ad3e4527cac29af1d9151321a954938674",
+      "action": "added"
+    },
+    {
+      "path": "package.json",
+      "sha256": "869598c2ebcfebbf3ae688d47c0b860dd6a64e61f941b13d515e041b0d40de3b",
+      "action": "modified"
+    },
+    {
+      "path": "src/data/adminConsoleDirectory.ts",
+      "sha256": "4100349a373732125a80c9a9946adab612fa01414ee0f406fab595c0e32787b0",
+      "action": "modified"
+    },
+    {
+      "path": "src/lib/nexusAuditPolicy.ts",
+      "sha256": "ddd2af1cbb86ae4d694f13cec6138727bcddd58b5956bc97078cf220e212232a",
+      "action": "modified"
+    },
+    {
+      "path": "src/lib/nexusEvidenceBaseline.ts",
+      "sha256": "aa013da2aed181c2ee95f2755037475d9bd612904d59fdbaf8917bba4fd40a26",
+      "action": "modified"
+    },
+    {
+      "path": "src/lib/nexusGovernanceAudits.ts",
+      "sha256": "eb4f3f6800578bd45becedc4bdedc61cda98c2c85d2e217ccaf20e0ec07d7cac",
+      "action": "added"
+    },
+    {
+      "path": "src/page/nexus/AdminDiagnosticsPage.tsx",
+      "sha256": "0b47d19423cbd4b9b5de882403ce66bc67fd9eafd26964008ca588b26d41e8c8",
+      "action": "modified"
+    },
+    {
+      "path": "tests/cp31-batch2-e2e-contract.test.cjs",
+      "sha256": "c38d75b27550ad5aa07169d1938c41c8ad52aa5720963d1afe9e561847bf1b1f",
+      "action": "modified"
+    },
+    {
+      "path": "tests/cp31-batch3-operational-audits.test.mjs",
+      "sha256": "69994119a695cfce5aa170297cb0088d3514dfd40dd762641656470f0b5eb5dd",
+      "action": "modified"
+    },
+    {
+      "path": "tests/cp31-batch5-governance.test.mjs",
+      "sha256": "a5a40c38ad39467b572d1a11927d5330fcca8598f16984f4332fa63b48c7e2f2",
+      "action": "added"
+    },
+    {
+      "path": "tests/cp31-nexus-review.test.mjs",
+      "sha256": "523dd2b7fe461a3b6b419267d4c2ee2030274850bf67e2fed116bc3316d4c4ea",
+      "action": "modified"
+    },
+    {
+      "path": "tests/e2e/cp31_nexus_manifest.json",
+      "sha256": "b1c0a0c78d47c20f950224bedf1bea236098a1902636eada35f3c3383c45f4a1",
+      "action": "modified"
+    },
+    {
+      "path": "tests_cp31/test_browser_gate_config.py",
+      "sha256": "4e1543bec803eb3caa4465b52bba4836881e5692fbde78d1cd7f3bfdc2cbee8d",
+      "action": "modified"
+    },
+    {
+      "path": "tools/cp31_browser_e2e.py",
+      "sha256": "bbd224b02a9ae7e417415795044a27c2cca268a3cd21191dbda6df4e86397fdc",
+      "action": "modified"
+    }
+  ],
+  "removedSourceFiles": [],
+  "note": "Overlay-only. Code/test PASS != 72 Browser E2E, 86 Firestore Emulator or reviewer approval."
+}

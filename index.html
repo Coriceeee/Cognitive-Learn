@@ -3,10 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="cla-firebase-project-id" content="%VITE_FIREBASE_PROJECT_ID%" />
     <title>Cognitive Learn AI</title>
     <link rel="icon" type="image/png" href="/logo cla.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
-    <meta name="theme-color" content="#103957" />
+    <meta name="theme-color" content="#f2f5fb" />
+    <meta name="color-scheme" content="light dark" />
+    <script>
+      /* Áp theme trước khi React chạy để không bị nháy màu. Giữ đồng bộ với src/lib/theme.ts */
+      (function () {
+        try {
+          var p = localStorage.getItem("cla_theme");
+          if (p !== "light" && p !== "dark") p = "system";
+          var d = p === "dark" || (p === "system" && matchMedia("(prefers-color-scheme: dark)").matches);
+          var r = document.documentElement;
+          r.setAttribute("data-theme", d ? "dark" : "light");
+          r.setAttribute("data-theme-pref", p);
+          r.style.colorScheme = d ? "dark" : "light";
+          document.querySelector('meta[name="theme-color"]').setAttribute("content", d ? "#060b1a" : "#f2f5fb");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   </head>

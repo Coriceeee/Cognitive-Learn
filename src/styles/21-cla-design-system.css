@@ -32,7 +32,7 @@ body {
   background:
     radial-gradient(circle at 8% 8%, rgba(37, 99, 235, .07), transparent 28%),
     radial-gradient(circle at 94% 12%, rgba(56, 189, 248, .10), transparent 25%),
-    linear-gradient(135deg, #f8fbff 0%, var(--cla-page) 55%, #fbfdff 100%);
+    linear-gradient(135deg, rgb(var(--tc-bg-f8fbff)) 0%, var(--cla-page) 55%, rgb(var(--tc-bg-fbfdff)) 100%);
 }
 
 /* Consistent branded hero treatment across the product. */
@@ -65,7 +65,7 @@ body {
 .admin-switcher,
 .about-hero-premium,
 .contact-hero-premium {
-  box-shadow: 0 22px 58px rgba(13, 55, 125, .16);
+  box-shadow: 0 22px 58px rgb(var(--tc-sh-0d377d) / calc(0.16 * var(--k-sh)));
 }
 
 /* Nexus rail now follows the same light workspace system, not a separate dark theme. */
@@ -74,15 +74,15 @@ body {
   grid-template-columns: 292px minmax(0, 1fr);
 }
 .nexus-rail {
-  background: linear-gradient(180deg, #f8fbff 0%, #edf5ff 100%) !important;
+  background: linear-gradient(180deg, rgb(var(--tc-bg-f8fbff)) 0%, rgb(var(--tc-bg-edf5ff)) 100%) !important;
   color: var(--cla-ink) !important;
   border-right: 1px solid var(--cla-border);
-  box-shadow: 8px 0 28px rgba(23, 73, 145, .045);
+  box-shadow: 8px 0 28px rgb(var(--tc-sh-174991) / calc(0.045 * var(--k-sh)));
 }
 .nexus-brand {
-  background: #fff !important;
+  background: rgb(var(--tc-bg-ffffff)) !important;
   border: 1px solid var(--cla-border) !important;
-  box-shadow: 0 10px 28px rgba(23, 73, 145, .06);
+  box-shadow: 0 10px 28px rgb(var(--tc-sh-174991) / calc(0.06 * var(--k-sh)));
 }
 .nexus-brand span { color: var(--cla-blue) !important; }
 .nexus-brand strong { color: var(--cla-ink) !important; }
@@ -90,28 +90,28 @@ body {
   background: linear-gradient(180deg, transparent, rgba(37, 99, 235, .25), transparent) !important;
 }
 .nexus-cluster-button {
-  background: rgba(255,255,255,.88) !important;
+  background: rgb(var(--tc-bg-ffffff) / 0.88) !important;
   color: var(--cla-ink) !important;
   border: 1px solid var(--cla-border) !important;
-  box-shadow: 0 7px 20px rgba(23,73,145,.045) !important;
+  box-shadow: 0 7px 20px rgb(var(--tc-sh-174991) / calc(0.045 * var(--k-sh))) !important;
 }
 .nexus-cluster-button:hover,
 .nexus-cluster-button.active {
-  background: linear-gradient(135deg, #eaf4ff, #ffffff) !important;
-  border-color: #9fc7fa !important;
-  box-shadow: 0 12px 28px rgba(37,99,235,.10) !important;
+  background: linear-gradient(135deg, rgb(var(--tc-bg-eaf4ff)), rgb(var(--tc-bg-ffffff))) !important;
+  border-color: rgb(var(--tc-bd-9fc7fa)) !important;
+  box-shadow: 0 12px 28px rgb(var(--tc-sh-2563eb) / calc(0.1 * var(--k-sh))) !important;
 }
 .nexus-cluster-copy strong { color: var(--cla-ink) !important; }
 .nexus-cluster-copy p { color: var(--cla-muted) !important; }
 .nexus-rail .user-nav { margin-top: auto; justify-content: center; flex-wrap: wrap; gap: 14px; }
-.nexus-rail .user-nav-link small { color: #526b89 !important; }
+.nexus-rail .user-nav-link small { color: rgb(var(--tc-tx-526b89)) !important; }
 .nexus-rail .user-nav-link:hover small { color: var(--cla-blue) !important; }
 .nexus-rail .user-nav-icon,
 .nexus-rail .user-nav-avatar {
-  background: #fff !important;
+  background: rgb(var(--tc-bg-ffffff)) !important;
   border-color: var(--cla-border) !important;
-  color: #174b94 !important;
-  box-shadow: 0 6px 16px rgba(23,73,145,.08) !important;
+  color: rgb(var(--tc-tx-174b94)) !important;
+  box-shadow: 0 6px 16px rgb(var(--tc-sh-174991) / calc(0.08 * var(--k-sh))) !important;
 }
 .nexus-rail .user-nav-link.admin-top-link .user-nav-icon {
   background: linear-gradient(135deg, var(--cla-blue), var(--cla-cyan)) !important;
@@ -151,10 +151,10 @@ body {
 .login-role-hint {
   margin: 0;
   padding: 12px 14px;
-  border: 1px solid #d5e7ff;
+  border: 1px solid rgb(var(--tc-bd-d5e7ff));
   border-radius: 15px;
-  background: #eff6ff;
-  color: #355579;
+  background: rgb(var(--tc-bg-eff6ff));
+  color: rgb(var(--tc-tx-355579));
   font-size: 13px;
   line-height: 1.5;
 }
@@ -162,7 +162,7 @@ body {
 .role-tabs button:focus-visible,
 .nexus-role-card:focus-visible,
 .user-nav-link:focus-visible {
-  outline: 3px solid #60a5fa;
+  outline: 3px solid rgb(var(--tc-bd-60a5fa));
   outline-offset: 3px;
 }
 
@@ -172,7 +172,7 @@ body {
   padding: clamp(20px, 2.5vw, 30px);
   border: 1px solid var(--cla-border);
   border-radius: 28px;
-  background: linear-gradient(145deg, #ffffff 0%, #f6faff 100%);
+  background: linear-gradient(145deg, rgb(var(--tc-bg-ffffff)) 0%, rgb(var(--tc-bg-f6faff)) 100%);
   box-shadow: var(--cla-card-shadow);
 }
 .nexus-role-switcher-head {
@@ -205,10 +205,10 @@ body {
 .nexus-role-preview-note {
   flex: 0 0 auto;
   padding: 8px 12px;
-  border: 1px solid #c9defb;
+  border: 1px solid rgb(var(--tc-bd-c9defb));
   border-radius: 999px;
-  background: #eaf4ff;
-  color: #1e55a4;
+  background: rgb(var(--tc-bg-eaf4ff));
+  color: rgb(var(--tc-tx-1e55a4));
   font-size: 11px;
   font-weight: 900;
 }
@@ -226,16 +226,16 @@ body {
   padding: 15px;
   border: 1px solid var(--cla-border);
   border-radius: 18px;
-  background: #fff;
+  background: rgb(var(--tc-bg-ffffff));
   color: var(--cla-ink);
   text-decoration: none;
   transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
 }
 .nexus-role-card:hover,
 .nexus-role-card.is-current {
-  border-color: #9fc7fa;
-  background: linear-gradient(135deg, #eff7ff, #fff);
-  box-shadow: 0 10px 24px rgba(37,99,235,.09);
+  border-color: rgb(var(--tc-bd-9fc7fa));
+  background: linear-gradient(135deg, rgb(var(--tc-bg-eff7ff)), rgb(var(--tc-bg-ffffff)));
+  box-shadow: 0 10px 24px rgb(var(--tc-sh-2563eb) / calc(0.09 * var(--k-sh)));
   transform: translateY(-1px);
 }
 .nexus-role-avatar {
@@ -244,9 +244,9 @@ body {
   height: 46px;
   place-items: center;
   border-radius: 15px;
-  background: linear-gradient(135deg, #e7f2ff, #d9edff);
-  border: 1px solid #c9defb;
-  color: #1c57a8;
+  background: linear-gradient(135deg, rgb(var(--tc-bg-e7f2ff)), rgb(var(--tc-bg-d9edff)));
+  border: 1px solid rgb(var(--tc-bd-c9defb));
+  color: rgb(var(--tc-tx-1c57a8));
   font-size: 12px;
   font-weight: 950;
 }
@@ -254,7 +254,7 @@ body {
 .nexus-role-card-copy strong { color: var(--cla-ink); font-size: 14px; font-weight: 900; }
 .nexus-role-card-copy small { color: var(--cla-muted); font-size: 11px; line-height: 1.45; }
 .nexus-role-card-action { color: var(--cla-blue); font-size: 11px; font-weight: 900; white-space: nowrap; }
-.nexus-role-card.is-current .nexus-role-card-action { color: #0f8b68; }
+.nexus-role-card.is-current .nexus-role-card-action { color: rgb(var(--tc-tx-0f8b68)); }
 
 /* Study-abroad/source discovery had a separate dark theme; align it with CLA's light pages. */
 .cla-study-abroad-page {
@@ -265,7 +265,7 @@ body {
 .cla-source-explorer,
 .cla-study-panel,
 .cla-haven-study-link {
-  background: #fff !important;
+  background: rgb(var(--tc-bg-ffffff)) !important;
   color: var(--cla-ink) !important;
   border: 1px solid var(--cla-border) !important;
   box-shadow: var(--cla-card-shadow) !important;
@@ -285,25 +285,25 @@ body {
 .cla-explorer-heading p,
 .cla-study-panel p { color: var(--cla-muted) !important; }
 .cla-study-hero p { color: #e6f2ff !important; }
-.cla-eyebrow { color: #2563eb !important; }
+.cla-eyebrow { color: rgb(var(--tc-tx-2563eb)) !important; }
 .cla-study-hero .cla-eyebrow { color: #bfe8ff !important; }
 .cla-explorer-filters label { color: var(--cla-ink-soft) !important; }
 .cla-explorer-filters input,
 .cla-explorer-filters select,
 .cla-score-label input {
-  background: #f8fbff !important;
+  background: rgb(var(--tc-bg-f8fbff)) !important;
   color: var(--cla-ink) !important;
   border: 1px solid var(--cla-border) !important;
 }
-.cla-source-count { color: #2563eb !important; }
+.cla-source-count { color: rgb(var(--tc-tx-2563eb)) !important; }
 .cla-source-card,
 .cla-study-school,
 .cla-study-checkpoints article,
 .cla-major-card {
-  background: #fff !important;
+  background: rgb(var(--tc-bg-ffffff)) !important;
   color: var(--cla-ink) !important;
   border: 1px solid var(--cla-border) !important;
-  box-shadow: 0 8px 24px rgba(23,73,145,.055);
+  box-shadow: 0 8px 24px rgb(var(--tc-sh-174991) / calc(0.055 * var(--k-sh)));
 }
 .cla-source-card h3,
 .cla-major-card > strong,
@@ -314,9 +314,9 @@ body {
 .cla-source-card-head > span,
 .cla-source-tags > span,
 .cla-source-tags > button {
-  color: #24538f !important;
-  background: #edf5ff !important;
-  border: 1px solid #d5e6fb !important;
+  color: rgb(var(--tc-tx-24538f)) !important;
+  background: rgb(var(--tc-bg-edf5ff)) !important;
+  border: 1px solid rgb(var(--tc-bd-d5e6fb)) !important;
 }
 .cla-source-tags > button[aria-pressed="true"] {
   color: #fff !important;
@@ -329,9 +329,9 @@ body {
 .cla-study-official,
 .cla-haven-study-link > a,
 .cla-study-jump {
-  color: #1e55a4 !important;
-  background: #edf5ff !important;
-  border: 1px solid #cfe1f8 !important;
+  color: rgb(var(--tc-tx-1e55a4)) !important;
+  background: rgb(var(--tc-bg-edf5ff)) !important;
+  border: 1px solid rgb(var(--tc-bd-cfe1f8)) !important;
 }
 .cla-source-links > a:hover,
 .cla-study-actions > a:hover,
@@ -345,75 +345,75 @@ body {
 .cla-source-footnote,
 .cla-source-empty,
 .cla-compare-toggle { color: var(--cla-muted) !important; }
-.cla-source-empty { border-color: #bfd7f6 !important; background: #f8fbff; }
-.cla-source-compare { border-color: var(--cla-border) !important; background: #fff; }
-.cla-source-compare th { color: var(--cla-ink) !important; background: #edf5ff !important; }
-.cla-source-compare td { color: var(--cla-ink-soft) !important; border-color: #e3edf9 !important; }
-.cla-source-compare a { color: #1d5fbd !important; }
+.cla-source-empty { border-color: rgb(var(--tc-bd-bfd7f6)) !important; background: rgb(var(--tc-bg-f8fbff)); }
+.cla-source-compare { border-color: var(--cla-border) !important; background: rgb(var(--tc-bg-ffffff)); }
+.cla-source-compare th { color: var(--cla-ink) !important; background: rgb(var(--tc-bg-edf5ff)) !important; }
+.cla-source-compare td { color: var(--cla-ink-soft) !important; border-color: rgb(var(--tc-bd-e3edf9)) !important; }
+.cla-source-compare a { color: rgb(var(--tc-tx-1d5fbd)) !important; }
 .cla-source-compare small { color: var(--cla-muted) !important; }
-.cla-requirement-list li { border-color: #e4edf8 !important; }
+.cla-requirement-list li { border-color: rgb(var(--tc-bd-e4edf8)) !important; }
 .cla-requirement-list label { color: var(--cla-ink-soft) !important; }
 .cla-requirement-list input { accent-color: var(--cla-blue) !important; }
 .cla-requirement-list input:checked + span { color: #8a9bb0 !important; }
-.cla-haven-module-nav { background: #f4f8ff !important; border-color: var(--cla-border) !important; }
-.cla-haven-module-nav a { color: #1e55a4 !important; background: #fff !important; border-color: #cfe1f8 !important; }
-.cla-unverified-destination { background: #fff8eb !important; border-color: #f0d29b !important; }
-.cla-unverified-destination strong { color: #875411 !important; }
-.cla-unverified-destination p { color: #715c3c !important; }
-.cla-unverified-destination a { color: #1d5fbd !important; }
-.cla-major-history { border-color: #dce8f7 !important; }
+.cla-haven-module-nav { background: rgb(var(--tc-bg-f4f8ff)) !important; border-color: var(--cla-border) !important; }
+.cla-haven-module-nav a { color: rgb(var(--tc-tx-1e55a4)) !important; background: rgb(var(--tc-bg-ffffff)) !important; border-color: rgb(var(--tc-bd-cfe1f8)) !important; }
+.cla-unverified-destination { background: rgb(var(--tc-bg-fff8eb)) !important; border-color: rgb(var(--tc-bd-f0d29b)) !important; }
+.cla-unverified-destination strong { color: rgb(var(--tc-tx-875411)) !important; }
+.cla-unverified-destination p { color: rgb(var(--tc-tx-715c3c)) !important; }
+.cla-unverified-destination a { color: rgb(var(--tc-tx-1d5fbd)) !important; }
+.cla-major-history { border-color: rgb(var(--tc-bd-dce8f7)) !important; }
 .cla-major-history h3 { color: var(--cla-ink) !important; }
 .cla-major-history > p { color: var(--cla-muted) !important; }
 .cla-score-label { color: var(--cla-ink-soft) !important; }
 .cla-major-card > small,
 .cla-major-cutoffs span,
 .cla-major-cutoffs small { color: var(--cla-muted) !important; }
-.cla-major-cutoffs > div { background: #f3f8ff !important; border: 1px solid var(--cla-border) !important; }
+.cla-major-cutoffs > div { background: rgb(var(--tc-bg-f3f8ff)) !important; border: 1px solid var(--cla-border) !important; }
 .cla-major-cutoffs a,
-.cla-major-scheme { color: #1d5fbd !important; }
+.cla-major-scheme { color: rgb(var(--tc-tx-1d5fbd)) !important; }
 .cla-haven-study-link strong { color: var(--cla-ink) !important; }
 .cla-haven-study-link p { color: var(--cla-muted) !important; }
 
 /* Restore a consistent light chat window while retaining the blue CLA mascot launcher. */
 .cla-chat-panel {
-  background: #fff !important;
+  background: rgb(var(--tc-bg-ffffff)) !important;
   color: var(--cla-ink) !important;
-  border: 1px solid #cfe1f8 !important;
-  box-shadow: 0 22px 58px rgba(18, 67, 135, .20) !important;
+  border: 1px solid rgb(var(--tc-bd-cfe1f8)) !important;
+  box-shadow: 0 22px 58px rgb(var(--tc-sh-124387) / calc(0.2 * var(--k-sh))) !important;
 }
 .cla-chat-header {
-  background: linear-gradient(120deg, #eaf4ff 0%, #dceeff 58%, #eafaff 100%) !important;
-  border-bottom: 1px solid #d6e7fa;
+  background: linear-gradient(120deg, rgb(var(--tc-bg-eaf4ff)) 0%, rgb(var(--tc-bg-dceeff)) 58%, rgb(var(--tc-bg-eafaff)) 100%) !important;
+  border-bottom: 1px solid rgb(var(--tc-bd-d6e7fa));
 }
 .cla-chat-header-copy strong { color: var(--cla-ink) !important; }
-.cla-chat-header-copy span { color: #526d8e !important; }
+.cla-chat-header-copy span { color: rgb(var(--tc-tx-526d8e)) !important; }
 .cla-chat-header-copy small {
-  color: #24538f !important;
-  background: #fff !important;
-  border-color: #cfe1f8 !important;
+  color: rgb(var(--tc-tx-24538f)) !important;
+  background: rgb(var(--tc-bg-ffffff)) !important;
+  border-color: rgb(var(--tc-bd-cfe1f8)) !important;
 }
 .cla-chat-header-mascot {
-  background: #fff !important;
-  border-color: #c7e1ff !important;
-  box-shadow: 0 0 0 4px rgba(37,99,235,.08) !important;
+  background: rgb(var(--tc-bg-ffffff)) !important;
+  border-color: rgb(var(--tc-bd-c7e1ff)) !important;
+  box-shadow: 0 0 0 4px rgb(var(--tc-sh-2563eb) / calc(0.08 * var(--k-sh))) !important;
 }
 .cla-chat-header button {
-  color: #24538f !important;
-  background: #fff !important;
-  border: 1px solid #cfe1f8 !important;
+  color: rgb(var(--tc-tx-24538f)) !important;
+  background: rgb(var(--tc-bg-ffffff)) !important;
+  border: 1px solid rgb(var(--tc-bd-cfe1f8)) !important;
 }
-.cla-chat-messages { background: #fff !important; }
+.cla-chat-messages { background: rgb(var(--tc-bg-ffffff)) !important; }
 .cla-chat-intro {
-  color: #526b88 !important;
-  background: #f2f7ff !important;
-  border: 1px solid #dce9f8 !important;
+  color: rgb(var(--tc-tx-526b88)) !important;
+  background: rgb(var(--tc-bg-f2f7ff)) !important;
+  border: 1px solid rgb(var(--tc-bd-dce9f8)) !important;
 }
 .cla-chat-message {
   color: var(--cla-ink) !important;
-  background: #f1f6fd !important;
-  border: 1px solid #dce8f6 !important;
+  background: rgb(var(--tc-bg-f1f6fd)) !important;
+  border: 1px solid rgb(var(--tc-bd-dce8f6)) !important;
 }
-.cla-chat-message > span { color: #2563eb !important; }
+.cla-chat-message > span { color: rgb(var(--tc-tx-2563eb)) !important; }
 .cla-chat-message p { color: var(--cla-ink-soft) !important; }
 .cla-chat-message.is-user {
   color: #fff !important;
@@ -423,12 +423,12 @@ body {
 .cla-chat-message.is-user > span,
 .cla-chat-message.is-user p { color: #fff !important; }
 .cla-chat-thinking { color: var(--cla-muted) !important; }
-.cla-chat-suggestions-wrap { background: #fff !important; border-top: 1px solid #e1ebf7 !important; }
-.cla-chat-suggestions-wrap > span { color: #52739a !important; }
+.cla-chat-suggestions-wrap { background: rgb(var(--tc-bg-ffffff)) !important; border-top: 1px solid rgb(var(--tc-bd-e1ebf7)) !important; }
+.cla-chat-suggestions-wrap > span { color: rgb(var(--tc-tx-52739a)) !important; }
 .cla-chat-suggestions button {
-  color: #24538f !important;
-  background: #f2f7ff !important;
-  border: 1px solid #d5e5f8 !important;
+  color: rgb(var(--tc-tx-24538f)) !important;
+  background: rgb(var(--tc-bg-f2f7ff)) !important;
+  border: 1px solid rgb(var(--tc-bd-d5e5f8)) !important;
 }
 .cla-chat-suggestions button:hover {
   color: #fff !important;
@@ -436,59 +436,59 @@ body {
   border-color: transparent !important;
 }
 .cla-chat-auth-note {
-  color: #76521c !important;
-  background: #fff8e9 !important;
-  border-top: 1px solid #f2dfb8 !important;
+  color: rgb(var(--tc-tx-76521c)) !important;
+  background: rgb(var(--tc-bg-fff8e9)) !important;
+  border-top: 1px solid rgb(var(--tc-bd-f2dfb8)) !important;
 }
 .cla-chat-notice {
-  color: #8a4b16 !important;
-  background: #fff7ed !important;
-  border-color: #f3c78c !important;
+  color: rgb(var(--tc-tx-8a4b16)) !important;
+  background: rgb(var(--tc-bg-fff7ed)) !important;
+  border-color: rgb(var(--tc-bd-f3c78c)) !important;
 }
-.cla-chat-form { background: #fff !important; border-top: 1px solid #e1ebf7 !important; }
+.cla-chat-form { background: rgb(var(--tc-bg-ffffff)) !important; border-top: 1px solid rgb(var(--tc-bd-e1ebf7)) !important; }
 .cla-chat-form textarea {
   color: var(--cla-ink) !important;
-  background: #f8fbff !important;
-  border: 1px solid #cfdef0 !important;
+  background: rgb(var(--tc-bg-f8fbff)) !important;
+  border: 1px solid rgb(var(--tc-bd-cfdef0)) !important;
 }
 .cla-chat-form textarea::placeholder { color: #8295ad !important; }
-.cla-chat-form textarea:focus-visible { outline: 2px solid #60a5fa !important; }
+.cla-chat-form textarea:focus-visible { outline: 2px solid rgb(var(--tc-bd-60a5fa)) !important; }
 .cla-chat-form button {
   color: #fff !important;
   background: linear-gradient(135deg, var(--cla-blue), var(--cla-cyan)) !important;
 }
-.cla-chat-form button:disabled { color: #71849d !important; background: #e7eef7 !important; }
-.cla-chat-footer { background: #fff !important; border-top: 1px solid #e1ebf7 !important; }
+.cla-chat-form button:disabled { color: rgb(var(--tc-tx-71849d)) !important; background: rgb(var(--tc-bg-e7eef7)) !important; }
+.cla-chat-footer { background: rgb(var(--tc-bg-ffffff)) !important; border-top: 1px solid rgb(var(--tc-bd-e1ebf7)) !important; }
 .cla-chat-footer a {
-  color: #24538f !important;
-  background: #f2f7ff !important;
-  border-color: #d5e5f8 !important;
+  color: rgb(var(--tc-tx-24538f)) !important;
+  background: rgb(var(--tc-bg-f2f7ff)) !important;
+  border-color: rgb(var(--tc-bd-d5e5f8)) !important;
 }
 .cla-chat-footer a:hover { color: #fff !important; background: #2563eb !important; }
-.cla-chat-footer button { color: #58708f !important; }
-.cla-chat-context-link { color: #1d5fbd !important; }
+.cla-chat-footer button { color: rgb(var(--tc-tx-58708f)) !important; }
+.cla-chat-context-link { color: rgb(var(--tc-tx-1d5fbd)) !important; }
 
 /* Replace near-black one-off cards with CLA surfaces or the shared hero gradient. */
 .cognitive-growth-insights article {
-  background: #fff !important;
+  background: rgb(var(--tc-bg-ffffff)) !important;
   border: 1px solid var(--cla-border);
-  box-shadow: 0 8px 24px rgba(23,73,145,.055);
+  box-shadow: 0 8px 24px rgb(var(--tc-sh-174991) / calc(0.055 * var(--k-sh)));
 }
 .cognitive-growth-insights strong { color: var(--cla-ink) !important; }
 .cognitive-growth-insights p { color: var(--cla-muted) !important; }
 .cognitive-growth-insights span { color: var(--cla-blue) !important; }
 .student-intelligence-engine-grid article {
-  background: #fff !important;
+  background: rgb(var(--tc-bg-ffffff)) !important;
   border: 1px solid var(--cla-border) !important;
-  box-shadow: 0 8px 24px rgba(23,73,145,.055) !important;
+  box-shadow: 0 8px 24px rgb(var(--tc-sh-174991) / calc(0.055 * var(--k-sh))) !important;
 }
 .student-intelligence-engine-grid span { color: var(--cla-blue) !important; }
 .student-intelligence-engine-grid strong { color: var(--cla-ink) !important; }
 .student-intelligence-engine-grid p { color: var(--cla-muted) !important; }
 .student-engine-icon {
-  color: #2563eb !important;
-  background: #edf5ff !important;
-  border-color: #d5e5f8 !important;
+  color: rgb(var(--tc-tx-2563eb)) !important;
+  background: rgb(var(--tc-bg-edf5ff)) !important;
+  border-color: rgb(var(--tc-bd-d5e5f8)) !important;
 }
 
 /* Unified page loading state. */
@@ -504,7 +504,7 @@ body {
   padding: 18px 24px;
   border: 1px solid var(--cla-border);
   border-radius: 20px;
-  background: #fff;
+  background: rgb(var(--tc-bg-ffffff));
   box-shadow: var(--cla-card-shadow);
 }
 .cla-app-loading-card strong { display: block; color: var(--cla-ink); }
@@ -535,10 +535,10 @@ body {
 }
 
 /* Specialist routes and links retain a readable CLA blue accent on light surfaces. */
-.cla-chat-context-link { display: inline-block; margin-top: .45rem; color: #1d5fbd !important; text-decoration: underline; text-underline-offset: .2rem; font-weight: 800; }
-.cla-chat-context-link:focus-visible { outline: 2px solid #60a5fa; outline-offset: 3px; border-radius: 4px; }
+.cla-chat-context-link { display: inline-block; margin-top: .45rem; color: rgb(var(--tc-tx-1d5fbd)) !important; text-decoration: underline; text-underline-offset: .2rem; font-weight: 800; }
+.cla-chat-context-link:focus-visible { outline: 2px solid rgb(var(--tc-bd-60a5fa)); outline-offset: 3px; border-radius: 4px; }
 
 /* Small dark accents are converted to the shared CLA blue family. */
-.student-readiness-ring-inner { background: #123b85 !important; box-shadow: inset 0 0 28px rgba(2, 22, 64, .22) !important; }
+.student-readiness-ring-inner { background: #123b85 !important; box-shadow: inset 0 0 28px rgb(var(--tc-sh-021640) / calc(0.22 * var(--k-sh))) !important; }
 .student-action-list li b,
-.student-dash-action-num { background: linear-gradient(135deg, #2563eb, #38bdf8) !important; }
+.student-dash-action-num { background: linear-gradient(135deg, #2563eb, rgb(var(--tc-bg-38bdf8))) !important; }

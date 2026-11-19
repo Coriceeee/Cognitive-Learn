@@ -1,10 +1,10 @@
 .haven-page {
   min-height: 100vh;
-  color: #071629;
+  color: rgb(var(--tc-tx-071629));
   background:
     radial-gradient(circle at 12% 8%, rgba(37, 99, 235, 0.12), transparent 28%),
     radial-gradient(circle at 88% 18%, rgba(56, 189, 248, 0.14), transparent 30%),
-    linear-gradient(180deg, #f8fbff 0%, #eef6ff 100%);
+    linear-gradient(180deg, rgb(var(--tc-bg-f8fbff)) 0%, rgb(var(--tc-bg-eef6ff)) 100%);
 }
 
 .haven-floating-header {
@@ -30,9 +30,9 @@
   border-radius: 22px;
   display: grid;
   place-items: center;
-  background: rgba(255, 255, 255, 0.78);
-  border: 1px solid rgba(191, 219, 254, 0.9);
-  box-shadow: 0 18px 44px rgba(37, 99, 235, 0.12);
+  background: rgb(var(--tc-bg-ffffff) / 0.78);
+  border: 1px solid rgb(var(--tc-bd-bfdbfe) / 0.9);
+  box-shadow: 0 18px 44px rgb(var(--tc-sh-2563eb) / calc(0.12 * var(--k-sh)));
   backdrop-filter: blur(18px);
   transition:
     transform 0.2s ease,
@@ -41,7 +41,7 @@
 
 .haven-home-logo:hover {
   transform: translateY(-2px);
-  box-shadow: 0 22px 52px rgba(37, 99, 235, 0.18);
+  box-shadow: 0 22px 52px rgb(var(--tc-sh-2563eb) / calc(0.18 * var(--k-sh)));
 }
 
 .haven-home-logo img {
@@ -62,11 +62,11 @@
 .haven-support-card,
 .haven-scholarship-card,
 .haven-warning {
-  border: 1px solid rgba(191, 219, 254, 0.92);
+  border: 1px solid rgb(var(--tc-bd-bfdbfe) / 0.92);
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(239, 248, 255, 0.86)),
-    rgba(255, 255, 255, 0.85);
-  box-shadow: 0 28px 90px rgba(37, 99, 235, 0.11);
+    linear-gradient(135deg, rgb(var(--tc-bg-ffffff) / 0.94), rgb(var(--tc-bg-eff8ff) / 0.86)),
+    rgb(var(--tc-bg-ffffff) / 0.85);
+  box-shadow: 0 28px 90px rgb(var(--tc-sh-2563eb) / calc(0.11 * var(--k-sh)));
   backdrop-filter: blur(22px);
 }
 
@@ -85,7 +85,7 @@
 .haven-section-head span,
 .haven-support-card > span {
   display: inline-flex;
-  color: #2563eb;
+  color: rgb(var(--tc-tx-2563eb));
   font-size: 12px;
   font-weight: 950;
   letter-spacing: 0.22em;
@@ -95,7 +95,7 @@
 .haven-hero h1 {
   max-width: 760px;
   margin: 14px 0 18px;
-  color: #071629;
+  color: rgb(var(--tc-tx-071629));
   font-size: clamp(42px, 6vw, 72px);
   line-height: 0.96;
   letter-spacing: -0.075em;
@@ -104,7 +104,7 @@
 .haven-hero p {
   max-width: 760px;
   margin: 0;
-  color: #475569;
+  color: rgb(var(--tc-tx-475569));
   font-size: 16px;
   font-weight: 650;
   line-height: 1.75;
@@ -113,19 +113,19 @@
 .haven-hero aside {
   border-radius: 26px;
   padding: 24px;
-  background: rgba(255, 255, 255, 0.82);
-  border: 1px solid rgba(191, 219, 254, 0.85);
+  background: rgb(var(--tc-bg-ffffff) / 0.82);
+  border: 1px solid rgb(var(--tc-bd-bfdbfe) / 0.85);
 }
 
 .haven-hero aside span {
-  color: #64748b;
+  color: rgb(var(--tc-tx-64748b));
   letter-spacing: 0.12em;
 }
 
 .haven-hero aside strong {
   display: block;
   margin-top: 14px;
-  color: #071629;
+  color: rgb(var(--tc-tx-071629));
   font-size: 46px;
   line-height: 1;
   letter-spacing: -0.06em;
@@ -144,18 +144,18 @@
 }
 
 .haven-risk.low {
-  color: #047857;
-  background: rgba(209, 250, 229, 0.95);
+  color: rgb(var(--tc-tx-047857));
+  background: rgb(var(--tc-bg-d1fae5) / 0.95);
 }
 
 .haven-risk.medium {
-  color: #92400e;
-  background: rgba(254, 243, 199, 0.95);
+  color: rgb(var(--tc-tx-92400e));
+  background: rgb(var(--tc-bg-fef3c7) / 0.95);
 }
 
 .haven-risk.high {
-  color: #be123c;
-  background: rgba(255, 228, 230, 0.95);
+  color: rgb(var(--tc-tx-be123c));
+  background: rgb(var(--tc-bg-ffe4e6) / 0.95);
 }
 
 .haven-control-panel {
@@ -168,7 +168,7 @@
 .haven-summary-grid h2,
 .haven-section-head h2 {
   margin: 8px 0 0;
-  color: #071629;
+  color: rgb(var(--tc-tx-071629));
   font-size: clamp(28px, 3vw, 42px);
   line-height: 1.05;
   letter-spacing: -0.055em;
@@ -178,7 +178,7 @@
 .haven-summary-grid p {
   max-width: 760px;
   margin: 10px 0 0;
-  color: #64748b;
+  color: rgb(var(--tc-tx-64748b));
   font-size: 14px;
   font-weight: 700;
   line-height: 1.7;
@@ -197,7 +197,7 @@
 }
 
 .haven-form-grid span {
-  color: #475569;
+  color: rgb(var(--tc-tx-475569));
   font-size: 12px;
   font-weight: 950;
 }
@@ -205,11 +205,11 @@
 .haven-form-grid input {
   width: 100%;
   min-height: 48px;
-  border: 1px solid rgba(191, 219, 254, 0.95);
+  border: 1px solid rgb(var(--tc-bd-bfdbfe) / 0.95);
   border-radius: 16px;
   padding: 0 14px;
-  color: #071629;
-  background: rgba(255, 255, 255, 0.92);
+  color: rgb(var(--tc-tx-071629));
+  background: rgb(var(--tc-bg-ffffff) / 0.92);
   outline: none;
   font-size: 14px;
   font-weight: 850;
@@ -217,13 +217,13 @@
 
 .haven-form-grid input:focus {
   border-color: rgba(37, 99, 235, 0.65);
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+  box-shadow: 0 0 0 4px rgb(var(--tc-sh-2563eb) / calc(0.08 * var(--k-sh)));
 }
 
 .haven-summary-grid {
   margin-top: 22px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
 }
 
@@ -259,8 +259,8 @@
   align-items: center;
   padding: 0 12px;
   border-radius: 999px;
-  color: #2563eb;
-  background: rgba(239, 246, 255, 0.96);
+  color: rgb(var(--tc-tx-2563eb));
+  background: rgb(var(--tc-bg-eff6ff) / 0.96);
   font-size: 12px;
   font-style: normal;
   font-weight: 950;
@@ -273,7 +273,7 @@
 .haven-support-card h3,
 .haven-scholarship-card h3 {
   margin: 14px 0 0;
-  color: #071629;
+  color: rgb(var(--tc-tx-071629));
   font-size: 20px;
   line-height: 1.2;
 }
@@ -281,14 +281,14 @@
 .haven-support-card p,
 .haven-scholarship-card p {
   margin: 10px 0 0;
-  color: #64748b;
+  color: rgb(var(--tc-tx-64748b));
   font-size: 13px;
   font-weight: 750;
   line-height: 1.6;
 }
 
 .haven-scholarship-card > div > span {
-  color: #2563eb;
+  color: rgb(var(--tc-tx-2563eb));
   font-size: 12px;
   font-weight: 950;
 }
@@ -301,7 +301,7 @@
 
 .haven-scholarship-card li,
 .haven-warning li {
-  color: #475569;
+  color: rgb(var(--tc-tx-475569));
   font-size: 13px;
   font-weight: 750;
   line-height: 1.7;
@@ -311,8 +311,8 @@
   margin-top: 22px;
   border-radius: 24px;
   padding: 22px;
-  color: #92400e;
-  background: rgba(254, 243, 199, 0.72);
+  color: rgb(var(--tc-tx-92400e));
+  background: rgb(var(--tc-bg-fef3c7) / 0.72);
 }
 
 .haven-warning strong {

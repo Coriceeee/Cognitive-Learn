@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import ModuleSectionNav from "../../components/common/ModuleSectionNav";
+import { useEffect, useRef, useState } from "react";
 import { onAuthStateChanged, type User } from "firebase/auth";
 import { doc, getDocFromServer } from "firebase/firestore";
 import { auth, db } from "../../lib/firebase";
 import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
 import "../../styles.css";
+import { isCurrentAccountInspection } from "./services/realtimeReadPolicy";
 
 type Row = { label: string; status: "Đã lưu" | "Chưa lưu" | "Chưa kiểm tra" | "Chưa thể đồng bộ" };
 const sources = [
@@ -17,27 +19,49 @@ const sources = [
 /** Student-friendly status view. Technical collection names and project identifiers stay private. */
 export default function StudentStorageStatusPage() {
   const [user, setUser] = useState<User | null>(auth.currentUser);
-  const [rows, setRows] = useState<Row[]>(sources.map(([label]) => ({ label, status: "Chưa kiểm tra" })));
+  const [rows, setRows] = useState<Row[]>(sources.map(([label]): Row => ({ label, status: "Chưa kiểm tra" })));
   const [busy, setBusy] = useState(false);
   const [checkedAt, setCheckedAt] = useState<string>("");
-  useEffect(() => onAuthStateChanged(auth, setUser), []);
+  const generation = useRef(0);
+  const mounted = useRef(true);
+  useEffect(() => {
+    mounted.current = true;
+    const stop = onAuthStateChanged(auth, next => {
+      ++generation.current;
+      setUser(next);
+      // Do not display one student's saved-record statuses to the next student.
+      setRows(sources.map(([label]): Row => ({ label, status: "Chưa kiểm tra" })));
+      setCheckedAt("");
+      setBusy(false);
+    }, () => {
+      ++generation.current;
+      setUser(null); setRows(sources.map(([label]): Row => ({ label, status: "Chưa kiểm tra" })));
+      setCheckedAt(""); setBusy(false);
+    });
+    return () => { mounted.current = false; ++generation.current; stop(); };
+  }, []);
 
   async function inspect() {
-    if (!user) return;
+    if (!user || busy || auth.currentUser?.uid !== user.uid) return;
+    const uid = user.uid;
+    const requestGeneration = ++generation.current;
+    const isCurrent = () => mounted.current && isCurrentAccountInspection(
+      uid, auth.currentUser?.uid, requestGeneration, generation.current);
     setBusy(true);
     try {
       const results = await Promise.all(sources.map(async ([label, collectionName]): Promise<Row> => {
         try {
-          const snap = await getDocFromServer(doc(db, collectionName, user.uid));
+          const snap = await getDocFromServer(doc(db, collectionName, uid));
           return { label, status: snap.exists() ? "Đã lưu" : "Chưa lưu" };
         } catch {
           return { label, status: "Chưa thể đồng bộ" };
         }
       }));
+      if (!isCurrent()) return;
       setRows(results);
       setCheckedAt(new Date().toLocaleString("vi-VN"));
     } finally {
-      setBusy(false);
+      if (isCurrent()) setBusy(false);
     }
   }
 
@@ -49,6 +73,7 @@ export default function StudentStorageStatusPage() {
         <UserMenu />
       </div>
       <section className="profile-shell cla-my-data-page">
+        <ModuleSectionNav moduleKey="seed" />
         <header className="profile-head">
           <span>HỒ SƠ CỦA BẠN · ĐỒNG BỘ DỮ LIỆU</span>
           <h1>Dữ liệu của tôi</h1>

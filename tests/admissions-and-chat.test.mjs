@@ -9,9 +9,9 @@ import { ADVISOR_PAGE_CONTEXTS, advisorPageContextFromPath, advisorSuggestionsFo
 import { readFileSync } from "node:fs";
 
 test("CP25-01: Curated universities have sourced years without inventing unverified archives", () => {
-  assert.equal(officialUniversities.length, 10);
+  assert.equal(officialUniversities.length, 32);
   const threeYearSources = officialUniversities.filter(item => item.years.length === 3);
-  assert.equal(threeYearSources.length, 7);
+  assert.equal(threeYearSources.length, 12);
   for (const item of threeYearSources) {
     assert.deepEqual(item.years.map(entry => entry.year).sort(), [2024, 2025, 2026]);
   }
@@ -37,8 +37,9 @@ test("CP25-03: Exact campus and method provenance on historical cutoffs", () => 
     assert.equal(item.campus, "BVH");
     assert.equal(item.historicalCutoffs.length, 2);
     assert.deepEqual(item.historicalCutoffs.map(c => c.year), [2024, 2025]);
-    assert.ok(item.historicalCutoffs.every(c => c.admissionTrack === "THPT" && c.cutoff >= 0 && c.cutoff <= 30));
-    assert.ok(!item.historicalCutoffs.some(c => c.year === 2026));
+    assert.deepEqual(item.historicalCutoffs.map(c => c.admissionTrack), ["THPT", "PUBLISHED_COMMON"]);
+    assert.ok(item.historicalCutoffs.every(c => c.cutoff >= 0 && c.cutoff <= 30 && c.tieBreak));
+    assert.ok(item.cutoffs2026.values.THPT >= 0 && item.cutoffs2026.values.THPT <= 30);
     assert.match(item.source2026, /^https:\/\/tuyensinh.ptit.edu.vn/);
   }
 });

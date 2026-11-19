@@ -1,0 +1,32 @@
+
+> cognitive-learn-ai@0.1.0 research:atlas:batch-preview
+> node --experimental-strip-types tools/atlas_reviewed_cutoff_preview.mjs /tmp/dthu-conflict.json
+
+{
+  "scope": "OFFLINE_PREVIEW_NOT_SOURCE_AUTHENTICATION",
+  "counts": {
+    "new": 0,
+    "unchanged": 533,
+    "conflict": 1
+  },
+  "conflicts": [
+    {
+      "key": "dthu|SPD|7480201|2026|DTHU_THPT",
+      "existing": {
+        "cutoff": 19.35,
+        "scale": 30,
+        "source": "https://qao.dthu.edu.vn/tuyen-sinh/diem-trung-tuyen",
+        "major": "Công nghệ thông tin",
+        "label": "Điểm THPT công bố"
+      },
+      "candidate": {
+        "cutoff": 19.36,
+        "scale": 30,
+        "source": "https://qao.dthu.edu.vn/tuyen-sinh/diem-trung-tuyen",
+        "major": "Công nghệ thông tin",
+        "label": "Điểm THPT công bố"
+      }
+    }
+  ],
+  "productionWrites": 0
+}

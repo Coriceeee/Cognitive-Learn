@@ -1,0 +1,1412 @@
+COMMAND npm run test:cp31:batch13
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch13
+> node --experimental-strip-types --test tests/cp31-batch13-measurement-audit.test.mjs
+
+TAP version 13
+# (node:35742) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: B13-01 two reviewed cycles retain the original descriptive series
+ok 1 - B13-01 two reviewed cycles retain the original descriptive series
+  ---
+  duration_ms: 24.682518
+  type: 'test'
+  ...
+# Subtest: B13-02 missing manifests are not silently filled in
+ok 2 - B13-02 missing manifests are not silently filled in
+  ---
+  duration_ms: 4.653118
+  type: 'test'
+  ...
+# Subtest: B13-03 null is equivalent to absent manifest
+ok 3 - B13-03 null is equivalent to absent manifest
+  ---
+  duration_ms: 4.79731
+  type: 'test'
+  ...
+# Subtest: B13-04 no cycles cannot imply measurements
+ok 4 - B13-04 no cycles cannot imply measurements
+  ---
+  duration_ms: 9.288409
+  type: 'test'
+  ...
+# Subtest: B13-05 malformed cycle returns SOURCE_BLOCKED
+ok 5 - B13-05 malformed cycle returns SOURCE_BLOCKED
+  ---
+  duration_ms: 0.878643
+  type: 'test'
+  ...
+# Subtest: B13-06 one reviewed cycle cannot create a T2 comparison
+ok 6 - B13-06 one reviewed cycle cannot create a T2 comparison
+  ---
+  duration_ms: 1.462222
+  type: 'test'
+  ...
+# Subtest: B13-07 sample independent manifest aligns declarations only
+ok 7 - B13-07 sample independent manifest aligns declarations only
+  ---
+  duration_ms: 7.885352
+  type: 'test'
+  ...
+# Subtest: B13-08 manifest order does not affect scientific status
+ok 8 - B13-08 manifest order does not affect scientific status
+  ---
+  duration_ms: 40.427375
+  type: 'test'
+  ...
+# Subtest: B13-09 cycle order does not affect matching
+ok 9 - B13-09 cycle order does not affect matching
+  ---
+  duration_ms: 4.062772
+  type: 'test'
+  ...
+# Subtest: B13-10 self report can never be promoted to verified equivalence
+ok 10 - B13-10 self report can never be promoted to verified equivalence
+  ---
+  duration_ms: 2.418937
+  type: 'test'
+  ...
+# Subtest: B13-11 no forecast accuracy or causal claims
+ok 11 - B13-11 no forecast accuracy or causal claims
+  ---
+  duration_ms: 1.635254
+  type: 'test'
+  ...
+# Subtest: B13-12 real score zero matches the declaration
+ok 12 - B13-12 real score zero matches the declaration
+  ---
+  duration_ms: 2.078719
+  type: 'test'
+  ...
+# Subtest: B13-13 same score with changed scale blocks longitudinal comparison
+ok 13 - B13-13 same score with changed scale blocks longitudinal comparison
+  ---
+  duration_ms: 2.125503
+  type: 'test'
+  ...
+# Subtest: B13-14 same score with changed instrument ID blocks comparison
+ok 14 - B13-14 same score with changed instrument ID blocks comparison
+  ---
+  duration_ms: 2.751246
+  type: 'test'
+  ...
+# Subtest: B13-15 changed instrument version is not assumed equivalent
+ok 15 - B13-15 changed instrument version is not assumed equivalent
+  ---
+  duration_ms: 2.059728
+  type: 'test'
+  ...
+# Subtest: B13-16 different forms do not imply equivalent tests
+ok 16 - B13-16 different forms do not imply equivalent tests
+  ---
+  duration_ms: 7.876783
+  type: 'test'
+  ...
+# Subtest: B13-17 scoring rubric changes block comparison
+ok 17 - B13-17 scoring rubric changes block comparison
+  ---
+  duration_ms: 1.727418
+  type: 'test'
+  ...
+# Subtest: B13-18 missing a single T0 declaration blocks complete status
+ok 18 - B13-18 missing a single T0 declaration blocks complete status
+  ---
+  duration_ms: 1.732804
+  type: 'test'
+  ...
+# Subtest: B13-19 missing a single T1 declaration blocks complete status
+ok 19 - B13-19 missing a single T1 declaration blocks complete status
+  ---
+  duration_ms: 12.238095
+  type: 'test'
+  ...
+# Subtest: B13-20 empty metadata list is missing, not compatible
+ok 20 - B13-20 empty metadata list is missing, not compatible
+  ---
+  duration_ms: 5.321981
+  type: 'test'
+  ...
+# Subtest: B13-21 false score injected is invalid, not normalized
+ok 21 - B13-21 false score injected is invalid, not normalized
+  ---
+  duration_ms: 2.409626
+  type: 'test'
+  ...
+# Subtest: B13-22 a true zero is never confused with missing
+ok 22 - B13-22 a true zero is never confused with missing
+  ---
+  duration_ms: 4.525899
+  type: 'test'
+  ...
+# Subtest: B13-23 wrong linked-at T0 time is invalid
+ok 23 - B13-23 wrong linked-at T0 time is invalid
+  ---
+  duration_ms: 2.454779
+  type: 'test'
+  ...
+# Subtest: B13-24 wrong linked-at T1 time is invalid
+ok 24 - B13-24 wrong linked-at T1 time is invalid
+  ---
+  duration_ms: 2.060567
+  type: 'test'
+  ...
+# Subtest: B13-25 duplicated source declaration is invalid
+ok 25 - B13-25 duplicated source declaration is invalid
+  ---
+  duration_ms: 3.570297
+  type: 'test'
+  ...
+# Subtest: B13-26 extra unknown cycle declaration is invalid
+ok 26 - B13-26 extra unknown cycle declaration is invalid
+  ---
+  duration_ms: 7.205577
+  type: 'test'
+  ...
+# Subtest: B13-27 extra unknown subject declaration is invalid
+ok 27 - B13-27 extra unknown subject declaration is invalid
+  ---
+  duration_ms: 1.898714
+  type: 'test'
+  ...
+# Subtest: B13-28 unexpected PII field in a declaration is invalid
+ok 28 - B13-28 unexpected PII field in a declaration is invalid
+  ---
+  duration_ms: 1.891386
+  type: 'test'
+  ...
+# Subtest: B13-29 unexpected PII field on manifest envelope is invalid
+ok 29 - B13-29 unexpected PII field on manifest envelope is invalid
+  ---
+  duration_ms: 18.836172
+  type: 'test'
+  ...
+# Subtest: B13-30 forged source verification is invalid
+ok 30 - B13-30 forged source verification is invalid
+  ---
+  duration_ms: 1.677522
+  type: 'test'
+  ...
+# Subtest: B13-31 empty instrument is invalid
+ok 31 - B13-31 empty instrument is invalid
+  ---
+  duration_ms: 2.14042
+  type: 'test'
+  ...
+# Subtest: B13-32 instrument with spaces or HTML is invalid
+ok 32 - B13-32 instrument with spaces or HTML is invalid
+  ---
+  duration_ms: 1.540225
+  type: 'test'
+  ...
+# Subtest: B13-33 undefined scoring scale is invalid
+ok 33 - B13-33 undefined scoring scale is invalid
+  ---
+  duration_ms: 2.307313
+  type: 'test'
+  ...
+# Subtest: B13-34 negative, NaN or out-of-range scores invalid
+ok 34 - B13-34 negative, NaN or out-of-range scores invalid
+  ---
+  duration_ms: 6.257938
+  type: 'test'
+  ...
+# Subtest: B13-35 timestamp with timezone offset cannot be disguised as canonical UTC
+ok 35 - B13-35 timestamp with timezone offset cannot be disguised as canonical UTC
+  ---
+  duration_ms: 2.21698
+  type: 'test'
+  ...
+# Subtest: B13-36 invalid calendar date is rejected
+ok 36 - B13-36 invalid calendar date is rejected
+  ---
+  duration_ms: 1.879394
+  type: 'test'
+  ...
+# Subtest: B13-37 expected owner mismatch blocks even accurate manifest
+ok 37 - B13-37 expected owner mismatch blocks even accurate manifest
+  ---
+  duration_ms: 0.634395
+  type: 'test'
+  ...
+# Subtest: B13-38 mixed owner metadata blocks declared alignment
+ok 38 - B13-38 mixed owner metadata blocks declared alignment
+  ---
+  duration_ms: 1.067373
+  type: 'test'
+  ...
+# Subtest: B13-39 moving a second baseline with regenerated T0 no longer gives valid source series
+ok 39 - B13-39 moving a second baseline with regenerated T0 no longer gives valid source series
+  ---
+  duration_ms: 0.842954
+  type: 'test'
+  ...
+# Subtest: B13-40 invalid evidence record blocks declaration promotion
+ok 40 - B13-40 invalid evidence record blocks declaration promotion
+  ---
+  duration_ms: 0.815811
+  type: 'test'
+  ...
+# Subtest: B13-41 original report can replay deterministic snapshot
+ok 41 - B13-41 original report can replay deterministic snapshot
+  ---
+  duration_ms: 4.88743
+  type: 'test'
+  ...
+# Subtest: B13-42 replay rejects forged validation flag
+ok 42 - B13-42 replay rejects forged validation flag
+  ---
+  duration_ms: 4.284941
+  type: 'test'
+  ...
+# Subtest: B13-43 replay rejects forged causal effect
+ok 43 - B13-43 replay rejects forged causal effect
+  ---
+  duration_ms: 3.635207
+  type: 'test'
+  ...
+# Subtest: B13-44 replay rejects withheld declaration
+ok 44 - B13-44 replay rejects withheld declaration
+  ---
+  duration_ms: 4.132587
+  type: 'test'
+  ...
+# Subtest: B13-45 offline envelope claims synthetic status only
+ok 45 - B13-45 offline envelope claims synthetic status only
+  ---
+  duration_ms: 4.842008
+  type: 'test'
+  ...
+# Subtest: B13-46 offline envelope verifies against original input bytes
+ok 46 - B13-46 offline envelope verifies against original input bytes
+  ---
+  duration_ms: 15.036697
+  type: 'test'
+  ...
+# Subtest: B13-47 changed fixture hash blocks replay
+ok 47 - B13-47 changed fixture hash blocks replay
+  ---
+  duration_ms: 8.240856
+  type: 'test'
+  ...
+# Subtest: B13-48 forged envelope payload or checksum rejected
+ok 48 - B13-48 forged envelope payload or checksum rejected
+  ---
+  duration_ms: 36.729729
+  type: 'test'
+  ...
+# Subtest: B13-49 unmarked synthetic fixture or unexpected PII fails offline
+ok 49 - B13-49 unmarked synthetic fixture or unexpected PII fails offline
+  ---
+  duration_ms: 4.981382
+  type: 'test'
+  ...
+# Subtest: B13-50 UI carries a fail-closed measurement warning and no verified score claim
+ok 50 - B13-50 UI carries a fail-closed measurement warning and no verified score claim
+  ---
+  duration_ms: 0.849226
+  type: 'test'
+  ...
+# Subtest: B13-51 source release fingerprint includes independent synthetic measurement manifest
+ok 51 - B13-51 source release fingerprint includes independent synthetic measurement manifest
+  ---
+  duration_ms: 0.731537
+  type: 'test'
+  ...
+# Subtest: B13-52 package scripts include new gate without removing preceding batches
+ok 52 - B13-52 package scripts include new gate without removing preceding batches
+  ---
+  duration_ms: 0.582817
+  type: 'test'
+  ...
+1..52
+# tests 52
+# suites 0
+# pass 52
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1776.947521
+COMMAND npm run test:cp31:batch14
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch14
+> node --experimental-strip-types --test tests/cp31-batch14-measurement-persistence.test.mjs
+
+TAP version 13
+# (node:35991) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: B14-01 create-only T0 point retains actual 0
+ok 1 - B14-01 create-only T0 point retains actual 0
+  ---
+  duration_ms: 4.595506
+  type: 'test'
+  ...
+# Subtest: B14-02 immutable T0 can be declared before any T1
+ok 2 - B14-02 immutable T0 can be declared before any T1
+  ---
+  duration_ms: 0.304412
+  type: 'test'
+  ...
+# Subtest: B14-03 T1 only comes from reviewed cycle
+ok 3 - B14-03 T1 only comes from reviewed cycle
+  ---
+  duration_ms: 2.938434
+  type: 'test'
+  ...
+# Subtest: B14-04 unobserved subject never gets fabricated T1
+ok 4 - B14-04 unobserved subject never gets fabricated T1
+  ---
+  duration_ms: 2.149879
+  type: 'test'
+  ...
+# Subtest: B14-05 every point ID is per cycle/key/timepoint and cannot collide
+ok 5 - B14-05 every point ID is per cycle/key/timepoint and cannot collide
+  ---
+  duration_ms: 2.387658
+  type: 'test'
+  ...
+# Subtest: B14-06 stored declaration maps to expected student-owned point
+ok 6 - B14-06 stored declaration maps to expected student-owned point
+  ---
+  duration_ms: 2.633128
+  type: 'test'
+  ...
+# Subtest: B14-07 T1 observation index binds to exactly its observed item
+ok 7 - B14-07 T1 observation index binds to exactly its observed item
+  ---
+  duration_ms: 0.833991
+  type: 'test'
+  ...
+# Subtest: B14-08 write timestamp is distinct from linked T0 time
+ok 8 - B14-08 write timestamp is distinct from linked T0 time
+  ---
+  duration_ms: 0.619842
+  type: 'test'
+  ...
+# Subtest: B14-09 missing exam point is rejected before write
+ok 9 - B14-09 missing exam point is rejected before write
+  ---
+  duration_ms: 0.676975
+  type: 'test'
+  ...
+# Subtest: B14-10 no phantom or unknown subject
+ok 10 - B14-10 no phantom or unknown subject
+  ---
+  duration_ms: 0.855428
+  type: 'test'
+  ...
+# Subtest: B14-11 invalid owner empty or outsize
+ok 11 - B14-11 invalid owner empty or outsize
+  ---
+  duration_ms: 0.462844
+  type: 'test'
+  ...
+# Subtest: B14-12 corrupt frozen T0 cannot be declared
+ok 12 - B14-12 corrupt frozen T0 cannot be declared
+  ---
+  duration_ms: 0.269254
+  type: 'test'
+  ...
+# Subtest: B14-13 corrupted evidence record prevents T1 declaration
+ok 13 - B14-13 corrupted evidence record prevents T1 declaration
+  ---
+  duration_ms: 0.25047
+  type: 'test'
+  ...
+# Subtest: B14-14 unsupported or missing instrument metadata is rejected
+ok 14 - B14-14 unsupported or missing instrument metadata is rejected
+  ---
+  duration_ms: 1.924782
+  type: 'test'
+  ...
+# Subtest: B14-15 HTML / spaces in source identifiers rejected
+ok 15 - B14-15 HTML / spaces in source identifiers rejected
+  ---
+  duration_ms: 0.514831
+  type: 'test'
+  ...
+# Subtest: B14-16 unsupported scale is rejected
+ok 16 - B14-16 unsupported scale is rejected
+  ---
+  duration_ms: 0.472575
+  type: 'test'
+  ...
+# Subtest: B14-17 caller cannot inject verified source or fake role
+ok 17 - B14-17 caller cannot inject verified source or fake role
+  ---
+  duration_ms: 2.607964
+  type: 'test'
+  ...
+# Subtest: B14-18 caller cannot inject PII or other fields
+ok 18 - B14-18 caller cannot inject PII or other fields
+  ---
+  duration_ms: 0.346673
+  type: 'test'
+  ...
+# Subtest: B14-19 owner swapped at read time is invalid
+ok 19 - B14-19 owner swapped at read time is invalid
+  ---
+  duration_ms: 0.467779
+  type: 'test'
+  ...
+# Subtest: B14-20 changed record score is rejected
+ok 20 - B14-20 changed record score is rejected
+  ---
+  duration_ms: 0.66455
+  type: 'test'
+  ...
+# Subtest: B14-21 changed linked timestamp rejected
+ok 21 - B14-21 changed linked timestamp rejected
+  ---
+  duration_ms: 0.779181
+  type: 'test'
+  ...
+# Subtest: B14-22 changed subjectIndex rejected
+ok 22 - B14-22 changed subjectIndex rejected
+  ---
+  duration_ms: 0.427751
+  type: 'test'
+  ...
+# Subtest: B14-23 forged observation index rejected
+ok 23 - B14-23 forged observation index rejected
+  ---
+  duration_ms: 1.066805
+  type: 'test'
+  ...
+# Subtest: B14-24 changed cycle ID rejected
+ok 24 - B14-24 changed cycle ID rejected
+  ---
+  duration_ms: 0.320383
+  type: 'test'
+  ...
+# Subtest: B14-25 record with unknown field rejected
+ok 25 - B14-25 record with unknown field rejected
+  ---
+  duration_ms: 0.258356
+  type: 'test'
+  ...
+# Subtest: B14-26 client cannot forge source verification status
+ok 26 - B14-26 client cannot forge source verification status
+  ---
+  duration_ms: 0.626517
+  type: 'test'
+  ...
+# Subtest: B14-27 missing server write timestamp rejected
+ok 27 - B14-27 missing server write timestamp rejected
+  ---
+  duration_ms: 0.255554
+  type: 'test'
+  ...
+# Subtest: B14-28 invalid or mismatched document ID rejected
+ok 28 - B14-28 invalid or mismatched document ID rejected
+  ---
+  duration_ms: 0.245501
+  type: 'test'
+  ...
+# Subtest: B14-29 stored snapshot is invalid when cycle score changes
+ok 29 - B14-29 stored snapshot is invalid when cycle score changes
+  ---
+  duration_ms: 0.477201
+  type: 'test'
+  ...
+# Subtest: B14-30 valid rows convert to strict B13 manifest with no user ID
+ok 30 - B14-30 valid rows convert to strict B13 manifest with no user ID
+  ---
+  duration_ms: 85.548297
+  type: 'test'
+  ...
+# Subtest: B14-31 partial declarations are not promoted to aligned
+ok 31 - B14-31 partial declarations are not promoted to aligned
+  ---
+  duration_ms: 9.315879
+  type: 'test'
+  ...
+# Subtest: B14-32 changed instrument yields mismatch instead of equivalence
+ok 32 - B14-32 changed instrument yields mismatch instead of equivalence
+  ---
+  duration_ms: 2.766458
+  type: 'test'
+  ...
+# Subtest: B14-33 no psychometric claims even when declarations align
+ok 33 - B14-33 no psychometric claims even when declarations align
+  ---
+  duration_ms: 12.261379
+  type: 'test'
+  ...
+# Subtest: B14-34 Firestore candidate has append-only, owner+consent scoped records
+ok 34 - B14-34 Firestore candidate has append-only, owner+consent scoped records
+  ---
+  duration_ms: 25.677899
+  type: 'test'
+  ...
+# Subtest: B14-35 candidate is not deployed by firebase.json
+ok 35 - B14-35 candidate is not deployed by firebase.json
+  ---
+  duration_ms: 0.431412
+  type: 'test'
+  ...
+# Subtest: B14-36 Firestore hooks do not write without student-initiated action
+ok 36 - B14-36 Firestore hooks do not write without student-initiated action
+  ---
+  duration_ms: 0.568655
+  type: 'test'
+  ...
+# Subtest: B14-37 UI requires explicit one-time confirmation and warns unverified
+ok 37 - B14-37 UI requires explicit one-time confirmation and warns unverified
+  ---
+  duration_ms: 0.475383
+  type: 'test'
+  ...
+# Subtest: B14-38 prior B13 measurement manifest is now from persisted rows
+ok 38 - B14-38 prior B13 measurement manifest is now from persisted rows
+  ---
+  duration_ms: 9.159522
+  type: 'test'
+  ...
+# Subtest: B14-39 npm gates extend B13, not replace it
+ok 39 - B14-39 npm gates extend B13, not replace it
+  ---
+  duration_ms: 0.475776
+  type: 'test'
+  ...
+# Subtest: B14-40 invalid score NaN and wrong origin never become declarations
+ok 40 - B14-40 invalid score NaN and wrong origin never become declarations
+  ---
+  duration_ms: 0.418716
+  type: 'test'
+  ...
+# Subtest: B14-41 UI hides longitudinal arrows until declared metadata aligns
+ok 41 - B14-41 UI hides longitudinal arrows until declared metadata aligns
+  ---
+  duration_ms: 0.651308
+  type: 'test'
+  ...
+1..41
+# tests 41
+# suites 0
+# pass 41
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1317.475596
+COMMAND npm run test:cp31:batch15
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch15
+> node --experimental-strip-types --test tests/cp31-batch15-snapshot-integrity.test.mjs
+
+TAP version 13
+# (node:36253) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: B15-01 one cycle with no declarations is incomplete, never complete
+ok 1 - B15-01 one cycle with no declarations is incomplete, never complete
+  ---
+  duration_ms: 57.275242
+  type: 'test'
+  ...
+# Subtest: B15-02 two fully declared cycles are syntactically complete, unverified
+ok 2 - B15-02 two fully declared cycles are syntactically complete, unverified
+  ---
+  duration_ms: 111.047831
+  type: 'test'
+  ...
+# Subtest: B15-03 partial snapshot gives exact missing count
+ok 3 - B15-03 partial snapshot gives exact missing count
+  ---
+  duration_ms: 51.460496
+  type: 'test'
+  ...
+# Subtest: B15-04 no window and no documents is neutral
+ok 4 - B15-04 no window and no documents is neutral
+  ---
+  duration_ms: 0.22099
+  type: 'test'
+  ...
+# Subtest: B15-05 unexpected data in empty window is blocked
+ok 5 - B15-05 unexpected data in empty window is blocked
+  ---
+  duration_ms: 6.923695
+  type: 'test'
+  ...
+# Subtest: B15-06 wrong user ID blocked
+ok 6 - B15-06 wrong user ID blocked
+  ---
+  duration_ms: 1.423955
+  type: 'test'
+  ...
+# Subtest: B15-07 overlong user ID blocked
+ok 7 - B15-07 overlong user ID blocked
+  ---
+  duration_ms: 0.793234
+  type: 'test'
+  ...
+# Subtest: B15-08 more than 8 cycles rejected regardless of documents
+ok 8 - B15-08 more than 8 cycles rejected regardless of documents
+  ---
+  duration_ms: 8.028135
+  type: 'test'
+  ...
+# Subtest: B15-09 duplicate cycle IDs reject the entire result
+ok 9 - B15-09 duplicate cycle IDs reject the entire result
+  ---
+  duration_ms: 1.498045
+  type: 'test'
+  ...
+# Subtest: B15-10 malformed cycle ID blocked
+ok 10 - B15-10 malformed cycle ID blocked
+  ---
+  duration_ms: 1.204748
+  type: 'test'
+  ...
+# Subtest: B15-11 unknown document refused, not silently filtered
+ok 11 - B15-11 unknown document refused, not silently filtered
+  ---
+  duration_ms: 12.315171
+  type: 'test'
+  ...
+# Subtest: B15-12 duplicate document point refused
+ok 12 - B15-12 duplicate document point refused
+  ---
+  duration_ms: 17.493511
+  type: 'test'
+  ...
+# Subtest: B15-13 wrong document ID refused
+ok 13 - B15-13 wrong document ID refused
+  ---
+  duration_ms: 11.693196
+  type: 'test'
+  ...
+# Subtest: B15-14 changed score 0 refused
+ok 14 - B15-14 changed score 0 refused
+  ---
+  duration_ms: 35.594129
+  type: 'test'
+  ...
+# Subtest: B15-15 changed reported time refused
+ok 15 - B15-15 changed reported time refused
+  ---
+  duration_ms: 7.800422
+  type: 'test'
+  ...
+# Subtest: B15-16 forged source refused
+ok 16 - B15-16 forged source refused
+  ---
+  duration_ms: 13.208685
+  type: 'test'
+  ...
+# Subtest: B15-17 forged identity refused
+ok 17 - B15-17 forged identity refused
+  ---
+  duration_ms: 12.573265
+  type: 'test'
+  ...
+# Subtest: B15-18 forged reviewer field refused
+ok 18 - B15-18 forged reviewer field refused
+  ---
+  duration_ms: 5.037117
+  type: 'test'
+  ...
+# Subtest: B15-19 missing write timestamp refused
+ok 19 - B15-19 missing write timestamp refused
+  ---
+  duration_ms: 7.108887
+  type: 'test'
+  ...
+# Subtest: B15-20 missing context field refused
+ok 20 - B15-20 missing context field refused
+  ---
+  duration_ms: 15.847199
+  type: 'test'
+  ...
+# Subtest: B15-21 swapped T0/T1 refused
+ok 21 - B15-21 swapped T0/T1 refused
+  ---
+  duration_ms: 11.090985
+  type: 'test'
+  ...
+# Subtest: B15-22 invalid subjectIndex refused
+ok 22 - B15-22 invalid subjectIndex refused
+  ---
+  duration_ms: 43.62411
+  type: 'test'
+  ...
+# Subtest: B15-23 corrupted frozen T0 blocks entire window
+ok 23 - B15-23 corrupted frozen T0 blocks entire window
+  ---
+  duration_ms: 9.127473
+  type: 'test'
+  ...
+# Subtest: B15-24 corrupt Evidence Record blocks entire window
+ok 24 - B15-24 corrupt Evidence Record blocks entire window
+  ---
+  duration_ms: 1.611934
+  type: 'test'
+  ...
+# Subtest: B15-25 legacy no T0 stays readable but is never complete
+ok 25 - B15-25 legacy no T0 stays readable but is never complete
+  ---
+  duration_ms: 69.217315
+  type: 'test'
+  ...
+# Subtest: B15-26 legacy no Evidence Record stays read-only
+ok 26 - B15-26 legacy no Evidence Record stays read-only
+  ---
+  duration_ms: 2.071844
+  type: 'test'
+  ...
+# Subtest: B15-27 forged metadata for legacy cycle cannot be promoted
+ok 27 - B15-27 forged metadata for legacy cycle cannot be promoted
+  ---
+  duration_ms: 28.707527
+  type: 'test'
+  ...
+# Subtest: B15-28 valid legacy + partial active cycle remains legacy read-only
+ok 28 - B15-28 valid legacy + partial active cycle remains legacy read-only
+  ---
+  duration_ms: 9.200764
+  type: 'test'
+  ...
+# Subtest: B15-29 limit sentinel over 96 records is blocked, never silently truncated
+ok 29 - B15-29 limit sentinel over 96 records is blocked, never silently truncated
+  ---
+  duration_ms: 9.872464
+  type: 'test'
+  ...
+# Subtest: B15-30 order of Firestore results does not change audited row order
+ok 30 - B15-30 order of Firestore results does not change audited row order
+  ---
+  duration_ms: 60.988928
+  type: 'test'
+  ...
+# Subtest: B15-31 missing manifest remains missing, never becomes aligned
+ok 31 - B15-31 missing manifest remains missing, never becomes aligned
+  ---
+  duration_ms: 114.65289
+  type: 'test'
+  ...
+# Subtest: B15-32 even complete metadata does not prove psychometric equivalence
+ok 32 - B15-32 even complete metadata does not prove psychometric equivalence
+  ---
+  duration_ms: 99.424769
+  type: 'test'
+  ...
+# Subtest: B15-33 query requests 97th sentinel and ignores local cache as evidence
+ok 33 - B15-33 query requests 97th sentinel and ignores local cache as evidence
+  ---
+  duration_ms: 0.544549
+  type: 'test'
+  ...
+# Subtest: B15-34 stale Firestore callbacks cannot set state after unmount
+ok 34 - B15-34 stale Firestore callbacks cannot set state after unmount
+  ---
+  duration_ms: 0.641565
+  type: 'test'
+  ...
+# Subtest: B15-35 transaction checks all immutable point fields, not only score
+ok 35 - B15-35 transaction checks all immutable point fields, not only score
+  ---
+  duration_ms: 0.244623
+  type: 'test'
+  ...
+# Subtest: B15-36 UI distinguishes legacy, missing rows, complete-unverified
+ok 36 - B15-36 UI distinguishes legacy, missing rows, complete-unverified
+  ---
+  duration_ms: 0.828691
+  type: 'test'
+  ...
+# Subtest: B15-37 no server deployment is introduced
+ok 37 - B15-37 no server deployment is introduced
+  ---
+  duration_ms: 28.815694
+  type: 'test'
+  ...
+# Subtest: B15-38 no numeric score or probability fabricated from missing rows
+ok 38 - B15-38 no numeric score or probability fabricated from missing rows
+  ---
+  duration_ms: 1.375563
+  type: 'test'
+  ...
+# Subtest: B15-39 prior source set remains under strict constraints
+ok 39 - B15-39 prior source set remains under strict constraints
+  ---
+  duration_ms: 0.491463
+  type: 'test'
+  ...
+# Subtest: B15-40 source never contains student identifying fields
+ok 40 - B15-40 source never contains student identifying fields
+  ---
+  duration_ms: 0.536671
+  type: 'test'
+  ...
+1..40
+# tests 40
+# suites 0
+# pass 40
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2789.393909
+COMMAND npm run test:cp31:batch16
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch16
+> node --experimental-strip-types --test tests/cp31-batch16-history-pagination.test.mjs
+
+TAP version 13
+# (node:36508) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: B16-01 page size is eight and cap is 80
+ok 1 - B16-01 page size is eight and cap is 80
+  ---
+  duration_ms: 16.945382
+  type: 'test'
+  ...
+# Subtest: B16-02 full page is eight records without exceeding Rules
+ok 2 - B16-02 full page is eight records without exceeding Rules
+  ---
+  duration_ms: 48.947334
+  type: 'test'
+  ...
+# Subtest: B16-03 short server page establishes no further rows for that request
+ok 3 - B16-03 short server page establishes no further rows for that request
+  ---
+  duration_ms: 0.804571
+  type: 'test'
+  ...
+# Subtest: B16-04 empty server page is legal
+ok 4 - B16-04 empty server page is legal
+  ---
+  duration_ms: 0.696661
+  type: 'test'
+  ...
+# Subtest: B16-05 cache cannot establish completeness
+ok 5 - B16-05 cache cannot establish completeness
+  ---
+  duration_ms: 1.141611
+  type: 'test'
+  ...
+# Subtest: B16-06 missing user ID fails closed
+ok 6 - B16-06 missing user ID fails closed
+  ---
+  duration_ms: 0.567257
+  type: 'test'
+  ...
+# Subtest: B16-07 invalid latest page fails closed
+ok 7 - B16-07 invalid latest page fails closed
+  ---
+  duration_ms: 1.908628
+  type: 'test'
+  ...
+# Subtest: B16-08 nine Firestore records exceed server query allowance
+ok 8 - B16-08 nine Firestore records exceed server query allowance
+  ---
+  duration_ms: 0.441648
+  type: 'test'
+  ...
+# Subtest: B16-09 foreign cycle cannot be displayed
+ok 9 - B16-09 foreign cycle cannot be displayed
+  ---
+  duration_ms: 5.512774
+  type: 'test'
+  ...
+# Subtest: B16-10 forged Firestore document ID fails
+ok 10 - B16-10 forged Firestore document ID fails
+  ---
+  duration_ms: 1.031808
+  type: 'test'
+  ...
+# Subtest: B16-11 duplicate archived cycle fails
+ok 11 - B16-11 duplicate archived cycle fails
+  ---
+  duration_ms: 1.080072
+  type: 'test'
+  ...
+# Subtest: B16-12 overlapping newest and archived cycle fails
+ok 12 - B16-12 overlapping newest and archived cycle fails
+  ---
+  duration_ms: 5.041204
+  type: 'test'
+  ...
+# Subtest: B16-13 non-descending page is rejected
+ok 13 - B16-13 non-descending page is rejected
+  ---
+  duration_ms: 1.119768
+  type: 'test'
+  ...
+# Subtest: B16-14 timestamp equal to cursor is rejected
+ok 14 - B16-14 timestamp equal to cursor is rejected
+  ---
+  duration_ms: 7.106861
+  type: 'test'
+  ...
+# Subtest: B16-15 invalid evidence nested fields reject all older data
+ok 15 - B16-15 invalid evidence nested fields reject all older data
+  ---
+  duration_ms: 1.253552
+  type: 'test'
+  ...
+# Subtest: B16-16 malformed document is rejected
+ok 16 - B16-16 malformed document is rejected
+  ---
+  duration_ms: 1.258729
+  type: 'test'
+  ...
+# Subtest: B16-17 reaching 80 caps display and never claims full history
+ok 17 - B16-17 reaching 80 caps display and never claims full history
+  ---
+  duration_ms: 6.712912
+  type: 'test'
+  ...
+# Subtest: B16-18 already at 80 is blocked
+ok 18 - B16-18 already at 80 is blocked
+  ---
+  duration_ms: 1.533101
+  type: 'test'
+  ...
+# Subtest: B16-19 pagination hook uses authenticated server cursor and resets on auth changes
+ok 19 - B16-19 pagination hook uses authenticated server cursor and resets on auth changes
+  ---
+  duration_ms: 25.149437
+  type: 'test'
+  ...
+# Subtest: B16-20 measurement analysis stays limited to the first eight cycles
+ok 20 - B16-20 measurement analysis stays limited to the first eight cycles
+  ---
+  duration_ms: 2.390541
+  type: 'test'
+  ...
+# Subtest: B16-21 UI provides separate older history disclosure and no attestation claim
+ok 21 - B16-21 UI provides separate older history disclosure and no attestation claim
+  ---
+  duration_ms: 0.855929
+  type: 'test'
+  ...
+# Subtest: B16-22 no client-side writes from history archive path
+ok 22 - B16-22 no client-side writes from history archive path
+  ---
+  duration_ms: 8.105563
+  type: 'test'
+  ...
+1..22
+# tests 22
+# suites 0
+# pass 22
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1200.007699
+COMMAND npm run test:cp31:batch17
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch17
+> node --experimental-strip-types --test tests/cp31-batch17-demo-backup.test.mjs
+
+TAP version 13
+# (node:36664) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: Static standalone offline HTML contains all essential safety claims
+ok 1 - Static standalone offline HTML contains all essential safety claims
+  ---
+  duration_ms: 34.206788
+  type: 'test'
+  ...
+# Subtest: Render is deterministic for the same independently checked data
+ok 2 - Render is deterministic for the same independently checked data
+  ---
+  duration_ms: 5.070337
+  type: 'test'
+  ...
+# Subtest: Disallowed score is fail-closed, not silently drawn
+ok 3 - Disallowed score is fail-closed, not silently drawn
+  ---
+  duration_ms: 3.316394
+  type: 'test'
+  ...
+# Subtest: Missing science-replay stages is fail-closed
+ok 4 - Missing science-replay stages is fail-closed
+  ---
+  duration_ms: 24.669581
+  type: 'test'
+  ...
+# Subtest: Potentially hostile labels and sources are HTML-escaped
+ok 5 - Potentially hostile labels and sources are HTML-escaped
+  ---
+  duration_ms: 1.02463
+  type: 'test'
+  ...
+# Subtest: Offline fallback from the REAL replay JSON is byte-reproducible and tamper-detecting
+ok 6 - Offline fallback from the REAL replay JSON is byte-reproducible and tamper-detecting
+  ---
+  duration_ms: 8741.275019
+  type: 'test'
+  ...
+# Subtest: Verification refuses an absent HTML artifact
+ok 7 - Verification refuses an absent HTML artifact
+  ---
+  duration_ms: 3356.334532
+  type: 'test'
+  ...
+# Subtest: Verification rejects unsupported action
+ok 8 - Verification rejects unsupported action
+  ---
+  duration_ms: 0.419495
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 12821.156755
+COMMAND npm run test:cp32:cutoffs
+
+> cognitive-learn-ai@0.1.0 test:cp32:cutoffs
+> node --experimental-strip-types --test tests/cp32-ptit-2026-cutoffs.test.mjs
+
+TAP version 13
+# (node:37555) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP32 10 BVH programs, 3 years, 90 method-specific 2026 cutoffs
+ok 1 - CP32 10 BVH programs, 3 years, 90 method-specific 2026 cutoffs
+  ---
+  duration_ms: 7.802847
+  type: 'test'
+  ...
+# Subtest: Source example: exact 9-column mapping, tie-break, no invented tie-break for IT
+ok 2 - Source example: exact 9-column mapping, tie-break, no invented tie-break for IT
+  ---
+  duration_ms: 0.222135
+  type: 'test'
+  ...
+# Subtest: Atlas UI separates 2025 common cutoff, 2026 method scale, and historical arithmetic
+ok 3 - Atlas UI separates 2025 common cutoff, 2026 method scale, and historical arithmetic
+  ---
+  duration_ms: 4.994344
+  type: 'test'
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 3
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 322.621027
+COMMAND npm run test:cp32:decision
+
+> cognitive-learn-ai@0.1.0 test:cp32:decision
+> node --experimental-strip-types --test tests/cp32-atlas-decision-comparison.test.mjs
+
+TAP version 13
+# (node:37627) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: all 90 program/method options preserve source and native scale
+ok 1 - all 90 program/method options preserve source and native scale
+  ---
+  duration_ms: 4.356555
+  type: 'test'
+  ...
+# Subtest: zero, decimal commas, missing and incorrect score bounds
+ok 2 - zero, decimal commas, missing and incorrect score bounds
+  ---
+  duration_ms: 0.397815
+  type: 'test'
+  ...
+# Subtest: source-backed chat lookup is exact, time- and method-specific
+ok 3 - source-backed chat lookup is exact, time- and method-specific
+  ---
+  duration_ms: 3.712018
+  type: 'test'
+  ...
+# Subtest: unknown, ambiguous, injected or incompatible queries abstain from direct facts
+ok 4 - unknown, ambiguous, injected or incompatible queries abstain from direct facts
+  ---
+  duration_ms: 0.698192
+  type: 'test'
+  ...
+# Subtest: UI clears score on method changes and chat gates deterministic answer before Gemini
+ok 5 - UI clears score on method changes and chat gates deterministic answer before Gemini
+  ---
+  duration_ms: 1.096881
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 460.097555
+COMMAND npm run test:cp32:national
+
+> cognitive-learn-ai@0.1.0 test:cp32:national
+> node --experimental-strip-types --test tests/cp32-national-admission.test.mjs
+
+TAP version 13
+# (node:37693) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: national catalog includes 16 schools and preserves 110 PTIT records, 728 external numeric facts
+ok 1 - national catalog includes 16 schools and preserves 110 PTIT records, 728 external numeric facts
+  ---
+  duration_ms: 22.285483
+  type: 'test'
+  ...
+# Subtest: all known scales compare equal values; unknown scales never compute gaps
+ok 2 - all known scales compare equal values; unknown scales never compute gaps
+  ---
+  duration_ms: 247.014045
+  type: 'test'
+  ...
+# Subtest: lookup uses school-specific method and exact code, no mismatched school or year
+ok 3 - lookup uses school-specific method and exact code, no mismatched school or year
+  ---
+  duration_ms: 282.185836
+  type: 'test'
+  ...
+# Subtest: independently checked numeric spot values and distinct campus codes
+ok 4 - independently checked numeric spot values and distinct campus codes
+  ---
+  duration_ms: 2.538789
+  type: 'test'
+  ...
+# Subtest: official links include central region, missing numeric sources remain missing
+ok 5 - official links include central region, missing numeric sources remain missing
+  ---
+  duration_ms: 0.882335
+  type: 'test'
+  ...
+# Subtest: CTU 2024 and 2025 preserve source, method and exact known values
+ok 6 - CTU 2024 and 2025 preserve source, method and exact known values
+  ---
+  duration_ms: 4.303746
+  type: 'test'
+  ...
+# Subtest: history isolates campus and code, preserves years and explicit missing slots
+ok 7 - history isolates campus and code, preserves years and explicit missing slots
+  ---
+  duration_ms: 4.187424
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 951.634806
+COMMAND npm run test:cp32:discovery
+
+> cognitive-learn-ai@0.1.0 test:cp32:discovery
+> node --experimental-strip-types --test tests/cp32-program-discovery.test.mjs
+
+TAP version 13
+# (node:37788) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: preserves all 216 new numeric facts and 11 institutional identities
+ok 1 - preserves all 216 new numeric facts and 11 institutional identities
+  ---
+  duration_ms: 1.152597
+  type: 'test'
+  ...
+# Subtest: actual VNU official numeric anchors, same code in different schools stays separate
+ok 2 - actual VNU official numeric anchors, same code in different schools stays separate
+  ---
+  duration_ms: 2.37424
+  type: 'test'
+  ...
+# Subtest: interest, school, year and region are actual filters not imputation
+ok 3 - interest, school, year and region are actual filters not imputation
+  ---
+  duration_ms: 19.962672
+  type: 'test'
+  ...
+# Subtest: combination evidence is separate from unknown; missing does not exclude candidates
+ok 4 - combination evidence is separate from unknown; missing does not exclude candidates
+  ---
+  duration_ms: 0.956001
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 341.340505
+COMMAND npm run test:cp32:personal
+
+> cognitive-learn-ai@0.1.0 test:cp32:personal
+> node --experimental-strip-types --test tests/cp32-personal-matching.test.mjs
+
+TAP version 13
+# (node:37835) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: same term, preserves zero, rejects missing or invalid scores
+ok 1 - same term, preserves zero, rejects missing or invalid scores
+  ---
+  duration_ms: 19.019244
+  type: 'test'
+  ...
+# Subtest: academic evidence only for source-listed combinations with observed subjects
+ok 2 - academic evidence only for source-listed combinations with observed subjects
+  ---
+  duration_ms: 4.057878
+  type: 'test'
+  ...
+# Subtest: unknown evidence is never converted to failure, explicit filter only
+ok 3 - unknown evidence is never converted to failure, explicit filter only
+  ---
+  duration_ms: 6.685033
+  type: 'test'
+  ...
+# Subtest: interest is user-selected not inferred from grade, supports multiple interests
+ok 4 - interest is user-selected not inferred from grade, supports multiple interests
+  ---
+  duration_ms: 34.128958
+  type: 'test'
+  ...
+# Subtest: requested combination limits academic evidence; no comparison against historical cutoff
+ok 5 - requested combination limits academic evidence; no comparison against historical cutoff
+  ---
+  duration_ms: 2.549503
+  type: 'test'
+  ...
+# Subtest: interest match never discards unknown source combinations without explicit filter
+ok 6 - interest match never discards unknown source combinations without explicit filter
+  ---
+  duration_ms: 0.701113
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 325.050116
+COMMAND npm run test:cp32:public-search
+
+> cognitive-learn-ai@0.1.0 test:cp32:public-search
+> node --experimental-strip-types --test tests/cp32-public-source-search.test.mjs
+
+TAP version 13
+# (node:37864) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: arbitrary public university, country or scholarship names supported
+ok 1 - arbitrary public university, country or scholarship names supported
+  ---
+  duration_ms: 13.58892
+  type: 'test'
+  ...
+# Subtest: explicit confirmation and closed schema including no profile or UID
+ok 2 - explicit confirmation and closed schema including no profile or UID
+  ---
+  duration_ms: 0.471008
+  type: 'test'
+  ...
+# Subtest: reject common PII patterns and free-form URL/injection operators
+ok 3 - reject common PII patterns and free-form URL/injection operators
+  ---
+  duration_ms: 1.002694
+  type: 'test'
+  ...
+# Subtest: scope and year encoded in external search link
+ok 4 - scope and year encoded in external search link
+  ---
+  duration_ms: 1.626149
+  type: 'test'
+  ...
+# Subtest: dangerous links rejected and only HTTPS accepted
+ok 5 - dangerous links rejected and only HTTPS accepted
+  ---
+  duration_ms: 1.835674
+  type: 'test'
+  ...
+# Subtest: provider claims never confer verification, numbers or model outputs
+ok 6 - provider claims never confer verification, numbers or model outputs
+  ---
+  duration_ms: 2.363091
+  type: 'test'
+  ...
+# Subtest: candidate payload bounded
+ok 7 - candidate payload bounded
+  ---
+  duration_ms: 0.763835
+  type: 'test'
+  ...
+# Subtest: Gemini key alone cannot bypass approval and separate provider contract
+ok 8 - Gemini key alone cannot bypass approval and separate provider contract
+  ---
+  duration_ms: 0.549919
+  type: 'test'
+  ...
+# Subtest: mock provider receives public fields only; no personal context or Firebase token
+ok 9 - mock provider receives public fields only; no personal context or Firebase token
+  ---
+  duration_ms: 0.716848
+  type: 'test'
+  ...
+# Subtest: missing provider data produces no result
+ok 10 - missing provider data produces no result
+  ---
+  duration_ms: 0.424402
+  type: 'test'
+  ...
+# Subtest: Atlas, study abroad, Haven share panel; no Firestore data writes
+ok 11 - Atlas, study abroad, Haven share panel; no Firestore data writes
+  ---
+  duration_ms: 0.609338
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 257.971438
+COMMAND node --experimental-strip-types --test tests/cp33-external-ml-evidence.test.mjs
+TAP version 13
+# (node:37881) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: structural gate accepts complete aggregate fixture, not proof of science
+ok 1 - structural gate accepts complete aggregate fixture, not proof of science
+  ---
+  duration_ms: 7.765315
+  type: 'test'
+  ...
+# Subtest: rejects missing subject, wrong source, synthetic status
+ok 2 - rejects missing subject, wrong source, synthetic status
+  ---
+  duration_ms: 0.811652
+  type: 'test'
+  ...
+# Subtest: rejects bad bounds, mismatched counts, and inconsistent ablation
+ok 3 - rejects bad bounds, mismatched counts, and inconsistent ablation
+  ---
+  duration_ms: 0.63015
+  type: 'test'
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 3
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 233.403743

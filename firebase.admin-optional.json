@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "source": "functions-admin",
+    "runtime": "nodejs22",
+    "codebase": "cla-admin-operations"
+  }
+}

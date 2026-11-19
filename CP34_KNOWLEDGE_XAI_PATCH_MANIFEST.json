@@ -1,0 +1,114 @@
+{
+  "schema": "cla.patch-manifest.v1",
+  "base": "CLA_FULL_SOURCE_CP33_34_MEASUREMENT_ADAPTIVE_20261118.zip",
+  "base_sha256": "cd2d767662fa6d57fd013d587c9d75141873d61d061a4913ac36e4f31614deba",
+  "source_fingerprint": {
+    "sha256": "b888d409c3139759a7c98f8430703917d4d83388df5a037edfe2cf2a8d571be7",
+    "fileCount": 355
+  },
+  "changed_files": [
+    {
+      "path": "START_HERE_CP34_KNOWLEDGE_XAI_20261118.md",
+      "sha256": "d15349f010a8591789fc20d524f97e745d76301d204574d9fac4d4dc1c21a9a9"
+    },
+    {
+      "path": "api/gemini-chat.ts",
+      "sha256": "3764fed1f3bdebd9cf6b39795a67748266348995ca8862c10a6ba32b612b1d8c"
+    },
+    {
+      "path": "package.json",
+      "sha256": "3e642e408dea4161222d193cefc6b77c3a06fab761a6ab9b3abd13eb6c2e9cba"
+    },
+    {
+      "path": "reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html",
+      "sha256": "d0628a5965c0e8080f27336d2bd24ca3f61fd175d2e670c3011db0aa44d5cd79"
+    },
+    {
+      "path": "reports/demo/cla_batch16_offline_readiness.json",
+      "sha256": "dd806c926bb7dd6cca6f37bd868b3fe6bb3f390c11f5c6ce3b67b5f2d673e775"
+    },
+    {
+      "path": "reports/evidence/atlas_lookup_fidelity.json",
+      "sha256": "4eb18be5d0ae2f6842b8b6de0bc3cbc04b3f5f4927df378b6079b96c0171af5b"
+    },
+    {
+      "path": "reports/evidence/cla_golden_path_SYNTHETIC.json",
+      "sha256": "de043e24bf88da4bd597f2bbd9cef5a6795919be391dc903d4165ae91f263627"
+    },
+    {
+      "path": "reports/evidence/cla_knowledge_retrieval_SYNTHETIC.json",
+      "sha256": "c9bfe8a1e7f2232dc2ae98319dd6f6c0dd59e6615ff595798ffcff103c623fa0"
+    },
+    {
+      "path": "reports/evidence/cla_measurement_SYNTHETIC.json",
+      "sha256": "02636af4e173cd30d2e86610570d98d1727b4a75e1a48ff45ce5ff5b93cabe8a"
+    },
+    {
+      "path": "reports/evidence/cla_multicycle_SYNTHETIC.json",
+      "sha256": "59647b332e60ea60f64237e5826f45e2f0313eac4224f681c607eab30f05145c"
+    },
+    {
+      "path": "research/benchmarks/cla_knowledge_120_v1.jsonl",
+      "sha256": "e52a6ca857e1deb543b9a7df017cfe065c6c6649612420a34cb038ee871cafcd"
+    },
+    {
+      "path": "src/components/common/FloatingAdvisorChat.tsx",
+      "sha256": "6011f803c3f8afb718a74d8c4dff0137fc45e1eab7b13b1e0969d60350bab829"
+    },
+    {
+      "path": "src/engines/cognitive/cognitiveEngine.ts",
+      "sha256": "dd77dfd85afa67c71bd18ea509d001ca35d8516324b14dd69987970e601d3a95"
+    },
+    {
+      "path": "src/lib/claKnowledgeRetrieval.ts",
+      "sha256": "dc16a354a58cc8ccea5bda21fa768e95f9b31134daf0cab099faa731f0125473"
+    },
+    {
+      "path": "src/lib/cognitiveCompositeFormula.ts",
+      "sha256": "d0ebeb26e789529c847855a9ca45069a34411766609a17b8e63a02de085f385c"
+    },
+    {
+      "path": "src/lib/cognitiveExplanation.ts",
+      "sha256": "0a5d3fe5ad6289a89aecf8f95551a040380b1680b620fe16495748e6b6ad26a5"
+    },
+    {
+      "path": "src/lib/nexusEvidenceBaseline.ts",
+      "sha256": "a89f180744722b3331c404002de486b22016ffc1fa816e829f937ed16f065e64"
+    },
+    {
+      "path": "src/page/lumen/components/LumenCognitiveResearchReadiness.tsx",
+      "sha256": "886a995d13b1fc9424590a63b4c77f1baf5ca0a823e237e579748cf2e1a73a64"
+    },
+    {
+      "path": "tests/cp34-knowledge-xai.test.mjs",
+      "sha256": "b7e2be5b3375b541e9f4b6e86513e5f349e10cd661a901f01752e88bad098527"
+    },
+    {
+      "path": "tools/cla_knowledge_benchmark.mjs",
+      "sha256": "90547fa15c16c5173dab48e6a490d446a391d6ed3b69ae8d577ba9c4e2e03540"
+    },
+    {
+      "path": "tools/cla_knowledge_local_llm.mjs",
+      "sha256": "f287ff057e286513e0fbec0d43c419da094b40f3093aab7d9c4e74c9df63c9bb"
+    },
+    {
+      "path": "tools/cp31_release_fingerprint.cjs",
+      "sha256": "d7f4f60250433a3680c83e87c451073dcc700dac544d20a9a18b536fd4e3a70b"
+    }
+  ],
+  "deleted_files": [],
+  "verification": {
+    "node_tap": {
+      "executed": 973,
+      "pass": 973,
+      "split_runs": true
+    },
+    "offline_knowledge": {
+      "executed": 120,
+      "pass": 120,
+      "independent": false
+    },
+    "live_llm": "NOT_RUN",
+    "build": "FAIL_MISSING_DEPENDENCIES"
+  }
+}

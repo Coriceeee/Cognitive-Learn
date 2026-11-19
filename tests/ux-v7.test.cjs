@@ -55,15 +55,16 @@ test("CP28-01: Account role labels are restored and sourced from the Firestore p
   const userMenu = read("src/components/common/UserMenu.tsx");
   const login = read("src/page/auth/LoginPage.tsx");
   const admin = read("src/page/nexus/AdminPage.tsx");
-  for (const label of ["Học sinh", "Giáo viên", "Phụ huynh", "Quản trị viên"]) {
+  for (const label of ["Học sinh", "Quản trị viên"]) {
     assert.ok(userMenu.includes(label), `missing account role label: ${label}`);
   }
   assert.match(userMenu, /profile\?\.role/);
   assert.match(userMenu, /Vai trò hiện tại/);
   assert.match(userMenu, /profile\?\.active === true/);
   assert.doesNotMatch(userMenu, /profile\?\.active !== false/);
-  assert.match(login, /Vai trò tài khoản/);
-  assert.match(admin, /Vai trò trong hệ thống/);
+  assert.match(login, /Tài khoản học sinh được tạo tự động/);
+  assert.doesNotMatch(userMenu, /Giáo viên|Phụ huynh/);
+  assert.match(admin, /Không gian học sinh và quản trị/);
   assert.match(admin, /ROLE WORKSPACES · ADMIN PREVIEW/);
   assert.match(admin, /không đổi vai trò tài khoản/);
 });

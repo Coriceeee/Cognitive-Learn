@@ -28,15 +28,14 @@ test('CP32-03: Orion trade-off plot is sourced from strategy scenarios and discl
   assert.match(source, /không phải xác suất đỗ/i);
 });
 
-test('CP32-04: Atlas historical slope field uses the verified PTIT 2024-2025 records only', () => {
+test('CP32-04: Atlas historical field uses exact school/campus/code and distinct year-method scales', () => {
   const source = read('src/page/atlas/components/AtlasCutoffField.tsx');
-  const data = read('src/data/verifiedAdmissionPrograms.ts');
-  assert.match(source, /verifiedPrograms/);
-  assert.match(source, /year === 2024/);
-  assert.match(source, /year === 2025/);
-  assert.match(source, /Không có điểm chuẩn THPT 2026/);
-  assert.match(data, /campus: "BVH"/);
-  assert.match(data, /admissionTrack: "THPT"/);
+  assert.match(source,/nationalCutoffs/);
+  assert.match(source,/nationalProgramHistory/);
+  assert.match(source,/r.universityId,r.campus,r.code/);
+  assert.match(source,/row.scale===null/);
+  assert.match(source,/Không nối các năm thành đường xu hướng/);
+  assert.match(source,/Chưa có bản ghi năm này/);
 });
 
 test('CP32-05: scientific visualization layer is imported and responsive', () => {

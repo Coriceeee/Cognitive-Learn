@@ -1,0 +1,19 @@
+
+test_invalid_target_range_is_blocked (research.tests.test_uci_baseline.UciBaselineGateTest.test_invalid_target_range_is_blocked) ... ok
+test_three_information_cutoffs_are_separated (research.tests.test_uci_baseline.UciBaselineGateTest.test_three_information_cutoffs_are_separated) ... ok
+test_underpowered_data_is_blocked (research.tests.test_uci_baseline.UciBaselineGateTest.test_underpowered_data_is_blocked) ... ok
+test_unverified_source_is_blocked (research.tests.test_uci_baseline.UciBaselineGateTest.test_unverified_source_is_blocked) ... ok
+test_good_minimum_schema (research.tests.test_uci_fetch_gate.FetchGateTests.test_good_minimum_schema) ... ok
+test_license_gate_and_scope (research.tests.test_uci_fetch_gate.FetchGateTests.test_license_gate_and_scope) ... ok
+test_pinned_revision_and_subject_counts (research.tests.test_uci_fetch_gate.FetchGateTests.test_pinned_revision_and_subject_counts) ... ok
+test_refuse_bad_grade_and_count_and_duplicates (research.tests.test_uci_fetch_gate.FetchGateTests.test_refuse_bad_grade_and_count_and_duplicates) ... ok
+test_all_models_and_intervals (research.tests.test_uci_ml_comparison.MLComparison.test_all_models_and_intervals) ... ok
+test_finite_sample_quantile (research.tests.test_uci_ml_comparison.MLComparison.test_finite_sample_quantile) ... ok
+test_invalid_missing_or_range (research.tests.test_uci_ml_comparison.MLComparison.test_invalid_missing_or_range) ... ok
+test_no_source_no_report (research.tests.test_uci_ml_comparison.MLComparison.test_no_source_no_report) ... ok
+test_signature_isolation_and_determinism (research.tests.test_uci_ml_comparison.MLComparison.test_signature_isolation_and_determinism) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 5.377s
+
+OK

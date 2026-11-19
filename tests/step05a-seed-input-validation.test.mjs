@@ -49,10 +49,10 @@ test('Seed: missing required behavior is rejected explicitly', () => {
 test('Seed: not silently converting scientific notation to amount', () => {
   assert.match(validateSeedNumericInput({ ...good(), educationBudget: '1e100' }), /hợp lệ/);
 });
-test('Seed: validator is called before Firestore writeBatch', () => {
+test('Seed: validator is called before atomic Firestore transaction', () => {
   const src = readFileSync(new URL('../src/page/seed/StudentProfilePage.tsx', import.meta.url), 'utf8');
   const start = src.indexOf('async function handleSubmit(');
   const validation = src.indexOf('validateSeedNumericInput(profile)', start);
-  const commit = src.indexOf('const batch = writeBatch(db)', start);
+  const commit = src.indexOf('await runTransaction(db,', start);
   assert.ok(start >= 0 && validation > start && commit > validation);
 });

@@ -1,22 +1,18 @@
+import ModuleSectionNav from "../../components/common/ModuleSectionNav";
+import { currentFocusedPath } from "../../lib/focusedModuleRoute";
 import { useEffect, useState } from "react";
 import { pushAppNotice } from "../../lib/appNotices";
 import { auth } from "../../lib/firebase";
 
-import StudentLinkManager from "../../components/common/StudentLinkManager";
 import ExamReminderBoard from "../../components/student/ExamReminderBoard";
-import SharedReportPanel from "../../components/common/SharedReportPanel";
 import "../../styles.css";
 
-import CognitiveGrowthPanel from "./components/CognitiveGrowthPanel";
-import CognitiveInsightPanel from "./components/CognitiveInsightPanel";
-import CognitiveScoreGrid from "./components/CognitiveScoreGrid";
+import StudentDecisionCanvas from "./components/StudentDecisionCanvas";
 import StudentHeader from "./components/StudentHeader";
 import StudentLoading from "./components/StudentLoading";
 import StudentPlanPanel from "./components/StudentPlanPanel";
 import StudentProfileNoticeModal from "./components/StudentProfileNoticeModal";
 import StudentRecommendationGrid from "./components/StudentRecommendationGrid";
-import StudentSubjectPanel from "./components/StudentSubjectPanel";
-import LearningIntelligencePanel from "./components/LearningIntelligencePanel";
 import seedIcon from "../../assets/modules/seed-profile.png";
 import lumenIcon from "../../assets/modules/lumen-intelligence.png";
 import atlasIcon from "../../assets/modules/atlas-admission.png";
@@ -25,6 +21,7 @@ import pulseIcon from "../../assets/modules/pulse-monitor.png";
 import havenIcon from "../../assets/modules/haven-support.png";
 
 import { useStudentProfile } from "./hooks/useStudentProfile";
+import { useAcademicGpaIntegrity } from "./hooks/useAcademicGpaIntegrity";
 import { useLearningIntelligence } from "./hooks/useLearningIntelligence";
 
 type ModuleLink = {
@@ -58,15 +55,20 @@ function isMeaningfulText(value: string | undefined): boolean {
 }
 
 export default function StudentPage() {
+  const view = currentFocusedPath();
   const {
     profile,
     cognitive,
     growthAnalytics,
+    temporalReport,
     loading,
+    syncing,
+    historyLoading,
     hasProfile,
     error,
     isAdminPreview,
   } = useStudentProfile();
+  const gpaIntegrity = useAcademicGpaIntegrity();
 
   // Use the same Firestore-backed Growth evidence as the Lumen page.
   const intelligence = useLearningIntelligence(profile, cognitive, growthAnalytics);
@@ -85,15 +87,18 @@ export default function StudentPage() {
     growthAnalytics.dataQuality !== "LIMITED";
 
   useEffect(() => {
-    setShowProfileNotice(!loading && !hasProfile && !error);
-  }, [loading, hasProfile, error]);
+    setShowProfileNotice(view === "/student" && !loading && !syncing && !hasProfile && !error);
+  }, [view, loading, syncing, hasProfile, error]);
 
   useEffect(() => {
-    if (!loading && error) pushAppNotice({kind:"error", title:"Không tải được hồ sơ học tập", detail:"Dữ liệu trên Dashboard chưa sẵn sàng. Kiểm tra kết nối hoặc quyền truy cập rồi tải lại."});
-  }, [loading, error]);
+    if (loading || syncing || !error) return;
+    pushAppNotice(hasProfile
+      ? {kind:"info", title:"Chưa xác minh được lịch sử Cognitive", detail:"Hồ sơ đã được đồng bộ, nhưng phân tích tăng trưởng chưa có bằng chứng mới từ máy chủ."}
+      : {kind:"error", title:"Không tải được hồ sơ học tập", detail:"Dữ liệu trên Dashboard chưa sẵn sàng. Kiểm tra kết nối hoặc quyền truy cập rồi tải lại."});
+  }, [loading, syncing, error, hasProfile]);
 
   useEffect(() => {
-    if (loading || error || !hasProfile) return;
+    if (loading || syncing || !hasProfile || historyLoading) return;
     const uid = auth.currentUser?.uid;
     if (!uid) return;
     try {
@@ -102,7 +107,7 @@ export default function StudentPage() {
       window.sessionStorage.removeItem(key);
       pushAppNotice({kind:"success", title:"Hồ sơ đã được cập nhật", detail:"Hồ sơ và bảng điểm mới đã lưu vào Firebase. Bạn có thể mở Lumen để xem phân tích dựa trên dữ liệu mới."});
     } catch { /* Private browsing may block storage, without affecting the dashboard. */ }
-  }, [loading, error, hasProfile]);
+  }, [loading, syncing, hasProfile, historyLoading]);
 
   useEffect(() => {
     if (loading || window.location.hash !== "#cla-exam-reminders") return;
@@ -162,6 +167,17 @@ export default function StudentPage() {
       : "Chưa thiết lập";
 
   if (loading) return <StudentLoading />;
+  if (syncing) return (
+    <main className="student-page">
+      <StudentHeader isAdminPreview={isAdminPreview} />
+      <section className="student-shell student-dash" role="status" aria-live="polite">
+        <div className="student-data-alert">
+          Đang chờ xác minh hồ sơ từ máy chủ. Dữ liệu cache hoặc đang lưu dở không được dùng để phân tích.
+          Hãy kiểm tra kết nối mạng.
+        </div>
+      </section>
+    </main>
+  );
 
   return (
     <main className="student-page">
@@ -179,68 +195,30 @@ export default function StudentPage() {
             {error}
           </div>
         )}
-
-        {/* 1. One clear overview instead of multiple competing hero cards. */}
-        <section className="student-dash-hero" aria-labelledby="student-dash-title">
-          <div className="student-dash-hero-copy">
-            <span className="student-dash-eyebrow">COGNITIVE LEARN / STUDENT SPACE</span>
-            <h1 id="student-dash-title">Xin chào, {displayName}</h1>
-            <p>
-              {hasProfile
-                ? "Theo dõi mục tiêu, ưu tiên việc cần làm và xem sự thay đổi trong học tập."
-                : "Bắt đầu từ hồ sơ cá nhân để có những phân tích phù hợp với dữ liệu của bạn."}
-            </p>
-            <div className="student-dash-hero-actions">
-              <button
-                type="button"
-                className="student-dash-primary-button"
-                onClick={() => goTo(profilePath)}
-              >
-                {hasProfile ? "Cập nhật hồ sơ" : "Tạo hồ sơ học tập"}
-                <span aria-hidden="true">↗</span>
-              </button>
-              <a href="/lumen" className="student-dash-secondary-link">
-                Xem phân tích Lumen <span aria-hidden="true">→</span>
-              </a>
-              <a href="/student/companion" className="student-dash-secondary-link">
-                Đồng hành mỗi ngày <span aria-hidden="true">→</span>
-              </a>
-              <a href="/student/guide" className="student-dash-secondary-link">
-                Hướng dẫn sử dụng CLA <span aria-hidden="true">→</span>
-              </a>
-            </div>
+        {hasProfile && gpaIntegrity.status === "MISMATCH" && (
+          <div className="student-data-alert" role="alert">
+            GPA trong hồ sơ chưa khớp với bảng điểm trên máy chủ. Hãy mở
+            {" "}<a href="/student/transcript">trang bảng điểm</a>{" "}
+            để đối soát trước khi sử dụng kết quả học lực trong phân tích hoặc tư vấn.
           </div>
-
-          <div className="student-dash-hero-summary" aria-label="Tóm tắt hồ sơ">
-            <div className="student-dash-hero-summary-top">
-              <span>MỤC TIÊU HIỆN TẠI</span>
-              <strong>{targetMajor}</strong>
-              <small>
-                {hasProfile && isMeaningfulText(profile.targetUniversity)
-                  ? profile.targetUniversity
-                  : "Chưa chọn trường mục tiêu"}
-              </small>
-            </div>
-            <div className="student-dash-hero-divider" />
-            <div className="student-dash-hero-metrics">
-              <div>
-                <span>CHỈ SỐ TỔNG HỢP</span>
-                <strong>{hasCognitiveScore ? `${cognitive.overallScore}/100` : "—"}</strong>
-              </div>
-              <div>
-                <span>ĐỘ BAO PHỦ DỮ LIỆU</span>
-                <strong>
-                  {hasProfile && typeof cognitive.dataCoverageScore === "number"
-                    ? `${cognitive.dataCoverageScore}%`
-                    : "—"}
-                </strong>
-              </div>
-            </div>
-            <p className="student-dash-hero-footnote">
-              Chỉ số dựa trên quy tắc thử nghiệm, không phải xác suất thành công.
-            </p>
+        )}
+        {hasProfile && (gpaIntegrity.status === "LEGACY" || gpaIntegrity.status === "INCOMPLETE") && (
+          <div className="student-data-alert" role="status">
+            GPA chưa được đối chiếu đầy đủ giữa hồ sơ và bảng điểm. Kết quả cũ không được coi là đã xác minh.
           </div>
+        )}
+
+        <ModuleSectionNav moduleKey="seed" />
+        {view === "/student" && <>
+        <section className="student-dash-hero cla-observatory-intro" aria-labelledby="student-dash-title">
+          <div className="cla-intro-copy">
+            <span className="cla-canvas-index">COGNITIVE LEARN AI / SPECTRAL OBSERVATORY</span>
+            <h1 id="student-dash-title">Xin chào, {displayName}.</h1>
+            <p>Hiểu năng lực hiện tại, lựa chọn chiến lược và theo dõi kết quả học tập.</p>
+          </div>
+          <div className="cla-intro-target"><span>MỤC TIÊU CỦA BẠN</span><strong>{targetMajor}</strong><small>{hasProfile && isMeaningfulText(profile.targetUniversity) ? profile.targetUniversity : "Chưa chọn trường mục tiêu"}</small><a href={profilePath}>{hasProfile ? "Cập nhật hồ sơ" : "Tạo hồ sơ"} ↗</a></div>
         </section>
+        <StudentDecisionCanvas cognitive={cognitive} gpa={gpaIntegrity.status === "VERIFIED" ? gpaIntegrity.result : null} temporal={!historyLoading && !error ? temporalReport : null} hasProfile={hasProfile} demo={isAdminPreview} />
 
         {/* 2. A single action hub that answers: What should I do next? */}
         <section className="student-dash-focus" aria-labelledby="student-dash-focus-title">
@@ -306,7 +284,7 @@ export default function StudentPage() {
         </section>
 
         {/* Student-chosen exam milestones sit below the hero AND the priority/status cards. */}
-        {!isAdminPreview && <ExamReminderBoard />}
+        {!isAdminPreview && <p className="cla-focus-notice"><a href="/student/exams#cla-exam-reminders">Lịch thi & đếm ngược của tôi →</a></p>}
 
         {/* 3. Four primary destinations, plus two lightweight secondary links. */}
         <section className="student-dash-modules" aria-labelledby="student-dash-modules-title">
@@ -323,14 +301,9 @@ export default function StudentPage() {
                 href={module.href === "/student/profile" ? profilePath : module.href}
                 key={module.code}
               >
-                <span className="student-dash-module-top">
-                  <span className="student-dash-module-icon"><img src={module.icon} alt="" aria-hidden="true" /></span>
-                  <span className="student-dash-module-code">{module.code}</span>
-                </span>
-                <span className="student-dash-module-category">{module.category}</span>
-                <strong>{module.title}</strong>
-                <p>{module.summary}</p>
-                <span className="student-dash-module-arrow">Khám phá <span aria-hidden="true">↗</span></span>
+                <span className="student-dash-module-icon"><img src={module.icon} alt="" aria-hidden="true" /></span>
+                <span className="cla-focus-module-copy"><small>{module.code} · {module.category}</small><strong>{module.title}</strong><span>{module.summary}</span></span>
+                <span className="cla-focus-module-arrow" aria-hidden="true">→</span>
               </a>
             ))}
           </div>
@@ -340,84 +313,6 @@ export default function StudentPage() {
             <a href="/student/guide">Hướng dẫn vận hành từng bước <span aria-hidden="true">↗</span></a>
           </div>
         </section>
-
-        {/* Actual Firestore grades; no mock scores in the main dashboard. */}
-        <div className="cla-transcript-dashboard">
-          <StudentSubjectPanel onUpdate={() => goTo(profilePath)} />
-        </div>
-
-        {/* Connections are strictly opt-in: never expose student records automatically. */}
-        {!isAdminPreview && (
-          <details className="student-dash-disclosure cla-student-sharing">
-            <summary>
-              <span><strong>Liên kết giáo viên và phụ huynh</strong><small>Chủ động cấp hoặc thu hồi quyền chia sẻ dữ liệu</small></span>
-              <span className="student-dash-chevron" aria-hidden="true">⌄</span>
-            </summary>
-            <div className="student-dash-disclosure-content">
-              <StudentLinkManager mode="student" />
-              <SharedReportPanel mode="student" />
-            </div>
-          </details>
-        )}
-
-        {/* 4. Deep analysis is available, but not open by default. */}
-        <section className="student-dash-details" aria-labelledby="student-dash-details-title">
-          <div className="student-dash-heading">
-            <div>
-              <span className="student-dash-eyebrow">PHÂN TÍCH CHI TIẾT</span>
-              <h2 id="student-dash-details-title">Đào sâu khi bạn cần</h2>
-            </div>
-            <span className="student-dash-soft-pill">Mở từng mục</span>
-          </div>
-
-          <details className="student-dash-disclosure">
-            <summary>
-              <span><strong>Chỉ số và nhận xét Cognitive</strong><small>SCI, MAS, CSL và diễn giải theo dữ liệu</small></span>
-              <span className="student-dash-chevron" aria-hidden="true">⌄</span>
-            </summary>
-            <div className="student-dash-disclosure-content">
-              <CognitiveScoreGrid cognitive={cognitive} />
-              <CognitiveInsightPanel
-                cognitive={cognitive}
-                hasProfile={hasProfile}
-                onCreateProfile={() => goTo(profilePath)}
-              />
-            </div>
-          </details>
-
-          <details className="student-dash-disclosure">
-            <summary>
-              <span><strong>Tiến trình thay đổi</strong><small>So sánh các lần đo Cognitive hợp lệ</small></span>
-              <span className="student-dash-chevron" aria-hidden="true">⌄</span>
-            </summary>
-            <div className="student-dash-disclosure-content">
-              <CognitiveGrowthPanel analytics={growthAnalytics} />
-            </div>
-          </details>
-
-          <details className="student-dash-disclosure">
-            <summary>
-              <span><strong>Learning Intelligence nâng cao</strong><small>Prediction, Simulation, Optimization và Career</small></span>
-              <span className="student-dash-chevron" aria-hidden="true">⌄</span>
-            </summary>
-            <div className="student-dash-disclosure-content">
-              {hasCognitiveScore ? (
-                <>
-                  <p className="student-dash-research-note">
-                    Các kết quả dự đoán, mô phỏng và tương thích nghề nghiệp là đầu ra
-                    quy tắc thử nghiệm; không phải xác suất đã hiệu chuẩn hay kết quả
-                    thực nghiệm quan sát được.
-                  </p>
-                  <LearningIntelligencePanel intelligence={intelligence} />
-                </>
-              ) : (
-                <p className="student-dash-empty-note">
-                  Chưa đủ dữ liệu Cognitive hợp lệ để trình bày phân tích chuyên sâu.
-                  Hãy hoàn thiện hồ sơ và các phép đo còn thiếu.
-                </p>
-              )}
-            </div>
-          </details>
 
           {isAdminPreview && (
           <details className="student-dash-disclosure">
@@ -440,7 +335,8 @@ export default function StudentPage() {
           )}
 
 
-        </section>
+        </>}
+        {view === "/student/exams" && (!isAdminPreview ? <ExamReminderBoard /> : <p role="status">Lịch thi cá nhân chỉ dành cho tài khoản học sinh.</p>)}
       </section>
     </main>
   );

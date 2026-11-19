@@ -1,0 +1,257 @@
+/* ==========================================================================
+   Cognitive Observatory – bản sắc giao diện CLA, hai chế độ sáng/tối.
+   Nạp SAU 36-cla-dark.generated.css. Mọi màu ở đây đi qua token, nên tự đổi theo theme.
+   Muốn đổi màu thương hiệu: sửa khối :root và :root[data-theme="dark"] bên dưới.
+   ========================================================================== */
+
+/* ---------- 1. Token ---------- */
+:root {
+  --t-bg: #f2f5fb;
+  --t-bg-2: #e8eef9;
+  --t-surface: #ffffff;
+  --t-surface-2: #f6f8fd;
+  --t-line: #dbe3f1;
+  --t-line-strong: #b9c6e0;
+  --t-ink: #0a1430;
+  --t-ink-2: #34425f;
+  --t-muted: #5b6987;
+  --t-accent: #2f5bff;
+  --t-accent-2: #0a93bd;
+  --t-ring: rgba(47, 91, 255, 0.22);
+  --t-grid: rgba(40, 70, 140, 0.055);
+  --t-glow-a: rgba(47, 91, 255, 0.16);
+  --t-glow-b: rgba(10, 147, 189, 0.12);
+  --t-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 14px 40px -16px rgba(26, 48, 110, 0.22);
+  --t-radius: 16px;
+
+  /* Màu ánh sáng của từng module (tối hơn ở nền sáng để đủ tương phản) */
+  --m-seed: #3f9b1d;
+  --m-lumen: #b77a00;
+  --m-atlas: #0a8fb5;
+  --m-orion: #6d4df0;
+  --m-pulse: #079b6b;
+  --m-haven: #d4581f;
+  --m-nexus: #2f5bff;
+
+  /* Biến cũ của dự án trỏ về token mới */
+  --ink: var(--t-ink);
+  --blue: var(--t-accent);
+  --blue-2: var(--t-accent-2);
+  --line: var(--t-line);
+  --muted: var(--t-muted);
+  --sheet: var(--t-surface);
+  --paper: var(--t-bg);
+  --shadow: var(--t-shadow);
+  --cla-ink: var(--t-ink);
+  --cla-ink-soft: var(--t-ink-2);
+  --cla-muted: var(--t-muted);
+  --cla-blue: var(--t-accent);
+  --cla-cyan: var(--t-accent-2);
+  --cla-border: var(--t-line);
+  --cla-surface: var(--t-surface);
+  --cla-surface-soft: var(--t-surface-2);
+  --cla-page: var(--t-bg);
+  --cla-card-shadow: var(--t-shadow);
+}
+
+:root[data-theme="dark"] {
+  --t-bg: #060b1a;
+  --t-bg-2: #0a1226;
+  --t-surface: #0d1730;
+  --t-surface-2: #101c3a;
+  --t-line: #1c2a4b;
+  --t-line-strong: #2b3f6b;
+  --t-ink: #e9efff;
+  --t-ink-2: #bac7e6;
+  --t-muted: #8d9fc6;
+  --t-accent: #4f7bff;
+  --t-accent-2: #4cd7f6;
+  --t-ring: rgba(108, 147, 255, 0.35);
+  --t-grid: rgba(143, 178, 255, 0.055);
+  --t-glow-a: rgba(63, 104, 255, 0.22);
+  --t-glow-b: rgba(76, 215, 246, 0.1);
+  --t-shadow: 0 1px 0 rgba(160, 190, 255, 0.07) inset, 0 18px 50px -20px rgba(0, 0, 0, 0.7);
+
+  --m-seed: #9be564;
+  --m-lumen: #ffc857;
+  --m-atlas: #4cd7f6;
+  --m-orion: #a58bff;
+  --m-pulse: #3df2b0;
+  --m-haven: #ff9f6b;
+  --m-nexus: #6c93ff;
+  color-scheme: dark;
+}
+:root[data-theme="light"] { color-scheme: light; }
+
+/* ---------- 2. Nền, chữ, tương tác chung ---------- */
+html {
+  font-family: "Be Vietnam Pro", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  scroll-behavior: smooth;
+}
+body {
+  color: var(--t-ink);
+  background-color: var(--t-bg);
+  background-image:
+    radial-gradient(900px 520px at 88% -6%, var(--t-glow-a), transparent 70%),
+    radial-gradient(720px 480px at 2% 6%, var(--t-glow-b), transparent 70%),
+    linear-gradient(var(--t-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--t-grid) 1px, transparent 1px);
+  background-size: auto, auto, 44px 44px, 44px 44px;
+  background-attachment: fixed;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+h1, h2, h3 { letter-spacing: -0.02em; }
+::selection { background: color-mix(in srgb, var(--t-accent) 35%, transparent); color: inherit; }
+:focus-visible { outline: 2px solid var(--t-accent-2); outline-offset: 3px; }
+* { scrollbar-width: thin; scrollbar-color: var(--t-line-strong) transparent; }
+code, kbd, samp, .mono { font-family: "JetBrains Mono", ui-monospace, Consolas, monospace; }
+
+/* ---------- 3. Bề mặt: panel và card dùng chung ---------- */
+.role-shell,
+.role-preview-card,
+.role-task-section,
+.role-card-grid article,
+.student-panel,
+.cla-study-panel,
+.cla-journey__card,
+.cla-major-card,
+.lumen-decision-card,
+.lumen-evidence-card,
+.pulse-metric-card,
+.profile-form-section,
+.orion-tradeoff-panel {
+  background: linear-gradient(180deg, var(--t-surface), var(--t-surface-2));
+  border: 1px solid var(--t-line);
+  box-shadow: var(--t-shadow);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.3s ease;
+}
+.role-card-grid article:hover,
+.student-panel:hover,
+.cla-major-card:hover,
+.pulse-metric-card:hover {
+  border-color: color-mix(in srgb, var(--t-accent) 50%, var(--t-line));
+}
+.role-shell { border-radius: 28px; }
+.role-card-grid article, .role-preview-card, .role-task-section { border-radius: var(--t-radius); }
+
+/* ---------- 4. Form ---------- */
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]),
+select,
+textarea {
+  background: var(--t-surface-2);
+  color: var(--t-ink);
+  border: 1px solid var(--t-line-strong);
+  border-radius: 10px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+input::placeholder, textarea::placeholder { color: var(--t-muted); opacity: 0.8; }
+input:focus-visible, select:focus-visible, textarea:focus-visible {
+  border-color: var(--t-accent);
+  box-shadow: 0 0 0 3px var(--t-ring);
+  outline: none;
+}
+.role-landing-copy button,
+.admin-actions button {
+  background: linear-gradient(135deg, var(--t-accent), color-mix(in srgb, var(--t-accent-2) 70%, var(--t-accent)));
+  color: #fff;
+  border: 0;
+  border-radius: 12px;
+  box-shadow: 0 10px 28px -10px var(--t-accent);
+}
+.role-landing-copy button:hover, .admin-actions button:hover { filter: brightness(1.08); }
+
+/* ---------- 5. Vòng quỹ đạo module ---------- */
+.cla-orbit {
+  --hue: var(--m-seed);
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(12px, 3vw, 44px);
+  align-items: center;
+  margin: 28px 0;
+  padding: clamp(18px, 3vw, 34px);
+  border: 1px solid var(--t-line);
+  border-radius: 24px;
+  background:
+    radial-gradient(520px 360px at 82% 40%, color-mix(in srgb, var(--hue) 12%, transparent), transparent 70%),
+    linear-gradient(180deg, var(--t-surface), var(--t-surface-2));
+  box-shadow: var(--t-shadow);
+  transition: background 0.4s ease;
+}
+.cla-orbit__copy h2 { margin: 0 0 8px; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.2; max-width: 20ch; }
+.cla-orbit__copy > p { margin: 0 0 20px; color: var(--t-muted); max-width: 44ch; }
+.cla-orbit__info {
+  padding: 18px 20px;
+  min-height: 176px;
+  border: 1px solid var(--t-line);
+  border-left: 3px solid var(--hue);
+  border-radius: 6px 14px 14px 6px;
+  background: linear-gradient(120deg, color-mix(in srgb, var(--hue) 10%, transparent), transparent 75%);
+  transition: border-color 0.3s ease;
+}
+.cla-orbit__info h3 { margin: 0; font-size: 20px; color: var(--hue); transition: color 0.3s ease; }
+.cla-orbit__info strong { display: block; margin: 2px 0 8px; font-weight: 500; color: var(--t-ink-2); font-size: 14.5px; }
+.cla-orbit__info p { margin: 0 0 14px; color: var(--t-muted); font-size: 14px; }
+.cla-orbit__open {
+  display: inline-block; padding: 9px 16px; border-radius: 10px; font-weight: 600; font-size: 14px;
+  text-decoration: none; color: var(--t-bg); background: var(--t-ink);
+}
+.cla-orbit__open:hover { background: var(--hue); }
+.cla-orbit__note { font-size: 13px; color: var(--t-muted); }
+.cla-orbit__svg { width: 100%; height: auto; max-height: 72vh; display: block; }
+.cla-orbit__outer { fill: none; stroke: var(--t-line); stroke-width: 1; stroke-dasharray: 1 7; }
+.cla-orbit__svg .seg { fill: none; stroke: var(--t-line-strong); stroke-width: 1.2; transition: stroke 0.3s, stroke-width 0.3s; }
+.cla-orbit__svg .seg.on { stroke: var(--hue); stroke-width: 2.4; }
+.cla-orbit__svg .spoke { stroke: var(--t-line); stroke-width: 1; stroke-dasharray: 2 5; }
+.cla-orbit__svg .spoke.on { stroke: var(--hue); stroke-dasharray: none; opacity: 0.9; }
+.cla-orbit__svg .packet { fill: var(--t-ink); filter: drop-shadow(0 0 6px var(--t-accent)); }
+.cla-orbit__svg .core-ring { fill: none; stroke: var(--t-accent); stroke-opacity: 0.35; stroke-width: 1.3; }
+.cla-orbit__svg .core-ring.is-inner { stroke-opacity: 0.9; }
+.cla-orbit__node { cursor: pointer; outline: none; }
+.cla-orbit__node .disc { fill: var(--t-surface); stroke: var(--c); stroke-width: 1.5; transition: stroke-width 0.25s, filter 0.25s; }
+.cla-orbit__node .halo { fill: var(--c); opacity: 0; transition: opacity 0.3s; }
+.cla-orbit__node:hover .halo, .cla-orbit__node:focus-visible .halo, .cla-orbit__node.is-on .halo { opacity: 0.18; }
+.cla-orbit__node.is-on .disc { stroke-width: 2.5; filter: drop-shadow(0 0 9px var(--c)); }
+.cla-orbit__node .glyph { fill: none; stroke: var(--c); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.cla-orbit__node text { fill: var(--t-muted); font-size: 14px; text-anchor: middle; transition: fill 0.25s; }
+.cla-orbit__node.is-on text { fill: var(--t-ink); }
+.cla-orbit__node:focus-visible .disc { stroke-width: 3; }
+@media (max-width: 900px) {
+  .cla-orbit { grid-template-columns: 1fr; }
+  .cla-orbit__svg { order: -1; max-width: 520px; margin: 0 auto; }
+}
+@media (max-width: 600px) {
+  .cla-orbit__node text { font-size: 21px; }
+}
+
+/* ---------- 6. Nút chuyển sáng / tối ---------- */
+.cla-theme-toggle {
+  position: fixed;
+  z-index: 1090;
+  left: max(14px, env(safe-area-inset-left));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--t-line-strong);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--t-surface) 82%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+  box-shadow: var(--t-shadow);
+}
+.cla-theme-toggle button {
+  display: grid; place-items: center; width: 34px; height: 34px; padding: 0;
+  border: 0; border-radius: 50%; background: transparent; color: var(--t-muted); cursor: pointer;
+  box-shadow: none; transform: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.cla-theme-toggle button:hover { color: var(--t-ink); transform: none; }
+.cla-theme-toggle button[aria-pressed="true"] { background: var(--t-accent); color: #fff; }
+.cla-theme-toggle svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.cla-theme-toggle svg .fill { fill: currentColor; }
+
+/* ---------- 7. Chuyển theme mượt, tôn trọng reduced-motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  body, .cla-orbit, .cla-orbit * { transition: none !important; }
+}

@@ -1,0 +1,128 @@
+{
+  "base": "CLA_FULL_SOURCE_CP42_ALL_SOURCES_20261118.zip",
+  "baseSha256": "25e018e9b8608e17c1dc91af7687fda296c0e22312c952c1d3e48638c6bab888",
+  "changedFiles": {
+    "START_HERE_CP42_SCHEME_COVERAGE_20261118.md": {
+      "sha256": "8a3c7f48cd7a16008697413d88afe56a1f250f04694438d1644e5ca27d0821cc",
+      "previousSha256": null
+    },
+    "package.json": {
+      "sha256": "22266c5a2ff1b02a3d4621cf218742b46b32bd70ca1819a083f89cb59c4180a6",
+      "previousSha256": "5ca5ae71de3df3cf569411f7acccea6fa34a60d233408f2c49ec040655d8adc0"
+    },
+    "reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html": {
+      "sha256": "6bf8a5d3ca48a37012167f4eeefc2dbc58e209c453d0c46c7ffbf9c027a481bf",
+      "previousSha256": "3140fc215317672e67acc05d7144c6a780280c65a81be701dbfeb92236828cb0"
+    },
+    "reports/demo/cla_batch16_offline_readiness.json": {
+      "sha256": "e0d733815fa79805be0474bdbfe7c66740b88855c004b8f451d9561f6b91d6d7",
+      "previousSha256": "85a58372b647281af8d72803118b39089f25dd8149347d961209cf35acd821eb"
+    },
+    "reports/evidence/atlas_lookup_fidelity.json": {
+      "sha256": "664c975ade08b5b87837da66eac3e2404bad088dcfd43348e8ee060a01a36113",
+      "previousSha256": "65ff59ca3aa78bf7b3bfbead16fe30fa51597908188d6916c681fbd89b777808"
+    },
+    "reports/evidence/cla_atlas_national_coverage.json": {
+      "sha256": "4b686d472b15a78fa61411326788800c94c422fa97a7540ab32e0735e47a6e12",
+      "previousSha256": null
+    },
+    "reports/evidence/cla_golden_path_SYNTHETIC.json": {
+      "sha256": "1a98104a85953dcfbec85c96f83c8c7fb4c233a20e37b4246b74be91953c3df3",
+      "previousSha256": "640d81737c601a3a74e485d3b83bcb9295c655aada872096f0df5afd8818cf23"
+    },
+    "reports/evidence/cla_measurement_SYNTHETIC.json": {
+      "sha256": "b3b89bccdab561fae28f7d21524ef35da92004f121ff2f9760a47e4ad95a5955",
+      "previousSha256": "be213b57a90f7ad8dfc0722f089ff2b37539084e3763f43b2455c6bb00f6df61"
+    },
+    "reports/evidence/cla_multicycle_SYNTHETIC.json": {
+      "sha256": "48285d75782a973f1ca28481ba05059a878eaab4ca43ebd23f4101978afa6d4e",
+      "previousSha256": "84fd9d03a1be186618548624dd016ccf8009f917811f88524e4dbc8265fbafd4"
+    },
+    "reports/verification/cp42_scheme_coverage/build-status.log": {
+      "sha256": "9ad6a7c71d93172681c7abecac9b24a876a8017de4997aaf157606a2af0405dd",
+      "previousSha256": null
+    },
+    "reports/verification/cp42_scheme_coverage/evidence.log": {
+      "sha256": "8764f8aec7e7f022877dafe70bb2995b0913060aebef0e5927a8d0e9d7f4396c",
+      "previousSha256": null
+    },
+    "reports/verification/cp42_scheme_coverage/inventory-smoke.log": {
+      "sha256": "f24c622a584c459881bc5cac523e0586fb2d595d91e65af279decd1686334b98",
+      "previousSha256": null
+    },
+    "reports/verification/cp42_scheme_coverage/node-regression.log": {
+      "sha256": "291e8af8e33f88001be49b647349faffe39d3a429fa5ab8a2946e5652133a873",
+      "previousSha256": null
+    },
+    "reports/verification/cp42_scheme_coverage/typecheck.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "previousSha256": null
+    },
+    "src/data/officialAdmissionSources.ts": {
+      "sha256": "c2ffadc861b04f847aaa7fb8de207312ae72b11929b0f72aa8621567f1262c6b",
+      "previousSha256": "d8b2e97d7f9d59ea4f467bef267c060df26e592540ccf410b305b98bcdf540bc"
+    },
+    "src/data/officialSchemePrograms2026.ts": {
+      "sha256": "250ecc0104597472ab6a54cdb63b8c56307807fa9a5f3377e725f9d97654c14e",
+      "previousSha256": null
+    },
+    "src/lib/nationalAdmissionPathways2026.ts": {
+      "sha256": "d1a5d4ef9b0201baed1995dbee1e1bfd1f3d16f00c1509b7781784c0881a3399",
+      "previousSha256": "1d0813aa877f2382447132b538d33db70711c394d5972bf35485ef492297a238"
+    },
+    "src/lib/nationalCoverageAudit.ts": {
+      "sha256": "781e15edadd3d1a384691d33ed9a4cd6c0dab3961bb3daa629a29add19d2b5f4",
+      "previousSha256": null
+    },
+    "src/lib/nationalProgramDiscovery.ts": {
+      "sha256": "efeacdbfc4c536701f6b35e336c21fd5058bed095e450f9888a477150c25c268",
+      "previousSha256": "49ae34050ae8b077e343276e70b34d376acf8e4d4099b176302c99cd132ece4c"
+    },
+    "src/lib/nationalSourceDiscovery.ts": {
+      "sha256": "e6c9d10e1eb8e411d97b8e3fe01348bfb3e27318cf42ee6808beabb52a02c665",
+      "previousSha256": "47e9ffaf87e36b5667a9d08daf5b8f59c43b8435d9b51c5d3867ed378ee92583"
+    },
+    "src/lib/nexusEvidenceBaseline.ts": {
+      "sha256": "f4935f67eb1b2e46bfadc7efeb7f39a8d85924913160e1ecc4740b01050d68a0",
+      "previousSha256": "16417ce541abec0689a6b5b72143a6215b39e116dd81698c47ec34e9eceac459"
+    },
+    "src/page/atlas/components/AtlasNationalPathways.tsx": {
+      "sha256": "1bac5e104fd1652097728faa870e8406bfa412ab635ea602439195cb474e26cd",
+      "previousSha256": "d5b30db8768adffc001a0c46c20ae64e74bd17e6ab051fdf8cc826fe82b66617"
+    },
+    "src/page/atlas/components/AtlasOfficialSourceRegistry.tsx": {
+      "sha256": "7e65bed43a3c4e37dbe7ce888d9bbf1cd873690e3acfa3594f7f15b19e3bcc97",
+      "previousSha256": "e05fe7145bb70b07419d9c0de504a439e333aa91af2dbb029a3fce39b67f1811"
+    },
+    "src/page/atlas/components/AtlasProgramDiscoveryPanel.tsx": {
+      "sha256": "a4b5135b822a97348f0c3b8ec3e9085a214877284896b9c73676705a05434ba2",
+      "previousSha256": "7f414b49c8ed9052585b6a5bdbe2ea4a95f13437d61a7c41b3cd79ee26001178"
+    },
+    "tests/admissions-and-chat.test.mjs": {
+      "sha256": "3d27afe871debb6119a08d42efd64e601b96fc345bfce204915a9c93934d7652",
+      "previousSha256": "671ce1a5e7a8a8abea4c05db005ae9124f09137dd56b09b434384d563c0c7149"
+    },
+    "tests/cp32-national-admission.test.mjs": {
+      "sha256": "e372ac9ff64113a19bae87de7d88055c65cc860195fd99ab8d9e164591d3ed81",
+      "previousSha256": "674ab57141e1f0a97b0d7cd337c76848fbe83af1ecb00310d614cb6a873243b5"
+    },
+    "tests/cp36-source-registry.test.mjs": {
+      "sha256": "a386f1c70f6ac59ca46a870d5ba92c112ad6b0f47a7817af6f9c288c0b7096fa",
+      "previousSha256": "5fcae088e2da033dd6fa07320c8b5ae2b9963f498e00f4625f22307f1fce6f13"
+    },
+    "tests/cp42-national-pathways.test.mjs": {
+      "sha256": "0c7a05d3cfb0647a0f3d3a6cc1b3b5b2313e33f90505e00a21970d612723b2a9",
+      "previousSha256": "d534e9eafd5a396761fee3c92b1c44ab7ecc8c1ee94bddc2bf2dc93c8f626002"
+    },
+    "tests/cp42-scheme-coverage.test.mjs": {
+      "sha256": "cf596e383aff871271fc168e9c8385aaf0a58303b4cb3a4b4fc8b692c0977fb3",
+      "previousSha256": null
+    },
+    "tools/atlas_national_coverage.mjs": {
+      "sha256": "2278925f0fe172227d5d7068c8b5fd5cd39e6ebb20de0054e02a98cd25535ff9",
+      "previousSha256": null
+    }
+  },
+  "deletedFiles": [],
+  "note": "Manifest excludes itself."
+}

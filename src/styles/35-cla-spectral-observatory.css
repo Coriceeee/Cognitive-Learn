@@ -1,0 +1,47 @@
+/* CP42 Spectral Observatory. The dark analytical instrument is intentionally scoped
+   to the student overview. Other routes and all engine semantics are unchanged. */
+.student-page:has(.cla-decision-canvas){background:rgb(var(--tc-bg-edf1f6))!important}
+.student-dash:has(.cla-decision-canvas){--obs-ink:rgb(var(--tc-tx-14243b));--obs-muted:rgb(var(--tc-tx-526780));--obs-line:rgb(var(--tc-bd-cbd5e1));--obs-green:rgb(var(--tc-tx-176a83));--obs-paper:rgb(var(--tc-bg-edf1f6))}
+.student-page .student-shell.student-dash:has(.cla-decision-canvas){width:min(1480px,100%);padding:0 0 34px}
+.student-dash .cla-observatory-intro{padding:25px 0 23px;gap:24px;align-items:center}
+.cla-observatory-intro h1{font-size:clamp(29px,3.5vw,48px);font-weight:680;letter-spacing:-.045em;line-height:1.13}
+.cla-observatory-intro .cla-canvas-index{font-size:11px;letter-spacing:.14em;color:rgb(var(--tc-tx-526780))}
+.cla-intro-target{border-left:2px solid #357e98;padding:7px 0 7px 18px}
+.cla-decision-canvas{--instrument-ink:#edf5ff;--instrument-muted:#a8bbd1;--instrument-line:#30435b;--instrument-cyan:#78e2d9;position:relative;isolation:isolate;border:1px solid #253951;border-radius:21px;background:radial-gradient(ellipse at 19% 25%,#213c55 0,transparent 48%),#101e32;color:var(--instrument-ink);box-shadow:0 18px 45px rgb(var(--tc-sh-142c45) / calc(0.125 * var(--k-sh)));overflow:hidden;margin-bottom:27px}
+.cla-decision-canvas::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(#9bb6d408 1px,transparent 1px),linear-gradient(90deg,#9bb6d408 1px,transparent 1px);background-size:32px 32px;mask-image:linear-gradient(rgb(var(--tc-tx-000000)),transparent 90%)}
+.cla-canvas-head{padding:22px 28px;border-color:var(--instrument-line)}
+.cla-canvas-head h2{color:var(--instrument-ink);font-size:clamp(21px,2.2vw,30px);letter-spacing:-.035em;font-weight:630;margin-top:6px}
+.cla-decision-canvas :is(.cla-canvas-index,.cla-canvas-label>span,.cla-canvas-flow>span){color:#9fb3cc;letter-spacing:.12em;font-size:10px}
+.cla-canvas-source{font-size:10px;color:#c0d1e1;border:1px solid #496078;border-radius:6px;padding:8px 10px;line-height:1.4;letter-spacing:.035em}
+.cla-decision-canvas a{color:#83dedb;font-size:12px}
+.cla-canvas-grid{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);grid-template-areas:'cognitive academic' 'temporal temporal'}
+.cla-canvas-grid>article{padding:23px 28px 19px}
+.cla-canvas-cognitive{grid-area:cognitive;border-right:1px solid var(--instrument-line)}
+.cla-canvas-academic{grid-area:academic;border:0}
+.cla-canvas-temporal{grid-area:temporal;grid-column:1/-1;border-color:var(--instrument-line);background:#0c192c44}
+.cla-canvas-grid h3{font-size:19px;color:var(--instrument-ink);font-weight:600;margin:9px 0 12px}
+.cla-canvas-kpi{color:var(--instrument-ink);font-size:45px;font-weight:560;letter-spacing:-.055em}
+.cla-canvas-kpi small,.cla-canvas-note{color:var(--instrument-muted)}
+.cla-canvas-note{font-size:11px;line-height:1.55;max-width:68ch}
+.cla-canvas-gpa{max-height:235px;overflow:visible}
+.cla-canvas-gpa text{fill:#9fb3cc}.cla-canvas-gpa .cla-canvas-chart-value{fill:rgb(var(--tc-fl-d1efff));font-size:14px}
+.cla-spectral-layout{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(152px,.85fr);gap:15px;align-items:center;min-height:265px}
+.cla-spectral-dial{display:block;width:100%;max-height:280px;overflow:visible;filter:drop-shadow(0 0 14px #67ead111)}
+.cla-dial-boundary{fill:none;stroke:#7e9ab0;stroke-opacity:.20;stroke-width:1}
+.cla-dial-arc{transition:stroke-dasharray .55s cubic-bezier(.2,.8,.2,1);}
+.cla-dial-number{fill:rgb(var(--tc-fl-f5f9ff));font-size:39px;font-weight:570;letter-spacing:-.055em;font-variant-numeric:tabular-nums}
+.cla-dial-caption{fill:#a5b9cf;font-size:9px;font-family:ui-monospace,Consolas,monospace;letter-spacing:1px}
+.cla-spectrum-key{display:grid;gap:0;min-width:0}
+.cla-spectrum-item{display:grid;grid-template-columns:4px minmax(0,1fr) auto;align-items:center;gap:10px;padding:15px 0;border-bottom:1px solid var(--instrument-line)}
+.cla-spectrum-item:last-child{border-bottom:0}.cla-spectrum-item i{height:34px;width:3px;border-radius:4px}.cla-spectrum-item div{display:grid;gap:4px;min-width:0}.cla-spectrum-item b{color:var(--instrument-ink);font-size:13px;letter-spacing:.06em}.cla-spectrum-item span{color:var(--instrument-muted);font-size:11px;line-height:1.4}.cla-spectrum-item strong{font-variant-numeric:tabular-nums;font-weight:550;font-size:24px;letter-spacing:-.04em}
+.cla-canvas-temporal .cla-viz-figure{color:#b6c8dc;margin:0}.cla-canvas-temporal .cla-viz-caption{font-size:12px;margin:5px 0}.cla-canvas-temporal .cla-viz-caption strong{color:#cbddef;font-weight:500}.cla-canvas-temporal .cla-viz-plot{max-height:225px;width:100%;}.cla-canvas-temporal .cla-viz-observed{stroke:rgb(var(--tc-sk-79e4da));stroke-width:2.6}.cla-canvas-temporal .cla-viz-ema{stroke:rgb(var(--tc-sk-a6b7ff));stroke-width:2;stroke-dasharray:6 5}.cla-canvas-temporal .cla-viz-dot{fill:rgb(var(--tc-fl-79e4da));stroke:rgb(var(--tc-sk-0f2137));stroke-width:1.5}.cla-canvas-temporal .cla-viz-legend{font-size:11px}.cla-canvas-temporal .cla-viz-legend .is-blue:before{background:rgb(var(--tc-bg-79e4da))}.cla-canvas-temporal .cla-viz-legend .is-teal:before{background:rgb(var(--tc-bg-a6b7ff))}
+.cla-canvas-switch{gap:4px;padding:3px;background:#0c1829;border:1px solid #344960;border-radius:8px}.cla-canvas-switch button{border:0;padding:8px 11px;min-height:36px;color:#a8bbd1;font-size:12px;border-radius:5px}.cla-canvas-switch button[aria-pressed=true]{background:#29435b;color:#e8fbff;border:0}.cla-canvas-switch button:hover{background:#20364d}.cla-canvas-switch button:focus-visible,.cla-decision-canvas a:focus-visible{outline:2px solid rgb(var(--tc-bd-83dedb));outline-offset:3px}
+.cla-canvas-empty>div{background:#12243a;border:1px solid #3a516a;border-radius:8px}.cla-canvas-empty strong{color:#edf5ff}.cla-canvas-empty span{color:#a8bbd1}
+.cla-canvas-flow{background:#101c2e;padding:16px 28px;border-color:var(--instrument-line);gap:12px 17px}.cla-canvas-flow a:not(:last-child)::after{color:rgb(var(--tc-tx-69839f));margin-left:10px}
+.student-dash:has(.cla-decision-canvas) .student-dash-card,.student-dash:has(.cla-decision-canvas) .student-dash-module-grid{border-radius:13px;background:rgb(var(--tc-bg-fbfcfe));box-shadow:0 5px 18px rgb(var(--tc-sh-1e3554) / calc(0.039 * var(--k-sh)))!important}.student-dash:has(.cla-decision-canvas) .student-dash-action{transition:background .18s ease}.student-dash:has(.cla-decision-canvas) .student-dash-action:hover{background:rgb(var(--tc-bg-eaf1f9))}.student-dash:has(.cla-decision-canvas) .student-dash-module:hover{background:rgb(var(--tc-bg-eaf1f9))}
+@media(max-width:1100px){.cla-spectral-layout{grid-template-columns:minmax(0,1fr);gap:0}.cla-spectral-dial{max-height:230px}.cla-spectrum-item{padding:9px 0}.cla-canvas-grid>article{padding:20px}.cla-spectrum-item i{height:25px}}
+@media(max-width:760px){.student-page .student-shell.student-dash:has(.cla-decision-canvas){width:100%}.student-dash .cla-observatory-intro{padding:13px 0 17px}.cla-decision-canvas{border-radius:15px}.cla-canvas-grid{grid-template-columns:minmax(0,1fr);grid-template-areas:'cognitive' 'academic' 'temporal'}.cla-canvas-head{padding:17px 16px;gap:10px}.cla-canvas-grid>article{padding:17px 16px}.cla-canvas-cognitive{border:0;border-bottom:1px solid var(--instrument-line)}.cla-canvas-academic{border:0}.cla-spectral-dial{max-height:252px}.cla-canvas-flow{padding:15px 16px}.cla-canvas-switch{width:100%;gap:3px}.cla-canvas-switch button{flex:1;min-width:0;padding:7px 4px;line-height:1.35;font-size:11px}.cla-canvas-gpa{max-height:none}.cla-canvas-temporal .cla-viz-plot{max-height:none}}
+@media(prefers-reduced-motion:reduce){.cla-decision-canvas *{transition:none!important;animation:none!important}}
+
+.cla-canvas-temporal .cla-viz-plot{max-height:285px}
+@media(max-width:760px){.cla-canvas-temporal .cla-viz-plot{max-height:none}}

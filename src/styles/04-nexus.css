@@ -5,7 +5,7 @@
   grid-template-columns: 330px 1fr;
   background:
     radial-gradient(circle at 16% 12%, rgba(56, 189, 248, 0.12), transparent 28%),
-    linear-gradient(135deg, #f8fbff 0%, #eef6ff 55%, #ffffff 100%);
+    linear-gradient(135deg, rgb(var(--tc-bg-f8fbff)) 0%, rgb(var(--tc-bg-eef6ff)) 55%, rgb(var(--tc-bg-ffffff)) 100%);
 }
 
 .nexus-rail {
@@ -75,7 +75,7 @@
   background: linear-gradient(
     180deg,
     rgba(56, 189, 248, 0),
-    rgba(56, 189, 248, 0.5),
+    rgb(var(--tc-bg-38bdf8) / 0.5),
     rgba(56, 189, 248, 0)
   );
 }
@@ -107,9 +107,9 @@
   background:
     radial-gradient(circle at 10% 50%, rgba(56, 189, 248, 0.2), transparent 34%),
     rgba(255, 255, 255, 0.12);
-  border-color: rgba(125, 211, 252, 0.38);
+  border-color: rgb(var(--tc-bd-7dd3fc) / 0.38);
   box-shadow:
-    0 18px 44px rgba(2, 12, 38, 0.18),
+    0 18px 44px rgb(var(--tc-sh-020c26) / calc(0.18 * var(--k-sh))),
     inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
@@ -121,8 +121,8 @@
   display: grid;
   place-items: center;
   background:
-    radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.55), transparent 18%),
-    linear-gradient(135deg, #2563eb, #38bdf8);
+    radial-gradient(circle at 35% 25%, rgb(var(--tc-bg-ffffff) / 0.55), transparent 18%),
+    linear-gradient(135deg, #2563eb, rgb(var(--tc-bg-38bdf8)));
   box-shadow:
     0 0 0 6px rgba(56, 189, 248, 0.08),
     0 12px 24px rgba(56, 189, 248, 0.2);
@@ -133,7 +133,7 @@
   position: absolute;
   inset: 7px;
   border-radius: 13px;
-  border: 1px solid rgba(255, 255, 255, 0.42);
+  border: 1px solid rgb(var(--tc-bd-ffffff) / 0.42);
 }
 
 .nexus-cluster-logo span {
@@ -143,7 +143,7 @@
   font-size: 24px;
   line-height: 1;
   font-weight: 950;
-  text-shadow: 0 0 14px rgba(255, 255, 255, 0.75);
+  text-shadow: 0 0 14px rgb(var(--tc-hl-ffffff) / 0.75);
 }
 
 .nexus-cluster-copy strong {
@@ -172,7 +172,7 @@
   border-radius: 18px;
   padding: 14px 16px;
   color: white;
-  background: linear-gradient(135deg, #2563eb, #38bdf8);
+  background: linear-gradient(135deg, #2563eb, rgb(var(--tc-bg-38bdf8)));
   font-weight: 950;
   cursor: pointer;
   box-shadow: 0 16px 34px rgba(56, 189, 248, 0.18);
@@ -197,7 +197,7 @@
   background:
     radial-gradient(circle at 82% 18%, rgba(56, 189, 248, 0.25), transparent 30%),
     linear-gradient(135deg, #071f5a, #153f9e);
-  box-shadow: 0 26px 80px rgba(15, 60, 120, 0.13);
+  box-shadow: 0 26px 80px rgb(var(--tc-sh-0f3c78) / calc(0.13 * var(--k-sh)));
 }
 
 .nexus-hero::before {
@@ -247,13 +247,13 @@
   display: grid;
   place-items: center;
   background:
-    radial-gradient(circle at 50% 48%, rgba(255, 255, 255, 0.95), transparent 7%),
-    radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.56), transparent 32%),
+    radial-gradient(circle at 50% 48%, rgb(var(--tc-bg-ffffff) / 0.95), transparent 7%),
+    radial-gradient(circle at 50% 50%, rgb(var(--tc-bg-38bdf8) / 0.56), transparent 32%),
     linear-gradient(135deg, #071f5a, #2563eb);
   border: 1px solid rgba(219, 234, 254, 0.24);
   box-shadow:
     0 0 0 14px rgba(56, 189, 248, 0.08),
-    0 30px 70px rgba(2, 12, 38, 0.22),
+    0 30px 70px rgb(var(--tc-sh-020c26) / calc(0.22 * var(--k-sh))),
     inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
@@ -262,8 +262,8 @@
   font-size: 78px;
   font-weight: 950;
   text-shadow:
-    0 0 20px rgba(255, 255, 255, 0.85),
-    0 0 50px rgba(56, 189, 248, 0.65);
+    0 0 20px rgb(var(--tc-hl-ffffff) / 0.85),
+    0 0 50px rgb(var(--tc-hl-38bdf8) / 0.65);
 }
 
 .nexus-action-grid {
@@ -277,9 +277,9 @@
   min-height: 220px;
   padding: 26px;
   border-radius: 30px;
-  background: white;
-  border: 1px solid #dbeafe;
-  box-shadow: 0 18px 50px rgba(15, 60, 120, 0.08);
+  background: rgb(var(--tc-bg-ffffff));
+  border: 1px solid rgb(var(--tc-bd-dbeafe));
+  box-shadow: 0 18px 50px rgb(var(--tc-sh-0f3c78) / calc(0.08 * var(--k-sh)));
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -287,7 +287,7 @@
 }
 
 .nexus-action-card span {
-  color: #2563eb;
+  color: rgb(var(--tc-tx-2563eb));
   font-size: 12px;
   font-weight: 950;
   letter-spacing: 1.1px;
@@ -295,7 +295,7 @@
 
 .nexus-action-card h2 {
   margin: 10px 0 0;
-  color: #071629;
+  color: rgb(var(--tc-tx-071629));
   font-size: 28px;
   line-height: 1.1;
   letter-spacing: -0.8px;
@@ -303,7 +303,7 @@
 
 .nexus-action-card p {
   margin: 12px 0 0;
-  color: #64748b;
+  color: rgb(var(--tc-tx-64748b));
   line-height: 1.65;
   font-weight: 600;
 }
@@ -314,10 +314,10 @@
   border-radius: 16px;
   padding: 13px 16px;
   color: white;
-  background: linear-gradient(135deg, #2563eb, #38bdf8);
+  background: linear-gradient(135deg, #2563eb, rgb(var(--tc-bg-38bdf8)));
   font-weight: 900;
   cursor: pointer;
-  box-shadow: 0 16px 34px rgba(37, 99, 235, 0.2);
+  box-shadow: 0 16px 34px rgb(var(--tc-sh-2563eb) / calc(0.2 * var(--k-sh)));
 }
 
 .nexus-action-card button:not(:hover) {
@@ -332,13 +332,13 @@
   grid-template-columns: 1fr auto;
   gap: 24px;
   align-items: center;
-  background: white;
-  border: 1px solid #dbeafe;
-  box-shadow: 0 18px 50px rgba(15, 60, 120, 0.08);
+  background: rgb(var(--tc-bg-ffffff));
+  border: 1px solid rgb(var(--tc-bd-dbeafe));
+  box-shadow: 0 18px 50px rgb(var(--tc-sh-0f3c78) / calc(0.08 * var(--k-sh)));
 }
 
 .nexus-preview-panel span {
-  color: #2563eb;
+  color: rgb(var(--tc-tx-2563eb));
   font-size: 13px;
   font-weight: 950;
   letter-spacing: 1.1px;
@@ -346,7 +346,7 @@
 
 .nexus-preview-panel h2 {
   margin: 8px 0 0;
-  color: #071629;
+  color: rgb(var(--tc-tx-071629));
   font-size: 30px;
   line-height: 1.1;
   letter-spacing: -0.9px;
@@ -355,7 +355,7 @@
 .nexus-preview-panel p {
   max-width: 780px;
   margin: 12px 0 0;
-  color: #64748b;
+  color: rgb(var(--tc-tx-64748b));
   line-height: 1.65;
   font-weight: 600;
 }
@@ -370,10 +370,10 @@
 .nexus-mini-map button {
   width: 48px;
   height: 48px;
-  border: 1px solid #dbeafe;
+  border: 1px solid rgb(var(--tc-bd-dbeafe));
   border-radius: 17px;
-  color: #2563eb;
-  background: #f6faff;
+  color: rgb(var(--tc-tx-2563eb));
+  background: rgb(var(--tc-bg-f6faff));
   font-size: 23px;
   font-weight: 950;
   cursor: pointer;
@@ -383,8 +383,8 @@
 .nexus-mini-map button.active {
   color: white;
   border-color: transparent;
-  background: linear-gradient(135deg, #2563eb, #38bdf8);
-  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.18);
+  background: linear-gradient(135deg, #2563eb, rgb(var(--tc-bg-38bdf8)));
+  box-shadow: 0 14px 28px rgb(var(--tc-sh-2563eb) / calc(0.18 * var(--k-sh)));
 }
 
 .nexus-cluster-logo.image-logo {
@@ -413,7 +413,7 @@
   border: 0;
   box-shadow:
     0 0 0 14px rgba(56, 189, 248, 0.08),
-    0 30px 70px rgba(2, 12, 38, 0.22);
+    0 30px 70px rgb(var(--tc-sh-020c26) / calc(0.22 * var(--k-sh)));
 }
 
 .nexus-hero-logo.image-logo img {
@@ -427,7 +427,7 @@
 .nexus-mini-map.image-map button {
   overflow: hidden;
   padding: 0;
-  background: white;
+  background: rgb(var(--tc-bg-ffffff));
 }
 
 .nexus-mini-map.image-map button img {
@@ -441,5 +441,5 @@
 .nexus-mini-map.image-map button.active {
   box-shadow:
     0 0 0 4px rgba(56, 189, 248, 0.22),
-    0 16px 32px rgba(37, 99, 235, 0.22);
+    0 16px 32px rgb(var(--tc-sh-2563eb) / calc(0.22 * var(--k-sh)));
 }

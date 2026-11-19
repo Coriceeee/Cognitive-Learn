@@ -1,4 +1,6 @@
 /* Cognitive Learn AI — global style entrypoint. Keep component CSS ordered. */
+/* Token màu light/dark (sinh bởi scripts/tokenize-colors.cjs) phải nạp đầu tiên. */
+@import "./styles/00a-theme-tokens.css";
 @import "./styles/00-base.css";
 @import "./styles/01-auth.css";
 @import "./styles/02-role.css";
@@ -49,3 +51,18 @@
 
 /* Toast feedback and notification inbox shared across authorized routes. */
 @import "./styles/31-notification-center.css";
+
+/* CP31 Nexus review inventory, limited navigation status. */
+@import "./styles/32-nexus-audit.css";
+
+/* CP42 analytical workspace: restrained UI, unchanged business logic. */
+@import "./styles/33-cla-analytical-workspace.css";
+
+/* CP42 Student Observatory — overview charts and editorial decision flow. */
+@import "./styles/34-student-observatory.css";
+
+/* CP42 Spectral Observatory — scientific instrument visual language. */
+@import "./styles/35-cla-spectral-observatory.css";
+
+/* Bản sắc "Cognitive Observatory" + legacy var remap. Màu light/dark của CSS cũ nằm ở 00a-theme-tokens.css. */
+@import "./styles/37-cla-orbital-theme.css";

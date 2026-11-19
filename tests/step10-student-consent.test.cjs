@@ -70,9 +70,9 @@ test('SC13 Rules gate academic writes, including profile and transcript', () => 
   assert.match(rules, /function ownerRecord\(uid\)\s*\{\s*return academicMayPersist\(uid\)/);
   assert.match(rules, /match \/student_transcripts\/\{uid\}[\s\S]*?allow create: if ownerRecord\(uid\)/);
 });
-test('SC14 existing teacher/parent share gates closed on withdrawal', () => {
-  assert.match(rules, /hasProductConsent\(data\.studentId\)/);
-  assert.match(rules, /hasProductConsent\(resource\.data\.studentId\)/);
+test('SC14 legacy shares closed regardless of consent', () => {
+  assert.match(rules, /match \/student_links\/\{linkId\}[\s\S]*?allow create, update: if false/);
+  assert.match(rules, /match \/student_shared_reports\/\{linkId\}[\s\S]*?allow list, create, update: if false/);
 });
 test('SC15 UI warns guardian identity is unverified', () => {
   assert.match(consentPage, /chưa xác minh được chữ ký hoặc danh tính người giám hộ/);

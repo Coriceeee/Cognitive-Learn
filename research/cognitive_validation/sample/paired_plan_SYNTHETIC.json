@@ -1,0 +1,7 @@
+{
+  "schema": "cla.cognitive.paired-plan.v1",
+  "test_window": "2026-10-01",
+  "retest_window": "2026-10-08",
+  "instrument_version": "synthetic-instrument-v1",
+  "protocol_version": "synthetic-protocol-v1"
+}

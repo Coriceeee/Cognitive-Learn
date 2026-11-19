@@ -5,7 +5,8 @@
  */
 import { ADMISSION_POLICY_2026 } from './aspirationPlanner';
 
-export type AspirationDraftOrigin = 'ptit_bvh_source_2026' | 'student_entered';
+import type { PathwayEntry } from "./nationalAdmissionPathways2026";
+export type AspirationDraftOrigin = 'ptit_bvh_source_2026' | 'national_source_2026' | 'student_entered';
 export type AspirationDraftChoice = {
   id: string;
   universityName: string;
@@ -16,6 +17,10 @@ export type AspirationDraftChoice = {
   origin: AspirationDraftOrigin;
   sourceUrl: string | null;
   combinations: string[];
+  universityId?: string;
+  campus?: string;
+  sourceKind?: PathwayEntry["sourceKind"];
+  matchStatus?: PathwayEntry["status"];
 };
 export type DraftChange = {items: AspirationDraftChoice[]; error: string | null};
 export type DraftReview = {blocking: string[]; cautions: string[]};
@@ -34,7 +39,7 @@ const safeHttpSource = (value:string|null):string|null => {
 /** This flags risk, never silently reorders or removes an entry. */
 export function looksLikeTeacherTraining(majorCode:string, majorName:string):boolean {
   const code=majorCode.replace(/[.\s-]/g,'');
-  return /^71402\d{2}$/.test(code) || code==='51140201' || /^(?:sư phạm|su pham)(?:\s|$)/i.test(majorName.trim());
+  return /^71402\d{2}[A-Z]?$/.test(code) || code==='51140201' || /^(?:sư phạm|su pham)(?:\s|$)/i.test(majorName.trim());
 }
 export function createManualDraftChoice(universityName:string, majorName:string, majorCode:string, teacherTraining=false):AspirationDraftChoice | null {
   const university=text(universityName);
@@ -61,6 +66,18 @@ export function createPtitDraftChoice(input:{programId:string;universityName:str
     combinations:Array.from(new Set(input.combinations.map(x=>text(x.code,8)).filter(Boolean))),
   };
 }
+/** Resolve the selection only against the current catalogue, never a user-supplied URL. */
+export function createNationalDraftChoice(id:string,catalogue:readonly PathwayEntry[]):AspirationDraftChoice|null {
+  const entry=catalogue.find(p=>p.id===id);
+  if(!entry||entry.year!==2026)return null;
+  let source:URL;try{source=new URL(entry.sourceUrl);}catch{return null;}
+  if(source.protocol!=="https:"||source.username||source.password)return null;
+  const code=text(entry.majorCode,30), major=text(entry.majorName), university=text(entry.universityName);
+  if(!code||!major||!university)return null;
+  return {id:entry.id,universityName:`${university} · ${entry.campus}`,universityId:entry.universityId,campus:entry.campus,
+    majorName:major,majorCode:code,year:2026,origin:'national_source_2026',teacherTraining:looksLikeTeacherTraining(code,major),
+    sourceUrl:source.href,sourceKind:entry.sourceKind,matchStatus:entry.status,combinations:[...new Set(entry.matches.map(m=>m.code))]};
+}
 export function addDraftChoice(items:readonly AspirationDraftChoice[], choice:AspirationDraftChoice|null):DraftChange {
   if (!choice) return {items:[...items],error:'Cần nhập tên trường, ngành và mã ngành hợp lệ.'};
   if (items.some(item=>item.id===choice.id || (
@@ -85,6 +102,8 @@ export function reviewAspirationDraft(items:readonly AspirationDraftChoice[]):Dr
   items.forEach((item,index)=>{
     if(item.teacherTraining && index>=ADMISSION_POLICY_2026.teacherTrainingLastPriority)
       blocking.push(`NV${index+1}: ${item.majorName} thuộc nhóm đào tạo giáo viên; chính sách 2026 chỉ cho phép NV1–NV5.`);
+    if(item.origin==='national_source_2026' && item.matchStatus!=='MATCH')
+      cautions.push(`NV${index+1}: chưa xác nhận tổ hợp từ cặp môn đang xem; kiểm tra đề án trường.`);
     if(item.origin==='student_entered')
       cautions.push(`NV${index+1}: thông tin do học sinh tự nhập, chưa đối chiếu đề án trường và mã ngành.`);
   });
@@ -97,7 +116,7 @@ export function makeAspirationDraftExport(items:readonly AspirationDraftChoice[]
     policyReference:ADMISSION_POLICY_2026.document,
     entries:items.map((item,index)=>({order:index+1, universityName:item.universityName,
       majorName:item.majorName,majorCode:item.majorCode,teacherTraining:item.teacherTraining,
-      origin:item.origin,sourceUrl:item.sourceUrl,combinations:item.combinations})),
+      origin:item.origin,sourceUrl:item.sourceUrl,combinations:item.combinations,universityId:item.universityId,campus:item.campus,sourceKind:item.sourceKind,matchStatus:item.matchStatus})),
     review:reviewAspirationDraft(items)};
 }
 

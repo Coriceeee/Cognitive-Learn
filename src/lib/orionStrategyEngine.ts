@@ -126,9 +126,9 @@ function buildMilestones({
   bestScenario: OrionScenario;
   weeksLeft: number;
 }): OrionMilestone[] {
-  const safeWeeks = Math.max(4, weeksLeft);
+  const safeWeeks = Math.max(1, Math.min(104, Math.floor(weeksLeft) || 1));
 
-  return [
+  const steps: OrionMilestone[] = [
     {
       week: 1,
       title: "Ổn định nền điểm",
@@ -140,7 +140,7 @@ function buildMilestones({
       ],
     },
     {
-      week: Math.max(2, Math.floor(safeWeeks * 0.35)),
+      week: Math.min(safeWeeks, Math.max(2, Math.floor(safeWeeks * 0.35))),
       title: "Tăng tốc theo tổ hợp",
       target: `Tập trung vào ${bestScenario.focusSubjects.join(", ") || "môn trọng tâm"}.`,
       actions: [
@@ -150,7 +150,7 @@ function buildMilestones({
       ],
     },
     {
-      week: Math.max(3, Math.floor(safeWeeks * 0.7)),
+      week: Math.min(safeWeeks, Math.max(3, Math.floor(safeWeeks * 0.7))),
       title: "Mô phỏng xét tuyển",
       target: "Chạy lại Atlas Admission Engine bằng điểm mới.",
       actions: [
@@ -170,6 +170,13 @@ function buildMilestones({
       ],
     },
   ];
+  // Merge milestones that coincide in short horizons; no actions after deadline.
+  const byWeek = new Map<number, OrionMilestone>();
+  for (const step of steps) {
+    const earlier=byWeek.get(step.week);
+    byWeek.set(step.week, earlier ? {week:step.week,title:`${earlier.title} · ${step.title}`,target:`${earlier.target} ${step.target}`,actions:[...new Set([...earlier.actions,...step.actions])]} : step);
+  }
+  return [...byWeek.values()];
 }
 
 export function runOrionStrategy({

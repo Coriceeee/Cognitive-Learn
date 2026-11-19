@@ -1,0 +1,103 @@
+/* CP42 UI refinement — compact, analytical, data-first. Loaded after legacy themes.
+   Structural routes, chart encodings, status colors and behavior belong to existing components. */
+:root {
+  --cla-page: #f5f6f8;
+  --cla-surface: #fff;
+  --cla-surface-soft: #f4f6f8;
+  --cla-border: #dce2e9;
+  --cla-ink: #182638;
+  --cla-ink-soft: #354457;
+  --cla-muted: #52647a;
+  --cla-blue: #245ba7;
+  --cla-hero: #193451;
+  --cla-card-shadow: none;
+  --ink: var(--cla-ink);
+  --line: var(--cla-border);
+  --paper: var(--cla-page);
+  --shadow: none;
+  --cla-panel-radius: 8px;
+}
+body { background: var(--cla-page); color: var(--cla-ink); }
+:is(.student-page,.profile-page,.atlas-page,.lumen-page,.orion-page,.pulse-page,.haven-page,.cla-study-abroad-page,.nexus-page) {
+  background: var(--cla-page) !important;
+  color: var(--cla-ink);
+}
+:is(.atlas-floating-header,.lumen-floating-header,.orion-floating-header,.pulse-floating-header,.haven-floating-header) {
+  width: 100%; height: 64px; padding: 0 max(20px, calc((100% - 1360px)/2));
+  margin: 0; background: rgb(var(--tc-bg-ffffff)); border-bottom: 1px solid var(--cla-border);
+  backdrop-filter: none; -webkit-backdrop-filter: none;
+}
+:is(.orion-home-logo,.pulse-home-logo,.haven-home-logo) { background: transparent; border: 0; box-shadow: none; backdrop-filter: none; border-radius: 0; }
+:is(.atlas-shell,.lumen-shell,.orion-shell,.pulse-shell,.haven-shell,.cla-study-shell) {
+  width: min(1360px, calc(100% - 48px)); padding-top: 24px;
+}
+.student-page .student-shell.student-dash,.profile-shell { background: transparent; border: 0; box-shadow: none; border-radius: 0; }
+.student-page .student-shell.student-dash { width: min(100%, 1360px); padding: 0; }
+/* Route-owned navigation is a plain tab band, not a card or a row of pills. */
+.cla-module-subnav.cla-focus-nav { margin: 0 0 24px; padding: 0 0 12px; border: 0; border-bottom: 1px solid var(--cla-border); border-radius: 0; box-shadow: none; background: transparent; }
+.cla-focus-nav .cla-module-subnav-head { padding: 0 0 8px; color: var(--cla-muted); }
+.cla-focus-nav .cla-module-subnav-head > span { font-size: 11px; font-weight: 600; letter-spacing: .035em; color: var(--cla-muted); }
+.cla-focus-nav .cla-module-subnav-links { gap: 2px 24px; border-bottom: 1px solid var(--cla-border); }
+.cla-focus-nav .cla-module-subnav-links a { border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: transparent; box-shadow: none; color: var(--cla-muted); font-size: 13px; font-weight: 500; padding: 10px 1px; min-height: 44px; }
+.cla-focus-nav .cla-module-subnav-links a:is(:hover,:focus-visible) { color: var(--cla-blue); background: transparent; transform: none; }
+.cla-focus-nav .cla-module-subnav-links a.is-active { border-bottom-color: var(--cla-blue); background: transparent; color: var(--cla-blue); font-weight: 650; box-shadow: none; }
+.cla-focus-nav .cla-focus-heading { margin-top: 18px; }
+.cla-focus-heading h1 { font-size: clamp(24px,2.6vw,32px); font-weight: 650; line-height: 1.25; letter-spacing: -.025em; }
+.cla-focus-heading p { color: var(--cla-muted); font-size: 14px; }
+/* Seed overview: one compact header, data as an adjacent summary, no marketing hero. */
+.student-dash-hero,.student-intelligence-hero,.nexus-hero { background: var(--cla-hero) !important; box-shadow: none !important; border-radius: var(--cla-panel-radius); min-height: 0; padding: 24px 28px; }
+.student-dash-hero::after,.nexus-hero::before,.lumen-overview-card::before,.lumen-overview-card::after { content: none; }
+.student-dash-hero h1,.nexus-hero h1 { font-size: clamp(25px,3vw,36px); font-weight: 650; letter-spacing: -.025em; line-height: 1.18; margin: 8px 0 10px; }
+.student-dash-hero-copy > p,.nexus-hero p { font-size: 14px; line-height: 1.6; font-weight: 400; margin: 0 0 16px; }
+.student-dash-hero-summary { background: #243f5d; border: 1px solid #47617d; border-radius: 6px; padding: 18px; backdrop-filter: none; }
+.student-dash-hero-summary-top > span,.student-dash-hero-metrics span { font-size: 11px; font-weight: 500; letter-spacing: .02em; }
+.student-dash-primary-button,.student-dash-secondary-link { border-radius: 5px; font-weight: 600; min-height: 40px; padding: 9px 12px; gap: 8px; }
+.student-dash-secondary-link { background: transparent; }
+.student-dash .student-dash-module-grid { border-radius: 8px; border-color: var(--cla-border); }
+.student-dash .student-dash-module-grid .student-dash-module { border-color: var(--cla-border); }
+/* White workspace introduction, without a large banner or artificial glass effect. */
+:is(.atlas-hero,.orion-hero,.pulse-hero,.haven-hero,.lumen-overview-card) { box-shadow: none; border-radius: 8px; }
+:is(.atlas-hero-copy,.atlas-hero-card,.orion-hero,.pulse-hero,.haven-hero,.lumen-overview-card) { background: rgb(var(--tc-bg-ffffff)); border: 1px solid var(--cla-border); padding: 24px; border-radius: 8px; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
+:is(.atlas-hero-copy,.orion-hero,.pulse-hero,.haven-hero,.lumen-overview-copy) h1 { font-size: clamp(27px,3vw,36px); font-weight: 650; line-height: 1.2; letter-spacing: -.025em; margin: 8px 0 10px; }
+:is(.atlas-hero-copy,.orion-hero,.pulse-hero,.haven-hero,.lumen-overview-copy) p { font-size: 14px; line-height: 1.6; font-weight: 400; }
+:is(.orion-hero,.pulse-hero,.haven-hero) aside,.lumen-score-orb { border-radius: 6px; background: var(--cla-surface-soft); border-color: var(--cla-border); box-shadow: none; }
+.lumen-score-orb { min-height: 168px; }
+:is(.atlas-hero-copy,.orion-hero,.pulse-hero,.haven-hero) > div > span:first-child,.atlas-hero-copy > span,.lumen-eyebrow { font-size: 11px; letter-spacing: .05em; font-weight: 600; }
+/* Restrained surfaces: retain borders and semantic risk/status backgrounds. */
+:is(.student-dash-card,.student-panel,.student-profile-card,.student-score-card,.student-panel-card,.student-journey-section,.student-skills-section,.profile-form-section,.nexus-action-card,.nexus-preview-panel,.nexus-role-switcher,.atlas-stat-card,.atlas-program-card,.atlas-source-card,.atlas-review-panel,.atlas-review-card,.atlas-gemini-panel,.atlas-engine-panel,.atlas-aspiration-card,.orion-control-panel,.orion-summary-card,.orion-focus-card,.orion-scenario-card,.orion-timeline-card,.pulse-control-panel,.pulse-metric-card,.pulse-summary-grid article,.pulse-action-card,.haven-control-panel,.haven-support-card,.haven-scholarship-card,.haven-summary-grid article,.lumen-panel,.lumen-dimension-card,.lumen-insight-card,.lumen-decision-card,.lumen-evidence-card,.lumen-ai-explanation-card,.lumen-gemini-panel,.cla-study-panel,.cla-source-explorer,.cla-source-card,.cla-study-school,.cla-major-card,.cla-signal-atlas,.orion-tradeoff-panel,.atlas-cutoff-field,.cla-visual-card) {
+  border-radius: var(--cla-panel-radius); box-shadow: none !important; backdrop-filter: none; -webkit-backdrop-filter: none;
+}
+:is(.student-dash-card,.nexus-role-switcher,.atlas-stat-card,.atlas-program-card,.atlas-source-card,.orion-control-panel,.orion-summary-card,.orion-focus-card,.orion-scenario-card,.orion-timeline-card,.pulse-control-panel,.pulse-metric-card,.pulse-summary-grid article,.pulse-action-card,.haven-control-panel,.haven-summary-grid article,.lumen-panel,.lumen-evidence-card,.cla-signal-atlas,.orion-tradeoff-panel,.atlas-cutoff-field,.cla-visual-card) { background: rgb(var(--tc-bg-ffffff)); border-color: var(--cla-border); }
+.student-panel.dark { background: var(--cla-hero) !important; }
+:is(.lumen-dimension-card,.lumen-insight-card,.lumen-decision-card,.atlas-program-card,.atlas-source-card,.nexus-action-card):hover { transform: none; box-shadow: none !important; }
+:is(.student-dash-heading,.atlas-section-head,.orion-section-head,.pulse-section-head,.haven-section-head,.lumen-panel-heading,.cla-signal-atlas-heading,.orion-tradeoff-heading,.atlas-cutoff-field-heading) h2 { font-size: clamp(18px,2vw,23px); line-height: 1.3; letter-spacing: -.015em; font-weight: 650; }
+:is(.atlas-stat-card,.pulse-metric-card,.orion-summary-card) strong { font-variant-numeric: tabular-nums; }
+/* Analytics: plain chart frame; do not change encodings, data or SVG geometry. */
+.cla-visual-card { padding: 18px; }
+.cla-visual-card-head h3 { font-size: 16px; font-weight: 650; letter-spacing: 0; }
+.cla-visual-stamp,.orion-tradeoff-stamp,.atlas-cutoff-stamp,.cla-visual-tag { border-radius: 4px; padding: 4px 7px; font-size: 10px; font-weight: 600; letter-spacing: .01em; }
+.cla-radar-legend > div { background: transparent; border-radius: 0; border-bottom: 1px solid var(--cla-border); }
+.cla-signal-track i { background: #3478c7; }
+.cla-focus-disclosure { border-radius: 6px; border-color: var(--cla-border); }
+/* Navigation, forms and branded actions; preserve native focus indicators. */
+:is(.atlas-page,.lumen-page,.orion-page,.pulse-page,.haven-page,.profile-page,.student-page,.cla-study-abroad-page) :is(input,select,textarea) { border-radius: 5px; }
+:is(.atlas-hero-actions button,.student-logout-button,.profile-logout-button,.profile-subject-options button.active,.profile-grade-tabs button.active,.profile-semester-tabs button.active) { background: var(--cla-blue); box-shadow: none; border-radius: 5px; font-weight: 600; }
+.atlas-hero-actions button.secondary { background: rgb(var(--tc-bg-e9eff7)); color: var(--cla-blue); }
+:is(.student-page,.profile-page,.atlas-page,.lumen-page,.orion-page,.pulse-page,.haven-page,.nexus-page) button:hover:not(:disabled) { transform: none; }
+.nexus-rail { background: rgb(var(--tc-bg-ffffff)) !important; box-shadow: none; }
+.nexus-brand,.nexus-cluster-button { box-shadow: none !important; border-radius: 6px; }
+.nexus-cluster-button:is(:hover,.active) { background: rgb(var(--tc-bg-eaf0f7)) !important; box-shadow: none !important; }
+.nexus-hero-logo { max-width: 94px; max-height: 94px; }
+.cla-chat-root .cla-chat-panel { border-radius: 10px; box-shadow: 0 8px 24px rgb(var(--tc-sh-142941) / calc(0.149 * var(--k-sh))) !important; }
+.cla-chat-root .cla-chat-header { background: rgb(var(--tc-bg-f4f6f8)) !important; }
+.cla-chat-root .cla-chat-message { border-radius: 6px; }
+.cla-chat-root .cla-chat-message.is-user,.cla-chat-root .cla-chat-form button:not(:disabled) { background: var(--cla-blue) !important; }
+@media(max-width: 760px) {
+  :is(.atlas-shell,.lumen-shell,.orion-shell,.pulse-shell,.haven-shell,.cla-study-shell) { width: calc(100% - 28px); padding-top: 16px; }
+  :is(.atlas-hero-copy,.atlas-hero-card,.orion-hero,.pulse-hero,.haven-hero,.lumen-overview-card,.student-dash-hero,.nexus-hero) { padding: 18px; }
+  .cla-focus-nav .cla-module-subnav-links { gap: 0 16px; }
+  .student-dash-hero { grid-template-columns: minmax(0,1fr); }
+}
+@media(prefers-reduced-motion: reduce) {
+  :is(.student-page,.profile-page,.atlas-page,.lumen-page,.orion-page,.pulse-page,.haven-page,.nexus-page) button { transition: none; }
+}

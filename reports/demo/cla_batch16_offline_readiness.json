@@ -1,0 +1,107 @@
+{
+  "schema": "cla.demo.offline-readiness.v1",
+  "generatedAt": "2026-11-18T17:21:19.417Z",
+  "dataScope": "SYNTHETIC_OR_STATIC_ONLY",
+  "status": "DEMO_OFFLINE_CORE_PASS",
+  "gates": [
+    {
+      "name": "Core closed-loop + measurement regression",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 1088,
+      "outputTail": "\n  ...\n# Subtest: B9-26 UI makes technical-only match and legacy uncertainty visible\nok 321 - B9-26 UI makes technical-only match and legacy uncertainty visible\n  ---\n  duration_ms: 3.476087\n  type: 'test'\n  ...\n# Subtest: B9-27 stale Firestore data cleared upon corrupt latest evidence\nok 322 - B9-27 stale Firestore data cleared upon corrupt latest evidence\n  ---\n  duration_ms: 0.539643\n  type: 'test'\n  ...\n# Subtest: B9-28 golden path still deterministic under regenerated audit rules\nok 323 - B9-28 golden path still deterministic under regenerated audit rules\n  ---\n  duration_ms: 3.939756\n  type: 'test'\n  ...\n# Subtest: B9-29 baseline exact source tracked and release identity not faked\nok 324 - B9-29 baseline exact source tracked and release identity not faked\n  ---\n  duration_ms: 12.031578\n  type: 'test'\n  ...\n# Subtest: B9-30 algorithm rejects extra nested keys even with otherwise valid data\nok 325 - B9-30 algorithm rejects extra nested keys even with otherwise valid data\n  ---\n  duration_ms: 0.57065\n  type: 'test'\n  ...\n# Subtest: B9-31 legacy cannot be used to fabricate REVIEWED without reassessment\nok 326 - B9-31 legacy cannot be used to fabricate REVIEWED without reassessment\n  ---\n  duration_ms: 0.150347\n  type: 'test'\n  ...\n# Subtest: B9-32 ACTIVE cycle cannot masquerade as reviewed or contain a future reassessment\nok 327 - B9-32 ACTIVE cycle cannot masquerade as reviewed or contain a future reassessment\n  ---\n  duration_ms: 0.170307\n  type: 'test'\n  ...\n1..327\n# tests 327\n# suites 0\n# pass 327\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 1035.725325\n\n",
+      "failure": null
+    },
+    {
+      "name": "Seed tests",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 255,
+      "outputTail": "PASS nine graded subjects exactly\nPASS elective duplicate blocked\nPASS elective invalid blocked\nPASS 0 valid\nPASS 10 valid\nPASS comma decimal valid\nPASS dot decimal valid\nPASS blank missing\nPASS invalid negative\nPASS invalid >10\nPASS invalid 1e0 syntax\nPASS provisional not complete\nPASS term complete with 0 score\nPASS year requires both completed terms\nACADEMIC TESTS: 14/14 PASS\n\n",
+      "failure": null
+    },
+    {
+      "name": "Atlas + chatbot tests",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 183,
+      "outputTail": "-\n  duration_ms: 0.157878\n  type: 'test'\n  ...\n# Subtest: ROUND-07: Career-fit UI states experimental scores are not admission probabilities\nok 20 - ROUND-07: Career-fit UI states experimental scores are not admission probabilities\n  ---\n  duration_ms: 0.15936\n  type: 'test'\n  ...\n# Subtest: GLOBAL-01: every ISO 3166-1 alpha-2 country/territory is selectable without fabricated claims\nok 21 - GLOBAL-01: every ISO 3166-1 alpha-2 country/territory is selectable without fabricated claims\n  ---\n  duration_ms: 2.403411\n  type: 'test'\n  ...\n# Subtest: GLOBAL-02: all-country UI abstains when programme-level evidence is unavailable\nok 22 - GLOBAL-02: all-country UI abstains when programme-level evidence is unavailable\n  ---\n  duration_ms: 0.194012\n  type: 'test'\n  ...\n# Subtest: GLOBAL-03: Atlas owns domestic and international admissions; Haven owns scholarships and finance\nok 23 - GLOBAL-03: Atlas owns domestic and international admissions; Haven owns scholarships and finance\n  ---\n  duration_ms: 0.399001\n  type: 'test'\n  ...\n# Subtest: MODULE-01: 7 main modules remain while study abroad is an Atlas submodule\nok 24 - MODULE-01: 7 main modules remain while study abroad is an Atlas submodule\n  ---\n  duration_ms: 0.505231\n  type: 'test'\n  ...\n# Subtest: UX-V7-01: Assistant receives only allowlisted page context and page-specific prompts\nok 25 - UX-V7-01: Assistant receives only allowlisted page context and page-specific prompts\n  ---\n  duration_ms: 0.380753\n  type: 'test'\n  ...\n1..25\n# tests 25\n# suites 0\n# pass 25\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 150.969815\n\n",
+      "failure": null
+    },
+    {
+      "name": "Golden Path synthetic generate",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 116,
+      "outputTail": "GOLDEN_PATH_SYNTHETIC_GENERATED: /tmp/cla-tabs.tJs1/reports/evidence/cla_golden_path_SYNTHETIC.json; 7 domain stages; NO real outcomes\n\n(node:22107) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time\n(Use `node --trace-warnings ...` to show where the warning was created)\n",
+      "failure": null
+    },
+    {
+      "name": "Golden Path synthetic verify",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 183,
+      "outputTail": "GOLDEN_PATH_SYNTHETIC_VERIFY_PASS: local deterministic replay only; no production or empirical claim\n\n(node:22118) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time\n(Use `node --trace-warnings ...` to show where the warning was created)\n",
+      "failure": null
+    },
+    {
+      "name": "Multicycle synthetic generate",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 140,
+      "outputTail": "MULTICYCLE_SYNTHETIC_GENERATED: /tmp/cla-tabs.tJs1/reports/evidence/cla_multicycle_SYNTHETIC.json; 2 reviewed cycles; 0 empirical claims\n\n(node:22129) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time\n(Use `node --trace-warnings ...` to show where the warning was created)\n",
+      "failure": null
+    },
+    {
+      "name": "Multicycle synthetic verify",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 123,
+      "outputTail": "MULTICYCLE_SYNTHETIC_VERIFY_PASS: deterministic local replay; NO empirical/production claim\n\n(node:22140) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time\n(Use `node --trace-warnings ...` to show where the warning was created)\n",
+      "failure": null
+    },
+    {
+      "name": "Measurement synthetic generate",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 143,
+      "outputTail": "MEASUREMENT_SYNTHETIC_GENERATED: /tmp/cla-tabs.tJs1/reports/evidence/cla_measurement_SYNTHETIC.json (no verified measurement claims)\n\n(node:22151) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time\n(Use `node --trace-warnings ...` to show where the warning was created)\n",
+      "failure": null
+    },
+    {
+      "name": "Measurement synthetic verify",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 132,
+      "outputTail": "MEASUREMENT_SYNTHETIC_VERIFY_PASS: deterministic local replay, NOT scientific validation\n\n(node:22162) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time\n(Use `node --trace-warnings ...` to show where the warning was created)\n",
+      "failure": null
+    },
+    {
+      "name": "Layout contract",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 28,
+      "outputTail": "CLA LAYOUT PASS: 22 required files and 19 legacy misplacements absent\n\n",
+      "failure": null
+    },
+    {
+      "name": "Source fingerprint / release evidence preflight",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 112,
+      "outputTail": "--- Release (evidence content only) ---\nNOT TESTED: Bằng chứng release — Chưa nhập báo cáo release JSON; chưa đối chiếu source với CI.\nNOT TESTED: CI, deploy, backup, rollback — Không có bằng chứng chạy pipeline, deploy hoặc rollback từ môi trường được kiểm soát.\n--- Rules (evidence content only) ---\nNOT TESTED: Firestore Emulator — Chưa nhập reports/security/firestore_emulator_gate.json từ máy đã chạy Emulator.\nNOT TESTED: 86 ca kiểm thử và Rules production — Chưa có test case log hoặc xác minh rules deployment.\n--- Model (evidence content only) ---\nNOT TESTED: Đánh giá holdout — Chưa nhập public/research/oulad-evidence.json tạo sau audit trên OULAD thật.\nNOT TESTED: Hiệu quả với học sinh THPT Việt Nam — Chưa có dữ liệu outcome THPT Việt Nam và kiểm định bên ngoài.\nSOURCE FINGERPRINT MATCH: 423 tracked files; zero production deployments.\n\n(node:22180) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time\n(Use `node --trace-warnings ...` to show where the warning was created)\n",
+      "failure": null
+    }
+  ],
+  "releaseGates": {
+    "productionBuild": "NOT_TESTED_BY_THIS_GATE",
+    "firestoreEmulator": "NOT_TESTED_BY_THIS_GATE",
+    "browserE2E72": "NOT_TESTED_BY_THIS_GATE",
+    "empiricalTHPTValidation": "NOT_TESTED_BY_THIS_GATE"
+  },
+  "limitations": [
+    "Synthetic replay does not prove student learning impact.",
+    "Source integrity does not attest production deployment.",
+    "Offline tests do not validate Firestore permissions or browser behavior."
+  ]
+}

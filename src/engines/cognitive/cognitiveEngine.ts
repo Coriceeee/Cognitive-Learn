@@ -1,3 +1,4 @@
+import { computeCognitiveComposite } from "../../lib/cognitiveCompositeFormula";
 import { createCognitiveVector, type CognitiveVector, type CognitiveCode } from "../../lib/cognitiveAdapter";
 
 export type CognitiveRisk = "LOW" | "MEDIUM" | "HIGH" | "UNKNOWN";
@@ -57,7 +58,7 @@ export function calculateCognitive(profile: unknown): CognitiveResult {
   const scoreAvailable = ["SCI", "MAS", "CSL", "CRI"].every(code => has(code as CognitiveCode));
 
   const overallScore = scoreAvailable
-    ? Math.round(SCI * 0.3 + MAS * 0.25 + CSL * 0.2 + CRI * 0.25)
+    ? computeCognitiveComposite({ SCI, MAS, CSL, CRI })
     : 0;
 
   let riskLevel: CognitiveRisk = "UNKNOWN";

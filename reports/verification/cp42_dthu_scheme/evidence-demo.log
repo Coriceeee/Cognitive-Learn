@@ -1,0 +1,104 @@
+
+> cognitive-learn-ai@0.1.0 research:golden-path
+> node --experimental-strip-types tools/cla_golden_path_offline.mjs --generate
+
+(node:8230) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+GOLDEN_PATH_SYNTHETIC_GENERATED: /tmp/cla-cont.YH3O/reports/evidence/cla_golden_path_SYNTHETIC.json; 7 domain stages; NO real outcomes
+
+> cognitive-learn-ai@0.1.0 research:multi-cycle
+> node --experimental-strip-types tools/cla_multicycle_offline.mjs --generate
+
+(node:8253) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+MULTICYCLE_SYNTHETIC_GENERATED: /tmp/cla-cont.YH3O/reports/evidence/cla_multicycle_SYNTHETIC.json; 2 reviewed cycles; 0 empirical claims
+
+> cognitive-learn-ai@0.1.0 research:measurement
+> node --experimental-strip-types tools/cla_measurement_offline.mjs --generate
+
+(node:8276) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+MEASUREMENT_SYNTHETIC_GENERATED: /tmp/cla-cont.YH3O/reports/evidence/cla_measurement_SYNTHETIC.json (no verified measurement claims)
+
+> cognitive-learn-ai@0.1.0 research:atlas:lookup
+> node --experimental-strip-types tools/atlas_lookup_benchmark.mjs
+
+(node:8299) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+ATLAS LOOKUP FIDELITY 1382/1382 (deterministic, NOT LLM evaluation)
+
+> cognitive-learn-ai@0.1.0 research:cla:knowledge
+> node --experimental-strip-types tools/cla_knowledge_benchmark.mjs
+
+{"total":120,"pass":120,"summary":{"single":{"total":100,"pass":100},"multiple":{"total":10,"pass":10},"abstain":{"total":10,"pass":10}},"liveLlm":"NOT_RUN"}
+(node:8322) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+> cognitive-learn-ai@0.1.0 research:atlas:coverage
+> node --experimental-strip-types tools/atlas_national_coverage.mjs
+
+(node:8345) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{
+  "summary": [
+    {
+      "year": 2026,
+      "registrySchools": 32,
+      "sourceSchools": 32,
+      "methodSchools": 15,
+      "cutoffSchools": 17,
+      "programSchools": 19,
+      "combinationSchools": 9
+    },
+    {
+      "year": 2025,
+      "registrySchools": 32,
+      "sourceSchools": 13,
+      "methodSchools": 7,
+      "cutoffSchools": 3,
+      "programSchools": null,
+      "combinationSchools": null
+    },
+    {
+      "year": 2024,
+      "registrySchools": 32,
+      "sourceSchools": 12,
+      "methodSchools": 8,
+      "cutoffSchools": 3,
+      "programSchools": null,
+      "combinationSchools": null
+    }
+  ],
+  "openSlots": 88,
+  "inventory": null
+}
+
+> cognitive-learn-ai@0.1.0 demo:final
+> npm run demo:gate && npm run demo:backup
+
+
+> cognitive-learn-ai@0.1.0 demo:gate
+> node tools/cla_demo_gate.mjs
+
+[PASS] Core closed-loop + measurement regression
+[PASS] Seed tests
+[PASS] Atlas + chatbot tests
+[PASS] Golden Path synthetic generate
+[PASS] Golden Path synthetic verify
+[PASS] Multicycle synthetic generate
+[PASS] Multicycle synthetic verify
+[PASS] Measurement synthetic generate
+[PASS] Measurement synthetic verify
+[PASS] Layout contract
+[PASS] Source fingerprint / release evidence preflight
+DEMO_OFFLINE_CORE_PASS — 11/11 steps; report: /tmp/cla-cont.YH3O/reports/demo/cla_batch16_offline_readiness.json
+
+> cognitive-learn-ai@0.1.0 demo:backup
+> node --experimental-strip-types tools/cla_demo_backup.mjs --generate && node --experimental-strip-types tools/cla_demo_backup.mjs --verify
+
+SYNTHETIC_DEMO_BACKUP_VERIFIED: --generate; 9773 bytes; sha256=7e6d8e99b7b09c75304e2036ce21136dc322d9abb752ca2b72ce164b0a3db1a8; /tmp/cla-cont.YH3O/reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html
+(node:8615) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+SYNTHETIC_DEMO_BACKUP_VERIFIED: --verify; 9773 bytes; sha256=7e6d8e99b7b09c75304e2036ce21136dc322d9abb752ca2b72ce164b0a3db1a8; /tmp/cla-cont.YH3O/reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html
+(node:8659) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)

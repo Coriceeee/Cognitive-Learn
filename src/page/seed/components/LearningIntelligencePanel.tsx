@@ -16,6 +16,7 @@ type LearningIntelligence = {
   simulation: any;
   optimization: any;
   career: {
+    rubricVersion?: string;
     primaryCareer?: {
       career?: {
         name?: string;
@@ -138,7 +139,7 @@ export default function LearningIntelligencePanel({
 
           <div className="student-intelligence-hero-meta">
             <div>
-              <span>Primary direction</span>
+              <span>Hướng tham khảo theo rubric cũ</span>
               <strong>{careerName}</strong>
             </div>
             <div>
@@ -162,7 +163,7 @@ export default function LearningIntelligencePanel({
         </div>
       </div>
 
-      <p className="student-dash-research-note" role="note">Các điểm phù hợp, sẵn sàng và hỗ trợ dữ liệu chỉ là chỉ số quy tắc thử nghiệm trên hồ sơ hiện có; không phải xác suất trúng tuyển, dự báo nghề nghiệp đã kiểm định hoặc kết luận thay cho học sinh.</p>
+      <p className="student-dash-research-note" role="note">Các điểm phù hợp, sẵn sàng và hỗ trợ dữ liệu chỉ là chỉ số quy tắc thử nghiệm trên hồ sơ hiện có; không phải xác suất trúng tuyển, dự báo nghề nghiệp đã kiểm định hoặc kết luận thay cho học sinh. Phiên bản: {career?.rubricVersion ?? "chưa xác định"}. Chỉ số rubric cũ có dùng Cognitive proxy và không nên dùng để loại ngành nghề. <a href="/atlas/recommendations#atlas-personalized-discovery">Khám phá sở thích và môn học riêng tại Atlas ↗</a></p>
 
       <div className="student-career-focus">
         <div className="student-career-focus-copy">
@@ -179,7 +180,7 @@ export default function LearningIntelligencePanel({
 
         <div className="student-career-score-stack">
           <div className="student-career-score-card student-career-score-primary">
-            <span>Mức phù hợp ngành (score)</span>
+            <span>Điểm rubric nghề nghiệp (thử nghiệm)</span>
             <strong>
               {compatibility !== null ? `${compatibility}/100` : "--"}
             </strong>

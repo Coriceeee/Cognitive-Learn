@@ -1,0 +1,30 @@
+import {useMemo,useState} from 'react';
+import {filterNationalPathways,officialPathwaySchools,pathwayKindLabel,pathwayStatusLabel,type matchNationalPathways2026} from '../../../lib/nationalAdmissionPathways2026';
+type Report=ReturnType<typeof matchNationalPathways2026>;
+export default function AtlasNationalPathways({report,scoreBasis}:{report:Report;scoreBasis:string}){
+ const [query,setQuery]=useState(''),[school,setSchool]=useState(''),[onlyMatched,setOnlyMatched]=useState(false),[limit,setLimit]=useState(12);
+ const schools=useMemo(()=>Array.from(new Map([...report.schools.map(s=>({id:s.id,name:s.name,source:''})),...officialPathwaySchools].map(s=>[s.id,s])).values()).sort((a,b)=>a.name.localeCompare(b.name,'vi')),[report.schools]);
+ const visible=useMemo(()=>filterNationalPathways(report.entries,query,school,onlyMatched),[report.entries,query,school,onlyMatched]);
+ const chart=report.schools.filter(s=>!school||s.id===school).slice(0,12);
+ const totalSchools=new Set([...officialPathwaySchools.map(s=>s.id),...report.schools.map(s=>s.id)]).size;
+ return <section className="atlas-official-pathways" aria-label="Đối chiếu chương trình tuyển sinh toàn kho Atlas">
+   <div className="atlas-official-pathways-head"><div><span>ATLAS · NATIONAL PATHWAY INTELLIGENCE</span><h4>Khám phá ngành từ tất cả trường có nguồn</h4><p>{report.entries.length} chương trình 2026 / {report.schools.length} trường có bản ghi cấp ngành · {totalSchools} trường có nguồn trong kho. Cặp môn thi chỉ là một phần của điều kiện.</p></div></div>
+   <div className="atlas-national-legend"><span><i className="atlas-national-dot is-match"/> Khớp tổ hợp ({report.pair?report.matches.length:"chưa chọn cặp môn"})</span><span><i className="atlas-national-dot"/> Tổng chương trình trong kho ({report.entries.length})</span></div>
+   <div className="atlas-national-bars" role="group" aria-label="So sánh độ phủ chương trình theo trường (tối đa 12 trường)">
+    {chart.map(s=><button type="button" key={s.id} className="atlas-national-bar-row" onClick={()=>{setSchool(s.id);setLimit(12);}} aria-label={`${s.name}: ${report.pair?`${s.matched} khớp trên `:""}${s.total} chương trình. Lọc trường này.`}><span>{s.name}</span><span className="atlas-national-track"><i style={{width:`${s.matched/s.total*100}%`}}/></span><strong>{report.pair?`${s.matched}/${s.total}`:`—/${s.total}`}</strong></button>)}
+   </div>
+   <small>Thanh biểu diễn tỷ lệ mã trong tập nguồn của từng trường, không phải tỷ lệ đỗ. Bấm một dòng để lọc trường; tất cả trường vẫn truy cập được từ bộ lọc. {report.pair?'Khớp tính trên cặp môn bạn chọn.':'Chọn cặp môn để tính số mã khớp.'}</small>
+   <div className="atlas-national-filters"><label>Trường<select value={school} onChange={e=>{setSchool(e.target.value);setLimit(12);}}><option value="">Tất cả trường</option>{schools.map(s=><option key={s.id} value={s.id}>{s.name}</option>)}</select></label><label>Tìm ngành / trường / mã<input value={query} onChange={e=>{setQuery(e.target.value);setLimit(12);}} placeholder="CNTT, Kinh tế, Cần Thơ…"/></label><label className="atlas-national-check"><input type="checkbox" checked={onlyMatched} onChange={e=>{setOnlyMatched(e.target.checked);setLimit(12);}}/> Chỉ mã khớp tổ hợp</label></div>
+   <p>{visible.length} chương trình trong bộ lọc · {report.publishedProgramCount} chương trình có thông tin mã tổ hợp/tổ hợp gốc trong toàn kho. {report.pair?`${report.unconfirmedCount} chương trình chưa có ánh xạ tổ hợp đủ căn cứ.`:''}</p>
+   {school&&!report.entries.some(p=>p.universityId===school)&&<p>Chưa có dữ liệu cấp ngành cho trường này. <a href={officialPathwaySchools.find(s=>s.id===school)?.source} target="_blank" rel="noopener noreferrer">Mở nguồn tuyển sinh trường</a>.</p>}
+   <div className="atlas-national-results">{visible.slice(0,limit).map(entry=><article key={entry.id} className="atlas-national-result">
+     <div><small>{entry.universityName} · {entry.campus} · {entry.majorCode}</small><strong>{entry.majorName}</strong><small>{entry.matchesTarget?'Khớp từ khóa ngành · ':''}{pathwayStatusLabel(entry.status)}</small><p>{entry.methods.join(' · ')}</p>{entry.publishedQuota!==undefined&&<small>Chỉ tiêu trong đề án: {entry.publishedQuota} (không phải số chỗ còn lại)</small>}{entry.schemeNote&&<p>{entry.schemeNote}</p>}{Boolean(entry.otherExamRoutes?.length)&&<p>Đường xét tuyển khác: {entry.otherExamRoutes?.join(' · ')}</p>}
+     {entry.matches.length>0&&<ul>{entry.matches.map((m,i)=><li key={`${m.code}|${m.source}|${i}`}><a href={m.source} target="_blank" rel="noopener noreferrer">{m.code} · {pathwayKindLabel(m.kind)}</a>{m.observedScore===null?' · chưa đủ điểm quan sát':` · ${m.observedScore.toFixed(2)}/30 tổng môn tham khảo (${scoreBasis==='school'?'học bạ':scoreBasis==='practice'?'thi thử':'THPT tự khai'})`}</li>)}</ul>}
+     {entry.evidence.length>0&&<p>{entry.combinationFormat==='named_subjects'?'Tổ hợp ghi theo tên môn: ':'Mã tổ hợp trong nguồn: '}{[...new Set(entry.evidence.map(e=>e.code))].join(', ')}{entry.evidence.some(e=>e.subjects===null)?' · có tổ hợp chưa ánh xạ được môn thi':''}</p>}</div>
+     <a href={entry.sourceUrl} target="_blank" rel="noopener noreferrer">{entry.sourceKind==='cutoff'?'Xem bản ghi công bố điểm chuẩn':'Xem nguồn tuyển sinh'} ↗</a>
+   </article>)}</div>
+   {!visible.length&&<p className="atlas-official-pathways-empty">Chưa tìm thấy mã trong bộ lọc. Bỏ lọc khớp, chọn trường khác hoặc tra cứu trực tiếp từ nguồn. Không kết luận bạn không đủ điều kiện.</p>}
+   {limit<visible.length&&<button className="atlas-national-more" type="button" onClick={()=>setLimit(n=>n+24)}>Xem thêm ({visible.length-limit} còn lại)</button>}
+   <p className="atlas-official-pathways-disclaimer">Không phải toàn bộ trường/ngành Việt Nam. Khớp chỉ có nghĩa tổ hợp trong nguồn và các môn đang chọn tương thích; tổ hợp gốc và phương thức tổng hợp không đồng nghĩa với xét điểm THPT độc lập. Không so tổng môn với điểm chuẩn đã quy đổi hoặc suy ra xác suất đỗ. Chương trình chưa có tổ hợp vẫn được chọn ở sổ tay, cần tra đề án và điều kiện riêng. <a href="/atlas/sources#atlas-public-source-search">Tra cứu thêm nguồn trường ngoài danh mục</a>.</p>
+ </section>;
+}

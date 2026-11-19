@@ -1,0 +1,374 @@
+{
+  "envelopeSchema": "cla.golden-path.local-integrity.v1",
+  "payloadSha256": "d9e0224af71f5ce9acdd576ffcc1f08fca4a4c3aeaf7842058f4e0ea50cf820f",
+  "payload": {
+    "fixtureSha256": "683adb60c967781b0cca88d24378fb2b88e217fc25a99084d30815c0a3a69ddb",
+    "sourceFingerprint": "9a9c92c2367d3da99302614d5d2b1d940f54700ca4913344826bc442eeadaf03",
+    "replay": {
+      "schema": "cla.golden-path.synthetic-replay.v1",
+      "dataScope": "SYNTHETIC_ONLY",
+      "empiricalClaimEligible": false,
+      "treatmentEffectEstimated": false,
+      "independentlyVerified": false,
+      "productionDeploymentVerified": false,
+      "evaluationStatus": "TECHNICAL_REPLAY_ONLY",
+      "note": "Synthetic fixture: no real student, no calibrated prediction, no causal or longitudinal effectiveness claim.",
+      "fixture": {
+        "schema": "cla.golden-path.synthetic-fixture.v1",
+        "dataScope": "SYNTHETIC_ONLY",
+        "researchConsent": "NOT_APPLICABLE_SYNTHETIC",
+        "cycle": {
+          "id": "synthetic_cycle_0001",
+          "scenarioId": "focused",
+          "scenarioTitle": "Tập trung (dữ liệu tổng hợp)",
+          "targetMajor": "",
+          "subjects": [
+            {
+              "key": "math",
+              "label": "Toán (giả lập)",
+              "baseline": 0,
+              "target": 5
+            },
+            {
+              "key": "english",
+              "label": "Anh (giả lập)",
+              "baseline": 7,
+              "target": 8
+            }
+          ],
+          "plannedWeeklyHours": 12,
+          "weeksLeft": 4,
+          "startedAt": "2026-10-01T08:00:00.000Z"
+        },
+        "checkIns": [
+          {
+            "id": "synthetic_check_001",
+            "week": 1,
+            "actualHours": 0,
+            "completedActions": 0,
+            "plannedActions": 4,
+            "note": "",
+            "recordedAt": "2026-10-02T08:00:00.000Z"
+          },
+          {
+            "id": "synthetic_check_002",
+            "week": 2,
+            "actualHours": 4,
+            "completedActions": 3,
+            "plannedActions": 4,
+            "note": "",
+            "recordedAt": "2026-10-09T08:00:00.000Z"
+          }
+        ],
+        "reassessment": {
+          "observations": [
+            {
+              "key": "math",
+              "score": 0
+            },
+            {
+              "key": "english",
+              "score": 8
+            }
+          ],
+          "note": "",
+          "recordedAt": "2026-10-13T08:00:00.000Z"
+        }
+      },
+      "frozenT0": {
+        "schemaVersion": 1,
+        "policyVersion": "cla-t0-descriptive-gap-v1",
+        "frozenAt": "2026-10-01T08:00:00.000Z",
+        "inputSource": "student_self_report",
+        "scenarioId": "focused",
+        "subjects": [
+          {
+            "key": "math",
+            "label": "Toán (giả lập)",
+            "baseline": 0,
+            "target": 5
+          },
+          {
+            "key": "english",
+            "label": "Anh (giả lập)",
+            "baseline": 7,
+            "target": 8
+          }
+        ],
+        "plannedWeeklyHours": 12,
+        "weeksLeft": 4,
+        "planGapPoints": 3,
+        "forecastStatus": "NOT_ESTIMATED",
+        "predictedOutcome": null,
+        "calibratedProbability": null
+      },
+      "stages": [
+        {
+          "id": "seed-input",
+          "name": "synthetic_seed",
+          "source": "fixture_SYNTHETIC",
+          "facts": {
+            "subjects": [
+              "math",
+              "english"
+            ],
+            "containsObservedStudentData": false,
+            "t0Status": "FROZEN_CONSISTENT"
+          }
+        },
+        {
+          "id": "orion-plan",
+          "name": "plan",
+          "source": "createJourneyCycle",
+          "facts": {
+            "scenarioId": "focused",
+            "hours": 12,
+            "t0Gap": 3,
+            "t0ForecastEstimated": false
+          }
+        },
+        {
+          "id": "pulse-checkin",
+          "name": "check_ins",
+          "source": "appendJourneyCheckIn",
+          "facts": {
+            "count": 2,
+            "observations": [
+              0,
+              37.5
+            ],
+            "isRealObservation": false
+          }
+        },
+        {
+          "id": "pulse-reassess",
+          "name": "reassessment",
+          "source": "reassessJourneyCycle",
+          "facts": {
+            "status": "REVIEWED",
+            "isRealObservation": false
+          }
+        },
+        {
+          "id": "pulse-metrics",
+          "name": "outcome_analysis",
+          "source": "analyzeJourney",
+          "facts": {
+            "stage": "REVIEWED",
+            "observedAverageDelta": 0.5,
+            "comparisonStatus": "DESCRIPTIVE_ONLY",
+            "missingT1Subjects": 0,
+            "forecastError": null,
+            "causalEffect": null,
+            "synthetic": true
+          }
+        },
+        {
+          "id": "evidence-record",
+          "name": "evidence",
+          "source": "buildJourneyEvidence",
+          "facts": {
+            "resultType": "recommendation",
+            "probability": null,
+            "uncertainty": "not_estimated"
+          }
+        },
+        {
+          "id": "orion-shadow",
+          "name": "adaptation",
+          "source": "evaluateShadowPolicies",
+          "facts": {
+            "staticDecision": "MAINTAIN",
+            "adaptiveDecision": "REPLAN",
+            "trigger": "self_reported_completion_below_60_percent",
+            "assignedTreatment": false
+          }
+        }
+      ],
+      "before": {
+        "stage": "CHECK_IN",
+        "observedAverageDelta": null,
+        "totalHoursReported": 0,
+        "completionRate": null,
+        "suggestion": "CONTINUE",
+        "explanation": "Cần ghi check-in thực tế trước khi có thể đánh giá lại."
+      },
+      "afterCheckIn": {
+        "stage": "READY_TO_REASSESS",
+        "observedAverageDelta": null,
+        "totalHoursReported": 4,
+        "completionRate": 37.5,
+        "suggestion": "REASSESS",
+        "explanation": "Đã có check-in. Có thể ghi điểm đo lại khi đã hoàn thành một bài đánh giá."
+      },
+      "assessment": {
+        "stage": "REVIEWED",
+        "observedAverageDelta": 0.5,
+        "totalHoursReported": 4,
+        "completionRate": 37.5,
+        "suggestion": "REPLAN",
+        "explanation": "Nên xem lại thời lượng hoặc cách học trước khi khởi tạo chu kỳ tiếp theo."
+      },
+      "comparison": {
+        "schema": "cla.journey.t0-t1-comparison.v1",
+        "status": "DESCRIPTIVE_ONLY",
+        "evidenceLevel": "student_self_report_only",
+        "cycleId": "synthetic_cycle_0001",
+        "t0FrozenAt": "2026-10-01T08:00:00.000Z",
+        "t1RecordedAt": "2026-10-13T08:00:00.000Z",
+        "measures": [
+          {
+            "subjectKey": "math",
+            "subjectLabel": "Toán (giả lập)",
+            "t0Score": 0,
+            "t1Score": 0,
+            "delta": 0,
+            "matched": true
+          },
+          {
+            "subjectKey": "english",
+            "subjectLabel": "Anh (giả lập)",
+            "t0Score": 7,
+            "t1Score": 8,
+            "delta": 1,
+            "matched": true
+          }
+        ],
+        "summary": {
+          "matchedSubjectCount": 2,
+          "missingT1SubjectCount": 0,
+          "averageMatchedT0": 3.5,
+          "averageMatchedT1": 4,
+          "observedAverageDelta": 0.5,
+          "reportedHours": 4,
+          "reportedCompletionPercent": 37.5,
+          "frozenTargetGapPoints": 3
+        },
+        "forecastEvaluation": "NOT_POSSIBLE_NO_T0_FORECAST",
+        "calibratedProbability": null,
+        "forecastError": null,
+        "causalEffect": null,
+        "treatmentAssignment": "NOT_PERFORMED",
+        "limitations": [
+          "T0 and T1 are student self-reports, not independently verified test scores.",
+          "T0 contains a descriptive target gap, NOT an ML forecast; prediction error cannot be assessed.",
+          "Action completion and hours are self-reported and cannot establish treatment exposure.",
+          "A before-after difference is not an intervention effect; no controlled comparison is available.",
+          "Missing T1 subjects are excluded, not replaced with zero; measurement equivalence is unverified."
+        ]
+      },
+      "shadow": {
+        "schemaVersion": 1,
+        "policyVersion": "cla-shadow-policy-v1",
+        "evidenceLevel": "technical_replay_only",
+        "cycleId": "synthetic_cycle_0001",
+        "inputSnapshot": {
+          "scenarioId": "focused",
+          "baselineSubjects": [
+            {
+              "key": "math",
+              "baseline": 0,
+              "target": 5
+            },
+            {
+              "key": "english",
+              "baseline": 7,
+              "target": 8
+            }
+          ],
+          "checkIns": [
+            {
+              "id": "synthetic_check_001",
+              "week": 1,
+              "planned": 4,
+              "completed": 0,
+              "source": "student_self_report"
+            },
+            {
+              "id": "synthetic_check_002",
+              "week": 2,
+              "planned": 4,
+              "completed": 3,
+              "source": "student_self_report"
+            }
+          ],
+          "reassessment": [
+            {
+              "key": "math",
+              "score": 0
+            },
+            {
+              "key": "english",
+              "score": 8
+            }
+          ]
+        },
+        "staticDecision": "MAINTAIN",
+        "adaptiveDecision": "REPLAN",
+        "changed": true,
+        "trigger": "self_reported_completion_below_60_percent",
+        "completionPercent": 37.5,
+        "observedDelta": 0.5,
+        "limitations": [
+          "Check-ins and scores are student self-reports; data are not independently verified.",
+          "Static is a frozen-policy baseline; neither policy assigns an intervention in shadow mode.",
+          "Decision divergence is not evidence of improved outcomes or a causal effect.",
+          "The 60% rule is an unvalidated engineering threshold, not a calibrated risk cutoff.",
+          "No uncertainty estimate, population validation, or research consent is inferred."
+        ]
+      },
+      "evidence": {
+        "resultId": "synthetic_cycle_0001-review",
+        "resultType": "recommendation",
+        "participantPseudonym": "local-cycle-synthetic_cycle_0001",
+        "inputSnapshotId": "synthetic_cycle_0001",
+        "engine": {
+          "name": "CLA Closed-Loop Analyzer",
+          "version": "1.1.0"
+        },
+        "datasetVersion": "student-self-report-v1",
+        "featureVersion": "closed-loop-v1",
+        "modelVersion": "rule-based-unvalidated-v1",
+        "output": {
+          "value": 0.5,
+          "probability": null,
+          "unit": "score-points-0-to-10"
+        },
+        "uncertainty": {
+          "type": "not_estimated",
+          "value": null
+        },
+        "factors": [
+          {
+            "name": "hours_self_reported",
+            "value": 4,
+            "direction": "?",
+            "attribution": null
+          },
+          {
+            "name": "task_completion_percent_self_reported",
+            "value": 37.5,
+            "direction": "?",
+            "attribution": null
+          }
+        ],
+        "evidenceRefs": [
+          "self-report-checkin:synthetic_check_001",
+          "self-report-checkin:synthetic_check_002",
+          "self-report-reassessment:synthetic_cycle_0001"
+        ],
+        "limitations": [
+          "Inputs and outcomes are student self-reports; no independent verification.",
+          "No control group; observed before-after difference is not a causal effect.",
+          "No calibrated model, uncertainty estimate, or validated research pseudonym."
+        ],
+        "sourceVersions": [
+          "cla-closed-loop-v1"
+        ],
+        "codeCommitHash": "not_recorded",
+        "createdAt": "2026-10-13T08:00:00.000Z",
+        "humanOverride": null
+      }
+    }
+  }
+}

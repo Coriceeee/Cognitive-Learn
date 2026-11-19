@@ -2,6 +2,7 @@ import {
   collection,
   doc,
   getDocs,
+  getDocsFromServer,
   limit,
   orderBy,
   query,
@@ -91,6 +92,19 @@ export async function getCognitiveHistory(
   return result.docs.map((item) =>
     normalizeSnapshot(item.data(), item.id)
   );
+}
+
+/** Used by CP30 dashboard: never accept cached history as fresh research evidence. */
+export async function getVerifiedCognitiveHistory(studentId: string): Promise<CognitiveSnapshot[]> {
+  const historyQuery = query(historyCollection(studentId), orderBy("createdAt", "desc"));
+  const result = await getDocsFromServer(historyQuery);
+  // Do not synthesize a timestamp for malformed historical evidence.
+  return result.docs.map(item => {
+    const data = item.data();
+    const stamp = data.createdAt;
+    const createdAt = stamp instanceof Timestamp ? stamp.toDate().toISOString() : typeof stamp === "string" ? stamp : "";
+    return { ...data, id: item.id, createdAt } as CognitiveSnapshot;
+  });
 }
 
 export async function getLatestCognitiveSnapshot(

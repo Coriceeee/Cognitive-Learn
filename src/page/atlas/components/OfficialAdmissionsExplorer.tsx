@@ -4,8 +4,6 @@ import {
   type AdmissionMethodTag, type AdmissionYear,
 } from "../../../data/officialAdmissionSources";
 
-import { verifiedPrograms, parseScore30, historicalGap } from "../../../data/verifiedAdmissionPrograms";
-
 const methodOptions = Object.entries(methodLabels) as [AdmissionMethodTag, string][];
 
 export default function OfficialAdmissionsExplorer() {
@@ -13,10 +11,6 @@ export default function OfficialAdmissionsExplorer() {
   const [field, setField] = useState("");
   const [method, setMethod] = useState<AdmissionMethodTag | "ALL">("ALL");
   const [compareAll, setCompareAll] = useState(true);
-  const [scoreInput, setScoreInput] = useState("");
-  const score = parseScore30(scoreInput);
-  const filterTerm = field.trim().toLowerCase() === "cntt" ? "Công nghệ thông tin" : field;
-  const relevantPrograms = verifiedPrograms.filter(program => !filterTerm.trim() || `${program.major} ${program.code}`.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(filterTerm.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")));
   const results = useMemo(() => findOfficialUniversities(field, year, method), [field, year, method]);
   return (
     <section className="cla-source-explorer" id="atlas-official-admissions" aria-labelledby="atlas-source-title">
@@ -25,6 +19,7 @@ export default function OfficialAdmissionsExplorer() {
         <h2 id="atlas-source-title">Tra cứu trực tiếp 3 năm tuyển sinh 2024–2026</h2>
         <p>Chọn lĩnh vực và phương thức để tìm trường đáng tìm hiểu. Những ngành cụ thể, điểm chuẩn, chỉ tiêu và điều kiện từng tổ hợp phải đối chiếu ở đề án của chính trường theo từng năm; CLA chưa tự động suy ra xác suất đỗ.</p>
       </div>
+      <p><a href="https://tuyensinh.moet.gov.vn/ts/thong-tin" target="_blank" rel="noopener noreferrer">Tra cứu danh mục cơ sở đào tạo toàn quốc trên cổng Bộ GD&amp;ĐT ↗</a> · Các trường chưa có trong CLA vẫn có thể tra cứu tại đây.</p>
       <div className="cla-explorer-filters">
         <label>Ngành / lĩnh vực muốn học
           <input type="search" value={field} placeholder="Ví dụ: CNTT, kỹ thuật, kinh doanh…" onChange={event => setField(event.target.value)} />
@@ -74,36 +69,8 @@ export default function OfficialAdmissionsExplorer() {
           })}</tr>)}
         </tbody></table>
       </div>}
-      <details className="cla-major-history-disclosure">
-        <summary>Bộ dữ liệu điểm chuẩn chi tiết đã đối chiếu: PTIT BVH · 10 ngành · 2024–2025</summary>
-      <section className="cla-major-history" aria-labelledby="cla-major-title">
-        <h3 id="cla-major-title">Ví dụ tra điểm ngành đã xác minh tại PTIT — cơ sở Hà Nội (BVH)</h3>
-        <p>Các ngành dưới đây đã đối chiếu được mã ngành và điểm lịch sử 2024–2025 trên trang trường. Không quy đổi điểm các kỳ thi TSA/HSA/SAT thành thang THPT; bảng điểm chuẩn 2026 đã được PTIT công bố chính thức nhưng CLA chưa nhập số từ bảng ảnh khi chưa đối chiếu từng dòng/thang điểm.</p>
-        <p><a href="https://tuyensinh.ptit.edu.vn/thong-bao-diem-chuan-trung-tuyen-vao-dai-hoc-he-chinh-quy-nam-2026/" target="_blank" rel="noopener noreferrer">Xem bảng điểm chuẩn PTIT 2026 chính thức theo từng phương thức ↗</a></p>
-        <label className="cla-score-label">Tổng điểm thi THPT của bạn (thang 30, chưa cộng ưu tiên)
-          <input type="text" inputMode="decimal" value={scoreInput} onChange={event => setScoreInput(event.target.value)} placeholder="Ví dụ 25,50 (để trống nếu chưa có)" />
-        </label>
-        {scoreInput && score === null && <p role="alert" className="cla-source-caution">Chỉ nhập điểm 0–30, tối đa 2 chữ số thập phân. Không nhập điểm GPA 10 hay HSA/TSA.</p>}
-        <div className="cla-major-grid">
-          {relevantPrograms.map(program => <article className="cla-major-card" key={program.code}>
-            <strong>{program.major}</strong><small>Mã {program.code} · PTIT BVH (Hà Nội)</small>
-            <p><strong>Tổ hợp 2026:</strong> {program.combinations2026.join(", ")}</p>
-            <p><strong>Phương thức 2026:</strong> {program.methods2026.join(" · ")}</p>
-            <div className="cla-major-cutoffs">
-              {program.historicalCutoffs.map(entry => <div key={entry.year}>
-                <span>{entry.year} · Điểm THPT BVH</span>
-                <a href={entry.source} target="_blank" rel="noopener noreferrer">{entry.cutoff.toFixed(2)} ↗</a>
-                {score !== null && <small>Chênh điểm tham khảo: {historicalGap(score, entry.cutoff) > 0 ? "+" : ""}{historicalGap(score, entry.cutoff).toFixed(2)}</small>}
-              </div>)}
-            </div>
-            <a className="cla-major-scheme" href={program.source2026} target="_blank" rel="noopener noreferrer">Xem mã ngành, tổ hợp và phương thức 2026 từ PTIT ↗</a>
-          </article>)}
-        </div>
-        {relevantPrograms.length === 0 && <p className="cla-source-empty">Chưa có mã ngành và điểm lịch sử đã xác minh cho tên này trong danh mục thí điểm.</p>}
-        <p className="cla-source-caution">Chênh lệch với điểm trúng tuyển lịch sử KHÔNG phải dự báo đỗ/trượt: năm tuyển sinh, chỉ tiêu, cách quy đổi điểm, đối tượng ưu tiên, thứ tự nguyện vọng và cách xét tuyển có thể thay đổi. Nếu xét trường khác, hãy dùng link đề án chính thức phía trên.</p>
-      </section>
-      </details>
-      <p className="cla-source-footnote">Cập nhật kiểm tra nguồn: 08/11/2026. Dữ liệu lịch sử chỉ để tham khảo; phương thức và ngưỡng năm sau có thể thay đổi. Đề án gốc của từng trường luôn có ưu tiên cao hơn thông tin tóm tắt trong CLA.</p>
+      <div className="cla-major-history-disclosure"><a href="/atlas/compare#atlas-decision-comparison">So sánh điểm cấp ngành 2024–2026 giữa các trường ↗</a><p>Dữ liệu điểm đã nhập không đại diện toàn bộ tuyển sinh Việt Nam. Chọn năm, mã xét tuyển, cơ sở và phương thức riêng trong bộ so sánh; không quy đổi các thang điểm khác nhau.</p></div>
+      <p className="cla-source-footnote">Danh mục trường: nguồn đã ghi nhận trong kho Atlas; dữ liệu cấp ngành có nguồn riêng. Dữ liệu lịch sử chỉ để tham khảo; phương thức và ngưỡng năm sau có thể thay đổi. Đề án gốc của từng trường luôn có ưu tiên cao hơn thông tin tóm tắt trong CLA.</p>
     </section>
   );
 }

@@ -1,3 +1,4 @@
+import { currentFocusedPath } from "../../lib/focusedModuleRoute";
 import ModuleSectionNav from "../../components/common/ModuleSectionNav";
 import { useRef } from "react";
 import { readNumber, isBlankOrValid } from "../../lib/inputValidation";
@@ -15,6 +16,8 @@ import {
 } from "../../lib/orionStrategyEngine";
 import "../../styles.css";
 import OrionScenarioTradeoff from "./OrionScenarioTradeoff";
+import { evaluateScenarioChoices } from "../../lib/scenarioDecision";
+import OrionDecisionWorkbench from "./OrionDecisionWorkbench";
 import ClosedLoopPanel from "../../components/journey/ClosedLoopPanel";
 
 type ScoreKey =
@@ -51,6 +54,15 @@ function getRiskClass(riskLevel: OrionRiskLevel) {
 }
 
 export default function OrionPage() {
+  const view = currentFocusedPath();
+  const [scenarioStep, setScenarioStep] = useState<"compare" | "optimize" | "commit">(() => window.location.hash === "#cla-closed-loop" ? "commit" : window.location.hash === "#orion-optimize" ? "optimize" : "compare");
+  function changeScenarioStep(next: "compare" | "optimize" | "commit") {
+    setScenarioStep(next);
+    const hash = next === "commit" ? "#cla-closed-loop" : next === "optimize" ? "#orion-optimize" : "#orion-scenarios";
+    window.history.replaceState(window.history.state, "", "/orion/scenarios" + window.location.search + hash);
+  }
+  const [decisionHours,setDecisionHours]=useState('');
+  const [decisionRisk,setDecisionRisk]=useState<OrionRiskLevel|''>('');
   const [targetMajor, setTargetMajor] = useState("");
   const [weeksLeft, setWeeksLeft] = useState("");
   const [scores, setScores] = useState<Record<ScoreKey, string>>(defaultScores);
@@ -131,6 +143,10 @@ export default function OrionPage() {
     });
   }, [subjects, weeksLeft, targetMajor]);
 
+  const eligibleScenarios = useMemo(() => evaluateScenarioChoices(strategy.scenarios,
+    decisionHours.trim() === '' ? null : Number(decisionHours), decisionRisk || null).rows
+    .filter(row => row.reasons.length === 0).map(row => row.scenario), [strategy.scenarios, decisionHours, decisionRisk]);
+
   function updateScore(key: ScoreKey, value: string) {
     setScores((current) => ({
       ...current,
@@ -148,44 +164,7 @@ export default function OrionPage() {
   const hasInputs = readNumber(weeksLeft, 1, 104, true) !== null && subjects.length > 0 &&
     [...Object.values(scores), ...Object.values(targets)].every(value => isBlankOrValid(value, 0, 10));
 
-  return (
-    <main className="orion-page">
-      <header className="orion-floating-header">
-        <a
-          className="orion-home-logo"
-          href="/student"
-          aria-label="Về trang học sinh"
-        >
-          <img src={appLogo} alt="Cognitive Learn" />
-        </a>
-
-        <UserMenu />
-      </header>
-
-      <section className="orion-shell">
-        <section className="orion-hero">
-          <div>
-            <span>ORION STRATEGY</span>
-            <h1>Mô phỏng chiến lược học tập và xét tuyển</h1>
-            <p>
-              Orion dùng điểm hiện tại, điểm mục tiêu và thời gian còn lại để
-              tạo chiến lược tăng điểm, phân tích rủi ro và đề xuất lộ trình
-              hành động theo tuần.
-            </p>
-          </div>
-
-          <aside>
-            <span>Readiness</span>
-            <strong>{hasInputs ? `${strategy.readinessScore}/100` : "Chưa đủ dữ liệu"}</strong>
-            <em className={`orion-risk ${getRiskClass(strategy.riskLevel)}`}>
-              {hasInputs ? getRiskLabel(strategy.riskLevel) : "Chưa đánh giá"}
-            </em>
-          </aside>
-        </section>
-
-        <ModuleSectionNav moduleKey="orion" />
-
-        <section id="orion-input" className="orion-control-panel">
+  const inputPanel = (<section id="orion-input" className="orion-control-panel">
           <div className="orion-control-head">
             <div>
               <span>INPUT</span>
@@ -245,13 +224,61 @@ export default function OrionPage() {
               </div>
             ))}
           </div>
-        </section>
+        </section>);
 
-        {hasInputs ? (<>
-        <section className="orion-result-grid">
+  return (
+    <main className="orion-page">
+      <header className="orion-floating-header">
+        <a
+          className="orion-home-logo"
+          href="/student"
+          aria-label="Về trang học sinh"
+        >
+          <img src={appLogo} alt="Cognitive Learn" />
+        </a>
+
+        <UserMenu />
+      </header>
+
+      <section className="orion-shell">
+        {view === "/orion" && <>
+          <section className="orion-hero">
+          <div>
+            <span>ORION STRATEGY</span>
+            <h1>Mô phỏng chiến lược học tập và xét tuyển</h1>
+            <p>
+              Orion dùng điểm hiện tại, điểm mục tiêu và thời gian còn lại để
+              tạo chiến lược tăng điểm, phân tích rủi ro và đề xuất lộ trình
+              hành động theo tuần.
+            </p>
+          </div>
+
+          <aside>
+            <span>Readiness</span>
+            <strong>{hasInputs ? `${strategy.readinessScore}/100` : "Chưa đủ dữ liệu"}</strong>
+            <em className={`orion-risk ${getRiskClass(strategy.riskLevel)}`}>
+              {hasInputs ? getRiskLabel(strategy.riskLevel) : "Chưa đánh giá"}
+            </em>
+          </aside>
+        </section></>}
+
+        <ModuleSectionNav moduleKey="orion" />
+
+        {view === "/orion/inputs" && <>{inputPanel}<p className="cla-focus-notice">Lưu dữ liệu trước khi chuyển trang. <a href="/orion/scenarios">Mở mô phỏng chiến lược →</a></p></>}
+        {view === "/orion/scenarios" && <div className="cla-workflow-tabs" aria-label="Các bước ra quyết định">
+          <button type="button" aria-pressed={scenarioStep === "compare"} onClick={() => changeScenarioStep("compare")}>1 · So sánh</button>
+          <button type="button" aria-pressed={scenarioStep === "optimize"} onClick={() => changeScenarioStep("optimize")}>2 · Tối ưu</button>
+          <button type="button" aria-pressed={scenarioStep === "commit"} onClick={() => changeScenarioStep("commit")}>3 · Chốt chu kỳ</button>
+        </div>}
+        {view === "/orion/scenarios" && <p className="cla-focus-notice">Giới hạn hiện tại: {decisionHours.trim() || "Chưa đặt"} giờ/tuần · {decisionRisk ? getRiskLabel(decisionRisk) : "Chưa giới hạn áp lực"} · {hasInputs ? `${eligibleScenarios.length} phương án hợp lệ` : "Chưa đủ dữ liệu"}. <button type="button" className="cla-focus-text-button" onClick={() => changeScenarioStep("optimize")}>Sửa giới hạn</button></p>}
+        {view === "/orion/scenarios" && <details className="cla-focus-disclosure"><summary>Xem / chỉnh dữ liệu mô phỏng và lưu bản nháp</summary>{inputPanel}</details>}
+
+
+        {["/orion/scenarios", "/orion/roadmap"].includes(view) && (hasInputs ? (<>
+{view === "/orion/scenarios" && scenarioStep === "compare" && <details className="cla-focus-disclosure"><summary>Kết quả tổng hợp và môn cần ưu tiên</summary><section className="orion-result-grid">
           <article className="orion-summary-card">
             <span>KẾT QUẢ ORION</span>
-            <h2>{strategy.bestScenario.title}</h2>
+            <h2>{strategy.bestScenario.title} · tham khảo ban đầu</h2>
             <p>{strategy.summary}</p>
 
             <div className="orion-metrics">
@@ -266,7 +293,7 @@ export default function OrionPage() {
               </div>
 
               <div>
-                <span>Khả thi</span>
+                <span>Điểm khả thi heuristic</span>
                 <strong>{strategy.bestScenario.feasibility}%</strong>
               </div>
             </div>
@@ -287,9 +314,10 @@ export default function OrionPage() {
               ))}
             </div>
           </article>
-        </section>
+        </section></details>}
 
-        <section id="orion-scenarios" className="orion-section">
+        {view === "/orion/scenarios" && scenarioStep === "compare" && <>
+          <section id="orion-scenarios" className="orion-section">
           <div className="orion-section-head">
             <div>
               <span>SCENARIOS</span>
@@ -297,9 +325,9 @@ export default function OrionPage() {
             </div>
           </div>
 
-          <div className="orion-scenario-grid">
+          <details className="cla-viz-scenario-details"><summary>Chi tiết ba chiến lược</summary><div className="cla-viz-rows">
             {strategy.scenarios.map((scenario) => (
-              <article className="orion-scenario-card" key={scenario.id}>
+              <article className="cla-viz-row" key={scenario.id}>
                 <div>
                   <span>{scenario.feasibility}% khả thi</span>
                   <h3>{scenario.title}</h3>
@@ -312,15 +340,19 @@ export default function OrionPage() {
                 </div>
               </article>
             ))}
-          </div>
-          <OrionScenarioTradeoff scenarios={strategy.scenarios} />
-        </section>
+          </div></details>
+          <OrionScenarioTradeoff scenarios={strategy.scenarios} maxHours={decisionHours.trim()===''?null:Number(decisionHours)} maxRisk={decisionRisk||null} />
+          <p className="cla-focus-notice"><button className="cla-focus-text-button" type="button" onClick={() => changeScenarioStep("optimize")}>Tiếp: giới hạn thời gian và tối ưu đa mục tiêu →</button></p>
+        </section></>}
+        {view === "/orion/scenarios" && scenarioStep === "optimize" && <div id="orion-optimize"><OrionDecisionWorkbench scenarios={strategy.scenarios} subjects={subjects} hours={decisionHours} risk={decisionRisk} setHours={setDecisionHours} setRisk={setDecisionRisk} /><p className="cla-focus-notice"><button className="cla-focus-text-button" type="button" onClick={() => changeScenarioStep("commit")}>Tiếp: chốt chu kỳ →</button></p></div>}
 
-        <section id="orion-roadmap" className="orion-section">
+        {view === "/orion/roadmap" && <>
+          <section id="orion-roadmap" className="orion-section">
           <div className="orion-section-head">
             <div>
               <span>ROADMAP</span>
-              <h2>Lộ trình hành động</h2>
+              <h2>Lộ trình tham khảo theo thời hạn</h2>
+              <p>Lộ trình chung trước khi bạn chốt chiến lược; không phải kế hoạch đã lưu. Hãy chọn phương án phù hợp trong phần tạo chu kỳ.</p>
             </div>
           </div>
 
@@ -339,7 +371,7 @@ export default function OrionPage() {
               </article>
             ))}
           </div>
-        </section>
+        </section></>}
 
         {strategy.warnings.length > 0 && (
           <section className="orion-warning">
@@ -351,11 +383,12 @@ export default function OrionPage() {
             </ul>
           </section>
         )}
-        </>) : <section className="cla-transcript-hint" role="status"><span id="orion-scenarios" /><span id="orion-roadmap" />Chưa đủ dữ liệu hợp lệ để đưa ra kết quả. Hãy hoàn thiện các ô đầu vào và lưu hồ sơ. Đây là công cụ mô phỏng theo giả định, không phải bằng chứng hiệu quả hoặc xác suất thành công.</section>}
-        <ClosedLoopPanel mode="orion" plan={hasInputs ? { targetMajor,
+        </>) : <section className="cla-transcript-hint" role="status"><span id="orion-scenarios" /><span id="orion-roadmap" />Chưa đủ dữ liệu hợp lệ để đưa ra kết quả. Hãy hoàn thiện các ô đầu vào và lưu hồ sơ. Đây là công cụ mô phỏng theo giả định, không phải bằng chứng hiệu quả hoặc xác suất thành công. <a href="/orion/inputs">Mở dữ liệu & mục tiêu</a>.</section>)}
+        {view === "/orion/scenarios" && scenarioStep === "commit" && <ClosedLoopPanel mode="orion" plan={hasInputs ? { targetMajor,
           weeksLeft: readNumber(weeksLeft, 1, 104, true) ?? 1,
           subjects: subjects.map(s => ({key:s.subject,label:s.label,baseline:s.currentScore,target:s.targetScore})),
-          scenarios: strategy.scenarios } : undefined} />
+          scenarios: eligibleScenarios } : undefined} />}
+        {view === "/orion/roadmap" && <p className="cla-focus-notice"><a href="/orion/scenarios#cla-closed-loop">Mô phỏng và chốt chu kỳ học tập →</a></p>}
       </section>
     </main>
   );

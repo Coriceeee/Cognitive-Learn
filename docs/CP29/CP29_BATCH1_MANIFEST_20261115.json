@@ -1,0 +1,31 @@
+{
+  "release": "CLA_CP29_BATCH1_20261115",
+  "base": "CLA_FULL_SOURCE_CP28_BATCH3_VERIFIED_CLEANUP_20261115.zip",
+  "changed_paths": [
+    "src/components/common/AccessGate.tsx",
+    "package.json",
+    "tests/cp29-live-access-gate.test.cjs",
+    "tests/cp29-route-deeplink-contract.test.cjs",
+    "docs/CP29/CP29_BATCH1_ACCESS_DEEPLINK_REPORT_20261115.md",
+    "START_HERE_CP29_BATCH1_20261115.md"
+  ],
+  "sha256": {
+    "src/components/common/AccessGate.tsx": "87b08cccf34ccfa9dd95d38dc86f8baefb2352e3aa707d836f7b95e4f2b9be71",
+    "package.json": "f554f78bdb18aa7ad6458a66490b0ffcf059c9f443fa6347354f083fa7a6b4dc",
+    "tests/cp29-live-access-gate.test.cjs": "132e76ff040694251c46a79ff36048cb4e4e020831c9f88ef155b76adfc9cc68",
+    "tests/cp29-route-deeplink-contract.test.cjs": "920f3ae54734daa6d3e2b12b73dee83eba7ddf9ecaccd6fdbf6f97f2fed3d3c3",
+    "docs/CP29/CP29_BATCH1_ACCESS_DEEPLINK_REPORT_20261115.md": "1735349f7188413b496dfe37495e7aa06e2c49ed565615d1bd583e150e1dcced",
+    "START_HERE_CP29_BATCH1_20261115.md": "4025dd88e4ce0e991f1e0e9bf463ef94333cd29872ad5043c02c41bd7ff60886"
+  },
+  "test_scope": {
+    "cp29_access": "10/10 PASS local mocked TSX",
+    "cp29_routes": "5/5 PASS static contract",
+    "cp29_static": "PASS",
+    "npm_test": "PASS",
+    "firestore_emulator": "NOT RUN in this release environment",
+    "production_build": "NOT RUN in this release environment",
+    "browser_e2e": "NOT RUN"
+  },
+  "production_deployment": false,
+  "reviewer_accepted_pass_tasks": 0
+}

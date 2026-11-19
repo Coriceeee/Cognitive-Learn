@@ -1,0 +1,82 @@
+
+> cognitive-learn-ai@0.1.0 test:cp42:atlas
+> node --experimental-strip-types --test tests/cp42-national-pathways.test.mjs
+
+TAP version 13
+# (node:39211) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: catalogue spans all current national records without changing cutoff facts
+ok 1 - catalogue spans all current national records without changing cutoff facts
+  ---
+  duration_ms: 1.84059
+  type: 'test'
+  ...
+# Subtest: CTU and AGU official code additions exactly reconcile with 2026 inventory
+ok 2 - CTU and AGU official code additions exactly reconcile with 2026 inventory
+  ---
+  duration_ms: 7.278642
+  type: 'test'
+  ...
+# Subtest: physics English returns multiple schools, not PTIT only
+ok 3 - physics English returns multiple schools, not PTIT only
+  ---
+  duration_ms: 4.240399
+  type: 'test'
+  ...
+# Subtest: social pair can return entirely non-PTIT schools
+ok 4 - social pair can return entirely non-PTIT schools
+  ---
+  duration_ms: 4.016609
+  type: 'test'
+  ...
+# Subtest: no pair or duplicate electives leaves all sourced programmes selectable
+ok 5 - no pair or duplicate electives leaves all sourced programmes selectable
+  ---
+  duration_ms: 4.327796
+  type: 'test'
+  ...
+# Subtest: zero is a valid observed score; missing is not
+ok 6 - zero is a valid observed score; missing is not
+  ---
+  duration_ms: 4.36412
+  type: 'test'
+  ...
+# Subtest: technology streams cannot borrow a generic technology grade
+ok 7 - technology streams cannot borrow a generic technology grade
+  ---
+  duration_ms: 4.044966
+  type: 'test'
+  ...
+# Subtest: AGU composite and HUST base evidence never become THPT eligibility
+ok 8 - AGU composite and HUST base evidence never become THPT eligibility
+  ---
+  duration_ms: 3.192538
+  type: 'test'
+  ...
+# Subtest: search admits unconfirmed programmes and keeps school identity
+ok 9 - search admits unconfirmed programmes and keeps school identity
+  ---
+  duration_ms: 6.076324
+  type: 'test'
+  ...
+# Subtest: reviewed record must have matching school, year, verified source and official host
+ok 10 - reviewed record must have matching school, year, verified source and official host
+  ---
+  duration_ms: 10.8638
+  type: 'test'
+  ...
+# Subtest: reviewed programme does not invent THPT evidence for other methods
+ok 11 - reviewed programme does not invent THPT evidence for other methods
+  ---
+  duration_ms: 1.199201
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 415.645912

@@ -39,10 +39,9 @@ const issue = code => Object.assign(new Error(code), {code});
 test('AUTH-01: explicit active Admin role is accepted', () => {
   assert.deepEqual(checkAccountDocument(true,{role:'admin',active:true}), {status:'ready', role:'admin'});
 });
-test('AUTH-02: each genuine non-Admin role is preserved', () => {
-  for(const role of ['student','teacher','parent']) {
-    assert.deepEqual(checkAccountDocument(true,{role,active:true}), {status:'ready',role});
-  }
+test('AUTH-02: only student non-Admin role is accepted', () => {
+  assert.deepEqual(checkAccountDocument(true,{role:'student',active:true}), {status:'ready',role:'student'});
+  for(const role of ['teacher','parent']) assert.deepEqual(checkAccountDocument(true,{role,active:true}),{status:'invalid-role'});
 });
 test('AUTH-03: absent profile or null data does not grant access', () => {
   assert.deepEqual(checkAccountDocument(false,{role:'admin',active:true}), {status:'no-profile'});

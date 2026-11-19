@@ -1,0 +1,20 @@
+{
+  "schema": "cla.cp31.batch14.package.v1",
+  "base": "CLA_FULL_SOURCE_CP31_BATCH13_MEASUREMENT_AUDIT_20261116.zip",
+  "baseSha256": "1c969f0ad4182f1c671651bafb0e3b5d8107bf82e70991df38eaff31124a56d1",
+  "changedPaths": [
+    "START_HERE_CP31_BATCH14_20261116.md",
+    "docs/CP31/CP31_BATCH14_MEASUREMENT_PROVENANCE_REPORT_20261116.md",
+    "firestore.rules.CANDIDATE_CP21",
+    "package.json",
+    "src/components/journey/ClosedLoopPanel.tsx",
+    "src/lib/journeyMeasurementDeclarations.ts",
+    "src/lib/nexusEvidenceBaseline.ts",
+    "src/lib/useJourneyMeasurementDeclarations.ts",
+    "tests/cp31-batch14-measurement-persistence.test.mjs",
+    "tests/firestore.rules.cp21.test.mjs"
+  ],
+  "sourceFingerprintSha256": "9417b6c4bab712f75ea21075daccda7f61f810436ae6f3b859ed69b7cf60efa0",
+  "sourceTrackedFiles": 294,
+  "notes": "candidate rules not deployed; Firestore Emulator and browser E2E not run in packaging environment"
+}

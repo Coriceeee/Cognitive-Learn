@@ -1,0 +1,15 @@
+{
+  "release": "CLA CP28 / 2026-11-15",
+  "base": "CP27 V5 candidate rules, emulator 74/74 PASS on owner machine",
+  "review": "100 candidate links / 0 auto-PASS",
+  "security": "Rules production unchanged; new emulator L14 NOT RUN",
+  "files": {
+    "src/page/seed/StudentConsentPage.tsx": "e05e5cd74d751375c2ec3cf29034e76712f06aa1b4f41d19be34f77a7e004570",
+    "src/lib/studentShareRevocation.ts": "77b887e825f2e1df2221c20296503bfcf407b2d9ff82c54bfd1dc29e451914bc",
+    "tests/step20-consent-share-revocation.test.mjs": "f9e731a74b9f436f538a87fafea6d3e9c3005b5232c3bbbb26b62843757c6460",
+    "tests/firestore.rules.cp21.test.mjs": "54b116063681d299c100128fb4bcf88abaace921e86f3dd634df396936c832d8",
+    "firestore.rules.CANDIDATE_CP21": "1945ca60ce7b62308cf93ceb250178a7d3b982e8fa17bbf6458e14c1bc9c3435",
+    "package.json": "5fe65b2a51748f7b6db9867cc957c2dff697a34f0702a4a060cb4a020080cc6e",
+    "docs/CP28/CP28_BACKLOG_100_EVIDENCE_CANDIDATES.csv": "0c59f9876bce68aa808ac405662ff949cf0a7e37fa4e8797080749d8cd6b2974"
+  }
+}

@@ -1,5 +1,6 @@
+import { currentFocusedPath } from "../../lib/focusedModuleRoute";
+import PublicSourceSearchPanel from "../../components/common/PublicSourceSearchPanel";
 import ModuleSectionNav from "../../components/common/ModuleSectionNav";
-import { useIsAdmin } from "../../lib/useIsAdmin";
 import { useRef } from "react";
 import { allValid, isBlankOrValid } from "../../lib/inputValidation";
 import { useStudentTranscript } from "../seed/hooks/useStudentTranscript";
@@ -16,6 +17,7 @@ import {
 } from "../../lib/havenSupportEngine";
 import "../../styles.css";
 import HavenPressureTopology from "./HavenPressureTopology";
+import HavenBudgetScenario from "./HavenBudgetScenario";
 import HavenScholarshipExplorer from "./HavenScholarshipExplorer";
 
 function toNumber(value: string) {
@@ -33,7 +35,7 @@ function getRiskClass(riskLevel: HavenRiskLevel) {
 }
 
 export default function HavenPage() {
-  const isAdmin = useIsAdmin();
+  const view = currentFocusedPath();
   const [gpa, setGpa] = useState("");
   const [englishScore, setEnglishScore] = useState("");
   const [tuitionPressure, setTuitionPressure] = useState("");
@@ -120,12 +122,13 @@ export default function HavenPage() {
       </header>
 
       <section className="haven-shell">
-        <section className="haven-hero">
+        {view === "/haven" && <>
+          <section className="haven-hero">
           <div>
             <span>HAVEN SUPPORT</span>
             <h1>Học bổng và hỗ trợ tài chính</h1>
             <p>
-              Haven tập trung vào học bổng, ngân sách, khả năng chi trả và các phương án hỗ trợ học sinh, phụ huynh.
+              Haven tập trung vào học bổng, ngân sách, khả năng chi trả và các phương án hỗ trợ học sinh.
               Tuyển sinh trong nước, chương trình liên kết và du học quốc tế đều được tra cứu trong Atlas.
             </p>
           </div>
@@ -137,17 +140,20 @@ export default function HavenPage() {
               {hasInputs ? getHavenRiskLabel(result.riskLevel) : "Chưa đánh giá"}
             </em>
           </aside>
-        </section>
+        </section></>}
 
         <ModuleSectionNav moduleKey="haven" />
-        <section id="haven-scholarships" className="cla-haven-study-link">
+        {view === "/haven/scholarships" && <PublicSourceSearchPanel topic="scholarship" />}
+        {view === "/haven/scholarships" && <>
+          <section id="haven-scholarships" className="cla-haven-study-link">
           <strong>Học bổng và điều kiện</strong>
           <p>Haven đánh giá điều kiện học bổng và nhu cầu hỗ trợ tài chính. Mỗi học bổng cụ thể phải có nguồn cấp, thời hạn, yêu cầu chứng chỉ và năm; không tự coi chỉ số phù hợp là xác suất nhận học bổng.</p>
           <a href="/atlas/study-abroad">Mở Atlas để tra quốc gia, trường và điều kiện du học ↗</a>
           <HavenScholarshipExplorer />
-        </section>
+        </section></>}
 
-        <section id="haven-financial" className="haven-control-panel">
+        {view === "/haven/finance" && <HavenBudgetScenario />}
+{view === "/haven/finance" && <details className="cla-focus-disclosure" open={window.location.hash === "#haven-financial" ? true : undefined}><summary>Nhập và lưu chỉ số hỗ trợ cá nhân</summary>        <section id="haven-financial" className="haven-control-panel">
           <div className="haven-control-head">
             <div>
               <span>SUPPORT INPUT</span>
@@ -210,44 +216,40 @@ export default function HavenPage() {
               />
             </label>
           </div>
-        </section>
+        </section></details>}
 
-        {hasInputs && <HavenPressureTopology values={{
+        {view === "/haven/finance" && hasInputs && <HavenPressureTopology values={{
           tuitionPressure: toNumber(tuitionPressure),
           studyPressure: toNumber(studyPressure),
           admissionRisk: toNumber(admissionRisk),
           financialNeed: toNumber(financialNeed),
         }} result={result} />}
 
-        {hasInputs ? (<>
-        {isAdmin && <section id="haven-support-roles" className="haven-summary-grid">
+        {["/haven/plan", "/haven/scholarships", "/haven/finance"].includes(view) && (hasInputs ? (<>
+        {view === "/haven/plan" && <>
+          <section id="haven-support-roles" className="haven-summary-grid">
           <article>
-            <span>PHỤ HUYNH</span>
-            <h2>Tóm tắt cho phụ huynh</h2>
-            <p>{result.parentSummary}</p>
+            <span>KẾ HOẠCH CỦA BẠN</span>
+            <h2>Gợi ý tài chính và học tập</h2>
+            <p>{result.studentSummary}</p>
           </article>
 
           <article>
-            <span>GIÁO VIÊN</span>
-            <h2>Tóm tắt cho giáo viên</h2>
-            <p>{result.teacherSummary}</p>
-          </article>
-
-          <article>
-            <span>ÁP LỰC GIA ĐÌNH</span>
+            <span>ÁP LỰC TỔNG HỢP</span>
             <h2>{result.familyPressureScore}/100</h2>
             <p>
               Chỉ số này phản ánh mức áp lực tổng hợp từ học phí, học tập, tuyển
               sinh và nhu cầu tài chính.
             </p>
           </article>
-        </section>}
+        </section></>}
 
-        <section id="haven-support-plan" className="haven-section">
+        {view === "/haven/plan" && <>
+          <section id="haven-support-plan" className="haven-section">
           <div className="haven-section-head">
             <div>
               <span>SUPPORT PLAN</span>
-              <h2>Việc nên hỗ trợ tiếp theo</h2>
+              <h2>Việc bạn nên làm tiếp theo</h2>
             </div>
           </div>
 
@@ -261,9 +263,10 @@ export default function HavenPage() {
               </article>
             ))}
           </div>
-        </section>
+        </section></>}
 
-        <section id="haven-scholarship-scenarios" className="haven-section">
+        {view === "/haven/scholarships" && <>
+          <section id="haven-scholarship-scenarios" className="haven-section">
           <div className="haven-section-head">
             <div>
               <span>SUPPORT POLICY ARCHETYPES</span>
@@ -289,7 +292,7 @@ export default function HavenPage() {
               </article>
             ))}
           </div>
-        </section>
+        </section></>}
 
         {result.warnings.length > 0 && (
           <section className="haven-warning">
@@ -301,7 +304,7 @@ export default function HavenPage() {
             </ul>
           </section>
         )}
-        </>) : <section className="cla-transcript-hint" role="status"> <span id="haven-support-roles" />Chưa đủ dữ liệu thực để đưa ra kết quả. Hãy hoàn thiện các ô đầu vào và lưu hồ sơ. Đây là công cụ mô phỏng theo giả định, không phải bằng chứng hiệu quả hoặc xác suất thành công.</section>}
+        </>) : <section className="cla-transcript-hint" role="status"> <span id="haven-support-roles" />Chưa đủ dữ liệu để tính chỉ số hỗ trợ cá nhân và gợi ý theo quy tắc. Tra cứu học bổng và mô phỏng tiền hoạt động độc lập. <a href="/haven/finance#haven-financial">Mở phần chỉ số hỗ trợ cá nhân</a>.</section>)}
       </section>
     </main>
   );

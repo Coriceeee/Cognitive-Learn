@@ -1,0 +1,7 @@
+
+> cognitive-learn-ai@0.1.0 research:cla:knowledge
+> node --experimental-strip-types tools/cla_knowledge_benchmark.mjs
+
+{"total":120,"pass":120,"summary":{"single":{"total":100,"pass":100},"multiple":{"total":10,"pass":10},"abstain":{"total":10,"pass":10}},"liveLlm":"NOT_RUN"}
+(node:26658) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)

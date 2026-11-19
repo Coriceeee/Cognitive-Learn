@@ -20,12 +20,10 @@ export default function UserMenu() {
   const [userEmail, setUserEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [adminMode, setAdminMode] = useState(false);
-  const [accountRole, setAccountRole] = useState<"student" | "teacher" | "parent" | "admin" | null>(null);
+  const [accountRole, setAccountRole] = useState<"student" | "admin" | null>(null);
 
   const roleLabels = {
     student: "Học sinh",
-    teacher: "Giáo viên",
-    parent: "Phụ huynh",
     admin: "Quản trị viên",
   } as const;
   const roleLabel = accountRole ? roleLabels[accountRole] : "Chưa xác định";
@@ -52,7 +50,7 @@ export default function UserMenu() {
         if (active && thisRequest === requestId) {
           const profile = snapshot.exists() ? snapshot.data() : null;
           const role = profile?.role;
-          const validRole = role === "student" || role === "teacher" || role === "parent" || role === "admin";
+          const validRole = role === "student" || role === "admin";
           setAccountRole(validRole ? role : null);
           setAdminMode(validRole && role === "admin" && profile?.active === true);
         }

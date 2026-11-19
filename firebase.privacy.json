@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "source": "functions-privacy",
+    "runtime": "nodejs22",
+    "codebase": "cla-privacy-revocation"
+  }
+}

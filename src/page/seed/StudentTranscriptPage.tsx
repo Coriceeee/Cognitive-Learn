@@ -1,13 +1,17 @@
+import StudentSubjectPanel from "./components/StudentSubjectPanel";
+import ModuleSectionNav from "../../components/common/ModuleSectionNav";
 import { useState } from "react";
 import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
 import { useStudentTranscript } from "./hooks/useStudentTranscript";
+import { useAcademicGpaIntegrity } from "./hooks/useAcademicGpaIntegrity";
 import { GRADES, SEMESTERS, type GradeKey } from "./services/transcriptData";
 import TranscriptResearchView from "./components/TranscriptResearchView";
 import "../../styles.css";
 
 export default function StudentTranscriptPage() {
-  const { data, status, error, source } = useStudentTranscript();
+  const { data, status, error, source, retry } = useStudentTranscript();
+  const integrity = useAcademicGpaIntegrity();
   const [grade, setGrade] = useState<GradeKey>("grade12");
   const gradeName = GRADES.find(g => g.key === grade)!.name;
   return (
@@ -17,20 +21,36 @@ export default function StudentTranscriptPage() {
         <UserMenu />
       </div>
       <section className="profile-shell">
+        <ModuleSectionNav moduleKey="seed" />
         <header className="profile-head">
           <span>KHO BẢNG ĐIỂM · HỒ SƠ CỦA BẠN</span>
           <h1>Bảng điểm THPT đã lưu</h1>
           <p>Kho điểm hiển thị 9 môn hiện đang học, gồm Giáo dục quốc phòng và an ninh. Điểm của môn từng học trước đây vẫn được giữ trong cơ sở dữ liệu, nhưng không cộng vào trung bình của tổ hợp hiện tại.</p>
         </header>
         <div className="cla-transcript-page-actions"><a href="/student/profile">Nhập / sửa bảng điểm →</a></div>
+        <details className="cla-focus-disclosure"><summary>Điểm gần nhất theo từng môn</summary><StudentSubjectPanel onUpdate={() => { window.location.href="/student/profile"; }} /></details>
         {status === "loading" && <p role="status">Đang tải bảng điểm đã lưu…</p>}
+        {status === "syncing" && <div role="status"><p>Đang chờ xác minh từ Firestore. Bảng điểm trong cache hoặc đang ghi dở sẽ không được hiển thị như dữ liệu đã đồng bộ. Hãy kiểm tra kết nối mạng.</p><button type="button" onClick={retry}>Thử đồng bộ lại</button></div>}
         {status === "signed-out" && <p>Hãy đăng nhập bằng tài khoản học sinh để xem bảng điểm.</p>}
         {status === "empty" && <p>Chưa có bảng điểm trong hồ sơ. Hãy vào trang nhập hồ sơ để lưu dữ liệu.</p>}
-        {status === "error" && <p role="alert">{error}</p>}
+        {status === "error" && <div role="alert"><p>{error}</p><button type="button" onClick={retry}>Kiểm tra lại kết nối và bảng điểm</button></div>}
+        {data && status === "ready" && source !== "legacy" && (
+          <div role={integrity.status === "MISMATCH" || integrity.status === "error" ? "alert" : "status"} className="cla-transcript-hint" data-academic-integrity={integrity.status}>
+            {integrity.status === "VERIFIED"
+              ? "Kiểm tra nhất quán GPA: hồ sơ và bảng điểm khớp với phép tính từ điểm đã nhập. Không phải xác nhận của nhà trường."
+              : integrity.status === "MISMATCH"
+                ? `Cảnh báo: ${integrity.result?.reason ?? "GPA không nhất quán."} Hãy kiểm tra dữ liệu trước khi sử dụng GPA.`
+                : integrity.status === "LEGACY" || integrity.status === "INCOMPLETE"
+                  ? "GPA chưa được đối soát đầy đủ với hồ sơ đã lưu. Không dùng làm kết quả chính thức."
+                  : integrity.status === "error"
+                    ? "Không thể kiểm tra nhất quán GPA từ Firestore. Hãy kiểm tra quyền truy cập và kết nối."
+                    : "Đang xác minh GPA bằng hai tài liệu trên máy chủ; chưa thể khẳng định tính nhất quán."}
+          </div>
+        )}
         {data && status === "ready" && (
           <>
             <div className="cla-transcript-meta">
-              <span>{source === "legacy" ? "Bảng điểm đang ở định dạng lưu cũ · Hãy mở trang nhập điểm và lưu lại để chuẩn hóa." : "Bảng điểm đã được lưu trong hồ sơ của bạn."}</span>
+              <span>{source === "legacy" ? "Bảng điểm lịch sử chỉ được đọc sau kiểm tra cấu trúc; chưa được đối chiếu GPA hai tài liệu. Không tự di chuyển hoặc xác nhận học bạ. Liên hệ người quản trị nếu cần chuẩn hóa." : "Bảng điểm đã được lưu trong hồ sơ của bạn."}</span>
               <span>Lần cập nhật: {data.updatedAt ? data.updatedAt.toLocaleString("vi-VN") : "Chưa xác định"}</span>
             </div>
             <nav className="profile-grade-tabs" aria-label="Chọn năm học">

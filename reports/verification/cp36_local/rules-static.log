@@ -1,0 +1,105 @@
+
+> cognitive-learn-ai@0.1.0 test:rules:static
+> node --test tests/cp21.rules.contract.test.cjs
+
+TAP version 13
+# Subtest: STATIC ONLY rules v2
+ok 1 - STATIC ONLY rules v2
+  ---
+  duration_ms: 2.291959
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY user doc own-id guard
+ok 2 - STATIC ONLY user doc own-id guard
+  ---
+  duration_ms: 0.282071
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY active role gate
+ok 3 - STATIC ONLY active role gate
+  ---
+  duration_ms: 0.126059
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY prevent self-registration of admin
+ok 4 - STATIC ONLY prevent self-registration of admin
+  ---
+  duration_ms: 0.14371
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY lock elective selection
+ok 5 - STATIC ONLY lock elective selection
+  ---
+  duration_ms: 0.216144
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY four unique electives
+ok 6 - STATIC ONLY four unique electives
+  ---
+  duration_ms: 0.118674
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY foreign language not equal to elective
+ok 7 - STATIC ONLY foreign language not equal to elective
+  ---
+  duration_ms: 2.127721
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY transcript path protected
+ok 8 - STATIC ONLY transcript path protected
+  ---
+  duration_ms: 0.11281
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY scope validation
+ok 9 - STATIC ONLY scope validation
+  ---
+  duration_ms: 0.318972
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY append-only cognitive history
+ok 10 - STATIC ONLY append-only cognitive history
+  ---
+  duration_ms: 0.472165
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY teacher/parent report review constrained
+ok 11 - STATIC ONLY teacher/parent report review constrained
+  ---
+  duration_ms: 0.144493
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY cp24 append-only provenance collection
+ok 12 - STATIC ONLY cp24 append-only provenance collection
+  ---
+  duration_ms: 0.76269
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY cp24 forbid update and delete provenance
+ok 13 - STATIC ONLY cp24 forbid update and delete provenance
+  ---
+  duration_ms: 0.159909
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY cp24 no PII through schema whitelist
+ok 14 - STATIC ONLY cp24 no PII through schema whitelist
+  ---
+  duration_ms: 0.164022
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY no public system health access
+ok 15 - STATIC ONLY no public system health access
+  ---
+  duration_ms: 0.129884
+  type: 'test'
+  ...
+1..15
+# tests 15
+# suites 0
+# pass 15
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 92.479238
+

@@ -1,0 +1,8 @@
+2026-11-18 local engineering run
+npm test exit 0; TAP counts 1130/1130 pass (includes 8 new tests).
+Targeted 27/27 pass (overlaps npm test). Standalone strict TypeScript for pure engine and strategy pass.
+Synthetic evidence regeneration and demo:final exit 0, 11/11; rules static 15/15.
+Atlas lookup 1382/1382 deterministic internal replay; not new source validation.
+npm run build exit 1 (missing dependencies/types in environment); browser E2E, Firebase runtime and production not run.
+Source fingerprint 415 files, 2150dba87fdc62bafd2291402d5715ad084aaacc23f2233094b9b56e00eda929.
+No new real outcome, ML efficacy, calibration, national admission data, or validated self-learning policy. No provider or rules change.

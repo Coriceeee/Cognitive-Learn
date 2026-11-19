@@ -75,8 +75,6 @@ export const ADVISOR_PAGE_CONTEXTS = {
   haven: "Haven Support · Học bổng và tài chính",
   admin: "Nexus Console · Quản trị hệ thống",
   "admin-diagnostics": "Nexus Console · Chẩn đoán hệ thống",
-  teacher: "Không gian giáo viên",
-  parent: "Không gian phụ huynh",
 } as const;
 
 export type AdvisorPageContext = keyof typeof ADVISOR_PAGE_CONTEXTS;
@@ -93,7 +91,7 @@ export function advisorPageContextFromPath(pathname: string): AdvisorPageContext
   if (path === "/student/transcript") return "student-transcript";
   if (path === "/student/storage") return "student-storage";
   if (path === "/student/modules") return "student-modules";
-  if (path === "/student") return "student-dashboard";
+  if (path === "/student" || path === "/student/exams") return "student-dashboard";
   if (path === "/admin/diagnostics") return "admin-diagnostics";
   if (path === "/admin") return "admin";
   if (path.startsWith("/atlas/study-abroad") || path === "/study-abroad" || path === "/haven/study-abroad") return "study-abroad";
@@ -102,8 +100,6 @@ export function advisorPageContextFromPath(pathname: string): AdvisorPageContext
   if (path.startsWith("/orion")) return "orion";
   if (path.startsWith("/pulse")) return "pulse";
   if (path.startsWith("/haven")) return "haven";
-  if (path === "/teacher") return "teacher";
-  if (path === "/parent") return "parent";
   return "general";
 }
 
@@ -123,8 +119,6 @@ export function advisorSuggestionsFor(context: AdvisorPageContext): string[] {
     haven: ["Cách dùng công cụ ngân sách?", "Tìm checklist học bổng ở đâu?", "Vì sao chi phí đang để trống?"],
     admin: ["Tìm công cụ kiểm tra hệ thống ở đâu?", "Phân biệt Admin và Student thế nào?", "Xem trạng thái kiểm thử ở đâu?"],
     "admin-diagnostics": ["Ý nghĩa PASS và NOT TESTED?", "Xem lỗi chẩn đoán thế nào?", "Làm sao quay lại Nexus Console?"],
-    teacher: ["Xem báo cáo được chia sẻ thế nào?", "Quản lý liên kết học sinh ở đâu?", "Báo lỗi quyền truy cập thế nào?"],
-    parent: ["Xem báo cáo được chia sẻ thế nào?", "Quản lý liên kết phụ huynh ở đâu?", "Báo lỗi quyền truy cập thế nào?"],
   };
   return suggestions[context];
 }

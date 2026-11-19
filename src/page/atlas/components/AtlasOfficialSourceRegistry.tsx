@@ -1,3 +1,5 @@
+import {auditNationalCoverage} from "../../../lib/nationalCoverageAudit";
+import { nationalCutoffs, normalizeNational } from "../../../lib/nationalAdmissionRegistry";
 import { useMemo, useState } from "react";
 import { admissionYears, methodLabels, officialUniversities } from "../../../data/officialAdmissionSources";
 
@@ -6,10 +8,10 @@ export default function AtlasOfficialSourceRegistry() {
   const [query, setQuery] = useState("");
   const [region, setRegion] = useState("ALL");
   const universities = useMemo(() => {
-    const needle = query.trim().toLocaleLowerCase("vi-VN");
+    const needle = normalizeNational(query);
     return officialUniversities.filter(item =>
       (region === "ALL" || item.region === region) &&
-      (!needle || [item.name, ...item.fieldTags].join(" ").toLocaleLowerCase("vi-VN").includes(needle)),
+      (!needle || normalizeNational([item.id, item.name, ...item.fieldTags].join(" ")).includes(needle)),
     );
   }, [query, region]);
   const yearRecords = officialUniversities.flatMap(university => university.years);
@@ -17,6 +19,7 @@ export default function AtlasOfficialSourceRegistry() {
   const archiveOnlyCount = yearRecords.filter(record => record.detailsStatus === "official_archive_only").length;
   const missingYearCount = officialUniversities.length * admissionYears.length - yearRecords.length;
   const totalYearSlots = officialUniversities.length * admissionYears.length;
+  const audit = useMemo(() => auditNationalCoverage(), []);
 
   return (
     <section id="atlas-source-registry" className="cla-source-explorer" aria-labelledby="atlas-source-registry-title">
@@ -25,11 +28,18 @@ export default function AtlasOfficialSourceRegistry() {
         <h2 id="atlas-source-registry-title">Nguồn tuyển sinh có thể truy vết</h2>
         <p>Danh mục hiện có {officialUniversities.length} trường có nguồn chính thức đã đối chiếu trong CLA. Đây là danh sách đang được xây dựng, <strong>không phải toàn bộ đại học Việt Nam</strong> và không bảo đảm đủ dữ liệu ngành/phương thức của mọi năm.</p>
       </div>
-      <div className="cla-source-registry-metrics" aria-label="Phạm vi dữ liệu nguồn">
-        <article><strong>{officialUniversities.length}</strong><span>trường trong danh mục</span></article>
-        <article><strong>{yearRecords.length}</strong><span>bản ghi nguồn theo năm</span></article>
-        <article><strong>{methodVerifiedCount}</strong><span>bản ghi đã đối chiếu nhóm phương thức</span></article>
-        <article><strong>{missingYearCount}</strong><span>năm còn thiếu bản ghi</span></article>
+      <p><a href="https://tuyensinh.moet.gov.vn/ts/" target="_blank" rel="noopener noreferrer">Tra cứu mã trường và thông tin tại cổng tuyển sinh Bộ GD&amp;ĐT ↗</a> · Nếu trường chưa có trong CLA, kiểm tra tại cổng Bộ và trang trường. CLA chưa đồng bộ được toàn bộ danh mục của Bộ.</p>
+      <p><strong>{officialUniversities.length}</strong> đơn vị trong danh mục · <strong>{nationalCutoffs.length}</strong> giá trị điểm chuẩn · <strong>{yearRecords.length}</strong> nguồn theo năm. Chưa có mẫu số quốc gia đã xác nhận.</p>
+      <div className="cla-source-coverage" aria-label="Biểu đồ nguồn theo từng năm trong kho cục bộ">
+        <h3>Độ phủ theo mùa tuyển sinh</h3>
+        {audit.summary.map(y=><div key={y.year} className="cla-source-year-list"><strong>{y.year}</strong>{([['Có nguồn',y.sourceSchools],['Nhóm phương thức',y.methodSchools],['Điểm chuẩn',y.cutoffSchools],['Mã ngành',y.programSchools],['Tổ hợp',y.combinationSchools]] as const).map(([label,n])=><div key={label} style={{display:'grid',gridTemplateColumns:'minmax(100px, 1fr) 2fr auto',alignItems:'center',gap:'8px'}}><small>{label}</small>{n===null?<small>Chưa kiểm kê</small>:<div className="cla-source-coverage-track"><span className="is-method" style={{width:`${n/y.registrySchools*100}%`}}/></div>}<small>{n===null?'—':`${n}/${y.registrySchools}`}</small></div>)}</div>)}
+        <p>Các nhóm bằng chứng độc lập, có thể chồng lấp; không cộng thành tỷ lệ hoàn thành toàn quốc.</p>
+      </div>
+      <div className="cla-source-coverage" aria-label="Độ phủ tổ hợp trong danh mục 2026">
+        <h3>Tổ hợp 2026 · nguồn và khả năng đối chiếu</h3>
+        {audit.rows.filter(r=>(r.years[0].programRecords??0)>0).sort((a,b)=>(b.years[0].programRecords??0)-(a.years[0].programRecords??0)).map(r=>{const y=r.years[0],total=y.programRecords??0,mapped=y.mappedCombinationRecords??0,sourced=y.combinationRecords??0;return <div key={r.id} style={{display:'grid',gridTemplateColumns:'minmax(110px, 1.5fr) 2fr auto',alignItems:'center',gap:'8px',marginBottom:'6px'}}><small>{r.name}</small><div className="cla-source-coverage-track"><span className="is-method" style={{width:`${mapped/total*100}%`}}/><span className="is-archive" style={{width:`${(sourced-mapped)/total*100}%`}}/><span className="is-missing" style={{width:`${(total-sourced)/total*100}%`}}/></div><small>{mapped}/{sourced}/{total}</small></div>})}
+        <p>Ánh xạ được ít nhất một tổ hợp / có nguồn tổ hợp / tổng mã trong kho. Một mã có tổ hợp ánh xạ được vẫn có thể có điều kiện khác hoặc tổ hợp chưa ánh xạ.</p>
+        <div className="cla-source-coverage-legend"><span><i className="is-method"/> Có ánh xạ</span><span><i className="is-archive"/> Có nguồn, chưa ánh xạ</span><span><i className="is-missing"/> Chưa có tổ hợp</span></div>
       </div>
       <div className="cla-source-coverage" role="img" aria-label={`${methodVerifiedCount} bản ghi nhóm phương thức, ${archiveOnlyCount} bản ghi nguồn lưu trữ, ${missingYearCount} năm còn thiếu trên ${totalYearSlots} cặp trường-năm trong danh mục`}>
         <div className="cla-source-coverage-track" aria-hidden="true">
@@ -52,6 +62,7 @@ export default function AtlasOfficialSourceRegistry() {
           <select value={region} onChange={event => setRegion(event.target.value)}>
             <option value="ALL">Tất cả khu vực trong danh mục</option>
             <option value="Bắc">Miền Bắc</option>
+            <option value="Trung">Miền Trung</option>
             <option value="Nam">Miền Nam</option>
           </select>
         </label>
@@ -62,7 +73,7 @@ export default function AtlasOfficialSourceRegistry() {
           <article className="cla-source-card" key={university.id}>
             <div className="cla-source-card-head">
               <h3>{university.name}</h3>
-              <span>{university.region === "Bắc" ? "Miền Bắc" : "Miền Nam"}</span>
+              <span>Miền {university.region}</span>
             </div>
             <p><strong>Lĩnh vực có thể tìm:</strong> {university.fieldTags.join(" · ")}</p>
             <div className="cla-source-links">
@@ -72,6 +83,7 @@ export default function AtlasOfficialSourceRegistry() {
             <div className="cla-source-year-list">
               {admissionYears.map(year => {
                 const record = university.years.find(item => item.year === year);
+                const numericCount = nationalCutoffs.filter(item => item.universityId === university.id && item.year === year).length;
                 return (
                   <div key={year} className="cla-source-year-row">
                     <strong>{year}</strong>
@@ -81,6 +93,8 @@ export default function AtlasOfficialSourceRegistry() {
                       </span>
                       <a href={record.schemeUrl} target="_blank" rel="noopener noreferrer">{record.schemeLabel} ↗</a>
                       {record.methods.length > 0 && <small>{record.methods.map(method => methodLabels[method]).join(" · ")}</small>}
+                      {record.cutoffUrl && <a href={record.cutoffUrl} target="_blank" rel="noopener noreferrer">Thông báo điểm chuẩn ↗</a>}
+                      <small>{numericCount ? `${numericCount} giá trị điểm chuẩn đã nhập (không đồng nghĩa đủ mọi phương thức)` : "Chưa có giá trị điểm chuẩn chuẩn hóa"}</small>
                       <small>{record.methodNotes}</small>
                     </> : <span className="is-archive">Chưa có bản ghi theo năm</span>}
                   </div>

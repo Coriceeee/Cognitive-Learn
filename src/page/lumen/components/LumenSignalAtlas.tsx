@@ -47,7 +47,7 @@ function RadarFigure({ values }: { values: Array<{ code: string; value: number }
       <defs>
         <linearGradient id="claRadarFill" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="#38bdf8" stopOpacity=".34" />
-          <stop offset="100%" stopColor="#2563eb" stopOpacity=".10" />
+          <stop offset="100%" stopColor="rgb(var(--tc-fl-2563eb))" stopOpacity=".10" />
         </linearGradient>
       </defs>
       {[25, 50, 75, 100].map((tick) => (
@@ -63,7 +63,7 @@ function RadarFigure({ values }: { values: Array<{ code: string; value: number }
           </g>
         );
       })}
-      <polygon points={polygon} fill="url(#claRadarFill)" stroke="#2563eb" strokeWidth="2.5" strokeLinejoin="round" />
+      <polygon points={polygon} fill="url(#claRadarFill)" stroke="rgb(var(--tc-sk-2563eb))" strokeWidth="2.5" strokeLinejoin="round" />
       {values.map((item, index) => {
         const p = point(item.value, index);
         return <circle key={item.code} cx={p.x} cy={p.y} r="4.5" className="cla-radar-point"><title>{item.code}: {item.value}/100</title></circle>;
@@ -87,7 +87,7 @@ function CoverageRing({ coverage, observed }: { coverage: number; observed: numb
   );
 }
 
-export default function LumenSignalAtlas({ cognitive, growth }: Props) {
+export default function LumenSignalAtlas({ cognitive, growth, mode="all" }: Props & {mode?: "all"|"indices"|"history"}) {
   const dimensions = cognitive.dimensions ?? [];
   const coreValues = CORE_CODES.flatMap((code) => {
     const item = dimensions.find((dimension) => dimension.code === code);
@@ -111,13 +111,13 @@ export default function LumenSignalAtlas({ cognitive, growth }: Props) {
       <div className="cla-signal-atlas-heading">
         <div>
           <span className="lumen-eyebrow">LUMEN · SIGNAL ATLAS</span>
-          <h2 id="cla-signal-atlas-title">Bản đồ tín hiệu người học</h2>
-          <p>Biểu diễn trực quan các phép đo đã có, tín hiệu còn thiếu và thay đổi giữa những lần ghi nhận hợp lệ.</p>
+          <h2 id="cla-signal-atlas-title">{mode === "history" ? "Biến động giữa các lần đo" : "Bản đồ tín hiệu người học"}</h2>
+          <p>{mode === "history" ? "So sánh giữa các lần ghi nhận hợp lệ." : "Biểu diễn các phép đo đã có và tín hiệu còn thiếu."}</p>
         </div>
         <span className="cla-visual-stamp">OBSERVATION FIRST</span>
       </div>
 
-      <div className="cla-signal-grid">
+      {mode !== "history" && <div className="cla-signal-grid">
         <article className="cla-visual-card cla-radar-card">
           <div className="cla-visual-card-head">
             <div><span>01 / PROFILE GEOMETRY</span><h3>Dấu vân tay Cognitive</h3></div>
@@ -156,9 +156,9 @@ export default function LumenSignalAtlas({ cognitive, growth }: Props) {
             )) : <p className="cla-signal-muted">Chưa có tín hiệu GVI, BDI hoặc FRI đủ điều kiện hiển thị.</p>}
           </div>
         </article>
-      </div>
+      </div>}
 
-      <article className="cla-visual-card cla-change-field">
+      {mode !== "indices" && <article className="cla-visual-card cla-change-field">
         <div className="cla-visual-card-head">
           <div><span>03 / LONGITUDINAL DIFFERENCE</span><h3>Trường biến động giữa hai lần đo</h3></div>
           <span className={`cla-visual-tag ${hasGrowth ? "is-observed" : ""}`}>{hasGrowth ? `${growth!.observationDays} ngày quan sát` : "CHƯA CÓ CẶP ĐO"}</span>
@@ -182,9 +182,9 @@ export default function LumenSignalAtlas({ cognitive, growth }: Props) {
           <div className="cla-chart-empty cla-change-empty"><strong>Đang chờ lần đo tiếp theo</strong><p>Biểu đồ chỉ xuất hiện khi có ít nhất hai snapshot hợp lệ cùng phiên bản mapping. Không nội suy xu hướng từ một lần đo.</p></div>
         )}
         <p className="cla-chart-footnote">GVI, BDI và FRI là chỉ báo có chiều diễn giải riêng; thay đổi số dương không mặc định là tốt. So sánh này mô tả biến động quan sát, không chứng minh tác động của CLA.</p>
-      </article>
+      </article>}
 
-      <div className="cla-evidence-path" aria-label="Trạng thái đường đi dữ liệu">
+      {mode !== "history" && <div className="cla-evidence-path" aria-label="Trạng thái đường đi dữ liệu">
         <div className="cla-evidence-path-head"><span>04 / EVIDENCE LINEAGE</span><strong>Đường đi từ dữ liệu đến bằng chứng</strong></div>
         <div className="cla-evidence-nodes">
           <div className="is-ready"><i>01</i><strong>Profile</strong><small>Hồ sơ đã tải</small></div>
@@ -195,7 +195,7 @@ export default function LumenSignalAtlas({ cognitive, growth }: Props) {
           <b aria-hidden="true">→</b>
           <div className="is-limited"><i>04</i><strong>Validation</strong><small>Chưa kiểm định thực nghiệm</small></div>
         </div>
-      </div>
+      </div>}
     </section>
   );
 }

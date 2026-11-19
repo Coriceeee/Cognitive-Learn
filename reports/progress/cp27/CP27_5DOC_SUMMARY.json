@@ -1,0 +1,22 @@
+{
+  "base_tasks": 164,
+  "source_documents": [
+    "lộ trình (1).docx",
+    "COGNITIVE LEARN AI.docx",
+    "COGNITIVE_LEARN_FINAL_SUPPLEMENT_SPEC.docx",
+    "COGNITIVE_LEARN_RESEARCH_VALIDATION_MASTER_PROTOCOL.docx",
+    "CLA_EXECUTION_MASTER_V3_WEBSITE_RESEARCH_HF.docx"
+  ],
+  "direct_d5_matches": 76,
+  "semantic_doc_links": {
+    "D1": 69,
+    "D2": 56,
+    "D3": 63,
+    "D4": 93,
+    "D5": 76
+  },
+  "supplementary_acceptance_gates": 20,
+  "passed_tasks_new": 0,
+  "score_raised": false,
+  "source_archive_sha256": "5e1e286169cb21db63b1c483f6e27fd66ead835febabfd7305887032833024cb"
+}

@@ -7,6 +7,8 @@ import type {
   CareerStrength,
 } from "./careerTypes";
 
+export const LEGACY_CAREER_RUBRIC_VERSION = "legacy-career-normalized-v2";
+
 function clamp(value: number): number {
   return Math.max(0, Math.min(100, Math.round(value)));
 }
@@ -267,13 +269,16 @@ export function scoreCareer(
     career
   );
 
-  const compatibility = clamp(
+  // Legacy rubric weights previously exceeded 1.0 and clipped high scores.
+  // Preserve relative weights, normalize to a convex combination; not a validated occupational measure.
+  const weightSum = 0.35 + career.academicWeight + career.behaviorWeight + career.motivationWeight + 0.15;
+  const compatibility = clamp((
     cognitiveFit * 0.35 +
       academicFit * career.academicWeight +
       behaviorFit * career.behaviorWeight +
       motivationFit * career.motivationWeight +
       goalFit * 0.15
-  );
+  ) / weightSum);
 
   const readiness = clamp(
     cognitiveFit * 0.3 +
@@ -307,8 +312,8 @@ export function scoreCareer(
     compatibility >= 75;
 
   const explanation = recommended
-    ? `Hồ sơ hiện tại có mức tương thích ${compatibility}% với hướng ${career.name}.`
-    : `Hướng ${career.name} hiện có mức tương thích ${compatibility}%, cần tiếp tục phát triển các yếu tố còn thiếu.`;
+    ? `Hồ sơ hiện tại có điểm rubric thử nghiệm ${compatibility}/100 với hướng ${career.name}.`
+    : `Hướng ${career.name} hiện có điểm rubric thử nghiệm ${compatibility}/100, cần tiếp tục phát triển các yếu tố còn thiếu.`;
 
   return {
     career,

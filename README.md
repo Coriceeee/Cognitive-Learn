@@ -1,3 +1,5 @@
+> **Phạm vi hiện hành 18/11/2026 — Student-only / CP40:** sản phẩm chỉ dành cho học sinh; Admin vận hành kỹ thuật, không đọc hồ sơ học sinh khác. Các vai trò và luồng chia sẻ cũ được loại khỏi sản phẩm. Xem [quyết định phạm vi](docs/CLA_STUDENT_ONLY_SCOPE_V5_20261118.md) và `START_HERE_CP40_STUDENT_ONLY_20261118.md`. Các báo cáo ngày trước là lịch sử, không phải phạm vi hiện hành.
+
 > **Kiến trúc module cập nhật (08/11/2026):** [7 module lớn → phân hệ nhỏ, Du học trong Atlas, học bổng/tài chính trong Haven](docs/specifications/CLA_MODULE_HIERARCHY_V4_20261108.md).
 
 > **CP25 (08/11/2026):** Có thêm chatbot nổi, Atlas tra tuyển sinh 2024–2026 và lộ trình du học; xem [hướng dẫn CP25](docs/CP25_ADMISSIONS_CHAT_RELEASE_NOTES.md) và [checklist 145 mục](docs/CP25_CHECKLIST_GAPS_20261108.md). Chưa nghiệm thu API Gemini live, E2E/production hoặc nghiên cứu thực chứng.

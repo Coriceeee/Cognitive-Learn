@@ -1,0 +1,28 @@
+{
+  "version": "CP31-B5-source-recovery-v1",
+  "root": "C:\\Gạo\\Cognitive-Learn",
+  "archive": "CLA_FULL_SOURCE_CP31_BATCH5_GOVERNANCE_20261115.zip",
+  "expectedSource": "b87dc44193a52c815d0f92020800228d6de78b7cf5f649a0c64157ce5d35fd6f",
+  "actualSource": "e27daac14b67064137180a127e9ce81adc3565386d2fd348da36e5b97c09a43e",
+  "trackedFileCount": 272,
+  "changes": [
+    {
+      "path": "tests/__cla_login_typecheck_25808_bce9cff7e04d.ts",
+      "kind": "EXTRA",
+      "expected_sha256": "",
+      "local_sha256": "3316549d642c562fdab83f7ec0e7c004755e8188997908307cf75d85de5e357e"
+    },
+    {
+      "path": "tests/test_benchmark.py",
+      "kind": "EXTRA",
+      "expected_sha256": "",
+      "local_sha256": "429ca2c07bda34502c2f28f59f3bac3cba4f2cbddf0bc70d7bbe21e6702f7f4b"
+    }
+  ],
+  "counts": {
+    "MODIFIED": 0,
+    "CRLF_ONLY": 0,
+    "EXTRA": 2,
+    "MISSING": 0
+  }
+}

@@ -1,21 +1,42 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { onAuthStateChanged, type User } from "firebase/auth";
 import { doc, getDocFromServer } from "firebase/firestore";
 import { auth, db } from "../../lib/firebase";
 import { calculateCognitive } from "../../engines/cognitive/cognitiveEngine";
+import { officialUniversities } from "../../data/officialAdmissionSources";
+import { officialScholarships } from "../../data/officialScholarships";
+import { auditAdmissionCoverage, auditScholarshipSources, auditSeedMigration } from "../../lib/nexusOperationalAudits";
+import { auditReleaseEvidence, auditRulesGateEvidence, auditModelEvidence } from "../../lib/nexusEvidenceAudits";
+import { auditAtlasApprovals, auditOrionPolicy, auditOrionScenarios, auditPulseEvidence, auditPulseTrends, auditHavenFinance } from "../../lib/nexusGovernanceAudits";
+import { cp31ReleaseSourceSha256, cp31RulesCandidateSha256 } from "../../lib/nexusEvidenceBaseline";
 import { getNineGradedSubjects, isValidElectiveSelection } from "../seed/services/academicCurriculum";
 import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
+import AdminAccountPanel from "./AdminAccountPanel";
 import "../../styles.css";
 
-type View = "health" | "roles" | "seed" | "cognitive" | "ml" | "atlas" | "orion" | "pulse" | "haven";
+type View = "release" | "seed-rules" | "model-eval" | "health" | "roles" | "accounts" | "seed" | "seed-migration" | "cognitive" | "ml" | "atlas" | "atlas-fresh" | "orion" | "pulse" | "haven" | "haven-sources" | "atlas-approve" | "orion-policy" | "orion-scenarios" | "pulse-evidence" | "pulse-trends" | "haven-finance";
 type Check = { name: string; status: "PASS" | "WARN" | "FAIL" | "NOT TESTED"; detail: string };
 type Result = { at: string; checks: Check[] };
 type Data = Record<string, unknown>;
 
+const evidenceViews = new Set<View>(["release", "seed-rules", "model-eval", "atlas-approve", "orion-policy", "orion-scenarios", "pulse-evidence", "pulse-trends", "haven-finance"]);
 const views: Record<View, { title: string; subtitle: string }> = {
+  release: { title: "Kiểm toán bằng chứng phát hành", subtitle: "Đối chiếu fingerprint source và metadata CI/deploy/backup/rollback, không tự xác nhận production." },
+  "seed-rules": { title: "Đối chiếu bằng chứng Firestore Rules", subtitle: "Đọc báo cáo Security Gate từ Emulator; kiểm tra SHA candidate. Không thay đổi Rules hoặc quyền." },
+  "model-eval": { title: "Kiểm tra bằng chứng đánh giá mô hình", subtitle: "Kiểm tra báo cáo aggregate OULAD thật; không dùng fixture làm kết quả hay suy diễn giá trị dự báo ở Việt Nam." },
   health: { title: "Tổng quan hệ thống", subtitle: "Kiểm tra kết nối thật; không tạo KPI hoặc trạng thái giả." },
   roles: { title: "Kiểm tra quyền vai trò", subtitle: "Kiểm tra đúng tài khoản Admin; quyền các vai trò khác cần Firebase Emulator." },
+  accounts: { title: "Quản trị tài khoản đặc quyền", subtitle: "Mặc định tắt; cần backend độc lập, operator, MFA và audit." },
+  "atlas-fresh": { title: "Độ phủ nguồn Atlas 2024–2026", subtitle: "Kiểm tra registry đóng gói, không xác minh URL live, ngành/điểm chuẩn hoặc hiện lực mùa tuyển sinh." },
+  "haven-sources": { title: "Kiểm toán nguồn học bổng", subtitle: "Kiểm tra metadata nguồn; không xác nhận kỳ nộp, điều kiện hoặc deadline đang còn hiệu lực." },
+  "atlas-approve": { title: "Đối chiếu quyết định duyệt Atlas", subtitle: "Kiểm tra JSON nguồn, version và tách người duyệt; không cấp quyền xuất bản hoặc xác minh trang trường." },
+  "orion-policy": { title: "Kiểm định chính sách thích ứng", subtitle: "Kiểm tra giới hạn policy shadow, trigger/dose/stop rule và giám sát; không bật can thiệp." },
+  "orion-scenarios": { title: "Kiểm toán replay kịch bản Orion", subtitle: "Đối chiếu phiên bản, dự báo, horizon; không đánh đồng mô phỏng với outcome thực tế." },
+  "pulse-evidence": { title: "Đối chiếu Evidence Record", subtitle: "Kiểm tra lineage và giới hạn kết quả; JSON không chứng minh bất biến hoặc nghiên cứu được duyệt." },
+  "pulse-trends": { title: "Kiểm tra chuỗi T0/T1/T2", subtitle: "Đối chiếu cùng thang đo và thời gian; không suy luận tác động của sản phẩm." },
+  "haven-finance": { title: "Kiểm toán giả định tài chính", subtitle: "Kiểm tra tiền, tỷ giá, kỳ hạn và nguồn khai báo; chưa xác minh chi phí hiện hành." },
+  "seed-migration": { title: "Kiểm tra khả năng di chuyển Seed", subtitle: "Chỉ đọc schema/UID/bảng điểm Admin Demo từ server; không thực hiện migration hoặc sao lưu." },
   atlas: { title: "Kiểm tra dữ liệu Atlas", subtitle: "Chỉ kiểm tra trạng thái workspace Admin; nguồn tuyển sinh chưa tự động được chứng thực." },
   orion: { title: "Kiểm tra dữ liệu Orion", subtitle: "Dữ liệu mô phỏng, policy và nhãn outcome cần được kiểm định riêng." },
   pulse: { title: "Kiểm tra dữ liệu Pulse", subtitle: "Không suy diễn tiến bộ nếu thiếu dữ liệu đo theo thời gian." },
@@ -81,7 +102,22 @@ async function readOwn(user: User, collection: string): Promise<Data | null> {
   return snapshot.exists() ? snapshot.data() : null;
 }
 
-async function runChecks(user: User, view: View): Promise<Check[]> {
+async function runChecks(user: User, view: View, importedEvidence: unknown): Promise<Check[]> {
+  if (view === "release") return auditReleaseEvidence(importedEvidence, cp31ReleaseSourceSha256);
+  if (view === "seed-rules") return auditRulesGateEvidence(importedEvidence, cp31RulesCandidateSha256);
+  if (view === "model-eval") return auditModelEvidence(importedEvidence);
+  if (view === "atlas-approve") return auditAtlasApprovals(importedEvidence);
+  if (view === "orion-policy") return auditOrionPolicy(importedEvidence);
+  if (view === "orion-scenarios") return auditOrionScenarios(importedEvidence);
+  if (view === "pulse-evidence") return auditPulseEvidence(importedEvidence);
+  if (view === "pulse-trends") return auditPulseTrends(importedEvidence);
+  if (view === "haven-finance") return auditHavenFinance(importedEvidence);
+  if (view === "atlas-fresh") return auditAdmissionCoverage(officialUniversities);
+  if (view === "haven-sources") return auditScholarshipSources(officialScholarships, new Date().toISOString().slice(0, 10));
+  if (view === "seed-migration") {
+    const [profile, transcript] = await Promise.all([readOwn(user, "learning_profiles"), readOwn(user, "student_transcripts")]);
+    return auditSeedMigration(profile, transcript, user.uid);
+  }
   if (view === "health") {
     const checks: Check[] = [];
     try {
@@ -112,10 +148,10 @@ async function runChecks(user: User, view: View): Promise<Check[]> {
     return [
       check("Tài khoản Admin đang hoạt động", account?.role === "admin" && account.active === true,
         "Đọc trực tiếp tài liệu users/{ownUid}; không tin role truyền từ trình duyệt."),
-      { name: "Ma trận quyền Student / Teacher / Parent", status: "NOT TESTED",
+      { name: "Ma trận quyền học sinh, Admin và tài khoản cũ", status: "NOT TESTED",
         detail: "Cần Firebase Emulator allow/deny cho từng vai trò và kiểm tra truy cập chéo UID." },
       { name: "Quản trị người dùng", status: "NOT TESTED",
-        detail: "Chưa có backend đặc quyền có audit log. Client không được liệt kê hoặc thay đổi tài khoản người khác." },
+        detail: "Backend tài khoản đã có mã nguồn thử nghiệm, mặc định tắt và chưa có bằng chứng deploy/MFA/audit production. Client không được cấp quyền." },
     ];
   }
   if (view === "atlas" || view === "orion" || view === "pulse" || view === "haven") {
@@ -187,21 +223,41 @@ export default function AdminDiagnosticsPage() {
   const view = currentView();
   const [user, setUser] = useState<User | null>(auth.currentUser);
   const [busy, setBusy] = useState(false);
+  const [evidenceFile, setEvidenceFile] = useState<File | null>(null);
   const [result, setResult] = useState<Result | null>(null);
   const [error, setError] = useState("");
-  useEffect(() => onAuthStateChanged(auth, setUser), []);
+  const requestSeq = useRef(0);
+  useEffect(() => onAuthStateChanged(auth, (nextUser: User | null) => {
+    requestSeq.current += 1;
+    setUser(nextUser);
+    setResult(null);
+    setEvidenceFile(null);
+    setError("");
+    setBusy(false);
+  }), []);
   async function inspect() {
     if (!user) { setError("Chưa có phiên đăng nhập hợp lệ."); return; }
+    const currentRequest = ++requestSeq.current;
+    const stillCurrent = () => requestSeq.current === currentRequest && auth.currentUser?.uid === user.uid;
     setBusy(true); setError(""); setResult(null);
     try {
       const account = await readOwn(user, "users");
+      if (!stillCurrent()) return;
       if (account?.role !== "admin" || account.active !== true) {
         setError("Chỉ tài khoản Admin đang hoạt động mới được kiểm tra."); return;
       }
-      const checks = await runChecks(user, view);
-      setResult({ at: new Date().toLocaleString("vi-VN"), checks });
-    } catch (e) { setError(`Không thể kiểm tra: ${String(e)}`); }
-    finally { setBusy(false); }
+      let importedEvidence: unknown = null;
+      if (evidenceViews.has(view) && evidenceFile) {
+        if (evidenceFile.size === 0 || evidenceFile.size > 256 * 1024 || !evidenceFile.name.toLowerCase().endsWith(".json")) {
+          throw new Error("Chỉ nhận JSON từ 1 đến 262144 byte; không chọn file chứa dữ liệu học sinh.");
+        }
+        importedEvidence = JSON.parse(await evidenceFile.text()) as unknown;
+        if (!stillCurrent()) return;
+      }
+      const checks = await runChecks(user, view, importedEvidence);
+      if (stillCurrent()) setResult({ at: new Date().toLocaleString("vi-VN"), checks });
+    } catch (e) { if (stillCurrent()) setError(`Không thể kiểm tra: ${String(e)}`); }
+    finally { if (stillCurrent()) setBusy(false); }
   }
   return (
     <main className="profile-page cla-transcript-page">
@@ -217,15 +273,23 @@ export default function AdminDiagnosticsPage() {
           {(Object.keys(views) as View[]).map(v => <a key={v} href={`/admin/diagnostics?view=${v}`} aria-current={v === view ? "page" : undefined}>
             {views[v].title}</a>)}
         </nav>
+        {view === "accounts" ? <AdminAccountPanel /> : <>
         <p>Chỉ đọc dữ liệu được phép của tài khoản đang đăng nhập. Không cấp quyền khác qua tham số URL, không ghi tài liệu và không sử dụng kết quả demo làm kết quả nghiên cứu.</p>
+        {evidenceViews.has(view) && <div style={{ margin: "16px 0" }}>
+          <label htmlFor="nexus-evidence-file"><strong>Tệp JSON bằng chứng kiểm thử (chỉ đọc cục bộ, không tải lên máy chủ)</strong></label>
+          <input key={`${user?.uid ?? "anonymous"}-${view}`} id="nexus-evidence-file" type="file" accept=".json,application/json"
+            onChange={event => { requestSeq.current += 1; setBusy(false); setEvidenceFile(event.currentTarget.files?.[0] ?? null); setResult(null); setError(""); }} />
+          <p>Không nhập tài liệu chứa dữ liệu cá nhân, token hay mật khẩu. Tệp chỉ được kiểm tra trong phiên trình duyệt; metadata tự khai không thay thế kiểm định độc lập.</p>
+        </div>}
         <button type="button" disabled={busy || !user} onClick={() => void inspect()}>
           {busy ? "Đang kiểm tra…" : "Chạy kiểm tra thực tế"}
         </button>
+        </>}
         {error && <p role="alert">{error}</p>}
         {result && <section aria-live="polite" style={{ marginTop:24 }}>
           <p><strong>Kiểm tra lúc {result.at}</strong> · Project: {db.app.options.projectId ?? "Không xác định"}</p>
           <div style={{ display:"grid",gap:12,marginTop:14 }}>
-            {result.checks.map((item, index) => <article key={`${item.name}-${index}`} className="student-panel" style={{ padding:16 }}>
+            {result.checks.map((item: Check, index: number) => <article key={`${item.name}-${index}`} className="student-panel" style={{ padding:16 }}>
               <strong>{item.status} · {item.name}</strong><p>{item.detail}</p>
             </article>)}
           </div>

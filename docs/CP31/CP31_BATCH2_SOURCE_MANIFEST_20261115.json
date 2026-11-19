@@ -1,0 +1,53 @@
+{
+  "version": "CP31-BATCH2",
+  "base": "CLA_FULL_SOURCE_CP31_BATCH1_NEXUS_AUDIT_20261115.zip",
+  "changed_files": {
+    "START_HERE_CP31_BATCH2_20261115.md": {
+      "kind": "added",
+      "sha256": "21450af6dad1fccbc93d599f64637f0b0cee19b876f6f6d5e2079be2815c33a1",
+      "bytes": 1065
+    },
+    "docs/CP31/CP31_BATCH2_BROWSER_E2E_REPORT_20261115.md": {
+      "kind": "added",
+      "sha256": "404390cf9ec6baf4c1443238273bc260cd4f14d5e8ec5acfaec2770c44ed3183",
+      "bytes": 5721
+    },
+    "package.json": {
+      "kind": "modified",
+      "sha256": "55bc577c68214dd99551ac4d80150226ba9ef17696dd6764d2d28a84fe6aa656",
+      "bytes": 11159
+    },
+    "src/page/nexus/AdminAuditPage.tsx": {
+      "kind": "modified",
+      "sha256": "9296e80b4f06ed7bcaff6c0266740b6146abbb45cea6624a8460145141de4a8f",
+      "bytes": 3981
+    },
+    "src/page/nexus/AdminPage.tsx": {
+      "kind": "modified",
+      "sha256": "44eec15997cb6b22d7dd66ae6bd8e376a1c67ba5587980a08090d9c941b99b72",
+      "bytes": 8703
+    },
+    "tests/cp31-batch2-e2e-contract.test.cjs": {
+      "kind": "added",
+      "sha256": "71024ba91b1c360ce2f37dc1e2108ba570e7d2b5935f6cff4abd1b1aaf8e6a1e",
+      "bytes": 3384
+    },
+    "tests/e2e/cp31_nexus_manifest.json": {
+      "kind": "added",
+      "sha256": "eb1fe38945eb337ee4aa1d005812a6d840e286dd4dc376562e8cf67187f2220c",
+      "bytes": 4622
+    },
+    "tests_cp31/test_browser_gate_config.py": {
+      "kind": "added",
+      "sha256": "d281784c2d1da0b86f4a6cc11301b4b7fdf1b9632b655f4c68d19cdfa5c5dc3e",
+      "bytes": 2533
+    },
+    "tools/cp31_browser_e2e.py": {
+      "kind": "added",
+      "sha256": "506fabda151a536362a80d7232a4560aaeb625a39959ae0e3b96a3c31b81b304",
+      "bytes": 14861
+    }
+  },
+  "browser_e2e_status": "NOT_RUN",
+  "production_build_status": "BLOCKED_MISSING_DEPENDENCIES"
+}

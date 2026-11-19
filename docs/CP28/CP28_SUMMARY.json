@@ -1,0 +1,25 @@
+{
+  "baseline_task_count": 164,
+  "previous_candidate_linked": 64,
+  "previous_unlinked": 100,
+  "new_candidate_paths_verified_exist": 100,
+  "unlinked_without_candidate_source": 0,
+  "source_coverage_after_indexing": 164,
+  "newly_accepted_PASS_tasks": 0,
+  "reviewer_accepted_PASS_total": "NOT ASSESSED",
+  "new_local_regression_tests": 9,
+  "new_emulator_cases_to_verify": 1,
+  "source_path_coverage_is_NOT_completion": true,
+  "group_counts": {
+    "Website MVP": 51,
+    "Nghiên cứu": 34,
+    "Tuyển sinh/Chat": 14,
+    "UI/mascot": 1
+  },
+  "next_actions": [
+    "Emulator 75 tests on Windows",
+    "npm run verify:cp37",
+    "Browser E2E + 22 Nexus actions",
+    "Review each task against requirements"
+  ]
+}

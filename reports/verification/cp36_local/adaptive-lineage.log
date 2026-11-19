@@ -1,0 +1,176 @@
+TAP version 13
+# (node:15495) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: low adherence chooses bounded lighter existing option, no automatic assignment
+ok 1 - low adherence chooses bounded lighter existing option, no automatic assignment
+  ---
+  duration_ms: 19.122668
+  type: 'test'
+  ...
+# Subtest: sufficient completion and reported hours retain workload
+ok 2 - sufficient completion and reported hours retain workload
+  ---
+  duration_ms: 3.106765
+  type: 'test'
+  ...
+# Subtest: score change not used to alter workload, even negative
+ok 3 - score change not used to alter workload, even negative
+  ---
+  duration_ms: 2.854877
+  type: 'test'
+  ...
+# Subtest: low hours alone reduces load
+ok 4 - low hours alone reduces load
+  ---
+  duration_ms: 3.277633
+  type: 'test'
+  ...
+# Subtest: zero reported hours yields manual review not fabricated plan
+ok 5 - zero reported hours yields manual review not fabricated plan
+  ---
+  duration_ms: 1.771099
+  type: 'test'
+  ...
+# Subtest: over-budget options are not recommended even with full completion
+ok 6 - over-budget options are not recommended even with full completion
+  ---
+  duration_ms: 0.886354
+  type: 'test'
+  ...
+# Subtest: partial reassessment abstains
+ok 7 - partial reassessment abstains
+  ---
+  duration_ms: 1.358581
+  type: 'test'
+  ...
+# Subtest: one check-in is insufficient
+ok 8 - one check-in is insufficient
+  ---
+  duration_ms: 1.974694
+  type: 'test'
+  ...
+# Subtest: cache and other owners cannot obtain advice
+ok 9 - cache and other owners cannot obtain advice
+  ---
+  duration_ms: 1.468218
+  type: 'test'
+  ...
+# Subtest: modified evidence and T0 fail closed
+ok 10 - modified evidence and T0 fail closed
+  ---
+  duration_ms: 1.652525
+  type: 'test'
+  ...
+# Subtest: legacy cycles remain untraceable
+ok 11 - legacy cycles remain untraceable
+  ---
+  duration_ms: 1.120418
+  type: 'test'
+  ...
+# Subtest: active cycle never gives a new-cycle suggestion
+ok 12 - active cycle never gives a new-cycle suggestion
+  ---
+  duration_ms: 2.270045
+  type: 'test'
+  ...
+# Subtest: invalid, duplicate, and empty options rejected
+ok 13 - invalid, duplicate, and empty options rejected
+  ---
+  duration_ms: 7.366052
+  type: 'test'
+  ...
+# Subtest: replay is deterministic, input remains untouched and changed result is rejected
+ok 14 - replay is deterministic, input remains untouched and changed result is rejected
+  ---
+  duration_ms: 6.480398
+  type: 'test'
+  ...
+# Subtest: Orion integration selects draft only and preserves explicit start
+ok 15 - Orion integration selects draft only and preserves explicit start
+  ---
+  duration_ms: 1.38742
+  type: 'test'
+  ...
+# Subtest: selected advice can start a second frozen cycle without mutating prior review
+ok 16 - selected advice can start a second frozen cycle without mutating prior review
+  ---
+  duration_ms: 0.926344
+  type: 'test'
+  ...
+# Subtest: Firestore listener requests metadata changes so cached snapshots do not count as server-confirmed
+ok 17 - Firestore listener requests metadata changes so cached snapshots do not count as server-confirmed
+  ---
+  duration_ms: 1.409848
+  type: 'test'
+  ...
+# (node:15496) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: explicit acceptance freezes source, options and selection; legacy no trace remains valid
+ok 18 - explicit acceptance freezes source, options and selection; legacy no trace remains valid
+  ---
+  duration_ms: 24.043669
+  type: 'test'
+  ...
+# Subtest: explicit rejection records an alternative without false assignment
+ok 19 - explicit rejection records an alternative without false assignment
+  ---
+  duration_ms: 14.43274
+  type: 'test'
+  ...
+# Subtest: manual choice same as recommendation is not a rejection
+ok 20 - manual choice same as recommendation is not a rejection
+  ---
+  duration_ms: 3.145728
+  type: 'test'
+  ...
+# Subtest: owner, missing server, wrong prior and changed evidence fail closed
+ok 21 - owner, missing server, wrong prior and changed evidence fail closed
+  ---
+  duration_ms: 2.850706
+  type: 'test'
+  ...
+# Subtest: forged refs, options and recommendations rejected
+ok 22 - forged refs, options and recommendations rejected
+  ---
+  duration_ms: 17.495767
+  type: 'test'
+  ...
+# Subtest: replay survives Firestore map key reordering; altered policy options detected when recommendation changes
+ok 23 - replay survives Firestore map key reordering; altered policy options detected when recommendation changes
+  ---
+  duration_ms: 7.835601
+  type: 'test'
+  ...
+# Subtest: chronology enforced and non-server contexts cannot freeze
+ok 24 - chronology enforced and non-server contexts cannot freeze
+  ---
+  duration_ms: 4.587995
+  type: 'test'
+  ...
+# Subtest: transaction reads source before writing; candidate rules only allow frozen lineage on create (static only)
+ok 25 - transaction reads source before writing; candidate rules only allow frozen lineage on create (static only)
+  ---
+  duration_ms: 1.715991
+  type: 'test'
+  ...
+# Subtest: freshness uses exact co-commit server timestamp, not a client clock or cached order
+ok 26 - freshness uses exact co-commit server timestamp, not a client clock or cached order
+  ---
+  duration_ms: 2.722293
+  type: 'test'
+  ...
+# Subtest: equal timestamps and malformed next timestamps cannot freeze a trace
+ok 27 - equal timestamps and malformed next timestamps cannot freeze a trace
+  ---
+  duration_ms: 5.332386
+  type: 'test'
+  ...
+1..27
+# tests 27
+# suites 0
+# pass 27
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 408.975043

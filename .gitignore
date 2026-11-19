@@ -51,3 +51,20 @@ research/huggingface/**/.venv/
 # Real OULAD research data and derivatives — never commit or publish
 research/oulad/data/
 research/oulad/work/
+
+# Optional dedicated privacy-cleanup Functions deployment
+functions-privacy/.env
+functions-privacy/.env.*
+!functions-privacy/.env.example
+functions-privacy/node_modules/
+functions-privacy/.runtimeconfig.json
+
+# Dedicated privileged admin callable configuration (local secrets never bundled)
+functions-admin/.env
+functions-admin/.env.*
+!functions-admin/.env.example
+functions-admin/node_modules/
+functions-admin/.runtimeconfig.json
+
+# QA browser reports contain local run metadata and must not be shipped
+reports/e2e/

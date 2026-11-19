@@ -1,0 +1,187 @@
+{
+  "base": "CLA_FULL_SOURCE_CP41_POLICY_SANDBOX_20261118.zip",
+  "baseSha256": "991040b4b1df9e7e7ed91cb80d24680b392432d5e884dccadef07db6b46a7fb6",
+  "removed": [],
+  "files": [
+    {
+      "path": "START_HERE_CP42_NATIONAL_PATHWAYS_20261118.md",
+      "sha256": "ce8624f629366871f55ebd8567b3c7a5c340775d5c0f61e8e5b97a2f580b4174",
+      "previousSha256": null
+    },
+    {
+      "path": "package.json",
+      "sha256": "c6502854b172e5d261415e8ba60b19deda8d957bb309021eaaed38bfbb0ef891",
+      "previousSha256": "f9f3d89d692d69dad30eaec6e9f21ec54f0fb0166ce7556037e92472ea1fdc03"
+    },
+    {
+      "path": "reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html",
+      "sha256": "233593940769ce33fdae29aa5cc65b43a4ce01d29694136d3b1c2ef1f113c543",
+      "previousSha256": "29296f599883e0451bda14345133c96792933968cd106fdc09190072be4586cf"
+    },
+    {
+      "path": "reports/demo/cla_batch16_offline_readiness.json",
+      "sha256": "07e2803d7b5948b8c15bdf4e692e3c4f92065b4f5ef8b7a88a91b072e305c086",
+      "previousSha256": "0032928e2eb0d51c5d13b342655a2e7c5be2f8650b3bd840fe7b0b77aea01768"
+    },
+    {
+      "path": "reports/evidence/atlas_lookup_fidelity.json",
+      "sha256": "2b23e7b5d354e75df66c828af751ea97df1040ee90ab7b21cb604fe0de1882de",
+      "previousSha256": "46d0c81f72c85640d90c17922f555a720b0f970eaa49bf15c140e174c0428223"
+    },
+    {
+      "path": "reports/evidence/cla_golden_path_SYNTHETIC.json",
+      "sha256": "37d1c2f617c4e7b252d5bcdd32b4d26b4fb25235fb79efcaeb8126b744d28c88",
+      "previousSha256": "674f3b7cccf69b7c8002e185eca951b66fd635bf721676470f8b46e793e82ee1"
+    },
+    {
+      "path": "reports/evidence/cla_measurement_SYNTHETIC.json",
+      "sha256": "9451b2bfa4fbe96dcd7780fce3acfab7a726a8a1f443035c1d371b57568e58cb",
+      "previousSha256": "f7f56bb33a4e3f0e4820b339ea5cb5ffcb5811407c8f23d5d36672efa055e68b"
+    },
+    {
+      "path": "reports/evidence/cla_multicycle_SYNTHETIC.json",
+      "sha256": "707b914447c3f9f24f0aa926aa208d25ed5f5c6ac8eea45f654892a0ae30f8a5",
+      "previousSha256": "37b9626bf7454873de2ad88c72e70171477e87e249d76453e263eb9a47d402a8"
+    },
+    {
+      "path": "reports/verification/cp42_national_pathways/build-summary.log",
+      "sha256": "91336003ab5cb7b24a42849e201c2b9cd124af6216ba70fc277fd72e63efabb7",
+      "previousSha256": null
+    },
+    {
+      "path": "reports/verification/cp42_national_pathways/cla-national-demo.log",
+      "sha256": "55c59b5a51dbcf977004b260e59793ce3fe457b6e257380cdf1c6d706593a380",
+      "previousSha256": null
+    },
+    {
+      "path": "reports/verification/cp42_national_pathways/cla-national-draft.log",
+      "sha256": "1bbac72f6f3508f37b5e75adee1e31c785aa84c9dbf2e6e4fd9c26f8a5779e08",
+      "previousSha256": null
+    },
+    {
+      "path": "reports/verification/cp42_national_pathways/cla-national-new.log",
+      "sha256": "d04b7511d04bb0aa8a507bc7934d9c9efcf259ead5b62d71f0df59c1f7e9254f",
+      "previousSha256": null
+    },
+    {
+      "path": "reports/verification/cp42_national_pathways/cla-national-rules.log",
+      "sha256": "8a4e308c1732822713b9864ff10c51dcb2d0c1f5682b5cfbb5b5755bb0ee4f60",
+      "previousSha256": null
+    },
+    {
+      "path": "reports/verification/cp42_national_pathways/pure-typescript.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "previousSha256": null
+    },
+    {
+      "path": "reports/verification/cp42_national_pathways/regression.log",
+      "sha256": "bd88fbf20b07e0743981f8e6909199404447c411179fb117fb7178aee6ef79f4",
+      "previousSha256": null
+    },
+    {
+      "path": "research/protocol/CLA_ADAPTIVE_ROADMAP_V4_20261118.md",
+      "sha256": "90e8d538d067baea7e9c93a88b44b38bca22e64e7767068e9ae2ca6278cddf9a",
+      "previousSha256": "662b134d0395c455c12a62d25dcb88705a489df081d901791aecdfa168a1cac3"
+    },
+    {
+      "path": "src/data/publishedAdmissionCombinations2026.ts",
+      "sha256": "faff910326e14dadc34a77ed28dcc192c7012bf5944632908fbbfb671b42f0b3",
+      "previousSha256": null
+    },
+    {
+      "path": "src/lib/atlasAspirationDraft2026.ts",
+      "sha256": "7ad9c7e1a751dac0451c009834be8ac027dc98f423d202d6957d67702fc168d8",
+      "previousSha256": "79293000307028faac4133467620ffd08198e63124b600265446b2fbba787ad7"
+    },
+    {
+      "path": "src/lib/atlasPersonalMatching.ts",
+      "sha256": "899ceae3dc7d727a24f0435c486a0af5687dc50c011b195284dec60b0a87ccc7",
+      "previousSha256": "679e85847ad6c705b98634d8ac58941817e74a3ee41100942a8fdcf54bf10f24"
+    },
+    {
+      "path": "src/lib/nationalAdmissionPathways2026.ts",
+      "sha256": "1d0813aa877f2382447132b538d33db70711c394d5972bf35485ef492297a238",
+      "previousSha256": null
+    },
+    {
+      "path": "src/lib/nationalProgramDiscovery.ts",
+      "sha256": "49ae34050ae8b077e343276e70b34d376acf8e4d4099b176302c99cd132ece4c",
+      "previousSha256": "c553d9ad4ab04669f9d108d409233b95c85dd645079bc2f3a557cd7f78173002"
+    },
+    {
+      "path": "src/lib/nexusEvidenceBaseline.ts",
+      "sha256": "61fc65d22766a97510350e63b765a1d2a62c002b83c7bab9f5c4a86f07abd505",
+      "previousSha256": "882e99feab034f6174293d9db8edbe474fce6ecdc0f604ae52888fd585b7a371"
+    },
+    {
+      "path": "src/page/atlas/AtlasPage.tsx",
+      "sha256": "fa083830f75132f93b3108be43ba07bcb12083cd270770bbd76fe652e18204b6",
+      "previousSha256": "a0ceb09b7e470e8ff05285f2a55798284d23205c3b514dac6da11513dfd3c0af"
+    },
+    {
+      "path": "src/page/atlas/components/AtlasAdmissionEnginePanel.tsx",
+      "sha256": "620ca97bc52e669d429cc8035cef32198188cdcb1e9825ae8826ff2548db42f2",
+      "previousSha256": "8d6e18686d46560ca5574be28ff6d2e8b33f9d3558ec754715c1e1dbb7ce8f89"
+    },
+    {
+      "path": "src/page/atlas/components/AtlasAspirationDraftEditor.tsx",
+      "sha256": "c91be2d701efc11b871acbce408dae36f08bb1679a4c4a67fc1bbfab036299b4",
+      "previousSha256": "42a478379367c6da0e68179ffa3b1b7acb7b137159fd43ed7dc3480df63d7037"
+    },
+    {
+      "path": "src/page/atlas/components/AtlasCutoffField.tsx",
+      "sha256": "0197060b7b70e62c2a8fd215e81bdf9f2875cb5178f105753fd595455c7ec037",
+      "previousSha256": "a4072349448f1a66cb775bd24c2650bb7ccc9e3213e7bf10d49ff07d6d2deaf7"
+    },
+    {
+      "path": "src/page/atlas/components/AtlasNationalPathways.tsx",
+      "sha256": "d5b30db8768adffc001a0c46c20ae64e74bd17e6ab051fdf8cc826fe82b66617",
+      "previousSha256": null
+    },
+    {
+      "path": "src/page/atlas/components/AtlasProgramDiscoveryPanel.tsx",
+      "sha256": "7f414b49c8ed9052585b6a5bdbe2ea4a95f13437d61a7c41b3cd79ee26001178",
+      "previousSha256": "34da23fcdb8648421af1ab664c4a9bfcec8dc2cacc71ef22e7d9bfa1254ae387"
+    },
+    {
+      "path": "src/page/atlas/components/OfficialAdmissionsExplorer.tsx",
+      "sha256": "7f66b56be322e1d682418560631717ce25dc88188d5f5db0b563f8794ccea3c5",
+      "previousSha256": "f16302a2762daf7b37b92bab7a2e234d39386f982ed8018d37a5f0faebd6bd33"
+    },
+    {
+      "path": "src/styles/07-atlas.css",
+      "sha256": "6c42b391a5e462f1b1a7401da21c7abe4004599904bfdf2e2fee7c97e2583c2d",
+      "previousSha256": "f5671550cf73629e905eedc4a296efdde8bd75ca91d27a6f34b2bfbe56f7128d"
+    },
+    {
+      "path": "tests/cp32-ptit-2026-cutoffs.test.mjs",
+      "sha256": "47b0b960630a22c224897f81a89769d832ab44d92517cdb7620f905213dfabce",
+      "previousSha256": "f8b840f376575024524ef8a252db5217609ee8f9a0b3334f0f2261f712e522b5"
+    },
+    {
+      "path": "tests/cp42-national-pathways.test.mjs",
+      "sha256": "d534e9eafd5a396761fee3c92b1c44ab7ecc8c1ee94bddc2bf2dc93c8f626002",
+      "previousSha256": null
+    },
+    {
+      "path": "tests/scientific-visuals.test.cjs",
+      "sha256": "782ce0bae858890c4220caf3495a509fbb10347c950027b2cc96dabf77d8ff9c",
+      "previousSha256": "93f7369c445afea3854070ddd106eab6072f261ea5d550ec449e4b280a9ba1a5"
+    },
+    {
+      "path": "tests/step09-ptit-official-pathways.test.cjs",
+      "sha256": "7918a71a4ed10572e11883a7b53adcfaac71eb559a38c3843e3f1da61ee46bee",
+      "previousSha256": "16fb26635d64d5827b41f3c01763db66a0b375b06eedfec6cc4eb71298eb0bd6"
+    },
+    {
+      "path": "tests/step16-atlas-aspiration-editor.test.cjs",
+      "sha256": "b5db3620ee4649e583b0904377efd978754cfc80107fbccc8df52d5589b247fd",
+      "previousSha256": "26914727236b095f93897e1eb14573d1be879cd68a69969f65d594c244a1e398"
+    },
+    {
+      "path": "tools/cp31_release_fingerprint.cjs",
+      "sha256": "573c210a1198c3f039802c5a3e6b5ea4673ad18f32895ea8e999002de5b66bfa",
+      "previousSha256": "41b3527af6f4aee7c0e8996f6cf82668cd7b1529ef6dce3a518165af2eb7e5b5"
+    }
+  ]
+}

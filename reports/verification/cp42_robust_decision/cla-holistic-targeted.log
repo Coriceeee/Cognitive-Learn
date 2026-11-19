@@ -1,0 +1,178 @@
+TAP version 13
+# (node:14610) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: explicit acceptance freezes source, options and selection; legacy no trace remains valid
+ok 1 - explicit acceptance freezes source, options and selection; legacy no trace remains valid
+  ---
+  duration_ms: 13.303552
+  type: 'test'
+  ...
+# Subtest: explicit rejection records an alternative without false assignment
+ok 2 - explicit rejection records an alternative without false assignment
+  ---
+  duration_ms: 13.015842
+  type: 'test'
+  ...
+# Subtest: manual choice same as recommendation is not a rejection
+ok 3 - manual choice same as recommendation is not a rejection
+  ---
+  duration_ms: 1.172467
+  type: 'test'
+  ...
+# Subtest: owner, missing server, wrong prior and changed evidence fail closed
+ok 4 - owner, missing server, wrong prior and changed evidence fail closed
+  ---
+  duration_ms: 1.821235
+  type: 'test'
+  ...
+# Subtest: forged refs, options and recommendations rejected
+ok 5 - forged refs, options and recommendations rejected
+  ---
+  duration_ms: 1.739242
+  type: 'test'
+  ...
+# Subtest: replay survives Firestore map key reordering; altered policy options detected when recommendation changes
+ok 6 - replay survives Firestore map key reordering; altered policy options detected when recommendation changes
+  ---
+  duration_ms: 7.646064
+  type: 'test'
+  ...
+# Subtest: chronology enforced and non-server contexts cannot freeze
+ok 7 - chronology enforced and non-server contexts cannot freeze
+  ---
+  duration_ms: 0.956381
+  type: 'test'
+  ...
+# Subtest: transaction reads source before writing; candidate rules only allow frozen lineage on create (static only)
+ok 8 - transaction reads source before writing; candidate rules only allow frozen lineage on create (static only)
+  ---
+  duration_ms: 5.557697
+  type: 'test'
+  ...
+# Subtest: freshness uses exact co-commit server timestamp, not a client clock or cached order
+ok 9 - freshness uses exact co-commit server timestamp, not a client clock or cached order
+  ---
+  duration_ms: 1.110834
+  type: 'test'
+  ...
+# Subtest: equal timestamps and malformed next timestamps cannot freeze a trace
+ok 10 - equal timestamps and malformed next timestamps cannot freeze a trace
+  ---
+  duration_ms: 2.867001
+  type: 'test'
+  ...
+# (node:14616) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: budget conserved, maintenance guaranteed, zero gap gets no extra
+ok 11 - budget conserved, maintenance guaranteed, zero gap gets no extra
+  ---
+  duration_ms: 1.824821
+  type: 'test'
+  ...
+# Subtest: zero observed score is valid; zero budget is valid
+ok 12 - zero observed score is valid; zero budget is valid
+  ---
+  duration_ms: 0.271479
+  type: 'test'
+  ...
+# Subtest: invalid or duplicate or missing data does not allocate
+ok 13 - invalid or duplicate or missing data does not allocate
+  ---
+  duration_ms: 0.362877
+  type: 'test'
+  ...
+# Subtest: invalid time and impossible minimum rejected
+ok 14 - invalid time and impossible minimum rejected
+  ---
+  duration_ms: 0.214063
+  type: 'test'
+  ...
+# Subtest: all goals met retains unused budget and avoids needless work
+ok 15 - all goals met retains unused budget and avoids needless work
+  ---
+  duration_ms: 0.290939
+  type: 'test'
+  ...
+# Subtest: tie resolution deterministic and invariant to input order
+ok 16 - tie resolution deterministic and invariant to input order
+  ---
+  duration_ms: 0.911714
+  type: 'test'
+  ...
+# Subtest: greedy matches exhaustive optimum on small budgets
+ok 17 - greedy matches exhaustive optimum on small budgets
+  ---
+  duration_ms: 3.449549
+  type: 'test'
+  ...
+# Subtest: shared user constraints drive plot and workbench; only feasible scenarios can allocate
+ok 18 - shared user constraints drive plot and workbench; only feasible scenarios can allocate
+  ---
+  duration_ms: 1.095541
+  type: 'test'
+  ...
+# Subtest: scatter uses actual three-dimensional frontier, no misleading connected curve
+ok 19 - scatter uses actual three-dimensional frontier, no misleading connected curve
+  ---
+  duration_ms: 2.120626
+  type: 'test'
+  ...
+# (node:14617) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: zero radius matches nominal utility and ranking
+ok 20 - zero radius matches nominal utility and ranking
+  ---
+  duration_ms: 4.74725
+  type: 'test'
+  ...
+# Subtest: full radius spans all criteria; worst regret is max per-criterion regret
+ok 21 - full radius spans all criteria; worst regret is max per-criterion regret
+  ---
+  duration_ms: 0.507735
+  type: 'test'
+  ...
+# Subtest: exact vertex result bounds a dense simplex grid for multiple weight configurations
+ok 22 - exact vertex result bounds a dense simplex grid for multiple weight configurations
+  ---
+  duration_ms: 71.798416
+  type: 'test'
+  ...
+# Subtest: same hard limits govern eligible alternatives and fixed anchors
+ok 23 - same hard limits govern eligible alternatives and fixed anchors
+  ---
+  duration_ms: 0.390048
+  type: 'test'
+  ...
+# Subtest: tie candidates retained, dominated alternatives never suggested even for zero weight
+ok 24 - tie candidates retained, dominated alternatives never suggested even for zero weight
+  ---
+  duration_ms: 0.476098
+  type: 'test'
+  ...
+# Subtest: block missing, invalid, duplicate and out-of-scale data
+ok 25 - block missing, invalid, duplicate and out-of-scale data
+  ---
+  duration_ms: 0.328645
+  type: 'test'
+  ...
+# Subtest: real Orion scenario set works for every valid horizon; timetable never exceeds deadline, no duplicate milestone keys
+ok 26 - real Orion scenario set works for every valid horizon; timetable never exceeds deadline, no duplicate milestone keys
+  ---
+  duration_ms: 3.07846
+  type: 'test'
+  ...
+# Subtest: UI passes same filtered scenario list into existing closed loop, no implicit or stale selection
+ok 27 - UI passes same filtered scenario list into existing closed loop, no implicit or stale selection
+  ---
+  duration_ms: 1.046397
+  type: 'test'
+  ...
+1..27
+# tests 27
+# suites 0
+# pass 27
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 373.465017

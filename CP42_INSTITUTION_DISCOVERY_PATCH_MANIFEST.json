@@ -1,0 +1,95 @@
+{
+  "base": "CLA_FULL_SOURCE_CP42_SCHEME_RECONCILIATION_20261118.zip",
+  "base_sha256": "85fe638c6ecdc1ab3c2d11821ab730e1018a3ae2b96c97d8726507127054a6e6",
+  "changes": {
+    "START_HERE_CP42_INSTITUTION_DISCOVERY_20261118.md": {
+      "sha256": "e19984a08c4f38ff496b3168236679719cdb6d9173421f056825e72e988fcf97",
+      "previous_sha256": null
+    },
+    "package.json": {
+      "sha256": "767a271c44c611e9380478025106b9a4d13ebe60f3cf56ef09f4d4b3e42e71e1",
+      "previous_sha256": "fceb7b33cf48950ee4c70ed8f21f302686389508fa3ace37ec3838c41f1538d9"
+    },
+    "reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html": {
+      "sha256": "65c26a3e63d506fdb3e2515ae8060ec2b167c3b9a962332b7dfa3339b6b2bc4d",
+      "previous_sha256": "7e6d8e99b7b09c75304e2036ce21136dc322d9abb752ca2b72ce164b0a3db1a8"
+    },
+    "reports/demo/cla_batch16_offline_readiness.json": {
+      "sha256": "009eb1c2812e2c32373d8c34c880c826b46689103794d16f4763165bf0ac33bf",
+      "previous_sha256": "e4610ded9eaebf71d733211255cff2de72470c03ca6ad816d74e9dcc4fb4d2a3"
+    },
+    "reports/evidence/atlas_lookup_fidelity.json": {
+      "sha256": "00f46dd4d2badb4937f63106372f2a29e5913310c491d558d1d5139c6d8f3a48",
+      "previous_sha256": "3a3a49ca993df3a7c860816bdbcf341d3ee4bfa7f384d683a00b404b518bddb1"
+    },
+    "reports/evidence/cla_atlas_national_coverage.json": {
+      "sha256": "677be35fffed0b0001d1269f72b5ffbcf1f5662dd666eeccd5fc21cbced771fe",
+      "previous_sha256": "3022b56386f878caf05b882ec2e2f0fa04b49b995c1f9889b1dc0bd3f1120076"
+    },
+    "reports/evidence/cla_golden_path_SYNTHETIC.json": {
+      "sha256": "48d1c00392eeda849f92022caba50636c6fb92b37a0b23b1da2de572a1539696",
+      "previous_sha256": "d751be28762c6bf4b2a51f693185cd217233f03cb45223b03d204da4655d05aa"
+    },
+    "reports/evidence/cla_measurement_SYNTHETIC.json": {
+      "sha256": "d2cd1ea089618e0cf5f299e7d1716d6c7b5dcd446e94346b3bc1f13a86221b50",
+      "previous_sha256": "89fa1739ee5f4d8da90952f6673d31a989e04dfd9922b856f183c1e003d2374c"
+    },
+    "reports/evidence/cla_multicycle_SYNTHETIC.json": {
+      "sha256": "5c3ff0c366d885352d9a114761b6b5601a22514c80f23a73e5b616f1e4fe4b9e",
+      "previous_sha256": "2287f27143f69ea675aa6f566ed62be1cd89d7d4ea63cf65f4c0aea55f6f3e88"
+    },
+    "reports/verification/cp42_institution_discovery/build-excerpt.log": {
+      "sha256": "6febc1ea5a6c4003fd122cfd00ac45336bb8a2787be211dc0d36cbedd73e2861",
+      "previous_sha256": null
+    },
+    "reports/verification/cp42_institution_discovery/coverage.log": {
+      "sha256": "44f31cd09e772d71b2604815455b51435becdcf9715d822522b4ea6843870a28",
+      "previous_sha256": null
+    },
+    "reports/verification/cp42_institution_discovery/evidence-demo.log": {
+      "sha256": "c02f99b88875c9e45e5b71189e9cad6ec97575ff26feb08bb4c3bf9128b93063",
+      "previous_sha256": null
+    },
+    "reports/verification/cp42_institution_discovery/node-regression.log": {
+      "sha256": "915fab0056326ca7da9588675fb556e111bd34066187cae36a0de7c1bca29ba2",
+      "previous_sha256": null
+    },
+    "reports/verification/cp42_institution_discovery/status.txt": {
+      "sha256": "3bf9b2b4a4de7f1490de055fd3727676c7d748d9c730d846b662ad5b1c88f884",
+      "previous_sha256": null
+    },
+    "src/components/common/InstitutionDiscoveryDirectory.tsx": {
+      "sha256": "3588fb07b971ef0e38853dcfee6334027df9a37e9e2c8e173afb357b9c788c6c",
+      "previous_sha256": null
+    },
+    "src/components/common/NationalSourceDiscoveryPanel.tsx": {
+      "sha256": "7a66c459a224fcf8c69ae9370401456bf3927b8e03471a5b0309234d30d292c4",
+      "previous_sha256": "110274e78324162db73dac5008a42c7be2902343ba61e342b3e79107e393cff4"
+    },
+    "src/data/institutionDiscovery2026.ts": {
+      "sha256": "1f31b03bf308070a0b084819013555f1bef8973fb7d94c2b137a40d5a5236f52",
+      "previous_sha256": null
+    },
+    "src/lib/institutionDiscovery.ts": {
+      "sha256": "6eea3c7deaebb7fcfe0be4e3bcf0208bb4703bc94b2fce41c464e5f2a7a072ab",
+      "previous_sha256": null
+    },
+    "src/lib/nationalSourceDiscovery.ts": {
+      "sha256": "e931830086de1f428582dab6c9702c9b55af86452718b35bce709e7a2c78f485",
+      "previous_sha256": "e6c9d10e1eb8e411d97b8e3fe01348bfb3e27318cf42ee6808beabb52a02c665"
+    },
+    "src/lib/nexusEvidenceBaseline.ts": {
+      "sha256": "359247c529f3c5594077e9db20e180650224ec3b15c3cb61392caf98ee538217",
+      "previous_sha256": "84d61184054141220031a8926bd034c0a52b2196561f56c2be64d952dc51ddfe"
+    },
+    "tests/cp42-institution-discovery.test.mjs": {
+      "sha256": "eb14a29f76070e3eee86a429731557e24c88a073d2033d67558ff24f67a0667d",
+      "previous_sha256": null
+    },
+    "tools/atlas_national_coverage.mjs": {
+      "sha256": "43565d4d6448b1872c2d78d72cac11fd9797bcc472c6cb5f2e94cec49a8bd4a4",
+      "previous_sha256": "2278925f0fe172227d5d7068c8b5fd5cd39e6ebb20de0054e02a98cd25535ff9"
+    }
+  },
+  "removed": []
+}

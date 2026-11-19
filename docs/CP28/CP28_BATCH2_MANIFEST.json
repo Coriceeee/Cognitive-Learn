@@ -1,0 +1,71 @@
+{
+  "release": "CP28_BATCH2_CONSENT_WITHDRAWAL_SERVER_CLEANUP_20261115",
+  "based_on": "CLA_FULL_SOURCE_CP28_100_TASK_KICKOFF_PRIVACY_20261115",
+  "default_firebase_config_modified": false,
+  "production_deployment_performed": false,
+  "reviewer_tasks_approved": 0,
+  "changed_files": [
+    {
+      "path": ".gitignore",
+      "sha256": "99aadbbfc1908a3f9ca986a6b2d0cdd4641c4bd5e242f4916438a9349de23948",
+      "bytes": 1281
+    },
+    {
+      "path": "START_HERE_CP28_BATCH2_SERVER_REVOCATION_20261115.md",
+      "sha256": "cbacdc4ba80f3eb65d787e10f33281417e3022f6965c17bdc3d9677cefa3a400",
+      "bytes": 815
+    },
+    {
+      "path": "docs/CP28/CP28_BATCH2_SERVER_REVOCATION_REPORT.md",
+      "sha256": "78ef742626655151d71169ea1ecdf9be31a05305a865a102ff4cea03450a85f9",
+      "bytes": 5248
+    },
+    {
+      "path": "firebase.privacy.json",
+      "sha256": "05f0ee8fd206a94573c739740a1e87f502359f403ae070079809d6db0ae1967f",
+      "bytes": 128
+    },
+    {
+      "path": "functions-privacy/.env.example",
+      "sha256": "49cca0d76aaee09388b737b368e3b29361c08cf808f1a144135402cb98dea89a",
+      "bytes": 118
+    },
+    {
+      "path": "functions-privacy/index.mjs",
+      "sha256": "fc09951142b8eaa1c27e01e52f838c7368ac3206776144d861d519985f8f738f",
+      "bytes": 1839
+    },
+    {
+      "path": "functions-privacy/package.json",
+      "sha256": "3998d20396383774136b1515c1a884a8fd49bd206877e6e39143400e86c11571",
+      "bytes": 233
+    },
+    {
+      "path": "functions-privacy/src/consentCleanup.mjs",
+      "sha256": "117f17d902a593acc8daf269fa0708473cb2554197876585d5c373a5d2f3a974",
+      "bytes": 3599
+    },
+    {
+      "path": "functions-privacy/src/firestoreAdapter.mjs",
+      "sha256": "d1d81003c3dee743a98efba0cadfc84c91025d9c37c4a320df5d2fe3a15089df",
+      "bytes": 1598
+    },
+    {
+      "path": "package.json",
+      "sha256": "1728f89b1cf6cf6b8355b984ae1dfd1430bdc8574b86240d71c4b3d8b16b7bd0",
+      "bytes": 8048
+    },
+    {
+      "path": "tests/step21-consent-server-cleanup.test.mjs",
+      "sha256": "ae8c7c6575decf7bca236f5adeed8245b4b6c2332a12f0a7a2ef3c0e2a89e406",
+      "bytes": 9581
+    }
+  ],
+  "verification": {
+    "local_unit_contract_pass": 110,
+    "local_unit_contract_fail": 0,
+    "firebase_emulator_cp28": "NOT_RUN",
+    "production_build": "NOT_RUN_MISSING_DEPS",
+    "browser_e2e": "NOT_RUN"
+  }
+}

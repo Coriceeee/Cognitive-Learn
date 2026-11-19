@@ -15,7 +15,7 @@ export type ModuleKey =
   | "pulse"
   | "haven";
 
-export type UserRoleScope = "student" | "parent" | "teacher" | "admin";
+export type UserRoleScope = "student" | "admin";
 
 export type ModuleAction = {
   label: string;
@@ -73,17 +73,6 @@ export const moduleClusters: ModuleCluster[] = [
         description: "Mở giao diện học sinh để kiểm thử trải nghiệm.",
         path: "/student",
       },
-      {
-        label: "Xem như giáo viên",
-        description: "Mở giao diện giáo viên để kiểm thử góc nhìn lớp học.",
-        path: "/teacher",
-      },
-      {
-        label: "Xem như phụ huynh",
-        description:
-          "Mở giao diện phụ huynh để kiểm thử phần theo dõi học sinh.",
-        path: "/parent",
-      },
     ],
   },
   {
@@ -100,7 +89,7 @@ export const moduleClusters: ModuleCluster[] = [
     icon: seedIcon,
     href: "/student",
     status: "core",
-    visibleFor: ["student", "teacher", "admin"],
+    visibleFor: ["student", "admin"],
     actions: [
       {
         label: "Mở dashboard học sinh",
@@ -135,7 +124,7 @@ export const moduleClusters: ModuleCluster[] = [
     icon: lumenIcon,
     href: "/lumen",
     status: "core",
-    visibleFor: ["student", "teacher", "admin"],
+    visibleFor: ["student", "admin"],
     actions: [
       {
         label: "Xem phân tích nhận thức",
@@ -168,7 +157,7 @@ export const moduleClusters: ModuleCluster[] = [
     icon: atlasIcon,
     href: "/atlas",
     status: "ready",
-    visibleFor: ["student", "parent", "teacher", "admin"],
+    visibleFor: ["student", "admin"],
     actions: [
       {
         label: "Mở Atlas Admission",
@@ -209,7 +198,7 @@ export const moduleClusters: ModuleCluster[] = [
     icon: orionIcon,
     href: "/orion",
     status: "ready",
-    visibleFor: ["student", "teacher", "admin"],
+    visibleFor: ["student", "admin"],
     actions: [
       {
         label: "Mở Orion Strategy",
@@ -240,11 +229,11 @@ export const moduleClusters: ModuleCluster[] = [
     meaning:
       "Theo dõi tiến độ học tập, nhận thức, tuyển sinh, chiến lược và các việc nên làm tiếp theo.",
     description:
-      "Tổng hợp dữ liệu từ Seed, Lumen, Atlas và Orion để tạo báo cáo tiến độ cho học sinh, phụ huynh, giáo viên.",
+      "Tổng hợp dữ liệu từ Seed, Lumen, Atlas và Orion để tạo báo cáo tiến độ cho học sinh.",
     icon: pulseIcon,
     href: "/pulse",
     status: "ready",
-    visibleFor: ["student", "parent", "teacher", "admin"],
+    visibleFor: ["student", "admin"],
     actions: [
       {
         label: "Mở Pulse Monitor",
@@ -278,7 +267,7 @@ export const moduleClusters: ModuleCluster[] = [
     icon: havenIcon,
     href: "/haven",
     status: "ready",
-    visibleFor: ["student", "parent", "teacher", "admin"],
+    visibleFor: ["student", "admin"],
     actions: [
       {
         label: "Mở Haven Support",
@@ -304,14 +293,6 @@ export const moduleClusters: ModuleCluster[] = [
 
 export const studentModuleClusters = moduleClusters.filter((module) =>
   module.visibleFor.includes("student")
-);
-
-export const parentModuleClusters = moduleClusters.filter((module) =>
-  module.visibleFor.includes("parent")
-);
-
-export const teacherModuleClusters = moduleClusters.filter((module) =>
-  module.visibleFor.includes("teacher")
 );
 
 export const adminModuleClusters = moduleClusters;

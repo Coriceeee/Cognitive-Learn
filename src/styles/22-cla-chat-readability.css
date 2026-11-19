@@ -4,12 +4,12 @@
  * mascot launcher and chat behavior. Overrides older CP25–CP28 tiny type styles.
  */
 .cla-chat-root {
-  --cla-chat-text: #102a43;
-  --cla-chat-secondary: #294968;
-  --cla-chat-label: #24527b;
-  --cla-chat-blue: #174ea6;
-  --cla-chat-blue-deep: #103e89;
-  --cla-chat-border: #b7cfe9;
+  --cla-chat-text: rgb(var(--tc-tx-102a43));
+  --cla-chat-secondary: rgb(var(--tc-tx-294968));
+  --cla-chat-label: rgb(var(--tc-tx-24527b));
+  --cla-chat-blue: rgb(var(--tc-tx-174ea6));
+  --cla-chat-blue-deep: rgb(var(--tc-tx-103e89));
+  --cla-chat-border: rgb(var(--tc-bd-b7cfe9));
   font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   font-size: 16px;
   line-height: 1.55;
@@ -17,15 +17,15 @@
 }
 
 .cla-chat-root .cla-chat-panel {
-  background: #fff !important;
+  background: rgb(var(--tc-bg-ffffff)) !important;
   color: var(--cla-chat-text) !important;
-  border: 1px solid #adcae9 !important;
-  box-shadow: 0 18px 48px rgba(16, 58, 112, .20) !important;
+  border: 1px solid rgb(var(--tc-bd-adcae9)) !important;
+  box-shadow: 0 18px 48px rgb(var(--tc-sh-103a70) / calc(0.2 * var(--k-sh))) !important;
   font-size: 16px;
   line-height: 1.58;
 }
 .cla-chat-root .cla-chat-header {
-  background: linear-gradient(120deg, #eaf4ff 0%, #deefff 65%, #eef9ff 100%) !important;
+  background: linear-gradient(120deg, rgb(var(--tc-bg-eaf4ff)) 0%, rgb(var(--tc-bg-deefff)) 65%, rgb(var(--tc-bg-eef9ff)) 100%) !important;
   border-bottom: 1px solid var(--cla-chat-border) !important;
   padding: 14px 16px !important;
 }
@@ -43,9 +43,9 @@
   line-height: 1.5;
 }
 .cla-chat-root .cla-chat-header-copy > small {
-  color: #164a80 !important;
-  background: #fff !important;
-  border: 1px solid #aac8e9 !important;
+  color: rgb(var(--tc-tx-164a80)) !important;
+  background: rgb(var(--tc-bg-ffffff)) !important;
+  border: 1px solid rgb(var(--tc-bd-aac8e9)) !important;
   font-size: 12px !important;
   font-weight: 700;
   letter-spacing: 0;
@@ -54,8 +54,8 @@
 }
 .cla-chat-root .cla-chat-header > button {
   color: var(--cla-chat-blue-deep) !important;
-  background: #fff !important;
-  border: 1px solid #aac8e9 !important;
+  background: rgb(var(--tc-bg-ffffff)) !important;
+  border: 1px solid rgb(var(--tc-bd-aac8e9)) !important;
   width: 44px;
   height: 44px;
   min-width: 44px;
@@ -64,19 +64,19 @@
   font-weight: 600;
 }
 .cla-chat-root .cla-chat-header > button:hover {
-  background: #d7eaff !important;
+  background: rgb(var(--tc-bg-d7eaff)) !important;
   border-color: #769fda !important;
 }
 
 .cla-chat-root .cla-chat-messages {
-  background: #fff !important;
+  background: rgb(var(--tc-bg-ffffff)) !important;
   color: var(--cla-chat-text) !important;
   padding: 14px 16px;
 }
 .cla-chat-root .cla-chat-intro {
   color: var(--cla-chat-text) !important;
-  background: #f2f8ff !important;
-  border: 1px solid #c8dcf2 !important;
+  background: rgb(var(--tc-bg-f2f8ff)) !important;
+  border: 1px solid rgb(var(--tc-bd-c8dcf2)) !important;
   font-size: 14px !important;
   font-weight: 500;
   line-height: 1.65;
@@ -84,8 +84,8 @@
 }
 .cla-chat-root .cla-chat-message {
   color: var(--cla-chat-text) !important;
-  background: #f1f7ff !important;
-  border: 1px solid #c7dcf4 !important;
+  background: rgb(var(--tc-bg-f1f7ff)) !important;
+  border: 1px solid rgb(var(--tc-bd-c7dcf4)) !important;
   padding: 13px 14px;
 }
 .cla-chat-root .cla-chat-message > span {
@@ -111,7 +111,7 @@
   color: #fff !important;
 }
 .cla-chat-root .cla-chat-context-link {
-  color: #154c9c !important;
+  color: rgb(var(--tc-tx-154c9c)) !important;
   font-size: 14px !important;
   font-weight: 800 !important;
   line-height: 1.5;
@@ -125,12 +125,12 @@
 }
 
 .cla-chat-root .cla-chat-suggestions-wrap {
-  background: #fff !important;
-  border-top: 1px solid #cedff2 !important;
+  background: rgb(var(--tc-bg-ffffff)) !important;
+  border-top: 1px solid rgb(var(--tc-bd-cedff2)) !important;
   padding: 12px 14px;
 }
 .cla-chat-root .cla-chat-suggestions-wrap > span {
-  color: #214e7b !important;
+  color: rgb(var(--tc-tx-214e7b)) !important;
   font-size: 12px !important;
   font-weight: 800 !important;
   letter-spacing: .035em !important;
@@ -142,8 +142,8 @@
 }
 .cla-chat-root .cla-chat-suggestions button {
   color: var(--cla-chat-blue-deep) !important;
-  background: #eaf4ff !important;
-  border: 1px solid #adc9e8 !important;
+  background: rgb(var(--tc-bg-eaf4ff)) !important;
+  border: 1px solid rgb(var(--tc-bd-adc9e8)) !important;
   border-radius: 12px !important;
   font-size: 14px !important;
   font-weight: 700 !important;
@@ -158,22 +158,22 @@
 }
 .cla-chat-root .cla-chat-notice,
 .cla-chat-root .cla-chat-auth-note {
-  color: #66410e !important;
-  background: #fff5df !important;
-  border-color: #dfbc81 !important;
+  color: rgb(var(--tc-tx-66410e)) !important;
+  background: rgb(var(--tc-bg-fff5df)) !important;
+  border-color: rgb(var(--tc-bd-dfbc81)) !important;
   font-size: 14px !important;
   font-weight: 600;
   line-height: 1.6 !important;
 }
 .cla-chat-root .cla-chat-form {
-  background: #fff !important;
-  border-top: 1px solid #cedff2 !important;
+  background: rgb(var(--tc-bg-ffffff)) !important;
+  border-top: 1px solid rgb(var(--tc-bd-cedff2)) !important;
   padding: 12px 14px 10px;
 }
 .cla-chat-root .cla-chat-form textarea {
   color: var(--cla-chat-text) !important;
-  background: #fff !important;
-  border: 1.5px solid #95b8e2 !important;
+  background: rgb(var(--tc-bg-ffffff)) !important;
+  border: 1.5px solid rgb(var(--tc-bd-95b8e2)) !important;
   border-radius: 12px;
   font-size: 15px !important;
   font-weight: 500 !important;
@@ -182,14 +182,14 @@
   padding: 11px 12px;
 }
 .cla-chat-root .cla-chat-form textarea::placeholder {
-  color: #405e7d !important;
+  color: rgb(var(--tc-tx-405e7d)) !important;
   opacity: 1;
   font-size: 14px;
   font-weight: 500;
 }
 .cla-chat-root .cla-chat-form textarea:disabled {
-  color: #425e7b !important;
-  background: #f2f6fc !important;
+  color: rgb(var(--tc-tx-425e7b)) !important;
+  background: rgb(var(--tc-bg-f2f6fc)) !important;
 }
 .cla-chat-root .cla-chat-form button {
   color: #fff !important;
@@ -205,22 +205,22 @@
   background: var(--cla-chat-blue-deep) !important;
 }
 .cla-chat-root .cla-chat-form button:disabled {
-  color: #375371 !important;
-  background: #dde8f5 !important;
-  border-color: #c2d3e8 !important;
+  color: rgb(var(--tc-tx-375371)) !important;
+  background: rgb(var(--tc-bg-dde8f5)) !important;
+  border-color: rgb(var(--tc-bd-c2d3e8)) !important;
   opacity: 1;
 }
 .cla-chat-root .cla-chat-footer {
-  background: #fff !important;
-  border-top: 1px solid #cedff2 !important;
+  background: rgb(var(--tc-bg-ffffff)) !important;
+  border-top: 1px solid rgb(var(--tc-bd-cedff2)) !important;
   padding: 10px 14px 14px;
   font-size: 13px !important;
   line-height: 1.5;
 }
 .cla-chat-root .cla-chat-footer a {
-  color: #124a96 !important;
-  background: #edf6ff !important;
-  border: 1px solid #b6d0ed !important;
+  color: rgb(var(--tc-tx-124a96)) !important;
+  background: rgb(var(--tc-bg-edf6ff)) !important;
+  border: 1px solid rgb(var(--tc-bd-b6d0ed)) !important;
   font-size: 13px !important;
   font-weight: 700 !important;
   min-height: 40px;
@@ -233,7 +233,7 @@
   background: #164b9f !important;
 }
 .cla-chat-root .cla-chat-footer button {
-  color: #164a80 !important;
+  color: rgb(var(--tc-tx-164a80)) !important;
   font-size: 13px !important;
   font-weight: 750 !important;
   min-height: 40px;

@@ -2,7 +2,7 @@
  * Account roles are verified using a fresh Firestore server read by the caller.
  * Never use a cached role, a selected UI tab, or the email address to grant Admin access.
  */
-export type AccountRole = "student" | "teacher" | "parent" | "admin";
+export type AccountRole = "student" | "admin";
 export type AccountCheck =
   | { status: "ready"; role: AccountRole }
   | { status: "no-profile" | "inactive" | "invalid-role" };
@@ -21,7 +21,7 @@ export function checkAccountDocument(exists: boolean, data: unknown): AccountChe
   // Only an explicitly active account is admitted. A missing `active` is not approval.
   if (profile.active !== true) return { status: "inactive" };
   const role = profile.role;
-  if (role !== "student" && role !== "teacher" && role !== "parent" && role !== "admin") {
+  if (role !== "student" && role !== "admin") {
     return { status: "invalid-role" };
   }
   return { status: "ready", role };

@@ -1,0 +1,66 @@
+{
+  "release": "CP30_BATCH4",
+  "parentArchive": "CLA_FULL_SOURCE_CP30_BATCH3_GPA_INTEGRITY_20261115.zip",
+  "parentArchiveSha256": "ed461fe4b1229fb58e9191a98fbb5e52751ce8ac38a81aa1ccd68a074fac3ca0",
+  "candidateRulesSha256": "8f6c3a6d1b37abc0f5d4669c276c035c9f3eef64a48bb74ce0cce0c08dc1e3d3",
+  "modifiedOrNewFiles": [
+    {
+      "path": "src/page/seed/services/legacyTranscriptPolicy.ts",
+      "sha256": "6f9f231c00292bf217d6b95193bf8b03662f8f12b29c75762ff480f72826b9d5",
+      "sizeBytes": 3049
+    },
+    {
+      "path": "src/page/seed/hooks/useStudentTranscript.ts",
+      "sha256": "5b30acb5a969429a43dfbe781df0084893b6d00daa0d91bcd3f520a25fcf795b",
+      "sizeBytes": 5429
+    },
+    {
+      "path": "src/page/seed/StudentTranscriptPage.tsx",
+      "sha256": "581fc48fb75374b8cc99615fcb5e7111f37eac198d278b8bdcfd028283c5502d",
+      "sizeBytes": 6935
+    },
+    {
+      "path": "tests/cp30-batch4-legacy-policy.test.cjs",
+      "sha256": "841a25c4b3a4ca3857d387121e41cfd2e529d375f1f82939ea620d29aa69737e",
+      "sizeBytes": 4956
+    },
+    {
+      "path": "tests/cp30-realtime-read.test.cjs",
+      "sha256": "fe111edfe7cbe44f1bbaac5fcf6a9957b0974bdc383d25229e40aa7731660959",
+      "sizeBytes": 7350
+    },
+    {
+      "path": "tests/step07-seed-atlas-bridge.test.cjs",
+      "sha256": "7b7dadabef7530bc11ff8d222c81b9d05bd76ebe98c7a64d47ade826fd5a4355",
+      "sizeBytes": 9915
+    },
+    {
+      "path": "tests/firestore.rules.cp21.test.mjs",
+      "sha256": "1ce10171801053e13c140304db6c2b9d448ab8feb2b947c4fe864ede0250373d",
+      "sizeBytes": 53439
+    },
+    {
+      "path": "package.json",
+      "sha256": "7ce02238121fa5c0e7d365c1d277125ca998d1de0e850df807143105743f063f",
+      "sizeBytes": 10445
+    },
+    {
+      "path": "docs/CP30/CP30_BATCH4_LEGACY_OFFLINE_MULTISESSION_REPORT_20261115.md",
+      "sha256": "f31e387b259a29101290baf0fa1266049e0962556d56e263195757c2bdcb1597",
+      "sizeBytes": 4726
+    },
+    {
+      "path": "START_HERE_CP30_BATCH4_20261115.md",
+      "sha256": "c02cd2d6f8d7b20a94e503d185a71567a8795e1c0d2fe5ed201cb0c2afc009ac",
+      "sizeBytes": 644
+    }
+  ],
+  "checks": {
+    "local": "32/32 PASS",
+    "verify": "PASS",
+    "npm_test": "NOT PASS (incomplete node_modules)",
+    "emulator": "NOT RUN; 3 cases added, target 86",
+    "production_deployment": false
+  },
+  "scopeWarning": "Local paths/evidence are not reviewer completion"
+}

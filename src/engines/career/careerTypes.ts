@@ -69,6 +69,7 @@ export type CareerMatch = {
 };
 
 export type CareerIntelligenceResult = {
+  rubricVersion: string;
   primaryCareer: CareerMatch;
   matches: CareerMatch[];
   currentReadiness: number;

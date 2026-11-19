@@ -42,6 +42,24 @@ export type JourneyEvidenceRecord = {
   createdAt: string;
   humanOverride: null;
 };
+/** CP31 Batch 10. Frozen before the first action, NOT a calibrated prediction.
+ * No reassessment, outcome, intervention effect or later check-in may enter T0.
+ */
+export type JourneyT0Snapshot = {
+  schemaVersion: 1;
+  policyVersion: "cla-t0-descriptive-gap-v1";
+  frozenAt: string;
+  inputSource: "student_self_report";
+  scenarioId: JourneyScenarioId;
+  subjects: JourneySubject[];
+  plannedWeeklyHours: number;
+  weeksLeft: number;
+  planGapPoints: number;
+  forecastStatus: "NOT_ESTIMATED";
+  predictedOutcome: null;
+  calibratedProbability: null;
+};
+export type JourneyT0Audit = "FROZEN_CONSISTENT" | "LEGACY_NO_T0" | "MISMATCH";
 export type JourneyLock = { schemaVersion: 1; userId: string; activeCycleId: string | null };
 export function isJourneyLock(value: unknown, uid: string): value is JourneyLock {
   if (!value || typeof value !== "object") return false;
@@ -49,7 +67,33 @@ export function isJourneyLock(value: unknown, uid: string): value is JourneyLock
   return lock.schemaVersion === 1 && lock.userId === uid &&
     (lock.activeCycleId === null || (typeof lock.activeCycleId === "string" && /^[\w-]{8,100}$/.test(lock.activeCycleId)));
 }
+/** Optional immutable client-reported decision lineage; not treatment assignment. */
+export type JourneyDecisionTrace = {
+  schemaVersion: 1; policyVersion: "cla-adaptive-next-cycle-v1";
+  sourceCycleId: string; inputSnapshotId: string; reviewEvidenceId: string;
+  disposition: "ACCEPTED" | "DECLINED";
+  recommendedId: JourneyScenarioId; recommendedHours: number;
+  optionHours: Record<JourneyScenarioId, number | null>;
+};
+export function validJourneyDecisionTrace(value: unknown, cycle: Pick<JourneyCycle,"id"|"scenarioId"|"plannedWeeklyHours">): value is JourneyDecisionTrace {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const t = value as JourneyDecisionTrace;
+  const keys = ["schemaVersion","policyVersion","sourceCycleId","inputSnapshotId","reviewEvidenceId","disposition","recommendedId","recommendedHours","optionHours"];
+  const ids: JourneyScenarioId[] = ["balanced","focused","breakthrough"];
+  const hours = t.optionHours;
+  if (Object.keys(t).length !== keys.length || !keys.every(k=>Object.prototype.hasOwnProperty.call(t,k)) ||
+      t.schemaVersion !== 1 || t.policyVersion !== "cla-adaptive-next-cycle-v1" ||
+      typeof t.sourceCycleId !== "string" || !/^[\w-]{8,100}$/.test(t.sourceCycleId) || t.sourceCycleId === cycle.id ||
+      t.inputSnapshotId !== t.sourceCycleId || t.reviewEvidenceId !== `${t.sourceCycleId}-review` ||
+      !ids.includes(t.recommendedId) || !hours || typeof hours !== "object" || Array.isArray(hours) ||
+      Object.keys(hours).length !== 3 || !ids.every(id=>Object.prototype.hasOwnProperty.call(hours,id) && (hours[id] === null || (Number.isInteger(hours[id]) && hours[id]! >= 1 && hours[id]! <= 80))) ||
+      !Number.isInteger(t.recommendedHours) || t.recommendedHours < 1 || t.recommendedHours > 80 || hours[t.recommendedId] !== t.recommendedHours ||
+      hours[cycle.scenarioId] !== cycle.plannedWeeklyHours) return false;
+  return t.disposition === "ACCEPTED" ? cycle.scenarioId === t.recommendedId : t.disposition === "DECLINED" && cycle.scenarioId !== t.recommendedId;
+}
 export type JourneyCycle = {
+  /** Firestore owner UID. Present on persisted cycle documents; omitted from offline/synthetic domain cycles. */
+  userId?: string;
   id: string;
   schemaVersion: 1;
   origin: "orion_simulation";
@@ -63,8 +107,11 @@ export type JourneyCycle = {
   status: "ACTIVE" | "REVIEWED";
   checkIns: JourneyCheckIn[];
   reassessment: JourneyReassessment | null;
+  /** New cycles freeze an immutable T0. Legacy v1 documents may lack it. */
+  t0Snapshot?: JourneyT0Snapshot | null;
   /** Legacy v1 documents may not have this field. */
   evidenceRecord?: JourneyEvidenceRecord | null;
+  decisionTrace?: JourneyDecisionTrace;
 };
 export type JourneyAssessment = {
   stage: "NOT_STARTED" | "CHECK_IN" | "READY_TO_REASSESS" | "REVIEWED";
@@ -78,6 +125,38 @@ const isScore = (value: number) => Number.isFinite(value) && value >= 0 && value
 const isInteger = (value: number, min: number, max: number) => Number.isInteger(value) && value >= min && value <= max;
 const isValidIsoDate = (value: string) => /^\d{4}-\d{2}-\d{2}T/.test(value) && !Number.isNaN(Date.parse(value));
 const round2 = (n: number) => Math.round(n * 100) / 100;
+
+/** Input-only computation. Its gap is descriptive, not a predicted learning gain. */
+export function buildJourneyT0Snapshot(cycle: Pick<JourneyCycle,
+  "startedAt" | "scenarioId" | "subjects" | "plannedWeeklyHours" | "weeksLeft">): JourneyT0Snapshot {
+  const gap = round2(cycle.subjects.reduce((total, s) => total + Math.max(0, s.target - s.baseline), 0) /
+    cycle.subjects.length);
+  return {
+    schemaVersion: 1, policyVersion: "cla-t0-descriptive-gap-v1",
+    frozenAt: cycle.startedAt, inputSource: "student_self_report",
+    scenarioId: cycle.scenarioId, subjects: cycle.subjects.map(s => ({ ...s })),
+    plannedWeeklyHours: cycle.plannedWeeklyHours, weeksLeft: cycle.weeksLeft,
+    planGapPoints: gap, forecastStatus: "NOT_ESTIMATED", predictedOutcome: null,
+    calibratedProbability: null,
+  };
+}
+
+/** Structural/derived consistency only: cannot authenticate a writer or prove pre-registration.
+ * Firestore candidate rules must separately make t0Snapshot and base plan fields immutable.
+ */
+export function auditJourneyT0Snapshot(cycle: JourneyCycle): JourneyT0Audit {
+  if (cycle.t0Snapshot === undefined || cycle.t0Snapshot === null) return "LEGACY_NO_T0";
+  if (!validUtc(cycle.startedAt) || !Array.isArray(cycle.subjects) ||
+      cycle.subjects.length < 1 || cycle.subjects.length > 6 ||
+      !Number.isInteger(cycle.plannedWeeklyHours) || cycle.plannedWeeklyHours < 1 || cycle.plannedWeeklyHours > 80 ||
+      !Number.isInteger(cycle.weeksLeft) || cycle.weeksLeft < 1 || cycle.weeksLeft > 104 ||
+      !["balanced", "focused", "breakthrough"].includes(cycle.scenarioId) ||
+      new Set(cycle.subjects.map(s => s.key)).size !== cycle.subjects.length ||
+      !cycle.subjects.every(s => s && /^[a-z]{2,20}$/.test(s.key) &&
+        typeof s.label === "string" && s.label.length >= 1 && s.label.length <= 40 &&
+        isScore(s.baseline) && isScore(s.target))) return "MISMATCH";
+  return sameEvidenceData(cycle.t0Snapshot, buildJourneyT0Snapshot(cycle)) ? "FROZEN_CONSISTENT" : "MISMATCH";
+}
 const requireValid = (ok: boolean, message: string) => { if (!ok) throw new Error(message); };
 
 export function createJourneyCycle(input: {
@@ -95,16 +174,18 @@ export function createJourneyCycle(input: {
   requireValid(input.subjects.length >= 1 && input.subjects.length <= 6, "Cần ít nhất một môn có điểm và mục tiêu.");
   requireValid(input.subjects.every(s => /^[a-z]{2,20}$/.test(s.key) && s.label.length > 0 && s.label.length <= 40 && isScore(s.baseline) && isScore(s.target)), "Điểm phải thuộc thang 0–10.");
   requireValid(new Set(input.subjects.map(s => s.key)).size === input.subjects.length, "Trùng môn trong chu kỳ.");
-  return { id: input.id, schemaVersion: 1, origin: "orion_simulation", scenarioId: input.scenarioId,
+  const plan: JourneyCycle = { id: input.id, schemaVersion: 1, origin: "orion_simulation", scenarioId: input.scenarioId,
     scenarioTitle: input.scenarioTitle.trim(), targetMajor: input.targetMajor.trim(),
     subjects: input.subjects.map(s => ({ ...s })), plannedWeeklyHours: input.plannedWeeklyHours,
     weeksLeft: input.weeksLeft, startedAt: input.startedAt, status: "ACTIVE", checkIns: [], reassessment: null, evidenceRecord: null };
+  return { ...plan, t0Snapshot: buildJourneyT0Snapshot(plan) };
 }
 
 export function appendJourneyCheckIn(cycle: JourneyCycle, input: {
   id: string; week: number; actualHours: number; completedActions: number;
   plannedActions: number; note: string; recordedAt: string;
 }): JourneyCycle {
+  requireValid(auditJourneyT0Snapshot(cycle) !== "MISMATCH", "Mốc T0 đã bị thay đổi; từ chối ghi check-in.");
   requireValid(cycle.status === "ACTIVE", "Chu kỳ đã tổng kết, không thể ghi thêm check-in.");
   requireValid(cycle.checkIns.length < 12, "Chu kỳ đã có tối đa 12 lần check-in.");
   requireValid(/^[\w-]{8,100}$/.test(input.id) && isValidIsoDate(input.recordedAt), "Mã hoặc ngày check-in không hợp lệ.");
@@ -120,6 +201,7 @@ export function reassessJourneyCycle(cycle: JourneyCycle, input: {
   observations: Array<{ key: string; score: number }>;
   note: string; recordedAt: string;
 }): JourneyCycle {
+  requireValid(auditJourneyT0Snapshot(cycle) !== "MISMATCH", "Mốc T0 đã bị thay đổi; không thể đánh giá lại.");
   requireValid(cycle.status === "ACTIVE" && cycle.reassessment === null, "Chu kỳ đã được tổng kết.");
   requireValid(cycle.checkIns.length > 0, "Cần ít nhất một check-in trước khi đánh giá lại.");
   requireValid(isValidIsoDate(input.recordedAt), "Ngày đánh giá lại không hợp lệ.");
@@ -209,6 +291,92 @@ export function isJourneyEvidenceRecord(record: unknown, cycleId: string): recor
     && typeof e.createdAt === "string";
 }
 
+/**
+ * CP31 Batch 9 — deterministic, read-only consistency check of a stored review.
+ * This does NOT authenticate the writer, Firestore server or original observations:
+ * a forged cycle and forged evidence can still be mutually consistent.
+ * Legacy reviewed records without an evidenceRecord remain readable but unverified.
+ */
+export type JourneyEvidenceAuditStatus = "CONSISTENT" | "LEGACY_NO_EVIDENCE" | "NOT_REVIEWED" | "MISMATCH";
+
+function sameEvidenceData(a: unknown, b: unknown): boolean {
+  if (a === b) return !(typeof a === "number" && !Number.isFinite(a));
+  if (typeof a !== typeof b || a === null || b === null || typeof a !== "object") return false;
+  if (Array.isArray(a) !== Array.isArray(b)) return false;
+  if (Array.isArray(a) && Array.isArray(b)) {
+    return a.length === b.length && a.every((item, i) => sameEvidenceData(item, b[i]));
+  }
+  const left = a as Record<string, unknown>;
+  const right = b as Record<string, unknown>;
+  const leftKeys = Object.keys(left).sort();
+  const rightKeys = Object.keys(right).sort();
+  return leftKeys.length === rightKeys.length && leftKeys.every((key, i) =>
+    key === rightKeys[i] && sameEvidenceData(left[key], right[key]));
+}
+
+const validUtc = (value: unknown): value is string => {
+  if (typeof value !== "string" || !/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d{3}Z$/.test(value)) return false;
+  const t = Date.parse(value);
+  return Number.isFinite(t) && new Date(t).toISOString() === value;
+};
+
+function validReplayInputs(cycle: JourneyCycle): boolean {
+  if (!validUtc(cycle.startedAt) || cycle.status !== "REVIEWED" || !cycle.reassessment ||
+      !Number.isInteger(cycle.weeksLeft) || cycle.weeksLeft < 1 || cycle.weeksLeft > 104 ||
+      !Number.isInteger(cycle.plannedWeeklyHours) || cycle.plannedWeeklyHours < 1 || cycle.plannedWeeklyHours > 80 ||
+      !Array.isArray(cycle.subjects) || cycle.subjects.length < 1 || cycle.subjects.length > 6 ||
+      !Array.isArray(cycle.checkIns) || cycle.checkIns.length < 1 || cycle.checkIns.length > 12) return false;
+  const subjects = new Set<string>();
+  for (const subject of cycle.subjects) {
+    if (!subject || typeof subject.key !== "string" || !/^[a-z]{2,20}$/.test(subject.key) || subjects.has(subject.key) ||
+        typeof subject.label !== "string" || !subject.label || subject.label.length > 40 ||
+        typeof subject.baseline !== "number" || !isScore(subject.baseline) ||
+        typeof subject.target !== "number" || !isScore(subject.target)) return false;
+    subjects.add(subject.key);
+  }
+  const weeks = new Set<number>();
+  const ids = new Set<string>();
+  let lastTime = Date.parse(cycle.startedAt);
+  for (const check of cycle.checkIns) {
+    if (!check || typeof check.id !== "string" || !/^[\w-]{8,100}$/.test(check.id) || ids.has(check.id) ||
+        !Number.isInteger(check.week) || check.week < 1 || check.week > cycle.weeksLeft || weeks.has(check.week) ||
+        !validUtc(check.recordedAt) || Date.parse(check.recordedAt) < lastTime ||
+        typeof check.actualHours !== "number" || !Number.isFinite(check.actualHours) ||
+        check.actualHours < 0 || check.actualHours > 168 ||
+        !Number.isInteger(check.plannedActions) || check.plannedActions < 1 || check.plannedActions > 20 ||
+        !Number.isInteger(check.completedActions) || check.completedActions < 0 || check.completedActions > check.plannedActions ||
+        check.provenance !== "student_self_report" || typeof check.note !== "string" || check.note.length > 240) return false;
+    weeks.add(check.week); ids.add(check.id); lastTime = Date.parse(check.recordedAt);
+  }
+  const reassessment = cycle.reassessment;
+  if (!validUtc(reassessment.recordedAt) || Date.parse(reassessment.recordedAt) < lastTime ||
+      reassessment.provenance !== "student_self_report" ||
+      typeof reassessment.note !== "string" || reassessment.note.length > 240 ||
+      !Array.isArray(reassessment.observations) || reassessment.observations.length < 1 ||
+      reassessment.observations.length > subjects.size) return false;
+  const observed = new Set<string>();
+  for (const item of reassessment.observations) {
+    if (!item || typeof item.key !== "string" || !subjects.has(item.key) || observed.has(item.key) ||
+        typeof item.score !== "number" || !isScore(item.score)) return false;
+    observed.add(item.key);
+  }
+  return true;
+}
+
+export function auditJourneyEvidence(cycle: JourneyCycle): JourneyEvidenceAuditStatus {
+  if (cycle.status !== "REVIEWED") return "NOT_REVIEWED";
+  if (cycle.evidenceRecord === undefined || cycle.evidenceRecord === null) return "LEGACY_NO_EVIDENCE";
+  if (!validReplayInputs(cycle) || !isJourneyEvidenceRecord(cycle.evidenceRecord, cycle.id)) return "MISMATCH";
+  try {
+    // Compare exact domain output, refs, factors, dates, versions and limitations;
+    // object key order is irrelevant (Firestore can reorder map keys).
+    const expected = buildJourneyEvidence(cycle);
+    return sameEvidenceData(cycle.evidenceRecord, expected) ? "CONSISTENT" : "MISMATCH";
+  } catch {
+    return "MISMATCH";
+  }
+}
+
 /** Reject malformed or unsupported server data instead of silently resetting a learning record. */
 export function isJourneyCycle(value: unknown): value is JourneyCycle {
   if (!value || typeof value !== "object") return false;
@@ -220,6 +388,10 @@ export function isJourneyCycle(value: unknown): value is JourneyCycle {
     && Array.isArray(c.subjects) && c.subjects.length >= 1
     && c.subjects.every(s => s && typeof s.key === "string" && isScore(s.baseline) && isScore(s.target))
     && Array.isArray(c.checkIns) && c.checkIns.length <= 12
-    && (c.reassessment === null || (c.reassessment !== undefined && Array.isArray(c.reassessment.observations)))
-    && (c.evidenceRecord === undefined || c.evidenceRecord === null || isJourneyEvidenceRecord(c.evidenceRecord, c.id));
+    && (c.decisionTrace === undefined || validJourneyDecisionTrace(c.decisionTrace, c as JourneyCycle))
+    && auditJourneyT0Snapshot(c as JourneyCycle) !== "MISMATCH"
+    && (c.status === "ACTIVE"
+      ? c.reassessment === null && (c.evidenceRecord === undefined || c.evidenceRecord === null)
+      : c.reassessment !== null && c.reassessment !== undefined && validReplayInputs(c as JourneyCycle)
+        && (c.evidenceRecord === undefined || c.evidenceRecord === null || auditJourneyEvidence(c as JourneyCycle) === "CONSISTENT"));
 }

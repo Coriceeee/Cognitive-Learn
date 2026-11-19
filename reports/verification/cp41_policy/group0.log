@@ -1,0 +1,550 @@
+COMMAND node tests/academic.test.cjs
+PASS nine graded subjects exactly
+PASS elective duplicate blocked
+PASS elective invalid blocked
+PASS 0 valid
+PASS 10 valid
+PASS comma decimal valid
+PASS dot decimal valid
+PASS blank missing
+PASS invalid negative
+PASS invalid >10
+PASS invalid 1e0 syntax
+PASS provisional not complete
+PASS term complete with 0 score
+PASS year requires both completed terms
+ACADEMIC TESTS: 14/14 PASS
+COMMAND node tests/cognitive-observation.test.cjs
+PASS unknown academic and behavior metrics stay null, not fake 0
+PASS genuine observed zero is preserved
+PASS mixed observed and missing metrics retain distinction
+PASS snapshot provenance and source object remain unchanged
+COGNITIVE OBSERVATION TESTS: 4/4 PASS
+COMMAND node tests/admin-deeplink.test.cjs
+ADMIN ROUTE CONTRACT: 22 admin-only links across 7 modules; no student business links PASS
+COMMAND node tests/module-hierarchy.test.cjs
+MODULE HIERARCHY CONTRACT: seven main modules, catalog, ownership and nested anchors PASS
+STUDENT EXPERIENCE: six major modules, student-only children and correctly named return links PASS
+COMMAND node tests/cp35-p0-p1-contract.test.cjs
+TAP version 13
+# Subtest: CP35-01: student navigation opens focused pages and preserves the six student modules
+ok 1 - CP35-01: student navigation opens focused pages and preserves the six student modules
+  ---
+  duration_ms: 10.491804
+  type: 'test'
+  ...
+# Subtest: CP35-02: PTIT is an explicitly scoped sample, never a default school recommendation
+ok 2 - CP35-02: PTIT is an explicitly scoped sample, never a default school recommendation
+  ---
+  duration_ms: 35.378572
+  type: 'test'
+  ...
+# Subtest: CP35-03: study-abroad starts with no country selected and preserves country selection across subpages
+ok 3 - CP35-03: study-abroad starts with no country selected and preserves country selection across subpages
+  ---
+  duration_ms: 0.655888
+  type: 'test'
+  ...
+# Subtest: CP35-04: student data status and transcript screens do not expose backend collection names
+ok 4 - CP35-04: student data status and transcript screens do not expose backend collection names
+  ---
+  duration_ms: 1.032791
+  type: 'test'
+  ...
+# Subtest: CP35-05: Admin-only system tools remain outside the student route allowlist
+ok 5 - CP35-05: Admin-only system tools remain outside the student route allowlist
+  ---
+  duration_ms: 1.681572
+  type: 'test'
+  ...
+# Subtest: CP35-06: official source register distinguishes method-verified entries from archive-only sources
+ok 6 - CP35-06: official source register distinguishes method-verified entries from archive-only sources
+  ---
+  duration_ms: 1.37029
+  type: 'test'
+  ...
+# Subtest: CP35-07: focused pages use the shared CLA design layer and SPA rewrites
+ok 7 - CP35-07: focused pages use the shared CLA design layer and SPA rewrites
+  ---
+  duration_ms: 18.348098
+  type: 'test'
+  ...
+# Subtest: CP35-08: Seed profile uses the full ISO country catalog instead of a seven-country shortlist
+ok 8 - CP35-08: Seed profile uses the full ISO country catalog instead of a seven-country shortlist
+  ---
+  duration_ms: 0.80825
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 213.224004
+COMMAND node tests/ux-v7.test.cjs
+TAP version 13
+# Subtest: UX-V7-02: Student dashboard exposes exactly six student modules with their own icons
+ok 1 - UX-V7-02: Student dashboard exposes exactly six student modules with their own icons
+  ---
+  duration_ms: 29.931495
+  type: 'test'
+  ...
+# Subtest: UX-V7-03: Student module navigator filters actions and uses real links only
+ok 2 - UX-V7-03: Student module navigator filters actions and uses real links only
+  ---
+  duration_ms: 0.605132
+  type: 'test'
+  ...
+# Subtest: UX-V7-04: Admin remains outside student navigation
+ok 3 - UX-V7-04: Admin remains outside student navigation
+  ---
+  duration_ms: 6.338771
+  type: 'test'
+  ...
+# Subtest: UX-V7-05: V7 UI layer is imported and has responsive/accessibility treatments
+ok 4 - UX-V7-05: V7 UI layer is imported and has responsive/accessibility treatments
+  ---
+  duration_ms: 5.855537
+  type: 'test'
+  ...
+# Subtest: CP28-01: Account role labels are restored and sourced from the Firestore profile
+ok 5 - CP28-01: Account role labels are restored and sourced from the Firestore profile
+  ---
+  duration_ms: 2.104004
+  type: 'test'
+  ...
+# Subtest: CP28-02: CLA design system is loaded last and chat is light
+ok 6 - CP28-02: CLA design system is loaded last and chat is light
+  ---
+  duration_ms: 11.246406
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 86.445526
+COMMAND node tests/student-role-isolation.test.cjs
+STUDENT ROLE ISOLATION: menu, read-only student flows and admin-only source API PASS
+COMMAND node --experimental-strip-types --test tests/pipeline-evidence.test.mjs tests/pipeline-evidence-record.test.mjs
+TAP version 13
+# (node:36251) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: R01 whitelisted persisted record has no UID/scores/names/notes
+ok 1 - R01 whitelisted persisted record has no UID/scores/names/notes
+  ---
+  duration_ms: 61.592501
+  type: 'test'
+  ...
+# Subtest: R02 unknown dataScope cannot be stored
+ok 2 - R02 unknown dataScope cannot be stored
+  ---
+  duration_ms: 1.506778
+  type: 'test'
+  ...
+# Subtest: R03 stored demo record remains explicitly labeled
+ok 3 - R03 stored demo record remains explicitly labeled
+  ---
+  duration_ms: 0.398851
+  type: 'test'
+  ...
+# Subtest: R04 never persist complete:true or another evidence version
+ok 4 - R04 never persist complete:true or another evidence version
+  ---
+  duration_ms: 0.332906
+  type: 'test'
+  ...
+# Subtest: R05 exactly four distinct stages required
+ok 5 - R05 exactly four distinct stages required
+  ---
+  duration_ms: 20.987433
+  type: 'test'
+  ...
+# Subtest: R06 invalid stage status rejected
+ok 6 - R06 invalid stage status rejected
+  ---
+  duration_ms: 0.565793
+  type: 'test'
+  ...
+# Subtest: R07 malformed timestamps rejected
+ok 7 - R07 malformed timestamps rejected
+  ---
+  duration_ms: 1.024661
+  type: 'test'
+  ...
+# Subtest: R08 history range/count consistency validated
+ok 8 - R08 history range/count consistency validated
+  ---
+  duration_ms: 1.190371
+  type: 'test'
+  ...
+# Subtest: R09 real zero not copied into provenance even when observed
+ok 9 - R09 real zero not copied into provenance even when observed
+  ---
+  duration_ms: 0.987884
+  type: 'test'
+  ...
+# Subtest: R10 unchanged observedAt and no arbitrary createdAt
+ok 10 - R10 unchanged observedAt and no arbitrary createdAt
+  ---
+  duration_ms: 2.051827
+  type: 'test'
+  ...
+# (node:36258) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: P01 missing four sources cannot become a report
+ok 11 - P01 missing four sources cannot become a report
+  ---
+  duration_ms: 12.451714
+  type: 'test'
+  ...
+# Subtest: P02 real Cognitive zero with scoreAvailable and mapping version counts as observed proxy
+ok 12 - P02 real Cognitive zero with scoreAvailable and mapping version counts as observed proxy
+  ---
+  duration_ms: 28.830312
+  type: 'test'
+  ...
+# Subtest: P03 technical zero without scoreAvailable is LIMITED, not an observed zero
+ok 13 - P03 technical zero without scoreAvailable is LIMITED, not an observed zero
+  ---
+  duration_ms: 0.246409
+  type: 'test'
+  ...
+# Subtest: P04 inconsistent transcript owner is INVALID
+ok 14 - P04 inconsistent transcript owner is INVALID
+  ---
+  duration_ms: 0.19376
+  type: 'test'
+  ...
+# Subtest: P05 inconsistent scopes are INVALID
+ok 15 - P05 inconsistent scopes are INVALID
+  ---
+  duration_ms: 9.240981
+  type: 'test'
+  ...
+# Subtest: P06 legacy schema is not silently accepted
+ok 16 - P06 legacy schema is not silently accepted
+  ---
+  duration_ms: 0.242226
+  type: 'test'
+  ...
+# Subtest: P07 drafts can be present only as LIMITED, never confirmed outcomes
+ok 17 - P07 drafts can be present only as LIMITED, never confirmed outcomes
+  ---
+  duration_ms: 0.3781
+  type: 'test'
+  ...
+# Subtest: P08 unknown dataScope is not treated as student
+ok 18 - P08 unknown dataScope is not treated as student
+  ---
+  duration_ms: 0.270532
+  type: 'test'
+  ...
+# Subtest: P09 demo records are labeled non-research
+ok 19 - P09 demo records are labeled non-research
+  ---
+  duration_ms: 7.294665
+  type: 'test'
+  ...
+# Subtest: P10 missing cognitive and invalid draft are distinguished
+ok 20 - P10 missing cognitive and invalid draft are distinguished
+  ---
+  duration_ms: 12.902469
+  type: 'test'
+  ...
+# Subtest: P11 cannot build a check without authenticated UID
+ok 21 - P11 cannot build a check without authenticated UID
+  ---
+  duration_ms: 12.488795
+  type: 'test'
+  ...
+# Subtest: P12 cannot build a check with invalid timestamp
+ok 22 - P12 cannot build a check with invalid timestamp
+  ---
+  duration_ms: 0.496555
+  type: 'test'
+  ...
+# Subtest: P13 privacy: no UID, score, name, raw profile included in evidence record
+ok 23 - P13 privacy: no UID, score, name, raw profile included in evidence record
+  ---
+  duration_ms: 0.930195
+  type: 'test'
+  ...
+# Subtest: P14 one valid snapshot never becomes a trend
+ok 24 - P14 one valid snapshot never becomes a trend
+  ---
+  duration_ms: 0.358804
+  type: 'test'
+  ...
+# Subtest: P15 two snapshots with different versions cannot be compared
+ok 25 - P15 two snapshots with different versions cannot be compared
+  ---
+  duration_ms: 0.313305
+  type: 'test'
+  ...
+# Subtest: P16 two time-separated matching observations allow technical comparison only
+ok 26 - P16 two time-separated matching observations allow technical comparison only
+  ---
+  duration_ms: 0.143663
+  type: 'test'
+  ...
+# Subtest: P17 history from another UID excluded
+ok 27 - P17 history from another UID excluded
+  ---
+  duration_ms: 0.104953
+  type: 'test'
+  ...
+1..27
+# tests 27
+# suites 0
+# pass 27
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1721.440026
+COMMAND node --experimental-strip-types --test tests/admissions-and-chat.test.mjs
+TAP version 13
+# (node:36395) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP25-01: Curated universities have sourced years without inventing unverified archives
+ok 1 - CP25-01: Curated universities have sourced years without inventing unverified archives
+  ---
+  duration_ms: 17.107331
+  type: 'test'
+  ...
+# Subtest: CP25-02: Year-specific PTIT pathways do not leak year-specific methods
+ok 2 - CP25-02: Year-specific PTIT pathways do not leak year-specific methods
+  ---
+  duration_ms: 0.285278
+  type: 'test'
+  ...
+# Subtest: CP25-03: Exact campus and method provenance on historical cutoffs
+ok 3 - CP25-03: Exact campus and method provenance on historical cutoffs
+  ---
+  duration_ms: 0.68171
+  type: 'test'
+  ...
+# Subtest: CP25-04: Score conversion accepts actual zero but not missing or invalid inputs
+ok 4 - CP25-04: Score conversion accepts actual zero but not missing or invalid inputs
+  ---
+  duration_ms: 0.267053
+  type: 'test'
+  ...
+# Subtest: CP25-05: Historical gap is arithmetic, never chance-of-admission
+ok 5 - CP25-05: Historical gap is arithmetic, never chance-of-admission
+  ---
+  duration_ms: 0.129625
+  type: 'test'
+  ...
+# Subtest: CP25-06: Discovery matches year/method without inventing unsupported methods
+ok 6 - CP25-06: Discovery matches year/method without inventing unsupported methods
+  ---
+  duration_ms: 33.781621
+  type: 'test'
+  ...
+# Subtest: CP25-07: International requirements have direct official endpoints and certifications
+ok 7 - CP25-07: International requirements have direct official endpoints and certifications
+  ---
+  duration_ms: 0.612414
+  type: 'test'
+  ...
+# Subtest: CP25-08: Chat only keeps last eight bounded turns
+ok 8 - CP25-08: Chat only keeps last eight bounded turns
+  ---
+  duration_ms: 0.965218
+  type: 'test'
+  ...
+# Subtest: CP25-09: Chat rejects invalid content and unauthorized roles in history
+ok 9 - CP25-09: Chat rejects invalid content and unauthorized roles in history
+  ---
+  duration_ms: 0.958282
+  type: 'test'
+  ...
+# Subtest: CP25-10: UI routes and protected chat endpoint exist
+ok 10 - CP25-10: UI routes and protected chat endpoint exist
+  ---
+  duration_ms: 1.067869
+  type: 'test'
+  ...
+# Subtest: CP25-11: Study-abroad refresh uses Vercel SPA rewrite, preserving /api routes
+ok 11 - CP25-11: Study-abroad refresh uses Vercel SPA rewrite, preserving /api routes
+  ---
+  duration_ms: 0.910265
+  type: 'test'
+  ...
+# Subtest: CP25-12: Chat supports same-origin secure deployment and optional CORS origin list
+ok 12 - CP25-12: Chat supports same-origin secure deployment and optional CORS origin list
+  ---
+  duration_ms: 0.39316
+  type: 'test'
+  ...
+# Subtest: ROUND-01: Floating assistant routes specialist questions to their owning modules
+ok 13 - ROUND-01: Floating assistant routes specialist questions to their owning modules
+  ---
+  duration_ms: 1.748051
+  type: 'test'
+  ...
+# Subtest: ROUND-02: Only internal known destinations may appear in chat responses
+ok 14 - ROUND-02: Only internal known destinations may appear in chat responses
+  ---
+  duration_ms: 0.287217
+  type: 'test'
+  ...
+# Subtest: ROUND-03: Backend and frontend share specialist redirect gate
+ok 15 - ROUND-03: Backend and frontend share specialist redirect gate
+  ---
+  duration_ms: 0.452664
+  type: 'test'
+  ...
+# Subtest: ROUND-04: Do not show uncalibrated achievement probability on the dashboard
+ok 16 - ROUND-04: Do not show uncalibrated achievement probability on the dashboard
+  ---
+  duration_ms: 0.422422
+  type: 'test'
+  ...
+# Subtest: ROUND-05: United States and domestic international pathways have official links and clear limitations
+ok 17 - ROUND-05: United States and domestic international pathways have official links and clear limitations
+  ---
+  duration_ms: 0.26849
+  type: 'test'
+  ...
+# Subtest: ROUND-06: TDTU three-year schemes distinguish score scales
+ok 18 - ROUND-06: TDTU three-year schemes distinguish score scales
+  ---
+  duration_ms: 0.604841
+  type: 'test'
+  ...
+# Subtest: ROUND-07: Career-fit UI states experimental scores are not admission probabilities
+ok 19 - ROUND-07: Career-fit UI states experimental scores are not admission probabilities
+  ---
+  duration_ms: 0.302162
+  type: 'test'
+  ...
+# Subtest: ROUND-07: Career-fit UI states experimental scores are not admission probabilities
+ok 20 - ROUND-07: Career-fit UI states experimental scores are not admission probabilities
+  ---
+  duration_ms: 0.265549
+  type: 'test'
+  ...
+# Subtest: GLOBAL-01: every ISO 3166-1 alpha-2 country/territory is selectable without fabricated claims
+ok 21 - GLOBAL-01: every ISO 3166-1 alpha-2 country/territory is selectable without fabricated claims
+  ---
+  duration_ms: 4.209304
+  type: 'test'
+  ...
+# Subtest: GLOBAL-02: all-country UI abstains when programme-level evidence is unavailable
+ok 22 - GLOBAL-02: all-country UI abstains when programme-level evidence is unavailable
+  ---
+  duration_ms: 0.64687
+  type: 'test'
+  ...
+# Subtest: GLOBAL-03: Atlas owns domestic and international admissions; Haven owns scholarships and finance
+ok 23 - GLOBAL-03: Atlas owns domestic and international admissions; Haven owns scholarships and finance
+  ---
+  duration_ms: 2.251041
+  type: 'test'
+  ...
+# Subtest: MODULE-01: 7 main modules remain while study abroad is an Atlas submodule
+ok 24 - MODULE-01: 7 main modules remain while study abroad is an Atlas submodule
+  ---
+  duration_ms: 2.648853
+  type: 'test'
+  ...
+# Subtest: UX-V7-01: Assistant receives only allowlisted page context and page-specific prompts
+ok 25 - UX-V7-01: Assistant receives only allowlisted page context and page-specific prompts
+  ---
+  duration_ms: 1.227236
+  type: 'test'
+  ...
+1..25
+# tests 25
+# suites 0
+# pass 25
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1314.715862
+COMMAND node --test tests/chat-launcher-mascot.test.cjs
+TAP version 13
+# Subtest: CLA chatbot launcher uses the custom mascot and has an accessible toggle
+ok 1 - CLA chatbot launcher uses the custom mascot and has an accessible toggle
+  ---
+  duration_ms: 7.266665
+  type: 'test'
+  ...
+# Subtest: CLA mascot launcher is circular, fixed to the bottom right, and responsive
+ok 2 - CLA mascot launcher is circular, fixed to the bottom right, and responsive
+  ---
+  duration_ms: 9.647256
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 542.559185
+COMMAND node --test tests/cp29-release-contract.test.cjs
+TAP version 13
+# Subtest: CP29-01: direct dependencies do not float on latest tags
+ok 1 - CP29-01: direct dependencies do not float on latest tags
+  ---
+  duration_ms: 6.930577
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 551.716874
+COMMAND node --test tests/cp30-chat-readability.test.cjs
+TAP version 13
+# Subtest: CP30 chat readability layer loads after the final CP28 theme
+ok 1 - CP30 chat readability layer loads after the final CP28 theme
+  ---
+  duration_ms: 1.665032
+  type: 'test'
+  ...
+# Subtest: CP30 keeps readable chat typography instead of legacy 9–11px labels
+ok 2 - CP30 keeps readable chat typography instead of legacy 9–11px labels
+  ---
+  duration_ms: 0.793745
+  type: 'test'
+  ...
+# Subtest: CP30 brand palette has WCAG AA normal-text contrast on the corresponding solid surface
+ok 3 - CP30 brand palette has WCAG AA normal-text contrast on the corresponding solid surface
+  ---
+  duration_ms: 13.570855
+  type: 'test'
+  ...
+# Subtest: CP30 preserves mascot, assistant routing and accessible keyboard treatment
+ok 4 - CP30 preserves mascot, assistant routing and accessible keyboard treatment
+  ---
+  duration_ms: 0.324182
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1157.924107

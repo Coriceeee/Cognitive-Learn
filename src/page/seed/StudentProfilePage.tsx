@@ -1,7 +1,8 @@
+import ModuleSectionNav from "../../components/common/ModuleSectionNav";
 import { pushAppNotice } from "../../lib/appNotices";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, doc, getDocFromServer, serverTimestamp, writeBatch } from "firebase/firestore";
+import { collection, doc, getDocFromServer, runTransaction, serverTimestamp } from "firebase/firestore";
 import { auth, db } from "../../lib/firebase";
 import { calculateCognitive } from "../../engines/cognitive/cognitiveEngine";
 import { attachObservedSnapshotMetrics, createCognitiveSnapshot } from "../../engines/history/cognitiveHistoryEngine";
@@ -16,6 +17,8 @@ import {
   type ScoreRow,
 } from "../../engines/academic-semester-engine";
 import { validateSeedNumericInput } from "./services/profileInputValidation";
+import { parseAcademicIdentity, sameAcademicIdentity, findForeignTranscriptSubject } from "./services/academicIdentity";
+import { captureSeedBaseline, verifySeedTransaction, type SeedBaseline } from "./services/seedPersistenceContract";
 import {
   ELECTIVE_SUBJECTS,
   NATIONAL_DEFENSE_SUBJECT,
@@ -185,8 +188,10 @@ export default function TrangNhapHoSoHocTap() {
   const [profileReadError, setProfileReadError] = useState("");
   const [loadAttempt, setLoadAttempt] = useState(0);
   const [loadedUid, setLoadedUid] = useState<string | null>(null);
+  const [seedBaseline, setSeedBaseline] = useState<SeedBaseline | null>(null);
   const [isAdminDemo, setIsAdminDemo] = useState(false);
   const [lockedElectives, setLockedElectives] = useState<string[] | null>(null);
+  const [lockedForeignLanguage, setLockedForeignLanguage] = useState<string | null>(null);
   const [previousPlanCompletionRate, setPreviousPlanCompletionRate] = useState<number | undefined>(undefined);
 
   const params = new URLSearchParams(window.location.search);
@@ -211,11 +216,13 @@ export default function TrangNhapHoSoHocTap() {
       setProfileReadFailed(false);
       setProfileReadError("");
       setLoadedUid(null);
+      setSeedBaseline(null);
       setIsAdminDemo(false);
       // Clear the previous account's in-memory values before loading a new UID.
       setProfile({ ...initialProfile });
       setSelectedElectives([...initialElectives]);
       setLockedElectives(null);
+      setLockedForeignLanguage(null);
       setTranscriptScores(createInitialTranscript());
       setPreviousPlanCompletionRate(undefined);
       setMessage("Đang tải hồ sơ và bảng điểm đã lưu…");
@@ -256,6 +263,16 @@ export default function TrangNhapHoSoHocTap() {
 
         const value = saved.exists() ? saved.data() : {};
         const academic = savedTranscript.exists() ? savedTranscript.data() : value;
+        // Use the server timestamps as optimistic-concurrency tokens. Missing
+        // timestamps on legacy documents are NOT safe to overwrite automatically.
+        const baseline = captureSeedBaseline(
+          { exists: saved.exists(), data: saved.exists() ? saved.data() : null },
+          { exists: savedTranscript.exists(), data: savedTranscript.exists() ? savedTranscript.data() : null },
+        );
+        if (!baseline) {
+          fail("Dữ liệu cũ thiếu phiên bản cập nhật của máy chủ. Cần đối soát hoặc di chuyển schema trước khi lưu.");
+          return;
+        }
         const oldBehavior = value.behavior as { planCompletionRate?: number } | undefined;
         setPreviousPlanCompletionRate(
           typeof oldBehavior?.planCompletionRate === "number"
@@ -270,26 +287,32 @@ export default function TrangNhapHoSoHocTap() {
             ),
           }));
         }
-        const curriculum = academic.curriculum as { selectedElectives?: string[] } | undefined;
-        const legacyCurriculum = value.curriculum as { selectedElectives?: string[] } | undefined;
-        if (Array.isArray(curriculum?.selectedElectives)
-            && Array.isArray(legacyCurriculum?.selectedElectives)
-            && JSON.stringify(curriculum.selectedElectives) !== JSON.stringify(legacyCurriculum.selectedElectives)) {
-          fail("Hai bản hồ sơ đang có tổ hợp môn khác nhau. Cần đối chiếu dữ liệu cũ trước khi chỉnh sửa.");
+        // Treat either saved academic record as an immutable identity. Never
+        // silently reset/replace a malformed legacy curriculum.
+        const storedProfileIdentity = saved.exists() ? parseAcademicIdentity(value.curriculum) : null;
+        const storedTranscriptIdentity = savedTranscript.exists() ? parseAcademicIdentity(academic.curriculum) : null;
+        if ((saved.exists() && !storedProfileIdentity)
+            || (savedTranscript.exists() && !storedTranscriptIdentity)
+            || (storedProfileIdentity && storedTranscriptIdentity
+              && !sameAcademicIdentity(storedProfileIdentity, storedTranscriptIdentity))) {
+          fail("Hồ sơ hoặc bảng điểm cũ có danh tính môn học thiếu/không nhất quán. Cần kiểm toán và khôi phục theo quy trình quản trị trước khi lưu.");
           return;
         }
-        const savedSelection = curriculum?.selectedElectives ?? legacyCurriculum?.selectedElectives;
-        if (Array.isArray(savedSelection)) {
-          if (!isValidElectiveSelection(savedSelection)) {
-            fail("Tổ hợp môn trong hồ sơ không hợp lệ. Hãy liên hệ quản trị viên trước khi lưu.");
+        const lockedIdentity = storedTranscriptIdentity ?? storedProfileIdentity;
+        if (lockedIdentity) {
+          setSelectedElectives([...lockedIdentity.selectedElectives]);
+          setLockedElectives([...lockedIdentity.selectedElectives]);
+          setLockedForeignLanguage(lockedIdentity.foreignLanguage);
+          setProfile(current => ({...current, foreignLanguage: lockedIdentity.foreignLanguage}));
+          if (academic.transcript && findForeignTranscriptSubject(academic.transcript, lockedIdentity)) {
+            fail("Bảng điểm cũ có môn học nằm ngoài tổ hợp 9 môn đã khóa. Cần đối soát dữ liệu trước khi lưu.");
             return;
           }
-          setSelectedElectives([...savedSelection]);
-          setLockedElectives([...savedSelection]);
         }
         if (academic.transcript && typeof academic.transcript === "object") {
           setTranscriptScores(academic.transcript as TranscriptScores);
         }
+        setSeedBaseline(baseline);
         setLoadedUid(user.uid);
         setProfileReady(true);
         setMessage("");
@@ -317,6 +340,10 @@ export default function TrangNhapHoSoHocTap() {
   );
 
   function updateField(field: keyof LearningProfile, value: string) {
+    if (field === "foreignLanguage" && lockedForeignLanguage !== null && value !== lockedForeignLanguage) {
+      setMessage("Ngoại ngữ 1 đã được khóa cùng tổ hợp 9 môn. Cần quy trình điều chỉnh có biên bản kiểm toán.");
+      return;
+    }
     setProfile((current) => ({
       ...current,
       [field]: value,
@@ -534,7 +561,7 @@ export default function TrangNhapHoSoHocTap() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (profileReadFailed || !profileReady || loadedUid !== auth.currentUser?.uid) {
+    if (profileReadFailed || !profileReady || !seedBaseline || loadedUid !== auth.currentUser?.uid) {
       setMessage(profileReadError || "Hồ sơ chưa tải xong hoặc phiên đăng nhập đã thay đổi. Hãy thử tải lại trước khi lưu.");
       return;
     }
@@ -545,6 +572,17 @@ export default function TrangNhapHoSoHocTap() {
     }
     if (lockedElectives && lockedElectives.some((subject, index) => subject !== selectedElectives[index])) {
       setMessage("Không thể đổi tổ hợp đã khóa. Hãy liên hệ quản trị viên nếu cần điều chỉnh theo hồ sơ nhà trường.");
+      return;
+    }
+    if (lockedForeignLanguage !== null && profile.foreignLanguage !== lockedForeignLanguage) {
+      setMessage("Không thể thay Ngoại ngữ 1 đã khóa trong cả ba năm học.");
+      return;
+    }
+    const unexpectedSubject = findForeignTranscriptSubject(buildTranscriptForSave(), {
+      foreignLanguage: profile.foreignLanguage, selectedElectives,
+    });
+    if (unexpectedSubject) {
+      setMessage(`Bảng điểm có môn nằm ngoài 9 môn đã khóa (${unexpectedSubject}). Cần kiểm tra lịch sử dữ liệu.`);
       return;
     }
 
@@ -687,35 +725,58 @@ export default function TrangNhapHoSoHocTap() {
         cognitive: cognitiveResult,
         id: historyRef.id, // Firestore-generated unique ID avoids millisecond collisions.
       });
-      const batch = writeBatch(db);
-      // Store the exact result used to create the snapshot so dashboard reads
-      // the same measurement rather than silently recalculating a different BDI.
-      batch.set(doc(db, "learning_profiles", currentUser.uid), {
-        ...profileWrite,
-        cognitiveMeasurement: JSON.parse(JSON.stringify(cognitiveResult)),
-      }, { merge: true });
-      batch.set(doc(db, "student_transcripts", currentUser.uid), {
-        userId: currentUser.uid,
-        schemaVersion: 1,
-        dataScope: isAdminDemo ? "demo" : "student",
-        curriculum: profileWrite.curriculum,
-        transcript: buildTranscriptForSave(),
-        gpaSummary,
-        updatedAt: serverTimestamp(),
+      // Read both documents + live account INSIDE a Firestore transaction before
+      // writing. The previous writeBatch could silently overwrite edits made by
+      // another tab after the initial profile load. The transaction retries on
+      // contention, and the baseline guard then rejects an obsolete form.
+      const profileRef = doc(db, "learning_profiles", currentUser.uid);
+      const transcriptRef = doc(db, "student_transcripts", currentUser.uid);
+      const userRef = doc(db, "users", currentUser.uid);
+      await runTransaction(db, async transaction => {
+        const [accountSnap, profileSnap, transcriptSnap] = await Promise.all([
+          transaction.get(userRef), transaction.get(profileRef), transaction.get(transcriptRef),
+        ]);
+        const accountData = accountSnap.exists() ? accountSnap.data() : null;
+        if (auth.currentUser?.uid !== currentUser.uid || !accountData || accountData.active !== true
+          || accountData.role !== (isAdminDemo ? "admin" : "student")) {
+          throw new Error("CLA_ACCOUNT_CHANGED_OR_INACTIVE");
+        }
+        const conflict = verifySeedTransaction(currentUser.uid, isAdminDemo ? "demo" : "student", seedBaseline,
+          {exists: profileSnap.exists(), data: profileSnap.exists() ? profileSnap.data() : null},
+          {exists: transcriptSnap.exists(), data: transcriptSnap.exists() ? transcriptSnap.data() : null},
+          {foreignLanguage: profile.foreignLanguage, selectedElectives},
+        );
+        if (conflict) throw new Error(`CLA_SEED_CONFLICT: ${conflict}`);
+
+        // Store the SAME measurement in profile and append-only history, with
+        // exactly the same transaction as the authoritative transcript.
+        transaction.set(profileRef, {
+          ...profileWrite,
+          cognitiveMeasurement: JSON.parse(JSON.stringify(cognitiveResult)),
+        }, { merge: true });
+        transaction.set(transcriptRef, {
+          userId: currentUser.uid,
+          schemaVersion: 1,
+          dataScope: isAdminDemo ? "demo" : "student",
+          curriculum: profileWrite.curriculum,
+          transcript: buildTranscriptForSave(),
+          gpaSummary,
+          updatedAt: serverTimestamp(),
+        });
+        transaction.set(historyRef, {
+          ...attachObservedSnapshotMetrics(cognitiveSnapshot, {
+            gpaOverall: gpaSummary.overall,
+            studyHoursPerWeek: behavior.studyHoursPerWeek,
+            practiceTestsPerWeek: behavior.practiceTestsPerWeek,
+            planCompletionRate: behavior.planCompletionRate,
+            motivationLevel: behavior.motivationLevel,
+          }),
+          dataScope: isAdminDemo ? "demo" : "student",
+          createdAt: serverTimestamp(),
+        });
       });
-      batch.set(historyRef, {
-        ...attachObservedSnapshotMetrics(cognitiveSnapshot, {
-          gpaOverall: gpaSummary.overall,
-          studyHoursPerWeek: behavior.studyHoursPerWeek,
-          practiceTestsPerWeek: behavior.practiceTestsPerWeek,
-          planCompletionRate: behavior.planCompletionRate,
-          motivationLevel: behavior.motivationLevel,
-        }),
-        dataScope: isAdminDemo ? "demo" : "student",
-        createdAt: serverTimestamp(),
-      });
-      await batch.commit();
       setLockedElectives([...selectedElectives]);
+      setLockedForeignLanguage(profile.foreignLanguage);
       pushAppNotice({kind:"success", title:"Đã lưu hồ sơ học tập", detail:"Hồ sơ, bảng điểm và bản đo Cognitive đã lưu thành công. CLA sẽ chuyển về Dashboard."});
       // The app uses full-page navigation; replay this *generic* success once on the destination page.
       try { window.sessionStorage.setItem(`cla-seed-save-flash:${currentUser.uid}`, "saved"); } catch { /* In-app toast above still works if session storage is unavailable. */ }
@@ -729,8 +790,10 @@ export default function TrangNhapHoSoHocTap() {
       }, 800);
     } catch (error) {
       console.error(error);
-      setMessage("Không thể lưu hồ sơ. Hãy kiểm tra kết nối hoặc liên hệ hỗ trợ.");
-      pushAppNotice({kind:"error", title:"Lưu hồ sơ thất bại", detail:"Dữ liệu chưa được xác nhận đã lưu. Kiểm tra Internet và quyền truy cập Firebase, rồi thử lại."});
+      const detail = error instanceof Error ? error.message : "";
+      const conflict = detail.startsWith("CLA_SEED_CONFLICT") || detail === "CLA_ACCOUNT_CHANGED_OR_INACTIVE";
+      setMessage(conflict ? "Hồ sơ đã thay đổi hoặc tài khoản không còn hợp lệ. Hãy tải lại trang rồi đối chiếu trước khi lưu; không có dữ liệu nào được ghi từ lần gửi này." : "Không thể lưu hồ sơ. Hãy kiểm tra kết nối hoặc liên hệ hỗ trợ.");
+      pushAppNotice({kind:"error", title:"Lưu hồ sơ thất bại", detail: conflict ? "Lần lưu đã bị chặn an toàn do dữ liệu hoặc quyền đã thay đổi. Tải lại hồ sơ trước khi thử." : "Dữ liệu chưa được xác nhận đã lưu. Kiểm tra Internet và quyền truy cập Firebase, rồi thử lại."});
     } finally {
       setLoading(false);
     }
@@ -759,6 +822,7 @@ export default function TrangNhapHoSoHocTap() {
       </div>
 
       <section className="profile-shell">
+        <ModuleSectionNav moduleKey="seed" />
         <header className="profile-head">
           <span>HỒ SƠ HỌC TẬP</span>
           <h1>Nhập dữ liệu THPT để Cognitive Learn phân tích</h1>
@@ -873,6 +937,7 @@ export default function TrangNhapHoSoHocTap() {
                 Ngoại ngữ 1
                 <select
                   value={profile.foreignLanguage}
+                  disabled={lockedForeignLanguage !== null || !profileReady}
                   onChange={(event) =>
                     updateField("foreignLanguage", event.target.value)
                   }
@@ -916,7 +981,7 @@ export default function TrangNhapHoSoHocTap() {
               </div>
               <p className="profile-note-box" role="status">
                 {lockedElectives
-                  ? "Tổ hợp đã được khóa sau lần lưu đầu tiên và được giữ nguyên cho cả lớp 10, 11, 12. Nếu trường chính thức điều chỉnh, cần quy trình quản trị riêng."
+                  ? "Tổ hợp 4 môn và Ngoại ngữ 1 đã khóa xuyên suốt lớp 10, 11, 12. Bất kỳ thay đổi chính thức nào phải có quy trình điều chỉnh và biên bản kiểm toán của nhà trường."
                   : "Sau lần lưu hồ sơ đầu tiên, 4 môn đã chọn sẽ được khóa và không thể tự sửa. Hãy kiểm tra kỹ trước khi xác nhận."}
               </p>
             </div>

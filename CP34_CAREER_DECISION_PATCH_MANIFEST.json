@@ -1,0 +1,118 @@
+{
+  "base": "CLA_FULL_SOURCE_CP34_KNOWLEDGE_XAI_20261118.zip",
+  "baseSha256": "c9bf5e410a0ca097c7f7a181737d03125e2974f32e540b82ddb42f36dbb49106",
+  "changes": [
+    {
+      "path": "START_HERE_CP34_CAREER_DECISION_20261118.md",
+      "previousSha256": null,
+      "sha256": "36258abbac1ce90314727f1ec5ed4d4db8b808b1ccb0fb4bd705f6d4700ebf2b"
+    },
+    {
+      "path": "package.json",
+      "previousSha256": "3e642e408dea4161222d193cefc6b77c3a06fab761a6ab9b3abd13eb6c2e9cba",
+      "sha256": "9d06421e3cdeccb2826b0ca1d9193fdd4137d3b8d814a98b287426d5a4cc1f05"
+    },
+    {
+      "path": "reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html",
+      "previousSha256": "d0628a5965c0e8080f27336d2bd24ca3f61fd175d2e670c3011db0aa44d5cd79",
+      "sha256": "b37033b28e4dae548bfaf4030ff2906f699fdf5e69f89f793bb3ae3b4170b8ef"
+    },
+    {
+      "path": "reports/demo/cla_batch16_offline_readiness.json",
+      "previousSha256": "dd806c926bb7dd6cca6f37bd868b3fe6bb3f390c11f5c6ce3b67b5f2d673e775",
+      "sha256": "28c4b8681238a6c954d28e7e222233d591049bd6cdc80a3a95653365cddfcc34"
+    },
+    {
+      "path": "reports/evidence/atlas_lookup_fidelity.json",
+      "previousSha256": "4eb18be5d0ae2f6842b8b6de0bc3cbc04b3f5f4927df378b6079b96c0171af5b",
+      "sha256": "c5453949d63eb215ff6981ff4af3a6487e3bcbb6fc5f055224130626b6b0310b"
+    },
+    {
+      "path": "reports/evidence/cla_golden_path_SYNTHETIC.json",
+      "previousSha256": "de043e24bf88da4bd597f2bbd9cef5a6795919be391dc903d4165ae91f263627",
+      "sha256": "99defb3dba535b939457b18fb43345f40e44b0cc227267c45cc90eecc1adebd3"
+    },
+    {
+      "path": "reports/evidence/cla_measurement_SYNTHETIC.json",
+      "previousSha256": "02636af4e173cd30d2e86610570d98d1727b4a75e1a48ff45ce5ff5b93cabe8a",
+      "sha256": "39d2e0fbcee5eb2bdd33d54eaad55adbda8d6a8c6f845b8755f5ce3ff3d60d6e"
+    },
+    {
+      "path": "reports/evidence/cla_multicycle_SYNTHETIC.json",
+      "previousSha256": "59647b332e60ea60f64237e5826f45e2f0313eac4224f681c607eab30f05145c",
+      "sha256": "fc3bc2e3f387036bd95911e33f12aa14bf3a520bee83dc032aa620f1669960bc"
+    },
+    {
+      "path": "reports/verification/CP34_CAREER_DECISION_NODE_REGRESSION_20261118.log",
+      "previousSha256": null,
+      "sha256": "93b7379a3e2728ae6bce5130e8c9be3da1639cc1948f5af40d71d92eb7d1b666"
+    },
+    {
+      "path": "src/engines/career/careerEngine.ts",
+      "previousSha256": "e208a0cc663a3d2696551e9c2fa0c9db5b8adc1e553d6293452d73e8cce304e7",
+      "sha256": "4322140aa4e0e0f0e7bf09bdc431f987b1a681c8cd50775ce51d0cef17efb6ae"
+    },
+    {
+      "path": "src/engines/career/careerScoring.ts",
+      "previousSha256": "474f3c88c7b523a92c8e354266b37aadc986bde13db0f70e79b82f72965071d0",
+      "sha256": "26c2dce93dc2edd22f3aa68d3df07fdd57abda7f3944de186516a35a5427cd24"
+    },
+    {
+      "path": "src/engines/career/careerTypes.ts",
+      "previousSha256": "eb52dcdef6ff08939291d9b73b122c2650cb226fc465d8b116a479b49c980dd2",
+      "sha256": "7a43c0856aa30903642e51479ffb6e7d9af4a4c123ad43844250a45ffb01b136"
+    },
+    {
+      "path": "src/lib/careerExploration.ts",
+      "previousSha256": null,
+      "sha256": "e40f85c3ee801e8d82d835adb8f100c606441fe9a5a031ac9961a0c1091e70a5"
+    },
+    {
+      "path": "src/lib/nexusEvidenceBaseline.ts",
+      "previousSha256": "a89f180744722b3331c404002de486b22016ffc1fa816e829f937ed16f065e64",
+      "sha256": "a140540a7ed683bb9dc396ab7be9185262ff7f042dadf2096b380111ee5e90c0"
+    },
+    {
+      "path": "src/lib/scenarioDecision.ts",
+      "previousSha256": null,
+      "sha256": "06cf9f5833bc460228c828e87aa8ce636e20420b21a49ad928099dbec8334ad7"
+    },
+    {
+      "path": "src/page/atlas/components/AtlasCareerExploration.tsx",
+      "previousSha256": null,
+      "sha256": "9449035fca3bac508c77dfff316041b8ca9816a863440300dbdc55fa56fa34e7"
+    },
+    {
+      "path": "src/page/atlas/components/AtlasProgramDiscoveryPanel.tsx",
+      "previousSha256": "80004d6cbb2bffea5a6631622ad91140dee88456933172f7702dafe96e2a2308",
+      "sha256": "34da23fcdb8648421af1ab664c4a9bfcec8dc2cacc71ef22e7d9bfa1254ae387"
+    },
+    {
+      "path": "src/page/orion/OrionDecisionWorkbench.tsx",
+      "previousSha256": null,
+      "sha256": "714e61e55aadf60de0a6856c658bd7ad84064d913c3fb32453d399fb462fd5f0"
+    },
+    {
+      "path": "src/page/orion/OrionPage.tsx",
+      "previousSha256": "2f448a3a9035805aa70ed17f14902080df77597dcb28f5c75a35e5432f6275b6",
+      "sha256": "84178d6d154fc8c6fb58c5bacf60f061aa2390b6969c15382b5730359761a2dd"
+    },
+    {
+      "path": "src/page/orion/OrionScenarioTradeoff.tsx",
+      "previousSha256": "7efa9fdf448770885ca826dc7846ccaaeb1feb85416ebf5c003fa27902041cd1",
+      "sha256": "c8c8b223197cc2188fa68f94025c20fc5ed0cbbf81888a0d05be54e447799903"
+    },
+    {
+      "path": "src/page/seed/components/LearningIntelligencePanel.tsx",
+      "previousSha256": "d121ddf4e0c65cf84eb085d34be49f165a152e6a92e28526633557a7131b21ef",
+      "sha256": "6613717c4cf083d9c22e2da810a1a3f6e544020b32147747fafeacd2cc124590"
+    },
+    {
+      "path": "tests/cp34-career-decision.test.mjs",
+      "previousSha256": null,
+      "sha256": "aaf7054bd81287a429fe1c825f84c4b1e5d944f41514874394b2acd367ed488e"
+    }
+  ],
+  "removed": [],
+  "note": "manifest excludes itself; no deployment attestation"
+}

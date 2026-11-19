@@ -1,0 +1,56 @@
+
+> cognitive-learn-ai@0.1.0 research:atlas:coverage
+> node --experimental-strip-types tools/atlas_national_coverage.mjs
+
+{
+  "summary": [
+    {
+      "year": 2026,
+      "registrySchools": 32,
+      "sourceSchools": 32,
+      "methodSchools": 15,
+      "cutoffSchools": 17,
+      "programSchools": 19,
+      "combinationSchools": 9
+    },
+    {
+      "year": 2025,
+      "registrySchools": 32,
+      "sourceSchools": 13,
+      "methodSchools": 7,
+      "cutoffSchools": 3,
+      "programSchools": null,
+      "combinationSchools": null
+    },
+    {
+      "year": 2024,
+      "registrySchools": 32,
+      "sourceSchools": 12,
+      "methodSchools": 8,
+      "cutoffSchools": 3,
+      "programSchools": null,
+      "combinationSchools": null
+    }
+  ],
+  "openSlots": 88,
+  "inventory": null,
+  "discovery": {
+    "scope": "PARTIAL_DISCOVERY_INDEX",
+    "nationalDenominator": null,
+    "entries": 108,
+    "surveyEntries": 99,
+    "registryEntries": 32,
+    "discoveryOnly": 76,
+    "explicitlyLinked": 23,
+    "source": {
+      "id": "moet-survey-oct2026",
+      "url": "https://hubt.edu.vn/wp-content/uploads/CV-370.pdf",
+      "label": "Danh sách cơ sở giáo dục đại học thực hiện khảo sát (Bộ GD&ĐT, tháng 10/2026)",
+      "pages": "2–4",
+      "asOf": "2026-10",
+      "reviewedAt": "2026-11-18",
+      "scope": "PARTIAL_SURVEY_INSTITUTION_LIST"
+    },
+    "queue": 228
+  }
+}

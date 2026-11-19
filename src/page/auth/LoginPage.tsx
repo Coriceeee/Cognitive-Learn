@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
@@ -18,7 +19,6 @@ import appLogo from "../../assets/logo cla.png";
 import "../../styles.css";
 
 type UserRole = AccountRole;
-type SelectableRole = "student" | "teacher" | "parent";
 type AuthMode = "login" | "register";
 
 function describeSignInError(error: unknown, authenticated = false): string {
@@ -50,7 +50,6 @@ function describeSignInError(error: unknown, authenticated = false): string {
 
 export default function LoginPage() {
   const [mode, setMode] = useState<AuthMode>("login");
-  const [selectedRole, setSelectedRole] = useState<SelectableRole>("student");
 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -115,7 +114,7 @@ export default function LoginPage() {
       } else if (account.status === "inactive") {
         setMessage("Tài khoản chưa có active: true hoặc đang bị khóa. Hãy kiểm tra hồ sơ trong Firestore.");
       } else {
-        setMessage("Vai trò tài khoản không hợp lệ. Cần kiểm tra trường role trong Firestore.");
+        setMessage("Vai trò tài khoản không hợp lệ. CLA chỉ hỗ trợ tài khoản học sinh và quản trị nội bộ; liên hệ hỗ trợ nếu cần xác minh tài khoản cũ.");
       }
       return;
     }
@@ -135,6 +134,32 @@ export default function LoginPage() {
     } catch (error) {
       console.error("CLA role verification failed:", error);
       setMessage(describeSignInError(error, true));
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handlePasswordReset() {
+    const address = normalizeEmail(email);
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(address) || address.length > 254) {
+      setMessage("Nhập địa chỉ email hợp lệ để yêu cầu đặt lại mật khẩu.");
+      return;
+    }
+    try {
+      setLoading(true);
+      await sendPasswordResetEmail(auth, address);
+      // Never reveal whether the email exists in Firebase Authentication.
+      setMessage("Nếu tài khoản email này tồn tại và đủ điều kiện, Firebase sẽ gửi hướng dẫn đặt lại mật khẩu. Kiểm tra hộp thư và spam.");
+    } catch (error) {
+      const code = firebaseErrorCode(error);
+      if (code === "auth/too-many-requests") {
+        setMessage("Quá nhiều yêu cầu. Hãy thử lại sau.");
+      } else if (code === "auth/network-request-failed") {
+        setMessage("Không kết nối được. Vui lòng kiểm tra mạng rồi thử lại.");
+      } else {
+        // Generic response avoids email enumeration, including user-not-found.
+        setMessage("Nếu tài khoản email này tồn tại và đủ điều kiện, hướng dẫn đặt lại mật khẩu sẽ được gửi.");
+      }
     } finally {
       setLoading(false);
     }
@@ -172,7 +197,7 @@ export default function LoginPage() {
       const normalizedEmail = normalizeEmail(email);
       // New registrations cannot create an administrator account.
       // Admin access must be provisioned by a trusted server/admin process.
-      const role: UserRole = selectedRole;
+      const role: UserRole = "student";
 
       const credential = await createUserWithEmailAndPassword(
         auth,
@@ -204,7 +229,7 @@ export default function LoginPage() {
       const provider = new GoogleAuthProvider();
       const credential = await signInWithPopup(auth, provider);
 
-      const role: UserRole = selectedRole;
+      const role: UserRole = "student";
 
       const profile = await createUserProfile(
         credential.user.uid,
@@ -319,42 +344,11 @@ export default function LoginPage() {
             <span>
               {mode === "login"
                 ? "Đăng nhập bằng tài khoản hiện có; nếu được cấp vai trò Admin, hệ thống tự chuyển đến trang quản trị."
-                : "Chọn vai trò để tạo tài khoản Student, Teacher hoặc Parent."}
+                : "Tạo tài khoản học sinh để bắt đầu lộ trình cá nhân."}
             </span>
           </div>
 
-          <div className="role-selector">
-            <span className="role-selector-label">Vai trò tài khoản</span>
-            {mode === "login" ? (
-              <p className="login-role-hint">CLA tự xác minh vai trò theo Firestore. Admin sẽ vào trang quản trị mà không cần chọn tab Học sinh.</p>
-            ) : (
-            <div className="role-tabs" role="group" aria-label="Chọn vai trò tài khoản">
-            <button
-              type="button"
-              onClick={() => setSelectedRole("student")}
-              className={selectedRole === "student" ? "active" : ""}
-            >
-              Học sinh
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setSelectedRole("teacher")}
-              className={selectedRole === "teacher" ? "active" : ""}
-            >
-              Giáo viên
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setSelectedRole("parent")}
-              className={selectedRole === "parent" ? "active" : ""}
-            >
-              Phụ huynh
-            </button>
-            </div>
-            )}
-          </div>
+          <p className="login-role-hint">Tài khoản học sinh được tạo tự động. Quản trị viên đăng nhập bằng tài khoản đã được cấp quyền.</p>
 
           <form
             className="login-form"
@@ -415,6 +409,13 @@ export default function LoginPage() {
                 </button>
               </div>
             </label>
+
+            {mode === "login" && (
+              <button type="button" className="auth-reset-button" disabled={loading}
+                onClick={() => void handlePasswordReset()}>
+                Quên mật khẩu? Gửi email khôi phục
+              </button>
+            )}
 
             <button type="submit" disabled={loading}>
               {loading

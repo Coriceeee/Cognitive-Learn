@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, doc, getDocsFromServer, onSnapshot, orderBy, query, limit, where, runTransaction, serverTimestamp, type Unsubscribe } from "firebase/firestore";
+import { collection, doc, getDocsFromServer, onSnapshot, orderBy, query, limit, where, startAfter, runTransaction, serverTimestamp, type Unsubscribe, type QueryDocumentSnapshot, type DocumentData } from "firebase/firestore";
 import { auth, db } from "./firebase";
-import { appendJourneyCheckIn, createJourneyCycle, isJourneyCycle, reassessJourneyCycle, isJourneyLock, type JourneyCycle, type JourneyScenarioId, type JourneySubject } from "./closedLoopJourney";
+import { auditAdaptiveDecisionTrace, sameReviewCommit } from "./adaptiveNextCycle";
+import {auditJourneyArchivePage, HISTORY_MAX_DISPLAY} from "./journeyHistoryArchive";
+import { appendJourneyCheckIn, createJourneyCycle, isJourneyCycle, reassessJourneyCycle, isJourneyLock, type JourneyCycle, type JourneyDecisionTrace, type JourneyScenarioId, type JourneySubject } from "./closedLoopJourney";
 
 type JourneyStatus = "loading" | "ready" | "empty" | "signed-out" | "error";
 const root = "learning_journeys";
@@ -21,6 +23,15 @@ export function useClosedLoopJourney() {
   const [cycles, setCycles] = useState<JourneyCycle[]>([]);
   const [status, setStatus] = useState<JourneyStatus>("loading");
   const [error, setError] = useState("");
+  const [olderCycles, setOlderCycles] = useState<JourneyCycle[]>([]);
+  const [hasMoreOlder, setHasMoreOlder] = useState(false);
+  const [recentFromServer, setRecentFromServer] = useState(false);
+  const [loadingOlder, setLoadingOlder] = useState(false);
+  const [olderError, setOlderError] = useState("");
+  const historyCursorRef = useRef<QueryDocumentSnapshot<DocumentData> | null>(null);
+  const recentCursorRef = useRef<QueryDocumentSnapshot<DocumentData> | null>(null);
+  const archiveGenerationRef = useRef(0);
+  const loadingOlderRef = useRef(false);
   const [busy, setBusy] = useState(false);
   const busyRef = useRef(false); // synchronous guard for rapid double clicks
 
@@ -28,26 +39,79 @@ export function useClosedLoopJourney() {
     let stopFirestore: Unsubscribe | undefined;
     const stopAuth = onAuthStateChanged(auth, user => {
       stopFirestore?.(); stopFirestore = undefined;
+      archiveGenerationRef.current++;
+      historyCursorRef.current=null;recentCursorRef.current=null;
+      setOlderCycles([]);setHasMoreOlder(false);setRecentFromServer(false);
+      setLoadingOlder(false);setOlderError("");
       setCycles([]); setUid(user?.uid ?? ""); setError("");
       if (!user) { setStatus("signed-out"); return; }
       setStatus("loading");
       const currentUid = user.uid;
-      stopFirestore = onSnapshot(query(cyclesPath(currentUid), orderBy("startedAt", "desc"), limit(8)), snapshot => {
+      // Retain limit(8): deployed and candidate Rules cap a student history query at eight.
+      stopFirestore = onSnapshot(query(cyclesPath(currentUid), orderBy("startedAt", "desc"), limit(8)), { includeMetadataChanges: true }, snapshot => {
         if (auth.currentUser?.uid !== currentUid) return;
-        const items = snapshot.docs.map(record => record.data());
-        if (!items.every(isJourneyCycle)) {
-          setStatus("error"); setError("Dữ liệu chu kỳ không đúng phiên bản, chưa tự động ghi đè."); return;
+        archiveGenerationRef.current++;
+        historyCursorRef.current=null;
+        setOlderCycles([]);setOlderError("");setLoadingOlder(false);
+        const pageDocs=snapshot.docs.slice(0,8);
+        const items = pageDocs.map(record => record.data());
+        if (!items.every(item => isJourneyCycle(item) && item.userId === currentUid) ||
+            !pageDocs.every((record,i)=>record.id===items[i].id)) {
+          setCycles([]); // Never keep displaying an older student result after corrupt server evidence.
+          setHasMoreOlder(false);setRecentFromServer(false);
+          setStatus("error"); setError("Dữ liệu chu kỳ hoặc Evidence Record không nhất quán. Đã ẩn kết quả cũ; không tự động ghi đè."); return;
         }
-        setCycles(items);
+        recentCursorRef.current=pageDocs[pageDocs.length-1]??null;
+        setHasMoreOlder(snapshot.docs.length===8);
+        setRecentFromServer(!snapshot.metadata.fromCache && !snapshot.metadata.hasPendingWrites);
+        // The all-record owner/shape/document-ID check above has already passed.
+        // Narrow DocumentData[] with the same runtime validator before publishing to React state.
+        // Never simply assert/cast untrusted Firestore data to JourneyCycle[].
+        setCycles(items.filter(isJourneyCycle));
         setError("");
         setStatus(items.length ? "ready" : "empty");
       }, error => {
         if (auth.currentUser?.uid !== currentUid) return;
+        archiveGenerationRef.current++;
+        setCycles([]);setOlderCycles([]);setHasMoreOlder(false);setRecentFromServer(false);
         setStatus("error"); setError(errorMessage(error));
       });
     }, () => { setStatus("error"); setError("Không xác minh được phiên đăng nhập Firebase."); });
     return () => { stopFirestore?.(); stopAuth(); };
   }, []);
+
+  async function loadOlder() {
+    if(loadingOlderRef.current)throw new Error("Đang tải trang lịch sử khác.");
+    const owner=uid;
+    if(!owner || auth.currentUser?.uid!==owner || status!=="ready" ||
+       !recentFromServer || !hasMoreOlder || cycles.length+olderCycles.length>=HISTORY_MAX_DISPLAY)
+      throw new Error("Chưa đủ điều kiện tải thêm lịch sử từ máy chủ.");
+    const cursor=historyCursorRef.current??recentCursorRef.current;
+    if(!cursor)throw new Error("Không có con trỏ lịch sử hợp lệ.");
+    const generation=archiveGenerationRef.current;
+    loadingOlderRef.current=true;setLoadingOlder(true);setOlderError("");
+    try {
+      const result=await getDocsFromServer(query(cyclesPath(owner),orderBy("startedAt","desc"),startAfter(cursor),limit(8)));
+      if(archiveGenerationRef.current!==generation || auth.currentUser?.uid!==owner)return;
+      const audit=auditJourneyArchivePage(owner,[...cycles,...olderCycles],
+        result.docs.map(record=>({id:record.id,data:record.data()})),true);
+      if(audit.state==="BLOCKED"){
+        setOlderCycles([]);setHasMoreOlder(false);historyCursorRef.current=null;
+        setOlderError(`Trang lịch sử không nhất quán (${audit.reason}); đã ẩn dữ liệu lịch sử cũ.`);return;
+      }
+      setOlderCycles([...olderCycles,...audit.older]);
+      setHasMoreOlder(audit.hasMore);
+      if(audit.older.length) historyCursorRef.current=result.docs[audit.older.length-1];
+    } catch(error) {
+      if(archiveGenerationRef.current===generation && auth.currentUser?.uid===owner){
+        setOlderCycles([]);setHasMoreOlder(false);historyCursorRef.current=null;
+        setOlderError(errorMessage(error));
+      }
+    } finally {
+      loadingOlderRef.current=false;
+      if(archiveGenerationRef.current===generation)setLoadingOlder(false);
+    }
+  }
 
   const assertOwner = () => {
     if (!uid || auth.currentUser?.uid !== uid || !["ready", "empty"].includes(status)) {
@@ -66,7 +130,7 @@ export function useClosedLoopJourney() {
 
   async function start(input: {
     scenarioId: JourneyScenarioId; scenarioTitle: string; targetMajor: string;
-    subjects: JourneySubject[]; plannedWeeklyHours: number; weeksLeft: number;
+    subjects: JourneySubject[]; plannedWeeklyHours: number; weeksLeft: number; decisionTrace?: JourneyDecisionTrace;
   }) {
     return execute(async () => {
       const owner = assertOwner();
@@ -76,7 +140,8 @@ export function useClosedLoopJourney() {
       const existingActive = await getDocsFromServer(query(cyclesPath(owner), where("status", "==", "ACTIVE"), limit(1)));
       if (!existingActive.empty) throw new Error("Tài khoản vẫn có chu kỳ ACTIVE (có thể là dữ liệu bản cũ). Hãy tổng kết chu kỳ đó trước.");
       const reference = doc(cyclesPath(owner));
-      const cycle = createJourneyCycle({ ...input, id: reference.id, startedAt: new Date().toISOString() });
+      const cycle = { ...createJourneyCycle({ ...input, id: reference.id, startedAt: new Date().toISOString() }), userId: owner,
+        ...(input.decisionTrace ? { decisionTrace: input.decisionTrace } : {}) };
       if (auth.currentUser?.uid !== owner) throw new Error("Tài khoản đã thay đổi.");
       const stateReference = lockPath(owner);
       await runTransaction(db, async transaction => {
@@ -85,6 +150,14 @@ export function useClosedLoopJourney() {
           throw new Error("Trạng thái chu kỳ không hợp lệ. Không ghi đè dữ liệu.");
         if (state.exists() && state.data().activeCycleId !== null)
           throw new Error("Tài khoản đang có một chu kỳ ACTIVE trên thiết bị khác.");
+        if (cycle.decisionTrace) {
+          if (!recentFromServer || !cycles.some(c=>c.id===cycle.decisionTrace?.sourceCycleId)) throw new Error("Cần đồng bộ gợi ý từ máy chủ trước khi lưu.");
+          const prior = await transaction.get(doc(cyclesPath(owner), cycle.decisionTrace.sourceCycleId));
+          if (!state.exists() || !sameReviewCommit(state.data().updatedAt, prior.data()?.updatedAt))
+            throw new Error("Gợi ý thuộc chu kỳ cũ hoặc thiếu xác nhận máy chủ. Hãy tải lại và chọn lại.");
+          if (prior.id !== cycle.decisionTrace.sourceCycleId || auditAdaptiveDecisionTrace(cycle, prior.data(), owner, true) !== "CONSISTENT")
+            throw new Error("Nguồn gợi ý không khớp. Không lưu chu kỳ; hãy chọn lại.");
+        }
         if (auth.currentUser?.uid !== owner) throw new Error("Tài khoản đã thay đổi.");
         const nextState = { userId: owner, schemaVersion: 1, activeCycleId: cycle.id, updatedAt: serverTimestamp() };
         transaction.set(stateReference, nextState);
@@ -149,6 +222,7 @@ export function useClosedLoopJourney() {
   }) => mutate(cycleId, cycle => reassessJourneyCycle(cycle, {
     ...input, recordedAt: new Date().toISOString(),
   }));
-  return { cycles, current: cycles.find(c => c.status === "ACTIVE") ?? null,
+  return { uid, cycles, olderCycles, hasMoreOlder, recentFromServer, loadingOlder, olderError, loadOlder,
+    current: cycles.find(c => c.status === "ACTIVE") ?? null,
     latest: cycles[0] ?? null, status, error, busy, start, checkIn, reassess };
 }

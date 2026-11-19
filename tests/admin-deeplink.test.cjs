@@ -13,8 +13,8 @@ assert.doesNotMatch(admin,/moduleSubmoduleDirectory|nexus-legacy-tests|getAdminP
 const rolePreview = admin.split('className="nexus-role-switcher"')[1] || "";
 assert.ok(rolePreview, "explicit admin role-preview section is required");
 assert.match(rolePreview, /href="\/student\?from=admin"/);
-assert.match(rolePreview, /href="\/teacher\?from=admin"/);
-assert.match(rolePreview, /href="\/parent\?from=admin"/);
+assert.doesNotMatch(rolePreview, /href="\/teacher\?from=admin"/);
+assert.doesNotMatch(rolePreview, /href="\/parent\?from=admin"/);
 assert.match(rolePreview, /không đổi vai trò tài khoản/i);
 assert.doesNotMatch(admin.split('className="nexus-role-switcher"')[0], /href="\/(?:student|teacher|parent)(?:["?])/,
   "role workspaces must not be mixed into the admin task directory");

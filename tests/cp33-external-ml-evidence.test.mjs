@@ -1,0 +1,8 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {externalMlModels,isExternalMlEvidence} from '../src/lib/externalMlEvidence.ts';
+const sha='a'.repeat(64);
+const fixture=()=>({schema_version:'cla.uci.ml-comparison.v1',status:'EXTERNAL_METHOD_FEASIBILITY_ONLY',dataset:'DElmazi/Student_Performance',revision:'85a4fba73197d748e4cfd445a5e9c2ed35ca4a21',license:'CC-BY-4.0',nominal_coverage:.9,code_sha256:sha,citation:'TEST FIXTURE ONLY',limitations:Array(5).fill('SYNTHETIC'),subjects:[['math',395],['portuguese',649]].map(([subject,rows])=>({subject,rows,source_sha256:sha,split_sha256:sha,counts:{train:rows-100,calibration:50,test:50},metrics:Object.fromEntries(externalMlModels.map(k=>[k,{mae:2,rmse:3,coverage:.8,mean_interval_width:5,calibration_radius:4}])),behavior_increment:{ridge:{mae_reduction:0,ci95_signature_bootstrap:[-1,1]},forest:{mae_reduction:0,ci95_signature_bootstrap:[-1,1]}}}))});
+test('structural gate accepts complete aggregate fixture, not proof of science',()=>assert.equal(isExternalMlEvidence(fixture()),true));
+test('rejects missing subject, wrong source, synthetic status',()=>{for(const alter of [v=>v.subjects.pop(),v=>v.revision='wrong',v=>v.status='SYNTHETIC',v=>v.subjects[1].subject='math']){const v=fixture();alter(v);assert.equal(isExternalMlEvidence(v),false);}});
+test('rejects bad bounds, mismatched counts, and inconsistent ablation',()=>{for(const alter of [v=>v.subjects[0].metrics.last_G2.coverage=1.5,v=>v.subjects[0].counts.test=49,v=>v.subjects[0].behavior_increment.ridge.mae_reduction=2,v=>v.subjects[0].metrics.last_G2.mae=NaN]){const v=fixture();alter(v);assert.equal(isExternalMlEvidence(v),false);}});

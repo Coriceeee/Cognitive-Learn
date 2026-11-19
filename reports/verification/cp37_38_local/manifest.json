@@ -1,0 +1,29 @@
+{
+  "schema": "cla.v4.cp37-38.local.v1",
+  "scope": "LOCAL_TECHNICAL_ONLY",
+  "source": {
+    "sha256": "629b4c8540cab81f4aa2562537ef325c4f83353cf1eea26bdb00627e8a035972",
+    "fileCount": 369
+  },
+  "node": {
+    "firstCompletedTap": 609,
+    "firstInvocation": "TIMEOUT_AT_CP31_BATCH3",
+    "remainingGroupedTap": 419,
+    "remainingExitCode": 0,
+    "totalPass": 1028,
+    "totalFail": 0
+  },
+  "newTests": 16,
+  "engineTypecheck": "PASS",
+  "demoOffline": "11/11 PASS",
+  "atlasRetrieval": "848/848 PASS",
+  "knowledgeRetrieval": "120/120 PASS",
+  "rulesStatic": "15/15 PASS",
+  "fullBuild": "FAIL_MISSING_DEPENDENCIES",
+  "firebaseEmulator": "NOT_RUN",
+  "browserE2E": "NOT_RUN",
+  "liveLlm": "NOT_RUN",
+  "realMl": "NOT_RUN",
+  "scientificValidity": "NOT_ESTABLISHED",
+  "reviewerAccepted": false
+}

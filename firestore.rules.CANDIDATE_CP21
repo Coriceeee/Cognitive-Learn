@@ -70,12 +70,6 @@ service cloud.firestore {
       return studentOwns(uid) || adminOwnsDemo(uid);
     }
 
-    function activeSelf() {
-      return signedIn()
-        && exists(userPath(request.auth.uid))
-        && get(userPath(request.auth.uid)).data.active == true;
-    }
-
     function validUserCreate(uid) {
       return signedIn()
         && request.auth.uid == uid
@@ -84,7 +78,7 @@ service cloud.firestore {
         && request.resource.data.keys().hasAll(['email', 'role', 'fullName', 'active', 'createdAt'])
         && request.resource.data.email is string
         && request.resource.data.email == request.auth.token.email.lower()
-        && request.resource.data.role in ['student', 'teacher', 'parent']
+        && request.resource.data.role == 'student'
         && request.resource.data.fullName is string
         && request.resource.data.fullName.size() > 0
         && request.resource.data.fullName.size() <= 120
@@ -135,24 +129,62 @@ service cloud.firestore {
           curriculum.selectedElectives[2], curriculum.selectedElectives[3]];
     }
 
+    // CP29 C4/D3: the authoritative subject identity is fixed for grades 10–12.
+    // Fail closed for malformed legacy records; migration requires an audited
+    // privileged operation, not self-service overwrite.
+    function sameAcademicIdentity(previous, next) {
+      return previous is map && next is map
+        && previous.get('selectedElectives', []) is list
+        && previous.get('selectedElectives', []).size() == 4
+        && previous.get('foreignLanguage', '') is string
+        && previous.get('foreignLanguage', '').size() > 0
+        && previous.selectedElectives == next.selectedElectives
+        && previous.foreignLanguage == next.foreignLanguage
+        && previous.get('program', '') == next.program;
+    }
+
     function preserveLockedElectives(previous, next) {
-      return !(previous is map
-          && previous.get('curriculum', {}) is map
-          && previous.get('curriculum', {}).get('selectedElectives', []) is list
-          && previous.get('curriculum', {}).get('selectedElectives', []).size() == 4)
-        || previous.curriculum.selectedElectives == next.curriculum.selectedElectives;
+      return previous is map && next is map
+        && previous.get('curriculum', {}) is map
+        && next.get('curriculum', {}) is map
+        && sameAcademicIdentity(previous.curriculum, next.curriculum);
     }
 
     function legacySelectedElectives(uid, curriculum) {
       let path = /databases/$(database)/documents/learning_profiles/$(uid);
-      return !exists(path)
-        || preserveLockedElectives(get(path).data, {'curriculum': curriculum});
+      // getAfter observes all writes in this atomic batch, including first-time
+      // profile+transcript creation; plain get() could miss a mismatched pair.
+      return !existsAfter(path)
+        || (getAfter(path).data.get('curriculum', {}) is map
+          && sameAcademicIdentity(getAfter(path).data.curriculum, curriculum));
     }
 
     function matchesStoredTranscript(uid, curriculum) {
       let path = /databases/$(database)/documents/student_transcripts/$(uid);
-      return !exists(path)
-        || get(path).data.curriculum.selectedElectives == curriculum.selectedElectives;
+      // getAfter observes all writes in this atomic batch, including first-time
+      // profile+transcript creation; plain get() could miss a mismatched pair.
+      return !existsAfter(path)
+        || (getAfter(path).data.get('curriculum', {}) is map
+          && sameAcademicIdentity(getAfter(path).data.curriculum, curriculum));
+    }
+
+    // All three school years refer to one locked 9-subject catalogue.
+    // Partially entered grades/terms are allowed; unknown subjects/years are not.
+    function validTranscriptYear(year, subjects) {
+      return year is map
+        && year.keys().hasOnly(['semester1', 'semester2'])
+        && year.get('semester1', {}) is map
+        && year.get('semester2', {}) is map
+        && year.get('semester1', {}).keys().hasOnly(subjects)
+        && year.get('semester2', {}).keys().hasOnly(subjects);
+    }
+
+    function validThreeYearTranscript(transcript, curriculum) {
+      return transcript is map
+        && transcript.keys().hasOnly(['grade10', 'grade11', 'grade12'])
+        && validTranscriptYear(transcript.get('grade10', {}), curriculum.gradedSubjects)
+        && validTranscriptYear(transcript.get('grade11', {}), curriculum.gradedSubjects)
+        && validTranscriptYear(transcript.get('grade12', {}), curriculum.gradedSubjects);
     }
 
     match /learning_profiles/{uid} {
@@ -182,117 +214,22 @@ service cloud.firestore {
       }
     }
 
-    function validLinkId(linkId, studentId, viewerId) {
-      return linkId == studentId + '_' + viewerId
-        && studentId is string
-        && viewerId is string
-        && studentId.size() >= 6 && studentId.size() <= 128
-        && viewerId.size() >= 6 && viewerId.size() <= 128
-        && studentId != viewerId;
-    }
-
-    function viewerHasRole(viewerId, viewerRole) {
-      return exists(userPath(viewerId))
-        && get(userPath(viewerId)).data.active == true
-        && get(userPath(viewerId)).data.role == viewerRole;
-    }
-
-    function linkReadAllowed(data) {
-
-      return activeSelf()
-        && (data.studentId == request.auth.uid
-            || (data.viewerId == request.auth.uid && hasProductConsent(data.studentId)));
-    }
-
+    // Student-only scope: legacy sharing is retired. Owners may revoke old records.
     function linkPath(linkId) {
       return /databases/$(database)/documents/student_links/$(linkId);
     }
-
-    function validLinkCreate(linkId) {
-      return signedIn()
-        && activeRole('student')
-        && hasProductConsent(request.auth.uid)
-        && request.resource.data.keys().hasOnly(['studentId', 'viewerId', 'viewerRole', 'studentName', 'createdAt'])
-        && request.resource.data.keys().hasAll(['studentId', 'viewerId', 'viewerRole', 'studentName', 'createdAt'])
-        && request.resource.data.studentId == request.auth.uid
-        && request.resource.data.viewerRole in ['teacher', 'parent']
-        && validLinkId(linkId, request.resource.data.studentId, request.resource.data.viewerId)
-        && viewerHasRole(request.resource.data.viewerId, request.resource.data.viewerRole)
-        && request.resource.data.studentName is string
-        && request.resource.data.studentName.size() <= 80
-        && request.resource.data.createdAt == request.time;
-    }
-
     match /student_links/{linkId} {
-      allow get: if linkReadAllowed(resource.data);
-      allow list: if signedIn() && request.query.limit <= 40
-        && linkReadAllowed(resource.data);
-      allow create: if validLinkCreate(linkId);
-      allow update: if false;
+      allow get: if studentOwns(resource.data.studentId);
+      allow list: if request.query.limit != null && request.query.limit <= 40
+        && studentOwns(resource.data.studentId);
+      allow create, update: if false;
       allow delete: if studentOwns(resource.data.studentId)
         && !exists(/databases/$(database)/documents/student_shared_reports/$(linkId));
     }
-
-    function validReportLink(linkId, data) {
-      return exists(linkPath(linkId))
-        && get(linkPath(linkId)).data.studentId == data.studentId
-        && get(linkPath(linkId)).data.viewerId == data.viewerId
-        && get(linkPath(linkId)).data.viewerRole == data.viewerRole;
-    }
-
-    function allowedReportFields() {
-      return ['studentId', 'viewerId', 'viewerRole', 'title', 'summary',
-        'nextStep', 'status', 'feedback', 'reviewedAt', 'createdAt'];
-    }
-
-    function validReportCreate(linkId) {
-      let data = request.resource.data;
-      return studentMayPersist(data.studentId)
-        && data.keys().hasOnly(allowedReportFields())
-        && data.keys().hasAll(allowedReportFields())
-        && validReportLink(linkId, data)
-        && data.title is string && data.title.size() >= 5 && data.title.size() <= 70
-        && data.summary is string && data.summary.size() >= 10 && data.summary.size() <= 900
-        && data.nextStep is string && data.nextStep.size() <= 400
-        && data.status == 'shared' && data.feedback == ''
-        && data.reviewedAt == null
-        && data.createdAt == request.time;
-    }
-
-    function canReadReport(linkId) {
-      return signedIn()
-        && validReportLink(linkId, resource.data)
-        && (studentOwns(resource.data.studentId)
-           || (hasProductConsent(resource.data.studentId) && resource.data.viewerId == request.auth.uid
-               && activeRole(resource.data.viewerRole)
-               && resource.data.viewerRole in ['teacher', 'parent']));
-    }
-
-    function validOneTimeReview(linkId) {
-      return signedIn()
-        && hasProductConsent(resource.data.studentId)
-        && resource.data.status == 'shared'
-        && resource.data.feedback == ''
-        && resource.data.viewerId == request.auth.uid
-        && resource.data.viewerRole in ['teacher', 'parent']
-        && activeRole(resource.data.viewerRole)
-        && validReportLink(linkId, resource.data)
-        && request.resource.data.diff(resource.data).affectedKeys()
-             .hasOnly(['feedback', 'status', 'reviewedAt'])
-        && request.resource.data.status == 'reviewed'
-        && request.resource.data.feedback is string
-        && request.resource.data.feedback.size() >= 5
-        && request.resource.data.feedback.size() <= 600
-        && request.resource.data.reviewedAt == request.time;
-    }
-
     match /student_shared_reports/{linkId} {
-      allow get: if canReadReport(linkId);
-      allow list: if false;
-      allow create: if validReportCreate(linkId);
-      allow update: if validOneTimeReview(linkId);
-      allow delete: if signedIn()
-        && exists(linkPath(linkId))
+      allow get: if studentOwns(resource.data.studentId);
+      allow list, create, update: if false;
+      allow delete: if signedIn() && exists(linkPath(linkId))
         && studentOwns(get(linkPath(linkId)).data.studentId)
         && (resource == null || resource.data.studentId == request.auth.uid);
     }
@@ -313,7 +250,7 @@ service cloud.firestore {
         && request.resource.data.keys().hasOnly([
           'userId', 'schemaVersion', 'dataScope', 'curriculum', 'transcript', 'gpaSummary', 'updatedAt'])
         && request.resource.data.curriculum is map
-        && request.resource.data.transcript is map
+        && validThreeYearTranscript(request.resource.data.transcript, request.resource.data.curriculum)
         && request.resource.data.gpaSummary is map
         && request.resource.data.updatedAt == request.time;
       allow update: if ownerRecord(uid)
@@ -324,7 +261,7 @@ service cloud.firestore {
         && request.resource.data.keys().hasOnly([
           'userId', 'schemaVersion', 'dataScope', 'curriculum', 'transcript', 'gpaSummary', 'updatedAt'])
         && request.resource.data.curriculum is map
-        && request.resource.data.transcript is map
+        && validThreeYearTranscript(request.resource.data.transcript, request.resource.data.curriculum)
         && request.resource.data.gpaSummary is map
         && request.resource.data.updatedAt == request.time;
       allow delete: if false;
@@ -431,6 +368,27 @@ service cloud.firestore {
         && result.provenance == 'student_self_report';
     }
 
+    // CP31 B10: T0 is a plan-only, non-predictive snapshot.
+    // Rules bind it to create-time plan fields. The update diff whitelist excludes
+    // both the snapshot AND all initial plan fields, so T1/T2 cannot rewrite T0.
+    function validJourneyT0Snapshot(t0, data) {
+      return t0 is map
+        && t0.keys().hasOnly(['schemaVersion', 'policyVersion', 'frozenAt', 'inputSource',
+          'scenarioId', 'subjects', 'plannedWeeklyHours', 'weeksLeft', 'planGapPoints',
+          'forecastStatus', 'predictedOutcome', 'calibratedProbability'])
+        && t0.keys().hasAll(['schemaVersion', 'policyVersion', 'frozenAt', 'inputSource',
+          'scenarioId', 'subjects', 'plannedWeeklyHours', 'weeksLeft', 'planGapPoints',
+          'forecastStatus', 'predictedOutcome', 'calibratedProbability'])
+        && t0.schemaVersion == 1 && t0.policyVersion == 'cla-t0-descriptive-gap-v1'
+        && t0.frozenAt == data.startedAt && t0.inputSource == 'student_self_report'
+        && t0.scenarioId == data.scenarioId && t0.subjects == data.subjects
+        && t0.plannedWeeklyHours == data.plannedWeeklyHours
+        && t0.weeksLeft == data.weeksLeft
+        && t0.planGapPoints is number && t0.planGapPoints >= 0 && t0.planGapPoints <= 10
+        && t0.forecastStatus == 'NOT_ESTIMATED'
+        && t0.predictedOutcome == null && t0.calibratedProbability == null;
+    }
+
     // Fixed per-student mutex document. Every new ACTIVE cycle must be created
     // in the same atomic transaction/batch as the metadata transition.
     function journeyStatePath(uid) {
@@ -513,12 +471,43 @@ service cloud.firestore {
       allow delete: if false;
     }
 
+    // CP36: optional immutable selection lineage. Referential/shape checks only;
+    // policy arithmetic must be replayed by the client. Not an attestation of adherence.
+    function validAdaptiveOptionHours(value) {
+      return value == null || (value is int && value >= 1 && value <= 80);
+    }
+    function validAdaptiveSource(uid, trace) {
+      let prior = get(journeyCyclePath(uid, trace.sourceCycleId)).data;
+      return prior.userId == uid && prior.id == trace.sourceCycleId
+        && prior.status == 'REVIEWED' && prior.checkIns.size() >= 2
+        && prior.updatedAt is timestamp
+        && get(journeyStatePath(uid)).data.updatedAt == prior.updatedAt
+        && prior.evidenceRecord.inputSnapshotId == trace.inputSnapshotId
+        && prior.evidenceRecord.resultId == trace.reviewEvidenceId
+        && trace.recommendedHours <= prior.plannedWeeklyHours;
+    }
+    function validDecisionTrace(uid, data, t) {
+      return t is map && t.keys().hasOnly(['schemaVersion','policyVersion','sourceCycleId','inputSnapshotId','reviewEvidenceId','disposition','recommendedId','recommendedHours','optionHours'])
+        && t.schemaVersion == 1 && t.policyVersion == 'cla-adaptive-next-cycle-v1'
+        && t.sourceCycleId is string && t.sourceCycleId.matches('^[a-zA-Z0-9_-]{8,100}$') && t.sourceCycleId != data.id
+        && t.inputSnapshotId == t.sourceCycleId && t.reviewEvidenceId == t.sourceCycleId + '-review'
+        && t.recommendedId in ['balanced','focused','breakthrough']
+        && t.recommendedHours is int && t.recommendedHours >= 1 && t.recommendedHours <= 80
+        && t.optionHours is map && t.optionHours.keys().hasOnly(['balanced','focused','breakthrough'])
+        && validAdaptiveOptionHours(t.optionHours.balanced) && validAdaptiveOptionHours(t.optionHours.focused) && validAdaptiveOptionHours(t.optionHours.breakthrough)
+        && t.optionHours[t.recommendedId] == t.recommendedHours
+        && t.optionHours[data.scenarioId] == data.plannedWeeklyHours
+        && ((t.disposition == 'ACCEPTED' && t.recommendedId == data.scenarioId)
+          || (t.disposition == 'DECLINED' && t.recommendedId != data.scenarioId))
+        && validAdaptiveSource(uid, t);
+    }
+
     function validJourneyRecord(uid, cycleId) {
       let data = request.resource.data;
       return studentMayPersist(uid)
         && data.keys().hasOnly(['id', 'userId', 'schemaVersion', 'origin', 'scenarioId', 'scenarioTitle',
           'targetMajor', 'subjects', 'plannedWeeklyHours', 'weeksLeft', 'startedAt',
-          'status', 'checkIns', 'reassessment', 'evidenceRecord', 'createdAt', 'updatedAt'])
+          'status', 'checkIns', 'reassessment', 'evidenceRecord', 't0Snapshot', 'decisionTrace', 'createdAt', 'updatedAt'])
         && data.keys().hasAll(['id', 'userId', 'schemaVersion', 'origin', 'scenarioId', 'scenarioTitle',
           'targetMajor', 'subjects', 'plannedWeeklyHours', 'weeksLeft', 'startedAt',
           'status', 'checkIns', 'reassessment', 'createdAt', 'updatedAt'])
@@ -529,6 +518,7 @@ service cloud.firestore {
         && data.scenarioTitle is string && data.scenarioTitle.size() >= 1 && data.scenarioTitle.size() <= 100
         && data.targetMajor is string && data.targetMajor.size() <= 120
         && validJourneySubjects(data.subjects)
+        && validJourneyT0Snapshot(data.t0Snapshot, data)
         && data.plannedWeeklyHours is int && data.plannedWeeklyHours >= 1 && data.plannedWeeklyHours <= 80
         && data.weeksLeft is int && data.weeksLeft >= 1 && data.weeksLeft <= 104
         && data.startedAt is string && data.startedAt.size() <= 40
@@ -537,7 +527,42 @@ service cloud.firestore {
         && (data.reassessment == null || validJourneyReassessment(data.reassessment))
         && (data.get('evidenceRecord', null) == null
           || (data.status == 'REVIEWED' && validJourneyEvidence(data.evidenceRecord, cycleId, data.reassessment)))
+        && (!data.keys().hasAny(['decisionTrace']) || validDecisionTrace(uid, data, data.decisionTrace))
         && data.updatedAt == request.time;
+    }
+
+    // Updates are intentionally separate from full creation validation.
+    // Immutable properties cannot be changed (diff whitelist), and repeating
+    // 6 subject validators and all evidence validators on every check-in
+    // exceeds Firestore's 1,000-expression evaluation budget.
+    function validJourneyUpdate(uid, cycleId) {
+      let old = resource.data;
+      let next = request.resource.data;
+      return studentMayPersist(uid)
+        && old.id == cycleId && old.userId == uid && old.schemaVersion == 1
+        && old.status == 'ACTIVE' && old.checkIns is list
+        && old.weeksLeft is int && old.weeksLeft >= 1 && old.weeksLeft <= 104
+        && next.id == cycleId && next.userId == uid && next.schemaVersion == 1
+        && next.createdAt == old.createdAt
+        && next.updatedAt == request.time
+        && next.diff(old).affectedKeys().hasOnly([
+          'status', 'checkIns', 'reassessment', 'evidenceRecord', 'updatedAt'])
+        && next.checkIns is list && next.checkIns.size() <= 12
+        && exists(journeyStatePath(uid))
+        && get(journeyStatePath(uid)).data.activeCycleId == cycleId
+        && ( (next.status == 'ACTIVE'
+          && next.reassessment == null
+          && old.reassessment == null
+          && next.get('evidenceRecord', null) == old.get('evidenceRecord', null)
+          && next.checkIns.size() == old.checkIns.size() + 1
+          && next.checkIns.hasAll(old.checkIns)
+          && validJourneyCheckIn(next.checkIns[next.checkIns.size() - 1], old.weeksLeft)
+          && getAfter(journeyStatePath(uid)).data.activeCycleId == cycleId)
+        || (next.status == 'REVIEWED'
+          && next.checkIns == old.checkIns && next.checkIns.size() >= 1
+          && validJourneyReassessment(next.reassessment)
+          && validJourneyEvidence(request.resource.data.get('evidenceRecord', null), cycleId, next.reassessment)
+          && getAfter(journeyStatePath(uid)).data.activeCycleId == null) );
     }
 
     match /learning_journeys/{uid}/cycles/{cycleId} {
@@ -551,28 +576,65 @@ service cloud.firestore {
         && request.resource.data.createdAt == request.time
         && (!exists(journeyStatePath(uid)) || get(journeyStatePath(uid)).data.activeCycleId == null)
         && getAfter(journeyStatePath(uid)).data.activeCycleId == cycleId;
-      allow update: if validJourneyRecord(uid, cycleId)
-        && resource.data.userId == uid && resource.data.schemaVersion == 1
-        && resource.data.status == 'ACTIVE'
-        && exists(journeyStatePath(uid))
-        && get(journeyStatePath(uid)).data.activeCycleId == cycleId
-        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
-          'status', 'checkIns', 'reassessment', 'evidenceRecord', 'updatedAt'])
-        && request.resource.data.createdAt == resource.data.createdAt
-        && request.resource.data.checkIns.size() >= resource.data.checkIns.size()
-        && request.resource.data.checkIns.size() <= resource.data.checkIns.size() + 1
-        && request.resource.data.checkIns.hasAll(resource.data.checkIns)
-        && (request.resource.data.checkIns.size() == resource.data.checkIns.size()
-          || validJourneyCheckIn(request.resource.data.checkIns[request.resource.data.checkIns.size() - 1], request.resource.data.weeksLeft))
-        && (request.resource.data.status == 'ACTIVE'
-          ? request.resource.data.reassessment == null
-            && request.resource.data.get('evidenceRecord', null) == resource.data.get('evidenceRecord', null)
-            && getAfter(journeyStatePath(uid)).data.activeCycleId == cycleId
-          : request.resource.data.checkIns.size() >= 1
-            && validJourneyReassessment(request.resource.data.reassessment)
-            && validJourneyEvidence(request.resource.data.get('evidenceRecord', null), cycleId, request.resource.data.reassessment)
-            && getAfter(journeyStatePath(uid)).data.activeCycleId == null);
+      allow update: if validJourneyUpdate(uid, cycleId);
       allow delete: if false;
+    }
+
+    // CP31 B14: owner-only, consent-gated, create-once student declarations.
+    // Metadata is NOT grading verification, and declaredAt is the server write time,
+    // never a trusted exam-administration timestamp.
+    function validMeasurementDeclaration(uid, declarationId) {
+      let d = request.resource.data;
+      let cycle = get(journeyCyclePath(uid, d.cycleId)).data;
+      let isT0 = d.timepoint == 'T0';
+      return studentMayPersist(uid)
+        && d.keys().hasOnly(['schemaVersion', 'userId', 'subjectIndex', 'observationIndex',
+          'cycleId', 'subjectKey', 'timepoint', 'score', 'linkedAt', 'source',
+          'instrumentId', 'instrumentVersion', 'formId', 'scoringProtocolId', 'scaleId', 'declaredAt'])
+        && d.keys().hasAll(['schemaVersion', 'userId', 'subjectIndex', 'observationIndex',
+          'cycleId', 'subjectKey', 'timepoint', 'score', 'linkedAt', 'source',
+          'instrumentId', 'instrumentVersion', 'formId', 'scoringProtocolId', 'scaleId', 'declaredAt'])
+        && d.schemaVersion == 1 && d.userId == uid
+        && d.cycleId is string && d.cycleId.matches('^[a-zA-Z0-9_-]{8,100}$')
+        && d.subjectKey is string && d.subjectKey.matches('^[a-z]{2,20}$')
+        && d.timepoint in ['T0', 'T1']
+        && declarationId == d.cycleId + '~' + d.subjectKey + '~' + d.timepoint
+        && d.subjectIndex is int && d.subjectIndex >= 0 && d.subjectIndex < 6
+        && d.observationIndex is int && d.observationIndex >= -1 && d.observationIndex < 6
+        && d.score is number && d.score >= 0 && d.score <= 10
+        && d.linkedAt is string && d.linkedAt.size() <= 40
+        && d.source == 'student_self_report'
+        && d.instrumentId is string && d.instrumentId.matches('^[a-z][a-z0-9_-]{2,63}$')
+        && d.instrumentVersion is string && d.instrumentVersion.matches('^[a-z][a-z0-9_-]{2,63}$')
+        && d.formId is string && d.formId.matches('^[a-z][a-z0-9_-]{2,63}$')
+        && d.scoringProtocolId is string && d.scoringProtocolId.matches('^[a-z][a-z0-9_-]{2,63}$')
+        && d.scaleId in ['score-0-to-10', 'score-0-to-10-rounded']
+        && d.declaredAt == request.time
+        && exists(journeyCyclePath(uid, d.cycleId))
+        && cycle.userId == uid && cycle.id == d.cycleId
+        && cycle.t0Snapshot is map
+        && cycle.subjects is list && cycle.subjects.size() > d.subjectIndex
+        && cycle.subjects[d.subjectIndex].key == d.subjectKey
+        && ( (isT0 && d.observationIndex == -1
+          && cycle.startedAt == d.linkedAt
+          && cycle.t0Snapshot.frozenAt == d.linkedAt
+          && cycle.subjects[d.subjectIndex].baseline == d.score)
+          || (!isT0 && cycle.status == 'REVIEWED'
+            && cycle.reassessment is map
+            && cycle.reassessment.observations is list
+            && cycle.reassessment.observations.size() > d.observationIndex
+            && cycle.reassessment.observations[d.observationIndex].key == d.subjectKey
+            && cycle.reassessment.observations[d.observationIndex].score == d.score
+            && cycle.reassessment.recordedAt == d.linkedAt
+            && cycle.evidenceRecord is map) );
+    }
+
+    match /learning_journeys/{uid}/measurement_declarations/{declarationId} {
+      allow get: if studentOwns(uid);
+      // Reads use an owner-bound cycleId `in` query; no arbitrary collection-group access.
+      allow list: if studentOwns(uid) && request.query.limit != null && request.query.limit <= 96;
+      allow create: if validMeasurementDeclaration(uid, declarationId);
+      allow update, delete: if false;
     }
 
     match /module_drafts/{uid} {

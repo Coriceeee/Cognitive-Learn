@@ -1,0 +1,1333 @@
+{
+  "schema": "cla.knowledge-retrieval.benchmark.v1",
+  "version": "cla-knowledge-v1",
+  "benchmarkSha256": "e52a6ca857e1deb543b9a7df017cfe065c6c6649612420a34cb038ee871cafcd",
+  "knowledgeSha256": "e9e23533138c078a89c96fd60701ca53e86973740a11990960627589b42e92b3",
+  "scope": "TECHNICAL_PUBLIC_SYNTHETIC_TEST",
+  "goldReview": "AUTHOR_DEFINED_NOT_INDEPENDENT",
+  "method": "lexical_exact_evidence_set",
+  "total": 120,
+  "pass": 120,
+  "summary": {
+    "single": {
+      "total": 100,
+      "pass": 100
+    },
+    "multiple": {
+      "total": 10,
+      "pass": 10
+    },
+    "abstain": {
+      "total": 10,
+      "pass": 10
+    }
+  },
+  "liveLlm": "NOT_RUN",
+  "limitations": [
+    "No independent holdout or human gold review.",
+    "No live Gemini, open-weight model or factual groundedness evaluation.",
+    "Abstain means this narrow retrieval path returned no cards, not an end-to-end safety refusal."
+  ],
+  "rows": [
+    {
+      "caseId": "CLA-KB-001",
+      "category": "single",
+      "expected": [
+        "CLA-K01"
+      ],
+      "actual": [
+        "CLA-K01"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-002",
+      "category": "single",
+      "expected": [
+        "CLA-K01"
+      ],
+      "actual": [
+        "CLA-K01"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-003",
+      "category": "single",
+      "expected": [
+        "CLA-K01"
+      ],
+      "actual": [
+        "CLA-K01"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-004",
+      "category": "single",
+      "expected": [
+        "CLA-K01"
+      ],
+      "actual": [
+        "CLA-K01"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-005",
+      "category": "single",
+      "expected": [
+        "CLA-K01"
+      ],
+      "actual": [
+        "CLA-K01"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-006",
+      "category": "single",
+      "expected": [
+        "CLA-K01"
+      ],
+      "actual": [
+        "CLA-K01"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-007",
+      "category": "single",
+      "expected": [
+        "CLA-K01"
+      ],
+      "actual": [
+        "CLA-K01"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-008",
+      "category": "single",
+      "expected": [
+        "CLA-K01"
+      ],
+      "actual": [
+        "CLA-K01"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-009",
+      "category": "single",
+      "expected": [
+        "CLA-K01"
+      ],
+      "actual": [
+        "CLA-K01"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-010",
+      "category": "single",
+      "expected": [
+        "CLA-K01"
+      ],
+      "actual": [
+        "CLA-K01"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-011",
+      "category": "single",
+      "expected": [
+        "CLA-K02"
+      ],
+      "actual": [
+        "CLA-K02"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-012",
+      "category": "single",
+      "expected": [
+        "CLA-K02"
+      ],
+      "actual": [
+        "CLA-K02"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-013",
+      "category": "single",
+      "expected": [
+        "CLA-K02"
+      ],
+      "actual": [
+        "CLA-K02"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-014",
+      "category": "single",
+      "expected": [
+        "CLA-K02"
+      ],
+      "actual": [
+        "CLA-K02"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-015",
+      "category": "single",
+      "expected": [
+        "CLA-K02"
+      ],
+      "actual": [
+        "CLA-K02"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-016",
+      "category": "single",
+      "expected": [
+        "CLA-K02"
+      ],
+      "actual": [
+        "CLA-K02"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-017",
+      "category": "single",
+      "expected": [
+        "CLA-K02"
+      ],
+      "actual": [
+        "CLA-K02"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-018",
+      "category": "single",
+      "expected": [
+        "CLA-K02"
+      ],
+      "actual": [
+        "CLA-K02"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-019",
+      "category": "single",
+      "expected": [
+        "CLA-K02"
+      ],
+      "actual": [
+        "CLA-K02"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-020",
+      "category": "single",
+      "expected": [
+        "CLA-K02"
+      ],
+      "actual": [
+        "CLA-K02"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-021",
+      "category": "single",
+      "expected": [
+        "CLA-K03"
+      ],
+      "actual": [
+        "CLA-K03"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-022",
+      "category": "single",
+      "expected": [
+        "CLA-K03"
+      ],
+      "actual": [
+        "CLA-K03"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-023",
+      "category": "single",
+      "expected": [
+        "CLA-K03"
+      ],
+      "actual": [
+        "CLA-K03"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-024",
+      "category": "single",
+      "expected": [
+        "CLA-K03"
+      ],
+      "actual": [
+        "CLA-K03"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-025",
+      "category": "single",
+      "expected": [
+        "CLA-K03"
+      ],
+      "actual": [
+        "CLA-K03"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-026",
+      "category": "single",
+      "expected": [
+        "CLA-K03"
+      ],
+      "actual": [
+        "CLA-K03"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-027",
+      "category": "single",
+      "expected": [
+        "CLA-K03"
+      ],
+      "actual": [
+        "CLA-K03"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-028",
+      "category": "single",
+      "expected": [
+        "CLA-K03"
+      ],
+      "actual": [
+        "CLA-K03"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-029",
+      "category": "single",
+      "expected": [
+        "CLA-K03"
+      ],
+      "actual": [
+        "CLA-K03"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-030",
+      "category": "single",
+      "expected": [
+        "CLA-K03"
+      ],
+      "actual": [
+        "CLA-K03"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-031",
+      "category": "single",
+      "expected": [
+        "CLA-K04"
+      ],
+      "actual": [
+        "CLA-K04"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-032",
+      "category": "single",
+      "expected": [
+        "CLA-K04"
+      ],
+      "actual": [
+        "CLA-K04"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-033",
+      "category": "single",
+      "expected": [
+        "CLA-K04"
+      ],
+      "actual": [
+        "CLA-K04"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-034",
+      "category": "single",
+      "expected": [
+        "CLA-K04"
+      ],
+      "actual": [
+        "CLA-K04"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-035",
+      "category": "single",
+      "expected": [
+        "CLA-K04"
+      ],
+      "actual": [
+        "CLA-K04"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-036",
+      "category": "single",
+      "expected": [
+        "CLA-K04"
+      ],
+      "actual": [
+        "CLA-K04"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-037",
+      "category": "single",
+      "expected": [
+        "CLA-K04"
+      ],
+      "actual": [
+        "CLA-K04"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-038",
+      "category": "single",
+      "expected": [
+        "CLA-K04"
+      ],
+      "actual": [
+        "CLA-K04"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-039",
+      "category": "single",
+      "expected": [
+        "CLA-K04"
+      ],
+      "actual": [
+        "CLA-K04"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-040",
+      "category": "single",
+      "expected": [
+        "CLA-K04"
+      ],
+      "actual": [
+        "CLA-K04"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-041",
+      "category": "single",
+      "expected": [
+        "CLA-K05"
+      ],
+      "actual": [
+        "CLA-K05"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-042",
+      "category": "single",
+      "expected": [
+        "CLA-K05"
+      ],
+      "actual": [
+        "CLA-K05"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-043",
+      "category": "single",
+      "expected": [
+        "CLA-K05"
+      ],
+      "actual": [
+        "CLA-K05"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-044",
+      "category": "single",
+      "expected": [
+        "CLA-K05"
+      ],
+      "actual": [
+        "CLA-K05"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-045",
+      "category": "single",
+      "expected": [
+        "CLA-K05"
+      ],
+      "actual": [
+        "CLA-K05"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-046",
+      "category": "single",
+      "expected": [
+        "CLA-K05"
+      ],
+      "actual": [
+        "CLA-K05"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-047",
+      "category": "single",
+      "expected": [
+        "CLA-K05"
+      ],
+      "actual": [
+        "CLA-K05"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-048",
+      "category": "single",
+      "expected": [
+        "CLA-K05"
+      ],
+      "actual": [
+        "CLA-K05"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-049",
+      "category": "single",
+      "expected": [
+        "CLA-K05"
+      ],
+      "actual": [
+        "CLA-K05"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-050",
+      "category": "single",
+      "expected": [
+        "CLA-K05"
+      ],
+      "actual": [
+        "CLA-K05"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-051",
+      "category": "single",
+      "expected": [
+        "CLA-K06"
+      ],
+      "actual": [
+        "CLA-K06"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-052",
+      "category": "single",
+      "expected": [
+        "CLA-K06"
+      ],
+      "actual": [
+        "CLA-K06"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-053",
+      "category": "single",
+      "expected": [
+        "CLA-K06"
+      ],
+      "actual": [
+        "CLA-K06"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-054",
+      "category": "single",
+      "expected": [
+        "CLA-K06"
+      ],
+      "actual": [
+        "CLA-K06"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-055",
+      "category": "single",
+      "expected": [
+        "CLA-K06"
+      ],
+      "actual": [
+        "CLA-K06"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-056",
+      "category": "single",
+      "expected": [
+        "CLA-K06"
+      ],
+      "actual": [
+        "CLA-K06"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-057",
+      "category": "single",
+      "expected": [
+        "CLA-K06"
+      ],
+      "actual": [
+        "CLA-K06"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-058",
+      "category": "single",
+      "expected": [
+        "CLA-K06"
+      ],
+      "actual": [
+        "CLA-K06"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-059",
+      "category": "single",
+      "expected": [
+        "CLA-K06"
+      ],
+      "actual": [
+        "CLA-K06"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-060",
+      "category": "single",
+      "expected": [
+        "CLA-K06"
+      ],
+      "actual": [
+        "CLA-K06"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-061",
+      "category": "single",
+      "expected": [
+        "CLA-K07"
+      ],
+      "actual": [
+        "CLA-K07"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-062",
+      "category": "single",
+      "expected": [
+        "CLA-K07"
+      ],
+      "actual": [
+        "CLA-K07"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-063",
+      "category": "single",
+      "expected": [
+        "CLA-K07"
+      ],
+      "actual": [
+        "CLA-K07"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-064",
+      "category": "single",
+      "expected": [
+        "CLA-K07"
+      ],
+      "actual": [
+        "CLA-K07"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-065",
+      "category": "single",
+      "expected": [
+        "CLA-K07"
+      ],
+      "actual": [
+        "CLA-K07"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-066",
+      "category": "single",
+      "expected": [
+        "CLA-K07"
+      ],
+      "actual": [
+        "CLA-K07"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-067",
+      "category": "single",
+      "expected": [
+        "CLA-K07"
+      ],
+      "actual": [
+        "CLA-K07"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-068",
+      "category": "single",
+      "expected": [
+        "CLA-K07"
+      ],
+      "actual": [
+        "CLA-K07"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-069",
+      "category": "single",
+      "expected": [
+        "CLA-K07"
+      ],
+      "actual": [
+        "CLA-K07"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-070",
+      "category": "single",
+      "expected": [
+        "CLA-K07"
+      ],
+      "actual": [
+        "CLA-K07"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-071",
+      "category": "single",
+      "expected": [
+        "CLA-K08"
+      ],
+      "actual": [
+        "CLA-K08"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-072",
+      "category": "single",
+      "expected": [
+        "CLA-K08"
+      ],
+      "actual": [
+        "CLA-K08"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-073",
+      "category": "single",
+      "expected": [
+        "CLA-K08"
+      ],
+      "actual": [
+        "CLA-K08"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-074",
+      "category": "single",
+      "expected": [
+        "CLA-K08"
+      ],
+      "actual": [
+        "CLA-K08"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-075",
+      "category": "single",
+      "expected": [
+        "CLA-K08"
+      ],
+      "actual": [
+        "CLA-K08"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-076",
+      "category": "single",
+      "expected": [
+        "CLA-K08"
+      ],
+      "actual": [
+        "CLA-K08"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-077",
+      "category": "single",
+      "expected": [
+        "CLA-K08"
+      ],
+      "actual": [
+        "CLA-K08"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-078",
+      "category": "single",
+      "expected": [
+        "CLA-K08"
+      ],
+      "actual": [
+        "CLA-K08"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-079",
+      "category": "single",
+      "expected": [
+        "CLA-K08"
+      ],
+      "actual": [
+        "CLA-K08"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-080",
+      "category": "single",
+      "expected": [
+        "CLA-K08"
+      ],
+      "actual": [
+        "CLA-K08"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-081",
+      "category": "single",
+      "expected": [
+        "CLA-K09"
+      ],
+      "actual": [
+        "CLA-K09"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-082",
+      "category": "single",
+      "expected": [
+        "CLA-K09"
+      ],
+      "actual": [
+        "CLA-K09"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-083",
+      "category": "single",
+      "expected": [
+        "CLA-K09"
+      ],
+      "actual": [
+        "CLA-K09"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-084",
+      "category": "single",
+      "expected": [
+        "CLA-K09"
+      ],
+      "actual": [
+        "CLA-K09"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-085",
+      "category": "single",
+      "expected": [
+        "CLA-K09"
+      ],
+      "actual": [
+        "CLA-K09"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-086",
+      "category": "single",
+      "expected": [
+        "CLA-K09"
+      ],
+      "actual": [
+        "CLA-K09"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-087",
+      "category": "single",
+      "expected": [
+        "CLA-K09"
+      ],
+      "actual": [
+        "CLA-K09"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-088",
+      "category": "single",
+      "expected": [
+        "CLA-K09"
+      ],
+      "actual": [
+        "CLA-K09"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-089",
+      "category": "single",
+      "expected": [
+        "CLA-K09"
+      ],
+      "actual": [
+        "CLA-K09"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-090",
+      "category": "single",
+      "expected": [
+        "CLA-K09"
+      ],
+      "actual": [
+        "CLA-K09"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-091",
+      "category": "single",
+      "expected": [
+        "CLA-K10"
+      ],
+      "actual": [
+        "CLA-K10"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-092",
+      "category": "single",
+      "expected": [
+        "CLA-K10"
+      ],
+      "actual": [
+        "CLA-K10"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-093",
+      "category": "single",
+      "expected": [
+        "CLA-K10"
+      ],
+      "actual": [
+        "CLA-K10"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-094",
+      "category": "single",
+      "expected": [
+        "CLA-K10"
+      ],
+      "actual": [
+        "CLA-K10"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-095",
+      "category": "single",
+      "expected": [
+        "CLA-K10"
+      ],
+      "actual": [
+        "CLA-K10"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-096",
+      "category": "single",
+      "expected": [
+        "CLA-K10"
+      ],
+      "actual": [
+        "CLA-K10"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-097",
+      "category": "single",
+      "expected": [
+        "CLA-K10"
+      ],
+      "actual": [
+        "CLA-K10"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-098",
+      "category": "single",
+      "expected": [
+        "CLA-K10"
+      ],
+      "actual": [
+        "CLA-K10"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-099",
+      "category": "single",
+      "expected": [
+        "CLA-K10"
+      ],
+      "actual": [
+        "CLA-K10"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-100",
+      "category": "single",
+      "expected": [
+        "CLA-K10"
+      ],
+      "actual": [
+        "CLA-K10"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-101",
+      "category": "multiple",
+      "expected": [
+        "CLA-K01",
+        "CLA-K02"
+      ],
+      "actual": [
+        "CLA-K01",
+        "CLA-K02"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-102",
+      "category": "multiple",
+      "expected": [
+        "CLA-K02",
+        "CLA-K03"
+      ],
+      "actual": [
+        "CLA-K02",
+        "CLA-K03"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-103",
+      "category": "multiple",
+      "expected": [
+        "CLA-K01",
+        "CLA-K02",
+        "CLA-K03"
+      ],
+      "actual": [
+        "CLA-K01",
+        "CLA-K02",
+        "CLA-K03"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-104",
+      "category": "multiple",
+      "expected": [
+        "CLA-K05"
+      ],
+      "actual": [
+        "CLA-K05"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-105",
+      "category": "multiple",
+      "expected": [
+        "CLA-K06",
+        "CLA-K07"
+      ],
+      "actual": [
+        "CLA-K06",
+        "CLA-K07"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-106",
+      "category": "multiple",
+      "expected": [
+        "CLA-K01",
+        "CLA-K04"
+      ],
+      "actual": [
+        "CLA-K01",
+        "CLA-K04"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-107",
+      "category": "multiple",
+      "expected": [
+        "CLA-K08",
+        "CLA-K09"
+      ],
+      "actual": [
+        "CLA-K08",
+        "CLA-K09"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-108",
+      "category": "multiple",
+      "expected": [
+        "CLA-K06",
+        "CLA-K10"
+      ],
+      "actual": [
+        "CLA-K06",
+        "CLA-K10"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-109",
+      "category": "multiple",
+      "expected": [
+        "CLA-K03",
+        "CLA-K04"
+      ],
+      "actual": [
+        "CLA-K03",
+        "CLA-K04"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-110",
+      "category": "multiple",
+      "expected": [
+        "CLA-K07",
+        "CLA-K08"
+      ],
+      "actual": [
+        "CLA-K07",
+        "CLA-K08"
+      ],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-111",
+      "category": "abstain",
+      "expected": [],
+      "actual": [],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-112",
+      "category": "abstain",
+      "expected": [],
+      "actual": [],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-113",
+      "category": "abstain",
+      "expected": [],
+      "actual": [],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-114",
+      "category": "abstain",
+      "expected": [],
+      "actual": [],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-115",
+      "category": "abstain",
+      "expected": [],
+      "actual": [],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-116",
+      "category": "abstain",
+      "expected": [],
+      "actual": [],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-117",
+      "category": "abstain",
+      "expected": [],
+      "actual": [],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-118",
+      "category": "abstain",
+      "expected": [],
+      "actual": [],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-119",
+      "category": "abstain",
+      "expected": [],
+      "actual": [],
+      "pass": true
+    },
+    {
+      "caseId": "CLA-KB-120",
+      "category": "abstain",
+      "expected": [],
+      "actual": [],
+      "pass": true
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "schema": "cla.patch-manifest.v1",
+  "base": "CLA_FULL_SOURCE_CP33_EXTERNAL_ML_20261118.zip",
+  "base_sha256": "6d9ee9e203dec44a20e52fbda11220b3cad5d41e94e10dc94ab6d77d96c870ce",
+  "source_fingerprint": {
+    "sha256": "1fac67925236be960bf2f29540161b79c8180182137fae17544a5e3e97f44215",
+    "fileCount": 348
+  },
+  "changed_files": [
+    {
+      "path": "package.json",
+      "sha256": "b6c7f06ae2b6a3ecb5c50f4cfcddb829eab6ba974944fcf6f42a0cb08bba6186"
+    },
+    {
+      "path": "reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html",
+      "sha256": "fef6d3cc388618d9dc56be2bc35c4f35b9e79bb059874b65d3e01f997fa2bdd2"
+    },
+    {
+      "path": "reports/demo/cla_batch16_offline_readiness.json",
+      "sha256": "8e364fc3defa9ba80c3edc98bd871e185a839d01e3962171e86a2edd24d28fab"
+    },
+    {
+      "path": "reports/evidence/atlas_lookup_fidelity.json",
+      "sha256": "7ba3a0b01b17d7957c97c3679ef813576ce0776d4ae527089e1cc1e9429421cf"
+    },
+    {
+      "path": "reports/evidence/cla_golden_path_SYNTHETIC.json",
+      "sha256": "f0d097da411af5bd61534b8dc10d94ce6d7fcacdfee33bdf1f3fedff250b1a7a"
+    },
+    {
+      "path": "reports/evidence/cla_measurement_SYNTHETIC.json",
+      "sha256": "3a20610061fcd9d9797ae79cf036f927dd04b7e75ca421c7b3105f5d91ea2fbe"
+    },
+    {
+      "path": "reports/evidence/cla_multicycle_SYNTHETIC.json",
+      "sha256": "71daf700c77cd2410dd3e5bd9c3329f9efeb2f4e5d8d40fe9ffda1588653d76d"
+    },
+    {
+      "path": "research/adaptive_study/README.md",
+      "sha256": "571a16c226ef2cba446b0af7d2195cfc263215f88185162915b4a74cb77763e0"
+    },
+    {
+      "path": "research/cognitive_validation/README.md",
+      "sha256": "445e31ae6db5e29a0b6fee3b68af34a3978cce71e955eb008949290bf508d565"
+    },
+    {
+      "path": "src/lib/nexusEvidenceBaseline.ts",
+      "sha256": "0bd29ccd78d9dd0323c8156aca7eedfb359e9b50c24e2f03c2ad6f6f890abd19"
+    },
+    {
+      "path": "src/page/lumen/LumenPage.tsx",
+      "sha256": "1c566aedf3bb31b4217996ad5c69be0f708f83dd7cd5ed286b066e4662e86c63"
+    },
+    {
+      "path": "tools/cp31_release_fingerprint.cjs",
+      "sha256": "7b821864c9a9d1aa7c6eb73723aea3526ac5ac5ae43be0f48069ca927c9e9eb3"
+    },
+    {
+      "path": "START_HERE_CP33_34_MEASUREMENT_ADAPTIVE_20261118.md",
+      "sha256": "68df6360563c5fb7bd9debc946296d09cc28092e3fe2a9d74c1e3242c27f7d81"
+    },
+    {
+      "path": "research/adaptive_study/cluster_comparison.py",
+      "sha256": "a33673688ae032d9008830a061d88ba7871fc010ee423211991ff67edb84c30c"
+    },
+    {
+      "path": "research/adaptive_study/tests/test_cluster_comparison.py",
+      "sha256": "c50f98bc66a7cd650ff5e023bd75f0ad8ca16171659e1546e3762fea3f9b95a6"
+    },
+    {
+      "path": "research/cognitive_validation/reliability.py",
+      "sha256": "0e2543c10cd5673f499ec9834fd5ef1622f7f1ef0ed806044b84c776edb144ac"
+    },
+    {
+      "path": "research/cognitive_validation/sample/paired_SYNTHETIC.csv",
+      "sha256": "aeb55197be4565996cdc417772c5d9f30bde19dbe817939a2e088f977698adca"
+    },
+    {
+      "path": "research/cognitive_validation/sample/paired_plan_SYNTHETIC.json",
+      "sha256": "6a826e598844b2f85c255d56121a6538654c15f5b19317eee7238e1dccda0e7b"
+    },
+    {
+      "path": "research/cognitive_validation/tests/test_reliability.py",
+      "sha256": "7650e493b0bf09e07fe8684714b290b25713fd158d1a95de7ffffaf936ef5bdf"
+    },
+    {
+      "path": "src/lib/cognitiveResearchReadiness.ts",
+      "sha256": "dcfed460f44eaf85ed2a2b1439c78bbb7b047cb2886adc1ca69554d03e920570"
+    },
+    {
+      "path": "src/page/lumen/components/LumenCognitiveResearchReadiness.tsx",
+      "sha256": "036b3ff07d24f7ba06ed0cbe924b5af991cc8ed6137f0bee6dc971c6a79ea480"
+    },
+    {
+      "path": "tests/cp33-cognitive-readiness.test.mjs",
+      "sha256": "9f3180b7c2d633415b0e5e2e3112f4c56bcad4cec20ebdd3f76fe6fc5da98443"
+    }
+  ],
+  "deleted_files": [],
+  "verification": {
+    "node_tests": "963/963 PASS",
+    "cognitive_python": "18/18 PASS",
+    "adaptive_python": "18/18 PASS",
+    "external_ml_python": "5/5 PASS",
+    "offline_demo": "11/11 PASS",
+    "atlas_same_registry": "848/848 PASS",
+    "security_static": "15/15 PASS",
+    "build": "BLOCKED_MISSING_DEPENDENCIES",
+    "production": "NOT_TESTED",
+    "empirical_validation": "NOT_TESTED"
+  }
+}

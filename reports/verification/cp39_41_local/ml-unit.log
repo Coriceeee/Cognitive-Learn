@@ -1,0 +1,16 @@
+test_conformal_rank (research.tests.test_longitudinal_adaptive_ml.LongitudinalTests.test_conformal_rank) ... ok
+test_cutoff_crossing_not_in_train (research.tests.test_longitudinal_adaptive_ml.LongitudinalTests.test_cutoff_crossing_not_in_train) ... ok
+test_future_feature_rejected (research.tests.test_longitudinal_adaptive_ml.LongitudinalTests.test_future_feature_rejected) ... ok
+test_minimum_cohort (research.tests.test_longitudinal_adaptive_ml.LongitudinalTests.test_minimum_cohort) ... ok
+test_missing_not_zero (research.tests.test_longitudinal_adaptive_ml.LongitudinalTests.test_missing_not_zero) ... ok
+test_nine_configs_and_intervals (research.tests.test_longitudinal_adaptive_ml.LongitudinalTests.test_nine_configs_and_intervals) ... ok
+test_reject_duplicate_id_between_periods (research.tests.test_longitudinal_adaptive_ml.LongitudinalTests.test_reject_duplicate_id_between_periods) ... ok
+test_reject_unapproved_and_synthetic_rows (research.tests.test_longitudinal_adaptive_ml.LongitudinalTests.test_reject_unapproved_and_synthetic_rows) ... ok
+test_source_hash_mismatch (research.tests.test_longitudinal_adaptive_ml.LongitudinalTests.test_source_hash_mismatch) ... ok
+test_temporal_counts_zero_and_determinism (research.tests.test_longitudinal_adaptive_ml.LongitudinalTests.test_temporal_counts_zero_and_determinism) ... ok
+test_train_support_drift (research.tests.test_longitudinal_adaptive_ml.LongitudinalTests.test_train_support_drift) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.589s
+
+OK

@@ -1,0 +1,60 @@
+TAP version 13
+# (node:21338) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: weekly Bernoulli not per-task count; posterior exact and sensitivity
+ok 1 - weekly Bernoulli not per-task count; posterior exact and sensitivity
+  ---
+  duration_ms: 7.916632
+  type: 'test'
+  ...
+# Subtest: prior sensitivity and zero completions valid
+ok 2 - prior sensitivity and zero completions valid
+  ---
+  duration_ms: 5.692903
+  type: 'test'
+  ...
+# Subtest: reject cache or cross owner
+ok 3 - reject cache or cross owner
+  ---
+  duration_ms: 0.493572
+  type: 'test'
+  ...
+# Subtest: two weeks insufficient
+ok 4 - two weeks insufficient
+  ---
+  duration_ms: 0.930124
+  type: 'test'
+  ...
+# Subtest: same-day/backfilled weeks blocked
+ok 5 - same-day/backfilled weeks blocked
+  ---
+  duration_ms: 1.090808
+  type: 'test'
+  ...
+# Subtest: irregular spacing blocked
+ok 6 - irregular spacing blocked
+  ---
+  duration_ms: 1.12533
+  type: 'test'
+  ...
+# Subtest: tampered evidence blocked
+ok 7 - tampered evidence blocked
+  ---
+  duration_ms: 0.898724
+  type: 'test'
+  ...
+# Subtest: policy is not changed and student panel does not display posterior probability
+ok 8 - policy is not changed and student panel does not display posterior probability
+  ---
+  duration_ms: 4.079316
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 476.576202

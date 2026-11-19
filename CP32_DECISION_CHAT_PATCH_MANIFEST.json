@@ -1,0 +1,25 @@
+{
+  "base": "CLA_FULL_SOURCE_CP32_33_ACCELERATED_20261117.zip",
+  "baseSha256": "b98eaa4b5609e37f4b1472f260aabe870f6921adf3ded3846b9a2731ffd6fdeb",
+  "files": {
+    "START_HERE_CP32_DECISION_CHAT_20261117.md": "d42b75e4715da1263226edeb0d446f3c1bafa249f588f96badc3f2027f7939e0",
+    "api/gemini-chat.ts": "c5e95cb8d37d4ee90fa93f88b6c142d353e5ae1148378a555fb9868698090ce0",
+    "package.json": "643640ff501e3fdb51940661ced397838a504fc7878c9a1a2a6ca42190af596b",
+    "reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html": "2c6ca063d414d1609c11d44528711d09bcc7d42a145caee6814393f284522271",
+    "reports/demo/cla_batch16_offline_readiness.json": "1c6dde76c9c3f600c73e8f6b77c585f2ba3f7a99696c42411dc5243cf3e5d6df",
+    "reports/evidence/atlas_lookup_fidelity.json": "780a2ff6c9e8d6425472994725b6fdc880ebbb354e0f1ad5a0b16a30e5029fea",
+    "reports/evidence/cla_golden_path_SYNTHETIC.json": "5176b3aa6c8353b96fa2d9fdbcffb623b708a04b397d5abc1abdb3dac1858fd4",
+    "reports/evidence/cla_measurement_SYNTHETIC.json": "d41d895c12d10612f064c87be5ba65843beded9eb71c169848f058027c2f632d",
+    "reports/evidence/cla_multicycle_SYNTHETIC.json": "7925fdbab3cec17292e77dfaecdaa80d8519df300b5914210c3ede8fd0b222db",
+    "src/components/common/FloatingAdvisorChat.tsx": "af501f30bfba46e28779601739e9c1b8476270b42a6869d19fb8a7b37df7ea3f",
+    "src/lib/atlasDecisionComparison.ts": "24fc2a3248b92d4491277322dbef9ceadd1899f31e6a9cb846ea7536dded9705",
+    "src/lib/nexusEvidenceBaseline.ts": "8784ebf4fd2da5d0647b2fbae693eb9641fc6a571b1a7c20f7750fd7a1448dab",
+    "src/page/atlas/AtlasPage.tsx": "599a794abd99bf49b6b6f28ebe75b8c7a376a39901da7297e6cb0384670eb916",
+    "src/page/atlas/components/AtlasDecisionComparisonPanel.tsx": "6721c8472d0264e2cd4ea3f4978d592c068a1f9d556577a533f5103d4182f67b",
+    "tests/cp32-atlas-decision-comparison.test.mjs": "62ca5cf17b80510436605f541dae7bd93a4d287066f40e95c6b67521154b4921",
+    "tools/atlas_lookup_benchmark.mjs": "8c7b36226168ebea93f740c10897ab57ab5f0d8ff8d8a3aec3c3692f20644804",
+    "tools/cp31_release_fingerprint.cjs": "f6a4b59804e38d27519ffacf393adbee7dde8e21df5d9919ab1979d1533a3912",
+    "tsconfig.api.json": "0913ad69a32ac99a40fec8e3d28d82847ee942f5c9c7a799df2e822a3bb34524"
+  },
+  "scope": "candidate, not release"
+}

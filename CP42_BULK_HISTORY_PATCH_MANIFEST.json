@@ -1,0 +1,125 @@
+{
+  "base": "CLA_FULL_SOURCE_CP42_SCHEME_COVERAGE_20261118.zip",
+  "base_sha256": "fd21f22d25c3e6e9c46ffa7f8197a0cb0b3151c3b8e4355c9f40a158f7247cca",
+  "changes": {
+    "START_HERE_CP42_BULK_HISTORY_20261118.md": {
+      "sha256": "9196b25f08f3926182a768019aeef60267fd68b4666f611889d9812d894ef129",
+      "previous_sha256": null
+    },
+    "package.json": {
+      "sha256": "eb74a9b240bfa61a0959e771acc7b0be3841e1754cdea6582fb38078d2d963ac",
+      "previous_sha256": "22266c5a2ff1b02a3d4621cf218742b46b32bd70ca1819a083f89cb59c4180a6"
+    },
+    "tools/atlas_reviewed_cutoff_preview.mjs": {
+      "sha256": "22cbb6d4c01182dc549f21c2eecbdb64446722412c16b71cf945e789e59ae7d2",
+      "previous_sha256": null
+    },
+    "tests/cp32-national-admission.test.mjs": {
+      "sha256": "9f6eabf058289a18d4824084a7bd2e500db93e12dff3a62af839f0ddaec3f7cd",
+      "previous_sha256": "e372ac9ff64113a19bae87de7d88055c65cc860195fd99ab8d9e164591d3ed81"
+    },
+    "tests/cp36-source-registry.test.mjs": {
+      "sha256": "5aea7b6a27fde57503fce6343d30e73476f3f30d6649c1e09b23e4f130861dd7",
+      "previous_sha256": "a386f1c70f6ac59ca46a870d5ba92c112ad6b0f47a7817af6f9c288c0b7096fa"
+    },
+    "tests/cp42-scheme-coverage.test.mjs": {
+      "sha256": "1a43cb0f5a7ea46a56a6d3d23574f16977bccc75adf0a89d875a92fcd4b7a2d0",
+      "previous_sha256": "cf596e383aff871271fc168e9c8385aaf0a58303b4cb3a4b4fc8b692c0977fb3"
+    },
+    "tests/cp42-dthu-batch.test.mjs": {
+      "sha256": "f83e0499a08b3ff9d6167315d3d3aa23780ce34f3d6ac06d9fa329d4ed2adaed",
+      "previous_sha256": null
+    },
+    "tests/admissions-and-chat.test.mjs": {
+      "sha256": "f5bb3928ac78bdb98530e0f1f1bbdebe1fca457edafb32f0633479c5f5407d7d",
+      "previous_sha256": "3d27afe871debb6119a08d42efd64e601b96fc345bfce204915a9c93934d7652"
+    },
+    "tests/cp42-national-pathways.test.mjs": {
+      "sha256": "c4a13ca18d9d8a9a232bf2c06cf7822a10bb0ee1f702727568844a5fea135d0f",
+      "previous_sha256": "0c7a05d3cfb0647a0f3d3a6cc1b3b5b2313e33f90505e00a21970d612723b2a9"
+    },
+    "src/data/dthuHistoricalCutoffs.ts": {
+      "sha256": "8a15903d1ee776bf72a16e8cc275a34568a0038b3b980b13e7c33474a7c6e3a9",
+      "previous_sha256": null
+    },
+    "src/data/officialAdmissionSources.ts": {
+      "sha256": "783356693bf2286a7d2cb5d7e7106534daf06e1dbbab209732f0763c765e2dfa",
+      "previous_sha256": "c2ffadc861b04f847aaa7fb8de207312ae72b11929b0f72aa8621567f1262c6b"
+    },
+    "src/data/nationalAdmissionCutoffs.ts": {
+      "sha256": "afe39d8cb81ae6e61c497acb6f2501497e8f381535e663e50e095f1d1dfef142",
+      "previous_sha256": "9ad8e17ea7afb72c7f671e0239528ba687cef9fc575be5624bfc7ef49105ccc1"
+    },
+    "src/lib/nationalAdmissionPathways2026.ts": {
+      "sha256": "2deb97a766654f10023fb23d0a7f2a22ee0e1891e8da825b5efbd072575bc12b",
+      "previous_sha256": "d1a5d4ef9b0201baed1995dbee1e1bfd1f3d16f00c1509b7781784c0881a3399"
+    },
+    "src/lib/nexusEvidenceBaseline.ts": {
+      "sha256": "265ba2ba70f15244c97c26ef60cdefc592e231b9f737667d6c2e7c9bded3ddda",
+      "previous_sha256": "f4935f67eb1b2e46bfadc7efeb7f39a8d85924913160e1ecc4740b01050d68a0"
+    },
+    "src/lib/nationalAdmissionRegistry.ts": {
+      "sha256": "d6bff50b9cbb0d7c64f425f47ea3f5ccfd47a6edcb4dc77e333f33a71a63de59",
+      "previous_sha256": "85de3025f730c768bbeb87f2d7c928c8099ea9cf5019f433640e056154c2e041"
+    },
+    "src/lib/reviewedCutoffBatch.ts": {
+      "sha256": "2bfd7a85592b2781a09e5b2d27f30843a392452ae4bc300e52eaf4434f2ab688",
+      "previous_sha256": null
+    },
+    "reports/demo/cla_batch16_offline_readiness.json": {
+      "sha256": "7d42b48a228b08566600f093763f283d77c54322f92c99237e031b4f5a12075d",
+      "previous_sha256": "e0d733815fa79805be0474bdbfe7c66740b88855c004b8f451d9561f6b91d6d7"
+    },
+    "reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html": {
+      "sha256": "0e1213d2aa3a13461d502829fa8d0a8330de74aed9aa7600ca16b2bd236786d7",
+      "previous_sha256": "6bf8a5d3ca48a37012167f4eeefc2dbc58e209c453d0c46c7ffbf9c027a481bf"
+    },
+    "reports/evidence/cla_golden_path_SYNTHETIC.json": {
+      "sha256": "73065cfd149731d43eb014f6b69fab4312d1477a806ed201b891aa7900dd2ab3",
+      "previous_sha256": "1a98104a85953dcfbec85c96f83c8c7fb4c233a20e37b4246b74be91953c3df3"
+    },
+    "reports/evidence/cla_measurement_SYNTHETIC.json": {
+      "sha256": "95e1910832295504234f5900fc9210d26f632c113c879b4c492cee4e0c8bd901",
+      "previous_sha256": "b3b89bccdab561fae28f7d21524ef35da92004f121ff2f9760a47e4ad95a5955"
+    },
+    "reports/evidence/cla_multicycle_SYNTHETIC.json": {
+      "sha256": "2f87eddbbdefd6ca52bb9425fac3f8d2899893c9cc36c0661b2c08d71f9357ba",
+      "previous_sha256": "48285d75782a973f1ca28481ba05059a878eaab4ca43ebd23f4101978afa6d4e"
+    },
+    "reports/evidence/atlas_lookup_fidelity.json": {
+      "sha256": "1e65503c0abcf988fb875eb836b5ce84e85f3eb242e1afb6cffa75339907e9e7",
+      "previous_sha256": "664c975ade08b5b87837da66eac3e2404bad088dcfd43348e8ee060a01a36113"
+    },
+    "reports/evidence/cla_atlas_national_coverage.json": {
+      "sha256": "f16066f301c426046c1d1612d68c9d594d1456a78cff670ee5854cee85ca43a5",
+      "previous_sha256": "4b686d472b15a78fa61411326788800c94c422fa97a7540ab32e0735e47a6e12"
+    },
+    "reports/verification/cp42_bulk_history/build-status.log": {
+      "sha256": "30c14da8d60be04b1c5041f733704efebb4be37825e8c5739ed7ba7721545db9",
+      "previous_sha256": null
+    },
+    "reports/verification/cp42_bulk_history/batch-preview.log": {
+      "sha256": "89ef3ca8e067fffa98ebe0fee3332f32afa0d0e2237326a91e1df623b59b9d4f",
+      "previous_sha256": null
+    },
+    "reports/verification/cp42_bulk_history/node-regression.log": {
+      "sha256": "0b90372f95d4bf40fdf8d96da9d1d765c3b488949f4186c7d0248379cf931727",
+      "previous_sha256": null
+    },
+    "reports/verification/cp42_bulk_history/targeted.log": {
+      "sha256": "d8e7916e1d483e005e29b08809b1180c899679fc82bfdf16390d0c33a88ac465",
+      "previous_sha256": null
+    },
+    "reports/verification/cp42_bulk_history/batch-conflict.log": {
+      "sha256": "41f4f3cf4373ae97e9c4670f97d19b40108ad1a051f74eb89a8487048b0fe41c",
+      "previous_sha256": null
+    }
+  },
+  "deleted": [],
+  "regression": {
+    "tests": 1106,
+    "pass": 1106,
+    "fail": 0,
+    "skipped": 0
+  }
+}

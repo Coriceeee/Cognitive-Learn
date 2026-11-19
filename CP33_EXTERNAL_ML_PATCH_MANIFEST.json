@@ -1,0 +1,23 @@
+{
+  "base": "CLA_FULL_SOURCE_CP32_HYBRID_PUBLIC_SEARCH_20261117.zip",
+  "base_sha256": "ee2df38ec9054fd08f6614b3cd2004460b4a779ece992937524eb82b38f163d3",
+  "files": {
+    "START_HERE_CP33_EXTERNAL_ML_20261118.md": "d8eec410c8d11b59c4702656000c750de257be6c3d6bb61bbd5ab4922381a13c",
+    "package.json": "d9d0ed6754c012d3852c9c5d9aa6d4ddbba9a3b99e2bb81ca8d7a6209371e0cf",
+    "reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html": "9827b37ad883ae93db94328e50c0919073302bff45a344aebdbc46f9e190f51f",
+    "reports/demo/cla_batch16_offline_readiness.json": "c7751f667e431652afdf094444b0a1ec4f9ed7dbd0fc72dcb327479c1424e2e8",
+    "reports/evidence/atlas_lookup_fidelity.json": "f0d68cb38e3eeb6c9d13849ec1342fb1432908faa7820f843655ac401f1fc45e",
+    "reports/evidence/cla_golden_path_SYNTHETIC.json": "7e4e1cbb82970fb46876e574d7b0fc6e3aa56705af3c6407dc5207b51cc120c7",
+    "reports/evidence/cla_measurement_SYNTHETIC.json": "2c8ec4fd38a3ffee9aa55a57bc280d29b7d6dc446006defd4c1d062e25c6638c",
+    "reports/evidence/cla_multicycle_SYNTHETIC.json": "85ebf1ca42ae0e085ee117a74f5ac308f03106af6b8dd42ccc5c12d1f2f8ce40",
+    "research/src/uci_ml_comparison.py": "534effd4fe7d4800459b9527ac89fe624d0a76173e3109d75779b2ebec93fca5",
+    "research/tests/test_uci_ml_comparison.py": "a652be79dd1182b3e06e025fde084306848ead5cf200e3e24f78b976152f1dd8",
+    "src/lib/externalMlEvidence.ts": "6b72b3cdaccd53cc29b35b2a0bff558a5b5c0ead65afd70ce1af1cc20252ee25",
+    "src/lib/nexusEvidenceBaseline.ts": "c10c17f617509d070505a367cbad117bca8ab7df870a14796ca66e04b5819f20",
+    "src/page/lumen/LumenPage.tsx": "77ce7f039e593dfeb8b6f67dbb34f39661468aea8a36b21346011623469e859c",
+    "src/page/lumen/components/LumenExternalMlEvidence.tsx": "14707261bb69871fc93f1d99b5c5f6bc9719142d128cb15164fc4dacd9c40221",
+    "tests/cp33-external-ml-evidence.test.mjs": "edc5a4d5573b0986a99f5ad37cc55dd94d0d947c22c04b530fea6ba1a8c5de79",
+    "tools/cp31_release_fingerprint.cjs": "fa9ab8f202fbc6c3cc471dc45f58eb8ab6e830cbc853e39a47031b3a2ac4d2e5"
+  },
+  "removed": []
+}

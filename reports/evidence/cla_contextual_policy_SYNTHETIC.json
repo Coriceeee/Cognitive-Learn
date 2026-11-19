@@ -1,0 +1,271 @@
+{
+  "version": "cla-contextual-bandit-sandbox-v1",
+  "scope": "SYNTHETIC_ONLY",
+  "deploymentAllowed": false,
+  "realEvaluation": "NOT_EVALUABLE",
+  "trainN": 1800,
+  "testN": 1200,
+  "split": "independent synthetic cohorts; predeclared seeds 41901/41902",
+  "reward": "w * fictional goalMet + (1-w) * fictional manageableBurden",
+  "logging": "uniform over safe actions; overload -> REDUCE only",
+  "comparisons": [
+    {
+      "weight": 0.4,
+      "policy": {
+        "version": "contextual-mean-reward-v1",
+        "weight": 0.4,
+        "decisions": {
+          "stable": "MAINTAIN",
+          "strained": "REDUCE",
+          "overload": "REDUCE"
+        },
+        "support": {
+          "stable": [
+            {
+              "action": "MAINTAIN",
+              "n": 323,
+              "mean": 0.8625386996904024
+            },
+            {
+              "action": "REDUCE",
+              "n": 291,
+              "mean": 0.826804123711339
+            }
+          ],
+          "strained": [
+            {
+              "action": "MAINTAIN",
+              "n": 307,
+              "mean": 0.43387622149837146
+            },
+            {
+              "action": "REDUCE",
+              "n": 276,
+              "mean": 0.7833333333333329
+            }
+          ],
+          "overload": [
+            {
+              "action": "REDUCE",
+              "n": 603,
+              "mean": 0.6908789386401338
+            }
+          ]
+        },
+        "minPerAction": 40
+      },
+      "baseline": {
+        "version": "static-safe-v1",
+        "decisions": {
+          "stable": "MAINTAIN",
+          "strained": "MAINTAIN",
+          "overload": "REDUCE"
+        },
+        "ips": 0.6726666666666671,
+        "snips": 0.6777497900923598,
+        "ess": 719.675799086758,
+        "matched": 801,
+        "n": 1200,
+        "actions": {
+          "MAINTAIN": 789,
+          "REDUCE": 411
+        },
+        "oracle": 0.6764850000000057
+      },
+      "candidate": {
+        "version": "contextual-mean-reward-v1",
+        "ips": 0.732000000000001,
+        "snips": 0.7631624674196361,
+        "ess": 700.5822316234796,
+        "matched": 781,
+        "n": 1200,
+        "actions": {
+          "MAINTAIN": 405,
+          "REDUCE": 795
+        },
+        "oracle": 0.7808050000000069
+      },
+      "pairedIpsDelta": 0.0593333333333334,
+      "syntheticBootstrap95": [
+        0.016000000000000004,
+        0.10633333333333336
+      ]
+    },
+    {
+      "weight": 0.6,
+      "policy": {
+        "version": "contextual-mean-reward-v1",
+        "weight": 0.6,
+        "decisions": {
+          "stable": "MAINTAIN",
+          "strained": "REDUCE",
+          "overload": "REDUCE"
+        },
+        "support": {
+          "stable": [
+            {
+              "action": "MAINTAIN",
+              "n": 323,
+              "mean": 0.8464396284829724
+            },
+            {
+              "action": "REDUCE",
+              "n": 291,
+              "mean": 0.7711340206185578
+            }
+          ],
+          "strained": [
+            {
+              "action": "MAINTAIN",
+              "n": 307,
+              "mean": 0.43908794788273603
+            },
+            {
+              "action": "REDUCE",
+              "n": 276,
+              "mean": 0.7565217391304352
+            }
+          ],
+          "overload": [
+            {
+              "action": "REDUCE",
+              "n": 603,
+              "mean": 0.6507462686567153
+            }
+          ]
+        },
+        "minPerAction": 40
+      },
+      "baseline": {
+        "version": "static-safe-v1",
+        "decisions": {
+          "stable": "MAINTAIN",
+          "strained": "MAINTAIN",
+          "overload": "REDUCE"
+        },
+        "ips": 0.6606666666666663,
+        "snips": 0.6656591099916033,
+        "ess": 719.675799086758,
+        "matched": 801,
+        "n": 1200,
+        "actions": {
+          "MAINTAIN": 789,
+          "REDUCE": 411
+        },
+        "oracle": 0.6673400000000048
+      },
+      "candidate": {
+        "version": "contextual-mean-reward-v1",
+        "ips": 0.7113333333333324,
+        "snips": 0.7416159860990433,
+        "ess": 700.5822316234796,
+        "matched": 781,
+        "n": 1200,
+        "actions": {
+          "MAINTAIN": 405,
+          "REDUCE": 795
+        },
+        "oracle": 0.7614200000000023
+      },
+      "pairedIpsDelta": 0.05066666666666662,
+      "syntheticBootstrap95": [
+        0.006666666666666663,
+        0.0963333333333333
+      ]
+    },
+    {
+      "weight": 0.8,
+      "policy": {
+        "version": "contextual-mean-reward-v1",
+        "weight": 0.8,
+        "decisions": {
+          "stable": "MAINTAIN",
+          "strained": "REDUCE",
+          "overload": "REDUCE"
+        },
+        "support": {
+          "stable": [
+            {
+              "action": "MAINTAIN",
+              "n": 323,
+              "mean": 0.8303405572755415
+            },
+            {
+              "action": "REDUCE",
+              "n": 291,
+              "mean": 0.7154639175257724
+            }
+          ],
+          "strained": [
+            {
+              "action": "MAINTAIN",
+              "n": 307,
+              "mean": 0.44429967426710093
+            },
+            {
+              "action": "REDUCE",
+              "n": 276,
+              "mean": 0.7297101449275359
+            }
+          ],
+          "overload": [
+            {
+              "action": "REDUCE",
+              "n": 603,
+              "mean": 0.6106135986732988
+            }
+          ]
+        },
+        "minPerAction": 40
+      },
+      "baseline": {
+        "version": "static-safe-v1",
+        "decisions": {
+          "stable": "MAINTAIN",
+          "strained": "MAINTAIN",
+          "overload": "REDUCE"
+        },
+        "ips": 0.6486666666666672,
+        "snips": 0.6535684298908485,
+        "ess": 719.675799086758,
+        "matched": 801,
+        "n": 1200,
+        "actions": {
+          "MAINTAIN": 789,
+          "REDUCE": 411
+        },
+        "oracle": 0.6581949999999998
+      },
+      "candidate": {
+        "version": "contextual-mean-reward-v1",
+        "ips": 0.6906666666666669,
+        "snips": 0.7200695047784537,
+        "ess": 700.5822316234796,
+        "matched": 781,
+        "n": 1200,
+        "actions": {
+          "MAINTAIN": 405,
+          "REDUCE": 795
+        },
+        "oracle": 0.7420350000000088
+      },
+      "pairedIpsDelta": 0.04199999999999997,
+      "syntheticBootstrap95": [
+        -0.0043333333333333505,
+        0.08833333333333333
+      ]
+    }
+  ],
+  "rollback": {
+    "activeLivePolicyUnchanged": true,
+    "candidateExportAllowed": false,
+    "baseline": "static-safe-v1"
+  },
+  "limitations": [
+    "Simulation probabilities hand-authored; reward is not GPA or clinical wellbeing.",
+    "No evidence of educational benefit, real-world propensity validity, or policy safety.",
+    "One synthetic decision per unit; no delayed rewards or RL.",
+    "Bootstrap interval is conditional on the fictional generator and frozen learned policy.",
+    "No live policy update or automatic assignments."
+  ]
+}

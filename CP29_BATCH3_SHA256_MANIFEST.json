@@ -1,0 +1,34 @@
+{
+  "release": "CP29 Batch 3",
+  "base": "CLA_FULL_SOURCE_CP29_BATCH2_ACADEMIC_LOCK_20261115.zip",
+  "date": "2026-11-15",
+  "source_changes": {
+    ".gitignore": "80b410826cbe286d1439312c8649525ec8a511ad25da184c06336c0da496be0a",
+    "package.json": "031053614b75e0468f101679b43500c6aae8282b180a902112a646a16e9e7e31",
+    "src/page/auth/LoginPage.tsx": "e2b920b3a86f2391b2a5035af3c6cd00afe362009401459517cb16e23b069793",
+    "src/styles/01-auth.css": "80490fd221e934ff7d8c342d85361a34804fb426c7168ae00050762330ec149d",
+    "src/page/nexus/AdminAccountPanel.tsx": "5832fa715a981957b58bbd716382679812cacdd11bc8d86e499c0e39e1a3e933",
+    "src/page/nexus/AdminDiagnosticsPage.tsx": "d62a475c86b0749d1242fad159fcb3fa3bbbc12d296aa4576807eb3743a05d9c",
+    "src/data/adminConsoleDirectory.ts": "b15fc442fc93c647f6653847ff7af57b6f4fa0486f272ca0c9cc89e043651780",
+    "functions-admin/index.mjs": "0a1b7d4dca8700c52541a09849b2bb20f0df0b8feebc0bbfb83740e207f0c969",
+    "functions-admin/package.json": "af1b685beb6974b6248272b7952fcb3361296ccffeac6bf619615c2ba2e70958",
+    "functions-admin/.env.example": "b0c216230b3b8735910d1d12781271573b201bbe54b25487b223fa483711d150",
+    "functions-admin/src/accountPolicy.mjs": "e9c2cf2ee64faaf7636f705f04f252a953ba989cb1daee0b690995b98936610e",
+    "firebase.admin-optional.json": "7fd9ba460e1f54a51590784fcec74bfbc76049837a08a59fa86c70c353b26531",
+    "tests/cp29-privileged-account-ops.test.mjs": "28f8755ee9d6a9935732dffb32a7120e48a42ddfc5e679cff66dfa0648f72fd6",
+    "tests/cp29-account-ui-contract.test.cjs": "a955aa653fc209edba14e2e4244a7b43e43e90013e613e1e7288888f1166859a",
+    "docs/CP29/CP29_BATCH3_ADMIN_SECURITY_REPORT_20261115.md": "29bf84ee71beada056e97df7783bf95b4bebe6b285d8b9fa2fdc9ac26bc31e35",
+    "START_HERE_CP29_BATCH3_20261115.md": "26614fa8b5d36575901f7e8883dad1e66207c0a1683834538c4d39901936d8a6"
+  },
+  "local_verification": {
+    "new_tests": "28/28 PASS",
+    "admin_recovery_plus_new": "44/44 PASS",
+    "npm_test": "PASS exit 0",
+    "verify_cp29_batch3": "PASS exit 0",
+    "ts_transpile_syntax": "0 diagnostics",
+    "build": "NOT RUN (npm dependencies unavailable)",
+    "firebase_emulator": "NOT RUN for batch3",
+    "functions_emulator": "NOT RUN"
+  },
+  "production_deployed": false
+}

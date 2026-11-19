@@ -1,12 +1,12 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDocFromServer } from "firebase/firestore";
+import { doc, getDocFromServer, onSnapshot, type Unsubscribe } from "firebase/firestore";
 import { auth, db } from "../../lib/firebase";
 import { checkAccountDocument, readAccountDocumentWithRetry } from "../../lib/accountVerification";
 import { readProductConsent } from "../../lib/studentConsentPolicy";
 import { STUDENT_CONSENT_GATE_ENABLED } from "../../lib/studentConsentConfig";
 
-type Role = "student" | "teacher" | "parent" | "admin";
+type Role = "student" | "admin";
 type GateStatus = "checking" | "unauthenticated" | "no-profile" | "inactive" | "denied" | "error" | "consent-required" | "ready";
 
 type AccessGateProps = {
@@ -23,14 +23,14 @@ const studentAllowedRoutes = new Set([
   "/orion", "/orion/inputs", "/orion/scenarios", "/orion/roadmap",
   "/pulse", "/pulse/progress", "/pulse/reports", "/pulse/actions",
   "/haven", "/haven/scholarships", "/haven/finance", "/haven/plan",
+  "/student/exams", "/atlas/subjects", "/atlas/compare", "/lumen/state", "/lumen/roadmap", "/lumen/evidence", "/lumen/advanced", "/pulse/inputs", "/pulse/checkin",
 ]);
 
 export function mayVisit(role: Role, path: string): boolean {
   const normalized = path.replace(/\/+$/, "") || "/";
+  if (["/teacher", "/parent", "/role"].includes(normalized)) return false;
   if (role === "admin") return true;
   if (role === "student") return studentAllowedRoutes.has(normalized);
-  if (role === "teacher") return normalized === "/teacher";
-  if (role === "parent") return normalized === "/parent";
   return false;
 }
 
@@ -45,10 +45,19 @@ export default function AccessGate({ path, children }: AccessGateProps) {
   useEffect(() => {
     let mounted = true;
     let requestId = 0;
+    let stopRoleWatch: Unsubscribe | undefined;
+    let stopConsentWatch: Unsubscribe | undefined;
+    function stopLiveAccessWatch() {
+      stopRoleWatch?.();
+      stopConsentWatch?.();
+      stopRoleWatch = undefined;
+      stopConsentWatch = undefined;
+    }
     const unsubscribe = onAuthStateChanged(
       auth,
       async (user) => {
         const thisRequest = ++requestId;
+        stopLiveAccessWatch();
         if (!mounted) return;
         setStatus("checking");
         setRole(null);
@@ -97,7 +106,88 @@ export default function AccessGate({ path, children }: AccessGateProps) {
               window.history.replaceState({}, "", current.pathname + current.search + current.hash);
             }
           }
-          setStatus("ready");
+          // CP29/B2: a one-time server read does not invalidate an already-mounted
+          // page when Admin locks an account or a student withdraws product consent.
+          // Keep children unmounted until listeners return a server-confirmed state.
+          type LiveRole = "checking" | "ready" | "inactive" | "no-profile" | "denied" | "error";
+          type LiveConsent = "checking" | "accepted" | "required" | "error";
+          let liveRole: LiveRole = "checking";
+          const consentRequired = STUDENT_CONSENT_GATE_ENABLED && actualRole === "student" && path !== "/student/consent";
+          let liveConsent: LiveConsent = consentRequired ? "checking" : "accepted";
+          const stillCurrent = () => mounted && thisRequest === requestId;
+          const publish = () => {
+            if (!stillCurrent()) return;
+            if (liveRole !== "ready") {
+              setStatus(liveRole);
+            } else if (liveConsent === "required") {
+              setStatus("consent-required");
+            } else if (liveConsent === "error") {
+              setStatus("error");
+            } else if (liveConsent === "checking") {
+              setStatus("checking");
+            } else {
+              setStatus("ready");
+            }
+          };
+          setStatus("checking");
+          stopRoleWatch = onSnapshot(
+            doc(db, "users", user.uid),
+            { includeMetadataChanges: true },
+            snapshot => {
+              if (!stillCurrent()) return;
+              // Cached snapshots and pending local writes cannot grant access.
+              if (snapshot.metadata.fromCache || snapshot.metadata.hasPendingWrites) {
+                liveRole = "checking";
+                publish();
+                return;
+              }
+              const checked = checkAccountDocument(snapshot.exists(), snapshot.exists() ? snapshot.data() : null);
+              if (checked.status !== "ready") {
+                setRole(null);
+                liveRole = checked.status === "inactive" ? "inactive" : "no-profile";
+              } else if (checked.role !== actualRole || !mayVisit(checked.role, path)) {
+                // A role changed mid-session: require a new route verification,
+                // rather than silently switching student/admin privileges.
+                setRole(null);
+                liveRole = "denied";
+              } else {
+                setRole(checked.role);
+                liveRole = "ready";
+              }
+              publish();
+            },
+            error => {
+              if (!stillCurrent()) return;
+              console.error("Live account authorization failed:", error);
+              liveRole = "error";
+              setRole(null);
+              publish();
+            },
+          );
+          if (consentRequired) {
+            stopConsentWatch = onSnapshot(
+              doc(db, "student_consents", user.uid),
+              { includeMetadataChanges: true },
+              snapshot => {
+                if (!stillCurrent()) return;
+                if (snapshot.metadata.fromCache || snapshot.metadata.hasPendingWrites) {
+                  liveConsent = "checking";
+                } else {
+                  liveConsent = readProductConsent(
+                    snapshot.exists() ? snapshot.data() : null,
+                    user.uid,
+                  ) === "accepted" ? "accepted" : "required";
+                }
+                publish();
+              },
+              error => {
+                if (!stillCurrent()) return;
+                console.error("Live student consent verification failed:", error);
+                liveConsent = "error";
+                publish();
+              },
+            );
+          }
         } catch (error) {
           console.error("Cannot verify CLA account permissions:", error);
           if (mounted && thisRequest === requestId) setStatus("error");
@@ -105,12 +195,15 @@ export default function AccessGate({ path, children }: AccessGateProps) {
       },
       (error) => {
         console.error("Firebase auth state error:", error);
-        if (mounted) setStatus("error");
+        requestId += 1;
+        stopLiveAccessWatch();
+        if (mounted) { setRole(null); setStatus("error"); }
       }
     );
     return () => {
       mounted = false;
       requestId += 1;
+      stopLiveAccessWatch();
       unsubscribe();
     };
   }, [path]);

@@ -1,0 +1,95 @@
+{
+  "release": "CP31 Batch 4",
+  "base": "CLA_FULL_SOURCE_CP31_BATCH3_NEXUS_OPERATIONS_20261115.zip",
+  "changedOrAddedFiles": 17,
+  "sourceTreeHashType": "sha256 per non-runtime source file",
+  "files": [
+    {
+      "path": "START_HERE_CP31_BATCH4_20261115.md",
+      "sha256": "b8ae4a731bce1182c9b841e2f0f52c017ff02b80bb6afbf84795b490f2b5289c",
+      "action": "added"
+    },
+    {
+      "path": "docs/CP31/CP31_BATCH4_EVIDENCE_AUDITS_REPORT_20261115.md",
+      "sha256": "cc4cb6fa2a0e924162fe34f9132f0adb8b5ebaa25e1f6a21b878f050cb82d0b0",
+      "action": "added"
+    },
+    {
+      "path": "package.json",
+      "sha256": "6f4837bf0b3da7741cc2dd728106bf92a9999e60ae59b93586733665caf29033",
+      "action": "modified"
+    },
+    {
+      "path": "src/data/adminConsoleDirectory.ts",
+      "sha256": "a8bd274b918b0ffd73d32bb5f3b15cb8008402d8fd249e4b32dd6edad6443798",
+      "action": "modified"
+    },
+    {
+      "path": "src/lib/nexusAuditPolicy.ts",
+      "sha256": "0c4d68fb61ec2c286999a7effec836b753071a1e6faf128af753efd9c5d472c1",
+      "action": "modified"
+    },
+    {
+      "path": "src/lib/nexusEvidenceAudits.ts",
+      "sha256": "190a4a7e9b309ee16f01eb19728c2b78b8d87c75c9e520ec0d2c64aca920975e",
+      "action": "added"
+    },
+    {
+      "path": "src/lib/nexusEvidenceBaseline.ts",
+      "sha256": "f855a3af344f21cabe8738f5d77f4003c2424293c1aeb661c31e1420edccfb62",
+      "action": "added"
+    },
+    {
+      "path": "src/page/nexus/AdminDiagnosticsPage.tsx",
+      "sha256": "50162afa0fd4e0e285575f2917217e5e1bf68c9a40db7b112204f201ebb91de5",
+      "action": "modified"
+    },
+    {
+      "path": "tests/cp31-batch2-e2e-contract.test.cjs",
+      "sha256": "f1cc7b48e7f961d3d5ff4b7a29527b65e76a1002e5ef7d1898d1a599fff08d51",
+      "action": "modified"
+    },
+    {
+      "path": "tests/cp31-batch3-operational-audits.test.mjs",
+      "sha256": "4b4f76e69d81e0318bb9d04c506e969ff1b33a53dbf777977542af9822b4f347",
+      "action": "modified"
+    },
+    {
+      "path": "tests/cp31-batch4-evidence.test.mjs",
+      "sha256": "20f7d71fb71fc0c5b24c8d19a14af47a8361dbf9bc3c9336e1965450f7543374",
+      "action": "added"
+    },
+    {
+      "path": "tests/cp31-nexus-review.test.mjs",
+      "sha256": "2fd867b1ef44f5ce5d2ab9e59503eff158449fe443aed55bf8b9e08ec84ab67a",
+      "action": "modified"
+    },
+    {
+      "path": "tests/e2e/cp31_nexus_manifest.json",
+      "sha256": "6f972c6e9d6e105d0223f7da7c099c62743058084889d52fe31cf9a9ab919ba7",
+      "action": "modified"
+    },
+    {
+      "path": "tests_cp31/test_browser_gate_config.py",
+      "sha256": "a18b22f7b43583c44777d2b8341db49b81ebd971400ad3f9446d583a88e488df",
+      "action": "modified"
+    },
+    {
+      "path": "tools/cp31_browser_e2e.py",
+      "sha256": "61f99a1c2b0bc4480ff925a4d09604b27f2e73b1ed60a5333d29446dd17dd01b",
+      "action": "modified"
+    },
+    {
+      "path": "tools/cp31_evidence_preflight.mjs",
+      "sha256": "1c1ca015bfc8dde1a5614a7297378db938fd0e4d465ae790ad35fee72d72cc36",
+      "action": "added"
+    },
+    {
+      "path": "tools/cp31_release_fingerprint.cjs",
+      "sha256": "752c13d2a92153e701422fbbbfea117a44ec6bf552e7f6394856503573a81680",
+      "action": "added"
+    }
+  ],
+  "removedSourceFiles": [],
+  "note": "Patch is overlay-only. tsconfig.tsbuildinfo is a stale build cache and should be deleted before npm run build."
+}

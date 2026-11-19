@@ -26,3 +26,11 @@ For missing cells, each index is withheld if fewer than 70% of its indicators ar
 Researcher-confirmed construct and content validity; genuine observations across persons and dates; test–retest/ICC and uncertainty; convergent/discriminant testing with predeclared instruments; independent external sample; measurement fairness and privacy/consent review. Protocol: `docs/specifications/COGNITIVE_LEARN_RESEARCH_VALIDATION_MASTER_PROTOCOL.docx`.
 
 The example fixture is synthetic and must not be cited as empirical validation.
+
+## CP33 — Paired-window agreement (additional research-only pipeline)
+Run `npm run test:cp33:measurement` and `npm run research:cognitive:agreement:sample`. The sample is synthetic. The additional CSV schema is the exact CP24 fields plus `consent_status` (granted), `instrument_version`, `stability_confirmed` (yes/no/unknown). For legitimate private input, supply a predeclared paired plan JSON (schema `cla.cognitive.paired-plan.v1`; exact two ISO dates 7–14 days apart, instrument_version, protocol_version); only paired participants with stability declared yes at both dates and complete applicable scores enter each index analysis.
+
+```
+python research/cognitive_validation/reliability.py --input <PRIVATE_CSV> --plan <PRIVATE_PLAN_JSON> --scope CONSENTED_RESEARCH_UNVERIFIED --out research/reports/private/cognitive
+```
+Use a plan fixed before inspecting outcomes; the script records its hash but cannot prove the plan was frozen prospectively. ICC(A,1), mean retest bias, mean absolute difference, 2,000 participant bootstrap replicates and percentile 95% CI are exploratory. Fewer than 10 eligible pairs => no point estimate or interval; constant/degenerate measurements => undefined ICC; at least 95% valid bootstrap replicates needed for an interval. Ten pairs is an engineering reporting floor, NOT a power calculation or acceptance threshold. Separate CP24 sensitivity diagnostics remain descriptive. No validated psychometric construct, reference population, convergent/discriminant validity, clinical cutoff or automatic production scoring is claimed. Do not pool MAS meanings or production and research mappings. New inputs and outputs must remain private; synthetic identifier checks are not consent verification and cannot detect all fabricated data.

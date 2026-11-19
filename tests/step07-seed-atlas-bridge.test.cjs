@@ -20,6 +20,10 @@ function load(file, mocks = {}) {
     if (Object.prototype.hasOwnProperty.call(mocks, name)) return mocks[name];
     if (name.startsWith('.')) {
       const candidate = path.resolve(path.dirname(filename), name);
+      // TypeScript source imports may already include their .ts extension.
+      if (fs.existsSync(candidate) && fs.statSync(candidate).isFile()) {
+        return load(path.relative(root, candidate), mocks);
+      }
       for (const ext of ['.ts', '.tsx', '.js']) {
         if (fs.existsSync(candidate + ext)) return load(path.relative(root, candidate + ext), mocks);
       }
@@ -170,10 +174,10 @@ test('07-13: delayed Firestore snapshot for a signed-out account cannot overwrit
   };
   const mocks = {
     react: fakeReact,
-    'firebase/auth': { onAuthStateChanged: (_auth, callback) => { authChanged = callback; return () => {}; } },
+    'firebase/auth': { onAuthStateChanged: (_auth, callback) => { authChanged = next => { _auth.currentUser = next; callback(next); }; return () => {}; } },
     'firebase/firestore': {
       doc: (_db, collection, uid) => `${collection}:${uid}`,
-      onSnapshot: (ref, cb) => { callbacks.set(ref, cb); return () => {}; },
+      onSnapshot: (ref, options, cb) => { callbacks.set(ref, cb); return () => {}; },
     },
     '../../../lib/firebase': { auth: {}, db: {} },
     '../services/transcriptData': {
@@ -182,13 +186,13 @@ test('07-13: delayed Firestore snapshot for a signed-out account cannot overwrit
   };
   const { useStudentTranscript } = load('src/page/seed/hooks/useStudentTranscript.ts', mocks);
   useStudentTranscript();
-  authChanged({uid:'A'});
-  const oldCallback = callbacks.get('student_transcripts:A');
-  authChanged({uid:'B'});
-  callbacks.get('student_transcripts:B')({exists: () => true, data: () => ({marker: 'B',score:9})});
-  oldCallback({exists: () => true, data: () => ({marker: 'A',score:3})});
+  authChanged({uid:'Student_A_001'});
+  const oldCallback = callbacks.get('student_transcripts:Student_A_001');
+  authChanged({uid:'Student_B_002'});
+  callbacks.get('student_transcripts:Student_B_002')({metadata:{fromCache:false,hasPendingWrites:false}, exists: () => true, data: () => ({userId:'Student_B_002',marker: 'B',score:9})});
+  oldCallback({metadata:{fromCache:false,hasPendingWrites:false}, exists: () => true, data: () => ({userId:'Student_A_001',marker: 'A',score:3})});
   assert.equal(values[0].marker, 'B');
   assert.equal(values[1], 'ready');
-  assert.equal(values[4], 'B');
+  assert.equal(values[4], 'Student_B_002');
   onCleanup();
 });

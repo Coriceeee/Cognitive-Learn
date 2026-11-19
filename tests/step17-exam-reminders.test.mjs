@@ -106,10 +106,10 @@ test('EX22 format is stable Vietnamese day/month/year',()=>{
   assert.equal(formatExamDate('2027-02-07'),'07/02/2027');
   assert.equal(formatExamDate(''),'Chưa nhập ngày');
 });
-test('EX23 student dashboard places exam board after hero and priority cards',()=>{
+test('EX23 student dashboard links to focused exam workspace after hero and priorities',()=>{
   const page=src('../src/page/seed/StudentPage.tsx');
-  assert.match(page,/!isAdminPreview && <ExamReminderBoard/);
-  const exam = page.indexOf('<ExamReminderBoard />');
+  assert.match(page,/view === "\/student\/exams" && \(!isAdminPreview \? <ExamReminderBoard/);
+  const exam = page.indexOf('href="/student/exams#cla-exam-reminders"');
   assert.ok(exam > page.indexOf('student-dash-hero'));
   assert.ok(exam > page.indexOf('student-dash-focus'));
   assert.ok(exam < page.indexOf('student-dash-modules')); 
@@ -147,8 +147,8 @@ test('EX28 stylesheet included and responsive',()=>{
 });
 
 test('EX29 Atlas and Companion can navigate to the student countdown board',()=>{
-  assert.match(src('../src/page/atlas/AtlasPage.tsx'),/student#cla-exam-reminders/);
-  assert.match(src('../src/page/companion/DailyCompanionPage.tsx'),/student#cla-exam-reminders/);
+  assert.match(src('../src/page/atlas/AtlasPage.tsx'),/student\/exams#cla-exam-reminders/);
+  assert.match(src('../src/page/companion/DailyCompanionPage.tsx'),/student\/exams#cla-exam-reminders/);
   assert.match(src('../src/page/seed/StudentPage.tsx'),/scrollIntoView/);
 });
 test('EX30 unsafe or modified date inputs cannot be persisted via save',()=>{

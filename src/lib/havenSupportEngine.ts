@@ -26,8 +26,7 @@ export type HavenResult = {
   familyPressureScore: number;
   supportReadinessScore: number;
   riskLevel: HavenRiskLevel;
-  parentSummary: string;
-  teacherSummary: string;
+  studentSummary: string;
   supportItems: HavenSupportItem[];
   scholarshipOptions: HavenScholarshipOption[];
   warnings: string[];
@@ -44,28 +43,16 @@ function getRiskLevel(score: number): HavenRiskLevel {
   return "HIGH";
 }
 
-function buildParentSummary(riskLevel: HavenRiskLevel) {
+function buildStudentSummary(riskLevel: HavenRiskLevel) {
   if (riskLevel === "LOW") {
-    return "Gia đình đang có mức hỗ trợ tương đối ổn định. Nên tiếp tục theo dõi học phí, học bổng và kế hoạch xét tuyển để giảm áp lực về sau.";
+    return "Bạn đang có điều kiện hỗ trợ tương đối ổn định. Hãy tiếp tục theo dõi học phí, học bổng và kế hoạch xét tuyển để giảm áp lực về sau.";
   }
 
   if (riskLevel === "MEDIUM") {
-    return "Gia đình cần chuẩn bị kỹ hơn về tài chính, lịch học và phương án dự phòng. Nên ưu tiên trường/ngành có học phí phù hợp và cơ hội học bổng rõ ràng.";
+    return "Bạn cần chuẩn bị kỹ hơn về tài chính, lịch học và phương án dự phòng. Nên ưu tiên trường/ngành có học phí phù hợp và cơ hội học bổng rõ ràng.";
   }
 
-  return "Gia đình đang có nguy cơ áp lực cao. Nên giảm lựa chọn quá rủi ro, ưu tiên học bổng, trường có học phí phù hợp và có thêm phương án an toàn.";
-}
-
-function buildTeacherSummary(riskLevel: HavenRiskLevel) {
-  if (riskLevel === "LOW") {
-    return "Học sinh có điều kiện hỗ trợ khá ổn. Giáo viên có thể tập trung vào chiến lược nâng điểm và tối ưu nguyện vọng.";
-  }
-
-  if (riskLevel === "MEDIUM") {
-    return "Học sinh cần được hỗ trợ theo dõi cả học tập lẫn lựa chọn tuyển sinh. Giáo viên nên phối hợp với phụ huynh để giữ mục tiêu phù hợp.";
-  }
-
-  return "Học sinh cần được hỗ trợ sớm. Giáo viên nên giúp học sinh chọn phương án thực tế, tránh áp lực quá mức và ưu tiên lộ trình khả thi.";
+  return "Bạn có thể đang gặp áp lực cao. Hãy giảm lựa chọn quá rủi ro, ưu tiên học bổng, trường có học phí phù hợp và có thêm phương án an toàn.";
 }
 
 function buildSupportItems({
@@ -224,8 +211,7 @@ export function runHavenSupport({
     familyPressureScore: Math.round(familyPressureScore),
     supportReadinessScore: Math.round(supportReadinessScore),
     riskLevel,
-    parentSummary: buildParentSummary(riskLevel),
-    teacherSummary: buildTeacherSummary(riskLevel),
+    studentSummary: buildStudentSummary(riskLevel),
     supportItems: buildSupportItems({
       riskLevel,
       tuitionPressure,

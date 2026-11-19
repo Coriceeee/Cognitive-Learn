@@ -1,0 +1,40 @@
+/* Student Observatory: editorial data atlas, scoped to the Seed overview. */
+.student-dash:has(.cla-decision-canvas) { --obs-ink:rgb(var(--tc-tx-182e27)); --obs-muted:rgb(var(--tc-tx-51675d)); --obs-line:rgb(var(--tc-bd-cdd8d0)); --obs-green:rgb(var(--tc-tx-126c59)); --obs-paper:rgb(var(--tc-bg-f6f8f4)); color:var(--obs-ink); }
+.student-page:has(.cla-decision-canvas) { background:rgb(var(--tc-bg-f6f8f4)) !important; }
+.student-page .student-shell.student-dash:has(.cla-decision-canvas) { width:min(1440px,calc(100% - 64px)); padding:0 0 32px; }
+.student-dash .cla-observatory-intro { display:grid; grid-template-columns:minmax(0,1fr) minmax(210px,28%); align-items:end; gap:24px; background:transparent !important; border:0; border-radius:0; padding:0 0 22px; color:var(--obs-ink); margin:0; }
+.cla-observatory-intro h1 { color:var(--obs-ink); font-size:clamp(26px,3.1vw,42px); letter-spacing:-.045em; font-weight:650; line-height:1.15; margin:9px 0 4px; overflow-wrap:anywhere; }
+.cla-observatory-intro p { margin:0; color:var(--obs-muted); font-size:14px; line-height:1.6; }
+.cla-canvas-index,.cla-canvas-source,.cla-intro-target>span,.cla-canvas-label>span,.cla-canvas-flow>span { font-family:ui-monospace,Consolas,monospace; letter-spacing:.05em; font-size:11px; font-weight:600; color:var(--obs-muted); }
+.cla-intro-target { display:grid; gap:3px; border-left:2px solid var(--obs-green); padding-left:17px; min-width:0; overflow-wrap:anywhere; }
+.cla-intro-target strong {font-size:17px; font-weight:650; color:var(--obs-ink)} .cla-intro-target small {color:var(--obs-muted);font-size:12px}
+.cla-intro-target a,.cla-decision-canvas a { color:var(--obs-green); font-weight:600; text-decoration:none; font-size:12px; }
+.cla-decision-canvas a:hover,.cla-intro-target a:hover {text-decoration:underline;text-underline-offset:4px}
+.cla-decision-canvas { border-top:3px solid var(--obs-green); border-bottom:1px solid var(--obs-line); background:rgb(var(--tc-bg-ffffff)); margin:0 0 24px; }
+.cla-canvas-head { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:18px 22px; border-bottom:1px solid var(--obs-line); }
+.cla-canvas-head h2 {font-size:23px; font-weight:650; letter-spacing:-.035em; margin:4px 0 0; color:var(--obs-ink);}
+.cla-canvas-grid {display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);}
+.cla-canvas-grid>article { min-width:0; padding:20px 22px 15px; background:transparent; border-radius:0; box-shadow:none; }
+.cla-canvas-academic {border-right:1px solid var(--obs-line)}
+.cla-canvas-temporal {grid-column:1/-1;border-top:1px solid var(--obs-line)}
+.cla-canvas-label {display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;}
+.cla-canvas-grid h3 {font-size:18px;line-height:1.3;font-weight:650;letter-spacing:-.02em;margin:10px 0;color:var(--obs-ink)}
+.cla-canvas-kpi {font-size:clamp(33px,4vw,49px);font-weight:650;line-height:1.12;letter-spacing:-.045em;font-variant-numeric:tabular-nums; color:var(--obs-ink);}
+.cla-canvas-kpi small {font-size:12px;font-weight:500;letter-spacing:0;margin-left:8px;color:var(--obs-muted);}
+.cla-canvas-gpa {width:100%;display:block;max-height:235px;margin-top:4px;color:var(--obs-muted);}
+.cla-canvas-gpa text {fill:var(--obs-muted);font-size:11px;font-family:inherit;}.cla-canvas-gpa .cla-canvas-chart-value{font-size:13px;font-weight:650;fill:var(--obs-green);}
+.cla-canvas-note {font-size:12px;line-height:1.55;color:var(--obs-muted);margin:7px 0 0;}
+.cla-canvas-signals {display:grid;gap:19px;margin:25px 0 18px;}
+.cla-canvas-signal>div:first-child {display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:6px;align-items:baseline;margin-bottom:8px;font-size:12px;color:var(--obs-muted);}
+.cla-canvas-signal b,.cla-canvas-signal strong {font-weight:650;color:var(--obs-ink);font-variant-numeric:tabular-nums;}
+.cla-canvas-track {height:12px;background:rgb(var(--tc-bg-e9eee9));position:relative;}.cla-canvas-track i {display:block;height:100%;background:var(--obs-green);position:relative;}.cla-canvas-track i::after{content:'';position:absolute;right:0;top:-3px;height:18px;width:2px;background:var(--obs-green);}
+.cla-canvas-track.is-missing {border:1px dashed rgb(var(--tc-bd-a5b2aa));background:transparent;}
+.cla-canvas-temporal-head {display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.cla-canvas-switch {display:flex;flex-wrap:wrap;gap:4px 12px;}.cla-canvas-switch button {background:transparent;border:0;border-bottom:2px solid transparent;border-radius:0;box-shadow:none;color:var(--obs-muted);padding:8px 2px;font-size:12px;cursor:pointer;}.cla-canvas-switch button[aria-pressed=true]{color:var(--obs-green);border-bottom-color:var(--obs-green);font-weight:650;}
+.cla-canvas-temporal .cla-viz-plot {max-height:255px;}.cla-canvas-temporal .cla-viz-figure{margin:8px 0 0;}
+.cla-canvas-empty {position:relative;min-height:144px;display:grid;place-items:center;margin:10px 0;}.cla-canvas-empty svg{position:absolute;inset:0;width:100%;height:100%;}.cla-canvas-empty>div{position:relative;display:grid;gap:6px;padding:12px 18px;background:rgb(var(--tc-bg-ffffff));text-align:center;}.cla-canvas-empty strong{font-size:14px;color:var(--obs-ink);}.cla-canvas-empty span{font-size:12px;color:var(--obs-muted);}
+.cla-canvas-flow {display:flex;align-items:center;flex-wrap:wrap;gap:12px 20px;border-top:1px solid var(--obs-line);padding:14px 22px;background:rgb(var(--tc-bg-eef3ee));}.cla-canvas-flow a:not(:last-child)::after{content:' →';color:#83988b;margin-left:8px;}
+.student-dash:has(.cla-decision-canvas) .student-dash-card,.student-dash:has(.cla-decision-canvas) .student-dash-module-grid{border-radius:0;box-shadow:none!important;border-color:var(--obs-line);}
+.student-dash:has(.cla-decision-canvas) .student-dash-action{background:transparent;border:0;border-bottom:1px solid var(--obs-line);border-radius:0;box-shadow:none;}
+.student-dash:has(.cla-decision-canvas) .student-dash-heading h2 {color:var(--obs-ink);}
+@media(max-width:760px){.student-page .student-shell.student-dash:has(.cla-decision-canvas){width:calc(100% - 28px)}.student-dash .cla-observatory-intro{grid-template-columns:1fr;align-items:start;gap:13px}.cla-canvas-grid{grid-template-columns:1fr}.cla-canvas-academic{border-right:0;border-bottom:1px solid var(--obs-line)}.cla-canvas-head{align-items:flex-start;flex-direction:column;gap:6px;padding:14px}.cla-canvas-grid>article{padding:15px 14px}.cla-canvas-flow{padding:12px 14px}.cla-canvas-gpa{max-height:none}.cla-canvas-source{font-size:10px}}

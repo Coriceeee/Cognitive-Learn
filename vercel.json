@@ -11,6 +11,10 @@
   },
   "rewrites": [
     {
+      "source": "/admin/audit",
+      "destination": "/index.html"
+    },
+    {
       "source": "/admin/diagnostics",
       "destination": "/index.html"
     },
@@ -43,19 +47,7 @@
       "destination": "/index.html"
     },
     {
-      "source": "/teacher",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/parent",
-      "destination": "/index.html"
-    },
-    {
       "source": "/admin",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/role",
       "destination": "/index.html"
     },
     {
@@ -180,6 +172,50 @@
     },
     {
       "source": "/student/guide",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/student/exams",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/atlas/subjects",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/atlas/compare",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/lumen/state",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/lumen/roadmap",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/lumen/evidence",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/lumen/advanced",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/pulse/inputs",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/pulse/checkin",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/atlas/library",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/pulse/audit",
       "destination": "/index.html"
     }
   ]

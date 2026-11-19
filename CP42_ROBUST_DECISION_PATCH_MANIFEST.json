@@ -1,0 +1,122 @@
+{
+  "base": "CLA_FULL_SOURCE_CP42_INSTITUTION_DISCOVERY_20261118.zip",
+  "baseSha256": "ebabcd9ca2d544c0eff7abe74276ee3f2ca5bb59bae9969b44bc50d471196e50",
+  "files": [
+    {
+      "path": "START_HERE_CP42_ROBUST_DECISION_20261118.md",
+      "sha256": "3144c043d95b60bc20bb52bba038ee0fb37e12c030091bba701e6f5139e615c3",
+      "previousSha256": null
+    },
+    {
+      "path": "package.json",
+      "sha256": "22afc61efc32faac0204de82ba88d4d2039f106026ab52179d6f680d3109be56",
+      "previousSha256": "767a271c44c611e9380478025106b9a4d13ebe60f3cf56ef09f4d4b3e42e71e1"
+    },
+    {
+      "path": "reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html",
+      "sha256": "78b5e22d00af8f4f582a82a5e0354b0f53e32e9464bfd428fc6cfa48ba6decd5",
+      "previousSha256": "65c26a3e63d506fdb3e2515ae8060ec2b167c3b9a962332b7dfa3339b6b2bc4d"
+    },
+    {
+      "path": "reports/demo/cla_batch16_offline_readiness.json",
+      "sha256": "83eac024729f2382a0d3f2aa08373047f019e6e04dad99110c69f2805caef00a",
+      "previousSha256": "009eb1c2812e2c32373d8c34c880c826b46689103794d16f4763165bf0ac33bf"
+    },
+    {
+      "path": "reports/evidence/atlas_lookup_fidelity.json",
+      "sha256": "456e36d480b1f3c051337a2a6f35f96662a567bdc4ccb63402edeb9bde02a13a",
+      "previousSha256": "00f46dd4d2badb4937f63106372f2a29e5913310c491d558d1d5139c6d8f3a48"
+    },
+    {
+      "path": "reports/evidence/cla_golden_path_SYNTHETIC.json",
+      "sha256": "b4045ba579360e217f93c3bb80d609a0b9fa12a2ab49d4ac3f2703e304b298db",
+      "previousSha256": "48d1c00392eeda849f92022caba50636c6fb92b37a0b23b1da2de572a1539696"
+    },
+    {
+      "path": "reports/evidence/cla_measurement_SYNTHETIC.json",
+      "sha256": "ad87b056745cd61022f8e9718cb558a667f122302c762800cc687d02b9ccf52e",
+      "previousSha256": "d2cd1ea089618e0cf5f299e7d1716d6c7b5dcd446e94346b3bc1f13a86221b50"
+    },
+    {
+      "path": "reports/evidence/cla_multicycle_SYNTHETIC.json",
+      "sha256": "81cc8031fc8cdef5e3830fd99934854de9886c2c91181d0d3b43ceb5a9f99788",
+      "previousSha256": "5c3ff0c366d885352d9a114761b6b5601a22514c80f23a73e5b616f1e4fe4b9e"
+    },
+    {
+      "path": "reports/verification/cp42_robust_decision/build-excerpt.log",
+      "sha256": "35911f1f1b24d6ea508ee676afa872efeee473c4b1062673debf13bc0a9bfd3d",
+      "previousSha256": null
+    },
+    {
+      "path": "reports/verification/cp42_robust_decision/cla-holistic-demo.log",
+      "sha256": "5fc767108504db45bb9df6ca4d495b7aa211036540b5330d2e9f8fb174a39603",
+      "previousSha256": null
+    },
+    {
+      "path": "reports/verification/cp42_robust_decision/cla-holistic-regression.log",
+      "sha256": "22545b9e118cc37155601a94135ef6aaa2d2cfab3133a1d95096f728350c351e",
+      "previousSha256": null
+    },
+    {
+      "path": "reports/verification/cp42_robust_decision/cla-holistic-rules.log",
+      "sha256": "18793ef92f0e852975a0417f988c67a0c7d0ab9ff8494f9edfd1b921521fdeed",
+      "previousSha256": null
+    },
+    {
+      "path": "reports/verification/cp42_robust_decision/cla-holistic-targeted.log",
+      "sha256": "751ff082132264c28f71759d9dc5063b82e51ac1376be0195d6f82c7515ad0c7",
+      "previousSha256": null
+    },
+    {
+      "path": "reports/verification/cp42_robust_decision/status.txt",
+      "sha256": "a3b59668d4bde777d7158b94b5b2d979457e530097656aa208f54e93ab15d9ec",
+      "previousSha256": null
+    },
+    {
+      "path": "research/protocol/CLA_ADAPTIVE_ROADMAP_V4_20261118.md",
+      "sha256": "c46477b171e139e470717d6395b83622b06aa408bff78fc0bc61482ba213bf0e",
+      "previousSha256": "90e8d538d067baea7e9c93a88b44b38bca22e64e7767068e9ae2ca6278cddf9a"
+    },
+    {
+      "path": "src/components/journey/ClosedLoopPanel.tsx",
+      "sha256": "b8f89bd13e6488c7cdb71af86f00b32d806fcc596da071d8f89d03a94fdc2950",
+      "previousSha256": "651ef9119a7de3be44614ac87ab8c4435b828fc00dd6a7b5c8a37f0bd801ffc9"
+    },
+    {
+      "path": "src/lib/nexusEvidenceBaseline.ts",
+      "sha256": "8c26b16417d0241277b7a0fae4c950d7403532e57df9396d847cb06786258cd4",
+      "previousSha256": "359247c529f3c5594077e9db20e180650224ec3b15c3cb61392caf98ee538217"
+    },
+    {
+      "path": "src/lib/orionStrategyEngine.ts",
+      "sha256": "40508bbf8fd4da29a97114a2329aec2113caae7c37cb827b55d1f7a8cef03973",
+      "previousSha256": "cfd0a9e1cb7e906179b0e6dd0c8684e4c37b07f13b5c2f93931235dc18a3b949"
+    },
+    {
+      "path": "src/lib/robustScenarioPolicy.ts",
+      "sha256": "2b3221a5095ae4087e4fa7b2e9f6f9dfff7e71ac13e077b14e3cdaea5726dc7e",
+      "previousSha256": null
+    },
+    {
+      "path": "src/page/orion/OrionDecisionWorkbench.tsx",
+      "sha256": "0a44c702169be1407f440feb73902a7284e61f4582a98df62af102aed07ad212",
+      "previousSha256": "1f2340e0df63a36712fd4de26ba7107a976d46ba5fa093e60b53bc334aa8b535"
+    },
+    {
+      "path": "src/page/orion/OrionPage.tsx",
+      "sha256": "d1cb1f2f43126194f8ee3d278ea971876a1fe79f839e539a12191f00240bbb2a",
+      "previousSha256": "d51765c931335c48e594f02b48ef9ee18f3f6943ac75ae8b0e79c0f30c39dbd4"
+    },
+    {
+      "path": "src/page/orion/OrionRobustPolicy.tsx",
+      "sha256": "127ba0ee0c4531da0e999c45abf3337bd81c90f7cbcb3c45bb32c68e08f0102a",
+      "previousSha256": null
+    },
+    {
+      "path": "tests/cp42-robust-decision.test.mjs",
+      "sha256": "73f52ab793f02291de19e5f9b1db0b18245275dc3d78bc9eab90fa8c124e9084",
+      "previousSha256": null
+    }
+  ],
+  "removed": []
+}

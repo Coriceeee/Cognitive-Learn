@@ -1,0 +1,64 @@
+{
+  "release": "CP30_BATCH1_REALTIME_CONSISTENCY_20261115",
+  "baseline": "CLA_FULL_SOURCE_CP29_BATCH4_DATA_INTEGRITY_20261115.zip",
+  "scope": "read-side only, no production deploy",
+  "files": [
+    {
+      "path": "package.json",
+      "sha256": "234a2075c63c8fcdeb1b292738c4ec01f059b8b6462f15031d37d3aaa6e4b6cc",
+      "action": "MODIFY",
+      "baseline_sha256": "f98e5b9b2acb17fe5dfa4f618ad9825e0414448609bf2ad207f36f36fe55d4d6"
+    },
+    {
+      "path": "src/page/seed/hooks/useStudentTranscript.ts",
+      "sha256": "fd12130ccded22255a84457823a585859fb00af4d161dab67bf104900ffe4e28",
+      "action": "MODIFY",
+      "baseline_sha256": "22f1854516806933feda45f37d0c48a93c296eefe09378470db05feb0988e9b4"
+    },
+    {
+      "path": "src/page/seed/StudentTranscriptPage.tsx",
+      "sha256": "c97a70868f5f074d951c951bd76ed2386e75384d256e8891faed5ce0d1288ddc",
+      "action": "MODIFY",
+      "baseline_sha256": "5ccdbae18cc0708e0c7ecf20cae5eba58d3ff66bdf1a2ee5f3e6a0ece094bfaf"
+    },
+    {
+      "path": "src/page/seed/StudentStorageStatusPage.tsx",
+      "sha256": "37b8001873068375d9856aecd4460605e4f7c211e4035c8dd5e960c2951a86c9",
+      "action": "MODIFY",
+      "baseline_sha256": "37b432f2d13122131db4f0365a3e5173b17036a534128a1784983a04789e1ede"
+    },
+    {
+      "path": "src/page/seed/services/realtimeReadPolicy.ts",
+      "sha256": "208b36bb8f415d572b56acb7941b4f2d1550e6bd532a2a53b2a0b5e57f94a91e",
+      "action": "ADD"
+    },
+    {
+      "path": "tests/step07-seed-atlas-bridge.test.cjs",
+      "sha256": "4064b6195f5117fe45d2b94835dc3c4637e80f35d36462cec1afebf487f4ace1",
+      "action": "MODIFY",
+      "baseline_sha256": "51dc252a61cfa2ecd4a80826967571f37407eff2326f7726b4fad0762be40c04"
+    },
+    {
+      "path": "tests/cp30-realtime-read.test.cjs",
+      "sha256": "d8e73efb7acd6429631eb158cd2007812f3e8805142283f28a2c12a9af73989a",
+      "action": "ADD"
+    },
+    {
+      "path": "docs/CP30/CP30_BATCH1_REALTIME_CONSISTENCY_REPORT_20261115.md",
+      "sha256": "35fadd00889c59ce9e036770834391fa732e4c89f48e735e1f31536c5f563330",
+      "action": "ADD"
+    },
+    {
+      "path": "START_HERE_CP30_BATCH1_20261115.md",
+      "sha256": "31890c47fc40703819e161283589d72eefa49e0f566a74a7726aa5ba6af87929",
+      "action": "ADD"
+    }
+  ],
+  "verification": {
+    "test_cp30_realtime": "23/23 PASS",
+    "verify_cp30_batch1": "PASS",
+    "npm_test_full": "BLOCKED_BY_MISSING_NODE_MODULES",
+    "firestore_emulator": "NOT_RUN_HERE",
+    "production_build": "NOT_RUN_HERE"
+  }
+}

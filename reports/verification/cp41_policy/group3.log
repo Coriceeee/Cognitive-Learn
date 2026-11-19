@@ -1,0 +1,2134 @@
+COMMAND npm run test:cp29:academic
+
+> cognitive-learn-ai@0.1.0 test:cp29:academic
+> node --experimental-strip-types --test tests/cp29-academic-lock.behavior.test.mjs && node --test tests/cp29-academic-lock.contract.test.cjs
+
+TAP version 13
+# (node:35772) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP29-C4-01 valid curriculum identity accepted without inventing scores
+ok 1 - CP29-C4-01 valid curriculum identity accepted without inventing scores
+  ---
+  duration_ms: 2.154132
+  type: 'test'
+  ...
+# Subtest: CP29-C4-02 rejects duplicate, malformed and unknown elective
+ok 2 - CP29-C4-02 rejects duplicate, malformed and unknown elective
+  ---
+  duration_ms: 0.231307
+  type: 'test'
+  ...
+# Subtest: CP29-C4-03 rejects wrong graded subject catalogue and programme
+ok 3 - CP29-C4-03 rejects wrong graded subject catalogue and programme
+  ---
+  duration_ms: 0.282137
+  type: 'test'
+  ...
+# Subtest: CP29-D3-01 exact four electives and foreign language remain immutable
+ok 4 - CP29-D3-01 exact four electives and foreign language remain immutable
+  ---
+  duration_ms: 4.495182
+  type: 'test'
+  ...
+# Subtest: CP29-D3-02 flags unapproved subjects in grade10, grade11, grade12
+ok 5 - CP29-D3-02 flags unapproved subjects in grade10, grade11, grade12
+  ---
+  duration_ms: 3.904056
+  type: 'test'
+  ...
+# Subtest: CP29-D3-03 accepts partial terms and real zero as valid school transcript
+ok 6 - CP29-D3-03 accepts partial terms and real zero as valid school transcript
+  ---
+  duration_ms: 0.5044
+  type: 'test'
+  ...
+# Subtest: CP29-D3-04 invalid grades/terms/shape fail closed
+ok 7 - CP29-D3-04 invalid grades/terms/shape fail closed
+  ---
+  duration_ms: 0.259779
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 811.960647
+TAP version 13
+# Subtest: CP29 lock contract: identity lock enforces foreign language and selected electives
+ok 1 - CP29 lock contract: identity lock enforces foreign language and selected electives
+  ---
+  duration_ms: 1.609083
+  type: 'test'
+  ...
+# Subtest: CP29 lock contract: legacy identity fails closed
+ok 2 - CP29 lock contract: legacy identity fails closed
+  ---
+  duration_ms: 0.502644
+  type: 'test'
+  ...
+# Subtest: CP29 lock contract: both academic document cross-checks use identity
+ok 3 - CP29 lock contract: both academic document cross-checks use identity
+  ---
+  duration_ms: 13.846779
+  type: 'test'
+  ...
+# Subtest: CP29 lock contract: transcript writes validate 3 years and whitelisted 9 subjects
+ok 4 - CP29 lock contract: transcript writes validate 3 years and whitelisted 9 subjects
+  ---
+  duration_ms: 0.912871
+  type: 'test'
+  ...
+# Subtest: CP29 lock contract: student UI blocks changing locked language
+ok 5 - CP29 lock contract: student UI blocks changing locked language
+  ---
+  duration_ms: 0.34393
+  type: 'test'
+  ...
+# Subtest: CP29 lock contract: student UI fails closed on corrupt previous transcripts
+ok 6 - CP29 lock contract: student UI fails closed on corrupt previous transcripts
+  ---
+  duration_ms: 33.473849
+  type: 'test'
+  ...
+# Subtest: CP29 lock contract: server emulator cases are retained
+ok 7 - CP29 lock contract: server emulator cases are retained
+  ---
+  duration_ms: 17.379568
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 655.146958
+COMMAND npm run test:cp29:accounts
+
+> cognitive-learn-ai@0.1.0 test:cp29:accounts
+> node --test tests/cp29-privileged-account-ops.test.mjs tests/cp29-account-ui-contract.test.cjs
+
+TAP version 13
+# Subtest: CP29-B1-01 password reset uses Firebase Auth and never guesses Admin privileges
+ok 1 - CP29-B1-01 password reset uses Firebase Auth and never guesses Admin privileges
+  ---
+  duration_ms: 8.347427
+  type: 'test'
+  ...
+# Subtest: CP29-B1-02 password reset UI returns generic acknowledgment
+ok 2 - CP29-B1-02 password reset UI returns generic acknowledgment
+  ---
+  duration_ms: 0.534186
+  type: 'test'
+  ...
+# Subtest: CP29-K15-24 optional backend is not in default firebase config
+ok 3 - CP29-K15-24 optional backend is not in default firebase config
+  ---
+  duration_ms: 24.552044
+  type: 'test'
+  ...
+# Subtest: CP29-K15-25 role Management is never accessible as student business route
+ok 4 - CP29-K15-25 role Management is never accessible as student business route
+  ---
+  duration_ms: 27.641346
+  type: 'test'
+  ...
+# Subtest: CP29-B4-01 Demo remains own-UID and explicitly labeled
+ok 5 - CP29-B4-01 Demo remains own-UID and explicitly labeled
+  ---
+  duration_ms: 1.67301
+  type: 'test'
+  ...
+# Subtest: CP29-K15-01 rejects empty, primitive, unknown and extra input keys
+ok 6 - CP29-K15-01 rejects empty, primitive, unknown and extra input keys
+  ---
+  duration_ms: 26.156553
+  type: 'test'
+  ...
+# Subtest: CP29-K15-02 rejects invalid UID/ticket/requestId without arbitrary document paths
+ok 7 - CP29-K15-02 rejects invalid UID/ticket/requestId without arbitrary document paths
+  ---
+  duration_ms: 6.966627
+  type: 'test'
+  ...
+# Subtest: CP29-K15-03 denies admin role grant and invalid active state
+ok 8 - CP29-K15-03 denies admin role grant and invalid active state
+  ---
+  duration_ms: 0.468509
+  type: 'test'
+  ...
+# Subtest: CP29-K15-04 allow only bounded non-Admin role targets
+ok 9 - CP29-K15-04 allow only bounded non-Admin role targets
+  ---
+  duration_ms: 0.758315
+  type: 'test'
+  ...
+# Subtest: CP29-K15-05 feature flag defaults fail-closed
+ok 10 - CP29-K15-05 feature flag defaults fail-closed
+  ---
+  duration_ms: 1.026852
+  type: 'test'
+  ...
+# Subtest: CP29-K15-06 empty operator allowlist is denied
+ok 11 - CP29-K15-06 empty operator allowlist is denied
+  ---
+  duration_ms: 0.197307
+  type: 'test'
+  ...
+# Subtest: CP29-K15-07 custom role claim cannot replace operator claim
+ok 12 - CP29-K15-07 custom role claim cannot replace operator claim
+  ---
+  duration_ms: 33.616365
+  type: 'test'
+  ...
+# Subtest: CP29-K15-08 a valid email or UI role never provides operator authority
+ok 13 - CP29-K15-08 a valid email or UI role never provides operator authority
+  ---
+  duration_ms: 0.498654
+  type: 'test'
+  ...
+# Subtest: CP29-K15-09 recent primary login with no second factor is denied
+ok 14 - CP29-K15-09 recent primary login with no second factor is denied
+  ---
+  duration_ms: 0.758863
+  type: 'test'
+  ...
+# Subtest: CP29-K15-10 stale or future sessions fail closed
+ok 15 - CP29-K15-10 stale or future sessions fail closed
+  ---
+  duration_ms: 50.810042
+  type: 'test'
+  ...
+# Subtest: CP29-K15-11 blocked or demoted operator cannot manage accounts
+ok 16 - CP29-K15-11 blocked or demoted operator cannot manage accounts
+  ---
+  duration_ms: 1.072819
+  type: 'test'
+  ...
+# Subtest: CP29-K15-12 never allows self-management
+ok 17 - CP29-K15-12 never allows self-management
+  ---
+  duration_ms: 0.195182
+  type: 'test'
+  ...
+# Subtest: CP29-K15-13 never manages another Admin, even if operator
+ok 18 - CP29-K15-13 never manages another Admin, even if operator
+  ---
+  duration_ms: 0.246918
+  type: 'test'
+  ...
+# Subtest: CP29-K15-14 rejects missing target or malformed legacy profile
+ok 19 - CP29-K15-14 rejects missing target or malformed legacy profile
+  ---
+  duration_ms: 0.267612
+  type: 'test'
+  ...
+# Subtest: CP29-K15-15 set-active updates only active and records atomic audit without email
+ok 20 - CP29-K15-15 set-active updates only active and records atomic audit without email
+  ---
+  duration_ms: 7.31378
+  type: 'test'
+  ...
+# Subtest: CP29-K15-16 replay same mutation does not write a second audit
+ok 21 - CP29-K15-16 replay same mutation does not write a second audit
+  ---
+  duration_ms: 0.480364
+  type: 'test'
+  ...
+# Subtest: CP29-K15-17 reusing requestId for a different request is rejected
+ok 22 - CP29-K15-17 reusing requestId for a different request is rejected
+  ---
+  duration_ms: 0.26342
+  type: 'test'
+  ...
+# Subtest: CP29-K15-18 inspect uses exact UID, returns minimal profile and creates audit
+ok 23 - CP29-K15-18 inspect uses exact UID, returns minimal profile and creates audit
+  ---
+  duration_ms: 0.211919
+  type: 'test'
+  ...
+# Subtest: CP29-K15-19 no-op mutation is not a successful operation
+ok 24 - CP29-K15-19 no-op mutation is not a successful operation
+  ---
+  duration_ms: 0.133949
+  type: 'test'
+  ...
+# Subtest: CP29-K15-20 explicit legacy-to-student migration is audited
+ok 25 - CP29-K15-20 explicit legacy-to-student migration is audited
+  ---
+  duration_ms: 0.29565
+  type: 'test'
+  ...
+# Subtest: CP29-K15-21 an existing audit entry for other operator is not trusted
+ok 26 - CP29-K15-21 an existing audit entry for other operator is not trusted
+  ---
+  duration_ms: 0.148491
+  type: 'test'
+  ...
+# Subtest: CP29-K15-22 owner mismatch between token and actor UID fails closed
+ok 27 - CP29-K15-22 owner mismatch between token and actor UID fails closed
+  ---
+  duration_ms: 0.308276
+  type: 'test'
+  ...
+# Subtest: CP29-K15-23 no unsafe Admin bootstrap or client role elevation in source
+ok 28 - CP29-K15-23 no unsafe Admin bootstrap or client role elevation in source
+  ---
+  duration_ms: 1.945418
+  type: 'test'
+  ...
+# Subtest: retired account cannot be reactivated without explicit conversion
+ok 29 - retired account cannot be reactivated without explicit conversion
+  ---
+  duration_ms: 0.931188
+  type: 'test'
+  ...
+1..29
+# tests 29
+# suites 0
+# pass 29
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 661.901482
+COMMAND npm run test:cp29:batch4
+
+> cognitive-learn-ai@0.1.0 test:cp29:batch4
+> node --experimental-strip-types --test tests/cp29-batch4-seed-transaction.test.mjs tests/cp29-batch4-link-integrity.test.mjs tests/step05a-seed-input-validation.test.mjs
+
+TAP version 13
+# (node:36309) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: F4 only owner can inspect legacy link for cleanup
+ok 1 - F4 only owner can inspect legacy link for cleanup
+  ---
+  duration_ms: 1.578245
+  type: 'test'
+  ...
+# Subtest: F4 missing and malformed server timestamps must not look like valid links
+ok 2 - F4 missing and malformed server timestamps must not look like valid links
+  ---
+  duration_ms: 0.224411
+  type: 'test'
+  ...
+# Subtest: F4 rejects orphaned or corrupted identifiers
+ok 3 - F4 rejects orphaned or corrupted identifiers
+  ---
+  duration_ms: 0.797106
+  type: 'test'
+  ...
+# Subtest: F4 rejects cross-account and role mismatch
+ok 4 - F4 rejects cross-account and role mismatch
+  ---
+  duration_ms: 0.268661
+  type: 'test'
+  ...
+# Subtest: F4 refuses invalid role, malformed names and same account links
+ok 5 - F4 refuses invalid role, malformed names and same account links
+  ---
+  duration_ms: 0.187879
+  type: 'test'
+  ...
+# Subtest: F4 exact active boolean and role are mandatory
+ok 6 - F4 exact active boolean and role are mandatory
+  ---
+  duration_ms: 0.457038
+  type: 'test'
+  ...
+# Subtest: F4 retired link and report UI cannot mount
+ok 7 - F4 retired link and report UI cannot mount
+  ---
+  duration_ms: 23.428731
+  type: 'test'
+  ...
+# Subtest: F4 partial legacy removal is explicitly reported and retryable
+ok 8 - F4 partial legacy removal is explicitly reported and retryable
+  ---
+  duration_ms: 9.135371
+  type: 'test'
+  ...
+# Subtest: F4 legacy cleanup uses server-only reads
+ok 9 - F4 legacy cleanup uses server-only reads
+  ---
+  duration_ms: 27.767193
+  type: 'test'
+  ...
+# (node:36312) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: C1 empty initial collection is valid and does not invent a version
+ok 10 - C1 empty initial collection is valid and does not invent a version
+  ---
+  duration_ms: 3.544106
+  type: 'test'
+  ...
+# Subtest: C1 real timestamp precision retained, including nanoseconds
+ok 11 - C1 real timestamp precision retained, including nanoseconds
+  ---
+  duration_ms: 1.032531
+  type: 'test'
+  ...
+# Subtest: C1 missing, invalid and forged timestamp fails closed
+ok 12 - C1 missing, invalid and forged timestamp fails closed
+  ---
+  duration_ms: 0.502516
+  type: 'test'
+  ...
+# Subtest: C5 accepted initial load can commit a matching existing academic pair
+ok 13 - C5 accepted initial load can commit a matching existing academic pair
+  ---
+  duration_ms: 2.584161
+  type: 'test'
+  ...
+# Subtest: C5 stale profile token rejects concurrent tab edits
+ok 14 - C5 stale profile token rejects concurrent tab edits
+  ---
+  duration_ms: 0.759704
+  type: 'test'
+  ...
+# Subtest: C5 stale transcript token rejects concurrent term edits
+ok 15 - C5 stale transcript token rejects concurrent term edits
+  ---
+  duration_ms: 0.594155
+  type: 'test'
+  ...
+# Subtest: C5 phantom document created by another client rejects stale initial form
+ok 16 - C5 phantom document created by another client rejects stale initial form
+  ---
+  duration_ms: 31.78275
+  type: 'test'
+  ...
+# Subtest: C1 invalid account owner, scope or schema fails closed
+ok 17 - C1 invalid account owner, scope or schema fails closed
+  ---
+  duration_ms: 0.641976
+  type: 'test'
+  ...
+# Subtest: C1 corrupted/foreign transcript subject cannot be silently overwritten
+ok 18 - C1 corrupted/foreign transcript subject cannot be silently overwritten
+  ---
+  duration_ms: 1.450108
+  type: 'test'
+  ...
+# Subtest: C5 mismatched academic identity rejects cross-document overwrite
+ok 19 - C5 mismatched academic identity rejects cross-document overwrite
+  ---
+  duration_ms: 21.166626
+  type: 'test'
+  ...
+# Subtest: C5 student cannot save against admin demo document or wrong UID
+ok 20 - C5 student cannot save against admin demo document or wrong UID
+  ---
+  duration_ms: 0.444637
+  type: 'test'
+  ...
+# Subtest: C5 transaction reads account, profile, transcript BEFORE all writes
+ok 21 - C5 transaction reads account, profile, transcript BEFORE all writes
+  ---
+  duration_ms: 1.617703
+  type: 'test'
+  ...
+# Subtest: C5 failed transaction gets visible conflict, not false success
+ok 22 - C5 failed transaction gets visible conflict, not false success
+  ---
+  duration_ms: 45.431673
+  type: 'test'
+  ...
+# (node:36314) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: Seed: normal values accept, including missing optional financial fields
+ok 23 - Seed: normal values accept, including missing optional financial fields
+  ---
+  duration_ms: 70.466975
+  type: 'test'
+  ...
+# Subtest: Seed: zero is observed zero, not missing
+ok 24 - Seed: zero is observed zero, not missing
+  ---
+  duration_ms: 1.325614
+  type: 'test'
+  ...
+# Subtest: Seed: percentages over 100 or negative are rejected
+ok 25 - Seed: percentages over 100 or negative are rejected
+  ---
+  duration_ms: 0.49577
+  type: 'test'
+  ...
+# Subtest: Seed: hours cannot exceed the length of one week
+ok 26 - Seed: hours cannot exceed the length of one week
+  ---
+  duration_ms: 0.481482
+  type: 'test'
+  ...
+# Subtest: Seed: counts require whole numbers
+ok 27 - Seed: counts require whole numbers
+  ---
+  duration_ms: 0.300603
+  type: 'test'
+  ...
+# Subtest: Seed: negative or malformed finances are rejected
+ok 28 - Seed: negative or malformed finances are rejected
+  ---
+  duration_ms: 12.481416
+  type: 'test'
+  ...
+# Subtest: Seed: missing required behavior is rejected explicitly
+ok 29 - Seed: missing required behavior is rejected explicitly
+  ---
+  duration_ms: 0.408355
+  type: 'test'
+  ...
+# Subtest: Seed: not silently converting scientific notation to amount
+ok 30 - Seed: not silently converting scientific notation to amount
+  ---
+  duration_ms: 0.196693
+  type: 'test'
+  ...
+# Subtest: Seed: validator is called before atomic Firestore transaction
+ok 31 - Seed: validator is called before atomic Firestore transaction
+  ---
+  duration_ms: 13.418624
+  type: 'test'
+  ...
+1..31
+# tests 31
+# suites 0
+# pass 31
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2361.589044
+COMMAND npm run test:cp30:realtime
+
+> cognitive-learn-ai@0.1.0 test:cp30:realtime
+> node --test tests/cp30-realtime-read.test.cjs tests/step07-seed-atlas-bridge.test.cjs
+
+TAP version 13
+# Subtest: CP30-R01 only server-confirmed, committed snapshots pass
+ok 1 - CP30-R01 only server-confirmed, committed snapshots pass
+  ---
+  duration_ms: 9.034378
+  type: 'test'
+  ...
+# Subtest: CP30-R02 cross-owner and malformed documents fail closed
+ok 2 - CP30-R02 cross-owner and malformed documents fail closed
+  ---
+  duration_ms: 1.28414
+  type: 'test'
+  ...
+# Subtest: CP30-R03 verified legacy docs with no userId remain readable in own UID-scoped path
+ok 3 - CP30-R03 verified legacy docs with no userId remain readable in own UID-scoped path
+  ---
+  duration_ms: 0.231314
+  type: 'test'
+  ...
+# Subtest: CP30-R04 account inspections reject old generation and account switches
+ok 4 - CP30-R04 account inspections reject old generation and account switches
+  ---
+  duration_ms: 0.427498
+  type: 'test'
+  ...
+# Subtest: CP30-R05 cache-only and pending writes never render as verified transcript
+ok 5 - CP30-R05 cache-only and pending writes never render as verified transcript
+  ---
+  duration_ms: 334.392516
+  type: 'test'
+  ...
+# Subtest: CP30-R06 A to B to A cannot resurrect callback from first A session
+ok 6 - CP30-R06 A to B to A cannot resurrect callback from first A session
+  ---
+  duration_ms: 58.597131
+  type: 'test'
+  ...
+# Subtest: CP30-R07 legacy fallback is server-confirmed and cannot overwrite a newer primary transcript
+ok 7 - CP30-R07 legacy fallback is server-confirmed and cannot overwrite a newer primary transcript
+  ---
+  duration_ms: 144.169064
+  type: 'test'
+  ...
+# Subtest: CP30-R08 conflicting document UID clears data and reports error
+ok 8 - CP30-R08 conflicting document UID clears data and reports error
+  ---
+  duration_ms: 62.239118
+  type: 'test'
+  ...
+# Subtest: CP30-R09 signed out session clears verified results immediately
+ok 9 - CP30-R09 signed out session clears verified results immediately
+  ---
+  duration_ms: 134.546952
+  type: 'test'
+  ...
+# Subtest: CP30-R10 storage status guard resets rows and rejects stale async results
+ok 10 - CP30-R10 storage status guard resets rows and rejects stale async results
+  ---
+  duration_ms: 1.209145
+  type: 'test'
+  ...
+# Subtest: 07-01: same-term D01 8+7+9 gives 24, no exam or probability label
+ok 11 - 07-01: same-term D01 8+7+9 gives 24, no exam or probability label
+  ---
+  duration_ms: 35.080454
+  type: 'test'
+  ...
+# Subtest: 07-02: zero really is an observed completed score
+ok 12 - 07-02: zero really is an observed completed score
+  ---
+  duration_ms: 0.795969
+  type: 'test'
+  ...
+# Subtest: 07-03: partial scores are never promoted to completed semester averages
+ok 13 - 07-03: partial scores are never promoted to completed semester averages
+  ---
+  duration_ms: 3.064426
+  type: 'test'
+  ...
+# Subtest: 07-04: cannot combine subjects from different semesters to fabricate D01
+ok 14 - 07-04: cannot combine subjects from different semesters to fabricate D01
+  ---
+  duration_ms: 1.061314
+  type: 'test'
+  ...
+# Subtest: 07-05: prefers most recent term with a complete supported combination
+ok 15 - 07-05: prefers most recent term with a complete supported combination
+  ---
+  duration_ms: 6.790287
+  type: 'test'
+  ...
+# Subtest: 07-06: returns null on transcript with no completed subject grades
+ok 16 - 07-06: returns null on transcript with no completed subject grades
+  ---
+  duration_ms: 0.938016
+  type: 'test'
+  ...
+# Subtest: 07-07: mapping covers new-programme electives and excludes unrelated subjects
+ok 17 - 07-07: mapping covers new-programme electives and excludes unrelated subjects
+  ---
+  duration_ms: 1.151056
+  type: 'test'
+  ...
+# Subtest: 07-08: non-English foreign language is not silently mapped to English
+ok 18 - 07-08: non-English foreign language is not silently mapped to English
+  ---
+  duration_ms: 0.595194
+  type: 'test'
+  ...
+# Subtest: 07-09: read-only adapter does not mutate Seed transcript
+ok 19 - 07-09: read-only adapter does not mutate Seed transcript
+  ---
+  duration_ms: 1.665557
+  type: 'test'
+  ...
+# Subtest: 07-10: Atlas reads user-bound Seed hook, only for school marks
+ok 20 - 07-10: Atlas reads user-bound Seed hook, only for school marks
+  ---
+  duration_ms: 1.86523
+  type: 'test'
+  ...
+# Subtest: 07-11: changing score basis clears old marks and never reuses school marks as official THPT
+ok 21 - 07-11: changing score basis clears old marks and never reuses school marks as official THPT
+  ---
+  duration_ms: 5.187216
+  type: 'test'
+  ...
+# Subtest: 07-12: hook clears account-specific data and blocks callbacks from old UID
+ok 22 - 07-12: hook clears account-specific data and blocks callbacks from old UID
+  ---
+  duration_ms: 0.66288
+  type: 'test'
+  ...
+# Subtest: 07-13: delayed Firestore snapshot for a signed-out account cannot overwrite new student
+ok 23 - 07-13: delayed Firestore snapshot for a signed-out account cannot overwrite new student
+  ---
+  duration_ms: 497.912586
+  type: 'test'
+  ...
+1..23
+# tests 23
+# suites 0
+# pass 23
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4482.78514
+COMMAND npm run test:cp30:profile
+
+> cognitive-learn-ai@0.1.0 test:cp30:profile
+> node --test tests/cp30-profile-realtime.test.cjs
+
+TAP version 13
+# Subtest: CP30-P01 profile opens a realtime subscription with metadata events
+ok 1 - CP30-P01 profile opens a realtime subscription with metadata events
+  ---
+  duration_ms: 319.444229
+  type: 'test'
+  ...
+# Subtest: CP30-P02 cache and pending writes cannot become verified student data
+ok 2 - CP30-P02 cache and pending writes cannot become verified student data
+  ---
+  duration_ms: 156.729463
+  type: 'test'
+  ...
+# Subtest: CP30-P03 verified profile is rendered, but Growth waits for server history
+ok 3 - CP30-P03 verified profile is rendered, but Growth waits for server history
+  ---
+  duration_ms: 128.836863
+  type: 'test'
+  ...
+# Subtest: CP30-P04 revised same-user profile cannot be overwritten by stale history
+ok 4 - CP30-P04 revised same-user profile cannot be overwritten by stale history
+  ---
+  duration_ms: 168.875225
+  type: 'test'
+  ...
+# Subtest: CP30-P05 A to B to A blocks stale profile callbacks from original A session
+ok 5 - CP30-P05 A to B to A blocks stale profile callbacks from original A session
+  ---
+  duration_ms: 283.857391
+  type: 'test'
+  ...
+# Subtest: CP30-P06 previously verified profile is hidden immediately when snapshot becomes cached
+ok 6 - CP30-P06 previously verified profile is hidden immediately when snapshot becomes cached
+  ---
+  duration_ms: 214.896544
+  type: 'test'
+  ...
+# Subtest: CP30-P07 cross-owner profile fails closed and clears previous values
+ok 7 - CP30-P07 cross-owner profile fails closed and clears previous values
+  ---
+  duration_ms: 140.172644
+  type: 'test'
+  ...
+# Subtest: CP30-P08 signed out resets history/profile and invalidates pending results
+ok 8 - CP30-P08 signed out resets history/profile and invalidates pending results
+  ---
+  duration_ms: 55.594876
+  type: 'test'
+  ...
+# Subtest: CP30-P09 server history unavailable preserves verified profile but discloses limitation
+ok 9 - CP30-P09 server history unavailable preserves verified profile but discloses limitation
+  ---
+  duration_ms: 92.40374
+  type: 'test'
+  ...
+# Subtest: CP30-P10 absent verified profile is empty but cache-only absence is not
+ok 10 - CP30-P10 absent verified profile is empty but cache-only absence is not
+  ---
+  duration_ms: 100.986533
+  type: 'test'
+  ...
+# Subtest: CP30-P11 Firestore permission errors remove all personally identifiable display values
+ok 11 - CP30-P11 Firestore permission errors remove all personally identifiable display values
+  ---
+  duration_ms: 89.821181
+  type: 'test'
+  ...
+# Subtest: CP30-P12 server history uses getDocsFromServer rather than an offline cache
+ok 12 - CP30-P12 server history uses getDocsFromServer rather than an offline cache
+  ---
+  duration_ms: 8.308669
+  type: 'test'
+  ...
+# Subtest: CP37 server read renders observed dynamic state, clears both new states on cache or signout
+ok 13 - CP37 server read renders observed dynamic state, clears both new states on cache or signout
+  ---
+  duration_ms: 93.640282
+  type: 'test'
+  ...
+# Subtest: CP38 stale same-owner history cannot populate a newer state
+ok 14 - CP38 stale same-owner history cannot populate a newer state
+  ---
+  duration_ms: 50.61917
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3401.766589
+COMMAND npm run test:cp30:gpa
+
+> cognitive-learn-ai@0.1.0 test:cp30:gpa
+> node --test tests/cp30-gpa-integrity.test.cjs tests/cp30-gpa-listener.test.cjs
+
+TAP version 13
+# Subtest: GPA01 valid zero is VERIFIED, distinct from missing score
+ok 1 - GPA01 valid zero is VERIFIED, distinct from missing score
+  ---
+  duration_ms: 31.349636
+  type: 'test'
+  ...
+# Subtest: GPA02 completed score 8 from six terms verifies for three years
+ok 2 - GPA02 completed score 8 from six terms verifies for three years
+  ---
+  duration_ms: 0.963382
+  type: 'test'
+  ...
+# Subtest: GPA03 falsified profile GPA rejected
+ok 3 - GPA03 falsified profile GPA rejected
+  ---
+  duration_ms: 4.836029
+  type: 'test'
+  ...
+# Subtest: GPA04 falsified transcript GPA rejected independently
+ok 4 - GPA04 falsified transcript GPA rejected independently
+  ---
+  duration_ms: 0.803095
+  type: 'test'
+  ...
+# Subtest: GPA05 missing GPA cannot be stored as numeric zero
+ok 5 - GPA05 missing GPA cannot be stored as numeric zero
+  ---
+  duration_ms: 1.362207
+  type: 'test'
+  ...
+# Subtest: GPA06 fake coverage, partial status, observed count rejected
+ok 6 - GPA06 fake coverage, partial status, observed count rejected
+  ---
+  duration_ms: 23.048057
+  type: 'test'
+  ...
+# Subtest: GPA07 extra subject outside nine cannot be silently excluded
+ok 7 - GPA07 extra subject outside nine cannot be silently excluded
+  ---
+  duration_ms: 0.339885
+  type: 'test'
+  ...
+# Subtest: GPA08 malformed 10+, negative or syntax rejected rather than missing
+ok 8 - GPA08 malformed 10+, negative or syntax rejected rather than missing
+  ---
+  duration_ms: 26.757415
+  type: 'test'
+  ...
+# Subtest: GPA09 absent rows or one missing semester is never verified as 0
+ok 9 - GPA09 absent rows or one missing semester is never verified as 0
+  ---
+  duration_ms: 1.083024
+  type: 'test'
+  ...
+# Subtest: GPA10 empty row can be MISSING, with null year but observed zero elsewhere
+ok 10 - GPA10 empty row can be MISSING, with null year but observed zero elsewhere
+  ---
+  duration_ms: 1.110779
+  type: 'test'
+  ...
+# Subtest: GPA11 two absent docs are INCOMPLETE, not VERIFIED
+ok 11 - GPA11 two absent docs are INCOMPLETE, not VERIFIED
+  ---
+  duration_ms: 0.230648
+  type: 'test'
+  ...
+# Subtest: GPA12 missing summary is LEGACY, never verified
+ok 12 - GPA12 missing summary is LEGACY, never verified
+  ---
+  duration_ms: 0.286101
+  type: 'test'
+  ...
+# Subtest: GPA13 UID, dataScope and schema tamper rejected
+ok 13 - GPA13 UID, dataScope and schema tamper rejected
+  ---
+  duration_ms: 0.186512
+  type: 'test'
+  ...
+# Subtest: GPA14 mismatched foreign language or electives rejected
+ok 14 - GPA14 mismatched foreign language or electives rejected
+  ---
+  duration_ms: 1.002517
+  type: 'test'
+  ...
+# Subtest: GPA15 calculation version and stringified zero both rejected
+ok 15 - GPA15 calculation version and stringified zero both rejected
+  ---
+  duration_ms: 0.766191
+  type: 'test'
+  ...
+# Subtest: GPA16 no modification of underlying Firestore documents
+ok 16 - GPA16 no modification of underlying Firestore documents
+  ---
+  duration_ms: 0.69362
+  type: 'test'
+  ...
+# Subtest: GPA17 UI discloses unverified/mismatch status and does not claim school validation
+ok 17 - GPA17 UI discloses unverified/mismatch status and does not claim school validation
+  ---
+  duration_ms: 12.449646
+  type: 'test'
+  ...
+# Subtest: GPA18 realtime GPA audit independently subscribes to both verified server documents
+ok 18 - GPA18 realtime GPA audit independently subscribes to both verified server documents
+  ---
+  duration_ms: 0.329371
+  type: 'test'
+  ...
+# Subtest: GPAR01 never verifies GPA from just one document
+ok 19 - GPAR01 never verifies GPA from just one document
+  ---
+  duration_ms: 573.637811
+  type: 'test'
+  ...
+# Subtest: GPAR02 verifies only when both server-confirmed snapshots arrive
+ok 20 - GPAR02 verifies only when both server-confirmed snapshots arrive
+  ---
+  duration_ms: 202.007785
+  type: 'test'
+  ...
+# Subtest: GPAR03 cache snapshot removes previously verified evidence immediately
+ok 21 - GPAR03 cache snapshot removes previously verified evidence immediately
+  ---
+  duration_ms: 141.391548
+  type: 'test'
+  ...
+# Subtest: GPAR04 pending write snapshot cannot be claimed as verified
+ok 22 - GPAR04 pending write snapshot cannot be claimed as verified
+  ---
+  duration_ms: 89.802952
+  type: 'test'
+  ...
+# Subtest: GPAR05 stale A watcher cannot affect A→B→A account switch
+ok 23 - GPAR05 stale A watcher cannot affect A→B→A account switch
+  ---
+  duration_ms: 116.544986
+  type: 'test'
+  ...
+# Subtest: GPAR06 wrong-owner record is rejected by the GPA auditor
+ok 24 - GPAR06 wrong-owner record is rejected by the GPA auditor
+  ---
+  duration_ms: 92.450767
+  type: 'test'
+  ...
+# Subtest: GPAR07 Firestore permissions failure clears verified summary
+ok 25 - GPAR07 Firestore permissions failure clears verified summary
+  ---
+  duration_ms: 32.911639
+  type: 'test'
+  ...
+# Subtest: GPAR08 missing transcript yields INCOMPLETE rather than zero GPA
+ok 26 - GPAR08 missing transcript yields INCOMPLETE rather than zero GPA
+  ---
+  duration_ms: 34.160251
+  type: 'test'
+  ...
+# Subtest: GPAR09 logout closes watchers and clears verified values
+ok 27 - GPAR09 logout closes watchers and clears verified values
+  ---
+  duration_ms: 62.070511
+  type: 'test'
+  ...
+# Subtest: GPAR10 recovered cache requires both fresh server payloads again
+ok 28 - GPAR10 recovered cache requires both fresh server payloads again
+  ---
+  duration_ms: 68.21827
+  type: 'test'
+  ...
+1..28
+# tests 28
+# suites 0
+# pass 28
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3020.656352
+COMMAND npm run test:cp30:batch4
+
+> cognitive-learn-ai@0.1.0 test:cp30:batch4
+> node --test tests/cp30-batch4-legacy-policy.test.cjs tests/cp30-realtime-read.test.cjs tests/cp30-gpa-listener.test.cjs
+
+TAP version 13
+# Subtest: LEG01 valid observed zero with six-semester omissions is read-only readable
+ok 1 - LEG01 valid observed zero with six-semester omissions is read-only readable
+  ---
+  duration_ms: 6.953347
+  type: 'test'
+  ...
+# Subtest: LEG02 valid legacy with no UID remains within only the owner UID-scoped path
+ok 2 - LEG02 valid legacy with no UID remains within only the owner UID-scoped path
+  ---
+  duration_ms: 0.437639
+  type: 'test'
+  ...
+# Subtest: LEG03 foreign userId, dataScope and invalid UID are denied
+ok 3 - LEG03 foreign userId, dataScope and invalid UID are denied
+  ---
+  duration_ms: 0.400763
+  type: 'test'
+  ...
+# Subtest: LEG04 missing or forged curriculum is quarantined rather than guessed
+ok 4 - LEG04 missing or forged curriculum is quarantined rather than guessed
+  ---
+  duration_ms: 20.672502
+  type: 'test'
+  ...
+# Subtest: LEG05 unknown grade or semester is quarantined
+ok 5 - LEG05 unknown grade or semester is quarantined
+  ---
+  duration_ms: 0.589686
+  type: 'test'
+  ...
+# Subtest: LEG06 subjects outside locked nine are never hidden in computation
+ok 6 - LEG06 subjects outside locked nine are never hidden in computation
+  ---
+  duration_ms: 0.312248
+  type: 'test'
+  ...
+# Subtest: LEG07 invalid scores are rejected instead of treated as missing or zero
+ok 7 - LEG07 invalid scores are rejected instead of treated as missing or zero
+  ---
+  duration_ms: 4.18165
+  type: 'test'
+  ...
+# Subtest: LEG08 malformed row, overlong regular series and invalid mark fields denied
+ok 8 - LEG08 malformed row, overlong regular series and invalid mark fields denied
+  ---
+  duration_ms: 0.595606
+  type: 'test'
+  ...
+# Subtest: LEG09 missing partial marks, comma decimals and true zero remain valid
+ok 9 - LEG09 missing partial marks, comma decimals and true zero remain valid
+  ---
+  duration_ms: 0.637954
+  type: 'test'
+  ...
+# Subtest: LEG10 payload is never mutated or migrated by read-only validation
+ok 10 - LEG10 payload is never mutated or migrated by read-only validation
+  ---
+  duration_ms: 0.459055
+  type: 'test'
+  ...
+# Subtest: LEG11 UI labels verified legacy schema as unverified historical grades
+ok 11 - LEG11 UI labels verified legacy schema as unverified historical grades
+  ---
+  duration_ms: 22.691519
+  type: 'test'
+  ...
+# Subtest: LEG12 primary and legacy subscriptions remain owner/session/server scoped
+ok 12 - LEG12 primary and legacy subscriptions remain owner/session/server scoped
+  ---
+  duration_ms: 0.41803
+  type: 'test'
+  ...
+# Subtest: GPAR01 never verifies GPA from just one document
+ok 13 - GPAR01 never verifies GPA from just one document
+  ---
+  duration_ms: 411.028843
+  type: 'test'
+  ...
+# Subtest: GPAR02 verifies only when both server-confirmed snapshots arrive
+ok 14 - GPAR02 verifies only when both server-confirmed snapshots arrive
+  ---
+  duration_ms: 130.74643
+  type: 'test'
+  ...
+# Subtest: GPAR03 cache snapshot removes previously verified evidence immediately
+ok 15 - GPAR03 cache snapshot removes previously verified evidence immediately
+  ---
+  duration_ms: 29.528571
+  type: 'test'
+  ...
+# Subtest: GPAR04 pending write snapshot cannot be claimed as verified
+ok 16 - GPAR04 pending write snapshot cannot be claimed as verified
+  ---
+  duration_ms: 148.605084
+  type: 'test'
+  ...
+# Subtest: GPAR05 stale A watcher cannot affect A→B→A account switch
+ok 17 - GPAR05 stale A watcher cannot affect A→B→A account switch
+  ---
+  duration_ms: 124.275239
+  type: 'test'
+  ...
+# Subtest: GPAR06 wrong-owner record is rejected by the GPA auditor
+ok 18 - GPAR06 wrong-owner record is rejected by the GPA auditor
+  ---
+  duration_ms: 128.251605
+  type: 'test'
+  ...
+# Subtest: GPAR07 Firestore permissions failure clears verified summary
+ok 19 - GPAR07 Firestore permissions failure clears verified summary
+  ---
+  duration_ms: 76.043131
+  type: 'test'
+  ...
+# Subtest: GPAR08 missing transcript yields INCOMPLETE rather than zero GPA
+ok 20 - GPAR08 missing transcript yields INCOMPLETE rather than zero GPA
+  ---
+  duration_ms: 21.938314
+  type: 'test'
+  ...
+# Subtest: GPAR09 logout closes watchers and clears verified values
+ok 21 - GPAR09 logout closes watchers and clears verified values
+  ---
+  duration_ms: 87.623213
+  type: 'test'
+  ...
+# Subtest: GPAR10 recovered cache requires both fresh server payloads again
+ok 22 - GPAR10 recovered cache requires both fresh server payloads again
+  ---
+  duration_ms: 51.495623
+  type: 'test'
+  ...
+# Subtest: CP30-R01 only server-confirmed, committed snapshots pass
+ok 23 - CP30-R01 only server-confirmed, committed snapshots pass
+  ---
+  duration_ms: 1.982321
+  type: 'test'
+  ...
+# Subtest: CP30-R02 cross-owner and malformed documents fail closed
+ok 24 - CP30-R02 cross-owner and malformed documents fail closed
+  ---
+  duration_ms: 1.261063
+  type: 'test'
+  ...
+# Subtest: CP30-R03 verified legacy docs with no userId remain readable in own UID-scoped path
+ok 25 - CP30-R03 verified legacy docs with no userId remain readable in own UID-scoped path
+  ---
+  duration_ms: 0.525503
+  type: 'test'
+  ...
+# Subtest: CP30-R04 account inspections reject old generation and account switches
+ok 26 - CP30-R04 account inspections reject old generation and account switches
+  ---
+  duration_ms: 0.378809
+  type: 'test'
+  ...
+# Subtest: CP30-R05 cache-only and pending writes never render as verified transcript
+ok 27 - CP30-R05 cache-only and pending writes never render as verified transcript
+  ---
+  duration_ms: 132.346476
+  type: 'test'
+  ...
+# Subtest: CP30-R06 A to B to A cannot resurrect callback from first A session
+ok 28 - CP30-R06 A to B to A cannot resurrect callback from first A session
+  ---
+  duration_ms: 131.507958
+  type: 'test'
+  ...
+# Subtest: CP30-R07 legacy fallback is server-confirmed and cannot overwrite a newer primary transcript
+ok 29 - CP30-R07 legacy fallback is server-confirmed and cannot overwrite a newer primary transcript
+  ---
+  duration_ms: 185.775343
+  type: 'test'
+  ...
+# Subtest: CP30-R08 conflicting document UID clears data and reports error
+ok 30 - CP30-R08 conflicting document UID clears data and reports error
+  ---
+  duration_ms: 116.370055
+  type: 'test'
+  ...
+# Subtest: CP30-R09 signed out session clears verified results immediately
+ok 31 - CP30-R09 signed out session clears verified results immediately
+  ---
+  duration_ms: 79.990999
+  type: 'test'
+  ...
+# Subtest: CP30-R10 storage status guard resets rows and rejects stale async results
+ok 32 - CP30-R10 storage status guard resets rows and rejects stale async results
+  ---
+  duration_ms: 0.718937
+  type: 'test'
+  ...
+1..32
+# tests 32
+# suites 0
+# pass 32
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3230.598313
+COMMAND npm run test:cp31:batch3
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch3
+> node --experimental-strip-types --test tests/cp31-batch3-operational-audits.test.mjs
+
+TAP version 13
+# (node:37580) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP31-B3-01 valid demo docs pass read-only identity/schema checks
+ok 1 - CP31-B3-01 valid demo docs pass read-only identity/schema checks
+  ---
+  duration_ms: 11.00348
+  type: 'test'
+  ...
+# Subtest: CP31-B3-02 cross-owner or dataScope != demo are rejected without leaking UID
+ok 2 - CP31-B3-02 cross-owner or dataScope != demo are rejected without leaking UID
+  ---
+  duration_ms: 0.788994
+  type: 'test'
+  ...
+# Subtest: CP31-B3-03 no docs or legacy never claims migration complete
+ok 3 - CP31-B3-03 no docs or legacy never claims migration complete
+  ---
+  duration_ms: 0.290273
+  type: 'test'
+  ...
+# Subtest: CP31-B3-04 inconsistent electives/foreign language block automated migrations
+ok 4 - CP31-B3-04 inconsistent electives/foreign language block automated migrations
+  ---
+  duration_ms: 11.979546
+  type: 'test'
+  ...
+# Subtest: CP31-B3-05 UID blank and missing ownership fail closed
+ok 5 - CP31-B3-05 UID blank and missing ownership fail closed
+  ---
+  duration_ms: 5.311133
+  type: 'test'
+  ...
+# Subtest: CP31-B3-06 current admission registry evaluated without fabricated freshness
+ok 6 - CP31-B3-06 current admission registry evaluated without fabricated freshness
+  ---
+  duration_ms: 0.912876
+  type: 'test'
+  ...
+# Subtest: CP31-B3-07 admission missing 2024 or duplicate year is visible
+ok 7 - CP31-B3-07 admission missing 2024 or duplicate year is visible
+  ---
+  duration_ms: 0.352163
+  type: 'test'
+  ...
+# Subtest: CP31-B3-08 bad HTTP, javascript and embedded credentials cannot be trusted
+ok 8 - CP31-B3-08 bad HTTP, javascript and embedded credentials cannot be trusted
+  ---
+  duration_ms: 0.219435
+  type: 'test'
+  ...
+# Subtest: CP31-B3-09 scholarship register is assessed with NOT TESTED deadlines
+ok 9 - CP31-B3-09 scholarship register is assessed with NOT TESTED deadlines
+  ---
+  duration_ms: 5.406592
+  type: 'test'
+  ...
+# Subtest: CP31-B3-10 scholarship URL and date validity includes future/invalid date
+ok 10 - CP31-B3-10 scholarship URL and date validity includes future/invalid date
+  ---
+  duration_ms: 0.92244
+  type: 'test'
+  ...
+# Subtest: CP31-B3-11 duplicate scholarship, missing conditions/credentials are rejected
+ok 11 - CP31-B3-11 duplicate scholarship, missing conditions/credentials are rejected
+  ---
+  duration_ms: 0.64055
+  type: 'test'
+  ...
+# Subtest: CP31-B3-12 changes registered as safe local diagnostics, not production approval
+ok 12 - CP31-B3-12 changes registered as safe local diagnostics, not production approval
+  ---
+  duration_ms: 1.163276
+  type: 'test'
+  ...
+# Subtest: CP31-B3-13 E2E manifest updated without weakening auth/preflight
+ok 13 - CP31-B3-13 E2E manifest updated without weakening auth/preflight
+  ---
+  duration_ms: 2.172641
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 605.220783
+COMMAND npm run test:cp31:batch4
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch4
+> node --experimental-strip-types --test tests/cp31-batch4-evidence.test.mjs
+
+TAP version 13
+# (node:37645) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP31-B4-01 fingerprint matches generated checked source tree and candidate rules file
+ok 1 - CP31-B4-01 fingerprint matches generated checked source tree and candidate rules file
+  ---
+  duration_ms: 23.293615
+  type: 'test'
+  ...
+# Subtest: CP31-B4-02 release no evidence: no invented CI/deploy PASS
+ok 2 - CP31-B4-02 release no evidence: no invented CI/deploy PASS
+  ---
+  duration_ms: 0.82814
+  type: 'test'
+  ...
+# Subtest: CP31-B4-03 release structural source matches, but self-declared production remains unverified
+ok 3 - CP31-B4-03 release structural source matches, but self-declared production remains unverified
+  ---
+  duration_ms: 0.871097
+  type: 'test'
+  ...
+# Subtest: CP31-B4-04 source fingerprint mismatch fails closed
+ok 4 - CP31-B4-04 source fingerprint mismatch fails closed
+  ---
+  duration_ms: 0.325695
+  type: 'test'
+  ...
+# Subtest: CP31-B4-05 release invalid CI HTTPS/credentials/commit/exit rejected
+ok 5 - CP31-B4-05 release invalid CI HTTPS/credentials/commit/exit rejected
+  ---
+  duration_ms: 0.709706
+  type: 'test'
+  ...
+# Subtest: CP31-B4-06 mismatched deploy artifact always FAIL
+ok 6 - CP31-B4-06 mismatched deploy artifact always FAIL
+  ---
+  duration_ms: 0.418457
+  type: 'test'
+  ...
+# Subtest: CP31-B4-07 no backup/rollback produce NOT TESTED not PASS
+ok 7 - CP31-B4-07 no backup/rollback produce NOT TESTED not PASS
+  ---
+  duration_ms: 0.7686
+  type: 'test'
+  ...
+# Subtest: CP31-B4-08 unknown release JSON schema fails
+ok 8 - CP31-B4-08 unknown release JSON schema fails
+  ---
+  duration_ms: 0.171006
+  type: 'test'
+  ...
+# Subtest: CP31-B4-09 no Emulator report never passes role authorization
+ok 9 - CP31-B4-09 no Emulator report never passes role authorization
+  ---
+  duration_ms: 0.676869
+  type: 'test'
+  ...
+# Subtest: CP31-B4-10 known gate schema and sha accepted only as local evidence
+ok 10 - CP31-B4-10 known gate schema and sha accepted only as local evidence
+  ---
+  duration_ms: 0.437654
+  type: 'test'
+  ...
+# Subtest: CP31-B4-11 tampered Rules candidate checksum is FAIL even with PASS fields
+ok 11 - CP31-B4-11 tampered Rules candidate checksum is FAIL even with PASS fields
+  ---
+  duration_ms: 0.171391
+  type: 'test'
+  ...
+# Subtest: CP31-B4-12 preflight-only or failed emulator cannot be called successful
+ok 12 - CP31-B4-12 preflight-only or failed emulator cannot be called successful
+  ---
+  duration_ms: 0.126767
+  type: 'test'
+  ...
+# Subtest: CP31-B4-13 wrong project/gate or future time rejected
+ok 13 - CP31-B4-13 wrong project/gate or future time rejected
+  ---
+  duration_ms: 0.075836
+  type: 'test'
+  ...
+# Subtest: CP31-B4-14 no OULAD result means no ML score claims
+ok 14 - CP31-B4-14 no OULAD result means no ML score claims
+  ---
+  duration_ms: 0.249139
+  type: 'test'
+  ...
+# Subtest: CP31-B4-15 correctly structured aggregate OULAD report does not imply Vietnamese validation
+ok 15 - CP31-B4-15 correctly structured aggregate OULAD report does not imply Vietnamese validation
+  ---
+  duration_ms: 0.129883
+  type: 'test'
+  ...
+# Subtest: CP31-B4-16 synthetic one-row VNHSGE fixture cannot pass as OULAD
+ok 16 - CP31-B4-16 synthetic one-row VNHSGE fixture cannot pass as OULAD
+  ---
+  duration_ms: 3.875034
+  type: 'test'
+  ...
+# Subtest: CP31-B4-17 OULAD tiny holdout, wrong cutoff and impossible splits fail
+ok 17 - CP31-B4-17 OULAD tiny holdout, wrong cutoff and impossible splits fail
+  ---
+  duration_ms: 0.333069
+  type: 'test'
+  ...
+# Subtest: CP31-B4-18 impossible Brier, delta and bootstrap confidence interval rejected
+ok 18 - CP31-B4-18 impossible Brier, delta and bootstrap confidence interval rejected
+  ---
+  duration_ms: 0.152254
+  type: 'test'
+  ...
+# Subtest: CP31-B4-19 invalid source/cohort and synthetic label cannot be presented as real result
+ok 19 - CP31-B4-19 invalid source/cohort and synthetic label cannot be presented as real result
+  ---
+  duration_ms: 0.212034
+  type: 'test'
+  ...
+# Subtest: CP31-B4-20 Admin UI only imports in memory; route/catalog/run guard is explicit
+ok 20 - CP31-B4-20 Admin UI only imports in memory; route/catalog/run guard is explicit
+  ---
+  duration_ms: 2.480809
+  type: 'test'
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 20
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 344.184469
+COMMAND npm run test:cp31:batch5
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch5
+> node --experimental-strip-types --test tests/cp31-batch5-governance.test.mjs
+
+TAP version 13
+# (node:37705) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: atlas: no file is NOT TESTED, never implicit PASS
+ok 1 - atlas: no file is NOT TESTED, never implicit PASS
+  ---
+  duration_ms: 10.707975
+  type: 'test'
+  ...
+# Subtest: atlas: wrong schema fails closed
+ok 2 - atlas: wrong schema fails closed
+  ---
+  duration_ms: 0.312334
+  type: 'test'
+  ...
+# Subtest: atlas: valid metadata retains unverified scope
+ok 3 - atlas: valid metadata retains unverified scope
+  ---
+  duration_ms: 1.137792
+  type: 'test'
+  ...
+# Subtest: policy: no file is NOT TESTED, never implicit PASS
+ok 4 - policy: no file is NOT TESTED, never implicit PASS
+  ---
+  duration_ms: 0.516027
+  type: 'test'
+  ...
+# Subtest: policy: wrong schema fails closed
+ok 5 - policy: wrong schema fails closed
+  ---
+  duration_ms: 0.265843
+  type: 'test'
+  ...
+# Subtest: policy: valid metadata retains unverified scope
+ok 6 - policy: valid metadata retains unverified scope
+  ---
+  duration_ms: 0.436921
+  type: 'test'
+  ...
+# Subtest: scenario: no file is NOT TESTED, never implicit PASS
+ok 7 - scenario: no file is NOT TESTED, never implicit PASS
+  ---
+  duration_ms: 0.92536
+  type: 'test'
+  ...
+# Subtest: scenario: wrong schema fails closed
+ok 8 - scenario: wrong schema fails closed
+  ---
+  duration_ms: 0.928076
+  type: 'test'
+  ...
+# Subtest: scenario: valid metadata retains unverified scope
+ok 9 - scenario: valid metadata retains unverified scope
+  ---
+  duration_ms: 2.121657
+  type: 'test'
+  ...
+# Subtest: evidence: no file is NOT TESTED, never implicit PASS
+ok 10 - evidence: no file is NOT TESTED, never implicit PASS
+  ---
+  duration_ms: 2.021228
+  type: 'test'
+  ...
+# Subtest: evidence: wrong schema fails closed
+ok 11 - evidence: wrong schema fails closed
+  ---
+  duration_ms: 0.210511
+  type: 'test'
+  ...
+# Subtest: evidence: valid metadata retains unverified scope
+ok 12 - evidence: valid metadata retains unverified scope
+  ---
+  duration_ms: 0.464752
+  type: 'test'
+  ...
+# Subtest: trends: no file is NOT TESTED, never implicit PASS
+ok 13 - trends: no file is NOT TESTED, never implicit PASS
+  ---
+  duration_ms: 0.374325
+  type: 'test'
+  ...
+# Subtest: trends: wrong schema fails closed
+ok 14 - trends: wrong schema fails closed
+  ---
+  duration_ms: 0.655708
+  type: 'test'
+  ...
+# Subtest: trends: valid metadata retains unverified scope
+ok 15 - trends: valid metadata retains unverified scope
+  ---
+  duration_ms: 0.493124
+  type: 'test'
+  ...
+# Subtest: finance: no file is NOT TESTED, never implicit PASS
+ok 16 - finance: no file is NOT TESTED, never implicit PASS
+  ---
+  duration_ms: 1.498528
+  type: 'test'
+  ...
+# Subtest: finance: wrong schema fails closed
+ok 17 - finance: wrong schema fails closed
+  ---
+  duration_ms: 0.964259
+  type: 'test'
+  ...
+# Subtest: finance: valid metadata retains unverified scope
+ok 18 - finance: valid metadata retains unverified scope
+  ---
+  duration_ms: 0.538793
+  type: 'test'
+  ...
+# Subtest: Atlas: forged same reviewer, malformed URL, impossible date fail
+ok 19 - Atlas: forged same reviewer, malformed URL, impossible date fail
+  ---
+  duration_ms: 0.688503
+  type: 'test'
+  ...
+# Subtest: Atlas: repeat IDs fail
+ok 20 - Atlas: repeat IDs fail
+  ---
+  duration_ms: 0.336898
+  type: 'test'
+  ...
+# Subtest: Orion: prevents non-shadow automatic assignment
+ok 21 - Orion: prevents non-shadow automatic assignment
+  ---
+  duration_ms: 0.396309
+  type: 'test'
+  ...
+# Subtest: Orion: missing stop rule or human review fails
+ok 22 - Orion: missing stop rule or human review fails
+  ---
+  duration_ms: 0.558248
+  type: 'test'
+  ...
+# Subtest: Scenario: outcome masquerading as simulation is denied
+ok 23 - Scenario: outcome masquerading as simulation is denied
+  ---
+  duration_ms: 0.42077
+  type: 'test'
+  ...
+# Subtest: Scenario: mismatch policy versions cannot be directly compared
+ok 24 - Scenario: mismatch policy versions cannot be directly compared
+  ---
+  duration_ms: 0.382179
+  type: 'test'
+  ...
+# Subtest: Pulse record: invented probability or confidence is rejected
+ok 25 - Pulse record: invented probability or confidence is rejected
+  ---
+  duration_ms: 0.292124
+  type: 'test'
+  ...
+# Subtest: Pulse record: missing snapshot denied
+ok 26 - Pulse record: missing snapshot denied
+  ---
+  duration_ms: 0.411404
+  type: 'test'
+  ...
+# Subtest: Pulse trend: genuine zero is valid
+ok 27 - Pulse trend: genuine zero is valid
+  ---
+  duration_ms: 2.067802
+  type: 'test'
+  ...
+# Subtest: Pulse trend: missing T1 cannot claim improvement
+ok 28 - Pulse trend: missing T1 cannot claim improvement
+  ---
+  duration_ms: 0.286878
+  type: 'test'
+  ...
+# Subtest: Pulse trend: impossible date and swapped T1/T2 warn
+ok 29 - Pulse trend: impossible date and swapped T1/T2 warn
+  ---
+  duration_ms: 0.374092
+  type: 'test'
+  ...
+# Subtest: Haven: zero travel cost allowed but no verified finance claim
+ok 30 - Haven: zero travel cost allowed but no verified finance claim
+  ---
+  duration_ms: 0.479461
+  type: 'test'
+  ...
+# Subtest: Haven: negative cost or invalid scholarship source fail
+ok 31 - Haven: negative cost or invalid scholarship source fail
+  ---
+  duration_ms: 0.4868
+  type: 'test'
+  ...
+# Subtest: Catalog/manifest/UI map six distinct limited views and no privileged writes
+ok 32 - Catalog/manifest/UI map six distinct limited views and no privileged writes
+  ---
+  duration_ms: 6.16122
+  type: 'test'
+  ...
+# Subtest: Synthetic example flag cannot be imported as validated evidence
+ok 33 - Synthetic example flag cannot be imported as validated evidence
+  ---
+  duration_ms: 2.182757
+  type: 'test'
+  ...
+1..33
+# tests 33
+# suites 0
+# pass 33
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 304.25413
+COMMAND npm run test:cp31:batch11
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch11
+> node --experimental-strip-types --test tests/cp31-batch11-t0-t1-comparison.test.mjs
+
+TAP version 13
+# (node:37748) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: B11-01 reviewed and traced cycle allows DESCRIPTIVE_ONLY comparison
+ok 1 - B11-01 reviewed and traced cycle allows DESCRIPTIVE_ONLY comparison
+  ---
+  duration_ms: 4.969033
+  type: 'test'
+  ...
+# Subtest: B11-02 no cycle is INVALID with no implied student outcome
+ok 2 - B11-02 no cycle is INVALID with no implied student outcome
+  ---
+  duration_ms: 0.340847
+  type: 'test'
+  ...
+# Subtest: B11-03 ACTIVE cycle has no post-outcome comparison
+ok 3 - B11-03 ACTIVE cycle has no post-outcome comparison
+  ---
+  duration_ms: 0.287141
+  type: 'test'
+  ...
+# Subtest: B11-04 check-in without T1 cannot create outcome
+ok 4 - B11-04 check-in without T1 cannot create outcome
+  ---
+  duration_ms: 0.25166
+  type: 'test'
+  ...
+# Subtest: B11-05 frozen T0 is never derived from reassessment
+ok 5 - B11-05 frozen T0 is never derived from reassessment
+  ---
+  duration_ms: 0.774782
+  type: 'test'
+  ...
+# Subtest: B11-06 observed zero remains zero (not null/missing)
+ok 6 - B11-06 observed zero remains zero (not null/missing)
+  ---
+  duration_ms: 0.564586
+  type: 'test'
+  ...
+# Subtest: B11-07 matched subjects and denominator are explicit
+ok 7 - B11-07 matched subjects and denominator are explicit
+  ---
+  duration_ms: 0.435104
+  type: 'test'
+  ...
+# Subtest: B11-08 missing subject cannot be imputed to zero
+ok 8 - B11-08 missing subject cannot be imputed to zero
+  ---
+  duration_ms: 0.406212
+  type: 'test'
+  ...
+# Subtest: B11-09 compared averages restrict to matched measures (not full T0)
+ok 9 - B11-09 compared averages restrict to matched measures (not full T0)
+  ---
+  duration_ms: 1.455403
+  type: 'test'
+  ...
+# Subtest: B11-10 negative observed delta is allowed and not a risk probability
+ok 10 - B11-10 negative observed delta is allowed and not a risk probability
+  ---
+  duration_ms: 1.444089
+  type: 'test'
+  ...
+# Subtest: B11-11 self-reported hours preserve actual zero
+ok 11 - B11-11 self-reported hours preserve actual zero
+  ---
+  duration_ms: 1.185807
+  type: 'test'
+  ...
+# Subtest: B11-12 T0 target gap remains independent of T1 change
+ok 12 - B11-12 T0 target gap remains independent of T1 change
+  ---
+  duration_ms: 2.037046
+  type: 'test'
+  ...
+# Subtest: B11-13 no ML forecast exists: error and calibration withheld
+ok 13 - B11-13 no ML forecast exists: error and calibration withheld
+  ---
+  duration_ms: 0.859804
+  type: 'test'
+  ...
+# Subtest: B11-14 no causal effect estimate or treatment assignment
+ok 14 - B11-14 no causal effect estimate or treatment assignment
+  ---
+  duration_ms: 0.667689
+  type: 'test'
+  ...
+# Subtest: B11-15 limitation array explicitly discloses missingness and self-report
+ok 15 - B11-15 limitation array explicitly discloses missingness and self-report
+  ---
+  duration_ms: 1.836761
+  type: 'test'
+  ...
+# Subtest: B11-16 no mutation to frozen T0 or source cycle on comparison
+ok 16 - B11-16 no mutation to frozen T0 or source cycle on comparison
+  ---
+  duration_ms: 1.646881
+  type: 'test'
+  ...
+# Subtest: B11-17 legacy reviewed cycle without T0 cannot compare
+ok 17 - B11-17 legacy reviewed cycle without T0 cannot compare
+  ---
+  duration_ms: 0.285436
+  type: 'test'
+  ...
+# Subtest: B11-18 reviewed legacy without Evidence Record cannot compare
+ok 18 - B11-18 reviewed legacy without Evidence Record cannot compare
+  ---
+  duration_ms: 1.021907
+  type: 'test'
+  ...
+# Subtest: B11-19 mismatched T0 is not comparable
+ok 19 - B11-19 mismatched T0 is not comparable
+  ---
+  duration_ms: 1.281163
+  type: 'test'
+  ...
+# Subtest: B11-20 forged T0 forecast is rejected not evaluated
+ok 20 - B11-20 forged T0 forecast is rejected not evaluated
+  ---
+  duration_ms: 0.184714
+  type: 'test'
+  ...
+# Subtest: B11-21 altered T1 observation is rejected without recalculated evidence
+ok 21 - B11-21 altered T1 observation is rejected without recalculated evidence
+  ---
+  duration_ms: 0.236532
+  type: 'test'
+  ...
+# Subtest: B11-22 altered hours is rejected without recalculated evidence
+ok 22 - B11-22 altered hours is rejected without recalculated evidence
+  ---
+  duration_ms: 0.155772
+  type: 'test'
+  ...
+# Subtest: B11-23 invalid reassessment chronology is rejected
+ok 23 - B11-23 invalid reassessment chronology is rejected
+  ---
+  duration_ms: 0.116524
+  type: 'test'
+  ...
+# Subtest: B11-24 corruption in the evidence output fails closed
+ok 24 - B11-24 corruption in the evidence output fails closed
+  ---
+  duration_ms: 0.648494
+  type: 'test'
+  ...
+# Subtest: B11-25 cannot pass fake foreign/empty/shape-invalid cycles
+ok 25 - B11-25 cannot pass fake foreign/empty/shape-invalid cycles
+  ---
+  duration_ms: 0.223262
+  type: 'test'
+  ...
+# Subtest: B11-26 result replay succeeds with exact domain outputs
+ok 26 - B11-26 result replay succeeds with exact domain outputs
+  ---
+  duration_ms: 1.585471
+  type: 'test'
+  ...
+# Subtest: B11-27 replay ignores Firestore object key ordering
+ok 27 - B11-27 replay ignores Firestore object key ordering
+  ---
+  duration_ms: 1.155283
+  type: 'test'
+  ...
+# Subtest: B11-28 report tampering detected for measured values and claims
+ok 28 - B11-28 report tampering detected for measured values and claims
+  ---
+  duration_ms: 2.427157
+  type: 'test'
+  ...
+# Subtest: B11-29 appended reviewer/external verification is rejected
+ok 29 - B11-29 appended reviewer/external verification is rejected
+  ---
+  duration_ms: 1.889115
+  type: 'test'
+  ...
+# Subtest: B11-30 replay rejects INVALID status even if structurally self-consistent
+ok 30 - B11-30 replay rejects INVALID status even if structurally self-consistent
+  ---
+  duration_ms: 0.629177
+  type: 'test'
+  ...
+# Subtest: B11-31 golden path uses the real comparison engine with no fake prediction
+ok 31 - B11-31 golden path uses the real comparison engine with no fake prediction
+  ---
+  duration_ms: 24.010954
+  type: 'test'
+  ...
+# Subtest: B11-32 golden path frozen T0 does not change after measurement
+ok 32 - B11-32 golden path frozen T0 does not change after measurement
+  ---
+  duration_ms: 11.254771
+  type: 'test'
+  ...
+# Subtest: B11-33 student UI displays uncertainty, matched T1 and blocks legacy comparison
+ok 33 - B11-33 student UI displays uncertainty, matched T1 and blocks legacy comparison
+  ---
+  duration_ms: 6.311949
+  type: 'test'
+  ...
+# Subtest: B11-34 comparator cannot compute forecasts from targets or T1
+ok 34 - B11-34 comparator cannot compute forecasts from targets or T1
+  ---
+  duration_ms: 0.503653
+  type: 'test'
+  ...
+# Subtest: B11-35 deep comparison identifies changed limitations and metadata
+ok 35 - B11-35 deep comparison identifies changed limitations and metadata
+  ---
+  duration_ms: 1.155272
+  type: 'test'
+  ...
+# Subtest: B11-36 no conditional claim about improvement on zero completion
+ok 36 - B11-36 no conditional claim about improvement on zero completion
+  ---
+  duration_ms: 0.446581
+  type: 'test'
+  ...
+1..36
+# tests 36
+# suites 0
+# pass 36
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 507.445281
+COMMAND npm run test:cp31:batch12
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch12
+> node --experimental-strip-types --test tests/cp31-batch12-multicycle-trend.test.mjs
+
+TAP version 13
+# (node:37806) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: B12-01 initial empty window is NO_HISTORY, no fabricated trend
+ok 1 - B12-01 initial empty window is NO_HISTORY, no fabricated trend
+  ---
+  duration_ms: 4.3739
+  type: 'test'
+  ...
+# Subtest: B12-02 unknown input is INVALID
+ok 2 - B12-02 unknown input is INVALID
+  ---
+  duration_ms: 0.40462
+  type: 'test'
+  ...
+# Subtest: B12-03 one reviewed cycle has no measured T2
+ok 3 - B12-03 one reviewed cycle has no measured T2
+  ---
+  duration_ms: 5.443018
+  type: 'test'
+  ...
+# Subtest: B12-04 one active cycle cannot be extrapolated
+ok 4 - B12-04 one active cycle cannot be extrapolated
+  ---
+  duration_ms: 0.256691
+  type: 'test'
+  ...
+# Subtest: B12-05 two real domain-reviewed synthetic cycles form descriptive series
+ok 5 - B12-05 two real domain-reviewed synthetic cycles form descriptive series
+  ---
+  duration_ms: 17.512212
+  type: 'test'
+  ...
+# Subtest: B12-06 reverse Firestore newest-first order does not change trend
+ok 6 - B12-06 reverse Firestore newest-first order does not change trend
+  ---
+  duration_ms: 4.356194
+  type: 'test'
+  ...
+# Subtest: B12-07 chronological cycle ids strictly sorted by T0
+ok 7 - B12-07 chronological cycle ids strictly sorted by T0
+  ---
+  duration_ms: 4.234272
+  type: 'test'
+  ...
+# Subtest: B12-08 frozen T0 second cycle is never silently treated as a measured T2
+ok 8 - B12-08 frozen T0 second cycle is never silently treated as a measured T2
+  ---
+  duration_ms: 2.572807
+  type: 'test'
+  ...
+# Subtest: B12-09 true observed 0 kept as zero
+ok 9 - B12-09 true observed 0 kept as zero
+  ---
+  duration_ms: 2.011607
+  type: 'test'
+  ...
+# Subtest: B12-10 English matched second T0 equals first T1, not target
+ok 10 - B12-10 English matched second T0 equals first T1, not target
+  ---
+  duration_ms: 2.570898
+  type: 'test'
+  ...
+# Subtest: B12-11 individual subject history only, no aggregate score across changing denominators
+ok 11 - B12-11 individual subject history only, no aggregate score across changing denominators
+  ---
+  duration_ms: 2.607845
+  type: 'test'
+  ...
+# Subtest: B12-12 provenance remains student self-report on every point
+ok 12 - B12-12 provenance remains student self-report on every point
+  ---
+  duration_ms: 1.171659
+  type: 'test'
+  ...
+# Subtest: B12-13 no causal, forecast or externally validated student outcome claims
+ok 13 - B12-13 no causal, forecast or externally validated student outcome claims
+  ---
+  duration_ms: 1.842049
+  type: 'test'
+  ...
+# Subtest: B12-14 baseline shift from C1 T1 to C2 T0 blocks stitched trend
+ok 14 - B12-14 baseline shift from C1 T1 to C2 T0 blocks stitched trend
+  ---
+  duration_ms: 2.077293
+  type: 'test'
+  ...
+# Subtest: B12-15 same key but different subject label blocks trend
+ok 15 - B12-15 same key but different subject label blocks trend
+  ---
+  duration_ms: 2.008592
+  type: 'test'
+  ...
+# Subtest: B12-16 missing T1 in previous cycle is not silently made zero
+ok 16 - B12-16 missing T1 in previous cycle is not silently made zero
+  ---
+  duration_ms: 2.194925
+  type: 'test'
+  ...
+# Subtest: B12-17 missing T1 in next cycle cannot be used for T2
+ok 17 - B12-17 missing T1 in next cycle cannot be used for T2
+  ---
+  duration_ms: 1.546151
+  type: 'test'
+  ...
+# Subtest: B12-18 no common subjects is not a longitudinal trend
+ok 18 - B12-18 no common subjects is not a longitudinal trend
+  ---
+  duration_ms: 1.261013
+  type: 'test'
+  ...
+# Subtest: B12-19 new-only subject prevents cohort-mix average
+ok 19 - B12-19 new-only subject prevents cohort-mix average
+  ---
+  duration_ms: 1.624999
+  type: 'test'
+  ...
+# Subtest: B12-20 reused cycle ID cannot merge outcomes
+ok 20 - B12-20 reused cycle ID cannot merge outcomes
+  ---
+  duration_ms: 1.251582
+  type: 'test'
+  ...
+# Subtest: B12-21 duplicated T0 timestamp fails closed
+ok 21 - B12-21 duplicated T0 timestamp fails closed
+  ---
+  duration_ms: 1.389985
+  type: 'test'
+  ...
+# Subtest: B12-22 overlapped cycle starts before previous reassessment ends rejected
+ok 22 - B12-22 overlapped cycle starts before previous reassessment ends rejected
+  ---
+  duration_ms: 0.565785
+  type: 'test'
+  ...
+# Subtest: B12-23 corrupt evidence in prior cycle fails closed instead of displaying later trend
+ok 23 - B12-23 corrupt evidence in prior cycle fails closed instead of displaying later trend
+  ---
+  duration_ms: 0.492252
+  type: 'test'
+  ...
+# Subtest: B12-24 corrupt evidence in next cycle fails closed
+ok 24 - B12-24 corrupt evidence in next cycle fails closed
+  ---
+  duration_ms: 0.540088
+  type: 'test'
+  ...
+# Subtest: B12-25 legacy T0 missing refuses trend, while source records remain readable
+ok 25 - B12-25 legacy T0 missing refuses trend, while source records remain readable
+  ---
+  duration_ms: 0.662716
+  type: 'test'
+  ...
+# Subtest: B12-26 legacy Evidence Record missing refuses trend
+ok 26 - B12-26 legacy Evidence Record missing refuses trend
+  ---
+  duration_ms: 0.694256
+  type: 'test'
+  ...
+# Subtest: B12-27 cross-UID records cannot be compared when owner is supplied
+ok 27 - B12-27 cross-UID records cannot be compared when owner is supplied
+  ---
+  duration_ms: 0.613096
+  type: 'test'
+  ...
+# Subtest: B12-28 legacy no-owner records cannot enter authenticated history
+ok 28 - B12-28 legacy no-owner records cannot enter authenticated history
+  ---
+  duration_ms: 0.39594
+  type: 'test'
+  ...
+# Subtest: B12-29 same-owner records remain eligible only under matching uid
+ok 29 - B12-29 same-owner records remain eligible only under matching uid
+  ---
+  duration_ms: 0.801432
+  type: 'test'
+  ...
+# Subtest: B12-30 max 8 displayed cycles; 9th fails rather than claim full history
+ok 30 - B12-30 max 8 displayed cycles; 9th fails rather than claim full history
+  ---
+  duration_ms: 0.924917
+  type: 'test'
+  ...
+# Subtest: B12-31 duplicate records in same window fail closed
+ok 31 - B12-31 duplicate records in same window fail closed
+  ---
+  duration_ms: 1.129499
+  type: 'test'
+  ...
+# Subtest: B12-32 current active cycle must not create fake T3
+ok 32 - B12-32 current active cycle must not create fake T3
+  ---
+  duration_ms: 2.533766
+  type: 'test'
+  ...
+# Subtest: B12-33 active cycle before previous reviewed cycle is invalid interleaving
+ok 33 - B12-33 active cycle before previous reviewed cycle is invalid interleaving
+  ---
+  duration_ms: 1.022143
+  type: 'test'
+  ...
+# Subtest: B12-34 reproducible report replay accepts key reorder
+ok 34 - B12-34 reproducible report replay accepts key reorder
+  ---
+  duration_ms: 3.27749
+  type: 'test'
+  ...
+# Subtest: B12-35 replay rejects spurious T3 and fabricated claims
+ok 35 - B12-35 replay rejects spurious T3 and fabricated claims
+  ---
+  duration_ms: 4.253758
+  type: 'test'
+  ...
+# Subtest: B12-36 replay rejects forged causal claim or changed baseline
+ok 36 - B12-36 replay rejects forged causal claim or changed baseline
+  ---
+  duration_ms: 12.587985
+  type: 'test'
+  ...
+# Subtest: B12-37 genuine inputs remain unmodified after audit
+ok 37 - B12-37 genuine inputs remain unmodified after audit
+  ---
+  duration_ms: 2.1105
+  type: 'test'
+  ...
+# Subtest: B12-38 synthesized local envelope generates and verifies without Firebase
+ok 38 - B12-38 synthesized local envelope generates and verifies without Firebase
+  ---
+  duration_ms: 6.486147
+  type: 'test'
+  ...
+# Subtest: B12-39 envelope source fixture tampering rejected
+ok 39 - B12-39 envelope source fixture tampering rejected
+  ---
+  duration_ms: 6.354071
+  type: 'test'
+  ...
+# Subtest: B12-40 envelope rejects injected externally verified flag
+ok 40 - B12-40 envelope rejects injected externally verified flag
+  ---
+  duration_ms: 2.816091
+  type: 'test'
+  ...
+# Subtest: B12-41 missing synthetic marker or injected student personal data rejected
+ok 41 - B12-41 missing synthetic marker or injected student personal data rejected
+  ---
+  duration_ms: 1.392111
+  type: 'test'
+  ...
+# Subtest: B12-42 UI displays per-subject series with guard labels and truncated history
+ok 42 - B12-42 UI displays per-subject series with guard labels and truncated history
+  ---
+  duration_ms: 0.734646
+  type: 'test'
+  ...
+# Subtest: B12-43 listener binds Firestore owner before trend computation
+ok 43 - B12-43 listener binds Firestore owner before trend computation
+  ---
+  duration_ms: 0.315796
+  type: 'test'
+  ...
+# Subtest: B12-44 historical report is bounded and never claims full population trend
+ok 44 - B12-44 historical report is bounded and never claims full population trend
+  ---
+  duration_ms: 0.712364
+  type: 'test'
+  ...
+# Subtest: B12-45 source checklist remains unchanged and test is invoked in npm scripts
+ok 45 - B12-45 source checklist remains unchanged and test is invoked in npm scripts
+  ---
+  duration_ms: 0.35476
+  type: 'test'
+  ...
+# Subtest: B12-46 exactly eight past reviewed cycles are a bounded, potentially truncated window
+ok 46 - B12-46 exactly eight past reviewed cycles are a bounded, potentially truncated window
+  ---
+  duration_ms: 5.210766
+  type: 'test'
+  ...
+# Subtest: B12-47 mixed owned and ownerless records are rejected even without expected UID
+ok 47 - B12-47 mixed owned and ownerless records are rejected even without expected UID
+  ---
+  duration_ms: 3.024657
+  type: 'test'
+  ...
+# Subtest: B12-48 malformed owner metadata rejected even when the rest of the evidence is consistent
+ok 48 - B12-48 malformed owner metadata rejected even when the rest of the evidence is consistent
+  ---
+  duration_ms: 1.014155
+  type: 'test'
+  ...
+1..48
+# tests 48
+# suites 0
+# pass 48
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 474.331801

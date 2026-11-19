@@ -1,0 +1,17 @@
+{
+  "release": "CP28_BATCH3_VERIFICATION",
+  "base": "CP28_BATCH2",
+  "files": {
+    "functions-privacy/src/consentCleanup.mjs": "42019ffc1e6dac7e087c9e6858ec29e933bdb4fbed686df873490d2a1f4a945c",
+    "functions-privacy/index.mjs": "d42edcbdbef3b2f08638b9ba12e8249e208eacd317719eb88656bae1537d3479",
+    "tests/step21-consent-server-cleanup.test.mjs": "8bdf41df52a61b8b7669126a7988e6c59dcb8aaf58403bb34805ccef522052b0",
+    "docs/CP28/CP28_BATCH3_VERIFICATION_REPORT.md": "7a0114c43bbac345135808c0e28f815977100f165a2c62633c170ad0aa3d0787"
+  },
+  "testResults": {
+    "localTotal": 118,
+    "localPass": 118,
+    "emulatorCP28": "NOT_RUN",
+    "productionDeployment": false
+  },
+  "reviewStatus": "PENDING"
+}

@@ -1,0 +1,31 @@
+{
+  "release": "CLA CP29 Batch 4 — C1/C5/F4",
+  "date": "2026-11-15",
+  "base_archive": "CLA_FULL_SOURCE_CP29_BATCH3_ADMIN_SECURITY_20261115.zip",
+  "base_archive_sha256": "2221e835e1379219713945e645ff0f0a9d8ab2f75be504c785615a615f95168a",
+  "release_files_sha256": {
+    "package.json": "f98e5b9b2acb17fe5dfa4f618ad9825e0414448609bf2ad207f36f36fe55d4d6",
+    "src/components/common/StudentLinkManager.tsx": "77851246cf1b9a0907f65ee2679d317581d13ac5bccd358ed22bf68bd2b22986",
+    "src/page/seed/StudentProfilePage.tsx": "fcb1a7049807b1d373abde29c02725a5e3a3a3f094531ccf2cc68cf2eaa2ccbb",
+    "src/lib/studentLinkIntegrity.ts": "b99a98e5a10d19cf666e44c463f6cb06fc34592104e22b970520e2dc37b3ebf0",
+    "src/page/seed/services/seedPersistenceContract.ts": "a690ada8940f47a92956d0bf6a8ce3e08a3e68d81f53971e5337b0093b20be82",
+    "tests/cp29-batch4-link-integrity.test.mjs": "997725b57b610b148da25db4c24bbb15c28103ca6a1841457c53719449c6a4c5",
+    "tests/cp29-batch4-seed-transaction.test.mjs": "b996b62ad6b01441af8e0c706cd504e93b835b4af8f01177b0d2f910c2d13835",
+    "tests/step05a-seed-input-validation.test.mjs": "b05fc94d9684d5ad442bb598f4cf13e3ea386f7c69d6540ae4c0d4605d17988f",
+    "docs/CP29/CP29_BATCH4_DATA_INTEGRITY_REPORT_20261115.md": "a5dda1c4d11bcbe5d804230b5df929c6d22ca45f2627479df0714b0f72b77c11",
+    "START_HERE_CP29_BATCH4_20261115.md": "4a4372ff76afb858a60db7fec6df20714424f39da55d260c4fe6d18a336a5163"
+  },
+  "local_verification": {
+    "new_and_maintained_seed_tests": "31/31 PASS",
+    "verify_cp29_batch4": "PASS",
+    "typescript_pure_modules": "PASS; global tsc 5.8.3 with isolated empty type roots",
+    "typescript_syntax": "0 diagnostics for four TS/TSX files",
+    "npm_test": "NOT PASS locally (incomplete node_modules/@types packages)",
+    "production_build": "NOT PASS locally (incomplete node_modules/@types packages)",
+    "firebase_emulator": "NOT RUN for Batch 4 (83 cases targeted on Windows)",
+    "browser_e2e": "NOT RUN"
+  },
+  "candidate_rules_changed": false,
+  "production_deployment_performed": false,
+  "reviewer_accepted_PASS_tasks": 0
+}
