@@ -68,3 +68,14 @@ functions-admin/.runtimeconfig.json
 
 # QA browser reports contain local run metadata and must not be shipped
 reports/e2e/
+
+# CP43: never publish local secrets, binary dependencies or private study data
+.env
+.env.*
+!.env.example
+node_modules/
+.venv/
+dist/
+research/**/raw_private/
+research/**/raw_immutable/
+research/**/private/

@@ -1,39 +1,19 @@
+/** CP44: only the light theme is supported and contrast-tested. This compatibility
+ * facade retains old types but prevents stored dark/system preferences activating
+ * a partially styled mode. Reintroduce theme choice only after full-site audits. */
 export type ThemePref = "light" | "dark" | "system";
 export type ThemeResolved = "light" | "dark";
 
-const KEY = "cla_theme";
-const META_COLOR: Record<ThemeResolved, string> = { light: "#f2f5fb", dark: "#060b1a" };
-
-export function getThemePref(): ThemePref {
-  try {
-    const v = localStorage.getItem(KEY);
-    if (v === "light" || v === "dark" || v === "system") return v;
-  } catch {
-    /* bỏ qua: trình duyệt chặn storage */
-  }
-  return "system";
-}
-
-export function resolveTheme(pref: ThemePref): ThemeResolved {
-  if (pref !== "system") return pref;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-}
-
-export function applyTheme(pref: ThemePref): ThemeResolved {
-  const resolved = resolveTheme(pref);
+export function getThemePref(): ThemePref { return "light"; }
+export function resolveTheme(_pref: ThemePref): ThemeResolved { return "light"; }
+export function applyTheme(_pref: ThemePref): ThemeResolved {
   const root = document.documentElement;
-  root.setAttribute("data-theme", resolved);
-  root.setAttribute("data-theme-pref", pref);
-  root.style.colorScheme = resolved;
-  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", META_COLOR[resolved]);
-  return resolved;
+  root.setAttribute("data-theme", "light");
+  root.setAttribute("data-theme-pref", "light");
+  root.style.colorScheme = "light";
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", "#f6f8fc");
+  return "light";
 }
-
-export function setThemePref(pref: ThemePref): ThemeResolved {
-  try {
-    localStorage.setItem(KEY, pref);
-  } catch {
-    /* bỏ qua */
-  }
-  return applyTheme(pref);
+export function setThemePref(_pref: ThemePref): ThemeResolved {
+  return applyTheme("light");
 }

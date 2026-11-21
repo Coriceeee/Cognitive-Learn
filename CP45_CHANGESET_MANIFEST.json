@@ -1,0 +1,73 @@
+{
+  "checkpoint": "CP45",
+  "date": "2026-11-20",
+  "base_zip": "CLA_CP44_DAYLIGHT_CONTRAST_SOURCE_20261120.zip",
+  "files_changed_or_added": [
+    {
+      "path": "START_HERE_CP45_SEAMLESS_NAVIGATION.md",
+      "kind": "added",
+      "sha256": "5bcec98c7df1240fcc0d9df4f43a37e2474dc2806710c3764a31058e7f76dbc1"
+    },
+    {
+      "path": "src/App.tsx",
+      "kind": "modified",
+      "sha256": "a81be94ef5f6837c788a16b6bff04ab8f67d70eddca3eee1de759819813e92f9"
+    },
+    {
+      "path": "src/lib/clientNavigation.ts",
+      "kind": "modified",
+      "sha256": "7f8b806ce0372e727d11370a016d47cca77ab245174999a17932d25977a158fe"
+    },
+    {
+      "path": "src/lib/routeModules.ts",
+      "kind": "added",
+      "sha256": "019838e6704bdb1064bff25cae7a33ec0ca174aba03b4e3db1a3b324d09248fc"
+    },
+    {
+      "path": "src/page/lumen/LumenPage.tsx",
+      "kind": "modified",
+      "sha256": "650772d975bac93ccf8bd4bfc17ef61b78f630e1045ffd0468cd81722d99f435"
+    },
+    {
+      "path": "src/page/seed/StudentPage.tsx",
+      "kind": "modified",
+      "sha256": "25bb7a908815e908ac97e76cf5119335e1229795ccfa33fe89ede60ed46c5bc2"
+    },
+    {
+      "path": "src/page/seed/hooks/StudentProfileProvider.tsx",
+      "kind": "added",
+      "sha256": "e0947bc3b1902c3b50ad82c298db4912fa0b305b5e9a7da2889aca5bd8a1d5a7"
+    },
+    {
+      "path": "src/styles/39-cla-seamless-navigation.css",
+      "kind": "added",
+      "sha256": "51a644040b698884a12a8f5b4ea8b1c5db37310377fb54ba105df18036ed8059"
+    },
+    {
+      "path": "src/styles.css",
+      "kind": "modified",
+      "sha256": "5ca35dcc365bd9659e62d31a9a8386aecbc555d30dbdda597766336a7581964a"
+    },
+    {
+      "path": "tests/cp37-operating-guide.test.cjs",
+      "kind": "modified",
+      "sha256": "d40577948cbaf4e7aa46313d2993ec532f2c011580357d6776b8ef3e8981a68e"
+    },
+    {
+      "path": "tests/cp43-daylight-spa.test.cjs",
+      "kind": "modified",
+      "sha256": "7ea2085e8d84d07c1e630ca0f5cbe94618787480c85e9fc286ff7c625fae52c4"
+    },
+    {
+      "path": "tests/cp45-seamless-navigation.test.cjs",
+      "kind": "added",
+      "sha256": "8f919b95157079f74811465b675cdb4d90b81157d37871a2a7d1d083366c9004"
+    }
+  ],
+  "verification": {
+    "typescript_frontend": "pass",
+    "selected_regression_tests": 155,
+    "layout": "pass",
+    "full_build": "blocked_by_missing_linux_rolldown_binary"
+  }
+}

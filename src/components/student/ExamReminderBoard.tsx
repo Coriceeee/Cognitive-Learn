@@ -2,14 +2,15 @@ import { pushAppNotice } from "../../lib/appNotices";
 import { useEffect, useMemo, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../lib/firebase";
+import { EXAM_CALENDAR_UPDATED, examCalendarKey } from "../../lib/examCalendarStorage";
 import {
   EXAM_CATALOG, EXAM_CALENDAR_MAX_ITEMS, createExamReminder, daysUntil, examAlerts,
   formatExamDate, isExamCalendarDocument, isExamReminder, isValidDay, localDayKey,
-  nextExamMilestone, safeExamUrl, upsertExamReminder,
+  safeExamUrl, upsertExamReminder,
   type ExamCode, type ExamReminder, type ExamCalendarDocument,
 } from "../../lib/examCalendar";
 
-const storageKey = (uid: string) => `cla-exam-calendar-v1:${uid}`;
+const storageKey = examCalendarKey;
 const catalogFor = (code: ExamCode) => EXAM_CATALOG.find(e => e.code === code);
 const makeId = () => typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
   ? crypto.randomUUID() : `exam_${Date.now()}_${Math.random().toString(36).slice(2, 12)}`;
@@ -56,6 +57,7 @@ export default function ExamReminderBoard() {
     if (!isExamCalendarDocument(data, uid)) { setNotice("Dữ liệu lịch không hợp lệ; chưa lưu."); return false; }
     try {
       window.localStorage.setItem(storageKey(uid), JSON.stringify(data));
+      window.dispatchEvent(new Event(EXAM_CALENDAR_UPDATED));
       setEvents(next); setNotice(message);
       pushAppNotice({kind:"success", title:"Đã cập nhật lịch thi", detail:message});
       return true;
@@ -97,7 +99,6 @@ export default function ExamReminderBoard() {
     const bDay = [b.registrationDone ? "" : b.registrationDeadline,b.examDate].filter(isValidDay).filter(d => d >= today).sort()[0] ?? "9999-12-31";
     return aDay.localeCompare(bDay) || a.title.localeCompare(b.title);
   }), [events,today]);
-  const closest = useMemo(() => nextExamMilestone(events, today), [events,today]);
   const alerts = useMemo(() => examAlerts(events,today), [events,today]);
 
   // At most once per milestone / day / signed-in UID in this browser tab.
@@ -119,24 +120,18 @@ export default function ExamReminderBoard() {
   return <section id="cla-exam-reminders" className="cla-exam-board" aria-labelledby="cla-exam-title">
     <div className="cla-exam-heading">
       <div>
-        <span className="cla-exam-eyebrow">ATLAS × DAILY COMPANION · LỊCH CÁ NHÂN</span>
-        <h2 id="cla-exam-title">Lịch thi của tôi</h2>
-        <p>Chỉ hiện những kỳ thi bạn chọn. Theo dõi ngày thi, hạn đăng ký và những mốc sắp đến.</p>
+        <span className="cla-exam-eyebrow">EXAM HORIZON / PERSONAL SETTINGS</span>
+        <h2 id="cla-exam-title">Thiết lập lịch thi</h2>
+        <p>Chọn kỳ thi, cập nhật ngày thi và hạn đăng ký. Những mốc sắp đến sẽ tự xuất hiện trên trang tổng quan.</p>
       </div>
-      <div className="cla-exam-countdown" aria-live="polite">
-        {closest ? <><strong>{closest.days === 0 ? "Hôm nay" : `${closest.days} ngày`}</strong><small>Đến {closest.label.toLowerCase()} · {closest.title}</small></>
-          : <><strong>Chưa có mốc</strong><small>Thêm kỳ thi và điền lịch để bắt đầu đếm ngược</small></>}
+      <div className="cla-exam-settings-meta" aria-label="Số kỳ thi đang theo dõi">
+        <strong>{events.length}</strong><span>/ {EXAM_CALENDAR_MAX_ITEMS} KỲ THI ĐÃ CHỌN</span>
       </div>
     </div>
+    <a className="cla-exam-back-home" href="/student">← Xem lịch thi trên tổng quan</a>
     {!ready && <p role="status">Đang tải lịch thi theo tài khoản…</p>}
     {ready && !uid && <p role="status">Đăng nhập tài khoản học sinh để chọn và lưu lịch thi.</p>}
     {ready && uid && <>
-      {alerts.length > 0 && <div className="cla-exam-alert" role="status" aria-live="polite">
-        <strong>Mốc cần chú ý</strong>
-        {alerts.slice(0,3).map((milestone,i) => <p key={`${milestone.eventId}-${milestone.kind}-${i}`}>
-          {milestone.days === 0 ? "Hôm nay" : `Còn ${milestone.days} ngày`} · {milestone.label} {milestone.title} ({formatExamDate(milestone.day)})
-        </p>)}
-      </div>}
       {events.length === 0 && <div className="cla-exam-empty">Chưa theo dõi kỳ thi nào. Bạn có thể chọn HSA, V-ACT, TSA, V-SAT hoặc chứng chỉ bên dưới.</div>}
       {events.length > 0 && <div className="cla-exam-items">
         {sorted.map(item => {
@@ -183,7 +178,7 @@ export default function ExamReminderBoard() {
       {notice && <p role="status" className="cla-exam-notice">{notice}</p>}
       {blockedStorage && <button type="button" className="cla-exam-reset" onClick={() => {
         if (!window.confirm("Xóa bản lịch thi lỗi trên thiết bị này? Hành động không khôi phục được.")) return;
-        try {window.localStorage.removeItem(storageKey(uid));setBlockedStorage(false);setNotice("Đã xóa bản lịch lỗi. Bạn có thể bắt đầu lại.");}
+        try {window.localStorage.removeItem(storageKey(uid));window.dispatchEvent(new Event(EXAM_CALENDAR_UPDATED));setBlockedStorage(false);setNotice("Đã xóa bản lịch lỗi. Bạn có thể bắt đầu lại.");}
         catch {setNotice("Không thể xóa dữ liệu lỗi trên trình duyệt này.");}
       }}>Xóa lịch lỗi và bắt đầu lại</button>}
       <p className="cla-exam-privacy">Lịch cá nhân V1 lưu riêng theo tài khoản <strong>trên trình duyệt này</strong>, chưa đồng bộ nhiều thiết bị. CLA chỉ nhắc khi bạn mở trang; <strong>chưa gửi push nền cho lịch thi</strong>. Ngày thi/hạn đăng ký có thể thay đổi theo đợt và địa điểm — đối chiếu thông báo chính thức trước khi đăng ký.</p>

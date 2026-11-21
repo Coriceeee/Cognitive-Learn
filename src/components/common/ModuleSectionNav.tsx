@@ -27,7 +27,7 @@ export default function ModuleSectionNav({ moduleKey }: { moduleKey: StudentModu
         <span>{module.eyebrow} / {onHome ? "TỔNG QUAN" : title}</span>
         <a href="/student" className="cla-focus-home">Không gian học sinh</a>
       </div>
-      <div className="cla-module-subnav-links">
+      <div className="cla-module-subnav-links" role="group" aria-label="Các phần trong module">
         <a className={onHome ? "is-active" : ""} href={module.home} aria-current={onHome ? "page" : undefined}>Tổng quan</a>
         {items.filter(item => item.href && item.href !== module.home && item.status !== "planned").map(item => {
           const active = item === activeItem;

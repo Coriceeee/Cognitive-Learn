@@ -1,3 +1,4 @@
+import { navigateTo } from "../../lib/clientNavigation";
 import LearningIntelligencePanel from "../seed/components/LearningIntelligencePanel";
 import CognitiveScoreGrid from "../seed/components/CognitiveScoreGrid";
 import CognitiveInsightPanel from "../seed/components/CognitiveInsightPanel";
@@ -9,8 +10,8 @@ import UserMenu from "../../components/common/UserMenu";
 
 
 import {
-  useStudentProfile,
-} from "../seed/hooks/useStudentProfile";
+  useVerifiedStudentProfile,
+} from "../seed/hooks/StudentProfileProvider";
 
 import {
   useLumenIntelligence,
@@ -45,7 +46,7 @@ export default function LumenPage() {
     historyLoading,
     hasProfile,
     error,
-  } = useStudentProfile();
+  } = useVerifiedStudentProfile();
 
 
 
@@ -254,7 +255,7 @@ export default function LumenPage() {
 
               </div></>}
 
-              {view === "/lumen/insights" && <details className="cla-focus-disclosure"><summary>Nhận xét chi tiết theo từng chỉ số</summary><CognitiveInsightPanel cognitive={cognitive} hasProfile={hasProfile} onCreateProfile={() => {window.location.href="/student/profile";}} /></details>}
+              {view === "/lumen/insights" && <details className="cla-focus-disclosure"><summary>Nhận xét chi tiết theo từng chỉ số</summary><CognitiveInsightPanel cognitive={cognitive} hasProfile={hasProfile} onCreateProfile={() => {navigateTo("/student/profile");}} /></details>}
               {view === "/lumen/evidence" && <LumenEvidencePanel
                 hasHistory={intelligence.growthEvidence.status === "OBSERVED"}
                 growthEvidence={intelligence.growthEvidence}

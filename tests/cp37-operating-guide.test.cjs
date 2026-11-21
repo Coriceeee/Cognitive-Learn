@@ -10,7 +10,8 @@ test("CP37-01: student guide route is registered and allowed for students", () =
   const gate = read("src/components/common/AccessGate.tsx");
   const vercel = JSON.parse(read("vercel.json"));
   assert.ok(app.includes('path === "/student/guide"'));
-  assert.ok(app.includes('import("./page/seed/StudentGuidePage")'));
+  assert.ok(app.includes('lazy(routeModules.studentGuide)'));
+  assert.ok(read('src/lib/routeModules.ts').includes("import('../page/seed/StudentGuidePage')"));
   assert.ok(gate.includes('"/student/guide"'));
   assert.ok(vercel.rewrites.some(item => item.source === "/student/guide" && item.destination === "/index.html"));
 });

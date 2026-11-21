@@ -1,3 +1,4 @@
+import { navigateTo } from "../../lib/clientNavigation";
 import ModuleSectionNav from "../../components/common/ModuleSectionNav";
 import { pushAppNotice } from "../../lib/appNotices";
 import { FormEvent, useEffect, useMemo, useState } from "react";
@@ -513,7 +514,7 @@ export default function TrangNhapHoSoHocTap() {
   }
 
   function goTo(path: string) {
-    window.location.href = path;
+    navigateTo(path);
   }
 
   function handleLoadDemoPreset() {

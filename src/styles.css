@@ -58,11 +58,14 @@
 /* CP42 analytical workspace: restrained UI, unchanged business logic. */
 @import "./styles/33-cla-analytical-workspace.css";
 
-/* CP42 Student Observatory — overview charts and editorial decision flow. */
-@import "./styles/34-student-observatory.css";
-
-/* CP42 Spectral Observatory — scientific instrument visual language. */
-@import "./styles/35-cla-spectral-observatory.css";
-
 /* Bản sắc "Cognitive Observatory" + legacy var remap. Màu light/dark của CSS cũ nằm ở 00a-theme-tokens.css. */
 @import "./styles/37-cla-orbital-theme.css";
+
+/* CP43: unified daylight visual language and chart-first workspace. */
+@import "./styles/38-cla-daylight-studio.css";
+
+/* CP45: non-blocking navigation progress indicator; respects reduced motion. */
+@import "./styles/39-cla-seamless-navigation.css";
+
+/* CP46: light exam horizon + connected learning circuit on student dashboard only. */
+@import "./styles/40-cla-exam-horizon-learning-circuit.css";

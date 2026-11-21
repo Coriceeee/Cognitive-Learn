@@ -7,21 +7,16 @@
     <title>Cognitive Learn AI</title>
     <link rel="icon" type="image/png" href="/logo cla.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
-    <meta name="theme-color" content="#f2f5fb" />
-    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f6f8fc" />
+    <meta name="color-scheme" content="light" />
     <script>
-      /* Áp theme trước khi React chạy để không bị nháy màu. Giữ đồng bộ với src/lib/theme.ts */
+      /* CP44: light-only. A partial dark-mode skin produced white text on white
+         analytical cards; do not activate it until a complete contrast audit. */
       (function () {
-        try {
-          var p = localStorage.getItem("cla_theme");
-          if (p !== "light" && p !== "dark") p = "system";
-          var d = p === "dark" || (p === "system" && matchMedia("(prefers-color-scheme: dark)").matches);
-          var r = document.documentElement;
-          r.setAttribute("data-theme", d ? "dark" : "light");
-          r.setAttribute("data-theme-pref", p);
-          r.style.colorScheme = d ? "dark" : "light";
-          document.querySelector('meta[name="theme-color"]').setAttribute("content", d ? "#060b1a" : "#f2f5fb");
-        } catch (e) {}
+        var r = document.documentElement;
+        r.setAttribute("data-theme", "light");
+        r.setAttribute("data-theme-pref", "light");
+        r.style.colorScheme = "light";
       })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />

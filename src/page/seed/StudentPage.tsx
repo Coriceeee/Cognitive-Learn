@@ -1,5 +1,6 @@
 import ModuleSectionNav from "../../components/common/ModuleSectionNav";
 import { currentFocusedPath } from "../../lib/focusedModuleRoute";
+import { navigateTo } from "../../lib/clientNavigation";
 import { useEffect, useState } from "react";
 import { pushAppNotice } from "../../lib/appNotices";
 import { auth } from "../../lib/firebase";
@@ -13,35 +14,12 @@ import StudentLoading from "./components/StudentLoading";
 import StudentPlanPanel from "./components/StudentPlanPanel";
 import StudentProfileNoticeModal from "./components/StudentProfileNoticeModal";
 import StudentRecommendationGrid from "./components/StudentRecommendationGrid";
-import seedIcon from "../../assets/modules/seed-profile.png";
-import lumenIcon from "../../assets/modules/lumen-intelligence.png";
-import atlasIcon from "../../assets/modules/atlas-admission.png";
-import orionIcon from "../../assets/modules/orion-strategy.png";
-import pulseIcon from "../../assets/modules/pulse-monitor.png";
-import havenIcon from "../../assets/modules/haven-support.png";
+import ExamHorizon from "../../components/student/ExamHorizon";
+import LearningCircuit from "./components/LearningCircuit";
 
-import { useStudentProfile } from "./hooks/useStudentProfile";
+import { useVerifiedStudentProfile } from "./hooks/StudentProfileProvider";
 import { useAcademicGpaIntegrity } from "./hooks/useAcademicGpaIntegrity";
 import { useLearningIntelligence } from "./hooks/useLearningIntelligence";
-
-type ModuleLink = {
-  code: string;
-  title: string;
-  summary: string;
-  href: string;
-  icon: string;
-  category: string;
-};
-
-// Six student-facing modules. Admin/Research tasks are deliberately excluded.
-const coreModules: ModuleLink[] = [
-  { code: "01 / SEED", title: "Hồ sơ học tập", summary: "Thông tin cá nhân, điểm số, GPA và mục tiêu học tập.", href: "/student/profile", icon: seedIcon, category: "Dữ liệu cá nhân" },
-  { code: "02 / LUMEN", title: "Phân tích năng lực", summary: "SCI, MAS, CSL, lịch sử đo và giải thích kết quả.", href: "/lumen", icon: lumenIcon, category: "Phân tích học tập" },
-  { code: "03 / ATLAS", title: "Tuyển sinh & du học", summary: "Tra cứu ngành, trường, phương thức và lộ trình quốc tế.", href: "/atlas", icon: atlasIcon, category: "Định hướng" },
-  { code: "04 / ORION", title: "Kế hoạch & chiến lược", summary: "Mục tiêu, mô phỏng các phương án và lộ trình theo tuần.", href: "/orion", icon: orionIcon, category: "Lập kế hoạch" },
-  { code: "05 / PULSE", title: "Theo dõi tiến độ", summary: "Theo dõi kết quả, báo cáo cá nhân và việc cần làm.", href: "/pulse", icon: pulseIcon, category: "Theo dõi" },
-  { code: "06 / HAVEN", title: "Học bổng & tài chính", summary: "Điều kiện học bổng, chi phí và kế hoạch ngân sách.", href: "/haven", icon: havenIcon, category: "Hỗ trợ tài chính" },
-];
 
 function getRiskText(riskLevel: string): string {
   if (riskLevel === "LOW") return "Cần theo dõi theo dữ liệu";
@@ -67,7 +45,7 @@ export default function StudentPage() {
     hasProfile,
     error,
     isAdminPreview,
-  } = useStudentProfile();
+  } = useVerifiedStudentProfile();
   const gpaIntegrity = useAcademicGpaIntegrity();
 
   // Use the same Firestore-backed Growth evidence as the Lumen page.
@@ -118,7 +96,7 @@ export default function StudentPage() {
   }, [loading]);
 
   function goTo(path: string) {
-    window.location.href = path;
+    navigateTo(path);
   }
 
   const actions: { title: string; detail: string; href: string }[] = !hasProfile
@@ -212,12 +190,13 @@ export default function StudentPage() {
         {view === "/student" && <>
         <section className="student-dash-hero cla-observatory-intro" aria-labelledby="student-dash-title">
           <div className="cla-intro-copy">
-            <span className="cla-canvas-index">COGNITIVE LEARN AI / SPECTRAL OBSERVATORY</span>
+            <span className="cla-canvas-index">COGNITIVE LEARN AI / TRẠM QUAN SÁT HỌC TẬP</span>
             <h1 id="student-dash-title">Xin chào, {displayName}.</h1>
             <p>Hiểu năng lực hiện tại, lựa chọn chiến lược và theo dõi kết quả học tập.</p>
           </div>
           <div className="cla-intro-target"><span>MỤC TIÊU CỦA BẠN</span><strong>{targetMajor}</strong><small>{hasProfile && isMeaningfulText(profile.targetUniversity) ? profile.targetUniversity : "Chưa chọn trường mục tiêu"}</small><a href={profilePath}>{hasProfile ? "Cập nhật hồ sơ" : "Tạo hồ sơ"} ↗</a></div>
         </section>
+        {!isAdminPreview && <ExamHorizon />}
         <StudentDecisionCanvas cognitive={cognitive} gpa={gpaIntegrity.status === "VERIFIED" ? gpaIntegrity.result : null} temporal={!historyLoading && !error ? temporalReport : null} hasProfile={hasProfile} demo={isAdminPreview} />
 
         {/* 2. A single action hub that answers: What should I do next? */}
@@ -283,36 +262,14 @@ export default function StudentPage() {
           </aside>
         </section>
 
-        {/* Student-chosen exam milestones sit below the hero AND the priority/status cards. */}
-        {!isAdminPreview && <p className="cla-focus-notice"><a href="/student/exams#cla-exam-reminders">Lịch thi & đếm ngược của tôi →</a></p>}
-
-        {/* 3. Four primary destinations, plus two lightweight secondary links. */}
-        <section className="student-dash-modules" aria-labelledby="student-dash-modules-title">
-          <div className="student-dash-heading">
-            <div>
-              <span className="student-dash-eyebrow">KHÔNG GIAN HỌC TẬP</span>
-              <h2 id="student-dash-modules-title">Bạn muốn khám phá gì?</h2>
-            </div>
-          </div>
-          <div className="student-dash-module-grid">
-            {coreModules.map((module) => (
-              <a
-                className="student-dash-module"
-                href={module.href === "/student/profile" ? profilePath : module.href}
-                key={module.code}
-              >
-                <span className="student-dash-module-icon"><img src={module.icon} alt="" aria-hidden="true" /></span>
-                <span className="cla-focus-module-copy"><small>{module.code} · {module.category}</small><strong>{module.title}</strong><span>{module.summary}</span></span>
-                <span className="cla-focus-module-arrow" aria-hidden="true">→</span>
-              </a>
-            ))}
-          </div>
-          <div className="student-dash-extra-links">
-            <a href="/student/transcript">Mở bảng điểm THPT <span aria-hidden="true">↗</span></a>
-            <a href="/student/modules">Tìm nhanh chức năng cần dùng <span aria-hidden="true">↗</span></a>
-            <a href="/student/guide">Hướng dẫn vận hành từng bước <span aria-hidden="true">↗</span></a>
-          </div>
-        </section>
+        {/* A connected learning circuit replaces the old six-card module grid. */}
+        <LearningCircuit profilePath={profilePath} />
+        <nav className="student-dash-extra-links" aria-label="Công cụ bổ sung">
+          <a href="/student/transcript">Bảng điểm THPT <span aria-hidden="true">↗</span></a>
+          <a href="/student/modules">Tìm nhanh chức năng <span aria-hidden="true">↗</span></a>
+          <a href="/student/guide">Hướng dẫn sử dụng <span aria-hidden="true">↗</span></a>
+          <a href="/student/companion">Đồng hành mỗi ngày <span aria-hidden="true">↗</span></a>
+        </nav>
 
           {isAdminPreview && (
           <details className="student-dash-disclosure">

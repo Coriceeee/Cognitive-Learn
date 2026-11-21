@@ -1,3 +1,4 @@
+import { navigateTo } from "../../lib/clientNavigation";
 import StudentSubjectPanel from "./components/StudentSubjectPanel";
 import ModuleSectionNav from "../../components/common/ModuleSectionNav";
 import { useState } from "react";
@@ -28,7 +29,7 @@ export default function StudentTranscriptPage() {
           <p>Kho điểm hiển thị 9 môn hiện đang học, gồm Giáo dục quốc phòng và an ninh. Điểm của môn từng học trước đây vẫn được giữ trong cơ sở dữ liệu, nhưng không cộng vào trung bình của tổ hợp hiện tại.</p>
         </header>
         <div className="cla-transcript-page-actions"><a href="/student/profile">Nhập / sửa bảng điểm →</a></div>
-        <details className="cla-focus-disclosure"><summary>Điểm gần nhất theo từng môn</summary><StudentSubjectPanel onUpdate={() => { window.location.href="/student/profile"; }} /></details>
+        <details className="cla-focus-disclosure"><summary>Điểm gần nhất theo từng môn</summary><StudentSubjectPanel onUpdate={() => { navigateTo("/student/profile"); }} /></details>
         {status === "loading" && <p role="status">Đang tải bảng điểm đã lưu…</p>}
         {status === "syncing" && <div role="status"><p>Đang chờ xác minh từ Firestore. Bảng điểm trong cache hoặc đang ghi dở sẽ không được hiển thị như dữ liệu đã đồng bộ. Hãy kiểm tra kết nối mạng.</p><button type="button" onClick={retry}>Thử đồng bộ lại</button></div>}
         {status === "signed-out" && <p>Hãy đăng nhập bằng tài khoản học sinh để xem bảng điểm.</p>}

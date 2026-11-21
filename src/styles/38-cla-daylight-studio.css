@@ -1,0 +1,482 @@
+/* CP44 · CLA DAYLIGHT CONTRAST CONTRACT
+ * The one authoritative student analytical-canvas skin. Legacy CP42 Observatory
+ * styles are retired; the structural CSS below is independent of their colors.
+ * Tokens describe text on a named surface, not arbitrary palette picks.
+ * Light mode is deliberate until another mode can pass the same contrast contract.
+ */
+
+/* Semantic color pairs: all standard text roles pass WCAG AA on every paired
+ * surface: canvas (#ffffff), subtle (#f0f5fc), page (#f6f8fc).
+ * Contrast ratios are asserted by tests/cp44-contrast-contract.test.cjs.
+ */
+:root {
+  --cla-bg-canvas: #ffffff;
+  --cla-bg-page: #f6f8fc;
+  --cla-bg-subtle: #f0f5fc;
+  --cla-text-primary: #142941;
+  --cla-text-secondary: #405a72;
+  --cla-text-muted: #526a81;
+  --cla-text-link: #2d5ba8;
+  --cla-text-accent-teal: #17685f;
+  --cla-text-accent-violet: #5264c9;
+  --cla-text-accent-amber: #8f561e;
+  --cla-border-subtle: #dde5f0;
+  --cla-focus-ring: #2d5ba8;
+}
+/* Preserve the information architecture after removing the two conflicting
+ * CP42 skins. Geometry belongs here; colors are owned by the semantic tokens. */
+.student-dash .cla-observatory-intro {
+  display: grid; grid-template-columns: minmax(0,1fr) minmax(205px,28%);
+  align-items: center;
+}
+/* Original target used a grid. Without this, metadata collapses into a single line. */
+.student-dash .cla-intro-target { display: grid; grid-template-columns: minmax(0,1fr); gap: 6px; min-width: 0; }
+.student-dash .cla-intro-target :is(span,strong,small,a) { display: block; overflow-wrap: anywhere; }
+.student-dash .cla-intro-target > span { color: var(--cla-text-muted); font-size: 11px; letter-spacing: .04em; font-weight: 650; }
+.student-dash .cla-intro-target > small { color: var(--cla-text-muted); line-height: 1.5; }
+.cla-decision-canvas { isolation: isolate; }
+.student-dash .cla-canvas-head {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 16px;
+}
+.cla-canvas-grid { display: grid; min-width: 0; grid-template-areas: 'cognitive academic' 'temporal temporal'; }
+.cla-canvas-grid > article { min-width: 0; box-shadow: none; border-radius: 0; }
+.cla-canvas-cognitive { grid-area: cognitive; }
+.cla-canvas-academic { grid-area: academic; }
+.cla-canvas-temporal { grid-area: temporal; grid-column: 1/-1; }
+.cla-canvas-label { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.cla-canvas-index,.cla-canvas-source,.cla-canvas-label > span,.cla-canvas-flow > span { font-size: 11px; font-weight: 650; }
+.cla-canvas-kpi { line-height: 1.1; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.cla-canvas-kpi small { margin-left: 8px; font-weight: 500; letter-spacing: 0; }
+.cla-canvas-gpa { width: 100%; display: block; max-height: 235px; }
+.cla-canvas-gpa text { font-family: inherit; font-size: 11px; }
+.cla-canvas-gpa .cla-canvas-chart-value { font-size: 13px; font-weight: 700; }
+.cla-spectral-layout { display: grid; grid-template-columns: minmax(0,1.25fr) minmax(158px,.85fr); gap: 22px; align-items: center; }
+.cla-spectral-dial { display: block; width: 100%; height: auto; overflow: visible; }
+.cla-dial-boundary { fill: none; stroke-width: 1; }
+.cla-dial-arc { transition: stroke-dasharray .35s ease-out; }
+.cla-spectrum-key { min-width: 0; display: grid; }
+.cla-spectrum-item { display: grid; grid-template-columns: 4px minmax(0,1fr) auto; gap: 10px; align-items: center; }
+.cla-spectrum-item i { display: block; height: 32px; width: 3px; border-radius: 4px; }
+.cla-spectrum-item > div { display: grid; gap: 4px; min-width: 0; }
+.cla-spectrum-item strong { font-variant-numeric: tabular-nums; }
+.cla-canvas-temporal-head { display: flex; align-items: center; justify-content: space-between; gap: 8px 18px; flex-wrap: wrap; }
+.cla-canvas-switch { display: flex; align-items: center; flex-wrap: wrap; }
+.cla-canvas-switch button { cursor: pointer; }
+.cla-canvas-empty { position: relative; min-height: 145px; display: grid; place-items: center; margin: 10px 0; }
+.cla-canvas-empty svg { position: absolute; inset: 0; height: 100%; width: 100%; }
+.cla-canvas-empty > div { position: relative; display: grid; gap: 7px; padding: 16px; text-align: center; }
+.cla-canvas-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 18px; }
+.cla-canvas-flow a { text-decoration: none; }
+.cla-canvas-flow a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.cla-canvas-flow a:not(:last-child)::after { content: ' →'; margin-left: 9px; }
+.cla-canvas-temporal .cla-viz-plot { max-height: 285px; width: 100%; }
+@media (max-width: 1100px) {
+  .cla-spectral-layout { grid-template-columns: minmax(0,1fr); }
+}
+@media (max-width: 760px) {
+  .cla-canvas-grid { grid-template-areas: 'cognitive' 'academic' 'temporal'; }
+  .cla-canvas-head { align-items: flex-start; }
+  .cla-canvas-gpa,.cla-canvas-temporal .cla-viz-plot { max-height: none; }
+  .cla-canvas-switch { flex-wrap: nowrap; overflow-x: auto; }
+}
+
+:root {
+  --cla-page: var(--cla-bg-page);
+  --cla-surface: var(--cla-bg-canvas);
+  --cla-surface-soft: var(--cla-bg-subtle);
+  --cla-border: #dde5f0;
+  --cla-ink: var(--cla-text-primary);
+  --cla-ink-soft: var(--cla-text-secondary);
+  --cla-muted: var(--cla-text-muted);
+  --cla-blue: var(--cla-text-link);
+  --cla-cyan: var(--cla-text-accent-teal);
+  --cla-hero: linear-gradient(130deg, #eaf2ff 0%, #f9fbff 60%, #edf8f7 100%);
+  --cla-card-shadow: 0 12px 38px -27px rgba(27, 57, 111, .25);
+  --cla-panel-radius: 19px;
+  --t-bg: #f6f8fc;
+  --t-bg-2: #edf3fb;
+  --t-surface-2: #f8faff;
+  --t-line: #dde5f0;
+  --t-line-strong: #bacade;
+  --t-ink: var(--cla-text-primary);
+  --t-ink-2: var(--cla-text-secondary);
+  --t-muted: var(--cla-text-muted);
+  --t-accent: var(--cla-text-link);
+  --t-accent-2: var(--cla-text-accent-teal);
+  --t-shadow: 0 12px 38px -27px rgba(27, 57, 111, .25);
+  --t-radius: 19px;
+}
+body {
+  background-color: #f6f8fc;
+  background-image: radial-gradient(ellipse 60% 44% at 88% 0%, rgba(75, 116, 229, .09), transparent 72%),
+                    radial-gradient(ellipse 44% 39% at -7% 18%, rgba(35, 174, 167, .065), transparent 74%) !important;
+  background-size: auto !important;
+  background-attachment: scroll !important;
+  color: var(--cla-ink);
+  font-family: 'Be Vietnam Pro', Inter, ui-sans-serif, system-ui, sans-serif;
+}
+:is(.student-page,.profile-page,.atlas-page,.lumen-page,.orion-page,.pulse-page,.haven-page,.cla-study-abroad-page,.nexus-page) {
+  background: transparent !important;
+  color: var(--cla-ink);
+}
+:is(.student-floating-header,.atlas-floating-header,.lumen-floating-header,.orion-floating-header,.pulse-floating-header,.haven-floating-header) {
+  background: rgba(255,255,255,.93) !important;
+  border-bottom: 1px solid #e1e8f3 !important;
+  box-shadow: 0 7px 20px -18px rgba(18,42,83,.28) !important;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+:is(.student-shell.student-dash,.atlas-shell,.lumen-shell,.orion-shell,.pulse-shell,.haven-shell,.cla-study-shell) {
+  max-width: 1420px;
+}
+/* A confident journal-like title above scientific figures — no giant dark hero. */
+.student-page:has(.cla-decision-canvas) { background: transparent !important; }
+.student-page .student-shell.student-dash:has(.cla-decision-canvas) {
+  width: min(1420px, calc(100% - 52px));
+  padding-bottom: 64px;
+}
+.student-dash .cla-observatory-intro {
+  background: transparent !important;
+  color: var(--cla-ink);
+  margin: 0 0 8px;
+  padding: 24px 3px 25px;
+  gap: clamp(22px, 6vw, 70px);
+}
+.student-dash .cla-observatory-intro h1 {
+  color: #142941;
+  font-size: clamp(31px,3.6vw,52px);
+  font-weight: 680;
+  letter-spacing: -.055em;
+  line-height: 1.12;
+  margin: 11px 0;
+}
+.student-dash .cla-observatory-intro p { color: var(--cla-text-muted); font-size: clamp(13px,1.16vw,16px); line-height: 1.65; }
+.student-dash .cla-observatory-intro .cla-canvas-index {
+  color: var(--cla-text-secondary); letter-spacing: .055em; font-family: inherit; font-weight: 760; font-size: 11px;
+}
+.student-dash .cla-intro-target {
+  border: 1px solid #dbe5f1;
+  border-left: 3px solid #24a19a;
+  background: linear-gradient(120deg,#fff 0%,#f4f9ff 100%);
+  padding: 16px 19px;
+  border-radius: 0 16px 16px 0;
+  box-shadow: 0 10px 28px -22px rgba(29,66,118,.35);
+  gap: 6px;
+}
+.student-dash .cla-intro-target strong { color: #1d3450; font-size: 18px; }
+.student-dash .cla-intro-target small { color: var(--cla-text-muted); }
+.student-dash .cla-intro-target a { color: #305db2; font-size: 12px; }
+
+/* The 3-panel learning observatory now feels like a daylight instrument.
+ * Visual channels remain: three independent index arcs, GPA by school year,
+ * and an observed-vs-EMA series with explicit missing data. */
+.student-dash .cla-decision-canvas {
+  --instrument-ink: #142941;
+  --instrument-muted: #647a94;
+  --instrument-line: #dfe7f1;
+  --instrument-cyan: #138f86;
+  position: relative;
+  background: #fff !important;
+  color: #142941 !important;
+  border: 1px solid #d9e4f0 !important;
+  border-radius: 24px;
+  box-shadow: 0 20px 50px -36px rgba(32,63,109,.40);
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+.student-dash .cla-decision-canvas::before {
+  content: '';
+  z-index: 0;
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 85% 18%,rgba(63,112,217,.045) 1px,transparent 1.5px);
+  background-size: 17px 17px;
+  opacity: .6;
+  mask-image: linear-gradient(to left, #000, transparent 64%);
+  pointer-events: none;
+}
+.student-dash .cla-decision-canvas::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg,#2b9e9b,#5c7bd6 48%,#a8b4ec);
+}
+.student-dash .cla-canvas-head {
+  background: linear-gradient(104deg,#fff 0%,#f8fbff 75%,#f1f7fc 100%);
+  padding: 24px 29px 21px;
+  border-bottom: 1px solid #dfe7f1;
+}
+.student-dash .cla-canvas-head h2 {
+  color: #142941 !important;
+  font-size: clamp(22px,2.4vw,31px); font-weight: 700;
+}
+.student-dash .cla-decision-canvas :is(.cla-canvas-index,.cla-canvas-label > span,.cla-canvas-flow > span) {
+  color: var(--cla-text-muted) !important; font-family: inherit; font-size: 10px; font-weight: 720; letter-spacing: .08em;
+}
+.student-dash .cla-canvas-source {
+  color: var(--cla-text-muted); background: white; border: 1px solid #dbe5f1;
+  font-family: inherit; font-size: 10px; font-weight: 650; line-height: 1.35; padding: 9px 12px; border-radius: 999px;
+}
+.student-dash .cla-canvas-grid { grid-template-columns: minmax(0,1.35fr) minmax(0,1fr); }
+.student-dash .cla-canvas-grid > article { padding: 24px 29px 19px; }
+.student-dash .cla-canvas-cognitive { border-right: 1px solid #e1e8f2; background: #fff; }
+.student-dash .cla-canvas-academic { background: linear-gradient(149deg,#f7faff,#fff 69%); }
+.student-dash .cla-canvas-temporal { border-top: 1px solid #e1e8f2; background: #fbfcff; }
+.student-dash .cla-canvas-grid h3 { color: #142941; font-size: 20px; font-weight: 670; margin: 12px 0 14px; }
+.student-dash .cla-canvas-kpi { color: #1c405d; font-size: clamp(41px,3.9vw,55px); font-weight: 675; }
+.student-dash .cla-canvas-kpi small { color: var(--cla-text-muted); font-size: 12px; }
+.student-dash .cla-canvas-note { color: var(--cla-text-muted); font-size: 11px; line-height: 1.7; }
+.student-dash .cla-decision-canvas a { color: #315fb4; font-weight: 675; }
+.student-dash .cla-decision-canvas a:hover { color: #159188; }
+.student-dash .cla-spectral-layout { min-height: 267px; gap: 22px; }
+.student-dash .cla-spectral-dial { max-height: 285px; filter: none; }
+.student-dash .cla-dial-boundary { stroke: #c6d5e4; stroke-opacity: .60; }
+.student-dash .cla-dial-number { fill: #183755; font-weight: 650; font-size: 39px; }
+.student-dash .cla-dial-caption { fill: var(--cla-text-muted); font-size: 9px; font-family: inherit; letter-spacing: .9px; }
+.student-dash .cla-spectrum-key { gap: 0; }
+.student-dash .cla-spectrum-item { border-bottom-color: #e3eaf3; padding: 15px 0; }
+.student-dash .cla-spectrum-item b { color: #344e69; font-size: 13px; }
+.student-dash .cla-spectrum-item span { color: var(--cla-text-muted); font-size: 11px; }
+.student-dash .cla-spectrum-item strong { font-weight: 680; font-size: 24px; }
+.student-dash .cla-canvas-gpa text { fill: var(--cla-text-muted); }
+.student-dash .cla-canvas-gpa .cla-canvas-chart-value { fill: #3557ae; font-weight: 730; }
+.student-dash .cla-canvas-switch { background: #edf3fb; border: 1px solid #dce6f0; border-radius: 12px; padding: 4px; gap: 2px; }
+.student-dash .cla-canvas-switch button { border: 0; border-radius: 8px; padding: 9px 13px; color: var(--cla-text-muted); font-weight: 600; min-height: 37px; }
+.student-dash .cla-canvas-switch button[aria-pressed='true'] { background: #fff; color: #2f55ae; box-shadow: 0 3px 12px rgba(44,82,135,.10); }
+.student-dash .cla-canvas-temporal .cla-viz-figure { color: var(--cla-text-muted); }
+.student-dash .cla-canvas-temporal .cla-viz-caption strong { color: #27445f; font-weight: 670; }
+.student-dash .cla-canvas-temporal .cla-viz-observed { stroke: #315fb4; }
+.student-dash .cla-canvas-temporal .cla-viz-ema { stroke: #109a91; }
+.student-dash .cla-canvas-temporal .cla-viz-dot { fill: #315fb4; stroke: white; }
+.student-dash .cla-canvas-temporal .cla-viz-legend .is-blue:before { background: #315fb4; }
+.student-dash .cla-canvas-temporal .cla-viz-legend .is-teal:before { background: #109a91; }
+.student-dash .cla-canvas-empty { min-height: 156px; }
+.student-dash .cla-canvas-empty > div { background: rgba(255,255,255,.96); border: 1px solid #e1e9f4; border-radius: 14px; box-shadow: 0 8px 22px -18px #4d6686; }
+.student-dash .cla-canvas-empty strong { color: #284562; }
+.student-dash .cla-canvas-empty span { color: var(--cla-text-muted); }
+.student-dash .cla-canvas-flow { background: #f1f6fc; border-top: 1px solid #dfe7f1; padding: 16px 29px; }
+.student-dash .cla-canvas-flow a:not(:last-child)::after { color: #b4c2d6; }
+/* Downstream is an editorial activity feed, not a matrix of colorful tiles. */
+.student-dash:has(.cla-decision-canvas) .student-dash-card {
+  background: #fff; border: 1px solid #dfe7f2; border-radius: 19px;
+  box-shadow: 0 13px 32px -29px #25476c !important;
+}
+.student-dash .student-dash-focus { gap: 17px; margin-top: 20px; }
+.student-dash .student-dash-action { padding: 14px 4px; border-bottom: 1px solid #e5ecf4; }
+.student-dash .student-dash-action:hover { background: #f4f8fe; border-radius: 9px; }
+.student-dash .student-dash-module-grid {
+  display: grid; grid-template-columns: repeat(2,minmax(0,1fr));
+  border: 1px solid #dfe8f1; border-radius: 20px !important; gap: 0;
+  background: white !important; overflow: hidden;
+  box-shadow: 0 14px 38px -32px #274a7e !important;
+}
+.student-dash .student-dash-module-grid .student-dash-module {
+  min-height: 105px; padding: 17px 22px; margin: 0;
+  display: flex; align-items: center; gap: 17px;
+  border: 0; border-bottom: 1px solid #e5ebf4; border-radius: 0;
+  background: #fff; box-shadow: none !important;
+  transition: background .18s ease;
+}
+.student-dash .student-dash-module-grid .student-dash-module:nth-child(odd) { border-right: 1px solid #e5ebf4; }
+.student-dash .student-dash-module-grid .student-dash-module:hover { background: #f4f8fe; transform: none; }
+.student-dash .student-dash-module-icon {
+  width: 58px; height: 58px; flex: 0 0 58px;
+  border-radius: 16px; background: #edf3fc; border: 1px solid #e1e9f4; box-shadow: none;
+}
+.student-dash .student-dash-module-icon img { width: 44px; height: 44px; object-fit: contain; }
+.student-dash .cla-focus-module-copy { gap: 4px; flex: 1; }
+.student-dash .cla-focus-module-copy small { color: var(--cla-text-muted); font-weight: 650; letter-spacing: .015em; }
+.student-dash .cla-focus-module-copy strong { color: #26435e; font-size: 15px; font-weight: 700; margin: 0; }
+.student-dash .cla-focus-module-copy > span { color: var(--cla-text-muted); line-height: 1.5; }
+.student-dash .cla-focus-module-arrow { color: #5477b3; font-size: 21px; flex: 0 0 auto; }
+/* Every student-facing module shares the same compact, scrollable chapter index. */
+.cla-module-subnav.cla-focus-nav {
+  margin: 0 0 28px; padding: 0 0 11px;
+  background: transparent; border: 0; border-bottom: 1px solid #dce5ef;
+  box-shadow: none;
+}
+.cla-focus-nav .cla-module-subnav-head { padding: 2px 0 13px; }
+.cla-focus-nav .cla-module-subnav-head > span { color: var(--cla-text-muted); font-family: inherit; font-size: 11px; font-weight: 730; line-height: 1.4; letter-spacing: .09em; }
+.cla-focus-nav .cla-focus-home {
+  color: #496aaa; border: 1px solid #dfe7f1; background: white; border-radius: 999px;
+  padding: 8px 13px; font-size: 11px; font-weight: 680; text-decoration: none;
+}
+.cla-focus-nav .cla-module-subnav-links {
+  display: flex; flex-wrap: nowrap; gap: 7px; padding: 2px 0 9px;
+  overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin;
+  border-bottom: 0; -webkit-overflow-scrolling: touch;
+}
+.cla-focus-nav .cla-module-subnav-links a {
+  flex: 0 0 auto; min-height: 39px; padding: 9px 15px; white-space: nowrap;
+  color: var(--cla-text-muted); border: 1px solid transparent; border-radius: 10px;
+  background: transparent; font-size: 12px; font-weight: 650;
+  transition: border-color .14s, color .14s, background-color .14s;
+}
+.cla-focus-nav .cla-module-subnav-links a:hover { color: #3457a8; background: #edf3fc; border-color: #e3eafa; }
+.cla-focus-nav .cla-module-subnav-links a.is-active {
+  color: #234b9c; background: white; border: 1px solid #d1def4;
+  box-shadow: 0 4px 14px -12px #2c50a1; font-weight: 760;
+}
+.cla-focus-nav .cla-focus-heading { margin-top: 24px; }
+.cla-focus-heading h1 { color: #173451; font-size: clamp(25px,2.8vw,36px); letter-spacing: -.04em; font-weight: 720; }
+.cla-focus-heading p { max-width: 74ch; margin: 8px 0 4px; color: var(--cla-text-muted); }
+/* Unified section language, consistent depth without repetitive dark blocks. */
+:is(.atlas-hero,.orion-hero,.pulse-hero,.haven-hero) { background: transparent !important; box-shadow: none !important; }
+:is(.atlas-hero-copy,.atlas-hero-card,.orion-hero,.pulse-hero,.haven-hero,.lumen-overview-card) {
+  background: #fff !important; color: #193553 !important;
+  border: 1px solid #dde6f1 !important; border-radius: 20px !important;
+  box-shadow: 0 14px 34px -30px rgba(29,59,110,.33) !important;
+}
+:is(.atlas-hero-copy,.orion-hero,.pulse-hero,.haven-hero,.lumen-overview-copy) :is(h1,h2) { color: #173551 !important; }
+:is(.atlas-hero-copy,.orion-hero,.pulse-hero,.haven-hero,.lumen-overview-copy) p { color: var(--cla-text-muted) !important; }
+:is(.atlas-hero-copy,.orion-hero,.pulse-hero,.haven-hero) > div > span:first-child,
+.atlas-hero-copy > span { color: #3861af !important; }
+:is(.atlas-hero-card,.orion-hero,.pulse-hero,.haven-hero) :is(aside,.atlas-flow) { color: #274762; }
+:is(.orion-hero,.pulse-hero,.haven-hero) aside { background: #f2f6fc !important; border: 1px solid #dfe8f2; border-radius: 15px; }
+:is(.orion-hero,.pulse-hero,.haven-hero) aside :is(strong,span) { color: #244666; }
+:is(.lumen-panel,.lumen-dimension-card,.lumen-insight-card,.lumen-decision-card,.lumen-evidence-card,
+    .atlas-stat-card,.atlas-program-card,.atlas-source-card,.atlas-review-card,.atlas-engine-panel,
+    .orion-control-panel,.orion-summary-card,.orion-focus-card,.orion-scenario-card,.orion-timeline-card,
+    .pulse-control-panel,.pulse-metric-card,.pulse-summary-grid article,.pulse-action-card,
+    .haven-control-panel,.haven-summary-grid article,.haven-support-card,.haven-scholarship-card,
+    .cla-visual-card,.orion-tradeoff-panel,.atlas-cutoff-field,.cla-source-explorer,.cla-study-panel) {
+  border-radius: 18px !important;
+  border-color: #dfe7f1;
+  box-shadow: 0 11px 30px -28px rgba(34,69,123,.33) !important;
+}
+.cla-workflow-tabs { border-bottom-color: #dce7f1; gap: 4px; }
+.cla-workflow-tabs button { border-radius: 9px 9px 0 0; font-weight: 660; }
+.cla-workflow-tabs button[aria-pressed='true'] { color: #3156ac; border-bottom-color: #3a65c9; background: #f0f5ff; }
+.cla-focus-disclosure { border-radius: 13px; background: #fff; border: 1px solid #dde6f1; }
+.cla-focus-notice { border-radius: 13px; }
+:is(.atlas-page,.lumen-page,.orion-page,.pulse-page,.haven-page) :is(input,select,textarea) { border-radius: 10px; }
+:is(.atlas-page,.lumen-page,.orion-page,.pulse-page,.haven-page) :is(button,a) { -webkit-tap-highlight-color: transparent; }
+/* Keep user motion light and responsive: navigation is SPA now, no page-wide parallax. */
+@media (max-width: 1100px) {
+  .student-dash .cla-canvas-grid>article { padding: 20px; }
+  .student-dash .cla-spectral-layout { grid-template-columns: minmax(0,1fr); }
+  .student-dash .cla-spectral-dial { max-height: 245px; }
+  .student-dash .cla-spectrum-item { padding: 10px 0; }
+}
+@media (max-width: 760px) {
+  .student-page .student-shell.student-dash:has(.cla-decision-canvas) { width: calc(100% - 26px); }
+  .student-dash .cla-observatory-intro { grid-template-columns: 1fr; padding: 18px 0 14px; gap: 14px; }
+  .student-dash .cla-observatory-intro h1 { font-size: clamp(29px,8vw,40px); }
+  .student-dash .cla-canvas-head { padding: 20px; gap: 11px; }
+  .student-dash .cla-canvas-grid { grid-template-columns: minmax(0,1fr); grid-template-areas: 'cognitive' 'academic' 'temporal'; }
+  .student-dash .cla-canvas-grid>article { padding: 21px 18px; }
+  .student-dash .cla-canvas-cognitive { border-right: 0; border-bottom: 1px solid #e1e8f2; }
+  .student-dash .cla-spectral-layout { grid-template-columns: minmax(0,1fr); }
+  .student-dash .cla-spectral-dial { max-height: 260px; }
+  .student-dash .cla-canvas-switch { width: 100%; overflow-x: auto; flex-wrap: nowrap; }
+  .student-dash .cla-canvas-switch button { flex: 1 0 auto; }
+  .student-dash .cla-canvas-flow { padding: 18px; }
+  .student-dash .student-dash-module-grid { grid-template-columns: 1fr; }
+  .student-dash .student-dash-module-grid .student-dash-module { min-height: 91px; border-right: 0 !important; padding: 14px 16px; }
+  .student-dash .student-dash-module-icon { width: 48px; height: 48px; flex-basis: 48px; border-radius: 13px; }
+  .student-dash .student-dash-module-icon img { width: 38px; height: 38px; }
+  .cla-focus-nav .cla-module-subnav-links { gap: 5px; }
+  .cla-focus-nav .cla-module-subnav-links a { padding: 9px 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; }
+  .student-dash .cla-decision-canvas * { transition: none !important; animation: none !important; }
+}
+
+/* CP44 · Surface/text contracts for legacy dark hero components that are now light.
+ * These exact selectors previously specified white/ice-blue text on a
+ * background inherited from --cla-hero, which CP43 changed to pale blue. */
+:is(.profile-head,.nexus-hero,.student-intelligence-hero,.student-panel.dark) {
+  background: linear-gradient(135deg,#fff 0%,#f2f7ff 100%) !important;
+  border: 1px solid var(--cla-border-subtle) !important;
+  color: var(--cla-text-primary) !important;
+  box-shadow: 0 12px 36px -30px rgba(24,50,99,.22) !important;
+}
+:is(.profile-head,.nexus-hero,.student-intelligence-hero,.student-panel.dark) :is(h1,h2,h3,h4) {
+  color: var(--cla-text-primary) !important;
+}
+:is(.profile-head,.nexus-hero,.student-intelligence-hero,.student-panel.dark) p {
+  color: var(--cla-text-secondary) !important;
+}
+.profile-head span,.nexus-hero > div > span,.student-intelligence-eyebrow,
+.student-intelligence-hero h2 span,.student-intelligence-live,
+.student-panel.dark .student-panel-head > span {
+  color: var(--cla-text-link) !important;
+}
+.student-intelligence-hero-meta > div { background: var(--cla-bg-canvas); border-color: var(--cla-border-subtle); backdrop-filter: none; }
+.student-intelligence-hero-meta :is(span,strong) { color: var(--cla-text-primary) !important; }
+.student-intelligence-hero-meta span { color: var(--cla-text-muted) !important; }
+.student-panel.dark .student-panel-head h2 { color: var(--cla-text-primary) !important; }
+.student-panel.dark :is(.student-panel-head p,.student-panel-head small) { color: var(--cla-text-muted) !important; }
+.nexus-hero > span { color: var(--cla-text-link) !important; }
+/* Accessible text and labels on the light student analysis sheet. */
+.student-dash .cla-canvas-source,
+.student-dash .cla-canvas-note,
+.student-dash .cla-canvas-kpi small,
+.student-dash .cla-canvas-label > span,
+.student-dash .cla-spectrum-item span,
+.student-dash .cla-spectrum-item b,
+.student-dash .cla-canvas-flow > span,
+.student-dash .cla-canvas-empty span,
+.student-dash .cla-canvas-temporal .cla-viz-caption,
+.student-dash .cla-focus-module-copy :is(small,span),
+.cla-focus-nav .cla-module-subnav-head > span,
+.cla-focus-heading p {
+  color: var(--cla-text-muted) !important;
+}
+.student-dash .cla-dial-caption,
+.student-dash .cla-canvas-gpa text { fill: var(--cla-text-muted); }
+.student-dash .cla-decision-canvas a,
+.student-dash .cla-intro-target a,
+.cla-focus-nav .cla-focus-home { color: var(--cla-text-link); }
+.student-dash .cla-canvas-switch button { color: var(--cla-text-muted); }
+.student-dash .cla-canvas-switch button[aria-pressed='true'] { color: var(--cla-text-link); }
+/* Consistent visible focus; do not use color alone to signal the selected tab. */
+.cla-focus-nav a:focus-visible,.cla-decision-canvas :is(a,button):focus-visible {
+  outline: 2px solid var(--cla-focus-ring); outline-offset: 3px;
+}
+/* Prevent the old translucent on-dark user-role label palette from being
+ * applied to a light user-dropdown header. */
+.user-dropdown-head .user-role-badge { background: #edf3fb; border-color: #dbe5f0; }
+.user-dropdown-head .user-role-badge :is(.user-role-badge-label,strong) { color: var(--cla-text-primary) !important; }
+@media (prefers-reduced-motion: reduce) {
+  .cla-dial-arc { transition: none !important; }
+}
+/* CP44 expanded legacy-hero audit: CP28 assigned --cla-hero to these
+ * components while their child text remained white or ice blue. Surface and
+ * foreground must migrate together, not via a global --cla-hero substitution. */
+:is(.profile-showcase-left,.student-hero,.about-hero-premium,.contact-hero-premium,
+    .module-detail-panel,.module-path-detail,.about-identity-grid article.featured,
+    .cognitive-growth-overall) {
+  background: linear-gradient(133deg, #ffffff 0%, #f1f7ff 100%) !important;
+  border: 1px solid var(--cla-border-subtle);
+  color: var(--cla-text-primary) !important;
+}
+:is(.showcase-copy,.student-hero-copy,.about-hero-copy,.contact-hero-premium,
+    .module-detail-main,.module-path-detail-hero,.about-identity-grid article.featured)
+    :is(h1,h2,h3,p) { color: var(--cla-text-primary) !important; }
+:is(.showcase-copy,.student-hero-copy,.about-hero-copy,.contact-hero-premium,
+    .module-detail-main,.module-path-detail-hero,.about-identity-grid article.featured)
+    p { color: var(--cla-text-secondary) !important; }
+:is(.showcase-copy,.student-hero-copy,.about-hero-copy,.contact-hero-premium,
+    .module-detail-main,.module-path-detail-hero,.about-identity-grid article.featured)
+    > span { color: var(--cla-text-link) !important; }
+.showcase-copy > span { background: #e9f1fe; border-color: var(--cla-border-subtle); }
+/* The login illustration card is now light too; internal stats aren't stuck
+ * with white text on the newly white container. */
+.profile-showcase-card { background: #f3f7ff !important; border: 1px solid var(--cla-border-subtle); box-shadow: none; }
+.profile-showcase-card :is(h3,.showcase-stats strong) { color: var(--cla-text-primary) !important; }
+.profile-showcase-card :is(p,.showcase-stats span,.showcase-note p) { color: var(--cla-text-secondary) !important; }
+.profile-showcase-card :is(.showcase-stats article,.showcase-note) { background: #fff; border: 1px solid var(--cla-border-subtle); }
+.profile-showcase-card .showcase-pill { background: #e8effb; border-color: var(--cla-border-subtle); color: var(--cla-text-secondary); }
+.profile-showcase-card .showcase-avatar { color: var(--cla-text-primary); }
+.module-path-detail-hero span,.module-detail-main > div > span { color: var(--cla-text-link) !important; }
+.module-path-action { background: #fff; border: 1px solid var(--cla-border-subtle); }
+.module-path-action strong { color: var(--cla-text-primary) !important; }
+.module-path-action p { color: var(--cla-text-secondary) !important; }
+.module-path-more { background: #e9f1fe; border-color: var(--cla-border-subtle); color: var(--cla-text-link); }
+.module-path-action button { color: #fff; background: var(--cla-text-link); opacity: 1; }
+.cognitive-growth-overall :is(small,em) { color: var(--cla-text-muted) !important; }
+.cognitive-growth-overall strong { color: var(--cla-text-primary); }
+/* Some status colors were originally pastel on dark; use readable colors on
+ * the light summary, while the semantic up/down classes remain distinct. */
+.cognitive-growth-overall.is-up em { color: var(--cla-text-accent-teal) !important; }
+.cognitive-growth-overall.is-down em { color: var(--cla-text-accent-amber) !important; }

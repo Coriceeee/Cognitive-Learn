@@ -119,7 +119,7 @@ export const studentSubmoduleDirectory: Record<StudentModuleKey, ModuleSubmodule
       { id: "overview", title: "Tổng quan của tôi", description: "Xem thông tin học sinh và các việc cần hoàn thiện.", group: "Hồ sơ", href: "/student", status: "available" },
       { id: "profile", title: "Hồ sơ & mục tiêu", description: "Cập nhật học tập, mục tiêu và bốn môn lựa chọn.", group: "Hồ sơ", href: "/student/profile", status: "available" },
       { id: "transcript", title: "Bảng điểm & GPA", description: "Xem và nhập điểm các năm học, không mặc định điểm thiếu là 0.", group: "Học lực", href: "/student/transcript", status: "partial" },
-      { id: "exams", title: "Lịch thi", description: "Mốc thi và đếm ngược do bạn chọn.", group: "Học lực", href: "/student/exams", status: "available" },
+      { id: "exams", title: "Thiết lập lịch thi", description: "Chọn kỳ thi, nhập ngày và nguồn; mốc sắp tới hiện trên trang tổng quan.", group: "Học lực", href: "/student/exams", status: "available" },
       { id: "storage", title: "Dữ liệu của tôi", description: "Xem trạng thái lưu và đồng bộ hồ sơ của chính bạn.", group: "Cá nhân", href: "/student/storage", status: "partial" },
     ],
   },

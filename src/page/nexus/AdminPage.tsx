@@ -1,3 +1,4 @@
+import { navigateTo } from "../../lib/clientNavigation";
 import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
 import { adminConsoleDirectory } from "../../data/adminConsoleDirectory";
@@ -45,7 +46,7 @@ export default function TrangQuanTri() {
   const secondaryTasks = activeDirectory.tasks.slice(3);
 
   function selectCluster(key: AdminClusterKey) {
-    window.location.href = `/admin?cluster=${key}`;
+    navigateTo(`/admin?cluster=${key}`);
   }
   function renderTask(task: (typeof primaryTasks)[number]) {
     return (

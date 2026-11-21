@@ -74,7 +74,7 @@ body {
   grid-template-columns: 292px minmax(0, 1fr);
 }
 .nexus-rail {
-  background: linear-gradient(180deg, rgb(var(--tc-bg-f8fbff)) 0%, rgb(var(--tc-bg-edf5ff)) 100%) !important;
+  background: linear-gradient(180deg, #f8fbff 0%, #edf5ff 100%) !important;
   color: var(--cla-ink) !important;
   border-right: 1px solid var(--cla-border);
   box-shadow: 8px 0 28px rgb(var(--tc-sh-174991) / calc(0.045 * var(--k-sh)));
@@ -376,7 +376,7 @@ body {
 
 /* Restore a consistent light chat window while retaining the blue CLA mascot launcher. */
 .cla-chat-panel {
-  background: rgb(var(--tc-bg-ffffff)) !important;
+  background: #fff !important;
   color: var(--cla-ink) !important;
   border: 1px solid rgb(var(--tc-bd-cfe1f8)) !important;
   box-shadow: 0 22px 58px rgb(var(--tc-sh-124387) / calc(0.2 * var(--k-sh))) !important;

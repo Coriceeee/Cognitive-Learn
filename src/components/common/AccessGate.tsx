@@ -42,6 +42,10 @@ export default function AccessGate({ path, children }: AccessGateProps) {
   const [status, setStatus] = useState<GateStatus>("checking");
   const [role, setRole] = useState<Role | null>(null);
 
+  // Only revalidate when the authorization boundary changes. Switching between
+  // student subpages does not tear down the verified role/consent listeners.
+  // Render-time mayVisit() below still enforces each individual route.
+  const accessScope = path === "/student/consent" ? "consent" : path.startsWith("/admin") ? "admin" : "student";
   useEffect(() => {
     let mounted = true;
     let requestId = 0;
@@ -206,10 +210,14 @@ export default function AccessGate({ path, children }: AccessGateProps) {
       stopLiveAccessWatch();
       unsubscribe();
     };
-  }, [path]);
+  // Scope changes remount the verification effect; an in-scope path change is
+  // protected by the render check as well as the already-active role watcher.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accessScope]);
 
-  if (status === "ready") return <>{children}</>;
-  if (status === "checking") {
+  const displayStatus: GateStatus = status === "ready" && (!role || !mayVisit(role, path)) ? "denied" : status;
+  if (displayStatus === "ready") return <>{children}</>;
+  if (displayStatus === "checking") {
     return (
       <main className="cla-access-screen" role="status">
         <div className="cla-access-panel">
@@ -228,7 +236,7 @@ export default function AccessGate({ path, children }: AccessGateProps) {
     error: ["Chưa xác minh được quyền truy cập", "Không thể kiểm tra vai trò hoặc quyết định dữ liệu từ Firestore. Kiểm tra kết nối và thử lại."],
     "consent-required": ["Cần xác nhận quyền dữ liệu", "Trước khi sử dụng Seed, Atlas và các công cụ học sinh, hãy đọc thông báo và lựa chọn việc dùng dữ liệu sản phẩm. Đồng ý này không đồng nghĩa tham gia nghiên cứu."],
   };
-  const [title, description] = messages[status];
+  const [title, description] = messages[displayStatus];
 
   return (
     <main className="cla-access-screen">
@@ -237,7 +245,7 @@ export default function AccessGate({ path, children }: AccessGateProps) {
         <h1>{title}</h1>
         <p>{description}</p>
         <div className="cla-access-actions">
-          <a href={status === "consent-required" ? "/student/consent" : homeForRole(role)}>{status === "consent-required" ? "Xem và quản lý quyền dữ liệu" : role ? "Về trang của tôi" : "Đăng nhập"}</a>
+          <a href={displayStatus === "consent-required" ? "/student/consent" : homeForRole(role)}>{displayStatus === "consent-required" ? "Xem và quản lý quyền dữ liệu" : role ? "Về trang của tôi" : "Đăng nhập"}</a>
           <button type="button" onClick={() => window.location.reload()}>Thử lại</button>
         </div>
       </section>

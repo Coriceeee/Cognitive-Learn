@@ -106,13 +106,14 @@ test('EX22 format is stable Vietnamese day/month/year',()=>{
   assert.equal(formatExamDate('2027-02-07'),'07/02/2027');
   assert.equal(formatExamDate(''),'Chưa nhập ngày');
 });
-test('EX23 student dashboard links to focused exam workspace after hero and priorities',()=>{
+test('EX23 student overview shows exam horizon; dedicated route is settings-only',()=>{
   const page=src('../src/page/seed/StudentPage.tsx');
+  assert.match(page,/view === "\/student"/);
+  const overview=page.indexOf('<ExamHorizon />');
+  assert.ok(overview > page.indexOf('student-dash-hero'));
+  assert.ok(overview < page.indexOf('<StudentDecisionCanvas'));
   assert.match(page,/view === "\/student\/exams" && \(!isAdminPreview \? <ExamReminderBoard/);
-  const exam = page.indexOf('href="/student/exams#cla-exam-reminders"');
-  assert.ok(exam > page.indexOf('student-dash-hero'));
-  assert.ok(exam > page.indexOf('student-dash-focus'));
-  assert.ok(exam < page.indexOf('student-dash-modules')); 
+  assert.match(src('../src/data/moduleSubmodules.ts'),/title: "Thiết lập lịch thi"/);
 });
 test('EX24 student selects visible exams, can remove or edit their own calendar',()=>{
   const board=src('../src/components/student/ExamReminderBoard.tsx');

@@ -1,0 +1,152 @@
+{
+  "source_zip": "CLA(20261120-160308).zip",
+  "source_zip_sha256": "3802abc08ea171040659695f9ff73189e886725a3abf702022df3b0fe57b3f88",
+  "checkpoint": "CP43 Daylight Data Studio",
+  "date": "2026-11-20",
+  "scope": "Visual design, navigation, duplicate cleanup. No alteration to core scoring/ML or Firebase security rules.",
+  "build_status": "TypeScript frontend PASS; TypeScript API PASS; Vite build NOT VERIFIED (Windows Rolldown binding in supplied source, Linux environment).",
+  "test_status": {
+    "cp43_static": "5/5 PASS",
+    "ux_hierarchy_roles": "8/8 PASS",
+    "cp42_ui": "24/24 PASS",
+    "firestore_rules_static": "15/15 PASS",
+    "daily_companion": "20/20 PASS",
+    "layout": "PASS",
+    "css_parser": "PASS",
+    "full_npm_test": "NOT PASS: historical CP31 source SHA fingerprint differs after source changes; check historical test only against historical freeze",
+    "browser_e2e": "NOT RUN",
+    "firebase_emulator": "NOT RUN"
+  },
+  "file_count": 911,
+  "changed_or_added": {
+    ".gitignore": {
+      "status": "modified",
+      "sha256": "c41e0a872f6a76881ff834fec40598e64d9284a356fab98d441200cc10fe44e8",
+      "bytes": 1796
+    },
+    "CP43_CHANGELOG.md": {
+      "status": "added",
+      "sha256": "e601d21f068dc1677edf2831b45bea2bd8230c0f8e42f38dd06979eb2be65a5b",
+      "bytes": 802
+    },
+    "START_HERE_CP43_DAYLIGHT_STUDIO.md": {
+      "status": "added",
+      "sha256": "8bef7e20db7f08e4fcabceacef266cde0e6ea4a1665d381d555200c36359f351",
+      "bytes": 5947
+    },
+    "index.html": {
+      "status": "modified",
+      "sha256": "6c131cfd82874a648ccd366525af5bf27a7abb65d49d0b0b2d861c7bd02a4a2a",
+      "bytes": 1841
+    },
+    "public/cla-companion-sw.js": {
+      "status": "added",
+      "sha256": "24a8882e0658c0657b92c07824196b02cf90306f1a2a47c90a2b18e849050ce3",
+      "bytes": 1373
+    },
+    "public/cla-icon-192.png": {
+      "status": "added",
+      "sha256": "7b24fbdc89f553027ca289f3d089a59ab7b717e2d7a72653500caa752d863ef0",
+      "bytes": 19268
+    },
+    "public/cla-icon-512.png": {
+      "status": "added",
+      "sha256": "0e35d1dbfe6a6b2291d0bcbbdd2e2f42403065419170e06cd5c1255a8357494e",
+      "bytes": 100583
+    },
+    "public/logo cla.png": {
+      "status": "added",
+      "sha256": "1e45d5b9c5b8665c8c365b48426c6e8e35b8ef196800f0a2e8e1e7ae76d65446",
+      "bytes": 72643
+    },
+    "public/manifest.webmanifest": {
+      "status": "added",
+      "sha256": "6371e4d8f5c26ab42fb922a4f207733569af2abc6ceef20189a5e5194fac2fcd",
+      "bytes": 490
+    },
+    "src/App.tsx": {
+      "status": "modified",
+      "sha256": "c235e37ee04d8c81a5a10cc3b1858e183d235335e3290c7cf616869dac6154b9",
+      "bytes": 5897
+    },
+    "src/components/common/AccessGate.tsx": {
+      "status": "modified",
+      "sha256": "91e2b2d3363102622dc74c05d4db93466a727e1d63c06c0198559c294a3c7645",
+      "bytes": 11893
+    },
+    "src/components/common/ModuleSectionNav.tsx": {
+      "status": "modified",
+      "sha256": "2a859287fd6d3728f63a55d97c4b236baef2265cfe349a7a5f4cfe1e961662a8",
+      "bytes": 2877
+    },
+    "src/lib/clientNavigation.ts": {
+      "status": "added",
+      "sha256": "9ebbb4604494b0d710a3b58273dfa26b8b2e21ee25b0da7026cc443cb38b86d9",
+      "bytes": 3640
+    },
+    "src/lib/theme.ts": {
+      "status": "modified",
+      "sha256": "f8fafa9afb49b7c87c900c64981d31b54cbd058ab18c1c00fc6e3a279be85464",
+      "bytes": 1293
+    },
+    "src/page/lumen/LumenPage.tsx": {
+      "status": "modified",
+      "sha256": "6ec8f2854ed5aeabed4f0dbebcc646797317cd56c66bc8c326863f871ec32012",
+      "bytes": 15210
+    },
+    "src/page/nexus/AdminPage.tsx": {
+      "status": "modified",
+      "sha256": "6b0b3d41da330593404387b30739846c6fb175cb314c3122194900e1da7f0132",
+      "bytes": 8395
+    },
+    "src/page/seed/StudentPage.tsx": {
+      "status": "modified",
+      "sha256": "10bc40708a2ad6d10d32733ff30281daf4c1a00462e4f6df63dccffa67a59afc",
+      "bytes": 16716
+    },
+    "src/page/seed/StudentProfilePage.tsx": {
+      "status": "modified",
+      "sha256": "c0850efcff1c7ff8d16634723512d51dae4fdbc5a1a126e386060031c28239f1",
+      "bytes": 56650
+    },
+    "src/page/seed/StudentTranscriptPage.tsx": {
+      "status": "modified",
+      "sha256": "0f197c341e87ae616a14b25535655294b2a9670e3e299a78686ccad7cd6af319",
+      "bytes": 7372
+    },
+    "src/page/seed/components/StudentDecisionCanvas.tsx": {
+      "status": "modified",
+      "sha256": "a426be80e92b220813d4191565f6d6690dc42ec8b9250485672cb106cb384720",
+      "bytes": 8901
+    },
+    "src/styles.css": {
+      "status": "modified",
+      "sha256": "5ab754b306fc0a0a1d30bfcbc2b8ae74ba4bd67d8018c785d9a4003ac1978ba6",
+      "bytes": 2962
+    },
+    "src/styles/21-cla-design-system.css": {
+      "status": "modified",
+      "sha256": "be6afb57e97eb653c2f72a8353275095ba7b4e4b62e8489877ef262cd15c1ed3",
+      "bytes": 21603
+    },
+    "src/styles/38-cla-daylight-studio.css": {
+      "status": "added",
+      "sha256": "debdbaf896ca7b154a697d240c51dc5e3524d8063c542470bb7bb3b95a78fc14",
+      "bytes": 18320
+    },
+    "tests/cp43-daylight-spa.test.cjs": {
+      "status": "added",
+      "sha256": "8b1eb1c12bd8ecccb8dc5b4086170ae11a14223af0ce240210d4fa50dc1a7487",
+      "bytes": 2914
+    }
+  },
+  "intended_removed_paths": [
+    "src/page/main/RolePage.tsx",
+    "src/components/common/StudentLinkManager.tsx",
+    "src/components/common/SharedReportPanel.tsx",
+    "src/audit_dataset.py",
+    "src/baseline_next_term.py",
+    "benchmarks/cla_llm_120_cases_DRAFT.jsonl"
+  ],
+  "sanitization_note": "Excluded secrets/environment, git, node_modules, local build outputs, virtualenv, unreviewed raw/private data. Use npm ci on target machine."
+}

@@ -1,0 +1,200 @@
+/* CP46 — The student home is a connected scientific workspace, never a 2x3 tile menu.
+ * These two components use their own class namespaces; no global theme overrides. */
+.student-dash .cla-horizon,
+.student-dash .cla-circuit {
+  --cla46-ink: #142D48;
+  --cla46-muted: #526A84;
+  --cla46-line: #DCE5F1;
+  --cla46-cobalt: #275CB4;
+  box-sizing: border-box;
+  color: var(--cla46-ink);
+}
+.student-dash .cla-horizon *, .student-dash .cla-circuit * { box-sizing: border-box; }
+.student-dash .cla-horizon a, .student-dash .cla-circuit a { text-decoration: none; }
+.student-dash .cla-horizon a:focus-visible, .student-dash .cla-circuit a:focus-visible {
+  outline: 3px solid #316ED4; outline-offset: 4px;
+}
+
+/* Exam horizon sits BEFORE the detailed intelligence analytics. */
+.student-dash .cla-horizon {
+  margin: 10px 0 24px;
+  border: 1px solid #D9E4F2;
+  border-radius: 22px;
+  background: #FFFFFF;
+  box-shadow: 0 18px 48px -42px rgba(25,59,106,.46);
+  overflow: hidden;
+  isolation: isolate;
+}
+.cla-horizon-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 20px 25px 16px;
+}
+.cla-horizon-overline, .cla-circuit-eyebrow {
+  color: #355C9A; font-size: 10px; font-weight: 800; letter-spacing: .125em;
+}
+.cla-horizon-live { display: inline-block; width: 7px; height: 7px; margin-right: 6px;
+  border-radius: 50%; background: #14837E; box-shadow: 0 0 0 3px #E1F4F1; }
+.cla-horizon-head h2, .cla-circuit-heading h2 {
+  margin: 5px 0 4px; color: #142D48; font-size: clamp(22px,2.35vw,30px);
+  letter-spacing: -.045em; line-height: 1.2; font-weight: 750;
+}
+.cla-horizon-head p, .cla-circuit-heading p {
+  color: #526A84; font-size: 12px; line-height: 1.6; margin: 0;
+}
+.cla-horizon-settings {
+  display: inline-flex; align-items: center; gap: 16px; flex: 0 0 auto;
+  padding: 11px 15px; border-radius: 10px; border: 1px solid #CDDDF0;
+  background: #F4F8FE; color: #24549C; font-size: 12px; font-weight: 720;
+  transition: background .15s, border-color .15s;
+}
+.cla-horizon-settings:hover { background: #E8F1FF; border-color: #8AB0E8; }
+.cla-horizon-main { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); min-width: 0; border-top: 1px solid #E4ECF5; }
+.cla-horizon-countdown {
+  position: relative; display: flex; flex-direction: column; min-width: 0;
+  padding: clamp(21px,3vw,35px); min-height: 245px; overflow: hidden;
+  background: radial-gradient(ellipse at 104% 0%,rgba(94,148,241,.17),transparent 55%),
+              linear-gradient(125deg,#F4F8FE,#EFF5FD 80%);
+  border-right: 1px solid #DDE7F4;
+}
+.cla-horizon-countdown::after {
+  content: ""; pointer-events: none; position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg,transparent 0,transparent 43px,rgba(57,102,164,.045) 44px,transparent 45px);
+}
+.cla-horizon-count-label, .cla-horizon-track-heading {
+  font-size: 10px; letter-spacing: .12em; font-weight: 780; color: #506B90;
+}
+.cla-horizon-digits { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; font-size: clamp(64px,7vw,93px); letter-spacing: -.085em;
+  font-variant-numeric: tabular-nums; line-height: 1.12; font-weight: 700; color: #19417B; margin-top: 11px; }
+.cla-horizon-digits small { font-size: 13px; letter-spacing: 0; font-weight: 700; color: #49698D; }
+.cla-horizon-countdown>strong { font-size: 15px; font-weight: 740; color: #173754; line-height: 1.4; margin-top: 2px; }
+.cla-horizon-source { font-size: 12px; color: #526A84; margin-top: 5px; }
+.cla-horizon-track { padding: 19px 26px 17px; min-width: 0; }
+.cla-horizon-track-heading { display: flex; justify-content: space-between; gap: 12px; font-size: 10px; color: #54708E; }
+.cla-horizon-milestones { list-style: none; margin: 9px 0 0; padding: 0; }
+.cla-horizon-milestones li { display: grid; grid-template-columns: 30px minmax(0,1fr) auto; align-items: center;
+  gap: 13px; padding: 15px 0; border-bottom: 1px solid #E6EDF6; min-width: 0; }
+.cla-horizon-milestones li:last-child { border: 0; }
+.cla-horizon-track-index { display: grid; place-items: center; width: 27px; height: 27px; border: 1px solid #CBD9EA;
+  border-radius: 50%; color: #50698A; font-size: 10px; font-weight: 750; font-variant-numeric: tabular-nums; }
+.cla-horizon-milestones .is-next .cla-horizon-track-index { color: white; border-color: #3265BD; background: #3265BD; }
+.cla-horizon-milestones li>div { display: grid; gap: 5px; min-width: 0; }
+.cla-horizon-milestones strong { font-size: 13px; font-weight: 720; color: #203D59; overflow-wrap: anywhere; }
+.cla-horizon-milestones li>div>span { color: #576E87; font-size: 11px; }
+.cla-horizon-milestones li>b { white-space: nowrap; color: #25549F; font-size: 11px; font-weight: 760; }
+.cla-horizon-empty { display: grid; align-content: center; gap: 8px; min-height: 191px; }
+.cla-horizon-empty>strong { color: #264761; font-size: 14px; font-weight: 740; }
+.cla-horizon-empty p { color: #526A84; line-height: 1.6; font-size: 12px; max-width: 48ch; margin: 0; }
+.cla-horizon-placeholder-lines { display: flex; align-items: center; height: 50px; gap: 7px; margin-bottom: 5px; }
+.cla-horizon-placeholder-lines span { width: 30%; height: 2px; border-radius: 8px; background: #B7CDEE; position: relative; }
+.cla-horizon-placeholder-lines span:nth-child(2) { background: #D2DFF0; }
+.cla-horizon-placeholder-lines span:nth-child(3) { background: #E0E8F3; }
+.cla-horizon-placeholder-lines span::before { content: ""; position: absolute; left: 0; top: -5px; width: 12px; height: 12px; border: 2px solid #87A9D6; background: white; border-radius: 50%; }
+.cla-horizon-undated { display: inline-block; margin-top: 11px; color: #285DAD; font-size: 12px; font-weight: 750; }
+.cla-horizon-foot, .cla-circuit-foot {
+  display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap;
+  padding: 11px 25px; background: #FAFCFF; border-top: 1px solid #E7EDF6;
+  font-size: 10px; line-height: 1.45; color: #61768D;
+}
+.cla-horizon-foot span:first-child, .cla-circuit-foot span:first-child { letter-spacing: .12em; font-size: 9px; font-weight: 780; color: #3E6086; }
+/* Actual editing remains in the dedicated exam settings page. */
+.cla-exam-back-home { display: inline-flex; margin: 0 0 16px; padding: 8px 12px; border-radius: 8px;
+  border: 1px solid #D5E3F0; background: #F5F9FF; color: #265BA7; font-size: 12px; font-weight: 750; }
+.cla-exam-back-home:hover { background: #E6F0FF; }
+
+/* Learning circuit: one connected data-diagram rather than six unrelated boxes. */
+.student-dash .cla-circuit { margin: 33px 0 15px; background: #FFFFFF; border: 1px solid #DFE7F1;
+  border-radius: 22px; box-shadow: 0 18px 48px -42px rgba(25,59,106,.46); overflow: hidden; }
+.cla-circuit-heading { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 25px 28px 21px; }
+.cla-circuit-heading h2 { margin-top: 8px; }
+.cla-circuit-counter { flex: 0 0 auto; display: flex; align-items: baseline; gap: 10px; color: #2D5AA1;
+  font-size: 42px; letter-spacing: -.06em; font-weight: 710; font-variant-numeric: tabular-nums; }
+.cla-circuit-counter small { font-size: 9px; font-weight: 800; letter-spacing: .125em; color: #6A7F98; width: 60px; line-height: 1.5; }
+.cla-circuit-stage { display: grid; grid-template-columns: minmax(0,1.85fr) minmax(260px,.8fr);
+  background: #F6F9FE; border-top: 1px solid #E1EAF5; min-width: 0; }
+.cla-circuit-map { position: relative; min-height: 456px; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 50%, #EFF5FD 0%, #F9FBFF 64%); }
+.cla-circuit-wires { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.cla-circuit-node {
+  position: absolute; z-index: 1; transform: translate(-50%,-50%); width: 137px; min-height: 89px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  padding: 7px 5px; border: 1px solid transparent; border-radius: 13px;
+  color: #204061; background: #fff; text-align: center;
+  box-shadow: 0 8px 24px -18px rgba(17,52,96,.3);
+  transition: border-color .16s, transform .16s, box-shadow .16s;
+}
+.cla-circuit-node:hover,.cla-circuit-node.is-current,.cla-circuit-node:focus-visible {
+  border-color: var(--node-color); transform: translate(-50%,-50%) scale(1.035);
+  box-shadow: 0 10px 25px -19px rgba(17,52,96,.56);
+}
+.cla-circuit-node-marker { display: grid; place-items: center; width: 28px; height: 28px; border: 1.5px solid var(--node-color);
+  border-radius: 50%; color: var(--node-color); background: #F9FCFF; font-size: 10px; font-weight: 800; line-height: 1; }
+.cla-circuit-node strong { font-size: 12px; font-weight: 810; letter-spacing: .065em; color: #1D3958; }
+.cla-circuit-node small { color: #526980; font-size: 10px; font-weight: 630; }
+.cla-circuit-detail { display: flex; flex-direction: column; gap: 24px; min-width: 0; padding: 24px;
+  background: white; border-left: 1px solid #E0E9F4; }
+.cla-circuit-detail-top { display: flex; gap: 12px; justify-content: space-between; color: #60758A; letter-spacing: .115em; font-size: 9px; font-weight: 770; }
+.cla-circuit-detail-core { margin: auto 0; padding: 28px 0; border-top: 2px solid var(--node-color); border-bottom: 1px solid #E5ECF4; }
+.cla-circuit-phase { font-size: 10px; font-weight: 790; letter-spacing: .08em; color: var(--node-color); }
+.cla-circuit-detail-core h3 { margin: 13px 0 12px; color: #173652; font-size: clamp(23px,2.7vw,35px); line-height: 1.17;
+  font-weight: 730; letter-spacing: -.05em; }
+.cla-circuit-detail-core p { color: #536B84; font-size: 13px; line-height: 1.7; margin: 0; }
+.cla-circuit-detail-links { display: grid; gap: 12px; }
+.cla-circuit-detail-links>a { display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  padding: 13px 15px; background: #265BB1; border-radius: 10px; color: #fff !important; font-size: 12px; font-weight: 770; }
+.cla-circuit-detail-links>a:hover { background: #1B478E; }
+.cla-circuit-detail-links small { color: #60758A; font-size: 11px; line-height: 1.5; }
+.cla-circuit-mobile { display: none; }
+.cla-circuit-foot { padding: 12px 28px; }
+
+@media(max-width:1020px) {
+ .cla-circuit-stage { grid-template-columns: minmax(0,1.35fr) minmax(230px,.8fr); }
+ .cla-circuit-node { width: 104px; min-height: 80px; }
+ .cla-circuit-map { min-height: 420px; }
+}
+@media(max-width:760px) {
+ .student-dash .cla-horizon { margin: 8px 0 19px; border-radius: 17px; }
+ .cla-horizon-head { padding: 18px 17px 15px; align-items: flex-start; }
+ .cla-horizon-head h2, .cla-circuit-heading h2 { font-size: 23px; }
+ .cla-horizon-settings { padding: 9px 10px; white-space: nowrap; font-size: 11px; }
+ .cla-horizon-main { grid-template-columns: minmax(0,1fr); }
+ .cla-horizon-countdown { min-height: 0; padding: 20px 20px 23px; border-right: 0; border-bottom: 1px solid #DDE7F4; }
+ .cla-horizon-digits { font-size: 72px; }
+ .cla-horizon-track { padding: 17px 20px 12px; }
+ .cla-horizon-empty { min-height: 151px; }
+ .cla-horizon-foot,.cla-circuit-foot { padding: 11px 17px; }
+ .student-dash .cla-circuit { margin: 23px 0 12px; border-radius: 18px; }
+ .cla-circuit-heading { padding: 20px 17px 17px; align-items: flex-start; }
+ .cla-circuit-counter { display: none; }
+ .cla-circuit-stage { display: none; }
+ .cla-circuit-mobile { display: block; background: #FFFFFF; border-top: 1px solid #E4ECF5; }
+ .cla-circuit-mobile>a { display: grid; grid-template-columns: 32px minmax(0,1fr) 17px; gap: 14px; align-items: center;
+   padding: 17px; color: #1B3754; border-bottom: 1px solid #E7EDF5; min-width: 0; }
+ .cla-circuit-mobile>a:last-child { border-bottom: 0; }
+ .cla-circuit-mobile>a:hover,.cla-circuit-mobile>a:focus-visible { background: #F3F7FF; }
+ .cla-circuit-mobile-n { position: relative; display: grid; place-items: center; width: 32px; height: 32px; flex: 0 0 32px;
+   color: var(--node-color); border: 1.5px solid var(--node-color); border-radius: 50%; font-size: 11px; font-weight: 790; }
+ .cla-circuit-mobile-copy { display: grid; gap: 5px; min-width: 0; }
+ .cla-circuit-mobile-copy>small { font-size: 9px; letter-spacing: .075em; color: #59718B; font-weight: 780; }
+ .cla-circuit-mobile-copy>strong { color: #193957; font-size: 15px; font-weight: 760; }
+ .cla-circuit-mobile-copy>span { color: #56708A; line-height: 1.5; font-size: 11px; }
+ .cla-circuit-mobile-arrow { color: #3C67A8; font-size: 18px; }
+ .cla-circuit-foot { display: block; }
+ .cla-circuit-foot span:last-child { display: block; margin-top: 5px; }
+}
+@media(max-width:420px) {
+ .cla-horizon-head { flex-direction: column; gap: 11px; }
+ .cla-horizon-settings { align-self: flex-start; }
+ .cla-horizon-track-heading { flex-wrap: wrap; }
+ .cla-horizon-milestones li { grid-template-columns: 26px minmax(0,1fr) auto; gap: 9px; }
+ .cla-horizon-milestones li>b { font-size: 10px; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .cla-circuit-node,.cla-horizon-settings { transition: none !important; }
+}
+
+/* Exam settings deliberately has no duplicate countdown: that belongs to the home horizon. */
+.cla-exam-settings-meta { display: flex; align-items: baseline; gap: 9px; padding: 11px 16px;
+  border: 1px solid #D5E3F2; border-radius: 12px; background: #F5F9FF; white-space: nowrap; }
+.cla-exam-settings-meta strong { font-size: 25px; font-variant-numeric: tabular-nums; color: #1E4D91; font-weight: 750; }
+.cla-exam-settings-meta span { color: #526D88; font-size: 10px; font-weight: 780; letter-spacing: .08em; }
+@media(max-width:760px) { .cla-exam-settings-meta { align-self: flex-start; } }

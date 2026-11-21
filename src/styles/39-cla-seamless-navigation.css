@@ -1,0 +1,12 @@
+/* CP45 — route transitions. The current page remains readable during code load. */
+.cla-route-progress {
+  position: fixed; inset: 0 0 auto; height: 3px; z-index: 9999;
+  pointer-events: none; background: linear-gradient(90deg, transparent, #3f65d9, #0b8c91, transparent);
+  background-size: 160% 100%; transform-origin: left;
+  animation: cla-route-progress 1s ease-in-out infinite alternate;
+}
+@keyframes cla-route-progress {
+  from { background-position: 100% 0; opacity: .55; }
+  to { background-position: 0 0; opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) { .cla-route-progress { animation: none; } }

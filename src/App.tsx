@@ -1,90 +1,57 @@
-import ThemeToggle from "./components/common/ThemeToggle";
 import {
   Suspense,
   lazy,
   useEffect,
+  useLayoutEffect,
+  useState,
+  useTransition,
   type ReactNode,
 } from "react";
 
 import { currentFocusedPath } from "./lib/focusedModuleRoute";
+import { subscribeNavigation, getLastNavigationKind } from "./lib/clientNavigation";
+import { routeModules, preloadLikelyRoutes } from "./lib/routeModules";
 import FloatingAdvisorChat from "./components/common/FloatingAdvisorChat";
 import AppFooter from "./components/common/AppFooter";
 import AccessGate from "./components/common/AccessGate";
 import AppNotificationCenter from "./components/common/AppNotificationCenter";
 
-const TrangDangNhap = lazy(
-  () => import("./page/auth/LoginPage")
-);
+const StudentProfileProvider = lazy(() => import("./page/seed/hooks/StudentProfileProvider").then(module => ({default: module.StudentProfileProvider})));
 
-const TrangQuanTri = lazy(
-  () => import("./page/nexus/AdminPage")
-);
-const AdminDiagnosticsPage = lazy(
-  () => import("./page/nexus/AdminDiagnosticsPage")
-);
-const AdminAuditPage = lazy(
-  () => import("./page/nexus/AdminAuditPage")
-);
+const TrangDangNhap = lazy(routeModules.login);
 
-const DailyCompanionPage = lazy(() => import("./page/companion/DailyCompanionPage"));
+const TrangQuanTri = lazy(routeModules.admin);
+const AdminDiagnosticsPage = lazy(routeModules.adminDiagnostics);
+const AdminAuditPage = lazy(routeModules.adminAudit);
 
-const TrangHocSinh = lazy(
-  () => import("./page/seed/StudentPage")
-);
+const DailyCompanionPage = lazy(routeModules.companion);
 
-const TrangNhapHoSoHocTap = lazy(
-  () =>
-    import(
-      "./page/seed/StudentProfilePage"
-    )
-);
+const TrangHocSinh = lazy(routeModules.student);
 
-const StudentConsentPage = lazy(
-  () => import("./page/seed/StudentConsentPage")
-);
+const TrangNhapHoSoHocTap = lazy(routeModules.studentProfile);
 
-const StudentTranscriptPage = lazy(
-  () => import("./page/seed/StudentTranscriptPage")
-);
-const StudentModulesPage = lazy(
-  () => import("./page/seed/StudentModulesPage")
-);
-const StudentGuidePage = lazy(
-  () => import("./page/seed/StudentGuidePage")
-);
-const StudentStorageStatusPage = lazy(
-  () => import("./page/seed/StudentStorageStatusPage")
-);
+const StudentConsentPage = lazy(routeModules.studentConsent);
 
-const GioiThieuPage = lazy(
-  () => import("./page/main/AboutPage")
-);
+const StudentTranscriptPage = lazy(routeModules.studentTranscript);
+const StudentModulesPage = lazy(routeModules.studentModules);
+const StudentGuidePage = lazy(routeModules.studentGuide);
+const StudentStorageStatusPage = lazy(routeModules.studentStorage);
 
-const LienHePage = lazy(
-  () => import("./page/main/ContactPage")
-);
+const GioiThieuPage = lazy(routeModules.about);
 
-const AtlasPage = lazy(
-  () => import("./page/atlas/AtlasPage")
-);
+const LienHePage = lazy(routeModules.contact);
 
-const LumenPage = lazy(
-  () => import("./page/lumen/LumenPage")
-);
+const AtlasPage = lazy(routeModules.atlas);
 
-const OrionPage = lazy(
-  () => import("./page/orion/OrionPage")
-);
+const LumenPage = lazy(routeModules.lumen);
 
-const PulsePage = lazy(
-  () => import("./page/pulse/PulsePage")
-);
+const OrionPage = lazy(routeModules.orion);
 
-const StudyAbroadPage = lazy(() => import("./page/study-abroad/StudyAbroadPage"));
+const PulsePage = lazy(routeModules.pulse);
 
-const HavenPage = lazy(
-  () => import("./page/haven/HavenPage")
-);
+const StudyAbroadPage = lazy(routeModules.studyAbroad);
+
+const HavenPage = lazy(routeModules.haven);
 
 function AppLoading() {
   return (
@@ -98,7 +65,39 @@ function AppLoading() {
 }
 
 export default function App() {
-  const path = currentFocusedPath();
+  // External-store updates are synchronous and can reveal Suspense's full-screen
+  // fallback on each cold lazy route. A React transition keeps the revealed page
+  // visible until the next JS module is ready, without reloading the document.
+  const [path, setPath] = useState(() => currentFocusedPath());
+  const [routePending, startRouteTransition] = useTransition();
+  useEffect(() => subscribeNavigation(() => {
+    startRouteTransition(() => setPath(currentFocusedPath()));
+  }), []);
+  // Preload at most two likely next module chunks on an idle connection.
+  // This helps touch devices, where pointer-hover prefetch is unavailable.
+  useEffect(() => {
+    if (!/^\/(student|atlas|lumen|orion|pulse|haven)(?:\/|$)/.test(path)) return;
+    if ('requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(() => preloadLikelyRoutes(path), { timeout: 2200 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const id = setTimeout(() => preloadLikelyRoutes(path), 1200);
+    return () => clearTimeout(id);
+  }, [path]);
+  useLayoutEffect(() => {
+    // Browser Back/Forward should keep native scroll restoration.
+    if (getLastNavigationKind() === 'pop') return;
+    const fragment = window.location.hash;
+    if (fragment && path === currentFocusedPath()) {
+      const frame = window.requestAnimationFrame(() => {
+        const target = document.getElementById(decodeURIComponent(fragment.slice(1)));
+        if (target) target.scrollIntoView({block: 'start'});
+        else window.scrollTo({top: 0, behavior: 'instant'});
+      });
+      return () => window.cancelAnimationFrame(frame);
+    }
+    window.scrollTo({top: 0, behavior: 'instant'});
+  }, [path]);
   useEffect(() => {
     if (window.location.pathname !== path) {
       window.history.replaceState(window.history.state, "", path + window.location.search + window.location.hash);
@@ -176,6 +175,7 @@ export default function App() {
 
   return (
     <div className="app-root">
+      {routePending && <div className="cla-route-progress" role="progressbar" aria-label="Đang mở trang tiếp theo" />}
       <Suspense
         fallback={
           <AppLoading />
@@ -186,16 +186,25 @@ export default function App() {
             currentPage
           ) : (
             <AccessGate path={path}>
-              <AppNotificationCenter />
-              {currentPage}
-              {path !== "/student/consent" && <FloatingAdvisorChat />}
+              {path === "/student/consent" || path.startsWith("/admin") ? (
+                <>
+                  <AppNotificationCenter />
+                  {currentPage}
+                  {path !== "/student/consent" && <FloatingAdvisorChat />}
+                </>
+              ) : (
+                <StudentProfileProvider>
+                  <AppNotificationCenter />
+                  {currentPage}
+                  <FloatingAdvisorChat />
+                </StudentProfileProvider>
+              )}
             </AccessGate>
           )}
         </div>
       </Suspense>
 
       <AppFooter />
-      <ThemeToggle />
     </div>
   );
 }
