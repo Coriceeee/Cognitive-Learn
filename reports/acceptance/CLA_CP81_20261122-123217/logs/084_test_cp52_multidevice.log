@@ -1,0 +1,21 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp52:multidevice
+> node --experimental-strip-types --test tests/cp52-multidevice-cas.test.mjs
+
+Γ£ö CP52.1: first write from two empty devices detects competing create (1.0929ms)
+Γ£ö CP52.2: stale device cannot overwrite newer revision (0.165ms)
+Γ£ö CP52.3: same revision with changed payload conflicts, timestamp resolution alone does not (0.1582ms)
+Γ£ö CP52.4: legacy version-less draft detects remote changes before migration (0.2768ms)
+Γ£ö CP52.5: canonical signature ignores object key order (0.1557ms)
+Γ£ö CP52.6: queued follow-up write may use acknowledged revision with unknown server timestamp (0.1193ms)
+Γ£ö CP52.7: hook uses server transaction read before write, explicit server reload and local edit guard (0.2516ms)
+Γ£ö CP52.8: Orion, Pulse and Haven expose deliberate conflict resolution, keep local editing (0.1665ms)
+Γ£ö CP52.9: candidate rules preserve owner isolation and protect revisioned documents (0.3892ms)
+Γä╣ tests 9
+Γä╣ suites 0
+Γä╣ pass 9
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 126.5339

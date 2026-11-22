@@ -113,7 +113,7 @@ test('EX23 student overview shows exam horizon; dedicated route is settings-only
   assert.ok(overview > page.indexOf('student-dash-hero'));
   assert.ok(overview < page.indexOf('<StudentDecisionCanvas'));
   assert.match(page,/view === "\/student\/exams" && \(!isAdminPreview \? <ExamReminderBoard/);
-  assert.match(src('../src/data/moduleSubmodules.ts'),/title: "Thiết lập lịch thi"/);
+  assert.match(src('../src/data/moduleSubmodules.ts'),/title: "Những cột mốc".*href: "\/student\/exams"/);
 });
 test('EX24 student selects visible exams, can remove or edit their own calendar',()=>{
   const board=src('../src/components/student/ExamReminderBoard.tsx');

@@ -1,0 +1,251 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp31:batch2:contract
+> node --test tests/cp31-batch2-e2e-contract.test.cjs && python -m unittest discover -s tests_cp31 -v
+
+Γ£ö CP31-B2-01 source inventory and E2E manifest agree for every task and diagnostic (1.4478ms)
+Γ£ö CP31-B2-02 source exposes stable task IDs and pressed-state cluster selectors (0.8648ms)
+Γ£ö CP31-B2-03 unknown query cannot silently claim to show 22 filtered tasks (0.1312ms)
+Γ£ö CP31-B2-04 browser gate uses real sign-in and checks all four roles (0.1585ms)
+Γ£û CP31-B2-05 browser gate forbids untrusted remote URLs and needs QA acknowledgements (1.3282ms)
+Γ£ö CP31-B2-06 CP31 scripts distinguish static check and real browser gate (0.7235ms)
+Γä╣ tests 6
+Γä╣ suites 0
+Γä╣ pass 5
+Γä╣ fail 1
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 101.3603
+
+Γ£û failing tests:
+
+test at tests\cp31-batch2-e2e-contract.test.cjs:50:1
+Γ£û CP31-B2-05 browser gate forbids untrusted remote URLs and needs QA acknowledgements (1.3282ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /all four role accounts/i. Input:
+  
+  '#!/usr/bin/env python3\n' +
+    '"""CP31 browser E2E against an explicitly opted-in LOCAL or QA STAGING CLA site.\n' +
+    '\n' +
+    'No mocking of Firebase auth or role checks; no production writes and no browser\n' +
+    'storage persistence. Test accounts must be isolated synthetic QA users.\n' +
+    '\n' +
+    'Requires Python Playwright: python -m pip install playwright; python -m playwright install chromium\n' +
+    'Run with --base-url http://127.0.0.1:5173 (or explicitly approved staging host).\n' +
+    '"""\n' +
+    'from __future__ import annotations\n' +
+    '\n' +
+    'import argparse\n' +
+    'import json\n' +
+    'import os\n' +
+    'from pathlib import Path\n' +
+    'from urllib.parse import urlsplit\n' +
+    'from urllib.request import Request, build_opener, HTTPRedirectHandler\n' +
+    'from urllib.error import URLError, HTTPError\n' +
+    'from html.parser import HTMLParser\n' +
+    'import re\n' +
+    'import uuid\n' +
+    'import sys\n' +
+    'from datetime import datetime, timezone\n' +
+    '# Both direct CLI execution and unittest spec loading must resolve the local helper.\n' +
+    'sys.path.insert(0, str(Path(__file__).resolve().parent))\n' +
+    'from cp31_browser_gate import (load_groups, case_names, make_report, atomic_json, OPERATIONAL_VIEWS, DEFAULT_REPORT)\n' +
+    '\n' +
+    'ROOT = Path(__file__).resolve().parents[1]\n' +
+    'MANIFEST = ROOT / "tests" / "e2e" / "cp31_nexus_manifest.json"\n' +
+    'ROLES = ("ADMIN", "STUDENT", "TEACHER", "PARENT")\n' +
+    'SAFE_LOOPBACK = {"127.0.0.1", "localhost", "::1"}\n' +
+    '\n' +
+    '\n' +
+    'def checked_origin(raw: str, staging_host: str = "") -> str:\n' +
+    '    value = urlsplit(raw)\n' +
+    '    if not value.hostname or value.username or value.password or value.query or value.fragment:\n' +
+    '        raise ValueError("Unsafe origin: expected a bare URL with no credentials/query/fragment")\n' +
+    '    if value.path not in ("", "/"):\n' +
+    '        raise ValueError("Unsafe origin: URL must not include a path")\n' +
+    '    if value.hostname in SAFE_LOOPBACK:\n' +
+    '        if value.scheme != "http" or value.port is None:\n' +
+    '            raise ValueError("Local E2E requires http://loopback:port")\n' +
+    '    elif not staging_host or value.hostname != staging_host or value.scheme != "https":\n' +
+    '        raise ValueError("External E2E requires exact --staging-host and HTTPS")\n' +
+    '    if value.hostname in SAFE_LOOPBACK and staging_host:\n' +
+    '        raise ValueError("Do not mix staging allowlist and a local origin")\n' +
+    '    if value.port is not None and not 1024 <= value.port <= 65535:\n' +
+    '        raise ValueError("Invalid E2E port")\n' +
+    '    return raw.rstrip("/")\n' +
+    '\n' +
+    '\n' +
+    'def load_manifest() -> list[dict]:\n' +
+    '    return load_groups()\n' +
+    '\n' +
+    '\n' +
+    'def require_accounts(prompt_passwords: bool = False) -> dict[str, tuple[str, str]]:\n' +
+    '    if os.environ.get("CLA_E2E_QA_ACK") != "I_USE_SYNTHETIC_QA_ACCOUNTS":\n' +
+    '        raise ValueError("Set CLA_E2E_QA_ACK=I_USE_SYNTHETIC_QA_ACCOUNTS only for isolated QA users")\n' +
+    '    result = {}\n' +
+    '    for role in ROLES:\n' +
+    '        email = os.environ.get(f"CLA_E2E_{role}_EMAIL", "").strip()\n' +
+    '        password = os.environ.get(f"CLA_E2E_{role}_PASSWORD", "")\n' +
+    '        if "@" not in email:\n' +
+    '            raise ValueError(f"Missing QA email for {role}; no cases have run")\n' +
+    '        if not password and prompt_passwords:\n' +
+    '            import sys\n' +
+    '            import getpass\n' +
+    '            if not sys.stdin.isatty():\n' +
+    '                raise ValueError("Password prompt requires an interactive terminal")\n' +
+    '            password = getpass.getpass(f"QA {role} password (hidden): ")\n' +
+    '        if not password:\n' +
+    '            raise ValueError(f"Missing QA password for {role}; no cases have run")\n' +
+    '        result[role] = (email, password)\n' +
+    '    if len({v[0].lower() for v in result.values()}) != 4:\n' +
+    '        raise ValueError("Student/Admin and two retired-role negative-test accounts must have distinct emails")\n' +
+    '    return result\n' +
+    '\n' +
+    '\n' +
+    'def local_qa_project(origin: str, expected_id: str) -> None:\n' +
+    '    """For localhost Vite, refuse to use any unverified or wrong Firebase project.\n' +
+    '\n' +
+    '    Vite .env priority for `development`: development.local > local > development > .env.\n' +
+    '    This is a guard against accidentally targeting a different project, not\n' +
+    '    independent proof that a QA project is isolated from production.\n' +
+    '    """\n' +
+    '    if urlsplit(origin).hostname not in SAFE_LOOPBACK:\n' +
+    '        return  # HTTPS staging project is checked in the authenticated diagnostic UI.\n' +
+    '    found = None\n' +
+    "    for env_name in ('.env.development.local', '.env.local', '.env.development', '.env'):\n" +
+    '        env_path = ROOT / env_name\n' +
+    '        if not env_path.is_file():\n' +
+    '            continue\n' +
+    "        for line in env_path.read_text(encoding='utf-8-sig').splitlines():\n" +
+    '            value = line.strip()\n' +
+    "            if value.startswith('VITE_FIREBASE_PROJECT_ID='):\n" +
+    `                found = value.split('=', 1)[1].strip().strip('"\\'')\n` +
+    '                break\n' +
+    '        if found:\n' +
+    '            break\n' +
+    '    if not found or found != expected_id:\n' +
+    "        raise ValueError('Local Firebase project is missing or differs from the explicitly approved QA project')\n" +
+    '\n' +
+    '\n' +
+    '\n' +
+    'class _ProjectMarkerParser(HTMLParser):\n' +
+    '    """Read the single public Firebase project marker; do not inspect student data."""\n' +
+    '    def __init__(self):\n' +
+    '        super().__init__()\n' +
+    '        self.values: list[str] = []\n' +
+    '\n' +
+    '    def handle_starttag(self, tag, attrs):\n' +
+    '        if tag.lower() != "meta":\n' +
+    '            return\n' +
+    '        values = dict(attrs)\n' +
+    '        if values.get("name") == "cla-firebase-project-id":\n' +
+    '            self.values.append(values.get("content", ""))\n' +
+    '\n' +
+    '\n' +
+    'class _NoRedirect(HTTPRedirectHandler):\n' +
+    '    def redirect_request(self, request, fp, code, msg, headers, newurl):\n' +
+    '        return None\n' +
+    '\n' +
+    '\n' +
+    'def assert_qa_origin_project(origin: str, expected_id: str) -> None:\n' +
+    `    """Validate the served app's build-time Firebase identity BEFORE reading QA passwords.\n` +
+    '\n' +
+    '    Works for Vite localhost and HTTPS QA staging; rejects unexpected redirects,\n' +
+    '    a missing/unexpanded marker, HTML errors, and mismatched Firebase projects.\n' +
+    '    This is not a signed Firebase attestation and cannot establish staging isolation.\n' +
+    '    """\n' +
+    '    try:\n' +
+    '        request = Request(origin + "/", headers={"Accept": "text/html", "Cache-Control": "no-cache"})\n' +
+    '        with build_opener(_NoRedirect).open(request, timeout=8) as response:\n' +
+    '            ctype = response.headers.get("Content-Type", "").lower()\n' +
+    '            if response.status != 200 or "text/html" not in ctype:\n' +
+    '                raise ValueError("QA server must serve HTML 200 at the approved origin")\n' +
+    '            payload = response.read(131073)\n' +
+    '            if len(payload) > 131072:\n' +
+    '                raise ValueError("QA index.html exceeds the 128 KiB safety limit")\n' +
+    '    except (HTTPError, URLError, OSError) as exc:\n' +
+    '        # Do not expose remote page content, query strings, credentials, or URL body.\n' +
+    '        raise ValueError("Approved QA server is unavailable or redirects to another URL") from exc\n' +
+    '    parser = _ProjectMarkerParser()\n' +
+    '    parser.feed(payload.decode("utf-8", errors="replace"))\n' +
+    '    if len(parser.values) != 1:\n' +
+    '        raise ValueError("QA HTML must expose exactly one Firebase project marker; restart/rebuild the updated site")\n' +
+    '    if parser.values[0] != expected_id:\n' +
+    '        raise ValueError("Served Firebase project ID differs from the approved QA project; credentials not requested")\n' +
+    '\n' +
+    '\n' +
+    'def qa_preflight(origin: str, project_id: str, *, check_browser: bool = True) -> None:\n' +
+    '    if not re.fullmatch(r"[a-z][a-z0-9-]{3,63}", project_id):\n' +
+    '        raise ValueError("Supply an explicit Firebase QA project ID; no credentials requested")\n' +
+    '    local_qa_project(origin, project_id)\n' +
+    '    assert_qa_origin_project(origin, project_id)\n' +
+    '    if check_browser:\n' +
+    '        try:\n' +
+    '            from playwright.sync_api import sync_playwright\n' +
+    '            with sync_playwright() as p:\n' +
+    '                browser_path = Path(p.chromium.executable_path)\n' +
+    '                if not browser_path.is_file():\n' +
+    '                    raise ValueError("Chromium is missing; run python -m playwright install chromium")\n' +
+    '        except ImportError as exc:\n' +
+    '            raise ValueError("Playwright missing; run python -m pip install playwright") from exc\n' +
+    '\n' +
+    '\n' +
+    'def sign_in(page, origin: str, email: str, password: str, expected_role: str) -> None:\n' +
+    '    page.goto(origin + "/", wait_until="domcontentloaded")\n' +
+    '    page.get_by_placeholder("Nhß║¡p email").fill(email)\n' +
+    '    page.get_by_placeholder("Nhß║¡p mß║¡t khß║⌐u").fill(password)\n' +
+    '    page.locator("form.login-form button[type=submit]").click()\n' +
+    '    page.wait_for_url(f"{origin}/{expected_role.lower()}*", timeout=30000)\n' +
+    '\n' +
+    '\n' +
+    'def run_browser(origin: str, groups: list[dict], accounts: dict, report_path: Path, headed: bool, project_id: str, run_id: str, started_at: str) -> int:\n' +
+    '    try:\n' +
+    '        from playwright.sync_api import sync_playwright, expect\n' +
+    '    except ImportError as exc:\n' +
+    '        raise RuntimeError("Missing Python Playwright; pip install playwright, then playwright install chromium") from exc\n' +
+    '    results: list[dict] = []\n' +
+    '\n' +
+    '    def record(case: str, operation) -> None:\n' +
+    '        try:\n' +
+    '            operation()\n' +
+    '            results.append({"case": case, "result": "PASS"})\n' +
+    '            print(f"PASS {case}", flush=True)\n' +
+    '        except Exception as exc:\n' +
+    '            # Do not log screenshots, student content, passwords or private page text.\n' +
+    '            results.append({"case": case, "result": "FAIL", "errorType": type(exc).__name__})\n' +
+    '            print(f"FAIL {case}: {type(exc).__name__}", flush=True)\n' +
+    '\n' +
+    '    fatal_error = ""\n' +
+    '    try:\n' +
+    '      with sync_playwright() as p:\n' +
+    '        browser = p.chromium.launch(headless=not headed)\n' +
+    '        try:\n' +
+    '            def anon_checks():\n' +
+    '                context = browser.new_context()\n' +
+    '                page = context.new_page()\n' +
+    '                for path in ("/admin", "/admin/audit", "/admin/diagnostics?view=health"):\n' +
+    '                    page.goto(origin + path, wait_until="domcontentloaded")\n' +
+    '                    expect(page.get_by_role("heading", name="Bß║ín ch╞░a ─æ─âng nhß║¡p")).to_be_visible(timeout=20000)\n' +
+    '                    assert page.locator(".nexus-audit-item,.nexus-action-card").count() == 0\n' +
+    '                context.close()\n' +
+    '            record("CP31-E2E-01 anonymous denied all admin routes", anon_checks)\n' +
+    '\n' +
+    '            context = browser.new_context(viewport={"width": 1366, "height": 900})\n' +
+    '            page = context.new_page()\n' +
+    '            def verified_admin_login():\n' +
+    '                sign_in(page, origin, *accounts["ADMIN"], "ADMIN")\n' +
+    '            '... 12622 more characters
+  
+      at TestContext.<anonymous> (C:\Gß║ío\Cognitive-Learn\tests\cp31-batch2-e2e-contract.test.cjs:54:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '#!/usr/bin/env python3\n"""CP31 browser E2E against an explicitly opted-in LOCAL or QA STAGING CLA site.\n\nNo mocking of Firebase auth or role checks; no production writes and no browser\nstorage persistence. Test accounts must be isolated synthetic QA users.\n\nRequires Python Playwright: python -m pip install playwright; python -m playwright install chromium\nRun with --base-url http://127.0.0.1:5173 (or explicitly approved staging host).\n"""\nfrom __future__ import annotations\n\nimport argparse\nimport json\nimport os\nfrom pathlib import Path\nfrom urllib.parse import urlsplit\nfrom urllib.request import Request, build_opener, HTTPRedirectHandler\nfrom urllib.error import URLError, HTTPError\nfrom html.parser import HTMLParser\nimport re\nimport uuid\nimport sys\nfrom datetime import datetime, timezone\n# Both direct CLI execution and unittest spec loading must resolve the local helper.\nsys.path.insert(0, str(Path(__file__).resolve().parent))\nfrom cp31_browser_gate import (load_groups, case_names, make_report, atomic_json, OPERATIONAL_VIEWS, DEFAULT_REPORT)\n\nROOT = Path(__file__).resolve().parents[1]\nMANIFEST = ROOT / "tests" / "e2e" / "cp31_nexus_manifest.json"\nROLES = ("ADMIN", "STUDENT", "TEACHER", "PARENT")\nSAFE_LOOPBACK = {"127.0.0.1", "localhost", "::1"}\n\n\ndef checked_origin(raw: str, staging_host: str = "") -> str:\n    value = urlsplit(raw)\n    if not value.hostname or value.username or value.password or value.query or value.fragment:\n        raise ValueError("Unsafe origin: expected a bare URL with no credentials/query/fragment")\n    if value.path not in ("", "/"):\n        raise ValueError("Unsafe origin: URL must not include a path")\n    if value.hostname in SAFE_LOOPBACK:\n        if value.scheme != "http" or value.port is None:\n            raise ValueError("Local E2E requires http://loopback:port")\n    elif not staging_host or value.hostname != staging_host or value.scheme != "https":\n        raise ValueError("External E2E requires exact --staging-host and HTTPS")\n    if value.hostname in SAFE_LOOPBACK and staging_host:\n        raise ValueError("Do not mix staging allowlist and a local origin")\n    if value.port is not None and not 1024 <= value.port <= 65535:\n        raise ValueError("Invalid E2E port")\n    return raw.rstrip("/")\n\n\ndef load_manifest() -> list[dict]:\n    return load_groups()\n\n\ndef require_accounts(prompt_passwords: bool = False) -> dict[str, tuple[str, str]]:\n    if os.environ.get("CLA_E2E_QA_ACK") != "I_USE_SYNTHETIC_QA_ACCOUNTS":\n        raise ValueError("Set CLA_E2E_QA_ACK=I_USE_SYNTHETIC_QA_ACCOUNTS only for isolated QA users")\n    result = {}\n    for role in ROLES:\n        email = os.environ.get(f"CLA_E2E_{role}_EMAIL", "").strip()\n        password = os.environ.get(f"CLA_E2E_{role}_PASSWORD", "")\n        if "@" not in email:\n            raise ValueError(f"Missing QA email for {role}; no cases have run")\n        if not password and prompt_passwords:\n            import sys\n            import getpass\n            if not sys.stdin.isatty():\n                raise ValueError("Password prompt requires an interactive terminal")\n            password = getpass.getpass(f"QA {role} password (hidden): ")\n        if not password:\n            raise ValueError(f"Missing QA password for {role}; no cases have run")\n        result[role] = (email, password)\n    if len({v[0].lower() for v in result.values()}) != 4:\n        raise ValueError("Student/Admin and two retired-role negative-test accounts must have distinct emails")\n    return result\n\n\ndef local_qa_project(origin: str, expected_id: str) -> None:\n    """For localhost Vite, refuse to use any unverified or wrong Firebase project.\n\n    Vite .env priority for `development`: development.local > local > development > .env.\n    This is a guard against accidentally targeting a different project, not\n    independent proof that a QA project is isolated from production.\n    """\n    if urlsplit(origin).hostname not in SAFE_LOOPBACK:\n        return  # HTTPS staging project is checked in the authenticated diagnostic UI.\n    found = None\n    for env_name in (\'.env.development.local\', \'.env.local\', \'.env.development\', \'.env\'):\n        env_path = ROOT / env_name\n        if not env_path.is_file():\n            continue\n        for line in env_path.read_text(encoding=\'utf-8-sig\').splitlines():\n            value = line.strip()\n            if value.startswith(\'VITE_FIREBASE_PROJECT_ID=\'):\n                found = value.split(\'=\', 1)[1].strip().strip(\'"\\\'\')\n                break\n        if found:\n            break\n    if not found or found != expected_id:\n        raise ValueError(\'Local Firebase project is missing or differs from the explicitly approved QA project\')\n\n\n\nclass _ProjectMarkerParser(HTMLParser):\n    """Read the single public Firebase project marker; do not inspect student data."""\n    def __init__(self):\n        super().__init__()\n        self.values: list[str] = []\n\n    def handle_starttag(self, tag, attrs):\n        if tag.lower() != "meta":\n            return\n        values = dict(attrs)\n        if values.get("name") == "cla-firebase-project-id":\n            self.values.append(values.get("content", ""))\n\n\nclass _NoRedirect(HTTPRedirectHandler):\n    def redirect_request(self, request, fp, code, msg, headers, newurl):\n        return None\n\n\ndef assert_qa_origin_project(origin: str, expected_id: str) -> None:\n    """Validate the served app\'s build-time Firebase identity BEFORE reading QA passwords.\n\n    Works for Vite localhost and HTTPS QA staging; rejects unexpected redirects,\n    a missing/unexpanded marker, HTML errors, and mismatched Firebase projects.\n    This is not a signed Firebase attestation and cannot establish staging isolation.\n    """\n    try:\n        request = Request(origin + "/", headers={"Accept": "text/html", "Cache-Control": "no-cache"})\n        with build_opener(_NoRedirect).open(request, timeout=8) as response:\n            ctype = response.headers.get("Content-Type", "").lower()\n            if response.status != 200 or "text/html" not in ctype:\n                raise ValueError("QA server must serve HTML 200 at the approved origin")\n            payload = response.read(131073)\n            if len(payload) > 131072:\n                raise ValueError("QA index.html exceeds the 128 KiB safety limit")\n    except (HTTPError, URLError, OSError) as exc:\n        # Do not expose remote page content, query strings, credentials, or URL body.\n        raise ValueError("Approved QA server is unavailable or redirects to another URL") from exc\n    parser = _ProjectMarkerParser()\n    parser.feed(payload.decode("utf-8", errors="replace"))\n    if len(parser.values) != 1:\n        raise ValueError("QA HTML must expose exactly one Firebase project marker; restart/rebuild the updated site")\n    if parser.values[0] != expected_id:\n        raise ValueError("Served Firebase project ID differs from the approved QA project; credentials not requested")\n\n\ndef qa_preflight(origin: str, project_id: str, *, check_browser: bool = True) -> None:\n    if not re.fullmatch(r"[a-z][a-z0-9-]{3,63}", project_id):\n        raise ValueError("Supply an explicit Firebase QA project ID; no credentials requested")\n    local_qa_project(origin, project_id)\n    assert_qa_origin_project(origin, project_id)\n    if check_browser:\n        try:\n            from playwright.sync_api import sync_playwright\n            with sync_playwright() as p:\n                browser_path = Path(p.chromium.executable_path)\n                if not browser_path.is_file():\n                    raise ValueError("Chromium is missing; run python -m playwright install chromium")\n        except ImportError as exc:\n            raise ValueError("Playwright missing; run python -m pip install playwright") from exc\n\n\ndef sign_in(page, origin: str, email: str, password: str, expected_role: str) -> None:\n    page.goto(origin + "/", wait_until="domcontentloaded")\n    page.get_by_placeholder("Nhß║¡p email").fill(email)\n    page.get_by_placeholder("Nhß║¡p mß║¡t khß║⌐u").fill(password)\n    page.locator("form.login-form button[type=submit]").click()\n    page.wait_for_url(f"{origin}/{expected_role.lower()}*", timeout=30000)\n\n\ndef run_browser(origin: str, groups: list[dict], accounts: dict, report_path: Path, headed: bool, project_id: str, run_id: str, started_at: str) -> int:\n    try:\n        from playwright.sync_api import sync_playwright, expect\n    except ImportError as exc:\n        raise RuntimeError("Missing Python Playwright; pip install playwright, then playwright install chromium") from exc\n    results: list[dict] = []\n\n    def record(case: str, operation) -> None:\n        try:\n            operation()\n            results.append({"case": case, "result": "PASS"})\n            print(f"PASS {case}", flush=True)\n        except Exception as exc:\n            # Do not log screenshots, student content, passwords or private page text.\n            results.append({"case": case, "result": "FAIL", "errorType": type(exc).__name__})\n            print(f"FAIL {case}: {type(exc).__name__}", flush=True)\n\n    fatal_error = ""\n    try:\n      with sync_playwright() as p:\n        browser = p.chromium.launch(headless=not headed)\n        try:\n            def anon_checks():\n                context = browser.new_context()\n                page = context.new_page()\n                for path in ("/admin", "/admin/audit", "/admin/diagnostics?view=health"):\n                    page.goto(origin + path, wait_until="domcontentloaded")\n                    expect(page.get_by_role("heading", name="Bß║ín ch╞░a ─æ─âng nhß║¡p")).to_be_visible(timeout=20000)\n                    assert page.locator(".nexus-audit-item,.nexus-action-card").count() == 0\n                context.close()\n            record("CP31-E2E-01 anonymous denied all admin routes", anon_checks)\n\n            context = browser.new_context(viewport={"width": 1366, "height": 900})\n            page = context.new_page()\n            def verified_admin_login():\n                sign_in(page, origin, *accounts["ADMIN"], "ADMIN")\n            '... 12622 more characters,
+    expected: /all four role accounts/i,
+    operator: 'match',
+    diff: 'simple'
+  }

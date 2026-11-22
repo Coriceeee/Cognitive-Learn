@@ -1,0 +1,14 @@
+﻿python.exe : test_exclusion_patterns (test_cp53_safe_packaging.PackagingTests.test_exclusion_patterns) ... ok
+At C:\Gạo\Cognitive-Learn\CLA_CP80_ONECLICK.ps1:95 char:9
++         & $exe @commandArgs 2>&1 | Out-File -LiteralPath $logPath -En ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (test_exclusion_...atterns) ... ok:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+test_missing_template_fails_closed (test_cp53_safe_packaging.PackagingTests.test_missing_template_fails_closed) ... ok
+test_templates_included_secrets_excluded (test_cp53_safe_packaging.PackagingTests.test_templates_included_secrets_excluded) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.051s
+
+OK

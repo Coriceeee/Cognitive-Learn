@@ -1,0 +1,10 @@
+﻿node.exe : CLA CP82 ZIP SOURCE NOT MATCHED: 3 mismatches
+At C:\Gạo\Cognitive-Learn\CLA_CP82_ONECLICK.ps1:35 char:7
++       & $exe @argsForCommand 2>&1 | Out-File -LiteralPath $log -Encod ...
++       ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (CLA CP82 ZIP SO...D: 3 mismatches:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Retired role component restored: src/page/main/RolePage.tsx
+Retired role component restored: src/components/common/StudentLinkManager.tsx
+Retired role component restored: src/components/common/SharedReportPanel.tsx

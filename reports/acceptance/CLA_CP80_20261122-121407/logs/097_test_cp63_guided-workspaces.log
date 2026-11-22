@@ -1,0 +1,44 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp63:guided-workspaces
+> node --experimental-strip-types --test tests/cp63-guided-workspaces.test.mjs
+
+Γû╢ CP63 student navigation seed
+  Γ£ö keeps all implemented student pages reachable without duplication (1.2483ms)
+  Γ£ö pins selected pages, including those originally behind disclosure (0.2269ms)
+Γ£ö CP63 student navigation seed (2.2046ms)
+Γû╢ CP63 student navigation lumen
+  Γ£ö keeps all implemented student pages reachable without duplication (0.1292ms)
+  Γ£ö pins selected pages, including those originally behind disclosure (0.1873ms)
+Γ£ö CP63 student navigation lumen (0.445ms)
+Γû╢ CP63 student navigation atlas
+  Γ£ö keeps all implemented student pages reachable without duplication (0.1226ms)
+  Γ£ö pins selected pages, including those originally behind disclosure (0.1086ms)
+Γ£ö CP63 student navigation atlas (0.3699ms)
+Γû╢ CP63 student navigation orion
+  Γ£ö keeps all implemented student pages reachable without duplication (0.1666ms)
+  Γ£ö pins selected pages, including those originally behind disclosure (0.0682ms)
+Γ£ö CP63 student navigation orion (0.3716ms)
+Γû╢ CP63 student navigation pulse
+  Γ£ö keeps all implemented student pages reachable without duplication (0.1447ms)
+  Γ£ö pins selected pages, including those originally behind disclosure (0.1ms)
+Γ£ö CP63 student navigation pulse (0.3333ms)
+Γû╢ CP63 student navigation haven
+  Γ£ö keeps all implemented student pages reachable without duplication (0.1086ms)
+  Γ£ö pins selected pages, including those originally behind disclosure (0.07ms)
+Γ£ö CP63 student navigation haven (0.2569ms)
+Γû╢ CP63 cross-module and accessibility contracts
+  Γ£ö handles nested study abroad country routes as the Atlas study-abroad tab (0.1128ms)
+  Γ£ö never exposes planned-only or missing destinations (0.0879ms)
+  Γ£ö caps quick links to a small scan-friendly set and preserves order (0.1327ms)
+  Γ£ö uses semantic links, native disclosure, current-page labels and no invented completion gauge (0.2282ms)
+  Γ£ö includes accessible focus, dark/light and mobile CSS with reduced motion (0.0794ms)
+  Γ£ö keeps SPA routing and unsaved-draft navigation guards in charge of links (0.0882ms)
+Γ£ö CP63 cross-module and accessibility contracts (0.8503ms)
+Γä╣ tests 18
+Γä╣ suites 7
+Γä╣ pass 18
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 132.1557

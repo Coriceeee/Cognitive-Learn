@@ -1,0 +1,20 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp42:dthu-scheme
+> node --experimental-strip-types --test tests/cp42-dthu-scheme.test.mjs
+
+Γ£ö 57 university scheme codes uniquely join 58 cutoff catalogue codes; no college or rewritten scores (1.3197ms)
+Γ£ö published programme methods and proposed quota are not inferred from historical scores (0.2316ms)
+Γ£ö NL1 is separately labelled, never a three subject combination (0.1445ms)
+Γ£ö five aptitude-review programmes are never ordinary three-subject matches; preserve listed codes (0.7556ms)
+Γ£ö explicit school X codes distinguish technology streams and Chinese language is unmapped (0.4266ms)
+Γ£ö discovery shares the same catalogue evidence and never assigns eligibility (0.9497ms)
+Γ£ö coverage separates having sources, mappable records and conditions; older years remain unknown (4.1939ms)
+Γ£ö scheme parser rejects unknown codes, duplicate entries, malformed quota and methods (0.4244ms)
+Γä╣ tests 8
+Γä╣ suites 0
+Γä╣ pass 8
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 194.257

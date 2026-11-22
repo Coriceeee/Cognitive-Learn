@@ -1,0 +1,46 @@
+
+> cognitive-learn-ai@0.1.0 test:cp32:decision
+> node --experimental-strip-types --test tests/cp32-atlas-decision-comparison.test.mjs
+
+TAP version 13
+# (node:17341) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: all 90 program/method options preserve source and native scale
+ok 1 - all 90 program/method options preserve source and native scale
+  ---
+  duration_ms: 1.839644
+  type: 'test'
+  ...
+# Subtest: zero, decimal commas, missing and incorrect score bounds
+ok 2 - zero, decimal commas, missing and incorrect score bounds
+  ---
+  duration_ms: 0.231153
+  type: 'test'
+  ...
+# Subtest: source-backed chat lookup is exact, time- and method-specific
+ok 3 - source-backed chat lookup is exact, time- and method-specific
+  ---
+  duration_ms: 3.666054
+  type: 'test'
+  ...
+# Subtest: unknown, ambiguous, injected or incompatible queries abstain from direct facts
+ok 4 - unknown, ambiguous, injected or incompatible queries abstain from direct facts
+  ---
+  duration_ms: 1.654657
+  type: 'test'
+  ...
+# Subtest: UI clears score on method changes and chat gates deterministic answer before Gemini
+ok 5 - UI clears score on method changes and chat gates deterministic answer before Gemini
+  ---
+  duration_ms: 1.269275
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 251.89973

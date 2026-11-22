@@ -1,0 +1,5 @@
+﻿
+> cognitive-learn-ai@0.1.0 research:cp82:verify
+> node --experimental-strip-types tools/cla_cp82_synthetic_replay.mjs --verify
+
+CP82 SYNTHETIC VERIFY PASS: 3 source-bound local replays; 0 empirical or production claims.

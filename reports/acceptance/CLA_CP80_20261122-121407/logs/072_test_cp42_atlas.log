@@ -1,0 +1,23 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp42:atlas
+> node --experimental-strip-types --test tests/cp42-national-pathways.test.mjs
+
+Γ£ö catalogue spans all current national records without changing cutoff facts (0.8886ms)
+Γ£ö CTU and AGU official code additions exactly reconcile with 2026 inventory (1.4225ms)
+Γ£ö physics English returns multiple schools, not PTIT only (2.895ms)
+Γ£ö social pair can return entirely non-PTIT schools (1.633ms)
+Γ£ö no pair or duplicate electives leaves all sourced programmes selectable (2.1242ms)
+Γ£ö zero is a valid observed score; missing is not (2.7194ms)
+Γ£ö technology streams cannot borrow a generic technology grade (1.0557ms)
+Γ£ö AGU composite and HUST base evidence never become THPT eligibility (1.6209ms)
+Γ£ö search admits unconfirmed programmes and keeps school identity (2.2518ms)
+Γ£ö reviewed record must have matching school, year, verified source and official host (10.7932ms)
+Γ£ö reviewed programme does not invent THPT evidence for other methods (1.1936ms)
+Γä╣ tests 11
+Γä╣ suites 0
+Γä╣ pass 11
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 203.1534

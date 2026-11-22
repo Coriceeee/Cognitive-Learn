@@ -11,17 +11,17 @@
  */
 :root {
   --cla-bg-canvas: #ffffff;
-  --cla-bg-page: #f6f8fc;
-  --cla-bg-subtle: #f0f5fc;
+  --cla-bg-page: #f5f8ff;
+  --cla-bg-subtle: #eff6ff;
   --cla-text-primary: #142941;
   --cla-text-secondary: #405a72;
   --cla-text-muted: #526a81;
-  --cla-text-link: #2d5ba8;
+  --cla-text-link: #2457af;
   --cla-text-accent-teal: #17685f;
   --cla-text-accent-violet: #5264c9;
   --cla-text-accent-amber: #8f561e;
   --cla-border-subtle: #dde5f0;
-  --cla-focus-ring: #2d5ba8;
+  --cla-focus-ring: #2457af;
 }
 /* Preserve the information architecture after removing the two conflicting
  * CP42 skins. Geometry belongs here; colors are owned by the semantic tokens. */
@@ -91,12 +91,12 @@
   --cla-muted: var(--cla-text-muted);
   --cla-blue: var(--cla-text-link);
   --cla-cyan: var(--cla-text-accent-teal);
-  --cla-hero: linear-gradient(130deg, #eaf2ff 0%, #f9fbff 60%, #edf8f7 100%);
+  --cla-hero: linear-gradient(130deg, #eaf4ff 0%, #f9fbff 60%, #eaf9f5 100%);
   --cla-card-shadow: 0 12px 38px -27px rgba(27, 57, 111, .25);
   --cla-panel-radius: 19px;
-  --t-bg: #f6f8fc;
-  --t-bg-2: #edf3fb;
-  --t-surface-2: #f8faff;
+  --t-bg: #f5f8ff;
+  --t-bg-2: #eef4ff;
+  --t-surface-2: #f9fbff;
   --t-line: #dde5f0;
   --t-line-strong: #bacade;
   --t-ink: var(--cla-text-primary);
@@ -108,9 +108,9 @@
   --t-radius: 19px;
 }
 body {
-  background-color: #f6f8fc;
-  background-image: radial-gradient(ellipse 60% 44% at 88% 0%, rgba(75, 116, 229, .09), transparent 72%),
-                    radial-gradient(ellipse 44% 39% at -7% 18%, rgba(35, 174, 167, .065), transparent 74%) !important;
+  background-color: #f5f8ff;
+  background-image: radial-gradient(ellipse 60% 44% at 88% 0%, rgba(88, 105, 235, .11), transparent 72%),
+                    radial-gradient(ellipse 44% 39% at -7% 18%, rgba(22, 171, 150, .09), transparent 74%) !important;
   background-size: auto !important;
   background-attachment: scroll !important;
   color: var(--cla-ink);

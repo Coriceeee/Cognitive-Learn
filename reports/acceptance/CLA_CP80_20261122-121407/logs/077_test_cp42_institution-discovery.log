@@ -1,0 +1,20 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp42:institution-discovery
+> node --experimental-strip-types --test tests/cp42-institution-discovery.test.mjs
+
+Γ£ö 99 source names plus registry-only entries: count, uniqueness and explicit links (1.3499ms)
+Γ£ö discovery-only records have names but no invented code, portal, or admission data (37.9254ms)
+Γ£ö accent-insensitive searches and existing verified code search (2.9237ms)
+Γ£ö parent institutions do not borrow member institution source links (2.4154ms)
+Γ£ö same faculty name in different cities resolves exact crosswalk only (1.6446ms)
+Γ£ö all names are valid public query payloads, links retain year and full name (9.8295ms)
+Γ£ö bad directory and crosswalk fail closed (0.7576ms)
+Γ£ö student directory uses explicit selection and no writes or live calls (0.8019ms)
+Γä╣ tests 8
+Γä╣ suites 0
+Γä╣ pass 8
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 242.5491

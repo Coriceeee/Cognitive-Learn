@@ -1,0 +1,1370 @@
+﻿[
+    {
+        "Group":  "ENV",
+        "Name":  "node_version",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  42,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\001_node_version.log",
+        "Note":  "node --version"
+    },
+    {
+        "Group":  "ENV",
+        "Name":  "npm_version",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  357,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\002_npm_version.log",
+        "Note":  "npm.cmd --version"
+    },
+    {
+        "Group":  "ENV",
+        "Name":  "python_version",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  64,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\003_python_version.log",
+        "Note":  "python --version"
+    },
+    {
+        "Group":  "ENV",
+        "Name":  "java_version",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  139,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\004_java_version.log",
+        "Note":  "java -version"
+    },
+    {
+        "Group":  "ENV",
+        "Name":  "git_status",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  731,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\005_git_status.log",
+        "Note":  "git status --short"
+    },
+    {
+        "Group":  "ENV",
+        "Name":  "dependencies_precheck",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  518,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\006_dependencies_precheck.log",
+        "Note":  "npm.cmd run check:dependencies"
+    },
+    {
+        "Group":  "ENV",
+        "Name":  "dependencies_final",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  494,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\007_dependencies_final.log",
+        "Note":  "npm.cmd run check:dependencies"
+    },
+    {
+        "Group":  "TEST",
+        "Name":  "cp80_regression",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  156,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\008_cp80_regression.log",
+        "Note":  "node --test tests/cp80-regressions.test.cjs"
+    },
+    {
+        "Group":  "BUILD",
+        "Name":  "layout",
+        "Status":  "FAIL",
+        "ExitCode":  1,
+        "DurationMs":  531,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\009_layout.log",
+        "Note":  "npm.cmd run check:layout"
+    },
+    {
+        "Group":  "BUILD",
+        "Name":  "api_typecheck",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  1796,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\010_api_typecheck.log",
+        "Note":  "npm.cmd run typecheck:api"
+    },
+    {
+        "Group":  "BUILD",
+        "Name":  "production_build",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  12660,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\011_production_build.log",
+        "Note":  "npm.cmd run build"
+    },
+    {
+        "Group":  "SECURITY",
+        "Name":  "rules_static",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  620,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\012_rules_static.log",
+        "Note":  "npm.cmd run test:rules:static"
+    },
+    {
+        "Group":  "SECURITY",
+        "Name":  "rules_v5_static",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  902,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\013_rules_v5_static.log",
+        "Note":  "npm.cmd run test:rules:v5:static"
+    },
+    {
+        "Group":  "SECURITY",
+        "Name":  "rules_gate_unit",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  604,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\014_rules_gate_unit.log",
+        "Note":  "npm.cmd run test:rules:gate-unit"
+    },
+    {
+        "Group":  "SECURITY",
+        "Name":  "rules_emulator_preflight",
+        "Status":  "BLOCKED",
+        "ExitCode":  1,
+        "DurationMs":  1970,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\015_rules_emulator_preflight.log",
+        "Note":  "npm.cmd run test:rules:preflight"
+    },
+    {
+        "Group":  "TEST",
+        "Name":  "npm_test_full",
+        "Status":  "FAIL",
+        "ExitCode":  1,
+        "DurationMs":  40380,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\016_npm_test_full.log",
+        "Note":  "npm.cmd test"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:adaptive:study",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  687,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\017_test_adaptive_study.log",
+        "Note":  "npm.cmd run test:adaptive:study"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:admin-recovery",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  3645,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\018_test_admin-recovery.log",
+        "Note":  "npm.cmd run test:admin-recovery"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:aspiration-draft",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  871,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\019_test_aspiration-draft.log",
+        "Note":  "npm.cmd run test:aspiration-draft"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:chart-first",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  604,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\020_test_chart-first.log",
+        "Note":  "npm.cmd run test:chart-first"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:closed-loop",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  622,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\021_test_closed-loop.log",
+        "Note":  "npm.cmd run test:closed-loop"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cognitive:validation",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  936,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\022_test_cognitive_validation.log",
+        "Note":  "npm.cmd run test:cognitive:validation"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:companion-push",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  605,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\023_test_companion-push.log",
+        "Note":  "npm.cmd run test:companion-push"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:consent-server-cleanup",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  645,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\024_test_consent-server-cleanup.log",
+        "Note":  "npm.cmd run test:consent-server-cleanup"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:consent-share-revocation",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  640,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\025_test_consent-share-revocation.log",
+        "Note":  "npm.cmd run test:consent-share-revocation"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp26:rebaseline",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  570,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\026_test_cp26_rebaseline.log",
+        "Note":  "npm.cmd run test:cp26:rebaseline"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp29:academic",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  741,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\027_test_cp29_academic.log",
+        "Note":  "npm.cmd run test:cp29:academic"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp29:access",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  950,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\028_test_cp29_access.log",
+        "Note":  "npm.cmd run test:cp29:access"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp29:accounts",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  623,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\029_test_cp29_accounts.log",
+        "Note":  "npm.cmd run test:cp29:accounts"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp29:batch4",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  671,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\030_test_cp29_batch4.log",
+        "Note":  "npm.cmd run test:cp29:batch4"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp29:routes",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  588,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\031_test_cp29_routes.log",
+        "Note":  "npm.cmd run test:cp29:routes"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp30:batch4",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  947,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\032_test_cp30_batch4.log",
+        "Note":  "npm.cmd run test:cp30:batch4"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp30:gpa",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  934,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\033_test_cp30_gpa.log",
+        "Note":  "npm.cmd run test:cp30:gpa"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp30:profile",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  1006,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\034_test_cp30_profile.log",
+        "Note":  "npm.cmd run test:cp30:profile"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp30:realtime",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  912,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\035_test_cp30_realtime.log",
+        "Note":  "npm.cmd run test:cp30:realtime"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp31:batch10",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  644,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\036_test_cp31_batch10.log",
+        "Note":  "npm.cmd run test:cp31:batch10"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp31:batch11",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  634,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\037_test_cp31_batch11.log",
+        "Note":  "npm.cmd run test:cp31:batch11"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp31:batch12",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  726,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\038_test_cp31_batch12.log",
+        "Note":  "npm.cmd run test:cp31:batch12"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp31:batch13",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  720,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\039_test_cp31_batch13.log",
+        "Note":  "npm.cmd run test:cp31:batch13"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp31:batch14",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  699,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\040_test_cp31_batch14.log",
+        "Note":  "npm.cmd run test:cp31:batch14"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp31:batch15",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  702,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\041_test_cp31_batch15.log",
+        "Note":  "npm.cmd run test:cp31:batch15"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp31:batch16",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  634,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\042_test_cp31_batch16.log",
+        "Note":  "npm.cmd run test:cp31:batch16"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp31:batch17",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  957,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\043_test_cp31_batch17.log",
+        "Note":  "npm.cmd run test:cp31:batch17"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp31:batch2:contract",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  6521,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\044_test_cp31_batch2_contract.log",
+        "Note":  "npm.cmd run test:cp31:batch2:contract"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp31:batch3",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  610,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\045_test_cp31_batch3.log",
+        "Note":  "npm.cmd run test:cp31:batch3"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp31:batch4",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  781,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\046_test_cp31_batch4.log",
+        "Note":  "npm.cmd run test:cp31:batch4"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp31:batch5",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  688,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\047_test_cp31_batch5.log",
+        "Note":  "npm.cmd run test:cp31:batch5"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp31:batch6",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  6497,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\048_test_cp31_batch6.log",
+        "Note":  "npm.cmd run test:cp31:batch6"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp31:batch7",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  6659,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\049_test_cp31_batch7.log",
+        "Note":  "npm.cmd run test:cp31:batch7"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp31:batch8",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  1557,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\050_test_cp31_batch8.log",
+        "Note":  "npm.cmd run test:cp31:batch8"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp31:batch9",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  883,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\051_test_cp31_batch9.log",
+        "Note":  "npm.cmd run test:cp31:batch9"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp31:nexus",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  730,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\052_test_cp31_nexus.log",
+        "Note":  "npm.cmd run test:cp31:nexus"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp32:cutoffs",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  615,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\053_test_cp32_cutoffs.log",
+        "Note":  "npm.cmd run test:cp32:cutoffs"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp32:decision",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  651,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\054_test_cp32_decision.log",
+        "Note":  "npm.cmd run test:cp32:decision"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp32:discovery",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  669,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\055_test_cp32_discovery.log",
+        "Note":  "npm.cmd run test:cp32:discovery"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp32:national",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  1172,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\056_test_cp32_national.log",
+        "Note":  "npm.cmd run test:cp32:national"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp32:personal",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  856,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\057_test_cp32_personal.log",
+        "Note":  "npm.cmd run test:cp32:personal"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp32:public-search",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  652,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\058_test_cp32_public-search.log",
+        "Note":  "npm.cmd run test:cp32:public-search"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp33:external-ml",
+        "Status":  "FAIL",
+        "ExitCode":  1,
+        "DurationMs":  4053,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\059_test_cp33_external-ml.log",
+        "Note":  "npm.cmd run test:cp33:external-ml"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp33:measurement",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  1156,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\060_test_cp33_measurement.log",
+        "Note":  "npm.cmd run test:cp33:measurement"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp34:adaptive-analysis",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  687,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\061_test_cp34_adaptive-analysis.log",
+        "Note":  "npm.cmd run test:cp34:adaptive-analysis"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp34:adaptive-decision",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  652,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\062_test_cp34_adaptive-decision.log",
+        "Note":  "npm.cmd run test:cp34:adaptive-decision"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp34:career-decision",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  686,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\063_test_cp34_career-decision.log",
+        "Note":  "npm.cmd run test:cp34:career-decision"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp34:knowledge-xai",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  625,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\064_test_cp34_knowledge-xai.log",
+        "Note":  "npm.cmd run test:cp34:knowledge-xai"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp36:adaptive-lineage",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  647,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\065_test_cp36_adaptive-lineage.log",
+        "Note":  "npm.cmd run test:cp36:adaptive-lineage"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp37-38:dynamic",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  652,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\066_test_cp37-38_dynamic.log",
+        "Note":  "npm.cmd run test:cp37-38:dynamic"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp39:longitudinal",
+        "Status":  "FAIL",
+        "ExitCode":  1,
+        "DurationMs":  672,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\067_test_cp39_longitudinal.log",
+        "Note":  "npm.cmd run test:cp39:longitudinal"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp39-41:bayes",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  647,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\068_test_cp39-41_bayes.log",
+        "Note":  "npm.cmd run test:cp39-41:bayes"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp40:allocation",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  632,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\069_test_cp40_allocation.log",
+        "Note":  "npm.cmd run test:cp40:allocation"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp40:student-only",
+        "Status":  "FAIL",
+        "ExitCode":  1,
+        "DurationMs":  629,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\070_test_cp40_student-only.log",
+        "Note":  "npm.cmd run test:cp40:student-only"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp41:policy",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  677,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\071_test_cp41_policy.log",
+        "Note":  "npm.cmd run test:cp41:policy"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp42:atlas",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  696,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\072_test_cp42_atlas.log",
+        "Note":  "npm.cmd run test:cp42:atlas"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp42:dthu-batch",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  696,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\073_test_cp42_dthu-batch.log",
+        "Note":  "npm.cmd run test:cp42:dthu-batch"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp42:dthu-scheme",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  696,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\074_test_cp42_dthu-scheme.log",
+        "Note":  "npm.cmd run test:cp42:dthu-scheme"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp42:focused-workspaces",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  633,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\075_test_cp42_focused-workspaces.log",
+        "Note":  "npm.cmd run test:cp42:focused-workspaces"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp42:holistic-temporal",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  647,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\076_test_cp42_holistic-temporal.log",
+        "Note":  "npm.cmd run test:cp42:holistic-temporal"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp42:institution-discovery",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  744,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\077_test_cp42_institution-discovery.log",
+        "Note":  "npm.cmd run test:cp42:institution-discovery"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp42:robust-decision",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  650,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\078_test_cp42_robust-decision.log",
+        "Note":  "npm.cmd run test:cp42:robust-decision"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp42:scheme-coverage",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  694,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\079_test_cp42_scheme-coverage.log",
+        "Note":  "npm.cmd run test:cp42:scheme-coverage"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp42:source-discovery",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  650,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\080_test_cp42_source-discovery.log",
+        "Note":  "npm.cmd run test:cp42:source-discovery"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp47:orion-autosave",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  580,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\081_test_cp47_orion-autosave.log",
+        "Note":  "npm.cmd run test:cp47:orion-autosave"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp50:orion-race",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  599,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\082_test_cp50_orion-race.log",
+        "Note":  "npm.cmd run test:cp50:orion-race"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp51:draft-queue",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  604,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\083_test_cp51_draft-queue.log",
+        "Note":  "npm.cmd run test:cp51:draft-queue"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp52:multidevice",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  600,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\084_test_cp52_multidevice.log",
+        "Note":  "npm.cmd run test:cp52:multidevice"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp53:integrity",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  659,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\085_test_cp53_integrity.log",
+        "Note":  "npm.cmd run test:cp53:integrity"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp53:package",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  549,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\086_test_cp53_package.log",
+        "Note":  "npm.cmd run test:cp53:package"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp54:safety",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  670,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\087_test_cp54_safety.log",
+        "Note":  "npm.cmd run test:cp54:safety"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp55:safety",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  622,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\088_test_cp55_safety.log",
+        "Note":  "npm.cmd run test:cp55:safety"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp56:navigation",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  648,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\089_test_cp56_navigation.log",
+        "Note":  "npm.cmd run test:cp56:navigation"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp56:navigation:integration",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  946,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\090_test_cp56_navigation_integration.log",
+        "Note":  "npm.cmd run test:cp56:navigation:integration"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp57:timestamp",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  691,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\091_test_cp57_timestamp.log",
+        "Note":  "npm.cmd run test:cp57:timestamp"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp58:integration",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  1119,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\092_test_cp58_integration.log",
+        "Note":  "npm.cmd run test:cp58:integration"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp59:verified-drafts",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  840,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\093_test_cp59_verified-drafts.log",
+        "Note":  "npm.cmd run test:cp59:verified-drafts"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp60:seed-listener",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  840,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\094_test_cp60_seed-listener.log",
+        "Note":  "npm.cmd run test:cp60:seed-listener"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp61:legacy-drafts",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  967,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\095_test_cp61_legacy-drafts.log",
+        "Note":  "npm.cmd run test:cp61:legacy-drafts"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp62:student-rail",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  627,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\096_test_cp62_student-rail.log",
+        "Note":  "npm.cmd run test:cp62:student-rail"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp63:guided-workspaces",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  647,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\097_test_cp63_guided-workspaces.log",
+        "Note":  "npm.cmd run test:cp63:guided-workspaces"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp64:input-ux",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  630,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\098_test_cp64_input-ux.log",
+        "Note":  "npm.cmd run test:cp64:input-ux"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp65:atlas-lumen-ux",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  619,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\099_test_cp65_atlas-lumen-ux.log",
+        "Note":  "npm.cmd run test:cp65:atlas-lumen-ux"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp66:unified-states",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  612,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\100_test_cp66_unified-states.log",
+        "Note":  "npm.cmd run test:cp66:unified-states"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp67:route-experience",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  628,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\101_test_cp67_route-experience.log",
+        "Note":  "npm.cmd run test:cp67:route-experience"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp68:qa-gate",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  800,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\102_test_cp68_qa-gate.log",
+        "Note":  "npm.cmd run test:cp68:qa-gate"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp69:firebase-integration",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  1211,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\103_test_cp69_firebase-integration.log",
+        "Note":  "npm.cmd run test:cp69:firebase-integration"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp70:journey",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  657,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\104_test_cp70_journey.log",
+        "Note":  "npm.cmd run test:cp70:journey"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp71:unified-nav",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  610,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\105_test_cp71_unified-nav.log",
+        "Note":  "npm.cmd run test:cp71:unified-nav"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp72:lumen-fallback",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  622,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\106_test_cp72_lumen-fallback.log",
+        "Note":  "npm.cmd run test:cp72:lumen-fallback"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp73:mvp",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  4527,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\107_test_cp73_mvp.log",
+        "Note":  "npm.cmd run test:cp73:mvp"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp74:product-polish",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  613,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\108_test_cp74_product-polish.log",
+        "Note":  "npm.cmd run test:cp74:product-polish"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp75:ux-audit",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  778,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\109_test_cp75_ux-audit.log",
+        "Note":  "npm.cmd run test:cp75:ux-audit"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp76:names",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  635,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\110_test_cp76_names.log",
+        "Note":  "npm.cmd run test:cp76:names"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp77:login-copy",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  589,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\111_test_cp77_login-copy.log",
+        "Note":  "npm.cmd run test:cp77:login-copy"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp78:clarity",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  624,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\112_test_cp78_clarity.log",
+        "Note":  "npm.cmd run test:cp78:clarity"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:cp79:theme",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  591,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\113_test_cp79_theme.log",
+        "Note":  "npm.cmd run test:cp79:theme"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:daily-companion",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  621,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\114_test_daily-companion.log",
+        "Note":  "npm.cmd run test:daily-companion"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:exam-calendar",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  671,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\115_test_exam-calendar.log",
+        "Note":  "npm.cmd run test:exam-calendar"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:hf:benchmark",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  605,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\116_test_hf_benchmark.log",
+        "Note":  "npm.cmd run test:hf:benchmark"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:journey-reliability",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  704,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\117_test_journey-reliability.log",
+        "Note":  "npm.cmd run test:journey-reliability"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:notifications",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  612,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\118_test_notifications.log",
+        "Note":  "npm.cmd run test:notifications"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:official-pathways",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  814,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\119_test_official-pathways.log",
+        "Note":  "npm.cmd run test:official-pathways"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:oulad",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  788,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\120_test_oulad.log",
+        "Note":  "npm.cmd run test:oulad"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:oulad:export",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  556,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\121_test_oulad_export.log",
+        "Note":  "npm.cmd run test:oulad:export"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:prediction-safety",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  1179,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\122_test_prediction-safety.log",
+        "Note":  "npm.cmd run test:prediction-safety"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:research:hf-uci",
+        "Status":  "FAIL",
+        "ExitCode":  1,
+        "DurationMs":  1143,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\123_test_research_hf-uci.log",
+        "Note":  "npm.cmd run test:research:hf-uci"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:rules:gate-unit",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  609,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\124_test_rules_gate-unit.log",
+        "Note":  "npm.cmd run test:rules:gate-unit"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:rules:preflight",
+        "Status":  "FAIL",
+        "ExitCode":  1,
+        "DurationMs":  1994,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\125_test_rules_preflight.log",
+        "Note":  "npm.cmd run test:rules:preflight"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:rules:static",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  568,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\126_test_rules_static.log",
+        "Note":  "npm.cmd run test:rules:static"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:rules:v5:static",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  844,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\127_test_rules_v5_static.log",
+        "Note":  "npm.cmd run test:rules:v5:static"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:seed-atlas",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  844,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\128_test_seed-atlas.log",
+        "Note":  "npm.cmd run test:seed-atlas"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:shadow",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  670,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\129_test_shadow.log",
+        "Note":  "npm.cmd run test:shadow"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:step06",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  881,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\130_test_step06.log",
+        "Note":  "npm.cmd run test:step06"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:student-consent",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  786,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\131_test_student-consent.log",
+        "Note":  "npm.cmd run test:student-consent"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:subject-optimizer",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  805,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\132_test_subject-optimizer.log",
+        "Note":  "npm.cmd run test:subject-optimizer"
+    },
+    {
+        "Group":  "UNIT",
+        "Name":  "test:visuals",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  590,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\133_test_visuals.log",
+        "Note":  "npm.cmd run test:visuals"
+    },
+    {
+        "Group":  "RESEARCH",
+        "Name":  "research_oulad",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  315,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\134_research_oulad.log",
+        "Note":  "python -m unittest discover -s research/oulad/tests -v"
+    },
+    {
+        "Group":  "RESEARCH",
+        "Name":  "research_cognitive",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  530,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\135_research_cognitive.log",
+        "Note":  "python -m unittest discover -s research/cognitive_validation/tests -v"
+    },
+    {
+        "Group":  "RESEARCH",
+        "Name":  "research_adaptive",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  227,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\136_research_adaptive.log",
+        "Note":  "python -m unittest discover -s research/adaptive_study/tests -v"
+    },
+    {
+        "Group":  "RESEARCH",
+        "Name":  "research_general",
+        "Status":  "FAIL",
+        "ExitCode":  1,
+        "DurationMs":  784,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\137_research_general.log",
+        "Note":  "python -m unittest discover -s research/tests -v"
+    },
+    {
+        "Group":  "RESEARCH",
+        "Name":  "research_scope_py",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  160,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\138_research_scope_py.log",
+        "Note":  "python -m unittest discover -s tests -p test_research_scope.py -v"
+    },
+    {
+        "Group":  "RESEARCH",
+        "Name":  "safe_package_py",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  176,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\139_safe_package_py.log",
+        "Note":  "python -m unittest discover -s tests -p test_cp53_safe_packaging.py -v"
+    },
+    {
+        "Group":  "RESEARCH",
+        "Name":  "hf_benchmark_unit",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  576,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\140_hf_benchmark_unit.log",
+        "Note":  "npm.cmd run test:hf:benchmark"
+    },
+    {
+        "Group":  "RESEARCH",
+        "Name":  "golden_path_generate",
+        "Status":  "FAIL",
+        "ExitCode":  1,
+        "DurationMs":  633,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\141_golden_path_generate.log",
+        "Note":  "npm.cmd run research:golden-path"
+    },
+    {
+        "Group":  "RESEARCH",
+        "Name":  "golden_path_verify",
+        "Status":  "FAIL",
+        "ExitCode":  1,
+        "DurationMs":  626,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\142_golden_path_verify.log",
+        "Note":  "npm.cmd run research:golden-path:verify"
+    },
+    {
+        "Group":  "RESEARCH",
+        "Name":  "multi_cycle_generate",
+        "Status":  "FAIL",
+        "ExitCode":  1,
+        "DurationMs":  588,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\143_multi_cycle_generate.log",
+        "Note":  "npm.cmd run research:multi-cycle"
+    },
+    {
+        "Group":  "RESEARCH",
+        "Name":  "multi_cycle_verify",
+        "Status":  "FAIL",
+        "ExitCode":  1,
+        "DurationMs":  614,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\144_multi_cycle_verify.log",
+        "Note":  "npm.cmd run research:multi-cycle:verify"
+    },
+    {
+        "Group":  "RESEARCH",
+        "Name":  "measurement_generate",
+        "Status":  "FAIL",
+        "ExitCode":  1,
+        "DurationMs":  667,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\145_measurement_generate.log",
+        "Note":  "npm.cmd run research:measurement"
+    },
+    {
+        "Group":  "RESEARCH",
+        "Name":  "measurement_verify",
+        "Status":  "FAIL",
+        "ExitCode":  1,
+        "DurationMs":  685,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\146_measurement_verify.log",
+        "Note":  "npm.cmd run research:measurement:verify"
+    },
+    {
+        "Group":  "RESEARCH",
+        "Name":  "policy_verify",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  530,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\147_policy_verify.log",
+        "Note":  "npm.cmd run research:cp41:policy:verify"
+    },
+    {
+        "Group":  "DEMO",
+        "Name":  "demo_gate",
+        "Status":  "FAIL",
+        "ExitCode":  1,
+        "DurationMs":  2228,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\148_demo_gate.log",
+        "Note":  "npm.cmd run demo:gate"
+    },
+    {
+        "Group":  "EMULATOR",
+        "Name":  "firebase_cli",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "DurationMs":  1084,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\149_firebase_cli.log",
+        "Note":  "firebase --version"
+    },
+    {
+        "Group":  "EMULATOR",
+        "Name":  "firestore_security_emulator",
+        "Status":  "FAIL",
+        "ExitCode":  1,
+        "DurationMs":  24571,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\150_firestore_security_emulator.log",
+        "Note":  "npm.cmd run test:rules:emulator"
+    },
+    {
+        "Group":  "BROWSER",
+        "Name":  "browser_qa_preflight",
+        "Status":  "FAIL",
+        "ExitCode":  2,
+        "DurationMs":  3752,
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance\\CLA_CP81_20261122-123217\\logs\\151_browser_qa_preflight.log",
+        "Note":  "npm.cmd run qa:cp73:mvp:preflight"
+    },
+    {
+        "Group":  "BROWSER",
+        "Name":  "browser_qa_full",
+        "Status":  "BLOCKED",
+        "ExitCode":  2,
+        "DurationMs":  0,
+        "Log":  "",
+        "Note":  "Preflight only, or preflight not PASS, or -RunBrowser not selected"
+    }
+]

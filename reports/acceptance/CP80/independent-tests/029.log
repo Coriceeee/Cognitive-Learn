@@ -1,0 +1,196 @@
+
+> cognitive-learn-ai@0.1.0 test:exam-calendar
+> node --experimental-strip-types --test tests/step17-exam-reminders.test.mjs
+
+TAP version 13
+# (node:16512) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: EX01 catalog offers HSA, V-ACT, TSA, V-SAT, THPT and certificates
+ok 1 - EX01 catalog offers HSA, V-ACT, TSA, V-SAT, THPT and certificates
+  ---
+  duration_ms: 4.657981
+  type: 'test'
+  ...
+# Subtest: EX02 no invented exam or registration dates by default
+ok 2 - EX02 no invented exam or registration dates by default
+  ---
+  duration_ms: 0.522345
+  type: 'test'
+  ...
+# Subtest: EX03 leap years and invalid dates rejected
+ok 3 - EX03 leap years and invalid dates rejected
+  ---
+  duration_ms: 0.487721
+  type: 'test'
+  ...
+# Subtest: EX04 countdown is calendar-day based over New Year
+ok 4 - EX04 countdown is calendar-day based over New Year
+  ---
+  duration_ms: 0.322568
+  type: 'test'
+  ...
+# Subtest: EX05 DST-safe date-difference avoids elapsed-hour anomalies
+ok 5 - EX05 DST-safe date-difference avoids elapsed-hour anomalies
+  ---
+  duration_ms: 0.13575
+  type: 'test'
+  ...
+# Subtest: EX06 local date key uses local calendar instead of ISO UTC date
+ok 6 - EX06 local date key uses local calendar instead of ISO UTC date
+  ---
+  duration_ms: 0.375121
+  type: 'test'
+  ...
+# Subtest: EX07 invalid countdown inputs never produce NaN
+ok 7 - EX07 invalid countdown inputs never produce NaN
+  ---
+  duration_ms: 0.103201
+  type: 'test'
+  ...
+# Subtest: EX08 multiple sittings of the same exam are supported
+ok 8 - EX08 multiple sittings of the same exam are supported
+  ---
+  duration_ms: 0.280558
+  type: 'test'
+  ...
+# Subtest: EX09 update does not append duplicate events
+ok 9 - EX09 update does not append duplicate events
+  ---
+  duration_ms: 0.28981
+  type: 'test'
+  ...
+# Subtest: EX10 cap prevents excessive local student records
+ok 10 - EX10 cap prevents excessive local student records
+  ---
+  duration_ms: 0.915289
+  type: 'test'
+  ...
+# Subtest: EX11 registration deadline cannot come after exam date
+ok 11 - EX11 registration deadline cannot come after exam date
+  ---
+  duration_ms: 0.216227
+  type: 'test'
+  ...
+# Subtest: EX12 source links must be HTTPS, never javascript or embedded credentials
+ok 12 - EX12 source links must be HTTPS, never javascript or embedded credentials
+  ---
+  duration_ms: 0.274781
+  type: 'test'
+  ...
+# Subtest: EX13 wrong-account calendar cannot be loaded
+ok 13 - EX13 wrong-account calendar cannot be loaded
+  ---
+  duration_ms: 0.14681
+  type: 'test'
+  ...
+# Subtest: EX14 corrupt storage and wrong version are rejected
+ok 14 - EX14 corrupt storage and wrong version are rejected
+  ---
+  duration_ms: 0.085297
+  type: 'test'
+  ...
+# Subtest: EX15 no-data reminder does not emit a countdown or warning
+ok 15 - EX15 no-data reminder does not emit a countdown or warning
+  ---
+  duration_ms: 0.202199
+  type: 'test'
+  ...
+# Subtest: EX16 nearest future milestone is registration deadline rather than exam
+ok 16 - EX16 nearest future milestone is registration deadline rather than exam
+  ---
+  duration_ms: 0.290836
+  type: 'test'
+  ...
+# Subtest: EX17 when registered, registration reminders are suppressed
+ok 17 - EX17 when registered, registration reminders are suppressed
+  ---
+  duration_ms: 0.15129
+  type: 'test'
+  ...
+# Subtest: EX18 upcoming alerts capped at 14 days, past milestones excluded
+ok 18 - EX18 upcoming alerts capped at 14 days, past milestones excluded
+  ---
+  duration_ms: 0.094224
+  type: 'test'
+  ...
+# Subtest: EX19 expired registrations do not mask an upcoming exam
+ok 19 - EX19 expired registrations do not mask an upcoming exam
+  ---
+  duration_ms: 0.060822
+  type: 'test'
+  ...
+# Subtest: EX20 deterministic sorting handles same day registration and exam
+ok 20 - EX20 deterministic sorting handles same day registration and exam
+  ---
+  duration_ms: 7.562734
+  type: 'test'
+  ...
+# Subtest: EX21 invalid custom names, broken ids and extra-long urls are rejected
+ok 21 - EX21 invalid custom names, broken ids and extra-long urls are rejected
+  ---
+  duration_ms: 0.17136
+  type: 'test'
+  ...
+# Subtest: EX22 format is stable Vietnamese day/month/year
+ok 22 - EX22 format is stable Vietnamese day/month/year
+  ---
+  duration_ms: 0.139465
+  type: 'test'
+  ...
+# Subtest: EX23 student overview shows exam horizon; dedicated route is settings-only
+ok 23 - EX23 student overview shows exam horizon; dedicated route is settings-only
+  ---
+  duration_ms: 1.025994
+  type: 'test'
+  ...
+# Subtest: EX24 student selects visible exams, can remove or edit their own calendar
+ok 24 - EX24 student selects visible exams, can remove or edit their own calendar
+  ---
+  duration_ms: 0.248814
+  type: 'test'
+  ...
+# Subtest: EX25 browser storage is explicit, versioned, cannot overwrite corrupt source silently
+ok 25 - EX25 browser storage is explicit, versioned, cannot overwrite corrupt source silently
+  ---
+  duration_ms: 1.744934
+  type: 'test'
+  ...
+# Subtest: EX26 reminder board never claims background push works
+ok 26 - EX26 reminder board never claims background push works
+  ---
+  duration_ms: 0.210128
+  type: 'test'
+  ...
+# Subtest: EX27 custom exam and manual source URL are editable with a save action
+ok 27 - EX27 custom exam and manual source URL are editable with a save action
+  ---
+  duration_ms: 0.154838
+  type: 'test'
+  ...
+# Subtest: EX28 stylesheet included and responsive
+ok 28 - EX28 stylesheet included and responsive
+  ---
+  duration_ms: 0.599833
+  type: 'test'
+  ...
+# Subtest: EX29 Atlas and Companion can navigate to the student countdown board
+ok 29 - EX29 Atlas and Companion can navigate to the student countdown board
+  ---
+  duration_ms: 0.333694
+  type: 'test'
+  ...
+# Subtest: EX30 unsafe or modified date inputs cannot be persisted via save
+ok 30 - EX30 unsafe or modified date inputs cannot be persisted via save
+  ---
+  duration_ms: 0.361845
+  type: 'test'
+  ...
+1..30
+# tests 30
+# suites 0
+# pass 30
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 185.692039

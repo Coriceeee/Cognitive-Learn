@@ -1,0 +1,32 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp31:batch4
+> node --experimental-strip-types --test tests/cp31-batch4-evidence.test.mjs
+
+Γ£ö CP31-B4-01 historical fingerprint remains frozen; current release cannot impersonate CP31 (155.4793ms)
+Γ£ö CP31-B4-02 release no evidence: no invented CI/deploy PASS (0.3786ms)
+Γ£ö CP31-B4-03 release structural source matches, but self-declared production remains unverified (0.3752ms)
+Γ£ö CP31-B4-04 source fingerprint mismatch fails closed (0.1751ms)
+Γ£ö CP31-B4-05 release invalid CI HTTPS/credentials/commit/exit rejected (0.2411ms)
+Γ£ö CP31-B4-06 mismatched deploy artifact always FAIL (0.1843ms)
+Γ£ö CP31-B4-07 no backup/rollback produce NOT TESTED not PASS (0.1333ms)
+Γ£ö CP31-B4-08 unknown release JSON schema fails (0.0897ms)
+Γ£ö CP31-B4-09 no Emulator report never passes role authorization (0.1893ms)
+Γ£ö CP31-B4-10 known gate schema and sha accepted only as local evidence (0.1646ms)
+Γ£ö CP31-B4-11 tampered Rules candidate checksum is FAIL even with PASS fields (0.1388ms)
+Γ£ö CP31-B4-12 preflight-only or failed emulator cannot be called successful (0.1242ms)
+Γ£ö CP31-B4-13 wrong project/gate or future time rejected (0.0834ms)
+Γ£ö CP31-B4-14 no OULAD result means no ML score claims (0.2163ms)
+Γ£ö CP31-B4-15 correctly structured aggregate OULAD report does not imply Vietnamese validation (0.1687ms)
+Γ£ö CP31-B4-16 synthetic one-row VNHSGE fixture cannot pass as OULAD (0.5355ms)
+Γ£ö CP31-B4-17 OULAD tiny holdout, wrong cutoff and impossible splits fail (0.142ms)
+Γ£ö CP31-B4-18 impossible Brier, delta and bootstrap confidence interval rejected (0.6749ms)
+Γ£ö CP31-B4-19 invalid source/cohort and synthetic label cannot be presented as real result (0.1063ms)
+Γ£ö CP31-B4-20 Admin UI only imports in memory; route/catalog/run guard is explicit (1.3764ms)
+Γä╣ tests 20
+Γä╣ suites 0
+Γä╣ pass 20
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 290.1795

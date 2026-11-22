@@ -1,0 +1,44 @@
+
+> cognitive-learn-ai@0.1.0 test:cp79:theme
+> node --test tests/cp79-six-gradient-theme.test.cjs
+
+TAP version 13
+# Subtest: CP79.01 authoritative palette matches all 6 user-approved original colors
+ok 1 - CP79.01 authoritative palette matches all 6 user-approved original colors
+  ---
+  duration_ms: 1.608703
+  type: 'test'
+  ...
+# Subtest: CP79.02 all module label names, routes and menu topology remain unchanged
+ok 2 - CP79.02 all module label names, routes and menu topology remain unchanged
+  ---
+  duration_ms: 0.461207
+  type: 'test'
+  ...
+# Subtest: CP79.03 selected navigation keeps sufficient readable contrast and unique theme
+ok 3 - CP79.03 selected navigation keeps sufficient readable contrast and unique theme
+  ---
+  duration_ms: 3.039904
+  type: 'test'
+  ...
+# Subtest: CP79.04 circuit nodes, focus panel and mobile links share the matching per-module palette
+ok 4 - CP79.04 circuit nodes, focus panel and mobile links share the matching per-module palette
+  ---
+  duration_ms: 0.837573
+  type: 'test'
+  ...
+# Subtest: CP79.05 page accents, charts and public cards remain scoped; no duplicate UX or new layout layer
+ok 5 - CP79.05 page accents, charts and public cards remain scoped; no duplicate UX or new layout layer
+  ---
+  duration_ms: 0.990246
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 77.601953

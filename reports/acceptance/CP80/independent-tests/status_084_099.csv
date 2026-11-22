@@ -1,0 +1,16 @@
+﻿index,status,exitcode,seconds,command,log
+84,PASS,0,0.41,npm run test:cp53:integrity,reports/acceptance/CP80/independent-tests/084.log
+85,PASS,0,0.38,npm run test:cp54:safety,reports/acceptance/CP80/independent-tests/085.log
+86,PASS,0,0.38,npm run test:cp55:safety,reports/acceptance/CP80/independent-tests/086.log
+87,PASS,0,0.35,npm run test:cp56:navigation,reports/acceptance/CP80/independent-tests/087.log
+88,PASS,0,0.34,npm run test:cp57:timestamp,reports/acceptance/CP80/independent-tests/088.log
+89,PASS,0,1.12,npm run test:cp58:integration,reports/acceptance/CP80/independent-tests/089.log
+90,PASS,0,0.34,npm run test:cp59:verified-drafts,reports/acceptance/CP80/independent-tests/090.log
+91,PASS,0,0.67,npm run test:cp60:seed-listener,reports/acceptance/CP80/independent-tests/091.log
+92,PASS,0,0.92,npm run test:cp61:legacy-drafts,reports/acceptance/CP80/independent-tests/092.log
+93,PASS,0,0.34,npm run test:cp62:student-rail,reports/acceptance/CP80/independent-tests/093.log
+94,PASS,0,0.37,npm run test:cp63:guided-workspaces,reports/acceptance/CP80/independent-tests/094.log
+95,PASS,0,0.35,npm run test:cp64:input-ux,reports/acceptance/CP80/independent-tests/095.log
+96,PASS,0,0.36,npm run test:cp65:atlas-lumen-ux,reports/acceptance/CP80/independent-tests/096.log
+97,PASS,0,0.35,npm run test:cp66:unified-states,reports/acceptance/CP80/independent-tests/097.log
+98,PASS,0,0.37,npm run test:cp67:route-experience,reports/acceptance/CP80/independent-tests/098.log

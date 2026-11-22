@@ -1,0 +1,14 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:rules:preflight
+> node tools/firestoreSecurityGate.cjs --preflight
+
+SECURITY GATE: BLOCKED (static PASS, emulator BLOCKED).
+Evidence: reports/security/firestore_emulator_gate.json
+npm.cmd : (node:21300) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+At C:\Gạo\Cognitive-Learn\CLA_CP81_ONECLICK.ps1:95 char:9
++         & $exe @commandArgs 2>&1 | Out-File -LiteralPath $logPath -En ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ((node:21300) [D...y concatenated.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+(Use `node --trace-deprecation ...` to show where the warning was created)

@@ -1,0 +1,42 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:exam-calendar
+> node --experimental-strip-types --test tests/step17-exam-reminders.test.mjs
+
+Γ£ö EX01 catalog offers HSA, V-ACT, TSA, V-SAT, THPT and certificates (2.3545ms)
+Γ£ö EX02 no invented exam or registration dates by default (0.3338ms)
+Γ£ö EX03 leap years and invalid dates rejected (0.2466ms)
+Γ£ö EX04 countdown is calendar-day based over New Year (0.2097ms)
+Γ£ö EX05 DST-safe date-difference avoids elapsed-hour anomalies (0.1318ms)
+Γ£ö EX06 local date key uses local calendar instead of ISO UTC date (1.1959ms)
+Γ£ö EX07 invalid countdown inputs never produce NaN (0.1725ms)
+Γ£ö EX08 multiple sittings of the same exam are supported (0.3514ms)
+Γ£ö EX09 update does not append duplicate events (0.194ms)
+Γ£ö EX10 cap prevents excessive local student records (0.7408ms)
+Γ£ö EX11 registration deadline cannot come after exam date (0.2076ms)
+Γ£ö EX12 source links must be HTTPS, never javascript or embedded credentials (0.2509ms)
+Γ£ö EX13 wrong-account calendar cannot be loaded (0.168ms)
+Γ£ö EX14 corrupt storage and wrong version are rejected (0.1082ms)
+Γ£ö EX15 no-data reminder does not emit a countdown or warning (0.2361ms)
+Γ£ö EX16 nearest future milestone is registration deadline rather than exam (0.3241ms)
+Γ£ö EX17 when registered, registration reminders are suppressed (0.1333ms)
+Γ£ö EX18 upcoming alerts capped at 14 days, past milestones excluded (0.109ms)
+Γ£ö EX19 expired registrations do not mask an upcoming exam (0.071ms)
+Γ£ö EX20 deterministic sorting handles same day registration and exam (8.4218ms)
+Γ£ö EX21 invalid custom names, broken ids and extra-long urls are rejected (0.1248ms)
+Γ£ö EX22 format is stable Vietnamese day/month/year (0.0948ms)
+Γ£ö EX23 student overview shows exam horizon; dedicated route is settings-only (1.0497ms)
+Γ£ö EX24 student selects visible exams, can remove or edit their own calendar (0.3124ms)
+Γ£ö EX25 browser storage is explicit, versioned, cannot overwrite corrupt source silently (0.2958ms)
+Γ£ö EX26 reminder board never claims background push works (0.2902ms)
+Γ£ö EX27 custom exam and manual source URL are editable with a save action (0.2397ms)
+Γ£ö EX28 stylesheet included and responsive (0.4551ms)
+Γ£ö EX29 Atlas and Companion can navigate to the student countdown board (0.6355ms)
+Γ£ö EX30 unsafe or modified date inputs cannot be persisted via save (0.2748ms)
+Γä╣ tests 30
+Γä╣ suites 0
+Γä╣ pass 30
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 153.4824

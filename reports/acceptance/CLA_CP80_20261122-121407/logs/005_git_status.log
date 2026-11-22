@@ -1,0 +1,79 @@
+﻿ D dist/assets/nen-cla-C76Gzy6K.png
+ M dist/index.html
+ M package.json
+ M reports/cp68/test-preflight-status.json
+ M reports/cp73/mvp-gate.json
+ M reports/cp73/qa-selftest.json
+ M reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html
+ M reports/demo/cla_batch16_offline_readiness.json
+ M reports/evidence/cla_golden_path_SYNTHETIC.json
+ M reports/evidence/cla_measurement_SYNTHETIC.json
+ M reports/evidence/cla_multicycle_SYNTHETIC.json
+ M src/App.tsx
+ M src/components/common/FloatingAdvisorChat.tsx
+ M src/components/common/ModuleClusterGrid.tsx
+ M src/components/common/ModuleSectionNav.tsx
+ M src/components/common/UserMenu.tsx
+ M src/data/moduleSubmodules.ts
+ M src/lib/nexusEvidenceBaseline.ts
+ M src/lib/routeExperience.ts
+ M src/lib/useDailyCompanion.ts
+ M src/page/atlas/AtlasPage.tsx
+ M src/page/auth/LoginPage.tsx
+ M src/page/haven/HavenPage.tsx
+ M src/page/lumen/LumenPage.tsx
+ M src/page/lumen/components/LumenOverview.tsx
+ M src/page/lumen/components/LumenStrategyPanel.tsx
+ M src/page/main/AboutPage.tsx
+ M src/page/orion/OrionPage.tsx
+ M src/page/pulse/PulsePage.tsx
+ M src/page/seed/StudentGuidePage.tsx
+ M src/page/seed/StudentPage.tsx
+ M src/page/seed/StudentProfilePage.tsx
+ M src/page/seed/components/CognitiveScoreGrid.tsx
+ M src/page/seed/components/LearningCircuit.tsx
+ M src/page/seed/components/StudentJourneyBridge.tsx
+ M src/styles/01-auth.css
+ M src/styles/37-cla-orbital-theme.css
+ M src/styles/38-cla-daylight-studio.css
+ M src/styles/40-cla-exam-horizon-learning-circuit.css
+ M src/styles/48-cla-unified-navigation.css
+ M src/styles/49-cla-product-polish.css
+ M src/styles/99-responsive.css
+ M tests/cp31-batch17-demo-backup.test.mjs
+ M tests/cp31-batch4-evidence.test.mjs
+ M tests/cp31-batch8-golden-path.test.mjs
+ M tests/cp31-batch9-evidence-integrity.test.mjs
+ M tests/cp66-unified-states.test.mjs
+ M tests/cp70-student-journey-integration.test.mjs
+ M tests/step09-ptit-official-pathways.test.cjs
+ M tests/step17-exam-reminders.test.mjs
+ M tests/student-role-isolation.test.cjs
+ M tests/ux-v7.test.cjs
+ M tsconfig.tsbuildinfo
+?? BAO_CAO_CP79_GRADIENT_6_PHAN_HE_20261122.md
+?? CHAY_NGHIEM_THU_CP80.cmd
+?? CLA_CP79_NGHIEM_THU_TOAN_BO.ps1
+?? CLA_CP80_ONECLICK.ps1
+?? CP79_PATCH_MANIFEST.json
+?? CP80_PATCH_MANIFEST.json
+?? HUONG_DAN_NGHIEM_THU_CLA_CP79.md
+?? README_CP80_SUA_LOI_VA_NGHIEM_THU.md
+?? START_HERE_CP75_FULL_UX_AUDIT_20261122.md
+?? START_HERE_CP76_VIETNAMESE_TABS_20261122.md
+?? START_HERE_CP77_LOGIN_MANIFESTO_20261122.md
+?? START_HERE_CP78_UX_COLOR_NO_LAYOUT_20261122.md
+?? reports/acceptance/
+?? reports/cp73/cp68-preflight.json
+?? reports/cp75/
+?? reports/cp76/
+?? reports/cp77/
+?? reports/cp78/
+?? tests/cp75-ux-audit.test.cjs
+?? tests/cp76-vietnamese-names.test.mjs
+?? tests/cp77-login-manifesto.test.cjs
+?? tests/cp78-clarity-palette-dedupe.test.mjs
+?? tests/cp79-six-gradient-theme.test.cjs
+?? tests/cp80-regressions.test.cjs
+?? tools/acceptance_cp80_batch.py
+?? tools/cp78_visual_smoke.py

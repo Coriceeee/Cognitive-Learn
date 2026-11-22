@@ -1,0 +1,10 @@
+﻿[
+    {
+        "Name":  "cp82_snapshot",
+        "Status":  "FAIL",
+        "ExitCode":  1,
+        "Kind":  "REQUIRED",
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance-cp82\\run-20261122-150945\\logs\\01_cp82_snapshot.log",
+        "Reason":  ""
+    }
+]

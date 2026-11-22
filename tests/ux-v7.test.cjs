@@ -27,8 +27,8 @@ test("UX-V7-03: Student module navigator filters actions and uses real links onl
   assert.match(grid, /module-path-action-open/);
   assert.match(grid, /status === "planned"/);
   assert.match(catalog, /studentSubmoduleDirectory/);
-  assert.match(catalog, /title: "Học bổng phù hợp"/);
-  assert.match(catalog, /title: "Du học toàn cầu"/);
+  assert.match(catalog, /id: "scholarships", title: "Cơ hội học bổng"/);
+  assert.match(catalog, /id: "abroad", title: "Chạm thế giới"/);
 });
 
 test("UX-V7-04: Admin remains outside student navigation", () => {

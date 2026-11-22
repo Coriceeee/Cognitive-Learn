@@ -197,7 +197,7 @@ export default function HavenPage() {
         {view === "/haven" && <>
           <section className="haven-hero">
           <div>
-            <span>HAVEN SUPPORT</span>
+            <span>HAVEN · HÀNH TRANG THẾ GIỚI</span>
             <h1>Học bổng và hỗ trợ tài chính</h1>
             <p>
               Haven tập trung vào học bổng, ngân sách, khả năng chi trả và các phương án hỗ trợ học sinh.
@@ -206,7 +206,7 @@ export default function HavenPage() {
           </div>
 
           <aside>
-            <span>Support Readiness</span>
+            <span>Mức chuẩn bị (tham khảo)</span>
             <strong>{hasInputs ? `${result.supportReadinessScore}/100` : "Chưa đủ dữ liệu"}</strong>
             <em className={`haven-risk ${getRiskClass(result.riskLevel)}`}>
               {hasInputs ? getHavenRiskLabel(result.riskLevel) : "Chưa đánh giá"}
@@ -231,13 +231,16 @@ export default function HavenPage() {
             ] },
           ]} />}
 
-        {view === "/haven/scholarships" && <PublicSourceSearchPanel topic="scholarship" />}
         {view === "/haven/scholarships" && <>
           <section id="haven-scholarships" className="cla-haven-study-link">
           <strong>Học bổng và điều kiện</strong>
           <p>Haven đánh giá điều kiện học bổng và nhu cầu hỗ trợ tài chính. Mỗi học bổng cụ thể phải có nguồn cấp, thời hạn, yêu cầu chứng chỉ và năm; không tự coi chỉ số phù hợp là xác suất nhận học bổng.</p>
           <a href="/atlas/study-abroad">Mở Atlas để tra quốc gia, trường và điều kiện du học ↗</a>
           <HavenScholarshipExplorer />
+          <details className="cla-focus-disclosure">
+            <summary>Tìm thêm học bổng ngoài thư viện (nâng cao)</summary>
+            <PublicSourceSearchPanel topic="scholarship" />
+          </details>
         </section></>}
 
         {view === "/haven/finance" && <HavenBudgetScenario />}

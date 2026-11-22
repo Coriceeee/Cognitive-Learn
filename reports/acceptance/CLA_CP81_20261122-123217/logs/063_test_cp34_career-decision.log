@@ -1,0 +1,24 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp34:career-decision
+> node --experimental-strip-types --test tests/cp34-career-decision.test.mjs
+
+Γ£ö nine domains, no implicit preferences and no ranking without explicit weight (1.6492ms)
+Γ£ö valid zero is observed; missing rating and missing subject do not become zero (0.2292ms)
+Γ£ö weight chosen by learner, two axes and transparent contribution (0.1634ms)
+Γ£ö no fixed academic mapping for creative and education; no exclusion (0.118ms)
+Γ£ö invalid data fails closed; no combining without trusted term metadata (0.2114ms)
+Γ£ö ties retained among complete groups, not incomplete groups (0.1922ms)
+Γ£ö Pareto preserves tradeoffs and identifies domination reasons (0.317ms)
+Γ£ö budget and risk are hard constraints, inclusive boundaries (0.1494ms)
+Γ£ö invalid/duplicate options and invalid constraints cannot win (0.2308ms)
+Γ£ö equivalent options stay, comparison independent of input order (0.238ms)
+Γ£ö legacy weights normalized without changing relative weights (0.4761ms)
+Γ£ö UI uses opted-in same-term evidence and does not persist or call AI; Orion uses actual scenario list (0.9198ms)
+Γä╣ tests 12
+Γä╣ suites 0
+Γä╣ pass 12
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 198.2429

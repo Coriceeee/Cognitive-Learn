@@ -1,0 +1,23 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:rules:gate-unit
+> node --test tests/firestore-security-gate.test.cjs
+
+Γ£ö SG01 accepts only reviewed candidate Rules in localhost emulator (1.321ms)
+Γ£ö SG02 rejects production or another demo Firebase project (0.4185ms)
+Γ£ö SG03 rejects a different Rules file, including a production Rules path (0.1834ms)
+Γ£ö SG04 rejects emulator host binding on all interfaces or external network (0.1602ms)
+Γ£ö SG05 rejects invalid ports and enabled Emulator UI (0.2021ms)
+Γ£ö SG06 rejects external/injected FIRESTORE_EMULATOR_HOST (0.2321ms)
+Γ£ö SG07 allows only local FIRESTORE_EMULATOR_HOST values or unset (0.154ms)
+Γ£ö SG08 overall PASS requires static AND emulator authorization tests PASS (0.0974ms)
+Γ£ö SG09 package scripts use fixed demo CLI and cannot invoke deployment (2.2606ms)
+Γ£ö SG10 production firebase.json does not silently deploy candidate Rules (0.6818ms)
+Γ£ö SG11 emulator test source fails closed on non-loopback endpoints (0.6885ms)
+Γä╣ tests 11
+Γä╣ suites 0
+Γä╣ pass 11
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 94.5792

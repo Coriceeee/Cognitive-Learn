@@ -1,0 +1,102 @@
+[
+  {
+    "release": "cla_cp74_work",
+    "buttons": {
+      "access-retry": {
+        "height": 43,
+        "width": 77,
+        "padding": "10px 16px",
+        "fontSize": "13px",
+        "borderRadius": "10px",
+        "color": "rgb(24, 47, 75)",
+        "background": "rgb(255, 255, 255)"
+      },
+      "chat-close": {
+        "height": 44,
+        "width": 44,
+        "padding": "10px 16px",
+        "fontSize": "13px",
+        "borderRadius": "10px",
+        "color": "rgb(16, 62, 137)",
+        "background": "rgb(255, 255, 255)"
+      },
+      "chat-suggest": {
+        "height": 43,
+        "width": 68.6,
+        "padding": "10px 16px",
+        "fontSize": "14px",
+        "borderRadius": "12px",
+        "color": "rgb(16, 62, 137)",
+        "background": "rgb(234, 244, 255)"
+      },
+      "chat-send": {
+        "height": 43,
+        "width": 58,
+        "padding": "10px 16px",
+        "fontSize": "14px",
+        "borderRadius": "10px",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(45, 91, 168)"
+      },
+      "generic": {
+        "height": 43,
+        "width": 100,
+        "padding": "10px 16px",
+        "fontSize": "13px",
+        "borderRadius": "10px",
+        "color": "rgb(24, 47, 75)",
+        "background": "rgb(255, 255, 255)"
+      }
+    }
+  },
+  {
+    "release": "cla_cp75_ux_audit",
+    "buttons": {
+      "access-retry": {
+        "height": 43,
+        "width": 79,
+        "padding": "11px 17px",
+        "fontSize": "13px",
+        "borderRadius": "12px",
+        "color": "rgb(26, 87, 163)",
+        "background": "rgb(237, 245, 255)"
+      },
+      "chat-close": {
+        "height": 44,
+        "width": 44,
+        "padding": "10px 16px",
+        "fontSize": "24px",
+        "borderRadius": "10px",
+        "color": "rgb(16, 62, 137)",
+        "background": "rgb(255, 255, 255)"
+      },
+      "chat-suggest": {
+        "height": 44,
+        "width": 60.6,
+        "padding": "9px 12px",
+        "fontSize": "14px",
+        "borderRadius": "12px",
+        "color": "rgb(16, 62, 137)",
+        "background": "rgb(234, 244, 255)"
+      },
+      "chat-send": {
+        "height": 48,
+        "width": 58,
+        "padding": "9px 16px",
+        "fontSize": "14px",
+        "borderRadius": "12px",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(45, 91, 168)"
+      },
+      "generic": {
+        "height": 43,
+        "width": 112.6,
+        "padding": "10px 16px",
+        "fontSize": "16px",
+        "borderRadius": "10px",
+        "color": "rgb(24, 47, 75)",
+        "background": "rgb(255, 255, 255)"
+      }
+    }
+  }
+]

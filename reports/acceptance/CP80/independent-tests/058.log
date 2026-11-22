@@ -1,0 +1,82 @@
+
+> cognitive-learn-ai@0.1.0 test:cp32:public-search
+> node --experimental-strip-types --test tests/cp32-public-source-search.test.mjs
+
+TAP version 13
+# (node:17461) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: arbitrary public university, country or scholarship names supported
+ok 1 - arbitrary public university, country or scholarship names supported
+  ---
+  duration_ms: 8.271405
+  type: 'test'
+  ...
+# Subtest: explicit confirmation and closed schema including no profile or UID
+ok 2 - explicit confirmation and closed schema including no profile or UID
+  ---
+  duration_ms: 0.450918
+  type: 'test'
+  ...
+# Subtest: reject common PII patterns and free-form URL/injection operators
+ok 3 - reject common PII patterns and free-form URL/injection operators
+  ---
+  duration_ms: 0.464264
+  type: 'test'
+  ...
+# Subtest: scope and year encoded in external search link
+ok 4 - scope and year encoded in external search link
+  ---
+  duration_ms: 0.54436
+  type: 'test'
+  ...
+# Subtest: dangerous links rejected and only HTTPS accepted
+ok 5 - dangerous links rejected and only HTTPS accepted
+  ---
+  duration_ms: 0.808166
+  type: 'test'
+  ...
+# Subtest: provider claims never confer verification, numbers or model outputs
+ok 6 - provider claims never confer verification, numbers or model outputs
+  ---
+  duration_ms: 1.700137
+  type: 'test'
+  ...
+# Subtest: candidate payload bounded
+ok 7 - candidate payload bounded
+  ---
+  duration_ms: 0.569387
+  type: 'test'
+  ...
+# Subtest: Gemini key alone cannot bypass approval and separate provider contract
+ok 8 - Gemini key alone cannot bypass approval and separate provider contract
+  ---
+  duration_ms: 0.241161
+  type: 'test'
+  ...
+# Subtest: mock provider receives public fields only; no personal context or Firebase token
+ok 9 - mock provider receives public fields only; no personal context or Firebase token
+  ---
+  duration_ms: 0.715643
+  type: 'test'
+  ...
+# Subtest: missing provider data produces no result
+ok 10 - missing provider data produces no result
+  ---
+  duration_ms: 0.521952
+  type: 'test'
+  ...
+# Subtest: Atlas, study abroad, Haven share panel; no Firestore data writes
+ok 11 - Atlas, study abroad, Haven share panel; no Firestore data writes
+  ---
+  duration_ms: 1.050317
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 260.709919

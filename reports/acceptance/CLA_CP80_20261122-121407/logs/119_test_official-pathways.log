@@ -1,0 +1,33 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:official-pathways
+> node --test tests/step09-ptit-official-pathways.test.cjs
+
+Γ£ö 09.01 published mappings include X06 and X26, not a guessed synonym (2.6298ms)
+Γ£ö 09.02 abstains until exactly two distinct electives confirmed (0.3542ms)
+Γ£ö 09.03 English + Informatics unlocks officially published X26, outside nine-code trial catalog (9.0402ms)
+Γ£ö 09.04 Physics + Informatics matches X06 and not X26 (0.3489ms)
+Γ£ö 09.05 Physics + English matches A01, and D01 only when literature and English exist (0.2592ms)
+Γ£ö 09.06 Physics + Chemistry matches only A00 (0.2035ms)
+Γ£ö 09.07 History + geography have no PTIT match in this bounded sample, not a nationwide exclusion (0.1735ms)
+Γ£ö 09.08 missing Informatics leaves X26 observable score null, not 0 (0.1795ms)
+Γ£ö 09.09 real zero accepted when three scores observed (0.1664ms)
+Γ£ö 09.10 invalid score cannot be used for a total (0.2425ms)
+Γ£ö 09.11 target major identifies matching records but does not exclude other majors (0.3365ms)
+Γ£ö 09.12 different source year is excluded (0.1034ms)
+Γ£ö 09.13 untrusted host is excluded despite copied combinations (0.0812ms)
+Γ£ö 09.14 campus BVS is not mislabeled BVH (0.0998ms)
+Γ£ö 09.15 outside the PTIT published five codes does not create arbitrary official combinations (0.0781ms)
+Γ£ö 09.16 output includes source URL, method, campus, year and program code (0.2776ms)
+Γ£ö 09.17 national explorer replaces the bounded PTIT picker and exposes all registered programmes (0.5941ms)
+Γ£ö 09.18 protects admission comparison from school/tryout scores (0.5934ms)
+Γ£ö 09.19 rejects prior-year official page even when a program wrongly claims year 2026 (0.1408ms)
+Γ£ö 09.20 excludes a program without a 2026 THPT admission method (0.0815ms)
+Γ£ö 09.21 official-pathway exploration is discoverable from Atlas module navigation (0.4835ms)
+Γä╣ tests 21
+Γä╣ suites 0
+Γä╣ pass 21
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 328.9432

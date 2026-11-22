@@ -1,0 +1,52 @@
+
+> cognitive-learn-ai@0.1.0 test:cp54:safety
+> node --experimental-strip-types --test tests/cp54-draft-refresh-security.test.mjs
+
+TAP version 13
+# (node:15101) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP54.1: a refresh waits for an in-flight save, and preserves its return value
+ok 1 - CP54.1: a refresh waits for an in-flight save, and preserves its return value
+  ---
+  duration_ms: 1.551581
+  type: 'test'
+  ...
+# Subtest: CP54.2: failed save does not prevent a safe reload
+ok 2 - CP54.2: failed save does not prevent a safe reload
+  ---
+  duration_ms: 0.581393
+  type: 'test'
+  ...
+# Subtest: CP54.3: reload serializes with save and invalidates writes queued behind it
+ok 3 - CP54.3: reload serializes with save and invalidates writes queued behind it
+  ---
+  duration_ms: 1.197242
+  type: 'test'
+  ...
+# Subtest: CP54.4: hook uses shared FIFO for server reload and checks session before applying response
+ok 4 - CP54.4: hook uses shared FIFO for server reload and checks session before applying response
+  ---
+  duration_ms: 0.376937
+  type: 'test'
+  ...
+# Subtest: CP54.5: both candidate Rules require revision on create and update
+ok 5 - CP54.5: both candidate Rules require revision on create and update
+  ---
+  duration_ms: 0.416943
+  type: 'test'
+  ...
+# Subtest: CP54.6: Emulator suite includes revised creates and legacy migration checks
+ok 6 - CP54.6: Emulator suite includes revised creates and legacy migration checks
+  ---
+  duration_ms: 0.757966
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 184.164003

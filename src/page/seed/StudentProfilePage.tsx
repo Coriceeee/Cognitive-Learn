@@ -1092,6 +1092,7 @@ export default function TrangNhapHoSoHocTap() {
                         {row.regular.map((score, index) => (
                           <td key={`${subject}-regular-${index}`}>
                             <input
+                              aria-label={`${subject} · Lớp ${activeGrade} · Học kỳ ${activeSemester} · Điểm thường xuyên ${index + 1}`}
                               type="number"
                               step="any"
                               min="0"
@@ -1113,6 +1114,7 @@ export default function TrangNhapHoSoHocTap() {
 
                         <td>
                           <input
+                            aria-label={`${subject} · Lớp ${activeGrade} · Học kỳ ${activeSemester} · Điểm giữa kỳ`}
                             type="number"
                             step="any"
                             min="0"
@@ -1132,6 +1134,7 @@ export default function TrangNhapHoSoHocTap() {
 
                         <td>
                           <input
+                            aria-label={`${subject} · Lớp ${activeGrade} · Học kỳ ${activeSemester} · Điểm cuối kỳ`}
                             type="number"
                             step="any"
                             min="0"

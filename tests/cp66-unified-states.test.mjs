@@ -87,7 +87,8 @@ describe('CP66 integration: one status vocabulary in six modules',()=>{
    assert.match(seed,/status === "error" && <ModuleStateNotice/);
    assert.match(seed,/onClick=\{retry\}/);
    assert.match(pages.lumen,/label="Chờ Firestore xác minh"/);
-   assert.match(pages.lumen,/label="Chưa có hồ sơ học sinh"/);
+   assert.match(pages.lumen,/label="Bắt đầu từ Seed"/);
+   assert.match(pages.lumen,/<h1>Chưa có hồ sơ học sinh<\/h1>/);
    assert.match(pages.atlas,/label="Đối chiếu nguồn tuyển sinh"/);
    assert.match(pages.atlas,/storageError \? "error"/);
  });

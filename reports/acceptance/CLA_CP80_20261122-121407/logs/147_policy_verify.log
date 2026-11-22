@@ -1,0 +1,5 @@
+﻿
+> cognitive-learn-ai@0.1.0 research:cp41:policy:verify
+> node tools/cla_policy_report.mjs --verify
+
+POLICY_SYNTHETIC_REPLAY_PASS (not scientific validation)

@@ -1,6 +1,6 @@
 {
   "envelopeSchema": "cla.multicycle.local-integrity.v1",
-  "payloadSha256": "74df516eb12e070aa0e7a56c6690567df7e7cdd058c582ee9f18c240b31f045f",
+  "payloadSha256": "efe07779829cb86742fd3ac5e2b7e9c0321f5765bde49e5fe812681a794447f1",
   "payload": {
     "schema": "cla.multicycle.synthetic-replay.v1",
     "dataScope": "SYNTHETIC_ONLY",
@@ -12,7 +12,7 @@
       "683adb60c967781b0cca88d24378fb2b88e217fc25a99084d30815c0a3a69ddb",
       "4206b902b980d1af37920689a2b230dff4b42227e87819c261b4614d890f3adb"
     ],
-    "sourceFingerprint": "f21efc3100a46ff820f955c241dbf07c66440c45b7d26d013637945e6ab54db5",
+    "sourceFingerprint": "4fbb5938d5e6c3d0eee91292a100be47c910db3573c74befa104b261bfa33e28",
     "history": {
       "schema": "cla.journey.history.v1",
       "status": "MULTI_CYCLE_DESCRIPTIVE",

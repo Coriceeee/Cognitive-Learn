@@ -1,0 +1,16 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp32:discovery
+> node --experimental-strip-types --test tests/cp32-program-discovery.test.mjs
+
+Γ£ö preserves all 216 new numeric facts and 11 institutional identities (0.7471ms)
+Γ£ö actual VNU official numeric anchors, same code in different schools stays separate (1.275ms)
+Γ£ö interest, school, year and region are actual filters not imputation (4.9037ms)
+Γ£ö combination evidence is separate from unknown; missing does not exclude candidates (0.5156ms)
+Γä╣ tests 4
+Γä╣ suites 0
+Γä╣ pass 4
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 190.245

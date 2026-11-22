@@ -1,0 +1,20 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp42:dthu-batch
+> node --experimental-strip-types --test tests/cp42-dthu-batch.test.mjs
+
+Γ£ö transcribed three-year numeric row counts; all keys distinct; no college programme (1.9514ms)
+Γ£ö spot check official CNTT three-year history, no VSAT record in 2024 (1.5545ms)
+Γ£ö missing columns are never zero; same scale comparison only; aptitude method wording retained as limitation (0.7901ms)
+Γ£ö school-code search and chatbot return exact method-labelled record (1.0248ms)
+Γ£ö scheme joined to exact codes; unmatched code remains searchable (12.6753ms)
+Γ£ö reviewed table parser rejects duplicates, prototype-like key, blank row, missing columns, nonnumeric or overflow (0.5335ms)
+Γ£ö source structure fail closed; legitimate numeric zero preserved; no claim of authenticity (0.2801ms)
+Γ£ö coverage counts DTHU once per year; missing combinations remain a task (5.0169ms)
+Γä╣ tests 8
+Γä╣ suites 0
+Γä╣ pass 8
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 191.8477

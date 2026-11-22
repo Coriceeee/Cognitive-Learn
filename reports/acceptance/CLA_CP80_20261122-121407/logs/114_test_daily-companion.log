@@ -1,0 +1,32 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:daily-companion
+> node --experimental-strip-types --test tests/step14-daily-companion.test.mjs
+
+Γ£ö DC01 only valid 24h times are accepted (0.9814ms)
+Γ£ö DC02 quiet hours wrap around midnight (0.1829ms)
+Γ£ö DC03 same quiet boundaries turn quiet mode off, never mute all day (0.0948ms)
+Γ£ö DC04 invalid schedules are fail-closed (0.2334ms)
+Γ£ö DC05 reminder due only at requested local minute (1.6392ms)
+Γ£ö DC06 reminder disabled or completed today never fires (0.1598ms)
+Γ£ö DC07 quiet hours suppress matching reminders (0.1633ms)
+Γ£ö DC08 midnight boundary yields correct local date (0.0965ms)
+Γ£ö DC09 invalid day keys rejected, including invalid calendar days (0.3602ms)
+Γ£ö DC10 daily check-in is idempotent (0.2302ms)
+Γ£ö DC11 daily check-in keeps only 14 most recent days (0.1935ms)
+Γ£ö DC12 data validation enforces account ownership and consent boundaries in rules (0.1068ms)
+Γ£ö DC13 recent activity returns seven calendar days (0.1318ms)
+Γ£ö DC14 route, protected roles and navigation are integrated (1.1388ms)
+Γ£ö DC15 no notification permission requested without user gesture (0.4283ms)
+Γ£ö DC16 background web push is opt-in, generic, and never caches student data (0.6092ms)
+Γ£ö DC17 Firestore candidate rules scope records to student and product consent (0.5143ms)
+Γ£ö DC18 manifests use real bundled icons and do not bundle app-store claim (0.4285ms)
+Γ£ö DC19 preview is fail-closed until consent gate and rules are deployed (0.222ms)
+Γ£ö DC20 consent withdrawal stops foreground reminders in the open page (0.3928ms)
+Γä╣ tests 20
+Γä╣ suites 0
+Γä╣ pass 20
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 136.7926

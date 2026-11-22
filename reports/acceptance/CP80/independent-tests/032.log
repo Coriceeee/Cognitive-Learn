@@ -1,0 +1,70 @@
+
+> cognitive-learn-ai@0.1.0 test:consent-share-revocation
+> node --experimental-strip-types --test tests/step20-consent-share-revocation.test.mjs
+
+TAP version 13
+# (node:16620) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: SR01 withdrawal cleanup queries again and verifies empty server result
+ok 1 - SR01 withdrawal cleanup queries again and verifies empty server result
+  ---
+  duration_ms: 3.766595
+  type: 'test'
+  ...
+# Subtest: SR02 student report must be removed BEFORE corresponding link
+ok 2 - SR02 student report must be removed BEFORE corresponding link
+  ---
+  duration_ms: 0.803369
+  type: 'test'
+  ...
+# Subtest: SR03 cross-account link from untrusted snapshot fails closed
+ok 3 - SR03 cross-account link from untrusted snapshot fails closed
+  ---
+  duration_ms: 1.064857
+  type: 'test'
+  ...
+# Subtest: SR04 switching account aborts without deleting remaining links
+ok 4 - SR04 switching account aborts without deleting remaining links
+  ---
+  duration_ms: 0.600065
+  type: 'test'
+  ...
+# Subtest: SR05 delete report error blocks link removal, no misleading success
+ok 5 - SR05 delete report error blocks link removal, no misleading success
+  ---
+  duration_ms: 0.548488
+  type: 'test'
+  ...
+# Subtest: SR06 nonempty 25th page never yields verifiedEmpty=true
+ok 6 - SR06 nonempty 25th page never yields verifiedEmpty=true
+  ---
+  duration_ms: 0.640341
+  type: 'test'
+  ...
+# Subtest: SR07 disallow invalid UID and oversized query pages
+ok 7 - SR07 disallow invalid UID and oversized query pages
+  ---
+  duration_ms: 1.030294
+  type: 'test'
+  ...
+# Subtest: SR08 user withdrawal is committed BEFORE best-effort share cleanup
+ok 8 - SR08 user withdrawal is committed BEFORE best-effort share cleanup
+  ---
+  duration_ms: 0.352037
+  type: 'test'
+  ...
+# Subtest: SR09 UI shows retry on partial cleanup and warns about residual data
+ok 9 - SR09 UI shows retry on partial cleanup and warns about residual data
+  ---
+  duration_ms: 0.625175
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 221.929721

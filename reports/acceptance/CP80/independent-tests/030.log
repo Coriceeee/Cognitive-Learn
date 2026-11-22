@@ -1,0 +1,94 @@
+
+> cognitive-learn-ai@0.1.0 test:notifications
+> node --experimental-strip-types --test tests/step18-notification-center.test.mjs
+
+TAP version 13
+# (node:16560) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: NC01 toast store starts empty and ignores blank messages
+ok 1 - NC01 toast store starts empty and ignores blank messages
+  ---
+  duration_ms: 1.308367
+  type: 'test'
+  ...
+# Subtest: NC02 notice broadcasts, includes type, and allows manual dismissal
+ok 2 - NC02 notice broadcasts, includes type, and allows manual dismissal
+  ---
+  duration_ms: 0.375742
+  type: 'test'
+  ...
+# Subtest: NC03 duplicate events are suppressed within 45s
+ok 3 - NC03 duplicate events are suppressed within 45s
+  ---
+  duration_ms: 0.219817
+  type: 'test'
+  ...
+# Subtest: NC04 notifications respect size limits and history cap
+ok 4 - NC04 notifications respect size limits and history cap
+  ---
+  duration_ms: 0.608393
+  type: 'test'
+  ...
+# Subtest: NC05 opening inbox marks current notices read
+ok 5 - NC05 opening inbox marks current notices read
+  ---
+  duration_ms: 0.232995
+  type: 'test'
+  ...
+# Subtest: NC06 all authorized routes share the same notification viewport
+ok 6 - NC06 all authorized routes share the same notification viewport
+  ---
+  duration_ms: 0.649975
+  type: 'test'
+  ...
+# Subtest: NC07 popup is below navigation and is mobile responsive
+ok 7 - NC07 popup is below navigation and is mobile responsive
+  ---
+  duration_ms: 0.249077
+  type: 'test'
+  ...
+# Subtest: NC08 no fake analysis completed on initial page mount
+ok 8 - NC08 no fake analysis completed on initial page mount
+  ---
+  duration_ms: 2.242436
+  type: 'test'
+  ...
+# Subtest: NC09 save success only after Firestore commit, error on failure
+ok 9 - NC09 save success only after Firestore commit, error on failure
+  ---
+  duration_ms: 0.850182
+  type: 'test'
+  ...
+# Subtest: NC10 exam reminders use real saved milestones and session dedupe
+ok 10 - NC10 exam reminders use real saved milestones and session dedupe
+  ---
+  duration_ms: 0.557802
+  type: 'test'
+  ...
+# Subtest: NC11 network events are handled without claiming Firebase save success
+ok 11 - NC11 network events are handled without claiming Firebase save success
+  ---
+  duration_ms: 0.266253
+  type: 'test'
+  ...
+# Subtest: NC12 no notification persists in server or between user logouts
+ok 12 - NC12 no notification persists in server or between user logouts
+  ---
+  duration_ms: 4.623948
+  type: 'test'
+  ...
+# Subtest: NC13 success notification remains visible after the profile-to-dashboard redirect
+ok 13 - NC13 success notification remains visible after the profile-to-dashboard redirect
+  ---
+  duration_ms: 4.688553
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 184.599021

@@ -1,0 +1,42 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp31:batch10
+> node --experimental-strip-types --test tests/cp31-batch10-t0-freeze.test.mjs
+
+Γ£ö B10-01 T0 created with plan before check-in / outcomes (3.0523ms)
+Γ£ö B10-02 T0 is transparent descriptive gap, not predicted score/gain (0.2214ms)
+Γ£ö B10-03 observed 0 is not missing, negative gaps truncated per subject (0.1944ms)
+Γ£ö B10-04 T0 is a defensive copy, not a live reference to editable draft (0.289ms)
+Γ£ö B10-05 check-in does not alter T0 snapshot (0.8579ms)
+Γ£ö B10-06 review / measured T1 does not alter T0 snapshot (0.8293ms)
+Γ£ö B10-07 same T0 inputs with different later outcomes give identical T0 (0.2922ms)
+Γ£ö B10-08 client refuses to check in after plan baseline rewritten (0.4415ms)
+Γ£ö B10-09 client refuses to reassess after T0 was rewritten (0.2295ms)
+Γ£ö B10-10 T0 rejects faked future predicted score (0.3275ms)
+Γ£ö B10-11 T0 rejects faked calibrated probability (0.1477ms)
+Γ£ö B10-12 T0 rejects forged forecastStatus (0.1278ms)
+Γ£ö B10-13 T0 rejects recalculated target gap after measurement (0.0866ms)
+Γ£ö B10-14 T0 rejects after-the-fact baseline change (0.1042ms)
+Γ£ö B10-15 T0 rejects after-the-fact target change (0.0829ms)
+Γ£ö B10-16 T0 rejects after-the-fact strategy or hours change (0.1395ms)
+Γ£ö B10-17 T0 rejects artificial frozenAt / startedAt (0.1684ms)
+Γ£ö B10-18 T0 refuses altered input provenance / policy (0.1052ms)
+Γ£ö B10-19 T0 refuses extra fields implying external review (0.0697ms)
+Γ£ö B10-20 T0 refuses duplicate/fake subject data (0.1241ms)
+Γ£ö B10-21 T0 safely allows old cycles without evidence but never claims frozen (0.2169ms)
+Γ£ö B10-22 explicit null from old Firestore cycle is legacy, not valid snapshot (0.1027ms)
+Γ£ö B10-23 malformed T0 and impossible timestamps fail closed (0.1036ms)
+Γ£ö B10-24 synthetic Golden Path retains frozen T0 and no predictions (2.338ms)
+Γ£ö B10-25 Firestore candidate enforces immutable snapshot + baseline before write (1.0188ms)
+Γ£ö B10-26 candidate emulator tests cover T0 missing/tamper, no silently dropped authorization tests (0.4448ms)
+Γ£ö B10-27 app displays T0 frozen/legacy status and refuses future prediction labels (0.3796ms)
+Γ£ö B10-28 stored T0 is never included in mutable Firestore updates (0.2991ms)
+Γ£ö B10-29 snapshot builder does not even accept later checkIns / reassessment fields (0.3436ms)
+Γ£ö B10-30 static contract: T0 gap cannot be sold as causal effect or forecast (0.0936ms)
+Γä╣ tests 30
+Γä╣ suites 0
+Γä╣ pass 30
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 155.7305

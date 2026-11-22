@@ -71,6 +71,24 @@
   font-weight: 600;
 }
 
+/* CP77: authentic two-sentence CLA statement on the sign-in showcase.
+ * The previous 74px heading cannot fit this longer text beside the illustration. */
+.showcase-copy .cla-login-manifesto {
+  max-width: 560px;
+  font-size: clamp(31px, 2.7vw, 47px);
+  line-height: 1.12;
+  letter-spacing: -0.045em;
+  font-weight: 850;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+.showcase-copy .cla-login-manifesto-caption {
+  max-width: 520px;
+  line-height: 1.6;
+  font-weight: 550;
+}
+
 .profile-showcase-card {
   position: relative;
   z-index: 2;

@@ -1,0 +1,18 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp75:ux-audit
+> node --test tests/cp75-ux-audit.test.cjs
+
+Γ£ö Unknown route presents a real not-found message, while home still logs in (1.3943ms)
+Γ£ö Fallback button styles cannot outrank local component styles by specificity (0.4885ms)
+Γ£ö Transcript input accessible names identify learner context and assessment (0.5622ms)
+Γ£ö Chat starts with a short action-focused introduction, not a full score list (0.5409ms)
+Γ£ö Account menu is keyboard dismissible and exposes expanded state (0.4123ms)
+Γ£ö No TypeScript syntax errors in the modified UI files (50.1908ms)
+Γä╣ tests 6
+Γä╣ suites 0
+Γä╣ pass 6
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 304.6144

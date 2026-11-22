@@ -1,0 +1,48 @@
+﻿Đường dẫn,Màn hình,Nhóm,Rà soát mã nguồn,Kiểm tra React thực tế,Desktop 1280,Mobile 390,Bàn phím + SR,Lưu/tải lại,Ghi chú
+/,Đăng nhập,Công khai / Tài khoản,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/about,Giới thiệu,Công khai / Tài khoản,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/contact,Liên hệ,Công khai / Tài khoản,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/student,Tổng quan học sinh · Seed,Seed / học sinh,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/student/exams,Lịch thi · Seed,Seed / học sinh,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/student/profile,Hồ sơ và mục tiêu · Seed,Seed / học sinh,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/student/transcript,Bảng điểm và GPA · Seed,Seed / học sinh,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/student/consent,Quyền riêng tư dữ liệu · Seed,Seed / học sinh,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/student/modules,Sáu phân hệ học sinh,Seed / học sinh,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/student/guide,Hướng dẫn sử dụng,Seed / học sinh,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/student/storage,Trạng thái đồng bộ · Seed,Seed / học sinh,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/student/companion,Nhật ký học tập · Seed,Seed / học sinh,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/lumen,Tổng quan · Lumen,Lumen,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/lumen/indices,Chỉ số nhận thức thử nghiệm · Lumen,Lumen,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/lumen/history,Lịch sử phép đo · Lumen,Lumen,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/lumen/insights,Diễn giải kết quả · Lumen,Lumen,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/lumen/assistant,Trợ lý diễn giải · Lumen,Lumen,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/lumen/state,Trạng thái dữ liệu · Lumen,Lumen,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/lumen/roadmap,Hành động tiếp theo · Lumen,Lumen,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/lumen/evidence,Bằng chứng phép đo · Lumen,Lumen,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/lumen/advanced,Thông tin mở rộng · Lumen,Lumen,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/atlas,Tổng quan · Atlas,Atlas,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/atlas/vietnam,Tuyển sinh Việt Nam · Atlas,Atlas,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/atlas/joint,Liên kết quốc tế · Atlas,Atlas,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/atlas/recommendations,Gợi ý ngành và trường · Atlas,Atlas,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/atlas/sources,Nguồn tuyển sinh · Atlas,Atlas,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/atlas/subjects,Tổ hợp xét tuyển · Atlas,Atlas,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/atlas/compare,So sánh trường và ngành · Atlas,Atlas,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/atlas/library,Thư viện dữ liệu · Atlas,Atlas,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/orion,Tổng quan · Orion,Orion,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/orion/inputs,Dữ liệu và mục tiêu · Orion,Orion,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/orion/scenarios,Kịch bản học tập · Orion,Orion,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/orion/roadmap,Lộ trình học tập · Orion,Orion,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/pulse,Tổng quan · Pulse,Pulse,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/pulse/progress,Theo dõi tiến độ · Pulse,Pulse,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/pulse/reports,Báo cáo học tập · Pulse,Pulse,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/pulse/actions,Hành động tiếp theo · Pulse,Pulse,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/pulse/inputs,Dữ liệu tiến độ · Pulse,Pulse,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/pulse/checkin,Check-in học tập · Pulse,Pulse,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/pulse/audit,Kiểm tra liên thông · Pulse,Pulse,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/haven,Tổng quan · Haven,Haven,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/haven/scholarships,Học bổng · Haven,Haven,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/haven/finance,Ngân sách · Haven,Haven,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/haven/plan,Kế hoạch hỗ trợ · Haven,Haven,Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/admin,Bảng điều hành · Nexus,Nexus (Admin),Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/admin/diagnostics,Chẩn đoán hệ thống · Nexus,Nexus (Admin),Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React
+/admin/audit,Kiểm toán hệ thống · Nexus,Nexus (Admin),Đã kiểm kê route / TSX,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,CHƯA CHẠY,Ảnh fixture không thay thế ảnh React

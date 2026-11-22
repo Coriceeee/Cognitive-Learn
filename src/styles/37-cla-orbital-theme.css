@@ -6,32 +6,77 @@
 
 /* ---------- 1. Token ---------- */
 :root {
-  --t-bg: #f2f5fb;
-  --t-bg-2: #e8eef9;
+  --t-bg: #f5f8ff;
+  --t-bg-2: #edf3ff;
   --t-surface: #ffffff;
-  --t-surface-2: #f6f8fd;
+  --t-surface-2: #f5f9ff;
   --t-line: #dbe3f1;
   --t-line-strong: #b9c6e0;
   --t-ink: #0a1430;
   --t-ink-2: #34425f;
   --t-muted: #5b6987;
-  --t-accent: #2f5bff;
-  --t-accent-2: #0a93bd;
+  --t-accent: #245bc4;
+  --t-accent-2: #0f819b;
   --t-ring: rgba(47, 91, 255, 0.22);
   --t-grid: rgba(40, 70, 140, 0.055);
-  --t-glow-a: rgba(47, 91, 255, 0.16);
-  --t-glow-b: rgba(10, 147, 189, 0.12);
+  --t-glow-a: rgba(83, 107, 236, 0.15);
+  --t-glow-b: rgba(35, 183, 164, 0.10);
   --t-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 14px 40px -16px rgba(26, 48, 110, 0.22);
   --t-radius: 16px;
 
   /* Màu ánh sáng của từng module (tối hơn ở nền sáng để đủ tương phản) */
-  --m-seed: #3f9b1d;
-  --m-lumen: #b77a00;
-  --m-atlas: #0a8fb5;
-  --m-orion: #6d4df0;
-  --m-pulse: #079b6b;
-  --m-haven: #d4581f;
+  --m-seed: #167d60;
+  --m-lumen: #9b650d;
+  --m-atlas: #265fc4;
+  --m-orion: #6744b8;
+  --m-pulse: #b13d60;
+  --m-haven: #087f88;
   --m-nexus: #2f5bff;
+
+  /* CP79: exact bright gradients from the original six-module palette.
+   * 500/300 are accents; 700 is legible type on 050 surfaces. */
+  --seed-500: #0FAF9A;
+  --seed-300: #35D6C2;
+  --seed-050: #E9FBF8;
+  --seed-200: #A9E9E0;
+  --seed-700: #09685F;
+  --seed-glow: rgba(15, 175, 154, .18);
+  --seed-gradient: linear-gradient(135deg, var(--seed-500), var(--seed-300));
+  --lumen-500: #C9922E;
+  --lumen-300: #F2BE5C;
+  --lumen-050: #FFF7E8;
+  --lumen-200: #E8C98F;
+  --lumen-700: #78500E;
+  --lumen-glow: rgba(201, 146, 46, .16);
+  --lumen-gradient: linear-gradient(135deg, var(--lumen-500), var(--lumen-300));
+  --atlas-500: #3977FF;
+  --atlas-300: #67A5FF;
+  --atlas-050: #EDF4FF;
+  --atlas-200: #BBD4FF;
+  --atlas-700: #1C4F9D;
+  --atlas-glow: rgba(57, 119, 255, .18);
+  --atlas-gradient: linear-gradient(135deg, var(--atlas-500), var(--atlas-300));
+  --orion-500: #8B6DFF;
+  --orion-300: #B39DFF;
+  --orion-050: #F4F0FF;
+  --orion-200: #D8CCFF;
+  --orion-700: #57369C;
+  --orion-glow: rgba(139, 109, 255, .18);
+  --orion-gradient: linear-gradient(135deg, var(--orion-500), var(--orion-300));
+  --pulse-500: #E94B7B;
+  --pulse-300: #FF7FA5;
+  --pulse-050: #FFF0F5;
+  --pulse-200: #F7BED0;
+  --pulse-700: #91314F;
+  --pulse-glow: rgba(233, 75, 123, .18);
+  --pulse-gradient: linear-gradient(135deg, var(--pulse-500), var(--pulse-300));
+  --haven-500: #14A3C7;
+  --haven-300: #4CCAE6;
+  --haven-050: #EAF9FD;
+  --haven-200: #AEE4F1;
+  --haven-700: #06656D;
+  --haven-glow: rgba(20, 163, 199, .18);
+  --haven-gradient: linear-gradient(135deg, var(--haven-500), var(--haven-300));
 
   /* Biến cũ của dự án trỏ về token mới */
   --ink: var(--t-ink);

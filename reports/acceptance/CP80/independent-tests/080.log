@@ -1,0 +1,44 @@
+
+> cognitive-learn-ai@0.1.0 test:cp47:orion-autosave
+> node --experimental-strip-types --test tests/cp47-orion-autosave.test.mjs
+
+TAP version 13
+# Subtest: CP47-01: Orion autosaves only after an explicit local edit and verified draft state
+ok 1 - CP47-01: Orion autosaves only after an explicit local edit and verified draft state
+  ---
+  duration_ms: 2.219993
+  type: 'test'
+  ...
+# Subtest: CP47-02: newer edits are not marked saved by an older in-flight autosave
+ok 2 - CP47-02: newer edits are not marked saved by an older in-flight autosave
+  ---
+  duration_ms: 0.146036
+  type: 'test'
+  ...
+# Subtest: CP47-03: autosave retains the authenticated Firestore ownership guard
+ok 3 - CP47-03: autosave retains the authenticated Firestore ownership guard
+  ---
+  duration_ms: 0.233732
+  type: 'test'
+  ...
+# Subtest: CP47-04: autosave is a Firestore draft only; no browser storage or outcome claim is introduced
+ok 4 - CP47-04: autosave is a Firestore draft only; no browser storage or outcome claim is introduced
+  ---
+  duration_ms: 0.352675
+  type: 'test'
+  ...
+# Subtest: CP47-05: manual save cancels a pending autosave to avoid duplicate writes
+ok 5 - CP47-05: manual save cancels a pending autosave to avoid duplicate writes
+  ---
+  duration_ms: 0.265974
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 123.157142

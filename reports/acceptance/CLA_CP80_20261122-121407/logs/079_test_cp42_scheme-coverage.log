@@ -1,0 +1,20 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp42:scheme-coverage
+> node --experimental-strip-types --test tests/cp42-scheme-coverage.test.mjs
+
+Γ£ö 73 scheme codes independent of cutoff; published quota sums match transcribed rows (0.9309ms)
+Γ£ö QNU named triples retain names and no invented standard codes (0.2179ms)
+Γ£ö ambiguous technology or aptitude never mapped to student elective (0.1721ms)
+Γ£ö HTU explicit X14 X21 mapping and legacy C14 not guessed (0.6392ms)
+Γ£ö scheme-only results searchable without fabricating cutoff or eligibility (0.5767ms)
+Γ£ö new school programmes available for elective matching and explicit zero (2.2303ms)
+Γ£ö coverage counts remain local and separate from national denominator (4.756ms)
+Γ£ö official published school codes work in three-year discovery (14.3376ms)
+Γä╣ tests 8
+Γä╣ suites 0
+Γä╣ pass 8
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 220.7545

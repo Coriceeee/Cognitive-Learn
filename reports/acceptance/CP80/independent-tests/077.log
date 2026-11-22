@@ -1,0 +1,64 @@
+
+> cognitive-learn-ai@0.1.0 test:cp42:robust-decision
+> node --experimental-strip-types --test tests/cp42-robust-decision.test.mjs
+
+TAP version 13
+# (node:18016) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: zero radius matches nominal utility and ranking
+ok 1 - zero radius matches nominal utility and ranking
+  ---
+  duration_ms: 3.099055
+  type: 'test'
+  ...
+# Subtest: full radius spans all criteria; worst regret is max per-criterion regret
+ok 2 - full radius spans all criteria; worst regret is max per-criterion regret
+  ---
+  duration_ms: 0.676395
+  type: 'test'
+  ...
+# Subtest: exact vertex result bounds a dense simplex grid for multiple weight configurations
+ok 3 - exact vertex result bounds a dense simplex grid for multiple weight configurations
+  ---
+  duration_ms: 21.425206
+  type: 'test'
+  ...
+# Subtest: same hard limits govern eligible alternatives and fixed anchors
+ok 4 - same hard limits govern eligible alternatives and fixed anchors
+  ---
+  duration_ms: 0.337369
+  type: 'test'
+  ...
+# Subtest: tie candidates retained, dominated alternatives never suggested even for zero weight
+ok 5 - tie candidates retained, dominated alternatives never suggested even for zero weight
+  ---
+  duration_ms: 0.446198
+  type: 'test'
+  ...
+# Subtest: block missing, invalid, duplicate and out-of-scale data
+ok 6 - block missing, invalid, duplicate and out-of-scale data
+  ---
+  duration_ms: 0.251444
+  type: 'test'
+  ...
+# Subtest: real Orion scenario set works for every valid horizon; timetable never exceeds deadline, no duplicate milestone keys
+ok 7 - real Orion scenario set works for every valid horizon; timetable never exceeds deadline, no duplicate milestone keys
+  ---
+  duration_ms: 4.038263
+  type: 'test'
+  ...
+# Subtest: UI passes same filtered scenario list into existing closed loop, no implicit or stale selection
+ok 8 - UI passes same filtered scenario list into existing closed loop, no implicit or stale selection
+  ---
+  duration_ms: 1.795936
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 250.092796

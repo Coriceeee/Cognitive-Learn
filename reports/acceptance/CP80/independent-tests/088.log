@@ -1,0 +1,52 @@
+
+> cognitive-learn-ai@0.1.0 test:cp57:timestamp
+> node --experimental-strip-types --test tests/cp57-firestore-timestamp-stability.test.mjs
+
+TAP version 13
+# (node:15191) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP57.1 revisioned documents do not conflict during serverTimestamp null -> resolved
+ok 1 - CP57.1 revisioned documents do not conflict during serverTimestamp null -> resolved
+  ---
+  duration_ms: 1.875711
+  type: 'test'
+  ...
+# Subtest: CP57.2 local timestamp estimates do not create phantom conflicts
+ok 2 - CP57.2 local timestamp estimates do not create phantom conflicts
+  ---
+  duration_ms: 0.33675
+  type: 'test'
+  ...
+# Subtest: CP57.3 genuine remote edits remain blocked even if revision was reused
+ok 3 - CP57.3 genuine remote edits remain blocked even if revision was reused
+  ---
+  duration_ms: 0.774682
+  type: 'test'
+  ...
+# Subtest: CP57.4 legacy revision-less documents keep timestamp ABA protection
+ok 4 - CP57.4 legacy revision-less documents keep timestamp ABA protection
+  ---
+  duration_ms: 0.485169
+  type: 'test'
+  ...
+# Subtest: CP57.5 acknowledgement with unknown timestamp still enforces exact payload
+ok 5 - CP57.5 acknowledgement with unknown timestamp still enforces exact payload
+  ---
+  duration_ms: 0.217116
+  type: 'test'
+  ...
+# Subtest: CP57.6 draft hook remains protected by server-side transaction CAS
+ok 6 - CP57.6 draft hook remains protected by server-side transaction CAS
+  ---
+  duration_ms: 0.918452
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 149.677503

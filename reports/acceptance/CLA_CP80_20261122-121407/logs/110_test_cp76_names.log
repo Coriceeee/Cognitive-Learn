@@ -1,0 +1,21 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp76:names
+> node --experimental-strip-types --test tests/cp76-vietnamese-names.test.mjs
+
+Γ£ö CP76 seed: only tab copy changes; existing destinations and availability stay intact (1.5367ms)
+Γ£ö CP76 lumen: only tab copy changes; existing destinations and availability stay intact (0.1622ms)
+Γ£ö CP76 atlas: only tab copy changes; existing destinations and availability stay intact (0.1229ms)
+Γ£ö CP76 orion: only tab copy changes; existing destinations and availability stay intact (0.1268ms)
+Γ£ö CP76 pulse: only tab copy changes; existing destinations and availability stay intact (0.1175ms)
+Γ£ö CP76 haven: only tab copy changes; existing destinations and availability stay intact (0.0918ms)
+Γ£ö CP76: six clear Vietnamese names appear in shared navigation without changing internal keys (0.7164ms)
+Γ£ö CP76: Atlas study-abroad four tasks remain in unified bar and preserve country query (0.355ms)
+Γ£ö CP76: student-facing map, module catalog, About and guide share the same brand names (0.8758ms)
+Γä╣ tests 9
+Γä╣ suites 0
+Γä╣ pass 9
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 125.9511

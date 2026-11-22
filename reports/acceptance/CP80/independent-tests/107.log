@@ -1,0 +1,70 @@
+
+> cognitive-learn-ai@0.1.0 test:cp76:names
+> node --experimental-strip-types --test tests/cp76-vietnamese-names.test.mjs
+
+TAP version 13
+# (node:15886) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP76 seed: only tab copy changes; existing destinations and availability stay intact
+ok 1 - CP76 seed: only tab copy changes; existing destinations and availability stay intact
+  ---
+  duration_ms: 2.920645
+  type: 'test'
+  ...
+# Subtest: CP76 lumen: only tab copy changes; existing destinations and availability stay intact
+ok 2 - CP76 lumen: only tab copy changes; existing destinations and availability stay intact
+  ---
+  duration_ms: 0.359038
+  type: 'test'
+  ...
+# Subtest: CP76 atlas: only tab copy changes; existing destinations and availability stay intact
+ok 3 - CP76 atlas: only tab copy changes; existing destinations and availability stay intact
+  ---
+  duration_ms: 0.28862
+  type: 'test'
+  ...
+# Subtest: CP76 orion: only tab copy changes; existing destinations and availability stay intact
+ok 4 - CP76 orion: only tab copy changes; existing destinations and availability stay intact
+  ---
+  duration_ms: 0.275854
+  type: 'test'
+  ...
+# Subtest: CP76 pulse: only tab copy changes; existing destinations and availability stay intact
+ok 5 - CP76 pulse: only tab copy changes; existing destinations and availability stay intact
+  ---
+  duration_ms: 0.369114
+  type: 'test'
+  ...
+# Subtest: CP76 haven: only tab copy changes; existing destinations and availability stay intact
+ok 6 - CP76 haven: only tab copy changes; existing destinations and availability stay intact
+  ---
+  duration_ms: 0.213622
+  type: 'test'
+  ...
+# Subtest: CP76: six clear Vietnamese names appear in shared navigation without changing internal keys
+ok 7 - CP76: six clear Vietnamese names appear in shared navigation without changing internal keys
+  ---
+  duration_ms: 1.108997
+  type: 'test'
+  ...
+# Subtest: CP76: Atlas study-abroad four tasks remain in unified bar and preserve country query
+ok 8 - CP76: Atlas study-abroad four tasks remain in unified bar and preserve country query
+  ---
+  duration_ms: 0.653614
+  type: 'test'
+  ...
+# Subtest: CP76: student-facing map, module catalog, About and guide share the same brand names
+ok 9 - CP76: student-facing map, module catalog, About and guide share the same brand names
+  ---
+  duration_ms: 1.274089
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 190.744267

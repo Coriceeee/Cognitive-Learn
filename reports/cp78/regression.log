@@ -1,0 +1,1365 @@
+==== test:cp62:student-rail ====
+
+> cognitive-learn-ai@0.1.0 test:cp62:student-rail
+> node --experimental-strip-types --test tests/cp62-student-action-rail.test.mjs
+
+TAP version 13
+# (node:59956) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP62 dashboard data-source signal rail
+    # Subtest: renders three explicitly labeled source flags and no invented measurements
+    ok 1 - renders three explicitly labeled source flags and no invented measurements
+      ---
+      duration_ms: 1.273928
+      type: 'test'
+      ...
+    # Subtest: distinguishes a profile from cognitive and historical observation
+    ok 2 - distinguishes a profile from cognitive and historical observation
+      ---
+      duration_ms: 0.12185
+      type: 'test'
+      ...
+    # Subtest: does not convert missing profile to valid downstream signals
+    ok 3 - does not convert missing profile to valid downstream signals
+      ---
+      duration_ms: 0.102942
+      type: 'test'
+      ...
+    # Subtest: handles mixed prerequisites without pretending all three are ready
+    ok 4 - handles mixed prerequisites without pretending all three are ready
+      ---
+      duration_ms: 0.22377
+      type: 'test'
+      ...
+    # Subtest: renders all-available as exactly three source flags, not a numeric score
+    ok 5 - renders all-available as exactly three source flags, not a numeric score
+      ---
+      duration_ms: 0.330607
+      type: 'test'
+      ...
+    # Subtest: integrates after the verified-data canvas without reinstating twin cards
+    ok 6 - integrates after the verified-data canvas without reinstating twin cards
+      ---
+      duration_ms: 0.182088
+      type: 'test'
+      ...
+    # Subtest: keeps the exam calendar first and the preview isolated
+    ok 7 - keeps the exam calendar first and the preview isolated
+      ---
+      duration_ms: 0.1219
+      type: 'test'
+      ...
+    # Subtest: bounds action count and uses real links, ARIA and plain source labels
+    ok 8 - bounds action count and uses real links, ARIA and plain source labels
+      ---
+      duration_ms: 0.255867
+      type: 'test'
+      ...
+    # Subtest: includes mobile, dark and reduced-motion styles loaded in the global entrypoint
+    ok 9 - includes mobile, dark and reduced-motion styles loaded in the global entrypoint
+      ---
+      duration_ms: 0.90935
+      type: 'test'
+      ...
+    1..9
+ok 1 - CP62 dashboard data-source signal rail
+  ---
+  duration_ms: 4.53166
+  type: 'suite'
+  ...
+1..1
+# tests 9
+# suites 1
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 147.379903
+==== test:cp63:guided-workspaces ====
+
+> cognitive-learn-ai@0.1.0 test:cp63:guided-workspaces
+> node --experimental-strip-types --test tests/cp63-guided-workspaces.test.mjs
+
+TAP version 13
+# (node:59993) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP63 student navigation seed
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 1.340796
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.279442
+      type: 'test'
+      ...
+    1..2
+ok 1 - CP63 student navigation seed
+  ---
+  duration_ms: 2.623237
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation lumen
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 2.984469
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.224291
+      type: 'test'
+      ...
+    1..2
+ok 2 - CP63 student navigation lumen
+  ---
+  duration_ms: 3.352222
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation atlas
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 0.115951
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.154177
+      type: 'test'
+      ...
+    1..2
+ok 3 - CP63 student navigation atlas
+  ---
+  duration_ms: 0.490433
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation orion
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 0.168849
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.137643
+      type: 'test'
+      ...
+    1..2
+ok 4 - CP63 student navigation orion
+  ---
+  duration_ms: 0.515049
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation pulse
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 0.198112
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.197221
+      type: 'test'
+      ...
+    1..2
+ok 5 - CP63 student navigation pulse
+  ---
+  duration_ms: 0.473228
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation haven
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 0.185193
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.06073
+      type: 'test'
+      ...
+    1..2
+ok 6 - CP63 student navigation haven
+  ---
+  duration_ms: 0.319501
+  type: 'suite'
+  ...
+# Subtest: CP63 cross-module and accessibility contracts
+    # Subtest: handles nested study abroad country routes as the Atlas study-abroad tab
+    ok 1 - handles nested study abroad country routes as the Atlas study-abroad tab
+      ---
+      duration_ms: 0.244641
+      type: 'test'
+      ...
+    # Subtest: never exposes planned-only or missing destinations
+    ok 2 - never exposes planned-only or missing destinations
+      ---
+      duration_ms: 1.201612
+      type: 'test'
+      ...
+    # Subtest: caps quick links to a small scan-friendly set and preserves order
+    ok 3 - caps quick links to a small scan-friendly set and preserves order
+      ---
+      duration_ms: 0.215748
+      type: 'test'
+      ...
+    # Subtest: uses semantic links, native disclosure, current-page labels and no invented completion gauge
+    ok 4 - uses semantic links, native disclosure, current-page labels and no invented completion gauge
+      ---
+      duration_ms: 0.329356
+      type: 'test'
+      ...
+    # Subtest: includes accessible focus, dark/light and mobile CSS with reduced motion
+    ok 5 - includes accessible focus, dark/light and mobile CSS with reduced motion
+      ---
+      duration_ms: 0.093718
+      type: 'test'
+      ...
+    # Subtest: keeps SPA routing and unsaved-draft navigation guards in charge of links
+    ok 6 - keeps SPA routing and unsaved-draft navigation guards in charge of links
+      ---
+      duration_ms: 0.097544
+      type: 'test'
+      ...
+    1..6
+ok 7 - CP63 cross-module and accessibility contracts
+  ---
+  duration_ms: 2.373608
+  type: 'suite'
+  ...
+1..7
+# tests 18
+# suites 7
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 183.256462
+==== test:cp64:input-ux ====
+
+> cognitive-learn-ai@0.1.0 test:cp64:input-ux
+> node --experimental-strip-types --test tests/cp64-input-ux.test.mjs
+
+TAP version 13
+# (node:60032) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP64 real field-coverage semantics
+    # Subtest: does not count blank values as observed zero
+    ok 1 - does not count blank values as observed zero
+      ---
+      duration_ms: 1.610013
+      type: 'test'
+      ...
+    # Subtest: does not count invalid text, NaN, Infinity, or out-of-range values
+    ok 2 - does not count invalid text, NaN, Infinity, or out-of-range values
+      ---
+      duration_ms: 0.17602
+      type: 'test'
+      ...
+    # Subtest: accepts explicit boundaries, decimal comma, and valid negative if permitted
+    ok 3 - accepts explicit boundaries, decimal comma, and valid negative if permitted
+      ---
+      duration_ms: 0.268867
+      type: 'test'
+      ...
+    # Subtest: enforces integer-only weeks and counts when configured
+    ok 4 - enforces integer-only weeks and counts when configured
+      ---
+      duration_ms: 0.184502
+      type: 'test'
+      ...
+    # Subtest: tracks text fields without inventing a numeric score
+    ok 5 - tracks text fields without inventing a numeric score
+      ---
+      duration_ms: 0.116832
+      type: 'test'
+      ...
+    # Subtest: sums independent groups without losing missing or invalid information
+    ok 6 - sums independent groups without losing missing or invalid information
+      ---
+      duration_ms: 0.33902
+      type: 'test'
+      ...
+    # Subtest: reports zero fields as zero rather than NaN or percentages
+    ok 7 - reports zero fields as zero rather than NaN or percentages
+      ---
+      duration_ms: 0.099447
+      type: 'test'
+      ...
+    # Subtest: rejects duplicate field identifiers to prevent double counting
+    ok 8 - rejects duplicate field identifiers to prevent double counting
+      ---
+      duration_ms: 0.571141
+      type: 'test'
+      ...
+    1..8
+ok 1 - CP64 real field-coverage semantics
+  ---
+  duration_ms: 4.59936
+  type: 'suite'
+  ...
+# Subtest: CP64 three-module integration and accessibility
+    # Subtest: shows the data graph on orion overview, not admin or all routes
+    ok 1 - shows the data graph on orion overview, not admin or all routes
+      ---
+      duration_ms: 0.443634
+      type: 'test'
+      ...
+    # Subtest: shows the data graph on pulse overview, not admin or all routes
+    ok 2 - shows the data graph on pulse overview, not admin or all routes
+      ---
+      duration_ms: 0.246843
+      type: 'test'
+      ...
+    # Subtest: shows the data graph on haven overview, not admin or all routes
+    ok 3 - shows the data graph on haven overview, not admin or all routes
+      ---
+      duration_ms: 0.07495
+      type: 'test'
+      ...
+    # Subtest: does not claim academic readiness or probability from form completeness
+    ok 4 - does not claim academic readiness or probability from form completeness
+      ---
+      duration_ms: 0.265691
+      type: 'test'
+      ...
+    # Subtest: shows missing versus invalid as two different states and does not leak field values
+    ok 5 - shows missing versus invalid as two different states and does not leak field values
+      ---
+      duration_ms: 0.22358
+      type: 'test'
+      ...
+    # Subtest: keeps user navigation inside SPA and respects unsaved draft guards
+    ok 6 - keeps user navigation inside SPA and respects unsaved draft guards
+      ---
+      duration_ms: 0.15569
+      type: 'test'
+      ...
+    # Subtest: configures proper input ranges for Orion, Pulse and Haven
+    ok 7 - configures proper input ranges for Orion, Pulse and Haven
+      ---
+      duration_ms: 0.220555
+      type: 'test'
+      ...
+    # Subtest: supports dark mode, mobile, print, reduced motion and accessible focus
+    ok 8 - supports dark mode, mobile, print, reduced motion and accessible focus
+      ---
+      duration_ms: 0.145535
+      type: 'test'
+      ...
+    1..8
+ok 2 - CP64 three-module integration and accessibility
+  ---
+  duration_ms: 2.162618
+  type: 'suite'
+  ...
+# Subtest: CP64 release evidence covers visual artifacts
+    # Subtest: fingerprints styles entrypoint and the new visual style, without duplicates
+    ok 1 - fingerprints styles entrypoint and the new visual style, without duplicates
+      ---
+      duration_ms: 8.715407
+      type: 'test'
+      ...
+    1..1
+ok 3 - CP64 release evidence covers visual artifacts
+  ---
+  duration_ms: 8.821503
+  type: 'suite'
+  ...
+1..3
+# tests 17
+# suites 3
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 161.18906
+==== test:cp65:atlas-lumen-ux ====
+
+> cognitive-learn-ai@0.1.0 test:cp65:atlas-lumen-ux
+> node --experimental-strip-types --test tests/cp65-atlas-lumen-ux.test.mjs
+
+TAP version 13
+# (node:60061) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP65 source-backed Atlas overview
+    # Subtest: counts registry rows not inferred national coverage
+    ok 1 - counts registry rows not inferred national coverage
+      ---
+      duration_ms: 1.224715
+      type: 'test'
+      ...
+    # Subtest: keeps missing years explicitly zero without interpolation
+    ok 2 - keeps missing years explicitly zero without interpolation
+      ---
+      duration_ms: 0.839758
+      type: 'test'
+      ...
+    # Subtest: does not invent rows when data is empty
+    ok 3 - does not invent rows when data is empty
+      ---
+      duration_ms: 0.148479
+      type: 'test'
+      ...
+    # Subtest: retains distinction between records, universities, distinct URLs
+    ok 4 - retains distinction between records, universities, distinct URLs
+      ---
+      duration_ms: 0.165273
+      type: 'test'
+      ...
+    # Subtest: reads actual registry instead of hard-coded numbers
+    ok 5 - reads actual registry instead of hard-coded numbers
+      ---
+      duration_ms: 0.262727
+      type: 'test'
+      ...
+    # Subtest: exposes four real active task routes and works with soft links
+    ok 6 - exposes four real active task routes and works with soft links
+      ---
+      duration_ms: 0.183501
+      type: 'test'
+      ...
+    # Subtest: keeps Atlas year-by-year cutoff graph visible on comparison tab
+    ok 7 - keeps Atlas year-by-year cutoff graph visible on comparison tab
+      ---
+      duration_ms: 0.140897
+      type: 'test'
+      ...
+    # Subtest: limits visual pathway to Atlas overview rather than every nested tab
+    ok 8 - limits visual pathway to Atlas overview rather than every nested tab
+      ---
+      duration_ms: 0.161007
+      type: 'test'
+      ...
+    1..8
+ok 1 - CP65 source-backed Atlas overview
+  ---
+  duration_ms: 4.004693
+  type: 'suite'
+  ...
+# Subtest: CP65 Lumen observation-first UX
+    # Subtest: adds evidence journey and chart to the overview only
+    ok 1 - adds evidence journey and chart to the overview only
+      ---
+      duration_ms: 0.240254
+      type: 'test'
+      ...
+    # Subtest: never treats missing dimensions as observed zeros
+    ok 2 - never treats missing dimensions as observed zeros
+      ---
+      duration_ms: 0.227085
+      type: 'test'
+      ...
+    # Subtest: does not claim growth before history verification
+    ok 3 - does not claim growth before history verification
+      ---
+      duration_ms: 0.116371
+      type: 'test'
+      ...
+    # Subtest: routes unavailable insights to Seed completion, not a fake AI result
+    ok 4 - routes unavailable insights to Seed completion, not a fake AI result
+      ---
+      duration_ms: 0.066919
+      type: 'test'
+      ...
+    # Subtest: leaves other Lumen tabs intact
+    ok 5 - leaves other Lumen tabs intact
+      ---
+      duration_ms: 0.128279
+      type: 'test'
+      ...
+    1..5
+ok 2 - CP65 Lumen observation-first UX
+  ---
+  duration_ms: 0.982569
+  type: 'suite'
+  ...
+# Subtest: CP65 usability, release tracking and limitations
+    # Subtest: supports semantic navigation and readable chart numbers
+    ok 1 - supports semantic navigation and readable chart numbers
+      ---
+      duration_ms: 0.100408
+      type: 'test'
+      ...
+    # Subtest: includes mobile, dark, print and reduced-motion rules
+    ok 2 - includes mobile, dark, print and reduced-motion rules
+      ---
+      duration_ms: 0.063984
+      type: 'test'
+      ...
+    # Subtest: fingerprints CSS and logic files for release provenance
+    ok 3 - fingerprints CSS and logic files for release provenance
+      ---
+      duration_ms: 6.540751
+      type: 'test'
+      ...
+    1..3
+ok 3 - CP65 usability, release tracking and limitations
+  ---
+  duration_ms: 6.800054
+  type: 'suite'
+  ...
+1..3
+# tests 16
+# suites 3
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 117.526399
+==== test:cp66:unified-states ====
+
+> cognitive-learn-ai@0.1.0 test:cp66:unified-states
+> node --experimental-strip-types --test tests/cp66-unified-states.test.mjs
+
+TAP version 13
+# (node:60094) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP66 pure and deterministic Firestore status UI
+    # Subtest: shows verified status only on confirmed ready
+    ok 1 - shows verified status only on confirmed ready
+      ---
+      duration_ms: 1.703872
+      type: 'test'
+      ...
+    # Subtest: never calls cache-backed syncing saved
+    ok 2 - never calls cache-backed syncing saved
+      ---
+      duration_ms: 0.18311
+      type: 'test'
+      ...
+    # Subtest: never shows ready for loading, signed-out, or denied reads
+    ok 3 - never shows ready for loading, signed-out, or denied reads
+      ---
+      duration_ms: 0.123612
+      type: 'test'
+      ...
+    # Subtest: gives conflicts precedence over stale save notices
+    ok 4 - gives conflicts precedence over stale save notices
+      ---
+      duration_ms: 0.094419
+      type: 'test'
+      ...
+    # Subtest: never claims saved while an upload is pending
+    ok 5 - never claims saved while an upload is pending
+      ---
+      duration_ms: 0.195067
+      type: 'test'
+      ...
+    # Subtest: distinguishes missing draft from confirmed saved draft
+    ok 6 - distinguishes missing draft from confirmed saved draft
+      ---
+      duration_ms: 0.099717
+      type: 'test'
+      ...
+    # Subtest: distinguishes failed writes from positive notices
+    ok 7 - distinguishes failed writes from positive notices
+      ---
+      duration_ms: 0.115991
+      type: 'test'
+      ...
+    # Subtest: does not hide user edits behind old successful notices
+    ok 8 - does not hide user edits behind old successful notices
+      ---
+      duration_ms: 0.248226
+      type: 'test'
+      ...
+    # Subtest: does not call failed autosave successful
+    ok 9 - does not call failed autosave successful
+      ---
+      duration_ms: 0.204571
+      type: 'test'
+      ...
+    # Subtest: keeps in-progress autosave distinct from completed autosave
+    ok 10 - keeps in-progress autosave distinct from completed autosave
+      ---
+      duration_ms: 0.2851
+      type: 'test'
+      ...
+    # Subtest: does not trust a stale success notice when the account signed out
+    ok 11 - does not trust a stale success notice when the account signed out
+      ---
+      duration_ms: 0.136511
+      type: 'test'
+      ...
+    1..11
+ok 1 - CP66 pure and deterministic Firestore status UI
+  ---
+  duration_ms: 4.406806
+  type: 'suite'
+  ...
+# Subtest: CP66 integration: one status vocabulary in six modules
+    # Subtest: renders consistent form feedback for Orion, Pulse and Haven
+    ok 1 - renders consistent form feedback for Orion, Pulse and Haven
+      ---
+      duration_ms: 0.187436
+      type: 'test'
+      ...
+    # Subtest: clears stale save notices on every edit in Pulse and Haven
+    ok 2 - clears stale save notices on every edit in Pulse and Haven
+      ---
+      duration_ms: 0.20326
+      type: 'test'
+      ...
+    # Subtest: keeps Orion autosave and newer edit protections intact
+    ok 3 - keeps Orion autosave and newer edit protections intact
+      ---
+      duration_ms: 0.083393
+      type: 'test'
+      ...
+    # Subtest: uses status-specific panels for Seed transcript, Lumen and Atlas
+    not ok 4 - uses status-specific panels for Seed transcript, Lumen and Atlas
+      ---
+      duration_ms: 1.281118
+      type: 'test'
+      location: '/mnt/data/cla_cp78_ux_clarity/tests/cp66-unified-states.test.mjs:85:2'
+      failureType: 'testCodeFailure'
+      error: |-
+        The input did not match the regular expression /label="Chưa có hồ sơ học sinh"/. Input:
+        
+        'import { navigateTo } from "../../lib/clientNavigation";\n' +
+          'import LearningIntelligencePanel from "../seed/components/LearningIntelligencePanel";\n' +
+          'import CognitiveScoreGrid from "../seed/components/CognitiveScoreGrid";\n' +
+          'import CognitiveInsightPanel from "../seed/components/CognitiveInsightPanel";\n' +
+          'import { useLearningIntelligence } from "../seed/hooks/useLearningIntelligence";\n' +
+          'import { currentFocusedPath } from "../../lib/focusedModuleRoute";\n' +
+          'import ModuleSectionNav from "../../components/common/ModuleSectionNav";\n' +
+          'import ModuleStateNotice from "../../components/common/ModuleStateNotice";\n' +
+          'import appLogo from "../../assets/logo cla.png";\n' +
+          'import UserMenu from "../../components/common/UserMenu";\n' +
+          '\n' +
+          '\n' +
+          'import {\n' +
+          '  useVerifiedStudentProfile,\n' +
+          '} from "../seed/hooks/StudentProfileProvider";\n' +
+          '\n' +
+          'import {\n' +
+          '  useLumenIntelligence,\n' +
+          '} from "./hooks/useLumenIntelligence";\n' +
+          '\n' +
+          'import LumenOverview from "./components/LumenOverview";\n' +
+          'import LumenInsightPanel from "./components/LumenInsightPanel";\n' +
+          'import LumenDecisionPanel from "./components/LumenDecisionPanel";\n' +
+          'import LumenEvidencePanel from "./components/LumenEvidencePanel";\n' +
+          'import LumenResearchEvidence from "./components/LumenResearchEvidence";\n' +
+          'import LumenExternalMlEvidence from "./components/LumenExternalMlEvidence";\n' +
+          'import LumenCognitiveResearchReadiness from "./components/LumenCognitiveResearchReadiness";\n' +
+          'import LumenStrategyPanel from "./components/LumenStrategyPanel";\n' +
+          'import CognitiveGrowthPanel from "../seed/components/CognitiveGrowthPanel";\n' +
+          'import LumenSignalAtlas from "./components/LumenSignalAtlas";\n' +
+          'import LumenObservationJourney from "./components/LumenObservationJourney";\n' +
+          'import LumenAdaptiveRoadmap from "./components/LumenAdaptiveRoadmap";\n' +
+          'import LumenDynamicState from "./components/LumenDynamicState";\n' +
+          'import ClosedLoopPanel from "../../components/journey/ClosedLoopPanel";\n' +
+          '\n' +
+          '\n' +
+          'export default function LumenPage() {\n' +
+          '  const view = currentFocusedPath();\n' +
+          '\n' +
+          '  const {\n' +
+          '    profile,\n' +
+          '    cognitive,\n' +
+          '    growthAnalytics,\n' +
+          '    dynamicState,\n' +
+          '    temporalReport,\n' +
+          '    loading,\n' +
+          '    syncing,\n' +
+          '    historyLoading,\n' +
+          '    hasProfile,\n' +
+          '    error,\n' +
+          '  } = useVerifiedStudentProfile();\n' +
+          '\n' +
+          '\n' +
+          '\n' +
+          '  const intelligence =\n' +
+          '    useLumenIntelligence(\n' +
+          '      profile,\n' +
+          '      cognitive,\n' +
+          '      growthAnalytics\n' +
+          '    );\n' +
+          '\n' +
+          '\n' +
+          '\n' +
+          '  const advanced = useLearningIntelligence(profile, cognitive, growthAnalytics);\n' +
+          '\n' +
+          '  if (loading) {\n' +
+          '\n' +
+          '    return (\n' +
+          '\n' +
+          '      <main className="lumen-page">\n' +
+          '\n' +
+          '        <header className="lumen-floating-header">\n' +
+          '\n' +
+          '          <a\n' +
+          '            className="lumen-home-logo"\n' +
+          '            href="/student"\n' +
+          '            aria-label="Về trang học sinh"\n' +
+          '          >\n' +
+          '\n' +
+          '            <img\n' +
+          '              src={appLogo}\n' +
+          '              alt="Cognitive Learn"\n' +
+          '            />\n' +
+          '\n' +
+          '          </a>\n' +
+          '\n' +
+          '          <UserMenu />\n' +
+          '\n' +
+          '        </header>\n' +
+          '\n' +
+          '\n' +
+          '        <section className="lumen-page-loading">\n' +
+          '\n' +
+          '          <div className="lumen-loading-orb" />\n' +
+          '\n' +
+          '          <ModuleStateNotice tone="loading" label="Đang tải Lumen Intelligence" message="Đang nhận hồ sơ và dữ liệu nhận thức để kiểm tra trạng thái." />\n' +
+          '\n' +
+          '        </section>\n' +
+          '\n' +
+          '      </main>\n' +
+          '\n' +
+          '    );\n' +
+          '\n' +
+          '  }\n' +
+          '\n' +
+          '\n' +
+          '\n' +
+          '  if (syncing) return (\n' +
+          '    <main className="lumen-page">\n' +
+          '      <section className="lumen-page-loading">\n' +
+          '        <ModuleStateNotice tone="loading" label="Chờ Firestore xác minh"\n' +
+          '          message="Đang chờ Firestore xác minh hồ sơ và dữ liệu nhận thức. Kết quả lưu trong cache không được dùng để phân tích." />\n' +
+          '      </section>\n' +
+          '    </main>\n' +
+          '  );\n' +
+          '\n' +
+          '  return (\n' +
+          '\n' +
+          '    <main className="lumen-page">\n' +
+          '\n' +
+          '      <header className="lumen-floating-header">\n' +
+          '\n' +
+          '        <a\n' +
+          '          className="lumen-home-logo"\n' +
+          '          href="/student"\n' +
+          '          aria-label="Về trang học sinh"\n' +
+          '        >\n' +
+          '\n' +
+          '          <img\n' +
+          '            src={appLogo}\n' +
+          '            alt="Cognitive Learn"\n' +
+          '          />\n' +
+          '\n' +
+          '        </a>\n' +
+          '\n' +
+          '        <UserMenu />\n' +
+          '\n' +
+          '      </header>\n' +
+          '\n' +
+          '\n' +
+          '\n' +
+          '      <section className="lumen-shell">\n' +
+          '        <ModuleSectionNav moduleKey="lumen" />\n' +
+          '        {view === "/lumen/evidence" && <ClosedLoopPanel mode="lumen" />}\n' +
+          '        {hasProfile && ["/lumen/state", "/lumen/history"].includes(view) && <LumenDynamicState state={dynamicState} temporal={temporalReport} historyLoading={historyLoading} mode={view === "/lumen/state" ? "state" : "history"} />}\n' +
+          '        {view === "/lumen/roadmap" && hasProfile && <LumenAdaptiveRoadmap state={dynamicState} temporal={historyLoading?null:temporalReport} />}\n' +
+          '        {view === "/lumen/evidence" && <details className="cla-focus-disclosure"><summary>Phương pháp đo và bằng chứng nghiên cứu tổng hợp</summary><LumenResearchEvidence /><LumenExternalMlEvidence />{hasProfile && !error && <LumenCognitiveResearchReadiness cognitive={cognitive} />}</details>}\n' +
+          '\n' +
+          '        {\n' +
+          '          error && !hasProfile ? (\n' +
+          '\n' +
+          '            <section className="lumen-error-card">\n' +
+          '\n' +
+          '              <span className="lumen-eyebrow">\n' +
+          '                LUMEN INTELLIGENCE\n' +
+          '              </span>\n' +
+          '\n' +
+          '              <h1>Không thể tải dữ liệu</h1>\n' +
+          '              <ModuleStateNotice tone="error" label="Cần kiểm tra kết nối"\n' +
+          '                message={error}>\n' +
+          '                <a href="/student/profile">Kiểm tra hồ sơ Seed</a>\n' +
+          '              </ModuleStateNotice>\n' +
+          '\n' +
+          '            </section>\n' +
+          '\n' +
+          '          ) : !hasProfile ? (\n' +
+          '\n' +
+          '            <section className="lumen-empty-card">\n' +
+          '\n' +
+          '              <div className="lumen-empty-icon">\n' +
+          '                ✦\n' +
+          '              </div>\n' +
+          '\n' +
+          '              <span className="lumen-eyebrow">\n' +
+          '                LUMEN INTELLIGENCE\n' +
+          '              </span>\n' +
+          '\n' +
+          '              <h1>Chưa có hồ sơ học sinh</h1>\n' +
+          '              <ModuleStateNotice tone="neutral" label="Bắt đầu từ Seed"\n' +
+          '                message="Hoàn thiện Seed Profile để bắt đầu quan sát các chỉ số nhận thức. Không suy đoán điểm số khi thiếu dữ liệu.">\n' +
+          '                <a href="/student/profile" className="lumen-primary-action">Hoàn thiện hồ sơ</a>\n' +
+          '              </ModuleStateNotice>\n' +
+          '\n' +
+          '            </section>\n' +
+          '\n' +
+          '          ) : (\n' +
+          '\n' +
+          '            <>\n' +
+          '\n' +
+          '              {error && (\n' +
+          '                <div className="lumen-data-warning" role="status">\n' +
+          '                  <strong>Đang sử dụng dữ liệu hồ sơ đã tải</strong>\n' +
+          '                  <p>{error} Phân tích Growth có thể chưa đầy đủ; các kết quả khác vẫn được hiển thị.</p>\n' +
+          '                </div>\n' +
+          '              )}\n' +
+          '\n' +
+          '        {view === "/lumen" && <>\n' +
+          '          <div><LumenOverview\n' +
+          '                fullName={\n' +
+          '                  profile.fullName\n' +
+          '                }\n' +
+          '                targetMajor={\n' +
+          '                  profile.targetMajor\n' +
+          '                }\n' +
+          '                targetUniversity={\n' +
+          '                  profile.targetUniversity\n' +
+          '                }\n' +
+          '                overallScore={cognitive.overallScore}\n' +
+          '                scoreAvailable={cognitive.scoreAvailable === true}\n' +
+          '              /></div>\n' +
+          '          <LumenObservationJourney cognitive={cognitive} growth={growthAnalytics} historyLoading={historyLoading} />\n' +
+          '          <LumenSignalAtlas cognitive={cognitive} growth={growthAnalytics} mode="indices" />\n' +
+          '        </>}\n' +
+          '\n' +
+          '\n' +
+          '              {view === "/lumen/history" && historyLoading && (\n' +
+          '                <p className="lumen-data-warning" role="status">\n' +
+          '                  Đang đối chiếu lịch sử Cognitive từ Firestore. Chưa kết luận xu hướng cho đến khi nhận được dữ liệu máy chủ.\n' +
+          '                </p>\n' +
+          '              )}\n' +
+          '        {view === "/lumen/history" && <>\n' +
+          '          <div id="lumen-growth" className="lumen-growth-section">\n' +
+          '                <CognitiveGrowthPanel analytics={growthAnalytics} />\n' +
+          '              </div></>}\n' +
+          '\n' +
+          '              {view === "/lumen/indices" && <div id="lumen-indices"><LumenSignalAtlas cognitive={cognitive} growth={growthAnalytics} mode="indices" /><details className="cla-focus-disclosure"><summary>Chi tiết các chỉ số</summary><CognitiveScoreGrid cognitive={cognitive} /></details></div>}\n' +
+          '              {view === "/lumen/history" && <LumenSignalAtlas cognitive={cognitive} growth={growthAnalytics} mode="history" />}\n' +
+          '\n' +
+          '        {view === "/lumen/insights" && <>\n' +
+          '          <div id="lumen-insights">{cognitive.scoreAvailable === true ? (\n' +
+          '                <LumenInsightPanel\n' +
+          '                  insights={intelligence.insights}\n' +
+          '                  aiInsights={intelligence.ai.reasoning.insights}\n' +
+          '                />\n' +
+          '              ) : (\n' +
+          '                <section className="lumen-empty-card">\n' +
+          '                  <h2>Đánh giá Cognitive chưa đủ dữ liệu</h2>\n' +
+          '                  <p>\n' +
+          '                    Vui lòng hoàn thiện các phép đo còn thiếu trong Seed Profile.\n' +
+          '                    Lumen không đưa ra kết luận năng lực từ điểm 0 kỹ thuật.\n' +
+          '                  </p>\n' +
+          '                  <a href="/student/profile" className="lumen-primary-action">\n' +
+          '                    Bổ sung dữ liệu\n' +
+          '                  </a>\n' +
+          '                </section>\n' +
+          '              )}\n' +
+          '\n' +
+          '\n' +
+          '              </div></>}\n' +
+          '\n' +
+          '              {view === "/lumen/insights" && <details className="cla-focus-disclosure"><summary>Nhận xét chi tiết theo từng chỉ số</summary><CognitiveInsightPanel cognitive={cognitive} hasProfile={hasProfile} onCreateProfile={() => {navigateTo("/student/profile");}} /></details>}\n' +
+          '              {view === "/lumen/evidence" && <LumenEvidencePanel\n' +
+          '                hasHistory={intelligence.growthEvidence.status === "OBSERVED"}\n' +
+          '                growthEvidence={intelligence.growthEvidence}\n' +
+          '                aiExplanation={cognitive.scoreAvailable === true\n' +
+          '                  ? intelligence.ai.explanation\n' +
+          '                  : undefined}\n' +
+          '              />}\n' +
+          '\n' +
+          '\n' +
+          '              {view === "/lumen/assistant" && cognitive.scoreAvailable !== true && <p className="cla-transcript-hint">Chưa đủ dữ liệu để giải thích bằng AI. <a href="/student/profile">Bổ sung hồ sơ</a>.</p>}\n' +
+          '              {view === "/lumen/assistant" && cognitive.scoreAvailable === true && (\n' +
+          '                <section id="lumen-gemini" className="lumen-gemini-panel" aria-labelledby="lumen-gemini-title">\n' +
+          '                  <div className="lumen-gemini-heading">\n' +
+          '                    <div>\n' +
+          '                      <span className="lumen-eyebrow">GEMINI · DIỄN GIẢI BỔ SUNG</span>\n' +
+          '                      <h2 id="lumen-gemini-title">Hiểu rõ hơn kết quả học tập</h2>\n' +
+          '                      <p>\n' +
+          '                        Nhấn nút bên dưới để yêu cầu Gemini giải thích các chỉ số\n' +
+          '                        Cognitive, Growth'... 6292 more characters
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected:
+      actual: |-
+        import { navigateTo } from "../../lib/clientNavigation";
+        import LearningIntelligencePanel from "../seed/components/LearningIntelligencePanel";
+        import CognitiveScoreGrid from "../seed/components/CognitiveScoreGrid";
+        import CognitiveInsightPanel from "../seed/components/CognitiveInsightPanel";
+        import { useLearningIntelligence } from "../seed/hooks/useLearningIntelligence";
+        import { currentFocusedPath } from "../../lib/focusedModuleRoute";
+        import ModuleSectionNav from "../../components/common/ModuleSectionNav";
+        import ModuleStateNotice from "../../components/common/ModuleStateNotice";
+        import appLogo from "../../assets/logo cla.png";
+        import UserMenu from "../../components/common/UserMenu";
+        
+        
+        import {
+          useVerifiedStudentProfile,
+        } from "../seed/hooks/StudentProfileProvider";
+        
+        import {
+          useLumenIntelligence,
+        } from "./hooks/useLumenIntelligence";
+        
+        import LumenOverview from "./components/LumenOverview";
+        import LumenInsightPanel from "./components/LumenInsightPanel";
+        import LumenDecisionPanel from "./components/LumenDecisionPanel";
+        import LumenEvidencePanel from "./components/LumenEvidencePanel";
+        import LumenResearchEvidence from "./components/LumenResearchEvidence";
+        import LumenExternalMlEvidence from "./components/LumenExternalMlEvidence";
+        import LumenCognitiveResearchReadiness from "./components/LumenCognitiveResearchReadiness";
+        import LumenStrategyPanel from "./components/LumenStrategyPanel";
+        import CognitiveGrowthPanel from "../seed/components/CognitiveGrowthPanel";
+        import LumenSignalAtlas from "./components/LumenSignalAtlas";
+        import LumenObservationJourney from "./components/LumenObservationJourney";
+        import LumenAdaptiveRoadmap from "./components/LumenAdaptiveRoadmap";
+        import LumenDynamicState from "./components/LumenDynamicState";
+        import ClosedLoopPanel from "../../components/journey/ClosedLoopPanel";
+        
+        
+        export default function LumenPage() {
+          const view = currentFocusedPath();
+        
+          const {
+            profile,
+            cognitive,
+            growthAnalytics,
+            dynamicState,
+            temporalReport,
+            loading,
+            syncing,
+            historyLoading,
+            hasProfile,
+            error,
+          } = useVerifiedStudentProfile();
+        
+        
+        
+          const intelligence =
+            useLumenIntelligence(
+              profile,
+              cognitive,
+              growthAnalytics
+            );
+        
+        
+        
+          const advanced = useLearningIntelligence(profile, cognitive, growthAnalytics);
+        
+          if (loading) {
+        
+            return (
+        
+              <main className="lumen-page">
+        
+                <header className="lumen-floating-header">
+        
+                  <a
+                    className="lumen-home-logo"
+                    href="/student"
+                    aria-label="Về trang học sinh"
+                  >
+        
+                    <img
+                      src={appLogo}
+                      alt="Cognitive Learn"
+                    />
+        
+                  </a>
+        
+                  <UserMenu />
+        
+                </header>
+        
+        
+                <section className="lumen-page-loading">
+        
+                  <div className="lumen-loading-orb" />
+        
+                  <ModuleStateNotice tone="loading" label="Đang tải Lumen Intelligence" message="Đang nhận hồ sơ và dữ liệu nhận thức để kiểm tra trạng thái." />
+        
+                </section>
+        
+              </main>
+        
+            );
+        
+          }
+        
+        
+        
+          if (syncing) return (
+            <main className="lumen-page">
+              <section className="lumen-page-loading">
+                <ModuleStateNotice tone="loading" label="Chờ Firestore xác minh"
+                  message="Đang chờ Firestore xác minh hồ sơ và dữ liệu nhận thức. Kết quả lưu trong cache không được dùng để phân tích." />
+              </section>
+            </main>
+          );
+        
+          return (
+        
+            <main className="lumen-page">
+        
+              <header className="lumen-floating-header">
+        
+                <a
+                  className="lumen-home-logo"
+                  href="/student"
+                  aria-label="Về trang học sinh"
+                >
+        
+                  <img
+                    src={appLogo}
+                    alt="Cognitive Learn"
+                  />
+        
+                </a>
+        
+                <UserMenu />
+        
+              </header>
+        
+        
+        
+              <section className="lumen-shell">
+                <ModuleSectionNav moduleKey="lumen" />
+                {view === "/lumen/evidence" && <ClosedLoopPanel mode="lumen" />}
+                {hasProfile && ["/lumen/state", "/lumen/history"].includes(view) && <LumenDynamicState state={dynamicState} temporal={temporalReport} historyLoading={historyLoading} mode={view === "/lumen/state" ? "state" : "history"} />}
+                {view === "/lumen/roadmap" && hasProfile && <LumenAdaptiveRoadmap state={dynamicState} temporal={historyLoading?null:temporalReport} />}
+                {view === "/lumen/evidence" && <details className="cla-focus-disclosure"><summary>Phương pháp đo và bằng chứng nghiên cứu tổng hợp</summary><LumenResearchEvidence /><LumenExternalMlEvidence />{hasProfile && !error && <LumenCognitiveResearchReadiness cognitive={cognitive} />}</details>}
+        
+                {
+                  error && !hasProfile ? (
+        
+                    <section className="lumen-error-card">
+        
+                      <span className="lumen-eyebrow">
+                        LUMEN INTELLIGENCE
+                      </span>
+        
+                      <h1>Không thể tải dữ liệu</h1>
+                      <ModuleStateNotice tone="error" label="Cần kiểm tra kết nối"
+                        message={error}>
+                        <a href="/student/profile">Kiểm tra hồ sơ Seed</a>
+                      </ModuleStateNotice>
+        
+                    </section>
+        
+                  ) : !hasProfile ? (
+        
+                    <section className="lumen-empty-card">
+        
+                      <div className="lumen-empty-icon">
+                        ✦
+                      </div>
+        
+                      <span className="lumen-eyebrow">
+                        LUMEN INTELLIGENCE
+                      </span>
+        
+                      <h1>Chưa có hồ sơ học sinh</h1>
+                      <ModuleStateNotice tone="neutral" label="Bắt đầu từ Seed"
+                        message="Hoàn thiện Seed Profile để bắt đầu quan sát các chỉ số nhận thức. Không suy đoán điểm số khi thiếu dữ liệu.">
+                        <a href="/student/profile" className="lumen-primary-action">Hoàn thiện hồ sơ</a>
+                      </ModuleStateNotice>
+        
+                    </section>
+        
+                  ) : (
+        
+                    <>
+        
+                      {error && (
+                        <div className="lumen-data-warning" role="status">
+                          <strong>Đang sử dụng dữ liệu hồ sơ đã tải</strong>
+                          <p>{error} Phân tích Growth có thể chưa đầy đủ; các kết quả khác vẫn được hiển thị.</p>
+                        </div>
+                      )}
+        
+                {view === "/lumen" && <>
+                  <div><LumenOverview
+                        fullName={
+                          profile.fullName
+                        }
+                        targetMajor={
+                          profile.targetMajor
+                        }
+                        targetUniversity={
+                          profile.targetUniversity
+                        }
+                        overallScore={cognitive.overallScore}
+                        scoreAvailable={cognitive.scoreAvailable === true}
+                      /></div>
+                  <LumenObservationJourney cognitive={cognitive} growth={growthAnalytics} historyLoading={historyLoading} />
+                  <LumenSignalAtlas cognitive={cognitive} growth={growthAnalytics} mode="indices" />
+                </>}
+        
+        
+                      {view === "/lumen/history" && historyLoading && (
+                        <p className="lumen-data-warning" role="status">
+                          Đang đối chiếu lịch sử Cognitive từ Firestore. Chưa kết luận xu hướng cho đến khi nhận được dữ liệu máy chủ.
+                        </p>
+                      )}
+                {view === "/lumen/history" && <>
+                  <div id="lumen-growth" className="lumen-growth-section">
+                        <CognitiveGrowthPanel analytics={growthAnalytics} />
+                      </div></>}
+        
+                      {view === "/lumen/indices" && <div id="lumen-indices"><LumenSignalAtlas cognitive={cognitive} growth={growthAnalytics} mode="indices" /><details className="cla-focus-disclosure"><summary>Chi tiết các chỉ số</summary><CognitiveScoreGrid cognitive={cognitive} /></details></div>}
+                      {view === "/lumen/history" && <LumenSignalAtlas cognitive={cognitive} growth={growthAnalytics} mode="history" />}
+        
+                {view === "/lumen/insights" && <>
+                  <div id="lumen-insights">{cognitive.scoreAvailable === true ? (
+                        <LumenInsightPanel
+                          insights={intelligence.insights}
+                          aiInsights={intelligence.ai.reasoning.insights}
+                        />
+                      ) : (
+                        <section className="lumen-empty-card">
+                          <h2>Đánh giá Cognitive chưa đủ dữ liệu</h2>
+                          <p>
+                            Vui lòng hoàn thiện các phép đo còn thiếu trong Seed Profile.
+                            Lumen không đưa ra kết luận năng lực từ điểm 0 kỹ thuật.
+                          </p>
+                          <a href="/student/profile" className="lumen-primary-action">
+                            Bổ sung dữ liệu
+                          </a>
+                        </section>
+                      )}
+        
+        
+                      </div></>}
+        
+                      {view === "/lumen/insights" && <details className="cla-focus-disclosure"><summary>Nhận xét chi tiết theo từng chỉ số</summary><CognitiveInsightPanel cognitive={cognitive} hasProfile={hasProfile} onCreateProfile={() => {navigateTo("/student/profile");}} /></details>}
+                      {view === "/lumen/evidence" && <LumenEvidencePanel
+                        hasHistory={intelligence.growthEvidence.status === "OBSERVED"}
+                        growthEvidence={intelligence.growthEvidence}
+                        aiExplanation={cognitive.scoreAvailable === true
+                          ? intelligence.ai.explanation
+                          : undefined}
+                      />}
+        
+        
+                      {view === "/lumen/assistant" && cognitive.scoreAvailable !== true && <p className="cla-transcript-hint">Chưa đủ dữ liệu để giải thích bằng AI. <a href="/student/profile">Bổ sung hồ sơ</a>.</p>}
+                      {view === "/lumen/assistant" && cognitive.scoreAvailable === true && (
+                        <section id="lumen-gemini" className="lumen-gemini-panel" aria-labelledby="lumen-gemini-title">
+                          <div className="lumen-gemini-heading">
+                            <div>
+                              <span className="lumen-eyebrow">GEMINI · DIỄN GIẢI BỔ SUNG</span>
+                              <h2 id="lumen-gemini-title">Hiểu rõ hơn kết quả học tập</h2>
+                              <p>
+                                Nhấn nút bên dưới để yêu cầu Gemini giải thích các chỉ số
+                                Cognitive, Growth hợp lệ và khuyến nghị nội bộ CLA.
+                                Không gửi họ tên, lớp hoặc mã tài khoản trong nội dung học tập.
+                                Lời giải thích chỉ mang tính tham khảo; Gemini không tự
+                                tính lại điểm hoặc xác suất tuyển sinh.
+                              </p>
+                            </div>
+                            <span className="lumen-gemini-label">
+                              {intelligence.gemini.status === "SUCCESS"
+                                ? "Đã có giải thích"
+                                : intelligence.gemini.status === "LOADING"
+                                  ? "Đang xử lý"
+                                  : "Theo yêu cầu"}
+                            </span>
+                          </div>
+        
+                          <section className="lumen-gemini-answer" aria-labelledby="lumen-local-guide-title">
+                            <div className="lumen-gemini-answer-header">
+                              <strong id="lumen-local-guide-title">Hướng dẫn CLA nội bộ · không cần Gemini</strong>
+                              <span>Quy tắc thử nghiệm, không phải dự báo ML</span>
+                            </div>
+                            <p>{intelligence.localGuide.summary}</p>
+                            {intelligence.localGuide.observations.length > 0 && <>
+                              <h3>Chỉ báo được sử dụng</h3>
+                              <ul>{intelligence.localGuide.observations.map(value => <li key={value}>{value}</li>)}</ul>
+                            </>}
+                            <h3>Bước có thể thử</h3>
+                            <ul>{intelligence.localGuide.nextActions.map(value => <li key={value}>{value}</li>)}</ul>
+                            <p className="lumen-gemini-note">{intelligence.localGuide.limitations.join(" ")}</p>
+                          </section>
+        
+                          <button
+                            type="button"
+                            className="lumen-primary-action lumen-gemini-button"
+                            onClick={() => { void intelligence.gemini.generate(); }}
+                            disabled={intelligence.gemini.status === "LOADING"}
+                            aria-busy={intelligence.gemini.status === "LOADING"}
+                          >
+                            {intelligence.gemini.status === "LOADING"
+                              ? "Đang chờ Gemini trả lời..."
+                              : intelligence.gemini.status === "SUCCESS"
+                                ? "Tạo lại giải thích"
+                                : "Tạo giải thích bằng Gemini"}
+                          </button>
+                          <div className="lumen-gemini-result" aria-live="polite" aria-atomic="false">
+                            {intelligence.gemini.status === "LOADING" && (
+                              <p className="lumen-gemini-info">Đang gửi yêu cầu bảo mật đến Gemini. Vui lòng chờ trong giây lát.</p>
+                            )}
+                            {intelligence.gemini.status === "FALLBACK" && (
+                              <div className="lumen-gemini-message" role="status">
+                                <strong>Chưa nhận được giải thích từ Gemini</strong>
+                                <p>{intelligence.gemini.error}</p>
+                                <p>Phân tích nội bộ trong Lumen vẫn sử dụng được bình thường.</p>
+                              </div>
+                            )}
+                            {intelligence.gemini.status === "SUCCESS" && intelligence.gemini.explanation && (
+                              <div className="lumen-gemini-answer">
+                                <div className="lumen-gemini-answer-header">
+                                  <strong>Giải thích hỗ trợ từ Gemini</strong>
+                                  <span>Không thay thế đánh giá chuyên môn</span>
+                                </div>
+                                <p>{intelligence.gemini.explanation.summary}</p>
+                                <h3>Căn cứ giải thích</h3>
+                                <ul>
+                                  {intelligence.gemini.explanation.reasons.map((item, index) => (
+                                    <li key={`reason-${index}`}>{item}</li>
+                                  ))}
+                                </ul>
+                                {intelligence.gemini.explanation.nextActions.length > 0 && (
+                                  <>
+                                    <h3>Việc có thể thử</h3>
+                                    <ul>
+                                      {intelligence.gemini.explanation.nextActions.map((item, index) => (
+                                        <li key={`action-${index}`}>{item}</li>
+                                      ))}
+                                    </ul>
+                                  </>
+                                )}
+                                {intelligence.gemini.explanation.limitations.length > 0 && (
+                                  <>
+                                    <h3>Giới hạn</h3>
+                                    <ul>
+                                      {intelligence.gemini.explanation.limitations.map((item, index) => (
+                                        <li key={`limit-${index}`}>{item}</li>
+                                      ))}
+                                    </ul>
+                                  </>
+                                )}
+                                <p className="lumen-gemini-note">
+                                  Đối chiếu phần Evidence trước khi sử dụng khuyến nghị.
+                                  Kết quả này chưa được lưu thành quyết định học tập.
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                        </section>
+                      )}
+        
+                      {view === "/lumen/advanced" && (cognitive.scoreAvailable === true ? <LearningIntelligencePanel intelligence={advanced} /> : <p className="cla-transcript-hint">Chưa đủ dữ liệu Cognitive hợp lệ. <a href="/student/profile">Bổ sung hồ sơ</a>.</p>)}
+                      {view === "/lumen/insights" && cognitive.scoreAvailable === true && (
+                        <>
+                          <LumenDecisionPanel intelligence={intelligence} />
+                          <details className="cla-focus-disclosure"><summary>Chiến lược học tập tham khảo</summary><LumenStrategyPanel strategy={intelligence.strategy} /></details>
+                        </>
+                      )}
+        
+                    </>
+        
+                  )
+                }
+        
+        
+                <footer className="lumen-footer">
+        
+                  <div>
+        
+                    <strong>
+                      COGNITIVE LEARN AI
+                    </strong>
+        
+                    <span>
+                      LUMEN INTELLIGENCE
+                    </span>
+        
+                  </div>
+        
+                  <small>
+                    Understand → Predict → Simulate → Decide
+                  </small>
+        
+                </footer>
+        
+              </section>
+        
+            </main>
+        
+          );
+        
+        }
+      operator: 'match'
+      stack: |-
+        TestContext.<anonymous> (file:///mnt/data/cla_cp78_ux_clarity/tests/cp66-unified-states.test.mjs:90:11)
+        Test.runInAsyncScope (node:async_hooks:214:14)
+        Test.run (node:internal/test_runner/test:1047:25)
+        Suite.processPendingSubtests (node:internal/test_runner/test:744:18)
+        Test.postRun (node:internal/test_runner/test:1173:19)
+        Test.run (node:internal/test_runner/test:1101:12)
+        async Suite.processPendingSubtests (node:internal/test_runner/test:744:7)
+      ...
+    # Subtest: keeps explicit accessibility roles and is not merely a color badge
+    ok 5 - keeps explicit accessibility roles and is not merely a color badge
+      ---
+      duration_ms: 0.087479
+      type: 'test'
+      ...
+    # Subtest: includes accessible mobile, dark, focus, print, reduced-motion CSS
+    ok 6 - includes accessible mobile, dark, focus, print, reduced-motion CSS
+      ---
+      duration_ms: 0.148609
+      type: 'test'
+      ...
+    # Subtest: keeps it a UI layer, not a change to Firestore authorisation
+    ok 7 - keeps it a UI layer, not a change to Firestore authorisation
+      ---
+      duration_ms: 0.419538
+      type: 'test'
+      ...
+    1..7
+not ok 2 - CP66 integration: one status vocabulary in six modules
+  ---
+  duration_ms: 2.609096
+  type: 'suite'
+  location: '/mnt/data/cla_cp78_ux_clarity/tests/cp66-unified-states.test.mjs:58:1'
+  failureType: 'subtestsFailed'
+  error: '1 subtest failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+1..2
+# tests 18
+# suites 2
+# pass 17
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 110.708269

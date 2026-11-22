@@ -1,0 +1,220 @@
+{
+  "scope": "isolated static DOM + actual CSS; not React E2E",
+  "results": [
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "hero": {
+        "left": 16,
+        "top": 16,
+        "right": 374,
+        "bottom": 1069.734375,
+        "width": 358,
+        "height": 1053.734375
+      },
+      "headline": {
+        "left": 41,
+        "top": 102,
+        "right": 349,
+        "bottom": 324.09375,
+        "width": 308,
+        "height": 222.09375
+      },
+      "caption": {
+        "left": 41,
+        "top": 348.09375,
+        "right": 349,
+        "bottom": 417.84375,
+        "width": 308,
+        "height": 69.75
+      },
+      "card": {
+        "left": 41,
+        "top": 445.84375,
+        "right": 349,
+        "bottom": 1044.734375,
+        "width": 308,
+        "height": 598.890625
+      },
+      "headingFont": "32.76px",
+      "headingColor": "rgb(20, 41, 65)",
+      "noHorizontalOverflow": true,
+      "headingContained": true,
+      "captionContained": true,
+      "cardContained": true,
+      "captionNotCovered": true
+    },
+    {
+      "width": 768,
+      "documentWidth": 768,
+      "hero": {
+        "left": 24,
+        "top": 24,
+        "right": 744,
+        "bottom": 1021.953125,
+        "width": 720,
+        "height": 997.953125
+      },
+      "headline": {
+        "left": 67,
+        "top": 128,
+        "right": 627,
+        "bottom": 266.875,
+        "width": 560,
+        "height": 138.875
+      },
+      "caption": {
+        "left": 67,
+        "top": 290.875,
+        "right": 587,
+        "bottom": 342.0625,
+        "width": 520,
+        "height": 51.1875
+      },
+      "card": {
+        "left": 204,
+        "top": 370.0625,
+        "right": 564,
+        "bottom": 978.953125,
+        "width": 360,
+        "height": 608.890625
+      },
+      "headingFont": "31px",
+      "headingColor": "rgb(20, 41, 65)",
+      "noHorizontalOverflow": true,
+      "headingContained": true,
+      "captionContained": true,
+      "cardContained": true,
+      "captionNotCovered": true
+    },
+    {
+      "width": 1093,
+      "documentWidth": 1093,
+      "hero": {
+        "left": 24,
+        "top": 24,
+        "right": 1069,
+        "bottom": 1021.953125,
+        "width": 1045,
+        "height": 997.953125
+      },
+      "headline": {
+        "left": 67,
+        "top": 128,
+        "right": 627,
+        "bottom": 266.875,
+        "width": 560,
+        "height": 138.875
+      },
+      "caption": {
+        "left": 67,
+        "top": 290.875,
+        "right": 587,
+        "bottom": 342.0625,
+        "width": 520,
+        "height": 51.1875
+      },
+      "card": {
+        "left": 366.5,
+        "top": 370.0625,
+        "right": 726.5,
+        "bottom": 978.953125,
+        "width": 360,
+        "height": 608.890625
+      },
+      "headingFont": "31px",
+      "headingColor": "rgb(20, 41, 65)",
+      "noHorizontalOverflow": true,
+      "headingContained": true,
+      "captionContained": true,
+      "cardContained": true,
+      "captionNotCovered": true
+    },
+    {
+      "width": 1366,
+      "documentWidth": 1366,
+      "hero": {
+        "left": 36,
+        "top": 36,
+        "right": 692.25,
+        "bottom": 786.78125,
+        "width": 656.25,
+        "height": 750.78125
+      },
+      "headline": {
+        "left": 79,
+        "top": 234.15625,
+        "right": 371.8125,
+        "bottom": 523.234375,
+        "width": 292.8125,
+        "height": 289.078125
+      },
+      "caption": {
+        "left": 79,
+        "top": 547.234375,
+        "right": 371.8125,
+        "bottom": 649.609375,
+        "width": 292.8125,
+        "height": 102.375
+      },
+      "card": {
+        "left": 399.8125,
+        "top": 79,
+        "right": 649.25,
+        "bottom": 743.78125,
+        "width": 249.4375,
+        "height": 664.78125
+      },
+      "headingFont": "36.882px",
+      "headingColor": "rgb(20, 41, 65)",
+      "noHorizontalOverflow": true,
+      "headingContained": true,
+      "captionContained": true,
+      "cardContained": true,
+      "captionNotCovered": true
+    },
+    {
+      "width": 1680,
+      "documentWidth": 1680,
+      "hero": {
+        "left": 36,
+        "top": 160,
+        "right": 857.09375,
+        "bottom": 890,
+        "width": 821.09375,
+        "height": 730
+      },
+      "headline": {
+        "left": 79,
+        "top": 327.3125,
+        "right": 460.828125,
+        "bottom": 682.890625,
+        "width": 381.828125,
+        "height": 355.578125
+      },
+      "caption": {
+        "left": 79,
+        "top": 706.890625,
+        "right": 460.828125,
+        "bottom": 783.671875,
+        "width": 381.828125,
+        "height": 76.78125
+      },
+      "card": {
+        "left": 488.828125,
+        "top": 220.546875,
+        "right": 814.09375,
+        "bottom": 829.4375,
+        "width": 325.265625,
+        "height": 608.890625
+      },
+      "headingFont": "45.36px",
+      "headingColor": "rgb(20, 41, 65)",
+      "noHorizontalOverflow": true,
+      "headingContained": true,
+      "captionContained": true,
+      "cardContained": true,
+      "captionNotCovered": true
+    }
+  ]
+}

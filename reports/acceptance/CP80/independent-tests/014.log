@@ -1,0 +1,40 @@
+TAP version 13
+# Subtest: CP36: Student Cognitive Path is task-first, no duplicate six-module selector
+ok 1 - CP36: Student Cognitive Path is task-first, no duplicate six-module selector
+  ---
+  duration_ms: 3.42043
+  type: 'test'
+  ...
+# Subtest: CP36: Haven separates sourced opportunities from heuristic score
+ok 2 - CP36: Haven separates sourced opportunities from heuristic score
+  ---
+  duration_ms: 0.616035
+  type: 'test'
+  ...
+# Subtest: CP36: seven scholarships have official URLs and no default guaranteed eligibility or deadlines
+ok 3 - CP36: seven scholarships have official URLs and no default guaranteed eligibility or deadlines
+  ---
+  duration_ms: 1.677474
+  type: 'test'
+  ...
+# Subtest: CP36: Atlas has three added official 2026 sources, no synthetic prior-year entries
+ok 4 - CP36: Atlas has three added official 2026 sources, no synthetic prior-year entries
+  ---
+  duration_ms: 0.617249
+  type: 'test'
+  ...
+# Subtest: CP36: final CSS layer is loaded and high-contrast inputs remain visible
+ok 5 - CP36: final CSS layer is loaded and high-contrast inputs remain visible
+  ---
+  duration_ms: 0.376327
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 70.851423

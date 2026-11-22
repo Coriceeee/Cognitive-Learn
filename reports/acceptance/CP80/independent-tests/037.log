@@ -1,0 +1,188 @@
+
+> cognitive-learn-ai@0.1.0 test:cp29:accounts
+> node --test tests/cp29-privileged-account-ops.test.mjs tests/cp29-account-ui-contract.test.cjs
+
+TAP version 13
+# Subtest: CP29-B1-01 password reset uses Firebase Auth and never guesses Admin privileges
+ok 1 - CP29-B1-01 password reset uses Firebase Auth and never guesses Admin privileges
+  ---
+  duration_ms: 4.010913
+  type: 'test'
+  ...
+# Subtest: CP29-B1-02 password reset UI returns generic acknowledgment
+ok 2 - CP29-B1-02 password reset UI returns generic acknowledgment
+  ---
+  duration_ms: 0.352942
+  type: 'test'
+  ...
+# Subtest: CP29-K15-24 optional backend is not in default firebase config
+ok 3 - CP29-K15-24 optional backend is not in default firebase config
+  ---
+  duration_ms: 0.644575
+  type: 'test'
+  ...
+# Subtest: CP29-K15-25 role Management is never accessible as student business route
+ok 4 - CP29-K15-25 role Management is never accessible as student business route
+  ---
+  duration_ms: 3.036925
+  type: 'test'
+  ...
+# Subtest: CP29-B4-01 Demo remains own-UID and explicitly labeled
+ok 5 - CP29-B4-01 Demo remains own-UID and explicitly labeled
+  ---
+  duration_ms: 0.55229
+  type: 'test'
+  ...
+# Subtest: CP29-K15-01 rejects empty, primitive, unknown and extra input keys
+ok 6 - CP29-K15-01 rejects empty, primitive, unknown and extra input keys
+  ---
+  duration_ms: 2.10765
+  type: 'test'
+  ...
+# Subtest: CP29-K15-02 rejects invalid UID/ticket/requestId without arbitrary document paths
+ok 7 - CP29-K15-02 rejects invalid UID/ticket/requestId without arbitrary document paths
+  ---
+  duration_ms: 0.557549
+  type: 'test'
+  ...
+# Subtest: CP29-K15-03 denies admin role grant and invalid active state
+ok 8 - CP29-K15-03 denies admin role grant and invalid active state
+  ---
+  duration_ms: 0.225094
+  type: 'test'
+  ...
+# Subtest: CP29-K15-04 allow only bounded non-Admin role targets
+ok 9 - CP29-K15-04 allow only bounded non-Admin role targets
+  ---
+  duration_ms: 0.287432
+  type: 'test'
+  ...
+# Subtest: CP29-K15-05 feature flag defaults fail-closed
+ok 10 - CP29-K15-05 feature flag defaults fail-closed
+  ---
+  duration_ms: 1.881085
+  type: 'test'
+  ...
+# Subtest: CP29-K15-06 empty operator allowlist is denied
+ok 11 - CP29-K15-06 empty operator allowlist is denied
+  ---
+  duration_ms: 0.621189
+  type: 'test'
+  ...
+# Subtest: CP29-K15-07 custom role claim cannot replace operator claim
+ok 12 - CP29-K15-07 custom role claim cannot replace operator claim
+  ---
+  duration_ms: 2.415866
+  type: 'test'
+  ...
+# Subtest: CP29-K15-08 a valid email or UI role never provides operator authority
+ok 13 - CP29-K15-08 a valid email or UI role never provides operator authority
+  ---
+  duration_ms: 12.355284
+  type: 'test'
+  ...
+# Subtest: CP29-K15-09 recent primary login with no second factor is denied
+ok 14 - CP29-K15-09 recent primary login with no second factor is denied
+  ---
+  duration_ms: 0.738091
+  type: 'test'
+  ...
+# Subtest: CP29-K15-10 stale or future sessions fail closed
+ok 15 - CP29-K15-10 stale or future sessions fail closed
+  ---
+  duration_ms: 2.648656
+  type: 'test'
+  ...
+# Subtest: CP29-K15-11 blocked or demoted operator cannot manage accounts
+ok 16 - CP29-K15-11 blocked or demoted operator cannot manage accounts
+  ---
+  duration_ms: 0.723091
+  type: 'test'
+  ...
+# Subtest: CP29-K15-12 never allows self-management
+ok 17 - CP29-K15-12 never allows self-management
+  ---
+  duration_ms: 0.301417
+  type: 'test'
+  ...
+# Subtest: CP29-K15-13 never manages another Admin, even if operator
+ok 18 - CP29-K15-13 never manages another Admin, even if operator
+  ---
+  duration_ms: 0.189417
+  type: 'test'
+  ...
+# Subtest: CP29-K15-14 rejects missing target or malformed legacy profile
+ok 19 - CP29-K15-14 rejects missing target or malformed legacy profile
+  ---
+  duration_ms: 0.250717
+  type: 'test'
+  ...
+# Subtest: CP29-K15-15 set-active updates only active and records atomic audit without email
+ok 20 - CP29-K15-15 set-active updates only active and records atomic audit without email
+  ---
+  duration_ms: 1.276645
+  type: 'test'
+  ...
+# Subtest: CP29-K15-16 replay same mutation does not write a second audit
+ok 21 - CP29-K15-16 replay same mutation does not write a second audit
+  ---
+  duration_ms: 0.265865
+  type: 'test'
+  ...
+# Subtest: CP29-K15-17 reusing requestId for a different request is rejected
+ok 22 - CP29-K15-17 reusing requestId for a different request is rejected
+  ---
+  duration_ms: 0.257052
+  type: 'test'
+  ...
+# Subtest: CP29-K15-18 inspect uses exact UID, returns minimal profile and creates audit
+ok 23 - CP29-K15-18 inspect uses exact UID, returns minimal profile and creates audit
+  ---
+  duration_ms: 0.278659
+  type: 'test'
+  ...
+# Subtest: CP29-K15-19 no-op mutation is not a successful operation
+ok 24 - CP29-K15-19 no-op mutation is not a successful operation
+  ---
+  duration_ms: 0.156883
+  type: 'test'
+  ...
+# Subtest: CP29-K15-20 explicit legacy-to-student migration is audited
+ok 25 - CP29-K15-20 explicit legacy-to-student migration is audited
+  ---
+  duration_ms: 0.188369
+  type: 'test'
+  ...
+# Subtest: CP29-K15-21 an existing audit entry for other operator is not trusted
+ok 26 - CP29-K15-21 an existing audit entry for other operator is not trusted
+  ---
+  duration_ms: 0.134685
+  type: 'test'
+  ...
+# Subtest: CP29-K15-22 owner mismatch between token and actor UID fails closed
+ok 27 - CP29-K15-22 owner mismatch between token and actor UID fails closed
+  ---
+  duration_ms: 0.146082
+  type: 'test'
+  ...
+# Subtest: CP29-K15-23 no unsafe Admin bootstrap or client role elevation in source
+ok 28 - CP29-K15-23 no unsafe Admin bootstrap or client role elevation in source
+  ---
+  duration_ms: 1.546808
+  type: 'test'
+  ...
+# Subtest: retired account cannot be reactivated without explicit conversion
+ok 29 - retired account cannot be reactivated without explicit conversion
+  ---
+  duration_ms: 0.858346
+  type: 'test'
+  ...
+1..29
+# tests 29
+# suites 0
+# pass 29
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 131.822621

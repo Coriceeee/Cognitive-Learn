@@ -1,0 +1,21 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp40:allocation
+> node --experimental-strip-types --test tests/cp40-allocation-charts.test.mjs
+
+Γ£ö budget conserved, maintenance guaranteed, zero gap gets no extra (0.9755ms)
+Γ£ö zero observed score is valid; zero budget is valid (0.1315ms)
+Γ£ö invalid or duplicate or missing data does not allocate (0.1711ms)
+Γ£ö invalid time and impossible minimum rejected (0.1392ms)
+Γ£ö all goals met retains unused budget and avoids needless work (0.1062ms)
+Γ£ö tie resolution deterministic and invariant to input order (0.6417ms)
+Γ£ö greedy matches exhaustive optimum on small budgets (1.7404ms)
+Γ£ö shared user constraints drive plot and workbench; only feasible scenarios can allocate (1.5221ms)
+Γ£ö scatter uses actual three-dimensional frontier, no misleading connected curve (0.7826ms)
+Γä╣ tests 9
+Γä╣ suites 0
+Γä╣ pass 9
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 131.8129

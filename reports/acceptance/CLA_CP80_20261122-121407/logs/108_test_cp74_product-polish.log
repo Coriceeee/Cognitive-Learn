@@ -1,0 +1,20 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp74:product-polish
+> node --experimental-strip-types --test tests/cp74-product-polish.test.mjs
+
+Γ£ö CP74 removes the redundant cross-module dropdown and preserves More (0.8427ms)
+Γ£ö CP74 six module navigation still reaches all implemented destinations (1.1724ms)
+Γ£ö CP74 navigation is one low-noise bar, responsive and readable in dark mode (0.2596ms)
+Γ£ö CP74 retry actions explicitly use the shared visible button design (0.2189ms)
+Γ£ö CP74 about page is honest about data maturity and covers six student modules (0.1862ms)
+Γ£ö CP74 contact page has usable issue selection and a real mail-client handoff (0.1348ms)
+Γ£ö CP74 mailto encodes Unicode and message without pretending to submit (0.3234ms)
+Γ£ö CP74 public information pages use one design system and no duplicate nav menu (0.1833ms)
+Γä╣ tests 8
+Γä╣ suites 0
+Γä╣ pass 8
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 145.9611

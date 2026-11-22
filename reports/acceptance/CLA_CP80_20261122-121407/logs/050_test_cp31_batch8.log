@@ -1,0 +1,55 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp31:batch8
+> node --experimental-strip-types --test tests/cp31-batch8-golden-path.test.mjs && npm run test:shadow
+
+Γ£ö B8-01 source integrity includes the fixed synthetic fixture (155.0345ms)
+Γ£ö B8-02 seven stages use real domain functions in deterministic order (4.4183ms)
+Γ£ö B8-03 never represents demo as a real research outcome or production QA (0.6965ms)
+Γ£ö B8-04 no apparent learning progress before reassessment (0.8243ms)
+Γ£ö B8-05 observed zero is preserved as numeric 0, not missing (0.9637ms)
+Γ£ö B8-06 zero reported hours and zero completed actions are valid synthetic input (0.5049ms)
+Γ£ö B8-07 application produces a bounded self-report evidence record (0.4144ms)
+Γ£ö B8-08 shadow engine compares static and adaptive, no treatment assignment (0.3634ms)
+Γ£ö B8-09 new shadow verifier accepts authentic replay, abstention and valid zero (0.4472ms)
+Γ£ö B8-10 verifying the same fixture is deterministic (1.6921ms)
+Γ£ö B8-11 changing a derived metric without updating all fields is rejected (0.9969ms)
+Γ£ö B8-12 even a fully recomputed payload hash cannot forge original fixture (0.809ms)
+Γ£ö B8-13 wrong source fingerprint or extra metadata is denied (0.9737ms)
+Γ£ö B8-14 invalid record or null never passes local verification (0.0871ms)
+Γ£ö B8-15 synthetic scope and flag cannot be replaced with claims about participants (0.3312ms)
+Γ£ö B8-16 disallow real-looking cycle IDs and subject labels (0.1341ms)
+Γ£ö B8-17 chronological order is mandatory, unlike mere date-parse validity (0.1537ms)
+Γ£ö B8-18 reject forged or overflowing check-in scores instead of clamping (0.517ms)
+Γ£ö B8-19 reject duplicated check-in weeks/identities and duplicate reassessments (0.3019ms)
+Γ£ö B8-20 reject malformed timestamps and free-text identity leakage (0.134ms)
+Γ£ö B8-21 shadow replay rejects falsified trigger, evidence class and limits (0.3371ms)
+Γ£ö B8-22 shadow replay rejects forged absent and malformed check-in data (0.5401ms)
+Γ£ö B8-23 shadow replay rejects negative scores, unknown subject and duplicates (0.4865ms)
+Γ£ö B8-24 shadow replay refuses synthetic data disguised as validated evidence (0.3201ms)
+Γ£ö B8-25 no network or credential dependencies in the replay engine (0.5526ms)
+Γ£ö B8-26 refuse extra PII fields at every fixture level, even with a synthetic marker (0.1997ms)
+Γä╣ tests 26
+Γä╣ suites 0
+Γä╣ pass 26
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 308.3288
+
+> cognitive-learn-ai@0.1.0 test:shadow
+> node --experimental-strip-types --test tests/step19-decision-evidence-shadow.test.mjs
+
+Γ£ö S19-01 incomplete cycle abstains and cannot imply a measured effect (1.328ms)
+Γ£ö S19-02 below engineering completion threshold differs from frozen static policy (3.4849ms)
+Γ£ö S19-03 positive delta with completed actions maintains both policies (0.3042ms)
+Γ£ö S19-04 nonpositive score delta produces replan, including valid score zero (0.2769ms)
+Γ£ö S19-05 tampering in recorded decisions is detected on replay (0.2625ms)
+Γä╣ tests 5
+Γä╣ suites 0
+Γä╣ pass 5
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 180.735

@@ -1,0 +1,76 @@
+
+> cognitive-learn-ai@0.1.0 test:cp34:knowledge-xai
+> node --experimental-strip-types --test tests/cp34-knowledge-xai.test.mjs
+
+TAP version 13
+# (node:17527) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: retrieval exact IDs, public source citation and unvalidated wording
+ok 1 - retrieval exact IDs, public source citation and unvalidated wording
+  ---
+  duration_ms: 6.767546
+  type: 'test'
+  ...
+# Subtest: multi-intent retrieval and diacritic normalization
+ok 2 - multi-intent retrieval and diacritic normalization
+  ---
+  duration_ms: 1.049478
+  type: 'test'
+  ...
+# Subtest: reject unrelated, personal and explicit injection in this path
+ok 3 - reject unrelated, personal and explicit injection in this path
+  ---
+  duration_ms: 2.099436
+  type: 'test'
+  ...
+# Subtest: selection schema rejects invented, duplicate and unpermitted IDs and arbitrary answer
+ok 4 - selection schema rejects invented, duplicate and unpermitted IDs and arbitrary answer
+  ---
+  duration_ms: 0.273343
+  type: 'test'
+  ...
+# Subtest: source IDs are unique and bounded
+ok 5 - source IDs are unique and bounded
+  ---
+  duration_ms: 0.26906
+  type: 'test'
+  ...
+# Subtest: explanation preserves valid zero and exact weighted sum
+ok 6 - explanation preserves valid zero and exact weighted sum
+  ---
+  duration_ms: 0.428628
+  type: 'test'
+  ...
+# Subtest: missing dimension prevents composite even if top-level claims available
+ok 7 - missing dimension prevents composite even if top-level claims available
+  ---
+  duration_ms: 0.260816
+  type: 'test'
+  ...
+# Subtest: mismatched composite does not publish contribution
+ok 8 - mismatched composite does not publish contribution
+  ---
+  duration_ms: 0.280596
+  type: 'test'
+  ...
+# Subtest: duplicate, invalid and legacy evidence fails closed
+ok 9 - duplicate, invalid and legacy evidence fails closed
+  ---
+  duration_ms: 0.422152
+  type: 'test'
+  ...
+# Subtest: client and authenticated server use same knowledge module; Lumen uses local XAI
+ok 10 - client and authenticated server use same knowledge module; Lumen uses local XAI
+  ---
+  duration_ms: 0.802467
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 191.835563

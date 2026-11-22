@@ -1,0 +1,176 @@
+TAP version 13
+# (node:16051) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: R01 whitelisted persisted record has no UID/scores/names/notes
+ok 1 - R01 whitelisted persisted record has no UID/scores/names/notes
+  ---
+  duration_ms: 2.363995
+  type: 'test'
+  ...
+# Subtest: R02 unknown dataScope cannot be stored
+ok 2 - R02 unknown dataScope cannot be stored
+  ---
+  duration_ms: 0.493953
+  type: 'test'
+  ...
+# Subtest: R03 stored demo record remains explicitly labeled
+ok 3 - R03 stored demo record remains explicitly labeled
+  ---
+  duration_ms: 0.264903
+  type: 'test'
+  ...
+# Subtest: R04 never persist complete:true or another evidence version
+ok 4 - R04 never persist complete:true or another evidence version
+  ---
+  duration_ms: 0.221008
+  type: 'test'
+  ...
+# Subtest: R05 exactly four distinct stages required
+ok 5 - R05 exactly four distinct stages required
+  ---
+  duration_ms: 0.276321
+  type: 'test'
+  ...
+# Subtest: R06 invalid stage status rejected
+ok 6 - R06 invalid stage status rejected
+  ---
+  duration_ms: 0.151944
+  type: 'test'
+  ...
+# Subtest: R07 malformed timestamps rejected
+ok 7 - R07 malformed timestamps rejected
+  ---
+  duration_ms: 0.110428
+  type: 'test'
+  ...
+# Subtest: R08 history range/count consistency validated
+ok 8 - R08 history range/count consistency validated
+  ---
+  duration_ms: 0.202381
+  type: 'test'
+  ...
+# Subtest: R09 real zero not copied into provenance even when observed
+ok 9 - R09 real zero not copied into provenance even when observed
+  ---
+  duration_ms: 0.582447
+  type: 'test'
+  ...
+# Subtest: R10 unchanged observedAt and no arbitrary createdAt
+ok 10 - R10 unchanged observedAt and no arbitrary createdAt
+  ---
+  duration_ms: 0.607776
+  type: 'test'
+  ...
+# (node:16052) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: P01 missing four sources cannot become a report
+ok 11 - P01 missing four sources cannot become a report
+  ---
+  duration_ms: 2.449639
+  type: 'test'
+  ...
+# Subtest: P02 real Cognitive zero with scoreAvailable and mapping version counts as observed proxy
+ok 12 - P02 real Cognitive zero with scoreAvailable and mapping version counts as observed proxy
+  ---
+  duration_ms: 0.262584
+  type: 'test'
+  ...
+# Subtest: P03 technical zero without scoreAvailable is LIMITED, not an observed zero
+ok 13 - P03 technical zero without scoreAvailable is LIMITED, not an observed zero
+  ---
+  duration_ms: 0.175297
+  type: 'test'
+  ...
+# Subtest: P04 inconsistent transcript owner is INVALID
+ok 14 - P04 inconsistent transcript owner is INVALID
+  ---
+  duration_ms: 0.116434
+  type: 'test'
+  ...
+# Subtest: P05 inconsistent scopes are INVALID
+ok 15 - P05 inconsistent scopes are INVALID
+  ---
+  duration_ms: 0.23675
+  type: 'test'
+  ...
+# Subtest: P06 legacy schema is not silently accepted
+ok 16 - P06 legacy schema is not silently accepted
+  ---
+  duration_ms: 0.105423
+  type: 'test'
+  ...
+# Subtest: P07 drafts can be present only as LIMITED, never confirmed outcomes
+ok 17 - P07 drafts can be present only as LIMITED, never confirmed outcomes
+  ---
+  duration_ms: 0.306302
+  type: 'test'
+  ...
+# Subtest: P08 unknown dataScope is not treated as student
+ok 18 - P08 unknown dataScope is not treated as student
+  ---
+  duration_ms: 0.132467
+  type: 'test'
+  ...
+# Subtest: P09 demo records are labeled non-research
+ok 19 - P09 demo records are labeled non-research
+  ---
+  duration_ms: 0.461096
+  type: 'test'
+  ...
+# Subtest: P10 missing cognitive and invalid draft are distinguished
+ok 20 - P10 missing cognitive and invalid draft are distinguished
+  ---
+  duration_ms: 1.380813
+  type: 'test'
+  ...
+# Subtest: P11 cannot build a check without authenticated UID
+ok 21 - P11 cannot build a check without authenticated UID
+  ---
+  duration_ms: 2.391107
+  type: 'test'
+  ...
+# Subtest: P12 cannot build a check with invalid timestamp
+ok 22 - P12 cannot build a check with invalid timestamp
+  ---
+  duration_ms: 0.206906
+  type: 'test'
+  ...
+# Subtest: P13 privacy: no UID, score, name, raw profile included in evidence record
+ok 23 - P13 privacy: no UID, score, name, raw profile included in evidence record
+  ---
+  duration_ms: 0.500784
+  type: 'test'
+  ...
+# Subtest: P14 one valid snapshot never becomes a trend
+ok 24 - P14 one valid snapshot never becomes a trend
+  ---
+  duration_ms: 0.198075
+  type: 'test'
+  ...
+# Subtest: P15 two snapshots with different versions cannot be compared
+ok 25 - P15 two snapshots with different versions cannot be compared
+  ---
+  duration_ms: 0.084383
+  type: 'test'
+  ...
+# Subtest: P16 two time-separated matching observations allow technical comparison only
+ok 26 - P16 two time-separated matching observations allow technical comparison only
+  ---
+  duration_ms: 0.066017
+  type: 'test'
+  ...
+# Subtest: P17 history from another UID excluded
+ok 27 - P17 history from another UID excluded
+  ---
+  duration_ms: 0.242202
+  type: 'test'
+  ...
+1..27
+# tests 27
+# suites 0
+# pass 27
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 201.479061

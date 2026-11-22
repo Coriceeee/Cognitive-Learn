@@ -1,0 +1,20 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp59:verified-drafts
+> node --experimental-strip-types --test tests/cp59-verified-module-drafts.test.mjs
+
+Γ£ö CP59.1: cached and pending module snapshots are never server-confirmed (0.7804ms)
+Γ£ö CP59.2: reject records owned by another account, allow safe legacy shape (0.2101ms)
+Γ£ö CP59.3: primary and legacy listeners request metadata changes and gate readValue (0.2739ms)
+Γ£ö CP59.4: offline cache cannot become a CAS baseline and local edits are preserved (0.1492ms)
+Γ£ö CP59.5: primary, legacy and explicit reload validate current UID before displaying (0.1983ms)
+Γ£ö CP59.6: a save is rejected until verified draft status is ready or empty (0.1029ms)
+Γ£ö CP59.7: Orion, Pulse and Haven disable save and explain server-sync state (2.7454ms)
+Γ£ö CP59.8: Seed verified-prefill is gated while module-draft server sync is pending (0.5474ms)
+Γä╣ tests 8
+Γä╣ suites 0
+Γä╣ pass 8
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 130.3422

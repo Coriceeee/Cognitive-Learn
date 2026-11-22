@@ -1,0 +1,31 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp67:route-experience
+> node --experimental-strip-types --test tests/cp67-route-experience.test.mjs
+
+Γû╢ CP67: SPA route focus, scroll and announcements
+  Γ£ö does not shift focus or scroll on first render (1.2459ms)
+  Γ£ö a real student route change scrolls to top and focuses the new workspace (0.8468ms)
+  Γ£ö country and admission query filters preserve viewport and input focus (0.1812ms)
+  Γ£ö hash target within the same route is scrolled into view without stealing focus (0.1316ms)
+  Γ£ö real route change can land at an existing anchor (0.0989ms)
+  Γ£ö Back/Forward restores scroll but focuses the new content when the page changes (0.1306ms)
+  Γ£ö malformed hash escape cannot crash app or hijack scroll restoration (0.2237ms)
+  Γ£ö fragment target supports encoded Vietnamese and common IDs (0.1087ms)
+  Γ£ö naming pages does not mislabel simulated scores or admissions predictions (0.3875ms)
+  Γ£ö student exam, school choices and scholarship pages receive distinct titles (0.1594ms)
+  Γ£ö admin pages are not advertised as student modules (0.1264ms)
+  Γ£ö app keeps progress transition while announcing a meaningful route title (0.1486ms)
+  Γ£ö skip link targets an existing focusable content anchor, not nested main (0.082ms)
+  Γ£ö route-scroll plan drives the side effect, query changes do not force scroll-to-top (0.1188ms)
+  Γ£ö navigation kind is captured with route state (not read after async commit) (0.1294ms)
+  Γ£ö CSS has accessible visual skip, dark-independent contrast, reduced-motion and print (0.1871ms)
+  Γ£ö works with the existing unsaved-draft navigation guard and native hash handling (0.0683ms)
+Γ£ö CP67: SPA route focus, scroll and announcements (5.5613ms)
+Γä╣ tests 17
+Γä╣ suites 1
+Γä╣ pass 17
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 124.5326

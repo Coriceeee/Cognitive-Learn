@@ -1,0 +1,139 @@
+
+> cognitive-learn-ai@0.1.0 test:cp64:input-ux
+> node --experimental-strip-types --test tests/cp64-input-ux.test.mjs
+
+TAP version 13
+# (node:37664) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP64 real field-coverage semantics
+    # Subtest: does not count blank values as observed zero
+    ok 1 - does not count blank values as observed zero
+      ---
+      duration_ms: 1.266655
+      type: 'test'
+      ...
+    # Subtest: does not count invalid text, NaN, Infinity, or out-of-range values
+    ok 2 - does not count invalid text, NaN, Infinity, or out-of-range values
+      ---
+      duration_ms: 0.152144
+      type: 'test'
+      ...
+    # Subtest: accepts explicit boundaries, decimal comma, and valid negative if permitted
+    ok 3 - accepts explicit boundaries, decimal comma, and valid negative if permitted
+      ---
+      duration_ms: 0.184282
+      type: 'test'
+      ...
+    # Subtest: enforces integer-only weeks and counts when configured
+    ok 4 - enforces integer-only weeks and counts when configured
+      ---
+      duration_ms: 0.127908
+      type: 'test'
+      ...
+    # Subtest: tracks text fields without inventing a numeric score
+    ok 5 - tracks text fields without inventing a numeric score
+      ---
+      duration_ms: 0.101699
+      type: 'test'
+      ...
+    # Subtest: sums independent groups without losing missing or invalid information
+    ok 6 - sums independent groups without losing missing or invalid information
+      ---
+      duration_ms: 0.180056
+      type: 'test'
+      ...
+    # Subtest: reports zero fields as zero rather than NaN or percentages
+    ok 7 - reports zero fields as zero rather than NaN or percentages
+      ---
+      duration_ms: 0.087229
+      type: 'test'
+      ...
+    # Subtest: rejects duplicate field identifiers to prevent double counting
+    ok 8 - rejects duplicate field identifiers to prevent double counting
+      ---
+      duration_ms: 0.424545
+      type: 'test'
+      ...
+    1..8
+ok 1 - CP64 real field-coverage semantics
+  ---
+  duration_ms: 3.537909
+  type: 'suite'
+  ...
+# Subtest: CP64 three-module integration and accessibility
+    # Subtest: shows the data graph on orion overview, not admin or all routes
+    ok 1 - shows the data graph on orion overview, not admin or all routes
+      ---
+      duration_ms: 0.318229
+      type: 'test'
+      ...
+    # Subtest: shows the data graph on pulse overview, not admin or all routes
+    ok 2 - shows the data graph on pulse overview, not admin or all routes
+      ---
+      duration_ms: 0.23764
+      type: 'test'
+      ...
+    # Subtest: shows the data graph on haven overview, not admin or all routes
+    ok 3 - shows the data graph on haven overview, not admin or all routes
+      ---
+      duration_ms: 0.075842
+      type: 'test'
+      ...
+    # Subtest: does not claim academic readiness or probability from form completeness
+    ok 4 - does not claim academic readiness or probability from form completeness
+      ---
+      duration_ms: 0.173205
+      type: 'test'
+      ...
+    # Subtest: shows missing versus invalid as two different states and does not leak field values
+    ok 5 - shows missing versus invalid as two different states and does not leak field values
+      ---
+      duration_ms: 0.132465
+      type: 'test'
+      ...
+    # Subtest: keeps user navigation inside SPA and respects unsaved draft guards
+    ok 6 - keeps user navigation inside SPA and respects unsaved draft guards
+      ---
+      duration_ms: 0.097944
+      type: 'test'
+      ...
+    # Subtest: configures proper input ranges for Orion, Pulse and Haven
+    ok 7 - configures proper input ranges for Orion, Pulse and Haven
+      ---
+      duration_ms: 0.141418
+      type: 'test'
+      ...
+    # Subtest: supports dark mode, mobile, print, reduced motion and accessible focus
+    ok 8 - supports dark mode, mobile, print, reduced motion and accessible focus
+      ---
+      duration_ms: 0.079958
+      type: 'test'
+      ...
+    1..8
+ok 2 - CP64 three-module integration and accessibility
+  ---
+  duration_ms: 1.496693
+  type: 'suite'
+  ...
+# Subtest: CP64 release evidence covers visual artifacts
+    # Subtest: fingerprints styles entrypoint and the new visual style, without duplicates
+    ok 1 - fingerprints styles entrypoint and the new visual style, without duplicates
+      ---
+      duration_ms: 6.148954
+      type: 'test'
+      ...
+    1..1
+ok 3 - CP64 release evidence covers visual artifacts
+  ---
+  duration_ms: 6.213339
+  type: 'suite'
+  ...
+1..3
+# tests 17
+# suites 3
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 123.992478

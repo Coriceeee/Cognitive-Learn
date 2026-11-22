@@ -1,0 +1,101 @@
+﻿python.exe : test_auc (test_pipeline.TestOulad.test_auc) ... ok
+At C:\Gạo\Cognitive-Learn\CLA_CP86_ONECLICK.ps1:35 char:7
++       & $exe @argsForCommand 2>&1 | Out-File -LiteralPath $log -Encod ...
++       ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (test_auc (test_...est_auc) ... ok:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+test_cluster_bootstrap_and_calibration (test_pipeline.TestOulad.test_cluster_bootstrap_and_calibration) ... ok
+test_early_withdrawal_excluded_and_late_withdrawal_retained (test_pipeline.TestOulad.test_early_withdrawal_excluded_and_late_withdrawal_retained) ... ok
+test_end_to_end (test_pipeline.TestOulad.test_end_to_end) ... ok
+test_missing_train_only (test_pipeline.TestOulad.test_missing_train_only) ... ok
+test_aggregate_only_export (test_public_evidence.PublicEvidenceTests.test_aggregate_only_export) ... ok
+test_blocks_failed_audit (test_public_evidence.PublicEvidenceTests.test_blocks_failed_audit) ... ok
+test_blocks_invalid_metrics (test_public_evidence.PublicEvidenceTests.test_blocks_invalid_metrics) ... ok
+test_blocks_missing_ci (test_public_evidence.PublicEvidenceTests.test_blocks_missing_ci) ... ok
+test_archive_mismatch (test_scientific_audit.ScientificAuditTests.test_archive_mismatch) ... ok
+test_cross_split_leakage (test_scientific_audit.ScientificAuditTests.test_cross_split_leakage) ... ok
+test_feature_tamper (test_scientific_audit.ScientificAuditTests.test_feature_tamper) ... ok
+test_valid (test_scientific_audit.ScientificAuditTests.test_valid) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.352s
+
+OK
+Prepared C:\Users\nguye\AppData\Local\Temp\tmp9dxrp3e4\work\features.csv split_counts {'train': 2} excluded {'already_unregistered_at_cutoff': 1}
+Prepared C:\Users\nguye\AppData\Local\Temp\tmpnz9_7ccg\work\features.csv split_counts {'train': 70, 'test': 24, 'val': 6} excluded {}
+{
+  "constant_baseline": {
+    "features": [],
+    "validation": {
+      "count": 6,
+      "positive_rate": 0.5,
+      "brier": 0.250816,
+      "log_loss": 0.694783,
+      "accuracy_at_0.5": 0.5,
+      "roc_auc": 0.5
+    },
+    "test": {
+      "count": 24,
+      "positive_rate": 0.58333,
+      "brier": 0.255578,
+      "log_loss": 0.704317,
+      "accuracy_at_0.5": 0.41667,
+      "roc_auc": 0.5
+    }
+  },
+  "academic_only": {
+    "features": [
+      "num_of_prev_attempts",
+      "studied_credits",
+      "registered_by_cutoff",
+      "prior_assess_count",
+      "prior_mean_score"
+    ],
+    "validation": {
+      "count": 6,
+      "positive_rate": 0.5,
+      "brier": 0.006434,
+      "log_loss": 0.047947,
+      "accuracy_at_0.5": 1.0,
+      "roc_auc": 1.0
+    },
+    "test": {
+      "count": 24,
+      "positive_rate": 0.58333,
+      "brier": 0.021149,
+      "log_loss": 0.125531,
+      "accuracy_at_0.5": 1.0,
+      "roc_auc": 1.0
+    }
+  },
+  "academic_plus_behavior": {
+    "features": [
+      "num_of_prev_attempts",
+      "studied_credits",
+      "registered_by_cutoff",
+      "prior_assess_count",
+      "prior_mean_score",
+      "clicks_0_30",
+      "active_days_0_30",
+      "unique_sites_0_30"
+    ],
+    "validation": {
+      "count": 6,
+      "positive_rate": 0.5,
+      "brier": 0.006738,
+      "log_loss": 0.048908,
+      "accuracy_at_0.5": 1.0,
+      "roc_auc": 1.0
+    },
+    "test": {
+      "count": 24,
+      "positive_rate": 0.58333,
+      "brier": 0.021048,
+      "log_loss": 0.125225,
+      "accuracy_at_0.5": 1.0,
+      "roc_auc": 1.0
+    }
+  }
+}
+Saved C:\Users\nguye\AppData\Local\Temp\tmpnz9_7ccg\results\metrics.json

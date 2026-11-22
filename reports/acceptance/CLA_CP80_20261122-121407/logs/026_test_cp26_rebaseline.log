@@ -1,0 +1,27 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp26:rebaseline
+> python -m unittest discover -s tests_cp26 -v
+
+npm.cmd : test_id_and_scores_preserved (test_rebaseline.RebaselineTests.test_id_and_scores_preserved) ... C:\G\u1ea1o\Cognitive-Learn\tests_cp26\test_rebaseline.py:11: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\G\u1ea1o\\Cognitive-Learn\\CLA_REBASELINE_164_NOTIFICATIONS_20261114.csv' mode='r' encoding='utf-8-sig'>
+At C:\Gạo\Cognitive-Learn\CLA_CP80_ONECLICK.ps1:95 char:9
++         & $exe @commandArgs 2>&1 | Out-File -LiteralPath $logPath -En ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (test_id_and_sco...ng='utf-8-sig'>:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  a=list(csv.DictReader((ROOT/'CLA_REBASELINE_164_NOTIFICATIONS_20261114.csv').open(encoding='utf-8-sig')))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+C:\G\u1ea1o\Cognitive-Learn\tests_cp26\test_rebaseline.py:12: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\G\u1ea1o\\Cognitive-Learn\\reports\\progress\\cp26\\CP26_REBASELINE_164_EVIDENCE.csv' mode='r' encoding='utf-8-sig'>
+  b=list(csv.DictReader((ROOT/'reports/progress/cp26/CP26_REBASELINE_164_EVIDENCE.csv').open(encoding='utf-8-sig')))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_summary (test_rebaseline.RebaselineTests.test_summary) ... ok
+test_total_unique_and_no_auto_accept (test_rebaseline.RebaselineTests.test_total_unique_and_no_auto_accept) ... C:\G\u1ea1o\Cognitive-Learn\tests_cp26\test_rebaseline.py:6: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\G\u1ea1o\\Cognitive-Learn\\reports\\progress\\cp26\\CP26_REBASELINE_164_EVIDENCE.csv' mode='r' encoding='utf-8-sig'>
+  rows=list(csv.DictReader(p.open(encoding='utf-8-sig',newline='')))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.021s
+
+OK

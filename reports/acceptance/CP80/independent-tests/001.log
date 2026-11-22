@@ -1,0 +1,5 @@
+PASS unknown academic and behavior metrics stay null, not fake 0
+PASS genuine observed zero is preserved
+PASS mixed observed and missing metrics retain distinction
+PASS snapshot provenance and source object remain unchanged
+COGNITIVE OBSERVATION TESTS: 4/4 PASS

@@ -1,0 +1,21 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:consent-share-revocation
+> node --experimental-strip-types --test tests/step20-consent-share-revocation.test.mjs
+
+Γ£ö SR01 withdrawal cleanup queries again and verifies empty server result (1.5462ms)
+Γ£ö SR02 student report must be removed BEFORE corresponding link (0.2358ms)
+Γ£ö SR03 cross-account link from untrusted snapshot fails closed (0.4215ms)
+Γ£ö SR04 switching account aborts without deleting remaining links (0.2144ms)
+Γ£ö SR05 delete report error blocks link removal, no misleading success (0.1909ms)
+Γ£ö SR06 nonempty 25th page never yields verifiedEmpty=true (0.9553ms)
+Γ£ö SR07 disallow invalid UID and oversized query pages (0.2591ms)
+Γ£ö SR08 user withdrawal is committed BEFORE best-effort share cleanup (0.1896ms)
+Γ£ö SR09 UI shows retry on partial cleanup and warns about residual data (0.1234ms)
+Γä╣ tests 9
+Γä╣ suites 0
+Γä╣ pass 9
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 119.1713

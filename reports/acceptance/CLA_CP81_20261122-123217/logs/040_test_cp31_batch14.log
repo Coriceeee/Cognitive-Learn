@@ -1,0 +1,53 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp31:batch14
+> node --experimental-strip-types --test tests/cp31-batch14-measurement-persistence.test.mjs
+
+Γ£ö B14-01 create-only T0 point retains actual 0 (4.2609ms)
+Γ£ö B14-02 immutable T0 can be declared before any T1 (0.43ms)
+Γ£ö B14-03 T1 only comes from reviewed cycle (1.7901ms)
+Γ£ö B14-04 unobserved subject never gets fabricated T1 (1.6161ms)
+Γ£ö B14-05 every point ID is per cycle/key/timepoint and cannot collide (1.1917ms)
+Γ£ö B14-06 stored declaration maps to expected student-owned point (0.9694ms)
+Γ£ö B14-07 T1 observation index binds to exactly its observed item (0.819ms)
+Γ£ö B14-08 write timestamp is distinct from linked T0 time (0.6436ms)
+Γ£ö B14-09 missing exam point is rejected before write (0.6495ms)
+Γ£ö B14-10 no phantom or unknown subject (1.2191ms)
+Γ£ö B14-11 invalid owner empty or outsize (0.5656ms)
+Γ£ö B14-12 corrupt frozen T0 cannot be declared (0.3145ms)
+Γ£ö B14-13 corrupted evidence record prevents T1 declaration (0.3277ms)
+Γ£ö B14-14 unsupported or missing instrument metadata is rejected (1.255ms)
+Γ£ö B14-15 HTML / spaces in source identifiers rejected (0.4693ms)
+Γ£ö B14-16 unsupported scale is rejected (0.2837ms)
+Γ£ö B14-17 caller cannot inject verified source or fake role (0.2357ms)
+Γ£ö B14-18 caller cannot inject PII or other fields (1.2357ms)
+Γ£ö B14-19 owner swapped at read time is invalid (0.2515ms)
+Γ£ö B14-20 changed record score is rejected (0.3201ms)
+Γ£ö B14-21 changed linked timestamp rejected (0.5255ms)
+Γ£ö B14-22 changed subjectIndex rejected (0.3147ms)
+Γ£ö B14-23 forged observation index rejected (0.3002ms)
+Γ£ö B14-24 changed cycle ID rejected (0.1798ms)
+Γ£ö B14-25 record with unknown field rejected (0.1809ms)
+Γ£ö B14-26 client cannot forge source verification status (0.2172ms)
+Γ£ö B14-27 missing server write timestamp rejected (0.189ms)
+Γ£ö B14-28 invalid or mismatched document ID rejected (0.1762ms)
+Γ£ö B14-29 stored snapshot is invalid when cycle score changes (0.2655ms)
+Γ£ö B14-30 valid rows convert to strict B13 manifest with no user ID (10.4437ms)
+Γ£ö B14-31 partial declarations are not promoted to aligned (0.8935ms)
+Γ£ö B14-32 changed instrument yields mismatch instead of equivalence (1.8014ms)
+Γ£ö B14-33 no psychometric claims even when declarations align (2.2845ms)
+Γ£ö B14-34 Firestore candidate has append-only, owner+consent scoped records (0.7135ms)
+Γ£ö B14-35 candidate is not deployed by firebase.json (0.4101ms)
+Γ£ö B14-36 Firestore hooks do not write without student-initiated action (0.4288ms)
+Γ£ö B14-37 UI requires explicit one-time confirmation and warns unverified (0.4528ms)
+Γ£ö B14-38 prior B13 measurement manifest is now from persisted rows (0.3708ms)
+Γ£ö B14-39 npm gates extend B13, not replace it (0.3545ms)
+Γ£ö B14-40 invalid score NaN and wrong origin never become declarations (0.195ms)
+Γ£ö B14-41 UI hides longitudinal arrows until declared metadata aligns (0.3755ms)
+Γä╣ tests 41
+Γä╣ suites 0
+Γä╣ pass 41
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 198.8883

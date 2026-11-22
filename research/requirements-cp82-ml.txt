@@ -1,0 +1,4 @@
+# CP82 research-only local environment. Never add these heavy native packages
+# to the Vite frontend or claim validation from their successful import.
+-r requirements-cp39.txt
+pandas>=2.3,<3.0

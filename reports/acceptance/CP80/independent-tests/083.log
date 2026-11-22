@@ -1,0 +1,70 @@
+
+> cognitive-learn-ai@0.1.0 test:cp52:multidevice
+> node --experimental-strip-types --test tests/cp52-multidevice-cas.test.mjs
+
+TAP version 13
+# (node:18192) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP52.1: first write from two empty devices detects competing create
+ok 1 - CP52.1: first write from two empty devices detects competing create
+  ---
+  duration_ms: 2.081183
+  type: 'test'
+  ...
+# Subtest: CP52.2: stale device cannot overwrite newer revision
+ok 2 - CP52.2: stale device cannot overwrite newer revision
+  ---
+  duration_ms: 0.395859
+  type: 'test'
+  ...
+# Subtest: CP52.3: same revision with changed payload conflicts, timestamp resolution alone does not
+ok 3 - CP52.3: same revision with changed payload conflicts, timestamp resolution alone does not
+  ---
+  duration_ms: 0.381404
+  type: 'test'
+  ...
+# Subtest: CP52.4: legacy version-less draft detects remote changes before migration
+ok 4 - CP52.4: legacy version-less draft detects remote changes before migration
+  ---
+  duration_ms: 1.045888
+  type: 'test'
+  ...
+# Subtest: CP52.5: canonical signature ignores object key order
+ok 5 - CP52.5: canonical signature ignores object key order
+  ---
+  duration_ms: 0.696065
+  type: 'test'
+  ...
+# Subtest: CP52.6: queued follow-up write may use acknowledged revision with unknown server timestamp
+ok 6 - CP52.6: queued follow-up write may use acknowledged revision with unknown server timestamp
+  ---
+  duration_ms: 0.492255
+  type: 'test'
+  ...
+# Subtest: CP52.7: hook uses server transaction read before write, explicit server reload and local edit guard
+ok 7 - CP52.7: hook uses server transaction read before write, explicit server reload and local edit guard
+  ---
+  duration_ms: 1.065362
+  type: 'test'
+  ...
+# Subtest: CP52.8: Orion, Pulse and Haven expose deliberate conflict resolution, keep local editing
+ok 8 - CP52.8: Orion, Pulse and Haven expose deliberate conflict resolution, keep local editing
+  ---
+  duration_ms: 0.467363
+  type: 'test'
+  ...
+# Subtest: CP52.9: candidate rules preserve owner isolation and protect revisioned documents
+ok 9 - CP52.9: candidate rules preserve owner isolation and protect revisioned documents
+  ---
+  duration_ms: 0.926739
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 179.152422

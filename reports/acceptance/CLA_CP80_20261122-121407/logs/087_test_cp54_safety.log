@@ -1,0 +1,18 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp54:safety
+> node --experimental-strip-types --test tests/cp54-draft-refresh-security.test.mjs
+
+Γ£ö CP54.1: a refresh waits for an in-flight save, and preserves its return value (1.4511ms)
+Γ£ö CP54.2: failed save does not prevent a safe reload (0.4908ms)
+Γ£ö CP54.3: reload serializes with save and invalidates writes queued behind it (1.0547ms)
+Γ£ö CP54.4: hook uses shared FIFO for server reload and checks session before applying response (0.249ms)
+Γ£ö CP54.5: both candidate Rules require revision on create and update (0.3148ms)
+Γ£ö CP54.6: Emulator suite includes revised creates and legacy migration checks (0.6837ms)
+Γä╣ tests 6
+Γä╣ suites 0
+Γä╣ pass 6
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 121.5216

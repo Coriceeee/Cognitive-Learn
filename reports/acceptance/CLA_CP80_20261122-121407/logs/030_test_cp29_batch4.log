@@ -1,0 +1,43 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp29:batch4
+> node --experimental-strip-types --test tests/cp29-batch4-seed-transaction.test.mjs tests/cp29-batch4-link-integrity.test.mjs tests/step05a-seed-input-validation.test.mjs
+
+Γ£ö F4 only owner can inspect legacy link for cleanup (1.2751ms)
+Γ£ö F4 missing and malformed server timestamps must not look like valid links (0.2279ms)
+Γ£ö F4 rejects orphaned or corrupted identifiers (0.2578ms)
+Γ£ö F4 rejects cross-account and role mismatch (0.2327ms)
+Γ£ö F4 refuses invalid role, malformed names and same account links (0.2464ms)
+Γ£ö F4 exact active boolean and role are mandatory (0.2037ms)
+Γ£ö F4 retired link and report UI cannot mount (1.2753ms)
+Γ£ö F4 partial legacy removal is explicitly reported and retryable (1.3249ms)
+Γ£ö F4 legacy cleanup uses server-only reads (0.6789ms)
+Γ£ö C1 empty initial collection is valid and does not invent a version (2.853ms)
+Γ£ö C1 real timestamp precision retained, including nanoseconds (0.3125ms)
+Γ£ö C1 missing, invalid and forged timestamp fails closed (0.2107ms)
+Γ£ö C5 accepted initial load can commit a matching existing academic pair (0.777ms)
+Γ£ö C5 stale profile token rejects concurrent tab edits (0.4644ms)
+Γ£ö C5 stale transcript token rejects concurrent term edits (0.2147ms)
+Γ£ö C5 phantom document created by another client rejects stale initial form (0.184ms)
+Γ£ö C1 invalid account owner, scope or schema fails closed (0.2529ms)
+Γ£ö C1 corrupted/foreign transcript subject cannot be silently overwritten (0.2785ms)
+Γ£ö C5 mismatched academic identity rejects cross-document overwrite (0.3656ms)
+Γ£ö C5 student cannot save against admin demo document or wrong UID (0.1738ms)
+Γ£ö C5 transaction reads account, profile, transcript BEFORE all writes (1.0583ms)
+Γ£ö C5 failed transaction gets visible conflict, not false success (0.6612ms)
+Γ£ö Seed: normal values accept, including missing optional financial fields (1.2221ms)
+Γ£ö Seed: zero is observed zero, not missing (0.2016ms)
+Γ£ö Seed: percentages over 100 or negative are rejected (0.2693ms)
+Γ£ö Seed: hours cannot exceed the length of one week (0.1483ms)
+Γ£ö Seed: counts require whole numbers (0.1464ms)
+Γ£ö Seed: negative or malformed finances are rejected (0.1385ms)
+Γ£ö Seed: missing required behavior is rejected explicitly (0.1258ms)
+Γ£ö Seed: not silently converting scientific notation to amount (0.1004ms)
+Γ£ö Seed: validator is called before atomic Firestore transaction (1.8877ms)
+Γä╣ tests 31
+Γä╣ suites 0
+Γä╣ pass 31
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 157.8611

@@ -1,0 +1,29 @@
+test_conformal_rank (test_longitudinal_adaptive_ml.LongitudinalTests.test_conformal_rank) ... ok
+test_cutoff_crossing_not_in_train (test_longitudinal_adaptive_ml.LongitudinalTests.test_cutoff_crossing_not_in_train) ... ok
+test_future_feature_rejected (test_longitudinal_adaptive_ml.LongitudinalTests.test_future_feature_rejected) ... ok
+test_minimum_cohort (test_longitudinal_adaptive_ml.LongitudinalTests.test_minimum_cohort) ... ok
+test_missing_not_zero (test_longitudinal_adaptive_ml.LongitudinalTests.test_missing_not_zero) ... ok
+test_nine_configs_and_intervals (test_longitudinal_adaptive_ml.LongitudinalTests.test_nine_configs_and_intervals) ... ok
+test_reject_duplicate_id_between_periods (test_longitudinal_adaptive_ml.LongitudinalTests.test_reject_duplicate_id_between_periods) ... ok
+test_reject_unapproved_and_synthetic_rows (test_longitudinal_adaptive_ml.LongitudinalTests.test_reject_unapproved_and_synthetic_rows) ... ok
+test_source_hash_mismatch (test_longitudinal_adaptive_ml.LongitudinalTests.test_source_hash_mismatch) ... ok
+test_temporal_counts_zero_and_determinism (test_longitudinal_adaptive_ml.LongitudinalTests.test_temporal_counts_zero_and_determinism) ... ok
+test_train_support_drift (test_longitudinal_adaptive_ml.LongitudinalTests.test_train_support_drift) ... ok
+test_invalid_target_range_is_blocked (test_uci_baseline.UciBaselineGateTest.test_invalid_target_range_is_blocked) ... ok
+test_three_information_cutoffs_are_separated (test_uci_baseline.UciBaselineGateTest.test_three_information_cutoffs_are_separated) ... ok
+test_underpowered_data_is_blocked (test_uci_baseline.UciBaselineGateTest.test_underpowered_data_is_blocked) ... ok
+test_unverified_source_is_blocked (test_uci_baseline.UciBaselineGateTest.test_unverified_source_is_blocked) ... ok
+test_good_minimum_schema (test_uci_fetch_gate.FetchGateTests.test_good_minimum_schema) ... ok
+test_license_gate_and_scope (test_uci_fetch_gate.FetchGateTests.test_license_gate_and_scope) ... ok
+test_pinned_revision_and_subject_counts (test_uci_fetch_gate.FetchGateTests.test_pinned_revision_and_subject_counts) ... ok
+test_refuse_bad_grade_and_count_and_duplicates (test_uci_fetch_gate.FetchGateTests.test_refuse_bad_grade_and_count_and_duplicates) ... ok
+test_all_models_and_intervals (test_uci_ml_comparison.MLComparison.test_all_models_and_intervals) ... ok
+test_finite_sample_quantile (test_uci_ml_comparison.MLComparison.test_finite_sample_quantile) ... ok
+test_invalid_missing_or_range (test_uci_ml_comparison.MLComparison.test_invalid_missing_or_range) ... ok
+test_no_source_no_report (test_uci_ml_comparison.MLComparison.test_no_source_no_report) ... ok
+test_signature_isolation_and_determinism (test_uci_ml_comparison.MLComparison.test_signature_isolation_and_determinism) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 3.725s
+
+OK

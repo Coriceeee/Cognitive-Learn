@@ -1,0 +1,58 @@
+TAP version 13
+# Subtest: CP35-01: student navigation opens focused pages and preserves the six student modules
+ok 1 - CP35-01: student navigation opens focused pages and preserves the six student modules
+  ---
+  duration_ms: 1.686719
+  type: 'test'
+  ...
+# Subtest: CP35-02: PTIT is an explicitly scoped sample, never a default school recommendation
+ok 2 - CP35-02: PTIT is an explicitly scoped sample, never a default school recommendation
+  ---
+  duration_ms: 3.010417
+  type: 'test'
+  ...
+# Subtest: CP35-03: study-abroad starts with no country selected and preserves country selection across subpages
+ok 3 - CP35-03: study-abroad starts with no country selected and preserves country selection across subpages
+  ---
+  duration_ms: 0.630523
+  type: 'test'
+  ...
+# Subtest: CP35-04: student data status and transcript screens do not expose backend collection names
+ok 4 - CP35-04: student data status and transcript screens do not expose backend collection names
+  ---
+  duration_ms: 0.442218
+  type: 'test'
+  ...
+# Subtest: CP35-05: Admin-only system tools remain outside the student route allowlist
+ok 5 - CP35-05: Admin-only system tools remain outside the student route allowlist
+  ---
+  duration_ms: 0.652452
+  type: 'test'
+  ...
+# Subtest: CP35-06: official source register distinguishes method-verified entries from archive-only sources
+ok 6 - CP35-06: official source register distinguishes method-verified entries from archive-only sources
+  ---
+  duration_ms: 2.15082
+  type: 'test'
+  ...
+# Subtest: CP35-07: focused pages use the shared CLA design layer and SPA rewrites
+ok 7 - CP35-07: focused pages use the shared CLA design layer and SPA rewrites
+  ---
+  duration_ms: 0.879314
+  type: 'test'
+  ...
+# Subtest: CP35-08: Seed profile uses the full ISO country catalog instead of a seven-country shortlist
+ok 8 - CP35-08: Seed profile uses the full ISO country catalog instead of a seven-country shortlist
+  ---
+  duration_ms: 1.245087
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 24.144096

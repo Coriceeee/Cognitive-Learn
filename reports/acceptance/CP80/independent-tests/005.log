@@ -1,0 +1,46 @@
+TAP version 13
+# Subtest: UX-V7-02: Student dashboard exposes six connected student spaces in the learning circuit
+ok 1 - UX-V7-02: Student dashboard exposes six connected student spaces in the learning circuit
+  ---
+  duration_ms: 1.778084
+  type: 'test'
+  ...
+# Subtest: UX-V7-03: Student module navigator filters actions and uses real links only
+ok 2 - UX-V7-03: Student module navigator filters actions and uses real links only
+  ---
+  duration_ms: 0.866687
+  type: 'test'
+  ...
+# Subtest: UX-V7-04: Admin remains outside student navigation
+ok 3 - UX-V7-04: Admin remains outside student navigation
+  ---
+  duration_ms: 1.98179
+  type: 'test'
+  ...
+# Subtest: UX-V7-05: V7 UI layer is imported and has responsive/accessibility treatments
+ok 4 - UX-V7-05: V7 UI layer is imported and has responsive/accessibility treatments
+  ---
+  duration_ms: 0.327086
+  type: 'test'
+  ...
+# Subtest: CP28-01: Account role labels are restored and sourced from the Firestore profile
+ok 5 - CP28-01: Account role labels are restored and sourced from the Firestore profile
+  ---
+  duration_ms: 0.614202
+  type: 'test'
+  ...
+# Subtest: CP28-02: CLA design system is loaded last and chat is light
+ok 6 - CP28-02: CLA design system is loaded last and chat is light
+  ---
+  duration_ms: 0.613275
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 17.236289

@@ -1,0 +1,15 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp50:orion-race
+> node --test tests/cp50-orion-race-safety.test.cjs
+
+Γ£ö CP50 Orion: incoming snapshot cannot overwrite unsaved local edits (0.6748ms)
+Γ£ö CP50 Orion: autosave validates weeks and scores before persistence (0.1744ms)
+Γ£ö CP50 Orion: async saves cannot clear newer edits (0.1402ms)
+Γä╣ tests 3
+Γä╣ suites 0
+Γä╣ pass 3
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 80.5238

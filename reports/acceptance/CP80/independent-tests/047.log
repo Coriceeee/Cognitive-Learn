@@ -1,0 +1,304 @@
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch12
+> node --experimental-strip-types --test tests/cp31-batch12-multicycle-trend.test.mjs
+
+TAP version 13
+# (node:17121) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: B12-01 initial empty window is NO_HISTORY, no fabricated trend
+ok 1 - B12-01 initial empty window is NO_HISTORY, no fabricated trend
+  ---
+  duration_ms: 1.865896
+  type: 'test'
+  ...
+# Subtest: B12-02 unknown input is INVALID
+ok 2 - B12-02 unknown input is INVALID
+  ---
+  duration_ms: 0.259256
+  type: 'test'
+  ...
+# Subtest: B12-03 one reviewed cycle has no measured T2
+ok 3 - B12-03 one reviewed cycle has no measured T2
+  ---
+  duration_ms: 8.383172
+  type: 'test'
+  ...
+# Subtest: B12-04 one active cycle cannot be extrapolated
+ok 4 - B12-04 one active cycle cannot be extrapolated
+  ---
+  duration_ms: 0.277319
+  type: 'test'
+  ...
+# Subtest: B12-05 two real domain-reviewed synthetic cycles form descriptive series
+ok 5 - B12-05 two real domain-reviewed synthetic cycles form descriptive series
+  ---
+  duration_ms: 16.344369
+  type: 'test'
+  ...
+# Subtest: B12-06 reverse Firestore newest-first order does not change trend
+ok 6 - B12-06 reverse Firestore newest-first order does not change trend
+  ---
+  duration_ms: 3.134086
+  type: 'test'
+  ...
+# Subtest: B12-07 chronological cycle ids strictly sorted by T0
+ok 7 - B12-07 chronological cycle ids strictly sorted by T0
+  ---
+  duration_ms: 2.555048
+  type: 'test'
+  ...
+# Subtest: B12-08 frozen T0 second cycle is never silently treated as a measured T2
+ok 8 - B12-08 frozen T0 second cycle is never silently treated as a measured T2
+  ---
+  duration_ms: 1.228854
+  type: 'test'
+  ...
+# Subtest: B12-09 true observed 0 kept as zero
+ok 9 - B12-09 true observed 0 kept as zero
+  ---
+  duration_ms: 2.405684
+  type: 'test'
+  ...
+# Subtest: B12-10 English matched second T0 equals first T1, not target
+ok 10 - B12-10 English matched second T0 equals first T1, not target
+  ---
+  duration_ms: 2.506959
+  type: 'test'
+  ...
+# Subtest: B12-11 individual subject history only, no aggregate score across changing denominators
+ok 11 - B12-11 individual subject history only, no aggregate score across changing denominators
+  ---
+  duration_ms: 2.475266
+  type: 'test'
+  ...
+# Subtest: B12-12 provenance remains student self-report on every point
+ok 12 - B12-12 provenance remains student self-report on every point
+  ---
+  duration_ms: 1.194946
+  type: 'test'
+  ...
+# Subtest: B12-13 no causal, forecast or externally validated student outcome claims
+ok 13 - B12-13 no causal, forecast or externally validated student outcome claims
+  ---
+  duration_ms: 1.146763
+  type: 'test'
+  ...
+# Subtest: B12-14 baseline shift from C1 T1 to C2 T0 blocks stitched trend
+ok 14 - B12-14 baseline shift from C1 T1 to C2 T0 blocks stitched trend
+  ---
+  duration_ms: 1.344928
+  type: 'test'
+  ...
+# Subtest: B12-15 same key but different subject label blocks trend
+ok 15 - B12-15 same key but different subject label blocks trend
+  ---
+  duration_ms: 0.681871
+  type: 'test'
+  ...
+# Subtest: B12-16 missing T1 in previous cycle is not silently made zero
+ok 16 - B12-16 missing T1 in previous cycle is not silently made zero
+  ---
+  duration_ms: 1.40868
+  type: 'test'
+  ...
+# Subtest: B12-17 missing T1 in next cycle cannot be used for T2
+ok 17 - B12-17 missing T1 in next cycle cannot be used for T2
+  ---
+  duration_ms: 0.773076
+  type: 'test'
+  ...
+# Subtest: B12-18 no common subjects is not a longitudinal trend
+ok 18 - B12-18 no common subjects is not a longitudinal trend
+  ---
+  duration_ms: 0.791035
+  type: 'test'
+  ...
+# Subtest: B12-19 new-only subject prevents cohort-mix average
+ok 19 - B12-19 new-only subject prevents cohort-mix average
+  ---
+  duration_ms: 1.115217
+  type: 'test'
+  ...
+# Subtest: B12-20 reused cycle ID cannot merge outcomes
+ok 20 - B12-20 reused cycle ID cannot merge outcomes
+  ---
+  duration_ms: 1.003679
+  type: 'test'
+  ...
+# Subtest: B12-21 duplicated T0 timestamp fails closed
+ok 21 - B12-21 duplicated T0 timestamp fails closed
+  ---
+  duration_ms: 0.424053
+  type: 'test'
+  ...
+# Subtest: B12-22 overlapped cycle starts before previous reassessment ends rejected
+ok 22 - B12-22 overlapped cycle starts before previous reassessment ends rejected
+  ---
+  duration_ms: 1.024604
+  type: 'test'
+  ...
+# Subtest: B12-23 corrupt evidence in prior cycle fails closed instead of displaying later trend
+ok 23 - B12-23 corrupt evidence in prior cycle fails closed instead of displaying later trend
+  ---
+  duration_ms: 0.597375
+  type: 'test'
+  ...
+# Subtest: B12-24 corrupt evidence in next cycle fails closed
+ok 24 - B12-24 corrupt evidence in next cycle fails closed
+  ---
+  duration_ms: 0.457328
+  type: 'test'
+  ...
+# Subtest: B12-25 legacy T0 missing refuses trend, while source records remain readable
+ok 25 - B12-25 legacy T0 missing refuses trend, while source records remain readable
+  ---
+  duration_ms: 0.422627
+  type: 'test'
+  ...
+# Subtest: B12-26 legacy Evidence Record missing refuses trend
+ok 26 - B12-26 legacy Evidence Record missing refuses trend
+  ---
+  duration_ms: 0.705332
+  type: 'test'
+  ...
+# Subtest: B12-27 cross-UID records cannot be compared when owner is supplied
+ok 27 - B12-27 cross-UID records cannot be compared when owner is supplied
+  ---
+  duration_ms: 0.847675
+  type: 'test'
+  ...
+# Subtest: B12-28 legacy no-owner records cannot enter authenticated history
+ok 28 - B12-28 legacy no-owner records cannot enter authenticated history
+  ---
+  duration_ms: 0.709768
+  type: 'test'
+  ...
+# Subtest: B12-29 same-owner records remain eligible only under matching uid
+ok 29 - B12-29 same-owner records remain eligible only under matching uid
+  ---
+  duration_ms: 1.306104
+  type: 'test'
+  ...
+# Subtest: B12-30 max 8 displayed cycles; 9th fails rather than claim full history
+ok 30 - B12-30 max 8 displayed cycles; 9th fails rather than claim full history
+  ---
+  duration_ms: 1.855595
+  type: 'test'
+  ...
+# Subtest: B12-31 duplicate records in same window fail closed
+ok 31 - B12-31 duplicate records in same window fail closed
+  ---
+  duration_ms: 0.805449
+  type: 'test'
+  ...
+# Subtest: B12-32 current active cycle must not create fake T3
+ok 32 - B12-32 current active cycle must not create fake T3
+  ---
+  duration_ms: 1.40557
+  type: 'test'
+  ...
+# Subtest: B12-33 active cycle before previous reviewed cycle is invalid interleaving
+ok 33 - B12-33 active cycle before previous reviewed cycle is invalid interleaving
+  ---
+  duration_ms: 1.064722
+  type: 'test'
+  ...
+# Subtest: B12-34 reproducible report replay accepts key reorder
+ok 34 - B12-34 reproducible report replay accepts key reorder
+  ---
+  duration_ms: 2.482288
+  type: 'test'
+  ...
+# Subtest: B12-35 replay rejects spurious T3 and fabricated claims
+ok 35 - B12-35 replay rejects spurious T3 and fabricated claims
+  ---
+  duration_ms: 2.204101
+  type: 'test'
+  ...
+# Subtest: B12-36 replay rejects forged causal claim or changed baseline
+ok 36 - B12-36 replay rejects forged causal claim or changed baseline
+  ---
+  duration_ms: 2.303747
+  type: 'test'
+  ...
+# Subtest: B12-37 genuine inputs remain unmodified after audit
+ok 37 - B12-37 genuine inputs remain unmodified after audit
+  ---
+  duration_ms: 1.009317
+  type: 'test'
+  ...
+# Subtest: B12-38 synthesized local envelope generates and verifies without Firebase
+ok 38 - B12-38 synthesized local envelope generates and verifies without Firebase
+  ---
+  duration_ms: 3.962507
+  type: 'test'
+  ...
+# Subtest: B12-39 envelope source fixture tampering rejected
+ok 39 - B12-39 envelope source fixture tampering rejected
+  ---
+  duration_ms: 2.980235
+  type: 'test'
+  ...
+# Subtest: B12-40 envelope rejects injected externally verified flag
+ok 40 - B12-40 envelope rejects injected externally verified flag
+  ---
+  duration_ms: 2.425902
+  type: 'test'
+  ...
+# Subtest: B12-41 missing synthetic marker or injected student personal data rejected
+ok 41 - B12-41 missing synthetic marker or injected student personal data rejected
+  ---
+  duration_ms: 0.789006
+  type: 'test'
+  ...
+# Subtest: B12-42 UI displays per-subject series with guard labels and truncated history
+ok 42 - B12-42 UI displays per-subject series with guard labels and truncated history
+  ---
+  duration_ms: 0.687368
+  type: 'test'
+  ...
+# Subtest: B12-43 listener verifies owner through the server-only snapshot gate before trend computation
+ok 43 - B12-43 listener verifies owner through the server-only snapshot gate before trend computation
+  ---
+  duration_ms: 0.331103
+  type: 'test'
+  ...
+# Subtest: B12-44 historical report is bounded and never claims full population trend
+ok 44 - B12-44 historical report is bounded and never claims full population trend
+  ---
+  duration_ms: 0.763458
+  type: 'test'
+  ...
+# Subtest: B12-45 source checklist remains unchanged and test is invoked in npm scripts
+ok 45 - B12-45 source checklist remains unchanged and test is invoked in npm scripts
+  ---
+  duration_ms: 0.627808
+  type: 'test'
+  ...
+# Subtest: B12-46 exactly eight past reviewed cycles are a bounded, potentially truncated window
+ok 46 - B12-46 exactly eight past reviewed cycles are a bounded, potentially truncated window
+  ---
+  duration_ms: 2.362685
+  type: 'test'
+  ...
+# Subtest: B12-47 mixed owned and ownerless records are rejected even without expected UID
+ok 47 - B12-47 mixed owned and ownerless records are rejected even without expected UID
+  ---
+  duration_ms: 0.301931
+  type: 'test'
+  ...
+# Subtest: B12-48 malformed owner metadata rejected even when the rest of the evidence is consistent
+ok 48 - B12-48 malformed owner metadata rejected even when the rest of the evidence is consistent
+  ---
+  duration_ms: 0.347168
+  type: 'test'
+  ...
+1..48
+# tests 48
+# suites 0
+# pass 48
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 335.333293

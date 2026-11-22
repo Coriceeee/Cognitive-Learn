@@ -1,0 +1,40 @@
+
+> cognitive-learn-ai@0.1.0 test:cp32:discovery
+> node --experimental-strip-types --test tests/cp32-program-discovery.test.mjs
+
+TAP version 13
+# (node:17401) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: preserves all 216 new numeric facts and 11 institutional identities
+ok 1 - preserves all 216 new numeric facts and 11 institutional identities
+  ---
+  duration_ms: 0.88214
+  type: 'test'
+  ...
+# Subtest: actual VNU official numeric anchors, same code in different schools stays separate
+ok 2 - actual VNU official numeric anchors, same code in different schools stays separate
+  ---
+  duration_ms: 3.307894
+  type: 'test'
+  ...
+# Subtest: interest, school, year and region are actual filters not imputation
+ok 3 - interest, school, year and region are actual filters not imputation
+  ---
+  duration_ms: 11.084149
+  type: 'test'
+  ...
+# Subtest: combination evidence is separate from unknown; missing does not exclude candidates
+ok 4 - combination evidence is separate from unknown; missing does not exclude candidates
+  ---
+  duration_ms: 1.27462
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 287.152107

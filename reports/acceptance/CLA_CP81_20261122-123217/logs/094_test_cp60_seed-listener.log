@@ -1,0 +1,16 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp60:seed-listener
+> node --test tests/cp60-seed-listener-stability.test.cjs
+
+Γ£ö CP60.1 repeated confirmed missing primary does not reopen legacy listener (67.7817ms)
+Γ£ö CP60.2 verified fallback remains visible across primary metadata changes (16.801ms)
+Γ£ö CP60.3 canonical document supersedes legacy and rejects late fallback callbacks (12.8817ms)
+Γ£ö CP60.4 unverified primary invalidates fallback; next verified absence starts fresh listener (9.2763ms)
+Γä╣ tests 4
+Γä╣ suites 0
+Γä╣ pass 4
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 348.8005

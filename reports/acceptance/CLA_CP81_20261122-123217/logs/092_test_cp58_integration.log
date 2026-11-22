@@ -1,0 +1,41 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp58:integration
+> node --experimental-strip-types --test tests/cp58-transcript-prefill.test.mjs && node --test tests/cp45-seamless-navigation.test.cjs
+
+Γ£ö CP58.1: Seed ΓåÆ Orion/Haven prefill requires both server-verified records for same UID (0.8297ms)
+Γ£ö CP58.2: an empty transcript cannot consume the first eligible prefill (0.132ms)
+Γ£ö CP58.3: manual edits take priority and same student is prefilled at most once (0.0902ms)
+Γ£ö CP58.4: account A prefill never blocks an eligible account B prefill (0.0984ms)
+Γ£ö CP58.5: Orion and Haven bind the prefill to verified UIDs, not any cached transcript (1.28ms)
+Γ£ö CP58.6: Haven does not mark empty/unsupported grades as prefilled (1.6734ms)
+Γ£ö CP58.7: transcript prefill never performs Firestore writes or fabricates a missing score (1.119ms)
+Γ£ö CP58.8: App re-renders for same-path query changes without hard reload (0.3881ms)
+Γ£ö CP58.9: Atlas study-abroad synchronizes Back/Forward country query without losing same-country checklist (0.6898ms)
+Γä╣ tests 9
+Γä╣ suites 0
+Γä╣ pass 9
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 121.6573
+Γ£ö CP45 navigation: internal links use pushState without document reload (63.8788ms)
+Γ£ö CP45 navigation: browser Back/Forward notifies React without reload (18.5901ms)
+Γ£ö CP45 navigation: native same-page anchors and external links remain native (10.8043ms)
+Γ£ö CP45 navigation: modified clicks, new-tab links and downloads are never hijacked (9.8556ms)
+Γ£ö CP45 navigation: pointer and keyboard intent only prefetch the route code (7.4625ms)
+Γ£ö CP45 navigation: legacy hash bookmarks are converted to canonical module path (7.693ms)
+Γ£ö CP45: transition keeps revealed content during lazy import, profile watcher is shared and consent gated (1.9814ms)
+Γ£ö CP45: lazy routes have a single shared import table, without eager imports (0.8624ms)
+Γ£ö CP56: a declined guard blocks a link without unmounting current page (11.0378ms)
+Γ£ö CP56: browser Back rejected by guard restores URL without notifying React (7.9058ms)
+Γ£ö CP56: imperative navigation obeys dirty guard, and same route is a no-op (11.2128ms)
+Γ£ö CP58: same-path query navigation notifies React, preserves SPA and supports Back query (14.6731ms)
+Γä╣ tests 12
+Γä╣ suites 0
+Γä╣ pass 12
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 427.828

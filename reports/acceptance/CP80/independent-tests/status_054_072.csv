@@ -1,0 +1,19 @@
+﻿index,status,exitcode,seconds,command,log
+54,PASS,0,0.47,npm run test:cp32:decision,reports/acceptance/CP80/independent-tests/054.log
+55,PASS,0,0.97,npm run test:cp32:national,reports/acceptance/CP80/independent-tests/055.log
+56,PASS,0,0.47,npm run test:cp32:discovery,reports/acceptance/CP80/independent-tests/056.log
+57,PASS,0,0.59,npm run test:cp32:personal,reports/acceptance/CP80/independent-tests/057.log
+58,PASS,0,0.45,npm run test:cp32:public-search,reports/acceptance/CP80/independent-tests/058.log
+59,PASS,0,0.24,node --experimental-strip-types --test tests/cp33-external-ml-evidence.test.mjs,reports/acceptance/CP80/independent-tests/059.log
+60,PASS,0,0.24,node --experimental-strip-types --test tests/cp33-cognitive-readiness.test.mjs,reports/acceptance/CP80/independent-tests/060.log
+61,PASS,0,0.37,npm run test:cp34:knowledge-xai,reports/acceptance/CP80/independent-tests/061.log
+62,PASS,0,0.52,npm run test:cp34:career-decision,reports/acceptance/CP80/independent-tests/062.log
+63,PASS,0,0.42,npm run test:cp34:adaptive-decision,reports/acceptance/CP80/independent-tests/063.log
+64,PASS,0,0.39,npm run test:cp36:adaptive-lineage,reports/acceptance/CP80/independent-tests/064.log
+65,PASS,0,0.38,npm run test:cp37-38:dynamic,reports/acceptance/CP80/independent-tests/065.log
+66,PASS,0,0.4,npm run test:cp39-41:bayes,reports/acceptance/CP80/independent-tests/066.log
+67,PASS,0,0.38,npm run test:chart-first,reports/acceptance/CP80/independent-tests/067.log
+68,PASS,0,0.33,npm run test:cp40:allocation,reports/acceptance/CP80/independent-tests/068.log
+69,PASS,0,0.38,npm run test:cp40:student-only,reports/acceptance/CP80/independent-tests/069.log
+70,PASS,0,0.47,npm run test:cp41:policy,reports/acceptance/CP80/independent-tests/070.log
+71,PASS,0,1.08,npm run test:cp42:atlas,reports/acceptance/CP80/independent-tests/071.log

@@ -1,0 +1,52 @@
+
+> cognitive-learn-ai@0.1.0 test:cp71:unified-nav
+> node --experimental-strip-types --test tests/cp71-unified-navigation.test.mjs
+
+TAP version 13
+# (node:37890) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP71: all six student workspaces use the same navigation component and bar class
+ok 1 - CP71: all six student workspaces use the same navigation component and bar class
+  ---
+  duration_ms: 1.604012
+  type: 'test'
+  ...
+# Subtest: CP71: former stacked heading / pager / start panels are absent in rendered module navigation
+ok 2 - CP71: former stacked heading / pager / start panels are absent in rendered module navigation
+  ---
+  duration_ms: 0.16997
+  type: 'test'
+  ...
+# Subtest: CP71: every implemented tab is reachable through quick links or More
+ok 3 - CP71: every implemented tab is reachable through quick links or More
+  ---
+  duration_ms: 1.986025
+  type: 'test'
+  ...
+# Subtest: CP71: study abroad uses the same bar and keeps country on nested route links
+ok 4 - CP71: study abroad uses the same bar and keeps country on nested route links
+  ---
+  duration_ms: 0.145535
+  type: 'test'
+  ...
+# Subtest: CP71: one shared final CSS layer overrides legacy competing tab styles
+ok 5 - CP71: one shared final CSS layer overrides legacy competing tab styles
+  ---
+  duration_ms: 0.238091
+  type: 'test'
+  ...
+# Subtest: CP71: map contrast repair is included and pairs colors with surfaces
+ok 6 - CP71: map contrast repair is included and pairs colors with surfaces
+  ---
+  duration_ms: 0.189789
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 109.108196

@@ -1,0 +1,268 @@
+TAP version 13
+# Subtest: P26-01 official policy is versioned and capped at 15 / teacher NV1-5
+ok 1 - P26-01 official policy is versioned and capped at 15 / teacher NV1-5
+  ---
+  duration_ms: 1.740202
+  type: 'test'
+  ...
+# Subtest: P26-02 classifier catches teacher-training by major code or explicit flag
+ok 2 - P26-02 classifier catches teacher-training by major code or explicit flag
+  ---
+  duration_ms: 0.686356
+  type: 'test'
+  ...
+# Subtest: P26-03 classifier catches teacher names without misleading other education majors
+ok 3 - P26-03 classifier catches teacher names without misleading other education majors
+  ---
+  duration_ms: 1.12409
+  type: 'test'
+  ...
+# Subtest: P26-04 >5 teacher-training candidates never spill into NV6-NV15
+ok 4 - P26-04 >5 teacher-training candidates never spill into NV6-NV15
+  ---
+  duration_ms: 1.776686
+  type: 'test'
+  ...
+# Subtest: P26-05 recommendations cannot contain more than 15 applications
+ok 5 - P26-05 recommendations cannot contain more than 15 applications
+  ---
+  duration_ms: 1.074482
+  type: 'test'
+  ...
+# Subtest: P26-06 user-chosen maximum below five also constrains teacher-training count
+ok 6 - P26-06 user-chosen maximum below five also constrains teacher-training count
+  ---
+  duration_ms: 0.397254
+  type: 'test'
+  ...
+# Subtest: P26-07 historical sources cannot silently become 2026 policy inputs
+ok 7 - P26-07 historical sources cannot silently become 2026 policy inputs
+  ---
+  duration_ms: 1.276046
+  type: 'test'
+  ...
+# Subtest: P26-08 invalid or missing-benchmark results are not offered
+ok 8 - P26-08 invalid or missing-benchmark results are not offered
+  ---
+  duration_ms: 0.314939
+  type: 'test'
+  ...
+# Subtest: P26-09 ten non-teacher programmes preserve model ranking; no auto teacher bias score
+ok 9 - P26-09 ten non-teacher programmes preserve model ranking; no auto teacher bias score
+  ---
+  duration_ms: 1.002446
+  type: 'test'
+  ...
+# Subtest: P26-10 unparseable cap falls back to legal maximum
+ok 10 - P26-10 unparseable cap falls back to legal maximum
+  ---
+  duration_ms: 0.780087
+  type: 'test'
+  ...
+# Subtest: P26-11 no valid candidates produces no fabricated places
+ok 11 - P26-11 no valid candidates produces no fabricated places
+  ---
+  duration_ms: 0.475408
+  type: 'test'
+  ...
+# Subtest: P26-12 UI displays source, cap and teaching limitation even before recommendations
+ok 12 - P26-12 UI displays source, cap and teaching limitation even before recommendations
+  ---
+  duration_ms: 1.197226
+  type: 'test'
+  ...
+# Subtest: P26-13 integrated Admission Engine enforces teaching NV1–NV5 after real eligibility calculation
+ok 13 - P26-13 integrated Admission Engine enforces teaching NV1–NV5 after real eligibility calculation
+  ---
+  duration_ms: 96.683523
+  type: 'test'
+  ...
+# Subtest: P26-14 integrated engine abstains if cutoff is unverified, despite policy-compliant ordering
+ok 14 - P26-14 integrated engine abstains if cutoff is unverified, despite policy-compliant ordering
+  ---
+  duration_ms: 91.768961
+  type: 'test'
+  ...
+# Subtest: 06.01 zero is a legitimate observed score, absent is not zero
+ok 15 - 06.01 zero is a legitimate observed score, absent is not zero
+  ---
+  duration_ms: 2.65691
+  type: 'test'
+  ...
+# Subtest: 06.02 impossible or malformed subject scores are not silently clamped
+ok 16 - 06.02 impossible or malformed subject scores are not silently clamped
+  ---
+  duration_ms: 0.647276
+  type: 'test'
+  ...
+# Subtest: 06.03 D01 uses exactly its three observed subjects
+ok 17 - 06.03 D01 uses exactly its three observed subjects
+  ---
+  duration_ms: 2.131812
+  type: 'test'
+  ...
+# Subtest: 06.04 genuine zero does not make a complete combination incomplete
+ok 18 - 06.04 genuine zero does not make a complete combination incomplete
+  ---
+  duration_ms: 0.557545
+  type: 'test'
+  ...
+# Subtest: 06.05 blank or invalid remains missing in the exact combination
+ok 19 - 06.05 blank or invalid remains missing in the exact combination
+  ---
+  duration_ms: 0.725491
+  type: 'test'
+  ...
+# Subtest: 06.06 partial sum is never the winning option
+ok 20 - 06.06 partial sum is never the winning option
+  ---
+  duration_ms: 1.200226
+  type: 'test'
+  ...
+# Subtest: 06.07 no external scale is silently ranked against school combinations
+ok 21 - 06.07 no external scale is silently ranked against school combinations
+  ---
+  duration_ms: 0.814606
+  type: 'test'
+  ...
+# Subtest: 06.08 a three-subject zero score remains an eligible combination, not a missing record
+ok 22 - 06.08 a three-subject zero score remains an eligible combination, not a missing record
+  ---
+  duration_ms: 1.204045
+  type: 'test'
+  ...
+# Subtest: 06.09 invalid or missing subjects cannot qualify for a verified benchmark
+ok 23 - 06.09 invalid or missing subjects cannot qualify for a verified benchmark
+  ---
+  duration_ms: 1.193032
+  type: 'test'
+  ...
+# Subtest: 06.10 Studio only admits official self-declared THPT 2026 scores into cutoff comparison
+ok 24 - 06.10 Studio only admits official self-declared THPT 2026 scores into cutoff comparison
+  ---
+  duration_ms: 2.087312
+  type: 'test'
+  ...
+# Subtest: 06.11 visual explanation is based on computed engine combinations, not hardcoded examples
+ok 25 - 06.11 visual explanation is based on computed engine combinations, not hardcoded examples
+  ---
+  duration_ms: 1.468673
+  type: 'test'
+  ...
+# Subtest: 06.12 supported input subjects are visible but extra combinations are not invented
+ok 26 - 06.12 supported input subjects are visible but extra combinations are not invented
+  ---
+  duration_ms: 1.041024
+  type: 'test'
+  ...
+# Subtest: 06.13 Studio styling supports mobile and reduced motion
+ok 27 - 06.13 Studio styling supports mobile and reduced motion
+  ---
+  duration_ms: 1.193079
+  type: 'test'
+  ...
+# Subtest: AUTH-01: explicit active Admin role is accepted
+ok 28 - AUTH-01: explicit active Admin role is accepted
+  ---
+  duration_ms: 3.547485
+  type: 'test'
+  ...
+# Subtest: AUTH-02: only student non-Admin role is accepted
+ok 29 - AUTH-02: only student non-Admin role is accepted
+  ---
+  duration_ms: 0.618233
+  type: 'test'
+  ...
+# Subtest: AUTH-03: absent profile or null data does not grant access
+ok 30 - AUTH-03: absent profile or null data does not grant access
+  ---
+  duration_ms: 0.294146
+  type: 'test'
+  ...
+# Subtest: AUTH-04: missing, false, and string active flags are denied
+ok 31 - AUTH-04: missing, false, and string active flags are denied
+  ---
+  duration_ms: 0.663569
+  type: 'test'
+  ...
+# Subtest: AUTH-05: malformed roles and email-based spoofing do not grant Admin
+ok 32 - AUTH-05: malformed roles and email-based spoofing do not grant Admin
+  ---
+  duration_ms: 0.577449
+  type: 'test'
+  ...
+# Subtest: AUTH-06: transient Firestore unavailable retries and returns server profile
+ok 33 - AUTH-06: transient Firestore unavailable retries and returns server profile
+  ---
+  duration_ms: 0.897561
+  type: 'test'
+  ...
+# Subtest: AUTH-07: stop after three transient failures and preserve the error
+ok 34 - AUTH-07: stop after three transient failures and preserve the error
+  ---
+  duration_ms: 1.404104
+  type: 'test'
+  ...
+# Subtest: AUTH-08: permission-denied is never retried or bypassed
+ok 35 - AUTH-08: permission-denied is never retried or bypassed
+  ---
+  duration_ms: 1.305217
+  type: 'test'
+  ...
+# Subtest: AUTH-09: error classifier handles Firestore-prefixed errors, not arbitrary failures
+ok 36 - AUTH-09: error classifier handles Firestore-prefixed errors, not arbitrary failures
+  ---
+  duration_ms: 1.168107
+  type: 'test'
+  ...
+# Subtest: AUTH-10: both login and route guard verify the latest server role, not cache
+ok 37 - AUTH-10: both login and route guard verify the latest server role, not cache
+  ---
+  duration_ms: 2.276898
+  type: 'test'
+  ...
+# Subtest: AUTH-11: existing admin redirects to /admin after server verification
+ok 38 - AUTH-11: existing admin redirects to /admin after server verification
+  ---
+  duration_ms: 206.542019
+  type: 'test'
+  ...
+# Subtest: AUTH-12: non-admin cannot be redirected to /admin by using the same login form
+ok 39 - AUTH-12: non-admin cannot be redirected to /admin by using the same login form
+  ---
+  duration_ms: 53.989607
+  type: 'test'
+  ...
+# Subtest: AUTH-13: blocked or missing Admin profile cannot navigate despite valid Firebase Auth
+ok 40 - AUTH-13: blocked or missing Admin profile cannot navigate despite valid Firebase Auth
+  ---
+  duration_ms: 153.466418
+  type: 'test'
+  ...
+# Subtest: AUTH-14: transient failure recovers during login without bypassing verification
+ok 41 - AUTH-14: transient failure recovers during login without bypassing verification
+  ---
+  duration_ms: 1187.432064
+  type: 'test'
+  ...
+# Subtest: AUTH-15: a failed role read retains the Auth session and exposes a retry button
+ok 42 - AUTH-15: a failed role read retains the Auth session and exposes a retry button
+  ---
+  duration_ms: 1198.344647
+  type: 'test'
+  ...
+# Subtest: AUTH-16: LoginPage role is strictly narrowed to ready before redirect
+ok 43 - AUTH-16: LoginPage role is strictly narrowed to ready before redirect
+  ---
+  duration_ms: 594.762691
+  type: 'test'
+  ...
+1..43
+# tests 43
+# suites 0
+# pass 43
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4020.118686

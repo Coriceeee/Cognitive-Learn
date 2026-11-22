@@ -1,0 +1,1838 @@
+﻿
+> cognitive-learn-ai@0.1.0 test
+> node tests/academic.test.cjs && node tests/cognitive-observation.test.cjs && node tests/admin-deeplink.test.cjs && node tests/module-hierarchy.test.cjs && node tests/cp35-p0-p1-contract.test.cjs && node tests/ux-v7.test.cjs && node tests/student-role-isolation.test.cjs && node --experimental-strip-types --test tests/pipeline-evidence.test.mjs tests/pipeline-evidence-record.test.mjs && node --experimental-strip-types --test tests/admissions-and-chat.test.mjs && node --test tests/chat-launcher-mascot.test.cjs && node --test tests/cp29-release-contract.test.cjs && node --test tests/cp30-chat-readability.test.cjs && node --experimental-strip-types --test research/tests/closed_loop_replay_demo.test.mjs && node --test tests/scientific-visuals.test.cjs && node --test tests/cp36-p1.test.cjs && node --experimental-strip-types --test tests/cp36-source-registry.test.mjs && node --test tests/cp37-operating-guide.test.cjs && node --test tests/atlas-aspiration-policy-2026.test.cjs tests/step06-subject-score-contract.test.cjs tests/step07-admin-auth-recovery.test.cjs && node --test tests/step07-seed-atlas-bridge.test.cjs && node --test tests/step08-subject-optimizer.test.cjs && node --test tests/step09-ptit-official-pathways.test.cjs && node --test tests/firestore-security-gate.test.cjs && npm run test:student-consent && npm run test:prediction-safety && npm run test:closed-loop && npm run test:journey-reliability && npm run test:daily-companion && npm run test:companion-push && npm run test:aspiration-draft && npm run test:exam-calendar && npm run test:notifications && npm run test:shadow && npm run test:consent-share-revocation && npm run test:consent-server-cleanup && npm run test:cp29:access && npm run test:cp29:routes && npm run test:cp29:academic && npm run test:cp29:accounts && npm run test:cp29:batch4 && npm run test:cp30:realtime && npm run test:cp30:profile && npm run test:cp30:gpa && npm run test:cp30:batch4 && npm run test:cp31:batch3 && npm run test:cp31:batch4 && npm run test:cp31:batch5 && npm run test:cp31:batch11 && npm run test:cp31:batch12 && npm run test:cp31:batch13 && npm run test:cp31:batch14 && npm run test:cp31:batch15 && npm run test:cp31:batch16 && npm run test:cp31:batch17 && npm run test:cp32:cutoffs && npm run test:cp32:decision && npm run test:cp32:national && npm run test:cp32:discovery && npm run test:cp32:personal && npm run test:cp32:public-search && node --experimental-strip-types --test tests/cp33-external-ml-evidence.test.mjs && node --experimental-strip-types --test tests/cp33-cognitive-readiness.test.mjs && npm run test:cp34:knowledge-xai && npm run test:cp34:career-decision && npm run test:cp34:adaptive-decision && npm run test:cp36:adaptive-lineage && npm run test:cp37-38:dynamic && npm run test:cp39-41:bayes && npm run test:chart-first && npm run test:cp40:allocation && npm run test:cp40:student-only && npm run test:cp41:policy && npm run test:cp42:atlas && npm run test:cp42:source-discovery && npm run test:cp42:scheme-coverage && npm run test:cp42:dthu-batch && npm run test:cp42:dthu-scheme && npm run test:cp42:institution-discovery && npm run test:cp42:robust-decision && npm run test:cp42:holistic-temporal && npm run test:cp42:focused-workspaces && npm run test:cp47:orion-autosave && npm run test:cp50:orion-race && npm run test:cp51:draft-queue && npm run test:cp52:multidevice && npm run test:cp53:integrity && npm run test:cp54:safety && npm run test:cp55:safety && npm run test:cp56:navigation && npm run test:cp57:timestamp && npm run test:cp58:integration && npm run test:cp59:verified-drafts && npm run test:cp60:seed-listener && npm run test:cp61:legacy-drafts && npm run test:cp62:student-rail && npm run test:cp63:guided-workspaces && npm run test:cp64:input-ux && npm run test:cp65:atlas-lumen-ux && npm run test:cp66:unified-states && npm run test:cp67:route-experience && npm run test:cp68:qa-gate && npm run test:cp69:firebase-integration && npm run test:cp70:journey && npm run test:cp71:unified-nav && npm run test:cp72:lumen-fallback && npm run test:cp73:mvp && npm run test:cp74:product-polish && npm run test:cp75:ux-audit && npm run test:cp76:names && npm run test:cp77:login-copy && npm run test:cp78:clarity && npm run test:cp79:theme
+
+PASS nine graded subjects exactly
+PASS elective duplicate blocked
+PASS elective invalid blocked
+PASS 0 valid
+PASS 10 valid
+PASS comma decimal valid
+PASS dot decimal valid
+PASS blank missing
+PASS invalid negative
+PASS invalid >10
+PASS invalid 1e0 syntax
+PASS provisional not complete
+PASS term complete with 0 score
+PASS year requires both completed terms
+ACADEMIC TESTS: 14/14 PASS
+PASS unknown academic and behavior metrics stay null, not fake 0
+PASS genuine observed zero is preserved
+PASS mixed observed and missing metrics retain distinction
+PASS snapshot provenance and source object remain unchanged
+COGNITIVE OBSERVATION TESTS: 4/4 PASS
+ADMIN ROUTE CONTRACT: 22 admin-only links across 7 modules; no student business links PASS
+MODULE HIERARCHY CONTRACT: seven main modules, catalog, ownership and nested anchors PASS
+STUDENT EXPERIENCE: six major modules, student-only children and correctly named return links PASS
+Γ£ö CP35-01: student navigation opens focused pages and preserves the six student modules (1.9359ms)
+Γ£ö CP35-02: PTIT is an explicitly scoped sample, never a default school recommendation (1.7148ms)
+Γ£ö CP35-03: study-abroad starts with no country selected and preserves country selection across subpages (0.8495ms)
+Γ£ö CP35-04: student data status and transcript screens do not expose backend collection names (0.7604ms)
+Γ£ö CP35-05: Admin-only system tools remain outside the student route allowlist (0.9256ms)
+Γ£ö CP35-06: official source register distinguishes method-verified entries from archive-only sources (1.699ms)
+Γ£ö CP35-07: focused pages use the shared CLA design layer and SPA rewrites (1.9075ms)
+Γ£ö CP35-08: Seed profile uses the full ISO country catalog instead of a seven-country shortlist (0.7084ms)
+Γä╣ tests 8
+Γä╣ suites 0
+Γä╣ pass 8
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 16.3175
+Γ£ö UX-V7-02: Student dashboard exposes six connected student spaces in the learning circuit (1.536ms)
+Γ£ö UX-V7-03: Student module navigator filters actions and uses real links only (0.8227ms)
+Γ£ö UX-V7-04: Admin remains outside student navigation (1.3802ms)
+Γ£ö UX-V7-05: V7 UI layer is imported and has responsive/accessibility treatments (0.5938ms)
+Γ£ö CP28-01: Account role labels are restored and sourced from the Firestore profile (0.7404ms)
+Γ£ö CP28-02: CLA design system is loaded last and chat is light (0.6421ms)
+Γä╣ tests 6
+Γä╣ suites 0
+Γä╣ pass 6
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 11.2919
+STUDENT ROLE ISOLATION: menu, read-only student flows and admin-only source API PASS
+Γ£ö R01 whitelisted persisted record has no UID/scores/names/notes (2.8696ms)
+Γ£ö R02 unknown dataScope cannot be stored (0.4791ms)
+Γ£ö R03 stored demo record remains explicitly labeled (0.1964ms)
+Γ£ö R04 never persist complete:true or another evidence version (0.3113ms)
+Γ£ö R05 exactly four distinct stages required (0.2079ms)
+Γ£ö R06 invalid stage status rejected (0.1438ms)
+Γ£ö R07 malformed timestamps rejected (0.9411ms)
+Γ£ö R08 history range/count consistency validated (0.1783ms)
+Γ£ö R09 real zero not copied into provenance even when observed (0.2808ms)
+Γ£ö R10 unchanged observedAt and no arbitrary createdAt (0.3383ms)
+Γ£ö P01 missing four sources cannot become a report (2.5757ms)
+Γ£ö P02 real Cognitive zero with scoreAvailable and mapping version counts as observed proxy (0.4541ms)
+Γ£ö P03 technical zero without scoreAvailable is LIMITED, not an observed zero (0.242ms)
+Γ£ö P04 inconsistent transcript owner is INVALID (0.2022ms)
+Γ£ö P05 inconsistent scopes are INVALID (0.2888ms)
+Γ£ö P06 legacy schema is not silently accepted (0.2228ms)
+Γ£ö P07 drafts can be present only as LIMITED, never confirmed outcomes (1.2422ms)
+Γ£ö P08 unknown dataScope is not treated as student (0.27ms)
+Γ£ö P09 demo records are labeled non-research (0.4175ms)
+Γ£ö P10 missing cognitive and invalid draft are distinguished (0.3823ms)
+Γ£ö P11 cannot build a check without authenticated UID (0.3292ms)
+Γ£ö P12 cannot build a check with invalid timestamp (0.2055ms)
+Γ£ö P13 privacy: no UID, score, name, raw profile included in evidence record (0.1695ms)
+Γ£ö P14 one valid snapshot never becomes a trend (0.1314ms)
+Γ£ö P15 two snapshots with different versions cannot be compared (0.0808ms)
+Γ£ö P16 two time-separated matching observations allow technical comparison only (0.1131ms)
+Γ£ö P17 history from another UID excluded (0.2205ms)
+Γä╣ tests 27
+Γä╣ suites 0
+Γä╣ pass 27
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 192.0284
+Γ£ö CP25-01: Curated universities have sourced years without inventing unverified archives (1.6731ms)
+Γ£ö CP25-02: Year-specific PTIT pathways do not leak year-specific methods (0.1482ms)
+Γ£ö CP25-03: Exact campus and method provenance on historical cutoffs (0.2692ms)
+Γ£ö CP25-04: Score conversion accepts actual zero but not missing or invalid inputs (0.2127ms)
+Γ£ö CP25-05: Historical gap is arithmetic, never chance-of-admission (0.156ms)
+Γ£ö CP25-06: Discovery matches year/method without inventing unsupported methods (0.6669ms)
+Γ£ö CP25-07: International requirements have direct official endpoints and certifications (0.1394ms)
+Γ£ö CP25-08: Chat only keeps last eight bounded turns (0.7385ms)
+Γ£ö CP25-09: Chat rejects invalid content and unauthorized roles in history (0.3978ms)
+Γ£ö CP25-10: UI routes and protected chat endpoint exist (1.0059ms)
+Γ£ö CP25-11: Study-abroad refresh uses Vercel SPA rewrite, preserving /api routes (0.5844ms)
+Γ£ö CP25-12: Chat supports same-origin secure deployment and optional CORS origin list (0.4639ms)
+Γ£ö ROUND-01: Floating assistant routes specialist questions to their owning modules (0.7811ms)
+Γ£ö ROUND-02: Only internal known destinations may appear in chat responses (0.1595ms)
+Γ£ö ROUND-03: Backend and frontend share specialist redirect gate (0.6605ms)
+Γ£ö ROUND-04: Do not show uncalibrated achievement probability on the dashboard (0.3586ms)
+Γ£ö ROUND-05: United States and domestic international pathways have official links and clear limitations (0.1852ms)
+Γ£ö ROUND-06: TDTU three-year schemes distinguish score scales (0.3191ms)
+Γ£ö ROUND-07: Career-fit UI states experimental scores are not admission probabilities (0.3799ms)
+Γ£ö ROUND-07: Career-fit UI states experimental scores are not admission probabilities (0.2865ms)
+Γ£ö GLOBAL-01: every ISO 3166-1 alpha-2 country/territory is selectable without fabricated claims (1.6841ms)
+Γ£ö GLOBAL-02: all-country UI abstains when programme-level evidence is unavailable (0.4511ms)
+Γ£ö GLOBAL-03: Atlas owns domestic and international admissions; Haven owns scholarships and finance (0.872ms)
+Γ£ö MODULE-01: 7 main modules remain while study abroad is an Atlas submodule (1.2487ms)
+Γ£ö UX-V7-01: Assistant receives only allowlisted page context and page-specific prompts (0.6612ms)
+Γä╣ tests 25
+Γä╣ suites 0
+Γä╣ pass 25
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 166.6832
+Γ£ö CLA chatbot launcher uses the custom mascot and has an accessible toggle (1.1435ms)
+Γ£ö CLA mascot launcher is circular, fixed to the bottom right, and responsive (0.2779ms)
+Γä╣ tests 2
+Γä╣ suites 0
+Γä╣ pass 2
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 81.3586
+Γ£ö CP29-01: direct dependencies do not float on latest tags (0.8265ms)
+Γä╣ tests 1
+Γä╣ suites 0
+Γä╣ pass 1
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 88.0258
+Γ£ö CP30 chat readability layer loads after the final CP28 theme (0.7612ms)
+Γ£ö CP30 keeps readable chat typography instead of legacy 9ΓÇô11px labels (0.4087ms)
+Γ£ö CP30 brand palette has WCAG AA normal-text contrast on the corresponding solid surface (0.3273ms)
+Γ£ö CP30 preserves mascot, assistant routing and accessible keyboard treatment (0.7201ms)
+Γä╣ tests 4
+Γä╣ suites 0
+Γä╣ pass 4
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 86.9494
+Γ£ö synthetic replay traverses all eight stages in order (1.8111ms)
+Γ£ö synthetic replay never claims an observed outcome or completion (0.2814ms)
+Γ£ö low synthetic adherence triggers a deterministic adaptation (0.22ms)
+Γ£ö all trace references point to known stage IDs (0.2525ms)
+Γä╣ tests 4
+Γä╣ suites 0
+Γä╣ pass 4
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 126.8684
+Γ£ö CP32-01: Lumen signal radar only plots dimensions explicitly marked available (1.4154ms)
+Γ£ö CP32-02: longitudinal delta chart abstains without two comparable snapshots (0.4776ms)
+Γ£ö CP32-03: Orion trade-off plot is sourced from strategy scenarios and disclaims heuristic values (1.2335ms)
+Γ£ö CP32-04: Atlas historical field uses exact school/campus/code and distinct year-method scales (0.4456ms)
+Γ£ö CP32-05: scientific visualization layer is imported and responsive (1.1285ms)
+Γ£ö CP32-06: synthetic demo preset is Admin-only, preview-before-save and scoped as demo (0.4557ms)
+Γ£ö CP32-07: transcript trajectory and heatmap read saved term/subject records (0.452ms)
+Γ£ö CP33-01: Haven pressure topology plots only the four entered support signals and labels their self-reported scope (1.0326ms)
+Γ£ö CP33-02: Pulse orbit derives all six progress rings from Pulse engine metrics (0.5281ms)
+Γ£ö CP33-03: Admin evidence circuit visualizes actual stage statuses and explicitly disclaims end-to-end completion (0.5502ms)
+Γ£ö CP33-04: Haven and Pulse scientific visuals have responsive and reduced-motion styling (0.363ms)
+Γ£ö CP34-01: Admin synthetic preset only fills local form state and cannot write Firestore (0.5455ms)
+Γ£ö CP34-02: Haven labels scholarship cards as rule archetypes, not verified opportunities (0.325ms)
+Γä╣ tests 13
+Γä╣ suites 0
+Γä╣ pass 13
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 96.1995
+Γ£ö CP36: Student Cognitive Path is task-first, no duplicate six-module selector (1.6222ms)
+Γ£ö CP36: Haven separates sourced opportunities from heuristic score (0.6423ms)
+Γ£ö CP36: seven scholarships have official URLs and no default guaranteed eligibility or deadlines (1.2617ms)
+Γ£ö CP36: Atlas has three added official 2026 sources, no synthetic prior-year entries (0.6482ms)
+Γ£ö CP36: final CSS layer is loaded and high-contrast inputs remain visible (0.5054ms)
+Γä╣ tests 5
+Γä╣ suites 0
+Γä╣ pass 5
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 88.7379
+Γ£ö P1 source provenance: no duplicate scholarship IDs, source URLs and conditions present (1.1845ms)
+Γ£ö P1 scholarship search filters by country and label without claiming eligibility (0.3018ms)
+Γ£ö P1 Atlas provenance distinguishes 3-year records from 2026-only additions (0.828ms)
+Γä╣ tests 3
+Γä╣ suites 0
+Γä╣ pass 3
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 145.451
+Γ£ö CP37-01: student guide route is registered and allowed for students (1.9045ms)
+Γ£ö CP37-02: dashboard and task finder link to the practical operating guide (0.5574ms)
+Γ£ö CP37-03: guide distinguishes real student data, Admin synthetic demo, and incomplete integrations (1.2385ms)
+Γ£ö CP37-04: guide CSS is imported after CP36 styles (0.4068ms)
+Γä╣ tests 4
+Γä╣ suites 0
+Γä╣ pass 4
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 88.9922
+Γ£ö P26-01 official policy is versioned and capped at 15 / teacher NV1-5 (1.0321ms)
+Γ£ö P26-02 classifier catches teacher-training by major code or explicit flag (0.3412ms)
+Γ£ö P26-03 classifier catches teacher names without misleading other education majors (0.434ms)
+Γ£ö P26-04 >5 teacher-training candidates never spill into NV6-NV15 (0.6882ms)
+Γ£ö P26-05 recommendations cannot contain more than 15 applications (0.2677ms)
+Γ£ö P26-06 user-chosen maximum below five also constrains teacher-training count (0.2036ms)
+Γ£ö P26-07 historical sources cannot silently become 2026 policy inputs (0.6896ms)
+Γ£ö P26-08 invalid or missing-benchmark results are not offered (0.2349ms)
+Γ£ö P26-09 ten non-teacher programmes preserve model ranking; no auto teacher bias score (0.3107ms)
+Γ£ö P26-10 unparseable cap falls back to legal maximum (0.286ms)
+Γ£ö P26-11 no valid candidates produces no fabricated places (0.1541ms)
+Γ£ö P26-12 UI displays source, cap and teaching limitation even before recommendations (0.702ms)
+Γ£ö P26-13 integrated Admission Engine enforces teaching NV1ΓÇôNV5 after real eligibility calculation (51.1941ms)
+Γ£ö P26-14 integrated engine abstains if cutoff is unverified, despite policy-compliant ordering (29.1788ms)
+Γ£ö 06.01 zero is a legitimate observed score, absent is not zero (1.23ms)
+Γ£ö 06.02 impossible or malformed subject scores are not silently clamped (0.292ms)
+Γ£ö 06.03 D01 uses exactly its three observed subjects (0.8098ms)
+Γ£ö 06.04 genuine zero does not make a complete combination incomplete (0.2045ms)
+Γ£ö 06.05 blank or invalid remains missing in the exact combination (0.4053ms)
+Γ£ö 06.06 partial sum is never the winning option (0.4285ms)
+Γ£ö 06.07 no external scale is silently ranked against school combinations (0.3443ms)
+Γ£ö 06.08 a three-subject zero score remains an eligible combination, not a missing record (0.5197ms)
+Γ£ö 06.09 invalid or missing subjects cannot qualify for a verified benchmark (0.2236ms)
+Γ£ö 06.10 Studio only admits official self-declared THPT 2026 scores into cutoff comparison (0.9882ms)
+Γ£ö 06.11 visual explanation is based on computed engine combinations, not hardcoded examples (0.6456ms)
+Γ£ö 06.12 supported input subjects are visible but extra combinations are not invented (0.5568ms)
+Γ£ö 06.13 Studio styling supports mobile and reduced motion (0.4329ms)
+Γ£ö AUTH-01: explicit active Admin role is accepted (2.4738ms)
+Γ£ö AUTH-02: only student non-Admin role is accepted (0.2094ms)
+Γ£ö AUTH-03: absent profile or null data does not grant access (0.1789ms)
+Γ£ö AUTH-04: missing, false, and string active flags are denied (0.4073ms)
+Γ£ö AUTH-05: malformed roles and email-based spoofing do not grant Admin (0.3239ms)
+Γ£ö AUTH-06: transient Firestore unavailable retries and returns server profile (0.7144ms)
+Γ£ö AUTH-07: stop after three transient failures and preserve the error (0.8022ms)
+Γ£ö AUTH-08: permission-denied is never retried or bypassed (0.307ms)
+Γ£ö AUTH-09: error classifier handles Firestore-prefixed errors, not arbitrary failures (0.2303ms)
+Γ£ö AUTH-10: both login and route guard verify the latest server role, not cache (1.4728ms)
+Γ£ö AUTH-11: existing admin redirects to /admin after server verification (67.7443ms)
+Γ£ö AUTH-12: non-admin cannot be redirected to /admin by using the same login form (25.938ms)
+Γ£ö AUTH-13: blocked or missing Admin profile cannot navigate despite valid Firebase Auth (71.2157ms)
+Γ£ö AUTH-14: transient failure recovers during login without bypassing verification (1174.8755ms)
+Γ£ö AUTH-15: a failed role read retains the Auth session and exposes a retry button (1195.5756ms)
+Γ£ö AUTH-16: LoginPage role is strictly narrowed to ready before redirect (711.7112ms)
+Γä╣ tests 43
+Γä╣ suites 0
+Γä╣ pass 43
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 3659.4785
+Γ£ö 07-01: same-term D01 8+7+9 gives 24, no exam or probability label (2.4729ms)
+Γ£ö 07-02: zero really is an observed completed score (0.3118ms)
+Γ£ö 07-03: partial scores are never promoted to completed semester averages (0.3081ms)
+Γ£ö 07-04: cannot combine subjects from different semesters to fabricate D01 (0.2549ms)
+Γ£ö 07-05: prefers most recent term with a complete supported combination (0.2812ms)
+Γ£ö 07-06: returns null on transcript with no completed subject grades (0.1853ms)
+Γ£ö 07-07: mapping covers new-programme electives and excludes unrelated subjects (0.2531ms)
+Γ£ö 07-08: non-English foreign language is not silently mapped to English (0.3107ms)
+Γ£ö 07-09: read-only adapter does not mutate Seed transcript (0.3799ms)
+Γ£ö 07-10: Atlas reads user-bound Seed hook, only for school marks (0.8013ms)
+Γ£ö 07-11: changing score basis clears old marks and never reuses school marks as official THPT (0.5431ms)
+Γ£ö 07-12: hook clears account-specific data and blocks callbacks from old UID (0.3603ms)
+Γ£ö 07-13: delayed Firestore snapshot for a signed-out account cannot overwrite new student (33.7898ms)
+Γä╣ tests 13
+Γä╣ suites 0
+Γä╣ pass 13
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 387.2651
+Γ£ö 08.01 policy states two compulsory plus two elective subjects, source and year (1.3535ms)
+Γ£ö 08.02 no confirmed grade-12 courses means abstain; marks alone are not enrollment (0.2825ms)
+Γ£ö 08.03 one confirmed elective cannot form a pair (0.1001ms)
+Γ£ö 08.04 two confirmed choices produce exactly one pair (0.3319ms)
+Γ£ö 08.05 only the confirmed grade-12 list contributes, other high scores excluded (0.174ms)
+Γ£ö 08.06 incomplete elective scores are null, never silently zero (0.2093ms)
+Γ£ö 08.07 actual zero remains valid input (0.1953ms)
+Γ£ö 08.08 invalid and negative marks cannot manufacture an observed-score comparison (0.1234ms)
+Γ£ö 08.09 does not claim no admission possible when project catalogue has no combo (0.2166ms)
+Γ£ö 08.10 technology streams are distinct and generic technology grade is not reused (0.1965ms)
+Γ£ö 08.11 duplicates are deduplicated and are not counted as two different electives (0.1188ms)
+Γ£ö 08.12 never invents verified university matches from exploratory combinations (0.1428ms)
+Γ£ö 08.13 only explicitly supplied verified program data is considered a matching opportunity (0.3501ms)
+Γ£ö 08.14 unmatched target cannot be fabricated by substring scoring or mock sources (0.1526ms)
+Γ£ö 08.15 three studied electives creates three pairs and sorts by coverage then grades (0.1372ms)
+Γ£ö 08.16 combining a pair with mandatory subjects only uses supported academic combinations (0.1167ms)
+Γ£ö 08.17 two technological streams are never assumed to share a common grade (0.1ms)
+Γ£ö 08.18 UI requires explicit confirmation and exposes policy/source/limits (0.8108ms)
+Γ£ö 08.19 previously established Seed and school-score safety gates remain untouched (0.5325ms)
+Γä╣ tests 19
+Γä╣ suites 0
+Γä╣ pass 19
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 320.4324
+Γ£ö 09.01 published mappings include X06 and X26, not a guessed synonym (1.4922ms)
+Γ£ö 09.02 abstains until exactly two distinct electives confirmed (0.3323ms)
+Γ£ö 09.03 English + Informatics unlocks officially published X26, outside nine-code trial catalog (8.9501ms)
+Γ£ö 09.04 Physics + Informatics matches X06 and not X26 (0.3538ms)
+Γ£ö 09.05 Physics + English matches A01, and D01 only when literature and English exist (0.4244ms)
+Γ£ö 09.06 Physics + Chemistry matches only A00 (0.2932ms)
+Γ£ö 09.07 History + geography have no PTIT match in this bounded sample, not a nationwide exclusion (0.2127ms)
+Γ£ö 09.08 missing Informatics leaves X26 observable score null, not 0 (0.3003ms)
+Γ£ö 09.09 real zero accepted when three scores observed (0.2582ms)
+Γ£ö 09.10 invalid score cannot be used for a total (0.2484ms)
+Γ£ö 09.11 target major identifies matching records but does not exclude other majors (0.4355ms)
+Γ£ö 09.12 different source year is excluded (0.1329ms)
+Γ£ö 09.13 untrusted host is excluded despite copied combinations (0.0884ms)
+Γ£ö 09.14 campus BVS is not mislabeled BVH (0.0986ms)
+Γ£ö 09.15 outside the PTIT published five codes does not create arbitrary official combinations (0.0794ms)
+Γ£ö 09.16 output includes source URL, method, campus, year and program code (0.303ms)
+Γ£ö 09.17 national explorer replaces the bounded PTIT picker and exposes all registered programmes (0.5906ms)
+Γ£ö 09.18 protects admission comparison from school/tryout scores (0.6188ms)
+Γ£ö 09.19 rejects prior-year official page even when a program wrongly claims year 2026 (0.172ms)
+Γ£ö 09.20 excludes a program without a 2026 THPT admission method (0.1197ms)
+Γ£ö 09.21 official-pathway exploration is discoverable from Atlas module navigation (0.5281ms)
+Γä╣ tests 21
+Γä╣ suites 0
+Γä╣ pass 21
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 359.8235
+Γ£ö SG01 accepts only reviewed candidate Rules in localhost emulator (2.0977ms)
+Γ£ö SG02 rejects production or another demo Firebase project (1.5136ms)
+Γ£ö SG03 rejects a different Rules file, including a production Rules path (0.4453ms)
+Γ£ö SG04 rejects emulator host binding on all interfaces or external network (0.2956ms)
+Γ£ö SG05 rejects invalid ports and enabled Emulator UI (0.3297ms)
+Γ£ö SG06 rejects external/injected FIRESTORE_EMULATOR_HOST (0.3573ms)
+Γ£ö SG07 allows only local FIRESTORE_EMULATOR_HOST values or unset (0.2111ms)
+Γ£ö SG08 overall PASS requires static AND emulator authorization tests PASS (0.1522ms)
+Γ£ö SG09 package scripts use fixed demo CLI and cannot invoke deployment (2.5992ms)
+Γ£ö SG10 production firebase.json does not silently deploy candidate Rules (0.6823ms)
+Γ£ö SG11 emulator test source fails closed on non-loopback endpoints (1.3434ms)
+Γä╣ tests 11
+Γä╣ suites 0
+Γä╣ pass 11
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 127.3768
+
+> cognitive-learn-ai@0.1.0 test:student-consent
+> node --test tests/step10-student-consent.test.cjs
+
+Γ£ö SC01 new, missing consent is never accepted (0.7798ms)
+Γ£ö SC02 same UID and notice required (0.148ms)
+Γ£ö SC03 withdrawn consent is not active (0.0929ms)
+Γ£ö SC04 product consent never enrolls in research (0.0804ms)
+Γ£ö SC05 helper rejects blank identity (0.2117ms)
+Γ£ö SC06 root routing includes student consent page (0.5222ms)
+Γ£ö SC07 student consent route allowed by role gate (0.1507ms)
+Γ£ö SC08 protected student pages read consent from server (0.1756ms)
+Γ£ö SC09 UI has separate acceptance and withdrawal controls (0.1099ms)
+Γ£ö SC10 UI requires explicit acknowledgment (0.1471ms)
+Γ£ö SC11 UI never silently enrolls research (0.1529ms)
+Γ£ö SC12 Rules include consent owner-only and strict schema (0.1047ms)
+Γ£ö SC13 Rules gate academic writes, including profile and transcript (0.1504ms)
+Γ£ö SC14 legacy shares closed regardless of consent (0.1028ms)
+Γ£ö SC15 UI warns guardian identity is unverified (0.0627ms)
+Γ£ö SC16 safe rollout stays off unless explicitly enabled (0.4444ms)
+Γ£ö SC17 assistant cannot mount outside the protected route gate (0.3845ms)
+Γä╣ tests 17
+Γä╣ suites 0
+Γä╣ pass 17
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 281.5762
+
+> cognitive-learn-ai@0.1.0 test:prediction-safety
+> node --test tests/step11-prediction-semantics.test.cjs
+
+Γ£ö PRED-01 three heuristic indices have distinct, explicit semantics (1.0088ms)
+Γ£ö PRED-02 no probability or statistically calibrated confidence in engine output (0.2225ms)
+Γ£ö PRED-03 distance index is a bounded transformation of score gap, not an event probability (0.1176ms)
+Γ£ö PRED-04 a higher target cannot improve the gap index with unchanged prediction inputs (0.1247ms)
+Γ£ö PRED-05 already reached target yields 100 index but NEVER 100% success claim (0.1346ms)
+Γ£ö PRED-06 distance index lower bound remains 0 (0.1096ms)
+Γ£ö PRED-07 stability/completion weighted index is not an uncertainty interval (0.1235ms)
+Γ£ö SIM-01 Orion scenario propagates named heuristic gap index only (0.381ms)
+Γ£ö SIM-02 utility uses descriptive cognitive index, not a probability field (0.1913ms)
+Γ£ö SIM-03 scenario lists maintain comparative sorting under renamed semantics (0.2671ms)
+Γ£ö CONTRACT-01 TypeScript strict compiles prediction + simulation contract together (360.2101ms)
+Γ£ö CONTRACT-02 UI exposes heuristic semantics and calibrated absence (0.5403ms)
+Γ£ö CONTRACT-03 result types cannot silently reintroduce probability/confidence fields (0.6859ms)
+Γ£ö CONTRACT-04 model version is bumped and terms say scenario, not validated ML (0.1462ms)
+Γ£ö SIM-04 explanations do not equate an assumed cognitive adjustment with observed benefit (0.325ms)
+Γä╣ tests 15
+Γä╣ suites 0
+Γä╣ pass 15
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 696.1635
+
+> cognitive-learn-ai@0.1.0 test:closed-loop
+> node --experimental-strip-types --test tests/step12-closed-loop-journey.test.mjs
+
+Γ£ö CL01 creates a versioned cycle and preserves valid baseline zero (3.2628ms)
+Γ£ö CL02 rejects missing/NaN, invalid and duplicate baseline scores (0.4279ms)
+Γ£ö CL03 no outcome is inferred merely from an Orion strategy (0.2165ms)
+Γ£ö CL04 check-in records self-report but is not an outcome (0.3281ms)
+Γ£ö CL05 zero actual hours and zero completed tasks are observed zeros (0.1704ms)
+Γ£ö CL06 rejects duplicate week and check-in ID (0.3957ms)
+Γ£ö CL07 rejects invalid time and impossible completion (0.3323ms)
+Γ£ö CL08 reassessment is blocked until one actual check-in exists (0.2522ms)
+Γ£ö CL09 reassessment only accepts observed subjects, 0 is valid (0.3467ms)
+Γ£ö CL10 prevents unknown subject/NaN, absent score and duplicate score (0.343ms)
+Γ£ö CL11 review calculates matched before-after delta without imputation (0.1744ms)
+Γ£ö CL12 closed cycles cannot be edited, measured again, or check-in again (0.251ms)
+Γ£ö CL13 rejects corrupted documents, does not silently overwrite them (0.1524ms)
+Γ£ö CL14 Orion, Pulse and Lumen all mount the same shared journey (1.6143ms)
+Γ£ö CL15 Firestore hook uses authenticated ownership and transaction-based updates (0.6108ms)
+Γ£ö CL16 candidate rules restrict student ownership, product consent, and immutable baselines (0.5274ms)
+Γ£ö CL17 no claim that self-report is externally verified or causal proof (0.5587ms)
+Γ£ö CL18 module never writes its own outcomes into Seed as proven grades (0.4055ms)
+Γä╣ tests 18
+Γä╣ suites 0
+Γä╣ pass 18
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 144.2781
+
+> cognitive-learn-ai@0.1.0 test:journey-reliability
+> node --experimental-strip-types --test tests/step13-journey-reliability.test.mjs
+
+Γ£ö JR01 new cycle has no evidence before reassessment (1.9051ms)
+Γ£ö JR02 evidence is persisted as a derived property of reviewed cycle (2.2187ms)
+Γ£ö JR03 scores of zero stay zero, missing outcomes are not imputed (0.238ms)
+Γ£ö JR04 evidence discloses provenance and no causal/confidence claim (0.3136ms)
+Γ£ö JR05 evidence record matches ┬º26.1 mandatory contract fields (0.8217ms)
+Γ£ö JR06 corrupted lineage cannot silently be accepted (0.2626ms)
+Γ£ö JR07 old v1 records without evidenceRecord still readable (0.2195ms)
+Γ£ö JR08 lock validates ownership and supports released state (0.1661ms)
+Γ£ö JR09 create uses transaction with fixed lock and server legacy ACTIVE preflight (0.9193ms)
+Γ£ö JR10 review releases state atomically and stores evidence; check-in does not release (0.6293ms)
+Γ£ö JR11 Rules enforce paired cycle+state updates using getAfter (0.7698ms)
+Γ£ö JR12 UI shows limitation and engine lineage, not calibrated probabilities (0.5645ms)
+Γ£ö JR13 evidence cannot be created before review or after malformed observations (0.5625ms)
+Γ£ö JR14 rapid double-click is synchronously guarded in hook (0.3709ms)
+Γ£ö JR15 legacy lock can be claimed after a previous lock is released (0.5295ms)
+Γä╣ tests 15
+Γä╣ suites 0
+Γä╣ pass 15
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 132.8196
+
+> cognitive-learn-ai@0.1.0 test:daily-companion
+> node --experimental-strip-types --test tests/step14-daily-companion.test.mjs
+
+Γ£ö DC01 only valid 24h times are accepted (1.0998ms)
+Γ£ö DC02 quiet hours wrap around midnight (0.1968ms)
+Γ£ö DC03 same quiet boundaries turn quiet mode off, never mute all day (0.0928ms)
+Γ£ö DC04 invalid schedules are fail-closed (0.8503ms)
+Γ£ö DC05 reminder due only at requested local minute (1.662ms)
+Γ£ö DC06 reminder disabled or completed today never fires (0.1617ms)
+Γ£ö DC07 quiet hours suppress matching reminders (0.1576ms)
+Γ£ö DC08 midnight boundary yields correct local date (0.0975ms)
+Γ£ö DC09 invalid day keys rejected, including invalid calendar days (0.3409ms)
+Γ£ö DC10 daily check-in is idempotent (0.2093ms)
+Γ£ö DC11 daily check-in keeps only 14 most recent days (0.1968ms)
+Γ£ö DC12 data validation enforces account ownership and consent boundaries in rules (0.1069ms)
+Γ£ö DC13 recent activity returns seven calendar days (0.1278ms)
+Γ£ö DC14 route, protected roles and navigation are integrated (1.0013ms)
+Γ£ö DC15 no notification permission requested without user gesture (0.3849ms)
+Γ£ö DC16 background web push is opt-in, generic, and never caches student data (0.5275ms)
+Γ£ö DC17 Firestore candidate rules scope records to student and product consent (0.3418ms)
+Γ£ö DC18 manifests use real bundled icons and do not bundle app-store claim (0.4036ms)
+Γ£ö DC19 preview is fail-closed until consent gate and rules are deployed (0.2184ms)
+Γ£ö DC20 consent withdrawal stops foreground reminders in the open page (0.436ms)
+Γä╣ tests 20
+Γä╣ suites 0
+Γä╣ pass 20
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 130.5618
+
+> cognitive-learn-ai@0.1.0 test:companion-push
+> node --test tests/step15-companion-web-push.test.mjs
+
+Γ£ö WP01 server evaluates time in device IANA zone, not UTC (17.4707ms)
+Γ£ö WP02 five-minute lookback handles scheduler delays, not arbitrary late sends (1.8923ms)
+Γ£ö WP03 notifications disabled by account setting and quiet hours (0.9184ms)
+Γ£ö WP04 completed day suppresses notifications (1.299ms)
+Γ£ö WP05 quiet periods spanning midnight work (0.1792ms)
+Γ£ö WP06 reject invalid timezone and schedule (fail-closed) (0.4881ms)
+Γ£ö WP07 DST repeated local wall time does not create different delivery key (0.8863ms)
+Γ£ö WP08 new-day boundary across UTC and device time (0.3278ms)
+Γ£ö WP09 only active student and verified opt-in product consent qualify (0.1916ms)
+Γ£ö WP10 only recognized secure push service endpoints are accepted (SSRF guard) (0.3913ms)
+Γ£ö WP11 malformed device owner/keys/zone cannot dispatch (0.4565ms)
+Γ£ö WP12 delivery key is deterministic and scoped to device/date/kind (0.9423ms)
+Γ£ö WP13 payload is generic, does not include student data or remote URLs (0.2926ms)
+Γ£ö WP14 worker receives Web Push but does not cache authenticated pages or trust external redirect (0.6408ms)
+Γ£ö WP15 opt-in and opt-out are distinct user-gesture actions (0.5775ms)
+Γ£ö WP16 server dispatch is disabled by default and is separately deployed (0.6219ms)
+Γ£ö WP17 rules restrict subscription ownership and deny client delivery ledger access (0.3581ms)
+Γ£ö WP18 service worker does not claim guaranteed background delivery (0.2846ms)
+Γä╣ tests 18
+Γä╣ suites 0
+Γä╣ pass 18
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 123.1795
+
+> cognitive-learn-ai@0.1.0 test:aspiration-draft
+> node --test tests/step16-atlas-aspiration-editor.test.cjs
+
+Γ£ö 16.01 manual choice requires university, major and code (0.9305ms)
+Γ£ö 16.02 retains user entered data provenance and no source URL (0.3322ms)
+Γ£ö 16.03 trusted PTIT sample contains official source and 2026 only (0.8242ms)
+Γ£ö 16.04 rejects stale year and invalid campus even with PTIT host (0.1596ms)
+Γ£ö 16.05 rejects foreign and http source (0.1351ms)
+Γ£ö 16.06 rejects source bearing credentials or wrong path (0.1044ms)
+Γ£ö 16.07 rejects mismatch between PTIT id and major code (0.2464ms)
+Γ£ö 16.08 add appends and NEVER sorts by marks or risk levels (0.3122ms)
+Γ£ö 16.09 duplicate id is rejected (0.2106ms)
+Γ£ö 16.10 duplicate school + major code rejected even if ID varies (0.2361ms)
+Γ£ö 16.11 maximum 15 preferences, 16th rejected without mutation (0.2188ms)
+Γ£ö 16.12 moving up/down preserves contents and only changes one step (0.1713ms)
+Γ£ö 16.13 boundary and unknown move are no-op (0.1543ms)
+Γ£ö 16.14 removal preserves preference ordering (0.1034ms)
+Γ£ö 16.15 teacher NV6 warns, does not move or remove it (0.2009ms)
+Γ£ö 16.16 teacher NV5 allowed at boundary (0.116ms)
+Γ£ö 16.17 teacher-training code and name recognized conservatively (0.0568ms)
+Γ£ö 16.18 self-entered schools always show verification caution (0.1651ms)
+Γ£ö 16.19 empty draft is explicitly a draft (0.0543ms)
+Γ£ö 16.20 export contains no personal scores, UID, or official-submission claim (0.147ms)
+Γ£ö 16.21 exported orders match reordered user list (0.0784ms)
+Γ£ö 16.22 UI is available without official THPT scores and no auto-selection (0.7157ms)
+Γ£ö 16.23 UI displays warnings rather than reordering teacher program (0.3008ms)
+Γ£ö 16.24 workspace linked to 2026 policy, no direct save to Firebase (0.2992ms)
+Γ£ö 16.25 Vercel serves all explicit React route paths including consent/companion, preserving API functions (0.5881ms)
+Γ£ö 16.26 CSS asset and test command present (0.5439ms)
+Γ£ö 16.27 import/export preserves ordering but downgrades claims to unverified (0.3192ms)
+Γ£ö 16.28 import rejects wrong schema, old year, or excessive entries (0.0932ms)
+Γ£ö 16.29 invalid or repeated file entries are rejected atomically (0.0988ms)
+Γ£ö 16.30 import UI explicitly warns that source claims are not trusted (0.2603ms)
+Γ£ö 16.31 national draft uses source registry identity across schools and rejects missing/stale/insecure entries (0.3607ms)
+Γä╣ tests 31
+Γä╣ suites 0
+Γä╣ pass 31
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 327.8679
+
+> cognitive-learn-ai@0.1.0 test:exam-calendar
+> node --experimental-strip-types --test tests/step17-exam-reminders.test.mjs
+
+Γ£ö EX01 catalog offers HSA, V-ACT, TSA, V-SAT, THPT and certificates (2.1447ms)
+Γ£ö EX02 no invented exam or registration dates by default (0.2755ms)
+Γ£ö EX03 leap years and invalid dates rejected (0.2211ms)
+Γ£ö EX04 countdown is calendar-day based over New Year (0.2007ms)
+Γ£ö EX05 DST-safe date-difference avoids elapsed-hour anomalies (0.1214ms)
+Γ£ö EX06 local date key uses local calendar instead of ISO UTC date (0.9616ms)
+Γ£ö EX07 invalid countdown inputs never produce NaN (0.1044ms)
+Γ£ö EX08 multiple sittings of the same exam are supported (0.2562ms)
+Γ£ö EX09 update does not append duplicate events (0.1557ms)
+Γ£ö EX10 cap prevents excessive local student records (0.5711ms)
+Γ£ö EX11 registration deadline cannot come after exam date (0.1814ms)
+Γ£ö EX12 source links must be HTTPS, never javascript or embedded credentials (0.1978ms)
+Γ£ö EX13 wrong-account calendar cannot be loaded (0.1183ms)
+Γ£ö EX14 corrupt storage and wrong version are rejected (0.0795ms)
+Γ£ö EX15 no-data reminder does not emit a countdown or warning (0.1816ms)
+Γ£ö EX16 nearest future milestone is registration deadline rather than exam (0.2916ms)
+Γ£ö EX17 when registered, registration reminders are suppressed (0.0937ms)
+Γ£ö EX18 upcoming alerts capped at 14 days, past milestones excluded (0.0827ms)
+Γ£ö EX19 expired registrations do not mask an upcoming exam (0.0575ms)
+Γ£ö EX20 deterministic sorting handles same day registration and exam (7.5374ms)
+Γ£ö EX21 invalid custom names, broken ids and extra-long urls are rejected (0.1093ms)
+Γ£ö EX22 format is stable Vietnamese day/month/year (0.0953ms)
+Γ£ö EX23 student overview shows exam horizon; dedicated route is settings-only (1.0872ms)
+Γ£ö EX24 student selects visible exams, can remove or edit their own calendar (0.3106ms)
+Γ£ö EX25 browser storage is explicit, versioned, cannot overwrite corrupt source silently (0.3245ms)
+Γ£ö EX26 reminder board never claims background push works (0.2722ms)
+Γ£ö EX27 custom exam and manual source URL are editable with a save action (0.2462ms)
+Γ£ö EX28 stylesheet included and responsive (0.4203ms)
+Γ£ö EX29 Atlas and Companion can navigate to the student countdown board (0.6503ms)
+Γ£ö EX30 unsafe or modified date inputs cannot be persisted via save (0.2511ms)
+Γä╣ tests 30
+Γä╣ suites 0
+Γä╣ pass 30
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 151.0052
+
+> cognitive-learn-ai@0.1.0 test:notifications
+> node --experimental-strip-types --test tests/step18-notification-center.test.mjs
+
+Γ£ö NC01 toast store starts empty and ignores blank messages (0.814ms)
+Γ£ö NC02 notice broadcasts, includes type, and allows manual dismissal (0.2353ms)
+Γ£ö NC03 duplicate events are suppressed within 45s (0.1191ms)
+Γ£ö NC04 notifications respect size limits and history cap (0.3093ms)
+Γ£ö NC05 opening inbox marks current notices read (0.9462ms)
+Γ£ö NC06 all authorized routes share the same notification viewport (0.9309ms)
+Γ£ö NC07 popup is below navigation and is mobile responsive (0.3689ms)
+Γ£ö NC08 no fake analysis completed on initial page mount (0.5637ms)
+Γ£ö NC09 save success only after Firestore commit, error on failure (0.5136ms)
+Γ£ö NC10 exam reminders use real saved milestones and session dedupe (0.4612ms)
+Γ£ö NC11 network events are handled without claiming Firebase save success (0.3301ms)
+Γ£ö NC12 no notification persists in server or between user logouts (0.4319ms)
+Γ£ö NC13 success notification remains visible after the profile-to-dashboard redirect (0.5686ms)
+Γä╣ tests 13
+Γä╣ suites 0
+Γä╣ pass 13
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 127.2842
+
+> cognitive-learn-ai@0.1.0 test:shadow
+> node --experimental-strip-types --test tests/step19-decision-evidence-shadow.test.mjs
+
+Γ£ö S19-01 incomplete cycle abstains and cannot imply a measured effect (1.0839ms)
+Γ£ö S19-02 below engineering completion threshold differs from frozen static policy (2.78ms)
+Γ£ö S19-03 positive delta with completed actions maintains both policies (0.2629ms)
+Γ£ö S19-04 nonpositive score delta produces replan, including valid score zero (0.2042ms)
+Γ£ö S19-05 tampering in recorded decisions is detected on replay (0.2071ms)
+Γä╣ tests 5
+Γä╣ suites 0
+Γä╣ pass 5
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 127.6691
+
+> cognitive-learn-ai@0.1.0 test:consent-share-revocation
+> node --experimental-strip-types --test tests/step20-consent-share-revocation.test.mjs
+
+Γ£ö SR01 withdrawal cleanup queries again and verifies empty server result (1.5124ms)
+Γ£ö SR02 student report must be removed BEFORE corresponding link (0.2189ms)
+Γ£ö SR03 cross-account link from untrusted snapshot fails closed (0.414ms)
+Γ£ö SR04 switching account aborts without deleting remaining links (0.2038ms)
+Γ£ö SR05 delete report error blocks link removal, no misleading success (0.184ms)
+Γ£ö SR06 nonempty 25th page never yields verifiedEmpty=true (0.1698ms)
+Γ£ö SR07 disallow invalid UID and oversized query pages (0.918ms)
+Γ£ö SR08 user withdrawal is committed BEFORE best-effort share cleanup (0.202ms)
+Γ£ö SR09 UI shows retry on partial cleanup and warns about residual data (0.127ms)
+Γä╣ tests 9
+Γä╣ suites 0
+Γä╣ pass 9
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 136.9707
+
+> cognitive-learn-ai@0.1.0 test:consent-server-cleanup
+> node --test tests/step21-consent-server-cleanup.test.mjs
+
+Γ£ö CS01 accepts only transition accepted -> withdrawn for same valid student and policy version (1.1023ms)
+Γ£ö CS02 rejects malformed timestamps, UID and bounds instead of guessing (0.6865ms)
+Γ£ö CS03 deletes old report/link pairs and reports accurate completion (8.4011ms)
+Γ£ö CS04 does NOT delete newly granted links after student reconsents (0.234ms)
+Γ£ö CS05 page traversal does not starve old records behind newer ones (0.3354ms)
+Γ£ö CS06 fail closed on foreign/malformed link, no subsequent delete (0.1945ms)
+Γ£ö CS07 fails and retries if conditional delete fails; cannot claim completion (0.2025ms)
+Γ£ö CS08 limit exhaustion never reports full cleanup (0.2363ms)
+Γ£ö CS09 idempotent repeat after completed cleanup returns deleted=0 (0.1613ms)
+Γ£ö CS10 malformed page/cursor rejects without claiming success (0.3123ms)
+Γ£ö CS11 deployment is isolated from default Firebase config; immutable source guarded (1.7936ms)
+Γ£ö CS12 no accidental PII in server cleanup logs (0.3788ms)
+Γ£ö CS13 privileged adapter deletes report+link atomically with update-time preconditions (0.4305ms)
+Γ£ö CS14 deleting old link with no report is safe and atomic (0.1262ms)
+Γ£ö CS15 refuses corrupt cross-account report before committing any deletion (0.1055ms)
+Γ£ö CS16 conditional batch conflict is surfaced for retry (0.1521ms)
+Γ£ö CS17 adapter rejects missing timestamps; never does unconditional deletes (0.111ms)
+Γ£ö CS18 independent verification confirms empty set after actual deletes (0.22ms)
+Γ£ö CS19 verification detects old metadata left behind after false success (0.0852ms)
+Γ£ö CS20 verification preserves later consent grants without false positives (0.0914ms)
+Γ£ö CS21 legacy links with missing timestamp remain pending (0.0781ms)
+Γ£ö CS22 scan verification does not perform deletes or expose record details (0.106ms)
+Γ£ö CS23 refuses incomplete full-page audit instead of reporting success (0.1014ms)
+Γ£ö CS24 rejects malformed and foreign records in audit scan (0.0835ms)
+Γ£ö CS25 deployed function gates completion on independent verification (0.3441ms)
+Γä╣ tests 25
+Γä╣ suites 0
+Γä╣ pass 25
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 109.6803
+
+> cognitive-learn-ai@0.1.0 test:cp29:access
+> node --test tests/cp29-live-access-gate.test.cjs
+
+Γ£ö CP29-B2-01 starts fail-closed until server-backed role listener confirms (45.902ms)
+Γ£ö CP29-B2-02 role revoked during open session unmounts private children (18.0202ms)
+Γ£ö CP29-B2-03 role changed to Admin does not silently escalate session (16.5912ms)
+Γ£ö CP29-B2-04 cached or pending-write account snapshots never authorize (14.5951ms)
+Γ£ö CP29-B2-05 live consent withdrawal immediately unmounts student pages (18.2262ms)
+Γ£ö CP29-B2-06 cached consent state cannot re-grant access (13.4063ms)
+Live account authorization failed: Error: firestore unavailable
+    at Object.fail (C:\Gß║ío\Cognitive-Learn\tests\cp29-live-access-gate.test.cjs:78:73)
+    at TestContext.<anonymous> (C:\Gß║ío\Cognitive-Learn\tests\cp29-live-access-gate.test.cjs:131:7)
+    at async Test.run (node:internal/test_runner/test:1332:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+  code: 'unavailable'
+}
+Γ£ö CP29-B2-07 listener failure fails closed and logout disposes old listeners (16.5478ms)
+Γ£ö CP29-B2-08 switching accounts disposes old listeners before new verification (19.4613ms)
+Γ£ö CP29-B2-09 consent management route stays usable to re-consent (13.1308ms)
+Firebase auth state error: Error: auth failure
+    at Object.authFail (C:\Gß║ío\Cognitive-Learn\tests\cp29-live-access-gate.test.cjs:76:40)
+    at TestContext.<anonymous> (C:\Gß║ío\Cognitive-Learn\tests\cp29-live-access-gate.test.cjs:154:7)
+    at async Test.run (node:internal/test_runner/test:1332:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+  code: 'unavailable'
+}
+Γ£ö CP29-B2-10 auth stream error revokes existing access and unsubscribes listeners (12.2975ms)
+Γä╣ tests 10
+Γä╣ suites 0
+Γä╣ pass 10
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 494.9121
+
+> cognitive-learn-ai@0.1.0 test:cp29:routes
+> node --test tests/cp29-route-deeplink-contract.test.cjs
+
+Γ£ö CP29-A4-01 all 20 current critical paths are registered by the root app (0.7615ms)
+Γ£ö CP29-A4-02 Vercel rewrites every critical deep link to SPA without shadowing APIs (0.28ms)
+Γ£ö CP29-A4-03 Firebase Hosting has SPA fallback (0.1211ms)
+Γ£ö CP29-A4-04 route guard enforces student-only scope and retired route denial (0.2363ms)
+Γ£ö CP29-A4-05 protected pages mount chatbot only inside AccessGate (0.7855ms)
+Γä╣ tests 5
+Γä╣ suites 0
+Γä╣ pass 5
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 94.1547
+
+> cognitive-learn-ai@0.1.0 test:cp29:academic
+> node --experimental-strip-types --test tests/cp29-academic-lock.behavior.test.mjs && node --test tests/cp29-academic-lock.contract.test.cjs
+
+Γ£ö CP29-C4-01 valid curriculum identity accepted without inventing scores (1.28ms)
+Γ£ö CP29-C4-02 rejects duplicate, malformed and unknown elective (0.1985ms)
+Γ£ö CP29-C4-03 rejects wrong graded subject catalogue and programme (0.1505ms)
+Γ£ö CP29-D3-01 exact four electives and foreign language remain immutable (0.244ms)
+Γ£ö CP29-D3-02 flags unapproved subjects in grade10, grade11, grade12 (0.3006ms)
+Γ£ö CP29-D3-03 accepts partial terms and real zero as valid school transcript (0.1239ms)
+Γ£ö CP29-D3-04 invalid grades/terms/shape fail closed (0.1427ms)
+Γä╣ tests 7
+Γä╣ suites 0
+Γä╣ pass 7
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 124.1141
+Γ£ö CP29 lock contract: identity lock enforces foreign language and selected electives (0.7065ms)
+Γ£ö CP29 lock contract: legacy identity fails closed (0.157ms)
+Γ£ö CP29 lock contract: both academic document cross-checks use identity (0.2403ms)
+Γ£ö CP29 lock contract: transcript writes validate 3 years and whitelisted 9 subjects (0.1249ms)
+Γ£ö CP29 lock contract: student UI blocks changing locked language (0.1342ms)
+Γ£ö CP29 lock contract: student UI fails closed on corrupt previous transcripts (0.0892ms)
+Γ£ö CP29 lock contract: server emulator cases are retained (0.2741ms)
+Γä╣ tests 7
+Γä╣ suites 0
+Γä╣ pass 7
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 84.3615
+
+> cognitive-learn-ai@0.1.0 test:cp29:accounts
+> node --test tests/cp29-privileged-account-ops.test.mjs tests/cp29-account-ui-contract.test.cjs
+
+Γ£ö CP29-B1-01 password reset uses Firebase Auth and never guesses Admin privileges (1.2983ms)
+Γ£ö CP29-B1-02 password reset UI returns generic acknowledgment (0.5343ms)
+Γ£ö CP29-K15-24 optional backend is not in default firebase config (0.9124ms)
+Γ£ö CP29-K15-25 role Management is never accessible as student business route (1.7323ms)
+Γ£ö CP29-B4-01 Demo remains own-UID and explicitly labeled (0.6428ms)
+Γ£ö CP29-K15-01 rejects empty, primitive, unknown and extra input keys (2.3437ms)
+Γ£ö CP29-K15-02 rejects invalid UID/ticket/requestId without arbitrary document paths (0.3834ms)
+Γ£ö CP29-K15-03 denies admin role grant and invalid active state (0.1862ms)
+Γ£ö CP29-K15-04 allow only bounded non-Admin role targets (0.2086ms)
+Γ£ö CP29-K15-05 feature flag defaults fail-closed (1.0217ms)
+Γ£ö CP29-K15-06 empty operator allowlist is denied (0.2702ms)
+Γ£ö CP29-K15-07 custom role claim cannot replace operator claim (0.6768ms)
+Γ£ö CP29-K15-08 a valid email or UI role never provides operator authority (0.3203ms)
+Γ£ö CP29-K15-09 recent primary login with no second factor is denied (0.322ms)
+Γ£ö CP29-K15-10 stale or future sessions fail closed (1.5959ms)
+Γ£ö CP29-K15-11 blocked or demoted operator cannot manage accounts (0.2949ms)
+Γ£ö CP29-K15-12 never allows self-management (0.1354ms)
+Γ£ö CP29-K15-13 never manages another Admin, even if operator (0.1233ms)
+Γ£ö CP29-K15-14 rejects missing target or malformed legacy profile (0.192ms)
+Γ£ö CP29-K15-15 set-active updates only active and records atomic audit without email (0.7094ms)
+Γ£ö CP29-K15-16 replay same mutation does not write a second audit (0.1373ms)
+Γ£ö CP29-K15-17 reusing requestId for a different request is rejected (0.2143ms)
+Γ£ö CP29-K15-18 inspect uses exact UID, returns minimal profile and creates audit (0.1437ms)
+Γ£ö CP29-K15-19 no-op mutation is not a successful operation (0.0974ms)
+Γ£ö CP29-K15-20 explicit legacy-to-student migration is audited (0.1343ms)
+Γ£ö CP29-K15-21 an existing audit entry for other operator is not trusted (0.1612ms)
+Γ£ö CP29-K15-22 owner mismatch between token and actor UID fails closed (0.1524ms)
+Γ£ö CP29-K15-23 no unsafe Admin bootstrap or client role elevation in source (1.5269ms)
+Γ£ö retired account cannot be reactivated without explicit conversion (0.1971ms)
+Γä╣ tests 29
+Γä╣ suites 0
+Γä╣ pass 29
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 121.6712
+
+> cognitive-learn-ai@0.1.0 test:cp29:batch4
+> node --experimental-strip-types --test tests/cp29-batch4-seed-transaction.test.mjs tests/cp29-batch4-link-integrity.test.mjs tests/step05a-seed-input-validation.test.mjs
+
+Γ£ö F4 only owner can inspect legacy link for cleanup (1.4189ms)
+Γ£ö F4 missing and malformed server timestamps must not look like valid links (0.279ms)
+Γ£ö F4 rejects orphaned or corrupted identifiers (0.185ms)
+Γ£ö F4 rejects cross-account and role mismatch (0.1359ms)
+Γ£ö F4 refuses invalid role, malformed names and same account links (0.1493ms)
+Γ£ö F4 exact active boolean and role are mandatory (0.1553ms)
+Γ£ö F4 retired link and report UI cannot mount (1.2397ms)
+Γ£ö F4 partial legacy removal is explicitly reported and retryable (1.3479ms)
+Γ£ö F4 legacy cleanup uses server-only reads (0.5547ms)
+Γ£ö C1 empty initial collection is valid and does not invent a version (1.6923ms)
+Γ£ö C1 real timestamp precision retained, including nanoseconds (0.2445ms)
+Γ£ö C1 missing, invalid and forged timestamp fails closed (0.2156ms)
+Γ£ö C5 accepted initial load can commit a matching existing academic pair (0.9869ms)
+Γ£ö C5 stale profile token rejects concurrent tab edits (0.3236ms)
+Γ£ö C5 stale transcript token rejects concurrent term edits (0.1265ms)
+Γ£ö C5 phantom document created by another client rejects stale initial form (0.113ms)
+Γ£ö C1 invalid account owner, scope or schema fails closed (0.1655ms)
+Γ£ö C1 corrupted/foreign transcript subject cannot be silently overwritten (0.3156ms)
+Γ£ö C5 mismatched academic identity rejects cross-document overwrite (0.3666ms)
+Γ£ö C5 student cannot save against admin demo document or wrong UID (0.2376ms)
+Γ£ö C5 transaction reads account, profile, transcript BEFORE all writes (1.3151ms)
+Γ£ö C5 failed transaction gets visible conflict, not false success (0.7382ms)
+Γ£ö Seed: normal values accept, including missing optional financial fields (1.0795ms)
+Γ£ö Seed: zero is observed zero, not missing (0.1889ms)
+Γ£ö Seed: percentages over 100 or negative are rejected (0.2846ms)
+Γ£ö Seed: hours cannot exceed the length of one week (0.1504ms)
+Γ£ö Seed: counts require whole numbers (0.2451ms)
+Γ£ö Seed: negative or malformed finances are rejected (0.1903ms)
+Γ£ö Seed: missing required behavior is rejected explicitly (0.162ms)
+Γ£ö Seed: not silently converting scientific notation to amount (0.1127ms)
+Γ£ö Seed: validator is called before atomic Firestore transaction (1.676ms)
+Γä╣ tests 31
+Γä╣ suites 0
+Γä╣ pass 31
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 160.6068
+
+> cognitive-learn-ai@0.1.0 test:cp30:realtime
+> node --test tests/cp30-realtime-read.test.cjs tests/step07-seed-atlas-bridge.test.cjs
+
+Γ£ö CP30-R01 only server-confirmed, committed snapshots pass (2.2951ms)
+Γ£ö CP30-R02 cross-owner and malformed documents fail closed (0.4432ms)
+Γ£ö CP30-R03 verified legacy docs with no userId remain readable in own UID-scoped path (0.1567ms)
+Γ£ö CP30-R04 account inspections reject old generation and account switches (0.1852ms)
+Γ£ö CP30-R05 cache-only and pending writes never render as verified transcript (39.8398ms)
+Γ£ö CP30-R06 A to B to A cannot resurrect callback from first A session (19.5346ms)
+Γ£ö CP30-R07 legacy fallback is server-confirmed and cannot overwrite a newer primary transcript (11.6637ms)
+Γ£ö CP30-R08 conflicting document UID clears data and reports error (11.6039ms)
+Γ£ö CP30-R09 signed out session clears verified results immediately (13.3092ms)
+Γ£ö CP30-R10 storage status guard resets rows and rejects stale async results (2.1667ms)
+Γ£ö 07-01: same-term D01 8+7+9 gives 24, no exam or probability label (2.5687ms)
+Γ£ö 07-02: zero really is an observed completed score (0.3343ms)
+Γ£ö 07-03: partial scores are never promoted to completed semester averages (0.2961ms)
+Γ£ö 07-04: cannot combine subjects from different semesters to fabricate D01 (0.2745ms)
+Γ£ö 07-05: prefers most recent term with a complete supported combination (0.3024ms)
+Γ£ö 07-06: returns null on transcript with no completed subject grades (0.2202ms)
+Γ£ö 07-07: mapping covers new-programme electives and excludes unrelated subjects (0.3153ms)
+Γ£ö 07-08: non-English foreign language is not silently mapped to English (0.3987ms)
+Γ£ö 07-09: read-only adapter does not mutate Seed transcript (0.5148ms)
+Γ£ö 07-10: Atlas reads user-bound Seed hook, only for school marks (0.9663ms)
+Γ£ö 07-11: changing score basis clears old marks and never reuses school marks as official THPT (0.5705ms)
+Γ£ö 07-12: hook clears account-specific data and blocks callbacks from old UID (0.3682ms)
+Γ£ö 07-13: delayed Firestore snapshot for a signed-out account cannot overwrite new student (45.1606ms)
+Γä╣ tests 23
+Γä╣ suites 0
+Γä╣ pass 23
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 434.3786
+
+> cognitive-learn-ai@0.1.0 test:cp30:profile
+> node --test tests/cp30-profile-realtime.test.cjs
+
+Γ£ö CP30-P01 profile opens a realtime subscription with metadata events (23.7548ms)
+Γ£ö CP30-P02 cache and pending writes cannot become verified student data (17.3521ms)
+Γ£ö CP30-P03 verified profile is rendered, but Growth waits for server history (17.6428ms)
+Γ£ö CP30-P04 revised same-user profile cannot be overwritten by stale history (18.5268ms)
+Γ£ö CP30-P05 A to B to A blocks stale profile callbacks from original A session (20.8993ms)
+Γ£ö CP30-P06 previously verified profile is hidden immediately when snapshot becomes cached (13.5345ms)
+Γ£ö CP30-P07 cross-owner profile fails closed and clears previous values (24.7461ms)
+Γ£ö CP30-P08 signed out resets history/profile and invalidates pending results (13.9934ms)
+Γ£ö CP30-P09 server history unavailable preserves verified profile but discloses limitation (13.163ms)
+Γ£ö CP30-P10 absent verified profile is empty but cache-only absence is not (9.0689ms)
+Γ£ö CP30-P11 Firestore permission errors remove all personally identifiable display values (9.3599ms)
+Γ£ö CP30-P12 server history uses getDocsFromServer rather than an offline cache (0.9761ms)
+Γ£ö CP37 server read renders observed dynamic state, clears both new states on cache or signout (15.2866ms)
+Γ£ö CP38 stale same-owner history cannot populate a newer state (9.4176ms)
+Γä╣ tests 14
+Γä╣ suites 0
+Γä╣ pass 14
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 523.6937
+
+> cognitive-learn-ai@0.1.0 test:cp30:gpa
+> node --test tests/cp30-gpa-integrity.test.cjs tests/cp30-gpa-listener.test.cjs
+
+Γ£ö GPA01 valid zero is VERIFIED, distinct from missing score (3.3964ms)
+Γ£ö GPA02 completed score 8 from six terms verifies for three years (0.7129ms)
+Γ£ö GPA03 falsified profile GPA rejected (0.5272ms)
+Γ£ö GPA04 falsified transcript GPA rejected independently (0.4461ms)
+Γ£ö GPA05 missing GPA cannot be stored as numeric zero (0.9897ms)
+Γ£ö GPA06 fake coverage, partial status, observed count rejected (0.9113ms)
+Γ£ö GPA07 extra subject outside nine cannot be silently excluded (0.2959ms)
+Γ£ö GPA08 malformed 10+, negative or syntax rejected rather than missing (0.3638ms)
+Γ£ö GPA09 absent rows or one missing semester is never verified as 0 (0.4487ms)
+Γ£ö GPA10 empty row can be MISSING, with null year but observed zero elsewhere (0.6655ms)
+Γ£ö GPA11 two absent docs are INCOMPLETE, not VERIFIED (0.2291ms)
+Γ£ö GPA12 missing summary is LEGACY, never verified (0.1969ms)
+Γ£ö GPA13 UID, dataScope and schema tamper rejected (0.2263ms)
+Γ£ö GPA14 mismatched foreign language or electives rejected (0.1453ms)
+Γ£ö GPA15 calculation version and stringified zero both rejected (0.5942ms)
+Γ£ö GPA16 no modification of underlying Firestore documents (0.4487ms)
+Γ£ö GPA17 UI discloses unverified/mismatch status and does not claim school validation (0.7773ms)
+Γ£ö GPA18 realtime GPA audit independently subscribes to both verified server documents (0.724ms)
+Γ£ö GPAR01 never verifies GPA from just one document (71.1976ms)
+Γ£ö GPAR02 verifies only when both server-confirmed snapshots arrive (17.6182ms)
+Γ£ö GPAR03 cache snapshot removes previously verified evidence immediately (11.8729ms)
+Γ£ö GPAR04 pending write snapshot cannot be claimed as verified (9.0788ms)
+Γ£ö GPAR05 stale A watcher cannot affect AΓåÆBΓåÆA account switch (7.1997ms)
+Γ£ö GPAR06 wrong-owner record is rejected by the GPA auditor (6.7044ms)
+Γ£ö GPAR07 Firestore permissions failure clears verified summary (7.2322ms)
+Γ£ö GPAR08 missing transcript yields INCOMPLETE rather than zero GPA (6.9943ms)
+Γ£ö GPAR09 logout closes watchers and clears verified values (9.3644ms)
+Γ£ö GPAR10 recovered cache requires both fresh server payloads again (5.8867ms)
+Γä╣ tests 28
+Γä╣ suites 0
+Γä╣ pass 28
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 426.8513
+
+> cognitive-learn-ai@0.1.0 test:cp30:batch4
+> node --test tests/cp30-batch4-legacy-policy.test.cjs tests/cp30-realtime-read.test.cjs tests/cp30-gpa-listener.test.cjs
+
+Γ£ö LEG01 valid observed zero with six-semester omissions is read-only readable (1.9103ms)
+Γ£ö LEG02 valid legacy with no UID remains within only the owner UID-scoped path (0.3699ms)
+Γ£ö LEG03 foreign userId, dataScope and invalid UID are denied (0.2882ms)
+Γ£ö LEG04 missing or forged curriculum is quarantined rather than guessed (0.2645ms)
+Γ£ö LEG05 unknown grade or semester is quarantined (0.2285ms)
+Γ£ö LEG06 subjects outside locked nine are never hidden in computation (0.1567ms)
+Γ£ö LEG07 invalid scores are rejected instead of treated as missing or zero (0.2862ms)
+Γ£ö LEG08 malformed row, overlong regular series and invalid mark fields denied (0.2702ms)
+Γ£ö LEG09 missing partial marks, comma decimals and true zero remain valid (0.3077ms)
+Γ£ö LEG10 payload is never mutated or migrated by read-only validation (0.4221ms)
+Γ£ö LEG11 UI labels verified legacy schema as unverified historical grades (1.178ms)
+Γ£ö LEG12 primary and legacy subscriptions remain owner/session/server scoped (0.9353ms)
+Γ£ö GPAR01 never verifies GPA from just one document (86.126ms)
+Γ£ö GPAR02 verifies only when both server-confirmed snapshots arrive (21.6184ms)
+Γ£ö GPAR03 cache snapshot removes previously verified evidence immediately (14.6536ms)
+Γ£ö GPAR04 pending write snapshot cannot be claimed as verified (13.9633ms)
+Γ£ö GPAR05 stale A watcher cannot affect AΓåÆBΓåÆA account switch (11.5056ms)
+Γ£ö GPAR06 wrong-owner record is rejected by the GPA auditor (7.6984ms)
+Γ£ö GPAR07 Firestore permissions failure clears verified summary (6.978ms)
+Γ£ö GPAR08 missing transcript yields INCOMPLETE rather than zero GPA (7.4189ms)
+Γ£ö GPAR09 logout closes watchers and clears verified values (8.8588ms)
+Γ£ö GPAR10 recovered cache requires both fresh server payloads again (7.4472ms)
+Γ£ö CP30-R01 only server-confirmed, committed snapshots pass (1.3389ms)
+Γ£ö CP30-R02 cross-owner and malformed documents fail closed (0.387ms)
+Γ£ö CP30-R03 verified legacy docs with no userId remain readable in own UID-scoped path (0.1803ms)
+Γ£ö CP30-R04 account inspections reject old generation and account switches (0.1539ms)
+Γ£ö CP30-R05 cache-only and pending writes never render as verified transcript (45.4968ms)
+Γ£ö CP30-R06 A to B to A cannot resurrect callback from first A session (20.9985ms)
+Γ£ö CP30-R07 legacy fallback is server-confirmed and cannot overwrite a newer primary transcript (13.5645ms)
+Γ£ö CP30-R08 conflicting document UID clears data and reports error (10.7682ms)
+Γ£ö CP30-R09 signed out session clears verified results immediately (10.2654ms)
+Γ£ö CP30-R10 storage status guard resets rows and rejects stale async results (2.1536ms)
+Γä╣ tests 32
+Γä╣ suites 0
+Γä╣ pass 32
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 469.8521
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch3
+> node --experimental-strip-types --test tests/cp31-batch3-operational-audits.test.mjs
+
+Γ£ö CP31-B3-01 valid demo docs pass read-only identity/schema checks (0.977ms)
+Γ£ö CP31-B3-02 cross-owner or dataScope != demo are rejected without leaking UID (0.22ms)
+Γ£ö CP31-B3-03 no docs or legacy never claims migration complete (0.1239ms)
+Γ£ö CP31-B3-04 inconsistent electives/foreign language block automated migrations (0.1298ms)
+Γ£ö CP31-B3-05 UID blank and missing ownership fail closed (0.3644ms)
+Γ£ö CP31-B3-06 current admission registry evaluated without fabricated freshness (0.5211ms)
+Γ£ö CP31-B3-07 admission missing 2024 or duplicate year is visible (0.1601ms)
+Γ£ö CP31-B3-08 bad HTTP, javascript and embedded credentials cannot be trusted (0.1855ms)
+Γ£ö CP31-B3-09 scholarship register is assessed with NOT TESTED deadlines (1.4221ms)
+Γ£ö CP31-B3-10 scholarship URL and date validity includes future/invalid date (0.3428ms)
+Γ£ö CP31-B3-11 duplicate scholarship, missing conditions/credentials are rejected (0.2091ms)
+Γ£ö CP31-B3-12 changes registered as safe local diagnostics, not production approval (1.2667ms)
+Γ£ö CP31-B3-13 E2E manifest updated without weakening auth/preflight (0.624ms)
+Γä╣ tests 13
+Γä╣ suites 0
+Γä╣ pass 13
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 147.9168
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch4
+> node --experimental-strip-types --test tests/cp31-batch4-evidence.test.mjs
+
+Γ£ö CP31-B4-01 historical fingerprint remains frozen; current release cannot impersonate CP31 (152.7354ms)
+Γ£ö CP31-B4-02 release no evidence: no invented CI/deploy PASS (0.344ms)
+Γ£ö CP31-B4-03 release structural source matches, but self-declared production remains unverified (0.3493ms)
+Γ£ö CP31-B4-04 source fingerprint mismatch fails closed (0.1678ms)
+Γ£ö CP31-B4-05 release invalid CI HTTPS/credentials/commit/exit rejected (0.2612ms)
+Γ£ö CP31-B4-06 mismatched deploy artifact always FAIL (0.224ms)
+Γ£ö CP31-B4-07 no backup/rollback produce NOT TESTED not PASS (0.1657ms)
+Γ£ö CP31-B4-08 unknown release JSON schema fails (0.1191ms)
+Γ£ö CP31-B4-09 no Emulator report never passes role authorization (0.2506ms)
+Γ£ö CP31-B4-10 known gate schema and sha accepted only as local evidence (0.2248ms)
+Γ£ö CP31-B4-11 tampered Rules candidate checksum is FAIL even with PASS fields (0.1801ms)
+Γ£ö CP31-B4-12 preflight-only or failed emulator cannot be called successful (0.1851ms)
+Γ£ö CP31-B4-13 wrong project/gate or future time rejected (0.1098ms)
+Γ£ö CP31-B4-14 no OULAD result means no ML score claims (0.2742ms)
+Γ£ö CP31-B4-15 correctly structured aggregate OULAD report does not imply Vietnamese validation (0.2306ms)
+Γ£ö CP31-B4-16 synthetic one-row VNHSGE fixture cannot pass as OULAD (0.4769ms)
+Γ£ö CP31-B4-17 OULAD tiny holdout, wrong cutoff and impossible splits fail (0.7626ms)
+Γ£ö CP31-B4-18 impossible Brier, delta and bootstrap confidence interval rejected (0.2133ms)
+Γ£ö CP31-B4-19 invalid source/cohort and synthetic label cannot be presented as real result (0.0847ms)
+Γ£ö CP31-B4-20 Admin UI only imports in memory; route/catalog/run guard is explicit (1.0796ms)
+Γä╣ tests 20
+Γä╣ suites 0
+Γä╣ pass 20
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 288.8179
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch5
+> node --experimental-strip-types --test tests/cp31-batch5-governance.test.mjs
+
+Γ£ö atlas: no file is NOT TESTED, never implicit PASS (2.2555ms)
+Γ£ö atlas: wrong schema fails closed (0.2046ms)
+Γ£ö atlas: valid metadata retains unverified scope (1.5094ms)
+Γ£ö policy: no file is NOT TESTED, never implicit PASS (0.1784ms)
+Γ£ö policy: wrong schema fails closed (0.1059ms)
+Γ£ö policy: valid metadata retains unverified scope (0.0908ms)
+Γ£ö scenario: no file is NOT TESTED, never implicit PASS (0.2047ms)
+Γ£ö scenario: wrong schema fails closed (0.069ms)
+Γ£ö scenario: valid metadata retains unverified scope (0.1378ms)
+Γ£ö evidence: no file is NOT TESTED, never implicit PASS (0.2719ms)
+Γ£ö evidence: wrong schema fails closed (0.088ms)
+Γ£ö evidence: valid metadata retains unverified scope (0.1094ms)
+Γ£ö trends: no file is NOT TESTED, never implicit PASS (0.1313ms)
+Γ£ö trends: wrong schema fails closed (0.041ms)
+Γ£ö trends: valid metadata retains unverified scope (0.157ms)
+Γ£ö finance: no file is NOT TESTED, never implicit PASS (0.1377ms)
+Γ£ö finance: wrong schema fails closed (0.039ms)
+Γ£ö finance: valid metadata retains unverified scope (0.0878ms)
+Γ£ö Atlas: forged same reviewer, malformed URL, impossible date fail (0.1222ms)
+Γ£ö Atlas: repeat IDs fail (0.0547ms)
+Γ£ö Orion: prevents non-shadow automatic assignment (0.0587ms)
+Γ£ö Orion: missing stop rule or human review fails (0.0671ms)
+Γ£ö Scenario: outcome masquerading as simulation is denied (0.0757ms)
+Γ£ö Scenario: mismatch policy versions cannot be directly compared (0.0678ms)
+Γ£ö Pulse record: invented probability or confidence is rejected (0.08ms)
+Γ£ö Pulse record: missing snapshot denied (0.073ms)
+Γ£ö Pulse trend: genuine zero is valid (0.1111ms)
+Γ£ö Pulse trend: missing T1 cannot claim improvement (0.0743ms)
+Γ£ö Pulse trend: impossible date and swapped T1/T2 warn (0.0781ms)
+Γ£ö Haven: zero travel cost allowed but no verified finance claim (0.0735ms)
+Γ£ö Haven: negative cost or invalid scholarship source fail (0.0787ms)
+Γ£ö Catalog/manifest/UI map six distinct limited views and no privileged writes (1.1412ms)
+Γ£ö Synthetic example flag cannot be imported as validated evidence (0.6689ms)
+Γä╣ tests 33
+Γä╣ suites 0
+Γä╣ pass 33
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 149.7778
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch11
+> node --experimental-strip-types --test tests/cp31-batch11-t0-t1-comparison.test.mjs
+
+Γ£ö B11-01 reviewed and traced cycle allows DESCRIPTIVE_ONLY comparison (3.6751ms)
+Γ£ö B11-02 no cycle is INVALID with no implied student outcome (0.123ms)
+Γ£ö B11-03 ACTIVE cycle has no post-outcome comparison (0.1472ms)
+Γ£ö B11-04 check-in without T1 cannot create outcome (0.1529ms)
+Γ£ö B11-05 frozen T0 is never derived from reassessment (0.468ms)
+Γ£ö B11-06 observed zero remains zero (not null/missing) (0.3964ms)
+Γ£ö B11-07 matched subjects and denominator are explicit (0.3828ms)
+Γ£ö B11-08 missing subject cannot be imputed to zero (0.3885ms)
+Γ£ö B11-09 compared averages restrict to matched measures (not full T0) (0.293ms)
+Γ£ö B11-10 negative observed delta is allowed and not a risk probability (0.3591ms)
+Γ£ö B11-11 self-reported hours preserve actual zero (0.7334ms)
+Γ£ö B11-12 T0 target gap remains independent of T1 change (0.463ms)
+Γ£ö B11-13 no ML forecast exists: error and calibration withheld (0.2204ms)
+Γ£ö B11-14 no causal effect estimate or treatment assignment (0.1715ms)
+Γ£ö B11-15 limitation array explicitly discloses missingness and self-report (0.2545ms)
+Γ£ö B11-16 no mutation to frozen T0 or source cycle on comparison (0.917ms)
+Γ£ö B11-17 legacy reviewed cycle without T0 cannot compare (0.1651ms)
+Γ£ö B11-18 reviewed legacy without Evidence Record cannot compare (0.1215ms)
+Γ£ö B11-19 mismatched T0 is not comparable (0.1212ms)
+Γ£ö B11-20 forged T0 forecast is rejected not evaluated (0.0984ms)
+Γ£ö B11-21 altered T1 observation is rejected without recalculated evidence (0.1254ms)
+Γ£ö B11-22 altered hours is rejected without recalculated evidence (0.1409ms)
+Γ£ö B11-23 invalid reassessment chronology is rejected (0.1168ms)
+Γ£ö B11-24 corruption in the evidence output fails closed (0.1262ms)
+Γ£ö B11-25 cannot pass fake foreign/empty/shape-invalid cycles (0.0748ms)
+Γ£ö B11-26 result replay succeeds with exact domain outputs (0.4234ms)
+Γ£ö B11-27 replay ignores Firestore object key ordering (0.7614ms)
+Γ£ö B11-28 report tampering detected for measured values and claims (0.5199ms)
+Γ£ö B11-29 appended reviewer/external verification is rejected (0.2453ms)
+Γ£ö B11-30 replay rejects INVALID status even if structurally self-consistent (0.0751ms)
+Γ£ö B11-31 golden path uses the real comparison engine with no fake prediction (1.1665ms)
+Γ£ö B11-32 golden path frozen T0 does not change after measurement (0.4566ms)
+Γ£ö B11-33 student UI displays uncertainty, matched T1 and blocks legacy comparison (0.6028ms)
+Γ£ö B11-34 comparator cannot compute forecasts from targets or T1 (0.42ms)
+Γ£ö B11-35 deep comparison identifies changed limitations and metadata (0.4477ms)
+Γ£ö B11-36 no conditional claim about improvement on zero completion (0.4819ms)
+Γä╣ tests 36
+Γä╣ suites 0
+Γä╣ pass 36
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 161.1368
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch12
+> node --experimental-strip-types --test tests/cp31-batch12-multicycle-trend.test.mjs
+
+Γ£ö B12-01 initial empty window is NO_HISTORY, no fabricated trend (1.3954ms)
+Γ£ö B12-02 unknown input is INVALID (0.2189ms)
+Γ£ö B12-03 one reviewed cycle has no measured T2 (3.4238ms)
+Γ£ö B12-04 one active cycle cannot be extrapolated (0.2224ms)
+Γ£ö B12-05 two real domain-reviewed synthetic cycles form descriptive series (8.8391ms)
+Γ£ö B12-06 reverse Firestore newest-first order does not change trend (1.6408ms)
+Γ£ö B12-07 chronological cycle ids strictly sorted by T0 (0.7491ms)
+Γ£ö B12-08 frozen T0 second cycle is never silently treated as a measured T2 (1.1388ms)
+Γ£ö B12-09 true observed 0 kept as zero (0.5901ms)
+Γ£ö B12-10 English matched second T0 equals first T1, not target (0.7453ms)
+Γ£ö B12-11 individual subject history only, no aggregate score across changing denominators (0.5654ms)
+Γ£ö B12-12 provenance remains student self-report on every point (0.4753ms)
+Γ£ö B12-13 no causal, forecast or externally validated student outcome claims (0.7383ms)
+Γ£ö B12-14 baseline shift from C1 T1 to C2 T0 blocks stitched trend (0.5799ms)
+Γ£ö B12-15 same key but different subject label blocks trend (0.4483ms)
+Γ£ö B12-16 missing T1 in previous cycle is not silently made zero (0.488ms)
+Γ£ö B12-17 missing T1 in next cycle cannot be used for T2 (0.5581ms)
+Γ£ö B12-18 no common subjects is not a longitudinal trend (0.7235ms)
+Γ£ö B12-19 new-only subject prevents cohort-mix average (0.5927ms)
+Γ£ö B12-20 reused cycle ID cannot merge outcomes (0.3669ms)
+Γ£ö B12-21 duplicated T0 timestamp fails closed (0.2602ms)
+Γ£ö B12-22 overlapped cycle starts before previous reassessment ends rejected (0.2226ms)
+Γ£ö B12-23 corrupt evidence in prior cycle fails closed instead of displaying later trend (0.1882ms)
+Γ£ö B12-24 corrupt evidence in next cycle fails closed (0.3093ms)
+Γ£ö B12-25 legacy T0 missing refuses trend, while source records remain readable (0.442ms)
+Γ£ö B12-26 legacy Evidence Record missing refuses trend (0.5291ms)
+Γ£ö B12-27 cross-UID records cannot be compared when owner is supplied (0.5771ms)
+Γ£ö B12-28 legacy no-owner records cannot enter authenticated history (0.5076ms)
+Γ£ö B12-29 same-owner records remain eligible only under matching uid (0.6181ms)
+Γ£ö B12-30 max 8 displayed cycles; 9th fails rather than claim full history (0.5758ms)
+Γ£ö B12-31 duplicate records in same window fail closed (0.3134ms)
+Γ£ö B12-32 current active cycle must not create fake T3 (0.6348ms)
+Γ£ö B12-33 active cycle before previous reviewed cycle is invalid interleaving (0.2334ms)
+Γ£ö B12-34 reproducible report replay accepts key reorder (1.3012ms)
+Γ£ö B12-35 replay rejects spurious T3 and fabricated claims (0.7681ms)
+Γ£ö B12-36 replay rejects forged causal claim or changed baseline (1.7549ms)
+Γ£ö B12-37 genuine inputs remain unmodified after audit (0.6646ms)
+Γ£ö B12-38 synthesized local envelope generates and verifies without Firebase (2.9467ms)
+Γ£ö B12-39 envelope source fixture tampering rejected (2.1155ms)
+Γ£ö B12-40 envelope rejects injected externally verified flag (1.6465ms)
+Γ£ö B12-41 missing synthetic marker or injected student personal data rejected (0.9974ms)
+Γ£ö B12-42 UI displays per-subject series with guard labels and truncated history (1.1776ms)
+Γ£ö B12-43 listener verifies owner through the server-only snapshot gate before trend computation (0.6684ms)
+Γ£ö B12-44 historical report is bounded and never claims full population trend (0.9994ms)
+Γ£ö B12-45 source checklist remains unchanged and test is invoked in npm scripts (0.8168ms)
+Γ£ö B12-46 exactly eight past reviewed cycles are a bounded, potentially truncated window (2.5471ms)
+Γ£ö B12-47 mixed owned and ownerless records are rejected even without expected UID (0.7678ms)
+Γ£ö B12-48 malformed owner metadata rejected even when the rest of the evidence is consistent (0.2454ms)
+Γä╣ tests 48
+Γä╣ suites 0
+Γä╣ pass 48
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 225.1953
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch13
+> node --experimental-strip-types --test tests/cp31-batch13-measurement-audit.test.mjs
+
+Γ£ö B13-01 two reviewed cycles retain the original descriptive series (15.8545ms)
+Γ£ö B13-02 missing manifests are not silently filled in (2.5356ms)
+Γ£ö B13-03 null is equivalent to absent manifest (1.0185ms)
+Γ£ö B13-04 no cycles cannot imply measurements (0.6411ms)
+Γ£ö B13-05 malformed cycle returns SOURCE_BLOCKED (0.1874ms)
+Γ£ö B13-06 one reviewed cycle cannot create a T2 comparison (0.4544ms)
+Γ£ö B13-07 sample independent manifest aligns declarations only (2.1469ms)
+Γ£ö B13-08 manifest order does not affect scientific status (1.7921ms)
+Γ£ö B13-09 cycle order does not affect matching (1.767ms)
+Γ£ö B13-10 self report can never be promoted to verified equivalence (0.9685ms)
+Γ£ö B13-11 no forecast accuracy or causal claims (0.9333ms)
+Γ£ö B13-12 real score zero matches the declaration (0.9173ms)
+Γ£ö B13-13 same score with changed scale blocks longitudinal comparison (1.2636ms)
+Γ£ö B13-14 same score with changed instrument ID blocks comparison (1.2649ms)
+Γ£ö B13-15 changed instrument version is not assumed equivalent (1.3556ms)
+Γ£ö B13-16 different forms do not imply equivalent tests (1.1244ms)
+Γ£ö B13-17 scoring rubric changes block comparison (1.028ms)
+Γ£ö B13-18 missing a single T0 declaration blocks complete status (0.6311ms)
+Γ£ö B13-19 missing a single T1 declaration blocks complete status (0.7009ms)
+Γ£ö B13-20 empty metadata list is missing, not compatible (0.5659ms)
+Γ£ö B13-21 false score injected is invalid, not normalized (1.0915ms)
+Γ£ö B13-22 a true zero is never confused with missing (0.7837ms)
+Γ£ö B13-23 wrong linked-at T0 time is invalid (0.6724ms)
+Γ£ö B13-24 wrong linked-at T1 time is invalid (0.7814ms)
+Γ£ö B13-25 duplicated source declaration is invalid (0.7368ms)
+Γ£ö B13-26 extra unknown cycle declaration is invalid (0.6691ms)
+Γ£ö B13-27 extra unknown subject declaration is invalid (0.8992ms)
+Γ£ö B13-28 unexpected PII field in a declaration is invalid (0.6039ms)
+Γ£ö B13-29 unexpected PII field on manifest envelope is invalid (0.5225ms)
+Γ£ö B13-30 forged source verification is invalid (0.615ms)
+Γ£ö B13-31 empty instrument is invalid (0.9002ms)
+Γ£ö B13-32 instrument with spaces or HTML is invalid (0.7863ms)
+Γ£ö B13-33 undefined scoring scale is invalid (0.5896ms)
+Γ£ö B13-34 negative, NaN or out-of-range scores invalid (3.4426ms)
+Γ£ö B13-35 timestamp with timezone offset cannot be disguised as canonical UTC (0.6154ms)
+Γ£ö B13-36 invalid calendar date is rejected (0.6009ms)
+Γ£ö B13-37 expected owner mismatch blocks even accurate manifest (0.2055ms)
+Γ£ö B13-38 mixed owner metadata blocks declared alignment (0.3759ms)
+Γ£ö B13-39 moving a second baseline with regenerated T0 no longer gives valid source series (0.3183ms)
+Γ£ö B13-40 invalid evidence record blocks declaration promotion (0.2339ms)
+Γ£ö B13-41 original report can replay deterministic snapshot (1.9479ms)
+Γ£ö B13-42 replay rejects forged validation flag (1.401ms)
+Γ£ö B13-43 replay rejects forged causal effect (1.1991ms)
+Γ£ö B13-44 replay rejects withheld declaration (1.2005ms)
+Γ£ö B13-45 offline envelope claims synthetic status only (2.1152ms)
+Γ£ö B13-46 offline envelope verifies against original input bytes (2.8848ms)
+Γ£ö B13-47 changed fixture hash blocks replay (3.5353ms)
+Γ£ö B13-48 forged envelope payload or checksum rejected (2.846ms)
+Γ£ö B13-49 unmarked synthetic fixture or unexpected PII fails offline (0.5483ms)
+Γ£ö B13-50 UI carries a fail-closed measurement warning and no verified score claim (0.6829ms)
+Γ£ö B13-51 source release fingerprint includes independent synthetic measurement manifest (0.5037ms)
+Γ£ö B13-52 package scripts include new gate without removing preceding batches (0.572ms)
+Γä╣ tests 52
+Γä╣ suites 0
+Γä╣ pass 52
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 241.7675
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch14
+> node --experimental-strip-types --test tests/cp31-batch14-measurement-persistence.test.mjs
+
+Γ£ö B14-01 create-only T0 point retains actual 0 (6.2336ms)
+Γ£ö B14-02 immutable T0 can be declared before any T1 (0.3236ms)
+Γ£ö B14-03 T1 only comes from reviewed cycle (1.7757ms)
+Γ£ö B14-04 unobserved subject never gets fabricated T1 (1.8311ms)
+Γ£ö B14-05 every point ID is per cycle/key/timepoint and cannot collide (1.4874ms)
+Γ£ö B14-06 stored declaration maps to expected student-owned point (1.0816ms)
+Γ£ö B14-07 T1 observation index binds to exactly its observed item (0.842ms)
+Γ£ö B14-08 write timestamp is distinct from linked T0 time (0.6271ms)
+Γ£ö B14-09 missing exam point is rejected before write (0.6602ms)
+Γ£ö B14-10 no phantom or unknown subject (0.8136ms)
+Γ£ö B14-11 invalid owner empty or outsize (0.5671ms)
+Γ£ö B14-12 corrupt frozen T0 cannot be declared (0.3973ms)
+Γ£ö B14-13 corrupted evidence record prevents T1 declaration (0.5889ms)
+Γ£ö B14-14 unsupported or missing instrument metadata is rejected (1.5949ms)
+Γ£ö B14-15 HTML / spaces in source identifiers rejected (0.7199ms)
+Γ£ö B14-16 unsupported scale is rejected (0.3808ms)
+Γ£ö B14-17 caller cannot inject verified source or fake role (0.3796ms)
+Γ£ö B14-18 caller cannot inject PII or other fields (0.8869ms)
+Γ£ö B14-19 owner swapped at read time is invalid (0.3188ms)
+Γ£ö B14-20 changed record score is rejected (0.4455ms)
+Γ£ö B14-21 changed linked timestamp rejected (0.3854ms)
+Γ£ö B14-22 changed subjectIndex rejected (0.3516ms)
+Γ£ö B14-23 forged observation index rejected (0.3416ms)
+Γ£ö B14-24 changed cycle ID rejected (0.2604ms)
+Γ£ö B14-25 record with unknown field rejected (0.3081ms)
+Γ£ö B14-26 client cannot forge source verification status (0.1843ms)
+Γ£ö B14-27 missing server write timestamp rejected (0.1884ms)
+Γ£ö B14-28 invalid or mismatched document ID rejected (0.1738ms)
+Γ£ö B14-29 stored snapshot is invalid when cycle score changes (0.5537ms)
+Γ£ö B14-30 valid rows convert to strict B13 manifest with no user ID (11.1859ms)
+Γ£ö B14-31 partial declarations are not promoted to aligned (1.1121ms)
+Γ£ö B14-32 changed instrument yields mismatch instead of equivalence (1.5082ms)
+Γ£ö B14-33 no psychometric claims even when declarations align (2.0368ms)
+Γ£ö B14-34 Firestore candidate has append-only, owner+consent scoped records (0.9347ms)
+Γ£ö B14-35 candidate is not deployed by firebase.json (0.4528ms)
+Γ£ö B14-36 Firestore hooks do not write without student-initiated action (0.4498ms)
+Γ£ö B14-37 UI requires explicit one-time confirmation and warns unverified (0.4453ms)
+Γ£ö B14-38 prior B13 measurement manifest is now from persisted rows (0.3623ms)
+Γ£ö B14-39 npm gates extend B13, not replace it (0.3438ms)
+Γ£ö B14-40 invalid score NaN and wrong origin never become declarations (0.2121ms)
+Γ£ö B14-41 UI hides longitudinal arrows until declared metadata aligns (0.386ms)
+Γä╣ tests 41
+Γä╣ suites 0
+Γä╣ pass 41
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 203.7002
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch15
+> node --experimental-strip-types --test tests/cp31-batch15-snapshot-integrity.test.mjs
+
+Γ£ö B15-01 one cycle with no declarations is incomplete, never complete (5.4101ms)
+Γ£ö B15-02 two fully declared cycles are syntactically complete, unverified (11.6296ms)
+Γ£ö B15-03 partial snapshot gives exact missing count (1.5884ms)
+Γ£ö B15-04 no window and no documents is neutral (0.1552ms)
+Γ£ö B15-05 unexpected data in empty window is blocked (0.9258ms)
+Γ£ö B15-06 wrong user ID blocked (0.3438ms)
+Γ£ö B15-07 overlong user ID blocked (0.3065ms)
+Γ£ö B15-08 more than 8 cycles rejected regardless of documents (0.4377ms)
+Γ£ö B15-09 duplicate cycle IDs reject the entire result (0.3704ms)
+Γ£ö B15-10 malformed cycle ID blocked (0.4477ms)
+Γ£ö B15-11 unknown document refused, not silently filtered (2.378ms)
+Γ£ö B15-12 duplicate document point refused (1.6439ms)
+Γ£ö B15-13 wrong document ID refused (1.5749ms)
+Γ£ö B15-14 changed score 0 refused (1.1536ms)
+Γ£ö B15-15 changed reported time refused (1.1869ms)
+Γ£ö B15-16 forged source refused (1.0146ms)
+Γ£ö B15-17 forged identity refused (1.0215ms)
+Γ£ö B15-18 forged reviewer field refused (0.7723ms)
+Γ£ö B15-19 missing write timestamp refused (1.0116ms)
+Γ£ö B15-20 missing context field refused (0.9515ms)
+Γ£ö B15-21 swapped T0/T1 refused (0.9461ms)
+Γ£ö B15-22 invalid subjectIndex refused (1.0266ms)
+Γ£ö B15-23 corrupted frozen T0 blocks entire window (1.0453ms)
+Γ£ö B15-24 corrupt Evidence Record blocks entire window (1.1484ms)
+Γ£ö B15-25 legacy no T0 stays readable but is never complete (2.4691ms)
+Γ£ö B15-26 legacy no Evidence Record stays read-only (1.8607ms)
+Γ£ö B15-27 forged metadata for legacy cycle cannot be promoted (0.844ms)
+Γ£ö B15-28 valid legacy + partial active cycle remains legacy read-only (0.625ms)
+Γ£ö B15-29 limit sentinel over 96 records is blocked, never silently truncated (0.6949ms)
+Γ£ö B15-30 order of Firestore results does not change audited row order (2.1084ms)
+Γ£ö B15-31 missing manifest remains missing, never becomes aligned (2.4767ms)
+Γ£ö B15-32 even complete metadata does not prove psychometric equivalence (2.2461ms)
+Γ£ö B15-33 query requests 97th sentinel and ignores local cache as evidence (0.6511ms)
+Γ£ö B15-34 stale Firestore callbacks cannot set state after unmount (0.5365ms)
+Γ£ö B15-35 transaction checks all immutable point fields, not only score (0.4327ms)
+Γ£ö B15-36 UI distinguishes legacy, missing rows, complete-unverified (1.0234ms)
+Γ£ö B15-37 no server deployment is introduced (0.5089ms)
+Γ£ö B15-38 no numeric score or probability fabricated from missing rows (0.5761ms)
+Γ£ö B15-39 prior source set remains under strict constraints (0.7663ms)
+Γ£ö B15-40 source never contains student identifying fields (0.4061ms)
+Γä╣ tests 40
+Γä╣ suites 0
+Γä╣ pass 40
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 232.0366
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch16
+> node --experimental-strip-types --test tests/cp31-batch16-history-pagination.test.mjs
+
+Γ£ö B16-01 page size is eight and cap is 80 (1.2098ms)
+Γ£ö B16-02 full page is eight records without exceeding Rules (2.6968ms)
+Γ£ö B16-03 short server page establishes no further rows for that request (0.3387ms)
+Γ£ö B16-04 empty server page is legal (0.273ms)
+Γ£ö B16-05 cache cannot establish completeness (0.4472ms)
+Γ£ö B16-06 missing user ID fails closed (0.1807ms)
+Γ£ö B16-07 invalid latest page fails closed (0.1646ms)
+Γ£ö B16-08 nine Firestore records exceed server query allowance (0.2456ms)
+Γ£ö B16-09 foreign cycle cannot be displayed (0.4041ms)
+Γ£ö B16-10 forged Firestore document ID fails (0.4973ms)
+Γ£ö B16-11 duplicate archived cycle fails (0.5375ms)
+Γ£ö B16-12 overlapping newest and archived cycle fails (0.6747ms)
+Γ£ö B16-13 non-descending page is rejected (0.3402ms)
+Γ£ö B16-14 timestamp equal to cursor is rejected (0.3274ms)
+Γ£ö B16-15 invalid evidence nested fields reject all older data (0.3221ms)
+Γ£ö B16-16 malformed document is rejected (0.3164ms)
+Γ£ö B16-17 reaching 80 caps display and never claims full history (1.4266ms)
+Γ£ö B16-18 already at 80 is blocked (0.3749ms)
+Γ£ö B16-19 pagination hook uses authenticated server cursor and resets on auth changes (0.5464ms)
+Γ£ö B16-20 measurement analysis stays limited to the first eight cycles (0.5667ms)
+Γ£ö B16-21 UI provides separate older history disclosure and no attestation claim (0.5336ms)
+Γ£ö B16-22 no client-side writes from history archive path (0.4184ms)
+Γä╣ tests 22
+Γä╣ suites 0
+Γä╣ pass 22
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 145.327
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch17
+> node --experimental-strip-types --test tests/cp31-batch17-demo-backup.test.mjs
+
+Γ£ö Static standalone offline HTML contains all essential safety claims (15.2845ms)
+Γ£ö Render is deterministic for the same independently checked data (0.7437ms)
+Γ£ö Disallowed score is fail-closed, not silently drawn (0.3999ms)
+Γ£ö Missing science-replay stages is fail-closed (0.126ms)
+Γ£ö Potentially hostile labels and sources are HTML-escaped (0.4263ms)
+Γ£ö Offline fallback from the REAL replay JSON is byte-reproducible and tamper-detecting (155.691ms)
+Γ£ö Verification refuses an absent HTML artifact (141.2192ms)
+Γ£ö Verification rejects unsupported action (0.2467ms)
+Γä╣ tests 8
+Γä╣ suites 0
+Γä╣ pass 8
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 436.4469
+
+> cognitive-learn-ai@0.1.0 test:cp32:cutoffs
+> node --experimental-strip-types --test tests/cp32-ptit-2026-cutoffs.test.mjs
+
+Γ£ö CP32 10 BVH programs, 3 years, 90 method-specific 2026 cutoffs (1.681ms)
+Γ£ö Source example: exact 9-column mapping, tie-break, no invented tie-break for IT (0.22ms)
+Γ£ö Atlas national history retains all method scales, missing scales and exact source links (0.6424ms)
+Γä╣ tests 3
+Γä╣ suites 0
+Γä╣ pass 3
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 127.3083
+
+> cognitive-learn-ai@0.1.0 test:cp32:decision
+> node --experimental-strip-types --test tests/cp32-atlas-decision-comparison.test.mjs
+
+Γ£ö all 90 program/method options preserve source and native scale (1.6916ms)
+Γ£ö zero, decimal commas, missing and incorrect score bounds (0.157ms)
+Γ£ö source-backed chat lookup is exact, time- and method-specific (1.3966ms)
+Γ£ö unknown, ambiguous, injected or incompatible queries abstain from direct facts (0.6311ms)
+Γ£ö UI clears score on method changes and chat gates deterministic answer before Gemini (1.1475ms)
+Γä╣ tests 5
+Γä╣ suites 0
+Γä╣ pass 5
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 164.6984
+
+> cognitive-learn-ai@0.1.0 test:cp32:national
+> node --experimental-strip-types --test tests/cp32-national-admission.test.mjs
+
+Γ£ö national catalog includes 17 schools and preserves 110 PTIT records, 1262 external numeric facts (9.5147ms)
+Γ£ö all known scales compare equal values; unknown scales never compute gaps (283.5489ms)
+Γ£ö lookup uses school-specific method and exact code, no mismatched school or year (238.2782ms)
+Γ£ö independently checked numeric spot values and distinct campus codes (1.1992ms)
+Γ£ö official links include central region, missing numeric sources remain missing (0.2485ms)
+Γ£ö CTU 2024 and 2025 preserve source, method and exact known values (2.3098ms)
+Γ£ö history isolates campus and code, preserves years and explicit missing slots (2.2814ms)
+Γä╣ tests 7
+Γä╣ suites 0
+Γä╣ pass 7
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 701.3962
+
+> cognitive-learn-ai@0.1.0 test:cp32:discovery
+> node --experimental-strip-types --test tests/cp32-program-discovery.test.mjs
+
+Γ£ö preserves all 216 new numeric facts and 11 institutional identities (0.7213ms)
+Γ£ö actual VNU official numeric anchors, same code in different schools stays separate (1.4474ms)
+Γ£ö interest, school, year and region are actual filters not imputation (5.187ms)
+Γ£ö combination evidence is separate from unknown; missing does not exclude candidates (0.8992ms)
+Γä╣ tests 4
+Γä╣ suites 0
+Γä╣ pass 4
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 196.5229
+
+> cognitive-learn-ai@0.1.0 test:cp32:personal
+> node --experimental-strip-types --test tests/cp32-personal-matching.test.mjs
+
+Γ£ö same term, preserves zero, rejects missing or invalid scores (1.7281ms)
+Γ£ö academic evidence only for source-listed combinations with observed subjects (2.4686ms)
+Γ£ö unknown evidence is never converted to failure, explicit filter only (1.5846ms)
+Γ£ö interest is user-selected not inferred from grade, supports multiple interests (29.584ms)
+Γ£ö requested combination limits academic evidence; no comparison against historical cutoff (0.9231ms)
+Γ£ö interest match never discards unknown source combinations without explicit filter (1.5207ms)
+Γä╣ tests 6
+Γä╣ suites 0
+Γä╣ pass 6
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 220.0168
+
+> cognitive-learn-ai@0.1.0 test:cp32:public-search
+> node --experimental-strip-types --test tests/cp32-public-source-search.test.mjs
+
+Γ£ö arbitrary public university, country or scholarship names supported (4.8959ms)
+Γ£ö explicit confirmation and closed schema including no profile or UID (0.1987ms)
+Γ£ö reject common PII patterns and free-form URL/injection operators (0.1579ms)
+Γ£ö scope and year encoded in external search link (0.3833ms)
+Γ£ö dangerous links rejected and only HTTPS accepted (0.3978ms)
+Γ£ö provider claims never confer verification, numbers or model outputs (0.9838ms)
+Γ£ö candidate payload bounded (0.2836ms)
+Γ£ö Gemini key alone cannot bypass approval and separate provider contract (0.1982ms)
+Γ£ö mock provider receives public fields only; no personal context or Firebase token (0.3894ms)
+Γ£ö missing provider data produces no result (0.2328ms)
+Γ£ö Atlas, study abroad, Haven share panel; no Firestore data writes (1.0482ms)
+Γä╣ tests 11
+Γä╣ suites 0
+Γä╣ pass 11
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 156.8257
+Γ£ö structural gate accepts complete aggregate fixture, not proof of science (1.5893ms)
+Γ£ö rejects missing subject, wrong source, synthetic status (0.2938ms)
+Γ£ö rejects bad bounds, mismatched counts, and inconsistent ablation (0.2901ms)
+Γä╣ tests 3
+Γä╣ suites 0
+Γä╣ pass 3
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 116.3169
+Γ£ö valid zero retained; missing zero never displayed (1.3497ms)
+Γ£ö unsupported version and malformed values remain unavailable (0.1508ms)
+Γ£ö disagreeing provenance fails closed (0.1139ms)
+Γ£ö duplicate dimensions and nonfinite values rejected (0.1246ms)
+Γä╣ tests 4
+Γä╣ suites 0
+Γä╣ pass 4
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 124.6108
+
+> cognitive-learn-ai@0.1.0 test:cp34:knowledge-xai
+> node --experimental-strip-types --test tests/cp34-knowledge-xai.test.mjs
+
+Γ£ö retrieval exact IDs, public source citation and unvalidated wording (2.2563ms)
+Γ£ö multi-intent retrieval and diacritic normalization (0.7829ms)
+Γ£ö reject unrelated, personal and explicit injection in this path (0.4069ms)
+Γ£ö selection schema rejects invented, duplicate and unpermitted IDs and arbitrary answer (1.1422ms)
+Γ£ö source IDs are unique and bounded (0.1691ms)
+Γ£ö explanation preserves valid zero and exact weighted sum (0.5081ms)
+Γ£ö missing dimension prevents composite even if top-level claims available (0.1961ms)
+Γ£ö mismatched composite does not publish contribution (0.179ms)
+Γ£ö duplicate, invalid and legacy evidence fails closed (0.2744ms)
+Γ£ö client and authenticated server use same knowledge module; Lumen uses local XAI (0.9172ms)
+Γä╣ tests 10
+Γä╣ suites 0
+Γä╣ pass 10
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 130.9444
+
+> cognitive-learn-ai@0.1.0 test:cp34:career-decision
+> node --experimental-strip-types --test tests/cp34-career-decision.test.mjs
+
+Γ£ö nine domains, no implicit preferences and no ranking without explicit weight (3.7441ms)
+Γ£ö valid zero is observed; missing rating and missing subject do not become zero (0.4362ms)
+Γ£ö weight chosen by learner, two axes and transparent contribution (0.2871ms)
+Γ£ö no fixed academic mapping for creative and education; no exclusion (0.2024ms)
+Γ£ö invalid data fails closed; no combining without trusted term metadata (0.2942ms)
+Γ£ö ties retained among complete groups, not incomplete groups (0.2859ms)
+Γ£ö Pareto preserves tradeoffs and identifies domination reasons (0.4495ms)
+Γ£ö budget and risk are hard constraints, inclusive boundaries (0.2021ms)
+Γ£ö invalid/duplicate options and invalid constraints cannot win (0.2468ms)
+Γ£ö equivalent options stay, comparison independent of input order (0.3671ms)
+Γ£ö legacy weights normalized without changing relative weights (0.9673ms)
+Γ£ö UI uses opted-in same-term evidence and does not persist or call AI; Orion uses actual scenario list (1.287ms)
+Γä╣ tests 12
+Γä╣ suites 0
+Γä╣ pass 12
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 226.1568
+
+> cognitive-learn-ai@0.1.0 test:cp34:adaptive-decision
+> node --experimental-strip-types --test tests/cp34-adaptive-next-cycle.test.mjs
+
+Γ£ö low adherence chooses bounded lighter existing option, no automatic assignment (5.6879ms)
+Γ£ö sufficient completion and reported hours retain workload (0.7057ms)
+Γ£ö score change not used to alter workload, even negative (0.985ms)
+Γ£ö low hours alone reduces load (0.5116ms)
+Γ£ö zero reported hours yields manual review not fabricated plan (0.5198ms)
+Γ£ö over-budget options are not recommended even with full completion (0.8478ms)
+Γ£ö partial reassessment abstains (0.4195ms)
+Γ£ö one check-in is insufficient (0.3752ms)
+Γ£ö cache and other owners cannot obtain advice (0.2789ms)
+Γ£ö modified evidence and T0 fail closed (0.4245ms)
+Γ£ö legacy cycles remain untraceable (0.285ms)
+Γ£ö active cycle never gives a new-cycle suggestion (0.1976ms)
+Γ£ö invalid, duplicate, and empty options rejected (1.6155ms)
+Γ£ö replay is deterministic, input remains untouched and changed result is rejected (1.6849ms)
+Γ£ö Orion integration selects draft only and preserves explicit start (0.7556ms)
+Γ£ö selected advice can start a second frozen cycle without mutating prior review (0.7291ms)
+Γ£ö Firestore listener routes metadata changes through the cache/pending-write gate (0.8418ms)
+Γä╣ tests 17
+Γä╣ suites 0
+Γä╣ pass 17
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 161.2333
+
+> cognitive-learn-ai@0.1.0 test:cp36:adaptive-lineage
+> node --experimental-strip-types --test tests/cp36-adaptive-lineage.test.mjs
+
+Γ£ö explicit acceptance freezes source, options and selection; legacy no trace remains valid (7.2991ms)
+Γ£ö explicit rejection records an alternative without false assignment (1.8441ms)
+Γ£ö manual choice same as recommendation is not a rejection (1.5158ms)
+Γ£ö owner, missing server, wrong prior and changed evidence fail closed (0.9926ms)
+Γ£ö forged refs, options and recommendations rejected (0.7129ms)
+Γ£ö replay survives Firestore map key reordering; altered policy options detected when recommendation changes (1.8871ms)
+Γ£ö chronology enforced and non-server contexts cannot freeze (0.7411ms)
+Γ£ö transaction reads source before writing; candidate rules only allow frozen lineage on create (static only) (0.949ms)
+Γ£ö freshness uses exact co-commit server timestamp, not a client clock or cached order (0.6906ms)
+Γ£ö equal timestamps and malformed next timestamps cannot freeze a trace (0.8898ms)
+Γä╣ tests 10
+Γä╣ suites 0
+Γä╣ pass 10
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 174.2203
+
+> cognitive-learn-ai@0.1.0 test:cp37-38:dynamic
+> node --experimental-strip-types --test tests/cp37-38-dynamic-temporal.test.mjs
+
+Γ£ö current state uses structured data only, preserves valid zero and unknown (2.8256ms)
+Γ£ö scope owner server and source time gates (0.2647ms)
+Γ£ö legacy placeholder numbers not promoted (0.1456ms)
+Γ£ö wrong vector mapping, duplicate dimensions and conflicting value reject proxies (0.2271ms)
+Γ£ö source timestamp is explicit; impossible timestamp rejected (0.1258ms)
+Γ£ö exact time weighted EMA, zero valid and no causal result (7.8059ms)
+Γ£ö same day latest only, no false sample inflation (1.0545ms)
+Γ£ö missing latest data resets series, no interpolation (0.2273ms)
+Γ£ö gap >28 days breaks series (0.2116ms)
+Γ£ö short time span cannot publish a trend (0.2993ms)
+Γ£ö scope mixing, owner mismatch, duplicate IDs or time, future timestamp blocked (0.3313ms)
+Γ£ö bounded window discloses truncation (0.323ms)
+Γ£ö inputs immutable and repeat deterministic (1.0678ms)
+Γ£ö out of range, string and inconsistent cognitive mapping not used (0.2194ms)
+Γä╣ tests 14
+Γä╣ suites 0
+Γä╣ pass 14
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 140.221
+
+> cognitive-learn-ai@0.1.0 test:cp39-41:bayes
+> node --experimental-strip-types --test tests/cp39-41-bayesian-shadow.test.mjs
+
+Γ£ö weekly Bernoulli not per-task count; posterior exact and sensitivity (6.4238ms)
+Γ£ö prior sensitivity and zero completions valid (0.8357ms)
+Γ£ö reject cache or cross owner (0.2958ms)
+Γ£ö two weeks insufficient (0.7552ms)
+Γ£ö same-day/backfilled weeks blocked (0.7129ms)
+Γ£ö irregular spacing blocked (0.9065ms)
+Γ£ö tampered evidence blocked (0.2857ms)
+Γ£ö policy is not changed and student panel does not display posterior probability (0.7327ms)
+Γä╣ tests 8
+Γä╣ suites 0
+Γä╣ pass 8
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 141.6931
+
+> cognitive-learn-ai@0.1.0 test:chart-first
+> node --experimental-strip-types --test tests/cp39-chart-first.test.mjs
+
+Γ£ö bars preserve zero but abstain for missing and invalid points (0.6987ms)
+Γ£ö temporal chart respects irregular time and same EMA as existing engine (11.0096ms)
+Γ£ö no short, out-of-order, invalid or missing history line (0.854ms)
+Γ£ö live plots gated by existing temporal and evidence status (1.028ms)
+Γ£ö career and decision visualization reads engine output and keeps user controls (2.032ms)
+Γ£ö no Bayesian posterior probability displayed to students (1.1114ms)
+Γ£ö readable graphics are responsive, no motion or hidden numeric values (0.887ms)
+Γä╣ tests 7
+Γä╣ suites 0
+Γä╣ pass 7
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 137.8143
+
+> cognitive-learn-ai@0.1.0 test:cp40:allocation
+> node --experimental-strip-types --test tests/cp40-allocation-charts.test.mjs
+
+Γ£ö budget conserved, maintenance guaranteed, zero gap gets no extra (1.0512ms)
+Γ£ö zero observed score is valid; zero budget is valid (0.1547ms)
+Γ£ö invalid or duplicate or missing data does not allocate (0.1787ms)
+Γ£ö invalid time and impossible minimum rejected (0.1301ms)
+Γ£ö all goals met retains unused budget and avoids needless work (0.1128ms)
+Γ£ö tie resolution deterministic and invariant to input order (0.6832ms)
+Γ£ö greedy matches exhaustive optimum on small budgets (1.6431ms)
+Γ£ö shared user constraints drive plot and workbench; only feasible scenarios can allocate (1.2967ms)
+Γ£ö scatter uses actual three-dimensional frontier, no misleading connected curve (0.4754ms)
+Γä╣ tests 9
+Γä╣ suites 0
+Γä╣ pass 9
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 120.4938
+
+> cognitive-learn-ai@0.1.0 test:cp40:student-only
+> node --experimental-strip-types --test tests/cp40-student-only.test.mjs
+
+Γ£ö Student-only account roles are fail closed (1.3981ms)
+Γ£û Retired workspace components removed, student dashboard not linked to them (1.2774ms)
+Γ£ö Registration and Google profile create only Student (0.6427ms)
+Γ£ö API role restrictions match Student-only client (0.7807ms)
+Γ£ö Pulse and Haven display personal summaries only (2.5723ms)
+Γ£ö candidate closes legacy share access and writes, owner cleanup remains (0.7071ms)
+Γ£ö Student-only scope keeps pedagogy and guardian privacy safeguards (0.6332ms)
+Γä╣ tests 7
+Γä╣ suites 0
+Γä╣ pass 6
+Γä╣ fail 1
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 125.2496
+
+Γ£û failing tests:
+
+test at tests\cp40-student-only.test.mjs:7:1
+Γ£û Retired workspace components removed, student dashboard not linked to them (1.2774ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///C:/G%E1%BA%A1o/Cognitive-Learn/tests/cp40-student-only.test.mjs:7:237)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

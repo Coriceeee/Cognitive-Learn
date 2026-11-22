@@ -1,0 +1,15 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp32:cutoffs
+> node --experimental-strip-types --test tests/cp32-ptit-2026-cutoffs.test.mjs
+
+Γ£ö CP32 10 BVH programs, 3 years, 90 method-specific 2026 cutoffs (2.1113ms)
+Γ£ö Source example: exact 9-column mapping, tie-break, no invented tie-break for IT (0.2984ms)
+Γ£ö Atlas national history retains all method scales, missing scales and exact source links (0.803ms)
+Γä╣ tests 3
+Γä╣ suites 0
+Γä╣ pass 3
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 122.1759

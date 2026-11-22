@@ -1,0 +1,1406 @@
+
+> cognitive-learn-ai@0.1.0 test
+> node tests/academic.test.cjs && node tests/cognitive-observation.test.cjs && node tests/admin-deeplink.test.cjs && node tests/module-hierarchy.test.cjs && node tests/cp35-p0-p1-contract.test.cjs && node tests/ux-v7.test.cjs && node tests/student-role-isolation.test.cjs && node --experimental-strip-types --test tests/pipeline-evidence.test.mjs tests/pipeline-evidence-record.test.mjs && node --experimental-strip-types --test tests/admissions-and-chat.test.mjs && node --test tests/chat-launcher-mascot.test.cjs && node --test tests/cp29-release-contract.test.cjs && node --test tests/cp30-chat-readability.test.cjs && node --experimental-strip-types --test research/tests/closed_loop_replay_demo.test.mjs && node --test tests/scientific-visuals.test.cjs && node --test tests/cp36-p1.test.cjs && node --experimental-strip-types --test tests/cp36-source-registry.test.mjs && node --test tests/cp37-operating-guide.test.cjs && node --test tests/atlas-aspiration-policy-2026.test.cjs tests/step06-subject-score-contract.test.cjs tests/step07-admin-auth-recovery.test.cjs && node --test tests/step07-seed-atlas-bridge.test.cjs && node --test tests/step08-subject-optimizer.test.cjs && node --test tests/step09-ptit-official-pathways.test.cjs && node --test tests/firestore-security-gate.test.cjs && npm run test:student-consent && npm run test:prediction-safety && npm run test:closed-loop && npm run test:journey-reliability && npm run test:daily-companion && npm run test:companion-push && npm run test:aspiration-draft && npm run test:exam-calendar && npm run test:notifications && npm run test:shadow && npm run test:consent-share-revocation && npm run test:consent-server-cleanup && npm run test:cp29:access && npm run test:cp29:routes && npm run test:cp29:academic && npm run test:cp29:accounts && npm run test:cp29:batch4 && npm run test:cp30:realtime && npm run test:cp30:profile && npm run test:cp30:gpa && npm run test:cp30:batch4 && npm run test:cp31:batch3 && npm run test:cp31:batch4 && npm run test:cp31:batch5 && npm run test:cp31:batch11 && npm run test:cp31:batch12 && npm run test:cp31:batch13 && npm run test:cp31:batch14 && npm run test:cp31:batch15 && npm run test:cp31:batch16 && npm run test:cp31:batch17 && npm run test:cp32:cutoffs && npm run test:cp32:decision && npm run test:cp32:national && npm run test:cp32:discovery && npm run test:cp32:personal && npm run test:cp32:public-search && node --experimental-strip-types --test tests/cp33-external-ml-evidence.test.mjs && node --experimental-strip-types --test tests/cp33-cognitive-readiness.test.mjs && npm run test:cp34:knowledge-xai && npm run test:cp34:career-decision && npm run test:cp34:adaptive-decision && npm run test:cp36:adaptive-lineage && npm run test:cp37-38:dynamic && npm run test:cp39-41:bayes && npm run test:chart-first && npm run test:cp40:allocation && npm run test:cp40:student-only && npm run test:cp41:policy && npm run test:cp42:atlas && npm run test:cp42:source-discovery && npm run test:cp42:scheme-coverage && npm run test:cp42:dthu-batch && npm run test:cp42:dthu-scheme && npm run test:cp42:institution-discovery && npm run test:cp42:robust-decision && npm run test:cp42:holistic-temporal && npm run test:cp42:focused-workspaces && npm run test:cp47:orion-autosave && npm run test:cp50:orion-race && npm run test:cp51:draft-queue && npm run test:cp52:multidevice && npm run test:cp53:integrity && npm run test:cp54:safety && npm run test:cp55:safety && npm run test:cp56:navigation && npm run test:cp57:timestamp && npm run test:cp58:integration && npm run test:cp59:verified-drafts && npm run test:cp60:seed-listener && npm run test:cp61:legacy-drafts && npm run test:cp62:student-rail && npm run test:cp63:guided-workspaces && npm run test:cp64:input-ux && npm run test:cp65:atlas-lumen-ux && npm run test:cp66:unified-states && npm run test:cp67:route-experience && npm run test:cp68:qa-gate && npm run test:cp69:firebase-integration && npm run test:cp70:journey && npm run test:cp71:unified-nav && npm run test:cp72:lumen-fallback && npm run test:cp73:mvp && npm run test:cp74:product-polish && npm run test:cp75:ux-audit && npm run test:cp76:names && npm run test:cp77:login-copy && npm run test:cp78:clarity && npm run test:cp79:theme
+
+PASS nine graded subjects exactly
+PASS elective duplicate blocked
+PASS elective invalid blocked
+PASS 0 valid
+PASS 10 valid
+PASS comma decimal valid
+PASS dot decimal valid
+PASS blank missing
+PASS invalid negative
+PASS invalid >10
+PASS invalid 1e0 syntax
+PASS provisional not complete
+PASS term complete with 0 score
+PASS year requires both completed terms
+ACADEMIC TESTS: 14/14 PASS
+PASS unknown academic and behavior metrics stay null, not fake 0
+PASS genuine observed zero is preserved
+PASS mixed observed and missing metrics retain distinction
+PASS snapshot provenance and source object remain unchanged
+COGNITIVE OBSERVATION TESTS: 4/4 PASS
+ADMIN ROUTE CONTRACT: 22 admin-only links across 7 modules; no student business links PASS
+MODULE HIERARCHY CONTRACT: seven main modules, catalog, ownership and nested anchors PASS
+STUDENT EXPERIENCE: six major modules, student-only children and correctly named return links PASS
+TAP version 13
+# Subtest: CP35-01: student navigation opens focused pages and preserves the six student modules
+ok 1 - CP35-01: student navigation opens focused pages and preserves the six student modules
+  ---
+  duration_ms: 1.780287
+  type: 'test'
+  ...
+# Subtest: CP35-02: PTIT is an explicitly scoped sample, never a default school recommendation
+ok 2 - CP35-02: PTIT is an explicitly scoped sample, never a default school recommendation
+  ---
+  duration_ms: 2.905824
+  type: 'test'
+  ...
+# Subtest: CP35-03: study-abroad starts with no country selected and preserves country selection across subpages
+ok 3 - CP35-03: study-abroad starts with no country selected and preserves country selection across subpages
+  ---
+  duration_ms: 0.515644
+  type: 'test'
+  ...
+# Subtest: CP35-04: student data status and transcript screens do not expose backend collection names
+ok 4 - CP35-04: student data status and transcript screens do not expose backend collection names
+  ---
+  duration_ms: 0.640717
+  type: 'test'
+  ...
+# Subtest: CP35-05: Admin-only system tools remain outside the student route allowlist
+ok 5 - CP35-05: Admin-only system tools remain outside the student route allowlist
+  ---
+  duration_ms: 0.666183
+  type: 'test'
+  ...
+# Subtest: CP35-06: official source register distinguishes method-verified entries from archive-only sources
+ok 6 - CP35-06: official source register distinguishes method-verified entries from archive-only sources
+  ---
+  duration_ms: 1.83618
+  type: 'test'
+  ...
+# Subtest: CP35-07: focused pages use the shared CLA design layer and SPA rewrites
+ok 7 - CP35-07: focused pages use the shared CLA design layer and SPA rewrites
+  ---
+  duration_ms: 2.537841
+  type: 'test'
+  ...
+# Subtest: CP35-08: Seed profile uses the full ISO country catalog instead of a seven-country shortlist
+ok 8 - CP35-08: Seed profile uses the full ISO country catalog instead of a seven-country shortlist
+  ---
+  duration_ms: 1.014174
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 33.809352
+TAP version 13
+# Subtest: UX-V7-02: Student dashboard exposes six connected student spaces in the learning circuit
+ok 1 - UX-V7-02: Student dashboard exposes six connected student spaces in the learning circuit
+  ---
+  duration_ms: 2.184652
+  type: 'test'
+  ...
+# Subtest: UX-V7-03: Student module navigator filters actions and uses real links only
+ok 2 - UX-V7-03: Student module navigator filters actions and uses real links only
+  ---
+  duration_ms: 0.793453
+  type: 'test'
+  ...
+# Subtest: UX-V7-04: Admin remains outside student navigation
+ok 3 - UX-V7-04: Admin remains outside student navigation
+  ---
+  duration_ms: 2.33285
+  type: 'test'
+  ...
+# Subtest: UX-V7-05: V7 UI layer is imported and has responsive/accessibility treatments
+ok 4 - UX-V7-05: V7 UI layer is imported and has responsive/accessibility treatments
+  ---
+  duration_ms: 0.600741
+  type: 'test'
+  ...
+# Subtest: CP28-01: Account role labels are restored and sourced from the Firestore profile
+ok 5 - CP28-01: Account role labels are restored and sourced from the Firestore profile
+  ---
+  duration_ms: 0.758506
+  type: 'test'
+  ...
+# Subtest: CP28-02: CLA design system is loaded last and chat is light
+ok 6 - CP28-02: CLA design system is loaded last and chat is light
+  ---
+  duration_ms: 0.886972
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 25.85739
+STUDENT ROLE ISOLATION: menu, read-only student flows and admin-only source API PASS
+TAP version 13
+# (node:7672) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: R01 whitelisted persisted record has no UID/scores/names/notes
+ok 1 - R01 whitelisted persisted record has no UID/scores/names/notes
+  ---
+  duration_ms: 2.973195
+  type: 'test'
+  ...
+# Subtest: R02 unknown dataScope cannot be stored
+ok 2 - R02 unknown dataScope cannot be stored
+  ---
+  duration_ms: 0.55889
+  type: 'test'
+  ...
+# Subtest: R03 stored demo record remains explicitly labeled
+ok 3 - R03 stored demo record remains explicitly labeled
+  ---
+  duration_ms: 0.405941
+  type: 'test'
+  ...
+# Subtest: R04 never persist complete:true or another evidence version
+ok 4 - R04 never persist complete:true or another evidence version
+  ---
+  duration_ms: 0.292493
+  type: 'test'
+  ...
+# Subtest: R05 exactly four distinct stages required
+ok 5 - R05 exactly four distinct stages required
+  ---
+  duration_ms: 0.25269
+  type: 'test'
+  ...
+# Subtest: R06 invalid stage status rejected
+ok 6 - R06 invalid stage status rejected
+  ---
+  duration_ms: 0.329119
+  type: 'test'
+  ...
+# Subtest: R07 malformed timestamps rejected
+ok 7 - R07 malformed timestamps rejected
+  ---
+  duration_ms: 0.284698
+  type: 'test'
+  ...
+# Subtest: R08 history range/count consistency validated
+ok 8 - R08 history range/count consistency validated
+  ---
+  duration_ms: 0.46139
+  type: 'test'
+  ...
+# Subtest: R09 real zero not copied into provenance even when observed
+ok 9 - R09 real zero not copied into provenance even when observed
+  ---
+  duration_ms: 0.919691
+  type: 'test'
+  ...
+# Subtest: R10 unchanged observedAt and no arbitrary createdAt
+ok 10 - R10 unchanged observedAt and no arbitrary createdAt
+  ---
+  duration_ms: 0.782223
+  type: 'test'
+  ...
+# (node:7673) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: P01 missing four sources cannot become a report
+ok 11 - P01 missing four sources cannot become a report
+  ---
+  duration_ms: 2.452842
+  type: 'test'
+  ...
+# Subtest: P02 real Cognitive zero with scoreAvailable and mapping version counts as observed proxy
+ok 12 - P02 real Cognitive zero with scoreAvailable and mapping version counts as observed proxy
+  ---
+  duration_ms: 0.387367
+  type: 'test'
+  ...
+# Subtest: P03 technical zero without scoreAvailable is LIMITED, not an observed zero
+ok 13 - P03 technical zero without scoreAvailable is LIMITED, not an observed zero
+  ---
+  duration_ms: 0.219609
+  type: 'test'
+  ...
+# Subtest: P04 inconsistent transcript owner is INVALID
+ok 14 - P04 inconsistent transcript owner is INVALID
+  ---
+  duration_ms: 0.194008
+  type: 'test'
+  ...
+# Subtest: P05 inconsistent scopes are INVALID
+ok 15 - P05 inconsistent scopes are INVALID
+  ---
+  duration_ms: 0.363019
+  type: 'test'
+  ...
+# Subtest: P06 legacy schema is not silently accepted
+ok 16 - P06 legacy schema is not silently accepted
+  ---
+  duration_ms: 0.213697
+  type: 'test'
+  ...
+# Subtest: P07 drafts can be present only as LIMITED, never confirmed outcomes
+ok 17 - P07 drafts can be present only as LIMITED, never confirmed outcomes
+  ---
+  duration_ms: 0.405732
+  type: 'test'
+  ...
+# Subtest: P08 unknown dataScope is not treated as student
+ok 18 - P08 unknown dataScope is not treated as student
+  ---
+  duration_ms: 0.189712
+  type: 'test'
+  ...
+# Subtest: P09 demo records are labeled non-research
+ok 19 - P09 demo records are labeled non-research
+  ---
+  duration_ms: 3.801136
+  type: 'test'
+  ...
+# Subtest: P10 missing cognitive and invalid draft are distinguished
+ok 20 - P10 missing cognitive and invalid draft are distinguished
+  ---
+  duration_ms: 1.166576
+  type: 'test'
+  ...
+# Subtest: P11 cannot build a check without authenticated UID
+ok 21 - P11 cannot build a check without authenticated UID
+  ---
+  duration_ms: 0.382788
+  type: 'test'
+  ...
+# Subtest: P12 cannot build a check with invalid timestamp
+ok 22 - P12 cannot build a check with invalid timestamp
+  ---
+  duration_ms: 0.131411
+  type: 'test'
+  ...
+# Subtest: P13 privacy: no UID, score, name, raw profile included in evidence record
+ok 23 - P13 privacy: no UID, score, name, raw profile included in evidence record
+  ---
+  duration_ms: 0.197306
+  type: 'test'
+  ...
+# Subtest: P14 one valid snapshot never becomes a trend
+ok 24 - P14 one valid snapshot never becomes a trend
+  ---
+  duration_ms: 0.119884
+  type: 'test'
+  ...
+# Subtest: P15 two snapshots with different versions cannot be compared
+ok 25 - P15 two snapshots with different versions cannot be compared
+  ---
+  duration_ms: 0.068698
+  type: 'test'
+  ...
+# Subtest: P16 two time-separated matching observations allow technical comparison only
+ok 26 - P16 two time-separated matching observations allow technical comparison only
+  ---
+  duration_ms: 0.061324
+  type: 'test'
+  ...
+# Subtest: P17 history from another UID excluded
+ok 27 - P17 history from another UID excluded
+  ---
+  duration_ms: 0.10777
+  type: 'test'
+  ...
+1..27
+# tests 27
+# suites 0
+# pass 27
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 427.090964
+TAP version 13
+# (node:7700) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP25-01: Curated universities have sourced years without inventing unverified archives
+ok 1 - CP25-01: Curated universities have sourced years without inventing unverified archives
+  ---
+  duration_ms: 2.164697
+  type: 'test'
+  ...
+# Subtest: CP25-02: Year-specific PTIT pathways do not leak year-specific methods
+ok 2 - CP25-02: Year-specific PTIT pathways do not leak year-specific methods
+  ---
+  duration_ms: 0.218532
+  type: 'test'
+  ...
+# Subtest: CP25-03: Exact campus and method provenance on historical cutoffs
+ok 3 - CP25-03: Exact campus and method provenance on historical cutoffs
+  ---
+  duration_ms: 0.401275
+  type: 'test'
+  ...
+# Subtest: CP25-04: Score conversion accepts actual zero but not missing or invalid inputs
+ok 4 - CP25-04: Score conversion accepts actual zero but not missing or invalid inputs
+  ---
+  duration_ms: 0.217906
+  type: 'test'
+  ...
+# Subtest: CP25-05: Historical gap is arithmetic, never chance-of-admission
+ok 5 - CP25-05: Historical gap is arithmetic, never chance-of-admission
+  ---
+  duration_ms: 0.121982
+  type: 'test'
+  ...
+# Subtest: CP25-06: Discovery matches year/method without inventing unsupported methods
+ok 6 - CP25-06: Discovery matches year/method without inventing unsupported methods
+  ---
+  duration_ms: 1.007299
+  type: 'test'
+  ...
+# Subtest: CP25-07: International requirements have direct official endpoints and certifications
+ok 7 - CP25-07: International requirements have direct official endpoints and certifications
+  ---
+  duration_ms: 0.219454
+  type: 'test'
+  ...
+# Subtest: CP25-08: Chat only keeps last eight bounded turns
+ok 8 - CP25-08: Chat only keeps last eight bounded turns
+  ---
+  duration_ms: 0.339069
+  type: 'test'
+  ...
+# Subtest: CP25-09: Chat rejects invalid content and unauthorized roles in history
+ok 9 - CP25-09: Chat rejects invalid content and unauthorized roles in history
+  ---
+  duration_ms: 0.667107
+  type: 'test'
+  ...
+# Subtest: CP25-10: UI routes and protected chat endpoint exist
+ok 10 - CP25-10: UI routes and protected chat endpoint exist
+  ---
+  duration_ms: 0.864056
+  type: 'test'
+  ...
+# Subtest: CP25-11: Study-abroad refresh uses Vercel SPA rewrite, preserving /api routes
+ok 11 - CP25-11: Study-abroad refresh uses Vercel SPA rewrite, preserving /api routes
+  ---
+  duration_ms: 0.3928
+  type: 'test'
+  ...
+# Subtest: CP25-12: Chat supports same-origin secure deployment and optional CORS origin list
+ok 12 - CP25-12: Chat supports same-origin secure deployment and optional CORS origin list
+  ---
+  duration_ms: 0.271328
+  type: 'test'
+  ...
+# Subtest: ROUND-01: Floating assistant routes specialist questions to their owning modules
+ok 13 - ROUND-01: Floating assistant routes specialist questions to their owning modules
+  ---
+  duration_ms: 1.024937
+  type: 'test'
+  ...
+# Subtest: ROUND-02: Only internal known destinations may appear in chat responses
+ok 14 - ROUND-02: Only internal known destinations may appear in chat responses
+  ---
+  duration_ms: 0.120476
+  type: 'test'
+  ...
+# Subtest: ROUND-03: Backend and frontend share specialist redirect gate
+ok 15 - ROUND-03: Backend and frontend share specialist redirect gate
+  ---
+  duration_ms: 0.269306
+  type: 'test'
+  ...
+# Subtest: ROUND-04: Do not show uncalibrated achievement probability on the dashboard
+ok 16 - ROUND-04: Do not show uncalibrated achievement probability on the dashboard
+  ---
+  duration_ms: 0.299596
+  type: 'test'
+  ...
+# Subtest: ROUND-05: United States and domestic international pathways have official links and clear limitations
+ok 17 - ROUND-05: United States and domestic international pathways have official links and clear limitations
+  ---
+  duration_ms: 0.176414
+  type: 'test'
+  ...
+# Subtest: ROUND-06: TDTU three-year schemes distinguish score scales
+ok 18 - ROUND-06: TDTU three-year schemes distinguish score scales
+  ---
+  duration_ms: 0.390832
+  type: 'test'
+  ...
+# Subtest: ROUND-07: Career-fit UI states experimental scores are not admission probabilities
+ok 19 - ROUND-07: Career-fit UI states experimental scores are not admission probabilities
+  ---
+  duration_ms: 0.253667
+  type: 'test'
+  ...
+# Subtest: ROUND-07: Career-fit UI states experimental scores are not admission probabilities
+ok 20 - ROUND-07: Career-fit UI states experimental scores are not admission probabilities
+  ---
+  duration_ms: 0.337161
+  type: 'test'
+  ...
+# Subtest: GLOBAL-01: every ISO 3166-1 alpha-2 country/territory is selectable without fabricated claims
+ok 21 - GLOBAL-01: every ISO 3166-1 alpha-2 country/territory is selectable without fabricated claims
+  ---
+  duration_ms: 3.340455
+  type: 'test'
+  ...
+# Subtest: GLOBAL-02: all-country UI abstains when programme-level evidence is unavailable
+ok 22 - GLOBAL-02: all-country UI abstains when programme-level evidence is unavailable
+  ---
+  duration_ms: 0.320236
+  type: 'test'
+  ...
+# Subtest: GLOBAL-03: Atlas owns domestic and international admissions; Haven owns scholarships and finance
+ok 23 - GLOBAL-03: Atlas owns domestic and international admissions; Haven owns scholarships and finance
+  ---
+  duration_ms: 0.775988
+  type: 'test'
+  ...
+# Subtest: MODULE-01: 7 main modules remain while study abroad is an Atlas submodule
+ok 24 - MODULE-01: 7 main modules remain while study abroad is an Atlas submodule
+  ---
+  duration_ms: 0.955533
+  type: 'test'
+  ...
+# Subtest: UX-V7-01: Assistant receives only allowlisted page context and page-specific prompts
+ok 25 - UX-V7-01: Assistant receives only allowlisted page context and page-specific prompts
+  ---
+  duration_ms: 0.510774
+  type: 'test'
+  ...
+1..25
+# tests 25
+# suites 0
+# pass 25
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 287.718457
+TAP version 13
+# Subtest: CLA chatbot launcher uses the custom mascot and has an accessible toggle
+ok 1 - CLA chatbot launcher uses the custom mascot and has an accessible toggle
+  ---
+  duration_ms: 1.79636
+  type: 'test'
+  ...
+# Subtest: CLA mascot launcher is circular, fixed to the bottom right, and responsive
+ok 2 - CLA mascot launcher is circular, fixed to the bottom right, and responsive
+  ---
+  duration_ms: 1.38831
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 133.577319
+TAP version 13
+# Subtest: CP29-01: direct dependencies do not float on latest tags
+ok 1 - CP29-01: direct dependencies do not float on latest tags
+  ---
+  duration_ms: 3.346415
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 139.54931
+TAP version 13
+# Subtest: CP30 chat readability layer loads after the final CP28 theme
+ok 1 - CP30 chat readability layer loads after the final CP28 theme
+  ---
+  duration_ms: 3.231255
+  type: 'test'
+  ...
+# Subtest: CP30 keeps readable chat typography instead of legacy 9–11px labels
+ok 2 - CP30 keeps readable chat typography instead of legacy 9–11px labels
+  ---
+  duration_ms: 3.104703
+  type: 'test'
+  ...
+# Subtest: CP30 brand palette has WCAG AA normal-text contrast on the corresponding solid surface
+ok 3 - CP30 brand palette has WCAG AA normal-text contrast on the corresponding solid surface
+  ---
+  duration_ms: 4.525411
+  type: 'test'
+  ...
+# Subtest: CP30 preserves mascot, assistant routing and accessible keyboard treatment
+ok 4 - CP30 preserves mascot, assistant routing and accessible keyboard treatment
+  ---
+  duration_ms: 0.267133
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 187.504284
+TAP version 13
+# (node:7756) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: synthetic replay traverses all eight stages in order
+ok 1 - synthetic replay traverses all eight stages in order
+  ---
+  duration_ms: 2.168898
+  type: 'test'
+  ...
+# Subtest: synthetic replay never claims an observed outcome or completion
+ok 2 - synthetic replay never claims an observed outcome or completion
+  ---
+  duration_ms: 0.447577
+  type: 'test'
+  ...
+# Subtest: low synthetic adherence triggers a deterministic adaptation
+ok 3 - low synthetic adherence triggers a deterministic adaptation
+  ---
+  duration_ms: 2.16405
+  type: 'test'
+  ...
+# Subtest: all trace references point to known stage IDs
+ok 4 - all trace references point to known stage IDs
+  ---
+  duration_ms: 0.320123
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 245.763602
+TAP version 13
+# Subtest: CP32-01: Lumen signal radar only plots dimensions explicitly marked available
+ok 1 - CP32-01: Lumen signal radar only plots dimensions explicitly marked available
+  ---
+  duration_ms: 1.705585
+  type: 'test'
+  ...
+# Subtest: CP32-02: longitudinal delta chart abstains without two comparable snapshots
+ok 2 - CP32-02: longitudinal delta chart abstains without two comparable snapshots
+  ---
+  duration_ms: 0.683726
+  type: 'test'
+  ...
+# Subtest: CP32-03: Orion trade-off plot is sourced from strategy scenarios and disclaims heuristic values
+ok 3 - CP32-03: Orion trade-off plot is sourced from strategy scenarios and disclaims heuristic values
+  ---
+  duration_ms: 1.756767
+  type: 'test'
+  ...
+# Subtest: CP32-04: Atlas historical field uses exact school/campus/code and distinct year-method scales
+ok 4 - CP32-04: Atlas historical field uses exact school/campus/code and distinct year-method scales
+  ---
+  duration_ms: 0.306978
+  type: 'test'
+  ...
+# Subtest: CP32-05: scientific visualization layer is imported and responsive
+ok 5 - CP32-05: scientific visualization layer is imported and responsive
+  ---
+  duration_ms: 0.837897
+  type: 'test'
+  ...
+# Subtest: CP32-06: synthetic demo preset is Admin-only, preview-before-save and scoped as demo
+ok 6 - CP32-06: synthetic demo preset is Admin-only, preview-before-save and scoped as demo
+  ---
+  duration_ms: 0.691557
+  type: 'test'
+  ...
+# Subtest: CP32-07: transcript trajectory and heatmap read saved term/subject records
+ok 7 - CP32-07: transcript trajectory and heatmap read saved term/subject records
+  ---
+  duration_ms: 0.320098
+  type: 'test'
+  ...
+# Subtest: CP33-01: Haven pressure topology plots only the four entered support signals and labels their self-reported scope
+ok 8 - CP33-01: Haven pressure topology plots only the four entered support signals and labels their self-reported scope
+  ---
+  duration_ms: 0.321729
+  type: 'test'
+  ...
+# Subtest: CP33-02: Pulse orbit derives all six progress rings from Pulse engine metrics
+ok 9 - CP33-02: Pulse orbit derives all six progress rings from Pulse engine metrics
+  ---
+  duration_ms: 2.789185
+  type: 'test'
+  ...
+# Subtest: CP33-03: Admin evidence circuit visualizes actual stage statuses and explicitly disclaims end-to-end completion
+ok 10 - CP33-03: Admin evidence circuit visualizes actual stage statuses and explicitly disclaims end-to-end completion
+  ---
+  duration_ms: 0.587683
+  type: 'test'
+  ...
+# Subtest: CP33-04: Haven and Pulse scientific visuals have responsive and reduced-motion styling
+ok 11 - CP33-04: Haven and Pulse scientific visuals have responsive and reduced-motion styling
+  ---
+  duration_ms: 0.461152
+  type: 'test'
+  ...
+# Subtest: CP34-01: Admin synthetic preset only fills local form state and cannot write Firestore
+ok 12 - CP34-01: Admin synthetic preset only fills local form state and cannot write Firestore
+  ---
+  duration_ms: 0.740597
+  type: 'test'
+  ...
+# Subtest: CP34-02: Haven labels scholarship cards as rule archetypes, not verified opportunities
+ok 13 - CP34-02: Haven labels scholarship cards as rule archetypes, not verified opportunities
+  ---
+  duration_ms: 0.280969
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 123.475804
+TAP version 13
+# Subtest: CP36: Student Cognitive Path is task-first, no duplicate six-module selector
+ok 1 - CP36: Student Cognitive Path is task-first, no duplicate six-module selector
+  ---
+  duration_ms: 2.031519
+  type: 'test'
+  ...
+# Subtest: CP36: Haven separates sourced opportunities from heuristic score
+ok 2 - CP36: Haven separates sourced opportunities from heuristic score
+  ---
+  duration_ms: 0.561129
+  type: 'test'
+  ...
+# Subtest: CP36: seven scholarships have official URLs and no default guaranteed eligibility or deadlines
+ok 3 - CP36: seven scholarships have official URLs and no default guaranteed eligibility or deadlines
+  ---
+  duration_ms: 2.094965
+  type: 'test'
+  ...
+# Subtest: CP36: Atlas has three added official 2026 sources, no synthetic prior-year entries
+ok 4 - CP36: Atlas has three added official 2026 sources, no synthetic prior-year entries
+  ---
+  duration_ms: 0.734456
+  type: 'test'
+  ...
+# Subtest: CP36: final CSS layer is loaded and high-contrast inputs remain visible
+ok 5 - CP36: final CSS layer is loaded and high-contrast inputs remain visible
+  ---
+  duration_ms: 0.341018
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 78.375731
+TAP version 13
+# (node:7799) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: P1 source provenance: no duplicate scholarship IDs, source URLs and conditions present
+ok 1 - P1 source provenance: no duplicate scholarship IDs, source URLs and conditions present
+  ---
+  duration_ms: 3.898334
+  type: 'test'
+  ...
+# Subtest: P1 scholarship search filters by country and label without claiming eligibility
+ok 2 - P1 scholarship search filters by country and label without claiming eligibility
+  ---
+  duration_ms: 0.687392
+  type: 'test'
+  ...
+# Subtest: P1 Atlas provenance distinguishes 3-year records from 2026-only additions
+ok 3 - P1 Atlas provenance distinguishes 3-year records from 2026-only additions
+  ---
+  duration_ms: 3.067668
+  type: 'test'
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 3
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 283.448545
+TAP version 13
+# Subtest: CP37-01: student guide route is registered and allowed for students
+ok 1 - CP37-01: student guide route is registered and allowed for students
+  ---
+  duration_ms: 1.498789
+  type: 'test'
+  ...
+# Subtest: CP37-02: dashboard and task finder link to the practical operating guide
+ok 2 - CP37-02: dashboard and task finder link to the practical operating guide
+  ---
+  duration_ms: 0.499464
+  type: 'test'
+  ...
+# Subtest: CP37-03: guide distinguishes real student data, Admin synthetic demo, and incomplete integrations
+ok 3 - CP37-03: guide distinguishes real student data, Admin synthetic demo, and incomplete integrations
+  ---
+  duration_ms: 0.307131
+  type: 'test'
+  ...
+# Subtest: CP37-04: guide CSS is imported after CP36 styles
+ok 4 - CP37-04: guide CSS is imported after CP36 styles
+  ---
+  duration_ms: 4.036383
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 111.209643
+TAP version 13
+# Subtest: P26-01 official policy is versioned and capped at 15 / teacher NV1-5
+ok 1 - P26-01 official policy is versioned and capped at 15 / teacher NV1-5
+  ---
+  duration_ms: 8.341501
+  type: 'test'
+  ...
+# Subtest: P26-02 classifier catches teacher-training by major code or explicit flag
+ok 2 - P26-02 classifier catches teacher-training by major code or explicit flag
+  ---
+  duration_ms: 1.041497
+  type: 'test'
+  ...
+# Subtest: P26-03 classifier catches teacher names without misleading other education majors
+ok 3 - P26-03 classifier catches teacher names without misleading other education majors
+  ---
+  duration_ms: 3.779225
+  type: 'test'
+  ...
+# Subtest: P26-04 >5 teacher-training candidates never spill into NV6-NV15
+ok 4 - P26-04 >5 teacher-training candidates never spill into NV6-NV15
+  ---
+  duration_ms: 2.90129
+  type: 'test'
+  ...
+# Subtest: P26-05 recommendations cannot contain more than 15 applications
+ok 5 - P26-05 recommendations cannot contain more than 15 applications
+  ---
+  duration_ms: 1.288285
+  type: 'test'
+  ...
+# Subtest: P26-06 user-chosen maximum below five also constrains teacher-training count
+ok 6 - P26-06 user-chosen maximum below five also constrains teacher-training count
+  ---
+  duration_ms: 3.536871
+  type: 'test'
+  ...
+# Subtest: P26-07 historical sources cannot silently become 2026 policy inputs
+ok 7 - P26-07 historical sources cannot silently become 2026 policy inputs
+  ---
+  duration_ms: 7.044968
+  type: 'test'
+  ...
+# Subtest: P26-08 invalid or missing-benchmark results are not offered
+ok 8 - P26-08 invalid or missing-benchmark results are not offered
+  ---
+  duration_ms: 0.727691
+  type: 'test'
+  ...
+# Subtest: P26-09 ten non-teacher programmes preserve model ranking; no auto teacher bias score
+ok 9 - P26-09 ten non-teacher programmes preserve model ranking; no auto teacher bias score
+  ---
+  duration_ms: 3.044748
+  type: 'test'
+  ...
+# Subtest: P26-10 unparseable cap falls back to legal maximum
+ok 10 - P26-10 unparseable cap falls back to legal maximum
+  ---
+  duration_ms: 0.921035
+  type: 'test'
+  ...
+# Subtest: P26-11 no valid candidates produces no fabricated places
+ok 11 - P26-11 no valid candidates produces no fabricated places
+  ---
+  duration_ms: 2.05781
+  type: 'test'
+  ...
+# Subtest: P26-12 UI displays source, cap and teaching limitation even before recommendations
+ok 12 - P26-12 UI displays source, cap and teaching limitation even before recommendations
+  ---
+  duration_ms: 1.157742
+  type: 'test'
+  ...
+# Subtest: P26-13 integrated Admission Engine enforces teaching NV1–NV5 after real eligibility calculation
+ok 13 - P26-13 integrated Admission Engine enforces teaching NV1–NV5 after real eligibility calculation
+  ---
+  duration_ms: 323.860962
+  type: 'test'
+  ...
+# Subtest: P26-14 integrated engine abstains if cutoff is unverified, despite policy-compliant ordering
+ok 14 - P26-14 integrated engine abstains if cutoff is unverified, despite policy-compliant ordering
+  ---
+  duration_ms: 208.50528
+  type: 'test'
+  ...
+# Subtest: 06.01 zero is a legitimate observed score, absent is not zero
+ok 15 - 06.01 zero is a legitimate observed score, absent is not zero
+  ---
+  duration_ms: 1.497627
+  type: 'test'
+  ...
+# Subtest: 06.02 impossible or malformed subject scores are not silently clamped
+ok 16 - 06.02 impossible or malformed subject scores are not silently clamped
+  ---
+  duration_ms: 0.409855
+  type: 'test'
+  ...
+# Subtest: 06.03 D01 uses exactly its three observed subjects
+ok 17 - 06.03 D01 uses exactly its three observed subjects
+  ---
+  duration_ms: 1.21611
+  type: 'test'
+  ...
+# Subtest: 06.04 genuine zero does not make a complete combination incomplete
+ok 18 - 06.04 genuine zero does not make a complete combination incomplete
+  ---
+  duration_ms: 0.245465
+  type: 'test'
+  ...
+# Subtest: 06.05 blank or invalid remains missing in the exact combination
+ok 19 - 06.05 blank or invalid remains missing in the exact combination
+  ---
+  duration_ms: 0.405897
+  type: 'test'
+  ...
+# Subtest: 06.06 partial sum is never the winning option
+ok 20 - 06.06 partial sum is never the winning option
+  ---
+  duration_ms: 12.71202
+  type: 'test'
+  ...
+# Subtest: 06.07 no external scale is silently ranked against school combinations
+ok 21 - 06.07 no external scale is silently ranked against school combinations
+  ---
+  duration_ms: 0.618855
+  type: 'test'
+  ...
+# Subtest: 06.08 a three-subject zero score remains an eligible combination, not a missing record
+ok 22 - 06.08 a three-subject zero score remains an eligible combination, not a missing record
+  ---
+  duration_ms: 0.739797
+  type: 'test'
+  ...
+# Subtest: 06.09 invalid or missing subjects cannot qualify for a verified benchmark
+ok 23 - 06.09 invalid or missing subjects cannot qualify for a verified benchmark
+  ---
+  duration_ms: 0.747039
+  type: 'test'
+  ...
+# Subtest: 06.10 Studio only admits official self-declared THPT 2026 scores into cutoff comparison
+ok 24 - 06.10 Studio only admits official self-declared THPT 2026 scores into cutoff comparison
+  ---
+  duration_ms: 1.292485
+  type: 'test'
+  ...
+# Subtest: 06.11 visual explanation is based on computed engine combinations, not hardcoded examples
+ok 25 - 06.11 visual explanation is based on computed engine combinations, not hardcoded examples
+  ---
+  duration_ms: 0.80697
+  type: 'test'
+  ...
+# Subtest: 06.12 supported input subjects are visible but extra combinations are not invented
+ok 26 - 06.12 supported input subjects are visible but extra combinations are not invented
+  ---
+  duration_ms: 0.709296
+  type: 'test'
+  ...
+# Subtest: 06.13 Studio styling supports mobile and reduced motion
+ok 27 - 06.13 Studio styling supports mobile and reduced motion
+  ---
+  duration_ms: 9.323328
+  type: 'test'
+  ...
+# Subtest: AUTH-01: explicit active Admin role is accepted
+ok 28 - AUTH-01: explicit active Admin role is accepted
+  ---
+  duration_ms: 13.917744
+  type: 'test'
+  ...
+# Subtest: AUTH-02: only student non-Admin role is accepted
+ok 29 - AUTH-02: only student non-Admin role is accepted
+  ---
+  duration_ms: 3.834273
+  type: 'test'
+  ...
+# Subtest: AUTH-03: absent profile or null data does not grant access
+ok 30 - AUTH-03: absent profile or null data does not grant access
+  ---
+  duration_ms: 0.488435
+  type: 'test'
+  ...
+# Subtest: AUTH-04: missing, false, and string active flags are denied
+ok 31 - AUTH-04: missing, false, and string active flags are denied
+  ---
+  duration_ms: 0.678956
+  type: 'test'
+  ...
+# Subtest: AUTH-05: malformed roles and email-based spoofing do not grant Admin
+ok 32 - AUTH-05: malformed roles and email-based spoofing do not grant Admin
+  ---
+  duration_ms: 3.891383
+  type: 'test'
+  ...
+# Subtest: AUTH-06: transient Firestore unavailable retries and returns server profile
+ok 33 - AUTH-06: transient Firestore unavailable retries and returns server profile
+  ---
+  duration_ms: 3.096187
+  type: 'test'
+  ...
+# Subtest: AUTH-07: stop after three transient failures and preserve the error
+ok 34 - AUTH-07: stop after three transient failures and preserve the error
+  ---
+  duration_ms: 2.648397
+  type: 'test'
+  ...
+# Subtest: AUTH-08: permission-denied is never retried or bypassed
+ok 35 - AUTH-08: permission-denied is never retried or bypassed
+  ---
+  duration_ms: 3.536671
+  type: 'test'
+  ...
+# Subtest: AUTH-09: error classifier handles Firestore-prefixed errors, not arbitrary failures
+ok 36 - AUTH-09: error classifier handles Firestore-prefixed errors, not arbitrary failures
+  ---
+  duration_ms: 0.991644
+  type: 'test'
+  ...
+# Subtest: AUTH-10: both login and route guard verify the latest server role, not cache
+ok 37 - AUTH-10: both login and route guard verify the latest server role, not cache
+  ---
+  duration_ms: 5.244741
+  type: 'test'
+  ...
+# Subtest: AUTH-11: existing admin redirects to /admin after server verification
+ok 38 - AUTH-11: existing admin redirects to /admin after server verification
+  ---
+  duration_ms: 427.358829
+  type: 'test'
+  ...
+# Subtest: AUTH-12: non-admin cannot be redirected to /admin by using the same login form
+ok 39 - AUTH-12: non-admin cannot be redirected to /admin by using the same login form
+  ---
+  duration_ms: 246.641261
+  type: 'test'
+  ...
+# Subtest: AUTH-13: blocked or missing Admin profile cannot navigate despite valid Firebase Auth
+ok 40 - AUTH-13: blocked or missing Admin profile cannot navigate despite valid Firebase Auth
+  ---
+  duration_ms: 429.210467
+  type: 'test'
+  ...
+# Subtest: AUTH-14: transient failure recovers during login without bypassing verification
+ok 41 - AUTH-14: transient failure recovers during login without bypassing verification
+  ---
+  duration_ms: 1239.982467
+  type: 'test'
+  ...
+# Subtest: AUTH-15: a failed role read retains the Auth session and exposes a retry button
+ok 42 - AUTH-15: a failed role read retains the Auth session and exposes a retry button
+  ---
+  duration_ms: 1224.833852
+  type: 'test'
+  ...
+# Subtest: AUTH-16: LoginPage role is strictly narrowed to ready before redirect
+ok 43 - AUTH-16: LoginPage role is strictly narrowed to ready before redirect
+  ---
+  duration_ms: 853.52154
+  type: 'test'
+  ...
+1..43
+# tests 43
+# suites 0
+# pass 43
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 6257.974566
+TAP version 13
+# Subtest: 07-01: same-term D01 8+7+9 gives 24, no exam or probability label
+ok 1 - 07-01: same-term D01 8+7+9 gives 24, no exam or probability label
+  ---
+  duration_ms: 3.355204
+  type: 'test'
+  ...
+# Subtest: 07-02: zero really is an observed completed score
+ok 2 - 07-02: zero really is an observed completed score
+  ---
+  duration_ms: 0.591297
+  type: 'test'
+  ...
+# Subtest: 07-03: partial scores are never promoted to completed semester averages
+ok 3 - 07-03: partial scores are never promoted to completed semester averages
+  ---
+  duration_ms: 0.463825
+  type: 'test'
+  ...
+# Subtest: 07-04: cannot combine subjects from different semesters to fabricate D01
+ok 4 - 07-04: cannot combine subjects from different semesters to fabricate D01
+  ---
+  duration_ms: 0.293941
+  type: 'test'
+  ...
+# Subtest: 07-05: prefers most recent term with a complete supported combination
+ok 5 - 07-05: prefers most recent term with a complete supported combination
+  ---
+  duration_ms: 0.45991
+  type: 'test'
+  ...
+# Subtest: 07-06: returns null on transcript with no completed subject grades
+ok 6 - 07-06: returns null on transcript with no completed subject grades
+  ---
+  duration_ms: 0.221709
+  type: 'test'
+  ...
+# Subtest: 07-07: mapping covers new-programme electives and excludes unrelated subjects
+ok 7 - 07-07: mapping covers new-programme electives and excludes unrelated subjects
+  ---
+  duration_ms: 0.324442
+  type: 'test'
+  ...
+# Subtest: 07-08: non-English foreign language is not silently mapped to English
+ok 8 - 07-08: non-English foreign language is not silently mapped to English
+  ---
+  duration_ms: 0.297125
+  type: 'test'
+  ...
+# Subtest: 07-09: read-only adapter does not mutate Seed transcript
+ok 9 - 07-09: read-only adapter does not mutate Seed transcript
+  ---
+  duration_ms: 0.604012
+  type: 'test'
+  ...
+# Subtest: 07-10: Atlas reads user-bound Seed hook, only for school marks
+ok 10 - 07-10: Atlas reads user-bound Seed hook, only for school marks
+  ---
+  duration_ms: 0.827783
+  type: 'test'
+  ...
+# Subtest: 07-11: changing score basis clears old marks and never reuses school marks as official THPT
+ok 11 - 07-11: changing score basis clears old marks and never reuses school marks as official THPT
+  ---
+  duration_ms: 0.482265
+  type: 'test'
+  ...
+# Subtest: 07-12: hook clears account-specific data and blocks callbacks from old UID
+ok 12 - 07-12: hook clears account-specific data and blocks callbacks from old UID
+  ---
+  duration_ms: 0.17779
+  type: 'test'
+  ...
+# Subtest: 07-13: delayed Firestore snapshot for a signed-out account cannot overwrite new student
+ok 13 - 07-13: delayed Firestore snapshot for a signed-out account cannot overwrite new student
+  ---
+  duration_ms: 49.308731
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 513.041231
+TAP version 13
+# Subtest: 08.01 policy states two compulsory plus two elective subjects, source and year
+ok 1 - 08.01 policy states two compulsory plus two elective subjects, source and year
+  ---
+  duration_ms: 1.854827
+  type: 'test'
+  ...
+# Subtest: 08.02 no confirmed grade-12 courses means abstain; marks alone are not enrollment
+ok 2 - 08.02 no confirmed grade-12 courses means abstain; marks alone are not enrollment
+  ---
+  duration_ms: 0.528664
+  type: 'test'
+  ...
+# Subtest: 08.03 one confirmed elective cannot form a pair
+ok 3 - 08.03 one confirmed elective cannot form a pair
+  ---
+  duration_ms: 0.145406
+  type: 'test'
+  ...
+# Subtest: 08.04 two confirmed choices produce exactly one pair
+ok 4 - 08.04 two confirmed choices produce exactly one pair
+  ---
+  duration_ms: 0.534906
+  type: 'test'
+  ...
+# Subtest: 08.05 only the confirmed grade-12 list contributes, other high scores excluded
+ok 5 - 08.05 only the confirmed grade-12 list contributes, other high scores excluded
+  ---
+  duration_ms: 0.299632
+  type: 'test'
+  ...
+# Subtest: 08.06 incomplete elective scores are null, never silently zero
+ok 6 - 08.06 incomplete elective scores are null, never silently zero
+  ---
+  duration_ms: 0.185264
+  type: 'test'
+  ...
+# Subtest: 08.07 actual zero remains valid input
+ok 7 - 08.07 actual zero remains valid input
+  ---
+  duration_ms: 0.289404
+  type: 'test'
+  ...
+# Subtest: 08.08 invalid and negative marks cannot manufacture an observed-score comparison
+ok 8 - 08.08 invalid and negative marks cannot manufacture an observed-score comparison
+  ---
+  duration_ms: 0.151364
+  type: 'test'
+  ...
+# Subtest: 08.09 does not claim no admission possible when project catalogue has no combo
+ok 9 - 08.09 does not claim no admission possible when project catalogue has no combo
+  ---
+  duration_ms: 0.553578
+  type: 'test'
+  ...
+# Subtest: 08.10 technology streams are distinct and generic technology grade is not reused
+ok 10 - 08.10 technology streams are distinct and generic technology grade is not reused
+  ---
+  duration_ms: 0.484671
+  type: 'test'
+  ...
+# Subtest: 08.11 duplicates are deduplicated and are not counted as two different electives
+ok 11 - 08.11 duplicates are deduplicated and are not counted as two different electives
+  ---
+  duration_ms: 0.167691
+  type: 'test'
+  ...
+# Subtest: 08.12 never invents verified university matches from exploratory combinations
+ok 12 - 08.12 never invents verified university matches from exploratory combinations
+  ---
+  duration_ms: 0.116239
+  type: 'test'
+  ...
+# Subtest: 08.13 only explicitly supplied verified program data is considered a matching opportunity
+ok 13 - 08.13 only explicitly supplied verified program data is considered a matching opportunity
+  ---
+  duration_ms: 0.353574
+  type: 'test'
+  ...
+# Subtest: 08.14 unmatched target cannot be fabricated by substring scoring or mock sources
+ok 14 - 08.14 unmatched target cannot be fabricated by substring scoring or mock sources
+  ---
+  duration_ms: 0.259289
+  type: 'test'
+  ...
+# Subtest: 08.15 three studied electives creates three pairs and sorts by coverage then grades
+ok 15 - 08.15 three studied electives creates three pairs and sorts by coverage then grades
+  ---
+  duration_ms: 0.136813
+  type: 'test'
+  ...
+# Subtest: 08.16 combining a pair with mandatory subjects only uses supported academic combinations
+ok 16 - 08.16 combining a pair with mandatory subjects only uses supported academic combinations
+  ---
+  duration_ms: 0.163464
+  type: 'test'
+  ...
+# Subtest: 08.17 two technological streams are never assumed to share a common grade
+ok 17 - 08.17 two technological streams are never assumed to share a common grade
+  ---
+  duration_ms: 0.095796
+  type: 'test'
+  ...
+# Subtest: 08.18 UI requires explicit confirmation and exposes policy/source/limits
+ok 18 - 08.18 UI requires explicit confirmation and exposes policy/source/limits
+  ---
+  duration_ms: 0.487701
+  type: 'test'
+  ...
+# Subtest: 08.19 previously established Seed and school-score safety gates remain untouched
+ok 19 - 08.19 previously established Seed and school-score safety gates remain untouched
+  ---
+  duration_ms: 0.307548
+  type: 'test'
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 19
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 495.433762
+TAP version 13
+# Subtest: 09.01 published mappings include X06 and X26, not a guessed synonym
+ok 1 - 09.01 published mappings include X06 and X26, not a guessed synonym
+  ---
+  duration_ms: 6.317883
+  type: 'test'
+  ...
+# Subtest: 09.02 abstains until exactly two distinct electives confirmed
+ok 2 - 09.02 abstains until exactly two distinct electives confirmed
+  ---
+  duration_ms: 0.504546
+  type: 'test'
+  ...
+# Subtest: 09.03 English + Informatics unlocks officially published X26, outside nine-code trial catalog
+ok 3 - 09.03 English + Informatics unlocks officially published X26, outside nine-code trial catalog
+  ---
+  duration_ms: 27.836285
+  type: 'test'
+  ...
+# Subtest: 09.04 Physics + Informatics matches X06 and not X26
+ok 4 - 09.04 Physics + Informatics matches X06 and not X26
+  ---
+  duration_ms: 0.848352
+  type: 'test'
+  ...
+# Subtest: 09.05 Physics + English matches A01, and D01 only when literature and English exist
+ok 5 - 09.05 Physics + English matches A01, and D01 only when literature and English exist
+  ---
+  duration_ms: 0.716397
+  type: 'test'
+  ...
+# Subtest: 09.06 Physics + Chemistry matches only A00
+ok 6 - 09.06 Physics + Chemistry matches only A00
+  ---
+  duration_ms: 1.485887
+  type: 'test'
+  ...
+# Subtest: 09.07 History + geography have no PTIT match in this bounded sample, not a nationwide exclusion
+ok 7 - 09.07 History + geography have no PTIT match in this bounded sample, not a nationwide exclusion
+  ---
+  duration_ms: 0.513613
+  type: 'test'
+  ...
+# Subtest: 09.08 missing Informatics leaves X26 observable score null, not 0
+ok 8 - 09.08 missing Informatics leaves X26 observable score null, not 0
+  ---
+  duration_ms: 0.534955
+  type: 'test'
+  ...
+# Subtest: 09.09 real zero accepted when three scores observed
+ok 9 - 09.09 real zero accepted when three scores observed
+  ---
+  duration_ms: 4.312567
+  type: 'test'
+  ...
+# Subtest: 09.10 invalid score cannot be used for a total
+ok 10 - 09.10 invalid score cannot be used for a total
+  ---
+  duration_ms: 1.014235
+  type: 'test'
+  ...
+# Subtest: 09.11 target major identifies matching records but does not exclude other majors
+ok 11 - 09.11 target major identifies matching records but does not exclude other majors
+  ---
+  duration_ms: 3.004761
+  type: 'test'
+  ...
+# Subtest: 09.12 different source year is excluded
+ok 12 - 09.12 different source year is excluded
+  ---
+  duration_ms: 0.284857
+  type: 'test'
+  ...
+# Subtest: 09.13 untrusted host is excluded despite copied combinations
+ok 13 - 09.13 untrusted host is excluded despite copied combinations
+  ---
+  duration_ms: 0.218064
+  type: 'test'
+  ...
+# Subtest: 09.14 campus BVS is not mislabeled BVH
+ok 14 - 09.14 campus BVS is not mislabeled BVH
+  ---
+  duration_ms: 0.173229
+  type: 'test'
+  ...
+# Subtest: 09.15 outside the PTIT published five codes does not create arbitrary official combinations
+ok 15 - 09.15 outside the PTIT published five codes does not create arbitrary official combinations
+  ---
+  duration_ms: 0.176382
+  type: 'test'
+  ...
+# Subtest: 09.16 output includes source URL, method, campus, year and program code
+ok 16 - 09.16 output includes source URL, method, campus, year and program code
+  ---
+  duration_ms: 0.632333
+  type: 'test'
+  ...
+# Subtest: 09.17 national explorer replaces the bounded PTIT picker and exposes all registered programmes
+ok 17 - 09.17 national explorer replaces the bounded PTIT picker and exposes all registered programmes
+  ---
+  duration_ms: 5.322635
+  type: 'test'
+  ...
+# Subtest: 09.18 protects admission comparison from school/tryout scores
+ok 18 - 09.18 protects admission comparison from school/tryout scores
+  ---
+  duration_ms: 0.939526
+  type: 'test'
+  ...
+# Subtest: 09.19 rejects prior-year official page even when a program wrongly claims year 2026
+ok 19 - 09.19 rejects prior-year official page even when a program wrongly claims year 2026
+  ---
+  duration_ms: 0.175904
+  type: 'test'
+  ...
+# Subtest: 09.20 excludes a program without a 2026 THPT admission method
+ok 20 - 09.20 excludes a program without a 2026 THPT admission method
+  ---
+  duration_ms: 0.20149
+  type: 'test'
+  ...
+# Subtest: 09.21 official-pathway exploration is discoverable from Atlas hero
+not ok 21 - 09.21 official-pathway exploration is discoverable from Atlas hero
+  ---
+  duration_ms: 19.231337
+  type: 'test'
+  location: '/mnt/data/CLA_CP80_FULL_FIXED/Cognitive-Learn/tests/step09-ptit-official-pathways.test.cjs:117:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The expression evaluated to a falsy value:
+    
+      assert.ok(page.includes('href="/atlas/subjects"'))
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (/mnt/data/CLA_CP80_FULL_FIXED/Cognitive-Learn/tests/step09-ptit-official-pathways.test.cjs:119:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..21
+# tests 21
+# suites 0
+# pass 20
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 809.74951

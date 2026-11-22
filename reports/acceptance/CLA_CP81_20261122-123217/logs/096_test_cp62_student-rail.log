@@ -1,0 +1,23 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp62:student-rail
+> node --experimental-strip-types --test tests/cp62-student-action-rail.test.mjs
+
+Γû╢ CP62 dashboard data-source signal rail
+  Γ£ö renders three explicitly labeled source flags and no invented measurements (1.3222ms)
+  Γ£ö distinguishes a profile from cognitive and historical observation (0.1405ms)
+  Γ£ö does not convert missing profile to valid downstream signals (0.1182ms)
+  Γ£ö handles mixed prerequisites without pretending all three are ready (0.1182ms)
+  Γ£ö renders all-available as exactly three source flags, not a numeric score (0.2961ms)
+  Γ£ö integrates after the verified-data canvas without reinstating twin cards (0.141ms)
+  Γ£ö keeps the exam calendar first and the preview isolated (0.7972ms)
+  Γ£ö bounds action count and uses real links, ARIA and plain source labels (0.1778ms)
+  Γ£ö includes mobile, dark and reduced-motion styles loaded in the global entrypoint (0.1623ms)
+Γ£ö CP62 dashboard data-source signal rail (4.4064ms)
+Γä╣ tests 9
+Γä╣ suites 1
+Γä╣ pass 9
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 128.0289

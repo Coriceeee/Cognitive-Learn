@@ -1,0 +1,34 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp66:unified-states
+> node --experimental-strip-types --test tests/cp66-unified-states.test.mjs
+
+Γû╢ CP66 pure and deterministic Firestore status UI
+  Γ£ö shows verified status only on confirmed ready (1.4845ms)
+  Γ£ö never calls cache-backed syncing saved (0.2326ms)
+  Γ£ö never shows ready for loading, signed-out, or denied reads (0.1324ms)
+  Γ£ö gives conflicts precedence over stale save notices (0.1127ms)
+  Γ£ö never claims saved while an upload is pending (0.129ms)
+  Γ£ö distinguishes missing draft from confirmed saved draft (0.1114ms)
+  Γ£ö distinguishes failed writes from positive notices (0.13ms)
+  Γ£ö does not hide user edits behind old successful notices (0.1343ms)
+  Γ£ö does not call failed autosave successful (0.1444ms)
+  Γ£ö keeps in-progress autosave distinct from completed autosave (0.1489ms)
+  Γ£ö does not trust a stale success notice when the account signed out (0.1288ms)
+Γ£ö CP66 pure and deterministic Firestore status UI (4.095ms)
+Γû╢ CP66 integration: one status vocabulary in six modules
+  Γ£ö renders consistent form feedback for Orion, Pulse and Haven (0.3229ms)
+  Γ£ö clears stale save notices on every edit in Pulse and Haven (0.2854ms)
+  Γ£ö keeps Orion autosave and newer edit protections intact (0.0931ms)
+  Γ£ö uses status-specific panels for Seed transcript, Lumen and Atlas (0.1313ms)
+  Γ£ö keeps explicit accessibility roles and is not merely a color badge (0.0676ms)
+  Γ£ö includes accessible mobile, dark, focus, print, reduced-motion CSS (0.507ms)
+  Γ£ö keeps it a UI layer, not a change to Firestore authorisation (0.3833ms)
+Γ£ö CP66 integration: one status vocabulary in six modules (2.0167ms)
+Γä╣ tests 18
+Γä╣ suites 2
+Γä╣ pass 18
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 136.4977

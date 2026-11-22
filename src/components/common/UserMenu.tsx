@@ -17,6 +17,22 @@ import { canNavigate } from "../../lib/draftNavigationGuard";
 
 export default function UserMenu() {
   const [open, setOpen] = useState(false);
+  const menuRoot = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const onPointerDown = (event: PointerEvent) => {
+      if (!menuRoot.current?.contains(event.target as Node)) setOpen(false);
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
   const noticeAccount = useRef(auth.currentUser?.uid ?? null);
   const [userEmail, setUserEmail] = useState("");
   const [userName, setUserName] = useState("");
@@ -78,7 +94,7 @@ export default function UserMenu() {
   }
 
   return (
-    <div className="user-nav">
+    <div className="user-nav" ref={menuRoot}>
       {adminMode && (
         <a href="/admin" className="user-nav-link admin-top-link">
           <span className="user-nav-icon">
@@ -105,6 +121,9 @@ export default function UserMenu() {
       <button
         type="button"
         className="user-nav-link user-button"
+        aria-expanded={open}
+        aria-controls="cla-account-dropdown"
+        aria-label={open ? "Đóng menu tài khoản" : "Mở menu tài khoản"}
         onClick={() => setOpen((current) => !current)}
       >
         <span className="user-nav-avatar">
@@ -116,7 +135,7 @@ export default function UserMenu() {
       <NotificationBell />
 
       {open && (
-        <div className="user-dropdown">
+        <div className="user-dropdown" id="cla-account-dropdown" role="group" aria-label="Thông tin và thao tác tài khoản">
           <div className="user-dropdown-head">
             <div className="user-avatar-mini">
               <Sparkles size={22} strokeWidth={2.5} />

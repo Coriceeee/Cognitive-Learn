@@ -1,0 +1,25 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp31:batch3
+> node --experimental-strip-types --test tests/cp31-batch3-operational-audits.test.mjs
+
+Γ£ö CP31-B3-01 valid demo docs pass read-only identity/schema checks (1.0248ms)
+Γ£ö CP31-B3-02 cross-owner or dataScope != demo are rejected without leaking UID (0.2248ms)
+Γ£ö CP31-B3-03 no docs or legacy never claims migration complete (0.1254ms)
+Γ£ö CP31-B3-04 inconsistent electives/foreign language block automated migrations (0.138ms)
+Γ£ö CP31-B3-05 UID blank and missing ownership fail closed (0.3777ms)
+Γ£ö CP31-B3-06 current admission registry evaluated without fabricated freshness (0.5415ms)
+Γ£ö CP31-B3-07 admission missing 2024 or duplicate year is visible (0.175ms)
+Γ£ö CP31-B3-08 bad HTTP, javascript and embedded credentials cannot be trusted (0.1973ms)
+Γ£ö CP31-B3-09 scholarship register is assessed with NOT TESTED deadlines (1.5106ms)
+Γ£ö CP31-B3-10 scholarship URL and date validity includes future/invalid date (0.3652ms)
+Γ£ö CP31-B3-11 duplicate scholarship, missing conditions/credentials are rejected (0.1794ms)
+Γ£ö CP31-B3-12 changes registered as safe local diagnostics, not production approval (1.3064ms)
+Γ£ö CP31-B3-13 E2E manifest updated without weakening auth/preflight (0.6773ms)
+Γä╣ tests 13
+Γä╣ suites 0
+Γä╣ pass 13
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 143.2183

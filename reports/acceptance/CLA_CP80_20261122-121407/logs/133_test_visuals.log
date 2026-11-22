@@ -1,0 +1,25 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:visuals
+> node --test tests/scientific-visuals.test.cjs
+
+Γ£ö CP32-01: Lumen signal radar only plots dimensions explicitly marked available (1.2799ms)
+Γ£ö CP32-02: longitudinal delta chart abstains without two comparable snapshots (0.4697ms)
+Γ£ö CP32-03: Orion trade-off plot is sourced from strategy scenarios and disclaims heuristic values (1.0892ms)
+Γ£ö CP32-04: Atlas historical field uses exact school/campus/code and distinct year-method scales (0.4381ms)
+Γ£ö CP32-05: scientific visualization layer is imported and responsive (1.0707ms)
+Γ£ö CP32-06: synthetic demo preset is Admin-only, preview-before-save and scoped as demo (0.5152ms)
+Γ£ö CP32-07: transcript trajectory and heatmap read saved term/subject records (0.469ms)
+Γ£ö CP33-01: Haven pressure topology plots only the four entered support signals and labels their self-reported scope (1.0451ms)
+Γ£ö CP33-02: Pulse orbit derives all six progress rings from Pulse engine metrics (0.6374ms)
+Γ£ö CP33-03: Admin evidence circuit visualizes actual stage statuses and explicitly disclaims end-to-end completion (0.6078ms)
+Γ£ö CP33-04: Haven and Pulse scientific visuals have responsive and reduced-motion styling (0.3956ms)
+Γ£ö CP34-01: Admin synthetic preset only fills local form state and cannot write Firestore (0.6772ms)
+Γ£ö CP34-02: Haven labels scholarship cards as rule archetypes, not verified opportunities (0.3555ms)
+Γä╣ tests 13
+Γä╣ suites 0
+Γä╣ pass 13
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 92.2135

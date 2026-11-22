@@ -1,0 +1,136 @@
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch4
+> node --experimental-strip-types --test tests/cp31-batch4-evidence.test.mjs
+
+TAP version 13
+# (node:17031) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP31-B4-01 historical fingerprint remains frozen; current release cannot impersonate CP31
+ok 1 - CP31-B4-01 historical fingerprint remains frozen; current release cannot impersonate CP31
+  ---
+  duration_ms: 48.863004
+  type: 'test'
+  ...
+# Subtest: CP31-B4-02 release no evidence: no invented CI/deploy PASS
+ok 2 - CP31-B4-02 release no evidence: no invented CI/deploy PASS
+  ---
+  duration_ms: 1.055058
+  type: 'test'
+  ...
+# Subtest: CP31-B4-03 release structural source matches, but self-declared production remains unverified
+ok 3 - CP31-B4-03 release structural source matches, but self-declared production remains unverified
+  ---
+  duration_ms: 0.495751
+  type: 'test'
+  ...
+# Subtest: CP31-B4-04 source fingerprint mismatch fails closed
+ok 4 - CP31-B4-04 source fingerprint mismatch fails closed
+  ---
+  duration_ms: 0.459236
+  type: 'test'
+  ...
+# Subtest: CP31-B4-05 release invalid CI HTTPS/credentials/commit/exit rejected
+ok 5 - CP31-B4-05 release invalid CI HTTPS/credentials/commit/exit rejected
+  ---
+  duration_ms: 0.442267
+  type: 'test'
+  ...
+# Subtest: CP31-B4-06 mismatched deploy artifact always FAIL
+ok 6 - CP31-B4-06 mismatched deploy artifact always FAIL
+  ---
+  duration_ms: 0.174795
+  type: 'test'
+  ...
+# Subtest: CP31-B4-07 no backup/rollback produce NOT TESTED not PASS
+ok 7 - CP31-B4-07 no backup/rollback produce NOT TESTED not PASS
+  ---
+  duration_ms: 0.175706
+  type: 'test'
+  ...
+# Subtest: CP31-B4-08 unknown release JSON schema fails
+ok 8 - CP31-B4-08 unknown release JSON schema fails
+  ---
+  duration_ms: 0.095563
+  type: 'test'
+  ...
+# Subtest: CP31-B4-09 no Emulator report never passes role authorization
+ok 9 - CP31-B4-09 no Emulator report never passes role authorization
+  ---
+  duration_ms: 0.662241
+  type: 'test'
+  ...
+# Subtest: CP31-B4-10 known gate schema and sha accepted only as local evidence
+ok 10 - CP31-B4-10 known gate schema and sha accepted only as local evidence
+  ---
+  duration_ms: 0.507966
+  type: 'test'
+  ...
+# Subtest: CP31-B4-11 tampered Rules candidate checksum is FAIL even with PASS fields
+ok 11 - CP31-B4-11 tampered Rules candidate checksum is FAIL even with PASS fields
+  ---
+  duration_ms: 0.184868
+  type: 'test'
+  ...
+# Subtest: CP31-B4-12 preflight-only or failed emulator cannot be called successful
+ok 12 - CP31-B4-12 preflight-only or failed emulator cannot be called successful
+  ---
+  duration_ms: 0.130124
+  type: 'test'
+  ...
+# Subtest: CP31-B4-13 wrong project/gate or future time rejected
+ok 13 - CP31-B4-13 wrong project/gate or future time rejected
+  ---
+  duration_ms: 0.080694
+  type: 'test'
+  ...
+# Subtest: CP31-B4-14 no OULAD result means no ML score claims
+ok 14 - CP31-B4-14 no OULAD result means no ML score claims
+  ---
+  duration_ms: 0.203768
+  type: 'test'
+  ...
+# Subtest: CP31-B4-15 correctly structured aggregate OULAD report does not imply Vietnamese validation
+ok 15 - CP31-B4-15 correctly structured aggregate OULAD report does not imply Vietnamese validation
+  ---
+  duration_ms: 0.13784
+  type: 'test'
+  ...
+# Subtest: CP31-B4-16 synthetic one-row VNHSGE fixture cannot pass as OULAD
+ok 16 - CP31-B4-16 synthetic one-row VNHSGE fixture cannot pass as OULAD
+  ---
+  duration_ms: 1.401513
+  type: 'test'
+  ...
+# Subtest: CP31-B4-17 OULAD tiny holdout, wrong cutoff and impossible splits fail
+ok 17 - CP31-B4-17 OULAD tiny holdout, wrong cutoff and impossible splits fail
+  ---
+  duration_ms: 0.208632
+  type: 'test'
+  ...
+# Subtest: CP31-B4-18 impossible Brier, delta and bootstrap confidence interval rejected
+ok 18 - CP31-B4-18 impossible Brier, delta and bootstrap confidence interval rejected
+  ---
+  duration_ms: 0.114606
+  type: 'test'
+  ...
+# Subtest: CP31-B4-19 invalid source/cohort and synthetic label cannot be presented as real result
+ok 19 - CP31-B4-19 invalid source/cohort and synthetic label cannot be presented as real result
+  ---
+  duration_ms: 0.143947
+  type: 'test'
+  ...
+# Subtest: CP31-B4-20 Admin UI only imports in memory; route/catalog/run guard is explicit
+ok 20 - CP31-B4-20 Admin UI only imports in memory; route/catalog/run guard is explicit
+  ---
+  duration_ms: 1.010144
+  type: 'test'
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 20
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 230.125404

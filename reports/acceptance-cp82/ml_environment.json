@@ -1,0 +1,43 @@
+{
+  "schema": "cla.cp82.ml-environment.v1",
+  "pythonVersion": "3.11.9",
+  "usingVirtualEnv": true,
+  "pythonExecutable": "C:\\Gạo\\Cognitive-Learn\\.venv\\Scripts\\python.exe",
+  "sysPrefix": "C:\\Gạo\\Cognitive-Learn\\.venv",
+  "sysBasePrefix": "C:\\Users\\nguye\\AppData\\Local\\Programs\\Python\\Python311",
+  "packages": {
+    "numpy": {
+      "status": "PASS",
+      "exitCode": 0,
+      "diagnostic": "import succeeded"
+    },
+    "pandas": {
+      "status": "PASS",
+      "exitCode": 0,
+      "diagnostic": "import succeeded"
+    },
+    "scipy": {
+      "status": "PASS",
+      "exitCode": 0,
+      "diagnostic": "import succeeded"
+    },
+    "scikit-learn": {
+      "status": "PASS",
+      "exitCode": 0,
+      "diagnostic": "import succeeded"
+    },
+    "xgboost": {
+      "status": "PASS",
+      "exitCode": 0,
+      "diagnostic": "import succeeded"
+    }
+  },
+  "overall": "PASS",
+  "sourceTestsRun": false,
+  "scientificClaimVerified": false,
+  "notes": [
+    "Install with python -m pip install -r research/requirements-cp82-ml.txt in an approved venv.",
+    "OS Application Control policy must be resolved by authorized IT; do not disable controls.",
+    "An import PASS proves only dependency availability, not an ML accuracy claim."
+  ]
+}

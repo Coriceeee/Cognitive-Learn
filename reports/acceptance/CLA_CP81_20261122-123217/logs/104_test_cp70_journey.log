@@ -1,0 +1,31 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp70:journey
+> node --experimental-strip-types --test tests/cp70-student-journey-integration.test.mjs
+
+Γ£ö CP70.01 cached snapshots cannot publish cycles, even if all records are otherwise valid (1.6909ms)
+Γ£ö CP70.02 pending Firestore local writes cannot publish cycles as server-confirmed (0.2263ms)
+Γ£ö CP70.03 confirmed empty server snapshot is distinguishable from empty cache (0.1341ms)
+Γ£ö CP70.04 owner mismatch fails closed and drops the full batch (1.4771ms)
+Γ£ö CP70.05 document ID and payload ID must agree (0.1645ms)
+Γ£ö CP70.06 tampered cycle fields and missing owner do not become a student journey (0.2209ms)
+Γ£ö CP70.07 server-confirmed valid document is available without changing observed grades (0.158ms)
+Γ£ö CP70.08 initial loading does not falsely prompt sign-in or invent progress (0.2095ms)
+Γ£ö CP70.09 waiting from cache and error never present previous student data (0.2011ms)
+Γ£ö CP70.10 verified but wrong UID is blocked in navigation handoff as defense-in-depth (0.1616ms)
+Γ£ö CP70.11 no profile takes student to Seed after a server-confirmed read (0.1333ms)
+Γ£ö CP70.12 empty verified journey starts at Orion without a fake achievement score (0.077ms)
+Γ£ö CP70.13 active plan links to Pulse with zero observed check-ins (0.2618ms)
+Γ£ö CP70.14 check-in links to reassessment, without treating self-report as academic progress (0.2267ms)
+Γ£ö CP70.15 reviewed plan links to Lumen evidence, without making a probability claim (0.5382ms)
+Γ£ö CP70.16 hook listens for metadata changes and clears stale cycles before server verification (0.7859ms)
+Γ£ö CP70.17 Orion and Pulse write controls require server-confirmed cycles (0.4941ms)
+Γ£ö CP70.18 student journey has one action, while the LearningCircuit exclusively owns six-module navigation (0.7243ms)
+Γ£ö CP70.19 a new student can start a Seed profile even if journey read is offline (0.0791ms)
+Γä╣ tests 19
+Γä╣ suites 0
+Γä╣ pass 19
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 138.2203

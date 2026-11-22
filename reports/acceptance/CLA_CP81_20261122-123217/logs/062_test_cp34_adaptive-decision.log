@@ -1,0 +1,29 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp34:adaptive-decision
+> node --experimental-strip-types --test tests/cp34-adaptive-next-cycle.test.mjs
+
+Γ£ö low adherence chooses bounded lighter existing option, no automatic assignment (4.8086ms)
+Γ£ö sufficient completion and reported hours retain workload (0.73ms)
+Γ£ö score change not used to alter workload, even negative (0.931ms)
+Γ£ö low hours alone reduces load (0.5105ms)
+Γ£ö zero reported hours yields manual review not fabricated plan (0.476ms)
+Γ£ö over-budget options are not recommended even with full completion (0.8496ms)
+Γ£ö partial reassessment abstains (0.426ms)
+Γ£ö one check-in is insufficient (0.3392ms)
+Γ£ö cache and other owners cannot obtain advice (0.2728ms)
+Γ£ö modified evidence and T0 fail closed (0.3851ms)
+Γ£ö legacy cycles remain untraceable (0.2944ms)
+Γ£ö active cycle never gives a new-cycle suggestion (0.1904ms)
+Γ£ö invalid, duplicate, and empty options rejected (1.5306ms)
+Γ£ö replay is deterministic, input remains untouched and changed result is rejected (1.9177ms)
+Γ£ö Orion integration selects draft only and preserves explicit start (0.7834ms)
+Γ£ö selected advice can start a second frozen cycle without mutating prior review (0.6837ms)
+Γ£ö Firestore listener routes metadata changes through the cache/pending-write gate (0.618ms)
+Γä╣ tests 17
+Γä╣ suites 0
+Γä╣ pass 17
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 162.0025

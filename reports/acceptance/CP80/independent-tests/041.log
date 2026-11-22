@@ -1,0 +1,182 @@
+
+> cognitive-learn-ai@0.1.0 test:cp30:gpa
+> node --test tests/cp30-gpa-integrity.test.cjs tests/cp30-gpa-listener.test.cjs
+
+TAP version 13
+# Subtest: GPA01 valid zero is VERIFIED, distinct from missing score
+ok 1 - GPA01 valid zero is VERIFIED, distinct from missing score
+  ---
+  duration_ms: 8.06421
+  type: 'test'
+  ...
+# Subtest: GPA02 completed score 8 from six terms verifies for three years
+ok 2 - GPA02 completed score 8 from six terms verifies for three years
+  ---
+  duration_ms: 1.066201
+  type: 'test'
+  ...
+# Subtest: GPA03 falsified profile GPA rejected
+ok 3 - GPA03 falsified profile GPA rejected
+  ---
+  duration_ms: 1.00664
+  type: 'test'
+  ...
+# Subtest: GPA04 falsified transcript GPA rejected independently
+ok 4 - GPA04 falsified transcript GPA rejected independently
+  ---
+  duration_ms: 4.27421
+  type: 'test'
+  ...
+# Subtest: GPA05 missing GPA cannot be stored as numeric zero
+ok 5 - GPA05 missing GPA cannot be stored as numeric zero
+  ---
+  duration_ms: 2.674961
+  type: 'test'
+  ...
+# Subtest: GPA06 fake coverage, partial status, observed count rejected
+ok 6 - GPA06 fake coverage, partial status, observed count rejected
+  ---
+  duration_ms: 3.966215
+  type: 'test'
+  ...
+# Subtest: GPA07 extra subject outside nine cannot be silently excluded
+ok 7 - GPA07 extra subject outside nine cannot be silently excluded
+  ---
+  duration_ms: 0.33967
+  type: 'test'
+  ...
+# Subtest: GPA08 malformed 10+, negative or syntax rejected rather than missing
+ok 8 - GPA08 malformed 10+, negative or syntax rejected rather than missing
+  ---
+  duration_ms: 0.482859
+  type: 'test'
+  ...
+# Subtest: GPA09 absent rows or one missing semester is never verified as 0
+ok 9 - GPA09 absent rows or one missing semester is never verified as 0
+  ---
+  duration_ms: 0.699288
+  type: 'test'
+  ...
+# Subtest: GPA10 empty row can be MISSING, with null year but observed zero elsewhere
+ok 10 - GPA10 empty row can be MISSING, with null year but observed zero elsewhere
+  ---
+  duration_ms: 0.805844
+  type: 'test'
+  ...
+# Subtest: GPA11 two absent docs are INCOMPLETE, not VERIFIED
+ok 11 - GPA11 two absent docs are INCOMPLETE, not VERIFIED
+  ---
+  duration_ms: 0.206855
+  type: 'test'
+  ...
+# Subtest: GPA12 missing summary is LEGACY, never verified
+ok 12 - GPA12 missing summary is LEGACY, never verified
+  ---
+  duration_ms: 0.275632
+  type: 'test'
+  ...
+# Subtest: GPA13 UID, dataScope and schema tamper rejected
+ok 13 - GPA13 UID, dataScope and schema tamper rejected
+  ---
+  duration_ms: 0.479687
+  type: 'test'
+  ...
+# Subtest: GPA14 mismatched foreign language or electives rejected
+ok 14 - GPA14 mismatched foreign language or electives rejected
+  ---
+  duration_ms: 0.127854
+  type: 'test'
+  ...
+# Subtest: GPA15 calculation version and stringified zero both rejected
+ok 15 - GPA15 calculation version and stringified zero both rejected
+  ---
+  duration_ms: 0.776759
+  type: 'test'
+  ...
+# Subtest: GPA16 no modification of underlying Firestore documents
+ok 16 - GPA16 no modification of underlying Firestore documents
+  ---
+  duration_ms: 0.887901
+  type: 'test'
+  ...
+# Subtest: GPA17 UI discloses unverified/mismatch status and does not claim school validation
+ok 17 - GPA17 UI discloses unverified/mismatch status and does not claim school validation
+  ---
+  duration_ms: 0.586858
+  type: 'test'
+  ...
+# Subtest: GPA18 realtime GPA audit independently subscribes to both verified server documents
+ok 18 - GPA18 realtime GPA audit independently subscribes to both verified server documents
+  ---
+  duration_ms: 0.348297
+  type: 'test'
+  ...
+# Subtest: GPAR01 never verifies GPA from just one document
+ok 19 - GPAR01 never verifies GPA from just one document
+  ---
+  duration_ms: 125.44696
+  type: 'test'
+  ...
+# Subtest: GPAR02 verifies only when both server-confirmed snapshots arrive
+ok 20 - GPAR02 verifies only when both server-confirmed snapshots arrive
+  ---
+  duration_ms: 52.428996
+  type: 'test'
+  ...
+# Subtest: GPAR03 cache snapshot removes previously verified evidence immediately
+ok 21 - GPAR03 cache snapshot removes previously verified evidence immediately
+  ---
+  duration_ms: 20.827583
+  type: 'test'
+  ...
+# Subtest: GPAR04 pending write snapshot cannot be claimed as verified
+ok 22 - GPAR04 pending write snapshot cannot be claimed as verified
+  ---
+  duration_ms: 30.50232
+  type: 'test'
+  ...
+# Subtest: GPAR05 stale A watcher cannot affect A→B→A account switch
+ok 23 - GPAR05 stale A watcher cannot affect A→B→A account switch
+  ---
+  duration_ms: 19.667394
+  type: 'test'
+  ...
+# Subtest: GPAR06 wrong-owner record is rejected by the GPA auditor
+ok 24 - GPAR06 wrong-owner record is rejected by the GPA auditor
+  ---
+  duration_ms: 13.069731
+  type: 'test'
+  ...
+# Subtest: GPAR07 Firestore permissions failure clears verified summary
+ok 25 - GPAR07 Firestore permissions failure clears verified summary
+  ---
+  duration_ms: 14.417661
+  type: 'test'
+  ...
+# Subtest: GPAR08 missing transcript yields INCOMPLETE rather than zero GPA
+ok 26 - GPAR08 missing transcript yields INCOMPLETE rather than zero GPA
+  ---
+  duration_ms: 14.010725
+  type: 'test'
+  ...
+# Subtest: GPAR09 logout closes watchers and clears verified values
+ok 27 - GPAR09 logout closes watchers and clears verified values
+  ---
+  duration_ms: 24.677906
+  type: 'test'
+  ...
+# Subtest: GPAR10 recovered cache requires both fresh server payloads again
+ok 28 - GPAR10 recovered cache requires both fresh server payloads again
+  ---
+  duration_ms: 12.47665
+  type: 'test'
+  ...
+1..28
+# tests 28
+# suites 0
+# pass 28
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 649.508856

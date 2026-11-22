@@ -1,0 +1,24 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp56:navigation:integration
+> node --test tests/cp45-seamless-navigation.test.cjs
+
+Γ£ö CP45 navigation: internal links use pushState without document reload (67.4867ms)
+Γ£ö CP45 navigation: browser Back/Forward notifies React without reload (18.3951ms)
+Γ£ö CP45 navigation: native same-page anchors and external links remain native (11.9395ms)
+Γ£ö CP45 navigation: modified clicks, new-tab links and downloads are never hijacked (8.2015ms)
+Γ£ö CP45 navigation: pointer and keyboard intent only prefetch the route code (8.3899ms)
+Γ£ö CP45 navigation: legacy hash bookmarks are converted to canonical module path (7.2216ms)
+Γ£ö CP45: transition keeps revealed content during lazy import, profile watcher is shared and consent gated (1.5075ms)
+Γ£ö CP45: lazy routes have a single shared import table, without eager imports (0.7089ms)
+Γ£ö CP56: a declined guard blocks a link without unmounting current page (7.9547ms)
+Γ£ö CP56: browser Back rejected by guard restores URL without notifying React (8.6236ms)
+Γ£ö CP56: imperative navigation obeys dirty guard, and same route is a no-op (9.7312ms)
+Γ£ö CP58: same-path query navigation notifies React, preserves SPA and supports Back query (9.3927ms)
+Γä╣ tests 12
+Γä╣ suites 0
+Γä╣ pass 12
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 425.2543

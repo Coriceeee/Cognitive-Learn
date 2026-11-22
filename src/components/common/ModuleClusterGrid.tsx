@@ -48,12 +48,12 @@ const moduleOrder = [
 
 const roleDisplayMap: Partial<Record<UserRoleScope | "all", Partial<Record<string, ModuleDisplay>>>> = {
   student: {
-    "seed-profile": { name: "Hồ sơ học tập", tagline: "Seed Profile" },
-    "lumen-intelligence": { name: "Phân tích năng lực", tagline: "Lumen Intelligence" },
-    "atlas-admission": { name: "Tuyển sinh & du học", tagline: "Atlas Admission" },
-    "orion-strategy": { name: "Kế hoạch & chiến lược", tagline: "Orion Strategy" },
-    "pulse-monitor": { name: "Theo dõi tiến độ", tagline: "Pulse Monitor" },
-    "haven-support": { name: "Học bổng & tài chính", tagline: "Haven Support" },
+    "seed-profile": { name: "Bản sắc học tập", tagline: "Seed Profile" },
+    "lumen-intelligence": { name: "Dấu vân tay trí tuệ", tagline: "Lumen Intelligence" },
+    "atlas-admission": { name: "Bản đồ tương lai", tagline: "Atlas Admission" },
+    "orion-strategy": { name: "Kiến trúc tương lai", tagline: "Orion Strategy" },
+    "pulse-monitor": { name: "Đường cong tiến hóa", tagline: "Pulse Monitor" },
+    "haven-support": { name: "Hành trang thế giới", tagline: "Haven Support" },
   },
 };
 
@@ -167,6 +167,7 @@ export default function ModuleClusterGrid({ variant, role, title, subtitle }: Mo
                 key={module.id}
                 type="button"
                 className={`module-path-tab ${isActive ? "active" : ""}`}
+                data-module={module.key}
                 onClick={() => setActiveId(module.id)}
                 aria-pressed={isActive}
               >
@@ -181,7 +182,7 @@ export default function ModuleClusterGrid({ variant, role, title, subtitle }: Mo
           })}
         </nav>
 
-        <article className="module-path-detail">
+        <article className="module-path-detail" data-module={activeModule.key}>
           <div className="module-path-detail-hero">
             <div className="module-path-detail-icon"><img src={activeModule.icon} alt="" aria-hidden="true" /></div>
             <div>

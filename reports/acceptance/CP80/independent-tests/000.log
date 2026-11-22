@@ -1,0 +1,15 @@
+PASS nine graded subjects exactly
+PASS elective duplicate blocked
+PASS elective invalid blocked
+PASS 0 valid
+PASS 10 valid
+PASS comma decimal valid
+PASS dot decimal valid
+PASS blank missing
+PASS invalid negative
+PASS invalid >10
+PASS invalid 1e0 syntax
+PASS provisional not complete
+PASS term complete with 0 score
+PASS year requires both completed terms
+ACADEMIC TESTS: 14/14 PASS

@@ -1,0 +1,31 @@
+{
+  "checkpoint": "CP80",
+  "base_zip": "Cognitive-Learn-CP79-Gradient-Sang-20261122.zip",
+  "date": "2026-11-22",
+  "source_files_modified": {
+    "src/lib/useDailyCompanion.ts": "c89250aad0c0c17b5d0001cb9afe76d24845db110776ec732fc26f5e4a3cbefd",
+    "tests/student-role-isolation.test.cjs": "a32d989b465e10de04a9600c693abd199ebf768dd03c08ab66f5065d9bd4f439",
+    "tests/step09-ptit-official-pathways.test.cjs": "f5c987412d75668bff07eeeded8302eed372be79fb6aba46ad2c4a6aba3d6b57",
+    "tests/step17-exam-reminders.test.mjs": "fe7f827d974033813bcd3bd90f1125134db9bfe37da0656f20f7f8aed3668226",
+    "tests/cp31-batch4-evidence.test.mjs": "3abcb0eb6c56bd0e3bb073085e1b176ae48c213fabff8a3eaf7d87f79f905984",
+    "tests/cp31-batch17-demo-backup.test.mjs": "3f3e4babd02fbb41bff4475bb74628b8dac97beb549b0f6d66f48af1f13518cb",
+    "tests/cp31-batch8-golden-path.test.mjs": "8fe0ada3d10a8e42498b7f787b0d6f90fe3c51c2aef98c771c2d8b800f977522",
+    "tests/cp31-batch9-evidence-integrity.test.mjs": "712699ef0f39321fc1d332898d9a619da3543de9d98705ad4aa7d87f003b1bfd"
+  },
+  "files_added": {
+    "tests/cp80-regressions.test.cjs": "19aafa43b52e11bd018749d2a9a289045228809dc352946f5fe569cadc7f4b5b",
+    "tools/acceptance_cp80_batch.py": "28aeff500616ded521b59408be0ca5667adb33daa03fe99b72db7aa8b941c2d9",
+    "CHAY_NGHIEM_THU_CP80.cmd": "bca208a00b009f0126534674181c59863023db2d9dffeab134f16e8aeb496ef1",
+    "CLA_CP80_ONECLICK.ps1": "6bd160c84f54a5d3c85d0c38639bcde1b03791e6deab0feefa1a2f50de108eff",
+    "README_CP80_SUA_LOI_VA_NGHIEM_THU.md": "d0446f6d0c1e1c2e9b36950fd9ff373110cffee74c36fae51c52ad19d106f8ad"
+  },
+  "validation": {
+    "test_commands_individual": 111,
+    "test_commands_pass": 111,
+    "typecheck_build": "NOT_RUN_DEPENDENCIES_UNAVAILABLE",
+    "firebase_emulator": "NOT_VERIFIED",
+    "browser_e2e": "NOT_VERIFIED",
+    "research_empirical": "NOT_VERIFIED",
+    "legacy_cp31_demo_gate": "BLOCKED_SOURCE_FINGERPRINT"
+  }
+}

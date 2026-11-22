@@ -1,0 +1,130 @@
+
+> cognitive-learn-ai@0.1.0 test:cp70:journey
+> node --experimental-strip-types --test tests/cp70-student-journey-integration.test.mjs
+
+TAP version 13
+# (node:37861) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP70.01 cached snapshots cannot publish cycles, even if all records are otherwise valid
+ok 1 - CP70.01 cached snapshots cannot publish cycles, even if all records are otherwise valid
+  ---
+  duration_ms: 1.671442
+  type: 'test'
+  ...
+# Subtest: CP70.02 pending Firestore local writes cannot publish cycles as server-confirmed
+ok 2 - CP70.02 pending Firestore local writes cannot publish cycles as server-confirmed
+  ---
+  duration_ms: 0.180706
+  type: 'test'
+  ...
+# Subtest: CP70.03 confirmed empty server snapshot is distinguishable from empty cache
+ok 3 - CP70.03 confirmed empty server snapshot is distinguishable from empty cache
+  ---
+  duration_ms: 0.226824
+  type: 'test'
+  ...
+# Subtest: CP70.04 owner mismatch fails closed and drops the full batch
+ok 4 - CP70.04 owner mismatch fails closed and drops the full batch
+  ---
+  duration_ms: 0.793579
+  type: 'test'
+  ...
+# Subtest: CP70.05 document ID and payload ID must agree
+ok 5 - CP70.05 document ID and payload ID must agree
+  ---
+  duration_ms: 0.174207
+  type: 'test'
+  ...
+# Subtest: CP70.06 tampered cycle fields and missing owner do not become a student journey
+ok 6 - CP70.06 tampered cycle fields and missing owner do not become a student journey
+  ---
+  duration_ms: 0.214325
+  type: 'test'
+  ...
+# Subtest: CP70.07 server-confirmed valid document is available without changing observed grades
+ok 7 - CP70.07 server-confirmed valid document is available without changing observed grades
+  ---
+  duration_ms: 0.123842
+  type: 'test'
+  ...
+# Subtest: CP70.08 initial loading does not falsely prompt sign-in or invent progress
+ok 8 - CP70.08 initial loading does not falsely prompt sign-in or invent progress
+  ---
+  duration_ms: 0.19671
+  type: 'test'
+  ...
+# Subtest: CP70.09 waiting from cache and error never present previous student data
+ok 9 - CP70.09 waiting from cache and error never present previous student data
+  ---
+  duration_ms: 0.383966
+  type: 'test'
+  ...
+# Subtest: CP70.10 verified but wrong UID is blocked in navigation handoff as defense-in-depth
+ok 10 - CP70.10 verified but wrong UID is blocked in navigation handoff as defense-in-depth
+  ---
+  duration_ms: 0.307663
+  type: 'test'
+  ...
+# Subtest: CP70.11 no profile takes student to Seed after a server-confirmed read
+ok 11 - CP70.11 no profile takes student to Seed after a server-confirmed read
+  ---
+  duration_ms: 0.139676
+  type: 'test'
+  ...
+# Subtest: CP70.12 empty verified journey starts at Orion without a fake achievement score
+ok 12 - CP70.12 empty verified journey starts at Orion without a fake achievement score
+  ---
+  duration_ms: 0.078656
+  type: 'test'
+  ...
+# Subtest: CP70.13 active plan links to Pulse with zero observed check-ins
+ok 13 - CP70.13 active plan links to Pulse with zero observed check-ins
+  ---
+  duration_ms: 0.322144
+  type: 'test'
+  ...
+# Subtest: CP70.14 check-in links to reassessment, without treating self-report as academic progress
+ok 14 - CP70.14 check-in links to reassessment, without treating self-report as academic progress
+  ---
+  duration_ms: 0.211982
+  type: 'test'
+  ...
+# Subtest: CP70.15 reviewed plan links to Lumen evidence, without making a probability claim
+ok 15 - CP70.15 reviewed plan links to Lumen evidence, without making a probability claim
+  ---
+  duration_ms: 0.418025
+  type: 'test'
+  ...
+# Subtest: CP70.16 hook listens for metadata changes and clears stale cycles before server verification
+ok 16 - CP70.16 hook listens for metadata changes and clears stale cycles before server verification
+  ---
+  duration_ms: 0.520747
+  type: 'test'
+  ...
+# Subtest: CP70.17 Orion and Pulse write controls require server-confirmed cycles
+ok 17 - CP70.17 Orion and Pulse write controls require server-confirmed cycles
+  ---
+  duration_ms: 0.262035
+  type: 'test'
+  ...
+# Subtest: CP70.18 six student-only module destinations are linked from the Seed handoff
+ok 18 - CP70.18 six student-only module destinations are linked from the Seed handoff
+  ---
+  duration_ms: 0.779758
+  type: 'test'
+  ...
+# Subtest: CP70.19 a new student can start a Seed profile even if journey read is offline
+ok 19 - CP70.19 a new student can start a Seed profile even if journey read is offline
+  ---
+  duration_ms: 0.091795
+  type: 'test'
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 19
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 125.809911

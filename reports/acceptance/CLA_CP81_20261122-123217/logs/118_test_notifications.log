@@ -1,0 +1,25 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:notifications
+> node --experimental-strip-types --test tests/step18-notification-center.test.mjs
+
+Γ£ö NC01 toast store starts empty and ignores blank messages (0.8582ms)
+Γ£ö NC02 notice broadcasts, includes type, and allows manual dismissal (0.2278ms)
+Γ£ö NC03 duplicate events are suppressed within 45s (0.1141ms)
+Γ£ö NC04 notifications respect size limits and history cap (0.3095ms)
+Γ£ö NC05 opening inbox marks current notices read (0.1384ms)
+Γ£ö NC06 all authorized routes share the same notification viewport (0.9691ms)
+Γ£ö NC07 popup is below navigation and is mobile responsive (0.3922ms)
+Γ£ö NC08 no fake analysis completed on initial page mount (0.5955ms)
+Γ£ö NC09 save success only after Firestore commit, error on failure (0.4778ms)
+Γ£ö NC10 exam reminders use real saved milestones and session dedupe (0.4831ms)
+Γ£ö NC11 network events are handled without claiming Firebase save success (0.3207ms)
+Γ£ö NC12 no notification persists in server or between user logouts (0.4267ms)
+Γ£ö NC13 success notification remains visible after the profile-to-dashboard redirect (0.5332ms)
+Γä╣ tests 13
+Γä╣ suites 0
+Γä╣ pass 13
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 124.9394

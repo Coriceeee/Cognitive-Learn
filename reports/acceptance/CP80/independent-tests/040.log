@@ -1,0 +1,98 @@
+
+> cognitive-learn-ai@0.1.0 test:cp30:profile
+> node --test tests/cp30-profile-realtime.test.cjs
+
+TAP version 13
+# Subtest: CP30-P01 profile opens a realtime subscription with metadata events
+ok 1 - CP30-P01 profile opens a realtime subscription with metadata events
+  ---
+  duration_ms: 43.956209
+  type: 'test'
+  ...
+# Subtest: CP30-P02 cache and pending writes cannot become verified student data
+ok 2 - CP30-P02 cache and pending writes cannot become verified student data
+  ---
+  duration_ms: 31.891557
+  type: 'test'
+  ...
+# Subtest: CP30-P03 verified profile is rendered, but Growth waits for server history
+ok 3 - CP30-P03 verified profile is rendered, but Growth waits for server history
+  ---
+  duration_ms: 33.764883
+  type: 'test'
+  ...
+# Subtest: CP30-P04 revised same-user profile cannot be overwritten by stale history
+ok 4 - CP30-P04 revised same-user profile cannot be overwritten by stale history
+  ---
+  duration_ms: 32.407653
+  type: 'test'
+  ...
+# Subtest: CP30-P05 A to B to A blocks stale profile callbacks from original A session
+ok 5 - CP30-P05 A to B to A blocks stale profile callbacks from original A session
+  ---
+  duration_ms: 24.022744
+  type: 'test'
+  ...
+# Subtest: CP30-P06 previously verified profile is hidden immediately when snapshot becomes cached
+ok 6 - CP30-P06 previously verified profile is hidden immediately when snapshot becomes cached
+  ---
+  duration_ms: 35.229239
+  type: 'test'
+  ...
+# Subtest: CP30-P07 cross-owner profile fails closed and clears previous values
+ok 7 - CP30-P07 cross-owner profile fails closed and clears previous values
+  ---
+  duration_ms: 14.444304
+  type: 'test'
+  ...
+# Subtest: CP30-P08 signed out resets history/profile and invalidates pending results
+ok 8 - CP30-P08 signed out resets history/profile and invalidates pending results
+  ---
+  duration_ms: 13.843584
+  type: 'test'
+  ...
+# Subtest: CP30-P09 server history unavailable preserves verified profile but discloses limitation
+ok 9 - CP30-P09 server history unavailable preserves verified profile but discloses limitation
+  ---
+  duration_ms: 20.807729
+  type: 'test'
+  ...
+# Subtest: CP30-P10 absent verified profile is empty but cache-only absence is not
+ok 10 - CP30-P10 absent verified profile is empty but cache-only absence is not
+  ---
+  duration_ms: 20.391113
+  type: 'test'
+  ...
+# Subtest: CP30-P11 Firestore permission errors remove all personally identifiable display values
+ok 11 - CP30-P11 Firestore permission errors remove all personally identifiable display values
+  ---
+  duration_ms: 23.11187
+  type: 'test'
+  ...
+# Subtest: CP30-P12 server history uses getDocsFromServer rather than an offline cache
+ok 12 - CP30-P12 server history uses getDocsFromServer rather than an offline cache
+  ---
+  duration_ms: 0.894467
+  type: 'test'
+  ...
+# Subtest: CP37 server read renders observed dynamic state, clears both new states on cache or signout
+ok 13 - CP37 server read renders observed dynamic state, clears both new states on cache or signout
+  ---
+  duration_ms: 25.124147
+  type: 'test'
+  ...
+# Subtest: CP38 stale same-owner history cannot populate a newer state
+ok 14 - CP38 stale same-owner history cannot populate a newer state
+  ---
+  duration_ms: 29.951298
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 790.771194

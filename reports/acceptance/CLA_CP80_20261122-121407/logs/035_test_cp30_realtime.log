@@ -1,0 +1,35 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp30:realtime
+> node --test tests/cp30-realtime-read.test.cjs tests/step07-seed-atlas-bridge.test.cjs
+
+Γ£ö CP30-R01 only server-confirmed, committed snapshots pass (0.8616ms)
+Γ£ö CP30-R02 cross-owner and malformed documents fail closed (0.2196ms)
+Γ£ö CP30-R03 verified legacy docs with no userId remain readable in own UID-scoped path (0.1304ms)
+Γ£ö CP30-R04 account inspections reject old generation and account switches (0.1085ms)
+Γ£ö CP30-R05 cache-only and pending writes never render as verified transcript (37.0608ms)
+Γ£ö CP30-R06 A to B to A cannot resurrect callback from first A session (19.0084ms)
+Γ£ö CP30-R07 legacy fallback is server-confirmed and cannot overwrite a newer primary transcript (13.8655ms)
+Γ£ö CP30-R08 conflicting document UID clears data and reports error (10.0374ms)
+Γ£ö CP30-R09 signed out session clears verified results immediately (11.8675ms)
+Γ£ö CP30-R10 storage status guard resets rows and rejects stale async results (0.7424ms)
+Γ£ö 07-01: same-term D01 8+7+9 gives 24, no exam or probability label (3.0389ms)
+Γ£ö 07-02: zero really is an observed completed score (0.3769ms)
+Γ£ö 07-03: partial scores are never promoted to completed semester averages (0.4094ms)
+Γ£ö 07-04: cannot combine subjects from different semesters to fabricate D01 (0.2907ms)
+Γ£ö 07-05: prefers most recent term with a complete supported combination (0.3264ms)
+Γ£ö 07-06: returns null on transcript with no completed subject grades (0.3513ms)
+Γ£ö 07-07: mapping covers new-programme electives and excludes unrelated subjects (0.4014ms)
+Γ£ö 07-08: non-English foreign language is not silently mapped to English (0.4432ms)
+Γ£ö 07-09: read-only adapter does not mutate Seed transcript (0.5521ms)
+Γ£ö 07-10: Atlas reads user-bound Seed hook, only for school marks (0.9452ms)
+Γ£ö 07-11: changing score basis clears old marks and never reuses school marks as official THPT (0.8826ms)
+Γ£ö 07-12: hook clears account-specific data and blocks callbacks from old UID (0.5705ms)
+Γ£ö 07-13: delayed Firestore snapshot for a signed-out account cannot overwrite new student (37.5721ms)
+Γä╣ tests 23
+Γä╣ suites 0
+Γä╣ pass 23
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 425.9274

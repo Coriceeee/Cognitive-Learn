@@ -1,0 +1,17 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:shadow
+> node --experimental-strip-types --test tests/step19-decision-evidence-shadow.test.mjs
+
+Γ£ö S19-01 incomplete cycle abstains and cannot imply a measured effect (1.0586ms)
+Γ£ö S19-02 below engineering completion threshold differs from frozen static policy (2.7393ms)
+Γ£ö S19-03 positive delta with completed actions maintains both policies (0.2353ms)
+Γ£ö S19-04 nonpositive score delta produces replan, including valid score zero (0.2048ms)
+Γ£ö S19-05 tampering in recorded decisions is detected on replay (0.2087ms)
+Γä╣ tests 5
+Γä╣ suites 0
+Γä╣ pass 5
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 137.5302

@@ -1,0 +1,44 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp30:batch4
+> node --test tests/cp30-batch4-legacy-policy.test.cjs tests/cp30-realtime-read.test.cjs tests/cp30-gpa-listener.test.cjs
+
+Γ£ö LEG01 valid observed zero with six-semester omissions is read-only readable (2.4251ms)
+Γ£ö LEG02 valid legacy with no UID remains within only the owner UID-scoped path (0.4026ms)
+Γ£ö LEG03 foreign userId, dataScope and invalid UID are denied (0.356ms)
+Γ£ö LEG04 missing or forged curriculum is quarantined rather than guessed (0.3196ms)
+Γ£ö LEG05 unknown grade or semester is quarantined (0.3634ms)
+Γ£ö LEG06 subjects outside locked nine are never hidden in computation (0.1768ms)
+Γ£ö LEG07 invalid scores are rejected instead of treated as missing or zero (0.3467ms)
+Γ£ö LEG08 malformed row, overlong regular series and invalid mark fields denied (0.2607ms)
+Γ£ö LEG09 missing partial marks, comma decimals and true zero remain valid (0.2618ms)
+Γ£ö LEG10 payload is never mutated or migrated by read-only validation (0.2868ms)
+Γ£ö LEG11 UI labels verified legacy schema as unverified historical grades (0.6725ms)
+Γ£ö LEG12 primary and legacy subscriptions remain owner/session/server scoped (0.4433ms)
+Γ£ö GPAR01 never verifies GPA from just one document (77.3564ms)
+Γ£ö GPAR02 verifies only when both server-confirmed snapshots arrive (19.782ms)
+Γ£ö GPAR03 cache snapshot removes previously verified evidence immediately (13.1662ms)
+Γ£ö GPAR04 pending write snapshot cannot be claimed as verified (11.0921ms)
+Γ£ö GPAR05 stale A watcher cannot affect AΓåÆBΓåÆA account switch (8.6679ms)
+Γ£ö GPAR06 wrong-owner record is rejected by the GPA auditor (8.0772ms)
+Γ£ö GPAR07 Firestore permissions failure clears verified summary (7.0642ms)
+Γ£ö GPAR08 missing transcript yields INCOMPLETE rather than zero GPA (9.3052ms)
+Γ£ö GPAR09 logout closes watchers and clears verified values (6.9628ms)
+Γ£ö GPAR10 recovered cache requires both fresh server payloads again (7.215ms)
+Γ£ö CP30-R01 only server-confirmed, committed snapshots pass (2.1521ms)
+Γ£ö CP30-R02 cross-owner and malformed documents fail closed (0.2877ms)
+Γ£ö CP30-R03 verified legacy docs with no userId remain readable in own UID-scoped path (0.1339ms)
+Γ£ö CP30-R04 account inspections reject old generation and account switches (0.1179ms)
+Γ£ö CP30-R05 cache-only and pending writes never render as verified transcript (45.2121ms)
+Γ£ö CP30-R06 A to B to A cannot resurrect callback from first A session (17.9149ms)
+Γ£ö CP30-R07 legacy fallback is server-confirmed and cannot overwrite a newer primary transcript (13.1782ms)
+Γ£ö CP30-R08 conflicting document UID clears data and reports error (11.1125ms)
+Γ£ö CP30-R09 signed out session clears verified results immediately (11.8255ms)
+Γ£ö CP30-R10 storage status guard resets rows and rejects stale async results (0.7084ms)
+Γä╣ tests 32
+Γä╣ suites 0
+Γä╣ pass 32
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 471.8225

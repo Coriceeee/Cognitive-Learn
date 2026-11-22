@@ -7,10 +7,10 @@
   --unav-muted: #546b83;
   --unav-line: #d8e3ef;
   --unav-soft: #f5f8fc;
-  --unav-hover: #ebf3ff;
-  --unav-accent: #1957ab;
-  --unav-selected-ink: #17478b;
-  --unav-focus: #1768c1;
+  --unav-hover: #eef4ff;
+  --unav-accent: #245bc4;
+  --unav-selected-ink: #17468c;
+  --unav-focus: #225db4;
   box-sizing: border-box;
   position: relative;
   isolation: isolate;
@@ -31,6 +31,13 @@
   color: var(--unav-ink);
   box-shadow: 0 6px 24px rgba(19, 55, 95, .045);
 }
+/* Same positions and tab structure. Accent identifies the selected workspace only. */
+.cla-module-subnav.cla-focus-nav.cla-guided-workspace.cla-unified-bar[data-module="seed"]  { --unav-accent: var(--seed-500); --unav-selected-ink: #125e4c; --unav-hover: #eaf8f3; --unav-border: var(--seed-200); --unav-gradient: linear-gradient(135deg, var(--seed-050), #ffffff); --unav-badge-gradient: linear-gradient(135deg, var(--seed-050), color-mix(in srgb, var(--seed-300) 17%, white)); --unav-light: var(--seed-300); --unav-glow: var(--seed-glow); }
+.cla-module-subnav.cla-focus-nav.cla-guided-workspace.cla-unified-bar[data-module="lumen"] { --unav-accent: var(--lumen-500); --unav-selected-ink: #78500e; --unav-hover: #fff6e7; --unav-border: var(--lumen-200); --unav-gradient: linear-gradient(135deg, var(--lumen-050), #ffffff); --unav-badge-gradient: linear-gradient(135deg, var(--lumen-050), color-mix(in srgb, var(--lumen-300) 17%, white)); --unav-light: var(--lumen-300); --unav-glow: var(--lumen-glow); }
+.cla-module-subnav.cla-focus-nav.cla-guided-workspace.cla-unified-bar[data-module="atlas"] { --unav-accent: var(--atlas-500); --unav-selected-ink: #1c4f9d; --unav-hover: #eef4ff; --unav-border: var(--atlas-200); --unav-gradient: linear-gradient(135deg, var(--atlas-050), #ffffff); --unav-badge-gradient: linear-gradient(135deg, var(--atlas-050), color-mix(in srgb, var(--atlas-300) 17%, white)); --unav-light: var(--atlas-300); --unav-glow: var(--atlas-glow); }
+.cla-module-subnav.cla-focus-nav.cla-guided-workspace.cla-unified-bar[data-module="orion"] { --unav-accent: var(--orion-500); --unav-selected-ink: #57369c; --unav-hover: #f3efff; --unav-border: var(--orion-200); --unav-gradient: linear-gradient(135deg, var(--orion-050), #ffffff); --unav-badge-gradient: linear-gradient(135deg, var(--orion-050), color-mix(in srgb, var(--orion-300) 17%, white)); --unav-light: var(--orion-300); --unav-glow: var(--orion-glow); }
+.cla-module-subnav.cla-focus-nav.cla-guided-workspace.cla-unified-bar[data-module="pulse"] { --unav-accent: var(--pulse-500); --unav-selected-ink: #91314f; --unav-hover: #fff0f5; --unav-border: var(--pulse-200); --unav-gradient: linear-gradient(135deg, var(--pulse-050), #ffffff); --unav-badge-gradient: linear-gradient(135deg, var(--pulse-050), color-mix(in srgb, var(--pulse-300) 17%, white)); --unav-light: var(--pulse-300); --unav-glow: var(--pulse-glow); }
+.cla-module-subnav.cla-focus-nav.cla-guided-workspace.cla-unified-bar[data-module="haven"] { --unav-accent: var(--haven-500); --unav-selected-ink: #06656d; --unav-hover: #eaf9fa; --unav-border: var(--haven-200); --unav-gradient: linear-gradient(135deg, var(--haven-050), #ffffff); --unav-badge-gradient: linear-gradient(135deg, var(--haven-050), color-mix(in srgb, var(--haven-300) 17%, white)); --unav-light: var(--haven-300); --unav-glow: var(--haven-glow); }
 .cla-unified-bar *, .cla-unified-bar *::before, .cla-unified-bar *::after { box-sizing: border-box; }
 .cla-unified-bar .cla-unified-identity {
   display: flex;
@@ -47,8 +54,10 @@
   width: 34px;
   height: 34px;
   border-radius: 9px;
-  color: #fff;
-  background: #1957ab;
+  color: var(--unav-selected-ink);
+  background: var(--unav-badge-gradient, var(--unav-accent));
+  border: 1px solid var(--unav-border, var(--unav-line));
+  box-shadow: 0 3px 12px -8px var(--unav-glow, transparent);
   font-size: 15px;
   line-height: 1;
   font-weight: 800;
@@ -108,7 +117,8 @@
 .cla-unified-bar .cla-module-subnav-links.cla-guided-primary.cla-unified-tabs a.is-active,
 .cla-unified-bar .cla-module-subnav-links.cla-guided-primary.cla-unified-tabs a[aria-current="page"] {
   color: var(--unav-selected-ink);
-  background: var(--unav-hover);
+  background: var(--unav-gradient, var(--unav-hover));
+  border-color: var(--unav-border, var(--unav-line));
   font-weight: 780;
 }
 .cla-unified-bar .cla-module-subnav-links.cla-guided-primary.cla-unified-tabs a[aria-current="page"]::after {
@@ -118,7 +128,7 @@
   left: 14px;
   right: 14px;
   height: 2px;
-  background: var(--unav-accent);
+  background: linear-gradient(90deg, var(--unav-accent), var(--unav-light, var(--unav-accent)));
   border-radius: 3px;
 }
 .cla-unified-bar .cla-guided-controls.cla-unified-actions {
@@ -217,6 +227,9 @@
   --unav-accent: #a9d1ff;
   --unav-selected-ink: #f1f7ff;
   --unav-focus: #7dbbff;
+  --unav-gradient: #234669;
+  --unav-badge-gradient: #274664;
+  --unav-border: #496884;
   box-shadow: none;
 }
 /* In-page filters are not route tabs: they retain their behavior, but share

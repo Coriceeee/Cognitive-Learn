@@ -1,0 +1,19 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp32:national
+> node --experimental-strip-types --test tests/cp32-national-admission.test.mjs
+
+Γ£ö national catalog includes 17 schools and preserves 110 PTIT records, 1262 external numeric facts (8.8225ms)
+Γ£ö all known scales compare equal values; unknown scales never compute gaps (269.4529ms)
+Γ£ö lookup uses school-specific method and exact code, no mismatched school or year (227.4545ms)
+Γ£ö independently checked numeric spot values and distinct campus codes (1.3128ms)
+Γ£ö official links include central region, missing numeric sources remain missing (0.3577ms)
+Γ£ö CTU 2024 and 2025 preserve source, method and exact known values (2.6078ms)
+Γ£ö history isolates campus and code, preserves years and explicit missing slots (2.8696ms)
+Γä╣ tests 7
+Γä╣ suites 0
+Γä╣ pass 7
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 666.6841

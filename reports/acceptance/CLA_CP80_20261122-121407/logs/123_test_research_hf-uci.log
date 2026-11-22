@@ -1,0 +1,50 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:research:hf-uci
+> python -m unittest research.tests.test_uci_baseline research.tests.test_uci_fetch_gate -v
+
+npm.cmd : test_uci_baseline (unittest.loader._FailedTest.test_uci_baseline) ... ERROR
+At C:\Gạo\Cognitive-Learn\CLA_CP80_ONECLICK.ps1:95 char:9
++         & $exe @commandArgs 2>&1 | Out-File -LiteralPath $logPath -En ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (test_uci_baseli...line) ... ERROR:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+test_good_minimum_schema (research.tests.test_uci_fetch_gate.FetchGateTests.test_good_minimum_schema) ... ok
+test_license_gate_and_scope (research.tests.test_uci_fetch_gate.FetchGateTests.test_license_gate_and_scope) ... ok
+test_pinned_revision_and_subject_counts (research.tests.test_uci_fetch_gate.FetchGateTests.test_pinned_revision_and_subject_counts) ... ok
+test_refuse_bad_grade_and_count_and_duplicates (research.tests.test_uci_fetch_gate.FetchGateTests.test_refuse_bad_grade_and_count_and_duplicates) ... ok
+
+======================================================================
+ERROR: test_uci_baseline (unittest.loader._FailedTest.test_uci_baseline)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_uci_baseline
+Traceback (most recent call last):
+  File "C:\Users\nguye\AppData\Local\Programs\Python\Python311\Lib\unittest\loader.py", line 162, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\G\u1ea1o\Cognitive-Learn\research\tests\test_uci_baseline.py", line 9, in <module>
+    from baseline_uci_student_performance import run
+  File "C:\G\u1ea1o\Cognitive-Learn\research\src\baseline_uci_student_performance.py", line 15, in <module>
+    import pandas as pd
+  File "C:\G\u1ea1o\Cognitive-Learn\.venv\Lib\site-packages\pandas\__init__.py", line 56, in <module>
+    import pandas.core.config_init  # pyright: ignore[reportUnusedImport] # noqa: F401
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\G\u1ea1o\Cognitive-Learn\.venv\Lib\site-packages\pandas\core\config_init.py", line 31, in <module>
+    from pandas.errors import Pandas4Warning
+  File "C:\G\u1ea1o\Cognitive-Learn\.venv\Lib\site-packages\pandas\errors\__init__.py", line 12, in <module>
+    from pandas._libs.tslibs import (
+  File "C:\G\u1ea1o\Cognitive-Learn\.venv\Lib\site-packages\pandas\_libs\__init__.py", line 18, in <module>
+    from pandas._libs.interval import Interval
+  File "pandas/_libs/interval.pyx", line 1, in init pandas._libs.interval
+  File "pandas/_libs/hashtable.pyx", line 1, in init pandas._libs.hashtable
+  File "pandas/_libs/missing.pyx", line 1, in init pandas._libs.missing
+  File "C:\G\u1ea1o\Cognitive-Learn\.venv\Lib\site-packages\pandas\_libs\tslibs\__init__.py", line 42, in <module>
+    from pandas._libs.tslibs.conversion import localize_pydatetime
+  File "pandas/_libs/tslibs/conversion.pyx", line 1, in init pandas._libs.tslibs.conversion
+ImportError: DLL load failed while importing base: An Application Control policy has blocked this file.
+
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.003s
+
+FAILED (errors=1)

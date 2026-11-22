@@ -1,0 +1,17 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp32:decision
+> node --experimental-strip-types --test tests/cp32-atlas-decision-comparison.test.mjs
+
+Γ£ö all 90 program/method options preserve source and native scale (1.7634ms)
+Γ£ö zero, decimal commas, missing and incorrect score bounds (0.1658ms)
+Γ£ö source-backed chat lookup is exact, time- and method-specific (1.4574ms)
+Γ£ö unknown, ambiguous, injected or incompatible queries abstain from direct facts (0.6762ms)
+Γ£ö UI clears score on method changes and chat gates deterministic answer before Gemini (1.2084ms)
+Γä╣ tests 5
+Γä╣ suites 0
+Γä╣ pass 5
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 171.9409

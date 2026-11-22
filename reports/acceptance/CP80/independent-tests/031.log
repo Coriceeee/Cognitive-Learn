@@ -1,0 +1,46 @@
+
+> cognitive-learn-ai@0.1.0 test:shadow
+> node --experimental-strip-types --test tests/step19-decision-evidence-shadow.test.mjs
+
+TAP version 13
+# (node:16590) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: S19-01 incomplete cycle abstains and cannot imply a measured effect
+ok 1 - S19-01 incomplete cycle abstains and cannot imply a measured effect
+  ---
+  duration_ms: 1.305161
+  type: 'test'
+  ...
+# Subtest: S19-02 below engineering completion threshold differs from frozen static policy
+ok 2 - S19-02 below engineering completion threshold differs from frozen static policy
+  ---
+  duration_ms: 2.64778
+  type: 'test'
+  ...
+# Subtest: S19-03 positive delta with completed actions maintains both policies
+ok 3 - S19-03 positive delta with completed actions maintains both policies
+  ---
+  duration_ms: 0.367994
+  type: 'test'
+  ...
+# Subtest: S19-04 nonpositive score delta produces replan, including valid score zero
+ok 4 - S19-04 nonpositive score delta produces replan, including valid score zero
+  ---
+  duration_ms: 0.460407
+  type: 'test'
+  ...
+# Subtest: S19-05 tampering in recorded decisions is detected on replay
+ok 5 - S19-05 tampering in recorded decisions is detected on replay
+  ---
+  duration_ms: 0.367603
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 179.17395

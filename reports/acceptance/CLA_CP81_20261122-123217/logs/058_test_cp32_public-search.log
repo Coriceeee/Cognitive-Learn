@@ -1,0 +1,23 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp32:public-search
+> node --experimental-strip-types --test tests/cp32-public-source-search.test.mjs
+
+Γ£ö arbitrary public university, country or scholarship names supported (5.0393ms)
+Γ£ö explicit confirmation and closed schema including no profile or UID (0.1753ms)
+Γ£ö reject common PII patterns and free-form URL/injection operators (0.1618ms)
+Γ£ö scope and year encoded in external search link (0.3664ms)
+Γ£ö dangerous links rejected and only HTTPS accepted (0.3946ms)
+Γ£ö provider claims never confer verification, numbers or model outputs (0.9783ms)
+Γ£ö candidate payload bounded (0.2896ms)
+Γ£ö Gemini key alone cannot bypass approval and separate provider contract (0.1951ms)
+Γ£ö mock provider receives public fields only; no personal context or Firebase token (0.3784ms)
+Γ£ö missing provider data produces no result (0.2578ms)
+Γ£ö Atlas, study abroad, Haven share panel; no Firestore data writes (1.1009ms)
+Γä╣ tests 11
+Γä╣ suites 0
+Γä╣ pass 11
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 150.7069

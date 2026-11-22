@@ -1,0 +1,34 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp65:atlas-lumen-ux
+> node --experimental-strip-types --test tests/cp65-atlas-lumen-ux.test.mjs
+
+Γû╢ CP65 source-backed Atlas overview
+  Γ£ö counts registry rows not inferred national coverage (2.2467ms)
+  Γ£ö keeps missing years explicitly zero without interpolation (0.1778ms)
+  Γ£ö does not invent rows when data is empty (0.1446ms)
+  Γ£ö retains distinction between records, universities, distinct URLs (0.1279ms)
+  Γ£ö reads actual registry instead of hard-coded numbers (0.242ms)
+  Γ£ö exposes four real active task routes and works with soft links (0.1949ms)
+  Γ£ö keeps Atlas year-by-year cutoff graph visible on comparison tab (0.1379ms)
+  Γ£ö limits visual pathway to Atlas overview rather than every nested tab (0.105ms)
+Γ£ö CP65 source-backed Atlas overview (4.4764ms)
+Γû╢ CP65 Lumen observation-first UX
+  Γ£ö adds evidence journey and chart to the overview only (0.2215ms)
+  Γ£ö never treats missing dimensions as observed zeros (0.1919ms)
+  Γ£ö does not claim growth before history verification (0.1097ms)
+  Γ£ö routes unavailable insights to Seed completion, not a fake AI result (0.0983ms)
+  Γ£ö leaves other Lumen tabs intact (0.1279ms)
+Γ£ö CP65 Lumen observation-first UX (0.9361ms)
+Γû╢ CP65 usability, release tracking and limitations
+  Γ£ö supports semantic navigation and readable chart numbers (0.1374ms)
+  Γ£ö includes mobile, dark, print and reduced-motion rules (0.0867ms)
+  Γ£ö fingerprints CSS and logic files for release provenance (12.7957ms)
+Γ£ö CP65 usability, release tracking and limitations (13.1243ms)
+Γä╣ tests 16
+Γä╣ suites 3
+Γä╣ pass 16
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 141.7968

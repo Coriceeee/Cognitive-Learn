@@ -1,0 +1,17 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp55:safety
+> node --experimental-strip-types --test tests/cp55-draft-session-safety.test.mjs
+
+Γ£ö CP55.1 current listener accepts only its active UID and observer epoch (0.6525ms)
+Γ£ö CP55.2 queued Firestore callback from previous account is rejected (0.1454ms)
+Γ£ö CP55.3 remote refresh cannot discard edits made while server is responding (0.4124ms)
+Γ£ö CP55.4 listener lifetime and queued-write cancellation use distinct epochs (0.3106ms)
+Γ£ö CP55.5 cleanup invalidates callbacks and auth failures do not update unmounted hook (0.1268ms)
+Γä╣ tests 5
+Γä╣ suites 0
+Γä╣ pass 5
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 123.9549

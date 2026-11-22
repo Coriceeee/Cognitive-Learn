@@ -1,0 +1,16 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp77:login-copy
+> node --test tests/cp77-login-manifesto.test.cjs
+
+Γ£ö CP77: agreed two-sentence manifesto appears in accessible main heading (0.8185ms)
+Γ£ö CP77: approved subtitle uses exact full copy (0.2151ms)
+Γ£ö CP77: preserves login card, all account entry paths and showcase illustration (0.1973ms)
+Γ£ö CP77: headline uses scoped adaptive typography rather than changing all global headings (0.1568ms)
+Γä╣ tests 4
+Γä╣ suites 0
+Γä╣ pass 4
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 90.0783

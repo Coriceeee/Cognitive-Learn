@@ -1,0 +1,19 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:hf:benchmark
+> python -m unittest discover -s research/huggingface/vnhsge_benchmark/tests -v
+
+npm.cmd : test_answers (test_benchmark.BenchmarkTests.test_answers) ... ok
+At C:\Gạo\Cognitive-Learn\CLA_CP81_ONECLICK.ps1:95 char:9
++         & $exe @commandArgs 2>&1 | Out-File -LiteralPath $logPath -En ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (test_answers (t...answers) ... ok:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+test_duplicate_hash (test_benchmark.BenchmarkTests.test_duplicate_hash) ... ok
+test_group_disjoint (test_benchmark.BenchmarkTests.test_group_disjoint) ... ok
+test_invalid_answer (test_benchmark.BenchmarkTests.test_invalid_answer) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK

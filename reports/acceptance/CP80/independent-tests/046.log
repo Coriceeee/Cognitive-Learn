@@ -1,0 +1,232 @@
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch11
+> node --experimental-strip-types --test tests/cp31-batch11-t0-t1-comparison.test.mjs
+
+TAP version 13
+# (node:17091) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: B11-01 reviewed and traced cycle allows DESCRIPTIVE_ONLY comparison
+ok 1 - B11-01 reviewed and traced cycle allows DESCRIPTIVE_ONLY comparison
+  ---
+  duration_ms: 6.433971
+  type: 'test'
+  ...
+# Subtest: B11-02 no cycle is INVALID with no implied student outcome
+ok 2 - B11-02 no cycle is INVALID with no implied student outcome
+  ---
+  duration_ms: 0.204361
+  type: 'test'
+  ...
+# Subtest: B11-03 ACTIVE cycle has no post-outcome comparison
+ok 3 - B11-03 ACTIVE cycle has no post-outcome comparison
+  ---
+  duration_ms: 0.324517
+  type: 'test'
+  ...
+# Subtest: B11-04 check-in without T1 cannot create outcome
+ok 4 - B11-04 check-in without T1 cannot create outcome
+  ---
+  duration_ms: 0.246938
+  type: 'test'
+  ...
+# Subtest: B11-05 frozen T0 is never derived from reassessment
+ok 5 - B11-05 frozen T0 is never derived from reassessment
+  ---
+  duration_ms: 0.613021
+  type: 'test'
+  ...
+# Subtest: B11-06 observed zero remains zero (not null/missing)
+ok 6 - B11-06 observed zero remains zero (not null/missing)
+  ---
+  duration_ms: 0.514268
+  type: 'test'
+  ...
+# Subtest: B11-07 matched subjects and denominator are explicit
+ok 7 - B11-07 matched subjects and denominator are explicit
+  ---
+  duration_ms: 0.525237
+  type: 'test'
+  ...
+# Subtest: B11-08 missing subject cannot be imputed to zero
+ok 8 - B11-08 missing subject cannot be imputed to zero
+  ---
+  duration_ms: 0.437328
+  type: 'test'
+  ...
+# Subtest: B11-09 compared averages restrict to matched measures (not full T0)
+ok 9 - B11-09 compared averages restrict to matched measures (not full T0)
+  ---
+  duration_ms: 0.573116
+  type: 'test'
+  ...
+# Subtest: B11-10 negative observed delta is allowed and not a risk probability
+ok 10 - B11-10 negative observed delta is allowed and not a risk probability
+  ---
+  duration_ms: 0.774033
+  type: 'test'
+  ...
+# Subtest: B11-11 self-reported hours preserve actual zero
+ok 11 - B11-11 self-reported hours preserve actual zero
+  ---
+  duration_ms: 0.41352
+  type: 'test'
+  ...
+# Subtest: B11-12 T0 target gap remains independent of T1 change
+ok 12 - B11-12 T0 target gap remains independent of T1 change
+  ---
+  duration_ms: 0.530683
+  type: 'test'
+  ...
+# Subtest: B11-13 no ML forecast exists: error and calibration withheld
+ok 13 - B11-13 no ML forecast exists: error and calibration withheld
+  ---
+  duration_ms: 0.246713
+  type: 'test'
+  ...
+# Subtest: B11-14 no causal effect estimate or treatment assignment
+ok 14 - B11-14 no causal effect estimate or treatment assignment
+  ---
+  duration_ms: 0.219806
+  type: 'test'
+  ...
+# Subtest: B11-15 limitation array explicitly discloses missingness and self-report
+ok 15 - B11-15 limitation array explicitly discloses missingness and self-report
+  ---
+  duration_ms: 0.417821
+  type: 'test'
+  ...
+# Subtest: B11-16 no mutation to frozen T0 or source cycle on comparison
+ok 16 - B11-16 no mutation to frozen T0 or source cycle on comparison
+  ---
+  duration_ms: 1.565828
+  type: 'test'
+  ...
+# Subtest: B11-17 legacy reviewed cycle without T0 cannot compare
+ok 17 - B11-17 legacy reviewed cycle without T0 cannot compare
+  ---
+  duration_ms: 1.052656
+  type: 'test'
+  ...
+# Subtest: B11-18 reviewed legacy without Evidence Record cannot compare
+ok 18 - B11-18 reviewed legacy without Evidence Record cannot compare
+  ---
+  duration_ms: 0.380248
+  type: 'test'
+  ...
+# Subtest: B11-19 mismatched T0 is not comparable
+ok 19 - B11-19 mismatched T0 is not comparable
+  ---
+  duration_ms: 0.182182
+  type: 'test'
+  ...
+# Subtest: B11-20 forged T0 forecast is rejected not evaluated
+ok 20 - B11-20 forged T0 forecast is rejected not evaluated
+  ---
+  duration_ms: 0.120061
+  type: 'test'
+  ...
+# Subtest: B11-21 altered T1 observation is rejected without recalculated evidence
+ok 21 - B11-21 altered T1 observation is rejected without recalculated evidence
+  ---
+  duration_ms: 0.220321
+  type: 'test'
+  ...
+# Subtest: B11-22 altered hours is rejected without recalculated evidence
+ok 22 - B11-22 altered hours is rejected without recalculated evidence
+  ---
+  duration_ms: 0.186658
+  type: 'test'
+  ...
+# Subtest: B11-23 invalid reassessment chronology is rejected
+ok 23 - B11-23 invalid reassessment chronology is rejected
+  ---
+  duration_ms: 0.181985
+  type: 'test'
+  ...
+# Subtest: B11-24 corruption in the evidence output fails closed
+ok 24 - B11-24 corruption in the evidence output fails closed
+  ---
+  duration_ms: 0.194602
+  type: 'test'
+  ...
+# Subtest: B11-25 cannot pass fake foreign/empty/shape-invalid cycles
+ok 25 - B11-25 cannot pass fake foreign/empty/shape-invalid cycles
+  ---
+  duration_ms: 0.095138
+  type: 'test'
+  ...
+# Subtest: B11-26 result replay succeeds with exact domain outputs
+ok 26 - B11-26 result replay succeeds with exact domain outputs
+  ---
+  duration_ms: 0.381617
+  type: 'test'
+  ...
+# Subtest: B11-27 replay ignores Firestore object key ordering
+ok 27 - B11-27 replay ignores Firestore object key ordering
+  ---
+  duration_ms: 0.444461
+  type: 'test'
+  ...
+# Subtest: B11-28 report tampering detected for measured values and claims
+ok 28 - B11-28 report tampering detected for measured values and claims
+  ---
+  duration_ms: 0.918086
+  type: 'test'
+  ...
+# Subtest: B11-29 appended reviewer/external verification is rejected
+ok 29 - B11-29 appended reviewer/external verification is rejected
+  ---
+  duration_ms: 0.374549
+  type: 'test'
+  ...
+# Subtest: B11-30 replay rejects INVALID status even if structurally self-consistent
+ok 30 - B11-30 replay rejects INVALID status even if structurally self-consistent
+  ---
+  duration_ms: 0.137868
+  type: 'test'
+  ...
+# Subtest: B11-31 golden path uses the real comparison engine with no fake prediction
+ok 31 - B11-31 golden path uses the real comparison engine with no fake prediction
+  ---
+  duration_ms: 2.355418
+  type: 'test'
+  ...
+# Subtest: B11-32 golden path frozen T0 does not change after measurement
+ok 32 - B11-32 golden path frozen T0 does not change after measurement
+  ---
+  duration_ms: 0.538062
+  type: 'test'
+  ...
+# Subtest: B11-33 student UI displays uncertainty, matched T1 and blocks legacy comparison
+ok 33 - B11-33 student UI displays uncertainty, matched T1 and blocks legacy comparison
+  ---
+  duration_ms: 0.789985
+  type: 'test'
+  ...
+# Subtest: B11-34 comparator cannot compute forecasts from targets or T1
+ok 34 - B11-34 comparator cannot compute forecasts from targets or T1
+  ---
+  duration_ms: 0.225694
+  type: 'test'
+  ...
+# Subtest: B11-35 deep comparison identifies changed limitations and metadata
+ok 35 - B11-35 deep comparison identifies changed limitations and metadata
+  ---
+  duration_ms: 0.941846
+  type: 'test'
+  ...
+# Subtest: B11-36 no conditional claim about improvement on zero completion
+ok 36 - B11-36 no conditional claim about improvement on zero completion
+  ---
+  duration_ms: 0.273576
+  type: 'test'
+  ...
+1..36
+# tests 36
+# suites 0
+# pass 36
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 226.78466

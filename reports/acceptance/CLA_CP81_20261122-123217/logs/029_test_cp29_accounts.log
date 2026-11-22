@@ -1,0 +1,41 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp29:accounts
+> node --test tests/cp29-privileged-account-ops.test.mjs tests/cp29-account-ui-contract.test.cjs
+
+Γ£ö CP29-B1-01 password reset uses Firebase Auth and never guesses Admin privileges (2.0239ms)
+Γ£ö CP29-B1-02 password reset UI returns generic acknowledgment (0.7822ms)
+Γ£ö CP29-K15-24 optional backend is not in default firebase config (1.2862ms)
+Γ£ö CP29-K15-25 role Management is never accessible as student business route (2.421ms)
+Γ£ö CP29-B4-01 Demo remains own-UID and explicitly labeled (0.735ms)
+Γ£ö CP29-K15-01 rejects empty, primitive, unknown and extra input keys (2.0955ms)
+Γ£ö CP29-K15-02 rejects invalid UID/ticket/requestId without arbitrary document paths (0.3798ms)
+Γ£ö CP29-K15-03 denies admin role grant and invalid active state (0.1819ms)
+Γ£ö CP29-K15-04 allow only bounded non-Admin role targets (0.348ms)
+Γ£ö CP29-K15-05 feature flag defaults fail-closed (0.769ms)
+Γ£ö CP29-K15-06 empty operator allowlist is denied (0.2647ms)
+Γ£ö CP29-K15-07 custom role claim cannot replace operator claim (0.6033ms)
+Γ£ö CP29-K15-08 a valid email or UI role never provides operator authority (0.2658ms)
+Γ£ö CP29-K15-09 recent primary login with no second factor is denied (0.3489ms)
+Γ£ö CP29-K15-10 stale or future sessions fail closed (1.6165ms)
+Γ£ö CP29-K15-11 blocked or demoted operator cannot manage accounts (0.2918ms)
+Γ£ö CP29-K15-12 never allows self-management (0.1515ms)
+Γ£ö CP29-K15-13 never manages another Admin, even if operator (0.1389ms)
+Γ£ö CP29-K15-14 rejects missing target or malformed legacy profile (0.1866ms)
+Γ£ö CP29-K15-15 set-active updates only active and records atomic audit without email (0.6947ms)
+Γ£ö CP29-K15-16 replay same mutation does not write a second audit (0.1835ms)
+Γ£ö CP29-K15-17 reusing requestId for a different request is rejected (0.2535ms)
+Γ£ö CP29-K15-18 inspect uses exact UID, returns minimal profile and creates audit (0.196ms)
+Γ£ö CP29-K15-19 no-op mutation is not a successful operation (0.1168ms)
+Γ£ö CP29-K15-20 explicit legacy-to-student migration is audited (0.2201ms)
+Γ£ö CP29-K15-21 an existing audit entry for other operator is not trusted (0.2008ms)
+Γ£ö CP29-K15-22 owner mismatch between token and actor UID fails closed (0.15ms)
+Γ£ö CP29-K15-23 no unsafe Admin bootstrap or client role elevation in source (1.5441ms)
+Γ£ö retired account cannot be reactivated without explicit conversion (0.19ms)
+Γä╣ tests 29
+Γä╣ suites 0
+Γä╣ pass 29
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 122.4844

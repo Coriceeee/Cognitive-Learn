@@ -1,0 +1,24 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp31:nexus
+> node --experimental-strip-types --test tests/cp31-nexus-review.test.mjs && node tests/admin-deeplink.test.cjs && node tests/module-hierarchy.test.cjs
+
+Γ£ö CP31-01 complete 22 task inventory across seven distinct modules (1.2725ms)
+Γ£ö CP31-02 twenty-two scoped diagnostics, zero undeployed tasks (0.1963ms)
+Γ£ö CP31-03 all 22 contain acceptance criteria and evidence requirements (0.1259ms)
+Γ£ö CP31-04 fail closed on duplicate, unknown or incomplete tasks (0.4508ms)
+Γ£ö CP31-05 unsafe external links or falsely available tools cannot become diagnostics (1.0428ms)
+Γ£ö CP31-06 read-only audit route is protected and works through Vercel SPA (0.8933ms)
+Γ£ö CP31-07 all 22 cards have a status-truthful acceptance link (0.5645ms)
+Γ£ö CP31-08 stale Admin diagnostic results are invalidated on auth switch (0.3982ms)
+Γ£ö CP31-09 no invented production test pass or admin role escalation in audit (0.5425ms)
+Γä╣ tests 9
+Γä╣ suites 0
+Γä╣ pass 9
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 120.2746
+ADMIN ROUTE CONTRACT: 22 admin-only links across 7 modules; no student business links PASS
+MODULE HIERARCHY CONTRACT: seven main modules, catalog, ownership and nested anchors PASS
+STUDENT EXPERIENCE: six major modules, student-only children and correctly named return links PASS

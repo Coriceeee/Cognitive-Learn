@@ -1,0 +1,30 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp72:lumen-fallback
+> node --experimental-strip-types --test tests/cp72-lumen-assistant-fallback.test.mjs
+
+Γ£ö 01 Missing technical zeros are never categorized as risks (2.4052ms)
+Γ£ö 02 Metadata fields are not cognitive measurements (0.2224ms)
+Γ£ö 03 Risk indicators do not invert into strengths (0.2289ms)
+Γ£ö 04 Low risk-direction scores are not called strengths (0.1159ms)
+Γ£ö 05 Regular high scores are positive proxy signals only (0.1377ms)
+Γ£ö 06 Missing dimensions override stale availability flags (0.1204ms)
+Γ£ö 07 Invalid numeric values are excluded (0.1821ms)
+Γ£ö 08 Incomplete score availability prevents conclusions (0.2412ms)
+Γ£ö 09 No-data decision mentions absence, not low competence (0.2441ms)
+Γ£ö 10 Offline guide uses measured inputs and provenance (0.2602ms)
+Γ£ö 11 Offline guide does not claim ML validation or probabilities (0.1542ms)
+Γ£ö 12 Offline guide does not invent measured values when missing (0.1288ms)
+Γ£ö 13 Missing and measured zero remain distinct (0.1008ms)
+Γ£ö 14 Offline guide returns deterministic output for same input (0.1652ms)
+Γ£ö 15 Reasoning engine rejects an unmeasured technical high score (0.3447ms)
+Γ£ö 16 Reasoning engine recognizes only verified measured signal (0.1352ms)
+Γ£ö 17 Gemini endpoint is configured and not hardcoded to an unrelated deployment (0.4764ms)
+Γ£ö 18 Assistant UI provides deterministic local guide independent of Gemini success (0.3235ms)
+Γä╣ tests 18
+Γä╣ suites 0
+Γä╣ pass 18
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 127.8132

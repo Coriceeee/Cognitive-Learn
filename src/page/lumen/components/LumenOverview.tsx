@@ -19,7 +19,7 @@ export default function LumenOverview({
       <div className="lumen-overview-copy">
 
         <span className="lumen-eyebrow">
-          LUMEN INTELLIGENCE
+          LUMEN · DẤU VÂN TAY TRÍ TUỆ
         </span>
 
         <h1>

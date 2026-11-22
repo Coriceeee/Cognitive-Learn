@@ -1,0 +1,17 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp29:routes
+> node --test tests/cp29-route-deeplink-contract.test.cjs
+
+Γ£ö CP29-A4-01 all 20 current critical paths are registered by the root app (0.7593ms)
+Γ£ö CP29-A4-02 Vercel rewrites every critical deep link to SPA without shadowing APIs (0.2856ms)
+Γ£ö CP29-A4-03 Firebase Hosting has SPA fallback (0.1223ms)
+Γ£ö CP29-A4-04 route guard enforces student-only scope and retired route denial (0.2325ms)
+Γ£ö CP29-A4-05 protected pages mount chatbot only inside AccessGate (0.7621ms)
+Γä╣ tests 5
+Γä╣ suites 0
+Γä╣ pass 5
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 84.6239

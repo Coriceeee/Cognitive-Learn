@@ -19,9 +19,9 @@ for (const adminOnly of ["Sẵn sàng dữ liệu ML", "Kiểm tra dữ liệu l
  assert.ok(!student.includes(adminOnly), `${adminOnly} must not appear in student catalog`);
 }
 assert.ok(!/^  nexus: \{/m.test(student), "Nexus must stay admin-only");
-assert.match(student,/Du học toàn cầu/);
-assert.match(student,/Báo cáo của tôi/);
-assert.match(student,/Khoảng cách|Điều kiện còn thiếu/);
+assert.match(student,/Chạm thế giới/);
+assert.match(student,/Bức tranh tiến bộ/);
+assert.match(student,/Mảnh ghép còn thiếu/);
 assert.match(grid,/studentSubmoduleDirectory\[module\.key as StudentModuleKey\]/);
 assert.match(nav,/getStudentSubmodules\(moduleKey\)/);
 assert.match(atlas,/isAdmin && <>/);

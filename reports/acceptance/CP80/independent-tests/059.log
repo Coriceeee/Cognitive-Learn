@@ -1,0 +1,30 @@
+TAP version 13
+# (node:17479) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: structural gate accepts complete aggregate fixture, not proof of science
+ok 1 - structural gate accepts complete aggregate fixture, not proof of science
+  ---
+  duration_ms: 1.464089
+  type: 'test'
+  ...
+# Subtest: rejects missing subject, wrong source, synthetic status
+ok 2 - rejects missing subject, wrong source, synthetic status
+  ---
+  duration_ms: 0.429356
+  type: 'test'
+  ...
+# Subtest: rejects bad bounds, mismatched counts, and inconsistent ablation
+ok 3 - rejects bad bounds, mismatched counts, and inconsistent ablation
+  ---
+  duration_ms: 0.32971
+  type: 'test'
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 3
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 186.346542

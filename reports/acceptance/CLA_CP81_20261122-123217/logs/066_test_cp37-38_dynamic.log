@@ -1,0 +1,26 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp37-38:dynamic
+> node --experimental-strip-types --test tests/cp37-38-dynamic-temporal.test.mjs
+
+Γ£ö current state uses structured data only, preserves valid zero and unknown (2.4243ms)
+Γ£ö scope owner server and source time gates (0.255ms)
+Γ£ö legacy placeholder numbers not promoted (0.158ms)
+Γ£ö wrong vector mapping, duplicate dimensions and conflicting value reject proxies (0.24ms)
+Γ£ö source timestamp is explicit; impossible timestamp rejected (0.152ms)
+Γ£ö exact time weighted EMA, zero valid and no causal result (8.3467ms)
+Γ£ö same day latest only, no false sample inflation (1.036ms)
+Γ£ö missing latest data resets series, no interpolation (0.2589ms)
+Γ£ö gap >28 days breaks series (0.2298ms)
+Γ£ö short time span cannot publish a trend (0.2575ms)
+Γ£ö scope mixing, owner mismatch, duplicate IDs or time, future timestamp blocked (0.2998ms)
+Γ£ö bounded window discloses truncation (0.4099ms)
+Γ£ö inputs immutable and repeat deterministic (1.1383ms)
+Γ£ö out of range, string and inconsistent cognitive mapping not used (0.1529ms)
+Γä╣ tests 14
+Γä╣ suites 0
+Γä╣ pass 14
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 144.0833

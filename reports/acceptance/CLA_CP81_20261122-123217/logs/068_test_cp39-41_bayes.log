@@ -1,0 +1,20 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp39-41:bayes
+> node --experimental-strip-types --test tests/cp39-41-bayesian-shadow.test.mjs
+
+Γ£ö weekly Bernoulli not per-task count; posterior exact and sensitivity (6.3213ms)
+Γ£ö prior sensitivity and zero completions valid (0.9138ms)
+Γ£ö reject cache or cross owner (0.2976ms)
+Γ£ö two weeks insufficient (0.5446ms)
+Γ£ö same-day/backfilled weeks blocked (0.6366ms)
+Γ£ö irregular spacing blocked (0.9509ms)
+Γ£ö tampered evidence blocked (0.2317ms)
+Γ£ö policy is not changed and student panel does not display posterior probability (0.7529ms)
+Γä╣ tests 8
+Γä╣ suites 0
+Γä╣ pass 8
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 147.4925

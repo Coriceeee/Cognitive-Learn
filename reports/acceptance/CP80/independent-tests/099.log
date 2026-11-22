@@ -1,0 +1,71 @@
+
+> cognitive-learn-ai@0.1.0 test:cp68:qa-gate
+> node --experimental-strip-types --test tests/cp68-qa-gate.test.mjs
+
+TAP version 13
+# (node:15544) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP68: production honesty and student SPA UX
+    # Subtest: Back to a different module restores scroll but moves keyboard focus
+    ok 1 - Back to a different module restores scroll but moves keyboard focus
+      ---
+      duration_ms: 1.975764
+      type: 'test'
+      ...
+    # Subtest: Back after changing only a filter does not steal focus or scroll
+    ok 2 - Back after changing only a filter does not steal focus or scroll
+      ---
+      duration_ms: 0.36485
+      type: 'test'
+      ...
+    # Subtest: push and replace continue to focus new routes and go to top
+    ok 3 - push and replace continue to focus new routes and go to top
+      ---
+      duration_ms: 0.254237
+      type: 'test'
+      ...
+    # Subtest: real React browser QA requires synthetic account consent
+    ok 4 - real React browser QA requires synthetic account consent
+      ---
+      duration_ms: 0.277309
+      type: 'test'
+      ...
+    # Subtest: QA origin is restricted to loopback and verifies Firebase project marker
+    ok 5 - QA origin is restricted to loopback and verifies Firebase project marker
+      ---
+      duration_ms: 0.602001
+      type: 'test'
+      ...
+    # Subtest: QA checks all six modules and two viewports using real DOM and SPA links
+    ok 6 - QA checks all six modules and two viewports using real DOM and SPA links
+      ---
+      duration_ms: 0.244742
+      type: 'test'
+      ...
+    # Subtest: rejects unapproved public origins before touching any QA credentials
+    ok 7 - rejects unapproved public origins before touching any QA credentials
+      ---
+      duration_ms: 1121.981505
+      type: 'test'
+      ...
+    # Subtest: does not advertise dark-mode full website as validated
+    ok 8 - does not advertise dark-mode full website as validated
+      ---
+      duration_ms: 0.524041
+      type: 'test'
+      ...
+    1..8
+ok 1 - CP68: production honesty and student SPA UX
+  ---
+  duration_ms: 1127.421187
+  type: 'suite'
+  ...
+1..1
+# tests 8
+# suites 1
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1300.857692

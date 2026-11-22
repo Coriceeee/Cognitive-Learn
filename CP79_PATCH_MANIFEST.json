@@ -1,0 +1,37 @@
+{
+  "source_zip": "Cognitive-Learn-CP78-20261122.zip",
+  "source_sha256": "500f14b02af0aad7b57f354cd55c784f208c0ddca531f055ed9f3890c8125c00",
+  "date": "2026-11-22",
+  "checkpoint": "CP79",
+  "modified_existing_files": [
+    "package.json",
+    "src/components/common/ModuleClusterGrid.tsx",
+    "src/page/main/AboutPage.tsx",
+    "src/page/seed/components/LearningCircuit.tsx",
+    "src/styles/37-cla-orbital-theme.css",
+    "src/styles/40-cla-exam-horizon-learning-circuit.css",
+    "src/styles/48-cla-unified-navigation.css",
+    "src/styles/49-cla-product-polish.css"
+  ],
+  "added_files": [
+    "tests/cp79-six-gradient-theme.test.cjs",
+    "BAO_CAO_CP79_GRADIENT_6_PHAN_HE_20261122.md",
+    "CP79_PATCH_MANIFEST.json"
+  ],
+  "verification": {
+    "static_tests_pass": "54/54",
+    "layout": "PASS",
+    "css_parse": "PASS",
+    "build": "NOT RUN: npm dependencies unavailable offline; npm ci failed due yargs-parser cache miss"
+  },
+  "sha256_modified": {
+    "package.json": "16d2fb7a06f301efc2e685e86dc08c62731aec39ff8dd0a85c600690581cc3cb",
+    "src/components/common/ModuleClusterGrid.tsx": "44e57a3c457ffc9185ea9de4127803d846c515be06a19936a8478f7994e3e5fc",
+    "src/page/main/AboutPage.tsx": "2fd105368803d049fc0ef9c8fdd52510f0549b167f996c46c869f1a6fd88d937",
+    "src/page/seed/components/LearningCircuit.tsx": "20744d7e34456709aeec69362e4375a0691b19810ce4d8d06e1d1e82b472c1d8",
+    "src/styles/37-cla-orbital-theme.css": "95d0a76ccf11cc6cbe306d725f5ac621fe5ea0228953b7b61ae2df11a22291b5",
+    "src/styles/40-cla-exam-horizon-learning-circuit.css": "76f375be6f5b91b6b3d9601b7139e4664a0534a6fb8c83560e6c0e47d5b01248",
+    "src/styles/48-cla-unified-navigation.css": "b72b6a570ca6f51e09e3e8761bcef90e17f0dd97ea2e93be02b15c6ba9c76972",
+    "src/styles/49-cla-product-polish.css": "02feb9a56884346d8534c44470098cacdab70763021a7d32b8820a590bec2d2f"
+  }
+}

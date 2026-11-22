@@ -1,0 +1,23 @@
+test_bootstrap_reproducible (test_reliability.Reliability.test_bootstrap_reproducible) ... ok
+test_constant_undefined (test_reliability.Reliability.test_constant_undefined) ... ok
+test_invalid_version_consent_duplicate (test_reliability.Reliability.test_invalid_version_consent_duplicate) ... ok
+test_inverted_negative (test_reliability.Reliability.test_inverted_negative) ... ok
+test_missing_exclusion_and_scope (test_reliability.Reliability.test_missing_exclusion_and_scope) ... ok
+test_perfect_absolute_agreement (test_reliability.Reliability.test_perfect_absolute_agreement) ... ok
+test_reject_synthetic_research_and_invalid_window (test_reliability.Reliability.test_reject_synthetic_research_and_invalid_window) ... ok
+test_small_withhold (test_reliability.Reliability.test_small_withhold) ... ok
+test_systematic_shift_not_perfect (test_reliability.Reliability.test_systematic_shift_not_perfect) ... ok
+test_all_values (test_validation.ValidationTests.test_all_values) ... ok
+test_duplicate (test_validation.ValidationTests.test_duplicate) ... ok
+test_event_gate (test_validation.ValidationTests.test_event_gate) ... ok
+test_missing_field (test_validation.ValidationTests.test_missing_field) ... ok
+test_missing_gate (test_validation.ValidationTests.test_missing_gate) ... ok
+test_out_of_range (test_validation.ValidationTests.test_out_of_range) ... ok
+test_repeated (test_validation.ValidationTests.test_repeated) ... ok
+test_spearman (test_validation.ValidationTests.test_spearman) ... ok
+test_zero_is_valid (test_validation.ValidationTests.test_zero_is_valid) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.350s
+
+OK

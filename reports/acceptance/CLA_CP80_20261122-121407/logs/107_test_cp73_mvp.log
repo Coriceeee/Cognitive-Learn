@@ -1,0 +1,25 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp73:mvp
+> node --experimental-strip-types --test tests/cp73-local-firebase-emulators.test.mjs tests/cp73-mvp-gate.test.mjs
+
+Γ£ö QA opt-in disabled does not mutate production connection (0.7646ms)
+Γ£ö Explicit QA opt-in only connects known demo identity to loopback ports (0.6721ms)
+Γ£ö Unknown opt-in value does not fall through to production (0.406ms)
+Γ£ö Production build and external hostname reject QA switch (1.4513ms)
+Γ£ö Wrong Firebase project, key or auth domain cannot connect to live project (0.5144ms)
+Γ£ö Firebase SDK connects both emulators only after safety check (0.844ms)
+Γ£ö QA template does not contain a real Firebase key or an application secret (0.4979ms)
+Γ£ö CP73 release gate rejects public host before reading QA credentials (112.0128ms)
+Γ£ö CP73 gate rejects network origin with username/password or path (335.7851ms)
+Γ£ö CP73 gate rejects report paths outside release root (113.5112ms)
+Γ£ö CP73 local gate writes a redacted, explicitly blocked report before dependencies installed (1401.3376ms)
+Γ£ö CP73 includes actual build, Emulator Rules and React E2E in candidate gate (0.1622ms)
+Γ£ö Local QA template must opt into consent gate and nonproduction Firebase ID (0.3972ms)
+Γä╣ tests 13
+Γä╣ suites 0
+Γä╣ pass 13
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 2061.1324

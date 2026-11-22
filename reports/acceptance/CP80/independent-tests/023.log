@@ -1,0 +1,104 @@
+
+> cognitive-learn-ai@0.1.0 test:prediction-safety
+> node --test tests/step11-prediction-semantics.test.cjs
+
+TAP version 13
+# Subtest: PRED-01 three heuristic indices have distinct, explicit semantics
+ok 1 - PRED-01 three heuristic indices have distinct, explicit semantics
+  ---
+  duration_ms: 1.577746
+  type: 'test'
+  ...
+# Subtest: PRED-02 no probability or statistically calibrated confidence in engine output
+ok 2 - PRED-02 no probability or statistically calibrated confidence in engine output
+  ---
+  duration_ms: 0.839528
+  type: 'test'
+  ...
+# Subtest: PRED-03 distance index is a bounded transformation of score gap, not an event probability
+ok 3 - PRED-03 distance index is a bounded transformation of score gap, not an event probability
+  ---
+  duration_ms: 0.24379
+  type: 'test'
+  ...
+# Subtest: PRED-04 a higher target cannot improve the gap index with unchanged prediction inputs
+ok 4 - PRED-04 a higher target cannot improve the gap index with unchanged prediction inputs
+  ---
+  duration_ms: 0.232546
+  type: 'test'
+  ...
+# Subtest: PRED-05 already reached target yields 100 index but NEVER 100% success claim
+ok 5 - PRED-05 already reached target yields 100 index but NEVER 100% success claim
+  ---
+  duration_ms: 0.132977
+  type: 'test'
+  ...
+# Subtest: PRED-06 distance index lower bound remains 0
+ok 6 - PRED-06 distance index lower bound remains 0
+  ---
+  duration_ms: 0.11297
+  type: 'test'
+  ...
+# Subtest: PRED-07 stability/completion weighted index is not an uncertainty interval
+ok 7 - PRED-07 stability/completion weighted index is not an uncertainty interval
+  ---
+  duration_ms: 0.187472
+  type: 'test'
+  ...
+# Subtest: SIM-01 Orion scenario propagates named heuristic gap index only
+ok 8 - SIM-01 Orion scenario propagates named heuristic gap index only
+  ---
+  duration_ms: 0.515381
+  type: 'test'
+  ...
+# Subtest: SIM-02 utility uses descriptive cognitive index, not a probability field
+ok 9 - SIM-02 utility uses descriptive cognitive index, not a probability field
+  ---
+  duration_ms: 0.386996
+  type: 'test'
+  ...
+# Subtest: SIM-03 scenario lists maintain comparative sorting under renamed semantics
+ok 10 - SIM-03 scenario lists maintain comparative sorting under renamed semantics
+  ---
+  duration_ms: 0.727059
+  type: 'test'
+  ...
+# Subtest: CONTRACT-01 TypeScript strict compiles prediction + simulation contract together
+ok 11 - CONTRACT-01 TypeScript strict compiles prediction + simulation contract together
+  ---
+  duration_ms: 711.504628
+  type: 'test'
+  ...
+# Subtest: CONTRACT-02 UI exposes heuristic semantics and calibrated absence
+ok 12 - CONTRACT-02 UI exposes heuristic semantics and calibrated absence
+  ---
+  duration_ms: 0.36739
+  type: 'test'
+  ...
+# Subtest: CONTRACT-03 result types cannot silently reintroduce probability/confidence fields
+ok 13 - CONTRACT-03 result types cannot silently reintroduce probability/confidence fields
+  ---
+  duration_ms: 0.750191
+  type: 'test'
+  ...
+# Subtest: CONTRACT-04 model version is bumped and terms say scenario, not validated ML
+ok 14 - CONTRACT-04 model version is bumped and terms say scenario, not validated ML
+  ---
+  duration_ms: 0.311331
+  type: 'test'
+  ...
+# Subtest: SIM-04 explanations do not equate an assumed cognitive adjustment with observed benefit
+ok 15 - SIM-04 explanations do not equate an assumed cognitive adjustment with observed benefit
+  ---
+  duration_ms: 0.369682
+  type: 'test'
+  ...
+1..15
+# tests 15
+# suites 0
+# pass 15
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1159.093224

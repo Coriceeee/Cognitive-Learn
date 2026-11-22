@@ -1,0 +1,39 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:step06
+> node --test tests/atlas-aspiration-policy-2026.test.cjs tests/step06-subject-score-contract.test.cjs
+
+Γ£ö P26-01 official policy is versioned and capped at 15 / teacher NV1-5 (1.3752ms)
+Γ£ö P26-02 classifier catches teacher-training by major code or explicit flag (0.3516ms)
+Γ£ö P26-03 classifier catches teacher names without misleading other education majors (0.455ms)
+Γ£ö P26-04 >5 teacher-training candidates never spill into NV6-NV15 (0.9461ms)
+Γ£ö P26-05 recommendations cannot contain more than 15 applications (0.3703ms)
+Γ£ö P26-06 user-chosen maximum below five also constrains teacher-training count (0.2121ms)
+Γ£ö P26-07 historical sources cannot silently become 2026 policy inputs (0.9003ms)
+Γ£ö P26-08 invalid or missing-benchmark results are not offered (0.2171ms)
+Γ£ö P26-09 ten non-teacher programmes preserve model ranking; no auto teacher bias score (0.2433ms)
+Γ£ö P26-10 unparseable cap falls back to legal maximum (0.2403ms)
+Γ£ö P26-11 no valid candidates produces no fabricated places (0.159ms)
+Γ£ö P26-12 UI displays source, cap and teaching limitation even before recommendations (0.6728ms)
+Γ£ö P26-13 integrated Admission Engine enforces teaching NV1ΓÇôNV5 after real eligibility calculation (43.9749ms)
+Γ£ö P26-14 integrated engine abstains if cutoff is unverified, despite policy-compliant ordering (23.2282ms)
+Γ£ö 06.01 zero is a legitimate observed score, absent is not zero (0.9054ms)
+Γ£ö 06.02 impossible or malformed subject scores are not silently clamped (0.1777ms)
+Γ£ö 06.03 D01 uses exactly its three observed subjects (0.7618ms)
+Γ£ö 06.04 genuine zero does not make a complete combination incomplete (0.1493ms)
+Γ£ö 06.05 blank or invalid remains missing in the exact combination (0.2854ms)
+Γ£ö 06.06 partial sum is never the winning option (0.3379ms)
+Γ£ö 06.07 no external scale is silently ranked against school combinations (0.2555ms)
+Γ£ö 06.08 a three-subject zero score remains an eligible combination, not a missing record (0.525ms)
+Γ£ö 06.09 invalid or missing subjects cannot qualify for a verified benchmark (0.2535ms)
+Γ£ö 06.10 Studio only admits official self-declared THPT 2026 scores into cutoff comparison (0.86ms)
+Γ£ö 06.11 visual explanation is based on computed engine combinations, not hardcoded examples (0.5589ms)
+Γ£ö 06.12 supported input subjects are visible but extra combinations are not invented (0.6217ms)
+Γ£ö 06.13 Studio styling supports mobile and reduced motion (0.52ms)
+Γä╣ tests 27
+Γä╣ suites 0
+Γä╣ pass 27
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 396.5876

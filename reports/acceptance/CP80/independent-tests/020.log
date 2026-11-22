@@ -1,0 +1,136 @@
+TAP version 13
+# Subtest: 09.01 published mappings include X06 and X26, not a guessed synonym
+ok 1 - 09.01 published mappings include X06 and X26, not a guessed synonym
+  ---
+  duration_ms: 2.997549
+  type: 'test'
+  ...
+# Subtest: 09.02 abstains until exactly two distinct electives confirmed
+ok 2 - 09.02 abstains until exactly two distinct electives confirmed
+  ---
+  duration_ms: 0.455143
+  type: 'test'
+  ...
+# Subtest: 09.03 English + Informatics unlocks officially published X26, outside nine-code trial catalog
+ok 3 - 09.03 English + Informatics unlocks officially published X26, outside nine-code trial catalog
+  ---
+  duration_ms: 9.196903
+  type: 'test'
+  ...
+# Subtest: 09.04 Physics + Informatics matches X06 and not X26
+ok 4 - 09.04 Physics + Informatics matches X06 and not X26
+  ---
+  duration_ms: 0.473057
+  type: 'test'
+  ...
+# Subtest: 09.05 Physics + English matches A01, and D01 only when literature and English exist
+ok 5 - 09.05 Physics + English matches A01, and D01 only when literature and English exist
+  ---
+  duration_ms: 0.398297
+  type: 'test'
+  ...
+# Subtest: 09.06 Physics + Chemistry matches only A00
+ok 6 - 09.06 Physics + Chemistry matches only A00
+  ---
+  duration_ms: 0.256694
+  type: 'test'
+  ...
+# Subtest: 09.07 History + geography have no PTIT match in this bounded sample, not a nationwide exclusion
+ok 7 - 09.07 History + geography have no PTIT match in this bounded sample, not a nationwide exclusion
+  ---
+  duration_ms: 0.281269
+  type: 'test'
+  ...
+# Subtest: 09.08 missing Informatics leaves X26 observable score null, not 0
+ok 8 - 09.08 missing Informatics leaves X26 observable score null, not 0
+  ---
+  duration_ms: 0.454928
+  type: 'test'
+  ...
+# Subtest: 09.09 real zero accepted when three scores observed
+ok 9 - 09.09 real zero accepted when three scores observed
+  ---
+  duration_ms: 0.503731
+  type: 'test'
+  ...
+# Subtest: 09.10 invalid score cannot be used for a total
+ok 10 - 09.10 invalid score cannot be used for a total
+  ---
+  duration_ms: 1.194197
+  type: 'test'
+  ...
+# Subtest: 09.11 target major identifies matching records but does not exclude other majors
+ok 11 - 09.11 target major identifies matching records but does not exclude other majors
+  ---
+  duration_ms: 0.698238
+  type: 'test'
+  ...
+# Subtest: 09.12 different source year is excluded
+ok 12 - 09.12 different source year is excluded
+  ---
+  duration_ms: 0.143445
+  type: 'test'
+  ...
+# Subtest: 09.13 untrusted host is excluded despite copied combinations
+ok 13 - 09.13 untrusted host is excluded despite copied combinations
+  ---
+  duration_ms: 0.163591
+  type: 'test'
+  ...
+# Subtest: 09.14 campus BVS is not mislabeled BVH
+ok 14 - 09.14 campus BVS is not mislabeled BVH
+  ---
+  duration_ms: 0.084363
+  type: 'test'
+  ...
+# Subtest: 09.15 outside the PTIT published five codes does not create arbitrary official combinations
+ok 15 - 09.15 outside the PTIT published five codes does not create arbitrary official combinations
+  ---
+  duration_ms: 0.083501
+  type: 'test'
+  ...
+# Subtest: 09.16 output includes source URL, method, campus, year and program code
+ok 16 - 09.16 output includes source URL, method, campus, year and program code
+  ---
+  duration_ms: 0.508274
+  type: 'test'
+  ...
+# Subtest: 09.17 national explorer replaces the bounded PTIT picker and exposes all registered programmes
+ok 17 - 09.17 national explorer replaces the bounded PTIT picker and exposes all registered programmes
+  ---
+  duration_ms: 0.425101
+  type: 'test'
+  ...
+# Subtest: 09.18 protects admission comparison from school/tryout scores
+ok 18 - 09.18 protects admission comparison from school/tryout scores
+  ---
+  duration_ms: 0.478988
+  type: 'test'
+  ...
+# Subtest: 09.19 rejects prior-year official page even when a program wrongly claims year 2026
+ok 19 - 09.19 rejects prior-year official page even when a program wrongly claims year 2026
+  ---
+  duration_ms: 0.132379
+  type: 'test'
+  ...
+# Subtest: 09.20 excludes a program without a 2026 THPT admission method
+ok 20 - 09.20 excludes a program without a 2026 THPT admission method
+  ---
+  duration_ms: 0.094615
+  type: 'test'
+  ...
+# Subtest: 09.21 official-pathway exploration is discoverable from Atlas module navigation
+ok 21 - 09.21 official-pathway exploration is discoverable from Atlas module navigation
+  ---
+  duration_ms: 0.357457
+  type: 'test'
+  ...
+1..21
+# tests 21
+# suites 0
+# pass 21
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 418.588199

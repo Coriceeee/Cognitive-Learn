@@ -1,0 +1,110 @@
+
+> cognitive-learn-ai@0.1.0 test:cp69:firebase-integration
+> node --test tests/cp69-atlas-verified-cas.test.cjs && node --experimental-strip-types --test tests/cp69-companion-verified-consent.test.mjs
+
+TAP version 13
+# Subtest: CP69.1: Atlas workspace canonical signature ignores object key order
+ok 1 - CP69.1: Atlas workspace canonical signature ignores object key order
+  ---
+  duration_ms: 1.21582
+  type: 'test'
+  ...
+# Subtest: CP69.2: newer revision or same revision modified payload prevents overwrite
+ok 2 - CP69.2: newer revision or same revision modified payload prevents overwrite
+  ---
+  duration_ms: 0.513516
+  type: 'test'
+  ...
+# Subtest: CP69.3: legacy version-less Atlas can migrate exactly once
+ok 3 - CP69.3: legacy version-less Atlas can migrate exactly once
+  ---
+  duration_ms: 0.333391
+  type: 'test'
+  ...
+# Subtest: CP69.4: cached Atlas snapshot does not become ready or create trusted baseline
+ok 4 - CP69.4: cached Atlas snapshot does not become ready or create trusted baseline
+  ---
+  duration_ms: 45.825789
+  type: 'test'
+  ...
+# Subtest: CP69.5: wrong-owner document fails closed; stale callback after account change ignored
+ok 5 - CP69.5: wrong-owner document fails closed; stale callback after account change ignored
+  ---
+  duration_ms: 26.952898
+  type: 'test'
+  ...
+# Subtest: CP69.6: first write uses transaction and revision=1, remote update causes conflict
+ok 6 - CP69.6: first write uses transaction and revision=1, remote update causes conflict
+  ---
+  duration_ms: 22.178789
+  type: 'test'
+  ...
+# Subtest: CP69.7: unscoped or another-user browser storage cannot be imported
+ok 7 - CP69.7: unscoped or another-user browser storage cannot be imported
+  ---
+  duration_ms: 37.377377
+  type: 'test'
+  ...
+# Subtest: CP69.7b: explicitly owned browser storage is available only to that UID
+ok 8 - CP69.7b: explicitly owned browser storage is available only to that UID
+  ---
+  duration_ms: 17.829804
+  type: 'test'
+  ...
+# Subtest: CP69.8: Atlas Rules in both candidate versions require monotonic revision and owner
+ok 9 - CP69.8: Atlas Rules in both candidate versions require monotonic revision and owner
+  ---
+  duration_ms: 0.824675
+  type: 'test'
+  ...
+# Subtest: CP69.9 + CP73: production remains unchanged; emulator connects only after QA safety gate
+ok 10 - CP69.9 + CP73: production remains unchanged; emulator connects only after QA safety gate
+  ---
+  duration_ms: 0.515038
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 418.554441
+TAP version 13
+# (node:37832) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP69.10: consent from cached/pending write cannot permit saving
+ok 1 - CP69.10: consent from cached/pending write cannot permit saving
+  ---
+  duration_ms: 1.167008
+  type: 'test'
+  ...
+# Subtest: CP69.11: companion listener requests metadata changes and never displays cached data as saved
+ok 2 - CP69.11: companion listener requests metadata changes and never displays cached data as saved
+  ---
+  duration_ms: 0.248906
+  type: 'test'
+  ...
+# Subtest: CP69.12: transaction reads consent record on server before writing schedule
+ok 3 - CP69.12: transaction reads consent record on server before writing schedule
+  ---
+  duration_ms: 0.171152
+  type: 'test'
+  ...
+# Subtest: CP69.13: account switch invalidates stale companion callbacks and errors
+ok 4 - CP69.13: account switch invalidates stale companion callbacks and errors
+  ---
+  duration_ms: 0.217621
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 123.513614

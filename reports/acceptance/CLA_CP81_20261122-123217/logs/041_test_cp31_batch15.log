@@ -1,0 +1,52 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp31:batch15
+> node --experimental-strip-types --test tests/cp31-batch15-snapshot-integrity.test.mjs
+
+Γ£ö B15-01 one cycle with no declarations is incomplete, never complete (6.2297ms)
+Γ£ö B15-02 two fully declared cycles are syntactically complete, unverified (11.2862ms)
+Γ£ö B15-03 partial snapshot gives exact missing count (2.0136ms)
+Γ£ö B15-04 no window and no documents is neutral (0.1765ms)
+Γ£ö B15-05 unexpected data in empty window is blocked (0.55ms)
+Γ£ö B15-06 wrong user ID blocked (0.2891ms)
+Γ£ö B15-07 overlong user ID blocked (0.1939ms)
+Γ£ö B15-08 more than 8 cycles rejected regardless of documents (0.2122ms)
+Γ£ö B15-09 duplicate cycle IDs reject the entire result (0.1902ms)
+Γ£ö B15-10 malformed cycle ID blocked (0.2224ms)
+Γ£ö B15-11 unknown document refused, not silently filtered (1.8742ms)
+Γ£ö B15-12 duplicate document point refused (1.6396ms)
+Γ£ö B15-13 wrong document ID refused (1.5559ms)
+Γ£ö B15-14 changed score 0 refused (1.063ms)
+Γ£ö B15-15 changed reported time refused (1.2958ms)
+Γ£ö B15-16 forged source refused (0.8639ms)
+Γ£ö B15-17 forged identity refused (1.0609ms)
+Γ£ö B15-18 forged reviewer field refused (0.7832ms)
+Γ£ö B15-19 missing write timestamp refused (1.0638ms)
+Γ£ö B15-20 missing context field refused (0.9441ms)
+Γ£ö B15-21 swapped T0/T1 refused (0.955ms)
+Γ£ö B15-22 invalid subjectIndex refused (0.8931ms)
+Γ£ö B15-23 corrupted frozen T0 blocks entire window (0.5432ms)
+Γ£ö B15-24 corrupt Evidence Record blocks entire window (0.9931ms)
+Γ£ö B15-25 legacy no T0 stays readable but is never complete (1.9362ms)
+Γ£ö B15-26 legacy no Evidence Record stays read-only (1.2038ms)
+Γ£ö B15-27 forged metadata for legacy cycle cannot be promoted (0.9829ms)
+Γ£ö B15-28 valid legacy + partial active cycle remains legacy read-only (0.6031ms)
+Γ£ö B15-29 limit sentinel over 96 records is blocked, never silently truncated (0.6441ms)
+Γ£ö B15-30 order of Firestore results does not change audited row order (2.0579ms)
+Γ£ö B15-31 missing manifest remains missing, never becomes aligned (2.4351ms)
+Γ£ö B15-32 even complete metadata does not prove psychometric equivalence (2.4086ms)
+Γ£ö B15-33 query requests 97th sentinel and ignores local cache as evidence (0.5669ms)
+Γ£ö B15-34 stale Firestore callbacks cannot set state after unmount (0.3115ms)
+Γ£ö B15-35 transaction checks all immutable point fields, not only score (0.2378ms)
+Γ£ö B15-36 UI distinguishes legacy, missing rows, complete-unverified (0.4761ms)
+Γ£ö B15-37 no server deployment is introduced (0.3022ms)
+Γ£ö B15-38 no numeric score or probability fabricated from missing rows (0.7397ms)
+Γ£ö B15-39 prior source set remains under strict constraints (0.4519ms)
+Γ£ö B15-40 source never contains student identifying fields (0.3847ms)
+Γä╣ tests 40
+Γä╣ suites 0
+Γä╣ pass 40
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 205.0473

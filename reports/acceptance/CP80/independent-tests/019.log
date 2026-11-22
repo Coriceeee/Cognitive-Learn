@@ -1,0 +1,124 @@
+TAP version 13
+# Subtest: 08.01 policy states two compulsory plus two elective subjects, source and year
+ok 1 - 08.01 policy states two compulsory plus two elective subjects, source and year
+  ---
+  duration_ms: 2.113233
+  type: 'test'
+  ...
+# Subtest: 08.02 no confirmed grade-12 courses means abstain; marks alone are not enrollment
+ok 2 - 08.02 no confirmed grade-12 courses means abstain; marks alone are not enrollment
+  ---
+  duration_ms: 0.592186
+  type: 'test'
+  ...
+# Subtest: 08.03 one confirmed elective cannot form a pair
+ok 3 - 08.03 one confirmed elective cannot form a pair
+  ---
+  duration_ms: 0.151586
+  type: 'test'
+  ...
+# Subtest: 08.04 two confirmed choices produce exactly one pair
+ok 4 - 08.04 two confirmed choices produce exactly one pair
+  ---
+  duration_ms: 0.547206
+  type: 'test'
+  ...
+# Subtest: 08.05 only the confirmed grade-12 list contributes, other high scores excluded
+ok 5 - 08.05 only the confirmed grade-12 list contributes, other high scores excluded
+  ---
+  duration_ms: 0.300308
+  type: 'test'
+  ...
+# Subtest: 08.06 incomplete elective scores are null, never silently zero
+ok 6 - 08.06 incomplete elective scores are null, never silently zero
+  ---
+  duration_ms: 0.372689
+  type: 'test'
+  ...
+# Subtest: 08.07 actual zero remains valid input
+ok 7 - 08.07 actual zero remains valid input
+  ---
+  duration_ms: 0.346238
+  type: 'test'
+  ...
+# Subtest: 08.08 invalid and negative marks cannot manufacture an observed-score comparison
+ok 8 - 08.08 invalid and negative marks cannot manufacture an observed-score comparison
+  ---
+  duration_ms: 0.138242
+  type: 'test'
+  ...
+# Subtest: 08.09 does not claim no admission possible when project catalogue has no combo
+ok 9 - 08.09 does not claim no admission possible when project catalogue has no combo
+  ---
+  duration_ms: 1.376171
+  type: 'test'
+  ...
+# Subtest: 08.10 technology streams are distinct and generic technology grade is not reused
+ok 10 - 08.10 technology streams are distinct and generic technology grade is not reused
+  ---
+  duration_ms: 0.457138
+  type: 'test'
+  ...
+# Subtest: 08.11 duplicates are deduplicated and are not counted as two different electives
+ok 11 - 08.11 duplicates are deduplicated and are not counted as two different electives
+  ---
+  duration_ms: 0.173845
+  type: 'test'
+  ...
+# Subtest: 08.12 never invents verified university matches from exploratory combinations
+ok 12 - 08.12 never invents verified university matches from exploratory combinations
+  ---
+  duration_ms: 0.438091
+  type: 'test'
+  ...
+# Subtest: 08.13 only explicitly supplied verified program data is considered a matching opportunity
+ok 13 - 08.13 only explicitly supplied verified program data is considered a matching opportunity
+  ---
+  duration_ms: 0.315292
+  type: 'test'
+  ...
+# Subtest: 08.14 unmatched target cannot be fabricated by substring scoring or mock sources
+ok 14 - 08.14 unmatched target cannot be fabricated by substring scoring or mock sources
+  ---
+  duration_ms: 0.119864
+  type: 'test'
+  ...
+# Subtest: 08.15 three studied electives creates three pairs and sorts by coverage then grades
+ok 15 - 08.15 three studied electives creates three pairs and sorts by coverage then grades
+  ---
+  duration_ms: 0.207088
+  type: 'test'
+  ...
+# Subtest: 08.16 combining a pair with mandatory subjects only uses supported academic combinations
+ok 16 - 08.16 combining a pair with mandatory subjects only uses supported academic combinations
+  ---
+  duration_ms: 0.182454
+  type: 'test'
+  ...
+# Subtest: 08.17 two technological streams are never assumed to share a common grade
+ok 17 - 08.17 two technological streams are never assumed to share a common grade
+  ---
+  duration_ms: 0.257103
+  type: 'test'
+  ...
+# Subtest: 08.18 UI requires explicit confirmation and exposes policy/source/limits
+ok 18 - 08.18 UI requires explicit confirmation and exposes policy/source/limits
+  ---
+  duration_ms: 0.591186
+  type: 'test'
+  ...
+# Subtest: 08.19 previously established Seed and school-score safety gates remain untouched
+ok 19 - 08.19 previously established Seed and school-score safety gates remain untouched
+  ---
+  duration_ms: 0.620302
+  type: 'test'
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 19
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 474.577952

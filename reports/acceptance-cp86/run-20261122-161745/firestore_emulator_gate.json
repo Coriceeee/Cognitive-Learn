@@ -1,0 +1,16 @@
+{
+  "gateVersion": "cla-firestore-security-gate-v1",
+  "at": "2026-11-22T09:19:58.935Z",
+  "projectId": "demo-cla-cp21-security",
+  "configFile": "firebase.emulator.cp21.json",
+  "rulesFile": "firestore.rules.CANDIDATE_CP21",
+  "rulesSha256": "8fbca0b88aacfb68fb8b48271ce58f00d803214154b01c1ccddad22aa66147ec",
+  "preflight": "PASS",
+  "staticTests": "PASS",
+  "emulatorAuthorizationTests": "PASS",
+  "overall": "PASS",
+  "productionRulesVerified": false,
+  "productionDeploymentPerformed": false,
+  "notes": [],
+  "emulatorPort": 18081
+}

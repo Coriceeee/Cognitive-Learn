@@ -1,0 +1,94 @@
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch3
+> node --experimental-strip-types --test tests/cp31-batch3-operational-audits.test.mjs
+
+TAP version 13
+# (node:17001) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP31-B3-01 valid demo docs pass read-only identity/schema checks
+ok 1 - CP31-B3-01 valid demo docs pass read-only identity/schema checks
+  ---
+  duration_ms: 1.311738
+  type: 'test'
+  ...
+# Subtest: CP31-B3-02 cross-owner or dataScope != demo are rejected without leaking UID
+ok 2 - CP31-B3-02 cross-owner or dataScope != demo are rejected without leaking UID
+  ---
+  duration_ms: 0.313333
+  type: 'test'
+  ...
+# Subtest: CP31-B3-03 no docs or legacy never claims migration complete
+ok 3 - CP31-B3-03 no docs or legacy never claims migration complete
+  ---
+  duration_ms: 0.202892
+  type: 'test'
+  ...
+# Subtest: CP31-B3-04 inconsistent electives/foreign language block automated migrations
+ok 4 - CP31-B3-04 inconsistent electives/foreign language block automated migrations
+  ---
+  duration_ms: 0.266196
+  type: 'test'
+  ...
+# Subtest: CP31-B3-05 UID blank and missing ownership fail closed
+ok 5 - CP31-B3-05 UID blank and missing ownership fail closed
+  ---
+  duration_ms: 0.550436
+  type: 'test'
+  ...
+# Subtest: CP31-B3-06 current admission registry evaluated without fabricated freshness
+ok 6 - CP31-B3-06 current admission registry evaluated without fabricated freshness
+  ---
+  duration_ms: 0.974469
+  type: 'test'
+  ...
+# Subtest: CP31-B3-07 admission missing 2024 or duplicate year is visible
+ok 7 - CP31-B3-07 admission missing 2024 or duplicate year is visible
+  ---
+  duration_ms: 0.191455
+  type: 'test'
+  ...
+# Subtest: CP31-B3-08 bad HTTP, javascript and embedded credentials cannot be trusted
+ok 8 - CP31-B3-08 bad HTTP, javascript and embedded credentials cannot be trusted
+  ---
+  duration_ms: 0.247329
+  type: 'test'
+  ...
+# Subtest: CP31-B3-09 scholarship register is assessed with NOT TESTED deadlines
+ok 9 - CP31-B3-09 scholarship register is assessed with NOT TESTED deadlines
+  ---
+  duration_ms: 1.824597
+  type: 'test'
+  ...
+# Subtest: CP31-B3-10 scholarship URL and date validity includes future/invalid date
+ok 10 - CP31-B3-10 scholarship URL and date validity includes future/invalid date
+  ---
+  duration_ms: 0.927634
+  type: 'test'
+  ...
+# Subtest: CP31-B3-11 duplicate scholarship, missing conditions/credentials are rejected
+ok 11 - CP31-B3-11 duplicate scholarship, missing conditions/credentials are rejected
+  ---
+  duration_ms: 0.411114
+  type: 'test'
+  ...
+# Subtest: CP31-B3-12 changes registered as safe local diagnostics, not production approval
+ok 12 - CP31-B3-12 changes registered as safe local diagnostics, not production approval
+  ---
+  duration_ms: 1.072725
+  type: 'test'
+  ...
+# Subtest: CP31-B3-13 E2E manifest updated without weakening auth/preflight
+ok 13 - CP31-B3-13 E2E manifest updated without weakening auth/preflight
+  ---
+  duration_ms: 0.531771
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 228.634993

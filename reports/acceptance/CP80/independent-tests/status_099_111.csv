@@ -1,0 +1,13 @@
+﻿index,status,exitcode,seconds,command,log
+99,PASS,0,1.51,npm run test:cp68:qa-gate,reports/acceptance/CP80/independent-tests/099.log
+100,PASS,0,1.63,npm run test:cp69:firebase-integration,reports/acceptance/CP80/independent-tests/100.log
+101,PASS,0,0.39,npm run test:cp70:journey,reports/acceptance/CP80/independent-tests/101.log
+102,PASS,0,0.35,npm run test:cp71:unified-nav,reports/acceptance/CP80/independent-tests/102.log
+103,PASS,0,0.37,npm run test:cp72:lumen-fallback,reports/acceptance/CP80/independent-tests/103.log
+104,PASS,0,6.62,npm run test:cp73:mvp,reports/acceptance/CP80/independent-tests/104.log
+105,PASS,0,0.37,npm run test:cp74:product-polish,reports/acceptance/CP80/independent-tests/105.log
+106,PASS,0,0.55,npm run test:cp75:ux-audit,reports/acceptance/CP80/independent-tests/106.log
+107,PASS,0,0.37,npm run test:cp76:names,reports/acceptance/CP80/independent-tests/107.log
+108,PASS,0,0.24,npm run test:cp77:login-copy,reports/acceptance/CP80/independent-tests/108.log
+109,PASS,0,0.35,npm run test:cp78:clarity,reports/acceptance/CP80/independent-tests/109.log
+110,PASS,0,0.26,npm run test:cp79:theme,reports/acceptance/CP80/independent-tests/110.log

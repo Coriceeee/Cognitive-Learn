@@ -1,0 +1,88 @@
+TAP version 13
+# Subtest: 07-01: same-term D01 8+7+9 gives 24, no exam or probability label
+ok 1 - 07-01: same-term D01 8+7+9 gives 24, no exam or probability label
+  ---
+  duration_ms: 4.841129
+  type: 'test'
+  ...
+# Subtest: 07-02: zero really is an observed completed score
+ok 2 - 07-02: zero really is an observed completed score
+  ---
+  duration_ms: 0.699233
+  type: 'test'
+  ...
+# Subtest: 07-03: partial scores are never promoted to completed semester averages
+ok 3 - 07-03: partial scores are never promoted to completed semester averages
+  ---
+  duration_ms: 0.784367
+  type: 'test'
+  ...
+# Subtest: 07-04: cannot combine subjects from different semesters to fabricate D01
+ok 4 - 07-04: cannot combine subjects from different semesters to fabricate D01
+  ---
+  duration_ms: 0.449844
+  type: 'test'
+  ...
+# Subtest: 07-05: prefers most recent term with a complete supported combination
+ok 5 - 07-05: prefers most recent term with a complete supported combination
+  ---
+  duration_ms: 0.521333
+  type: 'test'
+  ...
+# Subtest: 07-06: returns null on transcript with no completed subject grades
+ok 6 - 07-06: returns null on transcript with no completed subject grades
+  ---
+  duration_ms: 0.224939
+  type: 'test'
+  ...
+# Subtest: 07-07: mapping covers new-programme electives and excludes unrelated subjects
+ok 7 - 07-07: mapping covers new-programme electives and excludes unrelated subjects
+  ---
+  duration_ms: 0.428213
+  type: 'test'
+  ...
+# Subtest: 07-08: non-English foreign language is not silently mapped to English
+ok 8 - 07-08: non-English foreign language is not silently mapped to English
+  ---
+  duration_ms: 0.268834
+  type: 'test'
+  ...
+# Subtest: 07-09: read-only adapter does not mutate Seed transcript
+ok 9 - 07-09: read-only adapter does not mutate Seed transcript
+  ---
+  duration_ms: 0.76765
+  type: 'test'
+  ...
+# Subtest: 07-10: Atlas reads user-bound Seed hook, only for school marks
+ok 10 - 07-10: Atlas reads user-bound Seed hook, only for school marks
+  ---
+  duration_ms: 1.045133
+  type: 'test'
+  ...
+# Subtest: 07-11: changing score basis clears old marks and never reuses school marks as official THPT
+ok 11 - 07-11: changing score basis clears old marks and never reuses school marks as official THPT
+  ---
+  duration_ms: 0.411645
+  type: 'test'
+  ...
+# Subtest: 07-12: hook clears account-specific data and blocks callbacks from old UID
+ok 12 - 07-12: hook clears account-specific data and blocks callbacks from old UID
+  ---
+  duration_ms: 0.303195
+  type: 'test'
+  ...
+# Subtest: 07-13: delayed Firestore snapshot for a signed-out account cannot overwrite new student
+ok 13 - 07-13: delayed Firestore snapshot for a signed-out account cannot overwrite new student
+  ---
+  duration_ms: 78.640314
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 567.271764

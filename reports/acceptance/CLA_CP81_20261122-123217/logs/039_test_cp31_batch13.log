@@ -1,0 +1,64 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp31:batch13
+> node --experimental-strip-types --test tests/cp31-batch13-measurement-audit.test.mjs
+
+Γ£ö B13-01 two reviewed cycles retain the original descriptive series (13.9766ms)
+Γ£ö B13-02 missing manifests are not silently filled in (2.5252ms)
+Γ£ö B13-03 null is equivalent to absent manifest (1.2744ms)
+Γ£ö B13-04 no cycles cannot imply measurements (0.7052ms)
+Γ£ö B13-05 malformed cycle returns SOURCE_BLOCKED (0.1862ms)
+Γ£ö B13-06 one reviewed cycle cannot create a T2 comparison (0.4469ms)
+Γ£ö B13-07 sample independent manifest aligns declarations only (1.8848ms)
+Γ£ö B13-08 manifest order does not affect scientific status (1.8542ms)
+Γ£ö B13-09 cycle order does not affect matching (1.7215ms)
+Γ£ö B13-10 self report can never be promoted to verified equivalence (0.922ms)
+Γ£ö B13-11 no forecast accuracy or causal claims (1.0666ms)
+Γ£ö B13-12 real score zero matches the declaration (0.95ms)
+Γ£ö B13-13 same score with changed scale blocks longitudinal comparison (0.9922ms)
+Γ£ö B13-14 same score with changed instrument ID blocks comparison (0.949ms)
+Γ£ö B13-15 changed instrument version is not assumed equivalent (0.6604ms)
+Γ£ö B13-16 different forms do not imply equivalent tests (0.7293ms)
+Γ£ö B13-17 scoring rubric changes block comparison (1.2994ms)
+Γ£ö B13-18 missing a single T0 declaration blocks complete status (0.711ms)
+Γ£ö B13-19 missing a single T1 declaration blocks complete status (0.7003ms)
+Γ£ö B13-20 empty metadata list is missing, not compatible (0.5504ms)
+Γ£ö B13-21 false score injected is invalid, not normalized (0.7544ms)
+Γ£ö B13-22 a true zero is never confused with missing (0.5467ms)
+Γ£ö B13-23 wrong linked-at T0 time is invalid (0.6217ms)
+Γ£ö B13-24 wrong linked-at T1 time is invalid (0.7368ms)
+Γ£ö B13-25 duplicated source declaration is invalid (0.6969ms)
+Γ£ö B13-26 extra unknown cycle declaration is invalid (0.6459ms)
+Γ£ö B13-27 extra unknown subject declaration is invalid (0.8405ms)
+Γ£ö B13-28 unexpected PII field in a declaration is invalid (0.599ms)
+Γ£ö B13-29 unexpected PII field on manifest envelope is invalid (0.5102ms)
+Γ£ö B13-30 forged source verification is invalid (0.5874ms)
+Γ£ö B13-31 empty instrument is invalid (0.8247ms)
+Γ£ö B13-32 instrument with spaces or HTML is invalid (0.5855ms)
+Γ£ö B13-33 undefined scoring scale is invalid (0.5669ms)
+Γ£ö B13-34 negative, NaN or out-of-range scores invalid (2.4965ms)
+Γ£ö B13-35 timestamp with timezone offset cannot be disguised as canonical UTC (0.5503ms)
+Γ£ö B13-36 invalid calendar date is rejected (0.5382ms)
+Γ£ö B13-37 expected owner mismatch blocks even accurate manifest (0.1901ms)
+Γ£ö B13-38 mixed owner metadata blocks declared alignment (0.3224ms)
+Γ£ö B13-39 moving a second baseline with regenerated T0 no longer gives valid source series (0.2855ms)
+Γ£ö B13-40 invalid evidence record blocks declaration promotion (0.2761ms)
+Γ£ö B13-41 original report can replay deterministic snapshot (2.7293ms)
+Γ£ö B13-42 replay rejects forged validation flag (1.4619ms)
+Γ£ö B13-43 replay rejects forged causal effect (1.175ms)
+Γ£ö B13-44 replay rejects withheld declaration (1.2702ms)
+Γ£ö B13-45 offline envelope claims synthetic status only (2.2101ms)
+Γ£ö B13-46 offline envelope verifies against original input bytes (3.0466ms)
+Γ£ö B13-47 changed fixture hash blocks replay (3.1ms)
+Γ£ö B13-48 forged envelope payload or checksum rejected (3.0546ms)
+Γ£ö B13-49 unmarked synthetic fixture or unexpected PII fails offline (0.5504ms)
+Γ£ö B13-50 UI carries a fail-closed measurement warning and no verified score claim (0.6824ms)
+Γ£ö B13-51 source release fingerprint includes independent synthetic measurement manifest (0.5441ms)
+Γ£ö B13-52 package scripts include new gate without removing preceding batches (0.5706ms)
+Γä╣ tests 52
+Γä╣ suites 0
+Γä╣ pass 52
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 230.6028

@@ -1,0 +1,116 @@
+
+> cognitive-learn-ai@0.1.0 test:student-consent
+> node --test tests/step10-student-consent.test.cjs
+
+TAP version 13
+# Subtest: SC01 new, missing consent is never accepted
+ok 1 - SC01 new, missing consent is never accepted
+  ---
+  duration_ms: 1.159922
+  type: 'test'
+  ...
+# Subtest: SC02 same UID and notice required
+ok 2 - SC02 same UID and notice required
+  ---
+  duration_ms: 0.204939
+  type: 'test'
+  ...
+# Subtest: SC03 withdrawn consent is not active
+ok 3 - SC03 withdrawn consent is not active
+  ---
+  duration_ms: 0.102534
+  type: 'test'
+  ...
+# Subtest: SC04 product consent never enrolls in research
+ok 4 - SC04 product consent never enrolls in research
+  ---
+  duration_ms: 0.149833
+  type: 'test'
+  ...
+# Subtest: SC05 helper rejects blank identity
+ok 5 - SC05 helper rejects blank identity
+  ---
+  duration_ms: 0.347084
+  type: 'test'
+  ...
+# Subtest: SC06 root routing includes student consent page
+ok 6 - SC06 root routing includes student consent page
+  ---
+  duration_ms: 0.394211
+  type: 'test'
+  ...
+# Subtest: SC07 student consent route allowed by role gate
+ok 7 - SC07 student consent route allowed by role gate
+  ---
+  duration_ms: 0.246839
+  type: 'test'
+  ...
+# Subtest: SC08 protected student pages read consent from server
+ok 8 - SC08 protected student pages read consent from server
+  ---
+  duration_ms: 0.144275
+  type: 'test'
+  ...
+# Subtest: SC09 UI has separate acceptance and withdrawal controls
+ok 9 - SC09 UI has separate acceptance and withdrawal controls
+  ---
+  duration_ms: 0.299382
+  type: 'test'
+  ...
+# Subtest: SC10 UI requires explicit acknowledgment
+ok 10 - SC10 UI requires explicit acknowledgment
+  ---
+  duration_ms: 0.316678
+  type: 'test'
+  ...
+# Subtest: SC11 UI never silently enrolls research
+ok 11 - SC11 UI never silently enrolls research
+  ---
+  duration_ms: 0.520295
+  type: 'test'
+  ...
+# Subtest: SC12 Rules include consent owner-only and strict schema
+ok 12 - SC12 Rules include consent owner-only and strict schema
+  ---
+  duration_ms: 0.144493
+  type: 'test'
+  ...
+# Subtest: SC13 Rules gate academic writes, including profile and transcript
+ok 13 - SC13 Rules gate academic writes, including profile and transcript
+  ---
+  duration_ms: 0.282508
+  type: 'test'
+  ...
+# Subtest: SC14 legacy shares closed regardless of consent
+ok 14 - SC14 legacy shares closed regardless of consent
+  ---
+  duration_ms: 0.161579
+  type: 'test'
+  ...
+# Subtest: SC15 UI warns guardian identity is unverified
+ok 15 - SC15 UI warns guardian identity is unverified
+  ---
+  duration_ms: 0.086143
+  type: 'test'
+  ...
+# Subtest: SC16 safe rollout stays off unless explicitly enabled
+ok 16 - SC16 safe rollout stays off unless explicitly enabled
+  ---
+  duration_ms: 0.318637
+  type: 'test'
+  ...
+# Subtest: SC17 assistant cannot mount outside the protected route gate
+ok 17 - SC17 assistant cannot mount outside the protected route gate
+  ---
+  duration_ms: 0.263896
+  type: 'test'
+  ...
+1..17
+# tests 17
+# suites 0
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 383.958492

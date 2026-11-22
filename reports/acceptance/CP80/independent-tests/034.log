@@ -1,0 +1,88 @@
+
+> cognitive-learn-ai@0.1.0 test:cp29:access
+> node --test tests/cp29-live-access-gate.test.cjs
+
+TAP version 13
+# Subtest: CP29-B2-01 starts fail-closed until server-backed role listener confirms
+ok 1 - CP29-B2-01 starts fail-closed until server-backed role listener confirms
+  ---
+  duration_ms: 76.605899
+  type: 'test'
+  ...
+# Subtest: CP29-B2-02 role revoked during open session unmounts private children
+ok 2 - CP29-B2-02 role revoked during open session unmounts private children
+  ---
+  duration_ms: 43.856976
+  type: 'test'
+  ...
+# Subtest: CP29-B2-03 role changed to Admin does not silently escalate session
+ok 3 - CP29-B2-03 role changed to Admin does not silently escalate session
+  ---
+  duration_ms: 37.646373
+  type: 'test'
+  ...
+# Subtest: CP29-B2-04 cached or pending-write account snapshots never authorize
+ok 4 - CP29-B2-04 cached or pending-write account snapshots never authorize
+  ---
+  duration_ms: 26.834754
+  type: 'test'
+  ...
+# Subtest: CP29-B2-05 live consent withdrawal immediately unmounts student pages
+ok 5 - CP29-B2-05 live consent withdrawal immediately unmounts student pages
+  ---
+  duration_ms: 25.851904
+  type: 'test'
+  ...
+# Subtest: CP29-B2-06 cached consent state cannot re-grant access
+ok 6 - CP29-B2-06 cached consent state cannot re-grant access
+  ---
+  duration_ms: 27.727672
+  type: 'test'
+  ...
+# Live account authorization failed: Error: firestore unavailable
+#     at Object.fail (/mnt/data/CLA_CP80_FULL_FIXED/Cognitive-Learn/tests/cp29-live-access-gate.test.cjs:78:73)
+#     at TestContext.<anonymous> (/mnt/data/CLA_CP80_FULL_FIXED/Cognitive-Learn/tests/cp29-live-access-gate.test.cjs:131:7)
+#     at async Test.run (node:internal/test_runner/test:1054:7)
+#     at async Test.processPendingSubtests (node:internal/test_runner/test:744:7) {
+#   code: 'unavailable'
+# }
+# Subtest: CP29-B2-07 listener failure fails closed and logout disposes old listeners
+ok 7 - CP29-B2-07 listener failure fails closed and logout disposes old listeners
+  ---
+  duration_ms: 28.259126
+  type: 'test'
+  ...
+# Subtest: CP29-B2-08 switching accounts disposes old listeners before new verification
+ok 8 - CP29-B2-08 switching accounts disposes old listeners before new verification
+  ---
+  duration_ms: 32.198106
+  type: 'test'
+  ...
+# Subtest: CP29-B2-09 consent management route stays usable to re-consent
+ok 9 - CP29-B2-09 consent management route stays usable to re-consent
+  ---
+  duration_ms: 25.780466
+  type: 'test'
+  ...
+# Firebase auth state error: Error: auth failure
+#     at Object.authFail (/mnt/data/CLA_CP80_FULL_FIXED/Cognitive-Learn/tests/cp29-live-access-gate.test.cjs:76:40)
+#     at TestContext.<anonymous> (/mnt/data/CLA_CP80_FULL_FIXED/Cognitive-Learn/tests/cp29-live-access-gate.test.cjs:154:7)
+#     at async Test.run (node:internal/test_runner/test:1054:7)
+#     at async Test.processPendingSubtests (node:internal/test_runner/test:744:7) {
+#   code: 'unavailable'
+# }
+# Subtest: CP29-B2-10 auth stream error revokes existing access and unsubscribes listeners
+ok 10 - CP29-B2-10 auth stream error revokes existing access and unsubscribes listeners
+  ---
+  duration_ms: 19.777353
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 747.794693

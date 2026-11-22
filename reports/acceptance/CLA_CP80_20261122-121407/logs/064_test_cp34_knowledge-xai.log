@@ -1,0 +1,22 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp34:knowledge-xai
+> node --experimental-strip-types --test tests/cp34-knowledge-xai.test.mjs
+
+Γ£ö retrieval exact IDs, public source citation and unvalidated wording (2.067ms)
+Γ£ö multi-intent retrieval and diacritic normalization (0.4062ms)
+Γ£ö reject unrelated, personal and explicit injection in this path (0.9823ms)
+Γ£ö selection schema rejects invented, duplicate and unpermitted IDs and arbitrary answer (0.2592ms)
+Γ£ö source IDs are unique and bounded (0.1259ms)
+Γ£ö explanation preserves valid zero and exact weighted sum (0.3818ms)
+Γ£ö missing dimension prevents composite even if top-level claims available (0.2499ms)
+Γ£ö mismatched composite does not publish contribution (0.1863ms)
+Γ£ö duplicate, invalid and legacy evidence fails closed (0.2795ms)
+Γ£ö client and authenticated server use same knowledge module; Lumen uses local XAI (0.9185ms)
+Γä╣ tests 10
+Γä╣ suites 0
+Γä╣ pass 10
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 132.9956

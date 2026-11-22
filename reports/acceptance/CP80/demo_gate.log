@@ -1,0 +1,6 @@
+
+> cognitive-learn-ai@0.1.0 demo:gate
+> node tools/cla_demo_gate.mjs
+
+[FAIL] Core closed-loop + measurement regression
+DEMO_OFFLINE_CORE_FAIL — 1/11 steps; report: /mnt/data/CLA_CP80_FULL_FIXED/Cognitive-Learn/reports/demo/cla_batch16_offline_readiness.json

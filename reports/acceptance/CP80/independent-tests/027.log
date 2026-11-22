@@ -1,0 +1,122 @@
+
+> cognitive-learn-ai@0.1.0 test:companion-push
+> node --test tests/step15-companion-web-push.test.mjs
+
+TAP version 13
+# Subtest: WP01 server evaluates time in device IANA zone, not UTC
+ok 1 - WP01 server evaluates time in device IANA zone, not UTC
+  ---
+  duration_ms: 36.85565
+  type: 'test'
+  ...
+# Subtest: WP02 five-minute lookback handles scheduler delays, not arbitrary late sends
+ok 2 - WP02 five-minute lookback handles scheduler delays, not arbitrary late sends
+  ---
+  duration_ms: 12.836922
+  type: 'test'
+  ...
+# Subtest: WP03 notifications disabled by account setting and quiet hours
+ok 3 - WP03 notifications disabled by account setting and quiet hours
+  ---
+  duration_ms: 31.517787
+  type: 'test'
+  ...
+# Subtest: WP04 completed day suppresses notifications
+ok 4 - WP04 completed day suppresses notifications
+  ---
+  duration_ms: 2.498487
+  type: 'test'
+  ...
+# Subtest: WP05 quiet periods spanning midnight work
+ok 5 - WP05 quiet periods spanning midnight work
+  ---
+  duration_ms: 0.194225
+  type: 'test'
+  ...
+# Subtest: WP06 reject invalid timezone and schedule (fail-closed)
+ok 6 - WP06 reject invalid timezone and schedule (fail-closed)
+  ---
+  duration_ms: 0.75576
+  type: 'test'
+  ...
+# Subtest: WP07 DST repeated local wall time does not create different delivery key
+ok 7 - WP07 DST repeated local wall time does not create different delivery key
+  ---
+  duration_ms: 1.517319
+  type: 'test'
+  ...
+# Subtest: WP08 new-day boundary across UTC and device time
+ok 8 - WP08 new-day boundary across UTC and device time
+  ---
+  duration_ms: 0.511889
+  type: 'test'
+  ...
+# Subtest: WP09 only active student and verified opt-in product consent qualify
+ok 9 - WP09 only active student and verified opt-in product consent qualify
+  ---
+  duration_ms: 0.505026
+  type: 'test'
+  ...
+# Subtest: WP10 only recognized secure push service endpoints are accepted (SSRF guard)
+ok 10 - WP10 only recognized secure push service endpoints are accepted (SSRF guard)
+  ---
+  duration_ms: 0.731452
+  type: 'test'
+  ...
+# Subtest: WP11 malformed device owner/keys/zone cannot dispatch
+ok 11 - WP11 malformed device owner/keys/zone cannot dispatch
+  ---
+  duration_ms: 0.834598
+  type: 'test'
+  ...
+# Subtest: WP12 delivery key is deterministic and scoped to device/date/kind
+ok 12 - WP12 delivery key is deterministic and scoped to device/date/kind
+  ---
+  duration_ms: 1.786549
+  type: 'test'
+  ...
+# Subtest: WP13 payload is generic, does not include student data or remote URLs
+ok 13 - WP13 payload is generic, does not include student data or remote URLs
+  ---
+  duration_ms: 0.317633
+  type: 'test'
+  ...
+# Subtest: WP14 worker receives Web Push but does not cache authenticated pages or trust external redirect
+ok 14 - WP14 worker receives Web Push but does not cache authenticated pages or trust external redirect
+  ---
+  duration_ms: 0.546068
+  type: 'test'
+  ...
+# Subtest: WP15 opt-in and opt-out are distinct user-gesture actions
+ok 15 - WP15 opt-in and opt-out are distinct user-gesture actions
+  ---
+  duration_ms: 0.286607
+  type: 'test'
+  ...
+# Subtest: WP16 server dispatch is disabled by default and is separately deployed
+ok 16 - WP16 server dispatch is disabled by default and is separately deployed
+  ---
+  duration_ms: 0.313336
+  type: 'test'
+  ...
+# Subtest: WP17 rules restrict subscription ownership and deny client delivery ledger access
+ok 17 - WP17 rules restrict subscription ownership and deny client delivery ledger access
+  ---
+  duration_ms: 0.35249
+  type: 'test'
+  ...
+# Subtest: WP18 service worker does not claim guaranteed background delivery
+ok 18 - WP18 service worker does not claim guaranteed background delivery
+  ---
+  duration_ms: 0.229288
+  type: 'test'
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 183.837632

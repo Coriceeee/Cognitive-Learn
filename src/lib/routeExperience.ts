@@ -64,8 +64,8 @@ const routeTitles: Readonly<Record<string, string>> = {
 export function getRouteDisplayTitle(pathname: string): string {
   const path = pathname.replace(/\/+$/, '') || '/';
   if (routeTitles[path]) return routeTitles[path];
-  if (path === '/atlas/study-abroad' || path.startsWith('/atlas/study-abroad/')) return 'Du học quốc tế · Atlas';
-  return 'Cognitive Learn AI';
+  if (path === '/atlas/study-abroad' || path.startsWith('/atlas/study-abroad/') || path === '/study-abroad' || path === '/haven/study-abroad') return 'Du học quốc tế · Atlas';
+  return 'Không tìm thấy trang';
 }
 
 /** Invalid percent escapes are ignored instead of crashing the SPA. */

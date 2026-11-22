@@ -1,0 +1,18 @@
+{
+  "gateVersion": "cla-firestore-security-gate-v1",
+  "at": "2026-11-22T08:34:30.289Z",
+  "projectId": "demo-cla-cp21-security",
+  "configFile": "firebase.emulator.cp21.json",
+  "rulesFile": "firestore.rules.CANDIDATE_CP21",
+  "rulesSha256": "c6d32c530518f247ea85e9b1c4d52fe08eced14f1e048d0f4f19963f5dcf284f",
+  "preflight": "PASS",
+  "staticTests": "PASS",
+  "emulatorAuthorizationTests": "FAIL",
+  "overall": "FAIL",
+  "productionRulesVerified": false,
+  "productionDeploymentPerformed": false,
+  "notes": [
+    "Emulator test suite failed or timed out. Do NOT deploy candidate Rules."
+  ],
+  "emulatorPort": 18080
+}

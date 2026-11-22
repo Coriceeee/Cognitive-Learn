@@ -1,0 +1,136 @@
+
+> cognitive-learn-ai@0.1.0 test:daily-companion
+> node --experimental-strip-types --test tests/step14-daily-companion.test.mjs
+
+TAP version 13
+# (node:16426) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: DC01 only valid 24h times are accepted
+ok 1 - DC01 only valid 24h times are accepted
+  ---
+  duration_ms: 1.221362
+  type: 'test'
+  ...
+# Subtest: DC02 quiet hours wrap around midnight
+ok 2 - DC02 quiet hours wrap around midnight
+  ---
+  duration_ms: 0.223322
+  type: 'test'
+  ...
+# Subtest: DC03 same quiet boundaries turn quiet mode off, never mute all day
+ok 3 - DC03 same quiet boundaries turn quiet mode off, never mute all day
+  ---
+  duration_ms: 0.109663
+  type: 'test'
+  ...
+# Subtest: DC04 invalid schedules are fail-closed
+ok 4 - DC04 invalid schedules are fail-closed
+  ---
+  duration_ms: 0.17927
+  type: 'test'
+  ...
+# Subtest: DC05 reminder due only at requested local minute
+ok 5 - DC05 reminder due only at requested local minute
+  ---
+  duration_ms: 1.241736
+  type: 'test'
+  ...
+# Subtest: DC06 reminder disabled or completed today never fires
+ok 6 - DC06 reminder disabled or completed today never fires
+  ---
+  duration_ms: 0.158151
+  type: 'test'
+  ...
+# Subtest: DC07 quiet hours suppress matching reminders
+ok 7 - DC07 quiet hours suppress matching reminders
+  ---
+  duration_ms: 0.184767
+  type: 'test'
+  ...
+# Subtest: DC08 midnight boundary yields correct local date
+ok 8 - DC08 midnight boundary yields correct local date
+  ---
+  duration_ms: 0.190329
+  type: 'test'
+  ...
+# Subtest: DC09 invalid day keys rejected, including invalid calendar days
+ok 9 - DC09 invalid day keys rejected, including invalid calendar days
+  ---
+  duration_ms: 0.907997
+  type: 'test'
+  ...
+# Subtest: DC10 daily check-in is idempotent
+ok 10 - DC10 daily check-in is idempotent
+  ---
+  duration_ms: 0.608169
+  type: 'test'
+  ...
+# Subtest: DC11 daily check-in keeps only 14 most recent days
+ok 11 - DC11 daily check-in keeps only 14 most recent days
+  ---
+  duration_ms: 0.30578
+  type: 'test'
+  ...
+# Subtest: DC12 data validation enforces account ownership and consent boundaries in rules
+ok 12 - DC12 data validation enforces account ownership and consent boundaries in rules
+  ---
+  duration_ms: 0.274243
+  type: 'test'
+  ...
+# Subtest: DC13 recent activity returns seven calendar days
+ok 13 - DC13 recent activity returns seven calendar days
+  ---
+  duration_ms: 0.17969
+  type: 'test'
+  ...
+# Subtest: DC14 route, protected roles and navigation are integrated
+ok 14 - DC14 route, protected roles and navigation are integrated
+  ---
+  duration_ms: 0.927591
+  type: 'test'
+  ...
+# Subtest: DC15 no notification permission requested without user gesture
+ok 15 - DC15 no notification permission requested without user gesture
+  ---
+  duration_ms: 0.453687
+  type: 'test'
+  ...
+# Subtest: DC16 background web push is opt-in, generic, and never caches student data
+ok 16 - DC16 background web push is opt-in, generic, and never caches student data
+  ---
+  duration_ms: 0.549089
+  type: 'test'
+  ...
+# Subtest: DC17 Firestore candidate rules scope records to student and product consent
+ok 17 - DC17 Firestore candidate rules scope records to student and product consent
+  ---
+  duration_ms: 0.219567
+  type: 'test'
+  ...
+# Subtest: DC18 manifests use real bundled icons and do not bundle app-store claim
+ok 18 - DC18 manifests use real bundled icons and do not bundle app-store claim
+  ---
+  duration_ms: 0.559579
+  type: 'test'
+  ...
+# Subtest: DC19 preview is fail-closed until consent gate and rules are deployed
+ok 19 - DC19 preview is fail-closed until consent gate and rules are deployed
+  ---
+  duration_ms: 0.179679
+  type: 'test'
+  ...
+# Subtest: DC20 consent withdrawal stops foreground reminders in the open page
+ok 20 - DC20 consent withdrawal stops foreground reminders in the open page
+  ---
+  duration_ms: 0.202973
+  type: 'test'
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 20
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 173.367149

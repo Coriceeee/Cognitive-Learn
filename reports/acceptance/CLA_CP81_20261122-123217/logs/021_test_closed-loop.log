@@ -1,0 +1,30 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:closed-loop
+> node --experimental-strip-types --test tests/step12-closed-loop-journey.test.mjs
+
+Γ£ö CL01 creates a versioned cycle and preserves valid baseline zero (3.7899ms)
+Γ£ö CL02 rejects missing/NaN, invalid and duplicate baseline scores (0.3946ms)
+Γ£ö CL03 no outcome is inferred merely from an Orion strategy (0.1997ms)
+Γ£ö CL04 check-in records self-report but is not an outcome (0.3226ms)
+Γ£ö CL05 zero actual hours and zero completed tasks are observed zeros (0.1666ms)
+Γ£ö CL06 rejects duplicate week and check-in ID (0.381ms)
+Γ£ö CL07 rejects invalid time and impossible completion (0.3485ms)
+Γ£ö CL08 reassessment is blocked until one actual check-in exists (0.253ms)
+Γ£ö CL09 reassessment only accepts observed subjects, 0 is valid (0.3327ms)
+Γ£ö CL10 prevents unknown subject/NaN, absent score and duplicate score (0.3343ms)
+Γ£ö CL11 review calculates matched before-after delta without imputation (0.1712ms)
+Γ£ö CL12 closed cycles cannot be edited, measured again, or check-in again (0.2113ms)
+Γ£ö CL13 rejects corrupted documents, does not silently overwrite them (0.09ms)
+Γ£ö CL14 Orion, Pulse and Lumen all mount the same shared journey (1.2614ms)
+Γ£ö CL15 Firestore hook uses authenticated ownership and transaction-based updates (0.374ms)
+Γ£ö CL16 candidate rules restrict student ownership, product consent, and immutable baselines (0.444ms)
+Γ£ö CL17 no claim that self-report is externally verified or causal proof (0.4985ms)
+Γ£ö CL18 module never writes its own outcomes into Seed as proven grades (0.3461ms)
+Γä╣ tests 18
+Γä╣ suites 0
+Γä╣ pass 18
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 132.2953

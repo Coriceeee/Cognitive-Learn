@@ -1,0 +1,21 @@
+﻿numpy: PASS
+pandas: PASS
+scipy: MISSING_DEPENDENCY
+scikit-learn: MISSING_DEPENDENCY
+xgboost: MISSING_DEPENDENCY
+python.exe : Traceback (most recent call last):
+At C:\Gạo\Cognitive-Learn\CLA_CP82_ONECLICK.ps1:35 char:7
++       & $exe @argsForCommand 2>&1 | Out-File -LiteralPath $log -Encod ...
++       ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "C:\G\u1ea1o\Cognitive-Learn\tools\cla_cp82_ml_preflight.py", line 81, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "C:\G\u1ea1o\Cognitive-Learn\tools\cla_cp82_ml_preflight.py", line 77, in main
+    print(f"CP82 ML ENV: {report['overall']} | {out}")
+  File "C:\Users\nguye\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u1ea1' in position 27: character maps to <undefined>

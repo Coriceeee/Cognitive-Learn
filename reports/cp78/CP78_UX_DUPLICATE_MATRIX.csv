@@ -1,0 +1,10 @@
+﻿Phân hệ,Quan sát,Phân loại,Quyết định,Lý do / giải pháp,Tệp
+SEED,Hai điểm điều hướng tới sáu phân hệ: JourneyBridge và LearningCircuit,TRÙNG,BỎ HÀNG LIÊN KẾT LẶP,Giữ sơ đồ LearningCircuit; JourneyBridge chỉ hiển thị bước phù hợp và trạng thái đã xác minh,src/page/seed/components/StudentJourneyBridge.tsx
+SEED,Lối tắt Bảng điểm THPT trùng tab Hành trình học lực,TRÙNG,BỎ LỐI TẮT,Giữ tab /student/transcript; công cụ bổ sung khác còn nguyên,src/page/seed/StudentPage.tsx
+LUMEN,Tiêu đề lỗi/trống xuất hiện hai lần liên tiếp với cùng văn bản,TRÙNG NHÃN,ĐỔI NHÃN TRẠNG THÁI,Giữ h1; đổi nhãn cảnh báo thành hành động Cần kiểm tra kết nối / Bắt đầu từ Seed,src/page/lumen/LumenPage.tsx
+ATLAS,Hai lối tắt tra cứu Việt Nam và môn thi trùng thanh tab,TRÙNG,BỎ LỐI TẮT,Giữ tab gốc và sơ đồ 4 bước kèm bằng chứng khác ngữ cảnh,src/page/atlas/AtlasPage.tsx
+ATLAS,Điều hướng quy trình 4 bước và thanh tab dẫn tới một số nơi giống nhau,TƯƠNG TỰ NHƯNG KHÁC VAI TRÒ,GIỮ,Thanh tab chọn màn hình; 4 bước hướng dẫn trình tự công việc và có bản ghi nguồn. Chưa xóa vì hữu ích cho người mới,src/page/atlas/components/AtlasEvidenceJourney.tsx
+ORION,Biểu mẫu đầu vào có cả ở tab đích và trong phần mở rộng Mô phỏng,CÓ CHỦ ĐÍCH,GIỮ,Mặc định chỉ tab đầu vào; trên Mô phỏng phải chủ động mở phần Xem/chỉnh dữ liệu; tránh bắt quay trang khi sửa giả định,src/page/orion/OrionPage.tsx
+PULSE,"Trang tổng quan, dữ liệu báo cáo và nhật ký có chỉ số liên quan",KHÁC TÁC VỤ,GIỮ,"Một nơi nhập, một nơi xem tiến độ, một nơi ghi hành động; không được xóa gây mất chức năng",src/page/pulse/PulsePage.tsx
+HAVEN,Hai hộp tra cứu học bổng: thư viện nguồn và tìm nguồn trực tuyến,TRÙNG MỤC ĐÍCH CỦA NGƯỜI MỚI,ẨN TÙY CHỌN NÂNG CAO,"Giữ thư viện đầu tiên; chuyển tìm nguồn mở rộng vào phần thu gọn, không cắt khả năng tra cứu",src/page/haven/HavenPage.tsx
+TẤT CẢ,Tên tiếng Việt không hiện đồng nhất ở tiêu đề và nút trên sơ đồ,BẤT NHẤT NHẬN DIỆN,ĐỒNG BỘ,Bản sắc học tập; Dấu vân tay trí tuệ; Bản đồ tương lai; Kiến trúc tương lai; Đường cong tiến hóa; Hành trang thế giới,src/page/seed/components/LearningCircuit.tsx

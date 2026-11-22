@@ -1,0 +1,30 @@
+﻿python.exe : test_block_invalid_outcomes (test_cluster_comparison.Comparison.test_block_invalid_outcomes) ... ok
+At C:\Gạo\Cognitive-Learn\CLA_CP86_ONECLICK.ps1:35 char:7
++       & $exe @argsForCommand 2>&1 | Out-File -LiteralPath $log -Encod ...
++       ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (test_block_inva...utcomes) ... ok:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+test_bootstrap_independent_and_reproducible (test_cluster_comparison.Comparison.test_bootstrap_independent_and_reproducible) ... ok
+test_equal_weight_people_not_cycles (test_cluster_comparison.Comparison.test_equal_weight_people_not_cycles) ... ok
+test_mixed_assignment (test_cluster_comparison.Comparison.test_mixed_assignment) ... ok
+test_mixed_policy (test_cluster_comparison.Comparison.test_mixed_policy) ... ok
+test_synthetic_not_research (test_cluster_comparison.Comparison.test_synthetic_not_research) ... ok
+test_consent (test_study.StudyTests.test_consent) ... ok
+test_double_arm (test_study.StudyTests.test_double_arm) ... ok
+test_duplicate (test_study.StudyTests.test_duplicate) ... ok
+test_human (test_study.StudyTests.test_human) ... ok
+test_missing_outcome (test_study.StudyTests.test_missing_outcome) ... ok
+test_mixed_scale (test_study.StudyTests.test_mixed_scale) ... ok
+test_nan (test_study.StudyTests.test_nan) ... ok
+test_order (test_study.StudyTests.test_order) ... ok
+test_output_artifacts (test_study.StudyTests.test_output_artifacts) ... ok
+test_rand_not_causal (test_study.StudyTests.test_rand_not_causal) ... ok
+test_unverified (test_study.StudyTests.test_unverified) ... ok
+test_valid_pair (test_study.StudyTests.test_valid_pair) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.183s
+
+OK
+CP25: PASS_DESCRIPTIVE_ONLY valid 2 / 2 evidence: DESCRIPTIVE_NOT_CAUSAL

@@ -1,0 +1,164 @@
+
+> cognitive-learn-ai@0.1.0 test:consent-server-cleanup
+> node --test tests/step21-consent-server-cleanup.test.mjs
+
+TAP version 13
+# Subtest: CS01 accepts only transition accepted -> withdrawn for same valid student and policy version
+ok 1 - CS01 accepts only transition accepted -> withdrawn for same valid student and policy version
+  ---
+  duration_ms: 1.508712
+  type: 'test'
+  ...
+# Subtest: CS02 rejects malformed timestamps, UID and bounds instead of guessing
+ok 2 - CS02 rejects malformed timestamps, UID and bounds instead of guessing
+  ---
+  duration_ms: 1.093521
+  type: 'test'
+  ...
+# Subtest: CS03 deletes old report/link pairs and reports accurate completion
+ok 3 - CS03 deletes old report/link pairs and reports accurate completion
+  ---
+  duration_ms: 9.809201
+  type: 'test'
+  ...
+# Subtest: CS04 does NOT delete newly granted links after student reconsents
+ok 4 - CS04 does NOT delete newly granted links after student reconsents
+  ---
+  duration_ms: 0.250318
+  type: 'test'
+  ...
+# Subtest: CS05 page traversal does not starve old records behind newer ones
+ok 5 - CS05 page traversal does not starve old records behind newer ones
+  ---
+  duration_ms: 1.046209
+  type: 'test'
+  ...
+# Subtest: CS06 fail closed on foreign/malformed link, no subsequent delete
+ok 6 - CS06 fail closed on foreign/malformed link, no subsequent delete
+  ---
+  duration_ms: 1.34104
+  type: 'test'
+  ...
+# Subtest: CS07 fails and retries if conditional delete fails; cannot claim completion
+ok 7 - CS07 fails and retries if conditional delete fails; cannot claim completion
+  ---
+  duration_ms: 0.375809
+  type: 'test'
+  ...
+# Subtest: CS08 limit exhaustion never reports full cleanup
+ok 8 - CS08 limit exhaustion never reports full cleanup
+  ---
+  duration_ms: 0.400277
+  type: 'test'
+  ...
+# Subtest: CS09 idempotent repeat after completed cleanup returns deleted=0
+ok 9 - CS09 idempotent repeat after completed cleanup returns deleted=0
+  ---
+  duration_ms: 0.50478
+  type: 'test'
+  ...
+# Subtest: CS10 malformed page/cursor rejects without claiming success
+ok 10 - CS10 malformed page/cursor rejects without claiming success
+  ---
+  duration_ms: 0.539406
+  type: 'test'
+  ...
+# Subtest: CS11 deployment is isolated from default Firebase config; immutable source guarded
+ok 11 - CS11 deployment is isolated from default Firebase config; immutable source guarded
+  ---
+  duration_ms: 1.089843
+  type: 'test'
+  ...
+# Subtest: CS12 no accidental PII in server cleanup logs
+ok 12 - CS12 no accidental PII in server cleanup logs
+  ---
+  duration_ms: 0.281009
+  type: 'test'
+  ...
+# Subtest: CS13 privileged adapter deletes report+link atomically with update-time preconditions
+ok 13 - CS13 privileged adapter deletes report+link atomically with update-time preconditions
+  ---
+  duration_ms: 1.022717
+  type: 'test'
+  ...
+# Subtest: CS14 deleting old link with no report is safe and atomic
+ok 14 - CS14 deleting old link with no report is safe and atomic
+  ---
+  duration_ms: 0.253874
+  type: 'test'
+  ...
+# Subtest: CS15 refuses corrupt cross-account report before committing any deletion
+ok 15 - CS15 refuses corrupt cross-account report before committing any deletion
+  ---
+  duration_ms: 0.462534
+  type: 'test'
+  ...
+# Subtest: CS16 conditional batch conflict is surfaced for retry
+ok 16 - CS16 conditional batch conflict is surfaced for retry
+  ---
+  duration_ms: 0.205747
+  type: 'test'
+  ...
+# Subtest: CS17 adapter rejects missing timestamps; never does unconditional deletes
+ok 17 - CS17 adapter rejects missing timestamps; never does unconditional deletes
+  ---
+  duration_ms: 0.175945
+  type: 'test'
+  ...
+# Subtest: CS18 independent verification confirms empty set after actual deletes
+ok 18 - CS18 independent verification confirms empty set after actual deletes
+  ---
+  duration_ms: 0.422782
+  type: 'test'
+  ...
+# Subtest: CS19 verification detects old metadata left behind after false success
+ok 19 - CS19 verification detects old metadata left behind after false success
+  ---
+  duration_ms: 0.347186
+  type: 'test'
+  ...
+# Subtest: CS20 verification preserves later consent grants without false positives
+ok 20 - CS20 verification preserves later consent grants without false positives
+  ---
+  duration_ms: 0.120177
+  type: 'test'
+  ...
+# Subtest: CS21 legacy links with missing timestamp remain pending
+ok 21 - CS21 legacy links with missing timestamp remain pending
+  ---
+  duration_ms: 0.088152
+  type: 'test'
+  ...
+# Subtest: CS22 scan verification does not perform deletes or expose record details
+ok 22 - CS22 scan verification does not perform deletes or expose record details
+  ---
+  duration_ms: 0.143923
+  type: 'test'
+  ...
+# Subtest: CS23 refuses incomplete full-page audit instead of reporting success
+ok 23 - CS23 refuses incomplete full-page audit instead of reporting success
+  ---
+  duration_ms: 0.130462
+  type: 'test'
+  ...
+# Subtest: CS24 rejects malformed and foreign records in audit scan
+ok 24 - CS24 rejects malformed and foreign records in audit scan
+  ---
+  duration_ms: 0.106875
+  type: 'test'
+  ...
+# Subtest: CS25 deployed function gates completion on independent verification
+ok 25 - CS25 deployed function gates completion on independent verification
+  ---
+  duration_ms: 0.282988
+  type: 'test'
+  ...
+1..25
+# tests 25
+# suites 0
+# pass 25
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 133.609845

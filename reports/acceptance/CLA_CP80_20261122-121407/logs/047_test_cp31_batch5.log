@@ -1,0 +1,45 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp31:batch5
+> node --experimental-strip-types --test tests/cp31-batch5-governance.test.mjs
+
+Γ£ö atlas: no file is NOT TESTED, never implicit PASS (1.7433ms)
+Γ£ö atlas: wrong schema fails closed (0.1713ms)
+Γ£ö atlas: valid metadata retains unverified scope (1.4439ms)
+Γ£ö policy: no file is NOT TESTED, never implicit PASS (0.1697ms)
+Γ£ö policy: wrong schema fails closed (0.1183ms)
+Γ£ö policy: valid metadata retains unverified scope (0.0806ms)
+Γ£ö scenario: no file is NOT TESTED, never implicit PASS (0.2041ms)
+Γ£ö scenario: wrong schema fails closed (0.0632ms)
+Γ£ö scenario: valid metadata retains unverified scope (0.1526ms)
+Γ£ö evidence: no file is NOT TESTED, never implicit PASS (0.3051ms)
+Γ£ö evidence: wrong schema fails closed (0.0949ms)
+Γ£ö evidence: valid metadata retains unverified scope (0.1435ms)
+Γ£ö trends: no file is NOT TESTED, never implicit PASS (0.1298ms)
+Γ£ö trends: wrong schema fails closed (0.0406ms)
+Γ£ö trends: valid metadata retains unverified scope (0.167ms)
+Γ£ö finance: no file is NOT TESTED, never implicit PASS (0.1499ms)
+Γ£ö finance: wrong schema fails closed (0.0518ms)
+Γ£ö finance: valid metadata retains unverified scope (0.0837ms)
+Γ£ö Atlas: forged same reviewer, malformed URL, impossible date fail (0.1122ms)
+Γ£ö Atlas: repeat IDs fail (0.0545ms)
+Γ£ö Orion: prevents non-shadow automatic assignment (0.0617ms)
+Γ£ö Orion: missing stop rule or human review fails (0.0559ms)
+Γ£ö Scenario: outcome masquerading as simulation is denied (0.0723ms)
+Γ£ö Scenario: mismatch policy versions cannot be directly compared (0.0665ms)
+Γ£ö Pulse record: invented probability or confidence is rejected (0.0801ms)
+Γ£ö Pulse record: missing snapshot denied (0.0775ms)
+Γ£ö Pulse trend: genuine zero is valid (0.0894ms)
+Γ£ö Pulse trend: missing T1 cannot claim improvement (0.0871ms)
+Γ£ö Pulse trend: impossible date and swapped T1/T2 warn (0.0782ms)
+Γ£ö Haven: zero travel cost allowed but no verified finance claim (0.0712ms)
+Γ£ö Haven: negative cost or invalid scholarship source fail (0.075ms)
+Γ£ö Catalog/manifest/UI map six distinct limited views and no privileged writes (1.1253ms)
+Γ£ö Synthetic example flag cannot be imported as validated evidence (0.6696ms)
+Γä╣ tests 33
+Γä╣ suites 0
+Γä╣ pass 33
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 141.0151

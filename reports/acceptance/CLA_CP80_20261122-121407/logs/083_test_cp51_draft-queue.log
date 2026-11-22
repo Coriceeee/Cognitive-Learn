@@ -1,0 +1,16 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp51:draft-queue
+> node --experimental-strip-types --test tests/cp51-draft-write-queue.test.mjs
+
+Γ£ö CP51: queued older write cannot finish after a newer write (1.4637ms)
+Γ£ö CP51: failed earlier write does not poison subsequent writes (0.6105ms)
+Γ£ö CP51: eligibility checked when queued write starts (0.2501ms)
+Γ£ö CP51: Firestore draft hook uses FIFO and checks authenticated owner at execution time (0.2213ms)
+Γä╣ tests 4
+Γä╣ suites 0
+Γä╣ pass 4
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 139.8015

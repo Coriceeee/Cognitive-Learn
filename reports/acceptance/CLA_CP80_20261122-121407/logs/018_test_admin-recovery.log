@@ -1,0 +1,28 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:admin-recovery
+> node --test tests/step07-admin-auth-recovery.test.cjs
+
+Γ£ö AUTH-01: explicit active Admin role is accepted (1.2706ms)
+Γ£ö AUTH-02: only student non-Admin role is accepted (0.1483ms)
+Γ£ö AUTH-03: absent profile or null data does not grant access (0.1015ms)
+Γ£ö AUTH-04: missing, false, and string active flags are denied (0.1341ms)
+Γ£ö AUTH-05: malformed roles and email-based spoofing do not grant Admin (0.1282ms)
+Γ£ö AUTH-06: transient Firestore unavailable retries and returns server profile (0.3482ms)
+Γ£ö AUTH-07: stop after three transient failures and preserve the error (0.5099ms)
+Γ£ö AUTH-08: permission-denied is never retried or bypassed (0.158ms)
+Γ£ö AUTH-09: error classifier handles Firestore-prefixed errors, not arbitrary failures (0.1463ms)
+Γ£ö AUTH-10: both login and route guard verify the latest server role, not cache (0.9837ms)
+Γ£ö AUTH-11: existing admin redirects to /admin after server verification (53.2821ms)
+Γ£ö AUTH-12: non-admin cannot be redirected to /admin by using the same login form (27.7542ms)
+Γ£ö AUTH-13: blocked or missing Admin profile cannot navigate despite valid Firebase Auth (69.4196ms)
+Γ£ö AUTH-14: transient failure recovers during login without bypassing verification (1172.7686ms)
+Γ£ö AUTH-15: a failed role read retains the Auth session and exposes a retry button (1180.8025ms)
+Γ£ö AUTH-16: LoginPage role is strictly narrowed to ready before redirect (357.2755ms)
+Γä╣ tests 16
+Γä╣ suites 0
+Γä╣ pass 16
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 3189.5851

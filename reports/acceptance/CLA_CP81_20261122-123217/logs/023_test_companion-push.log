@@ -1,0 +1,30 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:companion-push
+> node --test tests/step15-companion-web-push.test.mjs
+
+Γ£ö WP01 server evaluates time in device IANA zone, not UTC (17.9435ms)
+Γ£ö WP02 five-minute lookback handles scheduler delays, not arbitrary late sends (1.7456ms)
+Γ£ö WP03 notifications disabled by account setting and quiet hours (0.8836ms)
+Γ£ö WP04 completed day suppresses notifications (0.8773ms)
+Γ£ö WP05 quiet periods spanning midnight work (0.1466ms)
+Γ£ö WP06 reject invalid timezone and schedule (fail-closed) (0.3588ms)
+Γ£ö WP07 DST repeated local wall time does not create different delivery key (0.6164ms)
+Γ£ö WP08 new-day boundary across UTC and device time (0.3205ms)
+Γ£ö WP09 only active student and verified opt-in product consent qualify (0.1936ms)
+Γ£ö WP10 only recognized secure push service endpoints are accepted (SSRF guard) (0.3648ms)
+Γ£ö WP11 malformed device owner/keys/zone cannot dispatch (0.4407ms)
+Γ£ö WP12 delivery key is deterministic and scoped to device/date/kind (0.9146ms)
+Γ£ö WP13 payload is generic, does not include student data or remote URLs (0.3128ms)
+Γ£ö WP14 worker receives Web Push but does not cache authenticated pages or trust external redirect (0.7801ms)
+Γ£ö WP15 opt-in and opt-out are distinct user-gesture actions (0.5911ms)
+Γ£ö WP16 server dispatch is disabled by default and is separately deployed (0.6135ms)
+Γ£ö WP17 rules restrict subscription ownership and deny client delivery ledger access (0.3833ms)
+Γ£ö WP18 service worker does not claim guaranteed background delivery (0.2963ms)
+Γä╣ tests 18
+Γä╣ suites 0
+Γä╣ pass 18
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 118.4832

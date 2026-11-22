@@ -1,0 +1,35 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp64:input-ux
+> node --experimental-strip-types --test tests/cp64-input-ux.test.mjs
+
+Γû╢ CP64 real field-coverage semantics
+  Γ£ö does not count blank values as observed zero (1.3266ms)
+  Γ£ö does not count invalid text, NaN, Infinity, or out-of-range values (0.1775ms)
+  Γ£ö accepts explicit boundaries, decimal comma, and valid negative if permitted (0.1437ms)
+  Γ£ö enforces integer-only weeks and counts when configured (0.1298ms)
+  Γ£ö tracks text fields without inventing a numeric score (0.1131ms)
+  Γ£ö sums independent groups without losing missing or invalid information (0.1511ms)
+  Γ£ö reports zero fields as zero rather than NaN or percentages (0.1244ms)
+  Γ£ö rejects duplicate field identifiers to prevent double counting (0.3867ms)
+Γ£ö CP64 real field-coverage semantics (3.5052ms)
+Γû╢ CP64 three-module integration and accessibility
+  Γ£ö shows the data graph on orion overview, not admin or all routes (0.3359ms)
+  Γ£ö shows the data graph on pulse overview, not admin or all routes (0.1282ms)
+  Γ£ö shows the data graph on haven overview, not admin or all routes (0.0741ms)
+  Γ£ö does not claim academic readiness or probability from form completeness (0.2296ms)
+  Γ£ö shows missing versus invalid as two different states and does not leak field values (0.1434ms)
+  Γ£ö keeps user navigation inside SPA and respects unsaved draft guards (0.0898ms)
+  Γ£ö configures proper input ranges for Orion, Pulse and Haven (0.1444ms)
+  Γ£ö supports dark mode, mobile, print, reduced motion and accessible focus (0.1008ms)
+Γ£ö CP64 three-module integration and accessibility (1.5102ms)
+Γû╢ CP64 release evidence covers visual artifacts
+  Γ£ö fingerprints styles entrypoint and the new visual style, without duplicates (15.7861ms)
+Γ£ö CP64 release evidence covers visual artifacts (15.8699ms)
+Γä╣ tests 17
+Γä╣ suites 3
+Γä╣ pass 17
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 150.9658

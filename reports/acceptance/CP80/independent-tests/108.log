@@ -1,0 +1,38 @@
+
+> cognitive-learn-ai@0.1.0 test:cp77:login-copy
+> node --test tests/cp77-login-manifesto.test.cjs
+
+TAP version 13
+# Subtest: CP77: agreed two-sentence manifesto appears in accessible main heading
+ok 1 - CP77: agreed two-sentence manifesto appears in accessible main heading
+  ---
+  duration_ms: 0.961503
+  type: 'test'
+  ...
+# Subtest: CP77: approved subtitle uses exact full copy
+ok 2 - CP77: approved subtitle uses exact full copy
+  ---
+  duration_ms: 0.321101
+  type: 'test'
+  ...
+# Subtest: CP77: preserves login card, all account entry paths and showcase illustration
+ok 3 - CP77: preserves login card, all account entry paths and showcase illustration
+  ---
+  duration_ms: 0.257221
+  type: 'test'
+  ...
+# Subtest: CP77: headline uses scoped adaptive typography rather than changing all global headings
+ok 4 - CP77: headline uses scoped adaptive typography rather than changing all global headings
+  ---
+  duration_ms: 0.182434
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 64.974658

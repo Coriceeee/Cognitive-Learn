@@ -1,0 +1,106 @@
+
+> cognitive-learn-ai@0.1.0 test:journey-reliability
+> node --experimental-strip-types --test tests/step13-journey-reliability.test.mjs
+
+TAP version 13
+# (node:16396) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: JR01 new cycle has no evidence before reassessment
+ok 1 - JR01 new cycle has no evidence before reassessment
+  ---
+  duration_ms: 2.834515
+  type: 'test'
+  ...
+# Subtest: JR02 evidence is persisted as a derived property of reviewed cycle
+ok 2 - JR02 evidence is persisted as a derived property of reviewed cycle
+  ---
+  duration_ms: 4.109177
+  type: 'test'
+  ...
+# Subtest: JR03 scores of zero stay zero, missing outcomes are not imputed
+ok 3 - JR03 scores of zero stay zero, missing outcomes are not imputed
+  ---
+  duration_ms: 0.431203
+  type: 'test'
+  ...
+# Subtest: JR04 evidence discloses provenance and no causal/confidence claim
+ok 4 - JR04 evidence discloses provenance and no causal/confidence claim
+  ---
+  duration_ms: 0.37147
+  type: 'test'
+  ...
+# Subtest: JR05 evidence record matches §26.1 mandatory contract fields
+ok 5 - JR05 evidence record matches §26.1 mandatory contract fields
+  ---
+  duration_ms: 1.090516
+  type: 'test'
+  ...
+# Subtest: JR06 corrupted lineage cannot silently be accepted
+ok 6 - JR06 corrupted lineage cannot silently be accepted
+  ---
+  duration_ms: 0.399686
+  type: 'test'
+  ...
+# Subtest: JR07 old v1 records without evidenceRecord still readable
+ok 7 - JR07 old v1 records without evidenceRecord still readable
+  ---
+  duration_ms: 0.283449
+  type: 'test'
+  ...
+# Subtest: JR08 lock validates ownership and supports released state
+ok 8 - JR08 lock validates ownership and supports released state
+  ---
+  duration_ms: 0.201595
+  type: 'test'
+  ...
+# Subtest: JR09 create uses transaction with fixed lock and server legacy ACTIVE preflight
+ok 9 - JR09 create uses transaction with fixed lock and server legacy ACTIVE preflight
+  ---
+  duration_ms: 1.029042
+  type: 'test'
+  ...
+# Subtest: JR10 review releases state atomically and stores evidence; check-in does not release
+ok 10 - JR10 review releases state atomically and stores evidence; check-in does not release
+  ---
+  duration_ms: 0.531993
+  type: 'test'
+  ...
+# Subtest: JR11 Rules enforce paired cycle+state updates using getAfter
+ok 11 - JR11 Rules enforce paired cycle+state updates using getAfter
+  ---
+  duration_ms: 0.527081
+  type: 'test'
+  ...
+# Subtest: JR12 UI shows limitation and engine lineage, not calibrated probabilities
+ok 12 - JR12 UI shows limitation and engine lineage, not calibrated probabilities
+  ---
+  duration_ms: 0.40809
+  type: 'test'
+  ...
+# Subtest: JR13 evidence cannot be created before review or after malformed observations
+ok 13 - JR13 evidence cannot be created before review or after malformed observations
+  ---
+  duration_ms: 2.547347
+  type: 'test'
+  ...
+# Subtest: JR14 rapid double-click is synchronously guarded in hook
+ok 14 - JR14 rapid double-click is synchronously guarded in hook
+  ---
+  duration_ms: 0.527601
+  type: 'test'
+  ...
+# Subtest: JR15 legacy lock can be claimed after a previous lock is released
+ok 15 - JR15 legacy lock can be claimed after a previous lock is released
+  ---
+  duration_ms: 3.17527
+  type: 'test'
+  ...
+1..15
+# tests 15
+# suites 0
+# pass 15
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 198.967354

@@ -1,0 +1,70 @@
+
+> cognitive-learn-ai@0.1.0 test:cp42:source-discovery
+> node --experimental-strip-types --test tests/cp42-national-source-discovery.test.mjs
+
+TAP version 13
+# (node:17866) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: national lookup has no school whitelist and supports field or code
+ok 1 - national lookup has no school whitelist and supports field or code
+  ---
+  duration_ms: 6.599691
+  type: 'test'
+  ...
+# Subtest: private fields and accidental PII rejected
+ok 2 - private fields and accidental PII rejected
+  ---
+  duration_ms: 0.853323
+  type: 'test'
+  ...
+# Subtest: three years separate and direct links cover school outside registry
+ok 3 - three years separate and direct links cover school outside registry
+  ---
+  duration_ms: 2.473828
+  type: 'test'
+  ...
+# Subtest: local links preserve original year and unknown institutions do not get invented data
+ok 4 - local links preserve original year and unknown institutions do not get invented data
+  ---
+  duration_ms: 4.030765
+  type: 'test'
+  ...
+# Subtest: provider errors isolated and no student profile transmitted
+ok 5 - provider errors isolated and no student profile transmitted
+  ---
+  duration_ms: 2.429364
+  type: 'test'
+  ...
+# Subtest: year mismatch and duplicates fail closed
+ok 6 - year mismatch and duplicates fail closed
+  ---
+  duration_ms: 0.641765
+  type: 'test'
+  ...
+# Subtest: Brave adapter requires separate approval and its own key
+ok 7 - Brave adapter requires separate approval and its own key
+  ---
+  duration_ms: 0.385443
+  type: 'test'
+  ...
+# Subtest: Brave fixed-origin web search display only, strict safe search, no private payload
+ok 8 - Brave fixed-origin web search display only, strict safe search, no private payload
+  ---
+  duration_ms: 1.407085
+  type: 'test'
+  ...
+# Subtest: national search has a focused source route and shortcuts; no browser database writes
+ok 9 - national search has a focused source route and shortcuts; no browser database writes
+  ---
+  duration_ms: 0.96125
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 270.621056

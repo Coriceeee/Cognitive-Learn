@@ -1,0 +1,13 @@
+﻿
+> cognitive-learn-ai@0.1.0 qa:cp73:mvp:preflight
+> python tools/cp73_mvp_gate.py --preflight
+
+CP73 MVP QA: BLOCKED | offline tests are not acceptance
+ - qaConfiguration PASS
+ - dependencies PASS
+ - firebaseCli PASS
+ - emulatorPorts BLOCKED
+ - localReactOrigin BLOCKED
+ - productionBuild NOT_RUN
+ - firestoreRulesEmulator NOT_RUN
+ - realBrowserE2E NOT_RUN

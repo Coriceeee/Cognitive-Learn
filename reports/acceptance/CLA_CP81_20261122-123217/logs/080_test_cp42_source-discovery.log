@@ -1,0 +1,21 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp42:source-discovery
+> node --experimental-strip-types --test tests/cp42-national-source-discovery.test.mjs
+
+Γ£ö national lookup has no school whitelist and supports field or code (2.1188ms)
+Γ£ö private fields and accidental PII rejected (0.2179ms)
+Γ£ö three years separate and direct links cover school outside registry (1.2356ms)
+Γ£ö local links preserve original year and unknown institutions do not get invented data (2.0342ms)
+Γ£ö provider errors isolated and no student profile transmitted (1.3672ms)
+Γ£ö year mismatch and duplicates fail closed (0.2412ms)
+Γ£ö Brave adapter requires separate approval and its own key (0.1384ms)
+Γ£ö Brave fixed-origin web search display only, strict safe search, no private payload (0.5889ms)
+Γ£ö national search has a focused source route and shortcuts; no browser database writes (0.8061ms)
+Γä╣ tests 9
+Γä╣ suites 0
+Γä╣ pass 9
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 162.0537

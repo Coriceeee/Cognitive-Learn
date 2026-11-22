@@ -1,0 +1,36 @@
+TAP version 13
+# (node:17497) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: valid zero retained; missing zero never displayed
+ok 1 - valid zero retained; missing zero never displayed
+  ---
+  duration_ms: 4.493533
+  type: 'test'
+  ...
+# Subtest: unsupported version and malformed values remain unavailable
+ok 2 - unsupported version and malformed values remain unavailable
+  ---
+  duration_ms: 2.893898
+  type: 'test'
+  ...
+# Subtest: disagreeing provenance fails closed
+ok 3 - disagreeing provenance fails closed
+  ---
+  duration_ms: 0.222935
+  type: 'test'
+  ...
+# Subtest: duplicate dimensions and nonfinite values rejected
+ok 4 - duplicate dimensions and nonfinite values rejected
+  ---
+  duration_ms: 0.1824
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 194.228444

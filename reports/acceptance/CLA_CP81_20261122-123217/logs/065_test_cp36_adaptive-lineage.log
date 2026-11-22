@@ -1,0 +1,22 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp36:adaptive-lineage
+> node --experimental-strip-types --test tests/cp36-adaptive-lineage.test.mjs
+
+Γ£ö explicit acceptance freezes source, options and selection; legacy no trace remains valid (6.5783ms)
+Γ£ö explicit rejection records an alternative without false assignment (2.859ms)
+Γ£ö manual choice same as recommendation is not a rejection (1.1307ms)
+Γ£ö owner, missing server, wrong prior and changed evidence fail closed (0.7207ms)
+Γ£ö forged refs, options and recommendations rejected (0.7108ms)
+Γ£ö replay survives Firestore map key reordering; altered policy options detected when recommendation changes (2.086ms)
+Γ£ö chronology enforced and non-server contexts cannot freeze (0.7287ms)
+Γ£ö transaction reads source before writing; candidate rules only allow frozen lineage on create (static only) (1.0304ms)
+Γ£ö freshness uses exact co-commit server timestamp, not a client clock or cached order (0.7694ms)
+Γ£ö equal timestamps and malformed next timestamps cannot freeze a trace (0.9155ms)
+Γä╣ tests 10
+Γä╣ suites 0
+Γä╣ pass 10
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 153.0355

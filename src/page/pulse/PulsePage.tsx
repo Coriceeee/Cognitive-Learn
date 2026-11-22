@@ -195,7 +195,7 @@ export default function PulsePage() {
         {view === "/pulse" && <>
           <section className="pulse-hero">
           <div>
-            <span>PULSE MONITOR</span>
+            <span>PULSE · ĐƯỜNG CONG TIẾN HÓA</span>
             <h1>Báo cáo tiến độ học tập và tuyển sinh</h1>
             <p>
               Pulse tổng hợp dữ liệu học tập từ Seed, Lumen, Atlas và Orion để

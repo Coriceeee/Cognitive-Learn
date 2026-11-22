@@ -1,0 +1,4 @@
+﻿
+> cognitive-learn-ai@0.1.0 typecheck:api
+> tsc -p tsconfig.api.json
+

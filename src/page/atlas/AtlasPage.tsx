@@ -57,7 +57,7 @@ export default function AtlasPage() {
         {view === "/atlas" && <>
           <section className="atlas-hero">
           <div className="atlas-hero-copy">
-            <span>ATLAS ADMISSION AI</span>
+            <span>ATLAS · BẢN ĐỒ TƯƠNG LAI</span>
             <h1>Tuyển sinh Việt Nam & du học quốc tế</h1>
             <p>
               Atlas phụ trách tuyển sinh Việt Nam, du học tại mọi quốc gia, chương trình liên kết quốc tế và định hướng ngành, trường, nguyện vọng.
@@ -66,8 +66,6 @@ export default function AtlasPage() {
 
             <div className="atlas-hero-actions">
               <a className="cla-study-jump" href="/student/exams#cla-exam-reminders">Lịch thi của tôi · Đếm ngược HSA / V-ACT / V-SAT</a>
-              <a className="cla-study-jump" href="/atlas/vietnam">Tra cứu tuyển sinh Việt Nam</a>
-              <a className="cla-study-jump" href="/atlas/subjects">Khám phá môn thi → chương trình có nguồn</a>
               {isAdmin && <a className="cla-study-jump" href="/atlas/library">Kho nhập nguồn · Admin</a>}
 
 

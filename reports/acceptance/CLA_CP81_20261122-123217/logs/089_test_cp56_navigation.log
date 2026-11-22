@@ -1,0 +1,21 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp56:navigation
+> node --experimental-strip-types --test tests/cp56-unsaved-navigation.test.mjs
+
+Γ£ö CP56.1 same workspace sub-tabs keep unsaved work without prompt (0.9328ms)
+Γ£ö CP56.2 explicit allow, deny and unregister work without storing PII (0.1666ms)
+Γ£ö CP56.3 guard registry rejects navigation if any active draft rejects (0.1047ms)
+Γ£ö CP56.4 hook registers and removes SPA and beforeunload guards (0.2021ms)
+Γ£ö CP56.5 hook does not treat an edit as saved until the server confirms it (0.1785ms)
+Γ£ö CP56.6 both click and imperative navigation use the central guard (0.116ms)
+Γ£ö CP56.7 rejected popstate restores location and leaves view mounted (0.1724ms)
+Γ£ö CP56.8 do not persist draft data to browser localStorage or sessionStorage (0.4689ms)
+Γ£ö CP56.9 explicit logout also respects pending unsaved drafts (0.7945ms)
+Γä╣ tests 9
+Γä╣ suites 0
+Γä╣ pass 9
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 123.1513

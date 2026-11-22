@@ -363,7 +363,7 @@ export default function OrionPage() {
         {view === "/orion" && <>
           <section className="orion-hero">
           <div>
-            <span>ORION STRATEGY</span>
+            <span>ORION · KIẾN TRÚC TƯƠNG LAI</span>
             <h1>Mô phỏng chiến lược học tập và xét tuyển</h1>
             <p>
               Orion dùng điểm hiện tại, điểm mục tiêu và thời gian còn lại để
@@ -373,7 +373,7 @@ export default function OrionPage() {
           </div>
 
           <aside>
-            <span>Readiness</span>
+            <span>Mức sẵn sàng (tham khảo)</span>
             <strong>{hasInputs ? `${strategy.readinessScore}/100` : "Chưa đủ dữ liệu"}</strong>
             <em className={`orion-risk ${getRiskClass(strategy.riskLevel)}`}>
               {hasInputs ? getRiskLabel(strategy.riskLevel) : "Chưa đánh giá"}

@@ -152,11 +152,11 @@ export default function LumenPage() {
             <section className="lumen-error-card">
 
               <span className="lumen-eyebrow">
-                LUMEN INTELLIGENCE
+                LUMEN · DẤU VÂN TAY TRÍ TUỆ
               </span>
 
               <h1>Không thể tải dữ liệu</h1>
-              <ModuleStateNotice tone="error" label="Không thể tải dữ liệu"
+              <ModuleStateNotice tone="error" label="Cần kiểm tra kết nối"
                 message={error}>
                 <a href="/student/profile">Kiểm tra hồ sơ Seed</a>
               </ModuleStateNotice>
@@ -172,11 +172,11 @@ export default function LumenPage() {
               </div>
 
               <span className="lumen-eyebrow">
-                LUMEN INTELLIGENCE
+                LUMEN · DẤU VÂN TAY TRÍ TUỆ
               </span>
 
               <h1>Chưa có hồ sơ học sinh</h1>
-              <ModuleStateNotice tone="neutral" label="Chưa có hồ sơ học sinh"
+              <ModuleStateNotice tone="neutral" label="Bắt đầu từ Seed"
                 message="Hoàn thiện Seed Profile để bắt đầu quan sát các chỉ số nhận thức. Không suy đoán điểm số khi thiếu dữ liệu.">
                 <a href="/student/profile" className="lumen-primary-action">Hoàn thiện hồ sơ</a>
               </ModuleStateNotice>
@@ -387,7 +387,7 @@ export default function LumenPage() {
             </strong>
 
             <span>
-              LUMEN INTELLIGENCE
+              LUMEN · DẤU VÂN TAY TRÍ TUỆ
             </span>
 
           </div>

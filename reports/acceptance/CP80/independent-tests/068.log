@@ -1,0 +1,70 @@
+
+> cognitive-learn-ai@0.1.0 test:cp40:allocation
+> node --experimental-strip-types --test tests/cp40-allocation-charts.test.mjs
+
+TAP version 13
+# (node:17737) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: budget conserved, maintenance guaranteed, zero gap gets no extra
+ok 1 - budget conserved, maintenance guaranteed, zero gap gets no extra
+  ---
+  duration_ms: 1.215531
+  type: 'test'
+  ...
+# Subtest: zero observed score is valid; zero budget is valid
+ok 2 - zero observed score is valid; zero budget is valid
+  ---
+  duration_ms: 0.274391
+  type: 'test'
+  ...
+# Subtest: invalid or duplicate or missing data does not allocate
+ok 3 - invalid or duplicate or missing data does not allocate
+  ---
+  duration_ms: 0.204198
+  type: 'test'
+  ...
+# Subtest: invalid time and impossible minimum rejected
+ok 4 - invalid time and impossible minimum rejected
+  ---
+  duration_ms: 0.142784
+  type: 'test'
+  ...
+# Subtest: all goals met retains unused budget and avoids needless work
+ok 5 - all goals met retains unused budget and avoids needless work
+  ---
+  duration_ms: 0.182607
+  type: 'test'
+  ...
+# Subtest: tie resolution deterministic and invariant to input order
+ok 6 - tie resolution deterministic and invariant to input order
+  ---
+  duration_ms: 1.045594
+  type: 'test'
+  ...
+# Subtest: greedy matches exhaustive optimum on small budgets
+ok 7 - greedy matches exhaustive optimum on small budgets
+  ---
+  duration_ms: 2.867792
+  type: 'test'
+  ...
+# Subtest: shared user constraints drive plot and workbench; only feasible scenarios can allocate
+ok 8 - shared user constraints drive plot and workbench; only feasible scenarios can allocate
+  ---
+  duration_ms: 0.831923
+  type: 'test'
+  ...
+# Subtest: scatter uses actual three-dimensional frontier, no misleading connected curve
+ok 9 - scatter uses actual three-dimensional frontier, no misleading connected curve
+  ---
+  duration_ms: 0.504799
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 158.05283

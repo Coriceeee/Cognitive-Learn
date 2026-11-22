@@ -1,0 +1,223 @@
+{
+  "scope": "isolated CSS only; not React E2E",
+  "total": 24,
+  "passed": 24,
+  "cases": [
+    {
+      "module": "seed",
+      "width": 390,
+      "selectedContrast": 7.04,
+      "horizontalOverflow": false,
+      "mapVisible": false,
+      "nodeOverflow": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "lumen",
+      "width": 390,
+      "selectedContrast": 6.63,
+      "horizontalOverflow": false,
+      "mapVisible": false,
+      "nodeOverflow": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "atlas",
+      "width": 390,
+      "selectedContrast": 7.16,
+      "horizontalOverflow": false,
+      "mapVisible": false,
+      "nodeOverflow": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "orion",
+      "width": 390,
+      "selectedContrast": 7.71,
+      "horizontalOverflow": false,
+      "mapVisible": false,
+      "nodeOverflow": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "pulse",
+      "width": 390,
+      "selectedContrast": 6.91,
+      "horizontalOverflow": false,
+      "mapVisible": false,
+      "nodeOverflow": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "haven",
+      "width": 390,
+      "selectedContrast": 6.29,
+      "horizontalOverflow": false,
+      "mapVisible": false,
+      "nodeOverflow": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "seed",
+      "width": 768,
+      "selectedContrast": 7.04,
+      "horizontalOverflow": false,
+      "mapVisible": true,
+      "nodeOverflow": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "lumen",
+      "width": 768,
+      "selectedContrast": 6.63,
+      "horizontalOverflow": false,
+      "mapVisible": true,
+      "nodeOverflow": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "atlas",
+      "width": 768,
+      "selectedContrast": 7.16,
+      "horizontalOverflow": false,
+      "mapVisible": true,
+      "nodeOverflow": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "orion",
+      "width": 768,
+      "selectedContrast": 7.71,
+      "horizontalOverflow": false,
+      "mapVisible": true,
+      "nodeOverflow": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "pulse",
+      "width": 768,
+      "selectedContrast": 6.91,
+      "horizontalOverflow": false,
+      "mapVisible": true,
+      "nodeOverflow": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "haven",
+      "width": 768,
+      "selectedContrast": 6.29,
+      "horizontalOverflow": false,
+      "mapVisible": true,
+      "nodeOverflow": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "seed",
+      "width": 1024,
+      "selectedContrast": 7.04,
+      "horizontalOverflow": false,
+      "mapVisible": true,
+      "nodeOverflow": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "lumen",
+      "width": 1024,
+      "selectedContrast": 6.63,
+      "horizontalOverflow": false,
+      "mapVisible": true,
+      "nodeOverflow": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "atlas",
+      "width": 1024,
+      "selectedContrast": 7.16,
+      "horizontalOverflow": false,
+      "mapVisible": true,
+      "nodeOverflow": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "orion",
+      "width": 1024,
+      "selectedContrast": 7.71,
+      "horizontalOverflow": false,
+      "mapVisible": true,
+      "nodeOverflow": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "pulse",
+      "width": 1024,
+      "selectedContrast": 6.91,
+      "horizontalOverflow": false,
+      "mapVisible": true,
+      "nodeOverflow": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "haven",
+      "width": 1024,
+      "selectedContrast": 6.29,
+      "horizontalOverflow": false,
+      "mapVisible": true,
+      "nodeOverflow": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "seed",
+      "width": 1440,
+      "selectedContrast": 7.04,
+      "horizontalOverflow": false,
+      "mapVisible": true,
+      "nodeOverflow": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "lumen",
+      "width": 1440,
+      "selectedContrast": 6.63,
+      "horizontalOverflow": false,
+      "mapVisible": true,
+      "nodeOverflow": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "atlas",
+      "width": 1440,
+      "selectedContrast": 7.16,
+      "horizontalOverflow": false,
+      "mapVisible": true,
+      "nodeOverflow": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "orion",
+      "width": 1440,
+      "selectedContrast": 7.71,
+      "horizontalOverflow": false,
+      "mapVisible": true,
+      "nodeOverflow": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "pulse",
+      "width": 1440,
+      "selectedContrast": 6.91,
+      "horizontalOverflow": false,
+      "mapVisible": true,
+      "nodeOverflow": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "haven",
+      "width": 1440,
+      "selectedContrast": 6.29,
+      "horizontalOverflow": false,
+      "mapVisible": true,
+      "nodeOverflow": 0,
+      "status": "PASS"
+    }
+  ]
+}

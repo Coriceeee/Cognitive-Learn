@@ -1,0 +1,57 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp31:batch6
+> node --test tests/cp31-batch6-e2e-evidence.test.cjs && python -m unittest discover -s tests_cp31 -p "test_browser_*.py" -v
+
+Γ£ö B6-01 real mobile E2E uses Playwright Page viewport, not BrowserContext (0.7519ms)
+Γ£ö B6-02 browser attempt invalidates stale QA gate before auth (0.7703ms)
+Γ£ö B6-03 all 72 distinct cases required, without permissive count shortcuts (0.1273ms)
+Γ£ö B6-04 QA identity checked before and after login without mocking role (0.2298ms)
+Γ£ö B6-05 E2E report is sanitized and atomic, no page body or credential capture (0.177ms)
+Γ£ö B6-06 static verification does not silently count as browser pass (0.1667ms)
+Γ£ö B6-07 never bundle or track old E2E report as release evidence (0.4682ms)
+Γä╣ tests 7
+Γä╣ suites 0
+Γä╣ pass 7
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 91.7152
+npm.cmd : test_01_exact_72_inventory_and_unique_ids (test_browser_evidence_gate.BrowserEvidenceTests.test_01_exact_72_inventory_and_unique_ids) ... ok
+At C:\Gạo\Cognitive-Learn\CLA_CP81_ONECLICK.ps1:95 char:9
++         & $exe @commandArgs 2>&1 | Out-File -LiteralPath $logPath -En ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (test_01_exact_7...que_ids) ... ok:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+test_02_report_builder_only_accepts_fixed_cases_and_unique_case_names (test_browser_evidence_gate.BrowserEvidenceTests.test_02_report_builder_only_accepts_fixed_cases_and_unique_case_names) ... ok
+test_03_complete_mock_object_validates_contract_only (test_browser_evidence_gate.BrowserEvidenceTests.test_03_complete_mock_object_validates_contract_only) ... ok
+test_04_missing_one_case_denies_gate (test_browser_evidence_gate.BrowserEvidenceTests.test_04_missing_one_case_denies_gate) ... ok
+test_05_stale_and_future_report_denied (test_browser_evidence_gate.BrowserEvidenceTests.test_05_stale_and_future_report_denied) ... ok
+test_06_forged_manifest_or_runner_checksum_denied (test_browser_evidence_gate.BrowserEvidenceTests.test_06_forged_manifest_or_runner_checksum_denied) ... ok
+test_07_reordered_and_duplicate_case_denied (test_browser_evidence_gate.BrowserEvidenceTests.test_07_reordered_and_duplicate_case_denied) ... ok
+test_08_partial_and_aborted_never_pass (test_browser_evidence_gate.BrowserEvidenceTests.test_08_partial_and_aborted_never_pass) ... ok
+test_09_failure_report_never_contains_exception_message_or_credentials (test_browser_evidence_gate.BrowserEvidenceTests.test_09_failure_report_never_contains_exception_message_or_credentials) ... ok
+test_10_atomic_write_replaces_stale_pass_report (test_browser_evidence_gate.BrowserEvidenceTests.test_10_atomic_write_replaces_stale_pass_report) ... ok
+test_11_local_qa_project_mismatch_and_missing_file_block (test_browser_evidence_gate.BrowserEvidenceTests.test_11_local_qa_project_mismatch_and_missing_file_block) ... ok
+test_12_mobile_uses_real_playwright_page_api (test_browser_evidence_gate.BrowserEvidenceTests.test_12_mobile_uses_real_playwright_page_api) ... ok
+test_13_invalid_manifest_path_is_fail_closed (test_browser_evidence_gate.BrowserEvidenceTests.test_13_invalid_manifest_path_is_fail_closed) ... ok
+test_14_contract_auditor_rejects_absent_report (test_browser_evidence_gate.BrowserEvidenceTests.test_14_contract_auditor_rejects_absent_report) ... ok
+test_exact_inventory (test_browser_gate_config.BrowserGateConfigTest.test_exact_inventory) ... ok
+test_no_credentials_or_ack_no_execution (test_browser_gate_config.BrowserGateConfigTest.test_no_credentials_or_ack_no_execution) ... ok
+test_only_loopback_http_without_explicit_staging (test_browser_gate_config.BrowserGateConfigTest.test_only_loopback_http_without_explicit_staging) ... ok
+test_staging_requires_exact_host_https (test_browser_gate_config.BrowserGateConfigTest.test_staging_requires_exact_host_https) ... ok
+test_b7_01_public_marker_matches_expected_project_no_auth (test_browser_project_preflight.QaProjectPreflight.test_b7_01_public_marker_matches_expected_project_no_auth) ... ok
+test_b7_02_denies_wrong_project_before_credentials (test_browser_project_preflight.QaProjectPreflight.test_b7_02_denies_wrong_project_before_credentials) ... ok
+test_b7_03_denies_missing_unexpanded_or_repeated_marker (test_browser_project_preflight.QaProjectPreflight.test_b7_03_denies_missing_unexpanded_or_repeated_marker) ... ok
+test_b7_04_denies_redirects_wrong_content_type_and_error_response (test_browser_project_preflight.QaProjectPreflight.test_b7_04_denies_redirects_wrong_content_type_and_error_response) ... ok
+test_b7_05_html_over_128k_cannot_sneak_second_project_marker (test_browser_project_preflight.QaProjectPreflight.test_b7_05_html_over_128k_cannot_sneak_second_project_marker) ... ok
+test_b7_06_preflight_is_credential_free_and_checks_local_env (test_browser_project_preflight.QaProjectPreflight.test_b7_06_preflight_is_credential_free_and_checks_local_env) ... ok
+test_b7_07_bad_project_id_fails_without_network (test_browser_project_preflight.QaProjectPreflight.test_b7_07_bad_project_id_fails_without_network) ... ok
+test_b7_08_preflight_cli_does_not_invalidate_previous_report (test_browser_project_preflight.QaProjectPreflight.test_b7_08_preflight_cli_does_not_invalidate_previous_report) ... ok
+test_b7_09_missing_chromium_blocks_without_credential_prompt (test_browser_project_preflight.QaProjectPreflight.test_b7_09_missing_chromium_blocks_without_credential_prompt) ... ok
+
+----------------------------------------------------------------------
+Ran 27 tests in 5.673s
+
+OK

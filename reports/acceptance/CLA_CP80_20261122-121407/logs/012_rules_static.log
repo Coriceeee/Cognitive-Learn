@@ -1,0 +1,27 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:rules:static
+> node --test tests/cp21.rules.contract.test.cjs
+
+Γ£ö STATIC ONLY rules v2 (2.3045ms)
+Γ£ö STATIC ONLY user doc own-id guard (0.2609ms)
+Γ£ö STATIC ONLY active role gate (0.1645ms)
+Γ£ö STATIC ONLY prevent self-registration of admin (0.1195ms)
+Γ£ö STATIC ONLY lock elective selection (0.1501ms)
+Γ£ö STATIC ONLY four unique electives (0.1586ms)
+Γ£ö STATIC ONLY foreign language not equal to elective (0.097ms)
+Γ£ö STATIC ONLY transcript path protected (0.1263ms)
+Γ£ö STATIC ONLY scope validation (0.1333ms)
+Γ£ö STATIC ONLY append-only cognitive history (0.4073ms)
+Γ£ö STATIC ONLY retired shared reports cannot be created or reviewed (0.7794ms)
+Γ£ö STATIC ONLY cp24 append-only provenance collection (0.1703ms)
+Γ£ö STATIC ONLY cp24 forbid update and delete provenance (0.2279ms)
+Γ£ö STATIC ONLY cp24 no PII through schema whitelist (0.1147ms)
+Γ£ö STATIC ONLY no public system health access (0.1489ms)
+Γä╣ tests 15
+Γä╣ suites 0
+Γä╣ pass 15
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 115.711

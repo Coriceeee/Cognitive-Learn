@@ -1,0 +1,20 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp42:robust-decision
+> node --experimental-strip-types --test tests/cp42-robust-decision.test.mjs
+
+Γ£ö zero radius matches nominal utility and ranking (2.119ms)
+Γ£ö full radius spans all criteria; worst regret is max per-criterion regret (1.0651ms)
+Γ£ö exact vertex result bounds a dense simplex grid for multiple weight configurations (10.4341ms)
+Γ£ö same hard limits govern eligible alternatives and fixed anchors (0.4298ms)
+Γ£ö tie candidates retained, dominated alternatives never suggested even for zero weight (0.2678ms)
+Γ£ö block missing, invalid, duplicate and out-of-scale data (0.2508ms)
+Γ£ö real Orion scenario set works for every valid horizon; timetable never exceeds deadline, no duplicate milestone keys (3.1891ms)
+Γ£ö UI passes same filtered scenario list into existing closed loop, no implicit or stale selection (1.8173ms)
+Γä╣ tests 8
+Γä╣ suites 0
+Γä╣ pass 8
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 163.0454

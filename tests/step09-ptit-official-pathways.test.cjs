@@ -114,8 +114,10 @@ test('09.20 excludes a program without a 2026 THPT admission method',()=>{
   assert.equal(run(['physics','informatics'],base,{programs:[notThpt]}).matches.length,0);
 });
 
-test('09.21 official-pathway exploration is discoverable from Atlas hero',()=>{
+test('09.21 official-pathway exploration is discoverable from Atlas module navigation',()=>{
   const page=fs.readFileSync(path.join(root,'src/page/atlas/AtlasPage.tsx'),'utf8');
-  assert.ok(page.includes('href="/atlas/subjects"'));
-  assert.ok(page.includes('Khám phá môn thi → chương trình có nguồn'));
+  const catalog=fs.readFileSync(path.join(root,'src/data/moduleSubmodules.ts'),'utf8');
+  assert.ok(page.includes('<ModuleSectionNav moduleKey="atlas" />'), 'Atlas must show focused module navigation');
+  assert.ok(catalog.includes('href: "/atlas/subjects"'), 'Subject optimizer must remain reachable');
+  assert.ok(catalog.includes('title: "Tổ hợp chiến lược"'), 'Student-facing subject pathway must be named');
 });

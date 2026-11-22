@@ -1,0 +1,262 @@
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch14
+> node --experimental-strip-types --test tests/cp31-batch14-measurement-persistence.test.mjs
+
+TAP version 13
+# (node:17181) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: B14-01 create-only T0 point retains actual 0
+ok 1 - B14-01 create-only T0 point retains actual 0
+  ---
+  duration_ms: 3.192951
+  type: 'test'
+  ...
+# Subtest: B14-02 immutable T0 can be declared before any T1
+ok 2 - B14-02 immutable T0 can be declared before any T1
+  ---
+  duration_ms: 0.698766
+  type: 'test'
+  ...
+# Subtest: B14-03 T1 only comes from reviewed cycle
+ok 3 - B14-03 T1 only comes from reviewed cycle
+  ---
+  duration_ms: 2.775615
+  type: 'test'
+  ...
+# Subtest: B14-04 unobserved subject never gets fabricated T1
+ok 4 - B14-04 unobserved subject never gets fabricated T1
+  ---
+  duration_ms: 1.302119
+  type: 'test'
+  ...
+# Subtest: B14-05 every point ID is per cycle/key/timepoint and cannot collide
+ok 5 - B14-05 every point ID is per cycle/key/timepoint and cannot collide
+  ---
+  duration_ms: 1.291495
+  type: 'test'
+  ...
+# Subtest: B14-06 stored declaration maps to expected student-owned point
+ok 6 - B14-06 stored declaration maps to expected student-owned point
+  ---
+  duration_ms: 0.958219
+  type: 'test'
+  ...
+# Subtest: B14-07 T1 observation index binds to exactly its observed item
+ok 7 - B14-07 T1 observation index binds to exactly its observed item
+  ---
+  duration_ms: 1.033005
+  type: 'test'
+  ...
+# Subtest: B14-08 write timestamp is distinct from linked T0 time
+ok 8 - B14-08 write timestamp is distinct from linked T0 time
+  ---
+  duration_ms: 0.458846
+  type: 'test'
+  ...
+# Subtest: B14-09 missing exam point is rejected before write
+ok 9 - B14-09 missing exam point is rejected before write
+  ---
+  duration_ms: 0.923591
+  type: 'test'
+  ...
+# Subtest: B14-10 no phantom or unknown subject
+ok 10 - B14-10 no phantom or unknown subject
+  ---
+  duration_ms: 0.715986
+  type: 'test'
+  ...
+# Subtest: B14-11 invalid owner empty or outsize
+ok 11 - B14-11 invalid owner empty or outsize
+  ---
+  duration_ms: 0.433861
+  type: 'test'
+  ...
+# Subtest: B14-12 corrupt frozen T0 cannot be declared
+ok 12 - B14-12 corrupt frozen T0 cannot be declared
+  ---
+  duration_ms: 0.348766
+  type: 'test'
+  ...
+# Subtest: B14-13 corrupted evidence record prevents T1 declaration
+ok 13 - B14-13 corrupted evidence record prevents T1 declaration
+  ---
+  duration_ms: 0.28502
+  type: 'test'
+  ...
+# Subtest: B14-14 unsupported or missing instrument metadata is rejected
+ok 14 - B14-14 unsupported or missing instrument metadata is rejected
+  ---
+  duration_ms: 2.013723
+  type: 'test'
+  ...
+# Subtest: B14-15 HTML / spaces in source identifiers rejected
+ok 15 - B14-15 HTML / spaces in source identifiers rejected
+  ---
+  duration_ms: 0.948617
+  type: 'test'
+  ...
+# Subtest: B14-16 unsupported scale is rejected
+ok 16 - B14-16 unsupported scale is rejected
+  ---
+  duration_ms: 0.679472
+  type: 'test'
+  ...
+# Subtest: B14-17 caller cannot inject verified source or fake role
+ok 17 - B14-17 caller cannot inject verified source or fake role
+  ---
+  duration_ms: 0.811785
+  type: 'test'
+  ...
+# Subtest: B14-18 caller cannot inject PII or other fields
+ok 18 - B14-18 caller cannot inject PII or other fields
+  ---
+  duration_ms: 0.704148
+  type: 'test'
+  ...
+# Subtest: B14-19 owner swapped at read time is invalid
+ok 19 - B14-19 owner swapped at read time is invalid
+  ---
+  duration_ms: 0.61325
+  type: 'test'
+  ...
+# Subtest: B14-20 changed record score is rejected
+ok 20 - B14-20 changed record score is rejected
+  ---
+  duration_ms: 0.914006
+  type: 'test'
+  ...
+# Subtest: B14-21 changed linked timestamp rejected
+ok 21 - B14-21 changed linked timestamp rejected
+  ---
+  duration_ms: 0.782293
+  type: 'test'
+  ...
+# Subtest: B14-22 changed subjectIndex rejected
+ok 22 - B14-22 changed subjectIndex rejected
+  ---
+  duration_ms: 0.933074
+  type: 'test'
+  ...
+# Subtest: B14-23 forged observation index rejected
+ok 23 - B14-23 forged observation index rejected
+  ---
+  duration_ms: 0.524761
+  type: 'test'
+  ...
+# Subtest: B14-24 changed cycle ID rejected
+ok 24 - B14-24 changed cycle ID rejected
+  ---
+  duration_ms: 0.298261
+  type: 'test'
+  ...
+# Subtest: B14-25 record with unknown field rejected
+ok 25 - B14-25 record with unknown field rejected
+  ---
+  duration_ms: 0.553905
+  type: 'test'
+  ...
+# Subtest: B14-26 client cannot forge source verification status
+ok 26 - B14-26 client cannot forge source verification status
+  ---
+  duration_ms: 0.231556
+  type: 'test'
+  ...
+# Subtest: B14-27 missing server write timestamp rejected
+ok 27 - B14-27 missing server write timestamp rejected
+  ---
+  duration_ms: 0.280371
+  type: 'test'
+  ...
+# Subtest: B14-28 invalid or mismatched document ID rejected
+ok 28 - B14-28 invalid or mismatched document ID rejected
+  ---
+  duration_ms: 0.219203
+  type: 'test'
+  ...
+# Subtest: B14-29 stored snapshot is invalid when cycle score changes
+ok 29 - B14-29 stored snapshot is invalid when cycle score changes
+  ---
+  duration_ms: 0.317626
+  type: 'test'
+  ...
+# Subtest: B14-30 valid rows convert to strict B13 manifest with no user ID
+ok 30 - B14-30 valid rows convert to strict B13 manifest with no user ID
+  ---
+  duration_ms: 11.656445
+  type: 'test'
+  ...
+# Subtest: B14-31 partial declarations are not promoted to aligned
+ok 31 - B14-31 partial declarations are not promoted to aligned
+  ---
+  duration_ms: 1.469814
+  type: 'test'
+  ...
+# Subtest: B14-32 changed instrument yields mismatch instead of equivalence
+ok 32 - B14-32 changed instrument yields mismatch instead of equivalence
+  ---
+  duration_ms: 2.576599
+  type: 'test'
+  ...
+# Subtest: B14-33 no psychometric claims even when declarations align
+ok 33 - B14-33 no psychometric claims even when declarations align
+  ---
+  duration_ms: 2.454329
+  type: 'test'
+  ...
+# Subtest: B14-34 Firestore candidate has append-only, owner+consent scoped records
+ok 34 - B14-34 Firestore candidate has append-only, owner+consent scoped records
+  ---
+  duration_ms: 0.369083
+  type: 'test'
+  ...
+# Subtest: B14-35 candidate is not deployed by firebase.json
+ok 35 - B14-35 candidate is not deployed by firebase.json
+  ---
+  duration_ms: 0.216729
+  type: 'test'
+  ...
+# Subtest: B14-36 Firestore hooks do not write without student-initiated action
+ok 36 - B14-36 Firestore hooks do not write without student-initiated action
+  ---
+  duration_ms: 0.617508
+  type: 'test'
+  ...
+# Subtest: B14-37 UI requires explicit one-time confirmation and warns unverified
+ok 37 - B14-37 UI requires explicit one-time confirmation and warns unverified
+  ---
+  duration_ms: 0.593548
+  type: 'test'
+  ...
+# Subtest: B14-38 prior B13 measurement manifest is now from persisted rows
+ok 38 - B14-38 prior B13 measurement manifest is now from persisted rows
+  ---
+  duration_ms: 0.345504
+  type: 'test'
+  ...
+# Subtest: B14-39 npm gates extend B13, not replace it
+ok 39 - B14-39 npm gates extend B13, not replace it
+  ---
+  duration_ms: 0.459652
+  type: 'test'
+  ...
+# Subtest: B14-40 invalid score NaN and wrong origin never become declarations
+ok 40 - B14-40 invalid score NaN and wrong origin never become declarations
+  ---
+  duration_ms: 0.473831
+  type: 'test'
+  ...
+# Subtest: B14-41 UI hides longitudinal arrows until declared metadata aligns
+ok 41 - B14-41 UI hides longitudinal arrows until declared metadata aligns
+  ---
+  duration_ms: 0.457238
+  type: 'test'
+  ...
+1..41
+# tests 41
+# suites 0
+# pass 41
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 274.73266

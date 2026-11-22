@@ -1,0 +1,6 @@
+﻿numpy: PASS
+pandas: PASS
+scipy: MISSING_DEPENDENCY
+scikit-learn: MISSING_DEPENDENCY
+xgboost: MISSING_DEPENDENCY
+CP82 ML ENV: BLOCKED | C:\Gß║ío\Cognitive-Learn\reports\acceptance-cp82\ml_environment.json

@@ -1,0 +1,35 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:research:hf-uci
+> python -m unittest research.tests.test_uci_baseline research.tests.test_uci_fetch_gate -v
+
+npm.cmd : test_uci_baseline (unittest.loader._FailedTest.test_uci_baseline) ... ERROR
+At C:\Gạo\Cognitive-Learn\CLA_CP81_ONECLICK.ps1:95 char:9
++         & $exe @commandArgs 2>&1 | Out-File -LiteralPath $logPath -En ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (test_uci_baseli...line) ... ERROR:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+test_good_minimum_schema (research.tests.test_uci_fetch_gate.FetchGateTests.test_good_minimum_schema) ... ok
+test_license_gate_and_scope (research.tests.test_uci_fetch_gate.FetchGateTests.test_license_gate_and_scope) ... ok
+test_pinned_revision_and_subject_counts (research.tests.test_uci_fetch_gate.FetchGateTests.test_pinned_revision_and_subject_counts) ... ok
+test_refuse_bad_grade_and_count_and_duplicates (research.tests.test_uci_fetch_gate.FetchGateTests.test_refuse_bad_grade_and_count_and_duplicates) ... ok
+
+======================================================================
+ERROR: test_uci_baseline (unittest.loader._FailedTest.test_uci_baseline)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_uci_baseline
+Traceback (most recent call last):
+  File "C:\Users\nguye\AppData\Local\Programs\Python\Python311\Lib\unittest\loader.py", line 162, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\G\u1ea1o\Cognitive-Learn\research\tests\test_uci_baseline.py", line 9, in <module>
+    from baseline_uci_student_performance import run
+  File "C:\G\u1ea1o\Cognitive-Learn\research\src\baseline_uci_student_performance.py", line 16, in <module>
+    from sklearn.compose import ColumnTransformer
+ModuleNotFoundError: No module named 'sklearn'
+
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.002s
+
+FAILED (errors=1)

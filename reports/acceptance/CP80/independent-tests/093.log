@@ -1,0 +1,77 @@
+
+> cognitive-learn-ai@0.1.0 test:cp62:student-rail
+> node --experimental-strip-types --test tests/cp62-student-action-rail.test.mjs
+
+TAP version 13
+# (node:15346) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP62 dashboard data-source signal rail
+    # Subtest: renders three explicitly labeled source flags and no invented measurements
+    ok 1 - renders three explicitly labeled source flags and no invented measurements
+      ---
+      duration_ms: 2.618785
+      type: 'test'
+      ...
+    # Subtest: distinguishes a profile from cognitive and historical observation
+    ok 2 - distinguishes a profile from cognitive and historical observation
+      ---
+      duration_ms: 0.312905
+      type: 'test'
+      ...
+    # Subtest: does not convert missing profile to valid downstream signals
+    ok 3 - does not convert missing profile to valid downstream signals
+      ---
+      duration_ms: 0.333677
+      type: 'test'
+      ...
+    # Subtest: handles mixed prerequisites without pretending all three are ready
+    ok 4 - handles mixed prerequisites without pretending all three are ready
+      ---
+      duration_ms: 0.40569
+      type: 'test'
+      ...
+    # Subtest: renders all-available as exactly three source flags, not a numeric score
+    ok 5 - renders all-available as exactly three source flags, not a numeric score
+      ---
+      duration_ms: 0.489791
+      type: 'test'
+      ...
+    # Subtest: integrates after the verified-data canvas without reinstating twin cards
+    ok 6 - integrates after the verified-data canvas without reinstating twin cards
+      ---
+      duration_ms: 0.221955
+      type: 'test'
+      ...
+    # Subtest: keeps the exam calendar first and the preview isolated
+    ok 7 - keeps the exam calendar first and the preview isolated
+      ---
+      duration_ms: 0.117054
+      type: 'test'
+      ...
+    # Subtest: bounds action count and uses real links, ARIA and plain source labels
+    ok 8 - bounds action count and uses real links, ARIA and plain source labels
+      ---
+      duration_ms: 2.149955
+      type: 'test'
+      ...
+    # Subtest: includes mobile, dark and reduced-motion styles loaded in the global entrypoint
+    ok 9 - includes mobile, dark and reduced-motion styles loaded in the global entrypoint
+      ---
+      duration_ms: 0.328159
+      type: 'test'
+      ...
+    1..9
+ok 1 - CP62 dashboard data-source signal rail
+  ---
+  duration_ms: 9.305725
+  type: 'suite'
+  ...
+1..1
+# tests 9
+# suites 1
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 163.957392

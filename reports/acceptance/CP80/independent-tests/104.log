@@ -1,0 +1,94 @@
+
+> cognitive-learn-ai@0.1.0 test:cp73:mvp
+> node --experimental-strip-types --test tests/cp73-local-firebase-emulators.test.mjs tests/cp73-mvp-gate.test.mjs
+
+TAP version 13
+# (node:15717) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: QA opt-in disabled does not mutate production connection
+ok 1 - QA opt-in disabled does not mutate production connection
+  ---
+  duration_ms: 1.120991
+  type: 'test'
+  ...
+# Subtest: Explicit QA opt-in only connects known demo identity to loopback ports
+ok 2 - Explicit QA opt-in only connects known demo identity to loopback ports
+  ---
+  duration_ms: 0.732051
+  type: 'test'
+  ...
+# Subtest: Unknown opt-in value does not fall through to production
+ok 3 - Unknown opt-in value does not fall through to production
+  ---
+  duration_ms: 0.47577
+  type: 'test'
+  ...
+# Subtest: Production build and external hostname reject QA switch
+ok 4 - Production build and external hostname reject QA switch
+  ---
+  duration_ms: 0.175971
+  type: 'test'
+  ...
+# Subtest: Wrong Firebase project, key or auth domain cannot connect to live project
+ok 5 - Wrong Firebase project, key or auth domain cannot connect to live project
+  ---
+  duration_ms: 0.231875
+  type: 'test'
+  ...
+# Subtest: Firebase SDK connects both emulators only after safety check
+ok 6 - Firebase SDK connects both emulators only after safety check
+  ---
+  duration_ms: 0.561101
+  type: 'test'
+  ...
+# Subtest: QA template does not contain a real Firebase key or an application secret
+ok 7 - QA template does not contain a real Firebase key or an application secret
+  ---
+  duration_ms: 2.353988
+  type: 'test'
+  ...
+# Subtest: CP73 release gate rejects public host before reading QA credentials
+ok 8 - CP73 release gate rejects public host before reading QA credentials
+  ---
+  duration_ms: 1188.191176
+  type: 'test'
+  ...
+# Subtest: CP73 gate rejects network origin with username/password or path
+ok 9 - CP73 gate rejects network origin with username/password or path
+  ---
+  duration_ms: 3121.054938
+  type: 'test'
+  ...
+# Subtest: CP73 gate rejects report paths outside release root
+ok 10 - CP73 gate rejects report paths outside release root
+  ---
+  duration_ms: 1065.828683
+  type: 'test'
+  ...
+# Subtest: CP73 local gate writes a redacted, explicitly blocked report before dependencies installed
+ok 11 - CP73 local gate writes a redacted, explicitly blocked report before dependencies installed
+  ---
+  duration_ms: 974.673506
+  type: 'test'
+  ...
+# Subtest: CP73 includes actual build, Emulator Rules and React E2E in candidate gate
+ok 12 - CP73 includes actual build, Emulator Rules and React E2E in candidate gate
+  ---
+  duration_ms: 0.489974
+  type: 'test'
+  ...
+# Subtest: Local QA template must opt into consent gate and nonproduction Firebase ID
+ok 13 - Local QA template must opt into consent gate and nonproduction Firebase ID
+  ---
+  duration_ms: 0.4053
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 6440.031684

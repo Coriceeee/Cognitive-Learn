@@ -1,0 +1,6 @@
+﻿
+> cognitive-learn-ai@0.1.0 check:dependencies
+> node tools/check-dependencies.cjs
+
+Node v24.18.0; platform win32/x64
+DEPENDENCY_PREFLIGHT_PASS

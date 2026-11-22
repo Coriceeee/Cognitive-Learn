@@ -1,0 +1,110 @@
+
+> cognitive-learn-ai@0.1.0 test:cp29:academic
+> node --experimental-strip-types --test tests/cp29-academic-lock.behavior.test.mjs && node --test tests/cp29-academic-lock.contract.test.cjs
+
+TAP version 13
+# (node:16732) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP29-C4-01 valid curriculum identity accepted without inventing scores
+ok 1 - CP29-C4-01 valid curriculum identity accepted without inventing scores
+  ---
+  duration_ms: 2.263999
+  type: 'test'
+  ...
+# Subtest: CP29-C4-02 rejects duplicate, malformed and unknown elective
+ok 2 - CP29-C4-02 rejects duplicate, malformed and unknown elective
+  ---
+  duration_ms: 0.355567
+  type: 'test'
+  ...
+# Subtest: CP29-C4-03 rejects wrong graded subject catalogue and programme
+ok 3 - CP29-C4-03 rejects wrong graded subject catalogue and programme
+  ---
+  duration_ms: 0.410293
+  type: 'test'
+  ...
+# Subtest: CP29-D3-01 exact four electives and foreign language remain immutable
+ok 4 - CP29-D3-01 exact four electives and foreign language remain immutable
+  ---
+  duration_ms: 0.570002
+  type: 'test'
+  ...
+# Subtest: CP29-D3-02 flags unapproved subjects in grade10, grade11, grade12
+ok 5 - CP29-D3-02 flags unapproved subjects in grade10, grade11, grade12
+  ---
+  duration_ms: 0.603453
+  type: 'test'
+  ...
+# Subtest: CP29-D3-03 accepts partial terms and real zero as valid school transcript
+ok 6 - CP29-D3-03 accepts partial terms and real zero as valid school transcript
+  ---
+  duration_ms: 0.164476
+  type: 'test'
+  ...
+# Subtest: CP29-D3-04 invalid grades/terms/shape fail closed
+ok 7 - CP29-D3-04 invalid grades/terms/shape fail closed
+  ---
+  duration_ms: 0.25181
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 159.189847
+TAP version 13
+# Subtest: CP29 lock contract: identity lock enforces foreign language and selected electives
+ok 1 - CP29 lock contract: identity lock enforces foreign language and selected electives
+  ---
+  duration_ms: 0.885611
+  type: 'test'
+  ...
+# Subtest: CP29 lock contract: legacy identity fails closed
+ok 2 - CP29 lock contract: legacy identity fails closed
+  ---
+  duration_ms: 0.254984
+  type: 'test'
+  ...
+# Subtest: CP29 lock contract: both academic document cross-checks use identity
+ok 3 - CP29 lock contract: both academic document cross-checks use identity
+  ---
+  duration_ms: 0.351241
+  type: 'test'
+  ...
+# Subtest: CP29 lock contract: transcript writes validate 3 years and whitelisted 9 subjects
+ok 4 - CP29 lock contract: transcript writes validate 3 years and whitelisted 9 subjects
+  ---
+  duration_ms: 0.183116
+  type: 'test'
+  ...
+# Subtest: CP29 lock contract: student UI blocks changing locked language
+ok 5 - CP29 lock contract: student UI blocks changing locked language
+  ---
+  duration_ms: 0.210281
+  type: 'test'
+  ...
+# Subtest: CP29 lock contract: student UI fails closed on corrupt previous transcripts
+ok 6 - CP29 lock contract: student UI fails closed on corrupt previous transcripts
+  ---
+  duration_ms: 0.097698
+  type: 'test'
+  ...
+# Subtest: CP29 lock contract: server emulator cases are retained
+ok 7 - CP29 lock contract: server emulator cases are retained
+  ---
+  duration_ms: 0.474645
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 69.575555

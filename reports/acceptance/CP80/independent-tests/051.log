@@ -1,0 +1,148 @@
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch16
+> node --experimental-strip-types --test tests/cp31-batch16-history-pagination.test.mjs
+
+TAP version 13
+# (node:17241) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: B16-01 page size is eight and cap is 80
+ok 1 - B16-01 page size is eight and cap is 80
+  ---
+  duration_ms: 2.708156
+  type: 'test'
+  ...
+# Subtest: B16-02 full page is eight records without exceeding Rules
+ok 2 - B16-02 full page is eight records without exceeding Rules
+  ---
+  duration_ms: 2.150899
+  type: 'test'
+  ...
+# Subtest: B16-03 short server page establishes no further rows for that request
+ok 3 - B16-03 short server page establishes no further rows for that request
+  ---
+  duration_ms: 0.354666
+  type: 'test'
+  ...
+# Subtest: B16-04 empty server page is legal
+ok 4 - B16-04 empty server page is legal
+  ---
+  duration_ms: 0.324792
+  type: 'test'
+  ...
+# Subtest: B16-05 cache cannot establish completeness
+ok 5 - B16-05 cache cannot establish completeness
+  ---
+  duration_ms: 0.262836
+  type: 'test'
+  ...
+# Subtest: B16-06 missing user ID fails closed
+ok 6 - B16-06 missing user ID fails closed
+  ---
+  duration_ms: 0.17693
+  type: 'test'
+  ...
+# Subtest: B16-07 invalid latest page fails closed
+ok 7 - B16-07 invalid latest page fails closed
+  ---
+  duration_ms: 1.138283
+  type: 'test'
+  ...
+# Subtest: B16-08 nine Firestore records exceed server query allowance
+ok 8 - B16-08 nine Firestore records exceed server query allowance
+  ---
+  duration_ms: 0.332406
+  type: 'test'
+  ...
+# Subtest: B16-09 foreign cycle cannot be displayed
+ok 9 - B16-09 foreign cycle cannot be displayed
+  ---
+  duration_ms: 0.669027
+  type: 'test'
+  ...
+# Subtest: B16-10 forged Firestore document ID fails
+ok 10 - B16-10 forged Firestore document ID fails
+  ---
+  duration_ms: 0.676598
+  type: 'test'
+  ...
+# Subtest: B16-11 duplicate archived cycle fails
+ok 11 - B16-11 duplicate archived cycle fails
+  ---
+  duration_ms: 0.442153
+  type: 'test'
+  ...
+# Subtest: B16-12 overlapping newest and archived cycle fails
+ok 12 - B16-12 overlapping newest and archived cycle fails
+  ---
+  duration_ms: 0.54383
+  type: 'test'
+  ...
+# Subtest: B16-13 non-descending page is rejected
+ok 13 - B16-13 non-descending page is rejected
+  ---
+  duration_ms: 0.436886
+  type: 'test'
+  ...
+# Subtest: B16-14 timestamp equal to cursor is rejected
+ok 14 - B16-14 timestamp equal to cursor is rejected
+  ---
+  duration_ms: 0.610591
+  type: 'test'
+  ...
+# Subtest: B16-15 invalid evidence nested fields reject all older data
+ok 15 - B16-15 invalid evidence nested fields reject all older data
+  ---
+  duration_ms: 0.464558
+  type: 'test'
+  ...
+# Subtest: B16-16 malformed document is rejected
+ok 16 - B16-16 malformed document is rejected
+  ---
+  duration_ms: 0.753977
+  type: 'test'
+  ...
+# Subtest: B16-17 reaching 80 caps display and never claims full history
+ok 17 - B16-17 reaching 80 caps display and never claims full history
+  ---
+  duration_ms: 1.500398
+  type: 'test'
+  ...
+# Subtest: B16-18 already at 80 is blocked
+ok 18 - B16-18 already at 80 is blocked
+  ---
+  duration_ms: 0.546548
+  type: 'test'
+  ...
+# Subtest: B16-19 pagination hook uses authenticated server cursor and resets on auth changes
+ok 19 - B16-19 pagination hook uses authenticated server cursor and resets on auth changes
+  ---
+  duration_ms: 0.410752
+  type: 'test'
+  ...
+# Subtest: B16-20 measurement analysis stays limited to the first eight cycles
+ok 20 - B16-20 measurement analysis stays limited to the first eight cycles
+  ---
+  duration_ms: 0.576756
+  type: 'test'
+  ...
+# Subtest: B16-21 UI provides separate older history disclosure and no attestation claim
+ok 21 - B16-21 UI provides separate older history disclosure and no attestation claim
+  ---
+  duration_ms: 0.542062
+  type: 'test'
+  ...
+# Subtest: B16-22 no client-side writes from history archive path
+ok 22 - B16-22 no client-side writes from history archive path
+  ---
+  duration_ms: 0.202689
+  type: 'test'
+  ...
+1..22
+# tests 22
+# suites 0
+# pass 22
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 178.237996

@@ -1,0 +1,20 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp31:batch17
+> node --experimental-strip-types --test tests/cp31-batch17-demo-backup.test.mjs
+
+Γ£ö Static standalone offline HTML contains all essential safety claims (14.408ms)
+Γ£ö Render is deterministic for the same independently checked data (0.7028ms)
+Γ£ö Disallowed score is fail-closed, not silently drawn (0.3856ms)
+Γ£ö Missing science-replay stages is fail-closed (0.1255ms)
+Γ£ö Potentially hostile labels and sources are HTML-escaped (0.4375ms)
+Γ£ö Offline fallback from the REAL replay JSON is byte-reproducible and tamper-detecting (141.6778ms)
+Γ£ö Verification refuses an absent HTML artifact (130.0362ms)
+Γ£ö Verification rejects unsupported action (0.311ms)
+Γä╣ tests 8
+Γä╣ suites 0
+Γä╣ pass 8
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 409.7072

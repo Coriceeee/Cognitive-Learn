@@ -1,0 +1,22 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp42:focused-workspaces
+> node --experimental-strip-types --test tests/cp42-focused-workspaces.test.mjs
+
+Γ£ö canonical route handles every supported former bookmark (0.9638ms)
+Γ£ö study aliases and unknown paths do not expand authorization (0.1349ms)
+Γ£ö new focused routes have matching access, app and deploy contracts (0.9193ms)
+Γ£ö admin workspace routes are not student allowlisted and use admin guards (0.7644ms)
+Γ£ö Atlas specialized panels have distinct React route owners (1.3305ms)
+Γ£ö Lumen separates state, history, advanced analysis, roadmap and evidence (0.4131ms)
+Γ£ö Orion uses separate workflow steps and retains the shared eligibility restriction (0.4035ms)
+Γ£ö Pulse owns check-ins and Haven owns budget simulation, both outside overview (0.5072ms)
+Γ£ö Seed keeps exam calendar and transcript on their own pages (0.5754ms)
+Γ£ö compact navigation uses current-page semantics, not route-based CSS hiding (0.7157ms)
+Γä╣ tests 10
+Γä╣ suites 0
+Γä╣ pass 10
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 129.403

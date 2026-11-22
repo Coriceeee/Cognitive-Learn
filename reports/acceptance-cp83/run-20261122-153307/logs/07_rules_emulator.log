@@ -1,0 +1,6 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:rules:emulator
+> node tools/firestoreSecurityGate.cjs
+
+SECURITY GATE: FAIL (static PASS, emulator FAIL).
+Evidence: reports/security/firestore_emulator_gate.json

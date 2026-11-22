@@ -1,0 +1,46 @@
+
+> cognitive-learn-ai@0.1.0 test:cp55:safety
+> node --experimental-strip-types --test tests/cp55-draft-session-safety.test.mjs
+
+TAP version 13
+# (node:15131) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP55.1 current listener accepts only its active UID and observer epoch
+ok 1 - CP55.1 current listener accepts only its active UID and observer epoch
+  ---
+  duration_ms: 0.960619
+  type: 'test'
+  ...
+# Subtest: CP55.2 queued Firestore callback from previous account is rejected
+ok 2 - CP55.2 queued Firestore callback from previous account is rejected
+  ---
+  duration_ms: 0.224729
+  type: 'test'
+  ...
+# Subtest: CP55.3 remote refresh cannot discard edits made while server is responding
+ok 3 - CP55.3 remote refresh cannot discard edits made while server is responding
+  ---
+  duration_ms: 0.634301
+  type: 'test'
+  ...
+# Subtest: CP55.4 listener lifetime and queued-write cancellation use distinct epochs
+ok 4 - CP55.4 listener lifetime and queued-write cancellation use distinct epochs
+  ---
+  duration_ms: 0.715575
+  type: 'test'
+  ...
+# Subtest: CP55.5 cleanup invalidates callbacks and auth failures do not update unmounted hook
+ok 5 - CP55.5 cleanup invalidates callbacks and auth failures do not update unmounted hook
+  ---
+  duration_ms: 0.265248
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 164.181379

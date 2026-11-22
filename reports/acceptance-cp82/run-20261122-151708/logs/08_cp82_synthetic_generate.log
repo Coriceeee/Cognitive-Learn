@@ -1,0 +1,5 @@
+﻿
+> cognitive-learn-ai@0.1.0 research:cp82:generate
+> node --experimental-strip-types tools/cla_cp82_synthetic_replay.mjs --generate
+
+CP82 SYNTHETIC GENERATED: C:\Gß║ío\Cognitive-Learn\reports\evidence\cla_cp82_SYNTHETIC_LOCAL_REPLAY.json; tracked source files=568. NO scientific/production claims.

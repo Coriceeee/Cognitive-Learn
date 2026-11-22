@@ -1,0 +1,11 @@
+﻿
+> cognitive-learn-ai@0.1.0 research:golden-path:verify
+> node --experimental-strip-types tools/cla_golden_path_offline.mjs --verify
+
+npm.cmd : GOLDEN_PATH_FAIL: Tracked source fingerprint drift; do not generate misleading evidence
+At C:\Gạo\Cognitive-Learn\CLA_CP80_ONECLICK.ps1:95 char:9
++         & $exe @commandArgs 2>&1 | Out-File -LiteralPath $logPath -En ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (GOLDEN_PATH_FAI...eading evidence:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 

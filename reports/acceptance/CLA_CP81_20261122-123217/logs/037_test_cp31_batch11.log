@@ -1,0 +1,48 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp31:batch11
+> node --experimental-strip-types --test tests/cp31-batch11-t0-t1-comparison.test.mjs
+
+Γ£ö B11-01 reviewed and traced cycle allows DESCRIPTIVE_ONLY comparison (3.8155ms)
+Γ£ö B11-02 no cycle is INVALID with no implied student outcome (0.139ms)
+Γ£ö B11-03 ACTIVE cycle has no post-outcome comparison (0.1554ms)
+Γ£ö B11-04 check-in without T1 cannot create outcome (0.1618ms)
+Γ£ö B11-05 frozen T0 is never derived from reassessment (0.4848ms)
+Γ£ö B11-06 observed zero remains zero (not null/missing) (0.3984ms)
+Γ£ö B11-07 matched subjects and denominator are explicit (0.3374ms)
+Γ£ö B11-08 missing subject cannot be imputed to zero (0.3447ms)
+Γ£ö B11-09 compared averages restrict to matched measures (not full T0) (0.3222ms)
+Γ£ö B11-10 negative observed delta is allowed and not a risk probability (0.3418ms)
+Γ£ö B11-11 self-reported hours preserve actual zero (0.8965ms)
+Γ£ö B11-12 T0 target gap remains independent of T1 change (0.4511ms)
+Γ£ö B11-13 no ML forecast exists: error and calibration withheld (0.2223ms)
+Γ£ö B11-14 no causal effect estimate or treatment assignment (0.1578ms)
+Γ£ö B11-15 limitation array explicitly discloses missingness and self-report (0.3162ms)
+Γ£ö B11-16 no mutation to frozen T0 or source cycle on comparison (1.5867ms)
+Γ£ö B11-17 legacy reviewed cycle without T0 cannot compare (0.3069ms)
+Γ£ö B11-18 reviewed legacy without Evidence Record cannot compare (0.2825ms)
+Γ£ö B11-19 mismatched T0 is not comparable (0.184ms)
+Γ£ö B11-20 forged T0 forecast is rejected not evaluated (0.1728ms)
+Γ£ö B11-21 altered T1 observation is rejected without recalculated evidence (0.1905ms)
+Γ£ö B11-22 altered hours is rejected without recalculated evidence (0.1576ms)
+Γ£ö B11-23 invalid reassessment chronology is rejected (0.143ms)
+Γ£ö B11-24 corruption in the evidence output fails closed (0.1353ms)
+Γ£ö B11-25 cannot pass fake foreign/empty/shape-invalid cycles (0.091ms)
+Γ£ö B11-26 result replay succeeds with exact domain outputs (0.4237ms)
+Γ£ö B11-27 replay ignores Firestore object key ordering (0.769ms)
+Γ£ö B11-28 report tampering detected for measured values and claims (0.5596ms)
+Γ£ö B11-29 appended reviewer/external verification is rejected (0.2719ms)
+Γ£ö B11-30 replay rejects INVALID status even if structurally self-consistent (0.0554ms)
+Γ£ö B11-31 golden path uses the real comparison engine with no fake prediction (1.1895ms)
+Γ£ö B11-32 golden path frozen T0 does not change after measurement (0.4772ms)
+Γ£ö B11-33 student UI displays uncertainty, matched T1 and blocks legacy comparison (0.6742ms)
+Γ£ö B11-34 comparator cannot compute forecasts from targets or T1 (0.3916ms)
+Γ£ö B11-35 deep comparison identifies changed limitations and metadata (0.7526ms)
+Γ£ö B11-36 no conditional claim about improvement on zero completion (0.1787ms)
+Γä╣ tests 36
+Γä╣ suites 0
+Γä╣ pass 36
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 159.7314

@@ -1,0 +1,68 @@
+
+> cognitive-learn-ai@0.1.0 test:cp41:policy
+> node --test tests/cp41-contextual-policy.test.mjs
+
+TAP version 13
+# Subtest: synthetic cohorts are reproducible and disjoint
+ok 1 - synthetic cohorts are reproducible and disjoint
+  ---
+  duration_ms: 15.884221
+  type: 'test'
+  ...
+# Subtest: mask never increases load and overload only reduces
+ok 2 - mask never increases load and overload only reduces
+  ---
+  duration_ms: 5.456427
+  type: 'test'
+  ...
+# Subtest: policy learns stable maintain and strained reduce in authored simulator
+ok 3 - policy learns stable maintain and strained reduce in authored simulator
+  ---
+  duration_ms: 2.700932
+  type: 'test'
+  ...
+# Subtest: low support falls back to baseline
+ok 4 - low support falls back to baseline
+  ---
+  duration_ms: 0.197857
+  type: 'test'
+  ...
+# Subtest: reject non synthetic or duplicate records
+ok 5 - reject non synthetic or duplicate records
+  ---
+  duration_ms: 0.646201
+  type: 'test'
+  ...
+# Subtest: reject mismatched split and malformed logging propensities
+ok 6 - reject mismatched split and malformed logging propensities
+  ---
+  duration_ms: 2.916096
+  type: 'test'
+  ...
+# Subtest: reject unsafe manual policy and reward mismatch
+ok 7 - reject unsafe manual policy and reward mismatch
+  ---
+  duration_ms: 10.265327
+  type: 'test'
+  ...
+# Subtest: IPS SNIPS and ESS hand-checked
+ok 8 - IPS SNIPS and ESS hand-checked
+  ---
+  duration_ms: 0.207023
+  type: 'test'
+  ...
+# Subtest: report deterministic and nondeployable; intervals and support present
+ok 9 - report deterministic and nondeployable; intervals and support present
+  ---
+  duration_ms: 114.286377
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 263.318277

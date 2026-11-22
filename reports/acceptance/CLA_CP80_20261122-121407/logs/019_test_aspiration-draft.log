@@ -1,0 +1,43 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:aspiration-draft
+> node --test tests/step16-atlas-aspiration-editor.test.cjs
+
+Γ£ö 16.01 manual choice requires university, major and code (0.9215ms)
+Γ£ö 16.02 retains user entered data provenance and no source URL (0.3416ms)
+Γ£ö 16.03 trusted PTIT sample contains official source and 2026 only (0.8275ms)
+Γ£ö 16.04 rejects stale year and invalid campus even with PTIT host (0.1553ms)
+Γ£ö 16.05 rejects foreign and http source (0.1413ms)
+Γ£ö 16.06 rejects source bearing credentials or wrong path (0.1017ms)
+Γ£ö 16.07 rejects mismatch between PTIT id and major code (0.101ms)
+Γ£ö 16.08 add appends and NEVER sorts by marks or risk levels (0.2487ms)
+Γ£ö 16.09 duplicate id is rejected (0.1773ms)
+Γ£ö 16.10 duplicate school + major code rejected even if ID varies (0.2152ms)
+Γ£ö 16.11 maximum 15 preferences, 16th rejected without mutation (0.2311ms)
+Γ£ö 16.12 moving up/down preserves contents and only changes one step (0.1748ms)
+Γ£ö 16.13 boundary and unknown move are no-op (0.1494ms)
+Γ£ö 16.14 removal preserves preference ordering (0.1009ms)
+Γ£ö 16.15 teacher NV6 warns, does not move or remove it (0.183ms)
+Γ£ö 16.16 teacher NV5 allowed at boundary (0.1108ms)
+Γ£ö 16.17 teacher-training code and name recognized conservatively (0.0726ms)
+Γ£ö 16.18 self-entered schools always show verification caution (0.1396ms)
+Γ£ö 16.19 empty draft is explicitly a draft (0.058ms)
+Γ£ö 16.20 export contains no personal scores, UID, or official-submission claim (0.1373ms)
+Γ£ö 16.21 exported orders match reordered user list (0.0765ms)
+Γ£ö 16.22 UI is available without official THPT scores and no auto-selection (0.6907ms)
+Γ£ö 16.23 UI displays warnings rather than reordering teacher program (0.2662ms)
+Γ£ö 16.24 workspace linked to 2026 policy, no direct save to Firebase (0.2663ms)
+Γ£ö 16.25 Vercel serves all explicit React route paths including consent/companion, preserving API functions (0.5486ms)
+Γ£ö 16.26 CSS asset and test command present (0.4777ms)
+Γ£ö 16.27 import/export preserves ordering but downgrades claims to unverified (0.3492ms)
+Γ£ö 16.28 import rejects wrong schema, old year, or excessive entries (0.1207ms)
+Γ£ö 16.29 invalid or repeated file entries are rejected atomically (0.1236ms)
+Γ£ö 16.30 import UI explicitly warns that source claims are not trusted (0.3039ms)
+Γ£ö 16.31 national draft uses source registry identity across schools and rejects missing/stale/insecure entries (0.4906ms)
+Γä╣ tests 31
+Γä╣ suites 0
+Γä╣ pass 31
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 366.1118

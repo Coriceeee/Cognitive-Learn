@@ -1,0 +1,88 @@
+
+> cognitive-learn-ai@0.1.0 test:cp34:career-decision
+> node --experimental-strip-types --test tests/cp34-career-decision.test.mjs
+
+TAP version 13
+# (node:17557) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: nine domains, no implicit preferences and no ranking without explicit weight
+ok 1 - nine domains, no implicit preferences and no ranking without explicit weight
+  ---
+  duration_ms: 2.256518
+  type: 'test'
+  ...
+# Subtest: valid zero is observed; missing rating and missing subject do not become zero
+ok 2 - valid zero is observed; missing rating and missing subject do not become zero
+  ---
+  duration_ms: 0.635211
+  type: 'test'
+  ...
+# Subtest: weight chosen by learner, two axes and transparent contribution
+ok 3 - weight chosen by learner, two axes and transparent contribution
+  ---
+  duration_ms: 0.344334
+  type: 'test'
+  ...
+# Subtest: no fixed academic mapping for creative and education; no exclusion
+ok 4 - no fixed academic mapping for creative and education; no exclusion
+  ---
+  duration_ms: 0.396823
+  type: 'test'
+  ...
+# Subtest: invalid data fails closed; no combining without trusted term metadata
+ok 5 - invalid data fails closed; no combining without trusted term metadata
+  ---
+  duration_ms: 0.457825
+  type: 'test'
+  ...
+# Subtest: ties retained among complete groups, not incomplete groups
+ok 6 - ties retained among complete groups, not incomplete groups
+  ---
+  duration_ms: 0.436059
+  type: 'test'
+  ...
+# Subtest: Pareto preserves tradeoffs and identifies domination reasons
+ok 7 - Pareto preserves tradeoffs and identifies domination reasons
+  ---
+  duration_ms: 0.825214
+  type: 'test'
+  ...
+# Subtest: budget and risk are hard constraints, inclusive boundaries
+ok 8 - budget and risk are hard constraints, inclusive boundaries
+  ---
+  duration_ms: 0.246029
+  type: 'test'
+  ...
+# Subtest: invalid/duplicate options and invalid constraints cannot win
+ok 9 - invalid/duplicate options and invalid constraints cannot win
+  ---
+  duration_ms: 0.574129
+  type: 'test'
+  ...
+# Subtest: equivalent options stay, comparison independent of input order
+ok 10 - equivalent options stay, comparison independent of input order
+  ---
+  duration_ms: 0.823691
+  type: 'test'
+  ...
+# Subtest: legacy weights normalized without changing relative weights
+ok 11 - legacy weights normalized without changing relative weights
+  ---
+  duration_ms: 0.725422
+  type: 'test'
+  ...
+# Subtest: UI uses opted-in same-term evidence and does not persist or call AI; Orion uses actual scenario list
+ok 12 - UI uses opted-in same-term evidence and does not persist or call AI; Orion uses actual scenario list
+  ---
+  duration_ms: 0.789318
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 338.660352

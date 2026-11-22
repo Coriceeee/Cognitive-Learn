@@ -1,0 +1,32 @@
+﻿
+> cognitive-learn-ai@0.1.0 check:layout
+> node tools/check-cla-layout.cjs
+
+npm.cmd : node:internal/assert/utils:77
+At C:\Gạo\Cognitive-Learn\CLA_CP81_ONECLICK.ps1:95 char:9
++         & $exe @commandArgs 2>&1 | Out-File -LiteralPath $logPath -En ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (node:internal/assert/utils:77:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+    throw err;
+    ^
+
+AssertionError [ERR_ASSERTION]: MISPLACED src/audit_dataset.py
+    at Object.<anonymous> (C:\Gß║ío\Cognitive-Learn\tools\check-cla-layout.cjs:36:26)
+    at Module._compile (node:internal/modules/cjs/loader:1871:14)
+    at Object..js (node:internal/modules/cjs/loader:2002:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.18.0

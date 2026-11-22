@@ -1,0 +1,256 @@
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch15
+> node --experimental-strip-types --test tests/cp31-batch15-snapshot-integrity.test.mjs
+
+TAP version 13
+# (node:17211) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: B15-01 one cycle with no declarations is incomplete, never complete
+ok 1 - B15-01 one cycle with no declarations is incomplete, never complete
+  ---
+  duration_ms: 5.445182
+  type: 'test'
+  ...
+# Subtest: B15-02 two fully declared cycles are syntactically complete, unverified
+ok 2 - B15-02 two fully declared cycles are syntactically complete, unverified
+  ---
+  duration_ms: 12.698026
+  type: 'test'
+  ...
+# Subtest: B15-03 partial snapshot gives exact missing count
+ok 3 - B15-03 partial snapshot gives exact missing count
+  ---
+  duration_ms: 2.943487
+  type: 'test'
+  ...
+# Subtest: B15-04 no window and no documents is neutral
+ok 4 - B15-04 no window and no documents is neutral
+  ---
+  duration_ms: 0.422468
+  type: 'test'
+  ...
+# Subtest: B15-05 unexpected data in empty window is blocked
+ok 5 - B15-05 unexpected data in empty window is blocked
+  ---
+  duration_ms: 0.927444
+  type: 'test'
+  ...
+# Subtest: B15-06 wrong user ID blocked
+ok 6 - B15-06 wrong user ID blocked
+  ---
+  duration_ms: 0.479356
+  type: 'test'
+  ...
+# Subtest: B15-07 overlong user ID blocked
+ok 7 - B15-07 overlong user ID blocked
+  ---
+  duration_ms: 0.248579
+  type: 'test'
+  ...
+# Subtest: B15-08 more than 8 cycles rejected regardless of documents
+ok 8 - B15-08 more than 8 cycles rejected regardless of documents
+  ---
+  duration_ms: 0.218119
+  type: 'test'
+  ...
+# Subtest: B15-09 duplicate cycle IDs reject the entire result
+ok 9 - B15-09 duplicate cycle IDs reject the entire result
+  ---
+  duration_ms: 0.512071
+  type: 'test'
+  ...
+# Subtest: B15-10 malformed cycle ID blocked
+ok 10 - B15-10 malformed cycle ID blocked
+  ---
+  duration_ms: 0.463787
+  type: 'test'
+  ...
+# Subtest: B15-11 unknown document refused, not silently filtered
+ok 11 - B15-11 unknown document refused, not silently filtered
+  ---
+  duration_ms: 3.401178
+  type: 'test'
+  ...
+# Subtest: B15-12 duplicate document point refused
+ok 12 - B15-12 duplicate document point refused
+  ---
+  duration_ms: 2.761108
+  type: 'test'
+  ...
+# Subtest: B15-13 wrong document ID refused
+ok 13 - B15-13 wrong document ID refused
+  ---
+  duration_ms: 1.441625
+  type: 'test'
+  ...
+# Subtest: B15-14 changed score 0 refused
+ok 14 - B15-14 changed score 0 refused
+  ---
+  duration_ms: 2.443423
+  type: 'test'
+  ...
+# Subtest: B15-15 changed reported time refused
+ok 15 - B15-15 changed reported time refused
+  ---
+  duration_ms: 1.94159
+  type: 'test'
+  ...
+# Subtest: B15-16 forged source refused
+ok 16 - B15-16 forged source refused
+  ---
+  duration_ms: 3.069293
+  type: 'test'
+  ...
+# Subtest: B15-17 forged identity refused
+ok 17 - B15-17 forged identity refused
+  ---
+  duration_ms: 1.983783
+  type: 'test'
+  ...
+# Subtest: B15-18 forged reviewer field refused
+ok 18 - B15-18 forged reviewer field refused
+  ---
+  duration_ms: 1.781472
+  type: 'test'
+  ...
+# Subtest: B15-19 missing write timestamp refused
+ok 19 - B15-19 missing write timestamp refused
+  ---
+  duration_ms: 1.010366
+  type: 'test'
+  ...
+# Subtest: B15-20 missing context field refused
+ok 20 - B15-20 missing context field refused
+  ---
+  duration_ms: 1.37577
+  type: 'test'
+  ...
+# Subtest: B15-21 swapped T0/T1 refused
+ok 21 - B15-21 swapped T0/T1 refused
+  ---
+  duration_ms: 1.10389
+  type: 'test'
+  ...
+# Subtest: B15-22 invalid subjectIndex refused
+ok 22 - B15-22 invalid subjectIndex refused
+  ---
+  duration_ms: 1.443125
+  type: 'test'
+  ...
+# Subtest: B15-23 corrupted frozen T0 blocks entire window
+ok 23 - B15-23 corrupted frozen T0 blocks entire window
+  ---
+  duration_ms: 0.533817
+  type: 'test'
+  ...
+# Subtest: B15-24 corrupt Evidence Record blocks entire window
+ok 24 - B15-24 corrupt Evidence Record blocks entire window
+  ---
+  duration_ms: 0.819562
+  type: 'test'
+  ...
+# Subtest: B15-25 legacy no T0 stays readable but is never complete
+ok 25 - B15-25 legacy no T0 stays readable but is never complete
+  ---
+  duration_ms: 1.890209
+  type: 'test'
+  ...
+# Subtest: B15-26 legacy no Evidence Record stays read-only
+ok 26 - B15-26 legacy no Evidence Record stays read-only
+  ---
+  duration_ms: 1.328302
+  type: 'test'
+  ...
+# Subtest: B15-27 forged metadata for legacy cycle cannot be promoted
+ok 27 - B15-27 forged metadata for legacy cycle cannot be promoted
+  ---
+  duration_ms: 1.309074
+  type: 'test'
+  ...
+# Subtest: B15-28 valid legacy + partial active cycle remains legacy read-only
+ok 28 - B15-28 valid legacy + partial active cycle remains legacy read-only
+  ---
+  duration_ms: 0.671427
+  type: 'test'
+  ...
+# Subtest: B15-29 limit sentinel over 96 records is blocked, never silently truncated
+ok 29 - B15-29 limit sentinel over 96 records is blocked, never silently truncated
+  ---
+  duration_ms: 0.600411
+  type: 'test'
+  ...
+# Subtest: B15-30 order of Firestore results does not change audited row order
+ok 30 - B15-30 order of Firestore results does not change audited row order
+  ---
+  duration_ms: 3.025963
+  type: 'test'
+  ...
+# Subtest: B15-31 missing manifest remains missing, never becomes aligned
+ok 31 - B15-31 missing manifest remains missing, never becomes aligned
+  ---
+  duration_ms: 3.360415
+  type: 'test'
+  ...
+# Subtest: B15-32 even complete metadata does not prove psychometric equivalence
+ok 32 - B15-32 even complete metadata does not prove psychometric equivalence
+  ---
+  duration_ms: 3.281019
+  type: 'test'
+  ...
+# Subtest: B15-33 query requests 97th sentinel and ignores local cache as evidence
+ok 33 - B15-33 query requests 97th sentinel and ignores local cache as evidence
+  ---
+  duration_ms: 0.337346
+  type: 'test'
+  ...
+# Subtest: B15-34 stale Firestore callbacks cannot set state after unmount
+ok 34 - B15-34 stale Firestore callbacks cannot set state after unmount
+  ---
+  duration_ms: 0.116247
+  type: 'test'
+  ...
+# Subtest: B15-35 transaction checks all immutable point fields, not only score
+ok 35 - B15-35 transaction checks all immutable point fields, not only score
+  ---
+  duration_ms: 0.092447
+  type: 'test'
+  ...
+# Subtest: B15-36 UI distinguishes legacy, missing rows, complete-unverified
+ok 36 - B15-36 UI distinguishes legacy, missing rows, complete-unverified
+  ---
+  duration_ms: 0.63482
+  type: 'test'
+  ...
+# Subtest: B15-37 no server deployment is introduced
+ok 37 - B15-37 no server deployment is introduced
+  ---
+  duration_ms: 0.215558
+  type: 'test'
+  ...
+# Subtest: B15-38 no numeric score or probability fabricated from missing rows
+ok 38 - B15-38 no numeric score or probability fabricated from missing rows
+  ---
+  duration_ms: 0.489195
+  type: 'test'
+  ...
+# Subtest: B15-39 prior source set remains under strict constraints
+ok 39 - B15-39 prior source set remains under strict constraints
+  ---
+  duration_ms: 0.567419
+  type: 'test'
+  ...
+# Subtest: B15-40 source never contains student identifying fields
+ok 40 - B15-40 source never contains student identifying fields
+  ---
+  duration_ms: 0.326062
+  type: 'test'
+  ...
+1..40
+# tests 40
+# suites 0
+# pass 40
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 285.275426

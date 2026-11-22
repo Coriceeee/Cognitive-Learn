@@ -1,0 +1,124 @@
+
+> cognitive-learn-ai@0.1.0 test:cp72:lumen-fallback
+> node --experimental-strip-types --test tests/cp72-lumen-assistant-fallback.test.mjs
+
+TAP version 13
+# (node:37919) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: 01 Missing technical zeros are never categorized as risks
+ok 1 - 01 Missing technical zeros are never categorized as risks
+  ---
+  duration_ms: 1.418489
+  type: 'test'
+  ...
+# Subtest: 02 Metadata fields are not cognitive measurements
+ok 2 - 02 Metadata fields are not cognitive measurements
+  ---
+  duration_ms: 0.204832
+  type: 'test'
+  ...
+# Subtest: 03 Risk indicators do not invert into strengths
+ok 3 - 03 Risk indicators do not invert into strengths
+  ---
+  duration_ms: 1.094252
+  type: 'test'
+  ...
+# Subtest: 04 Low risk-direction scores are not called strengths
+ok 4 - 04 Low risk-direction scores are not called strengths
+  ---
+  duration_ms: 0.119145
+  type: 'test'
+  ...
+# Subtest: 05 Regular high scores are positive proxy signals only
+ok 5 - 05 Regular high scores are positive proxy signals only
+  ---
+  duration_ms: 0.121789
+  type: 'test'
+  ...
+# Subtest: 06 Missing dimensions override stale availability flags
+ok 6 - 06 Missing dimensions override stale availability flags
+  ---
+  duration_ms: 0.172474
+  type: 'test'
+  ...
+# Subtest: 07 Invalid numeric values are excluded
+ok 7 - 07 Invalid numeric values are excluded
+  ---
+  duration_ms: 0.142259
+  type: 'test'
+  ...
+# Subtest: 08 Incomplete score availability prevents conclusions
+ok 8 - 08 Incomplete score availability prevents conclusions
+  ---
+  duration_ms: 0.316206
+  type: 'test'
+  ...
+# Subtest: 09 No-data decision mentions absence, not low competence
+ok 9 - 09 No-data decision mentions absence, not low competence
+  ---
+  duration_ms: 0.444965
+  type: 'test'
+  ...
+# Subtest: 10 Offline guide uses measured inputs and provenance
+ok 10 - 10 Offline guide uses measured inputs and provenance
+  ---
+  duration_ms: 0.401081
+  type: 'test'
+  ...
+# Subtest: 11 Offline guide does not claim ML validation or probabilities
+ok 11 - 11 Offline guide does not claim ML validation or probabilities
+  ---
+  duration_ms: 0.179655
+  type: 'test'
+  ...
+# Subtest: 12 Offline guide does not invent measured values when missing
+ok 12 - 12 Offline guide does not invent measured values when missing
+  ---
+  duration_ms: 0.140317
+  type: 'test'
+  ...
+# Subtest: 13 Missing and measured zero remain distinct
+ok 13 - 13 Missing and measured zero remain distinct
+  ---
+  duration_ms: 0.12909
+  type: 'test'
+  ...
+# Subtest: 14 Offline guide returns deterministic output for same input
+ok 14 - 14 Offline guide returns deterministic output for same input
+  ---
+  duration_ms: 0.412848
+  type: 'test'
+  ...
+# Subtest: 15 Reasoning engine rejects an unmeasured technical high score
+ok 15 - 15 Reasoning engine rejects an unmeasured technical high score
+  ---
+  duration_ms: 0.270438
+  type: 'test'
+  ...
+# Subtest: 16 Reasoning engine recognizes only verified measured signal
+ok 16 - 16 Reasoning engine recognizes only verified measured signal
+  ---
+  duration_ms: 0.10858
+  type: 'test'
+  ...
+# Subtest: 17 Gemini endpoint is configured and not hardcoded to an unrelated deployment
+ok 17 - 17 Gemini endpoint is configured and not hardcoded to an unrelated deployment
+  ---
+  duration_ms: 0.223709
+  type: 'test'
+  ...
+# Subtest: 18 Assistant UI provides deterministic local guide independent of Gemini success
+ok 18 - 18 Assistant UI provides deterministic local guide independent of Gemini success
+  ---
+  duration_ms: 0.185263
+  type: 'test'
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 113.569612

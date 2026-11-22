@@ -1,0 +1,152 @@
+
+> cognitive-learn-ai@0.1.0 test:cp58:integration
+> node --experimental-strip-types --test tests/cp58-transcript-prefill.test.mjs && node --test tests/cp45-seamless-navigation.test.cjs
+
+TAP version 13
+# (node:15221) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP58.1: Seed → Orion/Haven prefill requires both server-verified records for same UID
+ok 1 - CP58.1: Seed → Orion/Haven prefill requires both server-verified records for same UID
+  ---
+  duration_ms: 1.793925
+  type: 'test'
+  ...
+# Subtest: CP58.2: an empty transcript cannot consume the first eligible prefill
+ok 2 - CP58.2: an empty transcript cannot consume the first eligible prefill
+  ---
+  duration_ms: 0.25209
+  type: 'test'
+  ...
+# Subtest: CP58.3: manual edits take priority and same student is prefilled at most once
+ok 3 - CP58.3: manual edits take priority and same student is prefilled at most once
+  ---
+  duration_ms: 0.300463
+  type: 'test'
+  ...
+# Subtest: CP58.4: account A prefill never blocks an eligible account B prefill
+ok 4 - CP58.4: account A prefill never blocks an eligible account B prefill
+  ---
+  duration_ms: 0.244548
+  type: 'test'
+  ...
+# Subtest: CP58.5: Orion and Haven bind the prefill to verified UIDs, not any cached transcript
+ok 5 - CP58.5: Orion and Haven bind the prefill to verified UIDs, not any cached transcript
+  ---
+  duration_ms: 1.286919
+  type: 'test'
+  ...
+# Subtest: CP58.6: Haven does not mark empty/unsupported grades as prefilled
+ok 6 - CP58.6: Haven does not mark empty/unsupported grades as prefilled
+  ---
+  duration_ms: 0.404441
+  type: 'test'
+  ...
+# Subtest: CP58.7: transcript prefill never performs Firestore writes or fabricates a missing score
+ok 7 - CP58.7: transcript prefill never performs Firestore writes or fabricates a missing score
+  ---
+  duration_ms: 1.723801
+  type: 'test'
+  ...
+# Subtest: CP58.8: App re-renders for same-path query changes without hard reload
+ok 8 - CP58.8: App re-renders for same-path query changes without hard reload
+  ---
+  duration_ms: 0.229675
+  type: 'test'
+  ...
+# Subtest: CP58.9: Atlas study-abroad synchronizes Back/Forward country query without losing same-country checklist
+ok 9 - CP58.9: Atlas study-abroad synchronizes Back/Forward country query without losing same-country checklist
+  ---
+  duration_ms: 0.794032
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 155.933578
+TAP version 13
+# Subtest: CP45 navigation: internal links use pushState without document reload
+ok 1 - CP45 navigation: internal links use pushState without document reload
+  ---
+  duration_ms: 92.834325
+  type: 'test'
+  ...
+# Subtest: CP45 navigation: browser Back/Forward notifies React without reload
+ok 2 - CP45 navigation: browser Back/Forward notifies React without reload
+  ---
+  duration_ms: 33.18579
+  type: 'test'
+  ...
+# Subtest: CP45 navigation: native same-page anchors and external links remain native
+ok 3 - CP45 navigation: native same-page anchors and external links remain native
+  ---
+  duration_ms: 23.792715
+  type: 'test'
+  ...
+# Subtest: CP45 navigation: modified clicks, new-tab links and downloads are never hijacked
+ok 4 - CP45 navigation: modified clicks, new-tab links and downloads are never hijacked
+  ---
+  duration_ms: 27.608412
+  type: 'test'
+  ...
+# Subtest: CP45 navigation: pointer and keyboard intent only prefetch the route code
+ok 5 - CP45 navigation: pointer and keyboard intent only prefetch the route code
+  ---
+  duration_ms: 18.453514
+  type: 'test'
+  ...
+# Subtest: CP45 navigation: legacy hash bookmarks are converted to canonical module path
+ok 6 - CP45 navigation: legacy hash bookmarks are converted to canonical module path
+  ---
+  duration_ms: 27.132689
+  type: 'test'
+  ...
+# Subtest: CP45: transition keeps revealed content during lazy import, profile watcher is shared and consent gated
+ok 7 - CP45: transition keeps revealed content during lazy import, profile watcher is shared and consent gated
+  ---
+  duration_ms: 0.96537
+  type: 'test'
+  ...
+# Subtest: CP45: lazy routes have a single shared import table, without eager imports
+ok 8 - CP45: lazy routes have a single shared import table, without eager imports
+  ---
+  duration_ms: 0.715569
+  type: 'test'
+  ...
+# Subtest: CP56: a declined guard blocks a link without unmounting current page
+ok 9 - CP56: a declined guard blocks a link without unmounting current page
+  ---
+  duration_ms: 17.53278
+  type: 'test'
+  ...
+# Subtest: CP56: browser Back rejected by guard restores URL without notifying React
+ok 10 - CP56: browser Back rejected by guard restores URL without notifying React
+  ---
+  duration_ms: 13.921219
+  type: 'test'
+  ...
+# Subtest: CP56: imperative navigation obeys dirty guard, and same route is a no-op
+ok 11 - CP56: imperative navigation obeys dirty guard, and same route is a no-op
+  ---
+  duration_ms: 17.907448
+  type: 'test'
+  ...
+# Subtest: CP58: same-path query navigation notifies React, preserves SPA and supports Back query
+ok 12 - CP58: same-path query navigation notifies React, preserves SPA and supports Back query
+  ---
+  duration_ms: 26.89565
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 736.548341

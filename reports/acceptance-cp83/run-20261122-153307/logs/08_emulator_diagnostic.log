@@ -1,0 +1,10 @@
+﻿CP83 FIRESTORE DIAGNOSTIC (not security PASS)
+staticTests: PASS emulatorAuthorizationTests: FAIL overall: FAIL
+port: 18080
+hints: UNDETERMINED_NEED_FIREBASE_DEBUG_LOG
+source: C:\Gß║ío\Cognitive-Learn\reports\security\firestore_emulator_gate.json
+review sanitized excerpts of these local logs:
+  C:\Gß║ío\Cognitive-Learn\reports\security\firestore_emulator_gate.log
+  C:\Gß║ío\Cognitive-Learn\reports\security\firestore_emulator_debug.log
+note: Emulator test suite failed or timed out. Do NOT deploy candidate Rules.
+Do not deploy Security Rules while emulator authorization is not PASS.

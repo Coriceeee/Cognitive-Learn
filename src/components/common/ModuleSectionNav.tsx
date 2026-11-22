@@ -3,12 +3,12 @@ import { currentFocusedPath } from "../../lib/focusedModuleRoute";
 import { planGuidedNavigation, type GuidedSection } from "../../lib/moduleWayfinding";
 
 const moduleLabels: Record<StudentModuleKey, { name: string; home: string; short: string }> = {
-  seed: { name: "Hồ sơ học tập", home: "/student", short: "Seed" },
-  lumen: { name: "Phân tích năng lực", home: "/lumen", short: "Lumen" },
-  atlas: { name: "Tuyển sinh & du học", home: "/atlas", short: "Atlas" },
-  orion: { name: "Chiến lược học tập", home: "/orion", short: "Orion" },
-  pulse: { name: "Theo dõi tiến độ", home: "/pulse", short: "Pulse" },
-  haven: { name: "Học bổng & tài chính", home: "/haven", short: "Haven" },
+  seed: { name: "Bản sắc học tập", home: "/student", short: "Seed" },
+  lumen: { name: "Dấu vân tay trí tuệ", home: "/lumen", short: "Lumen" },
+  atlas: { name: "Bản đồ tương lai", home: "/atlas", short: "Atlas" },
+  orion: { name: "Kiến trúc tương lai", home: "/orion", short: "Orion" },
+  pulse: { name: "Đường cong tiến hóa", home: "/pulse", short: "Pulse" },
+  haven: { name: "Hành trang thế giới", home: "/haven", short: "Haven" },
 };
 
 function SectionLink({ item, active }: { item: GuidedSection; active: boolean }) {
@@ -19,16 +19,25 @@ function SectionLink({ item, active }: { item: GuidedSection; active: boolean })
   </a>;
 }
 
+const homeTabLabels: Record<StudentModuleKey, string> = {
+  seed: "Góc nhìn của tôi",
+  lumen: "Toàn cảnh tư duy",
+  atlas: "Bản đồ của tôi",
+  orion: "Bàn thiết kế",
+  pulse: "Dòng thời gian",
+  haven: "Toàn cảnh cơ hội",
+};
+
 /** The four study-abroad destinations belong to the SAME navigation bar, not
  * a second, conflicting set of tabs rendered inside the study-abroad page. */
 function studyAbroadSections(): GuidedSection[] {
   const country = new URLSearchParams(window.location.search).get("country");
   const suffix = country ? `?country=${encodeURIComponent(country)}` : "";
   return [
-    { id: "destination", title: "Chọn quốc gia", href: `/atlas/study-abroad${suffix}`, description: "Tìm điểm đến du học", group: "Du học", status: "partial" },
+    { id: "destination", title: "Chọn điểm đến", href: `/atlas/study-abroad${suffix}`, description: "Tìm điểm đến du học", group: "Du học", status: "partial" },
     { id: "programs", title: "Trường & chương trình", href: `/atlas/study-abroad/programs${suffix}`, description: "Tìm chương trình và trường có nguồn", group: "Du học", status: "partial" },
-    { id: "requirements", title: "Điều kiện & chứng chỉ", href: `/atlas/study-abroad/requirements${suffix}`, description: "Đối chiếu điều kiện hồ sơ", group: "Du học", status: "partial" },
-    { id: "sources", title: "Nguồn & quy trình", href: `/atlas/study-abroad/sources${suffix}`, description: "Kiểm tra nguồn và các bước nộp hồ sơ", group: "Du học", status: "partial" },
+    { id: "requirements", title: "Hành trang đầu vào", href: `/atlas/study-abroad/requirements${suffix}`, description: "Đối chiếu điều kiện hồ sơ", group: "Du học", status: "partial" },
+    { id: "sources", title: "Đường đến hồ sơ", href: `/atlas/study-abroad/sources${suffix}`, description: "Kiểm tra nguồn và các bước nộp hồ sơ", group: "Du học", status: "partial" },
   ];
 }
 
@@ -48,7 +57,7 @@ export default function ModuleSectionNav({ moduleKey }: { moduleKey: StudentModu
 
   return (
     <nav className="cla-module-subnav cla-focus-nav cla-guided-workspace cla-unified-bar"
-      aria-label={`Chức năng ${module.name}`}>
+      data-module={moduleKey} aria-label={`Chức năng ${module.name}`}>
       <div className="cla-unified-identity" aria-label={`Đang ở phân hệ ${module.name}`}>
         <span className="cla-unified-identity-mark" aria-hidden="true">{module.short.slice(0, 1)}</span>
         <strong>{module.short}</strong>
@@ -58,7 +67,7 @@ export default function ModuleSectionNav({ moduleKey }: { moduleKey: StudentModu
         aria-label={inStudyAbroad ? "Các mục du học" : `Các mục ${module.name}`}>
         <a className={!inStudyAbroad && guide.onHome ? "is-active" : ""} href={module.home}
           aria-current={!inStudyAbroad && guide.onHome ? "page" : undefined}>
-          {inStudyAbroad ? "← Atlas" : "Tổng quan"}
+          {inStudyAbroad ? "← Atlas" : homeTabLabels[moduleKey]}
         </a>
         {tabs.map(item => <SectionLink key={item.id} item={item}
           active={inStudyAbroad ? currentPath === item.href?.split("?")[0] : item === guide.active} />)}

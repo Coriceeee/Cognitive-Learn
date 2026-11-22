@@ -1,0 +1,100 @@
+
+> cognitive-learn-ai@0.1.0 test:cp37-38:dynamic
+> node --experimental-strip-types --test tests/cp37-38-dynamic-temporal.test.mjs
+
+TAP version 13
+# (node:17647) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: current state uses structured data only, preserves valid zero and unknown
+ok 1 - current state uses structured data only, preserves valid zero and unknown
+  ---
+  duration_ms: 2.407621
+  type: 'test'
+  ...
+# Subtest: scope owner server and source time gates
+ok 2 - scope owner server and source time gates
+  ---
+  duration_ms: 0.551049
+  type: 'test'
+  ...
+# Subtest: legacy placeholder numbers not promoted
+ok 3 - legacy placeholder numbers not promoted
+  ---
+  duration_ms: 0.246756
+  type: 'test'
+  ...
+# Subtest: wrong vector mapping, duplicate dimensions and conflicting value reject proxies
+ok 4 - wrong vector mapping, duplicate dimensions and conflicting value reject proxies
+  ---
+  duration_ms: 0.504887
+  type: 'test'
+  ...
+# Subtest: source timestamp is explicit; impossible timestamp rejected
+ok 5 - source timestamp is explicit; impossible timestamp rejected
+  ---
+  duration_ms: 0.154591
+  type: 'test'
+  ...
+# Subtest: exact time weighted EMA, zero valid and no causal result
+ok 6 - exact time weighted EMA, zero valid and no causal result
+  ---
+  duration_ms: 20.609272
+  type: 'test'
+  ...
+# Subtest: same day latest only, no false sample inflation
+ok 7 - same day latest only, no false sample inflation
+  ---
+  duration_ms: 0.31393
+  type: 'test'
+  ...
+# Subtest: missing latest data resets series, no interpolation
+ok 8 - missing latest data resets series, no interpolation
+  ---
+  duration_ms: 0.254121
+  type: 'test'
+  ...
+# Subtest: gap >28 days breaks series
+ok 9 - gap >28 days breaks series
+  ---
+  duration_ms: 0.496584
+  type: 'test'
+  ...
+# Subtest: short time span cannot publish a trend
+ok 10 - short time span cannot publish a trend
+  ---
+  duration_ms: 0.393337
+  type: 'test'
+  ...
+# Subtest: scope mixing, owner mismatch, duplicate IDs or time, future timestamp blocked
+ok 11 - scope mixing, owner mismatch, duplicate IDs or time, future timestamp blocked
+  ---
+  duration_ms: 0.304852
+  type: 'test'
+  ...
+# Subtest: bounded window discloses truncation
+ok 12 - bounded window discloses truncation
+  ---
+  duration_ms: 0.539123
+  type: 'test'
+  ...
+# Subtest: inputs immutable and repeat deterministic
+ok 13 - inputs immutable and repeat deterministic
+  ---
+  duration_ms: 1.056358
+  type: 'test'
+  ...
+# Subtest: out of range, string and inconsistent cognitive mapping not used
+ok 14 - out of range, string and inconsistent cognitive mapping not used
+  ---
+  duration_ms: 0.34326
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 203.348743

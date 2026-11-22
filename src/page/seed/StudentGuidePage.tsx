@@ -16,7 +16,7 @@ type GuideStep = {
 const steps: GuideStep[] = [
   {
     number: "01",
-    name: "Seed Profile · Tạo dữ liệu gốc",
+    name: "Seed · Bản sắc học tập",
     role: "Bắt buộc bắt đầu tại đây",
     input: "Thông tin học sinh, mục tiêu ngành/trường, 4 môn lựa chọn, bảng điểm 6 học kỳ lớp 10–12 và các chỉ báo hành vi tự báo cáo.",
     output: "Hồ sơ, GPA theo dữ liệu đã nhập và một Cognitive snapshot khi người dùng chủ động lưu.",
@@ -25,7 +25,7 @@ const steps: GuideStep[] = [
   },
   {
     number: "02",
-    name: "Lumen · Phân tích năng lực",
+    name: "Lumen · Dấu vân tay trí tuệ",
     role: "Đọc dữ liệu Seed",
     input: "Hồ sơ và chỉ báo hành vi đã lưu; lịch sử Cognitive nếu đã có nhiều lần đo.",
     output: "SCI/MAS/CSL và các proxy GVI/BDI/FRI/CRI theo quy tắc thử nghiệm; Gemini chỉ giải thích bổ sung khi được gọi.",
@@ -34,7 +34,7 @@ const steps: GuideStep[] = [
   },
   {
     number: "03",
-    name: "Orion · Lập kế hoạch",
+    name: "Orion · Kiến trúc tương lai",
     role: "Dùng điểm hiện tại từ Seed, cần mục tiêu do học sinh nhập",
     input: "Điểm hiện tại được điền từ bảng điểm khi có; học sinh nhập điểm mục tiêu từng môn, ngành mục tiêu và số tuần còn lại.",
     output: "Danh sách môn ưu tiên, ba kịch bản và mốc hành động theo tuần bằng công thức quy tắc; không phải dự báo ML đã kiểm định.",
@@ -43,7 +43,7 @@ const steps: GuideStep[] = [
   },
   {
     number: "04",
-    name: "Atlas · Tuyển sinh và du học",
+    name: "Atlas · Bản đồ tương lai",
     role: "Tra cứu nguồn trước, chạy engine sau",
     input: "Nguồn chính thức theo trường/năm; Admission Engine hiện yêu cầu nhập điểm môn và cần dữ liệu chương trình đã được Admin đưa vào Knowledge Base.",
     output: "Thông tin nguồn, phương thức và đối chiếu chương trình khi dữ liệu chương trình có đủ trường bắt buộc. Danh mục nguồn không đồng nghĩa đã có toàn bộ ngành.",
@@ -52,7 +52,7 @@ const steps: GuideStep[] = [
   },
   {
     number: "05",
-    name: "Haven · Học bổng và tài chính",
+    name: "Haven · Hành trang thế giới",
     role: "Tra cứu học bổng và tự kiểm hồ sơ",
     input: "Thư viện 7 hồ sơ học bổng có nguồn; GPA/tiếng Anh có thể lấy từ bảng điểm, các chỉ báo áp lực tài chính cần người dùng nhập.",
     output: "Điều kiện, chứng từ cần kiểm tra, đường dẫn chính thức và công cụ mô phỏng hỗ trợ. Checklist hiện chỉ giữ trong phiên trang.",
@@ -61,7 +61,7 @@ const steps: GuideStep[] = [
   },
   {
     number: "06",
-    name: "Pulse · Theo dõi và báo cáo",
+    name: "Pulse · Đường cong tiến hóa",
     role: "Hiện là báo cáo mô phỏng, chưa phải closed-loop tự động",
     input: "Tám chỉ số hiện được nhập thủ công; Admin có thêm công cụ chỉ đọc để kiểm tra sự tồn tại của một số nguồn dữ liệu.",
     output: "Báo cáo và việc cần làm theo công thức. Pulse chưa tự tổng hợp toàn bộ kết quả từ Lumen, Atlas và Orion.",
@@ -83,37 +83,37 @@ export default function StudentGuidePage() {
     <main className="cla-ops-guide-page">
       <header className="cla-ops-guide-header">
         <a href="/student" aria-label="Về tổng quan học sinh"><img src={appLogo} alt="Cognitive Learn AI" /></a>
-        <div><span>CLA · OPERATING GUIDE</span><strong>Hướng dẫn vận hành</strong></div>
+        <div><span>CLA · HƯỚNG DẪN SỬ DỤNG</span><strong>Hướng dẫn vận hành</strong></div>
         <UserMenu />
       </header>
 
       <section className="cla-ops-guide-shell">
         <a className="cla-ops-back" href="/student">← Quay lại tổng quan</a>
         <section className="cla-ops-hero">
-          <span>START HERE · ĐỌC TRƯỚC KHI DEMO</span>
-          <h1>CLA không tự có dữ liệu khi vừa mở website.</h1>
-          <p>Học sinh cần tạo hồ sơ và lưu dữ liệu trước. Các trang phía sau đọc một phần dữ liệu đó hoặc yêu cầu thêm đầu vào riêng. Trang này mô tả đúng cách source CP36 đang vận hành, không mô tả các chức năng dự kiến như thể đã hoàn thành.</p>
+          <span>BẮT ĐẦU · DÀNH CHO HỌC SINH</span>
+          <h1>Bắt đầu từ hồ sơ học tập của bạn.</h1>
+          <p>Hãy nhập thông tin và bảng điểm bạn đang có, sau đó nhấn lưu. Những phân hệ khác sẽ dùng dữ liệu phù hợp để hiển thị phân tích và gợi ý. Nếu chưa đủ dữ liệu, CLA sẽ báo rõ thay vì tự tạo kết quả.</p>
           <div className="cla-ops-hero-actions">
-            <a href="/student/profile" className="is-primary">Bắt đầu với Seed Profile ↗</a>
+            <a href="/student/profile" className="is-primary">Tạo hồ sơ của tôi ↗</a>
             <a href="/student/transcript">Mở bảng điểm ↗</a>
           </div>
         </section>
 
         <section className="cla-ops-mode-grid" aria-label="Chọn cách sử dụng">
           <article>
-            <span className="cla-ops-kicker">CÁCH 1 · HỌC SINH THẬT</span>
+            <span className="cla-ops-kicker">CÁCH 1 · BẮT ĐẦU HỌC</span>
             <h2>Dùng dữ liệu của chính bạn</h2>
             <ol>
-              <li>Đăng nhập bằng tài khoản có vai trò Học sinh đang hoạt động.</li>
-              <li>Vào Seed Profile, nhập thông tin thật và bảng điểm hiện có; ô chưa có điểm để trống.</li>
-              <li>Chọn đúng 4 môn lựa chọn, kiểm tra GPA và các chỉ báo hành vi.</li>
-              <li>Nhấn lưu. Sau khi lưu thành công, quay về Dashboard và mở Lumen.</li>
+              <li>Đăng nhập bằng tài khoản học sinh của bạn.</li>
+              <li>Mở “Tôi muốn trở thành” để nhập thông tin và mục tiêu; nhập điểm đã có, ô chưa có điểm cứ để trống.</li>
+              <li>Chọn 4 môn tự chọn và kiểm tra điểm trung bình (GPA).</li>
+              <li>Nhấn lưu. Khi đã cập nhật hồ sơ, mở LUMEN — Dấu vân tay trí tuệ để tìm hiểu các chỉ số.</li>
             </ol>
-            <a href="/student/profile">Mở biểu mẫu Seed ↗</a>
+            <a href="/student/profile">Mở hồ sơ ↗</a>
           </article>
           <article className={isAdmin ? "is-admin" : ""}>
-            <span className="cla-ops-kicker">CÁCH 2 · DEMO KỸ THUẬT</span>
-            <h2>Dùng hồ sơ minh họa</h2>
+            <span className="cla-ops-kicker">CÁCH 2 · CẦN HƯỚNG DẪN THÊM</span>
+            <h2>{isAdmin ? "Dùng hồ sơ minh họa" : "Khi chưa có đủ dữ liệu"}</h2>
             {isAdmin ? (
               <>
                 <ol>
@@ -126,15 +126,16 @@ export default function StudentGuidePage() {
               </>
             ) : (
               <>
-                <p>Preset demo chỉ dành cho tài khoản Admin. Tài khoản học sinh không được nạp dữ liệu tổng hợp vào hồ sơ thật.</p>
-                <p>Muốn chạy demo trước hội đồng, hãy nhờ Admin chuẩn bị phiên demo riêng và ghi rõ dữ liệu synthetic.</p>
+                <p>Chưa có đủ điểm hoặc chưa rõ bắt đầu từ đâu? Bạn có thể tạo hồ sơ với thông tin hiện có rồi bổ sung dần. Không cần nhập dữ liệu giả để mở các phân hệ.</p>
+                <p>Trước khi xem phân tích, hãy kiểm tra các môn và kỳ học trên trang bảng điểm. CLA sẽ ghi rõ những phần chưa đủ dữ liệu.</p>
+                <a href="/student/transcript">Mở bảng điểm của tôi ↗</a>
               </>
             )}
           </article>
         </section>
 
         <section className="cla-ops-section">
-          <div className="cla-ops-section-heading"><span>WORKFLOW</span><h2>Luồng sử dụng từng bước</h2><p>Đi theo thứ tự dưới đây. Không cần mở tất cả module cùng lúc.</p></div>
+          <div className="cla-ops-section-heading"><span>TỪNG BƯỚC</span><h2>Luồng sử dụng từng bước</h2><p>Đi theo thứ tự dưới đây. Không cần mở tất cả module cùng lúc.</p></div>
           <div className="cla-ops-step-list">
             {steps.map(step => (
               <article className="cla-ops-step" key={step.number}>
@@ -150,7 +151,7 @@ export default function StudentGuidePage() {
         </section>
 
         <section className="cla-ops-section cla-ops-dataflow">
-          <div className="cla-ops-section-heading"><span>DATA FLOW · CP36 HIỆN TẠI</span><h2>Dữ liệu đang đi như thế nào?</h2></div>
+          <div className="cla-ops-section-heading"><span>DỮ LIỆU ĐƯỢC SỬ DỤNG THẾ NÀO</span><h2>Dữ liệu đang đi như thế nào?</h2></div>
           <div className="cla-ops-flow-grid">
             <article><strong>Seed</strong><p>Lưu hồ sơ, bảng điểm và snapshot Cognitive trong tài khoản hiện tại.</p></article>
             <i>→</i>

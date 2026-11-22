@@ -1,0 +1,15 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp53:package
+> python -m unittest discover -s tests -p 'test_cp53_safe_packaging.py' -v
+
+npm.cmd : 
+At C:\Gạo\Cognitive-Learn\CLA_CP80_ONECLICK.ps1:95 char:9
++         & $exe @commandArgs 2>&1 | Out-File -LiteralPath $logPath -En ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+----------------------------------------------------------------------
+Ran 0 tests in 0.000s
+
+OK

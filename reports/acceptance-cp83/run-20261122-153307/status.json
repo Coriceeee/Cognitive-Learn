@@ -1,0 +1,130 @@
+﻿[
+    {
+        "Name":  "cp83_snapshot",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "Kind":  "REQUIRED",
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance-cp83\\run-20261122-153307\\logs\\01_cp83_snapshot.log",
+        "Reason":  ""
+    },
+    {
+        "Name":  "layout",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "Kind":  "REQUIRED",
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance-cp83\\run-20261122-153307\\logs\\02_layout.log",
+        "Reason":  ""
+    },
+    {
+        "Name":  "production_build",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "Kind":  "REQUIRED",
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance-cp83\\run-20261122-153307\\logs\\03_production_build.log",
+        "Reason":  ""
+    },
+    {
+        "Name":  "npm_test_full",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "Kind":  "REQUIRED",
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance-cp83\\run-20261122-153307\\logs\\04_npm_test_full.log",
+        "Reason":  ""
+    },
+    {
+        "Name":  "cp83_ops_tests",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "Kind":  "REQUIRED",
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance-cp83\\run-20261122-153307\\logs\\05_cp83_ops_tests.log",
+        "Reason":  ""
+    },
+    {
+        "Name":  "rules_static",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "Kind":  "REQUIRED",
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance-cp83\\run-20261122-153307\\logs\\06_rules_static.log",
+        "Reason":  ""
+    },
+    {
+        "Name":  "rules_emulator",
+        "Status":  "FAIL",
+        "ExitCode":  1,
+        "Kind":  "REQUIRED",
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance-cp83\\run-20261122-153307\\logs\\07_rules_emulator.log",
+        "Reason":  ""
+    },
+    {
+        "Name":  "emulator_diagnostic",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "Kind":  "REQUIRED",
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance-cp83\\run-20261122-153307\\logs\\08_emulator_diagnostic.log",
+        "Reason":  ""
+    },
+    {
+        "Name":  "cp82_synthetic_generate",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "Kind":  "REQUIRED",
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance-cp83\\run-20261122-153307\\logs\\09_cp82_synthetic_generate.log",
+        "Reason":  ""
+    },
+    {
+        "Name":  "cp82_synthetic_verify",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "Kind":  "REQUIRED",
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance-cp83\\run-20261122-153307\\logs\\10_cp82_synthetic_verify.log",
+        "Reason":  ""
+    },
+    {
+        "Name":  "ml_environment",
+        "Status":  "BLOCKED",
+        "ExitCode":  2,
+        "Kind":  "REQUIRED",
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance-cp83\\run-20261122-153307\\logs\\11_ml_environment.log",
+        "Reason":  ""
+    },
+    {
+        "Name":  "python_research",
+        "Status":  "BLOCKED",
+        "ExitCode":  2,
+        "Kind":  "REQUIRED",
+        "Log":  "",
+        "Reason":  "Native ML dependencies unavailable; inspect ml_environment.json and logged import errors"
+    },
+    {
+        "Name":  "python_oulad",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "Kind":  "REQUIRED",
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance-cp83\\run-20261122-153307\\logs\\12_python_oulad.log",
+        "Reason":  ""
+    },
+    {
+        "Name":  "python_cognitive_validation",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "Kind":  "REQUIRED",
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance-cp83\\run-20261122-153307\\logs\\13_python_cognitive_validation.log",
+        "Reason":  ""
+    },
+    {
+        "Name":  "python_adaptive_study",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "Kind":  "REQUIRED",
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance-cp83\\run-20261122-153307\\logs\\14_python_adaptive_study.log",
+        "Reason":  ""
+    },
+    {
+        "Name":  "cp83_snapshot_after_tests",
+        "Status":  "PASS",
+        "ExitCode":  0,
+        "Kind":  "REQUIRED",
+        "Log":  "C:\\Gạo\\Cognitive-Learn\\reports\\acceptance-cp83\\run-20261122-153307\\logs\\15_cp83_snapshot_after_tests.log",
+        "Reason":  ""
+    }
+]

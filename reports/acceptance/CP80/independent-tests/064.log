@@ -1,0 +1,76 @@
+
+> cognitive-learn-ai@0.1.0 test:cp36:adaptive-lineage
+> node --experimental-strip-types --test tests/cp36-adaptive-lineage.test.mjs
+
+TAP version 13
+# (node:17617) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: explicit acceptance freezes source, options and selection; legacy no trace remains valid
+ok 1 - explicit acceptance freezes source, options and selection; legacy no trace remains valid
+  ---
+  duration_ms: 9.469406
+  type: 'test'
+  ...
+# Subtest: explicit rejection records an alternative without false assignment
+ok 2 - explicit rejection records an alternative without false assignment
+  ---
+  duration_ms: 3.186156
+  type: 'test'
+  ...
+# Subtest: manual choice same as recommendation is not a rejection
+ok 3 - manual choice same as recommendation is not a rejection
+  ---
+  duration_ms: 1.012946
+  type: 'test'
+  ...
+# Subtest: owner, missing server, wrong prior and changed evidence fail closed
+ok 4 - owner, missing server, wrong prior and changed evidence fail closed
+  ---
+  duration_ms: 1.277484
+  type: 'test'
+  ...
+# Subtest: forged refs, options and recommendations rejected
+ok 5 - forged refs, options and recommendations rejected
+  ---
+  duration_ms: 1.375057
+  type: 'test'
+  ...
+# Subtest: replay survives Firestore map key reordering; altered policy options detected when recommendation changes
+ok 6 - replay survives Firestore map key reordering; altered policy options detected when recommendation changes
+  ---
+  duration_ms: 3.177373
+  type: 'test'
+  ...
+# Subtest: chronology enforced and non-server contexts cannot freeze
+ok 7 - chronology enforced and non-server contexts cannot freeze
+  ---
+  duration_ms: 0.656461
+  type: 'test'
+  ...
+# Subtest: transaction reads source before writing; candidate rules only allow frozen lineage on create (static only)
+ok 8 - transaction reads source before writing; candidate rules only allow frozen lineage on create (static only)
+  ---
+  duration_ms: 0.724145
+  type: 'test'
+  ...
+# Subtest: freshness uses exact co-commit server timestamp, not a client clock or cached order
+ok 9 - freshness uses exact co-commit server timestamp, not a client clock or cached order
+  ---
+  duration_ms: 1.156606
+  type: 'test'
+  ...
+# Subtest: equal timestamps and malformed next timestamps cannot freeze a trace
+ok 10 - equal timestamps and malformed next timestamps cannot freeze a trace
+  ---
+  duration_ms: 4.188752
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 186.58498

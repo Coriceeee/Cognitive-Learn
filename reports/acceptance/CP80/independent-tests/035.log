@@ -1,0 +1,44 @@
+
+> cognitive-learn-ai@0.1.0 test:cp29:routes
+> node --test tests/cp29-route-deeplink-contract.test.cjs
+
+TAP version 13
+# Subtest: CP29-A4-01 all 20 current critical paths are registered by the root app
+ok 1 - CP29-A4-01 all 20 current critical paths are registered by the root app
+  ---
+  duration_ms: 1.12111
+  type: 'test'
+  ...
+# Subtest: CP29-A4-02 Vercel rewrites every critical deep link to SPA without shadowing APIs
+ok 2 - CP29-A4-02 Vercel rewrites every critical deep link to SPA without shadowing APIs
+  ---
+  duration_ms: 0.466539
+  type: 'test'
+  ...
+# Subtest: CP29-A4-03 Firebase Hosting has SPA fallback
+ok 3 - CP29-A4-03 Firebase Hosting has SPA fallback
+  ---
+  duration_ms: 0.141156
+  type: 'test'
+  ...
+# Subtest: CP29-A4-04 route guard enforces student-only scope and retired route denial
+ok 4 - CP29-A4-04 route guard enforces student-only scope and retired route denial
+  ---
+  duration_ms: 0.315846
+  type: 'test'
+  ...
+# Subtest: CP29-A4-05 protected pages mount chatbot only inside AccessGate
+ok 5 - CP29-A4-05 protected pages mount chatbot only inside AccessGate
+  ---
+  duration_ms: 0.337765
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 76.405755

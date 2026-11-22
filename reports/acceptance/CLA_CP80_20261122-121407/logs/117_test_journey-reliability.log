@@ -1,0 +1,27 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:journey-reliability
+> node --experimental-strip-types --test tests/step13-journey-reliability.test.mjs
+
+Γ£ö JR01 new cycle has no evidence before reassessment (1.3291ms)
+Γ£ö JR02 evidence is persisted as a derived property of reviewed cycle (3.7274ms)
+Γ£ö JR03 scores of zero stay zero, missing outcomes are not imputed (0.4791ms)
+Γ£ö JR04 evidence discloses provenance and no causal/confidence claim (0.583ms)
+Γ£ö JR05 evidence record matches ┬º26.1 mandatory contract fields (1.409ms)
+Γ£ö JR06 corrupted lineage cannot silently be accepted (0.4267ms)
+Γ£ö JR07 old v1 records without evidenceRecord still readable (0.3186ms)
+Γ£ö JR08 lock validates ownership and supports released state (0.1956ms)
+Γ£ö JR09 create uses transaction with fixed lock and server legacy ACTIVE preflight (1.1361ms)
+Γ£ö JR10 review releases state atomically and stores evidence; check-in does not release (0.5611ms)
+Γ£ö JR11 Rules enforce paired cycle+state updates using getAfter (0.4417ms)
+Γ£ö JR12 UI shows limitation and engine lineage, not calibrated probabilities (0.4544ms)
+Γ£ö JR13 evidence cannot be created before review or after malformed observations (0.5674ms)
+Γ£ö JR14 rapid double-click is synchronously guarded in hook (0.4582ms)
+Γ£ö JR15 legacy lock can be claimed after a previous lock is released (0.5948ms)
+Γä╣ tests 15
+Γä╣ suites 0
+Γä╣ pass 15
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 143.6903

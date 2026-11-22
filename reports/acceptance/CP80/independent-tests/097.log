@@ -1,0 +1,138 @@
+
+> cognitive-learn-ai@0.1.0 test:cp66:unified-states
+> node --experimental-strip-types --test tests/cp66-unified-states.test.mjs
+
+TAP version 13
+# (node:15466) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP66 pure and deterministic Firestore status UI
+    # Subtest: shows verified status only on confirmed ready
+    ok 1 - shows verified status only on confirmed ready
+      ---
+      duration_ms: 2.59896
+      type: 'test'
+      ...
+    # Subtest: never calls cache-backed syncing saved
+    ok 2 - never calls cache-backed syncing saved
+      ---
+      duration_ms: 0.27222
+      type: 'test'
+      ...
+    # Subtest: never shows ready for loading, signed-out, or denied reads
+    ok 3 - never shows ready for loading, signed-out, or denied reads
+      ---
+      duration_ms: 0.147933
+      type: 'test'
+      ...
+    # Subtest: gives conflicts precedence over stale save notices
+    ok 4 - gives conflicts precedence over stale save notices
+      ---
+      duration_ms: 0.105594
+      type: 'test'
+      ...
+    # Subtest: never claims saved while an upload is pending
+    ok 5 - never claims saved while an upload is pending
+      ---
+      duration_ms: 0.188692
+      type: 'test'
+      ...
+    # Subtest: distinguishes missing draft from confirmed saved draft
+    ok 6 - distinguishes missing draft from confirmed saved draft
+      ---
+      duration_ms: 0.111381
+      type: 'test'
+      ...
+    # Subtest: distinguishes failed writes from positive notices
+    ok 7 - distinguishes failed writes from positive notices
+      ---
+      duration_ms: 0.088869
+      type: 'test'
+      ...
+    # Subtest: does not hide user edits behind old successful notices
+    ok 8 - does not hide user edits behind old successful notices
+      ---
+      duration_ms: 0.223884
+      type: 'test'
+      ...
+    # Subtest: does not call failed autosave successful
+    ok 9 - does not call failed autosave successful
+      ---
+      duration_ms: 0.207307
+      type: 'test'
+      ...
+    # Subtest: keeps in-progress autosave distinct from completed autosave
+    ok 10 - keeps in-progress autosave distinct from completed autosave
+      ---
+      duration_ms: 0.381694
+      type: 'test'
+      ...
+    # Subtest: does not trust a stale success notice when the account signed out
+    ok 11 - does not trust a stale success notice when the account signed out
+      ---
+      duration_ms: 0.174222
+      type: 'test'
+      ...
+    1..11
+ok 1 - CP66 pure and deterministic Firestore status UI
+  ---
+  duration_ms: 5.590643
+  type: 'suite'
+  ...
+# Subtest: CP66 integration: one status vocabulary in six modules
+    # Subtest: renders consistent form feedback for Orion, Pulse and Haven
+    ok 1 - renders consistent form feedback for Orion, Pulse and Haven
+      ---
+      duration_ms: 0.232486
+      type: 'test'
+      ...
+    # Subtest: clears stale save notices on every edit in Pulse and Haven
+    ok 2 - clears stale save notices on every edit in Pulse and Haven
+      ---
+      duration_ms: 0.238054
+      type: 'test'
+      ...
+    # Subtest: keeps Orion autosave and newer edit protections intact
+    ok 3 - keeps Orion autosave and newer edit protections intact
+      ---
+      duration_ms: 0.08555
+      type: 'test'
+      ...
+    # Subtest: uses status-specific panels for Seed transcript, Lumen and Atlas
+    ok 4 - uses status-specific panels for Seed transcript, Lumen and Atlas
+      ---
+      duration_ms: 0.087869
+      type: 'test'
+      ...
+    # Subtest: keeps explicit accessibility roles and is not merely a color badge
+    ok 5 - keeps explicit accessibility roles and is not merely a color badge
+      ---
+      duration_ms: 0.116439
+      type: 'test'
+      ...
+    # Subtest: includes accessible mobile, dark, focus, print, reduced-motion CSS
+    ok 6 - includes accessible mobile, dark, focus, print, reduced-motion CSS
+      ---
+      duration_ms: 0.191771
+      type: 'test'
+      ...
+    # Subtest: keeps it a UI layer, not a change to Firestore authorisation
+    ok 7 - keeps it a UI layer, not a change to Firestore authorisation
+      ---
+      duration_ms: 0.226827
+      type: 'test'
+      ...
+    1..7
+ok 2 - CP66 integration: one status vocabulary in six modules
+  ---
+  duration_ms: 1.345071
+  type: 'suite'
+  ...
+1..2
+# tests 18
+# suites 2
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 154.97717

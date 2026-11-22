@@ -1,0 +1,25 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp42:holistic-temporal
+> node --experimental-strip-types --test tests/cp42-holistic-temporal.test.mjs
+
+Γ£ö TheilΓÇôSen exact linear slope, robust to a single central spike (2.8769ms)
+Γ£ö elapsed time, not row number, defines the slope (0.1951ms)
+Γ£ö change candidate requires two sufficiently supported segments (0.7451ms)
+Γ£ö latest observation excluded from baseline, minimum MAD threshold (0.2233ms)
+Γ£ö invalid rows do not produce temporal results (0.2159ms)
+Γ£ö zero is valid, constant series no fabricated change (0.1144ms)
+Γ£ö roadmap tasks bound to selected time horizon, no forced options (0.6743ms)
+Γ£ö review reacts to selected priorities and behavioral signal without triggering writes (0.3151ms)
+Γ£ö unknown finance/goals cause review rather than inferred outcome (0.1587ms)
+Γ£ö budget scenarios separate hypothetical funding, stress and tuition ceiling (0.3258ms)
+Γ£ö no data imputation, invalid grants and stress rejected, zero permitted (0.1439ms)
+Γ£ö deterministic engines do not mutate inputs (0.3708ms)
+Γ£ö live page integrations and all roadmap routes exist; no new external request or storage (1.688ms)
+Γä╣ tests 13
+Γä╣ suites 0
+Γä╣ pass 13
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 145.0055

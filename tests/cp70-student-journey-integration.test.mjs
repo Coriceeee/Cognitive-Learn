@@ -105,12 +105,17 @@ test('CP70.17 Orion and Pulse write controls require server-confirmed cycles', (
   assert.match(panel,/const canWrite = !journey\.busy && journey\.recentFromServer/);
   assert.match(panel,/journey\.status === "syncing"/);
 });
-test('CP70.18 six student-only module destinations are linked from the Seed handoff', () => {
+test('CP70.18 student journey has one action, while the LearningCircuit exclusively owns six-module navigation', () => {
   const component=file('src/page/seed/components/StudentJourneyBridge.tsx');
+  const map=file('src/page/seed/components/LearningCircuit.tsx');
   const student=file('src/page/seed/StudentPage.tsx');
-  for (const route of ['/student/profile','/lumen/indices','/atlas/recommendations','/orion/inputs','/pulse/checkin','/haven/scholarships']) assert.ok(component.includes(route),route);
+  for (const name of ['SEED','LUMEN','ATLAS','ORION','PULSE','HAVEN']) assert.ok(map.includes(`code:"${name}"`), name);
+  for (const route of ['/lumen','/atlas','/orion','/pulse','/haven']) assert.ok(map.includes(`href:"${route}"`), route);
+  assert.match(map, /href=\{item\.code==="SEED"\?profilePath:item\.href\}/);
+  assert.doesNotMatch(component, /cla-journey-handoff__route|nodes\.map/);
+  assert.match(component, /handoff\.primaryHref/);
   assert.match(student,/!isAdminPreview && <StudentJourneyBridge hasProfile=\{hasProfile\} \/>/);
-  assert.match(component,/aria-label="Đi nhanh đến sáu phân hệ học sinh"/);
+  assert.match(student, /<LearningCircuit profilePath=\{profilePath\} \/>/);
 });
 
 test('CP70.19 a new student can start a Seed profile even if journey read is offline', () => {

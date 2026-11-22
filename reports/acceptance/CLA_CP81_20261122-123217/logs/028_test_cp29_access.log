@@ -1,0 +1,36 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp29:access
+> node --test tests/cp29-live-access-gate.test.cjs
+
+Γ£ö CP29-B2-01 starts fail-closed until server-backed role listener confirms (40.3223ms)
+Γ£ö CP29-B2-02 role revoked during open session unmounts private children (16.808ms)
+Γ£ö CP29-B2-03 role changed to Admin does not silently escalate session (16.3185ms)
+Γ£ö CP29-B2-04 cached or pending-write account snapshots never authorize (12.3087ms)
+Γ£ö CP29-B2-05 live consent withdrawal immediately unmounts student pages (15.7166ms)
+Γ£ö CP29-B2-06 cached consent state cannot re-grant access (12.0554ms)
+Live account authorization failed: Error: firestore unavailable
+    at Object.fail (C:\Gß║ío\Cognitive-Learn\tests\cp29-live-access-gate.test.cjs:78:73)
+    at TestContext.<anonymous> (C:\Gß║ío\Cognitive-Learn\tests\cp29-live-access-gate.test.cjs:131:7)
+    at async Test.run (node:internal/test_runner/test:1332:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+  code: 'unavailable'
+}
+Γ£ö CP29-B2-07 listener failure fails closed and logout disposes old listeners (13.8791ms)
+Γ£ö CP29-B2-08 switching accounts disposes old listeners before new verification (23.2096ms)
+Γ£ö CP29-B2-09 consent management route stays usable to re-consent (11.4185ms)
+Firebase auth state error: Error: auth failure
+    at Object.authFail (C:\Gß║ío\Cognitive-Learn\tests\cp29-live-access-gate.test.cjs:76:40)
+    at TestContext.<anonymous> (C:\Gß║ío\Cognitive-Learn\tests\cp29-live-access-gate.test.cjs:154:7)
+    at async Test.run (node:internal/test_runner/test:1332:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+  code: 'unavailable'
+}
+Γ£ö CP29-B2-10 auth stream error revokes existing access and unsubscribes listeners (12.2268ms)
+Γä╣ tests 10
+Γä╣ suites 0
+Γä╣ pass 10
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 456.256

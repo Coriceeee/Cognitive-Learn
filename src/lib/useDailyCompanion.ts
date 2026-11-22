@@ -87,10 +87,10 @@ export function useDailyCompanion() {
           throw new Error("Chưa xác minh được đồng ý sử dụng dữ liệu trên máy chủ.");
         const snapshot = await transaction.get(docFor(owner));
         if (snapshot.exists() && !isCompanionData(snapshot.data(), owner)) throw new Error("Dữ liệu đã lưu không đúng định dạng.");
-        const current: DailyCompanionData = snapshot.exists()
+        const currentData: DailyCompanionData = snapshot.exists()
           ? snapshot.data() as DailyCompanionData
           : { ...DEFAULT_COMPANION, schedule: {...DEFAULT_COMPANION.schedule}, completedDays: [], userId: owner };
-        const next = transform(current);
+        const next = transform(currentData);
         if (!isCompanionData(next, owner)) throw new Error("Cấu hình Companion không hợp lệ.");
         if (!current()) throw new Error("Tài khoản đã thay đổi, không lưu dữ liệu.");
         transaction.set(docFor(owner), { ...next, updatedAt: serverTimestamp() });

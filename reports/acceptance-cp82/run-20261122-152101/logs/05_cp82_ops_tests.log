@@ -1,0 +1,20 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp82:ops
+> node --experimental-strip-types --test tests/cp82-synthetic-replay.test.mjs tests/cp82-ops-contract.test.cjs
+
+Γ£ö CP82 Firebase gate uses no shell:true and never invokes production deploy (1.2772ms)
+Γ£ö CP82 keeps old CP31 release fingerprint untouched (0.6663ms)
+Γ£ö CP82 research preflight is separate from research validation (0.3707ms)
+Γ£ö CP82 acceptance script never deploys and runs full regression first (0.3323ms)
+Γ£ö CP82 replay combines three real-domain-engine synthetic reports (29.5413ms)
+Γ£ö CP82 replay is reproducible byte for byte (6.5573ms)
+Γ£ö CP82 replay rejects changed engine output and forged causal claim (11.9144ms)
+Γ£ö CP82 replay refuses any changed source fingerprint or fixture (3.4204ms)
+Γä╣ tests 8
+Γä╣ suites 0
+Γä╣ pass 8
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 228.6009

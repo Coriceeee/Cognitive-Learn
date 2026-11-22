@@ -1,0 +1,42 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp33:external-ml
+> node --experimental-strip-types --test tests/cp33-external-ml-evidence.test.mjs && python -m unittest research.tests.test_uci_ml_comparison -v
+
+Γ£ö structural gate accepts complete aggregate fixture, not proof of science (1.0588ms)
+Γ£ö rejects missing subject, wrong source, synthetic status (0.2383ms)
+Γ£ö rejects bad bounds, mismatched counts, and inconsistent ablation (0.2457ms)
+Γä╣ tests 3
+Γä╣ suites 0
+Γä╣ pass 3
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 125.422
+npm.cmd : test_uci_ml_comparison (unittest.loader._FailedTest.test_uci_ml_comparison) ... ERROR
+At C:\Gạo\Cognitive-Learn\CLA_CP81_ONECLICK.ps1:95 char:9
++         & $exe @commandArgs 2>&1 | Out-File -LiteralPath $logPath -En ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (test_uci_ml_com...ison) ... ERROR:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+======================================================================
+ERROR: test_uci_ml_comparison (unittest.loader._FailedTest.test_uci_ml_comparison)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_uci_ml_comparison
+Traceback (most recent call last):
+  File "C:\Users\nguye\AppData\Local\Programs\Python\Python311\Lib\unittest\loader.py", line 162, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\G\u1ea1o\Cognitive-Learn\research\tests\test_uci_ml_comparison.py", line 8, in <module>
+    from uci_ml_comparison import prepare, split, evaluate, interval_radius, reviewed_report, MODEL_NAMES, FEATURES
+  File "C:\G\u1ea1o\Cognitive-Learn\research\src\uci_ml_comparison.py", line 14, in <module>
+    import sklearn
+ModuleNotFoundError: No module named 'sklearn'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

@@ -1,0 +1,31 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp39:longitudinal
+> python -m unittest research.tests.test_longitudinal_adaptive_ml -v
+
+npm.cmd : test_longitudinal_adaptive_ml (unittest.loader._FailedTest.test_longitudinal_adaptive_ml) ... ERROR
+At C:\Gạo\Cognitive-Learn\CLA_CP81_ONECLICK.ps1:95 char:9
++         & $exe @commandArgs 2>&1 | Out-File -LiteralPath $logPath -En ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (test_longitudin...e_ml) ... ERROR:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+======================================================================
+ERROR: test_longitudinal_adaptive_ml (unittest.loader._FailedTest.test_longitudinal_adaptive_ml)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_longitudinal_adaptive_ml
+Traceback (most recent call last):
+  File "C:\Users\nguye\AppData\Local\Programs\Python\Python311\Lib\unittest\loader.py", line 162, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\G\u1ea1o\Cognitive-Learn\research\tests\test_longitudinal_adaptive_ml.py", line 6, in <module>
+    from research.src import longitudinal_adaptive_ml as m
+  File "C:\G\u1ea1o\Cognitive-Learn\research\src\longitudinal_adaptive_ml.py", line 17, in <module>
+    import sklearn
+ModuleNotFoundError: No module named 'sklearn'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

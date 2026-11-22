@@ -1,0 +1,64 @@
+
+> cognitive-learn-ai@0.1.0 test:cp74:product-polish
+> node --experimental-strip-types --test tests/cp74-product-polish.test.mjs
+
+TAP version 13
+# (node:38055) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP74 removes the redundant cross-module dropdown and preserves More
+ok 1 - CP74 removes the redundant cross-module dropdown and preserves More
+  ---
+  duration_ms: 1.169684
+  type: 'test'
+  ...
+# Subtest: CP74 six module navigation still reaches all implemented destinations
+ok 2 - CP74 six module navigation still reaches all implemented destinations
+  ---
+  duration_ms: 1.704431
+  type: 'test'
+  ...
+# Subtest: CP74 navigation is one low-noise bar, responsive and readable in dark mode
+ok 3 - CP74 navigation is one low-noise bar, responsive and readable in dark mode
+  ---
+  duration_ms: 0.229258
+  type: 'test'
+  ...
+# Subtest: CP74 retry actions explicitly use the shared visible button design
+ok 4 - CP74 retry actions explicitly use the shared visible button design
+  ---
+  duration_ms: 0.224471
+  type: 'test'
+  ...
+# Subtest: CP74 about page is honest about data maturity and covers six student modules
+ok 5 - CP74 about page is honest about data maturity and covers six student modules
+  ---
+  duration_ms: 0.309647
+  type: 'test'
+  ...
+# Subtest: CP74 contact page has usable issue selection and a real mail-client handoff
+ok 6 - CP74 contact page has usable issue selection and a real mail-client handoff
+  ---
+  duration_ms: 0.148198
+  type: 'test'
+  ...
+# Subtest: CP74 mailto encodes Unicode and message without pretending to submit
+ok 7 - CP74 mailto encodes Unicode and message without pretending to submit
+  ---
+  duration_ms: 0.347512
+  type: 'test'
+  ...
+# Subtest: CP74 public information pages use one design system and no duplicate nav menu
+ok 8 - CP74 public information pages use one design system and no duplicate nav menu
+  ---
+  duration_ms: 0.240134
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 136.166831

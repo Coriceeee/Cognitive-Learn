@@ -1,0 +1,50 @@
+
+> cognitive-learn-ai@0.1.0 test:cp75:ux-audit
+> node --test tests/cp75-ux-audit.test.cjs
+
+TAP version 13
+# Subtest: Unknown route presents a real not-found message, while home still logs in
+ok 1 - Unknown route presents a real not-found message, while home still logs in
+  ---
+  duration_ms: 1.60448
+  type: 'test'
+  ...
+# Subtest: Fallback button styles cannot outrank local component styles by specificity
+ok 2 - Fallback button styles cannot outrank local component styles by specificity
+  ---
+  duration_ms: 0.447869
+  type: 'test'
+  ...
+# Subtest: Transcript input accessible names identify learner context and assessment
+ok 3 - Transcript input accessible names identify learner context and assessment
+  ---
+  duration_ms: 0.532991
+  type: 'test'
+  ...
+# Subtest: Chat starts with a short action-focused introduction, not a full score list
+ok 4 - Chat starts with a short action-focused introduction, not a full score list
+  ---
+  duration_ms: 0.89105
+  type: 'test'
+  ...
+# Subtest: Account menu is keyboard dismissible and exposes expanded state
+ok 5 - Account menu is keyboard dismissible and exposes expanded state
+  ---
+  duration_ms: 0.471436
+  type: 'test'
+  ...
+# Subtest: No TypeScript syntax errors in the modified UI files
+ok 6 - No TypeScript syntax errors in the modified UI files
+  ---
+  duration_ms: 91.823632
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 381.29423

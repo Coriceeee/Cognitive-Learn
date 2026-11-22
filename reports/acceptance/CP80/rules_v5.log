@@ -1,0 +1,320 @@
+
+> cognitive-learn-ai@0.1.0 test:rules:v5:static
+> node --test tests/cp21.rules.contract.test.cjs tests/firestore-security-gate.test.cjs tests/step10-student-consent.test.cjs tests/cp27-firestore-rules-v5.contract.test.cjs
+
+TAP version 13
+# Subtest: STATIC ONLY rules v2
+ok 1 - STATIC ONLY rules v2
+  ---
+  duration_ms: 6.802218
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY user doc own-id guard
+ok 2 - STATIC ONLY user doc own-id guard
+  ---
+  duration_ms: 1.078347
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY active role gate
+ok 3 - STATIC ONLY active role gate
+  ---
+  duration_ms: 0.272028
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY prevent self-registration of admin
+ok 4 - STATIC ONLY prevent self-registration of admin
+  ---
+  duration_ms: 4.790179
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY lock elective selection
+ok 5 - STATIC ONLY lock elective selection
+  ---
+  duration_ms: 0.29503
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY four unique electives
+ok 6 - STATIC ONLY four unique electives
+  ---
+  duration_ms: 0.146142
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY foreign language not equal to elective
+ok 7 - STATIC ONLY foreign language not equal to elective
+  ---
+  duration_ms: 0.140217
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY transcript path protected
+ok 8 - STATIC ONLY transcript path protected
+  ---
+  duration_ms: 0.090823
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY scope validation
+ok 9 - STATIC ONLY scope validation
+  ---
+  duration_ms: 0.258059
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY append-only cognitive history
+ok 10 - STATIC ONLY append-only cognitive history
+  ---
+  duration_ms: 0.602838
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY retired shared reports cannot be created or reviewed
+ok 11 - STATIC ONLY retired shared reports cannot be created or reviewed
+  ---
+  duration_ms: 0.231385
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY cp24 append-only provenance collection
+ok 12 - STATIC ONLY cp24 append-only provenance collection
+  ---
+  duration_ms: 0.100122
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY cp24 forbid update and delete provenance
+ok 13 - STATIC ONLY cp24 forbid update and delete provenance
+  ---
+  duration_ms: 0.146865
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY cp24 no PII through schema whitelist
+ok 14 - STATIC ONLY cp24 no PII through schema whitelist
+  ---
+  duration_ms: 0.08584
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY no public system health access
+ok 15 - STATIC ONLY no public system health access
+  ---
+  duration_ms: 0.118458
+  type: 'test'
+  ...
+# Subtest: V5-01 legacy owner-only bounded list
+ok 16 - V5-01 legacy owner-only bounded list
+  ---
+  duration_ms: 9.537325
+  type: 'test'
+  ...
+# Subtest: V5-02 retired links cannot be created or updated
+ok 17 - V5-02 retired links cannot be created or updated
+  ---
+  duration_ms: 0.28752
+  type: 'test'
+  ...
+# Subtest: V5-03 journey cycle creates still require validated immutable baseline and atomic lock
+ok 18 - V5-03 journey cycle creates still require validated immutable baseline and atomic lock
+  ---
+  duration_ms: 0.318177
+  type: 'test'
+  ...
+# Subtest: V5-04 journey updates require owner, consent, immutable fields and LIVE lock
+ok 19 - V5-04 journey updates require owner, consent, immutable fields and LIVE lock
+  ---
+  duration_ms: 5.169626
+  type: 'test'
+  ...
+# Subtest: V5-05 check-in cannot mutate existing data or forge an observed outcome
+ok 20 - V5-05 check-in cannot mutate existing data or forge an observed outcome
+  ---
+  duration_ms: 0.567091
+  type: 'test'
+  ...
+# Subtest: V5-06 review remains evidence-checked and cannot edit check-in history
+ok 21 - V5-06 review remains evidence-checked and cannot edit check-in history
+  ---
+  duration_ms: 0.226111
+  type: 'test'
+  ...
+# Subtest: V5-07 production rules unchanged by this patch
+ok 22 - V5-07 production rules unchanged by this patch
+  ---
+  duration_ms: 0.615641
+  type: 'test'
+  ...
+# Subtest: V5-08 existing six failed emulator assertions remain intact
+ok 23 - V5-08 existing six failed emulator assertions remain intact
+  ---
+  duration_ms: 0.352141
+  type: 'test'
+  ...
+# Subtest: SG01 accepts only reviewed candidate Rules in localhost emulator
+ok 24 - SG01 accepts only reviewed candidate Rules in localhost emulator
+  ---
+  duration_ms: 2.535753
+  type: 'test'
+  ...
+# Subtest: SG02 rejects production or another demo Firebase project
+ok 25 - SG02 rejects production or another demo Firebase project
+  ---
+  duration_ms: 0.893059
+  type: 'test'
+  ...
+# Subtest: SG03 rejects a different Rules file, including a production Rules path
+ok 26 - SG03 rejects a different Rules file, including a production Rules path
+  ---
+  duration_ms: 0.421198
+  type: 'test'
+  ...
+# Subtest: SG04 rejects emulator host binding on all interfaces or external network
+ok 27 - SG04 rejects emulator host binding on all interfaces or external network
+  ---
+  duration_ms: 0.567369
+  type: 'test'
+  ...
+# Subtest: SG05 rejects invalid ports and enabled Emulator UI
+ok 28 - SG05 rejects invalid ports and enabled Emulator UI
+  ---
+  duration_ms: 0.374561
+  type: 'test'
+  ...
+# Subtest: SG06 rejects external/injected FIRESTORE_EMULATOR_HOST
+ok 29 - SG06 rejects external/injected FIRESTORE_EMULATOR_HOST
+  ---
+  duration_ms: 0.621193
+  type: 'test'
+  ...
+# Subtest: SG07 allows only local FIRESTORE_EMULATOR_HOST values or unset
+ok 30 - SG07 allows only local FIRESTORE_EMULATOR_HOST values or unset
+  ---
+  duration_ms: 0.542338
+  type: 'test'
+  ...
+# Subtest: SG08 overall PASS requires static AND emulator authorization tests PASS
+ok 31 - SG08 overall PASS requires static AND emulator authorization tests PASS
+  ---
+  duration_ms: 0.207923
+  type: 'test'
+  ...
+# Subtest: SG09 package scripts use fixed demo CLI and cannot invoke deployment
+ok 32 - SG09 package scripts use fixed demo CLI and cannot invoke deployment
+  ---
+  duration_ms: 1.475233
+  type: 'test'
+  ...
+# Subtest: SG10 production firebase.json does not silently deploy candidate Rules
+ok 33 - SG10 production firebase.json does not silently deploy candidate Rules
+  ---
+  duration_ms: 0.685944
+  type: 'test'
+  ...
+# Subtest: SG11 emulator test source fails closed on non-loopback endpoints
+ok 34 - SG11 emulator test source fails closed on non-loopback endpoints
+  ---
+  duration_ms: 2.714232
+  type: 'test'
+  ...
+# Subtest: SC01 new, missing consent is never accepted
+ok 35 - SC01 new, missing consent is never accepted
+  ---
+  duration_ms: 1.597257
+  type: 'test'
+  ...
+# Subtest: SC02 same UID and notice required
+ok 36 - SC02 same UID and notice required
+  ---
+  duration_ms: 0.292253
+  type: 'test'
+  ...
+# Subtest: SC03 withdrawn consent is not active
+ok 37 - SC03 withdrawn consent is not active
+  ---
+  duration_ms: 0.269885
+  type: 'test'
+  ...
+# Subtest: SC04 product consent never enrolls in research
+ok 38 - SC04 product consent never enrolls in research
+  ---
+  duration_ms: 0.200335
+  type: 'test'
+  ...
+# Subtest: SC05 helper rejects blank identity
+ok 39 - SC05 helper rejects blank identity
+  ---
+  duration_ms: 0.486144
+  type: 'test'
+  ...
+# Subtest: SC06 root routing includes student consent page
+ok 40 - SC06 root routing includes student consent page
+  ---
+  duration_ms: 0.698328
+  type: 'test'
+  ...
+# Subtest: SC07 student consent route allowed by role gate
+ok 41 - SC07 student consent route allowed by role gate
+  ---
+  duration_ms: 0.244657
+  type: 'test'
+  ...
+# Subtest: SC08 protected student pages read consent from server
+ok 42 - SC08 protected student pages read consent from server
+  ---
+  duration_ms: 0.307441
+  type: 'test'
+  ...
+# Subtest: SC09 UI has separate acceptance and withdrawal controls
+ok 43 - SC09 UI has separate acceptance and withdrawal controls
+  ---
+  duration_ms: 0.422462
+  type: 'test'
+  ...
+# Subtest: SC10 UI requires explicit acknowledgment
+ok 44 - SC10 UI requires explicit acknowledgment
+  ---
+  duration_ms: 0.518338
+  type: 'test'
+  ...
+# Subtest: SC11 UI never silently enrolls research
+ok 45 - SC11 UI never silently enrolls research
+  ---
+  duration_ms: 0.256208
+  type: 'test'
+  ...
+# Subtest: SC12 Rules include consent owner-only and strict schema
+ok 46 - SC12 Rules include consent owner-only and strict schema
+  ---
+  duration_ms: 0.11898
+  type: 'test'
+  ...
+# Subtest: SC13 Rules gate academic writes, including profile and transcript
+ok 47 - SC13 Rules gate academic writes, including profile and transcript
+  ---
+  duration_ms: 0.22634
+  type: 'test'
+  ...
+# Subtest: SC14 legacy shares closed regardless of consent
+ok 48 - SC14 legacy shares closed regardless of consent
+  ---
+  duration_ms: 0.142361
+  type: 'test'
+  ...
+# Subtest: SC15 UI warns guardian identity is unverified
+ok 49 - SC15 UI warns guardian identity is unverified
+  ---
+  duration_ms: 0.119139
+  type: 'test'
+  ...
+# Subtest: SC16 safe rollout stays off unless explicitly enabled
+ok 50 - SC16 safe rollout stays off unless explicitly enabled
+  ---
+  duration_ms: 0.2416
+  type: 'test'
+  ...
+# Subtest: SC17 assistant cannot mount outside the protected route gate
+ok 51 - SC17 assistant cannot mount outside the protected route gate
+  ---
+  duration_ms: 0.339533
+  type: 'test'
+  ...
+1..51
+# tests 51
+# suites 0
+# pass 51
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 634.852816

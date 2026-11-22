@@ -1,0 +1,18 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp57:timestamp
+> node --experimental-strip-types --test tests/cp57-firestore-timestamp-stability.test.mjs
+
+Γ£ö CP57.1 revisioned documents do not conflict during serverTimestamp null -> resolved (0.9665ms)
+Γ£ö CP57.2 local timestamp estimates do not create phantom conflicts (0.1921ms)
+Γ£ö CP57.3 genuine remote edits remain blocked even if revision was reused (0.3903ms)
+Γ£ö CP57.4 legacy revision-less documents keep timestamp ABA protection (0.2096ms)
+Γ£ö CP57.5 acknowledgement with unknown timestamp still enforces exact payload (0.2061ms)
+Γ£ö CP57.6 draft hook remains protected by server-side transaction CAS (0.6889ms)
+Γä╣ tests 6
+Γä╣ suites 0
+Γä╣ pass 6
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 133.9107

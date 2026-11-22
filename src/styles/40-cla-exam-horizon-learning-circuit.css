@@ -130,6 +130,7 @@
   border-radius: 50%; color: var(--node-color); background: #F9FCFF; font-size: 10px; font-weight: 800; line-height: 1; }
 .cla-circuit-node strong { font-size: 12px; font-weight: 810; letter-spacing: .065em; color: #1D3958; }
 .cla-circuit-node small { color: #526980; font-size: 10px; font-weight: 630; }
+.cla-circuit-node .cla-circuit-node-name { max-width: 100%; font-size: 10.5px; line-height: 1.25; font-weight: 700; color: #405a73; text-wrap: balance; }
 .cla-circuit-detail { display: flex; flex-direction: column; gap: 24px; min-width: 0; padding: 24px;
   background: white; border-left: 1px solid #E0E9F4; }
 .cla-circuit-detail-top { display: flex; gap: 12px; justify-content: space-between; color: #60758A; letter-spacing: .115em; font-size: 9px; font-weight: 770; }
@@ -149,6 +150,7 @@
 @media(max-width:1020px) {
  .cla-circuit-stage { grid-template-columns: minmax(0,1.35fr) minmax(230px,.8fr); }
  .cla-circuit-node { width: 104px; min-height: 80px; }
+ .cla-circuit-node .cla-circuit-node-name { font-size: 10px; }
  .cla-circuit-map { min-height: 420px; }
 }
 @media(max-width:760px) {
@@ -198,3 +200,48 @@
 .cla-exam-settings-meta strong { font-size: 25px; font-variant-numeric: tabular-nums; color: #1E4D91; font-weight: 750; }
 .cla-exam-settings-meta span { color: #526D88; font-size: 10px; font-weight: 780; letter-spacing: .08em; }
 @media(max-width:760px) { .cla-exam-settings-meta { align-self: flex-start; } }
+
+/* CP79 color-only circuit refinement: the route/map geometry remains unchanged. */
+.cla-circuit :is(.cla-circuit-node,.cla-circuit-detail,.cla-circuit-mobile>a)[data-module="seed"] { --node-color: var(--seed-700); --node-primary: var(--seed-500); --node-secondary: var(--seed-300); --node-soft: var(--seed-050); --node-border: var(--seed-200); --node-glow: var(--seed-glow); }
+.cla-circuit :is(.cla-circuit-node,.cla-circuit-detail,.cla-circuit-mobile>a)[data-module="lumen"] { --node-color: var(--lumen-700); --node-primary: var(--lumen-500); --node-secondary: var(--lumen-300); --node-soft: var(--lumen-050); --node-border: var(--lumen-200); --node-glow: var(--lumen-glow); }
+.cla-circuit :is(.cla-circuit-node,.cla-circuit-detail,.cla-circuit-mobile>a)[data-module="atlas"] { --node-color: var(--atlas-700); --node-primary: var(--atlas-500); --node-secondary: var(--atlas-300); --node-soft: var(--atlas-050); --node-border: var(--atlas-200); --node-glow: var(--atlas-glow); }
+.cla-circuit :is(.cla-circuit-node,.cla-circuit-detail,.cla-circuit-mobile>a)[data-module="orion"] { --node-color: var(--orion-700); --node-primary: var(--orion-500); --node-secondary: var(--orion-300); --node-soft: var(--orion-050); --node-border: var(--orion-200); --node-glow: var(--orion-glow); }
+.cla-circuit :is(.cla-circuit-node,.cla-circuit-detail,.cla-circuit-mobile>a)[data-module="pulse"] { --node-color: var(--pulse-700); --node-primary: var(--pulse-500); --node-secondary: var(--pulse-300); --node-soft: var(--pulse-050); --node-border: var(--pulse-200); --node-glow: var(--pulse-glow); }
+.cla-circuit :is(.cla-circuit-node,.cla-circuit-detail,.cla-circuit-mobile>a)[data-module="haven"] { --node-color: var(--haven-700); --node-primary: var(--haven-500); --node-secondary: var(--haven-300); --node-soft: var(--haven-050); --node-border: var(--haven-200); --node-glow: var(--haven-glow); }
+
+:root:not([data-theme="dark"]) .cla-circuit-node {
+  border-color: var(--node-border, #dce7f7);
+  background: linear-gradient(150deg, #ffffff 54%, var(--node-soft, #f5f8ff) 100%);
+  box-shadow: 0 12px 28px -23px var(--node-glow, rgba(24,57,105,.2));
+}
+:root:not([data-theme="dark"]) .cla-circuit-node:is(:hover,:focus-visible,.is-current) {
+  border-color: var(--node-primary, #3977ff);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--node-primary, #3977ff) 9%, transparent), 0 12px 27px -20px var(--node-glow, rgba(24,57,105,.2));
+}
+:root:not([data-theme="dark"]) .cla-circuit-node-marker,
+:root:not([data-theme="dark"]) .cla-circuit-mobile-n {
+  color: var(--node-color, #1c4f9d);
+  border-color: var(--node-border, #bbd4ff);
+  background: var(--node-soft, #edf4ff);
+}
+:root:not([data-theme="dark"]) .cla-circuit-detail {
+  background: linear-gradient(150deg, #fff 63%, var(--node-soft, #edf4ff) 100%);
+}
+:root:not([data-theme="dark"]) .cla-circuit-detail-core {
+  border-top-color: var(--node-primary, #3977ff);
+}
+:root:not([data-theme="dark"]) .cla-circuit-detail-links > a {
+  background: linear-gradient(125deg, var(--node-color, #1c4f9d), color-mix(in srgb, var(--node-color, #1c4f9d) 78%, var(--node-primary, #3977ff)));
+  box-shadow: 0 8px 20px -16px var(--node-glow, rgba(24,57,105,.2));
+}
+:root:not([data-theme="dark"]) .cla-circuit-detail-links > a:hover {
+  background: var(--node-color, #1c4f9d);
+}
+@media (max-width: 760px) {
+  :root:not([data-theme="dark"]) .cla-circuit-mobile > a {
+    background: linear-gradient(110deg, #fff 73%, var(--node-soft, #f5f8ff));
+  }
+  :root:not([data-theme="dark"]) .cla-circuit-mobile > a:is(:hover,:focus-visible) {
+    background: var(--node-soft, #f5f8ff);
+  }
+}

@@ -4,6 +4,11 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {produceBackup,renderBackupHTML} from '../tools/cla_demo_backup.mjs';
+import {createRequire} from 'node:module';
+import {cp31ReleaseSourceSha256} from '../src/lib/nexusEvidenceBaseline.ts';
+const require=createRequire(import.meta.url);
+const {fingerprint}=require('../tools/cp31_release_fingerprint.cjs');
+const originalSourceIntact=() => fingerprint(path.resolve(import.meta.dirname,'..')).sha256===cp31ReleaseSourceSha256;
 const sample=()=>({stages:Array.from({length:7},(_,i)=>({id:'stage-'+i,source:'engine-'+i})),trends:[{key:'math',label:'Toán (giả lập)',scores:[0,0,2]},{key:'english',label:'Anh (giả lập)',scores:[7,8,8]}],cycleCount:2,declaredCount:8,sourceFingerprint:'a'.repeat(64)});
 
 test('Static standalone offline HTML contains all essential safety claims',()=>{
@@ -41,6 +46,12 @@ test('Offline fallback from the REAL replay JSON is byte-reproducible and tamper
   const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'cla-demo-backup-'));
   const outfile=path.join(tmp,'standalone.html');
   try{
+    if (!originalSourceIntact()) {
+      assert.throws(()=>produceBackup('--generate',outfile),/Source fingerprint drift/,
+        'A newer source tree must not impersonate the frozen CP31 offline demo');
+      assert.equal(fs.existsSync(outfile),false,'Mismatched source may not emit a verified demo');
+      return;
+    }
     const report=produceBackup('--generate',outfile);
     assert.equal(report.status,'SYNTHETIC_DEMO_BACKUP_VERIFIED');
     assert.equal(report.measurementEquivalenceVerified,false);
@@ -56,7 +67,7 @@ test('Offline fallback from the REAL replay JSON is byte-reproducible and tamper
 
 test('Verification refuses an absent HTML artifact',()=>{
   const absent=path.join(os.tmpdir(),'cla-nonexistent-standalone-'+process.pid+'.html');
-  assert.throws(()=>produceBackup('--verify',absent),/No backup HTML/);
+  assert.throws(()=>produceBackup('--verify',absent),originalSourceIntact() ? /No backup HTML/ : /Source fingerprint drift/);
 });
 
 test('Verification rejects unsupported action',()=>{

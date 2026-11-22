@@ -1,0 +1,34 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp31:batch16
+> node --experimental-strip-types --test tests/cp31-batch16-history-pagination.test.mjs
+
+Γ£ö B16-01 page size is eight and cap is 80 (0.8193ms)
+Γ£ö B16-02 full page is eight records without exceeding Rules (2.4797ms)
+Γ£ö B16-03 short server page establishes no further rows for that request (0.429ms)
+Γ£ö B16-04 empty server page is legal (0.2388ms)
+Γ£ö B16-05 cache cannot establish completeness (0.3143ms)
+Γ£ö B16-06 missing user ID fails closed (0.188ms)
+Γ£ö B16-07 invalid latest page fails closed (0.1434ms)
+Γ£ö B16-08 nine Firestore records exceed server query allowance (0.2602ms)
+Γ£ö B16-09 foreign cycle cannot be displayed (0.3882ms)
+Γ£ö B16-10 forged Firestore document ID fails (0.5358ms)
+Γ£ö B16-11 duplicate archived cycle fails (0.4779ms)
+Γ£ö B16-12 overlapping newest and archived cycle fails (0.7259ms)
+Γ£ö B16-13 non-descending page is rejected (0.3425ms)
+Γ£ö B16-14 timestamp equal to cursor is rejected (0.2885ms)
+Γ£ö B16-15 invalid evidence nested fields reject all older data (0.3281ms)
+Γ£ö B16-16 malformed document is rejected (0.3873ms)
+Γ£ö B16-17 reaching 80 caps display and never claims full history (1.5341ms)
+Γ£ö B16-18 already at 80 is blocked (0.4091ms)
+Γ£ö B16-19 pagination hook uses authenticated server cursor and resets on auth changes (0.553ms)
+Γ£ö B16-20 measurement analysis stays limited to the first eight cycles (0.5443ms)
+Γ£ö B16-21 UI provides separate older history disclosure and no attestation claim (0.4551ms)
+Γ£ö B16-22 no client-side writes from history archive path (0.2747ms)
+Γä╣ tests 22
+Γä╣ suites 0
+Γä╣ pass 22
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 138.6595

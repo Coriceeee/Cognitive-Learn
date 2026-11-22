@@ -9,12 +9,12 @@ import UserMenu from "../../components/common/UserMenu";
 import "../../styles.css";
 
 const modules = [
-  { name: "Seed", title: "Hồ sơ học tập", icon: seedIcon, description: "Lưu mục tiêu, bảng điểm THPT và những thông tin bạn chủ động cung cấp.", path: "/student" },
-  { name: "Lumen", title: "Hiểu dữ liệu nhận thức", icon: lumenIcon, description: "Khám phá các chỉ báo có bằng chứng và nhận hướng dẫn phù hợp với dữ liệu hiện có.", path: "/lumen" },
-  { name: "Atlas", title: "Khám phá ngành và trường", icon: atlasIcon, description: "Đối chiếu phương thức xét tuyển, lịch sử tuyển sinh và nguồn công bố.", path: "/atlas" },
-  { name: "Orion", title: "Lập chiến lược", icon: orionIcon, description: "Xây dựng kế hoạch học tập và xem xét những kịch bản có điều kiện.", path: "/orion" },
-  { name: "Pulse", title: "Theo dõi và điều chỉnh", icon: pulseIcon, description: "Ghi nhận việc thực hiện kế hoạch, nhìn lại tiến độ qua các chu kỳ.", path: "/pulse" },
-  { name: "Haven", title: "Cân nhắc cơ hội", icon: havenIcon, description: "Tìm hiểu học bổng, du học, chi phí và điều kiện hồ sơ.", path: "/haven" },
+  { name: "Seed", title: "Bản sắc học tập", icon: seedIcon, description: "Lưu mục tiêu, bảng điểm THPT và những thông tin bạn chủ động cung cấp.", path: "/student" },
+  { name: "Lumen", title: "Dấu vân tay trí tuệ", icon: lumenIcon, description: "Khám phá các chỉ báo có bằng chứng và nhận hướng dẫn phù hợp với dữ liệu hiện có.", path: "/lumen" },
+  { name: "Atlas", title: "Bản đồ tương lai", icon: atlasIcon, description: "Đối chiếu phương thức xét tuyển, lịch sử tuyển sinh và nguồn công bố.", path: "/atlas" },
+  { name: "Orion", title: "Kiến trúc tương lai", icon: orionIcon, description: "Xây dựng kế hoạch học tập và xem xét những kịch bản có điều kiện.", path: "/orion" },
+  { name: "Pulse", title: "Đường cong tiến hóa", icon: pulseIcon, description: "Ghi nhận việc thực hiện kế hoạch, nhìn lại tiến độ qua các chu kỳ.", path: "/pulse" },
+  { name: "Haven", title: "Hành trang thế giới", icon: havenIcon, description: "Tìm hiểu học bổng, du học, chi phí và điều kiện hồ sơ.", path: "/haven" },
 ];
 
 const principles = [
@@ -65,7 +65,7 @@ export default function GioiThieuPage() {
           </div>
           <div className="cla-public-module-grid">
             {modules.map((module) => (
-              <article className="cla-public-module" key={module.name}>
+              <article className="cla-public-module" data-module={module.name.toLowerCase()} key={module.name}>
                 <img src={module.icon} alt="" aria-hidden="true" />
                 <span>{module.name}</span>
                 <h3>{module.title}</h3>

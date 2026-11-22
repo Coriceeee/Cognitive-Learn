@@ -1,0 +1,883 @@
+==== test:cp66:unified-states ====
+
+> cognitive-learn-ai@0.1.0 test:cp66:unified-states
+> node --experimental-strip-types --test tests/cp66-unified-states.test.mjs
+
+TAP version 13
+# (node:60341) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP66 pure and deterministic Firestore status UI
+    # Subtest: shows verified status only on confirmed ready
+    ok 1 - shows verified status only on confirmed ready
+      ---
+      duration_ms: 2.132541
+      type: 'test'
+      ...
+    # Subtest: never calls cache-backed syncing saved
+    ok 2 - never calls cache-backed syncing saved
+      ---
+      duration_ms: 0.356435
+      type: 'test'
+      ...
+    # Subtest: never shows ready for loading, signed-out, or denied reads
+    ok 3 - never shows ready for loading, signed-out, or denied reads
+      ---
+      duration_ms: 0.144162
+      type: 'test'
+      ...
+    # Subtest: gives conflicts precedence over stale save notices
+    ok 4 - gives conflicts precedence over stale save notices
+      ---
+      duration_ms: 0.096041
+      type: 'test'
+      ...
+    # Subtest: never claims saved while an upload is pending
+    ok 5 - never claims saved while an upload is pending
+      ---
+      duration_ms: 0.158123
+      type: 'test'
+      ...
+    # Subtest: distinguishes missing draft from confirmed saved draft
+    ok 6 - distinguishes missing draft from confirmed saved draft
+      ---
+      duration_ms: 0.10158
+      type: 'test'
+      ...
+    # Subtest: distinguishes failed writes from positive notices
+    ok 7 - distinguishes failed writes from positive notices
+      ---
+      duration_ms: 0.082482
+      type: 'test'
+      ...
+    # Subtest: does not hide user edits behind old successful notices
+    ok 8 - does not hide user edits behind old successful notices
+      ---
+      duration_ms: 0.158724
+      type: 'test'
+      ...
+    # Subtest: does not call failed autosave successful
+    ok 9 - does not call failed autosave successful
+      ---
+      duration_ms: 0.535769
+      type: 'test'
+      ...
+    # Subtest: keeps in-progress autosave distinct from completed autosave
+    ok 10 - keeps in-progress autosave distinct from completed autosave
+      ---
+      duration_ms: 0.297788
+      type: 'test'
+      ...
+    # Subtest: does not trust a stale success notice when the account signed out
+    ok 11 - does not trust a stale success notice when the account signed out
+      ---
+      duration_ms: 0.187967
+      type: 'test'
+      ...
+    1..11
+ok 1 - CP66 pure and deterministic Firestore status UI
+  ---
+  duration_ms: 5.276371
+  type: 'suite'
+  ...
+# Subtest: CP66 integration: one status vocabulary in six modules
+    # Subtest: renders consistent form feedback for Orion, Pulse and Haven
+    ok 1 - renders consistent form feedback for Orion, Pulse and Haven
+      ---
+      duration_ms: 0.202548
+      type: 'test'
+      ...
+    # Subtest: clears stale save notices on every edit in Pulse and Haven
+    ok 2 - clears stale save notices on every edit in Pulse and Haven
+      ---
+      duration_ms: 0.20364
+      type: 'test'
+      ...
+    # Subtest: keeps Orion autosave and newer edit protections intact
+    ok 3 - keeps Orion autosave and newer edit protections intact
+      ---
+      duration_ms: 0.084734
+      type: 'test'
+      ...
+    # Subtest: uses status-specific panels for Seed transcript, Lumen and Atlas
+    ok 4 - uses status-specific panels for Seed transcript, Lumen and Atlas
+      ---
+      duration_ms: 0.087679
+      type: 'test'
+      ...
+    # Subtest: keeps explicit accessibility roles and is not merely a color badge
+    ok 5 - keeps explicit accessibility roles and is not merely a color badge
+      ---
+      duration_ms: 0.103833
+      type: 'test'
+      ...
+    # Subtest: includes accessible mobile, dark, focus, print, reduced-motion CSS
+    ok 6 - includes accessible mobile, dark, focus, print, reduced-motion CSS
+      ---
+      duration_ms: 0.233964
+      type: 'test'
+      ...
+    # Subtest: keeps it a UI layer, not a change to Firestore authorisation
+    ok 7 - keeps it a UI layer, not a change to Firestore authorisation
+      ---
+      duration_ms: 0.218071
+      type: 'test'
+      ...
+    1..7
+ok 2 - CP66 integration: one status vocabulary in six modules
+  ---
+  duration_ms: 1.299664
+  type: 'suite'
+  ...
+1..2
+# tests 18
+# suites 2
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 110.87031
+==== test:cp67:route-experience ====
+
+> cognitive-learn-ai@0.1.0 test:cp67:route-experience
+> node --experimental-strip-types --test tests/cp67-route-experience.test.mjs
+
+TAP version 13
+# (node:60374) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP67: SPA route focus, scroll and announcements
+    # Subtest: does not shift focus or scroll on first render
+    ok 1 - does not shift focus or scroll on first render
+      ---
+      duration_ms: 1.726633
+      type: 'test'
+      ...
+    # Subtest: a real student route change scrolls to top and focuses the new workspace
+    ok 2 - a real student route change scrolls to top and focuses the new workspace
+      ---
+      duration_ms: 0.22382
+      type: 'test'
+      ...
+    # Subtest: country and admission query filters preserve viewport and input focus
+    ok 3 - country and admission query filters preserve viewport and input focus
+      ---
+      duration_ms: 0.259342
+      type: 'test'
+      ...
+    # Subtest: hash target within the same route is scrolled into view without stealing focus
+    ok 4 - hash target within the same route is scrolled into view without stealing focus
+      ---
+      duration_ms: 0.179615
+      type: 'test'
+      ...
+    # Subtest: real route change can land at an existing anchor
+    ok 5 - real route change can land at an existing anchor
+      ---
+      duration_ms: 0.16987
+      type: 'test'
+      ...
+    # Subtest: Back/Forward restores scroll but focuses the new content when the page changes
+    ok 6 - Back/Forward restores scroll but focuses the new content when the page changes
+      ---
+      duration_ms: 0.251981
+      type: 'test'
+      ...
+    # Subtest: malformed hash escape cannot crash app or hijack scroll restoration
+    ok 7 - malformed hash escape cannot crash app or hijack scroll restoration
+      ---
+      duration_ms: 1.225375
+      type: 'test'
+      ...
+    # Subtest: fragment target supports encoded Vietnamese and common IDs
+    ok 8 - fragment target supports encoded Vietnamese and common IDs
+      ---
+      duration_ms: 0.263438
+      type: 'test'
+      ...
+    # Subtest: naming pages does not mislabel simulated scores or admissions predictions
+    ok 9 - naming pages does not mislabel simulated scores or admissions predictions
+      ---
+      duration_ms: 0.657859
+      type: 'test'
+      ...
+    # Subtest: student exam, school choices and scholarship pages receive distinct titles
+    ok 10 - student exam, school choices and scholarship pages receive distinct titles
+      ---
+      duration_ms: 0.430755
+      type: 'test'
+      ...
+    # Subtest: admin pages are not advertised as student modules
+    ok 11 - admin pages are not advertised as student modules
+      ---
+      duration_ms: 0.134658
+      type: 'test'
+      ...
+    # Subtest: app keeps progress transition while announcing a meaningful route title
+    ok 12 - app keeps progress transition while announcing a meaningful route title
+      ---
+      duration_ms: 0.151844
+      type: 'test'
+      ...
+    # Subtest: skip link targets an existing focusable content anchor, not nested main
+    ok 13 - skip link targets an existing focusable content anchor, not nested main
+      ---
+      duration_ms: 0.089082
+      type: 'test'
+      ...
+    # Subtest: route-scroll plan drives the side effect, query changes do not force scroll-to-top
+    ok 14 - route-scroll plan drives the side effect, query changes do not force scroll-to-top
+      ---
+      duration_ms: 0.125044
+      type: 'test'
+      ...
+    # Subtest: navigation kind is captured with route state (not read after async commit)
+    ok 15 - navigation kind is captured with route state (not read after async commit)
+      ---
+      duration_ms: 0.06079
+      type: 'test'
+      ...
+    # Subtest: CSS has accessible visual skip, dark-independent contrast, reduced-motion and print
+    ok 16 - CSS has accessible visual skip, dark-independent contrast, reduced-motion and print
+      ---
+      duration_ms: 0.113748
+      type: 'test'
+      ...
+    # Subtest: works with the existing unsaved-draft navigation guard and native hash handling
+    ok 17 - works with the existing unsaved-draft navigation guard and native hash handling
+      ---
+      duration_ms: 0.072737
+      type: 'test'
+      ...
+    1..17
+ok 1 - CP67: SPA route focus, scroll and announcements
+  ---
+  duration_ms: 7.82849
+  type: 'suite'
+  ...
+1..1
+# tests 17
+# suites 1
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 141.632486
+==== test:cp70:journey ====
+
+> cognitive-learn-ai@0.1.0 test:cp70:journey
+> node --experimental-strip-types --test tests/cp70-student-journey-integration.test.mjs
+
+TAP version 13
+# (node:60411) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP70.01 cached snapshots cannot publish cycles, even if all records are otherwise valid
+ok 1 - CP70.01 cached snapshots cannot publish cycles, even if all records are otherwise valid
+  ---
+  duration_ms: 1.963392
+  type: 'test'
+  ...
+# Subtest: CP70.02 pending Firestore local writes cannot publish cycles as server-confirmed
+ok 2 - CP70.02 pending Firestore local writes cannot publish cycles as server-confirmed
+  ---
+  duration_ms: 0.250569
+  type: 'test'
+  ...
+# Subtest: CP70.03 confirmed empty server snapshot is distinguishable from empty cache
+ok 3 - CP70.03 confirmed empty server snapshot is distinguishable from empty cache
+  ---
+  duration_ms: 0.232994
+  type: 'test'
+  ...
+# Subtest: CP70.04 owner mismatch fails closed and drops the full batch
+ok 4 - CP70.04 owner mismatch fails closed and drops the full batch
+  ---
+  duration_ms: 0.837554
+  type: 'test'
+  ...
+# Subtest: CP70.05 document ID and payload ID must agree
+ok 5 - CP70.05 document ID and payload ID must agree
+  ---
+  duration_ms: 0.201927
+  type: 'test'
+  ...
+# Subtest: CP70.06 tampered cycle fields and missing owner do not become a student journey
+ok 6 - CP70.06 tampered cycle fields and missing owner do not become a student journey
+  ---
+  duration_ms: 0.272091
+  type: 'test'
+  ...
+# Subtest: CP70.07 server-confirmed valid document is available without changing observed grades
+ok 7 - CP70.07 server-confirmed valid document is available without changing observed grades
+  ---
+  duration_ms: 0.166635
+  type: 'test'
+  ...
+# Subtest: CP70.08 initial loading does not falsely prompt sign-in or invent progress
+ok 8 - CP70.08 initial loading does not falsely prompt sign-in or invent progress
+  ---
+  duration_ms: 0.279271
+  type: 'test'
+  ...
+# Subtest: CP70.09 waiting from cache and error never present previous student data
+ok 9 - CP70.09 waiting from cache and error never present previous student data
+  ---
+  duration_ms: 0.507848
+  type: 'test'
+  ...
+# Subtest: CP70.10 verified but wrong UID is blocked in navigation handoff as defense-in-depth
+ok 10 - CP70.10 verified but wrong UID is blocked in navigation handoff as defense-in-depth
+  ---
+  duration_ms: 0.466026
+  type: 'test'
+  ...
+# Subtest: CP70.11 no profile takes student to Seed after a server-confirmed read
+ok 11 - CP70.11 no profile takes student to Seed after a server-confirmed read
+  ---
+  duration_ms: 0.179585
+  type: 'test'
+  ...
+# Subtest: CP70.12 empty verified journey starts at Orion without a fake achievement score
+ok 12 - CP70.12 empty verified journey starts at Orion without a fake achievement score
+  ---
+  duration_ms: 0.108029
+  type: 'test'
+  ...
+# Subtest: CP70.13 active plan links to Pulse with zero observed check-ins
+ok 13 - CP70.13 active plan links to Pulse with zero observed check-ins
+  ---
+  duration_ms: 0.265752
+  type: 'test'
+  ...
+# Subtest: CP70.14 check-in links to reassessment, without treating self-report as academic progress
+ok 14 - CP70.14 check-in links to reassessment, without treating self-report as academic progress
+  ---
+  duration_ms: 0.264279
+  type: 'test'
+  ...
+# Subtest: CP70.15 reviewed plan links to Lumen evidence, without making a probability claim
+ok 15 - CP70.15 reviewed plan links to Lumen evidence, without making a probability claim
+  ---
+  duration_ms: 0.540376
+  type: 'test'
+  ...
+# Subtest: CP70.16 hook listens for metadata changes and clears stale cycles before server verification
+ok 16 - CP70.16 hook listens for metadata changes and clears stale cycles before server verification
+  ---
+  duration_ms: 0.571301
+  type: 'test'
+  ...
+# Subtest: CP70.17 Orion and Pulse write controls require server-confirmed cycles
+ok 17 - CP70.17 Orion and Pulse write controls require server-confirmed cycles
+  ---
+  duration_ms: 0.492005
+  type: 'test'
+  ...
+# Subtest: CP70.18 student journey has one action, while the LearningCircuit exclusively owns six-module navigation
+ok 18 - CP70.18 student journey has one action, while the LearningCircuit exclusively owns six-module navigation
+  ---
+  duration_ms: 0.579614
+  type: 'test'
+  ...
+# Subtest: CP70.19 a new student can start a Seed profile even if journey read is offline
+ok 19 - CP70.19 a new student can start a Seed profile even if journey read is offline
+  ---
+  duration_ms: 0.11542
+  type: 'test'
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 19
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 174.017423
+==== test:cp71:unified-nav ====
+
+> cognitive-learn-ai@0.1.0 test:cp71:unified-nav
+> node --experimental-strip-types --test tests/cp71-unified-navigation.test.mjs
+
+TAP version 13
+# (node:60450) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP71: all six student workspaces use the same navigation component and bar class
+ok 1 - CP71: all six student workspaces use the same navigation component and bar class
+  ---
+  duration_ms: 1.023557
+  type: 'test'
+  ...
+# Subtest: CP71: former stacked heading / pager / start panels are absent in rendered module navigation
+ok 2 - CP71: former stacked heading / pager / start panels are absent in rendered module navigation
+  ---
+  duration_ms: 0.168077
+  type: 'test'
+  ...
+# Subtest: CP71: every implemented tab is reachable through quick links or More
+ok 3 - CP71: every implemented tab is reachable through quick links or More
+  ---
+  duration_ms: 2.119101
+  type: 'test'
+  ...
+# Subtest: CP71: study abroad uses the same bar and keeps country on nested route links
+ok 4 - CP71: study abroad uses the same bar and keeps country on nested route links
+  ---
+  duration_ms: 0.270088
+  type: 'test'
+  ...
+# Subtest: CP71: one shared final CSS layer overrides legacy competing tab styles
+ok 5 - CP71: one shared final CSS layer overrides legacy competing tab styles
+  ---
+  duration_ms: 0.272881
+  type: 'test'
+  ...
+# Subtest: CP71: map contrast repair is included and pairs colors with surfaces
+ok 6 - CP71: map contrast repair is included and pairs colors with surfaces
+  ---
+  duration_ms: 0.531994
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 130.504487
+==== test:cp74:product-polish ====
+
+> cognitive-learn-ai@0.1.0 test:cp74:product-polish
+> node --experimental-strip-types --test tests/cp74-product-polish.test.mjs
+
+TAP version 13
+# (node:60479) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP74 removes the redundant cross-module dropdown and preserves More
+ok 1 - CP74 removes the redundant cross-module dropdown and preserves More
+  ---
+  duration_ms: 0.857954
+  type: 'test'
+  ...
+# Subtest: CP74 six module navigation still reaches all implemented destinations
+ok 2 - CP74 six module navigation still reaches all implemented destinations
+  ---
+  duration_ms: 1.467761
+  type: 'test'
+  ...
+# Subtest: CP74 navigation is one low-noise bar, responsive and readable in dark mode
+ok 3 - CP74 navigation is one low-noise bar, responsive and readable in dark mode
+  ---
+  duration_ms: 0.25085
+  type: 'test'
+  ...
+# Subtest: CP74 retry actions explicitly use the shared visible button design
+ok 4 - CP74 retry actions explicitly use the shared visible button design
+  ---
+  duration_ms: 0.224461
+  type: 'test'
+  ...
+# Subtest: CP74 about page is honest about data maturity and covers six student modules
+ok 5 - CP74 about page is honest about data maturity and covers six student modules
+  ---
+  duration_ms: 0.190711
+  type: 'test'
+  ...
+# Subtest: CP74 contact page has usable issue selection and a real mail-client handoff
+ok 6 - CP74 contact page has usable issue selection and a real mail-client handoff
+  ---
+  duration_ms: 0.137623
+  type: 'test'
+  ...
+# Subtest: CP74 mailto encodes Unicode and message without pretending to submit
+ok 7 - CP74 mailto encodes Unicode and message without pretending to submit
+  ---
+  duration_ms: 0.37352
+  type: 'test'
+  ...
+# Subtest: CP74 public information pages use one design system and no duplicate nav menu
+ok 8 - CP74 public information pages use one design system and no duplicate nav menu
+  ---
+  duration_ms: 0.187476
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 111.547588
+==== test:cp75:ux-audit ====
+
+> cognitive-learn-ai@0.1.0 test:cp75:ux-audit
+> node --test tests/cp75-ux-audit.test.cjs
+
+TAP version 13
+# Subtest: Unknown route presents a real not-found message, while home still logs in
+ok 1 - Unknown route presents a real not-found message, while home still logs in
+  ---
+  duration_ms: 0.98429
+  type: 'test'
+  ...
+# Subtest: Fallback button styles cannot outrank local component styles by specificity
+ok 2 - Fallback button styles cannot outrank local component styles by specificity
+  ---
+  duration_ms: 0.302676
+  type: 'test'
+  ...
+# Subtest: Transcript input accessible names identify learner context and assessment
+ok 3 - Transcript input accessible names identify learner context and assessment
+  ---
+  duration_ms: 0.351007
+  type: 'test'
+  ...
+# Subtest: Chat starts with a short action-focused introduction, not a full score list
+ok 4 - Chat starts with a short action-focused introduction, not a full score list
+  ---
+  duration_ms: 0.320592
+  type: 'test'
+  ...
+# Subtest: Account menu is keyboard dismissible and exposes expanded state
+ok 5 - Account menu is keyboard dismissible and exposes expanded state
+  ---
+  duration_ms: 0.27175
+  type: 'test'
+  ...
+# Subtest: No TypeScript syntax errors in the modified UI files
+ok 6 - No TypeScript syntax errors in the modified UI files
+  ---
+  duration_ms: 49.171019
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 246.316846
+==== test:cp76:names ====
+
+> cognitive-learn-ai@0.1.0 test:cp76:names
+> node --experimental-strip-types --test tests/cp76-vietnamese-names.test.mjs
+
+TAP version 13
+# (node:60537) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP76 seed: only tab copy changes; existing destinations and availability stay intact
+ok 1 - CP76 seed: only tab copy changes; existing destinations and availability stay intact
+  ---
+  duration_ms: 2.19162
+  type: 'test'
+  ...
+# Subtest: CP76 lumen: only tab copy changes; existing destinations and availability stay intact
+ok 2 - CP76 lumen: only tab copy changes; existing destinations and availability stay intact
+  ---
+  duration_ms: 0.286874
+  type: 'test'
+  ...
+# Subtest: CP76 atlas: only tab copy changes; existing destinations and availability stay intact
+ok 3 - CP76 atlas: only tab copy changes; existing destinations and availability stay intact
+  ---
+  duration_ms: 0.279364
+  type: 'test'
+  ...
+# Subtest: CP76 orion: only tab copy changes; existing destinations and availability stay intact
+ok 4 - CP76 orion: only tab copy changes; existing destinations and availability stay intact
+  ---
+  duration_ms: 0.1694
+  type: 'test'
+  ...
+# Subtest: CP76 pulse: only tab copy changes; existing destinations and availability stay intact
+ok 5 - CP76 pulse: only tab copy changes; existing destinations and availability stay intact
+  ---
+  duration_ms: 2.108718
+  type: 'test'
+  ...
+# Subtest: CP76 haven: only tab copy changes; existing destinations and availability stay intact
+ok 6 - CP76 haven: only tab copy changes; existing destinations and availability stay intact
+  ---
+  duration_ms: 0.16851
+  type: 'test'
+  ...
+# Subtest: CP76: six clear Vietnamese names appear in shared navigation without changing internal keys
+ok 7 - CP76: six clear Vietnamese names appear in shared navigation without changing internal keys
+  ---
+  duration_ms: 0.742898
+  type: 'test'
+  ...
+# Subtest: CP76: Atlas study-abroad four tasks remain in unified bar and preserve country query
+ok 8 - CP76: Atlas study-abroad four tasks remain in unified bar and preserve country query
+  ---
+  duration_ms: 0.258833
+  type: 'test'
+  ...
+# Subtest: CP76: student-facing map, module catalog, About and guide share the same brand names
+ok 9 - CP76: student-facing map, module catalog, About and guide share the same brand names
+  ---
+  duration_ms: 0.820743
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 192.273329
+==== test:cp77:login-copy ====
+
+> cognitive-learn-ai@0.1.0 test:cp77:login-copy
+> node --test tests/cp77-login-manifesto.test.cjs
+
+TAP version 13
+# Subtest: CP77: agreed two-sentence manifesto appears in accessible main heading
+ok 1 - CP77: agreed two-sentence manifesto appears in accessible main heading
+  ---
+  duration_ms: 0.732052
+  type: 'test'
+  ...
+# Subtest: CP77: approved subtitle uses exact full copy
+ok 2 - CP77: approved subtitle uses exact full copy
+  ---
+  duration_ms: 0.232274
+  type: 'test'
+  ...
+# Subtest: CP77: preserves login card, all account entry paths and showcase illustration
+ok 3 - CP77: preserves login card, all account entry paths and showcase illustration
+  ---
+  duration_ms: 0.211924
+  type: 'test'
+  ...
+# Subtest: CP77: headline uses scoped adaptive typography rather than changing all global headings
+ok 4 - CP77: headline uses scoped adaptive typography rather than changing all global headings
+  ---
+  duration_ms: 4.2203
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 108.127061
+==== test:cp78:clarity ====
+
+> cognitive-learn-ai@0.1.0 test:cp78:clarity
+> node --experimental-strip-types --test tests/cp78-clarity-palette-dedupe.test.mjs
+
+TAP version 13
+# (node:60613) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP78.01 six agreed Vietnamese labels are visible in the map, bar, public About and guide
+ok 1 - CP78.01 six agreed Vietnamese labels are visible in the map, bar, public About and guide
+  ---
+  duration_ms: 4.786547
+  type: 'test'
+  ...
+# Subtest: CP78.02 no second six-destination strip appears on Seed dashboard
+ok 2 - CP78.02 no second six-destination strip appears on Seed dashboard
+  ---
+  duration_ms: 0.38538
+  type: 'test'
+  ...
+# Subtest: CP78.03 no quick action duplicates the same two Atlas subnav destinations
+ok 3 - CP78.03 no quick action duplicates the same two Atlas subnav destinations
+  ---
+  duration_ms: 0.266184
+  type: 'test'
+  ...
+# Subtest: CP78.04 Haven uses curated scholarships as primary and web search only on demand
+ok 4 - CP78.04 Haven uses curated scholarships as primary and web search only on demand
+  ---
+  duration_ms: 0.326252
+  type: 'test'
+  ...
+# Subtest: CP78.05 Lumen error and empty notice do not repeat identical headings
+ok 5 - CP78.05 Lumen error and empty notice do not repeat identical headings
+  ---
+  duration_ms: 0.340564
+  type: 'test'
+  ...
+# Subtest: CP78.06 saturation uses only the existing theme files; no extra override layer or page rearrangement
+ok 6 - CP78.06 saturation uses only the existing theme files; no extra override layer or page rearrangement
+  ---
+  duration_ms: 1.139635
+  type: 'test'
+  ...
+# Subtest: CP78.07 interaction contracts remain and true duplicate finder does not remove needed work
+ok 7 - CP78.07 interaction contracts remain and true duplicate finder does not remove needed work
+  ---
+  duration_ms: 1.738981
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 138.926853
+TAP version 13
+# Subtest: CP44: every standard text role reaches WCAG 2.2 AA 4.5:1 on each light surface
+ok 1 - CP44: every standard text role reaches WCAG 2.2 AA 4.5:1 on each light surface
+  ---
+  duration_ms: 1.812069
+  type: 'test'
+  ...
+# Subtest: CP44: dashboard numeric series labels use validated contrast colors
+ok 2 - CP44: dashboard numeric series labels use validated contrast colors
+  ---
+  duration_ms: 1.513037
+  type: 'test'
+  ...
+# Subtest: CP44: no retired CP42 dark Observatory layer can override daylight canvas
+ok 3 - CP44: no retired CP42 dark Observatory layer can override daylight canvas
+  ---
+  duration_ms: 0.320043
+  type: 'test'
+  ...
+# Subtest: CP44: legacy dark foreground on newly light hero surfaces is corrected
+ok 4 - CP44: legacy dark foreground on newly light hero surfaces is corrected
+  ---
+  duration_ms: 0.234887
+  type: 'test'
+  ...
+# Subtest: CP44: app cannot silently revert into incomplete dark skin
+ok 5 - CP44: app cannot silently revert into incomplete dark skin
+  ---
+  duration_ms: 0.44603
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 54.52357
+
+> cognitive-learn-ai@0.1.0 check:layout
+> node tools/check-cla-layout.cjs
+
+CLA LAYOUT PASS: 22 required files and 19 legacy misplacements absent
+
+> cognitive-learn-ai@0.1.0 test:rules:static
+> node --test tests/cp21.rules.contract.test.cjs
+
+TAP version 13
+# Subtest: STATIC ONLY rules v2
+ok 1 - STATIC ONLY rules v2
+  ---
+  duration_ms: 1.056172
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY user doc own-id guard
+ok 2 - STATIC ONLY user doc own-id guard
+  ---
+  duration_ms: 0.196
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY active role gate
+ok 3 - STATIC ONLY active role gate
+  ---
+  duration_ms: 0.104164
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY prevent self-registration of admin
+ok 4 - STATIC ONLY prevent self-registration of admin
+  ---
+  duration_ms: 0.070083
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY lock elective selection
+ok 5 - STATIC ONLY lock elective selection
+  ---
+  duration_ms: 0.357318
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY four unique electives
+ok 6 - STATIC ONLY four unique electives
+  ---
+  duration_ms: 0.193376
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY foreign language not equal to elective
+ok 7 - STATIC ONLY foreign language not equal to elective
+  ---
+  duration_ms: 0.12911
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY transcript path protected
+ok 8 - STATIC ONLY transcript path protected
+  ---
+  duration_ms: 0.065587
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY scope validation
+ok 9 - STATIC ONLY scope validation
+  ---
+  duration_ms: 0.218653
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY append-only cognitive history
+ok 10 - STATIC ONLY append-only cognitive history
+  ---
+  duration_ms: 0.368545
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY retired shared reports cannot be created or reviewed
+ok 11 - STATIC ONLY retired shared reports cannot be created or reviewed
+  ---
+  duration_ms: 0.195338
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY cp24 append-only provenance collection
+ok 12 - STATIC ONLY cp24 append-only provenance collection
+  ---
+  duration_ms: 0.061331
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY cp24 forbid update and delete provenance
+ok 13 - STATIC ONLY cp24 forbid update and delete provenance
+  ---
+  duration_ms: 0.099327
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY cp24 no PII through schema whitelist
+ok 14 - STATIC ONLY cp24 no PII through schema whitelist
+  ---
+  duration_ms: 0.076454
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY no public system health access
+ok 15 - STATIC ONLY no public system health access
+  ---
+  duration_ms: 0.180416
+  type: 'test'
+  ...
+1..15
+# tests 15
+# suites 0
+# pass 15
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 56.749963

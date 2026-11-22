@@ -1,0 +1,19 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:chart-first
+> node --experimental-strip-types --test tests/cp39-chart-first.test.mjs
+
+Γ£ö bars preserve zero but abstain for missing and invalid points (0.6844ms)
+Γ£ö temporal chart respects irregular time and same EMA as existing engine (21.5053ms)
+Γ£ö no short, out-of-order, invalid or missing history line (1.3613ms)
+Γ£ö live plots gated by existing temporal and evidence status (1.5658ms)
+Γ£ö career and decision visualization reads engine output and keeps user controls (0.9158ms)
+Γ£ö no Bayesian posterior probability displayed to students (0.6545ms)
+Γ£ö readable graphics are responsive, no motion or hidden numeric values (0.5977ms)
+Γä╣ tests 7
+Γä╣ suites 0
+Γä╣ pass 7
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 148.2525

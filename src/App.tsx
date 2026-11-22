@@ -66,6 +66,22 @@ function AppLoading() {
   );
 }
 
+function NotFoundPage() {
+  return (
+    <main className="cla-access-screen cla-not-found-page">
+      <section className="cla-access-panel" aria-labelledby="cla-not-found-title">
+        <span className="cla-access-eyebrow">COGNITIVE LEARN AI · ĐIỀU HƯỚNG</span>
+        <h1 id="cla-not-found-title">Không tìm thấy trang này</h1>
+        <p>Đường dẫn có thể đã thay đổi hoặc không còn khả dụng. Bạn có thể quay lại không gian học sinh hoặc xem hướng dẫn sử dụng.</p>
+        <div className="cla-access-actions">
+          <a href="/student">Đến trang học sinh</a>
+          <a href="/student/guide">Xem hướng dẫn</a>
+        </div>
+      </section>
+    </main>
+  );
+}
+
 export default function App() {
   // External-store updates are synchronous and can reveal Suspense's full-screen
   // fallback on each cold lazy route. A React transition keeps the revealed page
@@ -123,6 +139,7 @@ export default function App() {
   }, [path]);
 
   let currentPage: ReactNode;
+  let notFound = false;
 
   if (path === "/about") {
     currentPage = (
@@ -185,10 +202,11 @@ export default function App() {
   } else if (["/haven", "/haven/scholarships", "/haven/finance", "/haven/plan"].includes(path)) {
     currentPage = <HavenPage />;
 
+  } else if (path === "/") {
+    currentPage = <TrangDangNhap />;
   } else {
-    currentPage = (
-      <TrangDangNhap />
-    );
+    notFound = true;
+    currentPage = <NotFoundPage />;
   }
 
   return (
@@ -204,7 +222,7 @@ export default function App() {
         }
       >
         <div className="app-content" id="cla-page-content" tabIndex={-1} data-cla-route={path}>
-          {path === "/" || path === "/about" || path === "/contact" ? (
+          {path === "/" || path === "/about" || path === "/contact" || notFound ? (
             currentPage
           ) : (
             <AccessGate path={path}>

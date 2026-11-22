@@ -1,0 +1,162 @@
+TAP version 13
+# (node:16080) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP25-01: Curated universities have sourced years without inventing unverified archives
+ok 1 - CP25-01: Curated universities have sourced years without inventing unverified archives
+  ---
+  duration_ms: 2.347786
+  type: 'test'
+  ...
+# Subtest: CP25-02: Year-specific PTIT pathways do not leak year-specific methods
+ok 2 - CP25-02: Year-specific PTIT pathways do not leak year-specific methods
+  ---
+  duration_ms: 0.184598
+  type: 'test'
+  ...
+# Subtest: CP25-03: Exact campus and method provenance on historical cutoffs
+ok 3 - CP25-03: Exact campus and method provenance on historical cutoffs
+  ---
+  duration_ms: 0.466447
+  type: 'test'
+  ...
+# Subtest: CP25-04: Score conversion accepts actual zero but not missing or invalid inputs
+ok 4 - CP25-04: Score conversion accepts actual zero but not missing or invalid inputs
+  ---
+  duration_ms: 0.286207
+  type: 'test'
+  ...
+# Subtest: CP25-05: Historical gap is arithmetic, never chance-of-admission
+ok 5 - CP25-05: Historical gap is arithmetic, never chance-of-admission
+  ---
+  duration_ms: 0.139307
+  type: 'test'
+  ...
+# Subtest: CP25-06: Discovery matches year/method without inventing unsupported methods
+ok 6 - CP25-06: Discovery matches year/method without inventing unsupported methods
+  ---
+  duration_ms: 1.023699
+  type: 'test'
+  ...
+# Subtest: CP25-07: International requirements have direct official endpoints and certifications
+ok 7 - CP25-07: International requirements have direct official endpoints and certifications
+  ---
+  duration_ms: 0.238051
+  type: 'test'
+  ...
+# Subtest: CP25-08: Chat only keeps last eight bounded turns
+ok 8 - CP25-08: Chat only keeps last eight bounded turns
+  ---
+  duration_ms: 0.581348
+  type: 'test'
+  ...
+# Subtest: CP25-09: Chat rejects invalid content and unauthorized roles in history
+ok 9 - CP25-09: Chat rejects invalid content and unauthorized roles in history
+  ---
+  duration_ms: 0.587521
+  type: 'test'
+  ...
+# Subtest: CP25-10: UI routes and protected chat endpoint exist
+ok 10 - CP25-10: UI routes and protected chat endpoint exist
+  ---
+  duration_ms: 0.811024
+  type: 'test'
+  ...
+# Subtest: CP25-11: Study-abroad refresh uses Vercel SPA rewrite, preserving /api routes
+ok 11 - CP25-11: Study-abroad refresh uses Vercel SPA rewrite, preserving /api routes
+  ---
+  duration_ms: 0.518839
+  type: 'test'
+  ...
+# Subtest: CP25-12: Chat supports same-origin secure deployment and optional CORS origin list
+ok 12 - CP25-12: Chat supports same-origin secure deployment and optional CORS origin list
+  ---
+  duration_ms: 0.354775
+  type: 'test'
+  ...
+# Subtest: ROUND-01: Floating assistant routes specialist questions to their owning modules
+ok 13 - ROUND-01: Floating assistant routes specialist questions to their owning modules
+  ---
+  duration_ms: 0.995293
+  type: 'test'
+  ...
+# Subtest: ROUND-02: Only internal known destinations may appear in chat responses
+ok 14 - ROUND-02: Only internal known destinations may appear in chat responses
+  ---
+  duration_ms: 0.119656
+  type: 'test'
+  ...
+# Subtest: ROUND-03: Backend and frontend share specialist redirect gate
+ok 15 - ROUND-03: Backend and frontend share specialist redirect gate
+  ---
+  duration_ms: 0.498685
+  type: 'test'
+  ...
+# Subtest: ROUND-04: Do not show uncalibrated achievement probability on the dashboard
+ok 16 - ROUND-04: Do not show uncalibrated achievement probability on the dashboard
+  ---
+  duration_ms: 0.357394
+  type: 'test'
+  ...
+# Subtest: ROUND-05: United States and domestic international pathways have official links and clear limitations
+ok 17 - ROUND-05: United States and domestic international pathways have official links and clear limitations
+  ---
+  duration_ms: 0.190347
+  type: 'test'
+  ...
+# Subtest: ROUND-06: TDTU three-year schemes distinguish score scales
+ok 18 - ROUND-06: TDTU three-year schemes distinguish score scales
+  ---
+  duration_ms: 0.554633
+  type: 'test'
+  ...
+# Subtest: ROUND-07: Career-fit UI states experimental scores are not admission probabilities
+ok 19 - ROUND-07: Career-fit UI states experimental scores are not admission probabilities
+  ---
+  duration_ms: 0.410518
+  type: 'test'
+  ...
+# Subtest: ROUND-07: Career-fit UI states experimental scores are not admission probabilities
+ok 20 - ROUND-07: Career-fit UI states experimental scores are not admission probabilities
+  ---
+  duration_ms: 0.542993
+  type: 'test'
+  ...
+# Subtest: GLOBAL-01: every ISO 3166-1 alpha-2 country/territory is selectable without fabricated claims
+ok 21 - GLOBAL-01: every ISO 3166-1 alpha-2 country/territory is selectable without fabricated claims
+  ---
+  duration_ms: 3.637179
+  type: 'test'
+  ...
+# Subtest: GLOBAL-02: all-country UI abstains when programme-level evidence is unavailable
+ok 22 - GLOBAL-02: all-country UI abstains when programme-level evidence is unavailable
+  ---
+  duration_ms: 0.289436
+  type: 'test'
+  ...
+# Subtest: GLOBAL-03: Atlas owns domestic and international admissions; Haven owns scholarships and finance
+ok 23 - GLOBAL-03: Atlas owns domestic and international admissions; Haven owns scholarships and finance
+  ---
+  duration_ms: 0.954376
+  type: 'test'
+  ...
+# Subtest: MODULE-01: 7 main modules remain while study abroad is an Atlas submodule
+ok 24 - MODULE-01: 7 main modules remain while study abroad is an Atlas submodule
+  ---
+  duration_ms: 0.950614
+  type: 'test'
+  ...
+# Subtest: UX-V7-01: Assistant receives only allowlisted page context and page-specific prompts
+ok 25 - UX-V7-01: Assistant receives only allowlisted page context and page-specific prompts
+  ---
+  duration_ms: 0.462355
+  type: 'test'
+  ...
+1..25
+# tests 25
+# suites 0
+# pass 25
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 318.941541

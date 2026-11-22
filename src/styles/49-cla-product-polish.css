@@ -8,9 +8,9 @@
   --cla-ui-line: #cfdeec;
   --cla-ui-surface: #ffffff;
   --cla-ui-soft: #f3f7fc;
-  --cla-ui-blue: #1957ab;
-  --cla-ui-blue-hover: #124683;
-  --cla-ui-blue-soft: #e8f1ff;
+  --cla-ui-blue: #2457af;
+  --cla-ui-blue-hover: #173e82;
+  --cla-ui-blue-soft: #ebf3ff;
   --cla-ui-focus: #006ac2;
 }
 :root[data-theme="dark"] {
@@ -26,7 +26,7 @@
 }
 /* Shared action style: use on forms, retry states and information pages. */
 .cla-action-button,
-.app-root main button:not([class]) {
+:where(.app-root main button:not([class])) {
   box-sizing: border-box;
   display: inline-flex;
   justify-content: center;
@@ -52,7 +52,7 @@
   transition: background .17s, border-color .17s, color .17s;
 }
 .cla-action-button:hover,
-.app-root main button:not([class]):hover { border-color: var(--cla-ui-blue); background: var(--cla-ui-blue-soft); color: var(--cla-ui-ink); }
+:where(.app-root main button:not([class])):hover { border-color: var(--cla-ui-blue); background: var(--cla-ui-blue-soft); color: var(--cla-ui-ink); }
 .cla-action-button--primary {
   background: #1957ab;
   border-color: #1957ab;
@@ -63,9 +63,9 @@
 .cla-action-button--quiet { border-color: transparent; background: transparent; color: var(--cla-ui-muted); }
 .cla-action-button--quiet:hover { color: var(--cla-ui-ink); background: var(--cla-ui-soft); }
 .cla-action-button:focus-visible,
-.app-root main button:not([class]):focus-visible { outline: 3px solid var(--cla-ui-focus); outline-offset: 3px; }
+:where(.app-root main button:not([class])):focus-visible { outline: 3px solid var(--cla-ui-focus); outline-offset: 3px; }
 .cla-action-button:disabled,
-.app-root main button:not([class]):disabled { opacity: .58; cursor: not-allowed; }
+:where(.app-root main button:not([class])):disabled { opacity: .58; cursor: not-allowed; }
 /* Recovery controls are separate from the sticky form action row. */
 .profile-page .profile-message[role="alert"] {
   text-align: left;
@@ -350,8 +350,250 @@
   .cla-public-section-heading h2 { font-size: 27px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .cla-action-button, .app-root main button:not([class]) { transition: none; }
+  .cla-action-button, :where(.app-root main button:not([class])) { transition: none; }
 }
 
 .cla-contact-validation { margin: 0; padding: 10px 12px; border-radius: 9px; border: 1px solid #eab89b; color: #803b1d; background: #fff1e8; font-size: 13px; line-height: 1.6; }
 :root[data-theme="dark"] .cla-contact-validation { color: #ffe0cf; background: #442c29; border-color: #a97456; }
+
+
+/* CP79 — final, light-first six-module color language.
+ * Color and state only: no layout, route, label, score or feature changes.
+ * Exact source hues live in 37-cla-orbital-theme.css; dark mode keeps its
+ * existing, higher-contrast surfaces instead of forcing white gradients. */
+:is(.student-page, .profile-page, .cla-ops-guide-page) {
+  --cla-theme-primary: var(--seed-500);
+  --cla-theme-secondary: var(--seed-300);
+  --cla-theme-soft: var(--seed-050);
+  --cla-theme-border: var(--seed-200);
+  --cla-theme-ink: var(--seed-700);
+  --cla-theme-glow: var(--seed-glow);
+  --cla-theme-gradient: var(--seed-gradient);
+}
+:is(.lumen-page) {
+  --cla-theme-primary: var(--lumen-500);
+  --cla-theme-secondary: var(--lumen-300);
+  --cla-theme-soft: var(--lumen-050);
+  --cla-theme-border: var(--lumen-200);
+  --cla-theme-ink: var(--lumen-700);
+  --cla-theme-glow: var(--lumen-glow);
+  --cla-theme-gradient: var(--lumen-gradient);
+}
+:is(.atlas-page, .cla-study-abroad-page) {
+  --cla-theme-primary: var(--atlas-500);
+  --cla-theme-secondary: var(--atlas-300);
+  --cla-theme-soft: var(--atlas-050);
+  --cla-theme-border: var(--atlas-200);
+  --cla-theme-ink: var(--atlas-700);
+  --cla-theme-glow: var(--atlas-glow);
+  --cla-theme-gradient: var(--atlas-gradient);
+}
+:is(.orion-page) {
+  --cla-theme-primary: var(--orion-500);
+  --cla-theme-secondary: var(--orion-300);
+  --cla-theme-soft: var(--orion-050);
+  --cla-theme-border: var(--orion-200);
+  --cla-theme-ink: var(--orion-700);
+  --cla-theme-glow: var(--orion-glow);
+  --cla-theme-gradient: var(--orion-gradient);
+}
+:is(.pulse-page) {
+  --cla-theme-primary: var(--pulse-500);
+  --cla-theme-secondary: var(--pulse-300);
+  --cla-theme-soft: var(--pulse-050);
+  --cla-theme-border: var(--pulse-200);
+  --cla-theme-ink: var(--pulse-700);
+  --cla-theme-glow: var(--pulse-glow);
+  --cla-theme-gradient: var(--pulse-gradient);
+}
+:is(.haven-page) {
+  --cla-theme-primary: var(--haven-500);
+  --cla-theme-secondary: var(--haven-300);
+  --cla-theme-soft: var(--haven-050);
+  --cla-theme-border: var(--haven-200);
+  --cla-theme-ink: var(--haven-700);
+  --cla-theme-glow: var(--haven-glow);
+  --cla-theme-gradient: var(--haven-gradient);
+}
+:is(.cla-public-module,.module-path-tab,.module-path-detail)[data-module="seed"] {
+  --cla-theme-primary: var(--seed-500);
+  --cla-theme-secondary: var(--seed-300);
+  --cla-theme-soft: var(--seed-050);
+  --cla-theme-border: var(--seed-200);
+  --cla-theme-ink: var(--seed-700);
+  --cla-theme-glow: var(--seed-glow);
+  --cla-theme-gradient: var(--seed-gradient);
+}
+:is(.cla-public-module,.module-path-tab,.module-path-detail)[data-module="lumen"] {
+  --cla-theme-primary: var(--lumen-500);
+  --cla-theme-secondary: var(--lumen-300);
+  --cla-theme-soft: var(--lumen-050);
+  --cla-theme-border: var(--lumen-200);
+  --cla-theme-ink: var(--lumen-700);
+  --cla-theme-glow: var(--lumen-glow);
+  --cla-theme-gradient: var(--lumen-gradient);
+}
+:is(.cla-public-module,.module-path-tab,.module-path-detail)[data-module="atlas"] {
+  --cla-theme-primary: var(--atlas-500);
+  --cla-theme-secondary: var(--atlas-300);
+  --cla-theme-soft: var(--atlas-050);
+  --cla-theme-border: var(--atlas-200);
+  --cla-theme-ink: var(--atlas-700);
+  --cla-theme-glow: var(--atlas-glow);
+  --cla-theme-gradient: var(--atlas-gradient);
+}
+:is(.cla-public-module,.module-path-tab,.module-path-detail)[data-module="orion"] {
+  --cla-theme-primary: var(--orion-500);
+  --cla-theme-secondary: var(--orion-300);
+  --cla-theme-soft: var(--orion-050);
+  --cla-theme-border: var(--orion-200);
+  --cla-theme-ink: var(--orion-700);
+  --cla-theme-glow: var(--orion-glow);
+  --cla-theme-gradient: var(--orion-gradient);
+}
+:is(.cla-public-module,.module-path-tab,.module-path-detail)[data-module="pulse"] {
+  --cla-theme-primary: var(--pulse-500);
+  --cla-theme-secondary: var(--pulse-300);
+  --cla-theme-soft: var(--pulse-050);
+  --cla-theme-border: var(--pulse-200);
+  --cla-theme-ink: var(--pulse-700);
+  --cla-theme-glow: var(--pulse-glow);
+  --cla-theme-gradient: var(--pulse-gradient);
+}
+:is(.cla-public-module,.module-path-tab,.module-path-detail)[data-module="haven"] {
+  --cla-theme-primary: var(--haven-500);
+  --cla-theme-secondary: var(--haven-300);
+  --cla-theme-soft: var(--haven-050);
+  --cla-theme-border: var(--haven-200);
+  --cla-theme-ink: var(--haven-700);
+  --cla-theme-glow: var(--haven-glow);
+  --cla-theme-gradient: var(--haven-gradient);
+}
+
+:root:not([data-theme="dark"]) {
+  --cla-ui-page: #F7FAFF;
+  --cla-ui-panel: #FFFFFF;
+  --cla-ui-section: #EEF4FF;
+  --cla-ui-border: #DCE7F7;
+  --cla-ui-title: #12304A;
+  --cla-ui-body: #49617A;
+  --cla-ui-caption: #637B93; /* stronger than #7B91A7 on white for normal text */
+}
+/* Workspace title/hero: a pale color wash, not a saturated full-page slab. */
+:root:not([data-theme="dark"]) :is(.student-page,.profile-page,.lumen-page,.atlas-page,.cla-study-abroad-page,.orion-page,.pulse-page,.haven-page) .cla-unified-bar {
+  border-color: var(--cla-theme-border);
+  box-shadow: 0 10px 28px -25px var(--cla-theme-glow);
+}
+:root:not([data-theme="dark"]) :is(.atlas-page,.orion-page,.pulse-page,.haven-page,.lumen-page)
+  :is(.atlas-hero-copy,.atlas-hero-card,.lumen-overview-card,.orion-hero,.pulse-hero,.haven-hero) {
+  background: linear-gradient(128deg, #FFFFFF 53%, var(--cla-theme-soft) 100%) !important;
+  border-color: var(--cla-theme-border) !important;
+  box-shadow: 0 12px 31px -26px var(--cla-theme-glow) !important;
+}
+:root:not([data-theme="dark"]) :is(.atlas-page,.orion-page,.pulse-page,.haven-page,.lumen-page)
+  :is(.cla-focus-heading>span,.atlas-hero-copy>span,.lumen-eyebrow,.orion-eyebrow,.pulse-eyebrow,.haven-eyebrow) {
+  color: var(--cla-theme-ink) !important;
+}
+:root:not([data-theme="dark"]) :is(.student-page,.profile-page,.lumen-page,.atlas-page,.orion-page,.pulse-page,.haven-page)
+  :is(.cla-workflow-tabs,.profile-grade-tabs,.profile-semester-tabs,.cla-task-filters) {
+  --unav-local-selected: var(--cla-theme-ink);
+  --unav-local-soft: var(--cla-theme-soft);
+  --unav-local-ink: var(--cla-theme-ink);
+  border-color: var(--cla-theme-border);
+}
+:root:not([data-theme="dark"]) :is(.student-page,.profile-page,.lumen-page,.atlas-page,.orion-page,.pulse-page,.haven-page)
+  :is(.cla-focus-disclosure,.cla-focus-notice) {
+  border-color: var(--cla-theme-border);
+}
+:root:not([data-theme="dark"]) :is(.student-page,.profile-page,.lumen-page,.atlas-page,.orion-page,.pulse-page,.haven-page)
+  :is(.cla-focus-disclosure>summary,.cla-focus-notice>a,.cla-focus-heading>span) {
+  color: var(--cla-theme-ink);
+}
+:root:not([data-theme="dark"]) :is(.student-page,.profile-page,.lumen-page,.atlas-page,.orion-page,.pulse-page,.haven-page)
+  :is(.cla-action-button--primary,.lumen-primary-action) {
+  color: #FFFFFF !important;
+  border-color: var(--cla-theme-ink) !important;
+  background: linear-gradient(125deg, var(--cla-theme-ink), color-mix(in srgb, var(--cla-theme-ink) 78%, var(--cla-theme-primary))) !important;
+  box-shadow: 0 9px 22px -17px var(--cla-theme-glow);
+}
+:root:not([data-theme="dark"]) :is(.student-page,.profile-page,.lumen-page,.atlas-page,.orion-page,.pulse-page,.haven-page)
+  :is(.cla-action-button--primary,.lumen-primary-action):hover:not(:disabled) {
+  color: #FFFFFF !important;
+  background: var(--cla-theme-ink) !important;
+}
+:root:not([data-theme="dark"]) :is(.student-page,.profile-page,.lumen-page,.atlas-page,.orion-page,.pulse-page,.haven-page)
+  :is(input,textarea,select):focus-visible {
+  border-color: var(--cla-theme-primary);
+  outline-color: var(--cla-theme-ink);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--cla-theme-primary) 13%, transparent);
+}
+/* Charts use the owning module's hue; chart values and risk status retain semantic meaning. */
+:root:not([data-theme="dark"]) .lumen-page .lumen-meter i,
+:root:not([data-theme="dark"]) .pulse-page .pulse-bar i,
+:root:not([data-theme="dark"]) .atlas-page .atlas-national-track i {
+  background: var(--cla-theme-gradient);
+}
+:root:not([data-theme="dark"]) .lumen-page .lumen-card-tag,
+:root:not([data-theme="dark"]) .pulse-page .pulse-action-card em:not(.pulse-risk) {
+  color: var(--cla-theme-ink);
+  background: var(--cla-theme-soft);
+  border-color: var(--cla-theme-border);
+}
+:root:not([data-theme="dark"]) .student-dash .cla-canvas-temporal .cla-viz-observed { stroke: var(--seed-700); }
+:root:not([data-theme="dark"]) .student-dash .cla-canvas-temporal .cla-viz-ema { stroke: var(--seed-500); }
+:root:not([data-theme="dark"]) .student-dash .cla-canvas-temporal .cla-viz-dot { fill: var(--seed-700); }
+:root:not([data-theme="dark"]) .student-dash .cla-canvas-temporal .cla-viz-legend .is-blue::before { background: var(--seed-700); }
+:root:not([data-theme="dark"]) .student-dash .cla-canvas-temporal .cla-viz-legend .is-teal::before { background: var(--seed-500); }
+
+/* Six-color discovery surfaces: each item owns its color without repainting the rest. */
+:root:not([data-theme="dark"]) .cla-public-module[data-module] {
+  border-color: var(--cla-theme-border);
+  background: linear-gradient(142deg, #FFFFFF 56%, var(--cla-theme-soft));
+  box-shadow: 0 11px 28px -25px var(--cla-theme-glow);
+}
+:root:not([data-theme="dark"]) .cla-public-module[data-module]::before {
+  content: "";
+  display: block;
+  height: 3px;
+  border-radius: 99px;
+  margin: -12px 0 15px;
+  background: var(--cla-theme-gradient);
+}
+:root:not([data-theme="dark"]) .cla-public-module[data-module] > span,
+:root:not([data-theme="dark"]) .cla-public-module[data-module] a {
+  color: var(--cla-theme-ink);
+}
+:root:not([data-theme="dark"]) .module-path-tab[data-module].active {
+  background: linear-gradient(120deg, #FFFFFF 38%, var(--cla-theme-soft));
+  border-color: var(--cla-theme-border);
+  box-shadow: inset 3px 0 var(--cla-theme-primary);
+}
+:root:not([data-theme="dark"]) .module-path-tab[data-module].active .module-path-tab-copy strong {
+  color: var(--cla-theme-ink);
+}
+:root:not([data-theme="dark"]) .module-path-detail[data-module] .module-path-detail-hero {
+  background: linear-gradient(120deg, #FFFFFF 55%, var(--cla-theme-soft));
+  border-color: var(--cla-theme-border);
+}
+:root:not([data-theme="dark"]) .module-path-detail[data-module] .module-path-detail-hero > div > span,
+:root:not([data-theme="dark"]) .module-path-detail[data-module] .module-path-detail-hero h3 {
+  color: var(--cla-theme-ink);
+}
+:root:not([data-theme="dark"]) .module-path-detail[data-module] .module-path-action-open {
+  color: var(--cla-theme-ink);
+  border-color: var(--cla-theme-border);
+  background: var(--cla-theme-soft);
+}
+:root:not([data-theme="dark"]) .module-path-detail[data-module] .module-path-action-open:hover {
+  background: color-mix(in srgb, var(--cla-theme-secondary) 24%, white);
+}
+:root:not([data-theme="dark"]) .module-path-detail[data-module] :is(.module-path-tab,.module-path-action-open):focus-visible,
+:root:not([data-theme="dark"]) .cla-public-module[data-module] a:focus-visible {
+  outline: 3px solid var(--cla-theme-ink);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cla-unified-bar .cla-unified-identity-mark,
+  .module-path-tab[data-module],
+  .cla-public-module[data-module] { transition: none; }
+}

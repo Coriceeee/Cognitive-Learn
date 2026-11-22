@@ -1,0 +1,19 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp78:clarity
+> node --experimental-strip-types --test tests/cp78-clarity-palette-dedupe.test.mjs
+
+Γ£ö CP78.01 six agreed Vietnamese labels are visible in the map, bar, public About and guide (6.395ms)
+Γ£ö CP78.02 no second six-destination strip appears on Seed dashboard (0.5923ms)
+Γ£ö CP78.03 no quick action duplicates the same two Atlas subnav destinations (0.3259ms)
+Γ£ö CP78.04 Haven uses curated scholarships as primary and web search only on demand (0.3645ms)
+Γ£ö CP78.05 Lumen error and empty notice do not repeat identical headings (0.3826ms)
+Γ£ö CP78.06 saturation uses only the existing theme files; no extra override layer or page rearrangement (1.3082ms)
+Γ£ö CP78.07 interaction contracts remain and true duplicate finder does not remove needed work (0.7745ms)
+Γä╣ tests 7
+Γä╣ suites 0
+Γä╣ pass 7
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 132.2988

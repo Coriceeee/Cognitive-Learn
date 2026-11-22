@@ -1,0 +1,30 @@
+--- STATIC CONTRACT TEST ---
+✔ STATIC ONLY rules v2 (1.4455ms)
+✔ STATIC ONLY user doc own-id guard (0.1473ms)
+✔ STATIC ONLY active role gate (0.0982ms)
+✔ STATIC ONLY prevent self-registration of admin (0.0729ms)
+✔ STATIC ONLY lock elective selection (0.1002ms)
+✔ STATIC ONLY four unique electives (0.0987ms)
+✔ STATIC ONLY foreign language not equal to elective (0.073ms)
+✔ STATIC ONLY transcript path protected (0.0854ms)
+✔ STATIC ONLY scope validation (0.1108ms)
+✔ STATIC ONLY append-only cognitive history (0.1348ms)
+✔ STATIC ONLY retired shared reports cannot be created or reviewed (0.1065ms)
+✔ STATIC ONLY cp24 append-only provenance collection (0.0942ms)
+✔ STATIC ONLY cp24 forbid update and delete provenance (0.1124ms)
+✔ STATIC ONLY cp24 no PII through schema whitelist (0.0761ms)
+✔ STATIC ONLY no public system health access (0.0982ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 95.8152
+
+Using real ASCII-only emulator staging directory: C:\Users\nguye\AppData\Local\Temp\cla-firestore-gate-jPMqbu
+Loopback port attempt 1: 127.0.0.1:18080 (staging only; original config remains unchanged)
+--- EMULATOR AUTHORISATION TESTS (attempt 1) ---
+error: unknown option '--test'
+

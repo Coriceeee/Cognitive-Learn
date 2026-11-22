@@ -1,0 +1,63 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:rules:v5:static
+> node --test tests/cp21.rules.contract.test.cjs tests/firestore-security-gate.test.cjs tests/step10-student-consent.test.cjs tests/cp27-firestore-rules-v5.contract.test.cjs
+
+Γ£ö STATIC ONLY rules v2 (2.6591ms)
+Γ£ö STATIC ONLY user doc own-id guard (0.2739ms)
+Γ£ö STATIC ONLY active role gate (0.1914ms)
+Γ£ö STATIC ONLY prevent self-registration of admin (0.113ms)
+Γ£ö STATIC ONLY lock elective selection (0.1275ms)
+Γ£ö STATIC ONLY four unique electives (0.1492ms)
+Γ£ö STATIC ONLY foreign language not equal to elective (0.1039ms)
+Γ£ö STATIC ONLY transcript path protected (0.1424ms)
+Γ£ö STATIC ONLY scope validation (0.1812ms)
+Γ£ö STATIC ONLY append-only cognitive history (0.261ms)
+Γ£ö STATIC ONLY retired shared reports cannot be created or reviewed (0.1838ms)
+Γ£ö STATIC ONLY cp24 append-only provenance collection (0.1266ms)
+Γ£ö STATIC ONLY cp24 forbid update and delete provenance (0.2252ms)
+Γ£ö STATIC ONLY cp24 no PII through schema whitelist (0.1136ms)
+Γ£ö STATIC ONLY no public system health access (0.13ms)
+Γ£ö V5-01 legacy owner-only bounded list (2.3489ms)
+Γ£ö V5-02 retired links cannot be created or updated (0.768ms)
+Γ£ö V5-03 journey cycle creates still require validated immutable baseline and atomic lock (0.3957ms)
+Γ£ö V5-04 journey updates require owner, consent, immutable fields and LIVE lock (1.3023ms)
+Γ£ö V5-05 check-in cannot mutate existing data or forge an observed outcome (0.2314ms)
+Γ£ö V5-06 review remains evidence-checked and cannot edit check-in history (0.1278ms)
+Γ£ö V5-07 production rules unchanged by this patch (0.6419ms)
+Γ£ö V5-08 existing six failed emulator assertions remain intact (0.1546ms)
+Γ£ö SG01 accepts only reviewed candidate Rules in localhost emulator (2.429ms)
+Γ£ö SG02 rejects production or another demo Firebase project (0.7256ms)
+Γ£ö SG03 rejects a different Rules file, including a production Rules path (0.5088ms)
+Γ£ö SG04 rejects emulator host binding on all interfaces or external network (0.6382ms)
+Γ£ö SG05 rejects invalid ports and enabled Emulator UI (0.4279ms)
+Γ£ö SG06 rejects external/injected FIRESTORE_EMULATOR_HOST (0.3797ms)
+Γ£ö SG07 allows only local FIRESTORE_EMULATOR_HOST values or unset (0.2558ms)
+Γ£ö SG08 overall PASS requires static AND emulator authorization tests PASS (0.1661ms)
+Γ£ö SG09 package scripts use fixed demo CLI and cannot invoke deployment (2.5588ms)
+Γ£ö SG10 production firebase.json does not silently deploy candidate Rules (0.6992ms)
+Γ£ö SG11 emulator test source fails closed on non-loopback endpoints (0.6596ms)
+Γ£ö SC01 new, missing consent is never accepted (0.8292ms)
+Γ£ö SC02 same UID and notice required (0.1568ms)
+Γ£ö SC03 withdrawn consent is not active (0.0872ms)
+Γ£ö SC04 product consent never enrolls in research (0.089ms)
+Γ£ö SC05 helper rejects blank identity (0.2276ms)
+Γ£ö SC06 root routing includes student consent page (0.4833ms)
+Γ£ö SC07 student consent route allowed by role gate (0.1674ms)
+Γ£ö SC08 protected student pages read consent from server (0.3553ms)
+Γ£ö SC09 UI has separate acceptance and withdrawal controls (0.1141ms)
+Γ£ö SC10 UI requires explicit acknowledgment (0.1464ms)
+Γ£ö SC11 UI never silently enrolls research (0.162ms)
+Γ£ö SC12 Rules include consent owner-only and strict schema (0.1224ms)
+Γ£ö SC13 Rules gate academic writes, including profile and transcript (0.1517ms)
+Γ£ö SC14 legacy shares closed regardless of consent (0.1107ms)
+Γ£ö SC15 UI warns guardian identity is unverified (0.0609ms)
+Γ£ö SC16 safe rollout stays off unless explicitly enabled (0.4224ms)
+Γ£ö SC17 assistant cannot mount outside the protected route gate (0.4054ms)
+Γä╣ tests 51
+Γä╣ suites 0
+Γä╣ pass 51
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 350.8523

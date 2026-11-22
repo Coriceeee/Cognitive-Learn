@@ -1,0 +1,18 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp61:legacy-drafts
+> node --test tests/cp61-legacy-draft-callbacks.test.cjs
+
+Γ£ö CP61.1 confirmed canonical update wins against queued legacy snapshot (86.5919ms)
+Γ£ö CP61.2 late legacy error cannot obscure server-confirmed canonical record (24.0917ms)
+Γ£ö CP61.3 cached primary invalidates legacy, new verified fallback is the only accepted source (17.1412ms)
+Γ£ö CP61.4 repeated confirmed missing primary retains legacy listener and verified draft (18.1449ms)
+Γ£ö CP61.5 account change and cleanup reject queued legacy callbacks and errors (22.5826ms)
+Γ£ö CP61.6 same listener protection is shared across Orion, Pulse and Haven (55.8572ms)
+Γä╣ tests 6
+Γä╣ suites 0
+Γä╣ pass 6
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 478.0218

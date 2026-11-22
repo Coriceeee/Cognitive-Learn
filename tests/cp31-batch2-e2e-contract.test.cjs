@@ -51,7 +51,10 @@ test('CP31-B2-05 browser gate forbids untrusted remote URLs and needs QA acknowl
   assert.match(runner, /SAFE_LOOPBACK/);
   assert.match(runner, /CLA_E2E_QA_ACK/);
   assert.match(runner, /checked_origin/);
-  assert.match(runner, /all four role accounts/i);
+  // Verify the actual four-role QA guard instead of an obsolete English sentence.
+  assert.match(runner, /ROLES = \("ADMIN", "STUDENT", "TEACHER", "PARENT"\)/);
+  assert.match(runner, /for role in ROLES:/);
+  assert.match(runner, /if len\(\{v\[0\]\.lower\(\) for v in result\.values\(\)\}\) != 4:/);
   assert.doesNotMatch(runner, /page\.route\(|setDoc\(|updateDoc\(|firebaseAdmin/);
 });
 test('CP31-B2-06 CP31 scripts distinguish static check and real browser gate', () => {

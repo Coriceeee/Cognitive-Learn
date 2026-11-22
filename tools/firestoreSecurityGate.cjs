@@ -14,6 +14,16 @@ const RULES_FILE = 'firestore.rules.CANDIDATE_CP21';
 const REPORT_FILE = 'reports/security/firestore_emulator_gate.json';
 const LOG_FILE = 'reports/security/firestore_emulator_gate.log';
 
+// CP84: Windows cmd.exe can split the positional script of
+// `firebase emulators:exec` and misinterpret Node's --test as a Firebase
+// option ("unknown option '--test'"). Supply ONE option-free basename
+// instead. The staged .cmd invokes the exact same authorization suite.
+const WINDOWS_AUTH_TEST_RUNNER = 'cla-firestore-authz.cmd';
+function windowsAuthTestLauncherSource() {
+  return '@echo off\r\nsetlocal\r\nnode --test tests\\firestore.rules.cp21.test.mjs\r\nexit /b %ERRORLEVEL%\r\n';
+}
+
+
 function isLoopback(host) {
   return host === '127.0.0.1' || host === 'localhost' || host === '::1';
 }
@@ -50,17 +60,34 @@ function overallStatus(staticStatus, emulatorStatus) {
   return 'BLOCKED';
 }
 
+// CP82: on Windows Node 24 warns about implicit shell execution and
+// .cmd shims cannot be executed reliably via spawnSync without a command host.
+// Invoke cmd.exe ONLY for the fixed firebase CLI command; the arguments are
+// internal constants, and none can come from an environment variable or user.
+function firebaseCommandLine(args) {
+  const safe = (token) => {
+    if (typeof token !== 'string' || /[\r\n&|<>%^!"]/.test(token)) {
+      throw new Error('SECURITY STOP: unsafe Firebase CLI argument.');
+    }
+    return /\s/.test(token) ? '"' + token + '"' : token;
+  };
+  return ['firebase', ...args].map(safe).join(' ');
+}
 function runCommand(command, args, cwd, timeout = 120000) {
   const win = process.platform === 'win32';
-  const result = spawnSync(command, args, {
+  const viaCmd = win && command === 'firebase';
+  const executable = viaCmd ? (process.env.ComSpec || 'cmd.exe') : command;
+  const argv = viaCmd ? ['/d', '/s', '/c', firebaseCommandLine(args)] : args;
+  const result = spawnSync(executable, argv, {
     cwd, encoding: 'utf8', timeout, windowsHide: true,
-    shell: win && command !== process.execPath,
+    shell: false,
     maxBuffer: 16 * 1024 * 1024,
     env: { ...process.env, GCLOUD_PROJECT: PROJECT_ID, GCP_PROJECT: PROJECT_ID },
   });
   return {
     ok: !result.error && result.status === 0,
     exitCode: result.status,
+    signal: result.signal || null,
     output: [result.stdout || '', result.stderr || '', result.error?.message || ''].filter(Boolean).join('\n'),
   };
 }
@@ -97,6 +124,7 @@ function createAsciiEmulatorStage(root) {
     for (const rel of [CONFIG_FILE, RULES_FILE, 'tests/firestore.rules.cp21.test.mjs']) {
       fs.copyFileSync(path.join(root, rel), path.join(stage, rel));
     }
+    fs.writeFileSync(path.join(stage, WINDOWS_AUTH_TEST_RUNNER), windowsAuthTestLauncherSource(), { encoding: 'ascii' });
     const nodeModules = path.join(root, 'node_modules');
     if (!fs.existsSync(nodeModules)) throw new Error('Missing local node_modules; run npm ci first.');
     fs.symlinkSync(nodeModules, path.join(stage, 'node_modules'), 'junction');
@@ -114,7 +142,7 @@ function clearAsciiEmulatorStage(stage) {
   const link = path.join(stage, 'node_modules');
   if (fs.existsSync(link)) fs.unlinkSync(link);
   if (fs.existsSync(link)) throw new Error('SECURITY STOP: cannot unlink staged node_modules junction.');
-  for (const rel of ['tests/firestore.rules.cp21.test.mjs', RULES_FILE, CONFIG_FILE,
+  for (const rel of [WINDOWS_AUTH_TEST_RUNNER, 'tests/firestore.rules.cp21.test.mjs', RULES_FILE, CONFIG_FILE,
     'firestore-debug.log', 'firebase-debug.log']) {
     const file = path.join(stage, rel);
     if (fs.existsSync(file)) fs.unlinkSync(file);
@@ -216,6 +244,10 @@ function runGate(root = path.resolve(__dirname, '..'), options = {}) {
     }
     const java = runCommand('java', ['-version'], root, 15000);
     if (!java.ok) report.notes.push('Java not found. Install Java 21+ and check java -version.');
+    else {
+      const version = /(?:version|openjdk)\s+["']?(\d+)/i.exec(java.output);
+      if (version && Number(version[1]) < 21) report.notes.push('Java 21+ is required by this CP82 acceptance gate.');
+    }
     const firebase = runCommand('firebase', ['--version'], root, 15000);
     if (!firebase.ok) report.notes.push('Firebase CLI not found. Install: npm install -g firebase-tools.');
     if (report.notes.length) {
@@ -226,13 +258,12 @@ function runGate(root = path.resolve(__dirname, '..'), options = {}) {
     if (options.preflightOnly) return publish();
 
     // firebase emulators:exec accepts exactly ONE positional command.
-    // On Windows runCommand uses shell:true, which joins args with spaces and
-    // removes the positional boundary unless the nested command is quoted.
-    // The nested command is a hard-coded relative test path (no user input).
-    const testCommand = 'node --test tests/firestore.rules.cp21.test.mjs';
+    // On Windows it is the staged .cmd basename (one token, no flags/spaces);
+    // on other platforms it remains the Node test invocation.
+    // All values are hard-coded and never derived from user input.
     const nestedCommandArg = process.platform === 'win32'
-      ? `"${testCommand}"`
-      : testCommand;
+      ? WINDOWS_AUTH_TEST_RUNNER
+      : 'node --test tests/firestore.rules.cp21.test.mjs';
     let emulatorRoot = root;
     let stagedRoot;
     try {
@@ -268,7 +299,20 @@ function runGate(root = path.resolve(__dirname, '..'), options = {}) {
         log.push('Port bind failed; retrying with a different available staging-only loopback port.');
       }
       report.emulatorAuthorizationTests = emulatorRun.ok ? 'PASS' : 'FAIL';
-      if (!emulatorRun.ok) report.notes.push('Emulator test suite failed or timed out. Do NOT deploy candidate Rules.');
+      if (!emulatorRun.ok) {
+        report.notes.push('Emulator test suite failed or timed out. Do NOT deploy candidate Rules.');
+        const details = emulatorRun.output || '';
+        if (/Firestore Emulator has exited with code: 1|Fatal error occurred/i.test(details)) {
+          report.notes.push('Firestore Java process terminated. Inspect reports/security/firestore_emulator_debug.log for the actual Java error.');
+        }
+        if (/Unable to access jarfile|UnsupportedClassVersionError|Java Runtime|java.*not found/i.test(details)) {
+          report.notes.push('Java installation or runtime compatibility may be the cause; inspect Java 21+ and executable access.');
+        }
+        if (/permission denied|Access is denied|EPERM/i.test(details)) {
+          report.notes.push('Operating system denied access to a file or process. Do not disable application security controls.');
+        }
+        if (emulatorRun.signal) report.notes.push('Emulator ended with signal: ' + emulatorRun.signal);
+      }
       if (stagedRoot) {
         for (const [srcName, dstName] of [
           ['firestore-debug.log', 'firestore_emulator_debug.log'],
@@ -304,4 +348,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { PROJECT_ID, RULES_FILE, validateConfiguration, validateEmulatorEnvironment, overallStatus, createAsciiEmulatorStage, clearAsciiEmulatorStage, canBindLoopbackPort, chooseStagePort, setStagedEmulatorPort, runGate };
+module.exports = { PROJECT_ID, RULES_FILE, WINDOWS_AUTH_TEST_RUNNER, windowsAuthTestLauncherSource, validateConfiguration, validateEmulatorEnvironment, overallStatus, createAsciiEmulatorStage, clearAsciiEmulatorStage, canBindLoopbackPort, chooseStagePort, setStagedEmulatorPort, runGate };

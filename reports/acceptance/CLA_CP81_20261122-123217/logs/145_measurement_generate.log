@@ -1,0 +1,11 @@
+﻿
+> cognitive-learn-ai@0.1.0 research:measurement
+> node --experimental-strip-types tools/cla_measurement_offline.mjs --generate
+
+npm.cmd : MEASUREMENT_SYNTHETIC_FAIL: Source fingerprint drift
+At C:\Gạo\Cognitive-Learn\CLA_CP81_ONECLICK.ps1:95 char:9
++         & $exe @commandArgs 2>&1 | Out-File -LiteralPath $logPath -En ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (MEASUREMENT_SYN...ngerprint drift:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 

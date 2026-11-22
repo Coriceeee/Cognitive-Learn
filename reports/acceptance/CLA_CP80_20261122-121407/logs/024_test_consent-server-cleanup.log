@@ -1,0 +1,37 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:consent-server-cleanup
+> node --test tests/step21-consent-server-cleanup.test.mjs
+
+Γ£ö CS01 accepts only transition accepted -> withdrawn for same valid student and policy version (1.047ms)
+Γ£ö CS02 rejects malformed timestamps, UID and bounds instead of guessing (0.6426ms)
+Γ£ö CS03 deletes old report/link pairs and reports accurate completion (8.816ms)
+Γ£ö CS04 does NOT delete newly granted links after student reconsents (0.2199ms)
+Γ£ö CS05 page traversal does not starve old records behind newer ones (0.3404ms)
+Γ£ö CS06 fail closed on foreign/malformed link, no subsequent delete (0.1987ms)
+Γ£ö CS07 fails and retries if conditional delete fails; cannot claim completion (0.2018ms)
+Γ£ö CS08 limit exhaustion never reports full cleanup (0.2445ms)
+Γ£ö CS09 idempotent repeat after completed cleanup returns deleted=0 (0.1591ms)
+Γ£ö CS10 malformed page/cursor rejects without claiming success (0.3101ms)
+Γ£ö CS11 deployment is isolated from default Firebase config; immutable source guarded (1.2563ms)
+Γ£ö CS12 no accidental PII in server cleanup logs (0.3292ms)
+Γ£ö CS13 privileged adapter deletes report+link atomically with update-time preconditions (0.4226ms)
+Γ£ö CS14 deleting old link with no report is safe and atomic (0.1486ms)
+Γ£ö CS15 refuses corrupt cross-account report before committing any deletion (0.1066ms)
+Γ£ö CS16 conditional batch conflict is surfaced for retry (0.1523ms)
+Γ£ö CS17 adapter rejects missing timestamps; never does unconditional deletes (0.0988ms)
+Γ£ö CS18 independent verification confirms empty set after actual deletes (0.2423ms)
+Γ£ö CS19 verification detects old metadata left behind after false success (0.0874ms)
+Γ£ö CS20 verification preserves later consent grants without false positives (0.0917ms)
+Γ£ö CS21 legacy links with missing timestamp remain pending (0.0958ms)
+Γ£ö CS22 scan verification does not perform deletes or expose record details (0.0883ms)
+Γ£ö CS23 refuses incomplete full-page audit instead of reporting success (0.0931ms)
+Γ£ö CS24 rejects malformed and foreign records in audit scan (0.0844ms)
+Γ£ö CS25 deployed function gates completion on independent verification (0.3351ms)
+Γä╣ tests 25
+Γä╣ suites 0
+Γä╣ pass 25
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 110.3263

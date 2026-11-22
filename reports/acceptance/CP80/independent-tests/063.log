@@ -1,0 +1,118 @@
+
+> cognitive-learn-ai@0.1.0 test:cp34:adaptive-decision
+> node --experimental-strip-types --test tests/cp34-adaptive-next-cycle.test.mjs
+
+TAP version 13
+# (node:17587) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: low adherence chooses bounded lighter existing option, no automatic assignment
+ok 1 - low adherence chooses bounded lighter existing option, no automatic assignment
+  ---
+  duration_ms: 6.711468
+  type: 'test'
+  ...
+# Subtest: sufficient completion and reported hours retain workload
+ok 2 - sufficient completion and reported hours retain workload
+  ---
+  duration_ms: 1.932756
+  type: 'test'
+  ...
+# Subtest: score change not used to alter workload, even negative
+ok 3 - score change not used to alter workload, even negative
+  ---
+  duration_ms: 1.129359
+  type: 'test'
+  ...
+# Subtest: low hours alone reduces load
+ok 4 - low hours alone reduces load
+  ---
+  duration_ms: 1.86158
+  type: 'test'
+  ...
+# Subtest: zero reported hours yields manual review not fabricated plan
+ok 5 - zero reported hours yields manual review not fabricated plan
+  ---
+  duration_ms: 0.742691
+  type: 'test'
+  ...
+# Subtest: over-budget options are not recommended even with full completion
+ok 6 - over-budget options are not recommended even with full completion
+  ---
+  duration_ms: 0.521332
+  type: 'test'
+  ...
+# Subtest: partial reassessment abstains
+ok 7 - partial reassessment abstains
+  ---
+  duration_ms: 0.744205
+  type: 'test'
+  ...
+# Subtest: one check-in is insufficient
+ok 8 - one check-in is insufficient
+  ---
+  duration_ms: 0.736263
+  type: 'test'
+  ...
+# Subtest: cache and other owners cannot obtain advice
+ok 9 - cache and other owners cannot obtain advice
+  ---
+  duration_ms: 0.689225
+  type: 'test'
+  ...
+# Subtest: modified evidence and T0 fail closed
+ok 10 - modified evidence and T0 fail closed
+  ---
+  duration_ms: 1.758197
+  type: 'test'
+  ...
+# Subtest: legacy cycles remain untraceable
+ok 11 - legacy cycles remain untraceable
+  ---
+  duration_ms: 0.777407
+  type: 'test'
+  ...
+# Subtest: active cycle never gives a new-cycle suggestion
+ok 12 - active cycle never gives a new-cycle suggestion
+  ---
+  duration_ms: 0.576927
+  type: 'test'
+  ...
+# Subtest: invalid, duplicate, and empty options rejected
+ok 13 - invalid, duplicate, and empty options rejected
+  ---
+  duration_ms: 2.742012
+  type: 'test'
+  ...
+# Subtest: replay is deterministic, input remains untouched and changed result is rejected
+ok 14 - replay is deterministic, input remains untouched and changed result is rejected
+  ---
+  duration_ms: 3.43874
+  type: 'test'
+  ...
+# Subtest: Orion integration selects draft only and preserves explicit start
+ok 15 - Orion integration selects draft only and preserves explicit start
+  ---
+  duration_ms: 8.331787
+  type: 'test'
+  ...
+# Subtest: selected advice can start a second frozen cycle without mutating prior review
+ok 16 - selected advice can start a second frozen cycle without mutating prior review
+  ---
+  duration_ms: 8.377882
+  type: 'test'
+  ...
+# Subtest: Firestore listener routes metadata changes through the cache/pending-write gate
+ok 17 - Firestore listener routes metadata changes through the cache/pending-write gate
+  ---
+  duration_ms: 0.849277
+  type: 'test'
+  ...
+1..17
+# tests 17
+# suites 0
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 235.366392

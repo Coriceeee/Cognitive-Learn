@@ -192,7 +192,7 @@ export default function StudentPage() {
         {view === "/student" && <>
         <section className="student-dash-hero cla-observatory-intro" aria-labelledby="student-dash-title">
           <div className="cla-intro-copy">
-            <span className="cla-canvas-index">COGNITIVE LEARN AI / TRẠM QUAN SÁT HỌC TẬP</span>
+            <span className="cla-canvas-index">SEED / BẢN SẮC HỌC TẬP</span>
             <h1 id="student-dash-title">Xin chào, {displayName}.</h1>
             <p>Hiểu năng lực hiện tại, lựa chọn chiến lược và theo dõi kết quả học tập.</p>
           </div>
@@ -218,7 +218,6 @@ export default function StudentPage() {
         {/* A connected learning circuit replaces the old six-card module grid. */}
         <LearningCircuit profilePath={profilePath} />
         <nav className="student-dash-extra-links" aria-label="Công cụ bổ sung">
-          <a href="/student/transcript">Bảng điểm THPT <span aria-hidden="true">↗</span></a>
           <a href="/student/modules">Tìm nhanh chức năng <span aria-hidden="true">↗</span></a>
           <a href="/student/guide">Hướng dẫn sử dụng <span aria-hidden="true">↗</span></a>
           <a href="/student/companion">Đồng hành mỗi ngày <span aria-hidden="true">↗</span></a>

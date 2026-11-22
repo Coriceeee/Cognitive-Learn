@@ -18,7 +18,7 @@ export default function CognitiveScoreGrid({
     <section className="student-cognitive-section">
       <div className="student-cognitive-head">
         <div>
-          <span>LUMEN INTELLIGENCE</span>
+          <span>LUMEN · DẤU VÂN TAY TRÍ TUỆ</span>
           <h2>Chỉ số nhận thức học tập</h2>
         </div>
 

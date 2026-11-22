@@ -1,0 +1,18 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp71:unified-nav
+> node --experimental-strip-types --test tests/cp71-unified-navigation.test.mjs
+
+Γ£ö CP71: all six student workspaces use the same navigation component and bar class (1.514ms)
+Γ£ö CP71: former stacked heading / pager / start panels are absent in rendered module navigation (0.2165ms)
+Γ£ö CP71: every implemented tab is reachable through quick links or More (1.1209ms)
+Γ£ö CP71: study abroad uses the same bar and keeps country on nested route links (0.1694ms)
+Γ£ö CP71: one shared final CSS layer overrides legacy competing tab styles (0.1988ms)
+Γ£ö CP71: map contrast repair is included and pairs colors with surfaces (0.4963ms)
+Γä╣ tests 6
+Γä╣ suites 0
+Γä╣ pass 6
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 128.2067

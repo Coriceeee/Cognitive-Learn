@@ -1,0 +1,40 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp30:gpa
+> node --test tests/cp30-gpa-integrity.test.cjs tests/cp30-gpa-listener.test.cjs
+
+Γ£ö GPA01 valid zero is VERIFIED, distinct from missing score (3.7012ms)
+Γ£ö GPA02 completed score 8 from six terms verifies for three years (0.6495ms)
+Γ£ö GPA03 falsified profile GPA rejected (0.5631ms)
+Γ£ö GPA04 falsified transcript GPA rejected independently (0.7148ms)
+Γ£ö GPA05 missing GPA cannot be stored as numeric zero (1.0541ms)
+Γ£ö GPA06 fake coverage, partial status, observed count rejected (1.0861ms)
+Γ£ö GPA07 extra subject outside nine cannot be silently excluded (0.4945ms)
+Γ£ö GPA08 malformed 10+, negative or syntax rejected rather than missing (0.4409ms)
+Γ£ö GPA09 absent rows or one missing semester is never verified as 0 (0.4574ms)
+Γ£ö GPA10 empty row can be MISSING, with null year but observed zero elsewhere (0.6642ms)
+Γ£ö GPA11 two absent docs are INCOMPLETE, not VERIFIED (0.1699ms)
+Γ£ö GPA12 missing summary is LEGACY, never verified (0.1903ms)
+Γ£ö GPA13 UID, dataScope and schema tamper rejected (0.179ms)
+Γ£ö GPA14 mismatched foreign language or electives rejected (0.1277ms)
+Γ£ö GPA15 calculation version and stringified zero both rejected (0.6796ms)
+Γ£ö GPA16 no modification of underlying Firestore documents (0.4582ms)
+Γ£ö GPA17 UI discloses unverified/mismatch status and does not claim school validation (0.8015ms)
+Γ£ö GPA18 realtime GPA audit independently subscribes to both verified server documents (0.5481ms)
+Γ£ö GPAR01 never verifies GPA from just one document (80.0648ms)
+Γ£ö GPAR02 verifies only when both server-confirmed snapshots arrive (17.7631ms)
+Γ£ö GPAR03 cache snapshot removes previously verified evidence immediately (13.9569ms)
+Γ£ö GPAR04 pending write snapshot cannot be claimed as verified (11.0247ms)
+Γ£ö GPAR05 stale A watcher cannot affect AΓåÆBΓåÆA account switch (8.7532ms)
+Γ£ö GPAR06 wrong-owner record is rejected by the GPA auditor (7.949ms)
+Γ£ö GPAR07 Firestore permissions failure clears verified summary (7.932ms)
+Γ£ö GPAR08 missing transcript yields INCOMPLETE rather than zero GPA (11.6813ms)
+Γ£ö GPAR09 logout closes watchers and clears verified values (7.8905ms)
+Γ£ö GPAR10 recovered cache requires both fresh server payloads again (8.477ms)
+Γä╣ tests 28
+Γä╣ suites 0
+Γä╣ pass 28
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 459.4515

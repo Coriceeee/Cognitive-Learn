@@ -1,0 +1,29 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:student-consent
+> node --test tests/step10-student-consent.test.cjs
+
+Γ£ö SC01 new, missing consent is never accepted (0.8607ms)
+Γ£ö SC02 same UID and notice required (0.1572ms)
+Γ£ö SC03 withdrawn consent is not active (0.0867ms)
+Γ£ö SC04 product consent never enrolls in research (0.0826ms)
+Γ£ö SC05 helper rejects blank identity (0.2327ms)
+Γ£ö SC06 root routing includes student consent page (0.5449ms)
+Γ£ö SC07 student consent route allowed by role gate (0.1472ms)
+Γ£ö SC08 protected student pages read consent from server (0.1655ms)
+Γ£ö SC09 UI has separate acceptance and withdrawal controls (0.114ms)
+Γ£ö SC10 UI requires explicit acknowledgment (0.1459ms)
+Γ£ö SC11 UI never silently enrolls research (0.1443ms)
+Γ£ö SC12 Rules include consent owner-only and strict schema (0.1178ms)
+Γ£ö SC13 Rules gate academic writes, including profile and transcript (0.1832ms)
+Γ£ö SC14 legacy shares closed regardless of consent (0.111ms)
+Γ£ö SC15 UI warns guardian identity is unverified (0.0689ms)
+Γ£ö SC16 safe rollout stays off unless explicitly enabled (0.4538ms)
+Γ£ö SC17 assistant cannot mount outside the protected route gate (0.3991ms)
+Γä╣ tests 17
+Γä╣ suites 0
+Γä╣ pass 17
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 280.7114

@@ -1,0 +1,17 @@
+﻿Γ£ö CP85 leaves authenticated owner and product-consent guard on every cycle create (1.5203ms)
+Γ£ö CP85 repeated create-only constraints are still strictly enforced (0.3908ms)
+Γ£ö CP85 still requires reviewed prior cycle, exact source and immutable lineage (0.3714ms)
+Γ£ö CP85 candidate remains local-only and deployment Rules are unchanged (2.8035ms)
+Γ£ö CP86 archives CP31 evidence checksum without rebasing it to the active rules (5.4003ms)
+Γ£ö CP86 active candidate is pinned by current immutable source manifest (813.3178ms)
+Γ£ö CP86 refuses to re-label current candidate gate as historical CP31 gate (1.9705ms)
+Γ£ö CP86 preserves CP85 positive and negative emulator tests and deployment guard (2.4985ms)
+Γ£ö CP86 never edits the CP31 baseline module or frozen historical manifests (2.4858ms)
+Γä╣ tests 9
+Γä╣ suites 0
+Γä╣ pass 9
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 1131.0301

@@ -1,0 +1,125 @@
+
+> cognitive-learn-ai@0.1.0 test:cp67:route-experience
+> node --experimental-strip-types --test tests/cp67-route-experience.test.mjs
+
+TAP version 13
+# (node:37751) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP67: SPA route focus, scroll and announcements
+    # Subtest: does not shift focus or scroll on first render
+    ok 1 - does not shift focus or scroll on first render
+      ---
+      duration_ms: 1.859067
+      type: 'test'
+      ...
+    # Subtest: a real student route change scrolls to top and focuses the new workspace
+    ok 2 - a real student route change scrolls to top and focuses the new workspace
+      ---
+      duration_ms: 0.240585
+      type: 'test'
+      ...
+    # Subtest: country and admission query filters preserve viewport and input focus
+    ok 3 - country and admission query filters preserve viewport and input focus
+      ---
+      duration_ms: 0.330757
+      type: 'test'
+      ...
+    # Subtest: hash target within the same route is scrolled into view without stealing focus
+    ok 4 - hash target within the same route is scrolled into view without stealing focus
+      ---
+      duration_ms: 0.199964
+      type: 'test'
+      ...
+    # Subtest: real route change can land at an existing anchor
+    ok 5 - real route change can land at an existing anchor
+      ---
+      duration_ms: 0.165323
+      type: 'test'
+      ...
+    # Subtest: Back/Forward restores scroll but focuses the new content when the page changes
+    ok 6 - Back/Forward restores scroll but focuses the new content when the page changes
+      ---
+      duration_ms: 1.362546
+      type: 'test'
+      ...
+    # Subtest: malformed hash escape cannot crash app or hijack scroll restoration
+    ok 7 - malformed hash escape cannot crash app or hijack scroll restoration
+      ---
+      duration_ms: 0.260723
+      type: 'test'
+      ...
+    # Subtest: fragment target supports encoded Vietnamese and common IDs
+    ok 8 - fragment target supports encoded Vietnamese and common IDs
+      ---
+      duration_ms: 0.350086
+      type: 'test'
+      ...
+    # Subtest: naming pages does not mislabel simulated scores or admissions predictions
+    ok 9 - naming pages does not mislabel simulated scores or admissions predictions
+      ---
+      duration_ms: 0.621185
+      type: 'test'
+      ...
+    # Subtest: student exam, school choices and scholarship pages receive distinct titles
+    ok 10 - student exam, school choices and scholarship pages receive distinct titles
+      ---
+      duration_ms: 0.507928
+      type: 'test'
+      ...
+    # Subtest: admin pages are not advertised as student modules
+    ok 11 - admin pages are not advertised as student modules
+      ---
+      duration_ms: 0.126767
+      type: 'test'
+      ...
+    # Subtest: app keeps progress transition while announcing a meaningful route title
+    ok 12 - app keeps progress transition while announcing a meaningful route title
+      ---
+      duration_ms: 0.123973
+      type: 'test'
+      ...
+    # Subtest: skip link targets an existing focusable content anchor, not nested main
+    ok 13 - skip link targets an existing focusable content anchor, not nested main
+      ---
+      duration_ms: 0.08112
+      type: 'test'
+      ...
+    # Subtest: route-scroll plan drives the side effect, query changes do not force scroll-to-top
+    ok 14 - route-scroll plan drives the side effect, query changes do not force scroll-to-top
+      ---
+      duration_ms: 0.06805
+      type: 'test'
+      ...
+    # Subtest: navigation kind is captured with route state (not read after async commit)
+    ok 15 - navigation kind is captured with route state (not read after async commit)
+      ---
+      duration_ms: 0.050534
+      type: 'test'
+      ...
+    # Subtest: CSS has accessible visual skip, dark-independent contrast, reduced-motion and print
+    ok 16 - CSS has accessible visual skip, dark-independent contrast, reduced-motion and print
+      ---
+      duration_ms: 0.18287
+      type: 'test'
+      ...
+    # Subtest: works with the existing unsaved-draft navigation guard and native hash handling
+    ok 17 - works with the existing unsaved-draft navigation guard and native hash handling
+      ---
+      duration_ms: 0.079857
+      type: 'test'
+      ...
+    1..17
+ok 1 - CP67: SPA route focus, scroll and announcements
+  ---
+  duration_ms: 8.308804
+  type: 'suite'
+  ...
+1..1
+# tests 17
+# suites 1
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 132.374161

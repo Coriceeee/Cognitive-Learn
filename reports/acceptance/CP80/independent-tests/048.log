@@ -1,0 +1,328 @@
+
+> cognitive-learn-ai@0.1.0 test:cp31:batch13
+> node --experimental-strip-types --test tests/cp31-batch13-measurement-audit.test.mjs
+
+TAP version 13
+# (node:17151) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: B13-01 two reviewed cycles retain the original descriptive series
+ok 1 - B13-01 two reviewed cycles retain the original descriptive series
+  ---
+  duration_ms: 25.524793
+  type: 'test'
+  ...
+# Subtest: B13-02 missing manifests are not silently filled in
+ok 2 - B13-02 missing manifests are not silently filled in
+  ---
+  duration_ms: 3.380689
+  type: 'test'
+  ...
+# Subtest: B13-03 null is equivalent to absent manifest
+ok 3 - B13-03 null is equivalent to absent manifest
+  ---
+  duration_ms: 2.738626
+  type: 'test'
+  ...
+# Subtest: B13-04 no cycles cannot imply measurements
+ok 4 - B13-04 no cycles cannot imply measurements
+  ---
+  duration_ms: 0.806857
+  type: 'test'
+  ...
+# Subtest: B13-05 malformed cycle returns SOURCE_BLOCKED
+ok 5 - B13-05 malformed cycle returns SOURCE_BLOCKED
+  ---
+  duration_ms: 0.248794
+  type: 'test'
+  ...
+# Subtest: B13-06 one reviewed cycle cannot create a T2 comparison
+ok 6 - B13-06 one reviewed cycle cannot create a T2 comparison
+  ---
+  duration_ms: 0.705362
+  type: 'test'
+  ...
+# Subtest: B13-07 sample independent manifest aligns declarations only
+ok 7 - B13-07 sample independent manifest aligns declarations only
+  ---
+  duration_ms: 1.955484
+  type: 'test'
+  ...
+# Subtest: B13-08 manifest order does not affect scientific status
+ok 8 - B13-08 manifest order does not affect scientific status
+  ---
+  duration_ms: 4.624403
+  type: 'test'
+  ...
+# Subtest: B13-09 cycle order does not affect matching
+ok 9 - B13-09 cycle order does not affect matching
+  ---
+  duration_ms: 2.671491
+  type: 'test'
+  ...
+# Subtest: B13-10 self report can never be promoted to verified equivalence
+ok 10 - B13-10 self report can never be promoted to verified equivalence
+  ---
+  duration_ms: 2.237549
+  type: 'test'
+  ...
+# Subtest: B13-11 no forecast accuracy or causal claims
+ok 11 - B13-11 no forecast accuracy or causal claims
+  ---
+  duration_ms: 1.20528
+  type: 'test'
+  ...
+# Subtest: B13-12 real score zero matches the declaration
+ok 12 - B13-12 real score zero matches the declaration
+  ---
+  duration_ms: 1.751023
+  type: 'test'
+  ...
+# Subtest: B13-13 same score with changed scale blocks longitudinal comparison
+ok 13 - B13-13 same score with changed scale blocks longitudinal comparison
+  ---
+  duration_ms: 2.335736
+  type: 'test'
+  ...
+# Subtest: B13-14 same score with changed instrument ID blocks comparison
+ok 14 - B13-14 same score with changed instrument ID blocks comparison
+  ---
+  duration_ms: 1.157299
+  type: 'test'
+  ...
+# Subtest: B13-15 changed instrument version is not assumed equivalent
+ok 15 - B13-15 changed instrument version is not assumed equivalent
+  ---
+  duration_ms: 1.056146
+  type: 'test'
+  ...
+# Subtest: B13-16 different forms do not imply equivalent tests
+ok 16 - B13-16 different forms do not imply equivalent tests
+  ---
+  duration_ms: 1.265914
+  type: 'test'
+  ...
+# Subtest: B13-17 scoring rubric changes block comparison
+ok 17 - B13-17 scoring rubric changes block comparison
+  ---
+  duration_ms: 0.865566
+  type: 'test'
+  ...
+# Subtest: B13-18 missing a single T0 declaration blocks complete status
+ok 18 - B13-18 missing a single T0 declaration blocks complete status
+  ---
+  duration_ms: 1.919556
+  type: 'test'
+  ...
+# Subtest: B13-19 missing a single T1 declaration blocks complete status
+ok 19 - B13-19 missing a single T1 declaration blocks complete status
+  ---
+  duration_ms: 1.339549
+  type: 'test'
+  ...
+# Subtest: B13-20 empty metadata list is missing, not compatible
+ok 20 - B13-20 empty metadata list is missing, not compatible
+  ---
+  duration_ms: 1.127418
+  type: 'test'
+  ...
+# Subtest: B13-21 false score injected is invalid, not normalized
+ok 21 - B13-21 false score injected is invalid, not normalized
+  ---
+  duration_ms: 1.093827
+  type: 'test'
+  ...
+# Subtest: B13-22 a true zero is never confused with missing
+ok 22 - B13-22 a true zero is never confused with missing
+  ---
+  duration_ms: 1.257522
+  type: 'test'
+  ...
+# Subtest: B13-23 wrong linked-at T0 time is invalid
+ok 23 - B13-23 wrong linked-at T0 time is invalid
+  ---
+  duration_ms: 0.79361
+  type: 'test'
+  ...
+# Subtest: B13-24 wrong linked-at T1 time is invalid
+ok 24 - B13-24 wrong linked-at T1 time is invalid
+  ---
+  duration_ms: 0.899062
+  type: 'test'
+  ...
+# Subtest: B13-25 duplicated source declaration is invalid
+ok 25 - B13-25 duplicated source declaration is invalid
+  ---
+  duration_ms: 1.342617
+  type: 'test'
+  ...
+# Subtest: B13-26 extra unknown cycle declaration is invalid
+ok 26 - B13-26 extra unknown cycle declaration is invalid
+  ---
+  duration_ms: 0.921319
+  type: 'test'
+  ...
+# Subtest: B13-27 extra unknown subject declaration is invalid
+ok 27 - B13-27 extra unknown subject declaration is invalid
+  ---
+  duration_ms: 0.830099
+  type: 'test'
+  ...
+# Subtest: B13-28 unexpected PII field in a declaration is invalid
+ok 28 - B13-28 unexpected PII field in a declaration is invalid
+  ---
+  duration_ms: 1.160567
+  type: 'test'
+  ...
+# Subtest: B13-29 unexpected PII field on manifest envelope is invalid
+ok 29 - B13-29 unexpected PII field on manifest envelope is invalid
+  ---
+  duration_ms: 0.917476
+  type: 'test'
+  ...
+# Subtest: B13-30 forged source verification is invalid
+ok 30 - B13-30 forged source verification is invalid
+  ---
+  duration_ms: 0.774098
+  type: 'test'
+  ...
+# Subtest: B13-31 empty instrument is invalid
+ok 31 - B13-31 empty instrument is invalid
+  ---
+  duration_ms: 1.198867
+  type: 'test'
+  ...
+# Subtest: B13-32 instrument with spaces or HTML is invalid
+ok 32 - B13-32 instrument with spaces or HTML is invalid
+  ---
+  duration_ms: 0.832049
+  type: 'test'
+  ...
+# Subtest: B13-33 undefined scoring scale is invalid
+ok 33 - B13-33 undefined scoring scale is invalid
+  ---
+  duration_ms: 0.782487
+  type: 'test'
+  ...
+# Subtest: B13-34 negative, NaN or out-of-range scores invalid
+ok 34 - B13-34 negative, NaN or out-of-range scores invalid
+  ---
+  duration_ms: 3.235033
+  type: 'test'
+  ...
+# Subtest: B13-35 timestamp with timezone offset cannot be disguised as canonical UTC
+ok 35 - B13-35 timestamp with timezone offset cannot be disguised as canonical UTC
+  ---
+  duration_ms: 1.029281
+  type: 'test'
+  ...
+# Subtest: B13-36 invalid calendar date is rejected
+ok 36 - B13-36 invalid calendar date is rejected
+  ---
+  duration_ms: 1.024702
+  type: 'test'
+  ...
+# Subtest: B13-37 expected owner mismatch blocks even accurate manifest
+ok 37 - B13-37 expected owner mismatch blocks even accurate manifest
+  ---
+  duration_ms: 0.298077
+  type: 'test'
+  ...
+# Subtest: B13-38 mixed owner metadata blocks declared alignment
+ok 38 - B13-38 mixed owner metadata blocks declared alignment
+  ---
+  duration_ms: 0.310326
+  type: 'test'
+  ...
+# Subtest: B13-39 moving a second baseline with regenerated T0 no longer gives valid source series
+ok 39 - B13-39 moving a second baseline with regenerated T0 no longer gives valid source series
+  ---
+  duration_ms: 0.984892
+  type: 'test'
+  ...
+# Subtest: B13-40 invalid evidence record blocks declaration promotion
+ok 40 - B13-40 invalid evidence record blocks declaration promotion
+  ---
+  duration_ms: 0.270585
+  type: 'test'
+  ...
+# Subtest: B13-41 original report can replay deterministic snapshot
+ok 41 - B13-41 original report can replay deterministic snapshot
+  ---
+  duration_ms: 1.968224
+  type: 'test'
+  ...
+# Subtest: B13-42 replay rejects forged validation flag
+ok 42 - B13-42 replay rejects forged validation flag
+  ---
+  duration_ms: 1.646321
+  type: 'test'
+  ...
+# Subtest: B13-43 replay rejects forged causal effect
+ok 43 - B13-43 replay rejects forged causal effect
+  ---
+  duration_ms: 1.424129
+  type: 'test'
+  ...
+# Subtest: B13-44 replay rejects withheld declaration
+ok 44 - B13-44 replay rejects withheld declaration
+  ---
+  duration_ms: 2.121918
+  type: 'test'
+  ...
+# Subtest: B13-45 offline envelope claims synthetic status only
+ok 45 - B13-45 offline envelope claims synthetic status only
+  ---
+  duration_ms: 2.879383
+  type: 'test'
+  ...
+# Subtest: B13-46 offline envelope verifies against original input bytes
+ok 46 - B13-46 offline envelope verifies against original input bytes
+  ---
+  duration_ms: 4.970289
+  type: 'test'
+  ...
+# Subtest: B13-47 changed fixture hash blocks replay
+ok 47 - B13-47 changed fixture hash blocks replay
+  ---
+  duration_ms: 3.944981
+  type: 'test'
+  ...
+# Subtest: B13-48 forged envelope payload or checksum rejected
+ok 48 - B13-48 forged envelope payload or checksum rejected
+  ---
+  duration_ms: 3.662769
+  type: 'test'
+  ...
+# Subtest: B13-49 unmarked synthetic fixture or unexpected PII fails offline
+ok 49 - B13-49 unmarked synthetic fixture or unexpected PII fails offline
+  ---
+  duration_ms: 0.82235
+  type: 'test'
+  ...
+# Subtest: B13-50 UI carries a fail-closed measurement warning and no verified score claim
+ok 50 - B13-50 UI carries a fail-closed measurement warning and no verified score claim
+  ---
+  duration_ms: 0.528464
+  type: 'test'
+  ...
+# Subtest: B13-51 source release fingerprint includes independent synthetic measurement manifest
+ok 51 - B13-51 source release fingerprint includes independent synthetic measurement manifest
+  ---
+  duration_ms: 0.23453
+  type: 'test'
+  ...
+# Subtest: B13-52 package scripts include new gate without removing preceding batches
+ok 52 - B13-52 package scripts include new gate without removing preceding batches
+  ---
+  duration_ms: 0.26515
+  type: 'test'
+  ...
+1..52
+# tests 52
+# suites 0
+# pass 52
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 405.01549

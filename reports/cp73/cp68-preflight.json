@@ -1,0 +1,9 @@
+{
+  "schema": "cla-cp68-student-ux-e2e-v1",
+  "dateUtc": "2026-11-22T09:19:44+00:00",
+  "scope": "real-React-Firebase-QA-synthetic-student",
+  "status": "BLOCKED",
+  "checks": [],
+  "limitations": "This only assesses QA browser/UX. It is not production, ML validity or user research evidence.",
+  "reasonType": "ValueError"
+}

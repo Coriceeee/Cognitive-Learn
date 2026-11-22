@@ -1,0 +1,60 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp31:batch12
+> node --experimental-strip-types --test tests/cp31-batch12-multicycle-trend.test.mjs
+
+Γ£ö B12-01 initial empty window is NO_HISTORY, no fabricated trend (1.4596ms)
+Γ£ö B12-02 unknown input is INVALID (0.2331ms)
+Γ£ö B12-03 one reviewed cycle has no measured T2 (3.5534ms)
+Γ£ö B12-04 one active cycle cannot be extrapolated (0.2207ms)
+Γ£ö B12-05 two real domain-reviewed synthetic cycles form descriptive series (9.1479ms)
+Γ£ö B12-06 reverse Firestore newest-first order does not change trend (2.3254ms)
+Γ£ö B12-07 chronological cycle ids strictly sorted by T0 (0.7426ms)
+Γ£ö B12-08 frozen T0 second cycle is never silently treated as a measured T2 (1.1438ms)
+Γ£ö B12-09 true observed 0 kept as zero (0.6091ms)
+Γ£ö B12-10 English matched second T0 equals first T1, not target (0.6529ms)
+Γ£ö B12-11 individual subject history only, no aggregate score across changing denominators (0.5294ms)
+Γ£ö B12-12 provenance remains student self-report on every point (0.5254ms)
+Γ£ö B12-13 no causal, forecast or externally validated student outcome claims (0.7531ms)
+Γ£ö B12-14 baseline shift from C1 T1 to C2 T0 blocks stitched trend (0.5873ms)
+Γ£ö B12-15 same key but different subject label blocks trend (0.4443ms)
+Γ£ö B12-16 missing T1 in previous cycle is not silently made zero (0.5164ms)
+Γ£ö B12-17 missing T1 in next cycle cannot be used for T2 (0.5047ms)
+Γ£ö B12-18 no common subjects is not a longitudinal trend (0.6564ms)
+Γ£ö B12-19 new-only subject prevents cohort-mix average (0.5245ms)
+Γ£ö B12-20 reused cycle ID cannot merge outcomes (0.3744ms)
+Γ£ö B12-21 duplicated T0 timestamp fails closed (0.2811ms)
+Γ£ö B12-22 overlapped cycle starts before previous reassessment ends rejected (0.2306ms)
+Γ£ö B12-23 corrupt evidence in prior cycle fails closed instead of displaying later trend (0.1788ms)
+Γ£ö B12-24 corrupt evidence in next cycle fails closed (0.2002ms)
+Γ£ö B12-25 legacy T0 missing refuses trend, while source records remain readable (0.3147ms)
+Γ£ö B12-26 legacy Evidence Record missing refuses trend (0.2998ms)
+Γ£ö B12-27 cross-UID records cannot be compared when owner is supplied (0.3371ms)
+Γ£ö B12-28 legacy no-owner records cannot enter authenticated history (0.45ms)
+Γ£ö B12-29 same-owner records remain eligible only under matching uid (0.5013ms)
+Γ£ö B12-30 max 8 displayed cycles; 9th fails rather than claim full history (0.4371ms)
+Γ£ö B12-31 duplicate records in same window fail closed (0.434ms)
+Γ£ö B12-32 current active cycle must not create fake T3 (0.6702ms)
+Γ£ö B12-33 active cycle before previous reviewed cycle is invalid interleaving (0.3061ms)
+Γ£ö B12-34 reproducible report replay accepts key reorder (1.2006ms)
+Γ£ö B12-35 replay rejects spurious T3 and fabricated claims (0.7632ms)
+Γ£ö B12-36 replay rejects forged causal claim or changed baseline (1.7428ms)
+Γ£ö B12-37 genuine inputs remain unmodified after audit (0.6106ms)
+Γ£ö B12-38 synthesized local envelope generates and verifies without Firebase (2.6733ms)
+Γ£ö B12-39 envelope source fixture tampering rejected (1.9085ms)
+Γ£ö B12-40 envelope rejects injected externally verified flag (1.5521ms)
+Γ£ö B12-41 missing synthetic marker or injected student personal data rejected (0.5287ms)
+Γ£ö B12-42 UI displays per-subject series with guard labels and truncated history (0.5656ms)
+Γ£ö B12-43 listener verifies owner through the server-only snapshot gate before trend computation (0.5633ms)
+Γ£ö B12-44 historical report is bounded and never claims full population trend (0.7624ms)
+Γ£ö B12-45 source checklist remains unchanged and test is invoked in npm scripts (0.439ms)
+Γ£ö B12-46 exactly eight past reviewed cycles are a bounded, potentially truncated window (1.845ms)
+Γ£ö B12-47 mixed owned and ownerless records are rejected even without expected UID (0.6349ms)
+Γ£ö B12-48 malformed owner metadata rejected even when the rest of the evidence is consistent (0.3963ms)
+Γä╣ tests 48
+Γä╣ suites 0
+Γä╣ pass 48
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 208.2

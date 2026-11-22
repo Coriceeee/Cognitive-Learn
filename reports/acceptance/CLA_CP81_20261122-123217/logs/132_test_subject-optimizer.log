@@ -1,0 +1,31 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:subject-optimizer
+> node --test tests/step08-subject-optimizer.test.cjs
+
+Γ£ö 08.01 policy states two compulsory plus two elective subjects, source and year (1.2818ms)
+Γ£ö 08.02 no confirmed grade-12 courses means abstain; marks alone are not enrollment (0.292ms)
+Γ£ö 08.03 one confirmed elective cannot form a pair (0.1013ms)
+Γ£ö 08.04 two confirmed choices produce exactly one pair (0.3401ms)
+Γ£ö 08.05 only the confirmed grade-12 list contributes, other high scores excluded (0.1752ms)
+Γ£ö 08.06 incomplete elective scores are null, never silently zero (0.2094ms)
+Γ£ö 08.07 actual zero remains valid input (0.1799ms)
+Γ£ö 08.08 invalid and negative marks cannot manufacture an observed-score comparison (0.1226ms)
+Γ£ö 08.09 does not claim no admission possible when project catalogue has no combo (0.2162ms)
+Γ£ö 08.10 technology streams are distinct and generic technology grade is not reused (0.1913ms)
+Γ£ö 08.11 duplicates are deduplicated and are not counted as two different electives (0.1282ms)
+Γ£ö 08.12 never invents verified university matches from exploratory combinations (0.1139ms)
+Γ£ö 08.13 only explicitly supplied verified program data is considered a matching opportunity (0.2286ms)
+Γ£ö 08.14 unmatched target cannot be fabricated by substring scoring or mock sources (0.1017ms)
+Γ£ö 08.15 three studied electives creates three pairs and sorts by coverage then grades (0.1485ms)
+Γ£ö 08.16 combining a pair with mandatory subjects only uses supported academic combinations (0.1258ms)
+Γ£ö 08.17 two technological streams are never assumed to share a common grade (0.0963ms)
+Γ£ö 08.18 UI requires explicit confirmation and exposes policy/source/limits (0.6121ms)
+Γ£ö 08.19 previously established Seed and school-score safety gates remain untouched (0.4763ms)
+Γä╣ tests 19
+Γä╣ suites 0
+Γä╣ pass 19
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 315.4472

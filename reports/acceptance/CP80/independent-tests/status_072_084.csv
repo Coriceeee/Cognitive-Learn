@@ -1,0 +1,13 @@
+﻿index,status,exitcode,seconds,command,log
+72,PASS,0,0.55,npm run test:cp42:source-discovery,reports/acceptance/CP80/independent-tests/072.log
+73,PASS,0,0.42,npm run test:cp42:scheme-coverage,reports/acceptance/CP80/independent-tests/073.log
+74,PASS,0,0.42,npm run test:cp42:dthu-batch,reports/acceptance/CP80/independent-tests/074.log
+75,PASS,0,0.46,npm run test:cp42:dthu-scheme,reports/acceptance/CP80/independent-tests/075.log
+76,PASS,0,0.59,npm run test:cp42:institution-discovery,reports/acceptance/CP80/independent-tests/076.log
+77,PASS,0,0.43,npm run test:cp42:robust-decision,reports/acceptance/CP80/independent-tests/077.log
+78,PASS,0,0.43,npm run test:cp42:holistic-temporal,reports/acceptance/CP80/independent-tests/078.log
+79,PASS,0,0.4,npm run test:cp42:focused-workspaces,reports/acceptance/CP80/independent-tests/079.log
+80,PASS,0,0.36,npm run test:cp47:orion-autosave,reports/acceptance/CP80/independent-tests/080.log
+81,PASS,0,0.39,npm run test:cp50:orion-race,reports/acceptance/CP80/independent-tests/081.log
+82,PASS,0,0.36,npm run test:cp51:draft-queue,reports/acceptance/CP80/independent-tests/082.log
+83,PASS,0,0.4,npm run test:cp52:multidevice,reports/acceptance/CP80/independent-tests/083.log

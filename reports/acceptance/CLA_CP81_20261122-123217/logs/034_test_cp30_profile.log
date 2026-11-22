@@ -1,0 +1,26 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp30:profile
+> node --test tests/cp30-profile-realtime.test.cjs
+
+Γ£ö CP30-P01 profile opens a realtime subscription with metadata events (23.404ms)
+Γ£ö CP30-P02 cache and pending writes cannot become verified student data (16.107ms)
+Γ£ö CP30-P03 verified profile is rendered, but Growth waits for server history (17.1823ms)
+Γ£ö CP30-P04 revised same-user profile cannot be overwritten by stale history (22.8081ms)
+Γ£ö CP30-P05 A to B to A blocks stale profile callbacks from original A session (16.4154ms)
+Γ£ö CP30-P06 previously verified profile is hidden immediately when snapshot becomes cached (13.52ms)
+Γ£ö CP30-P07 cross-owner profile fails closed and clears previous values (15.4696ms)
+Γ£ö CP30-P08 signed out resets history/profile and invalidates pending results (20.6707ms)
+Γ£ö CP30-P09 server history unavailable preserves verified profile but discloses limitation (11.3108ms)
+Γ£ö CP30-P10 absent verified profile is empty but cache-only absence is not (10.05ms)
+Γ£ö CP30-P11 Firestore permission errors remove all personally identifiable display values (9.6341ms)
+Γ£ö CP30-P12 server history uses getDocsFromServer rather than an offline cache (0.936ms)
+Γ£ö CP37 server read renders observed dynamic state, clears both new states on cache or signout (16.9523ms)
+Γ£ö CP38 stale same-owner history cannot populate a newer state (11.3731ms)
+Γä╣ tests 14
+Γä╣ suites 0
+Γä╣ pass 14
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 517.4177

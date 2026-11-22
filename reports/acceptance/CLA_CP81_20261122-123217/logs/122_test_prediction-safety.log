@@ -1,0 +1,27 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:prediction-safety
+> node --test tests/step11-prediction-semantics.test.cjs
+
+Γ£ö PRED-01 three heuristic indices have distinct, explicit semantics (0.9861ms)
+Γ£ö PRED-02 no probability or statistically calibrated confidence in engine output (0.2315ms)
+Γ£ö PRED-03 distance index is a bounded transformation of score gap, not an event probability (0.116ms)
+Γ£ö PRED-04 a higher target cannot improve the gap index with unchanged prediction inputs (0.1205ms)
+Γ£ö PRED-05 already reached target yields 100 index but NEVER 100% success claim (0.1275ms)
+Γ£ö PRED-06 distance index lower bound remains 0 (0.1087ms)
+Γ£ö PRED-07 stability/completion weighted index is not an uncertainty interval (0.1205ms)
+Γ£ö SIM-01 Orion scenario propagates named heuristic gap index only (0.3679ms)
+Γ£ö SIM-02 utility uses descriptive cognitive index, not a probability field (0.1695ms)
+Γ£ö SIM-03 scenario lists maintain comparative sorting under renamed semantics (0.2695ms)
+Γ£ö CONTRACT-01 TypeScript strict compiles prediction + simulation contract together (361.726ms)
+Γ£ö CONTRACT-02 UI exposes heuristic semantics and calibrated absence (0.5744ms)
+Γ£ö CONTRACT-03 result types cannot silently reintroduce probability/confidence fields (0.6888ms)
+Γ£ö CONTRACT-04 model version is bumped and terms say scenario, not validated ML (0.1361ms)
+Γ£ö SIM-04 explanations do not equate an assumed cognitive adjustment with observed benefit (0.2916ms)
+Γä╣ tests 15
+Γä╣ suites 0
+Γä╣ pass 15
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 686.9289

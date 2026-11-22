@@ -1,0 +1,17 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp53:integrity
+> node --experimental-strip-types --test tests/cp53-build-preflight-and-cas.test.mjs
+
+Γ£ö CP53.1: all directly called React hooks are imported (offline build preflight) (56.2553ms)
+Γ£ö CP53.2: acknowledged write cannot be replaced at same revision with different payload (0.5493ms)
+Γ£ö CP53.3: acknowledged payload signature is stable for same values with shuffled keys (0.221ms)
+Γ£ö CP53.4: approved save records payload signature while server timestamp resolves (0.1848ms)
+Γ£ö CP53.5: same-revision replay remains invalid even when timestamp is unavailable (0.1902ms)
+Γä╣ tests 5
+Γä╣ suites 0
+Γä╣ pass 5
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 175.6422

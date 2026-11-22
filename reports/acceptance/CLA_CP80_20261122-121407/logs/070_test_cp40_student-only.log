@@ -1,0 +1,42 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp40:student-only
+> node --experimental-strip-types --test tests/cp40-student-only.test.mjs
+
+Γ£ö Student-only account roles are fail closed (1.2634ms)
+Γ£û Retired workspace components removed, student dashboard not linked to them (1.1884ms)
+Γ£ö Registration and Google profile create only Student (0.598ms)
+Γ£ö API role restrictions match Student-only client (0.8459ms)
+Γ£ö Pulse and Haven display personal summaries only (2.3309ms)
+Γ£ö candidate closes legacy share access and writes, owner cleanup remains (0.7694ms)
+Γ£ö Student-only scope keeps pedagogy and guardian privacy safeguards (0.6533ms)
+Γä╣ tests 7
+Γä╣ suites 0
+Γä╣ pass 6
+Γä╣ fail 1
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 126.9359
+
+Γ£û failing tests:
+
+test at tests\cp40-student-only.test.mjs:7:1
+Γ£û Retired workspace components removed, student dashboard not linked to them (1.1884ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///C:/G%E1%BA%A1o/Cognitive-Learn/tests/cp40-student-only.test.mjs:7:237)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

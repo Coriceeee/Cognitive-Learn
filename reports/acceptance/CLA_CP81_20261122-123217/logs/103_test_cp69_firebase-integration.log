@@ -1,0 +1,34 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp69:firebase-integration
+> node --test tests/cp69-atlas-verified-cas.test.cjs && node --experimental-strip-types --test tests/cp69-companion-verified-consent.test.mjs
+
+Γ£ö CP69.1: Atlas workspace canonical signature ignores object key order (0.9938ms)
+Γ£ö CP69.2: newer revision or same revision modified payload prevents overwrite (0.4203ms)
+Γ£ö CP69.3: legacy version-less Atlas can migrate exactly once (0.2398ms)
+Γ£ö CP69.4: cached Atlas snapshot does not become ready or create trusted baseline (42.4271ms)
+Γ£ö CP69.5: wrong-owner document fails closed; stale callback after account change ignored (27.8304ms)
+Γ£ö CP69.6: first write uses transaction and revision=1, remote update causes conflict (27.8113ms)
+Γ£ö CP69.7: unscoped or another-user browser storage cannot be imported (52.3385ms)
+Γ£ö CP69.7b: explicitly owned browser storage is available only to that UID (23.4648ms)
+Γ£ö CP69.8: Atlas Rules in both candidate versions require monotonic revision and owner (1.9333ms)
+Γ£ö CP69.9 + CP73: production remains unchanged; emulator connects only after QA safety gate (1.2455ms)
+Γä╣ tests 10
+Γä╣ suites 0
+Γä╣ pass 10
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 513.2607
+Γ£ö CP69.10: consent from cached/pending write cannot permit saving (0.9784ms)
+Γ£ö CP69.11: companion listener requests metadata changes and never displays cached data as saved (0.2149ms)
+Γ£ö CP69.12: transaction reads consent record on server before writing schedule (0.1588ms)
+Γ£ö CP69.13: account switch invalidates stale companion callbacks and errors (0.1706ms)
+Γä╣ tests 4
+Γä╣ suites 0
+Γä╣ pass 4
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 129.7569

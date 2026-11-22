@@ -1,0 +1,64 @@
+
+> cognitive-learn-ai@0.1.0 test:cp42:dthu-scheme
+> node --experimental-strip-types --test tests/cp42-dthu-scheme.test.mjs
+
+TAP version 13
+# (node:17956) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: 57 university scheme codes uniquely join 58 cutoff catalogue codes; no college or rewritten scores
+ok 1 - 57 university scheme codes uniquely join 58 cutoff catalogue codes; no college or rewritten scores
+  ---
+  duration_ms: 1.967941
+  type: 'test'
+  ...
+# Subtest: published programme methods and proposed quota are not inferred from historical scores
+ok 2 - published programme methods and proposed quota are not inferred from historical scores
+  ---
+  duration_ms: 0.259075
+  type: 'test'
+  ...
+# Subtest: NL1 is separately labelled, never a three subject combination
+ok 3 - NL1 is separately labelled, never a three subject combination
+  ---
+  duration_ms: 0.449395
+  type: 'test'
+  ...
+# Subtest: five aptitude-review programmes are never ordinary three-subject matches; preserve listed codes
+ok 4 - five aptitude-review programmes are never ordinary three-subject matches; preserve listed codes
+  ---
+  duration_ms: 1.31928
+  type: 'test'
+  ...
+# Subtest: explicit school X codes distinguish technology streams and Chinese language is unmapped
+ok 5 - explicit school X codes distinguish technology streams and Chinese language is unmapped
+  ---
+  duration_ms: 1.726995
+  type: 'test'
+  ...
+# Subtest: discovery shares the same catalogue evidence and never assigns eligibility
+ok 6 - discovery shares the same catalogue evidence and never assigns eligibility
+  ---
+  duration_ms: 4.230208
+  type: 'test'
+  ...
+# Subtest: coverage separates having sources, mappable records and conditions; older years remain unknown
+ok 7 - coverage separates having sources, mappable records and conditions; older years remain unknown
+  ---
+  duration_ms: 20.531185
+  type: 'test'
+  ...
+# Subtest: scheme parser rejects unknown codes, duplicate entries, malformed quota and methods
+ok 8 - scheme parser rejects unknown codes, duplicate entries, malformed quota and methods
+  ---
+  duration_ms: 1.317964
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 289.843493

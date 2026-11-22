@@ -532,15 +532,19 @@ service cloud.firestore {
         && validAdaptiveSource(uid, t);
     }
 
+    // CP85: Firestore enforces at most 1,000 rule expressions per request.
+    // This function is used ONLY for a new cycle (`allow create` below).
+    // Rechecking status/checkIns/reassessment/evidence here duplicated exact
+    // create-only predicates evaluated in the same allow expression and pushed
+    // the two-document adaptive cycle transaction over the rule budget.
+    // Keep owner/consent, exact field allowlist, T0, subjects, lineage and
+    // timestamp checks. The create guard is mandatory for this function.
     function validJourneyRecord(uid, cycleId) {
       let data = request.resource.data;
       return studentMayPersist(uid)
         && data.keys().hasOnly(['id', 'userId', 'schemaVersion', 'origin', 'scenarioId', 'scenarioTitle',
           'targetMajor', 'subjects', 'plannedWeeklyHours', 'weeksLeft', 'startedAt',
           'status', 'checkIns', 'reassessment', 'evidenceRecord', 't0Snapshot', 'decisionTrace', 'createdAt', 'updatedAt'])
-        && data.keys().hasAll(['id', 'userId', 'schemaVersion', 'origin', 'scenarioId', 'scenarioTitle',
-          'targetMajor', 'subjects', 'plannedWeeklyHours', 'weeksLeft', 'startedAt',
-          'status', 'checkIns', 'reassessment', 'createdAt', 'updatedAt'])
         && cycleId.size() >= 8 && cycleId.size() <= 100
         && data.id == cycleId && data.userId == uid && data.schemaVersion == 1
         && data.origin == 'orion_simulation'
@@ -552,11 +556,6 @@ service cloud.firestore {
         && data.plannedWeeklyHours is int && data.plannedWeeklyHours >= 1 && data.plannedWeeklyHours <= 80
         && data.weeksLeft is int && data.weeksLeft >= 1 && data.weeksLeft <= 104
         && data.startedAt is string && data.startedAt.size() <= 40
-        && data.status in ['ACTIVE', 'REVIEWED']
-        && data.checkIns is list && data.checkIns.size() <= 12
-        && (data.reassessment == null || validJourneyReassessment(data.reassessment))
-        && (data.get('evidenceRecord', null) == null
-          || (data.status == 'REVIEWED' && validJourneyEvidence(data.evidenceRecord, cycleId, data.reassessment)))
         && (!data.keys().hasAny(['decisionTrace']) || validDecisionTrace(uid, data, data.decisionTrace))
         && data.updatedAt == request.time;
     }
@@ -600,6 +599,7 @@ service cloud.firestore {
       allow list: if studentOwns(uid) && request.query.limit != null && request.query.limit <= 8;
       allow create: if validJourneyRecord(uid, cycleId)
         && request.resource.data.status == 'ACTIVE'
+        && request.resource.data.checkIns is list
         && request.resource.data.checkIns.size() == 0
         && request.resource.data.reassessment == null
         && request.resource.data.get('evidenceRecord', null) == null

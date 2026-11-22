@@ -1,0 +1,22 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp68:qa-gate
+> node --experimental-strip-types --test tests/cp68-qa-gate.test.mjs
+
+Γû╢ CP68: production honesty and student SPA UX
+  Γ£ö Back to a different module restores scroll but moves keyboard focus (1.2087ms)
+  Γ£ö Back after changing only a filter does not steal focus or scroll (0.1522ms)
+  Γ£ö push and replace continue to focus new routes and go to top (0.1359ms)
+  Γ£ö real React browser QA requires synthetic account consent (0.1931ms)
+  Γ£ö QA origin is restricted to loopback and verifies Firebase project marker (0.1295ms)
+  Γ£ö QA checks all six modules and two viewports using real DOM and SPA links (1.0254ms)
+  Γ£ö rejects unapproved public origins before touching any QA credentials (166.1143ms)
+  Γ£ö does not advertise dark-mode full website as validated (0.4885ms)
+Γ£ö CP68: production honesty and student SPA UX (170.501ms)
+Γä╣ tests 8
+Γä╣ suites 1
+Γä╣ pass 8
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 285.8043

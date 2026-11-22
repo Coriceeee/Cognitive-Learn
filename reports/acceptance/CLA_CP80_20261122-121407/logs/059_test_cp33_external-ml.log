@@ -1,0 +1,54 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp33:external-ml
+> node --experimental-strip-types --test tests/cp33-external-ml-evidence.test.mjs && python -m unittest research.tests.test_uci_ml_comparison -v
+
+Γ£ö structural gate accepts complete aggregate fixture, not proof of science (2.9089ms)
+Γ£ö rejects missing subject, wrong source, synthetic status (0.6083ms)
+Γ£ö rejects bad bounds, mismatched counts, and inconsistent ablation (0.5993ms)
+Γä╣ tests 3
+Γä╣ suites 0
+Γä╣ pass 3
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 129.2743
+npm.cmd : test_uci_ml_comparison (unittest.loader._FailedTest.test_uci_ml_comparison) ... ERROR
+At C:\Gạo\Cognitive-Learn\CLA_CP80_ONECLICK.ps1:95 char:9
++         & $exe @commandArgs 2>&1 | Out-File -LiteralPath $logPath -En ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (test_uci_ml_com...ison) ... ERROR:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+======================================================================
+ERROR: test_uci_ml_comparison (unittest.loader._FailedTest.test_uci_ml_comparison)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_uci_ml_comparison
+Traceback (most recent call last):
+  File "C:\Users\nguye\AppData\Local\Programs\Python\Python311\Lib\unittest\loader.py", line 162, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\G\u1ea1o\Cognitive-Learn\research\tests\test_uci_ml_comparison.py", line 5, in <module>
+    import pandas as pd
+  File "C:\G\u1ea1o\Cognitive-Learn\.venv\Lib\site-packages\pandas\__init__.py", line 56, in <module>
+    import pandas.core.config_init  # pyright: ignore[reportUnusedImport] # noqa: F401
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\G\u1ea1o\Cognitive-Learn\.venv\Lib\site-packages\pandas\core\config_init.py", line 31, in <module>
+    from pandas.errors import Pandas4Warning
+  File "C:\G\u1ea1o\Cognitive-Learn\.venv\Lib\site-packages\pandas\errors\__init__.py", line 12, in <module>
+    from pandas._libs.tslibs import (
+  File "C:\G\u1ea1o\Cognitive-Learn\.venv\Lib\site-packages\pandas\_libs\__init__.py", line 18, in <module>
+    from pandas._libs.interval import Interval
+  File "pandas/_libs/interval.pyx", line 1, in init pandas._libs.interval
+  File "pandas/_libs/hashtable.pyx", line 1, in init pandas._libs.hashtable
+  File "pandas/_libs/missing.pyx", line 1, in init pandas._libs.missing
+  File "C:\G\u1ea1o\Cognitive-Learn\.venv\Lib\site-packages\pandas\_libs\tslibs\__init__.py", line 42, in <module>
+    from pandas._libs.tslibs.conversion import localize_pydatetime
+ImportError: DLL load failed while importing conversion: An Application Control policy has blocked this file.
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

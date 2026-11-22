@@ -45,7 +45,7 @@ export default function LumenStrategyPanel({
         <div className="lumen-panel-heading">
 
           <span className="lumen-eyebrow">
-            ORION STRATEGY
+            ORION · KIẾN TRÚC TƯƠNG LAI
           </span>
 
           <h2>
@@ -76,7 +76,7 @@ export default function LumenStrategyPanel({
       <div className="lumen-panel-heading">
 
         <span className="lumen-eyebrow">
-          ORION STRATEGY
+          ORION · KIẾN TRÚC TƯƠNG LAI
         </span>
 
         <h2>

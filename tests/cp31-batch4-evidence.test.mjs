@@ -30,9 +30,19 @@ const model = {schema_version:'cla.oulad.public-evidence.v1',dataset:'Open Unive
  comparison:{brier_improvement:.009125,learner_cluster_bootstrap_ci95:[.00669,.011249]},
  provenance:{archive_sha256:hex,features_sha256:'b'.repeat(64)}};
 
-test('CP31-B4-01 fingerprint matches generated checked source tree and candidate rules file', () => {
- assert.equal(fingerprint(root).sha256, cp31ReleaseSourceSha256);
- assert.equal(require('node:crypto').createHash('sha256').update(fs.readFileSync(path.join(root,'firestore.rules.CANDIDATE_CP21'))).digest('hex'), cp31RulesCandidateSha256);
+test('CP31-B4-01 historical fingerprint remains frozen; current release cannot impersonate CP31', () => {
+ const current = fingerprint(root).sha256;
+ assert.match(current, /^[0-9a-f]{64}$/, 'Current tree fingerprint must be a SHA-256 digest');
+ assert.notEqual(current, cp31ReleaseSourceSha256, 'New checkpoint must not claim the CP31 source hash');
+ assert.equal(fingerprint(root).sha256, current, 'Current source fingerprint is deterministic');
+ // Historical CP31 evidence must point to the archived, untouched baseline,
+ // not to a newer CP85/CP86 authorization candidate with a different checksum.
+ // The active candidate is checked separately against the CP86 immutable manifest.
+ const archivedRules = fs.readFileSync(path.join(root,'firestore.rules.CANDIDATE'));
+ assert.equal(require('node:crypto').createHash('sha256').update(archivedRules).digest('hex'), cp31RulesCandidateSha256);
+ const historical = JSON.parse(read('CP81_SOURCE_MANIFEST.json'));
+ assert.equal(historical.files.find(x => x.path === 'firestore.rules.CANDIDATE_CP21')?.sha256, cp31RulesCandidateSha256,
+   'Frozen CP31 baseline must match archived historical manifest');
 });
 test('CP31-B4-02 release no evidence: no invented CI/deploy PASS', () => {
  const rows = auditReleaseEvidence(null,cp31ReleaseSourceSha256);

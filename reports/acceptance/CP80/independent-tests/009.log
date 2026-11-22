@@ -1,0 +1,22 @@
+TAP version 13
+# Subtest: CLA chatbot launcher uses the custom mascot and has an accessible toggle
+ok 1 - CLA chatbot launcher uses the custom mascot and has an accessible toggle
+  ---
+  duration_ms: 1.327175
+  type: 'test'
+  ...
+# Subtest: CLA mascot launcher is circular, fixed to the bottom right, and responsive
+ok 2 - CLA mascot launcher is circular, fixed to the bottom right, and responsive
+  ---
+  duration_ms: 0.498515
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 70.368519

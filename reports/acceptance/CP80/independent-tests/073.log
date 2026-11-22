@@ -1,0 +1,64 @@
+
+> cognitive-learn-ai@0.1.0 test:cp42:scheme-coverage
+> node --experimental-strip-types --test tests/cp42-scheme-coverage.test.mjs
+
+TAP version 13
+# (node:17896) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: 73 scheme codes independent of cutoff; published quota sums match transcribed rows
+ok 1 - 73 scheme codes independent of cutoff; published quota sums match transcribed rows
+  ---
+  duration_ms: 1.051538
+  type: 'test'
+  ...
+# Subtest: QNU named triples retain names and no invented standard codes
+ok 2 - QNU named triples retain names and no invented standard codes
+  ---
+  duration_ms: 0.316512
+  type: 'test'
+  ...
+# Subtest: ambiguous technology or aptitude never mapped to student elective
+ok 3 - ambiguous technology or aptitude never mapped to student elective
+  ---
+  duration_ms: 0.193604
+  type: 'test'
+  ...
+# Subtest: HTU explicit X14 X21 mapping and legacy C14 not guessed
+ok 4 - HTU explicit X14 X21 mapping and legacy C14 not guessed
+  ---
+  duration_ms: 0.835633
+  type: 'test'
+  ...
+# Subtest: scheme-only results searchable without fabricating cutoff or eligibility
+ok 5 - scheme-only results searchable without fabricating cutoff or eligibility
+  ---
+  duration_ms: 1.025886
+  type: 'test'
+  ...
+# Subtest: new school programmes available for elective matching and explicit zero
+ok 6 - new school programmes available for elective matching and explicit zero
+  ---
+  duration_ms: 2.642882
+  type: 'test'
+  ...
+# Subtest: coverage counts remain local and separate from national denominator
+ok 7 - coverage counts remain local and separate from national denominator
+  ---
+  duration_ms: 6.906787
+  type: 'test'
+  ...
+# Subtest: official published school codes work in three-year discovery
+ok 8 - official published school codes work in three-year discovery
+  ---
+  duration_ms: 24.978246
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 241.573786

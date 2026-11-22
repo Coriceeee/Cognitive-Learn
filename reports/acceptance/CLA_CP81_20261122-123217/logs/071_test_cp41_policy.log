@@ -1,0 +1,21 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp41:policy
+> node --test tests/cp41-contextual-policy.test.mjs
+
+Γ£ö synthetic cohorts are reproducible and disjoint (8.6767ms)
+Γ£ö mask never increases load and overload only reduces (4.0512ms)
+Γ£ö policy learns stable maintain and strained reduce in authored simulator (1.7751ms)
+Γ£ö low support falls back to baseline (0.2486ms)
+Γ£ö reject non synthetic or duplicate records (0.5523ms)
+Γ£ö reject mismatched split and malformed logging propensities (2.3937ms)
+Γ£ö reject unsafe manual policy and reward mismatch (6.0498ms)
+Γ£ö IPS SNIPS and ESS hand-checked (0.2524ms)
+Γ£ö report deterministic and nondeployable; intervals and support present (54.5525ms)
+Γä╣ tests 9
+Γä╣ suites 0
+Γä╣ pass 9
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 166.3272

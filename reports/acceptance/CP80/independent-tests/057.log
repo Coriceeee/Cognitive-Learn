@@ -1,0 +1,52 @@
+
+> cognitive-learn-ai@0.1.0 test:cp32:personal
+> node --experimental-strip-types --test tests/cp32-personal-matching.test.mjs
+
+TAP version 13
+# (node:17431) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: same term, preserves zero, rejects missing or invalid scores
+ok 1 - same term, preserves zero, rejects missing or invalid scores
+  ---
+  duration_ms: 1.818266
+  type: 'test'
+  ...
+# Subtest: academic evidence only for source-listed combinations with observed subjects
+ok 2 - academic evidence only for source-listed combinations with observed subjects
+  ---
+  duration_ms: 4.304482
+  type: 'test'
+  ...
+# Subtest: unknown evidence is never converted to failure, explicit filter only
+ok 3 - unknown evidence is never converted to failure, explicit filter only
+  ---
+  duration_ms: 2.241941
+  type: 'test'
+  ...
+# Subtest: interest is user-selected not inferred from grade, supports multiple interests
+ok 4 - interest is user-selected not inferred from grade, supports multiple interests
+  ---
+  duration_ms: 55.982141
+  type: 'test'
+  ...
+# Subtest: requested combination limits academic evidence; no comparison against historical cutoff
+ok 5 - requested combination limits academic evidence; no comparison against historical cutoff
+  ---
+  duration_ms: 6.822303
+  type: 'test'
+  ...
+# Subtest: interest match never discards unknown source combinations without explicit filter
+ok 6 - interest match never discards unknown source combinations without explicit filter
+  ---
+  duration_ms: 4.315938
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 398.608291

@@ -258,15 +258,15 @@ export default function LoginPage() {
   <div className="showcase-copy">
     <span>COGNITIVE LEARN AI</span>
 
-    <h1>
-      Hiểu bản thân học tập.
+    <h1 className="cla-login-manifesto">
+      Mỗi con người là một tiềm năng chưa có giới hạn.
       <br />
-      Mở đường tương lai.
+      Mỗi tương lai là một hành trình chưa được viết nên.
     </h1>
 
-    <p>
-      Phân tích năng lực, nhận thức và dữ liệu tuyển sinh để gợi ý lộ trình học
-      tập và định hướng phù hợp cho từng học sinh.
+    <p className="cla-login-manifesto-caption">
+      CLA — Nơi dữ liệu trở thành sự thấu hiểu, nhận thức mở ra lựa chọn và mỗi
+      học sinh tìm thấy con đường của chính mình.
     </p>
   </div>
 

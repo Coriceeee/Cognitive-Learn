@@ -1,0 +1,18 @@
+﻿
+> cognitive-learn-ai@0.1.0 test:cp32:personal
+> node --experimental-strip-types --test tests/cp32-personal-matching.test.mjs
+
+Γ£ö same term, preserves zero, rejects missing or invalid scores (1.2732ms)
+Γ£ö academic evidence only for source-listed combinations with observed subjects (1.6608ms)
+Γ£ö unknown evidence is never converted to failure, explicit filter only (1.4834ms)
+Γ£ö interest is user-selected not inferred from grade, supports multiple interests (28.8197ms)
+Γ£ö requested combination limits academic evidence; no comparison against historical cutoff (0.9409ms)
+Γ£ö interest match never discards unknown source combinations without explicit filter (1.4727ms)
+Γä╣ tests 6
+Γä╣ suites 0
+Γä╣ pass 6
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 226.4548

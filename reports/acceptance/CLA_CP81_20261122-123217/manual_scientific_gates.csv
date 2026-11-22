@@ -1,0 +1,12 @@
+Category,Gate,Status,RequiredEvidence
+Product,Firebase production rights and restore,NOT_VERIFIED,emulator matrix plus controlled staging deploy and rollback
+Product,Student account save reload and multi device,NOT_VERIFIED,recorded browser E2E with synthetic QA accounts
+Product,All six modules navigation charts and accessibility,NOT_VERIFIED,desktop and mobile browser QA
+Product,Full source/official admissions and scholarship freshness,NOT_VERIFIED,dated source registry plus spot check
+Product,Real API Gemini failure and security,NOT_VERIFIED,staging API logs with redaction
+Research,SCI MAS CSL reliability and validity,NOT_VERIFIED,appropriate participant measurements and intervals
+Research,ML out of sample baseline and calibration,NOT_VERIFIED,eligible outcome labelled holdout
+Research,Adaptive vs Static comparative efficacy,NOT_VERIFIED,approved design and observed outcomes
+Research,Data usage permissions and minor consent,NOT_VERIFIED,legal and research protocol review
+Contest,Original contribution and AI usage log,NOT_VERIFIED,authorship logs and defense package
+Contest,Poster and defense Q&A,NOT_VERIFIED,poster and rehearsed questions with recorded evidence

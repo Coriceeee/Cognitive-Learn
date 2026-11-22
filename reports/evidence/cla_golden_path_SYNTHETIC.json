@@ -1,9 +1,9 @@
 {
   "envelopeSchema": "cla.golden-path.local-integrity.v1",
-  "payloadSha256": "15feafb5bb0683c3f513ea5af7692a51c1931b8e37e1c2087b85dbc466eec8d9",
+  "payloadSha256": "ddf8f5d09145120fca7eba3753347eefbe4cbfe7998c134f259ecbf9a66a1cfc",
   "payload": {
     "fixtureSha256": "683adb60c967781b0cca88d24378fb2b88e217fc25a99084d30815c0a3a69ddb",
-    "sourceFingerprint": "f21efc3100a46ff820f955c241dbf07c66440c45b7d26d013637945e6ab54db5",
+    "sourceFingerprint": "4fbb5938d5e6c3d0eee91292a100be47c910db3573c74befa104b261bfa33e28",
     "replay": {
       "schema": "cla.golden-path.synthetic-replay.v1",
       "dataScope": "SYNTHETIC_ONLY",
