@@ -1,0 +1,420 @@
+
+> cognitive-learn-ai@0.1.0 test:cp42:robust-decision
+> node --experimental-strip-types --test tests/cp42-robust-decision.test.mjs
+
+TAP version 13
+# (node:19540) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: zero radius matches nominal utility and ranking
+ok 1 - zero radius matches nominal utility and ranking
+  ---
+  duration_ms: 2.0972
+  type: 'test'
+  ...
+# Subtest: full radius spans all criteria; worst regret is max per-criterion regret
+ok 2 - full radius spans all criteria; worst regret is max per-criterion regret
+  ---
+  duration_ms: 0.618472
+  type: 'test'
+  ...
+# Subtest: exact vertex result bounds a dense simplex grid for multiple weight configurations
+ok 3 - exact vertex result bounds a dense simplex grid for multiple weight configurations
+  ---
+  duration_ms: 18.517631
+  type: 'test'
+  ...
+# Subtest: same hard limits govern eligible alternatives and fixed anchors
+ok 4 - same hard limits govern eligible alternatives and fixed anchors
+  ---
+  duration_ms: 0.37083
+  type: 'test'
+  ...
+# Subtest: tie candidates retained, dominated alternatives never suggested even for zero weight
+ok 5 - tie candidates retained, dominated alternatives never suggested even for zero weight
+  ---
+  duration_ms: 0.485164
+  type: 'test'
+  ...
+# Subtest: block missing, invalid, duplicate and out-of-scale data
+ok 6 - block missing, invalid, duplicate and out-of-scale data
+  ---
+  duration_ms: 0.448309
+  type: 'test'
+  ...
+# Subtest: real Orion scenario set works for every valid horizon; timetable never exceeds deadline, no duplicate milestone keys
+ok 7 - real Orion scenario set works for every valid horizon; timetable never exceeds deadline, no duplicate milestone keys
+  ---
+  duration_ms: 3.919789
+  type: 'test'
+  ...
+# Subtest: UI passes same filtered scenario list into existing closed loop, no implicit or stale selection
+ok 8 - UI passes same filtered scenario list into existing closed loop, no implicit or stale selection
+  ---
+  duration_ms: 1.1324
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 170.363169
+
+> cognitive-learn-ai@0.1.0 test:cp42:holistic-temporal
+> node --experimental-strip-types --test tests/cp42-holistic-temporal.test.mjs
+
+TAP version 13
+# (node:19569) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: Theil–Sen exact linear slope, robust to a single central spike
+ok 1 - Theil–Sen exact linear slope, robust to a single central spike
+  ---
+  duration_ms: 2.994441
+  type: 'test'
+  ...
+# Subtest: elapsed time, not row number, defines the slope
+ok 2 - elapsed time, not row number, defines the slope
+  ---
+  duration_ms: 0.265277
+  type: 'test'
+  ...
+# Subtest: change candidate requires two sufficiently supported segments
+ok 3 - change candidate requires two sufficiently supported segments
+  ---
+  duration_ms: 0.830363
+  type: 'test'
+  ...
+# Subtest: latest observation excluded from baseline, minimum MAD threshold
+ok 4 - latest observation excluded from baseline, minimum MAD threshold
+  ---
+  duration_ms: 0.213928
+  type: 'test'
+  ...
+# Subtest: invalid rows do not produce temporal results
+ok 5 - invalid rows do not produce temporal results
+  ---
+  duration_ms: 0.307584
+  type: 'test'
+  ...
+# Subtest: zero is valid, constant series no fabricated change
+ok 6 - zero is valid, constant series no fabricated change
+  ---
+  duration_ms: 0.23921
+  type: 'test'
+  ...
+# Subtest: roadmap tasks bound to selected time horizon, no forced options
+ok 7 - roadmap tasks bound to selected time horizon, no forced options
+  ---
+  duration_ms: 0.866394
+  type: 'test'
+  ...
+# Subtest: review reacts to selected priorities and behavioral signal without triggering writes
+ok 8 - review reacts to selected priorities and behavioral signal without triggering writes
+  ---
+  duration_ms: 0.314473
+  type: 'test'
+  ...
+# Subtest: unknown finance/goals cause review rather than inferred outcome
+ok 9 - unknown finance/goals cause review rather than inferred outcome
+  ---
+  duration_ms: 0.363471
+  type: 'test'
+  ...
+# Subtest: budget scenarios separate hypothetical funding, stress and tuition ceiling
+ok 10 - budget scenarios separate hypothetical funding, stress and tuition ceiling
+  ---
+  duration_ms: 0.523832
+  type: 'test'
+  ...
+# Subtest: no data imputation, invalid grants and stress rejected, zero permitted
+ok 11 - no data imputation, invalid grants and stress rejected, zero permitted
+  ---
+  duration_ms: 0.278372
+  type: 'test'
+  ...
+# Subtest: deterministic engines do not mutate inputs
+ok 12 - deterministic engines do not mutate inputs
+  ---
+  duration_ms: 0.471629
+  type: 'test'
+  ...
+# Subtest: live page integrations and all roadmap routes exist; no new external request or storage
+ok 13 - live page integrations and all roadmap routes exist; no new external request or storage
+  ---
+  duration_ms: 1.619956
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 145.247838
+
+> cognitive-learn-ai@0.1.0 test:cp42:focused-workspaces
+> node --experimental-strip-types --test tests/cp42-focused-workspaces.test.mjs
+
+TAP version 13
+# (node:19598) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: canonical route handles every supported former bookmark
+ok 1 - canonical route handles every supported former bookmark
+  ---
+  duration_ms: 1.168717
+  type: 'test'
+  ...
+# Subtest: study aliases and unknown paths do not expand authorization
+ok 2 - study aliases and unknown paths do not expand authorization
+  ---
+  duration_ms: 0.184311
+  type: 'test'
+  ...
+# Subtest: new focused routes have matching access, app and deploy contracts
+ok 3 - new focused routes have matching access, app and deploy contracts
+  ---
+  duration_ms: 0.446828
+  type: 'test'
+  ...
+# Subtest: admin workspace routes are not student allowlisted and use admin guards
+ok 4 - admin workspace routes are not student allowlisted and use admin guards
+  ---
+  duration_ms: 0.719403
+  type: 'test'
+  ...
+# Subtest: Atlas specialized panels have distinct React route owners
+ok 5 - Atlas specialized panels have distinct React route owners
+  ---
+  duration_ms: 1.310119
+  type: 'test'
+  ...
+# Subtest: Lumen separates state, history, advanced analysis, roadmap and evidence
+ok 6 - Lumen separates state, history, advanced analysis, roadmap and evidence
+  ---
+  duration_ms: 0.382165
+  type: 'test'
+  ...
+# Subtest: Orion uses separate workflow steps and retains the shared eligibility restriction
+ok 7 - Orion uses separate workflow steps and retains the shared eligibility restriction
+  ---
+  duration_ms: 0.455539
+  type: 'test'
+  ...
+# Subtest: Pulse owns check-ins and Haven owns budget simulation, both outside overview
+ok 8 - Pulse owns check-ins and Haven owns budget simulation, both outside overview
+  ---
+  duration_ms: 0.25663
+  type: 'test'
+  ...
+# Subtest: Seed keeps exam calendar and transcript on their own pages
+ok 9 - Seed keeps exam calendar and transcript on their own pages
+  ---
+  duration_ms: 0.535891
+  type: 'test'
+  ...
+# Subtest: compact navigation uses current-page semantics, not route-based CSS hiding
+ok 10 - compact navigation uses current-page semantics, not route-based CSS hiding
+  ---
+  duration_ms: 0.546482
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 126.914702
+
+> cognitive-learn-ai@0.1.0 test:cp47:orion-autosave
+> node --experimental-strip-types --test tests/cp47-orion-autosave.test.mjs
+
+TAP version 13
+# Subtest: CP47-01: Orion autosaves only after an explicit local edit and verified draft state
+ok 1 - CP47-01: Orion autosaves only after an explicit local edit and verified draft state
+  ---
+  duration_ms: 1.875611
+  type: 'test'
+  ...
+# Subtest: CP47-02: newer edits are not marked saved by an older in-flight autosave
+ok 2 - CP47-02: newer edits are not marked saved by an older in-flight autosave
+  ---
+  duration_ms: 0.308347
+  type: 'test'
+  ...
+# Subtest: CP47-03: autosave retains the authenticated Firestore ownership guard
+ok 3 - CP47-03: autosave retains the authenticated Firestore ownership guard
+  ---
+  duration_ms: 0.205174
+  type: 'test'
+  ...
+# Subtest: CP47-04: autosave is a Firestore draft only; no browser storage or outcome claim is introduced
+ok 4 - CP47-04: autosave is a Firestore draft only; no browser storage or outcome claim is introduced
+  ---
+  duration_ms: 0.200728
+  type: 'test'
+  ...
+# Subtest: CP47-05: manual save cancels a pending autosave to avoid duplicate writes
+ok 5 - CP47-05: manual save cancels a pending autosave to avoid duplicate writes
+  ---
+  duration_ms: 0.140676
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 65.471037
+
+> cognitive-learn-ai@0.1.0 test:cp50:orion-race
+> node --test tests/cp50-orion-race-safety.test.cjs
+
+TAP version 13
+# Subtest: CP50 Orion: incoming snapshot cannot overwrite unsaved local edits
+ok 1 - CP50 Orion: incoming snapshot cannot overwrite unsaved local edits
+  ---
+  duration_ms: 0.987967
+  type: 'test'
+  ...
+# Subtest: CP50 Orion: autosave validates weeks and scores before persistence
+ok 2 - CP50 Orion: autosave validates weeks and scores before persistence
+  ---
+  duration_ms: 0.236383
+  type: 'test'
+  ...
+# Subtest: CP50 Orion: async saves cannot clear newer edits
+ok 3 - CP50 Orion: async saves cannot clear newer edits
+  ---
+  duration_ms: 0.137446
+  type: 'test'
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 3
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 56.927079
+
+> cognitive-learn-ai@0.1.0 test:cp51:draft-queue
+> node --experimental-strip-types --test tests/cp51-draft-write-queue.test.mjs
+
+TAP version 13
+# (node:19681) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP51: queued older write cannot finish after a newer write
+ok 1 - CP51: queued older write cannot finish after a newer write
+  ---
+  duration_ms: 1.76933
+  type: 'test'
+  ...
+# Subtest: CP51: failed earlier write does not poison subsequent writes
+ok 2 - CP51: failed earlier write does not poison subsequent writes
+  ---
+  duration_ms: 0.771218
+  type: 'test'
+  ...
+# Subtest: CP51: eligibility checked when queued write starts
+ok 3 - CP51: eligibility checked when queued write starts
+  ---
+  duration_ms: 0.361333
+  type: 'test'
+  ...
+# Subtest: CP51: Firestore draft hook uses FIFO and checks authenticated owner at execution time
+ok 4 - CP51: Firestore draft hook uses FIFO and checks authenticated owner at execution time
+  ---
+  duration_ms: 0.289143
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 156.931283
+
+> cognitive-learn-ai@0.1.0 test:cp52:multidevice
+> node --experimental-strip-types --test tests/cp52-multidevice-cas.test.mjs
+
+TAP version 13
+# (node:19710) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP52.1: first write from two empty devices detects competing create
+ok 1 - CP52.1: first write from two empty devices detects competing create
+  ---
+  duration_ms: 2.917254
+  type: 'test'
+  ...
+# Subtest: CP52.2: stale device cannot overwrite newer revision
+ok 2 - CP52.2: stale device cannot overwrite newer revision
+  ---
+  duration_ms: 0.285503
+  type: 'test'
+  ...
+# Subtest: CP52.3: same revision with changed payload or timestamp conflicts
+ok 3 - CP52.3: same revision with changed payload or timestamp conflicts
+  ---
+  duration_ms: 0.298082
+  type: 'test'
+  ...
+# Subtest: CP52.4: legacy version-less draft detects remote changes before migration
+ok 4 - CP52.4: legacy version-less draft detects remote changes before migration
+  ---
+  duration_ms: 0.393742
+  type: 'test'
+  ...
+# Subtest: CP52.5: canonical signature ignores object key order
+ok 5 - CP52.5: canonical signature ignores object key order
+  ---
+  duration_ms: 0.200668
+  type: 'test'
+  ...
+# Subtest: CP52.6: queued follow-up write may use acknowledged revision with unknown server timestamp
+ok 6 - CP52.6: queued follow-up write may use acknowledged revision with unknown server timestamp
+  ---
+  duration_ms: 0.198323
+  type: 'test'
+  ...
+# Subtest: CP52.7: hook uses server transaction read before write, explicit server reload and local edit guard
+ok 7 - CP52.7: hook uses server transaction read before write, explicit server reload and local edit guard
+  ---
+  duration_ms: 0.401521
+  type: 'test'
+  ...
+# Subtest: CP52.8: Orion, Pulse and Haven expose deliberate conflict resolution, keep local editing
+ok 8 - CP52.8: Orion, Pulse and Haven expose deliberate conflict resolution, keep local editing
+  ---
+  duration_ms: 0.205738
+  type: 'test'
+  ...
+# Subtest: CP52.9: candidate rules preserve owner isolation and protect revisioned documents
+ok 9 - CP52.9: candidate rules preserve owner isolation and protect revisioned documents
+  ---
+  duration_ms: 0.762798
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 165.261503

@@ -9,6 +9,7 @@ import type { CognitiveGrowthAnalytics } from "../../../engines/history/cognitiv
 import type { AIStudentContext } from "../../../engines/ai/aiTypes";
 import { analyzeCognitiveProfile, buildLumenDecision } from "../../../engines/lumen/lumenIntelligenceEngine";
 import { getLumenGrowthEvidence } from "../../../engines/lumen/lumenEngine";
+import { buildLumenMeasuredGuide } from "../../../engines/lumen/lumenMeasuredGuide";
 import { runAIOrchestrator } from "../../../engines/ai/aiOrchestrator";
 import { runOrionStrategy } from "../../../lib/orionStrategyEngine";
 import {
@@ -98,6 +99,7 @@ export function useLumenIntelligence(
   );
   const insights = useMemo(() => analyzeCognitiveProfile(cognitive), [cognitive]);
   const decision = useMemo(() => buildLumenDecision(insights), [insights]);
+  const localGuide = useMemo(() => buildLumenMeasuredGuide(cognitive), [cognitive]);
   const growthEvidence = useMemo(() => getLumenGrowthEvidence(growth), [growth]);
   const strategy = useMemo(() => buildOrionStrategy(profile), [profile]);
 
@@ -152,6 +154,7 @@ export function useLumenIntelligence(
     growthEvidence,
     insights,
     decision,
+    localGuide,
     strategy,
     ai: {
       reasoning: ai.reasoning,

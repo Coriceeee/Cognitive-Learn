@@ -1,0 +1,1432 @@
+
+> cognitive-learn-ai@0.1.0 test:cp62:student-rail
+> node --experimental-strip-types --test tests/cp62-student-action-rail.test.mjs
+
+TAP version 13
+# (node:19354) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP62 dashboard data-source signal rail
+    # Subtest: renders three explicitly labeled source flags and no invented measurements
+    ok 1 - renders three explicitly labeled source flags and no invented measurements
+      ---
+      duration_ms: 2.061722
+      type: 'test'
+      ...
+    # Subtest: distinguishes a profile from cognitive and historical observation
+    ok 2 - distinguishes a profile from cognitive and historical observation
+      ---
+      duration_ms: 0.169505
+      type: 'test'
+      ...
+    # Subtest: does not convert missing profile to valid downstream signals
+    ok 3 - does not convert missing profile to valid downstream signals
+      ---
+      duration_ms: 0.178298
+      type: 'test'
+      ...
+    # Subtest: handles mixed prerequisites without pretending all three are ready
+    ok 4 - handles mixed prerequisites without pretending all three are ready
+      ---
+      duration_ms: 0.265209
+      type: 'test'
+      ...
+    # Subtest: renders all-available as exactly three source flags, not a numeric score
+    ok 5 - renders all-available as exactly three source flags, not a numeric score
+      ---
+      duration_ms: 0.471299
+      type: 'test'
+      ...
+    # Subtest: integrates after the verified-data canvas without reinstating twin cards
+    ok 6 - integrates after the verified-data canvas without reinstating twin cards
+      ---
+      duration_ms: 0.258199
+      type: 'test'
+      ...
+    # Subtest: keeps the exam calendar first and the preview isolated
+    ok 7 - keeps the exam calendar first and the preview isolated
+      ---
+      duration_ms: 0.2923
+      type: 'test'
+      ...
+    # Subtest: bounds action count and uses real links, ARIA and plain source labels
+    ok 8 - bounds action count and uses real links, ARIA and plain source labels
+      ---
+      duration_ms: 0.360512
+      type: 'test'
+      ...
+    # Subtest: includes mobile, dark and reduced-motion styles loaded in the global entrypoint
+    ok 9 - includes mobile, dark and reduced-motion styles loaded in the global entrypoint
+      ---
+      duration_ms: 0.395265
+      type: 'test'
+      ...
+    1..9
+ok 1 - CP62 dashboard data-source signal rail
+  ---
+  duration_ms: 6.941736
+  type: 'suite'
+  ...
+1..1
+# tests 9
+# suites 1
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 200.534854
+
+> cognitive-learn-ai@0.1.0 test:cp63:guided-workspaces
+> node --experimental-strip-types --test tests/cp63-guided-workspaces.test.mjs
+
+TAP version 13
+# (node:19383) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP63 student navigation seed
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 1.842784
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.373953
+      type: 'test'
+      ...
+    1..2
+ok 1 - CP63 student navigation seed
+  ---
+  duration_ms: 3.352565
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation lumen
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 0.261043
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.248003
+      type: 'test'
+      ...
+    1..2
+ok 2 - CP63 student navigation lumen
+  ---
+  duration_ms: 0.625962
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation atlas
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 0.104558
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.217417
+      type: 'test'
+      ...
+    1..2
+ok 3 - CP63 student navigation atlas
+  ---
+  duration_ms: 0.68435
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation orion
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 0.287572
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.129855
+      type: 'test'
+      ...
+    1..2
+ok 4 - CP63 student navigation orion
+  ---
+  duration_ms: 0.547063
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation pulse
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 0.267333
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.29865
+      type: 'test'
+      ...
+    1..2
+ok 5 - CP63 student navigation pulse
+  ---
+  duration_ms: 0.707004
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation haven
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 0.207923
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.108704
+      type: 'test'
+      ...
+    1..2
+ok 6 - CP63 student navigation haven
+  ---
+  duration_ms: 0.463317
+  type: 'suite'
+  ...
+# Subtest: CP63 cross-module and accessibility contracts
+    # Subtest: handles nested study abroad country routes as the Atlas study-abroad tab
+    ok 1 - handles nested study abroad country routes as the Atlas study-abroad tab
+      ---
+      duration_ms: 0.227141
+      type: 'test'
+      ...
+    # Subtest: never exposes planned-only or missing destinations
+    ok 2 - never exposes planned-only or missing destinations
+      ---
+      duration_ms: 1.758507
+      type: 'test'
+      ...
+    # Subtest: caps quick links to a small scan-friendly set and preserves order
+    ok 3 - caps quick links to a small scan-friendly set and preserves order
+      ---
+      duration_ms: 0.287042
+      type: 'test'
+      ...
+    # Subtest: uses semantic links, native disclosure, current-page labels and no invented completion gauge
+    ok 4 - uses semantic links, native disclosure, current-page labels and no invented completion gauge
+      ---
+      duration_ms: 0.344549
+      type: 'test'
+      ...
+    # Subtest: includes accessible focus, dark/light and mobile CSS with reduced motion
+    ok 5 - includes accessible focus, dark/light and mobile CSS with reduced motion
+      ---
+      duration_ms: 0.09309
+      type: 'test'
+      ...
+    # Subtest: keeps SPA routing and unsaved-draft navigation guards in charge of links
+    ok 6 - keeps SPA routing and unsaved-draft navigation guards in charge of links
+      ---
+      duration_ms: 0.097617
+      type: 'test'
+      ...
+    1..6
+ok 7 - CP63 cross-module and accessibility contracts
+  ---
+  duration_ms: 2.993045
+  type: 'suite'
+  ...
+1..7
+# tests 18
+# suites 7
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 174.111231
+
+> cognitive-learn-ai@0.1.0 test:cp64:input-ux
+> node --experimental-strip-types --test tests/cp64-input-ux.test.mjs
+
+TAP version 13
+# (node:19412) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP64 real field-coverage semantics
+    # Subtest: does not count blank values as observed zero
+    ok 1 - does not count blank values as observed zero
+      ---
+      duration_ms: 1.630864
+      type: 'test'
+      ...
+    # Subtest: does not count invalid text, NaN, Infinity, or out-of-range values
+    ok 2 - does not count invalid text, NaN, Infinity, or out-of-range values
+      ---
+      duration_ms: 0.181263
+      type: 'test'
+      ...
+    # Subtest: accepts explicit boundaries, decimal comma, and valid negative if permitted
+    ok 3 - accepts explicit boundaries, decimal comma, and valid negative if permitted
+      ---
+      duration_ms: 0.236947
+      type: 'test'
+      ...
+    # Subtest: enforces integer-only weeks and counts when configured
+    ok 4 - enforces integer-only weeks and counts when configured
+      ---
+      duration_ms: 0.191749
+      type: 'test'
+      ...
+    # Subtest: tracks text fields without inventing a numeric score
+    ok 5 - tracks text fields without inventing a numeric score
+      ---
+      duration_ms: 0.115815
+      type: 'test'
+      ...
+    # Subtest: sums independent groups without losing missing or invalid information
+    ok 6 - sums independent groups without losing missing or invalid information
+      ---
+      duration_ms: 0.244938
+      type: 'test'
+      ...
+    # Subtest: reports zero fields as zero rather than NaN or percentages
+    ok 7 - reports zero fields as zero rather than NaN or percentages
+      ---
+      duration_ms: 0.091117
+      type: 'test'
+      ...
+    # Subtest: rejects duplicate field identifiers to prevent double counting
+    ok 8 - rejects duplicate field identifiers to prevent double counting
+      ---
+      duration_ms: 1.518205
+      type: 'test'
+      ...
+    1..8
+ok 1 - CP64 real field-coverage semantics
+  ---
+  duration_ms: 5.691234
+  type: 'suite'
+  ...
+# Subtest: CP64 three-module integration and accessibility
+    # Subtest: shows the data graph on orion overview, not admin or all routes
+    ok 1 - shows the data graph on orion overview, not admin or all routes
+      ---
+      duration_ms: 0.481054
+      type: 'test'
+      ...
+    # Subtest: shows the data graph on pulse overview, not admin or all routes
+    ok 2 - shows the data graph on pulse overview, not admin or all routes
+      ---
+      duration_ms: 0.251578
+      type: 'test'
+      ...
+    # Subtest: shows the data graph on haven overview, not admin or all routes
+    ok 3 - shows the data graph on haven overview, not admin or all routes
+      ---
+      duration_ms: 0.079009
+      type: 'test'
+      ...
+    # Subtest: does not claim academic readiness or probability from form completeness
+    ok 4 - does not claim academic readiness or probability from form completeness
+      ---
+      duration_ms: 0.506893
+      type: 'test'
+      ...
+    # Subtest: shows missing versus invalid as two different states and does not leak field values
+    ok 5 - shows missing versus invalid as two different states and does not leak field values
+      ---
+      duration_ms: 0.196446
+      type: 'test'
+      ...
+    # Subtest: keeps user navigation inside SPA and respects unsaved draft guards
+    ok 6 - keeps user navigation inside SPA and respects unsaved draft guards
+      ---
+      duration_ms: 0.158409
+      type: 'test'
+      ...
+    # Subtest: configures proper input ranges for Orion, Pulse and Haven
+    ok 7 - configures proper input ranges for Orion, Pulse and Haven
+      ---
+      duration_ms: 0.244287
+      type: 'test'
+      ...
+    # Subtest: supports dark mode, mobile, print, reduced motion and accessible focus
+    ok 8 - supports dark mode, mobile, print, reduced motion and accessible focus
+      ---
+      duration_ms: 0.190346
+      type: 'test'
+      ...
+    1..8
+ok 2 - CP64 three-module integration and accessibility
+  ---
+  duration_ms: 2.451079
+  type: 'suite'
+  ...
+# Subtest: CP64 release evidence covers visual artifacts
+    # Subtest: fingerprints styles entrypoint and the new visual style, without duplicates
+    ok 1 - fingerprints styles entrypoint and the new visual style, without duplicates
+      ---
+      duration_ms: 13.182577
+      type: 'test'
+      ...
+    1..1
+ok 3 - CP64 release evidence covers visual artifacts
+  ---
+  duration_ms: 13.359003
+  type: 'suite'
+  ...
+1..3
+# tests 17
+# suites 3
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 173.853894
+
+> cognitive-learn-ai@0.1.0 test:cp65:atlas-lumen-ux
+> node --experimental-strip-types --test tests/cp65-atlas-lumen-ux.test.mjs
+
+TAP version 13
+# (node:19441) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP65 source-backed Atlas overview
+    # Subtest: counts registry rows not inferred national coverage
+    ok 1 - counts registry rows not inferred national coverage
+      ---
+      duration_ms: 1.87408
+      type: 'test'
+      ...
+    # Subtest: keeps missing years explicitly zero without interpolation
+    ok 2 - keeps missing years explicitly zero without interpolation
+      ---
+      duration_ms: 0.249136
+      type: 'test'
+      ...
+    # Subtest: does not invent rows when data is empty
+    ok 3 - does not invent rows when data is empty
+      ---
+      duration_ms: 1.024587
+      type: 'test'
+      ...
+    # Subtest: retains distinction between records, universities, distinct URLs
+    ok 4 - retains distinction between records, universities, distinct URLs
+      ---
+      duration_ms: 0.237469
+      type: 'test'
+      ...
+    # Subtest: reads actual registry instead of hard-coded numbers
+    ok 5 - reads actual registry instead of hard-coded numbers
+      ---
+      duration_ms: 0.229797
+      type: 'test'
+      ...
+    # Subtest: exposes four real active task routes and works with soft links
+    ok 6 - exposes four real active task routes and works with soft links
+      ---
+      duration_ms: 0.245871
+      type: 'test'
+      ...
+    # Subtest: keeps Atlas year-by-year cutoff graph visible on comparison tab
+    ok 7 - keeps Atlas year-by-year cutoff graph visible on comparison tab
+      ---
+      duration_ms: 0.19168
+      type: 'test'
+      ...
+    # Subtest: limits visual pathway to Atlas overview rather than every nested tab
+    ok 8 - limits visual pathway to Atlas overview rather than every nested tab
+      ---
+      duration_ms: 0.222917
+      type: 'test'
+      ...
+    1..8
+ok 1 - CP65 source-backed Atlas overview
+  ---
+  duration_ms: 5.717133
+  type: 'suite'
+  ...
+# Subtest: CP65 Lumen observation-first UX
+    # Subtest: adds evidence journey and chart to the overview only
+    ok 1 - adds evidence journey and chart to the overview only
+      ---
+      duration_ms: 0.350069
+      type: 'test'
+      ...
+    # Subtest: never treats missing dimensions as observed zeros
+    ok 2 - never treats missing dimensions as observed zeros
+      ---
+      duration_ms: 0.303488
+      type: 'test'
+      ...
+    # Subtest: does not claim growth before history verification
+    ok 3 - does not claim growth before history verification
+      ---
+      duration_ms: 0.159851
+      type: 'test'
+      ...
+    # Subtest: routes unavailable insights to Seed completion, not a fake AI result
+    ok 4 - routes unavailable insights to Seed completion, not a fake AI result
+      ---
+      duration_ms: 0.0732
+      type: 'test'
+      ...
+    # Subtest: leaves other Lumen tabs intact
+    ok 5 - leaves other Lumen tabs intact
+      ---
+      duration_ms: 0.136996
+      type: 'test'
+      ...
+    1..5
+ok 2 - CP65 Lumen observation-first UX
+  ---
+  duration_ms: 1.207473
+  type: 'suite'
+  ...
+# Subtest: CP65 usability, release tracking and limitations
+    # Subtest: supports semantic navigation and readable chart numbers
+    ok 1 - supports semantic navigation and readable chart numbers
+      ---
+      duration_ms: 0.099851
+      type: 'test'
+      ...
+    # Subtest: includes mobile, dark, print and reduced-motion rules
+    ok 2 - includes mobile, dark, print and reduced-motion rules
+      ---
+      duration_ms: 0.068092
+      type: 'test'
+      ...
+    # Subtest: fingerprints CSS and logic files for release provenance
+    ok 3 - fingerprints CSS and logic files for release provenance
+      ---
+      duration_ms: 8.070496
+      type: 'test'
+      ...
+    1..3
+ok 3 - CP65 usability, release tracking and limitations
+  ---
+  duration_ms: 8.322847
+  type: 'suite'
+  ...
+1..3
+# tests 16
+# suites 3
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 183.279925
+
+> cognitive-learn-ai@0.1.0 test:cp56:navigation
+> node --experimental-strip-types --test tests/cp56-unsaved-navigation.test.mjs
+
+TAP version 13
+# (node:19470) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP56.1 same workspace sub-tabs keep unsaved work without prompt
+ok 1 - CP56.1 same workspace sub-tabs keep unsaved work without prompt
+  ---
+  duration_ms: 0.864936
+  type: 'test'
+  ...
+# Subtest: CP56.2 explicit allow, deny and unregister work without storing PII
+ok 2 - CP56.2 explicit allow, deny and unregister work without storing PII
+  ---
+  duration_ms: 0.301566
+  type: 'test'
+  ...
+# Subtest: CP56.3 guard registry rejects navigation if any active draft rejects
+ok 3 - CP56.3 guard registry rejects navigation if any active draft rejects
+  ---
+  duration_ms: 0.228785
+  type: 'test'
+  ...
+# Subtest: CP56.4 hook registers and removes SPA and beforeunload guards
+ok 4 - CP56.4 hook registers and removes SPA and beforeunload guards
+  ---
+  duration_ms: 0.289507
+  type: 'test'
+  ...
+# Subtest: CP56.5 hook does not treat an edit as saved until the server confirms it
+ok 5 - CP56.5 hook does not treat an edit as saved until the server confirms it
+  ---
+  duration_ms: 0.308235
+  type: 'test'
+  ...
+# Subtest: CP56.6 both click and imperative navigation use the central guard
+ok 6 - CP56.6 both click and imperative navigation use the central guard
+  ---
+  duration_ms: 0.24536
+  type: 'test'
+  ...
+# Subtest: CP56.7 rejected popstate restores location and leaves view mounted
+ok 7 - CP56.7 rejected popstate restores location and leaves view mounted
+  ---
+  duration_ms: 0.326483
+  type: 'test'
+  ...
+# Subtest: CP56.8 do not persist draft data to browser localStorage or sessionStorage
+ok 8 - CP56.8 do not persist draft data to browser localStorage or sessionStorage
+  ---
+  duration_ms: 0.35783
+  type: 'test'
+  ...
+# Subtest: CP56.9 explicit logout also respects pending unsaved drafts
+ok 9 - CP56.9 explicit logout also respects pending unsaved drafts
+  ---
+  duration_ms: 0.842803
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 101.26147
+
+> cognitive-learn-ai@0.1.0 test:cp59:verified-drafts
+> node --experimental-strip-types --test tests/cp59-verified-module-drafts.test.mjs
+
+TAP version 13
+# (node:19499) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP59.1: cached and pending module snapshots are never server-confirmed
+ok 1 - CP59.1: cached and pending module snapshots are never server-confirmed
+  ---
+  duration_ms: 0.753458
+  type: 'test'
+  ...
+# Subtest: CP59.2: reject records owned by another account, allow safe legacy shape
+ok 2 - CP59.2: reject records owned by another account, allow safe legacy shape
+  ---
+  duration_ms: 0.475038
+  type: 'test'
+  ...
+# Subtest: CP59.3: primary and legacy listeners request metadata changes and gate readValue
+ok 3 - CP59.3: primary and legacy listeners request metadata changes and gate readValue
+  ---
+  duration_ms: 0.378972
+  type: 'test'
+  ...
+# Subtest: CP59.4: offline cache cannot become a CAS baseline and local edits are preserved
+ok 4 - CP59.4: offline cache cannot become a CAS baseline and local edits are preserved
+  ---
+  duration_ms: 0.15892
+  type: 'test'
+  ...
+# Subtest: CP59.5: primary, legacy and explicit reload validate current UID before displaying
+ok 5 - CP59.5: primary, legacy and explicit reload validate current UID before displaying
+  ---
+  duration_ms: 0.293022
+  type: 'test'
+  ...
+# Subtest: CP59.6: a save is rejected until verified draft status is ready or empty
+ok 6 - CP59.6: a save is rejected until verified draft status is ready or empty
+  ---
+  duration_ms: 0.11239
+  type: 'test'
+  ...
+# Subtest: CP59.7: Orion, Pulse and Haven disable save and explain server-sync state
+not ok 7 - CP59.7: Orion, Pulse and Haven disable save and explain server-sync state
+  ---
+  duration_ms: 2.170167
+  type: 'test'
+  location: '/mnt/data/cla_cp66_work/Cognitive-Learn/tests/cp59-verified-module-drafts.test.mjs:53:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /saveStatus === "syncing" \? "Đang chờ Firestore xác minh bản nháp…"/. Input:
+    
+    'import { currentFocusedPath } from "../../lib/focusedModuleRoute";\n' +
+      'import ModuleSectionNav from "../../components/common/ModuleSectionNav";\n' +
+      'import ModuleInputObservatory from "../../components/common/ModuleInputObservatory";\n' +
+      'import ModuleDraftFeedback from "../../components/common/ModuleDraftFeedback";\n' +
+      'import { useRef } from "react";\n' +
+      'import { readNumber, isBlankOrValid } from "../../lib/inputValidation";\n' +
+      'import { useStudentTranscript } from "../seed/hooks/useStudentTranscript";\n' +
+      'import { getLatestSubjectGrades } from "../seed/services/transcriptData";\n' +
+      'import { canPrefillFromVerifiedTranscript } from "../../lib/transcriptPrefillEligibility";\n' +
+      'import { useEffect } from "react";\n' +
+      'import { useModuleDraft } from "../../lib/useModuleDraft";\n' +
+      'import { useMemo, useState } from "react";\n' +
+      'import appLogo from "../../assets/logo cla.png";\n' +
+      'import UserMenu from "../../components/common/UserMenu";\n' +
+      'import {\n' +
+      '  runOrionStrategy,\n' +
+      '  type OrionRiskLevel,\n' +
+      '  type OrionSubjectScore,\n' +
+      '} from "../../lib/orionStrategyEngine";\n' +
+      'import "../../styles.css";\n' +
+      'import OrionScenarioTradeoff from "./OrionScenarioTradeoff";\n' +
+      'import { evaluateScenarioChoices } from "../../lib/scenarioDecision";\n' +
+      'import OrionDecisionWorkbench from "./OrionDecisionWorkbench";\n' +
+      'import ClosedLoopPanel from "../../components/journey/ClosedLoopPanel";\n' +
+      '\n' +
+      'type ScoreKey =\n' +
+      '  | "math"\n' +
+      '  | "literature"\n' +
+      '  | "english"\n' +
+      '  | "physics"\n' +
+      '  | "chemistry"\n' +
+      '  | "biology";\n' +
+      '\n' +
+      'const subjectLabels: Record<ScoreKey, string> = {\n' +
+      '  math: "Toán",\n' +
+      '  literature: "Văn",\n' +
+      '  english: "Anh",\n' +
+      '  physics: "Lý",\n' +
+      '  chemistry: "Hóa",\n' +
+      '  biology: "Sinh",\n' +
+      '};\n' +
+      '\n' +
+      'const defaultScores: Record<ScoreKey, string> = { math: "", literature: "", english: "", physics: "", chemistry: "", biology: "" };\n' +
+      '\n' +
+      'const defaultTargets: Record<ScoreKey, string> = { math: "", literature: "", english: "", physics: "", chemistry: "", biology: "" };\n' +
+      '\n' +
+      'function getRiskLabel(riskLevel: OrionRiskLevel) {\n' +
+      '  if (riskLevel === "LOW") return "Ổn định";\n' +
+      '  if (riskLevel === "MEDIUM") return "Cần tăng tốc";\n' +
+      '  return "Rủi ro cao";\n' +
+      '}\n' +
+      '\n' +
+      'function getRiskClass(riskLevel: OrionRiskLevel) {\n' +
+      '  if (riskLevel === "LOW") return "low";\n' +
+      '  if (riskLevel === "MEDIUM") return "medium";\n' +
+      '  return "high";\n' +
+      '}\n' +
+      '\n' +
+      'export default function OrionPage() {\n' +
+      '  const view = currentFocusedPath();\n' +
+      '  const [scenarioStep, setScenarioStep] = useState<"compare" | "optimize" | "commit">(() => window.location.hash === "#cla-closed-loop" ? "commit" : window.location.hash === "#orion-optimize" ? "optimize" : "compare");\n' +
+      '  function changeScenarioStep(next: "compare" | "optimize" | "commit") {\n' +
+      '    setScenarioStep(next);\n' +
+      '    const hash = next === "commit" ? "#cla-closed-loop" : next === "optimize" ? "#orion-optimize" : "#orion-scenarios";\n' +
+      '    window.history.replaceState(window.history.state, "", "/orion/scenarios" + window.location.search + hash);\n' +
+      '  }\n' +
+      "  const [decisionHours,setDecisionHours]=useState('');\n" +
+      "  const [decisionRisk,setDecisionRisk]=useState<OrionRiskLevel|''>('');\n" +
+      '  const [targetMajor, setTargetMajor] = useState("");\n' +
+      '  const [weeksLeft, setWeeksLeft] = useState("");\n' +
+      '  const [scores, setScores] = useState<Record<ScoreKey, string>>(defaultScores);\n' +
+      '  const [targets, setTargets] =\n' +
+      '    useState<Record<ScoreKey, string>>(defaultTargets);\n' +
+      '\n' +
+      '  const { draft: savedDraft, status: saveStatus, error: draftError, uid: draftOwnerUid, conflict: draftConflict, save: saveDraft, markEditing, acceptRemote } = useModuleDraft<{targetMajor:string;weeksLeft:string;scores:Record<ScoreKey,string>;targets:Record<ScoreKey,string>}>("orion");\n' +
+      '  const transcript = useStudentTranscript();\n' +
+      '  const seededFromTranscript = useRef<string | null>(null);\n' +
+      '  useEffect(() => {\n' +
+      '    if (!transcript.data) return;\n' +
+      '    const keyBySubject: Record<string, ScoreKey> = {\n' +
+      '      "Toán": "math", "Ngữ văn": "literature", "Tiếng Anh": "english",\n' +
+      '      "Vật lý": "physics", "Hóa học": "chemistry", "Sinh học": "biology",\n' +
+      '    };\n' +
+      '    const grades = getLatestSubjectGrades(transcript.data);\n' +
+      '    // An empty transcript must not consume the one-time prefill.\n' +
+      '    // A later Firestore snapshot with observed grades can still populate Orion.\n' +
+      '    const supportedGrades = grades.filter(grade => keyBySubject[grade.subject] && grade.provisional !== null);\n' +
+      '    if (!canPrefillFromVerifiedTranscript({\n' +
+      '      draftOwnerUid, transcriptOwnerUid: transcript.userId,\n' +
+      '      draftStatus: saveStatus, transcriptStatus: transcript.status,\n' +
+      '      seededOwnerUid: seededFromTranscript.current,\n' +
+      '      hasSupportedGrades: supportedGrades.length > 0,\n' +
+      '      hasLocalEdits: dirtyRevision.current,\n' +
+      '    })) return;\n' +
+      '    seededFromTranscript.current = draftOwnerUid;\n' +
+      '    setScores(current => {\n' +
+      '      const next = { ...current };\n' +
+      '      for (const grade of supportedGrades) {\n' +
+      '        const key = keyBySubject[grade.subject];\n' +
+      '        if (key && !next[key] && grade.provisional !== null) next[key] = String(grade.provisional);\n' +
+      '      }\n' +
+      '      return next;\n' +
+      '    });\n' +
+      '  }, [transcript.data, transcript.userId, transcript.status, draftOwnerUid, saveStatus]);\n' +
+      '\n' +
+      '  const [saveNotice, setSaveNotice] = useState("");\n' +
+      '  const [saveNoticeTone, setSaveNoticeTone] = useState<"success" | "warning" | "error">("success");\n' +
+      '  const [saving, setSaving] = useState(false);\n' +
+      '  const [hasLocalEdits, setHasLocalEdits] = useState(false);\n' +
+      '  const [autosaveState, setAutosaveState] = useState<"idle" | "saving" | "saved" | "pending">("idle");\n' +
+      '  const editRevision = useRef(0);\n' +
+      '  const dirtyRevision = useRef(false);\n' +
+      '  const autosaveTimer = useRef<number | null>(null);\n' +
+      "  // CP52: never show a previous account's draft after sign-out/account switch.\n" +
+      '  const lastDraftOwner = useRef<string | null>(null);\n' +
+      '  useEffect(() => {\n' +
+      '    if (lastDraftOwner.current === null) {\n' +
+      '      lastDraftOwner.current = draftOwnerUid;\n' +
+      '      return;\n' +
+      '    }\n' +
+      '    if (lastDraftOwner.current === draftOwnerUid) return;\n' +
+      '    lastDraftOwner.current = draftOwnerUid;\n' +
+      '    setTargetMajor("");\n' +
+      '    setWeeksLeft("");\n' +
+      '    setScores(defaultScores);\n' +
+      '    setTargets(defaultTargets);\n' +
+      '    dirtyRevision.current = false;\n' +
+      '    editRevision.current += 1;\n' +
+      '    setHasLocalEdits(false);\n' +
+      '    setAutosaveState("idle");\n' +
+      '    setSaveNotice("");\n' +
+      '  }, [draftOwnerUid]);\n' +
+      '\n' +
+      '  const currentDraft = { targetMajor, weeksLeft, scores, targets };\n' +
+      '  const currentDraftRef = useRef(currentDraft);\n' +
+      '  currentDraftRef.current = currentDraft;\n' +
+      '\n' +
+      '  useEffect(() => {\n' +
+      '    // Remote snapshots must not overwrite edits still pending on this device.\n' +
+      '    if (!savedDraft || dirtyRevision.current) return;\n' +
+      '    setTargetMajor(savedDraft.targetMajor);\n' +
+      '    setWeeksLeft(savedDraft.weeksLeft);\n' +
+      '    setScores(savedDraft.scores);\n' +
+      '    setTargets(savedDraft.targets);\n' +
+      '  }, [savedDraft]);\n' +
+      '\n' +
+      '  // Debounced Firestore draft persistence protects work when students move between modules.\n' +
+      "  // It only runs after a user edit and after the account's existing draft state is verified.\n" +
+      '  useEffect(() => {\n' +
+      '    if (!hasLocalEdits || (saveStatus !== "ready" && saveStatus !== "empty")) return;\n' +
+      '    const revision = editRevision.current;\n' +
+      '    const payload = { ...currentDraftRef.current };\n' +
+      '    autosaveTimer.current = window.setTimeout(async () => {\n' +
+      '      autosaveTimer.current = null;\n' +
+      '      setAutosaveState("saving");\n' +
+      '      try {\n' +
+      '        if (!isBlankOrValid(payload.weeksLeft, 1, 104, true) ||\n' +
+      '            ![...Object.values(payload.scores), ...Object.values(payload.targets)].every(v => isBlankOrValid(v, 0, 10))) {\n' +
+      '          throw new Error("Invalid Orion draft: scores or weeks outside supported range");\n' +
+      '        }\n' +
+      '        await saveDraft(payload);\n' +
+      '        if (editRevision.current === revision) {\n' +
+      '          dirtyRevision.current = false;\n' +
+      '          setHasLocalEdits(false);\n' +
+      '          setAutosaveState("saved");\n' +
+      '        }\n' +
+      '      } catch {\n' +
+      '        setAutosaveState("pending");\n' +
+      '      }\n' +
+      '    }, 700);\n' +
+      '    return () => {\n' +
+      '      if (autosaveTimer.current !== null) window.clearTimeout(autosaveTimer.current);\n' +
+      '      autosaveTimer.current = null;\n' +
+      '    };\n' +
+      '  }, [hasLocalEdits, saveStatus, targetMajor, weeksLeft, scores, targets]);\n' +
+      '\n' +
+      '  function markLocalEdit() {\n' +
+      '    markEditing();\n' +
+      '    editRevision.current += 1;\n' +
+      '    dirtyRevision.current = true;\n' +
+      '    setHasLocalEdits(true);\n' +
+      '    setAutosaveState("idle");\n' +
+      '    setSaveNotice("");\n' +
+      '  }\n' +
+      '\n' +
+      '  async function saveCurrentDraft() {\n' +
+      '    if (autosaveTimer.current !== null) window.clearTimeout(autosaveTimer.current);\n' +
+      '    autosaveTimer.current = null;\n' +
+      '    setSaving(true);\n' +
+      '    setSaveNotice("");\n' +
+      '    const revision = editRevision.current;\n' +
+      '    try {\n' +
+      '      if (!isBlankOrValid(weeksLeft, 1, 104, true) ||\n' +
+      '          ![...Object.values(scores), ...Object.values(targets)].every(v => isBlankOrValid(v, 0, 10))) {\n' +
+      '        throw new Error("Điểm phải từ 0–10; số tuần phải là số nguyên từ 1–104.");\n' +
+      '      }\n' +
+      '      await saveDraft({targetMajor, weeksLeft, scores, targets});\n' +
+      '      if (editRevision.current === revision) {\n' +
+      '        dirtyRevision.current = false;\n' +
+      '        setHasLocalEdits(false);\n' +
+      '        setAutosaveState("saved");\n' +
+      '        setSaveNoticeTone("success");\n' +
+      '        setSaveNotice("Đã lưu vào hồ sơ của bạn.");\n' +
+      '      } else {\n' +
+      '        setSaveNoticeTone("warning");\n' +
+      '        setSaveNotice("Đã lưu phiên bản trước; thay đổi mới đang chờ tự lưu.");\n' +
+      '      }\n' +
+      '    } catch (error) {\n' +
+      '      setSaveNoticeTone("error");\n' +
+      '      setSaveNotice(error instanceof Error ? error.message : "Không thể lưu dữ liệu. Hãy kiểm tra kết nối và thử lại.");\n' +
+      '    } finally { setSaving(false); }\n' +
+      '  }\n' +
+      '\n' +
+      '  async function loadLatestDraft() {\n' +
+      '    setSaveNotice("");\n' +
+      '    try {\n' +
+      '      const remote = await acceptRemote();\n' +
+      '      // Reset local dirty flag only on explicit user choice.\n' +
+      '      editRevision.current += 1;\n' +
+      '      dirtyRevision.current = false;\n' +
+      '      setHasLocalEdits(false);\n' +
+      '      setAutosaveState("idle");\n' +
+      '      setTargetMajor(remote?.targetMajor ?? "");\n' +
+      '      setWeeksLeft(remote?.weeksLeft ?? "");\n' +
+      '      setScores(remote?.scores ?? defaultScores);\n' +
+      '      setTargets(remote?.targets ?? defaultTargets);\n' +
+      '      setSaveNoticeTone("success");\n' +
+      '      setSaveNotice("Đã tải bản nháp mới nhất từ máy chủ.");\n' +
+      '    } catch (error) {\n' +
+      '      setSaveNoticeTone("error");\n' +
+      '      setSaveNotice(error instanceof Error ? error.message : "Không thể tải bản mới n'... 13731 more characters
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    import { currentFocusedPath } from "../../lib/focusedModuleRoute";
+    import ModuleSectionNav from "../../components/common/ModuleSectionNav";
+    import ModuleInputObservatory from "../../components/common/ModuleInputObservatory";
+    import ModuleDraftFeedback from "../../components/common/ModuleDraftFeedback";
+    import { useRef } from "react";
+    import { readNumber, isBlankOrValid } from "../../lib/inputValidation";
+    import { useStudentTranscript } from "../seed/hooks/useStudentTranscript";
+    import { getLatestSubjectGrades } from "../seed/services/transcriptData";
+    import { canPrefillFromVerifiedTranscript } from "../../lib/transcriptPrefillEligibility";
+    import { useEffect } from "react";
+    import { useModuleDraft } from "../../lib/useModuleDraft";
+    import { useMemo, useState } from "react";
+    import appLogo from "../../assets/logo cla.png";
+    import UserMenu from "../../components/common/UserMenu";
+    import {
+      runOrionStrategy,
+      type OrionRiskLevel,
+      type OrionSubjectScore,
+    } from "../../lib/orionStrategyEngine";
+    import "../../styles.css";
+    import OrionScenarioTradeoff from "./OrionScenarioTradeoff";
+    import { evaluateScenarioChoices } from "../../lib/scenarioDecision";
+    import OrionDecisionWorkbench from "./OrionDecisionWorkbench";
+    import ClosedLoopPanel from "../../components/journey/ClosedLoopPanel";
+    
+    type ScoreKey =
+      | "math"
+      | "literature"
+      | "english"
+      | "physics"
+      | "chemistry"
+      | "biology";
+    
+    const subjectLabels: Record<ScoreKey, string> = {
+      math: "Toán",
+      literature: "Văn",
+      english: "Anh",
+      physics: "Lý",
+      chemistry: "Hóa",
+      biology: "Sinh",
+    };
+    
+    const defaultScores: Record<ScoreKey, string> = { math: "", literature: "", english: "", physics: "", chemistry: "", biology: "" };
+    
+    const defaultTargets: Record<ScoreKey, string> = { math: "", literature: "", english: "", physics: "", chemistry: "", biology: "" };
+    
+    function getRiskLabel(riskLevel: OrionRiskLevel) {
+      if (riskLevel === "LOW") return "Ổn định";
+      if (riskLevel === "MEDIUM") return "Cần tăng tốc";
+      return "Rủi ro cao";
+    }
+    
+    function getRiskClass(riskLevel: OrionRiskLevel) {
+      if (riskLevel === "LOW") return "low";
+      if (riskLevel === "MEDIUM") return "medium";
+      return "high";
+    }
+    
+    export default function OrionPage() {
+      const view = currentFocusedPath();
+      const [scenarioStep, setScenarioStep] = useState<"compare" | "optimize" | "commit">(() => window.location.hash === "#cla-closed-loop" ? "commit" : window.location.hash === "#orion-optimize" ? "optimize" : "compare");
+      function changeScenarioStep(next: "compare" | "optimize" | "commit") {
+        setScenarioStep(next);
+        const hash = next === "commit" ? "#cla-closed-loop" : next === "optimize" ? "#orion-optimize" : "#orion-scenarios";
+        window.history.replaceState(window.history.state, "", "/orion/scenarios" + window.location.search + hash);
+      }
+      const [decisionHours,setDecisionHours]=useState('');
+      const [decisionRisk,setDecisionRisk]=useState<OrionRiskLevel|''>('');
+      const [targetMajor, setTargetMajor] = useState("");
+      const [weeksLeft, setWeeksLeft] = useState("");
+      const [scores, setScores] = useState<Record<ScoreKey, string>>(defaultScores);
+      const [targets, setTargets] =
+        useState<Record<ScoreKey, string>>(defaultTargets);
+    
+      const { draft: savedDraft, status: saveStatus, error: draftError, uid: draftOwnerUid, conflict: draftConflict, save: saveDraft, markEditing, acceptRemote } = useModuleDraft<{targetMajor:string;weeksLeft:string;scores:Record<ScoreKey,string>;targets:Record<ScoreKey,string>}>("orion");
+      const transcript = useStudentTranscript();
+      const seededFromTranscript = useRef<string | null>(null);
+      useEffect(() => {
+        if (!transcript.data) return;
+        const keyBySubject: Record<string, ScoreKey> = {
+          "Toán": "math", "Ngữ văn": "literature", "Tiếng Anh": "english",
+          "Vật lý": "physics", "Hóa học": "chemistry", "Sinh học": "biology",
+        };
+        const grades = getLatestSubjectGrades(transcript.data);
+        // An empty transcript must not consume the one-time prefill.
+        // A later Firestore snapshot with observed grades can still populate Orion.
+        const supportedGrades = grades.filter(grade => keyBySubject[grade.subject] && grade.provisional !== null);
+        if (!canPrefillFromVerifiedTranscript({
+          draftOwnerUid, transcriptOwnerUid: transcript.userId,
+          draftStatus: saveStatus, transcriptStatus: transcript.status,
+          seededOwnerUid: seededFromTranscript.current,
+          hasSupportedGrades: supportedGrades.length > 0,
+          hasLocalEdits: dirtyRevision.current,
+        })) return;
+        seededFromTranscript.current = draftOwnerUid;
+        setScores(current => {
+          const next = { ...current };
+          for (const grade of supportedGrades) {
+            const key = keyBySubject[grade.subject];
+            if (key && !next[key] && grade.provisional !== null) next[key] = String(grade.provisional);
+          }
+          return next;
+        });
+      }, [transcript.data, transcript.userId, transcript.status, draftOwnerUid, saveStatus]);
+    
+      const [saveNotice, setSaveNotice] = useState("");
+      const [saveNoticeTone, setSaveNoticeTone] = useState<"success" | "warning" | "error">("success");
+      const [saving, setSaving] = useState(false);
+      const [hasLocalEdits, setHasLocalEdits] = useState(false);
+      const [autosaveState, setAutosaveState] = useState<"idle" | "saving" | "saved" | "pending">("idle");
+      const editRevision = useRef(0);
+      const dirtyRevision = useRef(false);
+      const autosaveTimer = useRef<number | null>(null);
+      // CP52: never show a previous account's draft after sign-out/account switch.
+      const lastDraftOwner = useRef<string | null>(null);
+      useEffect(() => {
+        if (lastDraftOwner.current === null) {
+          lastDraftOwner.current = draftOwnerUid;
+          return;
+        }
+        if (lastDraftOwner.current === draftOwnerUid) return;
+        lastDraftOwner.current = draftOwnerUid;
+        setTargetMajor("");
+        setWeeksLeft("");
+        setScores(defaultScores);
+        setTargets(defaultTargets);
+        dirtyRevision.current = false;
+        editRevision.current += 1;
+        setHasLocalEdits(false);
+        setAutosaveState("idle");
+        setSaveNotice("");
+      }, [draftOwnerUid]);
+    
+      const currentDraft = { targetMajor, weeksLeft, scores, targets };
+      const currentDraftRef = useRef(currentDraft);
+      currentDraftRef.current = currentDraft;
+    
+      useEffect(() => {
+        // Remote snapshots must not overwrite edits still pending on this device.
+        if (!savedDraft || dirtyRevision.current) return;
+        setTargetMajor(savedDraft.targetMajor);
+        setWeeksLeft(savedDraft.weeksLeft);
+        setScores(savedDraft.scores);
+        setTargets(savedDraft.targets);
+      }, [savedDraft]);
+    
+      // Debounced Firestore draft persistence protects work when students move between modules.
+      // It only runs after a user edit and after the account's existing draft state is verified.
+      useEffect(() => {
+        if (!hasLocalEdits || (saveStatus !== "ready" && saveStatus !== "empty")) return;
+        const revision = editRevision.current;
+        const payload = { ...currentDraftRef.current };
+        autosaveTimer.current = window.setTimeout(async () => {
+          autosaveTimer.current = null;
+          setAutosaveState("saving");
+          try {
+            if (!isBlankOrValid(payload.weeksLeft, 1, 104, true) ||
+                ![...Object.values(payload.scores), ...Object.values(payload.targets)].every(v => isBlankOrValid(v, 0, 10))) {
+              throw new Error("Invalid Orion draft: scores or weeks outside supported range");
+            }
+            await saveDraft(payload);
+            if (editRevision.current === revision) {
+              dirtyRevision.current = false;
+              setHasLocalEdits(false);
+              setAutosaveState("saved");
+            }
+          } catch {
+            setAutosaveState("pending");
+          }
+        }, 700);
+        return () => {
+          if (autosaveTimer.current !== null) window.clearTimeout(autosaveTimer.current);
+          autosaveTimer.current = null;
+        };
+      }, [hasLocalEdits, saveStatus, targetMajor, weeksLeft, scores, targets]);
+    
+      function markLocalEdit() {
+        markEditing();
+        editRevision.current += 1;
+        dirtyRevision.current = true;
+        setHasLocalEdits(true);
+        setAutosaveState("idle");
+        setSaveNotice("");
+      }
+    
+      async function saveCurrentDraft() {
+        if (autosaveTimer.current !== null) window.clearTimeout(autosaveTimer.current);
+        autosaveTimer.current = null;
+        setSaving(true);
+        setSaveNotice("");
+        const revision = editRevision.current;
+        try {
+          if (!isBlankOrValid(weeksLeft, 1, 104, true) ||
+              ![...Object.values(scores), ...Object.values(targets)].every(v => isBlankOrValid(v, 0, 10))) {
+            throw new Error("Điểm phải từ 0–10; số tuần phải là số nguyên từ 1–104.");
+          }
+          await saveDraft({targetMajor, weeksLeft, scores, targets});
+          if (editRevision.current === revision) {
+            dirtyRevision.current = false;
+            setHasLocalEdits(false);
+            setAutosaveState("saved");
+            setSaveNoticeTone("success");
+            setSaveNotice("Đã lưu vào hồ sơ của bạn.");
+          } else {
+            setSaveNoticeTone("warning");
+            setSaveNotice("Đã lưu phiên bản trước; thay đổi mới đang chờ tự lưu.");
+          }
+        } catch (error) {
+          setSaveNoticeTone("error");
+          setSaveNotice(error instanceof Error ? error.message : "Không thể lưu dữ liệu. Hãy kiểm tra kết nối và thử lại.");
+        } finally { setSaving(false); }
+      }
+    
+      async function loadLatestDraft() {
+        setSaveNotice("");
+        try {
+          const remote = await acceptRemote();
+          // Reset local dirty flag only on explicit user choice.
+          editRevision.current += 1;
+          dirtyRevision.current = false;
+          setHasLocalEdits(false);
+          setAutosaveState("idle");
+          setTargetMajor(remote?.targetMajor ?? "");
+          setWeeksLeft(remote?.weeksLeft ?? "");
+          setScores(remote?.scores ?? defaultScores);
+          setTargets(remote?.targets ?? defaultTargets);
+          setSaveNoticeTone("success");
+          setSaveNotice("Đã tải bản nháp mới nhất từ máy chủ.");
+        } catch (error) {
+          setSaveNoticeTone("error");
+          setSaveNotice(error instanceof Error ? error.message : "Không thể tải bản mới nhất.");
+        }
+      }
+    
+      const subjects: OrionSubjectScore[] = useMemo(() => {
+        return (Object.keys(subjectLabels) as ScoreKey[]).flatMap((key): OrionSubjectScore[] => {
+          const current = readNumber(scores[key], 0, 10);
+          const target = readNumber(targets[key], 0, 10);
+          // Incomplete subjects must NOT enter the engine as observed zeros.
+          if (current === null || target === null) return [];
+          return [{
+            subject: key,
+            label: subjectLabels[key],
+            currentScore: current,
+            targetScore: target,
+            importance: key === "math" || key === "english" ? 1.2 :
+              key === "physics" || key === "chemistry" ? 1.1 : 1,
+          }];
+        });
+      }, [scores, targets]);
+    
+      const strategy = useMemo(() => {
+        return runOrionStrategy({
+          subjects,
+          weeksLeft: readNumber(weeksLeft, 1, 104, true) ?? 1,
+          targetMajor,
+        });
+      }, [subjects, weeksLeft, targetMajor]);
+    
+      const eligibleScenarios = useMemo(() => evaluateScenarioChoices(strategy.scenarios,
+        decisionHours.trim() === '' ? null : Number(decisionHours), decisionRisk || null).rows
+        .filter(row => row.reasons.length === 0).map(row => row.scenario), [strategy.scenarios, decisionHours, decisionRisk]);
+    
+      function updateScore(key: ScoreKey, value: string) {
+        markLocalEdit();
+        setScores((current) => ({
+          ...current,
+          [key]: value,
+        }));
+      }
+    
+      function updateTarget(key: ScoreKey, value: string) {
+        markLocalEdit();
+        setTargets((current) => ({
+          ...current,
+          [key]: value,
+        }));
+      }
+    
+      const hasInputs = readNumber(weeksLeft, 1, 104, true) !== null && subjects.length > 0 &&
+        [...Object.values(scores), ...Object.values(targets)].every(value => isBlankOrValid(value, 0, 10));
+    
+      const inputPanel = (<section id="orion-input" className="orion-control-panel">
+              <div className="orion-control-head">
+                <div>
+                  <span>INPUT</span>
+                  <h2>Dữ liệu mô phỏng</h2>
+                  <p>
+                    Điểm hiện tại được đề xuất từ bảng điểm đã lưu khi có dữ liệu. Bạn có thể chỉnh mục tiêu, lưu bản nháp vào hồ sơ. Kết quả mô phỏng không mang ý nghĩa nhân quả.
+                  </p>
+                </div>
+              </div>
+    
+              <div className="cla-firestore-save cla-module-save-panel">
+                <button type="button" disabled={saving || (saveStatus !== "ready" && saveStatus !== "empty")} onClick={() => void saveCurrentDraft()}>
+                  {saving ? "Đang lưu…" : "Lưu dữ liệu"}
+                </button>
+                {draftConflict && <button type="button" onClick={() => void loadLatestDraft()}>Tải bản mới nhất (bỏ thay đổi trên máy này)</button>}
+                <ModuleDraftFeedback status={saveStatus} error={draftError} conflict={draftConflict}
+                  saving={saving} notice={saveNotice} noticeTone={saveNoticeTone}
+                  dirty={hasLocalEdits} autosave={autosaveState} />
+              </div>
+              <div className="orion-form-grid">
+                <label>
+                  <span>Ngành mục tiêu</span>
+                  <input
+                    value={targetMajor}
+                    onChange={(event) => { markLocalEdit(); setTargetMajor(event.target.value); }}
+                    placeholder="Ví dụ: Công nghệ thông tin"
+                  />
+                </label>
+    
+                <label>
+                  <span>Số tuần còn lại</span>
+                  <input
+                    value={weeksLeft}
+                    onChange={(event) => { markLocalEdit(); setWeeksLeft(event.target.value); }}
+                    placeholder="Ví dụ: 16"
+                  />
+                </label>
+              </div>
+    
+              <div className="orion-score-table">
+                {(Object.keys(subjectLabels) as ScoreKey[]).map((key) => (
+                  <div key={key}>
+                    <strong>{subjectLabels[key]}</strong>
+    
+                    <label>
+                      <span>Hiện tại</span>
+                      <input
+                        value={scores[key]}
+                        onChange={(event) => updateScore(key, event.target.value)}
+                      />
+                    </label>
+    
+                    <label>
+                      <span>Mục tiêu</span>
+                      <input
+                        value={targets[key]}
+                        onChange={(event) => updateTarget(key, event.target.value)}
+                      />
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </section>);
+    
+      return (
+        <main className="orion-page">
+          <header className="orion-floating-header">
+            <a
+              className="orion-home-logo"
+              href="/student"
+              aria-label="Về trang học sinh"
+            >
+              <img src={appLogo} alt="Cognitive Learn" />
+            </a>
+    
+            <UserMenu />
+          </header>
+    
+          <section className="orion-shell">
+            {view === "/orion" && <>
+              <section className="orion-hero">
+              <div>
+                <span>ORION STRATEGY</span>
+                <h1>Mô phỏng chiến lược học tập và xét tuyển</h1>
+                <p>
+                  Orion dùng điểm hiện tại, điểm mục tiêu và thời gian còn lại để
+                  tạo chiến lược tăng điểm, phân tích rủi ro và đề xuất lộ trình
+                  hành động theo tuần.
+                </p>
+              </div>
+    
+              <aside>
+                <span>Readiness</span>
+                <strong>{hasInputs ? `${strategy.readinessScore}/100` : "Chưa đủ dữ liệu"}</strong>
+                <em className={`orion-risk ${getRiskClass(strategy.riskLevel)}`}>
+                  {hasInputs ? getRiskLabel(strategy.riskLevel) : "Chưa đánh giá"}
+                </em>
+              </aside>
+            </section></>}
+    
+            <ModuleSectionNav moduleKey="orion" />
+            {view === "/orion" && <ModuleInputObservatory moduleName="Orion" editHref="/orion/inputs"
+              resultHref="/orion/scenarios" resultLabel="Mở mô phỏng chiến lược" canSimulate={hasInputs}
+              note="Cần thời hạn hợp lệ và ít nhất một môn có cả điểm hiện tại lẫn mục tiêu. Các ô còn trống không được diễn giải là điểm 0. Đây không phải thang đo năng lực."
+              groups={[
+                { key: "now", title: "Điểm hiện tại (0–10)", fields: (Object.keys(subjectLabels) as ScoreKey[]).map(key => ({ key: `now-${key}`, label: subjectLabels[key], value: scores[key], min: 0, max: 10 })) },
+                { key: "target", title: "Điểm mục tiêu (0–10)", fields: (Object.keys(subjectLabels) as ScoreKey[]).map(key => ({ key: `target-${key}`, label: subjectLabels[key], value: targets[key], min: 0, max: 10 })) },
+                { key: "planning", title: "Thời hạn & ngành định hướng", fields: [
+                  { key: "weeks", label: "Số tuần còn lại", value: weeksLeft, min: 1, max: 104, integer: true },
+                  { key: "major", label: "Ngành mục tiêu", value: targetMajor },
+                ] },
+              ]} />}
+    
+    
+            {view === "/orion/inputs" && <>{inputPanel}<p className="cla-focus-notice">Lưu dữ liệu trước khi chuyển trang. <a href="/orion/scenarios">Mở mô phỏng chiến lược →</a></p></>}
+            {view === "/orion/scenarios" && <div className="cla-workflow-tabs" aria-label="Các bước ra quyết định">
+              <button type="button" aria-pressed={scenarioStep === "compare"} onClick={() => changeScenarioStep("compare")}>1 · So sánh</button>
+              <button type="button" aria-pressed={scenarioStep === "optimize"} onClick={() => changeScenarioStep("optimize")}>2 · Tối ưu</button>
+              <button type="button" aria-pressed={scenarioStep === "commit"} onClick={() => changeScenarioStep("commit")}>3 · Chốt chu kỳ</button>
+            </div>}
+            {view === "/orion/scenarios" && <p className="cla-focus-notice">Giới hạn hiện tại: {decisionHours.trim() || "Chưa đặt"} giờ/tuần · {decisionRisk ? getRiskLabel(decisionRisk) : "Chưa giới hạn áp lực"} · {hasInputs ? `${eligibleScenarios.length} phương án hợp lệ` : "Chưa đủ dữ liệu"}. <button type="button" className="cla-focus-text-button" onClick={() => changeScenarioStep("optimize")}>Sửa giới hạn</button></p>}
+            {view === "/orion/scenarios" && <details className="cla-focus-disclosure"><summary>Xem / chỉnh dữ liệu mô phỏng và lưu bản nháp</summary>{inputPanel}</details>}
+    
+    
+            {["/orion/scenarios", "/orion/roadmap"].includes(view) && (hasInputs ? (<>
+    {view === "/orion/scenarios" && scenarioStep === "compare" && <details className="cla-focus-disclosure"><summary>Kết quả tổng hợp và môn cần ưu tiên</summary><section className="orion-result-grid">
+              <article className="orion-summary-card">
+                <span>KẾT QUẢ ORION</span>
+                <h2>{strategy.bestScenario.title} · tham khảo ban đầu</h2>
+                <p>{strategy.summary}</p>
+    
+                <div className="orion-metrics">
+                  <div>
+                    <span>Khoảng cách điểm</span>
+                    <strong>{strategy.overallGap}</strong>
+                  </div>
+    
+                  <div>
+                    <span>Giờ/tuần đề xuất</span>
+                    <strong>{strategy.bestScenario.weeklyHours}</strong>
+                  </div>
+    
+                  <div>
+                    <span>Điểm khả thi heuristic</span>
+                    <strong>{strategy.bestScenario.feasibility}%</strong>
+                  </div>
+                </div>
+              </article>
+    
+              <article className="orion-focus-card">
+                <span>FOCUS</span>
+                <h2>Môn cần ưu tiên</h2>
+    
+                <div className="orion-focus-list">
+                  {strategy.focusSubjects.slice(0, 4).map((subject) => (
+                    <div key={subject.subject}>
+                      <strong>{subject.label}</strong>
+                      <span>
+                        {subject.currentScore} → {subject.targetScore}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </article>
+            </section></details>}
+    
+            {view === "/orion/scenarios" && scenarioStep === "compare" && <>
+              <section id="orion-scenarios" className="orion-section">
+              <div className="orion-section-head">
+                <div>
+                  <span>SCENARIOS</span>
+                  <h2>3 chiến lược có thể chọn</h2>
+                </div>
+              </div>
+    
+              <details className="cla-viz-scenario-details"><summary>Chi tiết ba chiến lược</summary><div className="cla-viz-rows">
+                {strategy.scenarios.map((scenario) => (
+                  <article className="cla-viz-row" key={scenario.id}>
+                    <div>
+                      <span>{scenario.feasibility}% khả thi</span>
+                      <h3>{scenario.title}</h3>
+                      <p>{scenario.description}</p>
+                    </div>
+    
+                    <div className="orion-chip-row">
+                      <span>+{scenario.expectedGain} điểm</span>
+                      <span>{scenario.weeklyHours} giờ/tuần</span>
+                    </div>
+                  </article>
+                ))}
+              </div></details>
+              <OrionScenarioTradeoff scenarios={strategy.scenarios} maxHours={decisionHours.trim()===''?null:Number(decisionHours)} maxRisk={decisionRisk||null} />
+              <p className="cla-focus-notice"><button className="cla-focus-text-button" type="button" onClick={() => changeScenarioStep("optimize")}>Tiếp: giới hạn thời gian và tối ưu đa mục tiêu →</button></p>
+            </section></>}
+            {view === "/orion/scenarios" && scenarioStep === "optimize" && <div id="orion-optimize"><OrionDecisionWorkbench scenarios={strategy.scenarios} subjects={subjects} hours={decisionHours} risk={decisionRisk} setHours={setDecisionHours} setRisk={setDecisionRisk} /><p className="cla-focus-notice"><button className="cla-focus-text-button" type="button" onClick={() => changeScenarioStep("commit")}>Tiếp: chốt chu kỳ →</button></p></div>}
+    
+            {view === "/orion/roadmap" && <>
+              <section id="orion-roadmap" className="orion-section">
+              <div className="orion-section-head">
+                <div>
+                  <span>ROADMAP</span>
+                  <h2>Lộ trình tham khảo theo thời hạn</h2>
+                  <p>Lộ trình chung trước khi bạn chốt chiến lược; không phải kế hoạch đã lưu. Hãy chọn phương án phù hợp trong phần tạo chu kỳ.</p>
+                </div>
+              </div>
+    
+              <div className="orion-timeline">
+                {strategy.milestones.map((milestone) => (
+                  <article className="orion-timeline-card" key={milestone.week}>
+                    <span>Tuần {milestone.week}</span>
+                    <h3>{milestone.title}</h3>
+                    <p>{milestone.target}</p>
+    
+                    <ul>
+                      {milestone.actions.map((action) => (
+                        <li key={action}>{action}</li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+            </section></>}
+    
+            {strategy.warnings.length > 0 && (
+              <section className="orion-warning">
+                <strong>Lưu ý từ Orion</strong>
+                <ul>
+                  {strategy.warnings.map((warning) => (
+                    <li key={warning}>{warning}</li>
+                  ))}
+                </ul>
+              </section>
+            )}
+            </>) : <section className="cla-transcript-hint" role="status"><span id="orion-scenarios" /><span id="orion-roadmap" />Chưa đủ dữ liệu hợp lệ để đưa ra kết quả. Hãy hoàn thiện các ô đầu vào và lưu hồ sơ. Đây là công cụ mô phỏng theo giả định, không phải bằng chứng hiệu quả hoặc xác suất thành công. <a href="/orion/inputs">Mở dữ liệu & mục tiêu</a>.</section>)}
+            {view === "/orion/scenarios" && scenarioStep === "commit" && <ClosedLoopPanel mode="orion" plan={hasInputs ? { targetMajor,
+              weeksLeft: readNumber(weeksLeft, 1, 104, true) ?? 1,
+              subjects: subjects.map(s => ({key:s.subject,label:s.label,baseline:s.currentScore,target:s.targetScore})),
+              scenarios: eligibleScenarios } : undefined} />}
+            {view === "/orion/roadmap" && <p className="cla-focus-notice"><a href="/orion/scenarios#cla-closed-loop">Mô phỏng và chốt chu kỳ học tập →</a></p>}
+          </section>
+        </main>
+      );
+    }
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///mnt/data/cla_cp66_work/Cognitive-Learn/tests/cp59-verified-module-drafts.test.mjs:57:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: CP59.8: Seed verified-prefill is gated while module-draft server sync is pending
+ok 8 - CP59.8: Seed verified-prefill is gated while module-draft server sync is pending
+  ---
+  duration_ms: 0.173662
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 7
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 108.48802

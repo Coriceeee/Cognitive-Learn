@@ -1,0 +1,26 @@
+{
+  "checkpoint": "CP48",
+  "date": "2026-11-21",
+  "base": "Cognitive-Learn-CP47-20261121.zip",
+  "scope": "backlog evidence reconciliation and offline verification; no production deploy",
+  "changes": [
+    {
+      "path": "START_HERE_CP48_BACKLOG_RECONCILIATION_20261121.md",
+      "status": "added",
+      "sha256": "8c6c7a6ef6724daf9351b0440be3c1444e968bfe430c1be7fa5fb064003a5285",
+      "bytes": 1274
+    },
+    {
+      "path": "docs/CP48_TEST_REPORT_20261121.md",
+      "status": "added",
+      "sha256": "9916a52fcc1e45d806dcaa3d5d4807635dcdccbad2c943f760335ffcc3fbd1ab",
+      "bytes": 5321
+    },
+    {
+      "path": "docs/CP48_BACKLOG_AUDIT_164_20261121.csv",
+      "status": "added",
+      "sha256": "e69ab0154e05c14232b3804d790fbe82e3af0cb2b5726977fa71c8968f736489",
+      "bytes": 369434
+    }
+  ]
+}

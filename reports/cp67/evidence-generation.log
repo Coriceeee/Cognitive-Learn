@@ -1,0 +1,48 @@
+(node:28712) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+GOLDEN_PATH_SYNTHETIC_GENERATED: /mnt/data/cla_cp67_work/Cognitive-Learn/reports/evidence/cla_golden_path_SYNTHETIC.json; 7 domain stages; NO real outcomes
+(node:28723) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+GOLDEN_PATH_SYNTHETIC_VERIFY_PASS: local deterministic replay only; no production or empirical claim
+(node:28734) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+MULTICYCLE_SYNTHETIC_GENERATED: /mnt/data/cla_cp67_work/Cognitive-Learn/reports/evidence/cla_multicycle_SYNTHETIC.json; 2 reviewed cycles; 0 empirical claims
+(node:28745) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+MULTICYCLE_SYNTHETIC_VERIFY_PASS: deterministic local replay; NO empirical/production claim
+(node:28756) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+MEASUREMENT_SYNTHETIC_GENERATED: /mnt/data/cla_cp67_work/Cognitive-Learn/reports/evidence/cla_measurement_SYNTHETIC.json (no verified measurement claims)
+(node:28767) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+MEASUREMENT_SYNTHETIC_VERIFY_PASS: deterministic local replay, NOT scientific validation
+
+> cognitive-learn-ai@0.1.0 demo:final
+> npm run demo:gate && npm run demo:backup
+
+
+> cognitive-learn-ai@0.1.0 demo:gate
+> node tools/cla_demo_gate.mjs
+
+[PASS] Core closed-loop + measurement regression
+[PASS] Seed tests
+[PASS] Atlas + chatbot tests
+[PASS] Golden Path synthetic generate
+[PASS] Golden Path synthetic verify
+[PASS] Multicycle synthetic generate
+[PASS] Multicycle synthetic verify
+[PASS] Measurement synthetic generate
+[PASS] Measurement synthetic verify
+[PASS] Layout contract
+[PASS] Source fingerprint / release evidence preflight
+DEMO_OFFLINE_CORE_PASS — 11/11 steps; report: /mnt/data/cla_cp67_work/Cognitive-Learn/reports/demo/cla_batch16_offline_readiness.json
+
+> cognitive-learn-ai@0.1.0 demo:backup
+> node --experimental-strip-types tools/cla_demo_backup.mjs --generate && node --experimental-strip-types tools/cla_demo_backup.mjs --verify
+
+SYNTHETIC_DEMO_BACKUP_VERIFIED: --generate; 9773 bytes; sha256=0c31641c46c8084ceae1a9a51cf1527aaad40881899559faaf22be7d22d4d8de; /mnt/data/cla_cp67_work/Cognitive-Learn/reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html
+(node:29037) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+SYNTHETIC_DEMO_BACKUP_VERIFIED: --verify; 9773 bytes; sha256=0c31641c46c8084ceae1a9a51cf1527aaad40881899559faaf22be7d22d4d8de; /mnt/data/cla_cp67_work/Cognitive-Learn/reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html
+(node:29081) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)

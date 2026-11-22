@@ -1,0 +1,176 @@
+<!doctype html><html lang="vi" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CP63 UX — Tuyển sinh &amp; du học</title><style>
+ *{box-sizing:border-box}html{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}body{background:#f5f8fc;color:#17324f;margin:0;padding:32px 26px}a{color:inherit}button{font:inherit}.frame{max-width:1180px;margin:0 auto}.preview-caption{font-size:12px;letter-spacing:.08em;font-weight:750;color:#526c86;padding:9px 0 18px}.demo-content{padding:24px 25px 28px;background:white;border:1px solid #dce7f2;border-radius:20px}.demo-content h2{margin:0 0 11px;font-size:23px}.demo-content p{max-width:80ch;line-height:1.65;font-size:14px}.demo-rule{height:16px;border-radius:8px;margin:19px 0;background:#e9f1fa;width:80%}.demo-rule.short{width:56%}.cla-focus-nav{width:100%}.cla-module-subnav-head strong{display:block}.cla-module-subnav-links a{display:inline-block}.cla-focus-home{text-decoration:none;border:1px solid transparent;border-radius:99px;padding:8px 12px}.cla-guided-controls details{display:block}.cla-focus-heading h1{margin:6px 0 0}.cla-focus-heading p{margin:8px 0 0}.cla-guided-journey-grid a strong{font-size:12px}
+ /* CP63 — shared, student-only guided workspaces across the six modules.
+   A bounded set of links stays visible; other implemented routes use disclosure.
+   This is a navigation index, NEVER a progress or cognitive score. */
+.cla-module-subnav.cla-focus-nav.cla-guided-workspace {
+  --guided-surface: #fff;
+  --guided-soft: #f2f6fc;
+  --guided-ink: #17324f;
+  --guided-muted: #4d6680;
+  --guided-stroke: #d9e4ef;
+  --guided-accent: #2458a5;
+  --guided-accent-soft: #e9f2ff;
+  --guided-focus: #166eaf;
+  box-sizing: border-box;
+  display: block;
+  margin: 12px 0 30px;
+  padding: 20px 23px 17px;
+  min-width: 0;
+  color: var(--guided-ink);
+  background: var(--guided-surface);
+  border: 1px solid var(--guided-stroke);
+  border-radius: 21px;
+  box-shadow: 0 18px 38px -36px rgba(22,58,98,.45);
+}
+.cla-guided-workspace * { box-sizing: border-box; }
+.cla-guided-workspace .cla-module-subnav-head {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px; padding: 0 0 16px;
+  border-bottom: 1px solid var(--guided-stroke);
+}
+.cla-guided-workspace .cla-guided-identity { min-width: 0; }
+.cla-guided-workspace .cla-module-subnav-head .cla-guided-identity > span {
+  display: block; margin: 0 0 5px; color: var(--guided-accent);
+  font-size: 10px; line-height: 1.4; font-weight: 800; letter-spacing: .09em;
+}
+.cla-guided-workspace .cla-guided-identity strong {
+  display: block; color: var(--guided-ink); font-size: clamp(17px,2vw,21px);
+  letter-spacing: -.025em; line-height: 1.3; font-weight: 780;
+}
+.cla-guided-workspace .cla-focus-home {
+  flex: 0 0 auto; border-color: var(--guided-stroke); color: var(--guided-accent);
+  background: var(--guided-soft); font-size: 11px;
+}
+.cla-guided-topline { display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin: 16px 0 10px; }
+.cla-guided-caption { color: var(--guided-muted); font-size: 10px; font-weight: 800; letter-spacing: .105em; }
+.cla-guided-position { font-size: 12px; font-weight: 800; color: var(--guided-accent); font-variant-numeric: tabular-nums; }
+.cla-guided-position small { font-size: 10px; font-weight: 550; color: var(--guided-muted); padding-left: 5px; }
+.cla-focus-nav .cla-module-subnav-links.cla-guided-primary {
+  display: flex; flex-wrap: nowrap; gap: 8px; padding: 0 0 9px;
+  overflow-x: auto; overscroll-behavior-x: contain; border-bottom: 0;
+  scrollbar-width: thin; -webkit-overflow-scrolling: touch;
+}
+.cla-focus-nav .cla-module-subnav-links.cla-guided-primary a {
+  flex: 0 0 auto; display: inline-flex; align-items: center;
+  max-width: 290px; min-height: 43px; padding: 10px 15px;
+  border: 1px solid var(--guided-stroke); border-radius: 11px;
+  background: var(--guided-soft); color: var(--guided-ink);
+  white-space: normal; text-align: left; font-size: 12px; line-height: 1.3;
+  font-weight: 700; text-decoration: none; box-shadow: none;
+  transition: background-color .16s, border-color .16s; transform: none;
+}
+.cla-focus-nav .cla-module-subnav-links.cla-guided-primary a:hover {
+  background: var(--guided-accent-soft); border-color: var(--guided-accent); color: var(--guided-accent);
+}
+.cla-focus-nav .cla-module-subnav-links.cla-guided-primary a.is-active {
+  background: var(--guided-accent); border-color: var(--guided-accent); color: #fff;
+  box-shadow: none;
+}
+.cla-guided-controls { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px 22px; margin-top: 2px; }
+.cla-guided-controls details { position: relative; min-width: min(100%, 180px); }
+.cla-guided-controls summary {
+  display: inline-flex; align-items: center; gap: 7px; padding: 7px 0;
+  color: var(--guided-accent); font-size: 12px; font-weight: 750;
+  line-height: 1.4; cursor: pointer; list-style: none;
+}
+.cla-guided-controls summary::-webkit-details-marker { display: none; }
+.cla-guided-controls summary span:not(.cla-guided-chevron) { color: var(--guided-muted); font-weight: 600; font-size: 11px; }
+.cla-guided-chevron { transition: transform .16s ease; font-size: 15px; }
+.cla-guided-controls details[open] .cla-guided-chevron { transform: rotate(180deg); }
+.cla-guided-more-content, .cla-guided-journey-grid {
+  display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px;
+  margin: 4px 0 11px; padding: 13px;
+  border: 1px solid var(--guided-stroke); border-radius: 13px;
+  background: var(--guided-soft);
+}
+.cla-guided-more-content { width: min(100%, 700px); }
+.cla-guided-more-content a {
+  display: flex; align-items: center; min-width: 0; padding: 11px 13px;
+  border: 1px solid var(--guided-stroke); border-radius: 10px;
+  background: var(--guided-surface); color: var(--guided-ink); font-size: 12px;
+  line-height: 1.4; font-weight: 680; text-decoration: none;
+}
+.cla-guided-more-content a:hover { border-color: var(--guided-accent); color: var(--guided-accent); }
+.cla-guided-controls details[open] { flex: 1 0 100%; }
+.cla-guided-journey-grid { grid-template-columns: repeat(6,minmax(0,1fr)); width: 100%; }
+.cla-guided-journey-grid a { display: grid; min-width: 0; gap: 3px; text-decoration: none;
+  padding: 11px 9px; border-radius: 10px; color: var(--guided-ink);
+  border: 1px solid transparent; }
+.cla-guided-journey-grid a > span { font-size: 10px; font-weight: 800; color: var(--guided-accent); }
+.cla-guided-journey-grid a strong { font-size: 12px; line-height: 1.4; letter-spacing: .02em; }
+.cla-guided-journey-grid a small { font-size: 11px; color: var(--guided-muted); line-height: 1.45; }
+.cla-guided-journey-grid a.is-current { border-color: var(--guided-stroke); background: var(--guided-surface); }
+.cla-guided-journey-grid a:not(.is-current):hover { background: var(--guided-accent-soft); }
+.cla-guided-journey-note { margin: 0 0 12px; font-size: 11px; color: var(--guided-muted); line-height: 1.5; }
+.cla-focus-nav .cla-focus-heading.cla-guided-heading {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: 12px; margin: 18px 0 0; padding-top: 16px;
+  border-top: 1px solid var(--guided-stroke);
+}
+.cla-guided-heading > div:first-child { min-width: 0; }
+.cla-focus-nav .cla-guided-heading h1 { color: var(--guided-ink); font-size: clamp(22px,2.4vw,29px); }
+.cla-focus-nav .cla-guided-heading p { color: var(--guided-muted); font-size: 12px; max-width: 65ch; }
+.cla-guided-pager { display: flex; gap: 7px; flex-shrink: 0; flex-wrap: wrap; }
+.cla-guided-pager a { border: 1px solid var(--guided-stroke); color: var(--guided-accent);
+  background: var(--guided-soft); border-radius: 999px; padding: 9px 12px;
+  font-size: 11px; font-weight: 750; text-decoration: none; }
+.cla-guided-pager a:hover { background: var(--guided-accent-soft); }
+.cla-guided-start { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 10px; padding: 12px 0 1px; border-top: 1px solid var(--guided-stroke); }
+.cla-guided-start > span { color: var(--guided-muted); font-size: 11px; line-height: 1.55; }
+.cla-guided-start a { color: var(--guided-accent); font-size: 12px; font-weight: 780; text-decoration: none; }
+.cla-guided-workspace :is(a,summary):focus-visible { outline: 3px solid var(--guided-focus); outline-offset: 3px; }
+:root[data-theme="dark"] .cla-guided-workspace {
+  --guided-surface: #111f32; --guided-soft: #172b45; --guided-ink: #edf5ff;
+  --guided-muted: #bdcee3; --guided-stroke: #344e6b;
+  --guided-accent: #9ecaff; --guided-accent-soft: #203c5c; --guided-focus: #7ac7ff;
+}
+:root[data-theme="dark"] .cla-focus-nav .cla-module-subnav-links.cla-guided-primary a.is-active {
+  background: #b6d7ff; border-color: #b6d7ff; color: #10233a;
+}
+@media(max-width: 850px) { .cla-guided-journey-grid { grid-template-columns: repeat(3,minmax(0,1fr)); } }
+@media(max-width: 640px) {
+  .cla-module-subnav.cla-focus-nav.cla-guided-workspace { padding: 17px 14px 15px; border-radius: 16px; margin: 9px 0 23px; }
+  .cla-guided-workspace .cla-module-subnav-head { align-items: flex-start; }
+  .cla-guided-workspace .cla-focus-home { font-size: 10px; padding: 7px 10px; }
+  .cla-focus-nav .cla-module-subnav-links.cla-guided-primary a { min-height: 44px; padding: 9px 12px; font-size: 12px; max-width: 205px; }
+  .cla-guided-controls { gap: 4px 18px; }
+  .cla-guided-controls details { min-width: min(100%, 135px); }
+  .cla-guided-more-content { grid-template-columns: 1fr; }
+  .cla-guided-journey-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .cla-focus-nav .cla-focus-heading.cla-guided-heading { display: block; margin-top: 13px; }
+  .cla-guided-pager { margin-top: 12px; }
+  .cla-guided-start { align-items: flex-start; }
+}
+@media(prefers-reduced-motion: reduce) {
+  .cla-guided-workspace :is(a,summary,.cla-guided-chevron) { transition: none !important; }
+}
+@media print {
+  .cla-guided-controls, .cla-guided-pager, .cla-guided-start { display: none !important; }
+  .cla-module-subnav.cla-focus-nav.cla-guided-workspace { box-shadow: none; break-inside: avoid; }
+}
+/* Never hide the selected workspace tab on narrow screens: two visible rows
+   are preferable to a horizontally clipped active link. */
+@media(max-width: 860px) {
+  .cla-focus-nav .cla-module-subnav-links.cla-guided-primary {
+    display: grid; grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 7px; overflow: visible;
+  }
+  .cla-focus-nav .cla-module-subnav-links.cla-guided-primary a {
+    display: flex; min-width: 0; width: 100%; max-width: none;
+    justify-content: flex-start; white-space: normal;
+  }
+}
+
+ @media(max-width:640px){body{padding:14px 11px}.preview-caption{font-size:10px}.demo-content{padding:18px}.demo-content h2{font-size:19px}}
+ </style></head><body><div class="frame"><div class="preview-caption">COGNITIVE LEARN AI / CP63 / ATLAS ADMISSION / ISOLATED CSS PREVIEW</div>
+ <nav class="cla-module-subnav cla-focus-nav cla-guided-workspace" aria-label="Chức năng Tuyển sinh &amp; du học">
+  <div class="cla-module-subnav-head"><div class="cla-guided-identity"><span>ATLAS ADMISSION / Môn thi &amp; nguyện vọng</span><strong>Tuyển sinh &amp; du học</strong></div><a href="/student" class="cla-focus-home">Không gian học sinh</a></div>
+  <div class="cla-guided-topline"><span class="cla-guided-caption">KHÔNG GIAN LÀM VIỆC</span><span class="cla-guided-position">06 / 08 <small>mục điều hướng</small></span></div>
+  <div class="cla-module-subnav-links cla-guided-primary" role="group"><a class="" href="/atlas">Tổng quan</a><a href="/atlas/vietnam" class="" >Tuyển sinh Việt Nam</a><a href="/atlas/study-abroad" class="" >Du học toàn cầu</a><a href="/atlas/subjects" class="is-active" aria-current="page">Môn thi &amp; nguyện vọng</a></div>
+  <div class="cla-guided-controls"><details class="cla-guided-more" open><summary>Khám phá thêm <span>4 mục</span><span class="cla-guided-chevron">⌄</span></summary><div class="cla-guided-more-content"><a href="/atlas/joint" class="" >Liên kết quốc tế tại Việt Nam</a><a href="/atlas/recommendations" class="" >Gợi ý ngành &amp; trường</a><a href="/atlas/compare" class="" >So sánh điểm chuẩn</a><a href="/atlas/sources" class="" >Nguồn tuyển sinh chính thức</a></div></details>
+  <details class="cla-guided-journey" ><summary>Chuyển phân hệ <span class="cla-guided-chevron">⌄</span></summary><div class="cla-guided-journey-grid"><a href="/student" ><span>01</span><strong>SEED</strong><small>Hồ sơ</small></a><a href="/lumen" ><span>02</span><strong>LUMEN</strong><small>Phân tích</small></a><a href="/atlas" class="is-current" aria-current="location"><span>03</span><strong>ATLAS</strong><small>Tuyển sinh</small></a><a href="/orion" ><span>04</span><strong>ORION</strong><small>Kế hoạch</small></a><a href="/pulse" ><span>05</span><strong>PULSE</strong><small>Tiến độ</small></a><a href="/haven" ><span>06</span><strong>HAVEN</strong><small>Học bổng</small></a></div><p class="cla-guided-journey-note">Đây là sơ đồ truy cập các phân hệ, không phải chỉ số tiến bộ hay thứ tự bắt buộc.</p></details></div>
+  <div class="cla-focus-heading cla-guided-heading"><div><span class="cla-guided-caption">ĐANG XEM</span><h1>Môn thi &amp; nguyện vọng</h1><p>Đối chiếu tổ hợp và lưu nguyện vọng.</p></div><div class="cla-guided-pager"><a href="/atlas/recommendations">← Trước</a><a href="/atlas/compare">Tiếp theo →</a></div></div>
+ </nav><section class="demo-content"><h2>Môn thi &amp; nguyện vọng</h2><p>Không gian nội dung của Tuyển sinh &amp; du học. Phần minh họa này chỉ dùng để đánh giá tính dễ đọc, tương phản và bố cục điều hướng; không hiển thị dữ liệu học sinh, điểm số hay kết quả nghiên cứu.</p><div class="demo-rule"></div><div class="demo-rule short"></div></section></div></body></html>

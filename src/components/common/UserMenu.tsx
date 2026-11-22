@@ -13,6 +13,7 @@ import { auth, db } from "../../lib/firebase";
 import "../../styles.css";
 import { NotificationBell } from "./AppNotificationCenter";
 import { clearAppNotices } from "../../lib/appNotices";
+import { canNavigate } from "../../lib/draftNavigationGuard";
 
 export default function UserMenu() {
   const [open, setOpen] = useState(false);
@@ -68,6 +69,9 @@ export default function UserMenu() {
   const adminSuffix = adminMode ? "?from=admin" : "";
 
   async function handleLogout() {
+    // An explicit sign-out must not bypass the unsaved-draft guard.
+    const from = window.location.pathname + window.location.search + window.location.hash;
+    if (!canNavigate(from, "/")) return;
     await signOut(auth);
     clearAppNotices();
     window.location.href = "/";

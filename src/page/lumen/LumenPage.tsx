@@ -5,6 +5,7 @@ import CognitiveInsightPanel from "../seed/components/CognitiveInsightPanel";
 import { useLearningIntelligence } from "../seed/hooks/useLearningIntelligence";
 import { currentFocusedPath } from "../../lib/focusedModuleRoute";
 import ModuleSectionNav from "../../components/common/ModuleSectionNav";
+import ModuleStateNotice from "../../components/common/ModuleStateNotice";
 import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
 
@@ -27,6 +28,7 @@ import LumenCognitiveResearchReadiness from "./components/LumenCognitiveResearch
 import LumenStrategyPanel from "./components/LumenStrategyPanel";
 import CognitiveGrowthPanel from "../seed/components/CognitiveGrowthPanel";
 import LumenSignalAtlas from "./components/LumenSignalAtlas";
+import LumenObservationJourney from "./components/LumenObservationJourney";
 import LumenAdaptiveRoadmap from "./components/LumenAdaptiveRoadmap";
 import LumenDynamicState from "./components/LumenDynamicState";
 import ClosedLoopPanel from "../../components/journey/ClosedLoopPanel";
@@ -91,9 +93,7 @@ export default function LumenPage() {
 
           <div className="lumen-loading-orb" />
 
-          <strong>
-            Đang tải Lumen Intelligence...
-          </strong>
+          <ModuleStateNotice tone="loading" label="Đang tải Lumen Intelligence" message="Đang nhận hồ sơ và dữ liệu nhận thức để kiểm tra trạng thái." />
 
         </section>
 
@@ -107,8 +107,9 @@ export default function LumenPage() {
 
   if (syncing) return (
     <main className="lumen-page">
-      <section className="lumen-page-loading" role="status" aria-live="polite">
-        Đang chờ Firestore xác minh hồ sơ và dữ liệu nhận thức. Kết quả lưu trong cache không được dùng để phân tích.
+      <section className="lumen-page-loading">
+        <ModuleStateNotice tone="loading" label="Chờ Firestore xác minh"
+          message="Đang chờ Firestore xác minh hồ sơ và dữ liệu nhận thức. Kết quả lưu trong cache không được dùng để phân tích." />
       </section>
     </main>
   );
@@ -154,13 +155,11 @@ export default function LumenPage() {
                 LUMEN INTELLIGENCE
               </span>
 
-              <h1>
-                Không thể tải dữ liệu
-              </h1>
-
-              <p>
-                {error}
-              </p>
+              <h1>Không thể tải dữ liệu</h1>
+              <ModuleStateNotice tone="error" label="Không thể tải dữ liệu"
+                message={error}>
+                <a href="/student/profile">Kiểm tra hồ sơ Seed</a>
+              </ModuleStateNotice>
 
             </section>
 
@@ -176,20 +175,11 @@ export default function LumenPage() {
                 LUMEN INTELLIGENCE
               </span>
 
-              <h1>
-                Chưa có hồ sơ học sinh
-              </h1>
-
-              <p>
-                Hoàn thiện Seed Profile để kích hoạt hệ thống phân tích nhận thức.
-              </p>
-
-              <a
-                href="/student/profile"
-                className="lumen-primary-action"
-              >
-                Hoàn thiện hồ sơ
-              </a>
+              <h1>Chưa có hồ sơ học sinh</h1>
+              <ModuleStateNotice tone="neutral" label="Chưa có hồ sơ học sinh"
+                message="Hoàn thiện Seed Profile để bắt đầu quan sát các chỉ số nhận thức. Không suy đoán điểm số khi thiếu dữ liệu.">
+                <a href="/student/profile" className="lumen-primary-action">Hoàn thiện hồ sơ</a>
+              </ModuleStateNotice>
 
             </section>
 
@@ -217,7 +207,10 @@ export default function LumenPage() {
                 }
                 overallScore={cognitive.overallScore}
                 scoreAvailable={cognitive.scoreAvailable === true}
-              /></div></>}
+              /></div>
+          <LumenObservationJourney cognitive={cognitive} growth={growthAnalytics} historyLoading={historyLoading} />
+          <LumenSignalAtlas cognitive={cognitive} growth={growthAnalytics} mode="indices" />
+        </>}
 
 
               {view === "/lumen/history" && historyLoading && (
@@ -288,6 +281,21 @@ export default function LumenPage() {
                           : "Theo yêu cầu"}
                     </span>
                   </div>
+
+                  <section className="lumen-gemini-answer" aria-labelledby="lumen-local-guide-title">
+                    <div className="lumen-gemini-answer-header">
+                      <strong id="lumen-local-guide-title">Hướng dẫn CLA nội bộ · không cần Gemini</strong>
+                      <span>Quy tắc thử nghiệm, không phải dự báo ML</span>
+                    </div>
+                    <p>{intelligence.localGuide.summary}</p>
+                    {intelligence.localGuide.observations.length > 0 && <>
+                      <h3>Chỉ báo được sử dụng</h3>
+                      <ul>{intelligence.localGuide.observations.map(value => <li key={value}>{value}</li>)}</ul>
+                    </>}
+                    <h3>Bước có thể thử</h3>
+                    <ul>{intelligence.localGuide.nextActions.map(value => <li key={value}>{value}</li>)}</ul>
+                    <p className="lumen-gemini-note">{intelligence.localGuide.limitations.join(" ")}</p>
+                  </section>
 
                   <button
                     type="button"

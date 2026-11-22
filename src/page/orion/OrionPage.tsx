@@ -1,9 +1,12 @@
 import { currentFocusedPath } from "../../lib/focusedModuleRoute";
 import ModuleSectionNav from "../../components/common/ModuleSectionNav";
+import ModuleInputObservatory from "../../components/common/ModuleInputObservatory";
+import ModuleDraftFeedback from "../../components/common/ModuleDraftFeedback";
 import { useRef } from "react";
 import { readNumber, isBlankOrValid } from "../../lib/inputValidation";
 import { useStudentTranscript } from "../seed/hooks/useStudentTranscript";
 import { getLatestSubjectGrades } from "../seed/services/transcriptData";
+import { canPrefillFromVerifiedTranscript } from "../../lib/transcriptPrefillEligibility";
 import { useEffect } from "react";
 import { useModuleDraft } from "../../lib/useModuleDraft";
 import { useMemo, useState } from "react";
@@ -69,11 +72,11 @@ export default function OrionPage() {
   const [targets, setTargets] =
     useState<Record<ScoreKey, string>>(defaultTargets);
 
-  const { draft: savedDraft, status: saveStatus, error: draftError, save: saveDraft } = useModuleDraft<{targetMajor:string;weeksLeft:string;scores:Record<ScoreKey,string>;targets:Record<ScoreKey,string>}>("orion");
+  const { draft: savedDraft, status: saveStatus, error: draftError, uid: draftOwnerUid, conflict: draftConflict, save: saveDraft, markEditing, acceptRemote } = useModuleDraft<{targetMajor:string;weeksLeft:string;scores:Record<ScoreKey,string>;targets:Record<ScoreKey,string>}>("orion");
   const transcript = useStudentTranscript();
-  const seededFromTranscript = useRef(false);
+  const seededFromTranscript = useRef<string | null>(null);
   useEffect(() => {
-    if (seededFromTranscript.current || saveStatus !== "empty" || !transcript.data) return;
+    if (!transcript.data) return;
     const keyBySubject: Record<string, ScoreKey> = {
       "Toán": "math", "Ngữ văn": "literature", "Tiếng Anh": "english",
       "Vật lý": "physics", "Hóa học": "chemistry", "Sinh học": "biology",
@@ -82,8 +85,14 @@ export default function OrionPage() {
     // An empty transcript must not consume the one-time prefill.
     // A later Firestore snapshot with observed grades can still populate Orion.
     const supportedGrades = grades.filter(grade => keyBySubject[grade.subject] && grade.provisional !== null);
-    if (supportedGrades.length === 0) return;
-    seededFromTranscript.current = true;
+    if (!canPrefillFromVerifiedTranscript({
+      draftOwnerUid, transcriptOwnerUid: transcript.userId,
+      draftStatus: saveStatus, transcriptStatus: transcript.status,
+      seededOwnerUid: seededFromTranscript.current,
+      hasSupportedGrades: supportedGrades.length > 0,
+      hasLocalEdits: dirtyRevision.current,
+    })) return;
+    seededFromTranscript.current = draftOwnerUid;
     setScores(current => {
       const next = { ...current };
       for (const grade of supportedGrades) {
@@ -92,30 +101,135 @@ export default function OrionPage() {
       }
       return next;
     });
-  }, [transcript.data, saveStatus]);
+  }, [transcript.data, transcript.userId, transcript.status, draftOwnerUid, saveStatus]);
 
   const [saveNotice, setSaveNotice] = useState("");
+  const [saveNoticeTone, setSaveNoticeTone] = useState<"success" | "warning" | "error">("success");
   const [saving, setSaving] = useState(false);
+  const [hasLocalEdits, setHasLocalEdits] = useState(false);
+  const [autosaveState, setAutosaveState] = useState<"idle" | "saving" | "saved" | "pending">("idle");
+  const editRevision = useRef(0);
+  const dirtyRevision = useRef(false);
+  const autosaveTimer = useRef<number | null>(null);
+  // CP52: never show a previous account's draft after sign-out/account switch.
+  const lastDraftOwner = useRef<string | null>(null);
   useEffect(() => {
-    if (!savedDraft) return;
+    if (lastDraftOwner.current === null) {
+      lastDraftOwner.current = draftOwnerUid;
+      return;
+    }
+    if (lastDraftOwner.current === draftOwnerUid) return;
+    lastDraftOwner.current = draftOwnerUid;
+    setTargetMajor("");
+    setWeeksLeft("");
+    setScores(defaultScores);
+    setTargets(defaultTargets);
+    dirtyRevision.current = false;
+    editRevision.current += 1;
+    setHasLocalEdits(false);
+    setAutosaveState("idle");
+    setSaveNotice("");
+  }, [draftOwnerUid]);
+
+  const currentDraft = { targetMajor, weeksLeft, scores, targets };
+  const currentDraftRef = useRef(currentDraft);
+  currentDraftRef.current = currentDraft;
+
+  useEffect(() => {
+    // Remote snapshots must not overwrite edits still pending on this device.
+    if (!savedDraft || dirtyRevision.current) return;
     setTargetMajor(savedDraft.targetMajor);
     setWeeksLeft(savedDraft.weeksLeft);
     setScores(savedDraft.scores);
     setTargets(savedDraft.targets);
   }, [savedDraft]);
+
+  // Debounced Firestore draft persistence protects work when students move between modules.
+  // It only runs after a user edit and after the account's existing draft state is verified.
+  useEffect(() => {
+    if (!hasLocalEdits || (saveStatus !== "ready" && saveStatus !== "empty")) return;
+    const revision = editRevision.current;
+    const payload = { ...currentDraftRef.current };
+    autosaveTimer.current = window.setTimeout(async () => {
+      autosaveTimer.current = null;
+      setAutosaveState("saving");
+      try {
+        if (!isBlankOrValid(payload.weeksLeft, 1, 104, true) ||
+            ![...Object.values(payload.scores), ...Object.values(payload.targets)].every(v => isBlankOrValid(v, 0, 10))) {
+          throw new Error("Invalid Orion draft: scores or weeks outside supported range");
+        }
+        await saveDraft(payload);
+        if (editRevision.current === revision) {
+          dirtyRevision.current = false;
+          setHasLocalEdits(false);
+          setAutosaveState("saved");
+        }
+      } catch {
+        setAutosaveState("pending");
+      }
+    }, 700);
+    return () => {
+      if (autosaveTimer.current !== null) window.clearTimeout(autosaveTimer.current);
+      autosaveTimer.current = null;
+    };
+  }, [hasLocalEdits, saveStatus, targetMajor, weeksLeft, scores, targets]);
+
+  function markLocalEdit() {
+    markEditing();
+    editRevision.current += 1;
+    dirtyRevision.current = true;
+    setHasLocalEdits(true);
+    setAutosaveState("idle");
+    setSaveNotice("");
+  }
+
   async function saveCurrentDraft() {
+    if (autosaveTimer.current !== null) window.clearTimeout(autosaveTimer.current);
+    autosaveTimer.current = null;
     setSaving(true);
     setSaveNotice("");
+    const revision = editRevision.current;
     try {
       if (!isBlankOrValid(weeksLeft, 1, 104, true) ||
           ![...Object.values(scores), ...Object.values(targets)].every(v => isBlankOrValid(v, 0, 10))) {
         throw new Error("Điểm phải từ 0–10; số tuần phải là số nguyên từ 1–104.");
       }
       await saveDraft({targetMajor, weeksLeft, scores, targets});
-      setSaveNotice("Đã lưu vào hồ sơ của bạn.");
+      if (editRevision.current === revision) {
+        dirtyRevision.current = false;
+        setHasLocalEdits(false);
+        setAutosaveState("saved");
+        setSaveNoticeTone("success");
+        setSaveNotice("Đã lưu vào hồ sơ của bạn.");
+      } else {
+        setSaveNoticeTone("warning");
+        setSaveNotice("Đã lưu phiên bản trước; thay đổi mới đang chờ tự lưu.");
+      }
     } catch (error) {
+      setSaveNoticeTone("error");
       setSaveNotice(error instanceof Error ? error.message : "Không thể lưu dữ liệu. Hãy kiểm tra kết nối và thử lại.");
     } finally { setSaving(false); }
+  }
+
+  async function loadLatestDraft() {
+    setSaveNotice("");
+    try {
+      const remote = await acceptRemote();
+      // Reset local dirty flag only on explicit user choice.
+      editRevision.current += 1;
+      dirtyRevision.current = false;
+      setHasLocalEdits(false);
+      setAutosaveState("idle");
+      setTargetMajor(remote?.targetMajor ?? "");
+      setWeeksLeft(remote?.weeksLeft ?? "");
+      setScores(remote?.scores ?? defaultScores);
+      setTargets(remote?.targets ?? defaultTargets);
+      setSaveNoticeTone("success");
+      setSaveNotice("Đã tải bản nháp mới nhất từ máy chủ.");
+    } catch (error) {
+      setSaveNoticeTone("error");
+      setSaveNotice(error instanceof Error ? error.message : "Không thể tải bản mới nhất.");
+    }
   }
 
   const subjects: OrionSubjectScore[] = useMemo(() => {
@@ -148,6 +262,7 @@ export default function OrionPage() {
     .filter(row => row.reasons.length === 0).map(row => row.scenario), [strategy.scenarios, decisionHours, decisionRisk]);
 
   function updateScore(key: ScoreKey, value: string) {
+    markLocalEdit();
     setScores((current) => ({
       ...current,
       [key]: value,
@@ -155,6 +270,7 @@ export default function OrionPage() {
   }
 
   function updateTarget(key: ScoreKey, value: string) {
+    markLocalEdit();
     setTargets((current) => ({
       ...current,
       [key]: value,
@@ -175,18 +291,21 @@ export default function OrionPage() {
             </div>
           </div>
 
-          <div className="cla-firestore-save" role="status" style={{display:"flex",flexWrap:"wrap",alignItems:"center",gap:12,margin:"12px 0"}}>
-            <button type="button" disabled={saving || saveStatus === "loading" || saveStatus === "error" || saveStatus === "signed-out"} onClick={() => void saveCurrentDraft()}>
+          <div className="cla-firestore-save cla-module-save-panel">
+            <button type="button" disabled={saving || (saveStatus !== "ready" && saveStatus !== "empty")} onClick={() => void saveCurrentDraft()}>
               {saving ? "Đang lưu…" : "Lưu dữ liệu"}
             </button>
-            <span>{saveNotice || draftError || (saveStatus === "ready" ? "Đã đồng bộ dữ liệu đã lưu" : saveStatus === "loading" ? "Đang tải dữ liệu đã lưu…" : "Chưa có dữ liệu đã lưu")}</span>
+            {draftConflict && <button type="button" onClick={() => void loadLatestDraft()}>Tải bản mới nhất (bỏ thay đổi trên máy này)</button>}
+            <ModuleDraftFeedback status={saveStatus} error={draftError} conflict={draftConflict}
+              saving={saving} notice={saveNotice} noticeTone={saveNoticeTone}
+              dirty={hasLocalEdits} autosave={autosaveState} />
           </div>
           <div className="orion-form-grid">
             <label>
               <span>Ngành mục tiêu</span>
               <input
                 value={targetMajor}
-                onChange={(event) => setTargetMajor(event.target.value)}
+                onChange={(event) => { markLocalEdit(); setTargetMajor(event.target.value); }}
                 placeholder="Ví dụ: Công nghệ thông tin"
               />
             </label>
@@ -195,7 +314,7 @@ export default function OrionPage() {
               <span>Số tuần còn lại</span>
               <input
                 value={weeksLeft}
-                onChange={(event) => setWeeksLeft(event.target.value)}
+                onChange={(event) => { markLocalEdit(); setWeeksLeft(event.target.value); }}
                 placeholder="Ví dụ: 16"
               />
             </label>
@@ -263,6 +382,18 @@ export default function OrionPage() {
         </section></>}
 
         <ModuleSectionNav moduleKey="orion" />
+        {view === "/orion" && <ModuleInputObservatory moduleName="Orion" editHref="/orion/inputs"
+          resultHref="/orion/scenarios" resultLabel="Mở mô phỏng chiến lược" canSimulate={hasInputs}
+          note="Cần thời hạn hợp lệ và ít nhất một môn có cả điểm hiện tại lẫn mục tiêu. Các ô còn trống không được diễn giải là điểm 0. Đây không phải thang đo năng lực."
+          groups={[
+            { key: "now", title: "Điểm hiện tại (0–10)", fields: (Object.keys(subjectLabels) as ScoreKey[]).map(key => ({ key: `now-${key}`, label: subjectLabels[key], value: scores[key], min: 0, max: 10 })) },
+            { key: "target", title: "Điểm mục tiêu (0–10)", fields: (Object.keys(subjectLabels) as ScoreKey[]).map(key => ({ key: `target-${key}`, label: subjectLabels[key], value: targets[key], min: 0, max: 10 })) },
+            { key: "planning", title: "Thời hạn & ngành định hướng", fields: [
+              { key: "weeks", label: "Số tuần còn lại", value: weeksLeft, min: 1, max: 104, integer: true },
+              { key: "major", label: "Ngành mục tiêu", value: targetMajor },
+            ] },
+          ]} />}
+
 
         {view === "/orion/inputs" && <>{inputPanel}<p className="cla-focus-notice">Lưu dữ liệu trước khi chuyển trang. <a href="/orion/scenarios">Mở mô phỏng chiến lược →</a></p></>}
         {view === "/orion/scenarios" && <div className="cla-workflow-tabs" aria-label="Các bước ra quyết định">

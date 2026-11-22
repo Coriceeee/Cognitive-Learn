@@ -1,6 +1,7 @@
 import { navigateTo } from "../../lib/clientNavigation";
 import StudentSubjectPanel from "./components/StudentSubjectPanel";
 import ModuleSectionNav from "../../components/common/ModuleSectionNav";
+import ModuleStateNotice from "../../components/common/ModuleStateNotice";
 import { useState } from "react";
 import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
@@ -30,11 +31,21 @@ export default function StudentTranscriptPage() {
         </header>
         <div className="cla-transcript-page-actions"><a href="/student/profile">Nhập / sửa bảng điểm →</a></div>
         <details className="cla-focus-disclosure"><summary>Điểm gần nhất theo từng môn</summary><StudentSubjectPanel onUpdate={() => { navigateTo("/student/profile"); }} /></details>
-        {status === "loading" && <p role="status">Đang tải bảng điểm đã lưu…</p>}
-        {status === "syncing" && <div role="status"><p>Đang chờ xác minh từ Firestore. Bảng điểm trong cache hoặc đang ghi dở sẽ không được hiển thị như dữ liệu đã đồng bộ. Hãy kiểm tra kết nối mạng.</p><button type="button" onClick={retry}>Thử đồng bộ lại</button></div>}
-        {status === "signed-out" && <p>Hãy đăng nhập bằng tài khoản học sinh để xem bảng điểm.</p>}
-        {status === "empty" && <p>Chưa có bảng điểm trong hồ sơ. Hãy vào trang nhập hồ sơ để lưu dữ liệu.</p>}
-        {status === "error" && <div role="alert"><p>{error}</p><button type="button" onClick={retry}>Kiểm tra lại kết nối và bảng điểm</button></div>}
+        {status === "loading" && <ModuleStateNotice tone="loading" label="Đang tải bảng điểm" message="Đang tải bảng điểm đã lưu từ máy chủ…" />}
+        {status === "syncing" && <ModuleStateNotice tone="loading" label="Đang xác minh với Firestore"
+          message="Bảng điểm trong cache hoặc đang ghi dở chưa được coi là đã đồng bộ. Hãy kiểm tra kết nối mạng.">
+          <button className="cla-action-button cla-action-button--outline" type="button" onClick={retry}>Thử đồng bộ lại</button>
+        </ModuleStateNotice>}
+        {status === "signed-out" && <ModuleStateNotice tone="warning" label="Chưa đăng nhập"
+          message="Hãy đăng nhập bằng tài khoản học sinh để xem bảng điểm."><a href="/">Đến trang đăng nhập</a></ModuleStateNotice>}
+        {status === "empty" && <ModuleStateNotice tone="neutral" label="Chưa có bảng điểm"
+          message="Chưa có bảng điểm đã lưu trong hồ sơ. Hoàn thiện thông tin trước khi xem phân tích.">
+          <a href="/student/profile">Nhập bảng điểm</a>
+        </ModuleStateNotice>}
+        {status === "error" && <ModuleStateNotice tone="error" label="Không thể tải bảng điểm"
+          message={error || "Không thể tải bảng điểm đã lưu. Kiểm tra quyền truy cập và kết nối."}>
+          <button className="cla-action-button cla-action-button--outline" type="button" onClick={retry}>Kiểm tra lại kết nối và bảng điểm</button>
+        </ModuleStateNotice>}
         {data && status === "ready" && source !== "legacy" && (
           <div role={integrity.status === "MISMATCH" || integrity.status === "error" ? "alert" : "status"} className="cla-transcript-hint" data-academic-integrity={integrity.status}>
             {integrity.status === "VERIFIED"

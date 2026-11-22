@@ -2,11 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, doc, getDocsFromServer, onSnapshot, orderBy, query, limit, where, startAfter, runTransaction, serverTimestamp, type Unsubscribe, type QueryDocumentSnapshot, type DocumentData } from "firebase/firestore";
 import { auth, db } from "./firebase";
+import { assessJourneySnapshot } from "./journeySnapshotGate";
 import { auditAdaptiveDecisionTrace, sameReviewCommit } from "./adaptiveNextCycle";
 import {auditJourneyArchivePage, HISTORY_MAX_DISPLAY} from "./journeyHistoryArchive";
 import { appendJourneyCheckIn, createJourneyCycle, isJourneyCycle, reassessJourneyCycle, isJourneyLock, type JourneyCycle, type JourneyDecisionTrace, type JourneyScenarioId, type JourneySubject } from "./closedLoopJourney";
 
-type JourneyStatus = "loading" | "ready" | "empty" | "signed-out" | "error";
+type JourneyStatus = "loading" | "syncing" | "ready" | "empty" | "signed-out" | "error";
 const root = "learning_journeys";
 const cyclesPath = (uid: string) => collection(db, root, uid, "cycles");
 // The fixed document serializes creates/finalizations across browser tabs and devices.
@@ -53,23 +54,27 @@ export function useClosedLoopJourney() {
         archiveGenerationRef.current++;
         historyCursorRef.current=null;
         setOlderCycles([]);setOlderError("");setLoadingOlder(false);
-        const pageDocs=snapshot.docs.slice(0,8);
-        const items = pageDocs.map(record => record.data());
-        if (!items.every(item => isJourneyCycle(item) && item.userId === currentUid) ||
-            !pageDocs.every((record,i)=>record.id===items[i].id)) {
-          setCycles([]); // Never keep displaying an older student result after corrupt server evidence.
-          setHasMoreOlder(false);setRecentFromServer(false);
-          setStatus("error"); setError("Dữ liệu chu kỳ hoặc Evidence Record không nhất quán. Đã ẩn kết quả cũ; không tự động ghi đè."); return;
+        const pageDocs = snapshot.docs.slice(0, 8);
+        const decision = assessJourneySnapshot(currentUid,
+          pageDocs.map(record => ({ id: record.id, data: record.data() })), snapshot.metadata);
+        if (decision.state === "WAITING_FOR_SERVER") {
+          // Never display cached or pending student cycles as an authoritative handoff.
+          setCycles([]); setHasMoreOlder(false); setRecentFromServer(false);
+          recentCursorRef.current = null;
+          setStatus("syncing"); setError(""); return;
         }
-        recentCursorRef.current=pageDocs[pageDocs.length-1]??null;
-        setHasMoreOlder(snapshot.docs.length===8);
-        setRecentFromServer(!snapshot.metadata.fromCache && !snapshot.metadata.hasPendingWrites);
-        // The all-record owner/shape/document-ID check above has already passed.
-        // Narrow DocumentData[] with the same runtime validator before publishing to React state.
-        // Never simply assert/cast untrusted Firestore data to JourneyCycle[].
-        setCycles(items.filter(isJourneyCycle));
+        if (decision.state === "INVALID") {
+          setCycles([]); setHasMoreOlder(false); setRecentFromServer(false);
+          recentCursorRef.current = null;
+          setStatus("error");
+          setError("Dữ liệu chu kỳ hoặc chủ sở hữu không nhất quán. Đã ẩn dữ liệu; không tự động ghi đè."); return;
+        }
+        recentCursorRef.current = pageDocs[pageDocs.length - 1] ?? null;
+        setHasMoreOlder(pageDocs.length === 8);
+        setRecentFromServer(true);
+        setCycles(decision.cycles);
         setError("");
-        setStatus(items.length ? "ready" : "empty");
+        setStatus(decision.state === "VERIFIED" ? "ready" : "empty");
       }, error => {
         if (auth.currentUser?.uid !== currentUid) return;
         archiveGenerationRef.current++;
@@ -114,7 +119,7 @@ export function useClosedLoopJourney() {
   }
 
   const assertOwner = () => {
-    if (!uid || auth.currentUser?.uid !== uid || !["ready", "empty"].includes(status)) {
+    if (!uid || auth.currentUser?.uid !== uid || !recentFromServer || !["ready", "empty"].includes(status)) {
       throw new Error("Chưa xác minh được tài khoản hoặc dữ liệu chu kỳ. Không ghi đè dữ liệu.");
     }
     return uid;
@@ -177,7 +182,7 @@ export function useClosedLoopJourney() {
       await runTransaction(db, async transaction => {
         const state = await transaction.get(stateReference);
         const previous = await transaction.get(reference);
-        if (!isJourneyCycle(previous.data()) || previous.data()?.status !== "ACTIVE")
+        if (!isJourneyCycle(previous.data()) || previous.data()?.userId !== owner || previous.id !== cycleId || previous.data()?.status !== "ACTIVE")
           throw new Error("Không tìm thấy chu kỳ đang thực hiện.");
         if (state.exists() && !isJourneyLock(state.data(), owner))
           throw new Error("Dữ liệu khóa chu kỳ không đúng định dạng.");
@@ -197,7 +202,7 @@ export function useClosedLoopJourney() {
         if (!state.exists() || !isJourneyLock(state.data(), owner) || state.data().activeCycleId !== cycleId)
           throw new Error("Chu kỳ không còn giữ quyền cập nhật.");
         const current = snapshot.exists() ? snapshot.data() : null;
-        if (!isJourneyCycle(current)) throw new Error("Không tìm thấy chu kỳ hợp lệ.");
+        if (!isJourneyCycle(current) || current.userId !== owner || current.id !== cycleId) throw new Error("Không tìm thấy chu kỳ thuộc tài khoản hiện tại.");
         const next = transform(current);
         if (auth.currentUser?.uid !== owner) throw new Error("Tài khoản đã thay đổi.");
         transaction.update(reference, {

@@ -1,42 +1,78 @@
 import { getStudentSubmodules, type StudentModuleKey } from "../../data/moduleSubmodules";
 import { currentFocusedPath } from "../../lib/focusedModuleRoute";
+import { planGuidedNavigation, type GuidedSection } from "../../lib/moduleWayfinding";
 
-const moduleLabels: Record<StudentModuleKey, { name: string; home: string; eyebrow: string }> = {
-  seed: { name: "Hồ sơ học tập", home: "/student", eyebrow: "SEED PROFILE" },
-  lumen: { name: "Phân tích năng lực", home: "/lumen", eyebrow: "LUMEN INTELLIGENCE" },
-  atlas: { name: "Tuyển sinh & du học", home: "/atlas", eyebrow: "ATLAS ADMISSION" },
-  orion: { name: "Chiến lược học tập", home: "/orion", eyebrow: "ORION STRATEGY" },
-  pulse: { name: "Theo dõi tiến độ", home: "/pulse", eyebrow: "PULSE MONITOR" },
-  haven: { name: "Học bổng & tài chính", home: "/haven", eyebrow: "HAVEN SUPPORT" },
+const moduleLabels: Record<StudentModuleKey, { name: string; home: string; short: string }> = {
+  seed: { name: "Hồ sơ học tập", home: "/student", short: "Seed" },
+  lumen: { name: "Phân tích năng lực", home: "/lumen", short: "Lumen" },
+  atlas: { name: "Tuyển sinh & du học", home: "/atlas", short: "Atlas" },
+  orion: { name: "Chiến lược học tập", home: "/orion", short: "Orion" },
+  pulse: { name: "Theo dõi tiến độ", home: "/pulse", short: "Pulse" },
+  haven: { name: "Học bổng & tài chính", home: "/haven", short: "Haven" },
 };
 
-/** One compact navigation band, with only implemented destinations.
- * Route-scoped content is mounted by each page, not hidden using CSS.
- */
+function SectionLink({ item, active }: { item: GuidedSection; active: boolean }) {
+  return <a href={item.href} className={active ? "is-active" : ""}
+    aria-current={active ? "page" : undefined}
+    title={item.status === "partial" ? `${item.description} (Đang hoàn thiện)` : item.description}>
+    {item.title}
+  </a>;
+}
+
+/** The four study-abroad destinations belong to the SAME navigation bar, not
+ * a second, conflicting set of tabs rendered inside the study-abroad page. */
+function studyAbroadSections(): GuidedSection[] {
+  const country = new URLSearchParams(window.location.search).get("country");
+  const suffix = country ? `?country=${encodeURIComponent(country)}` : "";
+  return [
+    { id: "destination", title: "Chọn quốc gia", href: `/atlas/study-abroad${suffix}`, description: "Tìm điểm đến du học", group: "Du học", status: "partial" },
+    { id: "programs", title: "Trường & chương trình", href: `/atlas/study-abroad/programs${suffix}`, description: "Tìm chương trình và trường có nguồn", group: "Du học", status: "partial" },
+    { id: "requirements", title: "Điều kiện & chứng chỉ", href: `/atlas/study-abroad/requirements${suffix}`, description: "Đối chiếu điều kiện hồ sơ", group: "Du học", status: "partial" },
+    { id: "sources", title: "Nguồn & quy trình", href: `/atlas/study-abroad/sources${suffix}`, description: "Kiểm tra nguồn và các bước nộp hồ sơ", group: "Du học", status: "partial" },
+  ];
+}
+
+/** One student-only navigation component and one visual bar across all
+ * six workspaces. Preserve every implemented destination, with no admin links.
+ * Works with existing SPA anchors and unsaved-draft navigation guard.
+ * No duplicate cross-module dropdown: the student dashboard owns that journey. */
 export default function ModuleSectionNav({ moduleKey }: { moduleKey: StudentModuleKey }) {
   const items = getStudentSubmodules(moduleKey);
   const module = moduleLabels[moduleKey];
   const currentPath = currentFocusedPath();
-  const onHome = currentPath === module.home;
-  const activeItem = items.find(item => item.href !== module.home && (currentPath === item.href ||
-    (item.href === "/atlas/study-abroad" && currentPath.startsWith("/atlas/study-abroad/"))));
-  const title = onHome ? module.name : activeItem?.title ?? (currentPath === "/atlas/library" ? "Kho dữ liệu Atlas · Admin" : currentPath === "/pulse/audit" ? "Kiểm tra liên thông · Admin" : module.name);
+  const guide = planGuidedNavigation(items, module.home, currentPath);
+  const inStudyAbroad = moduleKey === "atlas" &&
+    (currentPath === "/atlas/study-abroad" || currentPath.startsWith("/atlas/study-abroad/"));
+  const tabs = inStudyAbroad ? studyAbroadSections() : guide.featured;
+  const more = inStudyAbroad ? guide.available.filter(item => item.id !== "abroad") : guide.more;
+
   return (
-    <nav className="cla-module-subnav cla-focus-nav" aria-label={`Chức năng ${module.name}`}>
-      <div className="cla-module-subnav-head">
-        <span>{module.eyebrow} / {onHome ? "TỔNG QUAN" : title}</span>
-        <a href="/student" className="cla-focus-home">Không gian học sinh</a>
+    <nav className="cla-module-subnav cla-focus-nav cla-guided-workspace cla-unified-bar"
+      aria-label={`Chức năng ${module.name}`}>
+      <div className="cla-unified-identity" aria-label={`Đang ở phân hệ ${module.name}`}>
+        <span className="cla-unified-identity-mark" aria-hidden="true">{module.short.slice(0, 1)}</span>
+        <strong>{module.short}</strong>
       </div>
-      <div className="cla-module-subnav-links" role="group" aria-label="Các phần trong module">
-        <a className={onHome ? "is-active" : ""} href={module.home} aria-current={onHome ? "page" : undefined}>Tổng quan</a>
-        {items.filter(item => item.href && item.href !== module.home && item.status !== "planned").map(item => {
-          const active = item === activeItem;
-          return <a key={item.id} href={item.href} className={active ? "is-active" : ""}
-            aria-current={active ? (currentPath === item.href ? "page" : "location") : undefined}
-            title={item.status === "partial" ? `${item.description} (Đang hoàn thiện)` : item.description}>{item.title}</a>;
-        })}
+
+      <div className="cla-module-subnav-links cla-guided-primary cla-unified-tabs" role="group"
+        aria-label={inStudyAbroad ? "Các mục du học" : `Các mục ${module.name}`}>
+        <a className={!inStudyAbroad && guide.onHome ? "is-active" : ""} href={module.home}
+          aria-current={!inStudyAbroad && guide.onHome ? "page" : undefined}>
+          {inStudyAbroad ? "← Atlas" : "Tổng quan"}
+        </a>
+        {tabs.map(item => <SectionLink key={item.id} item={item}
+          active={inStudyAbroad ? currentPath === item.href?.split("?")[0] : item === guide.active} />)}
       </div>
-      {!onHome && (moduleKey !== "seed" || currentPath === "/student/exams") && <div className="cla-focus-heading"><h1>{title}</h1>{activeItem && <p>{activeItem.description}</p>}</div>}
+
+      <div className="cla-guided-controls cla-unified-actions">
+        {more.length > 0 && <details className="cla-guided-more">
+          <summary aria-label="Xem các mục chức năng khác">Mục khác <span>{more.length}</span><span aria-hidden="true" className="cla-guided-chevron">⌄</span></summary>
+          <div className="cla-guided-more-content" role="group" aria-label="Các mục khác trong phân hệ">
+            {more.map(item => <SectionLink key={item.id} item={item} active={false} />)}
+          </div>
+        </details>}
+
+      </div>
     </nav>
   );
 }

@@ -1,0 +1,12 @@
+(node:45131) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+--- Release (evidence content only) ---
+NOT TESTED: Bằng chứng release — Chưa nhập báo cáo release JSON; chưa đối chiếu source với CI.
+NOT TESTED: CI, deploy, backup, rollback — Không có bằng chứng chạy pipeline, deploy hoặc rollback từ môi trường được kiểm soát.
+--- Rules (evidence content only) ---
+NOT TESTED: Firestore Emulator — Chưa nhập reports/security/firestore_emulator_gate.json từ máy đã chạy Emulator.
+NOT TESTED: 86 ca kiểm thử và Rules production — Chưa có test case log hoặc xác minh rules deployment.
+--- Model (evidence content only) ---
+NOT TESTED: Đánh giá holdout — Chưa nhập public/research/oulad-evidence.json tạo sau audit trên OULAD thật.
+NOT TESTED: Hiệu quả với học sinh THPT Việt Nam — Chưa có dữ liệu outcome THPT Việt Nam và kiểm định bên ngoài.
+SOURCE FINGERPRINT MATCH: 453 tracked files; zero production deployments.

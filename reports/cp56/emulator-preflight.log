@@ -1,0 +1,2 @@
+SECURITY GATE: BLOCKED (static PASS, emulator BLOCKED).
+Evidence: reports/security/firestore_emulator_gate.json

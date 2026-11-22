@@ -1,0 +1,20 @@
+{
+  "schema": "cla-cp73-mvp-gate-v1",
+  "atUtc": "2026-11-22T02:19:48+00:00",
+  "qaProject": "demo-cla-mvp",
+  "scope": "LOCAL_SYNTHETIC_ONLY",
+  "status": "BLOCKED",
+  "mvpAccepted": false,
+  "qaTechnicalPassed": false,
+  "checks": {
+    "qaConfiguration": "BLOCKED",
+    "dependencies": "BLOCKED",
+    "firebaseCli": "BLOCKED",
+    "emulatorPorts": "BLOCKED",
+    "localReactOrigin": "BLOCKED",
+    "productionBuild": "NOT_RUN",
+    "firestoreRulesEmulator": "NOT_RUN",
+    "realBrowserE2E": "NOT_RUN"
+  },
+  "limits": "No production deployment, scientific validation or real student data covered."
+}

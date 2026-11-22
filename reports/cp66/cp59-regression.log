@@ -1,0 +1,64 @@
+
+> cognitive-learn-ai@0.1.0 test:cp59:verified-drafts
+> node --experimental-strip-types --test tests/cp59-verified-module-drafts.test.mjs
+
+TAP version 13
+# (node:19559) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP59.1: cached and pending module snapshots are never server-confirmed
+ok 1 - CP59.1: cached and pending module snapshots are never server-confirmed
+  ---
+  duration_ms: 0.94274
+  type: 'test'
+  ...
+# Subtest: CP59.2: reject records owned by another account, allow safe legacy shape
+ok 2 - CP59.2: reject records owned by another account, allow safe legacy shape
+  ---
+  duration_ms: 0.25243
+  type: 'test'
+  ...
+# Subtest: CP59.3: primary and legacy listeners request metadata changes and gate readValue
+ok 3 - CP59.3: primary and legacy listeners request metadata changes and gate readValue
+  ---
+  duration_ms: 0.276476
+  type: 'test'
+  ...
+# Subtest: CP59.4: offline cache cannot become a CAS baseline and local edits are preserved
+ok 4 - CP59.4: offline cache cannot become a CAS baseline and local edits are preserved
+  ---
+  duration_ms: 0.146871
+  type: 'test'
+  ...
+# Subtest: CP59.5: primary, legacy and explicit reload validate current UID before displaying
+ok 5 - CP59.5: primary, legacy and explicit reload validate current UID before displaying
+  ---
+  duration_ms: 0.184248
+  type: 'test'
+  ...
+# Subtest: CP59.6: a save is rejected until verified draft status is ready or empty
+ok 6 - CP59.6: a save is rejected until verified draft status is ready or empty
+  ---
+  duration_ms: 0.145289
+  type: 'test'
+  ...
+# Subtest: CP59.7: Orion, Pulse and Haven disable save and explain server-sync state
+ok 7 - CP59.7: Orion, Pulse and Haven disable save and explain server-sync state
+  ---
+  duration_ms: 1.567831
+  type: 'test'
+  ...
+# Subtest: CP59.8: Seed verified-prefill is gated while module-draft server sync is pending
+ok 8 - CP59.8: Seed verified-prefill is gated while module-draft server sync is pending
+  ---
+  duration_ms: 0.162755
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 103.909907

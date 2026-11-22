@@ -64,7 +64,7 @@ export default function StudentModulesPage() {
           {matches.length === 0 && <div className="cla-task-empty">
             <strong>Chưa tìm thấy chức năng phù hợp.</strong>
             <p>Hãy thử một từ khóa ngắn hơn hoặc xem tất cả.</p>
-            <button type="button" onClick={() => { setQuery(""); setCategory("Tất cả"); }}>Xem tất cả</button>
+            <button className="cla-action-button cla-action-button--outline" type="button" onClick={() => { setQuery(""); setCategory("Tất cả"); }}>Xem tất cả</button>
           </div>}
         </div>
       </section>

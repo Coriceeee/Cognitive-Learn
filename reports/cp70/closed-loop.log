@@ -1,0 +1,124 @@
+
+> cognitive-learn-ai@0.1.0 test:closed-loop
+> node --experimental-strip-types --test tests/step12-closed-loop-journey.test.mjs
+
+TAP version 13
+# (node:58329) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CL01 creates a versioned cycle and preserves valid baseline zero
+ok 1 - CL01 creates a versioned cycle and preserves valid baseline zero
+  ---
+  duration_ms: 1.700724
+  type: 'test'
+  ...
+# Subtest: CL02 rejects missing/NaN, invalid and duplicate baseline scores
+ok 2 - CL02 rejects missing/NaN, invalid and duplicate baseline scores
+  ---
+  duration_ms: 1.027499
+  type: 'test'
+  ...
+# Subtest: CL03 no outcome is inferred merely from an Orion strategy
+ok 3 - CL03 no outcome is inferred merely from an Orion strategy
+  ---
+  duration_ms: 0.239141
+  type: 'test'
+  ...
+# Subtest: CL04 check-in records self-report but is not an outcome
+ok 4 - CL04 check-in records self-report but is not an outcome
+  ---
+  duration_ms: 0.356497
+  type: 'test'
+  ...
+# Subtest: CL05 zero actual hours and zero completed tasks are observed zeros
+ok 5 - CL05 zero actual hours and zero completed tasks are observed zeros
+  ---
+  duration_ms: 0.164828
+  type: 'test'
+  ...
+# Subtest: CL06 rejects duplicate week and check-in ID
+ok 6 - CL06 rejects duplicate week and check-in ID
+  ---
+  duration_ms: 0.475156
+  type: 'test'
+  ...
+# Subtest: CL07 rejects invalid time and impossible completion
+ok 7 - CL07 rejects invalid time and impossible completion
+  ---
+  duration_ms: 0.356417
+  type: 'test'
+  ...
+# Subtest: CL08 reassessment is blocked until one actual check-in exists
+ok 8 - CL08 reassessment is blocked until one actual check-in exists
+  ---
+  duration_ms: 0.216757
+  type: 'test'
+  ...
+# Subtest: CL09 reassessment only accepts observed subjects, 0 is valid
+ok 9 - CL09 reassessment only accepts observed subjects, 0 is valid
+  ---
+  duration_ms: 0.501406
+  type: 'test'
+  ...
+# Subtest: CL10 prevents unknown subject/NaN, absent score and duplicate score
+ok 10 - CL10 prevents unknown subject/NaN, absent score and duplicate score
+  ---
+  duration_ms: 0.443409
+  type: 'test'
+  ...
+# Subtest: CL11 review calculates matched before-after delta without imputation
+ok 11 - CL11 review calculates matched before-after delta without imputation
+  ---
+  duration_ms: 0.269877
+  type: 'test'
+  ...
+# Subtest: CL12 closed cycles cannot be edited, measured again, or check-in again
+ok 12 - CL12 closed cycles cannot be edited, measured again, or check-in again
+  ---
+  duration_ms: 0.206772
+  type: 'test'
+  ...
+# Subtest: CL13 rejects corrupted documents, does not silently overwrite them
+ok 13 - CL13 rejects corrupted documents, does not silently overwrite them
+  ---
+  duration_ms: 0.097968
+  type: 'test'
+  ...
+# Subtest: CL14 Orion, Pulse and Lumen all mount the same shared journey
+ok 14 - CL14 Orion, Pulse and Lumen all mount the same shared journey
+  ---
+  duration_ms: 0.639143
+  type: 'test'
+  ...
+# Subtest: CL15 Firestore hook uses authenticated ownership and transaction-based updates
+ok 15 - CL15 Firestore hook uses authenticated ownership and transaction-based updates
+  ---
+  duration_ms: 0.207182
+  type: 'test'
+  ...
+# Subtest: CL16 candidate rules restrict student ownership, product consent, and immutable baselines
+ok 16 - CL16 candidate rules restrict student ownership, product consent, and immutable baselines
+  ---
+  duration_ms: 0.74296
+  type: 'test'
+  ...
+# Subtest: CL17 no claim that self-report is externally verified or causal proof
+ok 17 - CL17 no claim that self-report is externally verified or causal proof
+  ---
+  duration_ms: 0.372552
+  type: 'test'
+  ...
+# Subtest: CL18 module never writes its own outcomes into Seed as proven grades
+ok 18 - CL18 module never writes its own outcomes into Seed as proven grades
+  ---
+  duration_ms: 0.203717
+  type: 'test'
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 133.51778

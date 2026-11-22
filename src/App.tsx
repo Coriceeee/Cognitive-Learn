@@ -3,14 +3,16 @@ import {
   lazy,
   useEffect,
   useLayoutEffect,
+  useRef,
   useState,
   useTransition,
   type ReactNode,
 } from "react";
 
 import { currentFocusedPath } from "./lib/focusedModuleRoute";
-import { subscribeNavigation, getLastNavigationKind } from "./lib/clientNavigation";
+import { subscribeNavigation, getLastNavigationKind, getNavigationSnapshot } from "./lib/clientNavigation";
 import { routeModules, preloadLikelyRoutes } from "./lib/routeModules";
+import { getRouteDisplayTitle, planRouteExperience } from "./lib/routeExperience";
 import FloatingAdvisorChat from "./components/common/FloatingAdvisorChat";
 import AppFooter from "./components/common/AppFooter";
 import AccessGate from "./components/common/AccessGate";
@@ -68,10 +70,19 @@ export default function App() {
   // External-store updates are synchronous and can reveal Suspense's full-screen
   // fallback on each cold lazy route. A React transition keeps the revealed page
   // visible until the next JS module is ready, without reloading the document.
-  const [path, setPath] = useState(() => currentFocusedPath());
+  // Route identity includes URL search/hash, not just pathname. The Nexus
+  // cluster and audit pages change views through query parameters without
+  // changing the pathname. Storing pathname alone left React on stale UI.
+  const [routeSnapshot, setRouteSnapshot] = useState(() => ({
+    path: currentFocusedPath(), href: getNavigationSnapshot(), kind: getLastNavigationKind(),
+  }));
+  const path = routeSnapshot.path;
+  const previousRouteHref = useRef<string | null>(null);
   const [routePending, startRouteTransition] = useTransition();
   useEffect(() => subscribeNavigation(() => {
-    startRouteTransition(() => setPath(currentFocusedPath()));
+    startRouteTransition(() => setRouteSnapshot({
+      path: currentFocusedPath(), href: getNavigationSnapshot(), kind: getLastNavigationKind(),
+    }));
   }), []);
   // Preload at most two likely next module chunks on an idle connection.
   // This helps touch devices, where pointer-hover prefetch is unavailable.
@@ -85,19 +96,26 @@ export default function App() {
     return () => clearTimeout(id);
   }, [path]);
   useLayoutEffect(() => {
-    // Browser Back/Forward should keep native scroll restoration.
-    if (getLastNavigationKind() === 'pop') return;
-    const fragment = window.location.hash;
-    if (fragment && path === currentFocusedPath()) {
-      const frame = window.requestAnimationFrame(() => {
-        const target = document.getElementById(decodeURIComponent(fragment.slice(1)));
+    const previous = previousRouteHref.current;
+    previousRouteHref.current = routeSnapshot.href;
+    const experience = planRouteExperience(previous, routeSnapshot.href, routeSnapshot.kind);
+    document.title = `${getRouteDisplayTitle(path)} | Cognitive Learn AI`;
+    if (experience.scroll === 'top') window.scrollTo({top: 0, behavior: 'instant'});
+    // React has committed the new route before this effect. Wait a frame for
+    // its headings/anchors; do not scroll or steal focus on query-only filters.
+    if (!experience.anchor && !experience.focusContent) return;
+    const frame = window.requestAnimationFrame(() => {
+      if (experience.anchor) {
+        const target = document.getElementById(experience.anchor);
         if (target) target.scrollIntoView({block: 'start'});
-        else window.scrollTo({top: 0, behavior: 'instant'});
-      });
-      return () => window.cancelAnimationFrame(frame);
-    }
-    window.scrollTo({top: 0, behavior: 'instant'});
-  }, [path]);
+        else if (previous && experience.focusContent) window.scrollTo({top: 0, behavior: 'instant'});
+      }
+      if (experience.focusContent) {
+        document.getElementById('cla-page-content')?.focus({preventScroll: true});
+      }
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [routeSnapshot.href, routeSnapshot.kind, path]);
   useEffect(() => {
     if (window.location.pathname !== path) {
       window.history.replaceState(window.history.state, "", path + window.location.search + window.location.hash);
@@ -120,7 +138,7 @@ export default function App() {
     );
   } else if (path === "/admin/diagnostics") {
     currentPage = (
-      <AdminDiagnosticsPage />
+      <AdminDiagnosticsPage key={routeSnapshot.href} />
     );
   } else if (path === "/admin/audit") {
     currentPage = <AdminAuditPage />;
@@ -163,7 +181,7 @@ export default function App() {
   } else if (["/pulse", "/pulse/progress", "/pulse/reports", "/pulse/actions", "/pulse/inputs", "/pulse/checkin", "/pulse/audit"].includes(path)) {
     currentPage = <PulsePage />;
   } else if (path === "/atlas/study-abroad" || path.startsWith("/atlas/study-abroad/") || path === "/study-abroad" || path === "/haven/study-abroad") {
-    currentPage = <StudyAbroadPage />;
+    currentPage = <StudyAbroadPage navigationHref={routeSnapshot.href} />;
   } else if (["/haven", "/haven/scholarships", "/haven/finance", "/haven/plan"].includes(path)) {
     currentPage = <HavenPage />;
 
@@ -175,13 +193,17 @@ export default function App() {
 
   return (
     <div className="app-root">
+      <a className="cla-skip-to-content" href="#cla-page-content">Bỏ qua điều hướng, đến nội dung</a>
+      <span className="cla-route-announcement" role="status" aria-live="polite" aria-atomic="true">
+        {`Đã mở: ${getRouteDisplayTitle(path)}`}
+      </span>
       {routePending && <div className="cla-route-progress" role="progressbar" aria-label="Đang mở trang tiếp theo" />}
       <Suspense
         fallback={
           <AppLoading />
         }
       >
-        <div className="app-content" data-cla-route={path}>
+        <div className="app-content" id="cla-page-content" tabIndex={-1} data-cla-route={path}>
           {path === "/" || path === "/about" || path === "/contact" ? (
             currentPage
           ) : (

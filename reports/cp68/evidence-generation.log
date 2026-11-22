@@ -1,0 +1,39 @@
+(node:40271) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+GOLDEN_PATH_SYNTHETIC_GENERATED: /mnt/data/cla_cp68_source/reports/evidence/cla_golden_path_SYNTHETIC.json; 7 domain stages; NO real outcomes
+(node:40282) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+MULTICYCLE_SYNTHETIC_GENERATED: /mnt/data/cla_cp68_source/reports/evidence/cla_multicycle_SYNTHETIC.json; 2 reviewed cycles; 0 empirical claims
+(node:40293) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+MEASUREMENT_SYNTHETIC_GENERATED: /mnt/data/cla_cp68_source/reports/evidence/cla_measurement_SYNTHETIC.json (no verified measurement claims)
+
+> cognitive-learn-ai@0.1.0 demo:final
+> npm run demo:gate && npm run demo:backup
+
+
+> cognitive-learn-ai@0.1.0 demo:gate
+> node tools/cla_demo_gate.mjs
+
+[PASS] Core closed-loop + measurement regression
+[PASS] Seed tests
+[PASS] Atlas + chatbot tests
+[PASS] Golden Path synthetic generate
+[PASS] Golden Path synthetic verify
+[PASS] Multicycle synthetic generate
+[PASS] Multicycle synthetic verify
+[PASS] Measurement synthetic generate
+[PASS] Measurement synthetic verify
+[PASS] Layout contract
+[PASS] Source fingerprint / release evidence preflight
+DEMO_OFFLINE_CORE_PASS — 11/11 steps; report: /mnt/data/cla_cp68_source/reports/demo/cla_batch16_offline_readiness.json
+
+> cognitive-learn-ai@0.1.0 demo:backup
+> node --experimental-strip-types tools/cla_demo_backup.mjs --generate && node --experimental-strip-types tools/cla_demo_backup.mjs --verify
+
+SYNTHETIC_DEMO_BACKUP_VERIFIED: --generate; 9773 bytes; sha256=af382a8787632fdbf017eba7effe5e02cf885a9105b537c1c0dbf1a2826ecd3c; /mnt/data/cla_cp68_source/reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html
+(node:40564) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+SYNTHETIC_DEMO_BACKUP_VERIFIED: --verify; 9773 bytes; sha256=af382a8787632fdbf017eba7effe5e02cf885a9105b537c1c0dbf1a2826ecd3c; /mnt/data/cla_cp68_source/reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html
+(node:40608) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)

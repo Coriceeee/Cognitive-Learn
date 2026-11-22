@@ -69,3 +69,29 @@
 
 /* CP46: light exam horizon + connected learning circuit on student dashboard only. */
 @import "./styles/40-cla-exam-horizon-learning-circuit.css";
+
+/* CP62: student action / verified data-source visualization. */
+@import "./styles/41-cla-action-signal-rail.css";
+
+/* CP63: guided six-module navigation with progressive disclosure and true dark mode. */
+@import "./styles/42-cla-guided-workspaces.css";
+
+/* CP64: form readiness graph; never a cognitive/admission score. */
+@import "./styles/43-cla-input-observatory.css";
+
+/* CP65: evidence-first Atlas and Lumen navigation / charts. */
+@import "./styles/44-cla-atlas-lumen-journey.css";
+
+/* CP66: one accessible loading / empty / conflict / saved language across modules. */
+@import "./styles/45-cla-module-state-system.css";
+
+/* CP67: keyboard skip link, route focus and screen reader page announcements. */
+@import "./styles/46-cla-route-accessibility.css";
+
+/* CP70 contrast repair: visible text on light module map surfaces. */
+@import "./styles/47-cla-contrast-repair.css";
+
+@import "./styles/48-cla-unified-navigation.css";
+
+/* CP74: revised navigation, readable action controls, and public information pages. */
+@import "./styles/49-cla-product-polish.css";

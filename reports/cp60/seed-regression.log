@@ -1,0 +1,70 @@
+TAP version 13
+# Subtest: CP30-R01 only server-confirmed, committed snapshots pass
+ok 1 - CP30-R01 only server-confirmed, committed snapshots pass
+  ---
+  duration_ms: 0.835682
+  type: 'test'
+  ...
+# Subtest: CP30-R02 cross-owner and malformed documents fail closed
+ok 2 - CP30-R02 cross-owner and malformed documents fail closed
+  ---
+  duration_ms: 0.225851
+  type: 'test'
+  ...
+# Subtest: CP30-R03 verified legacy docs with no userId remain readable in own UID-scoped path
+ok 3 - CP30-R03 verified legacy docs with no userId remain readable in own UID-scoped path
+  ---
+  duration_ms: 0.105028
+  type: 'test'
+  ...
+# Subtest: CP30-R04 account inspections reject old generation and account switches
+ok 4 - CP30-R04 account inspections reject old generation and account switches
+  ---
+  duration_ms: 0.133612
+  type: 'test'
+  ...
+# Subtest: CP30-R05 cache-only and pending writes never render as verified transcript
+ok 5 - CP30-R05 cache-only and pending writes never render as verified transcript
+  ---
+  duration_ms: 31.750559
+  type: 'test'
+  ...
+# Subtest: CP30-R06 A to B to A cannot resurrect callback from first A session
+ok 6 - CP30-R06 A to B to A cannot resurrect callback from first A session
+  ---
+  duration_ms: 22.38095
+  type: 'test'
+  ...
+# Subtest: CP30-R07 legacy fallback is server-confirmed and cannot overwrite a newer primary transcript
+ok 7 - CP30-R07 legacy fallback is server-confirmed and cannot overwrite a newer primary transcript
+  ---
+  duration_ms: 21.105558
+  type: 'test'
+  ...
+# Subtest: CP30-R08 conflicting document UID clears data and reports error
+ok 8 - CP30-R08 conflicting document UID clears data and reports error
+  ---
+  duration_ms: 17.157842
+  type: 'test'
+  ...
+# Subtest: CP30-R09 signed out session clears verified results immediately
+ok 9 - CP30-R09 signed out session clears verified results immediately
+  ---
+  duration_ms: 9.572235
+  type: 'test'
+  ...
+# Subtest: CP30-R10 storage status guard resets rows and rejects stale async results
+ok 10 - CP30-R10 storage status guard resets rows and rejects stale async results
+  ---
+  duration_ms: 0.70138
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 356.504157

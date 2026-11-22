@@ -1413,7 +1413,7 @@ export default function TrangNhapHoSoHocTap() {
 
           {message && <p className="profile-message" role={profileReadFailed ? "alert" : "status"}>{message}</p>}
           {profileReadFailed && (
-            <button type="button" onClick={() => setLoadAttempt(value => value + 1)}>
+            <button className="cla-action-button cla-action-button--outline" type="button" onClick={() => setLoadAttempt(value => value + 1)}>
               Thử tải lại hồ sơ
             </button>
           )}

@@ -1,0 +1,6 @@
+atlas-desktop-light {'body': 1200, 'viewport': 1200, 'links': 5, 'bodyHeight': 702, 'steps': 4}
+atlas-desktop-dark {'body': 1200, 'viewport': 1200, 'links': 5, 'bodyHeight': 702, 'steps': 4}
+atlas-mobile {'body': 390, 'viewport': 390, 'links': 5, 'bodyHeight': 1237, 'steps': 4}
+lumen-desktop-light {'body': 1200, 'viewport': 1200, 'links': 5, 'bodyHeight': 573, 'steps': 4}
+lumen-desktop-dark {'body': 1200, 'viewport': 1200, 'links': 5, 'bodyHeight': 573, 'steps': 4}
+lumen-mobile {'body': 390, 'viewport': 390, 'links': 5, 'bodyHeight': 819, 'steps': 4}

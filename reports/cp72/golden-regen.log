@@ -1,0 +1,7 @@
+
+> cognitive-learn-ai@0.1.0 research:golden-path
+> node --experimental-strip-types tools/cla_golden_path_offline.mjs --generate
+
+(node:3095) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+GOLDEN_PATH_SYNTHETIC_GENERATED: /mnt/data/cla_cp72_work/Cognitive-Learn/reports/evidence/cla_golden_path_SYNTHETIC.json; 7 domain stages; NO real outcomes

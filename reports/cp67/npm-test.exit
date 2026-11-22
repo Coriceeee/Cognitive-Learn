@@ -1,0 +1,1 @@
+TIMEOUT: the tool stopped the full npm test at its 180-second execution limit; no exit code 0 was observed. The captured log reaches CP66. CP67 was run independently and passed.

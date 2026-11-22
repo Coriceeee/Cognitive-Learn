@@ -16,6 +16,8 @@ import StudentProfileNoticeModal from "./components/StudentProfileNoticeModal";
 import StudentRecommendationGrid from "./components/StudentRecommendationGrid";
 import ExamHorizon from "../../components/student/ExamHorizon";
 import LearningCircuit from "./components/LearningCircuit";
+import StudentActionSignalRail from "./components/StudentActionSignalRail";
+import StudentJourneyBridge from "./components/StudentJourneyBridge";
 
 import { useVerifiedStudentProfile } from "./hooks/StudentProfileProvider";
 import { useAcademicGpaIntegrity } from "./hooks/useAcademicGpaIntegrity";
@@ -199,68 +201,19 @@ export default function StudentPage() {
         {!isAdminPreview && <ExamHorizon />}
         <StudentDecisionCanvas cognitive={cognitive} gpa={gpaIntegrity.status === "VERIFIED" ? gpaIntegrity.result : null} temporal={!historyLoading && !error ? temporalReport : null} hasProfile={hasProfile} demo={isAdminPreview} />
 
-        {/* 2. A single action hub that answers: What should I do next? */}
-        <section className="student-dash-focus" aria-labelledby="student-dash-focus-title">
-          <div className="student-dash-card student-dash-priorities">
-            <div className="student-dash-heading">
-              <div>
-                <span className="student-dash-eyebrow">ƯU TIÊN CỦA BẠN</span>
-                <h2 id="student-dash-focus-title">Việc nên làm tiếp theo</h2>
-              </div>
-              <span className="student-dash-soft-pill">Tối đa 3 việc</span>
-            </div>
-            <div className="student-dash-action-list">
-              {actions.slice(0, 3).map((action, index) => (
-                <a href={action.href} className="student-dash-action" key={`${index}-${action.title}`}>
-                  <span className="student-dash-action-num">{String(index + 1).padStart(2, "0")}</span>
-                  <span className="student-dash-action-body">
-                    <strong>{action.title}</strong>
-                    <small>{action.detail}</small>
-                  </span>
-                  <span className="student-dash-action-arrow" aria-hidden="true">↗</span>
-                </a>
-              ))}
-            </div>
-          </div>
+        {/* CP62: one connected workflow/evidence visualization, not two tile cards. */}
+        <StudentActionSignalRail
+          actions={actions}
+          hasProfile={hasProfile}
+          hasCognitiveScore={hasCognitiveScore}
+          hasComparableGrowth={hasComparableGrowth}
+          riskText={getRiskText(cognitive.riskLevel)}
+          growthNote={hasComparableGrowth
+            ? intelligence.growthEvidence.message
+            : "Growth cần ít nhất hai lần đo hợp lệ cách nhau về thời gian."}
+        />
 
-          <aside className="student-dash-card student-dash-status" aria-label="Tình trạng dữ liệu">
-            <div className="student-dash-heading">
-              <div>
-                <span className="student-dash-eyebrow">TÌNH TRẠNG DỮ LIỆU</span>
-                <h2>Mức độ sẵn sàng</h2>
-              </div>
-            </div>
-            <div className="student-dash-status-list">
-              <div>
-                <span>Hồ sơ Seed</span>
-                <strong className={hasProfile ? "is-ok" : "is-pending"}>
-                  {hasProfile ? "Đã lưu" : "Chưa có"}
-                </strong>
-              </div>
-              <div>
-                <span>Đánh giá Cognitive</span>
-                <strong className={hasCognitiveScore ? "is-ok" : "is-pending"}>
-                  {hasCognitiveScore ? "Có chỉ số" : "Thiếu phép đo"}
-                </strong>
-              </div>
-              <div>
-                <span>Lịch sử Growth</span>
-                <strong className={hasComparableGrowth ? "is-ok" : "is-pending"}>
-                  {hasComparableGrowth ? "Có thể so sánh" : "Cần đo lại"}
-                </strong>
-              </div>
-              <div>
-                <span>Rủi ro nhận thức</span>
-                <strong>{hasProfile ? getRiskText(cognitive.riskLevel) : "Chưa đánh giá"}</strong>
-              </div>
-            </div>
-            <p className="student-dash-status-note">
-              {hasComparableGrowth
-                ? intelligence.growthEvidence.message
-                : "Growth cần ít nhất hai lần đo hợp lệ cách nhau về thời gian."}
-            </p>
-          </aside>
-        </section>
+        {!isAdminPreview && <StudentJourneyBridge hasProfile={hasProfile} />}
 
         {/* A connected learning circuit replaces the old six-card module grid. */}
         <LearningCircuit profilePath={profilePath} />

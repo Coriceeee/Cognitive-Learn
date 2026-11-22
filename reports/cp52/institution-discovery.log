@@ -1,0 +1,64 @@
+
+> cognitive-learn-ai@0.1.0 test:cp42:institution-discovery
+> node --experimental-strip-types --test tests/cp42-institution-discovery.test.mjs
+
+TAP version 13
+# (node:19490) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: 99 source names plus registry-only entries: count, uniqueness and explicit links
+ok 1 - 99 source names plus registry-only entries: count, uniqueness and explicit links
+  ---
+  duration_ms: 2.071999
+  type: 'test'
+  ...
+# Subtest: discovery-only records have names but no invented code, portal, or admission data
+ok 2 - discovery-only records have names but no invented code, portal, or admission data
+  ---
+  duration_ms: 71.130065
+  type: 'test'
+  ...
+# Subtest: accent-insensitive searches and existing verified code search
+ok 3 - accent-insensitive searches and existing verified code search
+  ---
+  duration_ms: 3.245212
+  type: 'test'
+  ...
+# Subtest: parent institutions do not borrow member institution source links
+ok 4 - parent institutions do not borrow member institution source links
+  ---
+  duration_ms: 2.350907
+  type: 'test'
+  ...
+# Subtest: same faculty name in different cities resolves exact crosswalk only
+ok 5 - same faculty name in different cities resolves exact crosswalk only
+  ---
+  duration_ms: 1.65486
+  type: 'test'
+  ...
+# Subtest: all names are valid public query payloads, links retain year and full name
+ok 6 - all names are valid public query payloads, links retain year and full name
+  ---
+  duration_ms: 10.57713
+  type: 'test'
+  ...
+# Subtest: bad directory and crosswalk fail closed
+ok 7 - bad directory and crosswalk fail closed
+  ---
+  duration_ms: 0.8267
+  type: 'test'
+  ...
+# Subtest: student directory uses explicit selection and no writes or live calls
+ok 8 - student directory uses explicit selection and no writes or live calls
+  ---
+  duration_ms: 0.441776
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 389.126377

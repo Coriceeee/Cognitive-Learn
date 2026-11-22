@@ -1,0 +1,16 @@
+
+> cognitive-learn-ai@0.1.0 qa:cp71:visual
+> node --experimental-strip-types tools/cp71_unified_preview.mjs && python tools/cp71_unified_visual_qa.py
+
+(node:82113) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+/mnt/data/cla_cp71_unified_work/reports/cp71/preview-seed.html
+/mnt/data/cla_cp71_unified_work/reports/cp71/preview-lumen.html
+/mnt/data/cla_cp71_unified_work/reports/cp71/preview-atlas.html
+/mnt/data/cla_cp71_unified_work/reports/cp71/preview-orion.html
+/mnt/data/cla_cp71_unified_work/reports/cp71/preview-pulse.html
+/mnt/data/cla_cp71_unified_work/reports/cp71/preview-haven.html
+PASS preview-unified-atlas-light-1280.png no overflow / active & accessible / six module links / contrast >=4.5 {'width': 1280, 'scroll': 1280, 'active': 1, 'links': 4, 'background': 'rgb(255, 255, 255)', 'text': 'rgb(23, 50, 79)', 'tabBackground': 'rgb(241, 245, 251)', 'buttonHeight': 40, 'tabNotClipped': True}
+PASS preview-unified-lumen-dark-1280.png no overflow / active & accessible / six module links / contrast >=4.5 {'width': 1280, 'scroll': 1280, 'active': 1, 'links': 4, 'background': 'rgb(19, 34, 56)', 'text': 'rgb(241, 247, 255)', 'tabBackground': 'rgb(32, 54, 83)', 'buttonHeight': 40, 'tabNotClipped': True}
+PASS preview-unified-seed-light-390.png no overflow / active & accessible / six module links / contrast >=4.5 {'width': 390, 'scroll': 390, 'active': 1, 'links': 4, 'background': 'rgb(255, 255, 255)', 'text': 'rgb(255, 255, 255)', 'tabBackground': 'rgb(36, 88, 165)', 'buttonHeight': 40, 'tabNotClipped': True}
+PASS preview-unified-orion-dark-390.png no overflow / active & accessible / six module links / contrast >=4.5 {'width': 390, 'scroll': 390, 'active': 1, 'links': 4, 'background': 'rgb(19, 34, 56)', 'text': 'rgb(16, 35, 58)', 'tabBackground': 'rgb(182, 215, 255)', 'buttonHeight': 40, 'tabNotClipped': True}

@@ -76,7 +76,7 @@ export default function ClosedLoopPanel({ mode, plan }: Props) {
   useEffect(() => {
     if (scenarioId && !selectedScenario) { setScenarioId(""); setDecisionChoice(null); }
   }, [scenarioId, selectedScenario]);
-  const canWrite = !journey.busy && (journey.status === "ready" || journey.status === "empty");
+  const canWrite = !journey.busy && journey.recentFromServer && (journey.status === "ready" || journey.status === "empty");
   const nextWeek = active ? Array.from({length: active.weeksLeft}, (_, i) => i + 1)
     .find(n => !active.checkIns.some(c => c.week === n)) : null;
   useEffect(() => {
@@ -154,6 +154,7 @@ export default function ClosedLoopPanel({ mode, plan }: Props) {
     </div>
 
     {journey.status === "loading" && <p role="status">Đang đọc hồ sơ chu kỳ trên Firestore…</p>}
+    {journey.status === "syncing" && <p role="status">Đang chờ Firestore xác minh chu kỳ từ máy chủ. Dữ liệu cache chưa được dùng để hiển thị hoặc ghi cập nhật.</p>}
     {journey.status === "signed-out" && <p role="status">Đăng nhập tài khoản học sinh để sử dụng chu kỳ.</p>}
     {journey.status === "error" && <p role="alert">{journey.error}</p>}
     {journey.error && journey.status !== "error" && <p role="alert">{journey.error}</p>}

@@ -110,7 +110,7 @@ test('CL15 Firestore hook uses authenticated ownership and transaction-based upd
   assert.match(code,/onAuthStateChanged/);
   assert.match(code,/auth\.currentUser\?\.uid !== owner/);
   assert.match(code,/runTransaction/);
-  assert.match(code,/if \(!isJourneyCycle\(current\)\)/);
+  assert.match(code,/if \(!isJourneyCycle\(current\) \|\| current\.userId !== owner \|\| current\.id !== cycleId\)/);
 });
 test('CL16 candidate rules restrict student ownership, product consent, and immutable baselines',()=>{
   const code=inspect('../firestore.rules.CANDIDATE_CP21');

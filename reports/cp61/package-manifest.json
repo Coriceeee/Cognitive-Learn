@@ -1,0 +1,14 @@
+{
+  "archive": "/mnt/data/Cognitive-Learn-CP61-20261121.zip",
+  "file_count": 1316,
+  "bytes": 22726526,
+  "sha256": "79ec1e1ea4f478d80e205baafd6e349416c34be89da6f0cc23ee33f66ee8fbe5",
+  "safe_env_examples": [
+    ".env.example",
+    "functions/.env.example",
+    "functions-admin/.env.example",
+    "functions-privacy/.env.example"
+  ],
+  "source_only": true,
+  "production_build_verified": false
+}

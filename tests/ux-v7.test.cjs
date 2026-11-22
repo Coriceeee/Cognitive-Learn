@@ -5,14 +5,17 @@ const path = require("node:path");
 const root = path.join(__dirname, "..");
 const read = file => fs.readFileSync(path.join(root, file), "utf8");
 
-test("UX-V7-02: Student dashboard exposes exactly six student modules with their own icons", () => {
+test("UX-V7-02: Student dashboard exposes six connected student spaces in the learning circuit", () => {
   const page = read("src/page/seed/StudentPage.tsx");
-  for (const key of ["seed", "lumen", "atlas", "orion", "pulse", "haven"]) {
-    assert.ok(page.includes(`/${key === "seed" ? "student/profile" : key}`), `missing student destination: ${key}`);
-    assert.ok(page.includes(`${key}-`), `missing module icon for ${key}`);
+  const circuit = read("src/page/seed/components/LearningCircuit.tsx");
+  assert.match(page, /import LearningCircuit from ".\/components\/LearningCircuit"/);
+  assert.match(page, /<LearningCircuit profilePath={profilePath} \/>/);
+  for (const [code, path] of [["SEED", "/student/profile"], ["LUMEN", "/lumen"], ["ATLAS", "/atlas"], ["ORION", "/orion"], ["PULSE", "/pulse"], ["HAVEN", "/haven"]]) {
+    assert.ok(circuit.includes(`code:"${code}"`), `missing learning space: ${code}`);
+    assert.ok(circuit.includes(`href:"${path}"`), `missing student destination: ${path}`);
   }
-  assert.match(page, /Six student-facing modules/);
-  assert.match(page, /coreModules\.map/);
+  assert.match(circuit, /Sáu hệ trí tuệ/);
+  assert.match(circuit, /aria-label="Sơ đồ sáu không gian học tập"/);
   assert.doesNotMatch(page, /href:\s*["']\/admin/);
 });
 

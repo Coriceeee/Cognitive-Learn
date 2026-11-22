@@ -1,0 +1,10 @@
+{
+  "checkpoint": "CP71",
+  "date": "2026-11-22",
+  "kind": "source_only",
+  "production_build_verified": false,
+  "firebase_emulator_verified": false,
+  "browser_e2e_verified": false,
+  "layout_and_offline_tests": "PASS",
+  "note": "SHA256 of the final ZIP is reported alongside the downloadable artifact, not embedded recursively."
+}

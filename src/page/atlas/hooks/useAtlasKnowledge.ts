@@ -1,7 +1,10 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, onSnapshot, serverTimestamp, setDoc } from "firebase/firestore";
+import { doc, onSnapshot, runTransaction, serverTimestamp } from "firebase/firestore";
 import { auth, db } from "../../../lib/firebase";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { isMatchingAccountRecord, isServerConfirmedSnapshot } from "../../seed/services/realtimeReadPolicy";
+import { atlasWorkspacePayload, atlasWorkspaceVersion } from "../../../lib/atlasWorkspaceRevision";
+import { assertDraftUnchanged, draftPayloadSignature, type DraftVersion } from "../../../lib/draftRevision";
 import type { GeminiAdmissionDraft } from "../../../lib/geminiAdmissionClient";
 import {
   getAtlasStats,
@@ -49,15 +52,18 @@ const emptyAtlasData: AtlasStorageData = {
   programs: [],
 };
 
-function loadAtlasStorage(): AtlasStorageData {
-  if (typeof window === "undefined") return emptyAtlasData;
+function loadAtlasStorage(ownerUid: string): AtlasStorageData {
+  if (typeof window === "undefined" || !ownerUid) return emptyAtlasData;
 
   try {
-    const raw = localStorage.getItem(ATLAS_STORAGE_KEY);
+    const raw = window.localStorage.getItem(ATLAS_STORAGE_KEY);
 
     if (!raw) return emptyAtlasData;
 
-    const parsed = JSON.parse(raw) as Partial<AtlasStorageData>;
+    const parsed = JSON.parse(raw) as Partial<AtlasStorageData> & { userId?: unknown };
+    // Older unscoped localStorage entries cannot prove which student owns them.
+    // Never offer to import such data into the currently authenticated account.
+    if (parsed.userId !== ownerUid) return emptyAtlasData;
 
     return {
       universities: Array.isArray(parsed.universities)
@@ -286,56 +292,110 @@ export function useAtlasKnowledge() {
   const [sources, setSources] = useState<AtlasAdmissionSource[]>([]);
   const [programs, setPrograms] = useState<AtlasProgram[]>([]);
   const [uid, setUid] = useState("");
-  const [storageStatus, setStorageStatus] = useState<"loading" | "ready" | "error" | "signed-out">("loading");
+  const [storageStatus, setStorageStatus] = useState<"loading" | "syncing" | "ready" | "error" | "signed-out">("loading");
   const [storageError, setStorageError] = useState("");
   const [saving, setSaving] = useState(false);
+  const savingRef = useRef(false);
+  const authEpoch = useRef(0);
+  const lastVerified = useRef<{ uid: string; version: DraftVersion } | null>(null);
   const legacyAvailable = useMemo(() => {
-    const data = loadAtlasStorage();
+    const data = loadAtlasStorage(uid);
     return data.universities.length + data.sources.length + data.programs.length > 0;
-  }, []);
+  }, [uid]);
 
   useEffect(() => {
+    let mounted = true;
     let stopDoc: (() => void) | undefined;
     const stopAuth = onAuthStateChanged(auth, user => {
-      stopDoc?.();
-      stopDoc = undefined;
-      setUid(user?.uid ?? "");
+      if (!mounted || (user?.uid ?? null) !== (auth.currentUser?.uid ?? null)) return;
+      stopDoc?.(); stopDoc = undefined;
+      const epoch = ++authEpoch.current;
+      const owner = user?.uid ?? "";
+      const current = () => mounted && epoch === authEpoch.current && auth.currentUser?.uid === owner;
+      lastVerified.current = null;
+      setUid(owner);
       setUniversities([]); setSources([]); setPrograms([]);
       setStorageError("");
       if (!user) { setStorageStatus("signed-out"); return; }
       setStorageStatus("loading");
-      stopDoc = onSnapshot(doc(db, "atlas_workspaces", user.uid), snapshot => {
-        const raw = snapshot.exists() ? snapshot.data() : {};
-        setUniversities(Array.isArray(raw.universities) ? raw.universities as AtlasUniversity[] : []);
-        setSources(Array.isArray(raw.sources) ? raw.sources as AtlasAdmissionSource[] : []);
-        setPrograms(Array.isArray(raw.programs) ? raw.programs as AtlasProgram[] : []);
+      stopDoc = onSnapshot(doc(db, "atlas_workspaces", owner), { includeMetadataChanges: true }, snapshot => {
+        if (!current()) return;
+        if (!isServerConfirmedSnapshot(snapshot.metadata)) {
+          // Cached documents and pending writes must never create a trusted CAS baseline.
+          if (!lastVerified.current || lastVerified.current.uid !== owner) {
+            setUniversities([]); setSources([]); setPrograms([]);
+          }
+          setStorageStatus("syncing"); return;
+        }
+        const raw = snapshot.exists() ? snapshot.data() : null;
+        if (raw && (!isMatchingAccountRecord(raw, owner) ||
+          (raw.schemaVersion !== undefined && raw.schemaVersion !== 1) ||
+          !Array.isArray(raw.universities) || !Array.isArray(raw.sources) || !Array.isArray(raw.programs))) {
+          lastVerified.current = null;
+          setUniversities([]); setSources([]); setPrograms([]);
+          setStorageStatus("error");
+          setStorageError("Kho Atlas sai chủ sở hữu hoặc cấu trúc dữ liệu; đã ngừng đồng bộ để bảo vệ hồ sơ.");
+          return;
+        }
+        const payload = atlasWorkspacePayload(raw);
+        lastVerified.current = { uid: owner, version: atlasWorkspaceVersion(raw) };
+        setUniversities(payload.universities as AtlasUniversity[]);
+        setSources(payload.sources as AtlasAdmissionSource[]);
+        setPrograms(payload.programs as AtlasProgram[]);
+        setStorageError("");
         setStorageStatus("ready");
       }, error => {
+        if (!current()) return;
+        lastVerified.current = null;
+        setUniversities([]); setSources([]); setPrograms([]);
         setStorageStatus("error");
         setStorageError(error.code === "permission-denied"
           ? "Không có quyền đọc Atlas từ Firestore. Cần kiểm tra Security Rules."
           : "Không thể kết nối Atlas Knowledge Base đến Firestore.");
       });
-    }, () => { setStorageStatus("error"); setStorageError("Firebase Auth không hoạt động."); });
-    return () => { stopDoc?.(); stopAuth(); };
+    }, () => { if (mounted) { setStorageStatus("error"); setStorageError("Firebase Auth không hoạt động."); } });
+    return () => { mounted = false; authEpoch.current++; lastVerified.current = null; stopDoc?.(); stopAuth(); };
   }, []);
 
   async function persist(data: AtlasStorageData) {
-    if (!uid || auth.currentUser?.uid !== uid || storageStatus !== "ready" || saving)
-      throw new Error("Atlas chưa tải xong hoặc chưa được xác thực; không lưu đè dữ liệu.");
-    setSaving(true);
-    setStorageError("");
+    const owner = uid;
+    const verified = lastVerified.current;
+    if (!owner || auth.currentUser?.uid !== owner || storageStatus !== "ready" ||
+        !verified || verified.uid !== owner || savingRef.current)
+      throw new Error("Atlas chưa được máy chủ xác minh hoặc đang lưu; không ghi đè dữ liệu.");
+    const uiSignature = draftPayloadSignature({ universities, sources, programs });
+    // An onSnapshot callback may have advanced the baseline before React commits
+    // the associated render. Do not merge an older UI payload with a new version.
+    if (verified.version.exists && verified.version.payloadSignature !== uiSignature)
+      throw new Error("Dữ liệu Atlas vừa thay đổi. Hãy xem phiên bản mới trước khi lưu.");
+    const expected = verified.version;
+    const epoch = authEpoch.current;
+    const current = () => epoch === authEpoch.current && auth.currentUser?.uid === owner;
+    savingRef.current = true; setSaving(true); setStorageError("");
     try {
-      await setDoc(doc(db, "atlas_workspaces", uid), {
-        userId: uid, schemaVersion: 1,
-        universities: data.universities, sources: data.sources, programs: data.programs,
-        updatedAt: serverTimestamp(),
+      await runTransaction(db, async transaction => {
+        if (!current()) throw new Error("Phiên tài khoản đã thay đổi trước khi lưu Atlas.");
+        const ref = doc(db, "atlas_workspaces", owner);
+        const latest = await transaction.get(ref);
+        if (!current()) throw new Error("Phiên tài khoản đã thay đổi trong lúc lưu Atlas.");
+        const raw = latest.exists() ? latest.data() : null;
+        if (raw && !isMatchingAccountRecord(raw, owner))
+          throw new Error("Dữ liệu Atlas trên máy chủ không khớp tài khoản.");
+        assertDraftUnchanged(expected, atlasWorkspaceVersion(raw));
+        transaction.set(ref, {
+          userId: owner, schemaVersion: 1, revision: expected.revision + 1,
+          universities: data.universities, sources: data.sources, programs: data.programs,
+          updatedAt: serverTimestamp(),
+        });
       });
-      // The onSnapshot listener owns canonical state: no success UI on write failure.
+      // Realtime listener only trusts a new server-confirmed snapshot.
     } catch (error) {
-      setStorageError(error instanceof Error ? error.message : "Lưu Firestore thất bại.");
+      if (current()) setStorageError(error instanceof Error ? error.message : "Lưu Firestore thất bại.");
       throw error;
-    } finally { setSaving(false); }
+    } finally {
+      savingRef.current = false;
+      if (current()) setSaving(false);
+    }
   }
 
   async function importLegacyAtlasData() {
@@ -343,7 +403,7 @@ export function useAtlasKnowledge() {
     if (universities.length || sources.length || programs.length) {
       throw new Error("Atlas trên Firestore đã có dữ liệu. Không thể tự động ghi đè bằng bản local cũ.");
     }
-    await persist(loadAtlasStorage());
+    await persist(loadAtlasStorage(uid));
   }
 
   const universityMap = useMemo(() => {

@@ -1,0 +1,6 @@
+
+> cognitive-learn-ai@0.1.0 test:rules:preflight
+> node tools/firestoreSecurityGate.cjs --preflight
+
+SECURITY GATE: BLOCKED (static PASS, emulator BLOCKED).
+Evidence: reports/security/firestore_emulator_gate.json

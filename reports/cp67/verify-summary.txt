@@ -1,0 +1,21 @@
+CP67 VERIFICATION SUMMARY
+New CP67 tests:
+1..1
+# tests 17
+# suites 1
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 225.357952
+Full npm test: timeout before final exit; no claim of full PASS
+TAP ok before timeout: 1338
+TAP not ok: 0
+Chromium isolated:
+desktop: PASS, skip link visible, query preserved scroll, route focused, no overflow
+mobile: PASS, skip link visible, query preserved scroll, route focused, no overflow
+Dependency preflight:
+DEPENDENCY_PREFLIGHT_BLOCKED (19 issue(s))
+Demo:
+DEMO_OFFLINE_CORE_PASS — 11/11 steps; report: /mnt/data/cla_cp67_work/Cognitive-Learn/reports/demo/cla_batch16_offline_readiness.json

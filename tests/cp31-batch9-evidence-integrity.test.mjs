@@ -117,10 +117,11 @@ test('B9-26 UI makes technical-only match and legacy uncertainty visible',()=>{
 });
 test('B9-27 stale Firestore data cleared upon corrupt latest evidence',()=>{
  const src=readFileSync(new URL('../src/lib/useClosedLoopJourney.ts', import.meta.url),'utf8');
- assert.match(src,/!items\.every\(item => isJourneyCycle\(item\) && item\.userId === currentUid\)/);
- assert.match(src,/setCycles\(\[\]\)/);
- assert.match(src,/!pageDocs\.every\(\(record,i\)=>record\.id===items\[i\]\.id\)/);
- assert.match(src,/Đã ẩn kết quả cũ/);
+ const gate=readFileSync(new URL('../src/lib/journeySnapshotGate.ts', import.meta.url),'utf8');
+ assert.match(src,/assessJourneySnapshot\(currentUid/);
+ assert.match(gate,/!isJourneyCycle\(value\) \|\| value\.userId !== uid \|\| record\.id !== value\.id/);
+ assert.match(src,/decision\.state === "INVALID"[\s\S]*setCycles\(\[\]\)/);
+ assert.match(src,/Đã ẩn dữ liệu/);
 });
 test('B9-28 golden path still deterministic under regenerated audit rules',()=>{
  const x=runSyntheticGoldenPath(fixture);

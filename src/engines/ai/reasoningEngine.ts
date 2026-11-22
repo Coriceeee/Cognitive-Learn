@@ -75,10 +75,17 @@ export function analyzeStudentContext(
   const cognitive =
     context.cognitive;
 
+  // Measured indicators only: a zero for a missing dimension is not evidence.
+  const observed = (code: "SCI" | "CRI") =>
+    cognitive.scoreAvailable === true &&
+    cognitive.dimensions?.some(item => item.code === code && item.available === true) === true &&
+    !cognitive.missingDimensions?.includes(code) &&
+    Number.isFinite(cognitive[code]) && cognitive[code] >= 0 && cognitive[code] <= 100;
+
 
 
   if(
-    cognitive.SCI >= 80
+    observed("SCI") && cognitive.SCI >= 80
   ){
 
     insights.push(
@@ -120,7 +127,7 @@ export function analyzeStudentContext(
 
 
   if(
-    cognitive.CRI >= 80
+    observed("CRI") && cognitive.CRI >= 80
   ){
 
     insights.push(

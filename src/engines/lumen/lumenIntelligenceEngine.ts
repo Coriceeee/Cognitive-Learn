@@ -1,139 +1,56 @@
-import {
-  LumenInsight,
-  LumenDecision
-} from "./lumenTypes";
+import type { CognitiveResult } from "../cognitive/cognitiveEngine";
+import type { LumenInsight, LumenDecision } from "./lumenTypes";
 
+// CP72: Never treat metadata (overallScore, confidenceScore, etc.) or a missing
+// dimension's technical zero as an observed cognitive measurement.
+const CODES = ["SCI", "MAS", "CSL", "GVI", "BDI", "FRI", "CRI"] as const;
+const RISK_DIRECTION = new Set<string>(["GVI", "BDI", "FRI"]);
 
-export function analyzeCognitiveProfile(
- cognitive:any
-){
+export function analyzeCognitiveProfile(cognitive: CognitiveResult): LumenInsight[] {
+  if (cognitive.scoreAvailable !== true) return [];
 
+  const insights: LumenInsight[] = [];
+  for (const code of CODES) {
+    const dimension = cognitive.dimensions?.find(item => item.code === code);
+    if (dimension?.available !== true || cognitive.missingDimensions?.includes(code)) continue;
+    const value = cognitive[code];
+    if (!Number.isFinite(value) || value < 0 || value > 100) continue;
 
- const insights:LumenInsight[]=[];
+    const riskIndicator = RISK_DIRECTION.has(code);
+    // High FRI/BDI/GVI means a larger risk indicator, not a strength.
+    const level: LumenInsight["level"] = riskIndicator
+      ? value >= 60 ? "RISK" : "BALANCED"
+      : value >= 80 ? "STRENGTH" : value < 60 ? "RISK" : "BALANCED";
 
-
- Object.entries(cognitive)
- .forEach(([key,value])=>{
-
-
-   if(
-     typeof value !== "number"
-   ) return;
-
-
-
-   if(value>=80){
-
-     insights.push({
-
-       dimension:key,
-
-       score:value,
-
-       level:"STRENGTH",
-
-       title:
-        `${key} là điểm mạnh`,
-
-       description:
-        "Năng lực này đang ở mức nổi bật.",
-
-       recommendation:
-        "Nên khai thác để xây dựng chiến lược học tập."
-
-     });
-
-   }
-
-
-   else if(value<60){
-
-     insights.push({
-
-       dimension:key,
-
-       score:value,
-
-       level:"RISK",
-
-       title:
-        `${key} cần cải thiện`,
-
-       description:
-        "Đây là vùng có thể ảnh hưởng đến hiệu quả học tập.",
-
-       recommendation:
-        "Cần xây dựng kế hoạch cải thiện."
-
-     });
-
-   }
-
-
- });
-
-
- return insights;
-
+    insights.push({
+      dimension: code,
+      score: value,
+      level,
+      title: riskIndicator
+        ? `${code}: ${level === "RISK" ? "Tín hiệu cần theo dõi" : "Chưa vượt ngưỡng cảnh báo thử nghiệm"}`
+        : `${code}: ${level === "STRENGTH" ? "Tín hiệu tương đối cao" : level === "RISK" ? "Tín hiệu cần xem xét" : "Tín hiệu trung gian"}`,
+      description: `Giá trị ${value}/100 theo phép đo proxy thử nghiệm; không phải chẩn đoán hay kết luận về năng lực.`,
+      recommendation: level === "RISK"
+        ? "Kiểm tra dữ liệu đầu vào và theo dõi thêm qua các chu kỳ học tập."
+        : "Theo dõi thêm dữ liệu trước khi đưa ra quyết định quan trọng.",
+    });
+  }
+  return insights;
 }
 
-
-
-export function buildLumenDecision(
- insights:LumenInsight[]
-):LumenDecision{
-
-
- const strengths =
- insights
- .filter(
-  x=>x.level==="STRENGTH"
- )
- .map(
-  x=>x.title
- );
-
-
-
- const risks =
- insights
- .filter(
-  x=>x.level==="RISK"
- )
- .map(
-  x=>x.title
- );
-
-
-
- return {
-
-
-  strengths,
-
-
-  risks,
-
-
-  learningStrategy:[
-
-   "Ưu tiên phát huy điểm mạnh nhận thức",
-
-   "Xây dựng kế hoạch học cá nhân hóa",
-
-   "Theo dõi sự thay đổi theo thời gian"
-
-  ],
-
-
-
-  summary:
-   strengths.length>0
-   ?
-   "Hồ sơ nhận thức có nhiều tiềm năng phát triển."
-   :
-   "Cần tiếp tục thu thập dữ liệu."
-
- };
-
+export function buildLumenDecision(insights: LumenInsight[]): LumenDecision {
+  const strengths = insights.filter(item => item.level === "STRENGTH").map(item => item.title);
+  const risks = insights.filter(item => item.level === "RISK").map(item => item.title);
+  return {
+    strengths,
+    risks,
+    learningStrategy: [
+      "Đối chiếu các tín hiệu đã đo với kế hoạch học thực tế",
+      "Thử một thay đổi nhỏ rồi ghi lại kết quả",
+      "Theo dõi nhiều chu kỳ trước khi đánh giá xu hướng",
+    ],
+    summary: insights.length > 0
+      ? `Có ${insights.length} chỉ báo proxy đủ điều kiện hiển thị; chưa phải kết luận tâm trắc hoặc xác suất dự báo.`
+      : "Chưa có chỉ báo đã xác minh để diễn giải; không suy luận từ số 0 kỹ thuật.",
+  };
 }

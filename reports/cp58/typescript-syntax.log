@@ -1,0 +1,5 @@
+PASS Syntax src/App.tsx 0 diagnostics
+PASS Syntax src/page/study-abroad/StudyAbroadPage.tsx 0 diagnostics
+PASS Syntax src/page/orion/OrionPage.tsx 0 diagnostics
+PASS Syntax src/page/haven/HavenPage.tsx 0 diagnostics
+PASS Syntax src/lib/transcriptPrefillEligibility.ts 0 diagnostics

@@ -1,0 +1,173 @@
+
+> cognitive-learn-ai@0.1.0 test:cp63:guided-workspaces
+> node --experimental-strip-types --test tests/cp63-guided-workspaces.test.mjs
+
+TAP version 13
+# (node:27978) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP63 student navigation seed
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 1.598236
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.388077
+      type: 'test'
+      ...
+    1..2
+ok 1 - CP63 student navigation seed
+  ---
+  duration_ms: 2.882798
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation lumen
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 0.199912
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.186021
+      type: 'test'
+      ...
+    1..2
+ok 2 - CP63 student navigation lumen
+  ---
+  duration_ms: 0.497593
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation atlas
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 0.100001
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.24442
+      type: 'test'
+      ...
+    1..2
+ok 3 - CP63 student navigation atlas
+  ---
+  duration_ms: 0.63511
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation orion
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 0.184328
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.070486
+      type: 'test'
+      ...
+    1..2
+ok 4 - CP63 student navigation orion
+  ---
+  duration_ms: 0.401647
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation pulse
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 0.366925
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.197879
+      type: 'test'
+      ...
+    1..2
+ok 5 - CP63 student navigation pulse
+  ---
+  duration_ms: 0.638515
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation haven
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 0.118338
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.057036
+      type: 'test'
+      ...
+    1..2
+ok 6 - CP63 student navigation haven
+  ---
+  duration_ms: 0.272662
+  type: 'suite'
+  ...
+# Subtest: CP63 cross-module and accessibility contracts
+    # Subtest: handles nested study abroad country routes as the Atlas study-abroad tab
+    ok 1 - handles nested study abroad country routes as the Atlas study-abroad tab
+      ---
+      duration_ms: 0.130107
+      type: 'test'
+      ...
+    # Subtest: never exposes planned-only or missing destinations
+    ok 2 - never exposes planned-only or missing destinations
+      ---
+      duration_ms: 0.872078
+      type: 'test'
+      ...
+    # Subtest: caps quick links to a small scan-friendly set and preserves order
+    ok 3 - caps quick links to a small scan-friendly set and preserves order
+      ---
+      duration_ms: 0.388227
+      type: 'test'
+      ...
+    # Subtest: uses semantic links, native disclosure, current-page labels and no invented completion gauge
+    ok 4 - uses semantic links, native disclosure, current-page labels and no invented completion gauge
+      ---
+      duration_ms: 0.277489
+      type: 'test'
+      ...
+    # Subtest: includes accessible focus, dark/light and mobile CSS with reduced motion
+    ok 5 - includes accessible focus, dark/light and mobile CSS with reduced motion
+      ---
+      duration_ms: 0.114413
+      type: 'test'
+      ...
+    # Subtest: keeps SPA routing and unsaved-draft navigation guards in charge of links
+    ok 6 - keeps SPA routing and unsaved-draft navigation guards in charge of links
+      ---
+      duration_ms: 0.105199
+      type: 'test'
+      ...
+    1..6
+ok 7 - CP63 cross-module and accessibility contracts
+  ---
+  duration_ms: 2.059383
+  type: 'suite'
+  ...
+1..7
+# tests 18
+# suites 7
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 132.875204

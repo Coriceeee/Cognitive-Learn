@@ -1,11 +1,13 @@
 import { currentFocusedPath } from "../../lib/focusedModuleRoute";
 import ModuleSectionNav from "../../components/common/ModuleSectionNav";
+import ModuleInputObservatory from "../../components/common/ModuleInputObservatory";
+import ModuleDraftFeedback from "../../components/common/ModuleDraftFeedback";
 import { useIsAdmin } from "../../lib/useIsAdmin";
 import { useEffect } from "react";
 import { allValid, isBlankOrValid } from "../../lib/inputValidation";
 import { useModuleDraft } from "../../lib/useModuleDraft";
 import { usePipelineEvidence } from "../../lib/usePipelineEvidence";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
 import {
@@ -53,9 +55,41 @@ export default function PulsePage() {
   const [weeklyStudyHours, setWeeklyStudyHours] = useState("");
   const [targetWeeklyHours, setTargetWeeklyHours] = useState("");
 
-  const { draft: savedDraft, status: saveStatus, error: draftError, save: saveDraft } = useModuleDraft<{cognitiveScore:string;previousCognitiveScore:string;admissionReadiness:string;orionReadiness:string;atlasProgramCount:string;aspirationCount:string;weeklyStudyHours:string;targetWeeklyHours:string}>("pulse");
+  const { draft: savedDraft, status: saveStatus, error: draftError, uid: draftOwnerUid, conflict: draftConflict, save: saveDraft, markEditing, acceptRemote } = useModuleDraft<{cognitiveScore:string;previousCognitiveScore:string;admissionReadiness:string;orionReadiness:string;atlasProgramCount:string;aspirationCount:string;weeklyStudyHours:string;targetWeeklyHours:string}>("pulse");
   const [saveNotice, setSaveNotice] = useState("");
+  const [saveNoticeTone, setSaveNoticeTone] = useState<"success" | "warning" | "error">("success");
   const [saving, setSaving] = useState(false);
+  const [hasLocalEdits, setHasLocalEdits] = useState(false);
+  const editVersion = useRef(0);
+  function markLocalEdit() {
+    markEditing();
+    editVersion.current += 1;
+    setHasLocalEdits(true);
+    // Never leave a previous successful save notice visible after new edits.
+    setSaveNotice("");
+  }
+  // CP52: never show a previous account's draft after sign-out/account switch.
+  const lastDraftOwner = useRef<string | null>(null);
+  useEffect(() => {
+    if (lastDraftOwner.current === null) {
+      lastDraftOwner.current = draftOwnerUid;
+      return;
+    }
+    if (lastDraftOwner.current === draftOwnerUid) return;
+    lastDraftOwner.current = draftOwnerUid;
+    setCognitiveScore("");
+    setPreviousCognitiveScore("");
+    setAdmissionReadiness("");
+    setOrionReadiness("");
+    setAtlasProgramCount("");
+    setAspirationCount("");
+    setWeeklyStudyHours("");
+    setTargetWeeklyHours("");
+    setSaveNotice("");
+    setHasLocalEdits(false);
+    editVersion.current += 1;
+  }, [draftOwnerUid]);
+
   useEffect(() => {
     if (!savedDraft) return;
     setCognitiveScore(savedDraft.cognitiveScore);
@@ -67,9 +101,32 @@ export default function PulsePage() {
     setWeeklyStudyHours(savedDraft.weeklyStudyHours);
     setTargetWeeklyHours(savedDraft.targetWeeklyHours);
   }, [savedDraft]);
+  async function loadLatestDraft() {
+    setSaveNotice("");
+    try {
+      const remote = await acceptRemote();
+      setCognitiveScore(remote?.cognitiveScore ?? "");
+      setPreviousCognitiveScore(remote?.previousCognitiveScore ?? "");
+      setAdmissionReadiness(remote?.admissionReadiness ?? "");
+      setOrionReadiness(remote?.orionReadiness ?? "");
+      setAtlasProgramCount(remote?.atlasProgramCount ?? "");
+      setAspirationCount(remote?.aspirationCount ?? "");
+      setWeeklyStudyHours(remote?.weeklyStudyHours ?? "");
+      setTargetWeeklyHours(remote?.targetWeeklyHours ?? "");
+      editVersion.current += 1;
+      setHasLocalEdits(false);
+      setSaveNoticeTone("success");
+      setSaveNotice("Đã tải bản nháp mới nhất từ máy chủ.");
+    } catch (error) {
+      setSaveNoticeTone("error");
+      setSaveNotice(error instanceof Error ? error.message : "Không thể tải bản mới nhất.");
+    }
+  }
+
   async function saveCurrentDraft() {
     setSaving(true);
     setSaveNotice("");
+    const revision = editVersion.current;
     try {
       if (![cognitiveScore, previousCognitiveScore, admissionReadiness, orionReadiness].every(v => isBlankOrValid(v, 0, 100)) ||
           ![atlasProgramCount, aspirationCount].every(v => isBlankOrValid(v, 0, 10000, true)) ||
@@ -77,8 +134,16 @@ export default function PulsePage() {
         throw new Error("Có dữ liệu ngoài khoảng hợp lệ. Kiểm tra thang 0–100, số lượng và giờ/tuần.");
       }
       await saveDraft({cognitiveScore, previousCognitiveScore, admissionReadiness, orionReadiness, atlasProgramCount, aspirationCount, weeklyStudyHours, targetWeeklyHours});
-      setSaveNotice("Đã lưu vào hồ sơ của bạn.");
+      if (editVersion.current === revision) {
+        setHasLocalEdits(false);
+        setSaveNoticeTone("success");
+        setSaveNotice("Đã lưu vào hồ sơ của bạn.");
+      } else {
+        setSaveNoticeTone("warning");
+        setSaveNotice("Đã lưu phiên bản trước; thay đổi mới vẫn chưa lưu.");
+      }
     } catch (error) {
+      setSaveNoticeTone("error");
       setSaveNotice(error instanceof Error ? error.message : "Không thể lưu dữ liệu. Hãy kiểm tra kết nối và thử lại.");
     } finally { setSaving(false); }
   }
@@ -151,6 +216,26 @@ export default function PulsePage() {
         </section></>}
 
         <ModuleSectionNav moduleKey="pulse" />
+        {view === "/pulse" && <ModuleInputObservatory moduleName="Pulse" editHref="/pulse/inputs"
+          resultHref="/pulse/progress" resultLabel="Mở biểu đồ tiến độ" canSimulate={hasInputs}
+          note="Các giá trị Pulse là chỉ số tự nhập để thử nghiệm báo cáo, không thay thế các phép đo hoặc chứng cứ khoa học từ Seed/Lumen/Atlas/Orion."
+          groups={[
+            { key: "cognitive", title: "Theo dõi Lumen", fields: [
+              { key: "current", label: "Lumen hiện tại", value: cognitiveScore, min: 0, max: 100 },
+              { key: "previous", label: "Lumen kỳ trước", value: previousCognitiveScore, min: 0, max: 100 },
+            ] },
+            { key: "decision", title: "Tuyển sinh & chiến lược", fields: [
+              { key: "admission", label: "Atlas readiness", value: admissionReadiness, min: 0, max: 100 },
+              { key: "orion", label: "Orion readiness", value: orionReadiness, min: 0, max: 100 },
+              { key: "programs", label: "Số ngành Atlas", value: atlasProgramCount, min: 0, max: 10000, integer: true },
+              { key: "aspirations", label: "Số nguyện vọng", value: aspirationCount, min: 0, max: 10000, integer: true },
+            ] },
+            { key: "time", title: "Thời gian học", fields: [
+              { key: "hours", label: "Giờ học mỗi tuần", value: weeklyStudyHours, min: 0, max: 168 },
+              { key: "targetHours", label: "Mục tiêu giờ học", value: targetWeeklyHours, min: 0, max: 168 },
+            ] },
+          ]} />}
+
 
         {view === "/pulse/audit" && !isAdmin && <p role="status">Đang xác minh quyền quản trị…</p>}
         {view === "/pulse/audit" && isAdmin && <section id="pulse-pipeline" className="pulse-control-panel" aria-labelledby="cp23-pipeline-title">
@@ -209,18 +294,21 @@ export default function PulsePage() {
             </div>
           </div>
 
-          <div className="cla-firestore-save" role="status" style={{display:"flex",flexWrap:"wrap",alignItems:"center",gap:12,margin:"12px 0"}}>
-            <button type="button" disabled={saving || saveStatus === "loading" || saveStatus === "error" || saveStatus === "signed-out"} onClick={() => void saveCurrentDraft()}>
+          <div className="cla-firestore-save cla-module-save-panel">
+            <button type="button" disabled={saving || (saveStatus !== "ready" && saveStatus !== "empty")} onClick={() => void saveCurrentDraft()}>
               {saving ? "Đang lưu…" : "Lưu dữ liệu"}
             </button>
-            <span>{saveNotice || draftError || (saveStatus === "ready" ? "Đã đồng bộ dữ liệu đã lưu" : saveStatus === "loading" ? "Đang tải dữ liệu đã lưu…" : "Chưa có dữ liệu đã lưu")}</span>
+            {draftConflict && <button type="button" onClick={() => void loadLatestDraft()}>Tải bản mới nhất (bỏ thay đổi trên máy này)</button>}
+            <ModuleDraftFeedback status={saveStatus} error={draftError} conflict={draftConflict}
+              saving={saving} notice={saveNotice} noticeTone={saveNoticeTone}
+              dirty={hasLocalEdits} />
           </div>
           <div className="pulse-form-grid">
             <label>
               <span>Lumen hiện tại</span>
               <input
                 value={cognitiveScore}
-                onChange={(event) => setCognitiveScore(event.target.value)}
+                onChange={(event) => { markLocalEdit(); setCognitiveScore(event.target.value); }}
               />
             </label>
 
@@ -228,9 +316,7 @@ export default function PulsePage() {
               <span>Lumen kỳ trước</span>
               <input
                 value={previousCognitiveScore}
-                onChange={(event) =>
-                  setPreviousCognitiveScore(event.target.value)
-                }
+                onChange={(event) => { markLocalEdit(); setPreviousCognitiveScore(event.target.value); }}
               />
             </label>
 
@@ -238,9 +324,7 @@ export default function PulsePage() {
               <span>Atlas readiness</span>
               <input
                 value={admissionReadiness}
-                onChange={(event) =>
-                  setAdmissionReadiness(event.target.value)
-                }
+                onChange={(event) => { markLocalEdit(); setAdmissionReadiness(event.target.value); }}
               />
             </label>
 
@@ -248,7 +332,7 @@ export default function PulsePage() {
               <span>Orion readiness</span>
               <input
                 value={orionReadiness}
-                onChange={(event) => setOrionReadiness(event.target.value)}
+                onChange={(event) => { markLocalEdit(); setOrionReadiness(event.target.value); }}
               />
             </label>
 
@@ -256,7 +340,7 @@ export default function PulsePage() {
               <span>Số ngành Atlas</span>
               <input
                 value={atlasProgramCount}
-                onChange={(event) => setAtlasProgramCount(event.target.value)}
+                onChange={(event) => { markLocalEdit(); setAtlasProgramCount(event.target.value); }}
               />
             </label>
 
@@ -264,7 +348,7 @@ export default function PulsePage() {
               <span>Số nguyện vọng</span>
               <input
                 value={aspirationCount}
-                onChange={(event) => setAspirationCount(event.target.value)}
+                onChange={(event) => { markLocalEdit(); setAspirationCount(event.target.value); }}
               />
             </label>
 
@@ -272,7 +356,7 @@ export default function PulsePage() {
               <span>Giờ học/tuần</span>
               <input
                 value={weeklyStudyHours}
-                onChange={(event) => setWeeklyStudyHours(event.target.value)}
+                onChange={(event) => { markLocalEdit(); setWeeklyStudyHours(event.target.value); }}
               />
             </label>
 
@@ -280,7 +364,7 @@ export default function PulsePage() {
               <span>Mục tiêu giờ/tuần</span>
               <input
                 value={targetWeeklyHours}
-                onChange={(event) => setTargetWeeklyHours(event.target.value)}
+                onChange={(event) => { markLocalEdit(); setTargetWeeklyHours(event.target.value); }}
               />
             </label>
           </div>

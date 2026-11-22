@@ -1,0 +1,169 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>CP67 | Isolated QA</title><style>/* CP67 — keyboard-accessible SPA transitions and a visible-on-focus skip link. */
+.cla-skip-to-content {
+  position: fixed;
+  z-index: 10020;
+  top: 8px;
+  left: 8px;
+  padding: 12px 18px;
+  border: 2px solid #0b4784;
+  border-radius: 11px;
+  background: #fff;
+  color: #103d6a;
+  font: 700 14px/1.4 'Be Vietnam Pro', sans-serif;
+  transform: translateY(calc(-100% - 24px));
+  transition: transform .15s ease;
+  text-decoration: none;
+  box-shadow: 0 8px 22px rgba(20, 37, 61, .2);
+}
+.cla-skip-to-content:focus-visible,
+.cla-skip-to-content:focus {
+  transform: translateY(0);
+  outline: 3px solid #3177b8;
+  outline-offset: 2px;
+}
+.cla-route-announcement {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+/* The focus target is a neutral container, not a second main landmark. */
+#cla-page-content:focus { outline: none; }
+#cla-page-content:focus-visible { outline: 3px solid #3177b8; outline-offset: -3px; }
+@media (prefers-reduced-motion: reduce) {
+  .cla-skip-to-content { transition: none; }
+}
+@media print { .cla-skip-to-content, .cla-route-announcement { display: none !important; } }
+</style><style>
+body{font:15px/1.65 system-ui,sans-serif;background:#f2f7fc;color:#163453;margin:0}
+header{background:#fff;border-bottom:1px solid #c3d3e6;padding:18px max(16px,calc((100vw - 1050px)/2))}
+header a{color:#17477e;font-weight:bold;margin-right:14px}
+main{padding:24px;max-width:900px;margin:auto}
+.tour{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+button{border:1px solid #9dbbdb;background:#fff;color:#164d82;border-radius:10px;padding:12px 15px;font-weight:bold;cursor:pointer}
+section{border-radius:18px;background:#fff;border:1px solid #cdddf0;padding:20px;max-width:800px}
+.graph{height:150px;display:flex;align-items:end;gap:15px;padding:16px 5px;border-bottom:1px solid #abc}
+.graph b{width:30%;border-radius:8px 8px 0 0;background:#5282bd}
+small{color:#4b6178}
+</style></head><body><a class="cla-skip-to-content" href="#cla-page-content">Bỏ qua điều hướng, đến nội dung</a>
+<span class="cla-route-announcement" role="status" aria-live="polite">Đã mở: Du học quốc tế · Atlas</span>
+<header><strong>CP67 · QA điều hướng (không phải React)</strong><nav aria-label="Mô phỏng sáu phân hệ"><a href="#atlas">Atlas</a><a href="#lumen">Lumen</a><a href="#orion">Orion</a><a href="#pulse">Pulse</a><a href="#haven">Haven</a><a href="#seed">Seed</a></nav></header>
+<main id="cla-page-content" tabindex="-1"><section><small>ISOLATED ROUTE EXPERIENCE · A11Y</small><h1 id="route-heading">Du học quốc tế · Atlas</h1><p>Minh họa kiểm thử CSS và kế hoạch chuyển trang. Không chứa dữ liệu học sinh và không phải ảnh chụp website thật.</p>
+<div class="graph" aria-hidden="true"><b style="height:70%"></b><b style="height:40%"></b><b style="height:100%"></b></div><div class="tour"><button id="filter" type="button">Đổi quốc gia (giữ vị trí)</button><button id="route" type="button">Mở Orion (về đầu, focus)</button></div><output id="status">Chưa điều hướng</output></section><div style="height:950px"></div></main>
+<script>
+const routeTitles = {
+    '/': 'Đăng nhập',
+    '/about': 'Giới thiệu',
+    '/contact': 'Liên hệ',
+    '/student': 'Tổng quan học sinh · Seed',
+    '/student/exams': 'Lịch thi · Seed',
+    '/student/profile': 'Hồ sơ và mục tiêu · Seed',
+    '/student/transcript': 'Bảng điểm và GPA · Seed',
+    '/student/consent': 'Quyền riêng tư dữ liệu · Seed',
+    '/student/modules': 'Sáu phân hệ học sinh',
+    '/student/guide': 'Hướng dẫn sử dụng',
+    '/student/storage': 'Trạng thái đồng bộ · Seed',
+    '/student/companion': 'Nhật ký học tập · Seed',
+    '/lumen': 'Tổng quan · Lumen',
+    '/lumen/indices': 'Chỉ số nhận thức thử nghiệm · Lumen',
+    '/lumen/history': 'Lịch sử phép đo · Lumen',
+    '/lumen/insights': 'Diễn giải kết quả · Lumen',
+    '/lumen/assistant': 'Trợ lý diễn giải · Lumen',
+    '/lumen/state': 'Trạng thái dữ liệu · Lumen',
+    '/lumen/roadmap': 'Hành động tiếp theo · Lumen',
+    '/lumen/evidence': 'Bằng chứng phép đo · Lumen',
+    '/lumen/advanced': 'Thông tin mở rộng · Lumen',
+    '/atlas': 'Tổng quan · Atlas',
+    '/atlas/vietnam': 'Tuyển sinh Việt Nam · Atlas',
+    '/atlas/joint': 'Liên kết quốc tế · Atlas',
+    '/atlas/recommendations': 'Gợi ý ngành và trường · Atlas',
+    '/atlas/sources': 'Nguồn tuyển sinh · Atlas',
+    '/atlas/subjects': 'Tổ hợp xét tuyển · Atlas',
+    '/atlas/compare': 'So sánh trường và ngành · Atlas',
+    '/atlas/library': 'Thư viện dữ liệu · Atlas',
+    '/orion': 'Tổng quan · Orion',
+    '/orion/inputs': 'Dữ liệu và mục tiêu · Orion',
+    '/orion/scenarios': 'Kịch bản học tập · Orion',
+    '/orion/roadmap': 'Lộ trình học tập · Orion',
+    '/pulse': 'Tổng quan · Pulse',
+    '/pulse/progress': 'Theo dõi tiến độ · Pulse',
+    '/pulse/reports': 'Báo cáo học tập · Pulse',
+    '/pulse/actions': 'Hành động tiếp theo · Pulse',
+    '/pulse/inputs': 'Dữ liệu tiến độ · Pulse',
+    '/pulse/checkin': 'Check-in học tập · Pulse',
+    '/pulse/audit': 'Kiểm tra liên thông · Pulse',
+    '/haven': 'Tổng quan · Haven',
+    '/haven/scholarships': 'Học bổng · Haven',
+    '/haven/finance': 'Ngân sách · Haven',
+    '/haven/plan': 'Kế hoạch hỗ trợ · Haven',
+    '/admin': 'Bảng điều hành · Nexus',
+    '/admin/diagnostics': 'Chẩn đoán hệ thống · Nexus',
+    '/admin/audit': 'Kiểm toán hệ thống · Nexus',
+};
+function getRouteDisplayTitle(pathname) {
+    const path = pathname.replace(/\/+$/, '') || '/';
+    if (routeTitles[path])
+        return routeTitles[path];
+    if (path === '/atlas/study-abroad' || path.startsWith('/atlas/study-abroad/'))
+        return 'Du học quốc tế · Atlas';
+    return 'Cognitive Learn AI';
+}
+/** Invalid percent escapes are ignored instead of crashing the SPA. */
+function getSafeFragment(hash) {
+    if (!hash.startsWith('#') || hash.length < 2)
+        return null;
+    try {
+        return decodeURIComponent(hash.slice(1));
+    }
+    catch {
+        return null;
+    }
+}
+function planRouteExperience(previousHref, nextHref, kind) {
+    const preserve = { scroll: 'preserve', anchor: null, focusContent: false };
+    if (!previousHref)
+        return preserve;
+    const base = 'https://cla.local';
+    const previous = new URL(previousHref, base);
+    const next = new URL(nextHref, base);
+    // A query-only update is a filter/selection, NOT a new page. Never reset
+    // focus/scroll or students lose their place midway through a long form.
+    if (previous.pathname === next.pathname) {
+        if (previous.hash !== next.hash && next.hash) {
+            const anchor = getSafeFragment(next.hash);
+            return anchor ? { scroll: 'anchor', anchor, focusContent: false } : preserve;
+        }
+        return preserve;
+    }
+    // On Back/Forward, the browser is responsible for restoring the position.
+    // But the keyboard focus may still be on a link that no longer exists.
+    // Focus the new content with preventScroll, preserving history restoration.
+    // An explicit URL fragment takes precedence over the historic scroll point.
+    const anchor = getSafeFragment(next.hash);
+    if (kind === 'pop')
+        return {
+            scroll: anchor ? 'anchor' : 'preserve', anchor, focusContent: true,
+        };
+    // A new route reached via click/imperative navigation starts at the top.
+    return { scroll: anchor ? 'anchor' : 'top', anchor, focusContent: true };
+}
+
+let href='/atlas/study-abroad?country=vn';
+window.testNavigate=(destination,kind='push')=>{
+ const decision=planRouteExperience(href,destination,kind); href=destination;
+ document.getElementById('status').textContent=JSON.stringify(decision);
+ document.querySelector('.cla-route-announcement').textContent='Đã mở: '+getRouteDisplayTitle(new URL(href,'https://cla.local').pathname);
+ if(decision.scroll==='top') window.scrollTo(0,0);
+ if(decision.focusContent) document.getElementById('cla-page-content').focus({preventScroll:true});
+ document.getElementById('route-heading').textContent=getRouteDisplayTitle(new URL(href,'https://cla.local').pathname);
+ return decision;
+};
+document.getElementById('filter').addEventListener('click',()=>window.testNavigate('/atlas/study-abroad?country=jp'));
+document.getElementById('route').addEventListener('click',()=>window.testNavigate('/orion/inputs'));
+window.qaReady=true;
+</script></body></html>

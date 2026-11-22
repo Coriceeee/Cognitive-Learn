@@ -1,0 +1,12 @@
+(node:14253) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+GOLDEN_PATH_SYNTHETIC_GENERATED: /mnt/data/cp51_work/Cognitive-Learn/reports/evidence/cla_golden_path_SYNTHETIC.json; 7 domain stages; NO real outcomes
+(node:14264) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+MULTICYCLE_SYNTHETIC_GENERATED: /mnt/data/cp51_work/Cognitive-Learn/reports/evidence/cla_multicycle_SYNTHETIC.json; 2 reviewed cycles; 0 empirical claims
+(node:14275) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+MEASUREMENT_SYNTHETIC_GENERATED: /mnt/data/cp51_work/Cognitive-Learn/reports/evidence/cla_measurement_SYNTHETIC.json (no verified measurement claims)
+SYNTHETIC_DEMO_BACKUP_VERIFIED: --generate; 9773 bytes; sha256=bbb180d94efb0071c07c473bafaf84d187f2a9ec265e884dade2bd6b92ceee04; /mnt/data/cp51_work/Cognitive-Learn/reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html
+(node:14286) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)

@@ -1,0 +1,64 @@
+<!doctype html><html lang="vi"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>
+html{font-family:Arial,system-ui,sans-serif;background:#e9eff6;color:#173250}body{margin:0;padding:40px 16px;box-sizing:border-box}main{max-width:1050px;margin:auto}header{padding:15px 8px 24px;display:flex;justify-content:space-between;align-items:center;gap:15px}header strong{font-size:20px;color:#173250}header span{font-size:11px;color:#52677d}body:has(:root[data-theme=dark]){background:#091527}html[data-theme=dark]{background:#091527;color:#edf6ff}html[data-theme=dark] header strong{color:#eef6ff}html[data-theme=dark] header span{color:#bdd3ec}
+/* CP64 — field completeness only. Never use this as an outcome score. */
+.cla-input-observatory {
+  --io-bg: #ffffff; --io-ink: #173250; --io-sub: #52677d;
+  --io-line: #d9e5ee; --io-soft: #eff5fa; --io-filled: #2769ad;
+  --io-empty: #d5e1ec; --io-invalid: #be6927; --io-focus: #176da7;
+  color: var(--io-ink); background: var(--io-bg);
+  border: 1px solid var(--io-line); border-radius: 22px;
+  box-shadow: 0 17px 42px -40px rgba(13,50,92,.75);
+  padding: clamp(17px, 3vw, 30px); margin: 12px 0 30px;
+  min-width: 0; box-sizing: border-box;
+}
+.cla-input-observatory * { box-sizing: border-box; }
+.cla-input-observatory-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; }
+.cla-input-observatory-eyebrow { color: var(--io-filled); font-weight: 850; font-size: 11px; letter-spacing: .11em; }
+.cla-input-observatory h2 { font-size: clamp(21px, 2.1vw, 28px); line-height: 1.25; margin: 6px 0 8px; letter-spacing: -.027em; color: var(--io-ink); }
+.cla-input-observatory p { color: var(--io-sub); line-height: 1.6; margin: 0; max-width: 72ch; font-size: 13px; }
+.cla-input-observatory-total { flex-shrink: 0; text-align: right; white-space: nowrap; }
+.cla-input-observatory-total strong { font-variant-numeric: tabular-nums; font-size: clamp(30px, 4vw, 44px); line-height: 1; font-weight: 850; letter-spacing: -.055em; }
+.cla-input-observatory-total strong span { color: var(--io-sub); font-size: .48em; font-weight: 650; }
+.cla-input-observatory-total small { display: block; color: var(--io-sub); font-size: 11px; margin-top: 5px; }
+.cla-input-observatory-track { position: relative; height: 9px; overflow: hidden; border-radius: 999px; margin: 24px 0 22px; background: var(--io-empty); }
+.cla-input-observatory-track-ready { height: 100%; display: block; background: var(--io-filled); border-radius: 999px; transition: width .18s ease; }
+.cla-input-observatory-groups { display: grid; gap: 15px; }
+.cla-input-observatory-row-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; margin-bottom: 7px; }
+.cla-input-observatory-row-head strong { color: var(--io-ink); font-size: 13px; font-weight: 750; }
+.cla-input-observatory-row-head span { color: var(--io-sub); font-size: 11px; font-variant-numeric: tabular-nums; }
+.cla-input-observatory-segments { display: flex; gap: 4px; width: 100%; }
+.cla-input-observatory-segments > span { flex: 1 1 0; min-width: 5px; height: 14px; border-radius: 4px; background: var(--io-empty); }
+.cla-input-observatory :is(.cla-input-observatory-segments > span,.cla-input-observatory-legend i).is-ready { background: var(--io-filled); }
+.cla-input-observatory :is(.cla-input-observatory-segments > span,.cla-input-observatory-legend i).is-invalid { background: var(--io-invalid); }
+.cla-input-observatory-bottom { border-top: 1px solid var(--io-line); padding-top: 18px; margin-top: 21px; }
+.cla-input-observatory-legend { display: flex; flex-wrap: wrap; gap: 10px 20px; }
+.cla-input-observatory-legend span { display: flex; align-items: center; gap: 7px; font-size: 11px; color: var(--io-sub); }
+.cla-input-observatory-legend i { width: 10px; height: 10px; display: inline-block; border-radius: 3px; background: var(--io-empty); }
+.cla-input-observatory .cla-input-observatory-state { font-size: 13px; color: var(--io-ink); font-weight: 650; margin-top: 16px; }
+.cla-input-observatory-actions { display: flex; flex-wrap: wrap; gap: 10px 17px; align-items: center; margin: 15px 0 12px; }
+.cla-input-observatory-actions a { color: var(--io-filled); font-size: 12px; font-weight: 750; text-decoration: none; min-height: 41px; display: inline-flex; gap: 6px; align-items: center; }
+.cla-input-observatory-actions .cla-input-observatory-primary { padding: 9px 16px; color: #fff; background: #245ca3; border-radius: 10px; }
+.cla-input-observatory-actions .cla-input-observatory-primary:hover { background: #19477f; }
+.cla-input-observatory .cla-input-observatory-note { font-size: 11px; margin-top: 3px; }
+.cla-input-observatory a:focus-visible { outline: 3px solid var(--io-focus); outline-offset: 3px; }
+:root[data-theme="dark"] .cla-input-observatory {
+  --io-bg: #111f32; --io-ink: #eff6ff; --io-sub: #c5d3e4;
+  --io-line: #36516f; --io-soft: #20334b; --io-filled: #9bc9ff;
+  --io-empty: #344a63; --io-invalid: #f1ae68; --io-focus: #80c8ff;
+}
+:root[data-theme="dark"] .cla-input-observatory-actions .cla-input-observatory-primary { color: #0c2037; background: #a7cfff; }
+:root[data-theme="dark"] .cla-input-observatory-actions .cla-input-observatory-primary:hover { background: #d1e6ff; }
+@media(max-width: 640px) {
+  .cla-input-observatory { border-radius: 17px; }
+  .cla-input-observatory-head { align-items: flex-start; gap: 12px; }
+  .cla-input-observatory-total strong { font-size: 29px; }
+  .cla-input-observatory h2 { font-size: 20px; }
+  .cla-input-observatory-total small { max-width: 95px; white-space: normal; }
+  .cla-input-observatory-row-head { flex-wrap: wrap; gap: 2px 8px; }
+  .cla-input-observatory-actions a { width: 100%; justify-content: center; }
+  .cla-input-observatory-segments > span { height: 12px; }
+}
+@media(prefers-reduced-motion: reduce) { .cla-input-observatory-track-ready { transition: none; } }
+@media print { .cla-input-observatory { box-shadow: none; break-inside: avoid; } .cla-input-observatory-actions { display: none; } }
+
+</style><body><main><header><div><strong>ORION · Trạm mô phỏng</strong><div><span>KIỂM TRA BỐ CỤC ĐỘC LẬP · DỮ LIỆU MINH HỌA</span></div></div><span>UX CP64</span></header><section class="cla-input-observatory" aria-label="Tình trạng nhập dữ liệu Orion"><div class="cla-input-observatory-head"><div><span class="cla-input-observatory-eyebrow">DATA COVERAGE / ORION</span><h2>Đường tín hiệu dữ liệu của bạn</h2><p>Biểu đồ đếm ô đã nhập hợp lệ, không đo năng lực và không phải kết quả của AI.</p></div><div class="cla-input-observatory-total" aria-label="7 trên 14 trường đã nhập hợp lệ"><strong>7<span>/14</span></strong><small>ô có dữ liệu hợp lệ</small></div></div><div class="cla-input-observatory-track" role="meter" aria-valuemin="0" aria-valuemax="14" aria-valuenow="7" aria-label="Số trường dữ liệu đã nhập hợp lệ"><span class="cla-input-observatory-track-ready" style="width:50%"></span></div><div class="cla-input-observatory-groups" aria-label="Tình trạng từng nhóm dữ liệu"><div class="cla-input-observatory-row"><div class="cla-input-observatory-row-head"><strong>Điểm hiện tại (0–10)</strong><span>3/6 ô hợp lệ</span></div><div class="cla-input-observatory-segments" role="img" aria-label="Điểm hiện tại (0–10): 3 hợp lệ, 2 còn trống, 1 cần sửa"><span class="is-ready" title="Toán: đã nhập hợp lệ" aria-hidden="true"></span><span class="is-ready" title="Văn: đã nhập hợp lệ" aria-hidden="true"></span><span class="is-missing" title="Anh: chưa nhập" aria-hidden="true"></span><span class="is-ready" title="Lý: đã nhập hợp lệ" aria-hidden="true"></span><span class="is-invalid" title="Hóa: dữ liệu chưa hợp lệ" aria-hidden="true"></span><span class="is-missing" title="Sinh: chưa nhập" aria-hidden="true"></span></div></div><div class="cla-input-observatory-row"><div class="cla-input-observatory-row-head"><strong>Điểm mục tiêu (0–10)</strong><span>2/6 ô hợp lệ</span></div><div class="cla-input-observatory-segments" role="img" aria-label="Điểm mục tiêu (0–10): 2 hợp lệ, 4 còn trống, 0 cần sửa"><span class="is-ready" title="T-Toán: đã nhập hợp lệ" aria-hidden="true"></span><span class="is-missing" title="T-Văn: chưa nhập" aria-hidden="true"></span><span class="is-ready" title="T-Anh: đã nhập hợp lệ" aria-hidden="true"></span><span class="is-missing" title="T-Lý: chưa nhập" aria-hidden="true"></span><span class="is-missing" title="T-Hóa: chưa nhập" aria-hidden="true"></span><span class="is-missing" title="T-Sinh: chưa nhập" aria-hidden="true"></span></div></div><div class="cla-input-observatory-row"><div class="cla-input-observatory-row-head"><strong>Thời hạn &amp; ngành định hướng</strong><span>2/2 ô hợp lệ</span></div><div class="cla-input-observatory-segments" role="img" aria-label="Thời hạn &amp; ngành định hướng: 2 hợp lệ, 0 còn trống, 0 cần sửa"><span class="is-ready" title="Số tuần còn lại: đã nhập hợp lệ" aria-hidden="true"></span><span class="is-ready" title="Ngành mục tiêu: đã nhập hợp lệ" aria-hidden="true"></span></div></div></div><div class="cla-input-observatory-bottom"><div class="cla-input-observatory-legend" aria-label="Chú giải biểu đồ"><span><i class="is-ready"></i> Đã nhập</span><span><i class="is-missing"></i> Còn trống</span><span><i class="is-invalid"></i> Cần sửa</span></div><p class="cla-input-observatory-state" role="status">1 giá trị ngoài phạm vi cho phép cần sửa.</p><div class="cla-input-observatory-actions"><a class="cla-input-observatory-primary" href="/orion/inputs">Bổ sung / chỉnh dữ liệu <span aria-hidden="true">→</span></a></div><p class="cla-input-observatory-note">Dữ liệu minh họa chỉ dùng kiểm tra bố cục. Không sử dụng cho báo cáo kết quả học sinh.</p></div></section></main></body></html>

@@ -1,0 +1,2 @@
+TypeScript core helper check: PASS (strict, moduleResolution=bundler, noEmit)
+6 changed TS/TSX files transpileModule syntax PASS

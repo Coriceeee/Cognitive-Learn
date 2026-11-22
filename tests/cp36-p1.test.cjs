@@ -8,8 +8,10 @@ const read = f => fs.readFileSync(path.join(root, f), 'utf8');
 test('CP36: Student Cognitive Path is task-first, no duplicate six-module selector', () => {
   const dashboard = read('src/page/seed/StudentPage.tsx');
   const finder = read('src/page/seed/StudentModulesPage.tsx');
-  assert.match(dashboard, /coreModules\.map/);
-  assert.match(dashboard, /Tìm nhanh chức năng cần dùng/);
+  const circuit = read('src/page/seed/components/LearningCircuit.tsx');
+  assert.match(dashboard, /<LearningCircuit profilePath={profilePath} \/>/);
+  assert.match(circuit, /Sáu hệ trí tuệ/);
+  assert.match(circuit, /LEARNING NETWORK/);
   assert.match(finder, /Tìm theo công việc/);
   assert.match(finder, /studentSubmoduleDirectory/);
   assert.match(finder, /Định hướng tương lai/);

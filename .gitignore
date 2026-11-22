@@ -79,3 +79,6 @@ dist/
 research/**/raw_private/
 research/**/raw_immutable/
 research/**/private/
+
+# Reviewed public, fake-only Firebase emulator template (CP73).
+!.env.mvp-qa.example

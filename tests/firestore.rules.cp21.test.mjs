@@ -272,10 +272,10 @@ test('A03 student cannot forge dataScope demo', async () => {
 test('M01 student owns Atlas/Orion/Pulse/Haven drafts', async () => {
   const db = dbAs(UID.student);
   const cases = [
-    ['atlas_workspaces', { userId: UID.student, schemaVersion: 1,
+    ['atlas_workspaces', { userId: UID.student, schemaVersion: 1, revision: 1,
       universities: [], sources: [], programs: [], updatedAt: serverTimestamp() }],
     ...['orion_drafts', 'pulse_drafts', 'haven_drafts'].map(col => [col,
-      { userId: UID.student, schemaVersion: 1, data: {}, updatedAt: serverTimestamp() }]),
+      { userId: UID.student, schemaVersion: 1, revision: 1, data: {}, updatedAt: serverTimestamp() }]),
   ];
   for (const [col, data] of cases) {
     await assertSucceeds(setDoc(ref(db, col, UID.student), data));
@@ -284,10 +284,85 @@ test('M01 student owns Atlas/Orion/Pulse/Haven drafts', async () => {
     await assertFails(setDoc(ref(dbAs(UID.teacher), col, UID.student), data));
   }
 });
+// CP69: Atlas must reject stale full-workspace replaces, including old clients.
+test('M05 CP69 Atlas workspace revision cannot be overwritten by stale devices', async () => {
+  const db = dbAs(UID.student);
+  const atlasRef = ref(db, 'atlas_workspaces', UID.student);
+  const workspace = (revision, tag) => ({
+    userId: UID.student, schemaVersion: 1, revision,
+    universities: [{id: tag}], sources: [], programs: [], updatedAt: serverTimestamp(),
+  });
+  await assertSucceeds(setDoc(atlasRef, workspace(1, 'first')));
+  const oldVersion = (await getDoc(atlasRef)).data().revision;
+  await assertSucceeds(setDoc(atlasRef, workspace(oldVersion + 1, 'newer')));
+  await assertFails(setDoc(atlasRef, workspace(oldVersion + 1, 'stale')));
+  await assertFails(setDoc(atlasRef, {
+    userId: UID.student, schemaVersion: 1, universities: [{id:'old-client'}],
+    sources: [], programs: [], updatedAt: serverTimestamp(),
+  }));
+  await assertFails(setDoc(ref(dbAs(UID.other), 'atlas_workspaces', UID.student), workspace(3,'cross-owner')));
+  assert.equal((await getDoc(atlasRef)).data().universities[0].id, 'newer');
+});
+// CP52: a versioned draft must be advanced exactly one revision per update.
+// This is a live Emulator test; it is NOT covered by static contract tests.
+test('M04 CP52 stale concurrent saves cannot overwrite a versioned draft', async () => {
+  const db = dbAs(UID.student);
+  const draftRef = ref(db, 'orion_drafts', UID.student);
+  const payload = (revision, value) => ({
+    userId: UID.student, schemaVersion: 1, revision,
+    data: { targetMajor: value }, updatedAt: serverTimestamp(),
+  });
+  await assertSucceeds(setDoc(draftRef, payload(1, 'Computer science')));
+  const deviceARevision = (await getDoc(draftRef)).data().revision;
+  const deviceBRevision = (await getDoc(draftRef)).data().revision;
+  assert.equal(deviceARevision, 1);
+  assert.equal(deviceBRevision, 1);
+  await assertSucceeds(setDoc(draftRef, payload(deviceARevision + 1, 'Data science')));
+  await assertFails(setDoc(draftRef, payload(deviceBRevision + 1, 'Outdated target')));
+  await assertFails(setDoc(draftRef, {userId: UID.student, schemaVersion: 1,
+    data: {targetMajor: 'Legacy overwrite'}, updatedAt: serverTimestamp()}));
+  await assertFails(setDoc(ref(dbAs(UID.other), 'orion_drafts', UID.student), payload(3, 'Cross UID')));
+  assert.equal((await getDoc(draftRef)).data().data.targetMajor, 'Data science');
+});
+
+// CP54: exercise migration of a real legacy document written before revision tokens.
+// This authorization suite requires Firebase Emulator; do not mark it PASS offline.
+test('M05 CP54 new drafts require revision; legacy documents upgrade once then reject old writers', async () => {
+  const db = dbAs(UID.student);
+  for (const col of ['orion_drafts', 'pulse_drafts', 'haven_drafts']) {
+    const item = ref(db, col, UID.student);
+    const base = { userId: UID.student, schemaVersion: 1, data: { value: 'one' }, updatedAt: serverTimestamp() };
+    await assertFails(setDoc(item, base)); // no unversioned CREATE
+    await assertSucceeds(setDoc(item, { ...base, revision: 1 }));
+    await assertFails(setDoc(item, base)); // no unversioned UPDATE
+  }
+  await env.withSecurityRulesDisabled(async context => {
+    await setDoc(ref(context.firestore(), 'orion_drafts', UID.student), {
+      userId: UID.student, schemaVersion: 1,
+      data: { value: 'legacy' }, updatedAt: serverTimestamp(),
+    });
+  });
+  const legacy = ref(db, 'orion_drafts', UID.student);
+  await assertSucceeds(getDoc(legacy)); // legacy is still readable
+  await assertFails(setDoc(legacy, {
+    userId: UID.student, schemaVersion: 1,
+    data: { value: 'bypass' }, updatedAt: serverTimestamp(),
+  }));
+  await assertSucceeds(setDoc(legacy, {
+    userId: UID.student, schemaVersion: 1, revision: 1,
+    data: { value: 'migrated' }, updatedAt: serverTimestamp(),
+  }));
+  await assertFails(setDoc(legacy, {
+    userId: UID.student, schemaVersion: 1, revision: 1,
+    data: { value: 'stale' }, updatedAt: serverTimestamp(),
+  }));
+  assert.equal((await getDoc(legacy)).data().data.value, 'migrated');
+});
+
 test('M02 admin can only read its own drafts and cannot enumerate users', async () => {
   const db = dbAs(UID.admin);
   await assertSucceeds(setDoc(ref(db, 'orion_drafts', UID.admin),
-    { userId: UID.admin, schemaVersion: 1, data: {}, updatedAt: serverTimestamp() }));
+    { userId: UID.admin, schemaVersion: 1, revision: 1, data: {}, updatedAt: serverTimestamp() }));
   await assertFails(getDocs(collection(db, 'orion_drafts')));
   await assertFails(getDoc(ref(db, 'orion_drafts', UID.student)));
 });
@@ -457,7 +532,7 @@ test('C07 after withdrawal existing shared report becomes unreadable to teacher'
 });
 test('C08 Admin own demo draft remains possible without student consent', async () => {
   await assertSucceeds(setDoc(ref(dbAs(UID.admin), 'orion_drafts', UID.admin), {
-    userId: UID.admin, schemaVersion: 1, data: {}, updatedAt: serverTimestamp(),
+    userId: UID.admin, schemaVersion: 1, revision: 1, data: {}, updatedAt: serverTimestamp(),
   }));
 });
 

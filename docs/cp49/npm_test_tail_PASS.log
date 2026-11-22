@@ -1,0 +1,60 @@
+  ...
+# Subtest: compact navigation uses current-page semantics, not route-based CSS hiding
+ok 10 - compact navigation uses current-page semantics, not route-based CSS hiding
+  ---
+  duration_ms: 0.518175
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 129.475121
+
+> cognitive-learn-ai@0.1.0 test:cp47:orion-autosave
+> node --experimental-strip-types --test tests/cp47-orion-autosave.test.mjs
+
+TAP version 13
+# Subtest: CP47-01: Orion autosaves only after an explicit local edit and verified draft state
+ok 1 - CP47-01: Orion autosaves only after an explicit local edit and verified draft state
+  ---
+  duration_ms: 1.722149
+  type: 'test'
+  ...
+# Subtest: CP47-02: newer edits are not marked saved by an older in-flight autosave
+ok 2 - CP47-02: newer edits are not marked saved by an older in-flight autosave
+  ---
+  duration_ms: 0.166494
+  type: 'test'
+  ...
+# Subtest: CP47-03: autosave retains the authenticated Firestore ownership guard
+ok 3 - CP47-03: autosave retains the authenticated Firestore ownership guard
+  ---
+  duration_ms: 0.16279
+  type: 'test'
+  ...
+# Subtest: CP47-04: autosave is a Firestore draft only; no browser storage or outcome claim is introduced
+ok 4 - CP47-04: autosave is a Firestore draft only; no browser storage or outcome claim is introduced
+  ---
+  duration_ms: 0.242645
+  type: 'test'
+  ...
+# Subtest: CP47-05: manual save cancels a pending autosave to avoid duplicate writes
+ok 5 - CP47-05: manual save cancels a pending autosave to avoid duplicate writes
+  ---
+  duration_ms: 0.252344
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 62.246562

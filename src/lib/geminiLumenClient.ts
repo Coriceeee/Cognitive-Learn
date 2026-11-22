@@ -136,14 +136,14 @@ export async function requestGeminiLumenExplanation(
   const user = auth.currentUser;
   if (!user) throw new Error("Bạn cần đăng nhập để dùng Gemini Lumen.");
   const body = buildGeminiLumenRequest(context, reasoning);
+  const API_BASE_URL = getApiBaseUrl(); // Never send a student's token to a hard-coded deployment.
   const token = await getIdToken(user);
-  const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL ||
-  "https://cognitive-learn.vercel.app";
+  if (signal?.aborted) throw new DOMException("Yêu cầu đã bị hủy.", "AbortError");
+  if (auth.currentUser?.uid !== user.uid) {
+    throw new Error("Phiên đăng nhập đã thay đổi; không gửi dữ liệu sang Gemini.");
+  }
 
-const response = await fetch(
-  `${API_BASE_URL}/api/gemini-lumen`,
-  {
+  const response = await fetch(`${API_BASE_URL}/api/gemini-lumen`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

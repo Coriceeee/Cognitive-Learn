@@ -1,0 +1,268 @@
+
+> cognitive-learn-ai@0.1.0 test:cp57:timestamp
+> node --experimental-strip-types --test tests/cp57-firestore-timestamp-stability.test.mjs
+
+TAP version 13
+# (node:55555) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP57.1 revisioned documents do not conflict during serverTimestamp null -> resolved
+ok 1 - CP57.1 revisioned documents do not conflict during serverTimestamp null -> resolved
+  ---
+  duration_ms: 1.968598
+  type: 'test'
+  ...
+# Subtest: CP57.2 local timestamp estimates do not create phantom conflicts
+ok 2 - CP57.2 local timestamp estimates do not create phantom conflicts
+  ---
+  duration_ms: 0.327203
+  type: 'test'
+  ...
+# Subtest: CP57.3 genuine remote edits remain blocked even if revision was reused
+ok 3 - CP57.3 genuine remote edits remain blocked even if revision was reused
+  ---
+  duration_ms: 0.711243
+  type: 'test'
+  ...
+# Subtest: CP57.4 legacy revision-less documents keep timestamp ABA protection
+ok 4 - CP57.4 legacy revision-less documents keep timestamp ABA protection
+  ---
+  duration_ms: 0.347154
+  type: 'test'
+  ...
+# Subtest: CP57.5 acknowledgement with unknown timestamp still enforces exact payload
+ok 5 - CP57.5 acknowledgement with unknown timestamp still enforces exact payload
+  ---
+  duration_ms: 0.383552
+  type: 'test'
+  ...
+# Subtest: CP57.6 draft hook remains protected by server-side transaction CAS
+ok 6 - CP57.6 draft hook remains protected by server-side transaction CAS
+  ---
+  duration_ms: 0.667038
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 208.987237
+
+> cognitive-learn-ai@0.1.0 test:cp58:integration
+> node --experimental-strip-types --test tests/cp58-transcript-prefill.test.mjs && node --test tests/cp45-seamless-navigation.test.cjs
+
+TAP version 13
+# (node:55584) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP58.1: Seed → Orion/Haven prefill requires both server-verified records for same UID
+ok 1 - CP58.1: Seed → Orion/Haven prefill requires both server-verified records for same UID
+  ---
+  duration_ms: 1.897418
+  type: 'test'
+  ...
+# Subtest: CP58.2: an empty transcript cannot consume the first eligible prefill
+ok 2 - CP58.2: an empty transcript cannot consume the first eligible prefill
+  ---
+  duration_ms: 0.256696
+  type: 'test'
+  ...
+# Subtest: CP58.3: manual edits take priority and same student is prefilled at most once
+ok 3 - CP58.3: manual edits take priority and same student is prefilled at most once
+  ---
+  duration_ms: 0.371932
+  type: 'test'
+  ...
+# Subtest: CP58.4: account A prefill never blocks an eligible account B prefill
+ok 4 - CP58.4: account A prefill never blocks an eligible account B prefill
+  ---
+  duration_ms: 0.18279
+  type: 'test'
+  ...
+# Subtest: CP58.5: Orion and Haven bind the prefill to verified UIDs, not any cached transcript
+ok 5 - CP58.5: Orion and Haven bind the prefill to verified UIDs, not any cached transcript
+  ---
+  duration_ms: 1.761666
+  type: 'test'
+  ...
+# Subtest: CP58.6: Haven does not mark empty/unsupported grades as prefilled
+ok 6 - CP58.6: Haven does not mark empty/unsupported grades as prefilled
+  ---
+  duration_ms: 1.449005
+  type: 'test'
+  ...
+# Subtest: CP58.7: transcript prefill never performs Firestore writes or fabricates a missing score
+ok 7 - CP58.7: transcript prefill never performs Firestore writes or fabricates a missing score
+  ---
+  duration_ms: 3.134015
+  type: 'test'
+  ...
+# Subtest: CP58.8: App re-renders for same-path query changes without hard reload
+ok 8 - CP58.8: App re-renders for same-path query changes without hard reload
+  ---
+  duration_ms: 0.329285
+  type: 'test'
+  ...
+# Subtest: CP58.9: Atlas study-abroad synchronizes Back/Forward country query without losing same-country checklist
+ok 9 - CP58.9: Atlas study-abroad synchronizes Back/Forward country query without losing same-country checklist
+  ---
+  duration_ms: 0.948421
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 175.622689
+TAP version 13
+# Subtest: CP45 navigation: internal links use pushState without document reload
+ok 1 - CP45 navigation: internal links use pushState without document reload
+  ---
+  duration_ms: 101.751529
+  type: 'test'
+  ...
+# Subtest: CP45 navigation: browser Back/Forward notifies React without reload
+ok 2 - CP45 navigation: browser Back/Forward notifies React without reload
+  ---
+  duration_ms: 34.251078
+  type: 'test'
+  ...
+# Subtest: CP45 navigation: native same-page anchors and external links remain native
+ok 3 - CP45 navigation: native same-page anchors and external links remain native
+  ---
+  duration_ms: 35.867172
+  type: 'test'
+  ...
+# Subtest: CP45 navigation: modified clicks, new-tab links and downloads are never hijacked
+ok 4 - CP45 navigation: modified clicks, new-tab links and downloads are never hijacked
+  ---
+  duration_ms: 16.934766
+  type: 'test'
+  ...
+# Subtest: CP45 navigation: pointer and keyboard intent only prefetch the route code
+ok 5 - CP45 navigation: pointer and keyboard intent only prefetch the route code
+  ---
+  duration_ms: 16.563878
+  type: 'test'
+  ...
+# Subtest: CP45 navigation: legacy hash bookmarks are converted to canonical module path
+ok 6 - CP45 navigation: legacy hash bookmarks are converted to canonical module path
+  ---
+  duration_ms: 26.220923
+  type: 'test'
+  ...
+# Subtest: CP45: transition keeps revealed content during lazy import, profile watcher is shared and consent gated
+ok 7 - CP45: transition keeps revealed content during lazy import, profile watcher is shared and consent gated
+  ---
+  duration_ms: 1.052277
+  type: 'test'
+  ...
+# Subtest: CP45: lazy routes have a single shared import table, without eager imports
+ok 8 - CP45: lazy routes have a single shared import table, without eager imports
+  ---
+  duration_ms: 0.508652
+  type: 'test'
+  ...
+# Subtest: CP56: a declined guard blocks a link without unmounting current page
+ok 9 - CP56: a declined guard blocks a link without unmounting current page
+  ---
+  duration_ms: 12.364507
+  type: 'test'
+  ...
+# Subtest: CP56: browser Back rejected by guard restores URL without notifying React
+ok 10 - CP56: browser Back rejected by guard restores URL without notifying React
+  ---
+  duration_ms: 19.794565
+  type: 'test'
+  ...
+# Subtest: CP56: imperative navigation obeys dirty guard, and same route is a no-op
+ok 11 - CP56: imperative navigation obeys dirty guard, and same route is a no-op
+  ---
+  duration_ms: 21.201843
+  type: 'test'
+  ...
+# Subtest: CP58: same-path query navigation notifies React, preserves SPA and supports Back query
+ok 12 - CP58: same-path query navigation notifies React, preserves SPA and supports Back query
+  ---
+  duration_ms: 16.352904
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 660.477437
+
+> cognitive-learn-ai@0.1.0 test:cp59:verified-drafts
+> node --experimental-strip-types --test tests/cp59-verified-module-drafts.test.mjs
+
+TAP version 13
+# (node:55626) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP59.1: cached and pending module snapshots are never server-confirmed
+ok 1 - CP59.1: cached and pending module snapshots are never server-confirmed
+  ---
+  duration_ms: 1.141023
+  type: 'test'
+  ...
+# Subtest: CP59.2: reject records owned by another account, allow safe legacy shape
+ok 2 - CP59.2: reject records owned by another account, allow safe legacy shape
+  ---
+  duration_ms: 0.234373
+  type: 'test'
+  ...
+# Subtest: CP59.3: primary and legacy listeners request metadata changes and gate readValue
+ok 3 - CP59.3: primary and legacy listeners request metadata changes and gate readValue
+  ---
+  duration_ms: 0.360893
+  type: 'test'
+  ...
+# Subtest: CP59.4: offline cache cannot become a CAS baseline and local edits are preserved
+ok 4 - CP59.4: offline cache cannot become a CAS baseline and local edits are preserved
+  ---
+  duration_ms: 0.219274
+  type: 'test'
+  ...
+# Subtest: CP59.5: primary, legacy and explicit reload validate current UID before displaying
+ok 5 - CP59.5: primary, legacy and explicit reload validate current UID before displaying
+  ---
+  duration_ms: 0.21056
+  type: 'test'
+  ...
+# Subtest: CP59.6: a save is rejected until verified draft status is ready or empty
+ok 6 - CP59.6: a save is rejected until verified draft status is ready or empty
+  ---
+  duration_ms: 0.111852
+  type: 'test'
+  ...
+# Subtest: CP59.7: Orion, Pulse and Haven disable save and explain server-sync state
+ok 7 - CP59.7: Orion, Pulse and Haven disable save and explain server-sync state
+  ---
+  duration_ms: 1.689313
+  type: 'test'
+  ...
+# Subtest: CP59.8: Seed verified-prefill is gated while module-draft server sync is pending
+ok 8 - CP59.8: Seed verified-prefill is gated while module-draft server sync is pending
+  ---
+  duration_ms: 0.171544
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 153.443815

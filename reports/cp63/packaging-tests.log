@@ -1,0 +1,12 @@
+
+> cognitive-learn-ai@0.1.0 test:cp53:package
+> python -m unittest discover -s tests -p 'test_cp53_safe_packaging.py' -v
+
+test_exclusion_patterns (test_cp53_safe_packaging.PackagingTests.test_exclusion_patterns) ... ok
+test_missing_template_fails_closed (test_cp53_safe_packaging.PackagingTests.test_missing_template_fails_closed) ... ok
+test_templates_included_secrets_excluded (test_cp53_safe_packaging.PackagingTests.test_templates_included_secrets_excluded) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.004s
+
+OK

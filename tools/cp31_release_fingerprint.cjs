@@ -8,20 +8,20 @@ const crypto = require('node:crypto');
 const ROOT = path.resolve(__dirname, '..');
 const SOURCE_DIRS = ['src', 'api', 'tests', 'tools', 'tests_cp31', 'functions-admin/src', 'functions-privacy/src', 'functions/src'];
 const SOURCE_FILES = ['src/styles/07-atlas.css', 'src/components/common/charts/analytic-charts.css', 'src/styles/09-pulse.css', 'src/styles/10-haven.css', 'src/page/lumen/components/lumen-dynamic-state.css', 'research/benchmarks/cla_knowledge_120_v1.jsonl', 'package.json', 'package-lock.json', 'vercel.json', 'firestore.rules.CANDIDATE', 'tsconfig.json', 'tsconfig.api.json', 'index.html', 'firestore.rules.CANDIDATE_CP21', 'firebase.emulator.cp21.json', 'research/golden_path/fixture_SYNTHETIC.v1.json', 'research/golden_path/fixture_SYNTHETIC_cycle2.v1.json', 'research/golden_path/measurement_declarations_SYNTHETIC.v1.json', 'research/src/longitudinal_adaptive_ml.py', 'research/tests/test_longitudinal_adaptive_ml.py', 'research/src/uci_ml_comparison.py', 'research/tests/test_uci_ml_comparison.py', 'research/huggingface/uci_student_performance/fetch_eval.py', 'research/cognitive_validation/validate.py', 'research/cognitive_validation/reliability.py', 'research/cognitive_validation/tests/test_validation.py', 'research/cognitive_validation/tests/test_reliability.py', 'research/cognitive_validation/sample/paired_SYNTHETIC.csv', 'research/cognitive_validation/sample/paired_plan_SYNTHETIC.json', 'research/adaptive_study/study.py', 'research/adaptive_study/cluster_comparison.py', 'research/adaptive_study/tests/test_study.py', 'research/adaptive_study/tests/test_cluster_comparison.py', 'research/adaptive_study/sample/fixture_SYNTHETIC.csv'];
-const EXTENSIONS = new Set(['.ts', '.tsx', '.js', '.jsx', '.cjs', '.mjs', '.py', '.json']);
+const EXTENSIONS = new Set(['.ts', '.tsx', '.js', '.jsx', '.cjs', '.mjs', '.py', '.json', '.css']);
 const EXCLUDED = new Set(['src/lib/nexusEvidenceBaseline.ts']);
 function trackedFiles(root = ROOT) {
-  const results = [...SOURCE_FILES];
+  const results = new Set(SOURCE_FILES);
   function walk(rel) {
     for (const entry of fs.readdirSync(path.join(root, rel), { withFileTypes: true })) {
       const child = path.posix.join(rel, entry.name);
       if (entry.isDirectory()) {
         if (!['__pycache__', 'node_modules', 'dist', '.git'].includes(entry.name)) walk(child);
-      } else if (entry.isFile() && EXTENSIONS.has(path.extname(entry.name)) && !EXCLUDED.has(child)) results.push(child);
+      } else if (entry.isFile() && EXTENSIONS.has(path.extname(entry.name)) && !EXCLUDED.has(child)) results.add(child);
     }
   }
   for (const dir of SOURCE_DIRS) if (fs.existsSync(path.join(root, dir))) walk(dir);
-  return results.sort();
+  return [...results].sort();
 }
 function fingerprint(root = ROOT) {
   const lines = trackedFiles(root).map(rel => {

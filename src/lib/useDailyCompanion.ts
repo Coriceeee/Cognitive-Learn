@@ -5,8 +5,9 @@ import { auth, db } from "./firebase";
 import { readProductConsent } from "./studentConsentPolicy";
 import { STUDENT_CONSENT_GATE_ENABLED } from "./studentConsentConfig";
 import { DEFAULT_COMPANION, isCompanionData, recordDailyCheckIn, type DailyCompanionData } from "./dailyCompanion";
+import { isServerConfirmedSnapshot } from "../page/seed/services/realtimeReadPolicy";
 
-type Status = "loading" | "empty" | "ready" | "error" | "signed-out" | "preview";
+type Status = "loading" | "syncing" | "empty" | "ready" | "error" | "signed-out" | "preview";
 const docFor = (uid: string) => doc(db, "daily_companion", uid);
 const errorText = (error: unknown) => {
   const code = (error as {code?: string})?.code;
@@ -23,26 +24,35 @@ export function useDailyCompanion() {
   const [busy, setBusy] = useState(false);
   const [consentAccepted, setConsentAccepted] = useState(false);
   const busyRef = useRef(false);
+  const authEpoch = useRef(0);
 
   useEffect(() => {
     if (!STUDENT_CONSENT_GATE_ENABLED) { setStatus("preview"); return; }
+    let mounted = true;
     let stopDoc: Unsubscribe | undefined;
     let stopConsent: Unsubscribe | undefined;
     const stopAuth = onAuthStateChanged(auth, user => {
+      if (!mounted || (user?.uid ?? null) !== (auth.currentUser?.uid ?? null)) return;
       stopDoc?.(); stopDoc = undefined;
       stopConsent?.(); stopConsent = undefined;
-      setConsentAccepted(false);
+      const epoch = ++authEpoch.current;
       const currentUid = user?.uid ?? "";
+      const current = () => mounted && epoch === authEpoch.current && auth.currentUser?.uid === currentUid;
+      setConsentAccepted(false);
       setUid(currentUid); setSettings(null); setError("");
       if (!currentUid) { setStatus("signed-out"); return; }
       setStatus("loading");
       stopConsent = onSnapshot(doc(db, "student_consents", currentUid), {includeMetadataChanges:true}, snapshot => {
-        if (auth.currentUser?.uid !== currentUid) return;
-        setConsentAccepted(!snapshot.metadata.fromCache
+        if (!current()) return;
+        setConsentAccepted(isServerConfirmedSnapshot(snapshot.metadata)
           && readProductConsent(snapshot.exists() ? snapshot.data() : null, currentUid) === "accepted");
-      }, () => { if (auth.currentUser?.uid === currentUid) setConsentAccepted(false); });
-      stopDoc = onSnapshot(docFor(currentUid), snapshot => {
-        if (auth.currentUser?.uid !== currentUid) return;
+      }, () => { if (current()) setConsentAccepted(false); });
+      stopDoc = onSnapshot(docFor(currentUid), {includeMetadataChanges:true}, snapshot => {
+        if (!current()) return;
+        if (!isServerConfirmedSnapshot(snapshot.metadata)) {
+          // Never treat a cached schedule or locally pending write as committed.
+          setSettings(null); setStatus("syncing"); return;
+        }
         if (!snapshot.exists()) { setSettings(null); setStatus("empty"); setError(""); return; }
         const data = snapshot.data();
         if (!isCompanionData(data, currentUid)) {
@@ -50,11 +60,11 @@ export function useDailyCompanion() {
         }
         setSettings(data); setStatus("ready"); setError("");
       }, reason => {
-        if (auth.currentUser?.uid !== currentUid) return;
+        if (!current()) return;
         setSettings(null); setStatus("error"); setError(errorText(reason));
       });
-    }, reason => { setSettings(null); setStatus("error"); setError(errorText(reason)); });
-    return () => { stopDoc?.(); stopConsent?.(); stopAuth(); };
+    }, () => { if (mounted) { setSettings(null); setStatus("error"); setError("Lỗi xác thực Firebase."); } });
+    return () => { mounted = false; authEpoch.current++; stopDoc?.(); stopConsent?.(); stopAuth(); };
   }, []);
 
   async function update(transform: (current: DailyCompanionData) => DailyCompanionData) {
@@ -65,23 +75,30 @@ export function useDailyCompanion() {
     if (!uid || auth.currentUser?.uid !== uid || !["empty", "ready"].includes(status)) {
       throw new Error("Chưa xác minh được tài khoản hoặc dữ liệu, không thể ghi.");
     }
+    const owner = uid;
+    const epoch = authEpoch.current;
+    const current = () => epoch === authEpoch.current && auth.currentUser?.uid === owner;
     busyRef.current = true; setBusy(true); setError("");
     try {
       await runTransaction(db, async transaction => {
-        const snapshot = await transaction.get(docFor(uid));
-        if (snapshot.exists() && !isCompanionData(snapshot.data(), uid)) throw new Error("Dữ liệu đã lưu không đúng định dạng.");
+        if (!current()) throw new Error("Phiên tài khoản đã thay đổi.");
+        const consent = await transaction.get(doc(db, "student_consents", owner));
+        if (!current() || !consent.exists() || readProductConsent(consent.data(), owner) !== "accepted")
+          throw new Error("Chưa xác minh được đồng ý sử dụng dữ liệu trên máy chủ.");
+        const snapshot = await transaction.get(docFor(owner));
+        if (snapshot.exists() && !isCompanionData(snapshot.data(), owner)) throw new Error("Dữ liệu đã lưu không đúng định dạng.");
         const current: DailyCompanionData = snapshot.exists()
           ? snapshot.data() as DailyCompanionData
-          : { ...DEFAULT_COMPANION, schedule: {...DEFAULT_COMPANION.schedule}, completedDays: [], userId: uid };
+          : { ...DEFAULT_COMPANION, schedule: {...DEFAULT_COMPANION.schedule}, completedDays: [], userId: owner };
         const next = transform(current);
-        if (!isCompanionData(next, uid)) throw new Error("Cấu hình Companion không hợp lệ.");
-        if (auth.currentUser?.uid !== uid) throw new Error("Tài khoản đã thay đổi, không lưu dữ liệu.");
-        transaction.set(docFor(uid), { ...next, updatedAt: serverTimestamp() });
+        if (!isCompanionData(next, owner)) throw new Error("Cấu hình Companion không hợp lệ.");
+        if (!current()) throw new Error("Tài khoản đã thay đổi, không lưu dữ liệu.");
+        transaction.set(docFor(owner), { ...next, updatedAt: serverTimestamp() });
       });
     } catch (reason) {
-      setError((reason as {code?: string})?.code ? errorText(reason) : reason instanceof Error ? reason.message : errorText(reason));
+      if (current()) setError((reason as {code?: string})?.code ? errorText(reason) : reason instanceof Error ? reason.message : errorText(reason));
       throw reason;
-    } finally { busyRef.current = false; setBusy(false); }
+    } finally { busyRef.current = false; if (current()) setBusy(false); }
   }
   const saveSettings = (next: Pick<DailyCompanionData, "enabled" | "schedule" | "quietStart" | "quietEnd">) =>
     update(current => ({ ...current, ...next, schedule: {...next.schedule} }));

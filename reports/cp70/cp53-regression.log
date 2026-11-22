@@ -1,0 +1,46 @@
+
+> cognitive-learn-ai@0.1.0 test:cp53:integrity
+> node --experimental-strip-types --test tests/cp53-build-preflight-and-cas.test.mjs
+
+TAP version 13
+# (node:64824) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP53.1: all directly called React hooks are imported (offline build preflight)
+ok 1 - CP53.1: all directly called React hooks are imported (offline build preflight)
+  ---
+  duration_ms: 34.13468
+  type: 'test'
+  ...
+# Subtest: CP53.2: acknowledged write cannot be replaced at same revision with different payload
+ok 2 - CP53.2: acknowledged write cannot be replaced at same revision with different payload
+  ---
+  duration_ms: 0.701229
+  type: 'test'
+  ...
+# Subtest: CP53.3: acknowledged payload signature is stable for same values with shuffled keys
+ok 3 - CP53.3: acknowledged payload signature is stable for same values with shuffled keys
+  ---
+  duration_ms: 0.316148
+  type: 'test'
+  ...
+# Subtest: CP53.4: approved save records payload signature while server timestamp resolves
+ok 4 - CP53.4: approved save records payload signature while server timestamp resolves
+  ---
+  duration_ms: 0.277189
+  type: 'test'
+  ...
+# Subtest: CP53.5: same-revision replay remains invalid even when timestamp is unavailable
+ok 5 - CP53.5: same-revision replay remains invalid even when timestamp is unavailable
+  ---
+  duration_ms: 0.313644
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 205.149131

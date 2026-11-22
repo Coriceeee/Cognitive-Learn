@@ -1,0 +1,16 @@
+
+> cognitive-learn-ai@0.1.0 demo:gate
+> node tools/cla_demo_gate.mjs
+
+[PASS] Core closed-loop + measurement regression
+[PASS] Seed tests
+[PASS] Atlas + chatbot tests
+[PASS] Golden Path synthetic generate
+[PASS] Golden Path synthetic verify
+[PASS] Multicycle synthetic generate
+[PASS] Multicycle synthetic verify
+[PASS] Measurement synthetic generate
+[PASS] Measurement synthetic verify
+[PASS] Layout contract
+[PASS] Source fingerprint / release evidence preflight
+DEMO_OFFLINE_CORE_PASS — 11/11 steps; report: /mnt/data/cla_cp57_work/Cognitive-Learn/reports/demo/cla_batch16_offline_readiness.json

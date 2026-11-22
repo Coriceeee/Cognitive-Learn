@@ -1,0 +1,30 @@
+
+> cognitive-learn-ai@0.1.0 demo:final
+> npm run demo:gate && npm run demo:backup
+
+
+> cognitive-learn-ai@0.1.0 demo:gate
+> node tools/cla_demo_gate.mjs
+
+[PASS] Core closed-loop + measurement regression
+[PASS] Seed tests
+[PASS] Atlas + chatbot tests
+[PASS] Golden Path synthetic generate
+[PASS] Golden Path synthetic verify
+[PASS] Multicycle synthetic generate
+[PASS] Multicycle synthetic verify
+[PASS] Measurement synthetic generate
+[PASS] Measurement synthetic verify
+[PASS] Layout contract
+[PASS] Source fingerprint / release evidence preflight
+DEMO_OFFLINE_CORE_PASS — 11/11 steps; report: /mnt/data/cp59_work/Cognitive-Learn/reports/demo/cla_batch16_offline_readiness.json
+
+> cognitive-learn-ai@0.1.0 demo:backup
+> node --experimental-strip-types tools/cla_demo_backup.mjs --generate && node --experimental-strip-types tools/cla_demo_backup.mjs --verify
+
+SYNTHETIC_DEMO_BACKUP_VERIFIED: --generate; 9773 bytes; sha256=f6579396d494752a54062212ad56509d060406ba6fa4616eeb520f2a7f7b2a3c; /mnt/data/cp59_work/Cognitive-Learn/reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html
+(node:52930) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+SYNTHETIC_DEMO_BACKUP_VERIFIED: --verify; 9773 bytes; sha256=f6579396d494752a54062212ad56509d060406ba6fa4616eeb520f2a7f7b2a3c; /mnt/data/cp59_work/Cognitive-Learn/reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html
+(node:52974) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)

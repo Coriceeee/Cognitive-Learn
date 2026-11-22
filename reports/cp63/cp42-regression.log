@@ -1,0 +1,72 @@
+TAP version 13
+# (node:4049) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: canonical route handles every supported former bookmark
+ok 1 - canonical route handles every supported former bookmark
+  ---
+  duration_ms: 1.042065
+  type: 'test'
+  ...
+# Subtest: study aliases and unknown paths do not expand authorization
+ok 2 - study aliases and unknown paths do not expand authorization
+  ---
+  duration_ms: 0.119861
+  type: 'test'
+  ...
+# Subtest: new focused routes have matching access, app and deploy contracts
+ok 3 - new focused routes have matching access, app and deploy contracts
+  ---
+  duration_ms: 0.388767
+  type: 'test'
+  ...
+# Subtest: admin workspace routes are not student allowlisted and use admin guards
+ok 4 - admin workspace routes are not student allowlisted and use admin guards
+  ---
+  duration_ms: 0.466476
+  type: 'test'
+  ...
+# Subtest: Atlas specialized panels have distinct React route owners
+ok 5 - Atlas specialized panels have distinct React route owners
+  ---
+  duration_ms: 0.269037
+  type: 'test'
+  ...
+# Subtest: Lumen separates state, history, advanced analysis, roadmap and evidence
+ok 6 - Lumen separates state, history, advanced analysis, roadmap and evidence
+  ---
+  duration_ms: 0.826209
+  type: 'test'
+  ...
+# Subtest: Orion uses separate workflow steps and retains the shared eligibility restriction
+ok 7 - Orion uses separate workflow steps and retains the shared eligibility restriction
+  ---
+  duration_ms: 0.319663
+  type: 'test'
+  ...
+# Subtest: Pulse owns check-ins and Haven owns budget simulation, both outside overview
+ok 8 - Pulse owns check-ins and Haven owns budget simulation, both outside overview
+  ---
+  duration_ms: 0.194474
+  type: 'test'
+  ...
+# Subtest: Seed keeps exam calendar and transcript on their own pages
+ok 9 - Seed keeps exam calendar and transcript on their own pages
+  ---
+  duration_ms: 0.425694
+  type: 'test'
+  ...
+# Subtest: compact navigation uses current-page semantics, not route-based CSS hiding
+ok 10 - compact navigation uses current-page semantics, not route-based CSS hiding
+  ---
+  duration_ms: 0.440696
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 100.000798

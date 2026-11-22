@@ -1,0 +1,35 @@
+/* CP66 — consistent student status vocabulary and actions. No fabricated measurements. */
+.cla-module-state {
+  --ms-bg:#f2f7fc;--ms-border:#c9dbee;--ms-ink:#17324f;--ms-text:#435d75;--ms-accent:#245e9e;
+  display:flex;align-items:flex-start;gap:12px;min-width:0;margin:13px 0 19px;
+  padding:16px 17px;background:var(--ms-bg);border:1px solid var(--ms-border);
+  border-left:4px solid var(--ms-accent);border-radius:12px;color:var(--ms-ink);
+  box-sizing:border-box;overflow-wrap:anywhere;
+}
+.cla-module-state * {box-sizing:border-box;}
+.cla-module-state.is-success {--ms-bg:#ecf7f1;--ms-border:#b9e2cd;--ms-ink:#155136;--ms-text:#346c54;--ms-accent:#237a53;}
+.cla-module-state.is-warning {--ms-bg:#fff7eb;--ms-border:#e9d2ac;--ms-ink:#754216;--ms-text:#825a31;--ms-accent:#a56622;}
+.cla-module-state.is-error {--ms-bg:#fff1f1;--ms-border:#edbdc2;--ms-ink:#812c35;--ms-text:#874852;--ms-accent:#ac3d4a;}
+.cla-module-state.is-loading {--ms-bg:#edf5fc;--ms-border:#bfd6ee;--ms-ink:#173e69;--ms-text:#436885;--ms-accent:#286aab;}
+.cla-module-state-icon {display:grid;place-items:center;flex:0 0 26px;width:26px;height:26px;border:1px solid currentColor;border-radius:50%;font-size:15px;font-weight:900;color:var(--ms-accent);line-height:1;}
+.cla-module-state.is-loading .cla-module-state-icon {animation:cla-ui-loading 1.5s ease-in-out infinite;}
+@keyframes cla-ui-loading {50% {opacity:.35;transform:rotate(90deg);}}
+.cla-module-state-body {flex:1;min-width:0;}
+.cla-module-state-label {display:block;color:var(--ms-ink);font-size:13px;line-height:1.4;font-weight:800;}
+.cla-module-state p {color:var(--ms-text);font-size:12px;line-height:1.6;margin:3px 0 0;max-width:85ch;}
+.cla-module-state-actions {display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;}
+.cla-module-state-actions :is(button,a) {color:var(--ms-ink);background:transparent;border:1px solid var(--ms-border);border-radius:9px;padding:9px 12px;min-height:42px;display:inline-flex;align-items:center;font-size:12px;font-weight:750;text-decoration:none;cursor:pointer;}
+.cla-module-state-actions :is(button,a):hover {border-color:var(--ms-accent);}
+.cla-module-state :is(button,a):focus-visible,.cla-module-save-panel button:focus-visible {outline:3px solid #327dc0;outline-offset:3px;}
+.cla-module-state.is-compact {margin:0;flex:1 1 250px;padding:11px 13px;border-left-width:3px;}
+.cla-module-save-panel.cla-firestore-save {display:flex;align-items:stretch;flex-wrap:wrap;gap:10px;margin:15px 0 20px;min-width:0;}
+.cla-module-save-panel > button {flex:0 0 auto;align-self:center;min-height:44px;border-radius:10px;max-width:100%;white-space:normal;text-wrap:balance;}
+.cla-module-save-panel > button:disabled {opacity:.65;cursor:not-allowed;}
+:root[data-theme="dark"] .cla-module-state,[data-theme="dark"] .cla-module-state {--ms-bg:#183048;--ms-border:#365775;--ms-ink:#e7f0ff;--ms-text:#c4d7e9;--ms-accent:#a8d0ff;}
+:root[data-theme="dark"] .cla-module-state.is-success,[data-theme="dark"] .cla-module-state.is-success {--ms-bg:#16392f;--ms-border:#2a6650;--ms-ink:#c4f4d9;--ms-text:#b4e4ca;--ms-accent:#83dcaf;}
+:root[data-theme="dark"] .cla-module-state.is-warning,[data-theme="dark"] .cla-module-state.is-warning {--ms-bg:#493519;--ms-border:#77572d;--ms-ink:#ffe1ac;--ms-text:#f5d4a5;--ms-accent:#f3bb6d;}
+:root[data-theme="dark"] .cla-module-state.is-error,[data-theme="dark"] .cla-module-state.is-error {--ms-bg:#45262d;--ms-border:#77515b;--ms-ink:#ffd7de;--ms-text:#ffbfc9;--ms-accent:#f59aaa;}
+:root[data-theme="dark"] .cla-module-state.is-loading,[data-theme="dark"] .cla-module-state.is-loading {--ms-bg:#183048;--ms-border:#365775;--ms-ink:#e7f0ff;--ms-text:#c4d7e9;--ms-accent:#a8d0ff;}
+@media(max-width:650px) {.cla-module-state {padding:13px 12px;gap:9px;}.cla-module-save-panel.cla-firestore-save {flex-direction:column;}.cla-module-save-panel > button {align-self:stretch;width:100%;}.cla-module-state.is-compact {flex-basis:auto;}}
+@media(prefers-reduced-motion:reduce) {.cla-module-state.is-loading .cla-module-state-icon {animation:none;}}
+@media print {.cla-module-state {box-shadow:none;break-inside:avoid;}.cla-module-state-actions,.cla-module-save-panel > button {display:none !important;}}

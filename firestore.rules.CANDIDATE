@@ -267,44 +267,74 @@ service cloud.firestore {
       allow delete: if false;
     }
 
+    // CP69: prevent silent lost updates across Atlas browser tabs/devices.
+    // Legacy revision-less records are readable; their first new write upgrades to 1.
+    function validAtlasWorkspace() {
+      let data = request.resource.data;
+      return data.keys().hasOnly([
+          'userId', 'schemaVersion', 'revision', 'universities', 'sources', 'programs', 'updatedAt'])
+        && data.keys().hasAll([
+          'userId', 'schemaVersion', 'revision', 'universities', 'sources', 'programs', 'updatedAt'])
+        && data.userId == request.auth.uid && data.schemaVersion == 1
+        && data.revision is int && data.revision >= 1
+        && data.universities is list && data.sources is list && data.programs is list
+        && data.updatedAt == request.time;
+    }
+
     match /atlas_workspaces/{uid} {
       allow get: if selfAcademicOwner(uid);
       allow list: if false;
-      allow create, update: if ownerRecord(uid)
-        && request.resource.data.keys().hasOnly([
-          'userId', 'schemaVersion', 'universities', 'sources', 'programs', 'updatedAt'])
-        && request.resource.data.universities is list
-        && request.resource.data.sources is list
-        && request.resource.data.programs is list
-        && request.resource.data.updatedAt == request.time;
+      allow create: if ownerRecord(uid) && validAtlasWorkspace()
+        && request.resource.data.revision == 1;
+      allow update: if ownerRecord(uid) && validAtlasWorkspace()
+        && request.resource.data.revision == resource.data.get('revision', 0) + 1;
       allow delete: if false;
+    }
+
+    // CP54 candidate: new writes must carry a monotonic revision.
+    // Legacy revision-less records remain READABLE and can be upgraded by a
+    // revision=1 write; old clients cannot bypass concurrency protection.
+    function validDraftData() {
+      return request.resource.data.keys().hasOnly(['userId', 'schemaVersion', 'revision', 'data', 'updatedAt'])
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.data is map
+        && request.resource.data.updatedAt == request.time;
+    }
+
+    function validDraftCreate() {
+      return validDraftData()
+        && request.resource.data.keys().hasAll(['revision'])
+        && request.resource.data.revision is int
+        && request.resource.data.revision == 1;
+    }
+
+    function validDraftUpdate() {
+      return validDraftData()
+        && request.resource.data.keys().hasAll(['revision'])
+        && request.resource.data.revision is int
+        && request.resource.data.revision == resource.data.get('revision', 0) + 1;
     }
 
     match /orion_drafts/{uid} {
       allow get: if selfAcademicOwner(uid);
       allow list: if false;
-      allow create, update: if ownerRecord(uid)
-        && request.resource.data.keys().hasOnly(['userId', 'schemaVersion', 'data', 'updatedAt'])
-        && request.resource.data.data is map
-        && request.resource.data.updatedAt == request.time;
+      allow create: if ownerRecord(uid) && validDraftCreate();
+      allow update: if ownerRecord(uid) && validDraftUpdate();
       allow delete: if false;
     }
     match /pulse_drafts/{uid} {
       allow get: if selfAcademicOwner(uid);
       allow list: if false;
-      allow create, update: if ownerRecord(uid)
-        && request.resource.data.keys().hasOnly(['userId', 'schemaVersion', 'data', 'updatedAt'])
-        && request.resource.data.data is map
-        && request.resource.data.updatedAt == request.time;
+      allow create: if ownerRecord(uid) && validDraftCreate();
+      allow update: if ownerRecord(uid) && validDraftUpdate();
       allow delete: if false;
     }
     match /haven_drafts/{uid} {
       allow get: if selfAcademicOwner(uid);
       allow list: if false;
-      allow create, update: if ownerRecord(uid)
-        && request.resource.data.keys().hasOnly(['userId', 'schemaVersion', 'data', 'updatedAt'])
-        && request.resource.data.data is map
-        && request.resource.data.updatedAt == request.time;
+      allow create: if ownerRecord(uid) && validDraftCreate();
+      allow update: if ownerRecord(uid) && validDraftUpdate();
       allow delete: if false;
     }
 

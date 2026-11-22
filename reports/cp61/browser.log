@@ -1,0 +1,5 @@
+
+> cognitive-learn-ai@0.1.0 qa:cp31:preflight
+> python tools/cp31_browser_e2e.py --preflight
+
+CP31 E2E BLOCKED: ValueError: Supply an explicit Firebase QA project ID; no credentials requested

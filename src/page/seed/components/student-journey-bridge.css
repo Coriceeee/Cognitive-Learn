@@ -1,0 +1,70 @@
+/* CP70 — continuous, chart-first student handoff. No change to account, ML or Firestore data. */
+.cla-journey-handoff {
+  --jb-ink: #163657;
+  --jb-muted: #4c6480;
+  --jb-border: #d5e4f0;
+  --jb-accent: #176e9e;
+  margin: 26px 0;
+  padding: clamp(18px, 2.7vw, 30px);
+  border: 1px solid var(--jb-border);
+  border-radius: 22px;
+  color: var(--jb-ink);
+  background: linear-gradient(136deg, #f5faff 0%, #f8fcfd 54%, #f6f5ff 100%);
+  box-shadow: 0 12px 35px rgba(23, 56, 91, 0.055);
+}
+.cla-journey-handoff__head { display: flex; gap: 16px; justify-content: space-between; align-items: start; }
+.cla-journey-handoff__kicker { font-size: .72rem; letter-spacing: .15em; color: var(--jb-accent); font-weight: 800; }
+.cla-journey-handoff h2 { margin: 8px 0; color: var(--jb-ink); font-size: clamp(1.2rem, 2.3vw, 1.7rem); line-height: 1.25; }
+.cla-journey-handoff p { margin: 5px 0; color: var(--jb-muted); line-height: 1.6; }
+.cla-journey-handoff__stamp { flex: 0 0 auto; max-width: 180px; padding: 8px 12px; border: 1px solid #aadbcf; border-radius: 20px; color: #125e52; background: #e3f9f1; font-size: .64rem; font-weight: 800; letter-spacing: .04em; text-align: center; }
+.cla-journey-handoff__stamp.is-pending { color: #7a542a; background: #fff2dc; border-color: #e6cba4; }
+.cla-journey-handoff__route { margin: 22px 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border: 1px solid var(--jb-border); border-radius: 15px; overflow: hidden; background: rgba(255,255,255,.65); }
+.cla-journey-handoff__route a { min-width: 0; padding: 15px 9px; display: flex; flex-direction: column; gap: 5px; color: var(--jb-ink); text-align: center; text-decoration: none; border-right: 1px solid var(--jb-border); transition: background .15s ease; }
+.cla-journey-handoff__route a:last-child { border-right: none; }
+.cla-journey-handoff__route a:hover, .cla-journey-handoff__route a:focus-visible { background: #e9f4ff; }
+.cla-journey-handoff__route a.is-next { background: #dff1f8; box-shadow: inset 0 -4px var(--jb-accent); }
+.cla-journey-handoff__route a:focus-visible, .cla-journey-handoff__cta:focus-visible { outline: 3px solid #2776c1; outline-offset: -3px; }
+.cla-journey-handoff__no { color: var(--jb-accent); font-weight: 800; font-size: .73rem; }
+.cla-journey-handoff__route strong { letter-spacing: .06em; font-size: clamp(.73rem, 1.1vw, .91rem); }
+.cla-journey-handoff__route small { font-size: .72rem; color: var(--jb-muted); line-height: 1.3; }
+.cla-journey-handoff__next { padding: 18px 20px; display: flex; gap: 20px; justify-content: space-between; align-items: center; border: 1px solid #c8e2ed; border-radius: 14px; background: #fff; }
+.cla-journey-handoff__copy { flex: 1 1 auto; min-width: 0; }
+.cla-journey-handoff__copy > span { color: var(--jb-accent); font-size: .72rem; font-weight: 800; letter-spacing: .09em; }
+.cla-journey-handoff__next h3 { margin: 6px 0; color: var(--jb-ink); font-size: 1.08rem; }
+.cla-journey-handoff__cta { flex: 0 0 auto; max-width: 240px; padding: 12px 17px; border-radius: 11px; color: #fff !important; background: #176e9e; font-weight: 750; text-align: center; text-decoration: none; }
+.cla-journey-handoff__cta:hover { background: #0b527c; }
+.cla-journey-handoff__progress { margin-top: 16px; max-width: 460px; }
+.cla-journey-handoff__progress-label { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; color: var(--jb-ink); font-size: .82rem; }
+.cla-journey-handoff__progress-label small { color: var(--jb-muted); }
+.cla-journey-handoff__track { margin-top: 7px; height: 9px; overflow: hidden; background: #e6eef6; border-radius: 10px; }
+.cla-journey-handoff__track span { display: block; height: 100%; background: linear-gradient(90deg,#128b89,#3578bf); border-radius: 10px; }
+.cla-journey-handoff__source { margin-top: 13px !important; font-size: .76rem; }
+@media (max-width: 760px) {
+  .cla-journey-handoff__head, .cla-journey-handoff__next { flex-direction: column; align-items: stretch; }
+  .cla-journey-handoff__stamp { align-self: start; max-width: none; }
+  .cla-journey-handoff__route { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cla-journey-handoff__route a { border-bottom: 1px solid var(--jb-border); }
+  .cla-journey-handoff__route a:nth-child(3n) { border-right: none; }
+  .cla-journey-handoff__route a:nth-child(n+4) { border-bottom: none; }
+  .cla-journey-handoff__cta { max-width: none; }
+}
+@media (max-width: 360px) {
+  .cla-journey-handoff { padding: 15px; }
+  .cla-journey-handoff__route a { padding: 12px 4px; }
+  .cla-journey-handoff__route small { font-size: .65rem; }
+  .cla-journey-handoff__next { padding: 15px; }
+}
+/* The application is deliberately locked to the verified light theme (CP44).
+ * An OS-level dark preference must NEVER recolor only this widget; it previously
+ * produced an isolated dark card inside a light dashboard. Dark colors are kept
+ * for the day the entire app is deliberately enabled with data-theme=dark. */
+:root[data-theme="dark"] .cla-journey-handoff {
+  --jb-ink: #e6f3ff; --jb-muted: #b6cee3; --jb-border: #3b5970; --jb-accent: #86d1f3;
+  color: var(--jb-ink); background: linear-gradient(130deg,#12283d,#1a2439);
+}
+:root[data-theme="dark"] .cla-journey-handoff :is(.cla-journey-handoff__route,.cla-journey-handoff__next) { background: rgba(24,43,62,.8); }
+:root[data-theme="dark"] .cla-journey-handoff__route a:is(:hover,:focus-visible,.is-next) { background: #22445d; }
+:root[data-theme="dark"] .cla-journey-handoff__track { background: #39526b; }
+:root[data-theme="dark"] .cla-journey-handoff__stamp { color: #d3fff0; background: #205449; border-color: #346e61; }
+:root[data-theme="dark"] .cla-journey-handoff__stamp.is-pending { color: #ffe7c2; background: #523e28; border-color: #846338; }
+@media (prefers-reduced-motion: reduce) { .cla-journey-handoff__route a { transition: none; } }

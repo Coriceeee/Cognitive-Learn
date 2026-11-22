@@ -1,0 +1,69 @@
+{
+  "scope": "independent HTML/CSS fixture, not React E2E",
+  "checks": [
+    {
+      "viewport": 1280,
+      "theme": "light",
+      "result": "PASS",
+      "selectedContrast": 8.14,
+      "alertContrast": 8.14,
+      "overflow": false
+    },
+    {
+      "viewport": 1280,
+      "theme": "dark",
+      "result": "PASS",
+      "selectedContrast": 10.69,
+      "alertContrast": 10.24,
+      "overflow": false
+    },
+    {
+      "viewport": 900,
+      "theme": "light",
+      "result": "PASS",
+      "selectedContrast": 8.14,
+      "alertContrast": 8.14,
+      "overflow": false
+    },
+    {
+      "viewport": 900,
+      "theme": "dark",
+      "result": "PASS",
+      "selectedContrast": 10.69,
+      "alertContrast": 10.24,
+      "overflow": false
+    },
+    {
+      "viewport": 390,
+      "theme": "light",
+      "result": "PASS",
+      "selectedContrast": 8.14,
+      "alertContrast": 8.14,
+      "overflow": false
+    },
+    {
+      "viewport": 390,
+      "theme": "dark",
+      "result": "PASS",
+      "selectedContrast": 10.69,
+      "alertContrast": 10.24,
+      "overflow": false
+    },
+    {
+      "viewport": 360,
+      "theme": "light",
+      "result": "PASS",
+      "selectedContrast": 8.14,
+      "alertContrast": 8.14,
+      "overflow": false
+    },
+    {
+      "viewport": 360,
+      "theme": "dark",
+      "result": "PASS",
+      "selectedContrast": 10.69,
+      "alertContrast": 10.24,
+      "overflow": false
+    }
+  ]
+}

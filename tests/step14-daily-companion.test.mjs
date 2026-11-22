@@ -109,7 +109,7 @@ test('DC20 consent withdrawal stops foreground reminders in the open page',()=>{
   const hook=file('../src/lib/useDailyCompanion.ts');
   const page=file('../src/page/companion/DailyCompanionPage.tsx');
   assert.match(hook,/onSnapshot\(doc\(db, "student_consents", currentUid\)/);
-  assert.match(hook,/!snapshot\.metadata\.fromCache/);
-  assert.match(hook,/setConsentAccepted\(!snapshot\.metadata\.fromCache/);
+  assert.match(hook,/setConsentAccepted\(isServerConfirmedSnapshot\(snapshot\.metadata\)/);
+  assert.match(hook,/readProductConsent\(snapshot\.exists\(\) \? snapshot\.data\(\) : null, currentUid\)/);
   assert.match(page,/!companion\.consentAccepted\) return/);
 });

@@ -2,6 +2,7 @@ import { currentFocusedPath } from "../../lib/focusedModuleRoute";
 import PublicSourceSearchPanel from "../../components/common/PublicSourceSearchPanel";
 import NationalSourceDiscoveryPanel from "../../components/common/NationalSourceDiscoveryPanel";
 import ModuleSectionNav from "../../components/common/ModuleSectionNav";
+import ModuleStateNotice from "../../components/common/ModuleStateNotice";
 import { useIsAdmin } from "../../lib/useIsAdmin";
 import { domesticInternationalPrograms } from "../../data/domesticInternationalPrograms";
 import OfficialAdmissionsExplorer from "./components/OfficialAdmissionsExplorer";
@@ -17,6 +18,7 @@ import AtlasProgramCard from "./components/AtlasProgramCard";
 import AtlasProgramDiscoveryPanel from "./components/AtlasProgramDiscoveryPanel";
 import AtlasDecisionComparisonPanel from "./components/AtlasDecisionComparisonPanel";
 import AtlasCutoffField from "./components/AtlasCutoffField";
+import AtlasEvidenceJourney from "./components/AtlasEvidenceJourney";
 import { useAtlasKnowledge } from "./hooks/useAtlasKnowledge";
 
 export default function AtlasPage() {
@@ -51,6 +53,7 @@ export default function AtlasPage() {
       </header>
 
       <section className="atlas-shell">
+        <ModuleSectionNav moduleKey="atlas" />
         {view === "/atlas" && <>
           <section className="atlas-hero">
           <div className="atlas-hero-copy">
@@ -86,20 +89,19 @@ export default function AtlasPage() {
               <strong>{isAdmin ? "Admission Engine" : "Gợi ý phù hợp với hồ sơ"}</strong>
             </div>
           </div>
-        </section></>}
+        </section><AtlasEvidenceJourney /></>}
 
-        <ModuleSectionNav moduleKey="atlas" />
-        <div className="atlas-warning">
-          Tra cứu từ trang tuyển sinh chính thức; kiểm tra năm, ngành và phương thức của từng trường.
-          Thông tin chưa đủ nguồn không được coi là đã xác minh.
-        </div>
+        <ModuleStateNotice tone="warning" label="Đối chiếu nguồn tuyển sinh"
+          message="Tra cứu từ trang tuyển sinh chính thức; kiểm tra năm, ngành và phương thức của từng trường. Thông tin chưa đủ nguồn không được coi là đã xác minh." compact />
 
-        {view === "/atlas/library" && isAdmin && <div role="status" className="atlas-warning">
-          {storageError || (storageStatus === "ready" ? "Atlas đang kết nối kho dữ liệu của tài khoản hiện tại." : "Đang xác minh và đồng bộ dữ liệu Atlas…" )}
+        {view === "/atlas/library" && isAdmin && <ModuleStateNotice
+          tone={storageError ? "error" : storageStatus === "ready" ? "success" : "loading"}
+          label={storageError ? "Không thể truy cập kho Atlas" : storageStatus === "ready" ? "Kho Atlas đã xác minh" : "Đang xác minh kho Atlas"}
+          message={storageError || (storageStatus === "ready" ? "Atlas đang kết nối kho dữ liệu của tài khoản hiện tại." : "Đang xác minh và đồng bộ dữ liệu Atlas…" )}>
           {legacyAvailable && storageStatus === "ready" && <button type="button" disabled={saving} onClick={() => void importLegacyAtlasData().catch(error => window.alert(error instanceof Error ? error.message : "Nhập dữ liệu cũ thất bại."))}>
             Chuyển dữ liệu Atlas cũ trên trình duyệt vào kho Atlas (chỉ khi kho hiện tại trống)
           </button>}
-        </div>}
+        </ModuleStateNotice>}
 
         {view === "/atlas/library" && !isAdmin && <p role="status">Đang xác minh quyền quản trị…</p>}
         {view === "/atlas/library" && isAdmin && <p><a href="/admin/diagnostics?view=atlas">Chẩn đoán kho Atlas (Admin)</a></p>}
@@ -109,11 +111,7 @@ export default function AtlasPage() {
         {view === "/atlas/vietnam" && <OfficialAdmissionsExplorer />}
         {view === "/atlas/sources" && <><div id="atlas-public-source-search"><NationalSourceDiscoveryPanel /><details className="cla-evidence-sample"><summary>Tra cứu nguồn một năm (nâng cao)</summary><PublicSourceSearchPanel topic="admission" /></details></div><AtlasOfficialSourceRegistry /></>}
         {["/atlas/vietnam", "/atlas/recommendations"].includes(view) && <p className="cla-focus-notice"><a href="/atlas/sources#atlas-public-source-search">Tìm nguồn của mọi trường trên toàn quốc, kể cả trường ngoài kho →</a></p>}
-        {view === "/atlas/compare" && <>
-          <details className="cla-evidence-sample">
-          <summary>Xem biểu đồ điểm công bố ba năm · tất cả trường có dữ liệu</summary>
-          <AtlasCutoffField />
-        </details></>}
+        {view === "/atlas/compare" && <AtlasCutoffField />}
 
         {view === "/atlas/joint" && <>
           <section id="atlas-joint-programs" className="cla-source-explorer" aria-label="Chương trình liên kết quốc tế tại Việt Nam">
@@ -162,13 +160,8 @@ export default function AtlasPage() {
               ))}
             </div>
           ) : (
-            <div className="atlas-empty-state">
-              <strong>Chưa có dữ liệu tuyển sinh</strong>
-              <p>
-                Nhập tên trường ở ô Gemini Admission Reader để Atlas tạo dữ liệu
-                ngành, phương thức, học phí và link tuyển sinh. Học bổng tra tại Haven.
-              </p>
-            </div>
+            <ModuleStateNotice tone="neutral" label="Chưa có dữ liệu tuyển sinh"
+              message="Kho Atlas của tài khoản hiện chưa có bản ghi. Có thể nhập nguồn bằng Gemini Admission Reader và kiểm tra từng đường dẫn chính thức trước khi sử dụng." />
           )}
         </section>
 

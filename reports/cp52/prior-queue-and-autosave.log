@@ -1,0 +1,414 @@
+TAP version 13
+# Subtest: CP47-01: Orion autosaves only after an explicit local edit and verified draft state
+ok 1 - CP47-01: Orion autosaves only after an explicit local edit and verified draft state
+  ---
+  duration_ms: 3.914156
+  type: 'test'
+  ...
+# Subtest: CP47-02: newer edits are not marked saved by an older in-flight autosave
+ok 2 - CP47-02: newer edits are not marked saved by an older in-flight autosave
+  ---
+  duration_ms: 3.515778
+  type: 'test'
+  ...
+# Subtest: CP47-03: autosave retains the authenticated Firestore ownership guard
+ok 3 - CP47-03: autosave retains the authenticated Firestore ownership guard
+  ---
+  duration_ms: 0.62332
+  type: 'test'
+  ...
+# Subtest: CP47-04: autosave is a Firestore draft only; no browser storage or outcome claim is introduced
+ok 4 - CP47-04: autosave is a Firestore draft only; no browser storage or outcome claim is introduced
+  ---
+  duration_ms: 0.402095
+  type: 'test'
+  ...
+# Subtest: CP47-05: manual save cancels a pending autosave to avoid duplicate writes
+ok 5 - CP47-05: manual save cancels a pending autosave to avoid duplicate writes
+  ---
+  duration_ms: 0.219341
+  type: 'test'
+  ...
+# (node:16946) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP51: queued older write cannot finish after a newer write
+ok 6 - CP51: queued older write cannot finish after a newer write
+  ---
+  duration_ms: 1.491525
+  type: 'test'
+  ...
+# Subtest: CP51: failed earlier write does not poison subsequent writes
+ok 7 - CP51: failed earlier write does not poison subsequent writes
+  ---
+  duration_ms: 0.603052
+  type: 'test'
+  ...
+# Subtest: CP51: eligibility checked when queued write starts
+ok 8 - CP51: eligibility checked when queued write starts
+  ---
+  duration_ms: 0.212147
+  type: 'test'
+  ...
+# Subtest: CP51: Firestore draft hook uses FIFO and checks authenticated owner at execution time
+not ok 9 - CP51: Firestore draft hook uses FIFO and checks authenticated owner at execution time
+  ---
+  duration_ms: 2.282114
+  type: 'test'
+  location: '/mnt/data/cla_cp52_work/Cognitive-Learn/tests/cp51-draft-write-queue.test.mjs:40:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /if \(auth\.currentUser\?\.uid !== ownerUid\)/. Input:
+    
+    'import { useEffect, useRef, useState } from "react";\n' +
+      'import { onAuthStateChanged } from "firebase/auth";\n' +
+      'import { doc, getDocFromServer, onSnapshot, runTransaction, serverTimestamp, type Unsubscribe } from "firebase/firestore";\n' +
+      'import { auth, db } from "./firebase";\n' +
+      'import { createDraftWriteQueue } from "./serializedDraftWrites";\n' +
+      'import { assertDraftUnchanged, draftVersion, DraftConflictError, type DraftVersion } from "./draftRevision";\n' +
+      '\n' +
+      'export type ModuleDraftName = "orion" | "pulse" | "haven";\n' +
+      'type DraftStatus = "loading" | "empty" | "ready" | "signed-out" | "error";\n' +
+      'const collections: Record<ModuleDraftName, string> = {\n' +
+      '  orion: "orion_drafts", pulse: "pulse_drafts", haven: "haven_drafts",\n' +
+      '};\n' +
+      'const noDocument: DraftVersion = { exists: false, revision: 0, signature: "" };\n' +
+      '\n' +
+      'export function useModuleDraft<T extends Record<string, unknown>>(moduleName: ModuleDraftName) {\n' +
+      '  const [draft, setDraft] = useState<T | null>(null);\n' +
+      '  const [status, setStatus] = useState<DraftStatus>("loading");\n' +
+      '  const [error, setError] = useState("");\n' +
+      '  const [conflict, setConflict] = useState(false);\n' +
+      '  const [uid, setUid] = useState("");\n' +
+      '  const writeQueue = useRef(createDraftWriteQueue());\n' +
+      '  const baseline = useRef<DraftVersion>(noDocument);\n' +
+      '  const latestRemote = useRef<T | null>(null);\n' +
+      '  const latestVersion = useRef<DraftVersion>(noDocument);\n' +
+      '  const editing = useRef(false);\n' +
+      '  const editGeneration = useRef(0);\n' +
+      '  const session = useRef(0);\n' +
+      '  const conflictRef = useRef(false);\n' +
+      '\n' +
+      '  useEffect(() => {\n' +
+      '    let stopPrimary: Unsubscribe | undefined;\n' +
+      '    let stopLegacy: Unsubscribe | undefined;\n' +
+      '    const stopAuth = onAuthStateChanged(auth, user => {\n' +
+      '      stopPrimary?.(); stopLegacy?.();\n' +
+      '      stopPrimary = undefined; stopLegacy = undefined;\n' +
+      '      session.current += 1;\n' +
+      '      editing.current = false;\n' +
+      '      editGeneration.current = 0;\n' +
+      '      conflictRef.current = false;\n' +
+      '      setConflict(false);\n' +
+      '      baseline.current = noDocument;\n' +
+      '      latestVersion.current = noDocument;\n' +
+      '      latestRemote.current = null;\n' +
+      '      setUid(user?.uid ?? ""); setDraft(null); setError("");\n' +
+      '      if (!user) { setStatus("signed-out"); return; }\n' +
+      '      setStatus("loading");\n' +
+      '      const readValue = (value: unknown, version: DraftVersion) => {\n' +
+      '        latestVersion.current = version;\n' +
+      '        latestRemote.current = value && typeof value === "object" && !Array.isArray(value) ? value as T : null;\n' +
+      "        // Snapshots from another device must not replace a student's unsaved inputs.\n" +
+      '        if (!editing.current && !conflictRef.current) {\n' +
+      '          baseline.current = version;\n' +
+      '          setDraft(latestRemote.current);\n' +
+      '        }\n' +
+      '        setStatus(latestRemote.current ? "ready" : "empty");\n' +
+      '      };\n' +
+      '      const fail = (err: { code?: string }) => {\n' +
+      '        setStatus("error");\n' +
+      '        setError(err.code === "permission-denied"\n' +
+      '          ? `Firestore từ chối truy cập ${collections[moduleName]}. Kiểm tra Security Rules.`\n' +
+      '          : "Không thể tải dữ liệu đã lưu. Hãy kiểm tra kết nối và thử lại.");\n' +
+      '      };\n' +
+      '      stopPrimary = onSnapshot(doc(db, collections[moduleName], user.uid), snap => {\n' +
+      '        stopLegacy?.(); stopLegacy = undefined;\n' +
+      '        if (snap.exists()) { readValue(snap.data().data, draftVersion(snap.data())); return; }\n' +
+      '        // Migration: legacy module_drafts is read-only; first CAS write creates new doc.\n' +
+      '        stopLegacy = onSnapshot(doc(db, "module_drafts", user.uid), legacy => {\n' +
+      '          readValue(legacy.exists() ? legacy.data()[moduleName] : null, noDocument);\n' +
+      '        }, fail);\n' +
+      '      }, fail);\n' +
+      '    }, () => { setStatus("error"); setError("Lỗi xác thực Firebase."); });\n' +
+      '    return () => { stopPrimary?.(); stopLegacy?.(); stopAuth(); session.current += 1; };\n' +
+      '  }, [moduleName]);\n' +
+      '\n' +
+      '  // Call before each local input mutation. This freezes the last acknowledged\n' +
+      '  // remote version as the base for optimistic compare-and-swap.\n' +
+      '  function markEditing() {\n' +
+      '    editing.current = true;\n' +
+      '    editGeneration.current += 1;\n' +
+      '  }\n' +
+      '\n' +
+      '  async function acceptRemote(): Promise<T | null> {\n' +
+      '    // Explicit discard: fetch from SERVER, never rely on a stale offline cache.\n' +
+      '    const ownerUid = uid;\n' +
+      '    if (!ownerUid || auth.currentUser?.uid !== ownerUid) {\n' +
+      '      throw new Error("Không thể tải bản nháp khi phiên đăng nhập đã thay đổi.");\n' +
+      '    }\n' +
+      '    const requestSession = session.current;\n' +
+      '    const current = await getDocFromServer(doc(db, collections[moduleName], ownerUid));\n' +
+      '    let value: T | null = null;\n' +
+      '    let version = noDocument;\n' +
+      '    if (current.exists()) {\n' +
+      '      const data = current.data();\n' +
+      '      version = draftVersion(data);\n' +
+      '      value = data.data && typeof data.data === "object" && !Array.isArray(data.data) ? data.data as T : null;\n' +
+      '    } else {\n' +
+      '      const legacy = await getDocFromServer(doc(db, "module_drafts", ownerUid));\n' +
+      '      const candidate = legacy.exists() ? legacy.data()[moduleName] : null;\n' +
+      '      value = candidate && typeof candidate === "object" && !Array.isArray(candidate) ? candidate as T : null;\n' +
+      '    }\n' +
+      '    if (auth.currentUser?.uid !== ownerUid || requestSession !== session.current) {\n' +
+      '      throw new Error("Phiên đã thay đổi trong khi tải bản nháp.");\n' +
+      '    }\n' +
+      '    session.current += 1; // cancel older queued writes\n' +
+      '    editing.current = false;\n' +
+      '    conflictRef.current = false;\n' +
+      '    setConflict(false);\n' +
+      '    latestRemote.current = value;\n' +
+      '    latestVersion.current = version;\n' +
+      '    baseline.current = version;\n' +
+      '    setDraft(value ? { ...value } : null);\n' +
+      '    setStatus(value ? "ready" : "empty");\n' +
+      '    return value;\n' +
+      '  }\n' +
+      '\n' +
+      '  async function save(value: T): Promise<void> {\n' +
+      '    if (!uid || auth.currentUser?.uid !== uid || status === "loading" || status === "error" || status === "signed-out") {\n' +
+      '      throw new Error("Chưa xác minh được tài khoản hoặc dữ liệu hiện tại. Không ghi đè bản nháp.");\n' +
+      '    }\n' +
+      '    if (conflictRef.current) throw new DraftConflictError();\n' +
+      '    const ownerUid = uid;\n' +
+      '    const queuedSession = session.current;\n' +
+      '    const queuedEdit = editGeneration.current;\n' +
+      '    await writeQueue.current.enqueue(async () => {\n' +
+      '      if (auth.currentUser?.uid !== ownerUid || session.current !== queuedSession) {\n' +
+      '        throw new Error("Tài khoản hoặc phiên dữ liệu đã thay đổi; thao tác ghi bị hủy.");\n' +
+      '      }\n' +
+      '      if (conflictRef.current) throw new DraftConflictError();\n' +
+      '      const ref = doc(db, collections[moduleName], ownerUid);\n' +
+      '      const expected = baseline.current;\n' +
+      '      try {\n' +
+      '        const nextRevision = await runTransaction(db, async transaction => {\n' +
+      '          const current = await transaction.get(ref);\n' +
+      '          if (auth.currentUser?.uid !== ownerUid || session.current !== queuedSession) {\n' +
+      '            throw new Error("Phiên đăng nhập đã đổi trước khi transaction được ghi.");\n' +
+      '          }\n' +
+      '          const stored = current.exists() ? current.data() : null;\n' +
+      '          assertDraftUnchanged(expected, draftVersion(stored));\n' +
+      '          const revision = expected.revision + 1;\n' +
+      '          transaction.set(ref, {\n' +
+      '            userId: ownerUid, schemaVersion: 1, revision,\n' +
+      '            data: value, updatedAt: serverTimestamp(),\n' +
+      '          });\n' +
+      '          return revision;\n' +
+      '        });\n' +
+      '        if (auth.currentUser?.uid !== ownerUid || session.current !== queuedSession) return;\n' +
+      '        // Advance our acknowledged token even when an edit arrived during save.\n' +
+      '        // Keep signature blank until a confirmed snapshot supplies server timestamp.\n' +
+      '        baseline.current = { exists: true, revision: nextRevision, signature: "" };\n' +
+      '        if (queuedEdit === editGeneration.current) {\n' +
+      '          editing.current = false;\n' +
+      '          setDraft(value);\n' +
+      '        }\n' +
+      '      } catch (err) {\n' +
+      '        if (err instanceof DraftConflictError && session.current === queuedSession) {\n' +
+      '          conflictRef.current = true;\n' +
+      '          setConflict(true);\n' +
+      '        }\n' +
+      '        throw err;\n' +
+      '      }\n' +
+      '    });\n' +
+      '  }\n' +
+      '  return { draft, status, error, conflict, save, markEditing, acceptRemote };\n' +
+      '}\n'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    import { useEffect, useRef, useState } from "react";
+    import { onAuthStateChanged } from "firebase/auth";
+    import { doc, getDocFromServer, onSnapshot, runTransaction, serverTimestamp, type Unsubscribe } from "firebase/firestore";
+    import { auth, db } from "./firebase";
+    import { createDraftWriteQueue } from "./serializedDraftWrites";
+    import { assertDraftUnchanged, draftVersion, DraftConflictError, type DraftVersion } from "./draftRevision";
+    
+    export type ModuleDraftName = "orion" | "pulse" | "haven";
+    type DraftStatus = "loading" | "empty" | "ready" | "signed-out" | "error";
+    const collections: Record<ModuleDraftName, string> = {
+      orion: "orion_drafts", pulse: "pulse_drafts", haven: "haven_drafts",
+    };
+    const noDocument: DraftVersion = { exists: false, revision: 0, signature: "" };
+    
+    export function useModuleDraft<T extends Record<string, unknown>>(moduleName: ModuleDraftName) {
+      const [draft, setDraft] = useState<T | null>(null);
+      const [status, setStatus] = useState<DraftStatus>("loading");
+      const [error, setError] = useState("");
+      const [conflict, setConflict] = useState(false);
+      const [uid, setUid] = useState("");
+      const writeQueue = useRef(createDraftWriteQueue());
+      const baseline = useRef<DraftVersion>(noDocument);
+      const latestRemote = useRef<T | null>(null);
+      const latestVersion = useRef<DraftVersion>(noDocument);
+      const editing = useRef(false);
+      const editGeneration = useRef(0);
+      const session = useRef(0);
+      const conflictRef = useRef(false);
+    
+      useEffect(() => {
+        let stopPrimary: Unsubscribe | undefined;
+        let stopLegacy: Unsubscribe | undefined;
+        const stopAuth = onAuthStateChanged(auth, user => {
+          stopPrimary?.(); stopLegacy?.();
+          stopPrimary = undefined; stopLegacy = undefined;
+          session.current += 1;
+          editing.current = false;
+          editGeneration.current = 0;
+          conflictRef.current = false;
+          setConflict(false);
+          baseline.current = noDocument;
+          latestVersion.current = noDocument;
+          latestRemote.current = null;
+          setUid(user?.uid ?? ""); setDraft(null); setError("");
+          if (!user) { setStatus("signed-out"); return; }
+          setStatus("loading");
+          const readValue = (value: unknown, version: DraftVersion) => {
+            latestVersion.current = version;
+            latestRemote.current = value && typeof value === "object" && !Array.isArray(value) ? value as T : null;
+            // Snapshots from another device must not replace a student's unsaved inputs.
+            if (!editing.current && !conflictRef.current) {
+              baseline.current = version;
+              setDraft(latestRemote.current);
+            }
+            setStatus(latestRemote.current ? "ready" : "empty");
+          };
+          const fail = (err: { code?: string }) => {
+            setStatus("error");
+            setError(err.code === "permission-denied"
+              ? `Firestore từ chối truy cập ${collections[moduleName]}. Kiểm tra Security Rules.`
+              : "Không thể tải dữ liệu đã lưu. Hãy kiểm tra kết nối và thử lại.");
+          };
+          stopPrimary = onSnapshot(doc(db, collections[moduleName], user.uid), snap => {
+            stopLegacy?.(); stopLegacy = undefined;
+            if (snap.exists()) { readValue(snap.data().data, draftVersion(snap.data())); return; }
+            // Migration: legacy module_drafts is read-only; first CAS write creates new doc.
+            stopLegacy = onSnapshot(doc(db, "module_drafts", user.uid), legacy => {
+              readValue(legacy.exists() ? legacy.data()[moduleName] : null, noDocument);
+            }, fail);
+          }, fail);
+        }, () => { setStatus("error"); setError("Lỗi xác thực Firebase."); });
+        return () => { stopPrimary?.(); stopLegacy?.(); stopAuth(); session.current += 1; };
+      }, [moduleName]);
+    
+      // Call before each local input mutation. This freezes the last acknowledged
+      // remote version as the base for optimistic compare-and-swap.
+      function markEditing() {
+        editing.current = true;
+        editGeneration.current += 1;
+      }
+    
+      async function acceptRemote(): Promise<T | null> {
+        // Explicit discard: fetch from SERVER, never rely on a stale offline cache.
+        const ownerUid = uid;
+        if (!ownerUid || auth.currentUser?.uid !== ownerUid) {
+          throw new Error("Không thể tải bản nháp khi phiên đăng nhập đã thay đổi.");
+        }
+        const requestSession = session.current;
+        const current = await getDocFromServer(doc(db, collections[moduleName], ownerUid));
+        let value: T | null = null;
+        let version = noDocument;
+        if (current.exists()) {
+          const data = current.data();
+          version = draftVersion(data);
+          value = data.data && typeof data.data === "object" && !Array.isArray(data.data) ? data.data as T : null;
+        } else {
+          const legacy = await getDocFromServer(doc(db, "module_drafts", ownerUid));
+          const candidate = legacy.exists() ? legacy.data()[moduleName] : null;
+          value = candidate && typeof candidate === "object" && !Array.isArray(candidate) ? candidate as T : null;
+        }
+        if (auth.currentUser?.uid !== ownerUid || requestSession !== session.current) {
+          throw new Error("Phiên đã thay đổi trong khi tải bản nháp.");
+        }
+        session.current += 1; // cancel older queued writes
+        editing.current = false;
+        conflictRef.current = false;
+        setConflict(false);
+        latestRemote.current = value;
+        latestVersion.current = version;
+        baseline.current = version;
+        setDraft(value ? { ...value } : null);
+        setStatus(value ? "ready" : "empty");
+        return value;
+      }
+    
+      async function save(value: T): Promise<void> {
+        if (!uid || auth.currentUser?.uid !== uid || status === "loading" || status === "error" || status === "signed-out") {
+          throw new Error("Chưa xác minh được tài khoản hoặc dữ liệu hiện tại. Không ghi đè bản nháp.");
+        }
+        if (conflictRef.current) throw new DraftConflictError();
+        const ownerUid = uid;
+        const queuedSession = session.current;
+        const queuedEdit = editGeneration.current;
+        await writeQueue.current.enqueue(async () => {
+          if (auth.currentUser?.uid !== ownerUid || session.current !== queuedSession) {
+            throw new Error("Tài khoản hoặc phiên dữ liệu đã thay đổi; thao tác ghi bị hủy.");
+          }
+          if (conflictRef.current) throw new DraftConflictError();
+          const ref = doc(db, collections[moduleName], ownerUid);
+          const expected = baseline.current;
+          try {
+            const nextRevision = await runTransaction(db, async transaction => {
+              const current = await transaction.get(ref);
+              if (auth.currentUser?.uid !== ownerUid || session.current !== queuedSession) {
+                throw new Error("Phiên đăng nhập đã đổi trước khi transaction được ghi.");
+              }
+              const stored = current.exists() ? current.data() : null;
+              assertDraftUnchanged(expected, draftVersion(stored));
+              const revision = expected.revision + 1;
+              transaction.set(ref, {
+                userId: ownerUid, schemaVersion: 1, revision,
+                data: value, updatedAt: serverTimestamp(),
+              });
+              return revision;
+            });
+            if (auth.currentUser?.uid !== ownerUid || session.current !== queuedSession) return;
+            // Advance our acknowledged token even when an edit arrived during save.
+            // Keep signature blank until a confirmed snapshot supplies server timestamp.
+            baseline.current = { exists: true, revision: nextRevision, signature: "" };
+            if (queuedEdit === editGeneration.current) {
+              editing.current = false;
+              setDraft(value);
+            }
+          } catch (err) {
+            if (err instanceof DraftConflictError && session.current === queuedSession) {
+              conflictRef.current = true;
+              setConflict(true);
+            }
+            throw err;
+          }
+        });
+      }
+      return { draft, status, error, conflict, save, markEditing, acceptRemote };
+    }
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///mnt/data/cla_cp52_work/Cognitive-Learn/tests/cp51-draft-write-queue.test.mjs:43:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 8
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 287.675277

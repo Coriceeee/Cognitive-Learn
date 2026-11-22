@@ -1,0 +1,56 @@
+/* CP70 UX contrast hotfix: pair foreground and surface colors together.
+ * CP44 converted ModuleClusterGrid from a dark hero to a light surface, but
+ * CP20 kept its white/pale-blue labels, empty state and status badges.
+ * The app currently supports LIGHT only. Scope to this component, without
+ * overriding branded dark widgets or enabling unsupported sitewide dark mode.
+ */
+.module-path-v7 .module-path-detail {
+  --map-ink: #17324f;
+  --map-secondary: #405a72;
+  --map-muted: #526a81;
+  --map-link: #2458a5;
+  --map-surface: #ffffff;
+  --map-soft: #f1f6fc;
+  --map-line: #bdcfe2;
+  color: var(--map-ink);
+}
+.module-path-v7 .module-path-action-tools label,
+.module-path-v7 .module-path-action-tools > span {
+  color: var(--map-secondary);
+}
+.module-path-v7 .module-path-action-tools input {
+  color: var(--map-ink);
+  background: var(--map-surface);
+  border: 1px solid var(--map-line);
+  caret-color: var(--map-link);
+}
+.module-path-v7 .module-path-action-tools input::placeholder {
+  color: var(--map-muted);
+  opacity: 1;
+}
+.module-path-v7 .module-path-action-meta > span:first-child:not(.module-path-status),
+.module-path-v7 .module-path-action-disabled {
+  color: var(--map-muted);
+}
+/* Solid, paired status chips: the old translucent backgrounds inherited a white
+ * canvas while their text remained nearly white (invisible at normal sizes). */
+.module-path-v7 .module-path-status.is-available { color: #176346; background: #dff4e9; }
+.module-path-v7 .module-path-status.is-partial { color: #754216; background: #fff0d8; }
+.module-path-v7 .module-path-status.is-planned { color: #40566e; background: #e9f0f8; }
+.module-path-v7 .module-path-empty {
+  color: var(--map-ink);
+  background: var(--map-soft);
+  border: 1px dashed var(--map-line);
+}
+.module-path-v7 .module-path-empty p { color: var(--map-secondary); }
+.module-path-v7 .module-path-empty button {
+  color: #fff;
+  background: var(--map-link);
+  border: 1px solid var(--map-link);
+}
+.module-path-v7 .module-path-empty button:hover { background: #183f7b; }
+.module-path-v7 .module-path-action-tools input:focus-visible,
+.module-path-v7 .module-path-empty button:focus-visible {
+  outline: 3px solid #236fae;
+  outline-offset: 3px;
+}

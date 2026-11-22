@@ -1,0 +1,6 @@
+PASS syntax-only: src/lib/useModuleDraft.ts
+PASS syntax-only: src/lib/draftAsyncGuards.ts
+PASS syntax-only: src/page/orion/OrionPage.tsx
+PASS syntax-only: src/page/pulse/PulsePage.tsx
+PASS syntax-only: src/page/haven/HavenPage.tsx
+SYNTAX_ONLY: 5 source files; diagnostics=0; NOT a production typecheck

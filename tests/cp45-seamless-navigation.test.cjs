@@ -12,6 +12,7 @@ function createNavigationHarness() {
   const documentEvents = {};
   let address = new URL('https://cla.example/student');
   let hardReloads = 0;
+  let allowNavigation = () => true;
   const pushes = [], warms = [];
   const location = {
     get href(){return address.href;}, get origin(){return address.origin;},
@@ -42,6 +43,7 @@ function createNavigationHarness() {
   const requireMock = name=>{
     if(name==='./focusedModuleRoute')return {resolveFocusedPath:(p,h)=> p==='/lumen' && h==='#lumen-indices' ? '/lumen/indices':p};
     if(name==='./routeModules')return {prefetchRoute:p=>warms.push(p)};
+    if(name==='./draftNavigationGuard')return {canNavigate:(from,to)=>allowNavigation(from,to)};
     throw new Error(name);
   };
   new Function('module','exports','require','window','document','Element','URL',js)(m,m.exports,requireMock,fakeWindow,fakeDocument,FakeElement,URL);
@@ -51,7 +53,8 @@ function createNavigationHarness() {
       preventDefault(){this.defaultPrevented=true;}};
     documentEvents.click(event);return event;
   };
-  return {nav:m.exports, click, warms,pushes,windowEvents,documentEvents,get hardReloads(){return hardReloads;}, get path(){return address.pathname+address.search+address.hash;}, link(href){return {target:new FakeElement({href:new URL(href,address).href,target:'',rel:'',dataset:{},hasAttribute:()=>false})};}};
+  return {nav:m.exports, click, warms,pushes,windowEvents,documentEvents,
+    setGuard(fn){allowNavigation=fn;},setLocation(href){address=new URL(href,address);},get hardReloads(){return hardReloads;}, get path(){return address.pathname+address.search+address.hash;}, link(href){return {target:new FakeElement({href:new URL(href,address).href,target:'',rel:'',dataset:{},hasAttribute:()=>false})};}};
 }
 
 test('CP45 navigation: internal links use pushState without document reload',()=>{
@@ -113,7 +116,7 @@ test('CP45: transition keeps revealed content during lazy import, profile watche
   const provider=read('src/page/seed/hooks/StudentProfileProvider.tsx');
   const seed=read('src/page/seed/StudentPage.tsx');
   const lumen=read('src/page/lumen/LumenPage.tsx');
-  assert.match(app,/startRouteTransition\(\(\) => setPath\(currentFocusedPath\(\)\)\)/);
+  assert.match(app,/startRouteTransition\(\(\) => setRouteSnapshot\(\{/);
   assert.doesNotMatch(app,/useSyncExternalStore\(/);
   assert.match(app,/routePending && <div className="cla-route-progress"/);
   assert.match(app,/path === "\/student\/consent" \|\| path\.startsWith\("\/admin"\)/);
@@ -130,4 +133,54 @@ test('CP45: lazy routes have a single shared import table, without eager imports
   }
   assert.match(m,/const requested = new Map/);
   assert.match(m,/Prefetch loads CODE only/);
+});
+
+// CP56: draft exit protection is enforced before SPA routing and for Back.
+test('CP56: a declined guard blocks a link without unmounting current page',()=>{
+  const h=createNavigationHarness();let seen=0;
+  h.nav.subscribeNavigation(()=>seen++);
+  h.setGuard((_from,to)=>to!=='/atlas');
+  const e=h.click('/atlas');
+  assert.equal(e.defaultPrevented,true);
+  assert.equal(h.path,'/student');
+  assert.equal(h.pushes.length,0);
+  assert.equal(seen,0);
+  h.click('/lumen');
+  assert.equal(h.path,'/lumen');assert.equal(seen,1);
+});
+
+test('CP56: browser Back rejected by guard restores URL without notifying React',()=>{
+  const h=createNavigationHarness();let seen=0;
+  h.nav.subscribeNavigation(()=>seen++);
+  h.click('/orion');
+  assert.equal(seen,1);
+  h.setGuard((_from,to)=>to!=='/student');
+  h.setLocation('/student');
+  h.windowEvents.popstate();
+  assert.equal(h.path,'/orion');
+  assert.equal(seen,1);
+  assert.equal(h.hardReloads,0);
+});
+
+test('CP56: imperative navigation obeys dirty guard, and same route is a no-op',()=>{
+  const h=createNavigationHarness();let seen=0;
+  h.nav.subscribeNavigation(()=>seen++);
+  h.setGuard(()=>false);
+  h.nav.navigateTo('/pulse');
+  assert.equal(h.path,'/student');assert.equal(seen,0);
+  h.nav.navigateTo('/student');
+  assert.equal(seen,0);
+});
+
+test('CP58: same-path query navigation notifies React, preserves SPA and supports Back query',()=>{
+  const h=createNavigationHarness();const urls=[];
+  h.setLocation('/admin?cluster=nexus-core');
+  h.nav.subscribeNavigation(()=>urls.push(h.nav.getNavigationSnapshot()));
+  h.nav.navigateTo('/admin?cluster=atlas-admission');
+  assert.equal(h.path,'/admin?cluster=atlas-admission');
+  assert.equal(h.hardReloads,0);
+  h.setLocation('/admin?cluster=nexus-core');
+  h.windowEvents.popstate();
+  assert.deepEqual(urls,['/admin?cluster=atlas-admission','/admin?cluster=nexus-core']);
+  assert.equal(h.nav.getLastNavigationKind(),'pop');
 });

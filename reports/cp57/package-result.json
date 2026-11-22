@@ -1,0 +1,11 @@
+{
+  "schema": "cla.cp57.source-packaging.v1",
+  "sourceOnly": true,
+  "archiveName": "Cognitive-Learn-CP57-20261121.zip",
+  "packager": "tools/package_release.py",
+  "zipCrcCheck": "run after packaging",
+  "includesProductionBuild": false,
+  "productionDeployVerified": false,
+  "containsPrivateEnv": false,
+  "note": "The archive SHA-256 is reported outside this source archive to avoid circular hashing."
+}

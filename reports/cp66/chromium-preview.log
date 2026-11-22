@@ -1,0 +1,4 @@
+desktop-light {'viewport': 1160, 'scrollWidth': 1160, 'states': 6, 'alerts': 1, 'statuses': 5}
+desktop-dark {'viewport': 1160, 'scrollWidth': 1160, 'states': 6, 'alerts': 1, 'statuses': 5}
+mobile-light {'viewport': 390, 'scrollWidth': 390, 'states': 6, 'alerts': 1, 'statuses': 5}
+mobile-dark {'viewport': 390, 'scrollWidth': 390, 'states': 6, 'alerts': 1, 'statuses': 5}

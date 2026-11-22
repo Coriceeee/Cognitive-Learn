@@ -71,11 +71,21 @@ export function useStudentTranscript() {
         { includeMetadataChanges: true }, snap => {
           if (activeUid !== uid) return;
           if (!isCurrent()) return;
-          stopLegacy();
           if (!isServerConfirmedSnapshot(snap.metadata)) {
+            // An unverified primary snapshot invalidates its legacy fallback.
+            stopLegacy();
             clearVisible(); setStatus("syncing"); return;
           }
-          if (snap.exists()) { show(snap.data(), "student_transcripts"); return; }
+          if (snap.exists()) {
+            // The canonical document now exists; a late legacy callback must
+            // not overwrite it, even if that callback was already queued.
+            stopLegacy();
+            show(snap.data(), "student_transcripts"); return;
+          }
+          // Firestore can emit repeated, server-confirmed "missing" metadata
+          // events. Keep the existing legacy listener and verified view rather
+          // than resubscribing, flashing loading, and consuming extra reads.
+          if (unsubscribeLegacy) return;
           clearVisible(); setStatus("loading");
           const capturedLegacyEpoch = legacyEpoch;
           unsubscribeLegacy = onSnapshot(doc(db, "learning_profiles", uid),

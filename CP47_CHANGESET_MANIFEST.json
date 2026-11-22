@@ -1,0 +1,82 @@
+{
+  "checkpoint": "CP47",
+  "date": "2026-11-21",
+  "base": "Cognitive-Learn-080333b4b7ad7976017ce32e0b0c499d28a76173.zip",
+  "changes": [
+    {
+      "path": "src/page/orion/OrionPage.tsx",
+      "status": "modified_or_added",
+      "sha256": "7dc5a3faa2147fc0b90d59a0184bbaece11a63b6700e8e1fc6622f0e9ca284bc"
+    },
+    {
+      "path": "tests/cp47-orion-autosave.test.mjs",
+      "status": "modified_or_added",
+      "sha256": "fc2a1c7343d83c7c00440a44c6de0feb6413b4c16053daf11cd225063798fcc9"
+    },
+    {
+      "path": "tests/ux-v7.test.cjs",
+      "status": "modified_or_added",
+      "sha256": "773e75b18efb926d625db00033b919cbec5c838f919bc2bd1179c50a6e6c3418"
+    },
+    {
+      "path": "tests/cp36-p1.test.cjs",
+      "status": "modified_or_added",
+      "sha256": "c5f94640e32b9dadea8cecb0d0fae1446af664f42f5c8773e9ef5e3ea8225fff"
+    },
+    {
+      "path": "package.json",
+      "status": "modified_or_added",
+      "sha256": "42c7726dbbe888720b537c3c30f04051a2369907da17edec311baddb1b96a73f"
+    },
+    {
+      "path": "src/lib/nexusEvidenceBaseline.ts",
+      "status": "modified_or_added",
+      "sha256": "a0698658b6e9f841ee1b919eeca13a7c04eb32e30982f0807b35d0743c863ac8"
+    },
+    {
+      "path": "src/audit_dataset.py",
+      "status": "deleted",
+      "sha256": null
+    },
+    {
+      "path": "src/baseline_next_term.py",
+      "status": "deleted",
+      "sha256": null
+    },
+    {
+      "path": "src/page/main/RolePage.tsx",
+      "status": "deleted",
+      "sha256": null
+    },
+    {
+      "path": "src/components/common/StudentLinkManager.tsx",
+      "status": "deleted",
+      "sha256": null
+    },
+    {
+      "path": "src/components/common/SharedReportPanel.tsx",
+      "status": "deleted",
+      "sha256": null
+    },
+    {
+      "path": "BAO_CAO_CP47_ORION_AUTOSAVE_20261121.md",
+      "status": "modified_or_added",
+      "sha256": "91d7278170e82e6f9e98cda5519e6ccb46bf22f27ba87f612d6e3bcc5349c208"
+    },
+    {
+      "path": "START_HERE_CP47_ORION_AUTOSAVE_20261121.md",
+      "status": "modified_or_added",
+      "sha256": "b854323a6a325f069578df25635232637bcadf28446301ad25a8e1f76a421501"
+    },
+    {
+      "path": "reports/demo/cla_batch16_offline_readiness.json",
+      "status": "modified_or_added",
+      "sha256": "6cb0d1382768687ee4ba2b502013531559bdb6a63d1d5bb29d638cae9c9068dc"
+    },
+    {
+      "path": "reports/demo/CLA_DEMO_BACKUP_SYNTHETIC.html",
+      "status": "modified_or_added",
+      "sha256": "c24fd4a4db90dd8c3f6261dc0267849988260d55999ac2dc5a2e61d823b07dcd"
+    }
+  ]
+}

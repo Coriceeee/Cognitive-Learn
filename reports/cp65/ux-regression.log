@@ -1,0 +1,357 @@
+TAP version 13
+# (node:15489) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP62 dashboard data-source signal rail
+    # Subtest: renders three explicitly labeled source flags and no invented measurements
+    ok 1 - renders three explicitly labeled source flags and no invented measurements
+      ---
+      duration_ms: 2.531915
+      type: 'test'
+      ...
+    # Subtest: distinguishes a profile from cognitive and historical observation
+    ok 2 - distinguishes a profile from cognitive and historical observation
+      ---
+      duration_ms: 0.277169
+      type: 'test'
+      ...
+    # Subtest: does not convert missing profile to valid downstream signals
+    ok 3 - does not convert missing profile to valid downstream signals
+      ---
+      duration_ms: 0.237469
+      type: 'test'
+      ...
+    # Subtest: handles mixed prerequisites without pretending all three are ready
+    ok 4 - handles mixed prerequisites without pretending all three are ready
+      ---
+      duration_ms: 0.381356
+      type: 'test'
+      ...
+    # Subtest: renders all-available as exactly three source flags, not a numeric score
+    ok 5 - renders all-available as exactly three source flags, not a numeric score
+      ---
+      duration_ms: 0.610402
+      type: 'test'
+      ...
+    # Subtest: integrates after the verified-data canvas without reinstating twin cards
+    ok 6 - integrates after the verified-data canvas without reinstating twin cards
+      ---
+      duration_ms: 0.375116
+      type: 'test'
+      ...
+    # Subtest: keeps the exam calendar first and the preview isolated
+    ok 7 - keeps the exam calendar first and the preview isolated
+      ---
+      duration_ms: 0.268656
+      type: 'test'
+      ...
+    # Subtest: bounds action count and uses real links, ARIA and plain source labels
+    ok 8 - bounds action count and uses real links, ARIA and plain source labels
+      ---
+      duration_ms: 0.546135
+      type: 'test'
+      ...
+    # Subtest: includes mobile, dark and reduced-motion styles loaded in the global entrypoint
+    ok 9 - includes mobile, dark and reduced-motion styles loaded in the global entrypoint
+      ---
+      duration_ms: 0.560807
+      type: 'test'
+      ...
+    1..9
+ok 1 - CP62 dashboard data-source signal rail
+  ---
+  duration_ms: 7.907886
+  type: 'suite'
+  ...
+# (node:15490) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP63 student navigation seed
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 1.4498
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.348877
+      type: 'test'
+      ...
+    1..2
+ok 2 - CP63 student navigation seed
+  ---
+  duration_ms: 8.440581
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation lumen
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 0.262627
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.280513
+      type: 'test'
+      ...
+    1..2
+ok 3 - CP63 student navigation lumen
+  ---
+  duration_ms: 0.662791
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation atlas
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 0.106511
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.220994
+      type: 'test'
+      ...
+    1..2
+ok 4 - CP63 student navigation atlas
+  ---
+  duration_ms: 0.711054
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation orion
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 0.241055
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.06559
+      type: 'test'
+      ...
+    1..2
+ok 5 - CP63 student navigation orion
+  ---
+  duration_ms: 0.432634
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation pulse
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 0.26496
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.337791
+      type: 'test'
+      ...
+    1..2
+ok 6 - CP63 student navigation pulse
+  ---
+  duration_ms: 0.736062
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation haven
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 0.197038
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.113201
+      type: 'test'
+      ...
+    1..2
+ok 7 - CP63 student navigation haven
+  ---
+  duration_ms: 0.465052
+  type: 'suite'
+  ...
+# Subtest: CP63 cross-module and accessibility contracts
+    # Subtest: handles nested study abroad country routes as the Atlas study-abroad tab
+    ok 1 - handles nested study abroad country routes as the Atlas study-abroad tab
+      ---
+      duration_ms: 0.261535
+      type: 'test'
+      ...
+    # Subtest: never exposes planned-only or missing destinations
+    ok 2 - never exposes planned-only or missing destinations
+      ---
+      duration_ms: 1.459805
+      type: 'test'
+      ...
+    # Subtest: caps quick links to a small scan-friendly set and preserves order
+    ok 3 - caps quick links to a small scan-friendly set and preserves order
+      ---
+      duration_ms: 0.312122
+      type: 'test'
+      ...
+    # Subtest: uses semantic links, native disclosure, current-page labels and no invented completion gauge
+    ok 4 - uses semantic links, native disclosure, current-page labels and no invented completion gauge
+      ---
+      duration_ms: 0.33125
+      type: 'test'
+      ...
+    # Subtest: includes accessible focus, dark/light and mobile CSS with reduced motion
+    ok 5 - includes accessible focus, dark/light and mobile CSS with reduced motion
+      ---
+      duration_ms: 0.093001
+      type: 'test'
+      ...
+    # Subtest: keeps SPA routing and unsaved-draft navigation guards in charge of links
+    ok 6 - keeps SPA routing and unsaved-draft navigation guards in charge of links
+      ---
+      duration_ms: 0.096916
+      type: 'test'
+      ...
+    1..6
+ok 8 - CP63 cross-module and accessibility contracts
+  ---
+  duration_ms: 2.770005
+  type: 'suite'
+  ...
+# (node:15491) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP64 real field-coverage semantics
+    # Subtest: does not count blank values as observed zero
+    ok 1 - does not count blank values as observed zero
+      ---
+      duration_ms: 1.636813
+      type: 'test'
+      ...
+    # Subtest: does not count invalid text, NaN, Infinity, or out-of-range values
+    ok 2 - does not count invalid text, NaN, Infinity, or out-of-range values
+      ---
+      duration_ms: 0.153953
+      type: 'test'
+      ...
+    # Subtest: accepts explicit boundaries, decimal comma, and valid negative if permitted
+    ok 3 - accepts explicit boundaries, decimal comma, and valid negative if permitted
+      ---
+      duration_ms: 0.245811
+      type: 'test'
+      ...
+    # Subtest: enforces integer-only weeks and counts when configured
+    ok 4 - enforces integer-only weeks and counts when configured
+      ---
+      duration_ms: 0.129676
+      type: 'test'
+      ...
+    # Subtest: tracks text fields without inventing a numeric score
+    ok 5 - tracks text fields without inventing a numeric score
+      ---
+      duration_ms: 0.109836
+      type: 'test'
+      ...
+    # Subtest: sums independent groups without losing missing or invalid information
+    ok 6 - sums independent groups without losing missing or invalid information
+      ---
+      duration_ms: 0.229667
+      type: 'test'
+      ...
+    # Subtest: reports zero fields as zero rather than NaN or percentages
+    ok 7 - reports zero fields as zero rather than NaN or percentages
+      ---
+      duration_ms: 0.097156
+      type: 'test'
+      ...
+    # Subtest: rejects duplicate field identifiers to prevent double counting
+    ok 8 - rejects duplicate field identifiers to prevent double counting
+      ---
+      duration_ms: 0.494367
+      type: 'test'
+      ...
+    1..8
+ok 9 - CP64 real field-coverage semantics
+  ---
+  duration_ms: 4.267447
+  type: 'suite'
+  ...
+# Subtest: CP64 three-module integration and accessibility
+    # Subtest: shows the data graph on orion overview, not admin or all routes
+    ok 1 - shows the data graph on orion overview, not admin or all routes
+      ---
+      duration_ms: 0.449669
+      type: 'test'
+      ...
+    # Subtest: shows the data graph on pulse overview, not admin or all routes
+    ok 2 - shows the data graph on pulse overview, not admin or all routes
+      ---
+      duration_ms: 0.27804
+      type: 'test'
+      ...
+    # Subtest: shows the data graph on haven overview, not admin or all routes
+    ok 3 - shows the data graph on haven overview, not admin or all routes
+      ---
+      duration_ms: 0.078629
+      type: 'test'
+      ...
+    # Subtest: does not claim academic readiness or probability from form completeness
+    ok 4 - does not claim academic readiness or probability from form completeness
+      ---
+      duration_ms: 0.210598
+      type: 'test'
+      ...
+    # Subtest: shows missing versus invalid as two different states and does not leak field values
+    ok 5 - shows missing versus invalid as two different states and does not leak field values
+      ---
+      duration_ms: 0.203147
+      type: 'test'
+      ...
+    # Subtest: keeps user navigation inside SPA and respects unsaved draft guards
+    ok 6 - keeps user navigation inside SPA and respects unsaved draft guards
+      ---
+      duration_ms: 0.163237
+      type: 'test'
+      ...
+    # Subtest: configures proper input ranges for Orion, Pulse and Haven
+    ok 7 - configures proper input ranges for Orion, Pulse and Haven
+      ---
+      duration_ms: 0.222396
+      type: 'test'
+      ...
+    # Subtest: supports dark mode, mobile, print, reduced motion and accessible focus
+    ok 8 - supports dark mode, mobile, print, reduced motion and accessible focus
+      ---
+      duration_ms: 0.150958
+      type: 'test'
+      ...
+    1..8
+ok 10 - CP64 three-module integration and accessibility
+  ---
+  duration_ms: 2.142797
+  type: 'suite'
+  ...
+# Subtest: CP64 release evidence covers visual artifacts
+    # Subtest: fingerprints styles entrypoint and the new visual style, without duplicates
+    ok 1 - fingerprints styles entrypoint and the new visual style, without duplicates
+      ---
+      duration_ms: 10.806735
+      type: 'test'
+      ...
+    1..1
+ok 11 - CP64 release evidence covers visual artifacts
+  ---
+  duration_ms: 10.990663
+  type: 'suite'
+  ...
+1..11
+# tests 44
+# suites 11
+# pass 44
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 219.773372

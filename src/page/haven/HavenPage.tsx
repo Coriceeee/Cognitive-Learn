@@ -1,10 +1,13 @@
 import { currentFocusedPath } from "../../lib/focusedModuleRoute";
 import PublicSourceSearchPanel from "../../components/common/PublicSourceSearchPanel";
 import ModuleSectionNav from "../../components/common/ModuleSectionNav";
+import ModuleInputObservatory from "../../components/common/ModuleInputObservatory";
+import ModuleDraftFeedback from "../../components/common/ModuleDraftFeedback";
 import { useRef } from "react";
 import { allValid, isBlankOrValid } from "../../lib/inputValidation";
 import { useStudentTranscript } from "../seed/hooks/useStudentTranscript";
 import { getLatestSubjectGrades } from "../seed/services/transcriptData";
+import { canPrefillFromVerifiedTranscript } from "../../lib/transcriptPrefillEligibility";
 import { useEffect } from "react";
 import { useModuleDraft } from "../../lib/useModuleDraft";
 import { useMemo, useState } from "react";
@@ -43,22 +46,62 @@ export default function HavenPage() {
   const [admissionRisk, setAdmissionRisk] = useState("");
   const [financialNeed, setFinancialNeed] = useState("");
 
-  const { draft: savedDraft, status: saveStatus, error: draftError, save: saveDraft } = useModuleDraft<{gpa:string;englishScore:string;tuitionPressure:string;studyPressure:string;admissionRisk:string;financialNeed:string}>("haven");
+  const { draft: savedDraft, status: saveStatus, error: draftError, uid: draftOwnerUid, conflict: draftConflict, save: saveDraft, markEditing, acceptRemote } = useModuleDraft<{gpa:string;englishScore:string;tuitionPressure:string;studyPressure:string;admissionRisk:string;financialNeed:string}>("haven");
   const transcript = useStudentTranscript();
-  const seededFromTranscript = useRef(false);
+  const seededFromTranscript = useRef<string | null>(null);
+  const localInputEdited = useRef(false);
   useEffect(() => {
-    if (seededFromTranscript.current || saveStatus !== "empty" || !transcript.data) return;
-    seededFromTranscript.current = true;
-    const yearly = Object.values(transcript.data.yearly).filter((x): x is number => x !== null);
-    if (yearly.length) setGpa(current => current || String(Math.round(yearly.reduce((a,b)=>a+b,0)/yearly.length*100)/100));
+    if (!transcript.data) return;
+    const yearly = Object.values(transcript.data.yearly).filter((x): x is number => typeof x === "number" && Number.isFinite(x));
     const english = getLatestSubjectGrades(transcript.data).find(x => x.subject === "Tiếng Anh");
-    if (english?.provisional !== null && english?.provisional !== undefined) {
-      setEnglishScore(current => current || String(english.provisional));
+    const englishGrade = english?.provisional;
+    if (!canPrefillFromVerifiedTranscript({
+      draftOwnerUid, transcriptOwnerUid: transcript.userId,
+      draftStatus: saveStatus, transcriptStatus: transcript.status,
+      seededOwnerUid: seededFromTranscript.current,
+      hasSupportedGrades: yearly.length > 0 || (englishGrade !== null && englishGrade !== undefined),
+      hasLocalEdits: localInputEdited.current,
+    })) return;
+    seededFromTranscript.current = draftOwnerUid;
+    if (yearly.length) setGpa(current => current || String(Math.round(yearly.reduce((a,b)=>a+b,0)/yearly.length*100)/100));
+    if (englishGrade !== null && englishGrade !== undefined) {
+      setEnglishScore(current => current || String(englishGrade));
     }
-  }, [transcript.data, saveStatus]);
+  }, [transcript.data, transcript.userId, transcript.status, draftOwnerUid, saveStatus]);
 
   const [saveNotice, setSaveNotice] = useState("");
+  const [saveNoticeTone, setSaveNoticeTone] = useState<"success" | "warning" | "error">("success");
   const [saving, setSaving] = useState(false);
+  const [hasLocalEdits, setHasLocalEdits] = useState(false);
+  const editVersion = useRef(0);
+  function markLocalEdit() {
+    markEditing();
+    editVersion.current += 1;
+    setHasLocalEdits(true);
+    // Never leave a previous successful save notice visible after new edits.
+    setSaveNotice("");
+  }
+  // CP52: never show a previous account's draft after sign-out/account switch.
+  const lastDraftOwner = useRef<string | null>(null);
+  useEffect(() => {
+    if (lastDraftOwner.current === null) {
+      lastDraftOwner.current = draftOwnerUid;
+      return;
+    }
+    if (lastDraftOwner.current === draftOwnerUid) return;
+    lastDraftOwner.current = draftOwnerUid;
+    localInputEdited.current = false;
+    setGpa("");
+    setEnglishScore("");
+    setTuitionPressure("");
+    setStudyPressure("");
+    setAdmissionRisk("");
+    setFinancialNeed("");
+    setSaveNotice("");
+    setHasLocalEdits(false);
+    editVersion.current += 1;
+  }, [draftOwnerUid]);
+
   useEffect(() => {
     if (!savedDraft) return;
     setGpa(savedDraft.gpa);
@@ -68,17 +111,46 @@ export default function HavenPage() {
     setAdmissionRisk(savedDraft.admissionRisk);
     setFinancialNeed(savedDraft.financialNeed);
   }, [savedDraft]);
+  async function loadLatestDraft() {
+    setSaveNotice("");
+    try {
+      const remote = await acceptRemote();
+      setGpa(remote?.gpa ?? "");
+      setEnglishScore(remote?.englishScore ?? "");
+      setTuitionPressure(remote?.tuitionPressure ?? "");
+      setStudyPressure(remote?.studyPressure ?? "");
+      setAdmissionRisk(remote?.admissionRisk ?? "");
+      setFinancialNeed(remote?.financialNeed ?? "");
+      editVersion.current += 1;
+      setHasLocalEdits(false);
+      setSaveNoticeTone("success");
+      setSaveNotice("Đã tải bản nháp mới nhất từ máy chủ.");
+    } catch (error) {
+      setSaveNoticeTone("error");
+      setSaveNotice(error instanceof Error ? error.message : "Không thể tải bản mới nhất.");
+    }
+  }
+
   async function saveCurrentDraft() {
     setSaving(true);
     setSaveNotice("");
+    const revision = editVersion.current;
     try {
       if (![gpa, englishScore].every(v => isBlankOrValid(v, 0, 10)) ||
           ![tuitionPressure, studyPressure, admissionRisk, financialNeed].every(v => isBlankOrValid(v, 0, 100))) {
         throw new Error("GPA/tiếng Anh phải từ 0–10; chỉ số hỗ trợ phải từ 0–100.");
       }
       await saveDraft({gpa, englishScore, tuitionPressure, studyPressure, admissionRisk, financialNeed});
-      setSaveNotice("Đã lưu vào hồ sơ của bạn.");
+      if (editVersion.current === revision) {
+        setHasLocalEdits(false);
+        setSaveNoticeTone("success");
+        setSaveNotice("Đã lưu vào hồ sơ của bạn.");
+      } else {
+        setSaveNoticeTone("warning");
+        setSaveNotice("Đã lưu phiên bản trước; thay đổi mới vẫn chưa lưu.");
+      }
     } catch (error) {
+      setSaveNoticeTone("error");
       setSaveNotice(error instanceof Error ? error.message : "Không thể lưu dữ liệu. Hãy kiểm tra kết nối và thử lại.");
     } finally { setSaving(false); }
   }
@@ -143,6 +215,22 @@ export default function HavenPage() {
         </section></>}
 
         <ModuleSectionNav moduleKey="haven" />
+        {view === "/haven" && <ModuleInputObservatory moduleName="Haven" editHref="/haven/finance#haven-financial"
+          resultHref="/haven/plan" resultLabel="Xem kế hoạch hỗ trợ" canSimulate={hasInputs}
+          note="GPA và điểm tiếng Anh cần kiểm tra nguồn học bạ. Các ô áp lực là tự nhập theo giả định, không phải chẩn đoán hay xác suất nhận học bổng."
+          groups={[
+            { key: "academic", title: "Thông tin học tập (0–10)", fields: [
+              { key: "gpa", label: "GPA", value: gpa, min: 0, max: 10 },
+              { key: "english", label: "Điểm tiếng Anh", value: englishScore, min: 0, max: 10 },
+            ] },
+            { key: "support", title: "Đầu vào hỗ trợ (0–100)", fields: [
+              { key: "tuition", label: "Áp lực học phí", value: tuitionPressure, min: 0, max: 100 },
+              { key: "study", label: "Áp lực học tập", value: studyPressure, min: 0, max: 100 },
+              { key: "admission", label: "Rủi ro tuyển sinh", value: admissionRisk, min: 0, max: 100 },
+              { key: "financial", label: "Nhu cầu tài chính", value: financialNeed, min: 0, max: 100 },
+            ] },
+          ]} />}
+
         {view === "/haven/scholarships" && <PublicSourceSearchPanel topic="scholarship" />}
         {view === "/haven/scholarships" && <>
           <section id="haven-scholarships" className="cla-haven-study-link">
@@ -164,23 +252,26 @@ export default function HavenPage() {
             </div>
           </div>
 
-          <div className="cla-firestore-save" role="status" style={{display:"flex",flexWrap:"wrap",alignItems:"center",gap:12,margin:"12px 0"}}>
-            <button type="button" disabled={saving || saveStatus === "loading" || saveStatus === "error" || saveStatus === "signed-out"} onClick={() => void saveCurrentDraft()}>
+          <div className="cla-firestore-save cla-module-save-panel">
+            <button type="button" disabled={saving || (saveStatus !== "ready" && saveStatus !== "empty")} onClick={() => void saveCurrentDraft()}>
               {saving ? "Đang lưu…" : "Lưu dữ liệu"}
             </button>
-            <span>{saveNotice || draftError || (saveStatus === "ready" ? "Đã đồng bộ dữ liệu đã lưu" : saveStatus === "loading" ? "Đang tải dữ liệu đã lưu…" : "Chưa có dữ liệu đã lưu")}</span>
+            {draftConflict && <button type="button" onClick={() => void loadLatestDraft()}>Tải bản mới nhất (bỏ thay đổi trên máy này)</button>}
+            <ModuleDraftFeedback status={saveStatus} error={draftError} conflict={draftConflict}
+              saving={saving} notice={saveNotice} noticeTone={saveNoticeTone}
+              dirty={hasLocalEdits} />
           </div>
           <div className="haven-form-grid">
             <label>
               <span>GPA</span>
-              <input value={gpa} onChange={(event) => setGpa(event.target.value)} />
+              <input value={gpa} onChange={(event) => { markLocalEdit(); localInputEdited.current = true; setGpa(event.target.value); }} />
             </label>
 
             <label>
               <span>Điểm tiếng Anh</span>
               <input
                 value={englishScore}
-                onChange={(event) => setEnglishScore(event.target.value)}
+                onChange={(event) => { markLocalEdit(); localInputEdited.current = true; setEnglishScore(event.target.value); }}
               />
             </label>
 
@@ -188,7 +279,7 @@ export default function HavenPage() {
               <span>Áp lực học phí</span>
               <input
                 value={tuitionPressure}
-                onChange={(event) => setTuitionPressure(event.target.value)}
+                onChange={(event) => { markLocalEdit(); localInputEdited.current = true; setTuitionPressure(event.target.value); }}
               />
             </label>
 
@@ -196,7 +287,7 @@ export default function HavenPage() {
               <span>Áp lực học tập</span>
               <input
                 value={studyPressure}
-                onChange={(event) => setStudyPressure(event.target.value)}
+                onChange={(event) => { markLocalEdit(); localInputEdited.current = true; setStudyPressure(event.target.value); }}
               />
             </label>
 
@@ -204,7 +295,7 @@ export default function HavenPage() {
               <span>Rủi ro tuyển sinh</span>
               <input
                 value={admissionRisk}
-                onChange={(event) => setAdmissionRisk(event.target.value)}
+                onChange={(event) => { markLocalEdit(); localInputEdited.current = true; setAdmissionRisk(event.target.value); }}
               />
             </label>
 
@@ -212,7 +303,7 @@ export default function HavenPage() {
               <span>Nhu cầu tài chính</span>
               <input
                 value={financialNeed}
-                onChange={(event) => setFinancialNeed(event.target.value)}
+                onChange={(event) => { markLocalEdit(); localInputEdited.current = true; setFinancialNeed(event.target.value); }}
               />
             </label>
           </div>

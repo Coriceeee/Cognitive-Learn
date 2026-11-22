@@ -1,0 +1,26 @@
+
+> cognitive-learn-ai@0.1.0 check:dependencies
+> node tools/check-dependencies.cjs
+
+Node v22.16.0; platform linux/x64
+DEPENDENCY_PREFLIGHT_BLOCKED (19 issue(s))
+ - MISSING_DEPENDENCY @vitejs/plugin-react
+ - MISSING_DEPENDENCY dotenv
+ - MISSING_DEPENDENCY firebase
+ - MISSING_DEPENDENCY lucide-react
+ - MISSING_DEPENDENCY react
+ - MISSING_DEPENDENCY react-dom
+ - MISSING_DEPENDENCY react-router-dom
+ - MISSING_DEPENDENCY recharts
+ - MISSING_DEPENDENCY @firebase/rules-unit-testing
+ - MISSING_DEPENDENCY @types/node
+ - MISSING_DEPENDENCY @types/react
+ - MISSING_DEPENDENCY @types/react-dom
+ - MISSING_DEPENDENCY autoprefixer
+ - MISSING_DEPENDENCY postcss
+ - MISSING_DEPENDENCY tailwindcss
+ - MISSING_DEPENDENCY typescript
+ - MISSING_DEPENDENCY vite
+ - MISSING_EXECUTABLE typescript/bin/tsc
+ - MISSING_EXECUTABLE vite/bin/vite.js
+Run npm ci on a machine with access to the npm registry, then rerun npm run check:dependencies.

@@ -1,0 +1,1416 @@
+
+> cognitive-learn-ai@0.1.0 test:cp47:orion-autosave
+> node --experimental-strip-types --test tests/cp47-orion-autosave.test.mjs
+
+TAP version 13
+# Subtest: CP47-01: Orion autosaves only after an explicit local edit and verified draft state
+ok 1 - CP47-01: Orion autosaves only after an explicit local edit and verified draft state
+  ---
+  duration_ms: 1.589398
+  type: 'test'
+  ...
+# Subtest: CP47-02: newer edits are not marked saved by an older in-flight autosave
+ok 2 - CP47-02: newer edits are not marked saved by an older in-flight autosave
+  ---
+  duration_ms: 0.11924
+  type: 'test'
+  ...
+# Subtest: CP47-03: autosave retains the authenticated Firestore ownership guard
+ok 3 - CP47-03: autosave retains the authenticated Firestore ownership guard
+  ---
+  duration_ms: 0.150918
+  type: 'test'
+  ...
+# Subtest: CP47-04: autosave is a Firestore draft only; no browser storage or outcome claim is introduced
+ok 4 - CP47-04: autosave is a Firestore draft only; no browser storage or outcome claim is introduced
+  ---
+  duration_ms: 0.261414
+  type: 'test'
+  ...
+# Subtest: CP47-05: manual save cancels a pending autosave to avoid duplicate writes
+ok 5 - CP47-05: manual save cancels a pending autosave to avoid duplicate writes
+  ---
+  duration_ms: 0.18573
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 57.90239
+
+> cognitive-learn-ai@0.1.0 test:cp50:orion-race
+> node --test tests/cp50-orion-race-safety.test.cjs
+
+TAP version 13
+# Subtest: CP50 Orion: incoming snapshot cannot overwrite unsaved local edits
+ok 1 - CP50 Orion: incoming snapshot cannot overwrite unsaved local edits
+  ---
+  duration_ms: 0.769321
+  type: 'test'
+  ...
+# Subtest: CP50 Orion: autosave validates weeks and scores before persistence
+ok 2 - CP50 Orion: autosave validates weeks and scores before persistence
+  ---
+  duration_ms: 0.159721
+  type: 'test'
+  ...
+# Subtest: CP50 Orion: async saves cannot clear newer edits
+ok 3 - CP50 Orion: async saves cannot clear newer edits
+  ---
+  duration_ms: 0.148915
+  type: 'test'
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 3
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 47.023483
+
+> cognitive-learn-ai@0.1.0 test:cp51:draft-queue
+> node --experimental-strip-types --test tests/cp51-draft-write-queue.test.mjs
+
+TAP version 13
+# (node:23566) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP51: queued older write cannot finish after a newer write
+ok 1 - CP51: queued older write cannot finish after a newer write
+  ---
+  duration_ms: 1.3581
+  type: 'test'
+  ...
+# Subtest: CP51: failed earlier write does not poison subsequent writes
+ok 2 - CP51: failed earlier write does not poison subsequent writes
+  ---
+  duration_ms: 0.468427
+  type: 'test'
+  ...
+# Subtest: CP51: eligibility checked when queued write starts
+ok 3 - CP51: eligibility checked when queued write starts
+  ---
+  duration_ms: 0.199331
+  type: 'test'
+  ...
+# Subtest: CP51: Firestore draft hook uses FIFO and checks authenticated owner at execution time
+ok 4 - CP51: Firestore draft hook uses FIFO and checks authenticated owner at execution time
+  ---
+  duration_ms: 0.170808
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 119.560398
+
+> cognitive-learn-ai@0.1.0 test:cp52:multidevice
+> node --experimental-strip-types --test tests/cp52-multidevice-cas.test.mjs
+
+TAP version 13
+# (node:23595) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP52.1: first write from two empty devices detects competing create
+ok 1 - CP52.1: first write from two empty devices detects competing create
+  ---
+  duration_ms: 1.406422
+  type: 'test'
+  ...
+# Subtest: CP52.2: stale device cannot overwrite newer revision
+ok 2 - CP52.2: stale device cannot overwrite newer revision
+  ---
+  duration_ms: 0.204809
+  type: 'test'
+  ...
+# Subtest: CP52.3: same revision with changed payload conflicts, timestamp resolution alone does not
+ok 3 - CP52.3: same revision with changed payload conflicts, timestamp resolution alone does not
+  ---
+  duration_ms: 0.252461
+  type: 'test'
+  ...
+# Subtest: CP52.4: legacy version-less draft detects remote changes before migration
+ok 4 - CP52.4: legacy version-less draft detects remote changes before migration
+  ---
+  duration_ms: 0.417049
+  type: 'test'
+  ...
+# Subtest: CP52.5: canonical signature ignores object key order
+ok 5 - CP52.5: canonical signature ignores object key order
+  ---
+  duration_ms: 0.210247
+  type: 'test'
+  ...
+# Subtest: CP52.6: queued follow-up write may use acknowledged revision with unknown server timestamp
+ok 6 - CP52.6: queued follow-up write may use acknowledged revision with unknown server timestamp
+  ---
+  duration_ms: 0.129375
+  type: 'test'
+  ...
+# Subtest: CP52.7: hook uses server transaction read before write, explicit server reload and local edit guard
+ok 7 - CP52.7: hook uses server transaction read before write, explicit server reload and local edit guard
+  ---
+  duration_ms: 0.359994
+  type: 'test'
+  ...
+# Subtest: CP52.8: Orion, Pulse and Haven expose deliberate conflict resolution, keep local editing
+ok 8 - CP52.8: Orion, Pulse and Haven expose deliberate conflict resolution, keep local editing
+  ---
+  duration_ms: 0.213332
+  type: 'test'
+  ...
+# Subtest: CP52.9: candidate rules preserve owner isolation and protect revisioned documents
+ok 9 - CP52.9: candidate rules preserve owner isolation and protect revisioned documents
+  ---
+  duration_ms: 0.646276
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 161.56663
+
+> cognitive-learn-ai@0.1.0 test:cp53:integrity
+> node --experimental-strip-types --test tests/cp53-build-preflight-and-cas.test.mjs
+
+TAP version 13
+# (node:23624) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP53.1: all directly called React hooks are imported (offline build preflight)
+ok 1 - CP53.1: all directly called React hooks are imported (offline build preflight)
+  ---
+  duration_ms: 30.331004
+  type: 'test'
+  ...
+# Subtest: CP53.2: acknowledged write cannot be replaced at same revision with different payload
+ok 2 - CP53.2: acknowledged write cannot be replaced at same revision with different payload
+  ---
+  duration_ms: 0.842331
+  type: 'test'
+  ...
+# Subtest: CP53.3: acknowledged payload signature is stable for same values with shuffled keys
+ok 3 - CP53.3: acknowledged payload signature is stable for same values with shuffled keys
+  ---
+  duration_ms: 0.373534
+  type: 'test'
+  ...
+# Subtest: CP53.4: approved save records payload signature while server timestamp resolves
+ok 4 - CP53.4: approved save records payload signature while server timestamp resolves
+  ---
+  duration_ms: 0.323518
+  type: 'test'
+  ...
+# Subtest: CP53.5: same-revision replay remains invalid even when timestamp is unavailable
+ok 5 - CP53.5: same-revision replay remains invalid even when timestamp is unavailable
+  ---
+  duration_ms: 0.297459
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 167.103703
+
+> cognitive-learn-ai@0.1.0 test:cp54:safety
+> node --experimental-strip-types --test tests/cp54-draft-refresh-security.test.mjs
+
+TAP version 13
+# (node:23653) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP54.1: a refresh waits for an in-flight save, and preserves its return value
+ok 1 - CP54.1: a refresh waits for an in-flight save, and preserves its return value
+  ---
+  duration_ms: 1.377488
+  type: 'test'
+  ...
+# Subtest: CP54.2: failed save does not prevent a safe reload
+ok 2 - CP54.2: failed save does not prevent a safe reload
+  ---
+  duration_ms: 0.571613
+  type: 'test'
+  ...
+# Subtest: CP54.3: reload serializes with save and invalidates writes queued behind it
+ok 3 - CP54.3: reload serializes with save and invalidates writes queued behind it
+  ---
+  duration_ms: 1.086249
+  type: 'test'
+  ...
+# Subtest: CP54.4: hook uses shared FIFO for server reload and checks session before applying response
+ok 4 - CP54.4: hook uses shared FIFO for server reload and checks session before applying response
+  ---
+  duration_ms: 0.304199
+  type: 'test'
+  ...
+# Subtest: CP54.5: both candidate Rules require revision on create and update
+ok 5 - CP54.5: both candidate Rules require revision on create and update
+  ---
+  duration_ms: 0.323528
+  type: 'test'
+  ...
+# Subtest: CP54.6: Emulator suite includes revised creates and legacy migration checks
+ok 6 - CP54.6: Emulator suite includes revised creates and legacy migration checks
+  ---
+  duration_ms: 0.340594
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 109.710249
+
+> cognitive-learn-ai@0.1.0 test:cp55:safety
+> node --experimental-strip-types --test tests/cp55-draft-session-safety.test.mjs
+
+TAP version 13
+# (node:23682) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP55.1 current listener accepts only its active UID and observer epoch
+ok 1 - CP55.1 current listener accepts only its active UID and observer epoch
+  ---
+  duration_ms: 0.800979
+  type: 'test'
+  ...
+# Subtest: CP55.2 queued Firestore callback from previous account is rejected
+ok 2 - CP55.2 queued Firestore callback from previous account is rejected
+  ---
+  duration_ms: 0.123787
+  type: 'test'
+  ...
+# Subtest: CP55.3 remote refresh cannot discard edits made while server is responding
+ok 3 - CP55.3 remote refresh cannot discard edits made while server is responding
+  ---
+  duration_ms: 0.375056
+  type: 'test'
+  ...
+# Subtest: CP55.4 listener lifetime and queued-write cancellation use distinct epochs
+ok 4 - CP55.4 listener lifetime and queued-write cancellation use distinct epochs
+  ---
+  duration_ms: 0.3178
+  type: 'test'
+  ...
+# Subtest: CP55.5 cleanup invalidates callbacks and auth failures do not update unmounted hook
+ok 5 - CP55.5 cleanup invalidates callbacks and auth failures do not update unmounted hook
+  ---
+  duration_ms: 0.130727
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 104.865808
+
+> cognitive-learn-ai@0.1.0 test:cp56:navigation
+> node --experimental-strip-types --test tests/cp56-unsaved-navigation.test.mjs
+
+TAP version 13
+# (node:23711) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP56.1 same workspace sub-tabs keep unsaved work without prompt
+ok 1 - CP56.1 same workspace sub-tabs keep unsaved work without prompt
+  ---
+  duration_ms: 0.870203
+  type: 'test'
+  ...
+# Subtest: CP56.2 explicit allow, deny and unregister work without storing PII
+ok 2 - CP56.2 explicit allow, deny and unregister work without storing PII
+  ---
+  duration_ms: 0.150347
+  type: 'test'
+  ...
+# Subtest: CP56.3 guard registry rejects navigation if any active draft rejects
+ok 3 - CP56.3 guard registry rejects navigation if any active draft rejects
+  ---
+  duration_ms: 0.149335
+  type: 'test'
+  ...
+# Subtest: CP56.4 hook registers and removes SPA and beforeunload guards
+ok 4 - CP56.4 hook registers and removes SPA and beforeunload guards
+  ---
+  duration_ms: 0.210949
+  type: 'test'
+  ...
+# Subtest: CP56.5 hook does not treat an edit as saved until the server confirms it
+ok 5 - CP56.5 hook does not treat an edit as saved until the server confirms it
+  ---
+  duration_ms: 0.213212
+  type: 'test'
+  ...
+# Subtest: CP56.6 both click and imperative navigation use the central guard
+ok 6 - CP56.6 both click and imperative navigation use the central guard
+  ---
+  duration_ms: 0.125009
+  type: 'test'
+  ...
+# Subtest: CP56.7 rejected popstate restores location and leaves view mounted
+ok 7 - CP56.7 rejected popstate restores location and leaves view mounted
+  ---
+  duration_ms: 0.210267
+  type: 'test'
+  ...
+# Subtest: CP56.8 do not persist draft data to browser localStorage or sessionStorage
+ok 8 - CP56.8 do not persist draft data to browser localStorage or sessionStorage
+  ---
+  duration_ms: 0.373143
+  type: 'test'
+  ...
+# Subtest: CP56.9 explicit logout also respects pending unsaved drafts
+ok 9 - CP56.9 explicit logout also respects pending unsaved drafts
+  ---
+  duration_ms: 0.362747
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 100.909893
+
+> cognitive-learn-ai@0.1.0 test:cp57:timestamp
+> node --experimental-strip-types --test tests/cp57-firestore-timestamp-stability.test.mjs
+
+TAP version 13
+# (node:23740) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP57.1 revisioned documents do not conflict during serverTimestamp null -> resolved
+ok 1 - CP57.1 revisioned documents do not conflict during serverTimestamp null -> resolved
+  ---
+  duration_ms: 1.018697
+  type: 'test'
+  ...
+# Subtest: CP57.2 local timestamp estimates do not create phantom conflicts
+ok 2 - CP57.2 local timestamp estimates do not create phantom conflicts
+  ---
+  duration_ms: 0.211369
+  type: 'test'
+  ...
+# Subtest: CP57.3 genuine remote edits remain blocked even if revision was reused
+ok 3 - CP57.3 genuine remote edits remain blocked even if revision was reused
+  ---
+  duration_ms: 0.371891
+  type: 'test'
+  ...
+# Subtest: CP57.4 legacy revision-less documents keep timestamp ABA protection
+ok 4 - CP57.4 legacy revision-less documents keep timestamp ABA protection
+  ---
+  duration_ms: 0.179201
+  type: 'test'
+  ...
+# Subtest: CP57.5 acknowledgement with unknown timestamp still enforces exact payload
+ok 5 - CP57.5 acknowledgement with unknown timestamp still enforces exact payload
+  ---
+  duration_ms: 0.310549
+  type: 'test'
+  ...
+# Subtest: CP57.6 draft hook remains protected by server-side transaction CAS
+ok 6 - CP57.6 draft hook remains protected by server-side transaction CAS
+  ---
+  duration_ms: 0.566295
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 105.799186
+
+> cognitive-learn-ai@0.1.0 test:cp58:integration
+> node --experimental-strip-types --test tests/cp58-transcript-prefill.test.mjs && node --test tests/cp45-seamless-navigation.test.cjs
+
+TAP version 13
+# (node:23769) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP58.1: Seed → Orion/Haven prefill requires both server-verified records for same UID
+ok 1 - CP58.1: Seed → Orion/Haven prefill requires both server-verified records for same UID
+  ---
+  duration_ms: 1.067361
+  type: 'test'
+  ...
+# Subtest: CP58.2: an empty transcript cannot consume the first eligible prefill
+ok 2 - CP58.2: an empty transcript cannot consume the first eligible prefill
+  ---
+  duration_ms: 0.167282
+  type: 'test'
+  ...
+# Subtest: CP58.3: manual edits take priority and same student is prefilled at most once
+ok 3 - CP58.3: manual edits take priority and same student is prefilled at most once
+  ---
+  duration_ms: 0.233723
+  type: 'test'
+  ...
+# Subtest: CP58.4: account A prefill never blocks an eligible account B prefill
+ok 4 - CP58.4: account A prefill never blocks an eligible account B prefill
+  ---
+  duration_ms: 0.150136
+  type: 'test'
+  ...
+# Subtest: CP58.5: Orion and Haven bind the prefill to verified UIDs, not any cached transcript
+ok 5 - CP58.5: Orion and Haven bind the prefill to verified UIDs, not any cached transcript
+  ---
+  duration_ms: 1.009884
+  type: 'test'
+  ...
+# Subtest: CP58.6: Haven does not mark empty/unsupported grades as prefilled
+ok 6 - CP58.6: Haven does not mark empty/unsupported grades as prefilled
+  ---
+  duration_ms: 0.4173
+  type: 'test'
+  ...
+# Subtest: CP58.7: transcript prefill never performs Firestore writes or fabricates a missing score
+ok 7 - CP58.7: transcript prefill never performs Firestore writes or fabricates a missing score
+  ---
+  duration_ms: 1.608859
+  type: 'test'
+  ...
+# Subtest: CP58.8: App re-renders for same-path query changes without hard reload
+ok 8 - CP58.8: App re-renders for same-path query changes without hard reload
+  ---
+  duration_ms: 0.162545
+  type: 'test'
+  ...
+# Subtest: CP58.9: Atlas study-abroad synchronizes Back/Forward country query without losing same-country checklist
+ok 9 - CP58.9: Atlas study-abroad synchronizes Back/Forward country query without losing same-country checklist
+  ---
+  duration_ms: 0.566655
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 168.135976
+TAP version 13
+# Subtest: CP45 navigation: internal links use pushState without document reload
+ok 1 - CP45 navigation: internal links use pushState without document reload
+  ---
+  duration_ms: 93.128825
+  type: 'test'
+  ...
+# Subtest: CP45 navigation: browser Back/Forward notifies React without reload
+ok 2 - CP45 navigation: browser Back/Forward notifies React without reload
+  ---
+  duration_ms: 25.262575
+  type: 'test'
+  ...
+# Subtest: CP45 navigation: native same-page anchors and external links remain native
+ok 3 - CP45 navigation: native same-page anchors and external links remain native
+  ---
+  duration_ms: 20.840331
+  type: 'test'
+  ...
+# Subtest: CP45 navigation: modified clicks, new-tab links and downloads are never hijacked
+ok 4 - CP45 navigation: modified clicks, new-tab links and downloads are never hijacked
+  ---
+  duration_ms: 14.895068
+  type: 'test'
+  ...
+# Subtest: CP45 navigation: pointer and keyboard intent only prefetch the route code
+ok 5 - CP45 navigation: pointer and keyboard intent only prefetch the route code
+  ---
+  duration_ms: 12.323999
+  type: 'test'
+  ...
+# Subtest: CP45 navigation: legacy hash bookmarks are converted to canonical module path
+ok 6 - CP45 navigation: legacy hash bookmarks are converted to canonical module path
+  ---
+  duration_ms: 15.214791
+  type: 'test'
+  ...
+# Subtest: CP45: transition keeps revealed content during lazy import, profile watcher is shared and consent gated
+ok 7 - CP45: transition keeps revealed content during lazy import, profile watcher is shared and consent gated
+  ---
+  duration_ms: 0.759886
+  type: 'test'
+  ...
+# Subtest: CP45: lazy routes have a single shared import table, without eager imports
+ok 8 - CP45: lazy routes have a single shared import table, without eager imports
+  ---
+  duration_ms: 0.255335
+  type: 'test'
+  ...
+# Subtest: CP56: a declined guard blocks a link without unmounting current page
+ok 9 - CP56: a declined guard blocks a link without unmounting current page
+  ---
+  duration_ms: 10.05183
+  type: 'test'
+  ...
+# Subtest: CP56: browser Back rejected by guard restores URL without notifying React
+ok 10 - CP56: browser Back rejected by guard restores URL without notifying React
+  ---
+  duration_ms: 15.272719
+  type: 'test'
+  ...
+# Subtest: CP56: imperative navigation obeys dirty guard, and same route is a no-op
+ok 11 - CP56: imperative navigation obeys dirty guard, and same route is a no-op
+  ---
+  duration_ms: 17.798771
+  type: 'test'
+  ...
+# Subtest: CP58: same-path query navigation notifies React, preserves SPA and supports Back query
+ok 12 - CP58: same-path query navigation notifies React, preserves SPA and supports Back query
+  ---
+  duration_ms: 18.982327
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 526.987289
+
+> cognitive-learn-ai@0.1.0 test:cp59:verified-drafts
+> node --experimental-strip-types --test tests/cp59-verified-module-drafts.test.mjs
+
+TAP version 13
+# (node:23811) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP59.1: cached and pending module snapshots are never server-confirmed
+ok 1 - CP59.1: cached and pending module snapshots are never server-confirmed
+  ---
+  duration_ms: 0.998247
+  type: 'test'
+  ...
+# Subtest: CP59.2: reject records owned by another account, allow safe legacy shape
+ok 2 - CP59.2: reject records owned by another account, allow safe legacy shape
+  ---
+  duration_ms: 0.300784
+  type: 'test'
+  ...
+# Subtest: CP59.3: primary and legacy listeners request metadata changes and gate readValue
+ok 3 - CP59.3: primary and legacy listeners request metadata changes and gate readValue
+  ---
+  duration_ms: 0.369247
+  type: 'test'
+  ...
+# Subtest: CP59.4: offline cache cannot become a CAS baseline and local edits are preserved
+ok 4 - CP59.4: offline cache cannot become a CAS baseline and local edits are preserved
+  ---
+  duration_ms: 0.2053
+  type: 'test'
+  ...
+# Subtest: CP59.5: primary, legacy and explicit reload validate current UID before displaying
+ok 5 - CP59.5: primary, legacy and explicit reload validate current UID before displaying
+  ---
+  duration_ms: 0.253392
+  type: 'test'
+  ...
+# Subtest: CP59.6: a save is rejected until verified draft status is ready or empty
+ok 6 - CP59.6: a save is rejected until verified draft status is ready or empty
+  ---
+  duration_ms: 0.177247
+  type: 'test'
+  ...
+# Subtest: CP59.7: Orion, Pulse and Haven disable save and explain server-sync state
+ok 7 - CP59.7: Orion, Pulse and Haven disable save and explain server-sync state
+  ---
+  duration_ms: 1.55745
+  type: 'test'
+  ...
+# Subtest: CP59.8: Seed verified-prefill is gated while module-draft server sync is pending
+ok 8 - CP59.8: Seed verified-prefill is gated while module-draft server sync is pending
+  ---
+  duration_ms: 0.1324
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 143.54473
+
+> cognitive-learn-ai@0.1.0 test:cp60:seed-listener
+> node --test tests/cp60-seed-listener-stability.test.cjs
+
+TAP version 13
+# Subtest: CP60.1 repeated confirmed missing primary does not reopen legacy listener
+ok 1 - CP60.1 repeated confirmed missing primary does not reopen legacy listener
+  ---
+  duration_ms: 81.359152
+  type: 'test'
+  ...
+# Subtest: CP60.2 verified fallback remains visible across primary metadata changes
+ok 2 - CP60.2 verified fallback remains visible across primary metadata changes
+  ---
+  duration_ms: 24.143006
+  type: 'test'
+  ...
+# Subtest: CP60.3 canonical document supersedes legacy and rejects late fallback callbacks
+ok 3 - CP60.3 canonical document supersedes legacy and rejects late fallback callbacks
+  ---
+  duration_ms: 20.595972
+  type: 'test'
+  ...
+# Subtest: CP60.4 unverified primary invalidates fallback; next verified absence starts fresh listener
+ok 4 - CP60.4 unverified primary invalidates fallback; next verified absence starts fresh listener
+  ---
+  duration_ms: 12.772145
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 404.743907
+
+> cognitive-learn-ai@0.1.0 test:cp61:legacy-drafts
+> node --test tests/cp61-legacy-draft-callbacks.test.cjs
+
+TAP version 13
+# Subtest: CP61.1 confirmed canonical update wins against queued legacy snapshot
+ok 1 - CP61.1 confirmed canonical update wins against queued legacy snapshot
+  ---
+  duration_ms: 119.939846
+  type: 'test'
+  ...
+# Subtest: CP61.2 late legacy error cannot obscure server-confirmed canonical record
+ok 2 - CP61.2 late legacy error cannot obscure server-confirmed canonical record
+  ---
+  duration_ms: 52.477566
+  type: 'test'
+  ...
+# Subtest: CP61.3 cached primary invalidates legacy, new verified fallback is the only accepted source
+ok 3 - CP61.3 cached primary invalidates legacy, new verified fallback is the only accepted source
+  ---
+  duration_ms: 39.899633
+  type: 'test'
+  ...
+# Subtest: CP61.4 repeated confirmed missing primary retains legacy listener and verified draft
+ok 4 - CP61.4 repeated confirmed missing primary retains legacy listener and verified draft
+  ---
+  duration_ms: 23.805566
+  type: 'test'
+  ...
+# Subtest: CP61.5 account change and cleanup reject queued legacy callbacks and errors
+ok 5 - CP61.5 account change and cleanup reject queued legacy callbacks and errors
+  ---
+  duration_ms: 28.551718
+  type: 'test'
+  ...
+# Subtest: CP61.6 same listener protection is shared across Orion, Pulse and Haven
+ok 6 - CP61.6 same listener protection is shared across Orion, Pulse and Haven
+  ---
+  duration_ms: 75.181539
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 589.071624
+
+> cognitive-learn-ai@0.1.0 test:cp62:student-rail
+> node --experimental-strip-types --test tests/cp62-student-action-rail.test.mjs
+
+TAP version 13
+# (node:23890) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP62 dashboard data-source signal rail
+    # Subtest: renders three explicitly labeled source flags and no invented measurements
+    ok 1 - renders three explicitly labeled source flags and no invented measurements
+      ---
+      duration_ms: 1.257237
+      type: 'test'
+      ...
+    # Subtest: distinguishes a profile from cognitive and historical observation
+    ok 2 - distinguishes a profile from cognitive and historical observation
+      ---
+      duration_ms: 0.705955
+      type: 'test'
+      ...
+    # Subtest: does not convert missing profile to valid downstream signals
+    ok 3 - does not convert missing profile to valid downstream signals
+      ---
+      duration_ms: 0.323438
+      type: 'test'
+      ...
+    # Subtest: handles mixed prerequisites without pretending all three are ready
+    ok 4 - handles mixed prerequisites without pretending all three are ready
+      ---
+      duration_ms: 0.187743
+      type: 'test'
+      ...
+    # Subtest: renders all-available as exactly three source flags, not a numeric score
+    ok 5 - renders all-available as exactly three source flags, not a numeric score
+      ---
+      duration_ms: 0.330589
+      type: 'test'
+      ...
+    # Subtest: integrates after the verified-data canvas without reinstating twin cards
+    ok 6 - integrates after the verified-data canvas without reinstating twin cards
+      ---
+      duration_ms: 0.185239
+      type: 'test'
+      ...
+    # Subtest: keeps the exam calendar first and the preview isolated
+    ok 7 - keeps the exam calendar first and the preview isolated
+      ---
+      duration_ms: 0.705585
+      type: 'test'
+      ...
+    # Subtest: bounds action count and uses real links, ARIA and plain source labels
+    ok 8 - bounds action count and uses real links, ARIA and plain source labels
+      ---
+      duration_ms: 0.282917
+      type: 'test'
+      ...
+    # Subtest: includes mobile, dark and reduced-motion styles loaded in the global entrypoint
+    ok 9 - includes mobile, dark and reduced-motion styles loaded in the global entrypoint
+      ---
+      duration_ms: 0.283397
+      type: 'test'
+      ...
+    1..9
+ok 1 - CP62 dashboard data-source signal rail
+  ---
+  duration_ms: 5.356835
+  type: 'suite'
+  ...
+1..1
+# tests 9
+# suites 1
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 106.921881
+
+> cognitive-learn-ai@0.1.0 test:cp63:guided-workspaces
+> node --experimental-strip-types --test tests/cp63-guided-workspaces.test.mjs
+
+TAP version 13
+# (node:23919) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP63 student navigation seed
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 1.349386
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.35149
+      type: 'test'
+      ...
+    1..2
+ok 1 - CP63 student navigation seed
+  ---
+  duration_ms: 2.88215
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation lumen
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 0.253693
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.247233
+      type: 'test'
+      ...
+    1..2
+ok 2 - CP63 student navigation lumen
+  ---
+  duration_ms: 0.615488
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation atlas
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 0.103536
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.235436
+      type: 'test'
+      ...
+    1..2
+ok 3 - CP63 student navigation atlas
+  ---
+  duration_ms: 0.638835
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation orion
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 0.224419
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.070106
+      type: 'test'
+      ...
+    1..2
+ok 4 - CP63 student navigation orion
+  ---
+  duration_ms: 0.41115
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation pulse
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 0.287304
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.449017
+      type: 'test'
+      ...
+    1..2
+ok 5 - CP63 student navigation pulse
+  ---
+  duration_ms: 0.873919
+  type: 'suite'
+  ...
+# Subtest: CP63 student navigation haven
+    # Subtest: keeps all implemented student pages reachable without duplication
+    ok 1 - keeps all implemented student pages reachable without duplication
+      ---
+      duration_ms: 0.234264
+      type: 'test'
+      ...
+    # Subtest: pins selected pages, including those originally behind disclosure
+    ok 2 - pins selected pages, including those originally behind disclosure
+      ---
+      duration_ms: 0.115424
+      type: 'test'
+      ...
+    1..2
+ok 6 - CP63 student navigation haven
+  ---
+  duration_ms: 0.498833
+  type: 'suite'
+  ...
+# Subtest: CP63 cross-module and accessibility contracts
+    # Subtest: handles nested study abroad country routes as the Atlas study-abroad tab
+    ok 1 - handles nested study abroad country routes as the Atlas study-abroad tab
+      ---
+      duration_ms: 0.230618
+      type: 'test'
+      ...
+    # Subtest: never exposes planned-only or missing destinations
+    ok 2 - never exposes planned-only or missing destinations
+      ---
+      duration_ms: 1.949152
+      type: 'test'
+      ...
+    # Subtest: caps quick links to a small scan-friendly set and preserves order
+    ok 3 - caps quick links to a small scan-friendly set and preserves order
+      ---
+      duration_ms: 0.253763
+      type: 'test'
+      ...
+    # Subtest: uses semantic links, native disclosure, current-page labels and no invented completion gauge
+    ok 4 - uses semantic links, native disclosure, current-page labels and no invented completion gauge
+      ---
+      duration_ms: 0.31151
+      type: 'test'
+      ...
+    # Subtest: includes accessible focus, dark/light and mobile CSS with reduced motion
+    ok 5 - includes accessible focus, dark/light and mobile CSS with reduced motion
+      ---
+      duration_ms: 0.117167
+      type: 'test'
+      ...
+    # Subtest: keeps SPA routing and unsaved-draft navigation guards in charge of links
+    ok 6 - keeps SPA routing and unsaved-draft navigation guards in charge of links
+      ---
+      duration_ms: 0.102885
+      type: 'test'
+      ...
+    1..6
+ok 7 - CP63 cross-module and accessibility contracts
+  ---
+  duration_ms: 3.145877
+  type: 'suite'
+  ...
+1..7
+# tests 18
+# suites 7
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 158.101357
+
+> cognitive-learn-ai@0.1.0 test:cp64:input-ux
+> node --experimental-strip-types --test tests/cp64-input-ux.test.mjs
+
+TAP version 13
+# (node:23953) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP64 real field-coverage semantics
+    # Subtest: does not count blank values as observed zero
+    ok 1 - does not count blank values as observed zero
+      ---
+      duration_ms: 1.392331
+      type: 'test'
+      ...
+    # Subtest: does not count invalid text, NaN, Infinity, or out-of-range values
+    ok 2 - does not count invalid text, NaN, Infinity, or out-of-range values
+      ---
+      duration_ms: 0.153261
+      type: 'test'
+      ...
+    # Subtest: accepts explicit boundaries, decimal comma, and valid negative if permitted
+    ok 3 - accepts explicit boundaries, decimal comma, and valid negative if permitted
+      ---
+      duration_ms: 0.19207
+      type: 'test'
+      ...
+    # Subtest: enforces integer-only weeks and counts when configured
+    ok 4 - enforces integer-only weeks and counts when configured
+      ---
+      duration_ms: 0.123897
+      type: 'test'
+      ...
+    # Subtest: tracks text fields without inventing a numeric score
+    ok 5 - tracks text fields without inventing a numeric score
+      ---
+      duration_ms: 0.103907
+      type: 'test'
+      ...
+    # Subtest: sums independent groups without losing missing or invalid information
+    ok 6 - sums independent groups without losing missing or invalid information
+      ---
+      duration_ms: 0.346293
+      type: 'test'
+      ...
+    # Subtest: reports zero fields as zero rather than NaN or percentages
+    ok 7 - reports zero fields as zero rather than NaN or percentages
+      ---
+      duration_ms: 0.093701
+      type: 'test'
+      ...
+    # Subtest: rejects duplicate field identifiers to prevent double counting
+    ok 8 - rejects duplicate field identifiers to prevent double counting
+      ---
+      duration_ms: 0.395898
+      type: 'test'
+      ...
+    1..8
+ok 1 - CP64 real field-coverage semantics
+  ---
+  duration_ms: 3.753825
+  type: 'suite'
+  ...
+# Subtest: CP64 three-module integration and accessibility
+    # Subtest: shows the data graph on orion overview, not admin or all routes
+    ok 1 - shows the data graph on orion overview, not admin or all routes
+      ---
+      duration_ms: 0.320043
+      type: 'test'
+      ...
+    # Subtest: shows the data graph on pulse overview, not admin or all routes
+    ok 2 - shows the data graph on pulse overview, not admin or all routes
+      ---
+      duration_ms: 0.182485
+      type: 'test'
+      ...
+    # Subtest: shows the data graph on haven overview, not admin or all routes
+    ok 3 - shows the data graph on haven overview, not admin or all routes
+      ---
+      duration_ms: 0.069716
+      type: 'test'
+      ...
+    # Subtest: does not claim academic readiness or probability from form completeness
+    ok 4 - does not claim academic readiness or probability from form completeness
+      ---
+      duration_ms: 0.200443
+      type: 'test'
+      ...
+    # Subtest: shows missing versus invalid as two different states and does not leak field values
+    ok 5 - shows missing versus invalid as two different states and does not leak field values
+      ---
+      duration_ms: 0.13268
+      type: 'test'
+      ...
+    # Subtest: keeps user navigation inside SPA and respects unsaved draft guards
+    ok 6 - keeps user navigation inside SPA and respects unsaved draft guards
+      ---
+      duration_ms: 0.101924
+      type: 'test'
+      ...
+    # Subtest: configures proper input ranges for Orion, Pulse and Haven
+    ok 7 - configures proper input ranges for Orion, Pulse and Haven
+      ---
+      duration_ms: 0.140322
+      type: 'test'
+      ...
+    # Subtest: supports dark mode, mobile, print, reduced motion and accessible focus
+    ok 8 - supports dark mode, mobile, print, reduced motion and accessible focus
+      ---
+      duration_ms: 0.080962
+      type: 'test'
+      ...
+    1..8
+ok 2 - CP64 three-module integration and accessibility
+  ---
+  duration_ms: 1.456779
+  type: 'suite'
+  ...
+# Subtest: CP64 release evidence covers visual artifacts
+    # Subtest: fingerprints styles entrypoint and the new visual style, without duplicates
+    ok 1 - fingerprints styles entrypoint and the new visual style, without duplicates
+      ---
+      duration_ms: 6.635904
+      type: 'test'
+      ...
+    1..1
+ok 3 - CP64 release evidence covers visual artifacts
+  ---
+  duration_ms: 6.701573
+  type: 'suite'
+  ...
+1..3
+# tests 17
+# suites 3
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 118.648878
+
+> cognitive-learn-ai@0.1.0 test:cp65:atlas-lumen-ux
+> node --experimental-strip-types --test tests/cp65-atlas-lumen-ux.test.mjs
+
+TAP version 13
+# (node:23982) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP65 source-backed Atlas overview
+    # Subtest: counts registry rows not inferred national coverage
+    ok 1 - counts registry rows not inferred national coverage
+      ---
+      duration_ms: 1.168503
+      type: 'test'
+      ...
+    # Subtest: keeps missing years explicitly zero without interpolation
+    ok 2 - keeps missing years explicitly zero without interpolation
+      ---
+      duration_ms: 0.197077
+      type: 'test'
+      ...
+    # Subtest: does not invent rows when data is empty
+    ok 3 - does not invent rows when data is empty
+      ---
+      duration_ms: 0.783613
+      type: 'test'
+      ...
+    # Subtest: retains distinction between records, universities, distinct URLs
+    ok 4 - retains distinction between records, universities, distinct URLs
+      ---
+      duration_ms: 0.218259
+      type: 'test'
+      ...
+    # Subtest: reads actual registry instead of hard-coded numbers
+    ok 5 - reads actual registry instead of hard-coded numbers
+      ---
+      duration_ms: 0.227073
+      type: 'test'
+      ...
+    # Subtest: exposes four real active task routes and works with soft links
+    ok 6 - exposes four real active task routes and works with soft links
+      ---
+      duration_ms: 0.188033
+      type: 'test'
+      ...
+    # Subtest: keeps Atlas year-by-year cutoff graph visible on comparison tab
+    ok 7 - keeps Atlas year-by-year cutoff graph visible on comparison tab
+      ---
+      duration_ms: 0.142014
+      type: 'test'
+      ...
+    # Subtest: limits visual pathway to Atlas overview rather than every nested tab
+    ok 8 - limits visual pathway to Atlas overview rather than every nested tab
+      ---
+      duration_ms: 0.166802
+      type: 'test'
+      ...
+    1..8
+ok 1 - CP65 source-backed Atlas overview
+  ---
+  duration_ms: 3.946446
+  type: 'suite'
+  ...
+# Subtest: CP65 Lumen observation-first UX
+    # Subtest: adds evidence journey and chart to the overview only
+    ok 1 - adds evidence journey and chart to the overview only
+      ---
+      duration_ms: 0.230168
+      type: 'test'
+      ...
+    # Subtest: never treats missing dimensions as observed zeros
+    ok 2 - never treats missing dimensions as observed zeros
+      ---
+      duration_ms: 0.230098
+      type: 'test'
+      ...
+    # Subtest: does not claim growth before history verification
+    ok 3 - does not claim growth before history verification
+      ---
+      duration_ms: 0.117577
+      type: 'test'
+      ...
+    # Subtest: routes unavailable insights to Seed completion, not a fake AI result
+    ok 4 - routes unavailable insights to Seed completion, not a fake AI result
+      ---
+      duration_ms: 0.103646
+      type: 'test'
+      ...
+    # Subtest: leaves other Lumen tabs intact
+    ok 5 - leaves other Lumen tabs intact
+      ---
+      duration_ms: 0.090056
+      type: 'test'
+      ...
+    1..5
+ok 2 - CP65 Lumen observation-first UX
+  ---
+  duration_ms: 0.943564
+  type: 'suite'
+  ...
+# Subtest: CP65 usability, release tracking and limitations
+    # Subtest: supports semantic navigation and readable chart numbers
+    ok 1 - supports semantic navigation and readable chart numbers
+      ---
+      duration_ms: 0.092299
+      type: 'test'
+      ...
+    # Subtest: includes mobile, dark, print and reduced-motion rules
+    ok 2 - includes mobile, dark, print and reduced-motion rules
+      ---
+      duration_ms: 0.065589
+      type: 'test'
+      ...
+    # Subtest: fingerprints CSS and logic files for release provenance
+    ok 3 - fingerprints CSS and logic files for release provenance
+      ---
+      duration_ms: 6.090402
+      type: 'test'
+      ...
+    1..3
+ok 3 - CP65 usability, release tracking and limitations
+  ---
+  duration_ms: 6.330203
+  type: 'suite'
+  ...
+1..3
+# tests 16
+# suites 3
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 117.871365
+
+> cognitive-learn-ai@0.1.0 test:cp66:unified-states
+> node --experimental-strip-types --test tests/cp66-unified-states.test.mjs
+
+TAP version 13
+# (node:24010) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP66 pure and deterministic Firestore status UI
+    # Subtest: shows verified status only on confirmed ready
+    ok 1 - shows verified status only on confirmed ready
+      ---
+      duration_ms: 2.001871
+      type: 'test'
+      ...
+    # Subtest: never calls cache-backed syncing saved
+    ok 2 - never calls cache-backed syncing saved
+      ---
+      duration_ms: 0.227493
+      type: 'test'
+      ...
+    # Subtest: never shows ready for loading, signed-out, or denied reads
+    ok 3 - never shows ready for loading, signed-out, or denied reads
+      ---
+      duration_ms: 0.136596
+      type: 'test'
+      ...
+    # Subtest: gives conflicts precedence over stale save notices
+    ok 4 - gives conflicts precedence over stale save notices
+      ---
+      duration_ms: 0.102605
+      type: 'test'
+      ...
+    # Subtest: never claims saved while an upload is pending
+    ok 5 - never claims saved while an upload is pending
+      ---
+      duration_ms: 0.156857
+      type: 'test'
+      ...
+    # Subtest: distinguishes missing draft from confirmed saved draft
+    ok 6 - distinguishes missing draft from confirmed saved draft
+      ---
+      duration_ms: 0.100161
+      type: 'test'
+      ...
+    # Subtest: distinguishes failed writes from positive notices
+    ok 7 - distinguishes failed writes from positive notices
+      ---
+      duration_ms: 0.077047
+      type: 'test'
+      ...
+    # Subtest: does not hide user edits behind old successful notices
+    ok 8 - does not hide user edits behind old successful notices
+      ---
+      duration_ms: 0.160802
+      type: 'test'
+      ...
+    # Subtest: does not call failed autosave successful
+    ok 9 - does not call failed autosave successful
+      ---
+      duration_ms: 0.200252
+      type: 'test'
+      ...
+    # Subtest: keeps in-progress autosave distinct from completed autosave
+    ok 10 - keeps in-progress autosave distinct from completed autosave
+      ---
+      duration_ms: 0.280673
+      type: 'test'
+      ...
+    # Subtest: does not trust a stale success notice when the account signed out
+    ok 11 - does not trust a stale success notice when the account signed out
+      ---
+      duration_ms: 0.089004
+      type: 'test'
+      ...
+    1..11
+ok 1 - CP66 pure and deterministic Firestore status UI
+  ---
+  duration_ms: 4.522124
+  type: 'suite'
+  ...
+# Subtest: CP66 integration: one status vocabulary in six modules
+    # Subtest: renders consistent form feedback for Orion, Pulse and Haven
+    ok 1 - renders consistent form feedback for Orion, Pulse and Haven
+      ---
+      duration_ms: 0.223918
+      type: 'test'
+      ...
+    # Subtest: clears stale save notices on every edit in Pulse and Haven
+    ok 2 - clears stale save notices on every edit in Pulse and Haven
+      ---
+      duration_ms: 0.217548
+      type: 'test'
+      ...
+    # Subtest: keeps Orion autosave and newer edit protections intact
+    ok 3 - keeps Orion autosave and newer edit protections intact
+      ---
+      duration_ms: 0.091168
+      type: 'test'
+      ...
+    # Subtest: uses status-specific panels for Seed transcript, Lumen and Atlas
+    ok 4 - uses status-specific panels for Seed transcript, Lumen and Atlas
+      ---
+      duration_ms: 0.083246
+      type: 'test'
+      ...
+    # Subtest: keeps explicit accessibility roles and is not merely a color badge
+    ok 5 - keeps explicit accessibility roles and is not merely a color badge
+      ---
+      duration_ms: 0.058588
+      type: 'test'
+      ...
+    # Subtest: includes accessible mobile, dark, focus, print, reduced-motion CSS
+    ok 6 - includes accessible mobile, dark, focus, print, reduced-motion CSS
+      ---
+      duration_ms: 0.149245
+      type: 'test'
+      ...
+    # Subtest: keeps it a UI layer, not a change to Firestore authorisation
+    ok 7 - keeps it a UI layer, not a change to Firestore authorisation
+      ---
+      duration_ms: 0.188695
+      type: 'test'
+      ...
+    1..7
+ok 2 - CP66 integration: one status vocabulary in six modules
+  ---
+  duration_ms: 1.169585
+  type: 'suite'
+  ...
+1..2
+# tests 18
+# suites 2
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 107.997975

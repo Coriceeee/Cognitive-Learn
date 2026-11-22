@@ -15,7 +15,7 @@ import "../../styles.css";
  * limited to destinations with known source links. Missing destinations NEVER inherit
  * academic/financial requirements from another country.
  */
-export default function StudyAbroadPage() {
+export default function StudyAbroadPage({ navigationHref }: { navigationHref: string }) {
   const view = currentFocusedPath();
   useEffect(() => {
     // Preserve legacy bookmarks while keeping study-abroad routes under Atlas.
@@ -27,6 +27,17 @@ export default function StudyAbroadPage() {
   const [countrySearch, setCountrySearch] = useState("");
   const [fieldSearch, setFieldSearch] = useState("");
   const [checked, setChecked] = useState<string[]>([]);
+  // A query-only SPA navigation (including Back/Forward) must update the
+  // selected country without remounting the four study-abroad subpages.
+  // The selector itself updates both state and URL via replaceState.
+  useEffect(() => {
+    const incoming = new URL(navigationHref, window.location.origin);
+    const nextCountry = incoming.searchParams.get("country") || "";
+    if (countryCode !== nextCountry) {
+      setCountryCode(nextCountry);
+      setChecked([]); // Never transfer checked criteria to a different country.
+    }
+  }, [navigationHref]);
   const selectedCountry = findCountry(countryCode);
   const selectedRoute = internationalRoutes.find(item => item.isoCode === countryCode);
   const countriesFound = useMemo(() => searchCountries(countrySearch), [countrySearch]);
@@ -64,12 +75,7 @@ export default function StudyAbroadPage() {
         <span className="cla-eyebrow">ATLAS ADMISSION · DU HỌC TOÀN CẦU</span>
         <h2>{selectedCountry ? `Điểm đến · ${selectedCountry.name}` : "Chưa chọn điểm đến"}</h2>
         {view === "/atlas/study-abroad" && <p>Chọn bất kỳ quốc gia/vùng lãnh thổ nào trong danh mục ISO 3166-1. Với những điểm đến đã có nguồn tham khảo, Atlas hiển thị trường, hướng nộp hồ sơ và danh sách chứng chỉ cần kiểm tra. Nơi chưa có dữ liệu xác minh sẽ được ghi rõ, không tạo trường, học phí, yêu cầu hay học bổng giả.</p>}
-        <nav className="cla-study-actions" aria-label="Các trang tra cứu du học">
-          <a aria-current={view === "/atlas/study-abroad" ? "page" : undefined} href={`/atlas/study-abroad${countryCode ? `?country=${countryCode}` : ""}`}>Chọn quốc gia</a>
-          <a aria-current={view === "/atlas/study-abroad/programs" ? "page" : undefined} href={`/atlas/study-abroad/programs${countryCode ? `?country=${countryCode}` : ""}`}>Trường & chương trình</a>
-          <a aria-current={view === "/atlas/study-abroad/requirements" ? "page" : undefined} href={`/atlas/study-abroad/requirements${countryCode ? `?country=${countryCode}` : ""}`}>Điều kiện & chứng chỉ</a>
-          <a aria-current={view === "/atlas/study-abroad/sources" ? "page" : undefined} href={`/atlas/study-abroad/sources${countryCode ? `?country=${countryCode}` : ""}`}>Nguồn & quy trình</a>
-        </nav>
+        {/* The four study routes now share ModuleSectionNav; no duplicate tab style. */}
       </div>
         {view === "/atlas/study-abroad/sources" && <PublicSourceSearchPanel topic="study" />}
 

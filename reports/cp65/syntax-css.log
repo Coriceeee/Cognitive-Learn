@@ -1,0 +1,6 @@
+TSX_SYNTAX_PASS src/page/atlas/components/AtlasEvidenceJourney.tsx
+TSX_SYNTAX_PASS src/page/lumen/components/LumenObservationJourney.tsx
+TSX_SYNTAX_PASS src/page/atlas/AtlasPage.tsx
+TSX_SYNTAX_PASS src/page/lumen/LumenPage.tsx
+TSX_SYNTAX_PASS src/lib/atlasEvidenceOverview.ts
+CSS_PARSER_PASS

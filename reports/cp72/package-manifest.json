@@ -1,0 +1,14 @@
+{
+  "archive": "/mnt/data/Cognitive-Learn-CP72-20261122.zip",
+  "file_count": 1613,
+  "bytes": 26172779,
+  "sha256": "bea7f364ab921af7af4d9efc3d9b31a24f621b9e63ba7947872d6699b2496c99",
+  "safe_env_examples": [
+    ".env.example",
+    "functions/.env.example",
+    "functions-admin/.env.example",
+    "functions-privacy/.env.example"
+  ],
+  "source_only": true,
+  "production_build_verified": false
+}

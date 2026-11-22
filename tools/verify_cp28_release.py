@@ -31,7 +31,7 @@ def scan(root: Path):
         if parts & FORBIDDEN_COMPONENTS:
             flagged.append({'path':str(relative),'reason':'forbidden component'})
             continue
-        if file.name=='.env' or file.name.startswith('.env.') and file.name!='.env.example' or file.suffix.lower() in FORBIDDEN_SUFFIXES or 'service-account' in file.name.lower():
+        if file.name=='.env' or file.name.startswith('.env.') and file.name!='.env.example' and relative.as_posix()!='.env.mvp-qa.example' or file.suffix.lower() in FORBIDDEN_SUFFIXES or 'service-account' in file.name.lower():
             flagged.append({'path':str(relative),'reason':'potential secret file'})
             continue
         if relative.parts[:2] == ('research','oulad') and file.suffix.lower() in {'.zip','.csv','.parquet','.pkl','.joblib'}:

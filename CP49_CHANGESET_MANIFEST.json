@@ -1,0 +1,27 @@
+{
+  "checkpoint": "CP49",
+  "source": "CP48",
+  "status": "SOURCE_PATCH_VERIFIED_OFFLINE_NOT_PRODUCTION",
+  "changedFiles": [
+    {
+      "path": "tools/check-dependencies.cjs",
+      "sha256": "04bc794a7f4b2a11d9b30173f606a7dd4288a52d899f5b330abb8df62d665a20"
+    },
+    {
+      "path": "package.json",
+      "sha256": "b2cf6fad86a23bf892f5786041716ccdec933c4bc4d9904b6984edfed15f2ef6"
+    },
+    {
+      "path": ".github/workflows/cla-cp21-verify.yml",
+      "sha256": "417fd5f705dd20c4ac4c125422e44a50ac19227bc23b29c9b0e34b550950e2db"
+    },
+    {
+      "path": "src/lib/nexusEvidenceBaseline.ts",
+      "sha256": "6321f432c846027da493a98a640bbc6e064219b817e6cc1dbb726c2611150465"
+    },
+    {
+      "path": "START_HERE_CP49_BUILD_RECOVERY_20261121.md",
+      "sha256": "0106d18c8d36bc8ea19f1e68ba391d8d97f240b8d02a5c393f0420aefc10235b"
+    }
+  ]
+}

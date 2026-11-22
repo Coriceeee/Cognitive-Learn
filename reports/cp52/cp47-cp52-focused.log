@@ -1,0 +1,150 @@
+TAP version 13
+# Subtest: CP47-01: Orion autosaves only after an explicit local edit and verified draft state
+ok 1 - CP47-01: Orion autosaves only after an explicit local edit and verified draft state
+  ---
+  duration_ms: 2.72172
+  type: 'test'
+  ...
+# Subtest: CP47-02: newer edits are not marked saved by an older in-flight autosave
+ok 2 - CP47-02: newer edits are not marked saved by an older in-flight autosave
+  ---
+  duration_ms: 0.270553
+  type: 'test'
+  ...
+# Subtest: CP47-03: autosave retains the authenticated Firestore ownership guard
+ok 3 - CP47-03: autosave retains the authenticated Firestore ownership guard
+  ---
+  duration_ms: 0.256928
+  type: 'test'
+  ...
+# Subtest: CP47-04: autosave is a Firestore draft only; no browser storage or outcome claim is introduced
+ok 4 - CP47-04: autosave is a Firestore draft only; no browser storage or outcome claim is introduced
+  ---
+  duration_ms: 0.316701
+  type: 'test'
+  ...
+# Subtest: CP47-05: manual save cancels a pending autosave to avoid duplicate writes
+ok 5 - CP47-05: manual save cancels a pending autosave to avoid duplicate writes
+  ---
+  duration_ms: 0.218564
+  type: 'test'
+  ...
+# (node:20707) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP51: queued older write cannot finish after a newer write
+ok 6 - CP51: queued older write cannot finish after a newer write
+  ---
+  duration_ms: 1.569049
+  type: 'test'
+  ...
+# Subtest: CP51: failed earlier write does not poison subsequent writes
+ok 7 - CP51: failed earlier write does not poison subsequent writes
+  ---
+  duration_ms: 0.517298
+  type: 'test'
+  ...
+# Subtest: CP51: eligibility checked when queued write starts
+ok 8 - CP51: eligibility checked when queued write starts
+  ---
+  duration_ms: 0.224978
+  type: 'test'
+  ...
+# Subtest: CP51: Firestore draft hook uses FIFO and checks authenticated owner at execution time
+ok 9 - CP51: Firestore draft hook uses FIFO and checks authenticated owner at execution time
+  ---
+  duration_ms: 0.429867
+  type: 'test'
+  ...
+# (node:20713) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP52.1: first write from two empty devices detects competing create
+ok 10 - CP52.1: first write from two empty devices detects competing create
+  ---
+  duration_ms: 1.458712
+  type: 'test'
+  ...
+# Subtest: CP52.2: stale device cannot overwrite newer revision
+ok 11 - CP52.2: stale device cannot overwrite newer revision
+  ---
+  duration_ms: 0.24811
+  type: 'test'
+  ...
+# Subtest: CP52.3: same revision with changed payload or timestamp conflicts
+ok 12 - CP52.3: same revision with changed payload or timestamp conflicts
+  ---
+  duration_ms: 0.315178
+  type: 'test'
+  ...
+# Subtest: CP52.4: legacy version-less draft detects remote changes before migration
+ok 13 - CP52.4: legacy version-less draft detects remote changes before migration
+  ---
+  duration_ms: 0.318523
+  type: 'test'
+  ...
+# Subtest: CP52.5: canonical signature ignores object key order
+ok 14 - CP52.5: canonical signature ignores object key order
+  ---
+  duration_ms: 0.224126
+  type: 'test'
+  ...
+# Subtest: CP52.6: queued follow-up write may use acknowledged revision with unknown server timestamp
+ok 15 - CP52.6: queued follow-up write may use acknowledged revision with unknown server timestamp
+  ---
+  duration_ms: 0.142322
+  type: 'test'
+  ...
+# Subtest: CP52.7: hook uses server transaction read before write, explicit server reload and local edit guard
+ok 16 - CP52.7: hook uses server transaction read before write, explicit server reload and local edit guard
+  ---
+  duration_ms: 0.324968
+  type: 'test'
+  ...
+# Subtest: CP52.8: Orion, Pulse and Haven expose deliberate conflict resolution, keep local editing
+ok 17 - CP52.8: Orion, Pulse and Haven expose deliberate conflict resolution, keep local editing
+  ---
+  duration_ms: 0.170216
+  type: 'test'
+  ...
+# Subtest: CP52.9: candidate rules preserve owner isolation and protect revisioned documents
+ok 18 - CP52.9: candidate rules preserve owner isolation and protect revisioned documents
+  ---
+  duration_ms: 0.607215
+  type: 'test'
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 163.525509
+TAP version 13
+# Subtest: CP50 Orion: incoming snapshot cannot overwrite unsaved local edits
+ok 1 - CP50 Orion: incoming snapshot cannot overwrite unsaved local edits
+  ---
+  duration_ms: 0.981978
+  type: 'test'
+  ...
+# Subtest: CP50 Orion: autosave validates weeks and scores before persistence
+ok 2 - CP50 Orion: autosave validates weeks and scores before persistence
+  ---
+  duration_ms: 0.389837
+  type: 'test'
+  ...
+# Subtest: CP50 Orion: async saves cannot clear newer edits
+ok 3 - CP50 Orion: async saves cannot clear newer edits
+  ---
+  duration_ms: 0.373558
+  type: 'test'
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 3
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 60.517347

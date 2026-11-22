@@ -1,0 +1,70 @@
+
+> cognitive-learn-ai@0.1.0 test:cp56:navigation
+> node --experimental-strip-types --test tests/cp56-unsaved-navigation.test.mjs
+
+TAP version 13
+# (node:41199) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP56.1 same workspace sub-tabs keep unsaved work without prompt
+ok 1 - CP56.1 same workspace sub-tabs keep unsaved work without prompt
+  ---
+  duration_ms: 0.974625
+  type: 'test'
+  ...
+# Subtest: CP56.2 explicit allow, deny and unregister work without storing PII
+ok 2 - CP56.2 explicit allow, deny and unregister work without storing PII
+  ---
+  duration_ms: 0.178032
+  type: 'test'
+  ...
+# Subtest: CP56.3 guard registry rejects navigation if any active draft rejects
+ok 3 - CP56.3 guard registry rejects navigation if any active draft rejects
+  ---
+  duration_ms: 0.169997
+  type: 'test'
+  ...
+# Subtest: CP56.4 hook registers and removes SPA and beforeunload guards
+ok 4 - CP56.4 hook registers and removes SPA and beforeunload guards
+  ---
+  duration_ms: 0.251633
+  type: 'test'
+  ...
+# Subtest: CP56.5 hook does not treat an edit as saved until the server confirms it
+ok 5 - CP56.5 hook does not treat an edit as saved until the server confirms it
+  ---
+  duration_ms: 0.231161
+  type: 'test'
+  ...
+# Subtest: CP56.6 both click and imperative navigation use the central guard
+ok 6 - CP56.6 both click and imperative navigation use the central guard
+  ---
+  duration_ms: 0.125735
+  type: 'test'
+  ...
+# Subtest: CP56.7 rejected popstate restores location and leaves view mounted
+ok 7 - CP56.7 rejected popstate restores location and leaves view mounted
+  ---
+  duration_ms: 0.22019
+  type: 'test'
+  ...
+# Subtest: CP56.8 do not persist draft data to browser localStorage or sessionStorage
+ok 8 - CP56.8 do not persist draft data to browser localStorage or sessionStorage
+  ---
+  duration_ms: 0.299329
+  type: 'test'
+  ...
+# Subtest: CP56.9 explicit logout also respects pending unsaved drafts
+ok 9 - CP56.9 explicit logout also respects pending unsaved drafts
+  ---
+  duration_ms: 0.47506
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 127.605996

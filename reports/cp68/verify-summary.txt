@@ -1,0 +1,1 @@
+8/8 CP68; 17/17 CP67; 11/11 synthetic; 15/15 Rules static; 2/2 Chromium isolated; 0/12 React QA (BLOCKED)

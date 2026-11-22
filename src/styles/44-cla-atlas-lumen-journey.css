@@ -1,0 +1,64 @@
+/* CP65 — evidence-first pathways for Atlas and Lumen. No invented model scores. */
+.cla-atlas-journey,.cla-lumen-journey {
+  --ux-ink: #17324f; --ux-muted: #526b82; --ux-accent: #2458a5;
+  --ux-border: #d9e4ef; --ux-surface: #fff; --ux-soft: #f3f7fc;
+  --ux-track: #e5edf6; --ux-fill: #317bc4;
+  margin: 20px 0 30px; padding: clamp(18px,2.4vw,29px);
+  border: 1px solid var(--ux-border); border-radius: 17px;
+  background: var(--ux-surface); color: var(--ux-ink); min-width: 0;
+}
+.cla-atlas-journey *,.cla-lumen-journey * { box-sizing: border-box; }
+.cla-ux-kicker { display:block; color: var(--ux-accent); font-size: 10px; font-weight: 800; letter-spacing: .105em; margin-bottom: 7px; }
+.cla-atlas-journey-heading,.cla-lumen-journey-head {display:flex; align-items:flex-end; justify-content:space-between; gap: 16px; flex-wrap:wrap; margin-bottom: 20px;}
+.cla-atlas-journey-heading h2,.cla-lumen-journey-head h2 {margin:0; color:var(--ux-ink); font-size:clamp(20px,2.4vw,26px); line-height:1.25; letter-spacing:-.025em;}
+.cla-atlas-journey-heading p,.cla-lumen-journey-head p {color:var(--ux-muted); margin:7px 0 0; line-height:1.55; font-size:13px; max-width:670px;}
+.cla-ux-heading-action { display:inline-flex; align-items:center; gap:6px; padding:11px 14px; border-radius:9px; background:var(--ux-soft); color:var(--ux-accent) !important; border:1px solid var(--ux-border); text-decoration:none; font-size:12px; font-weight:750; }
+.cla-atlas-journey-steps {display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap: 9px;}
+.cla-atlas-journey-step {position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0;min-height:142px;padding:15px;border:1px solid var(--ux-border);border-radius:12px;text-decoration:none;background:var(--ux-soft);color:var(--ux-ink) !important;}
+.cla-atlas-journey-index,.cla-lumen-journey-index {color:var(--ux-accent);font-weight:800;letter-spacing:.07em;font-variant-numeric:tabular-nums;font-size:12px;}
+.cla-atlas-journey-step strong {font-size:15px;line-height:1.2;}
+.cla-atlas-journey-step small {color:var(--ux-muted);font-size:11px;line-height:1.45;padding-right:10px;}
+.cla-atlas-journey-arrow {position:absolute;right:12px;top:12px;color:var(--ux-accent);font-size:13px;}
+.cla-atlas-evidence-summary {display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:clamp(18px,3vw,40px);align-items:center;border-top:1px solid var(--ux-border);padding-top:22px;margin-top:23px;}
+.cla-atlas-evidence-intro h3 {color:var(--ux-ink);margin:0;font-size:18px;line-height:1.3;}
+.cla-atlas-evidence-intro p,.cla-atlas-evidence-note {color:var(--ux-muted);font-size:12px;line-height:1.6;}
+.cla-atlas-evidence-total {display:block;color:var(--ux-ink);font-size:31px;font-variant-numeric:tabular-nums;letter-spacing:-.04em;}
+.cla-atlas-evidence-total small {font-size:11px;color:var(--ux-muted);font-weight:500;letter-spacing:0;}
+.cla-atlas-evidence-years {display:grid;gap:15px;min-width:0;}
+.cla-atlas-evidence-year-caption {display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:6px; color:var(--ux-ink);font-size:12px;font-variant-numeric:tabular-nums;}
+.cla-atlas-evidence-year-caption span {color:var(--ux-muted);font-size:11px;text-align:right;}
+.cla-atlas-evidence-track {height:12px;border-radius:100px;background:var(--ux-track);overflow:hidden;}
+.cla-atlas-evidence-track i {display:block;height:100%;background:var(--ux-fill);border-radius:100px;max-width:100%;min-width:0;}
+.cla-atlas-evidence-note {margin:0;}
+.cla-lumen-journey-list {list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;counter-reset:none;}
+.cla-lumen-journey-list li {min-width:0;}
+.cla-lumen-journey-link {display:flex;align-items:center;gap:12px;min-height:80px;padding:13px 14px;border-radius:11px;background:var(--ux-soft);border:1px solid var(--ux-border);color:var(--ux-ink) !important;text-decoration:none;min-width:0;}
+.cla-lumen-journey-main {display:grid;gap:4px;flex:1;min-width:0;}
+.cla-lumen-journey-main strong {font-size:14px;line-height:1.3;}
+.cla-lumen-journey-main small {color:var(--ux-muted);font-size:11px;line-height:1.45;}
+.cla-lumen-journey-status {padding:5px 7px;border-radius:7px;font-size:10px;font-weight:750;white-space:nowrap;}
+.cla-lumen-journey-status.is-available {color:#176346;background:#dff4e9;}
+.cla-lumen-journey-status.is-limited {color:#8a521b;background:#fff0d8;}
+.cla-lumen-journey-arrow {color:var(--ux-accent);}
+.cla-lumen-journey-note {font-size:11px;line-height:1.6;color:var(--ux-muted);margin:14px 0 0;}
+.cla-atlas-journey a:focus-visible,.cla-lumen-journey a:focus-visible {outline:3px solid #2287dc;outline-offset:3px;}
+.cla-atlas-journey-step:hover,.cla-lumen-journey-link:hover,.cla-ux-heading-action:hover {border-color:var(--ux-accent);}
+:root[data-theme="dark"] .cla-atlas-journey,:root[data-theme="dark"] .cla-lumen-journey,
+[data-theme="dark"] .cla-atlas-journey,[data-theme="dark"] .cla-lumen-journey {
+  --ux-ink:#e5f0ff;--ux-muted:#b9cee1;--ux-accent:#a9cdfd;
+  --ux-border:#34506e;--ux-surface:#152538;--ux-soft:#20354c;
+  --ux-track:#34485f;--ux-fill:#81b9fa;
+}
+:root[data-theme="dark"] .cla-lumen-journey-status.is-available {background:#1c4b3a;color:#b0f5d3;}
+:root[data-theme="dark"] .cla-lumen-journey-status.is-limited {background:#4b3a20;color:#ffe6b7;}
+@media(max-width:900px){.cla-atlas-journey-steps{grid-template-columns:repeat(2,minmax(0,1fr));}.cla-atlas-evidence-summary{grid-template-columns:1fr;}}
+@media(max-width:620px){
+ .cla-atlas-journey,.cla-lumen-journey{padding:16px;margin:14px 0 20px;}
+ .cla-atlas-journey-steps,.cla-lumen-journey-list{grid-template-columns:1fr;}
+ .cla-atlas-journey-step{min-height:96px;padding:13px 34px 13px 13px;}
+ .cla-lumen-journey-link{flex-wrap:wrap;gap:9px;}
+ .cla-lumen-journey-status{order:4;margin-left:auto;}
+ .cla-atlas-evidence-total{font-size:27px;}
+}
+@media(prefers-reduced-motion:reduce){.cla-atlas-journey *,.cla-lumen-journey * {animation:none !important;transition:none !important;}}
+@media print{.cla-atlas-journey,.cla-lumen-journey{break-inside:avoid;box-shadow:none;}.cla-atlas-journey-step,.cla-lumen-journey-link{break-inside:avoid;}}

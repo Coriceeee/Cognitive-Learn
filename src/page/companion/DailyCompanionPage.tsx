@@ -126,9 +126,9 @@ export default function DailyCompanionPage() {
         <p>Lập kế hoạch ở Orion, ghi hành động tại Pulse, xem tiến bộ trong Lumen. Daily Companion giúp bạn nhớ thời điểm và ghi nhận việc đã làm — không tạo áp lực bằng những thông báo liên tục.</p>
         <div className="cla-companion-links"><a href="/orion/scenarios#cla-closed-loop">Kế hoạch Orion</a><a href="/pulse/checkin#cla-closed-loop">Theo dõi Pulse</a><a href="/lumen/evidence#cla-closed-loop">Đánh giá Lumen</a><a href="/student/exams#cla-exam-reminders">Lịch thi & đếm ngược</a></div>
       </section>
-      {(companion.status === "loading" || journey.status === "loading") && <p role="status">Đang đồng bộ kế hoạch và quyền dữ liệu…</p>}
+      {(["loading", "syncing"].includes(companion.status) || journey.status === "loading") && <p role="status">Đang đồng bộ kế hoạch và quyền dữ liệu…</p>}
       {companion.status === "preview" && <p className="cla-companion-notice" role="status">Daily Companion đang ở chế độ xem trước. Để lưu và nhắc học, cần kiểm thử Rules bằng Emulator, triển khai đúng Rules ứng viên rồi bật <code>VITE_CLA_STUDENT_CONSENT_GATE=true</code> và xác nhận quyền dữ liệu ở Seed. Không tự động bật để tránh làm gián đoạn tài khoản hiện tại.</p>}
-      {companion.status !== "preview" && !companion.consentAccepted && companion.status !== "loading" && <p className="cla-companion-alert" role="status">Chưa xác nhận được đồng ý sử dụng dữ liệu. Hệ thống dừng lịch nhắc và thao tác ghi. <a href="/student/consent">Xem quyền dữ liệu</a>.</p>}
+      {companion.status !== "preview" && !companion.consentAccepted && !["loading", "syncing"].includes(companion.status) && <p className="cla-companion-alert" role="status">Chưa xác nhận được đồng ý sử dụng dữ liệu. Hệ thống dừng lịch nhắc và thao tác ghi. <a href="/student/consent">Xem quyền dữ liệu</a>.</p>}
       {companion.status === "signed-out" && <p role="alert">Cần đăng nhập tài khoản học sinh để lưu lịch.</p>}
       {companion.error && <p role="alert" className="cla-companion-alert">{companion.error}</p>}
       {notice && <p role="status" className="cla-companion-notice">{notice}</p>}

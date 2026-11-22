@@ -8,6 +8,7 @@
  */
 import { resolveFocusedPath } from './focusedModuleRoute';
 import { prefetchRoute } from './routeModules';
+import { canNavigate } from './draftNavigationGuard';
 
 type Listener = () => void;
 export type NavigationKind = 'push' | 'replace' | 'pop';
@@ -28,6 +29,13 @@ function notify(kind: NavigationKind): void {
 }
 
 function handlePopState(): void {
+  const destination = currentLocation();
+  if (current && !canNavigate(current, destination)) {
+    // The URL has already changed by the time popstate fires. Restore the
+    // page instead of notifying React and unmounting unsaved draft inputs.
+    window.history.pushState(window.history.state, '', current);
+    return;
+  }
   notify('pop');
 }
 
@@ -101,6 +109,7 @@ export function navigateTo(href: string, replace = false): void {
   const resolved = resolveFocusedPath(url.pathname, url.hash);
   const destination = resolved + url.search + (resolved === url.pathname ? url.hash : '');
   if (destination === currentLocation()) return;
+  if (!canNavigate(currentLocation(), destination)) return;
   if (replace) window.history.replaceState(window.history.state, '', destination);
   else window.history.pushState(window.history.state, '', destination);
   notify(replace ? 'replace' : 'push');

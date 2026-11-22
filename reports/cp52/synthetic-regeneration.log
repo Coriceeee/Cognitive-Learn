@@ -1,0 +1,21 @@
+
+> cognitive-learn-ai@0.1.0 research:golden-path
+> node --experimental-strip-types tools/cla_golden_path_offline.mjs --generate
+
+(node:20295) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+GOLDEN_PATH_SYNTHETIC_GENERATED: /mnt/data/cla_cp52_work/Cognitive-Learn/reports/evidence/cla_golden_path_SYNTHETIC.json; 7 domain stages; NO real outcomes
+
+> cognitive-learn-ai@0.1.0 research:multi-cycle
+> node --experimental-strip-types tools/cla_multicycle_offline.mjs --generate
+
+(node:20318) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+MULTICYCLE_SYNTHETIC_GENERATED: /mnt/data/cla_cp52_work/Cognitive-Learn/reports/evidence/cla_multicycle_SYNTHETIC.json; 2 reviewed cycles; 0 empirical claims
+
+> cognitive-learn-ai@0.1.0 research:measurement
+> node --experimental-strip-types tools/cla_measurement_offline.mjs --generate
+
+(node:20341) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+MEASUREMENT_SYNTHETIC_GENERATED: /mnt/data/cla_cp52_work/Cognitive-Learn/reports/evidence/cla_measurement_SYNTHETIC.json (no verified measurement claims)
