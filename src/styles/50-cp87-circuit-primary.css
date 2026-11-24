@@ -31,3 +31,24 @@
   .student-dash .student-dash-extra-links { gap: 8px; margin: 10px 0 19px; }
   .student-dash .student-dash-extra-links a { flex: 1 1 145px; justify-content: center; }
 }
+
+/* Restore the original full-width Learning Network map shown in the project report.
+   The six destinations remain the primary menu; no four-step replacement or side panel. */
+.student-dash .cla-circuit-heading {
+  align-items: flex-start;
+  padding: 23px clamp(18px, 2.7vw, 26px) 15px;
+}
+.student-dash .cla-circuit-counter { display: none; }
+.student-dash .cla-circuit-stage {
+  display: block;
+  min-width: 0;
+  background: #F6F9FE;
+}
+.student-dash .cla-circuit-map {
+  width: 100%;
+  min-height: clamp(360px, 41vw, 416px);
+}
+.student-dash .cla-circuit-detail { display: none; }
+@media (max-width: 760px) {
+  .student-dash .cla-circuit-stage { display: none; }
+}
