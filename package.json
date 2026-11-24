@@ -196,7 +196,7 @@
     "test:cp61:legacy-drafts": "node --test tests/cp61-legacy-draft-callbacks.test.cjs",
     "test:cp62:student-rail": "node --experimental-strip-types --test tests/cp62-student-action-rail.test.mjs",
     "test:cp63:guided-workspaces": "node --experimental-strip-types --test tests/cp63-guided-workspaces.test.mjs",
-    "test:cp64:input-ux": "node --experimental-strip-types --test tests/cp64-input-ux.test.mjs",
+    "test:cp64:input-ux": "node --experimental-strip-types --test tests/cp64-input-ux.test.mjs tests/step05a-seed-input-validation.test.mjs",
     "test:cp65:atlas-lumen-ux": "node --experimental-strip-types --test tests/cp65-atlas-lumen-ux.test.mjs",
     "test:cp66:unified-states": "node --experimental-strip-types --test tests/cp66-unified-states.test.mjs",
     "test:cp67:route-experience": "node --experimental-strip-types --test tests/cp67-route-experience.test.mjs",
