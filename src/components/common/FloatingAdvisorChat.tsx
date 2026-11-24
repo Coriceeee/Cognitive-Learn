@@ -4,7 +4,8 @@ import { auth } from "../../lib/firebase";
 import claChatMascot from "../../assets/cla-chat-mascot.webp";
 import { ADVISOR_PAGE_CONTEXTS, advisorPageContextFromPath, advisorSuggestionsFor, normaliseAdvisorHistory, prepareAdvisorMessage, routeAdvisorQuestion, safeAdvisorDestination, type AdvisorTurn, type AdvisorRoute } from "../../lib/advisorChatPolicy";
 
-import { advisorLocalIntent, answerLocalDecision, remoteAdvisorTurns, type AdvisorLocalIntent, type AdvisorLocalAnswer } from "../../lib/advisorDecisionContext";
+import { advisorLocalIntent, answerLocalDecision, isPersonalLearningAdviceQuestion, answerPersonalLearningAdvice, remoteAdvisorTurns, type AdvisorLocalIntent, type AdvisorLocalAnswer } from "../../lib/advisorDecisionContext";
+import { useOptionalVerifiedStudentProfile } from "../../page/seed/hooks/StudentProfileProvider";
 import { safeAdmissionAdvisorSource } from "../../lib/advisorAdmissionAnswers";
 import { answerClaKnowledge } from "../../lib/claKnowledgeRetrieval";
 import { answerVerifiedCutoff, safeCutoffSource } from "../../lib/atlasDecisionComparison";
@@ -30,6 +31,7 @@ export default function FloatingAdvisorChat() {
   const pageContext = advisorPageContextFromPath(currentPath);
   const pageContextLabel = ADVISOR_PAGE_CONTEXTS[pageContext];
   const suggestions = advisorSuggestionsFor(pageContext);
+  const studentContext = useOptionalVerifiedStudentProfile();
   const [open, setOpen] = useState(false);
   const [sessionUid, setSessionUid] = useState<string|null>(null);
   const authenticated = Boolean(sessionUid && auth.currentUser?.uid === sessionUid);
@@ -56,7 +58,14 @@ export default function FloatingAdvisorChat() {
     try { message = prepareAdvisorMessage(raw); } catch (error) { setNotice(error instanceof Error ? error.message : "Câu hỏi chưa hợp lệ."); return; }
     const uid = auth.currentUser?.uid;
     if (!authenticated || !uid || uid !== sessionUid) { setNotice("Bạn cần đăng nhập để trò chuyện với trợ lý CLA."); return; }
-    // Personal questions are handled locally, before public facts or Gemini.
+    // Personal learning guidance uses only this signed-in student's server-confirmed transcript.
+    // The transcript is ranked locally and is never included in the Gemini request.
+    if (isPersonalLearningAdviceQuestion(message)) {
+      const local = answerPersonalLearningAdvice(studentContext?.transcript ?? null, uid);
+      setTurns(current => [...current, { role: "user", text: message }, { role: "model", text: local.answer, destination: local.destination, linkLabel: local.linkLabel }]);
+      setQuestion(""); setNotice(""); return;
+    }
+    // Other personal decisions are handled locally, before public facts or Gemini.
     const localIntent = advisorLocalIntent(message);
     const previousPrivate = turns[turns.length - 1]?.privateIntent;
     if (localIntent || (previousPrivate && /^(vay|the|con|tiep|tai sao|vi sao|sao|neu|bao nhieu|lam sao|co nen)\b/i.test(message.normalize("NFD").replace(/[\u0300-\u036f]/g, "")))) {
@@ -117,7 +126,7 @@ export default function FloatingAdvisorChat() {
         <button type="button" aria-label="Đóng trò chuyện" onClick={() => setOpen(false)}>×</button>
       </header>
       <div className="cla-chat-messages" role="log" aria-live="polite" aria-relevant="additions text">
-        <p className="cla-chat-intro">Hỏi trực tiếp về ngành học, trường đại học, tổ hợp, phương thức, điểm chuẩn và nguyện vọng. CLA trả lời ngay trong hội thoại, kèm nguồn tuyển sinh chính thức khi có dữ liệu; thông tin chưa xác minh sẽ được ghi rõ. Bạn cũng có thể hỏi cách sử dụng hệ thống. Khi đã xác nhận kịch bản hoặc mục tiêu tại Atlas/Orion, hỏi “Điểm kịch bản của tôi?” hoặc “Còn thiếu bao nhiêu điểm?”. Kết quả cá nhân hóa này được xử lý trên máy, không tự gửi sang Gemini.</p>
+        <p className="cla-chat-intro">Hỏi về ngành học, trường đại học, tuyển sinh, cách sử dụng CLA hoặc môn học nên ưu tiên cải thiện. Với câu hỏi học tập cá nhân, CLA đối chiếu bảng điểm đã đồng bộ của chính tài khoản đang đăng nhập và xử lý ngay trên máy; bảng điểm không được gửi sang Gemini. Khi đã xác nhận kịch bản hoặc mục tiêu tại Atlas/Orion, bạn cũng có thể hỏi “Điểm kịch bản của tôi?” hoặc “Còn thiếu bao nhiêu điểm?”.</p>
         {(authenticated ? turns : []).map((turn, index) => <div key={index} className={`cla-chat-message ${turn.role === "user" ? "is-user" : "is-model"}`}><span>{turn.role === "user" ? "Bạn" : "CLA"}</span><p>{turn.text}</p>{turn.source && <a className="cla-chat-context-link" href={turn.source} target="_blank" rel="noopener noreferrer">Nguồn công bố chính thức ↗</a>}{turn.destination && <a className="cla-chat-context-link" href={turn.destination}>{turn.linkLabel || "Mở chức năng liên quan"} ↗</a>}</div>)}
         {loading && <p className="cla-chat-thinking" role="status">Đang tạo câu trả lời…</p>}
         <div ref={scrollAnchor} />
