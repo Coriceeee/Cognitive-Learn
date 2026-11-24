@@ -15,7 +15,7 @@ function load(file){
   return mod.exports;
 }
 const root=path.resolve(__dirname,'..');
-const {answerPersonalLearningAdvice,isPersonalLearningAdviceQuestion}=load(path.join(root,'src/lib/advisorDecisionContext.ts'));
+const {answerPersonalLearningAdvice,isPersonalLearningAdviceQuestion,isFocusLearningAdviceRequest}=load(path.join(root,'src/lib/advisorDecisionContext.ts'));
 const makeState=(subjects,overrides={})=>({
   data:{terms:[{grade:'grade12',semester:'semester2',subjects}],subjects:[],currentSubjects:[],yearly:{grade10:null,grade11:null,grade12:null},updatedAt:null},
   status:'ready',source:'student_transcripts',userId:'student-A',...overrides
@@ -151,11 +151,42 @@ test('chat reads optional verified context and handles personal advice locally b
   const chat=readFileSync(path.join(root,'src/components/common/FloatingAdvisorChat.tsx'),'utf8');
   const provider=readFileSync(path.join(root,'src/page/seed/hooks/StudentProfileProvider.tsx'),'utf8');
   assert.match(chat,/useOptionalVerifiedStudentProfile/);
-  assert.match(chat,/answerPersonalLearningAdvice\(studentContext, uid\)/);
+  assert.match(chat,/answerPersonalLearningAdvice\\(studentContext, uid, \\{ focusLowestSubject: isFocusLearningAdviceRequest\\(message\\) \\}\\)/);
   assert.ok(chat.indexOf('answerPersonalLearningAdvice(studentContext')<chat.indexOf('fetch(`${apiBase()}\/api\/gemini-chat'));
   assert.match(provider,/useStudentTranscript\(\)/);
   assert.match(provider,/useOptionalVerifiedStudentProfile/);
   const chatStyles=readFileSync(path.join(root,'src/styles/22-cla-chat-readability.css'),'utf8');
   assert.match(chatStyles,/white-space: pre-wrap/);
   assert.match(chat,/body: JSON\.stringify\(\{ version: 1, message, history: past, pageContext \}\)/);
+});
+
+test('detects conversational requests to focus more on the weakest subject',()=>{
+  for(const q of ['Nếu môn này tập trung hơn kiểu vậy','Tăng thời gian cho môn yếu nhất','Dành thêm thời gian cho môn này']) {
+    assert.equal(isFocusLearningAdviceRequest(q),true,q);
+    assert.equal(isPersonalLearningAdviceQuestion(q),true,q);
+  }
+  assert.equal(isFocusLearningAdviceRequest('Giải thích điểm chuẩn HUST'),false);
+});
+test('focused-subject scenario reallocates the same verified weekly hours toward the weakest subject',()=>{
+  const transcript=makeState([row('Toán',5.8),row('Vật lý',6.2),row('Hóa học',7.4),row('Ngữ văn',8.1)]);
+  const context=makeContext(transcript,{
+    hasProfile:true,loading:false,syncing:false,
+    profile:{studyHoursPerWeek:10,practiceTestsPerWeek:2,planCompletionRate:40,motivationLevel:30},
+    dynamicState:{scope:'student',behavior:{hours:10,practice:2,completion:40,motivation:30}}
+  });
+  const base=answerPersonalLearningAdvice(context,'student-A').answer;
+  const focused=answerPersonalLearningAdvice(context,'student-A',{focusLowestSubject:true}).answer;
+  assert.match(base,/Toán: 5\.8\/10 · khoảng 3\.7 giờ/);
+  assert.match(focused,/Toán: 5\.8\/10 · khoảng 4\.4 giờ/);
+  assert.match(focused,/Vật lý: 6\.2\/10 · khoảng 2\.4 giờ/);
+  assert.match(focused,/Hóa học: 7\.4\/10 · khoảng 0\.7 giờ/);
+  assert.match(focused,/cùng quỹ 7\.5 giờ\/tuần/);
+  assert.match(focused,/không phải hiệu quả can thiệp đã được kiểm định/);
+});
+test('focused-subject scenario never invents a timetable when weekly hours are missing',()=>{
+  const context=makeContext(makeState([row('Toán',5.8),row('Vật lý',6.2)]));
+  const focused=answerPersonalLearningAdvice(context,'student-A',{focusLowestSubject:true}).answer;
+  assert.match(focused,/môn có điểm thấp nhất/);
+  assert.match(focused,/chưa có quỹ giờ học\/tuần đã xác minh/);
+  assert.doesNotMatch(focused,/khoảng \d+\.\d giờ mỗi tuần/);
 });
