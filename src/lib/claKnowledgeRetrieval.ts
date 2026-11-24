@@ -28,9 +28,22 @@ export function retrieveClaKnowledge(question:unknown):KnowledgeCard[]{
  return found.length>3?[]:found;
 }
 export function answerClaKnowledge(question:unknown){
+ if(typeof question!=="string")return null;
+ const q=normalise(question);
+
+ // Advice-seeking questions must not be intercepted by the K08 trend-definition card.
+ // Give the learner safe, actionable guidance without pretending to know their scores.
+ const asksForImprovement=/\b(lam sao|cach nao|cach de|nen lam gi|can lam gi|de cai thien|cai thien|tien bo hon|hoc tot hon|tang diem|khac phuc diem yeu)\b/.test(q);
+ if(asksForImprovement){
+  return {
+   answer:"Để tiến bộ, bạn hãy bắt đầu từ một mục tiêu nhỏ và cụ thể: chọn một môn học hoặc thói quen muốn cải thiện, xác định việc có thể thực hiện mỗi ngày, rồi ghi lại kết quả theo tuần. Sau mỗi lần ghi nhận, xem điều gì đã hiệu quả và điều gì cần điều chỉnh. Với Lumen, một lần phân tích chỉ phản ánh trạng thái tại thời điểm đó; cần nhiều lần đo hợp lệ trong điều kiện tương đương mới có thể nhận xét xu hướng.\n\nBạn muốn cải thiện điểm số môn học, khả năng tập trung hay mức độ hoàn thành kế hoạch? Mình có thể giúp bạn lập các bước phù hợp.",
+   evidenceIds:["CLA-K08"], version:CLA_KNOWLEDGE_VERSION, mode:"LOCAL_GUIDANCE" as const
+  };
+ }
  const cards=retrieveClaKnowledge(question);
  if(!cards.length)return null;
- return {answer:cards.map(c=>`${c.text} [${c.id}]\nTham chiếu: ${c.ref}.`).join('\n\n'), evidenceIds:cards.map(c=>c.id), version:CLA_KNOWLEDGE_VERSION, mode:'LOCAL_KNOWLEDGE' as const};
+ // Keep internal evidence IDs and source paths in metadata, never in student-facing prose.
+ return {answer:cards.map(c=>c.text).join("\n\n"), evidenceIds:cards.map(c=>c.id), version:CLA_KNOWLEDGE_VERSION, mode:"LOCAL_KNOWLEDGE" as const};
 }
 /** A model may select cards only. It cannot add claims, change scores or fabricate citations. */
 export function validateKnowledgeSelection(raw:unknown, permitted:readonly KnowledgeId[]):KnowledgeId[]|null{
