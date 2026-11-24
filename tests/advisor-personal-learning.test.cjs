@@ -151,7 +151,7 @@ test('chat reads optional verified context and handles personal advice locally b
   const chat=readFileSync(path.join(root,'src/components/common/FloatingAdvisorChat.tsx'),'utf8');
   const provider=readFileSync(path.join(root,'src/page/seed/hooks/StudentProfileProvider.tsx'),'utf8');
   assert.match(chat,/useOptionalVerifiedStudentProfile/);
-  assert.match(chat,/answerPersonalLearningAdvice\\(studentContext, uid, \\{ focusLowestSubject: isFocusLearningAdviceRequest\\(message\\) \\}\\)/);
+  assert.match(chat,/answerPersonalLearningAdvice\(studentContext, uid, \{ focusLowestSubject: isFocusLearningAdviceRequest\(message\) \}\)/);
   assert.ok(chat.indexOf('answerPersonalLearningAdvice(studentContext')<chat.indexOf('fetch(`${apiBase()}\/api\/gemini-chat'));
   assert.match(provider,/useStudentTranscript\(\)/);
   assert.match(provider,/useOptionalVerifiedStudentProfile/);
