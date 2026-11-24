@@ -102,6 +102,8 @@ export function compareProjectionToHistoricalCutoffs({
         const subjects = item.subjects as readonly SubjectCode[];
         const values = subjects.map(subject => scores[subject]);
         if (!values.every(observed)) continue;
+        const schemeSource = safePathwayUrl(item.source) ?? safePathwayUrl(program.sourceUrl);
+        if (!schemeSource) continue;
         const projectedScore = Math.round((values as number[]).reduce((sum, value) => sum + value, 0) * 100) / 100;
         const gap = Math.round((projectedScore - cutoff.cutoff) * 100) / 100;
         const id = [cutoff.universityId, cutoff.campus, cutoff.code, cutoff.method, item.code].join("|");
@@ -123,7 +125,7 @@ export function compareProjectionToHistoricalCutoffs({
           method: cutoff.label,
           referenceYear: REFERENCE_YEAR,
           cutoffSource,
-          schemeSource: safePathwayUrl(item.source) ?? program.sourceUrl,
+          schemeSource,
           reviewedAt: cutoff.reviewedAt,
           eligibility: "NOT_EVALUATED",
           probability: null,
