@@ -105,3 +105,13 @@ test('18 Assistant UI provides deterministic local guide independent of Gemini s
   assert.match(ui, /Hướng dẫn CLA nội bộ · không cần Gemini/);
   assert.ok(ui.indexOf('intelligence.localGuide.summary') < ui.indexOf('intelligence.gemini.status === "FALLBACK"'));
 });
+
+test('19 GPA scenario is hidden until all risk-direction dimensions are measured', () => {
+  const ui = fs.readFileSync('src/page/lumen/LumenPage.tsx', 'utf8');
+  assert.match(ui, /predictionRequiredDimensions = \["GVI", "BDI", "FRI"\]/);
+  assert.match(ui, /missingPredictionDimensions\.length === 0/);
+  assert.match(ui, /hasCompletePredictionSignals/);
+  assert.match(ui, /BDI cần ít nhất hai lần ghi nhận hợp lệ/);
+  assert.match(ui, /không nhập 0 thay thế/);
+  assert.match(ui, /không phải dự báo điểm thi THPT đã kiểm định/);
+});
