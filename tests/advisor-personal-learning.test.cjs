@@ -85,7 +85,7 @@ test('weekly hours and completion rate drive the actual schedule allocation',()=
   assert.match(answer,/7\.5 giờ\/tuần/);
   assert.match(answer,/Toán 3\.7 giờ/);
   assert.match(answer,/Vật lý 3\.0 giờ/);
-  assert.match(answer,/Hóa học 0\.9 giờ/);
+  assert.match(answer,/Hóa học 0\.8 giờ/);
   assert.match(answer,/hoàn thành kế hoạch hiện ghi nhận 40%/);
   assert.match(answer,/2\.0 bài thi thử\/tuần/);
   assert.match(answer,/động lực tự báo cáo là 30\/100/);
@@ -146,5 +146,7 @@ test('chat reads optional verified context and handles personal advice locally b
   assert.ok(chat.indexOf('answerPersonalLearningAdvice(studentContext')<chat.indexOf('fetch(`${apiBase()}\/api\/gemini-chat'));
   assert.match(provider,/useStudentTranscript\(\)/);
   assert.match(provider,/useOptionalVerifiedStudentProfile/);
+  const chatStyles=readFileSync(path.join(root,'src/styles/22-cla-chat-readability.css'),'utf8');
+  assert.match(chatStyles,/white-space: pre-wrap/);
   assert.match(chat,/body: JSON\.stringify\(\{ version: 1, message, history: past, pageContext \}\)/);
 });
