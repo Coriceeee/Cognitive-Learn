@@ -101,6 +101,7 @@
   font-weight: 500;
   line-height: 1.65 !important;
   overflow-wrap: anywhere;
+  white-space: pre-wrap;
 }
 .cla-chat-root .cla-chat-message.is-user {
   background: var(--cla-chat-blue) !important;
