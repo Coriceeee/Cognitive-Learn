@@ -12,6 +12,7 @@ import { buildNationalPathwayCatalogue, matchNationalPathways2026 } from "../../
 import AtlasNationalPathways from "./AtlasNationalPathways";
 
 import { runAdmissionEngine } from "../../../lib/admissionEngine";
+import { compareProjectionToHistoricalCutoffs } from "../../../lib/examProjectionBenchmarks";
 import { ADMISSION_POLICY_2026 } from "../../../lib/aspirationPlanner";
 import AtlasAspirationDraftEditor from "./AtlasAspirationDraftEditor";
 
@@ -321,6 +322,18 @@ export default function AtlasAdmissionEnginePanel({
       maxAspirations: 15,
     });
   }, [programs, universityMap, sources, scoreReport, targetMajor, canClassifyAdmission]);
+
+  // A two-mock projection may be compared with exact 2026 THPT references,
+  // but it must never enter the eligibility or aspiration-probability engine.
+  const projectionBenchmarkReport = useMemo(() => {
+    if (scoreBasis !== "projection" || hasInvalidScores || !validPriority || parsedPriority !== 0) return null;
+    return compareProjectionToHistoricalCutoffs({
+      scores: scoreMap,
+      interest: targetMajor.trim(),
+      region: "ALL",
+      referenceYear: 2026,
+    });
+  }, [scoreBasis, hasInvalidScores, validPriority, parsedPriority, scoreMap, targetMajor]);
 
   // Only explicitly verified 2026 program + official source records can be used
   // for a program match. The demo/pending programs never become real advice.
@@ -802,6 +815,40 @@ export default function AtlasAdmissionEnginePanel({
         {examChoiceReport.warnings.filter(message => !message.startsWith("Điểm học bạ/") && !message.startsWith("Chưa có chương trình đã được duyệt nguồn khớp ngành mục tiêu")).map(warning => <p className="atlas-exam-choice-warning" key={warning}>{warning}</p>)}
       </section>
 
+      {projectionBenchmarkReport && (
+        <section className="atlas-projection-benchmark" aria-labelledby="atlas-projection-benchmark-title">
+          <span className="atlas-section-eyebrow">ATLAS · ĐỐI CHIẾU LỊCH SỬ CÓ NGUỒN</span>
+          <h2 id="atlas-projection-benchmark-title">Kịch bản thi thử so với điểm chuẩn THPT 2026</h2>
+          <p>Điểm từng môn được ước lượng từ hai bài thi thử. Bảng chỉ giữ các ngành có điểm chuẩn THPT thang 30 và tổ hợp được công bố trong nguồn đề án tương ứng. Đây là khoảng cách với dữ liệu lịch sử, không phải dự báo đỗ cho kỳ tuyển sinh tiếp theo.</p>
+          {projectionBenchmarkReport.rows.length > 0 ? (
+            <>
+              <p role="status">{projectionBenchmarkReport.rows.length} đối chiếu đủ điều kiện nguồn · Sắp xếp theo chênh lệch điểm so với mốc 2026.</p>
+              <div className="cla-projection-scroll">
+                <table className="cla-projection-benchmark-table">
+                  <thead><tr><th scope="col">Ngành · trường</th><th scope="col">Tổ hợp</th><th scope="col">Kịch bản</th><th scope="col">Mốc 2026</th><th scope="col">Chênh lệch</th><th scope="col">Nguồn</th></tr></thead>
+                  <tbody>
+                    {projectionBenchmarkReport.rows.slice(0, 12).map(row => (
+                      <tr key={row.id}>
+                        <th scope="row"><strong>{row.majorName}</strong><small>{row.universityName} · {row.campus} · {row.majorCode}</small></th>
+                        <td>{row.combinationCode}</td>
+                        <td>{row.projectedScore.toFixed(2)}/30</td>
+                        <td>{row.cutoff.toFixed(2)}/30</td>
+                        <td><strong>{row.gap > 0 ? "+" : ""}{row.gap.toFixed(2)}</strong><small>{row.relation === "ABOVE" ? "Cao hơn mốc" : row.relation === "EQUAL" ? "Bằng mốc" : "Thấp hơn mốc"}</small></td>
+                        <td><a href={row.cutoffSource} target="_blank" rel="noopener noreferrer">Điểm chuẩn ↗</a><small><a href={row.schemeSource} target="_blank" rel="noopener noreferrer">Đề án / tổ hợp ↗</a></small></td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              {projectionBenchmarkReport.rows.length > 12 && <p>Còn {projectionBenchmarkReport.rows.length - 12} đối chiếu khác trong cùng bộ dữ liệu.</p>}
+            </>
+          ) : (
+            <p role="status">Chưa có đối chiếu đủ điều kiện. CLA không thay thế điểm thi bằng điểm học bạ, không dùng điểm chuẩn tổng hợp hoặc phương thức khác thang để tạo kết quả THPT.</p>
+          )}
+          <ul>{projectionBenchmarkReport.limitations.map(note => <li key={note}>{note}</li>)}</ul>
+        </section>
+      )}
+
       {!engineResult ? (
         <div className="atlas-empty-state">
 
@@ -810,13 +857,15 @@ export default function AtlasAdmissionEnginePanel({
           </strong>
 
           <p>
-            {completeCombinations.length === 0
-              ? "Hãy nhập đủ ba môn của ít nhất một tổ hợp được hỗ trợ. Bạn có thể khám phá các tổ hợp phía trên mà không cần nhập tất cả môn."
-              : scoreBasis !== "official_thpt_2026"
-                ? "Hiện bạn đang dùng kịch bản, điểm thi thử hoặc học bạ: có thể khám phá tổ hợp, nhưng không thể so sánh trực tiếp với mốc điểm chuẩn THPT 2026."
-                : hasInvalidScores || !validPriority || parsedPriority > 0
-                  ? "Cần sửa điểm không hợp lệ hoặc bỏ điểm ưu tiên giả định trước khi đối chiếu mốc tham chiếu."
-                  : "Atlas chưa có chương trình đủ nguồn điểm chuẩn THPT 2026 và phương thức để xếp nhóm nguyện vọng. Xin kiểm tra thông báo chính thức của trường."}
+            {scoreBasis === "projection"
+              ? "Kịch bản chỉ được đối chiếu tham khảo với điểm chuẩn THPT 2026 cùng thang điểm và tổ hợp có nguồn. CLA không dùng kịch bản thi thử để xác nhận điều kiện, phân nhóm nguyện vọng hoặc tính xác suất trúng tuyển."
+              : completeCombinations.length === 0
+                ? "Hãy nhập đủ ba môn của ít nhất một tổ hợp được hỗ trợ. Bạn có thể khám phá các tổ hợp phía trên mà không cần nhập tất cả môn."
+                : scoreBasis !== "official_thpt_2026"
+                  ? "Bạn đang dùng điểm học bạ hoặc dữ liệu tham khảo: có thể khám phá tổ hợp, nhưng không thể dùng trực tiếp để xếp nguyện vọng theo điểm chuẩn THPT."
+                  : hasInvalidScores || !validPriority || parsedPriority > 0
+                    ? "Cần sửa điểm không hợp lệ hoặc bỏ điểm ưu tiên giả định trước khi đối chiếu mốc tham chiếu."
+                    : "Atlas chưa có chương trình đủ nguồn điểm chuẩn THPT 2026 và phương thức để xếp nhóm nguyện vọng. Xin kiểm tra thông báo chính thức của trường."}
           </p>
 
         </div>
