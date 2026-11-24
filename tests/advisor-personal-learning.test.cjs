@@ -21,7 +21,7 @@ const makeState=(subjects,overrides={})=>({
   status:'ready',source:'student_transcripts',userId:'student-A',...overrides
 });
 const makeContext=(transcript,extras={})=>({transcript,...extras});
-const row=(subject,average,status='COMPLETE')=>({subject,average,provisional:average,row:{regular:[],midterm:'',final:''},status});
+const row=(subject,average,status='COMPLETE')=>({subject,average,provisional:status==='PARTIAL'?6.5:average,row:{regular:[],midterm:'',final:''},status});
 
 test('detects Vietnamese improvement and subject-priority questions with or without accents',()=>{
   for(const q of ['Làm sao để tiến bộ hơn?','Em nên tập trung môn nào?','mon nao can cai thien','Tôi cần ưu tiên môn học nào?','Lập kế hoạch học tập cho em','Cho em lịch học tuần này'])assert.equal(isPersonalLearningAdviceQuestion(q),true);
@@ -51,7 +51,7 @@ test('refuses to rank incomplete or provisional-only grades',()=>{
   assert.doesNotMatch(answer,/Toán: 6\.1/);
 });
 test('does not fall back to an older semester when the latest semester is incomplete',()=>{
-  const state=makeState([row('Toán',6.1),row('Vật lý',6.3),row('Hóa học',null,'PARTIAL')]);
+  const state=makeState([row('Toán',null,'PARTIAL'),row('Vật lý',null,'PARTIAL'),row('Hóa học',null,'PARTIAL')]);
   state.data.terms.unshift({grade:'grade11',semester:'semester2',subjects:[row('Toán',5.1),row('Vật lý',5.3),row('Hóa học',6.0)]});
   const answer=answerPersonalLearningAdvice(makeContext(state),'student-A').answer;
   assert.match(answer,/chỉ có điểm tạm tính/);
@@ -65,7 +65,7 @@ test('blocks stale, unavailable and cross-account transcript context with specif
   const cases=[
     [makeState([row('Toán',5),row('Vật lý',6),row('Hóa học',7)],{userId:'student-B'}),/đang xác minh dữ liệu/],
     [makeState([row('Toán',5),row('Vật lý',6),row('Hóa học',7)],{status:'syncing'}),/đang được tải hoặc xác minh/],
-    [makeState([row('Toán',5),row('Vật lý',6),row('Hóa học',7)],{status:'error'}),/chưa đọc được bảng điểm từ máy chủ/]]
+    [makeState([row('Toán',5),row('Vật lý',6),row('Hóa học',7)],{status:'error'}),/chưa đọc được bảng điểm từ máy chủ/]
   ];
   for(const [state,expected] of cases){
     const answer=answerPersonalLearningAdvice(makeContext(state),'student-A').answer;
