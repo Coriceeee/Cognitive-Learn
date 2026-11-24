@@ -1,4 +1,3 @@
-import { useStudentTranscript } from "../seed/hooks/useStudentTranscript";
 import { studentDecisionLedger, pinDecisionHandoff } from "../../lib/studentDecisionSnapshot";
 import { auth } from "../../lib/firebase";
 import { EXAM_SUBJECT_LABELS, stageExamProjection, clearExamProjection } from "../../lib/examProjectionHandoff";
@@ -54,6 +53,7 @@ export default function LumenPage() {
     historyLoading,
     hasProfile,
     error,
+    transcript: decisionTranscript,
   } = useVerifiedStudentProfile();
 
 
@@ -69,7 +69,6 @@ export default function LumenPage() {
 
   const advanced = useLearningIntelligence(profile, cognitive, growthAnalytics);
   const gpaIntegrity = useAcademicGpaIntegrity();
-  const decisionTranscript = useStudentTranscript();
   const canShowGpaScenario = gpaIntegrity.status === "VERIFIED" && typeof gpaIntegrity.result?.derived?.overall === "number" && gpaIntegrity.result.derived.overall === profile.gpaOverall && !error && cognitive.scoreAvailable === true;
 
   if (loading) {
