@@ -76,7 +76,7 @@ import type { TemporalStudentReport } from './temporalStudentIntelligence';
 
 export function isPersonalLearningAdviceQuestion(message: string): boolean {
   const q = norm(message);
-  return /\b(tien bo|cai thien|tap trung mon|tap trung vao|neu tap trung|mon nao|mon nay|mon do|mon hoc nao|yeu mon|hoc mon nao|on mon|uu tien mon|mon nao can|nen tap trung|diem mon nao|ke hoach hoc tap|lap ke hoach|lich hoc|thoi khoa bieu|phan bo thoi gian|hoc bao nhieu|ke hoach cua em|lo trinh hoc)\b/.test(q);
+  return /\b(tien bo|cai thien|tap trung mon|tap trung vao|neu tap trung|mon nao|mon nay|mon do|mon hoc nao|yeu mon|hoc mon nao|on mon|uu tien mon|mon nao can|nen tap trung|diem mon nao|ke hoach hoc tap|lap ke hoach|lich hoc|thoi khoa bieu|phan bo thoi gian|hoc bao nhieu|ke hoach cua em|ke hoach cho em|ke hoach cho toi|lap lich hoc|lo trinh hoc)\b/.test(q);
 }
 
 type LearningTranscriptState = {
@@ -227,6 +227,7 @@ export function answerPersonalLearningAdvice(context: PersonalLearningContext | 
   const abandonment = profileReady && profile && finiteIn(profile.taskAbandonmentRate, 0, 100) ? profile.taskAbandonmentRate : null;
   const contextSwitch = profileReady && profile && finiteIn(profile.contextSwitchRate, 0, 100) ? profile.contextSwitchRate : null;
   const goalSwitch = profileReady && profile && finiteIn(profile.goalSwitchFrequency, 0, 1000) ? profile.goalSwitchFrequency : null;
+  const learningStrategy = profileReady && profile && finiteIn(profile.learningStrategy, 0, 100) ? profile.learningStrategy : null;
   if (abandonment !== null && abandonment >= 50) {
     loadFactor = Math.min(loadFactor, 0.85);
     loadReasons.push('Tỷ lệ bỏ dở nhiệm vụ tự báo cáo là ' + abandonment.toFixed(0) + '%, nên chia nhỏ đầu việc và tránh tăng tải.');
@@ -267,6 +268,7 @@ export function answerPersonalLearningAdvice(context: PersonalLearningContext | 
   if (motivation !== null && motivation < 40) adaptation.push('Mức động lực tự báo cáo là ' + motivation.toFixed(0) + '/100; chia mỗi môn thành các đầu việc nhỏ, có điểm kết thúc rõ ràng.');
   if (contextSwitch !== null && contextSwitch >= 50) adaptation.push('Tần suất chuyển ngữ cảnh tự báo cáo là ' + contextSwitch.toFixed(0) + '%; học từng môn trong một phiên riêng, hạn chế đổi môn giữa chừng.');
   if (goalSwitch !== null && goalSwitch >= 3) adaptation.push('Bạn ghi nhận ' + goalSwitch.toFixed(0) + ' lần đổi mục tiêu/tháng; giữ nguyên mục tiêu học trong chu kỳ tuần này và ghi lý do trước khi đổi.');
+  if (learningStrategy !== null && learningStrategy < 50) adaptation.push('Mức chiến lược học tập tự báo cáo là ' + learningStrategy.toFixed(0) + '/100; thử một chu trình rõ ràng cho từng phần: tự nhớ lại kiến thức, làm bài theo chủ đề, rồi chữa và ghi lỗi.');
   if (practice !== null && practice > 0) adaptation.push('Bạn đang tự báo cáo ' + practice.toFixed(1) + ' bài thi thử/tuần; kế hoạch giữ mức luyện hiện tại và ưu tiên bài kiểm tra cho ' + priorities[0].subject + ' trước.');
   else if (practice === 0) adaptation.push('Hồ sơ ghi nhận hiện chưa có bài thi thử/tuần; ưu tiên bài tập theo chuyên đề và rà lỗi trước khi thêm đề thi thử toàn diện.');
 
