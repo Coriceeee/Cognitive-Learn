@@ -20,6 +20,12 @@ test('Seed: normal values accept, including missing optional financial fields', 
   assert.equal(validateSeedNumericInput(good()), null);
   assert.equal(validateSeedNumericInput({ ...good(), educationBudget: '', maxTuition: '' }), null);
 });
+test('Seed: all self-reported measures may remain missing without being converted to zero', () => {
+  const input = good();
+  for (const key of ['studyHoursPerWeek','practiceTestsPerWeek','planCompletionRate','goalSwitchFrequency',
+    'taskAbandonmentRate','contextSwitchRate','learningStrategy','motivationLevel']) input[key] = '';
+  assert.equal(validateSeedNumericInput(input), null);
+});
 test('Seed: zero is observed zero, not missing', () => {
   const input = Object.fromEntries(Object.keys(good()).map(key => [key, '0']));
   assert.equal(validateSeedNumericInput(input), null);
@@ -43,8 +49,12 @@ test('Seed: negative or malformed finances are rejected', () => {
   assert.match(validateSeedNumericInput({ ...good(), educationBudget: '-42' }), /không âm/);
   assert.match(validateSeedNumericInput({ ...good(), maxTuition: 'Infinity' }), /không âm/);
 });
-test('Seed: missing required behavior is rejected explicitly', () => {
-  assert.match(validateSeedNumericInput({ ...good(), motivationLevel: '' }), /Vui lòng/);
+test('Seed: missing self-reported values stay optional; explicit invalid values still fail', () => {
+  for (const key of ['studyHoursPerWeek','practiceTestsPerWeek','planCompletionRate','goalSwitchFrequency',
+    'taskAbandonmentRate','contextSwitchRate','learningStrategy','motivationLevel']) {
+    assert.equal(validateSeedNumericInput({ ...good(), [key]: '' }), null, key);
+  }
+  assert.match(validateSeedNumericInput({ ...good(), motivationLevel: '101' }), /100/);
 });
 test('Seed: not silently converting scientific notation to amount', () => {
   assert.match(validateSeedNumericInput({ ...good(), educationBudget: '1e100' }), /hợp lệ/);
