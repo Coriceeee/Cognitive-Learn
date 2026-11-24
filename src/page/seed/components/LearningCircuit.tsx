@@ -1,7 +1,7 @@
 /** CP46 — accessible, chart-like route diagram; no faux scores or hidden destinations. */
 import { useState } from "react";
 
-type Link = { code: string; short: string; title: string; description: string; href: string; phase: string; x: number; y: number };
+type Link = { code: string; short: string; title: string; description: string; href: string; x: number; y: number };
 const links: Link[] = [
   { code:"SEED",short:"Dữ liệu",title:"Bản sắc học tập",description:"Điểm số, GPA và mục tiêu — nền tảng cho mọi phân tích tiếp theo.",href:"/student/profile",x:16,y:26 },
   { code:"LUMEN",short:"Nhận thức",title:"Dấu vân tay trí tuệ",description:"Quan sát SCI, MAS, CSL cùng bằng chứng và giới hạn diễn giải.",href:"/lumen",x:49,y:18 },
