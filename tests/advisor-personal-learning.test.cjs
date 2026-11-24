@@ -20,56 +20,111 @@ const makeState=(subjects,overrides={})=>({
   data:{terms:[{grade:'grade12',semester:'semester2',subjects}],subjects:[],currentSubjects:[],yearly:{grade10:null,grade11:null,grade12:null},updatedAt:null},
   status:'ready',source:'student_transcripts',userId:'student-A',...overrides
 });
+const makeContext=(transcript,extras={})=>({transcript,...extras});
 const row=(subject,average,status='COMPLETE')=>({subject,average,provisional:average,row:{regular:[],midterm:'',final:''},status});
 
 test('detects Vietnamese improvement and subject-priority questions with or without accents',()=>{
-  for(const q of ['Làm sao để tiến bộ hơn?','Em nên tập trung môn nào?','mon nao can cai thien','Tôi cần ưu tiên môn học nào?'])assert.equal(isPersonalLearningAdviceQuestion(q),true);
+  for(const q of ['Làm sao để tiến bộ hơn?','Em nên tập trung môn nào?','mon nao can cai thien','Tôi cần ưu tiên môn học nào?','Lập kế hoạch học tập cho em','Cho em lịch học tuần này'])assert.equal(isPersonalLearningAdviceQuestion(q),true);
   assert.equal(isPersonalLearningAdviceQuestion('Điểm chuẩn HUST 2026?'),false);
 });
 test('ranks only complete subjects from the same latest semester and gives concrete next steps',()=>{
-  const answer=answerPersonalLearningAdvice(makeState([
+  const answer=answerPersonalLearningAdvice(makeContext(makeState([
     row('Toán',5.8),row('Vật lý',6.2),row('Hóa học',7.4),row('Ngữ văn',8.1),row('Tiếng Anh',null,'MISSING')
-  ]),'student-A').answer;
+  ])),'student-A').answer;
   assert.match(answer,/Lớp 12 · Học kỳ II/);
   assert.match(answer,/Toán: 5\.8\/10/);
   assert.match(answer,/ưu tiên trước/);
-  assert.match(answer,/2 buổi\/tuần/);
-  assert.match(answer,/bài kiểm tra mới/);
+  assert.match(answer,/Kế hoạch tuần được tính từ dữ liệu của bạn/);
+  assert.match(answer,/chưa có số giờ học\/tuần đã xác minh/);
+  assert.match(answer,/Cuối tuần làm một bài kiểm tra ngắn/);
   assert.doesNotMatch(answer,/CLA-K08|src\/engines|UNKNOWN/);
   assert.doesNotMatch(answer,/Tiếng Anh: 0/);
 });
 test('does not claim a single weak subject when two subjects are nearly tied',()=>{
-  const answer=answerPersonalLearningAdvice(makeState([row('Toán',6.1),row('Vật lý',6.3),row('Hóa học',7.5)]),'student-A').answer;
-  assert.match(answer,/Toán và Vật lý/);
-  assert.match(answer,/khá sát nhau/);
+  const answer=answerPersonalLearningAdvice(makeContext(makeState([row('Toán',6.1),row('Vật lý',6.3),row('Hóa học',7.5)])),'student-A').answer;
+  assert.match(answer,/Toán: 6\.1\/10; Vật lý: 6\.3\/10/);
+  assert.match(answer,/xếp theo điểm hiện tại từ thấp lên cao/);
 });
 test('refuses to rank incomplete or provisional-only grades',()=>{
-  const answer=answerPersonalLearningAdvice(makeState([row('Toán',6.1),row('Vật lý',6.3),row('Hóa học',null,'PARTIAL')]),'student-A').answer;
-  assert.match(answer,/chưa có ít nhất 3 môn/);
+  const answer=answerPersonalLearningAdvice(makeContext(makeState([row('Toán',null,'PARTIAL'),row('Vật lý',null,'PARTIAL'),row('Hóa học',null,'PARTIAL')])),'student-A').answer;
+  assert.match(answer,/chỉ có điểm tạm tính/);
   assert.doesNotMatch(answer,/Toán: 6\.1/);
 });
 test('does not fall back to an older semester when the latest semester is incomplete',()=>{
   const state=makeState([row('Toán',6.1),row('Vật lý',6.3),row('Hóa học',null,'PARTIAL')]);
   state.data.terms.unshift({grade:'grade11',semester:'semester2',subjects:[row('Toán',5.1),row('Vật lý',5.3),row('Hóa học',6.0)]});
-  const answer=answerPersonalLearningAdvice(state,'student-A').answer;
-  assert.match(answer,/chưa có ít nhất 3 môn/);
+  const answer=answerPersonalLearningAdvice(makeContext(state),'student-A').answer;
+  assert.match(answer,/chỉ có điểm tạm tính/);
   assert.doesNotMatch(answer,/Lớp 11|Toán: 5\.1/);
 });
 test('legacy transcript is explicitly described as historical read-only data',()=>{
-  const answer=answerPersonalLearningAdvice(makeState([row('Toán',5.8),row('Vật lý',6.2),row('Hóa học',7.4)],{source:'legacy'}),'student-A').answer;
+  const answer=answerPersonalLearningAdvice(makeContext(makeState([row('Toán',5.8),row('Vật lý',6.2),row('Hóa học',7.4)],{source:'legacy'})),'student-A').answer;
   assert.match(answer,/bảng điểm lịch sử ở chế độ chỉ đọc/);
 });
 test('blocks stale, unavailable and cross-account transcript context with specific status guidance',()=>{
   const cases=[
     [makeState([row('Toán',5),row('Vật lý',6),row('Hóa học',7)],{userId:'student-B'}),/đang xác minh dữ liệu/],
     [makeState([row('Toán',5),row('Vật lý',6),row('Hóa học',7)],{status:'syncing'}),/đang được tải hoặc xác minh/],
-    [makeState([row('Toán',5),row('Vật lý',6),row('Hóa học',7)],{status:'error'}),/chưa đọc được bảng điểm từ máy chủ/]
+    [makeState([row('Toán',5),row('Vật lý',6),row('Hóa học',7)],{status:'error'}),/chưa đọc được bảng điểm từ máy chủ/]]
   ];
   for(const [state,expected] of cases){
-    const answer=answerPersonalLearningAdvice(state,'student-A').answer;
+    const answer=answerPersonalLearningAdvice(makeContext(state),'student-A').answer;
     assert.match(answer,expected);
     assert.doesNotMatch(answer,/Toán: 5/);
   }
+});
+test('weekly hours and completion rate drive the actual schedule allocation',()=>{
+  const transcript=makeState([row('Toán',5.8),row('Vật lý',6.2),row('Hóa học',7.4),row('Ngữ văn',8.1)]);
+  const context=makeContext(transcript,{
+    hasProfile:true,loading:false,syncing:false,
+    profile:{studyHoursPerWeek:10,practiceTestsPerWeek:2,planCompletionRate:40,motivationLevel:30,targetMajor:'CNTT'},
+    dynamicState:{scope:'student',behavior:{hours:10,practice:2,completion:40,motivation:30}}
+  });
+  const answer=answerPersonalLearningAdvice(context,'student-A').answer;
+  assert.match(answer,/10\.0 giờ\/tuần/);
+  assert.match(answer,/7\.5 giờ\/tuần/);
+  assert.match(answer,/Toán 3\.7 giờ/);
+  assert.match(answer,/Vật lý 3\.0 giờ/);
+  assert.match(answer,/Hóa học 0\.9 giờ/);
+  assert.match(answer,/hoàn thành kế hoạch hiện ghi nhận 40%/);
+  assert.match(answer,/2\.0 bài thi thử\/tuần/);
+  assert.match(answer,/động lực tự báo cáo là 30\/100/);
+  assert.match(answer,/CNTT/);
+});
+test('a recorded zero-hour week does not silently create a timetable',()=>{
+  const context=makeContext(makeState([row('Toán',5.8),row('Vật lý',6.2)]),{
+    hasProfile:true,loading:false,syncing:false,
+    profile:{studyHoursPerWeek:0,practiceTestsPerWeek:0,planCompletionRate:0,motivationLevel:0},
+    dynamicState:{scope:'student',behavior:{hours:0,practice:0,completion:0,motivation:0}}
+  });
+  const answer=answerPersonalLearningAdvice(context,'student-A').answer;
+  assert.match(answer,/ghi nhận 0 giờ học\/tuần/);
+  assert.doesNotMatch(answer,/khoảng \d+\.\d giờ mỗi tuần/);
+});
+test('missing study-hour measurement never invents hours or sessions',()=>{
+  const answer=answerPersonalLearningAdvice(makeContext(makeState([row('Toán',5.8),row('Vật lý',6.2)])),'student-A').answer;
+  assert.match(answer,/chưa có số giờ học\/tuần đã xác minh/);
+  assert.doesNotMatch(answer,/buổi\/tuần|\d+\.\d giờ mỗi tuần/);
+});
+test('previous-term subject changes are reported from the transcript rather than guessed',()=>{
+  const transcript=makeState([row('Toán',5.8),row('Vật lý',6.2),row('Hóa học',7.4)]);
+  transcript.data.terms.unshift({grade:'grade11',semester:'semester2',subjects:[row('Toán',6.3),row('Vật lý',6.0),row('Hóa học',7.4)]});
+  const answer=answerPersonalLearningAdvice(makeContext(transcript),'student-A').answer;
+  assert.match(answer,/Toán giảm 0\.5 điểm/);
+  assert.match(answer,/Vật lý tăng 0\.2 điểm/);
+});
+test('measured cognitive proxies adapt the plan but remain explicitly labelled as proxies',()=>{
+  const context=makeContext(makeState([row('Toán',5.8),row('Vật lý',6.2)]),{
+    cognitive:{scoreAvailable:true,missingDimensions:[],SCI:45,CSL:50,GVI:70,FRI:65,dimensions:[
+      {code:'SCI',available:true},{code:'CSL',available:true},{code:'GVI',available:true},{code:'FRI',available:true}
+    ]}
+  });
+  const answer=answerPersonalLearningAdvice(context,'student-A').answer;
+  assert.match(answer,/SCI proxy \(45\/100\)/);
+  assert.match(answer,/CSL proxy \(50\/100\)/);
+  assert.match(answer,/GVI proxy \(70\/100\)/);
+  assert.match(answer,/FRI proxy \(65\/100\)/);
+  assert.match(answer,/quy tắc lập kế hoạch thử nghiệm/);
 });
 test('chat reads optional verified context and handles personal advice locally before Gemini',()=>{
   const chat=readFileSync(path.join(root,'src/components/common/FloatingAdvisorChat.tsx'),'utf8');
