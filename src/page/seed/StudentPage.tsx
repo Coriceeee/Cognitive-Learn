@@ -1,4 +1,3 @@
-import ModuleSectionNav from "../../components/common/ModuleSectionNav";
 import { currentFocusedPath } from "../../lib/focusedModuleRoute";
 import { navigateTo } from "../../lib/clientNavigation";
 import { useEffect, useState } from "react";
@@ -16,19 +15,9 @@ import StudentProfileNoticeModal from "./components/StudentProfileNoticeModal";
 import StudentRecommendationGrid from "./components/StudentRecommendationGrid";
 import ExamHorizon from "../../components/student/ExamHorizon";
 import LearningCircuit from "./components/LearningCircuit";
-import StudentActionSignalRail from "./components/StudentActionSignalRail";
-import StudentJourneyBridge from "./components/StudentJourneyBridge";
 
 import { useVerifiedStudentProfile } from "./hooks/StudentProfileProvider";
 import { useAcademicGpaIntegrity } from "./hooks/useAcademicGpaIntegrity";
-import { useLearningIntelligence } from "./hooks/useLearningIntelligence";
-
-function getRiskText(riskLevel: string): string {
-  if (riskLevel === "LOW") return "Cần theo dõi theo dữ liệu";
-  if (riskLevel === "MEDIUM") return "Có tín hiệu cần chú ý";
-  if (riskLevel === "HIGH") return "Cần xem xét ưu tiên";
-  return "Chưa đủ dữ liệu";
-}
 
 function isMeaningfulText(value: string | undefined): boolean {
   return Boolean(value && value.trim() && value !== "--" && value !== "Chưa có dữ liệu");
@@ -39,7 +28,6 @@ export default function StudentPage() {
   const {
     profile,
     cognitive,
-    growthAnalytics,
     temporalReport,
     loading,
     syncing,
@@ -50,21 +38,11 @@ export default function StudentPage() {
   } = useVerifiedStudentProfile();
   const gpaIntegrity = useAcademicGpaIntegrity();
 
-  // Use the same Firestore-backed Growth evidence as the Lumen page.
-  const intelligence = useLearningIntelligence(profile, cognitive, growthAnalytics);
   const [showProfileNotice, setShowProfileNotice] = useState(false);
 
   const profilePath = isAdminPreview
     ? "/student/profile?from=admin"
     : "/student/profile";
-
-  const hasCognitiveScore = hasProfile && cognitive.scoreAvailable === true;
-  const hasComparableGrowth =
-    hasProfile &&
-    growthAnalytics !== null &&
-    growthAnalytics.overall.previous !== null &&
-    growthAnalytics.observationDays > 0 &&
-    growthAnalytics.dataQuality !== "LIMITED";
 
   useEffect(() => {
     setShowProfileNotice(view === "/student" && !loading && !syncing && !hasProfile && !error);
@@ -99,42 +77,6 @@ export default function StudentPage() {
 
   function goTo(path: string) {
     navigateTo(path);
-  }
-
-  const actions: { title: string; detail: string; href: string }[] = !hasProfile
-    ? [
-        {
-          title: "Hoàn thiện hồ sơ học tập",
-          detail: "Bổ sung thông tin để hệ thống có dữ liệu phân tích.",
-          href: profilePath,
-        },
-        {
-          title: "Xem cách CLA hoạt động",
-          detail: "Tìm hiểu từng phân hệ trước khi sử dụng.",
-          href: "/student/guide",
-        },
-      ]
-    : [
-        ...cognitive.nextActions.slice(0, 3).map((title) => ({
-          title,
-          detail: "Gợi ý từ quy tắc phân tích thử nghiệm; cần đối chiếu thực tế.",
-          href: "/lumen",
-        })),
-      ];
-
-  if (hasProfile && actions.length < 3) {
-    actions.push({
-      title: "Rà soát thông tin học tập",
-      detail: "Bảo đảm điểm số, mục tiêu và hành vi đã được cập nhật.",
-      href: profilePath,
-    });
-  }
-  if (hasProfile && actions.length < 3) {
-    actions.push({
-      title: "Khám phá lộ trình học tập",
-      detail: "Mở Orion để xem các kịch bản và kế hoạch đề xuất.",
-      href: "/orion",
-    });
   }
 
   const displayName =
@@ -201,30 +143,14 @@ export default function StudentPage() {
         {/* CP87: keep the original six-node circuit as the PRIMARY navigation,
             now immediately below the greeting and before analytical widgets. */}
         <LearningCircuit profilePath={profilePath} />
-        <nav className="student-dash-extra-links" aria-label="Công cụ bổ sung">
-          <a href={hasProfile ? "/lumen/indices" : profilePath}>{hasProfile ? "Bắt đầu phân tích hồ sơ" : "Bắt đầu nhập hồ sơ"} <span aria-hidden="true">↗</span></a>
-          <a href="/student/guide">Hướng dẫn sử dụng <span aria-hidden="true">↗</span></a>
-          <a href="/atlas/subjects">Tổ hợp & nguyện vọng <span aria-hidden="true">↗</span></a>
-        </nav>
         </>}
-        <ModuleSectionNav moduleKey="seed" />
+        {view !== "/student" && <ModuleSectionNav moduleKey="seed" />}
         {view === "/student" && <>
         {!isAdminPreview && <ExamHorizon />}
-        <StudentDecisionCanvas cognitive={cognitive} gpa={gpaIntegrity.status === "VERIFIED" ? gpaIntegrity.result : null} temporal={!historyLoading && !error ? temporalReport : null} hasProfile={hasProfile} demo={isAdminPreview} />
-
-        {/* CP62: one connected workflow/evidence visualization, not two tile cards. */}
-        <StudentActionSignalRail
-          actions={actions}
-          hasProfile={hasProfile}
-          hasCognitiveScore={hasCognitiveScore}
-          hasComparableGrowth={hasComparableGrowth}
-          riskText={getRiskText(cognitive.riskLevel)}
-          growthNote={hasComparableGrowth
-            ? intelligence.growthEvidence.message
-            : "Growth cần ít nhất hai lần đo hợp lệ cách nhau về thời gian."}
-        />
-
-        {!isAdminPreview && <StudentJourneyBridge hasProfile={hasProfile} />}
+        <details className="cla-student-analysis-details">
+          <summary>Xem phân tích dữ liệu học tập chi tiết</summary>
+          <StudentDecisionCanvas cognitive={cognitive} gpa={gpaIntegrity.status === "VERIFIED" ? gpaIntegrity.result : null} temporal={!historyLoading && !error ? temporalReport : null} hasProfile={hasProfile} demo={isAdminPreview} />
+        </details>
 
           {isAdminPreview && (
           <details className="student-dash-disclosure">
