@@ -834,6 +834,14 @@ export default function TrangNhapHoSoHocTap() {
           </p>
         </header>
 
+        <nav className="cla-seed-form-nav" aria-label="Đi đến từng phần hồ sơ">
+          <a href="#cla-seed-section-goals"><span>01</span> Mục tiêu</a>
+          <a href="#cla-seed-section-curriculum"><span>02</span> Môn học</a>
+          <a href="#cla-seed-section-transcript"><span>03</span> Bảng điểm</a>
+          <a href="#cla-seed-section-behavior"><span>04</span> Hành vi học tập</a>
+          <a href="#cla-seed-section-finance"><span>05</span> Tài chính <small>Tùy chọn</small></a>
+        </nav>
+
         {isAdminDemo && profileReady && (
           <>
             <p className="profile-message" role="status">
@@ -855,7 +863,7 @@ export default function TrangNhapHoSoHocTap() {
         <div className="cla-transcript-page-actions"><a href="/student/transcript">Xem bảng điểm đã lưu →</a></div>
 
         <form className="profile-form" onSubmit={handleSubmit}>
-          <section className="profile-form-section">
+          <section id="cla-seed-section-goals" className="profile-form-section">
             <div className="profile-section-title">
               <span>01</span>
               <h2>Thông tin mục tiêu</h2>
@@ -917,7 +925,7 @@ export default function TrangNhapHoSoHocTap() {
             </div>
           </section>
 
-          <section className="profile-form-section">
+          <section id="cla-seed-section-curriculum" className="profile-form-section">
             <div className="profile-section-title">
               <span>02</span>
               <h2>Chương trình học GDPT 2018</h2>
@@ -988,7 +996,7 @@ export default function TrangNhapHoSoHocTap() {
             </div>
           </section>
 
-          <section className="profile-form-section">
+          <section id="cla-seed-section-transcript" className="profile-form-section">
             <div className="profile-section-title">
               <span>03</span>
               <h2>Bảng điểm 3 năm THPT</h2>
@@ -1164,10 +1172,15 @@ export default function TrangNhapHoSoHocTap() {
             </div>
           </section>
 
-          <section className="profile-form-section">
+          <section id="cla-seed-section-behavior" className="profile-form-section">
             <div className="profile-section-title">
               <span>04</span>
               <h2>Hành vi học tập và nhận thức</h2>
+            </div>
+
+            <div className="cla-seed-measurement-note" role="note">
+              <strong>Dữ liệu tự đánh giá</strong>
+              <p>Các thông tin dưới đây do bạn tự ước lượng. Nếu chưa theo dõi hoặc không chắc con số, hãy để trống. Cognitive Learn sẽ ghi nhận là thiếu dữ liệu, không tự đổi thành 0. Bạn vẫn có thể lưu hồ sơ và sử dụng các chức năng tuyển sinh dựa trên bảng điểm.</p>
             </div>
 
             <div className="profile-field-grid">
@@ -1180,7 +1193,6 @@ export default function TrangNhapHoSoHocTap() {
                   onChange={(event) =>
                     updateField("studyHoursPerWeek", event.target.value)
                   }
-                  required
                 />
               </label>
 
@@ -1193,7 +1205,6 @@ export default function TrangNhapHoSoHocTap() {
                   onChange={(event) =>
                     updateField("practiceTestsPerWeek", event.target.value)
                   }
-                  required
                 />
               </label>
 
@@ -1207,7 +1218,6 @@ export default function TrangNhapHoSoHocTap() {
                   onChange={(event) =>
                     updateField("planCompletionRate", event.target.value)
                   }
-                  required
                 />
               </label>
 
@@ -1220,7 +1230,6 @@ export default function TrangNhapHoSoHocTap() {
                   onChange={(event) =>
                     updateField("goalSwitchFrequency", event.target.value)
                   }
-                  required
                 />
               </label>
 
@@ -1234,7 +1243,6 @@ export default function TrangNhapHoSoHocTap() {
                   onChange={(event) =>
                     updateField("taskAbandonmentRate", event.target.value)
                   }
-                  required
                 />
               </label>
 
@@ -1248,7 +1256,6 @@ export default function TrangNhapHoSoHocTap() {
                   onChange={(event) =>
                     updateField("contextSwitchRate", event.target.value)
                   }
-                  required
                 />
               </label>
 
@@ -1262,7 +1269,6 @@ export default function TrangNhapHoSoHocTap() {
                   onChange={(event) =>
                     updateField("learningStrategy", event.target.value)
                   }
-                  required
                 />
               </label>
 
@@ -1276,13 +1282,12 @@ export default function TrangNhapHoSoHocTap() {
                   onChange={(event) =>
                     updateField("motivationLevel", event.target.value)
                   }
-                  required
                 />
               </label>
             </div>
           </section>
 
-          <section className="profile-form-section">
+          <section id="cla-seed-section-finance" className="profile-form-section">
             <div className="profile-section-title">
               <span>05</span>
               <h2>Tài chính, du học và học bổng (không bắt buộc)</h2>
