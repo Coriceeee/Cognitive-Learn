@@ -112,3 +112,6 @@
 
 /* Phase 2: Seed form wayfinding and honest optional self-report inputs. */
 @import "./styles/55-cla-seed-profile-guidance.css";
+
+/* CP88: readable historical THPT comparison for mock-score projections. */
+@import "./styles/56-cla-projection-benchmark.css";
