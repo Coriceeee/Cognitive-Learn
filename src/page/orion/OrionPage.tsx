@@ -11,7 +11,7 @@ import ModuleInputObservatory from "../../components/common/ModuleInputObservato
 import ModuleDraftFeedback from "../../components/common/ModuleDraftFeedback";
 import { useRef } from "react";
 import { readNumber, isBlankOrValid } from "../../lib/inputValidation";
-import { useStudentTranscript } from "../seed/hooks/useStudentTranscript";
+
 import { getLatestSubjectGrades } from "../seed/services/transcriptData";
 import { canPrefillFromVerifiedTranscript } from "../../lib/transcriptPrefillEligibility";
 import { useEffect, useLayoutEffect } from "react";
@@ -80,8 +80,8 @@ export default function OrionPage() {
     useState<Record<ScoreKey, string>>(defaultTargets);
 
   const { draft: savedDraft, status: saveStatus, error: draftError, uid: draftOwnerUid, conflict: draftConflict, save: saveDraft, markEditing, acceptRemote } = useModuleDraft<{targetMajor:string;weeksLeft:string;scores:Record<ScoreKey,string>;targets:Record<ScoreKey,string>}>("orion");
-  const transcript = useStudentTranscript();
   const verifiedProfile = useVerifiedStudentProfile();
+  const transcript = verifiedProfile.transcript;
   const [gapSubjects,setGapSubjects]=useState<ScoreKey[]>([]);
   const [gapTotal,setGapTotal]=useState("");
   const [admissionGoal, setAdmissionGoal] = useState<AdmissionGoal | null>(null);
