@@ -231,8 +231,9 @@ export function answerPersonalLearningAdvice(context: PersonalLearningContext | 
     loadFactor = Math.min(loadFactor, 0.85);
     loadReasons.push('Tỷ lệ bỏ dở nhiệm vụ tự báo cáo là ' + abandonment.toFixed(0) + '%, nên chia nhỏ đầu việc và tránh tăng tải.');
   }
-  const completionTrend = profileReady && context?.temporalReport?.status === 'DESCRIPTIVE'
-    ? context.temporalReport.series.find(item => item.metric === 'planCompletionRate' && item.status === 'DESCRIPTIVE')?.delta ?? null
+  const temporal = profileReady ? context?.temporalReport ?? null : null;
+  const completionTrend = temporal?.status === 'DESCRIPTIVE'
+    ? temporal.series.find(item => item.metric === 'planCompletionRate' && item.status === 'DESCRIPTIVE')?.delta ?? null
     : null;
   if (completionTrend !== null && finiteIn(completionTrend, -100, 100) && completionTrend <= -10) {
     loadFactor = Math.min(loadFactor, 0.85);
