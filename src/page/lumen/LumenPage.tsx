@@ -69,7 +69,26 @@ export default function LumenPage() {
 
   const advanced = useLearningIntelligence(profile, cognitive, growthAnalytics);
   const gpaIntegrity = useAcademicGpaIntegrity();
-  const canShowGpaScenario = gpaIntegrity.status === "VERIFIED" && typeof gpaIntegrity.result?.derived?.overall === "number" && gpaIntegrity.result.derived.overall === profile.gpaOverall && !error && cognitive.scoreAvailable === true;
+  const predictionRequiredDimensions = ["GVI", "BDI", "FRI"] as const;
+  const missingPredictionDimensions = predictionRequiredDimensions.filter(code =>
+    cognitive.missingDimensions?.includes(code) ||
+    cognitive.dimensions?.find(item => item.code === code)?.available !== true
+  );
+  const hasCompletePredictionSignals = missingPredictionDimensions.length === 0;
+  const gpaIsVerified = gpaIntegrity.status === "VERIFIED"
+    && typeof gpaIntegrity.result?.derived?.overall === "number"
+    && gpaIntegrity.result.derived.overall === profile.gpaOverall;
+  const canShowGpaScenario = gpaIsVerified && !error
+    && cognitive.scoreAvailable === true && hasCompletePredictionSignals;
+  const advancedGateMessage = !gpaIsVerified
+    ? "GPA chưa được đối soát đầy đủ với bảng điểm trên máy chủ. Hãy kiểm tra Seed trước khi xem kịch bản."
+    : cognitive.scoreAvailable !== true
+      ? "Chưa đủ ba chỉ báo nền tảng SCI, MAS và CSL để tạo kịch bản. Hãy hoàn thiện các thông tin cơ bản trong Seed."
+      : missingPredictionDimensions.length > 0
+        ? `Chưa tạo kịch bản vì còn thiếu ${missingPredictionDimensions.join(", ")}. GVI cần số lần đổi mục tiêu; FRI cần cả tỷ lệ bỏ dở và chuyển tác vụ; BDI cần ít nhất hai lần ghi nhận hợp lệ. Để trống nếu chưa biết, không nhập 0 thay thế.`
+        : error
+          ? "Chưa xác minh được lịch sử Cognitive từ máy chủ. Hãy thử đồng bộ lại trước khi sử dụng kịch bản."
+          : "Dữ liệu hồ sơ chưa sẵn sàng để tạo kịch bản.";
 
   if (loading) {
 
@@ -382,7 +401,7 @@ export default function LumenPage() {
                 navigateTo("/atlas/subjects");
                 if (window.location.pathname !== "/atlas/subjects") clearExamProjection();
               }} />}
-              {view === "/lumen/advanced" && (canShowGpaScenario ? <><section className="lumen-empty-card"><h2>Dự báo học tập và định hướng tuyển sinh</h2><p>Điểm kịch bản học tập theo công thức: {Number.isFinite(advanced.prediction.predictedScore) ? advanced.prediction.predictedScore : "Chưa có"}/10. Đây là kịch bản từ GPA, không phải dự báo điểm thi THPT đã kiểm định.</p><p><a href="/atlas/subjects#cla-exam-projection">Mở Atlas nếu muốn nhập điểm trực tiếp →</a></p></section><details className="cla-focus-disclosure"><summary>Chi tiết mô hình, hướng nghề và chiến lược tham khảo</summary><LearningIntelligencePanel intelligence={advanced} /></details></> : <p className="cla-transcript-hint">Chưa đủ dữ liệu nhận thức và GPA đã đối soát. <a href="/student/profile">Bổ sung hồ sơ</a> hoặc <a href="/student/transcript">đối soát bảng điểm</a>. Bạn vẫn có thể ước lượng từ hai bài thi thử ở trên hoặc <a href="/atlas/subjects#cla-exam-projection">nhập trực tiếp ở Atlas →</a>.</p>)}
+              {view === "/lumen/advanced" && (canShowGpaScenario ? <><section className="lumen-empty-card"><h2>Dự báo học tập và định hướng tuyển sinh</h2><p>Điểm kịch bản học tập theo công thức: {Number.isFinite(advanced.prediction.predictedScore) ? advanced.prediction.predictedScore : "Chưa có"}/10. Đây là kịch bản từ GPA, không phải dự báo điểm thi THPT đã kiểm định.</p><p><a href="/atlas/subjects#cla-exam-projection">Mở Atlas nếu muốn nhập điểm trực tiếp →</a></p></section><details className="cla-focus-disclosure"><summary>Chi tiết mô hình, hướng nghề và chiến lược tham khảo</summary><LearningIntelligencePanel intelligence={advanced} /></details></> : <p className="cla-transcript-hint">{advancedGateMessage} <a href="/student/profile">Mở hồ sơ Seed</a> · <a href="/student/transcript">Đối soát bảng điểm</a>. Bạn vẫn có thể ước lượng trực tiếp từ hai bài thi thử ở đây hoặc <a href="/atlas/subjects#cla-exam-projection">mở Atlas →</a>.</p>)}
               {view === "/lumen/insights" && cognitive.scoreAvailable === true && (
                 <>
                   <LumenDecisionPanel intelligence={intelligence} />
