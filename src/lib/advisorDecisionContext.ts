@@ -143,7 +143,7 @@ export function answerPersonalLearningAdvice(state: LearningTranscriptState | nu
     : '';
 
   return {
-    answer: `Mình đã xem bảng điểm đã đồng bộ của bạn ở ${period}. Trong các môn có điểm trung bình hoàn chỉnh cùng học kỳ, mức thấp nhất là: ${scoreList}. ${focusAdvice}\\n\\nGợi ý thử trong 2 tuần: dành 2 buổi/tuần, mỗi buổi 30–40 phút cho môn ưu tiên; 10 phút ôn đúng phần kiến thức, 20 phút làm bài theo chủ đề, 5–10 phút ghi lại lỗi và cách sửa. Sau 2 tuần, đối chiếu bài kiểm tra mới trước khi đổi ưu tiên.\\n\\nCác môn tiếp theo trong nhóm điểm thấp là: ${next || 'chưa đủ dữ liệu để so sánh thêm'}. Điểm phản ánh kết quả đã nhập trong học kỳ này, không tự cho biết nguyên nhân yếu hay dự báo điểm thi. ${legacyNote}`,
+    answer: `Mình đã xem bảng điểm đã đồng bộ của bạn ở ${period}. Trong các môn có điểm trung bình hoàn chỉnh cùng học kỳ, mức thấp nhất là: ${scoreList}. ${focusAdvice}\n\nGợi ý thử trong 2 tuần: dành 2 buổi/tuần, mỗi buổi 30–40 phút cho môn ưu tiên; 10 phút ôn đúng phần kiến thức, 20 phút làm bài theo chủ đề, 5–10 phút ghi lại lỗi và cách sửa. Sau 2 tuần, đối chiếu bài kiểm tra mới trước khi đổi ưu tiên.\n\nCác môn tiếp theo trong nhóm điểm thấp là: ${next || 'chưa đủ dữ liệu để so sánh thêm'}. Điểm phản ánh kết quả đã nhập trong học kỳ này, không tự cho biết nguyên nhân yếu hay dự báo điểm thi. ${legacyNote}`,
     destination: '/student/transcript',
     linkLabel: 'Xem bảng điểm chi tiết',
   };
