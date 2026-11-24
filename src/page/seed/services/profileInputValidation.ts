@@ -22,14 +22,14 @@ const rules: readonly {
   max?: number;
   integer?: boolean;
 }[] = [
-  { key: "studyHoursPerWeek", label: "Số giờ học mỗi tuần", required: false, max: 168 },
-  { key: "practiceTestsPerWeek", label: "Số đề luyện mỗi tuần", required: false, integer: true },
-  { key: "planCompletionRate", label: "Mức hoàn thành kế hoạch", required: false, max: 100 },
+  { key: "studyHoursPerWeek", label: "Số giờ học mỗi tuần", required: true, max: 168 },
+  { key: "practiceTestsPerWeek", label: "Số đề luyện mỗi tuần", required: true, integer: true },
+  { key: "planCompletionRate", label: "Mức hoàn thành kế hoạch", required: true, max: 100 },
   { key: "goalSwitchFrequency", label: "Số lần đổi mục tiêu/tháng", required: false, integer: true },
   { key: "taskAbandonmentRate", label: "Tỷ lệ bỏ dở nhiệm vụ", required: false, max: 100 },
   { key: "contextSwitchRate", label: "Tỷ lệ chuyển đổi tác vụ", required: false, max: 100 },
-  { key: "learningStrategy", label: "Mức sử dụng chiến lược học tập", required: false, max: 100 },
-  { key: "motivationLevel", label: "Mức động lực", required: false, max: 100 },
+  { key: "learningStrategy", label: "Mức sử dụng chiến lược học tập", required: true, max: 100 },
+  { key: "motivationLevel", label: "Mức động lực", required: true, max: 100 },
   { key: "educationBudget", label: "Ngân sách giáo dục", required: false },
   { key: "maxTuition", label: "Mức học phí tối đa/năm", required: false },
 ];
