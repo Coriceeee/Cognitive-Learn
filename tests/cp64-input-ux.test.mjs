@@ -54,7 +54,8 @@ describe('CP64 three-module integration and accessibility',()=>{
       const page=pages[module];
       assert.match(page,/import ModuleInputObservatory from/);
       assert.match(page,new RegExp(`view === "/${module}" && <ModuleInputObservatory`));
-      assert.match(page,/canSimulate=\{hasInputs\}/);
+      // CP92 supersedes manual PULSE inputs with Firestore-linked evidence.
+    assert.match(page,module==='pulse' ? /canSimulate=\{linked.ready > 0\} mode="linked"/ : /canSimulate=\{hasInputs\}/);
     });
   }
   it('does not claim academic readiness or probability from form completeness',()=>{
@@ -79,8 +80,11 @@ describe('CP64 three-module integration and accessibility',()=>{
   it('configures proper input ranges for Orion, Pulse and Haven',()=>{
     assert.match(pages.orion,/min: 1, max: 104, integer: true/);
     assert.match(pages.orion,/Điểm hiện tại \(0–10\)/);
-    assert.match(pages.pulse,/Số nguyện vọng.*integer: true/);
-    assert.match(pages.pulse,/max: 168/);
+    const linked = readFileSync(new URL('../src/lib/pulseLinkedSourceModel.ts',import.meta.url),'utf8');
+    assert.match(pages.pulse,/usePulseLinkedSources\(/);
+    assert.match(linked,/atlasProgramCount/);
+    assert.match(linked,/studyHoursPerWeek',168/);
+    assert.match(linked,/planCompletionRate',100/);
     assert.match(pages.haven,/Điểm tiếng Anh.*max: 10/);
     assert.match(pages.haven,/max: 100/);
   });

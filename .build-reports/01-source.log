@@ -1,0 +1,10 @@
+CP92 SOURCE FAIL [
+  'CHANGED .gitignore',
+  'CHANGED api/gemini-lumen.ts',
+  'CHANGED firebase.json',
+  'CHANGED src/components/common/FloatingAdvisorChat.tsx',
+  'CHANGED src/lib/geminiAdmissionClient.ts',
+  'CHANGED src/lib/geminiLumenClient.ts',
+  'CHANGED tests/cp87-navigation-priority.test.cjs',
+  'CHANGED tests/step15-companion-web-push.test.mjs'
+]

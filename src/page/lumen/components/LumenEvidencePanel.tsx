@@ -33,20 +33,17 @@ export default function LumenEvidencePanel({
       <div>
 
         <span className="lumen-eyebrow">
-          03 · WHY?
+          03 · KIỂM TRA CĂN CỨ
         </span>
 
 
         <h2>
-          Evidence status
+          Dữ liệu nào đã được kiểm chứng?
         </h2>
 
 
         <p>
-          Lumen phân biệt giữa dữ liệu
-          quan sát, engine output và
-          bằng chứng nghiên cứu. Chỉ số tin cậy nội bộ hiện là quy tắc
-          thử nghiệm, không phải xác suất đã hiệu chuẩn.
+          LUMEN phân biệt dữ liệu bạn đã cung cấp, kết quả do công thức tính và bằng chứng nghiên cứu. Các mức hỗ trợ hiện nay là quy tắc thử nghiệm, không phải xác suất chính xác.
         </p>
 
       </div>
@@ -56,7 +53,7 @@ export default function LumenEvidencePanel({
 
       {growthEvidence && (
         <p className="lumen-growth-evidence-note">
-          <strong>Growth · {growthEvidence.dataQuality}:</strong>{" "}
+          <strong>So sánh theo thời gian · {({ SUFFICIENT: "Đủ dữ liệu mô tả", EMERGING: "Dữ liệu đang hình thành", LIMITED: "Chưa đủ dữ liệu", UNKNOWN: "Chưa rõ" } as Record<string, string>)[growthEvidence.dataQuality] ?? "Cần xem thêm"}:</strong>{" "}
           {growthEvidence.message}
           {growthEvidence.status !== "NO_COMPARISON" && (
             <> · Khoảng quan sát: {growthEvidence.observationDays} ngày.</>
@@ -79,15 +76,15 @@ export default function LumenEvidencePanel({
 
 
           <span>
-            Longitudinal cognitive history
+            Lịch sử ghi nhận để so sánh
           </span>
 
 
           <strong>
             {
               hasHistory
-                ? "Available"
-                : "Building"
+                ? "Đã có"
+                : "Đang bổ sung"
             }
           </strong>
 
@@ -103,12 +100,12 @@ export default function LumenEvidencePanel({
 
 
           <span>
-            Deterministic intelligence engines
+            Bộ tính chỉ số theo công thức
           </span>
 
 
           <strong>
-            Available
+            Đã có
           </strong>
 
 
@@ -123,12 +120,12 @@ export default function LumenEvidencePanel({
 
 
           <span>
-            Research-grade causal evidence
+            Bằng chứng CLA gây ra cải thiện học tập
           </span>
 
 
           <strong>
-            Not claimed
+            Chưa chứng minh
           </strong>
 
 
@@ -148,13 +145,13 @@ export default function LumenEvidencePanel({
 
 
             <span className="lumen-eyebrow">
-              EXPLAINABLE AI
+              GIẢI THÍCH CĂN CỨ ĐỀ XUẤT
             </span>
 
 
 
             <h2>
-              Vì sao AI đưa ra kết luận?
+              Vì sao hệ thống đưa ra gợi ý này?
             </h2>
 
 

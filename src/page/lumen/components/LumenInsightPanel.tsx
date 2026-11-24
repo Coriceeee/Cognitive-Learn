@@ -59,18 +59,17 @@ export default function LumenInsightPanel({
       <div className="lumen-panel-header">
 
         <span className="lumen-eyebrow">
-          COGNITIVE INSIGHT
+          DIỄN GIẢI KẾT QUẢ HỌC TẬP
         </span>
 
 
         <h2>
-          Phân tích năng lực nhận thức
+          Gợi ý dựa trên các chỉ báo học tập
         </h2>
 
 
         <p>
-          Tổng hợp từ Cognitive Engine
-          và dữ liệu học tập của học sinh.
+          Tổng hợp từ dữ liệu học tập và các quy tắc tính thử nghiệm của CLA; không phải kết luận về trí thông minh.
         </p>
 
       </div>
@@ -130,7 +129,7 @@ export default function LumenInsightPanel({
                         <div className="lumen-score">
 
                           <span>
-                            Score
+                            Điểm quy tắc
                           </span>
 
 
@@ -197,23 +196,21 @@ export default function LumenInsightPanel({
 
               <span className="lumen-eyebrow">
 
-                AI REASONING
+                PHÂN TÍCH TỰ ĐỘNG CỦA CLA
 
               </span>
 
 
               <h2>
 
-                Insight từ AI Intelligence Core
+                Giải thích bổ sung từ hệ thống
 
               </h2>
 
 
               <p>
 
-                AI phân tích dựa trên
-                cognitive profile,
-                growth trend và hành vi học tập.
+                Hệ thống sử dụng các chỉ báo học tập và dữ liệu theo dõi hiện có; chưa chứng minh quan hệ nhân quả.
 
               </p>
 
@@ -316,7 +313,7 @@ export default function LumenInsightPanel({
 
                         <span>
 
-                          Confidence
+                          Mức hỗ trợ theo quy tắc
 
                         </span>
 
@@ -329,7 +326,7 @@ export default function LumenInsightPanel({
                             )
                           }
 
-                          %
+                          /100 · Quy tắc nội bộ
 
                         </strong>
 

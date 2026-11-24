@@ -2,7 +2,7 @@ import { inspectModuleInputs, type ReadinessGroup } from "../../lib/moduleInputR
 
 /** No inferred outcomes: this chart shows *field coverage* only. */
 export default function ModuleInputObservatory({
-  moduleName, groups, editHref, resultHref, resultLabel, canSimulate, note,
+  moduleName, groups, editHref, resultHref, resultLabel, canSimulate, note, mode = "input",
 }: {
   moduleName: "Orion" | "Pulse" | "Haven";
   groups: ReadinessGroup[];
@@ -11,19 +11,20 @@ export default function ModuleInputObservatory({
   resultLabel: string;
   canSimulate: boolean;
   note: string;
+  mode?: "input" | "linked";
 }) {
   const data = inspectModuleInputs(groups);
   const pct = data.total ? Math.round(data.ready / data.total * 100) : 0;
   return <section className="cla-input-observatory" aria-label={`Tình trạng nhập dữ liệu ${moduleName}`}>
     <div className="cla-input-observatory-head">
       <div>
-        <span className="cla-input-observatory-eyebrow">DATA COVERAGE / {moduleName.toUpperCase()}</span>
+        <span className="cla-input-observatory-eyebrow">{mode === "linked" ? "DỮ LIỆU LIÊN THÔNG" : "DATA COVERAGE"} / {moduleName.toUpperCase()}</span>
         <h2>Đường tín hiệu dữ liệu của bạn</h2>
-        <p>Biểu đồ đếm ô đã nhập hợp lệ, không đo năng lực và không phải kết quả của AI.</p>
+        <p>{mode === "linked" ? "Các phân hệ tự cung cấp dữ liệu đã lưu từ Firebase. Biểu đồ đếm nguồn có giá trị, không đo năng lực và không phải kết quả của AI." : "Biểu đồ đếm ô đã nhập hợp lệ, không đo năng lực và không phải kết quả của AI."}</p>
       </div>
       <div className="cla-input-observatory-total" aria-label={`${data.ready} trên ${data.total} trường đã nhập hợp lệ`}>
         <strong>{data.ready}<span>/{data.total}</span></strong>
-        <small>ô có dữ liệu hợp lệ</small>
+        <small>{mode === "linked" ? "nguồn có dữ liệu" : "ô có dữ liệu hợp lệ"}</small>
       </div>
     </div>
     <div className="cla-input-observatory-track" role="meter" aria-valuemin={0} aria-valuemax={data.total} aria-valuenow={data.ready} aria-label="Số trường dữ liệu đã nhập hợp lệ">
@@ -39,15 +40,16 @@ export default function ModuleInputObservatory({
     </div>
     <div className="cla-input-observatory-bottom">
       <div className="cla-input-observatory-legend" aria-label="Chú giải biểu đồ">
-        <span><i className="is-ready" /> Đã nhập</span><span><i className="is-missing" /> Còn trống</span><span><i className="is-invalid" /> Cần sửa</span>
+        <span><i className="is-ready" /> {mode === "linked" ? "Đã liên kết" : "Đã nhập"}</span><span><i className="is-missing" /> Còn trống</span><span><i className="is-invalid" /> Cần sửa</span>
       </div>
       <p className="cla-input-observatory-state" role="status">{data.invalid > 0
         ? `${data.invalid} giá trị ngoài phạm vi cho phép cần sửa.`
+        : mode === "linked" ? (data.ready ? "Dữ liệu đã lấy trực tiếp từ các phân hệ; nguồn còn thiếu được để trống." : "Chưa có dữ liệu được xác minh. Hãy cập nhật tại SEED, LUMEN, ATLAS hoặc ORION.")
         : canSimulate ? "Đã có đầu vào để xem kết quả mô phỏng theo giả định."
         : data.ready ? "Đã có dữ liệu bước đầu; vẫn thiếu điều kiện để lập kết quả."
         : "Chưa có dữ liệu đầu vào; bắt đầu từ biểu mẫu của bạn."}</p>
       <div className="cla-input-observatory-actions">
-        <a className="cla-input-observatory-primary" href={editHref}>{data.ready ? "Bổ sung / chỉnh dữ liệu" : "Bắt đầu nhập dữ liệu"} <span aria-hidden="true">→</span></a>
+        <a className="cla-input-observatory-primary" href={editHref}>{mode === "linked" ? "Xem dữ liệu liên thông" : data.ready ? "Bổ sung / chỉnh dữ liệu" : "Bắt đầu nhập dữ liệu"} <span aria-hidden="true">→</span></a>
         {canSimulate && <a href={resultHref}>{resultLabel} <span aria-hidden="true">↗</span></a>}
       </div>
       <p className="cla-input-observatory-note">{note}</p>

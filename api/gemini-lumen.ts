@@ -480,7 +480,9 @@ async function callGemini(apiKey: string, model: string, context: ReturnType<typ
 
     if (response.status === 429) throw new ApiError(429, "Gemini đã đạt hạn mức. Vui lòng thử lại sau.");
 
-    if (response.status === 400) throw new ApiError(502, "Gemini từ chối cấu trúc yêu cầu. Kiểm tra cấu hình model.");
+    if (response.status === 400) throw new ApiError(502, "Gemini từ chối yêu cầu (HTTP 400): kiểm tra model và định dạng JSON yêu cầu.");
+    if (response.status === 401 || response.status === 403) throw new ApiError(502, "Gemini từ chối quyền gọi API: kiểm tra API key, API restrictions và project Google AI Studio.");
+    if (response.status === 404) throw new ApiError(502, "Model Gemini không được tìm thấy hoặc không khả dụng với API key hiện tại.");
 
     throw new ApiError(502, "Gemini chưa khả dụng. Lumen vẫn có phân tích nội bộ.");
 
@@ -506,9 +508,11 @@ async function callGemini(apiKey: string, model: string, context: ReturnType<typ
 
   let parsed: unknown;
 
-  try { parsed = JSON.parse(raw) as unknown; }
-
-  catch { throw new ApiError(502, "Gemini trả nội dung không phải JSON hợp lệ."); }
+  // CP93: accept only a complete JSON object or a single well-formed fenced JSON
+  // block. Never extract JSON from arbitrary prose or bypass schema checks.
+  const cleaned = raw.replace(/^```(?:json)?\s*\n?([\s\S]*?)\n?```$/i, "$1").trim();
+  try { parsed = JSON.parse(cleaned) as unknown; }
+  catch { throw new ApiError(502, "Gemini trả nội dung không phải JSON hợp lệ (không phải lỗi lưu API key). Hệ thống giữ phân tích nội bộ."); }
 
   return normalizeExplanation(parsed);
 

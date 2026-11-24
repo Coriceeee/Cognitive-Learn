@@ -37,6 +37,22 @@
   color: rgb(var(--tc-tx-1a57a3));
 }
 .cla-access-actions a { background: #2563eb; border-color: #2563eb; color: white; }
+/* CP91: distinct, accessible error reason rather than an endless generic retry. */
+.cla-access-diagnosis {
+  display: grid;
+  gap: 8px;
+  padding: 15px 17px;
+  border-radius: 14px;
+  border: 1px solid #c6d9f3;
+  background: #f1f7ff;
+  color: #183b65;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.cla-access-diagnosis code { font-size: 12px; color: #164f98; }
+.cla-access-diagnosis p { margin: 2px 0; color: #284767; line-height: 1.6; }
+.cla-access-diagnosis small { color: #536a82; line-height: 1.5; }
+
 .role-workflow-notice {
   margin: 24px 0 0;
   padding: 16px 20px;

@@ -1,10 +1,10 @@
 {
   "envelopeSchema": "cla.cp82.local-integrity.v1",
-  "payloadSha256": "f552f980f0ce388aeb20c094d6ae38969d293447fb55e6979d37b9cab8d41fd3",
+  "payloadSha256": "571908204af8fb0bb310cf1a07958205edb3803c64d372c9ca7ccf91856154b0",
   "payload": {
     "schema": "cla.cp82.current-source.synthetic-local-replay.v1",
     "sourceScope": "CP82_CURRENT_TREE_NOT_CP31_HISTORICAL_RELEASE",
-    "sourceFingerprintSha256": "15a91d5a81a49e05fa2827300c21f8bf8e9c8664839d504ae1e61036767d6d15",
+    "sourceFingerprintSha256": "441914211736616345e683a1abf5ba9c23b110ef33b38d2144f1b516b8264a3f",
     "fixtureSha256s": [
       "683adb60c967781b0cca88d24378fb2b88e217fc25a99084d30815c0a3a69ddb",
       "4206b902b980d1af37920689a2b230dff4b42227e87819c261b4614d890f3adb",
@@ -22,10 +22,10 @@
     "stages": {
       "golden": {
         "envelopeSchema": "cla.golden-path.local-integrity.v1",
-        "payloadSha256": "8eaa3135a959f21f3052a7aa2616bb919356e4bc682ec8199b6208af94fc4e88",
+        "payloadSha256": "409be6692d52a5636a21a691b3eb10f40f02aacf49a6dd7fc88d91e9a6c828e3",
         "payload": {
           "fixtureSha256": "683adb60c967781b0cca88d24378fb2b88e217fc25a99084d30815c0a3a69ddb",
-          "sourceFingerprint": "15a91d5a81a49e05fa2827300c21f8bf8e9c8664839d504ae1e61036767d6d15",
+          "sourceFingerprint": "441914211736616345e683a1abf5ba9c23b110ef33b38d2144f1b516b8264a3f",
           "replay": {
             "schema": "cla.golden-path.synthetic-replay.v1",
             "dataScope": "SYNTHETIC_ONLY",
@@ -396,7 +396,7 @@
       },
       "multi": {
         "envelopeSchema": "cla.multicycle.local-integrity.v1",
-        "payloadSha256": "2ce76389cab15e16c4859abdb801fd8c8eabf404bafb2912993ddf7fddab5977",
+        "payloadSha256": "a6cecd830f8ef382a7ebb17d4d29460c2e5f0c326eab6692baf440136dfc9c95",
         "payload": {
           "schema": "cla.multicycle.synthetic-replay.v1",
           "dataScope": "SYNTHETIC_ONLY",
@@ -408,7 +408,7 @@
             "683adb60c967781b0cca88d24378fb2b88e217fc25a99084d30815c0a3a69ddb",
             "4206b902b980d1af37920689a2b230dff4b42227e87819c261b4614d890f3adb"
           ],
-          "sourceFingerprint": "15a91d5a81a49e05fa2827300c21f8bf8e9c8664839d504ae1e61036767d6d15",
+          "sourceFingerprint": "441914211736616345e683a1abf5ba9c23b110ef33b38d2144f1b516b8264a3f",
           "history": {
             "schema": "cla.journey.history.v1",
             "status": "MULTI_CYCLE_DESCRIPTIVE",
@@ -508,7 +508,7 @@
       },
       "measurement": {
         "envelopeSchema": "cla.measurement.local-integrity.v1",
-        "payloadSha256": "c8cfe51a91530effc001e22c75a879852b7d83a7bb4f7fd88a7f5b43fc4c7ba4",
+        "payloadSha256": "14284ddea8eee9c1264dc0f1d6e9b8e9cedaec5e352aea7b78059f276583f51d",
         "payload": {
           "schema": "cla.measurement.synthetic-replay.v1",
           "dataScope": "SYNTHETIC_ONLY",
@@ -516,7 +516,7 @@
           "empiricalClaimEligible": false,
           "measurementEquivalenceVerified": false,
           "reliabilityValidated": false,
-          "sourceFingerprint": "15a91d5a81a49e05fa2827300c21f8bf8e9c8664839d504ae1e61036767d6d15",
+          "sourceFingerprint": "441914211736616345e683a1abf5ba9c23b110ef33b38d2144f1b516b8264a3f",
           "fixtureSha256s": [
             "683adb60c967781b0cca88d24378fb2b88e217fc25a99084d30815c0a3a69ddb",
             "4206b902b980d1af37920689a2b230dff4b42227e87819c261b4614d890f3adb",

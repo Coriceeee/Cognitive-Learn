@@ -49,14 +49,14 @@ function directionLabel(
   direction: "UP" | "DOWN" | "STABLE"
 ) {
   if (direction === "UP") {
-    return "Improving";
+    return "Giá trị tăng";
   }
 
   if (direction === "DOWN") {
-    return "Needs attention";
+    return "Cần xem nguyên nhân";
   }
 
-  return "Stable";
+  return "Ít thay đổi";
 }
 
 export default function CognitiveGrowthPanel({
@@ -72,8 +72,8 @@ export default function CognitiveGrowthPanel({
     return (
       <section className="cognitive-growth-panel">
         <div className="cognitive-growth-empty">
-          <span>Longitudinal Growth</span>
-          <h3>Chưa đủ dữ liệu để so sánh</h3>
+          <span>THEO DÕI QUA CÁC LẦN GHI NHẬN</span>
+          <h3>Chưa có đủ hai lần ghi nhận để so sánh</h3>
           <p>
             Hệ thống cần ít nhất hai lần đo hợp lệ để
             xác định thay đổi theo thời gian.
@@ -89,7 +89,7 @@ export default function CognitiveGrowthPanel({
     <section className="cognitive-growth-panel">
       <div className="cognitive-growth-header">
         <div>
-          <span>Longitudinal Growth</span>
+          <span>THEO DÕI QUA CÁC LẦN GHI NHẬN</span>
           <h3>Bạn đã thay đổi như thế nào?</h3>
           <p>
             So sánh trạng thái hiện tại với lần đo trước
@@ -100,7 +100,7 @@ export default function CognitiveGrowthPanel({
         <div
           className={`cognitive-growth-overall is-${overall.direction.toLowerCase()}`}
         >
-          <small>Overall change</small>
+          <small>Chênh lệch điểm tổng hợp</small>
           <strong>{formatDelta(overall.delta)}</strong>
           <em>{directionLabel(overall.direction)}</em>
         </div>
@@ -108,20 +108,20 @@ export default function CognitiveGrowthPanel({
 
       <div className="cognitive-growth-meta">
         <div>
-          <span>Observation window</span>
-          <strong>{analytics.observationDays} days</strong>
+          <span>Khoảng thời gian có dữ liệu</span>
+          <strong>{analytics.observationDays} ngày</strong>
         </div>
 
         <div>
-          <span>Growth velocity</span>
+          <span>Mức thay đổi trung bình mỗi ngày</span>
           <strong>
-            {formatDelta(overall.velocityPerDay)} / day
+            {formatDelta(overall.velocityPerDay)} / ngày
           </strong>
         </div>
 
         <div>
-          <span>Data quality</span>
-          <strong>{analytics.dataQuality}</strong>
+          <span>Mức dữ liệu theo quy tắc</span>
+          <strong>{({SUFFICIENT:"Có đủ khoảng quan sát",EMERGING:"Đang hình thành",LIMITED:"Còn hạn chế"} as Record<string,string>)[analytics.dataQuality] ?? "Chưa rõ"}</strong>
         </div>
       </div>
 
@@ -152,7 +152,7 @@ export default function CognitiveGrowthPanel({
 
             <div className="cognitive-growth-card-bottom">
               <span>
-                Previous {formatNumber(item.previous)}
+                Lần trước: {formatNumber(item.previous)}
               </span>
               <em>{directionLabel(beneficialDirection(item.code, item.direction))}</em>
             </div>
@@ -162,7 +162,7 @@ export default function CognitiveGrowthPanel({
 
       <div className="cognitive-growth-insights">
         <article>
-          <span>Strongest improvement</span>
+          <span>Chỉ báo tăng nhiều nhất</span>
           <strong>
             {analytics.strongestImprovement
               ? labels[analytics.strongestImprovement.code]
@@ -172,13 +172,13 @@ export default function CognitiveGrowthPanel({
             {analytics.strongestImprovement
               ? `${formatDelta(
                   analytics.strongestImprovement.delta
-                )} points`
+                )} điểm`
               : "Chưa có tín hiệu tăng rõ ràng."}
           </p>
         </article>
 
         <article>
-          <span>Strongest decline</span>
+          <span>Chỉ báo giảm nhiều nhất</span>
           <strong>
             {analytics.strongestDecline
               ? labels[analytics.strongestDecline.code]
@@ -188,25 +188,25 @@ export default function CognitiveGrowthPanel({
             {analytics.strongestDecline
               ? `${formatDelta(
                   analytics.strongestDecline.delta
-                )} points`
+                )} điểm`
               : "Chưa có tín hiệu giảm rõ ràng."}
           </p>
         </article>
 
         <article>
-          <span>Profile balance</span>
+          <span>Tổng số chỉ báo tăng / giảm</span>
           <strong>
             {analytics.improving.length} ↑ /{" "}
             {analytics.declining.length} ↓
           </strong>
           <p>
-            {analytics.stable.length} dimension ổn định
+            {analytics.stable.length} chỉ báo ít thay đổi
           </p>
         </article>
       </div>
 
       <div className="cognitive-growth-note">
-        <span>Evidence status</span>
+        <span>Giới hạn của kết quả</span>
         <p>
           {analytics.dataQuality === "SUFFICIENT"
             ? "Đã có khoảng thời gian quan sát đủ dài để phân tích xu hướng. Đây vẫn là dữ liệu quan sát, chưa phải bằng chứng nhân quả."

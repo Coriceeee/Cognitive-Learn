@@ -1,0 +1,7 @@
+{
+  "local_page_http": "ERROR",
+  "load_error": "Error",
+  "origin": "http://127.0.0.1:3000/",
+  "failed_firebase_hosts": [],
+  "diagnosis": "APP_MODULE_LOAD_ERROR: inspect local Vite config and module startup."
+}

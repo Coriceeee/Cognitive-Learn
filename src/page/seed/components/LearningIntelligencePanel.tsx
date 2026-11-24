@@ -55,6 +55,22 @@ function formatReadinessLevel(value: string) {
   return labels[value] ?? value;
 }
 
+// Only translate display names; keep upstream career IDs and rule calculations unchanged.
+function careerNameVi(name: string): string {
+  const names: Record<string, string> = {
+    "Software Engineer": "Kỹ sư phần mềm",
+    "Data Scientist": "Chuyên gia khoa học dữ liệu",
+    "Data Analyst": "Chuyên viên phân tích dữ liệu",
+    "Business Analyst": "Chuyên viên phân tích nghiệp vụ",
+    "Doctor": "Bác sĩ", "Teacher": "Giáo viên", "Designer": "Nhà thiết kế",
+    "AI Engineer": "Kỹ sư trí tuệ nhân tạo", "Cybersecurity Analyst": "Chuyên viên an ninh mạng",
+    "Product Manager": "Quản lý sản phẩm", "Marketing Specialist": "Chuyên viên tiếp thị",
+  };
+  return names[name] ?? name;
+}
+function sourceNameVi(name: string): string {
+  return ({ COGNITIVE: "Chỉ báo học tập", BEHAVIOR: "Hành vi", ACADEMIC: "Học lực" } as Record<string, string>)[name] ?? name;
+}
 function formatScore(value: unknown) {
   return typeof value === "number" ? Math.round(value) : "--";
 }
@@ -80,7 +96,7 @@ export default function LearningIntelligencePanel({
   } = intelligence;
 
   const primaryCareer = career?.primaryCareer;
-  const careerName = primaryCareer?.career?.name ?? "--";
+  const careerName = careerNameVi(primaryCareer?.career?.name ?? "--");
   const careerDescription =
     primaryCareer?.career?.description ??
     "Hệ thống đang phân tích hồ sơ để xác định hướng phát triển phù hợp.";
@@ -122,7 +138,7 @@ export default function LearningIntelligencePanel({
         <div className="student-intelligence-hero-main">
           <div className="student-intelligence-eyebrow">
             <span className="student-intelligence-dot" />
-            Learning Intelligence
+            Phân tích dữ liệu học tập
             <span className="student-intelligence-live">CHỈ SỐ THỬ NGHIỆM</span>
           </div>
 
@@ -133,8 +149,8 @@ export default function LearningIntelligencePanel({
 
           <p>
             Cognitive Learn kết nối trạng thái nhận thức, hành vi học tập
-            và mục tiêu nghề nghiệp để biến dữ liệu hiện tại thành những
-            quyết định phát triển có thể hành động.
+            và mục tiêu nghề nghiệp để hiển thị các chỉ số theo quy tắc thử nghiệm
+            và gợi ý bước bạn có thể tự lựa chọn.
           </p>
 
           <div className="student-intelligence-hero-meta">
@@ -157,7 +173,7 @@ export default function LearningIntelligencePanel({
             </div>
           </div>
           <div className="student-readiness-label">
-            <span>Current state</span>
+            <span>Trạng thái hiện tại</span>
             <strong>{formatReadinessLevel(readinessLevel)}</strong>
           </div>
         </div>
@@ -167,12 +183,12 @@ export default function LearningIntelligencePanel({
 
       <div className="student-career-focus">
         <div className="student-career-focus-copy">
-          <div className="student-section-kicker">01 · Career Focus</div>
+          <div className="student-section-kicker">01 · NGHỀ NGHIỆP ĐANG QUAN TÂM</div>
           <h3>{careerName}</h3>
           <p>{careerDescription}</p>
           {career?.summary && (
             <div className="student-career-insight">
-              <span>System interpretation</span>
+              <span>CLA diễn giải từ dữ liệu đã có</span>
               <p>{career.summary}</p>
             </div>
           )}
@@ -204,10 +220,10 @@ export default function LearningIntelligencePanel({
       <div className="student-journey-section">
         <div className="student-section-heading">
           <div>
-            <div className="student-section-kicker">02 · Career Journey</div>
+            <div className="student-section-kicker">02 · CÁC BƯỚC TỪ HIỆN TẠI ĐẾN MỤC TIÊU</div>
             <h3>Từ hiện tại đến mục tiêu</h3>
           </div>
-          <span>{readiness !== null ? `${readiness}% ready` : "Building profile"}</span>
+          <span>{readiness !== null ? `${readiness}/100 · Điểm quy tắc` : "Đang bổ sung hồ sơ"}</span>
         </div>
 
         <div className="student-journey-track">
@@ -218,22 +234,22 @@ export default function LearningIntelligencePanel({
           <div className="student-journey-nodes">
             <div className="is-complete">
               <b>01</b>
-              <strong>Current State</strong>
+              <strong>Hiện tại</strong>
               <span>Hiểu bản thân</span>
             </div>
             <div className={journeyProgress >= 50 ? "is-active" : ""}>
               <b>02</b>
-              <strong>Career Fit</strong>
+              <strong>Đối chiếu nghề</strong>
               <span>Đối chiếu hướng đi</span>
             </div>
             <div className={journeyProgress >= 70 ? "is-active" : ""}>
               <b>03</b>
-              <strong>Development</strong>
+              <strong>Cải thiện</strong>
               <span>Lấp khoảng trống</span>
             </div>
             <div className={journeyProgress >= 85 ? "is-active" : ""}>
               <b>04</b>
-              <strong>Readiness</strong>
+              <strong>Sẵn sàng</strong>
               <span>Sẵn sàng tiến bước</span>
             </div>
           </div>
@@ -243,10 +259,10 @@ export default function LearningIntelligencePanel({
       <div className="student-skills-section">
         <div className="student-section-heading">
           <div>
-            <div className="student-section-kicker">03 · Skill Profile</div>
+            <div className="student-section-kicker">03 · CÁC TÍN HIỆU NỔI BẬT</div>
             <h3>Năng lực đang tạo lợi thế</h3>
           </div>
-          <span>{skillItems.length} signals</span>
+          <span>{skillItems.length} chỉ báo</span>
         </div>
 
         {skillItems.length > 0 ? (
@@ -271,12 +287,12 @@ export default function LearningIntelligencePanel({
                   <div className="student-skill-card-bottom">
                     <span>
                       {score >= 85
-                        ? "Core strength"
+                        ? "Mức cao theo quy tắc"
                         : score >= 70
-                          ? "Strong signal"
-                          : "Developing"}
+                          ? "Tín hiệu khá"
+                          : "Cần theo dõi thêm"}
                     </span>
-                    <span>{item.source ?? "COGNITIVE"}</span>
+                    <span>{sourceNameVi(item.source ?? "COGNITIVE")}</span>
                   </div>
                 </article>
               );
@@ -284,7 +300,7 @@ export default function LearningIntelligencePanel({
           </div>
         ) : (
           <div className="student-empty-state">
-            Chưa có đủ dữ liệu để tạo skill profile.
+            Chưa đủ dữ liệu để hiển thị các chỉ báo nổi bật.
           </div>
         )}
       </div>
@@ -293,10 +309,10 @@ export default function LearningIntelligencePanel({
         <article className="student-panel-card student-gap-panel">
           <div className="student-section-heading">
             <div>
-              <div className="student-section-kicker">04 · Development Gaps</div>
+              <div className="student-section-kicker">04 · NHỮNG ĐIỂM CẦN XEM LẠI</div>
               <h3>Khoảng cách cần xử lý</h3>
             </div>
-            <span>{gaps.length} priorities</span>
+            <span>{gaps.length} việc cần chú ý</span>
           </div>
 
           {gaps.length > 0 ? (
@@ -323,7 +339,7 @@ export default function LearningIntelligencePanel({
             </div>
           ) : (
             <div className="student-empty-state">
-              Chưa phát hiện khoảng cách ưu tiên.
+              Chưa có căn cứ xác định khoảng cách ưu tiên.
             </div>
           )}
         </article>
@@ -331,10 +347,10 @@ export default function LearningIntelligencePanel({
         <article className="student-panel-card student-action-panel">
           <div className="student-section-heading">
             <div>
-              <div className="student-section-kicker">05 · Next Actions</div>
+              <div className="student-section-kicker">05 · VIỆC CÓ THỂ LÀM TIẾP</div>
               <h3>Hành động tiếp theo</h3>
             </div>
-            <span>Priority path</span>
+            <span>Gợi ý để tự lựa chọn</span>
           </div>
 
           {nextActions.length > 0 ? (
@@ -359,7 +375,7 @@ export default function LearningIntelligencePanel({
         <article>
           <div className="student-engine-icon">↗</div>
           <div>
-            <span>Future Prediction</span>
+            <span>Điểm kịch bản thử nghiệm</span>
             <strong>{prediction?.predictedScore ?? "--"}</strong>
             <p>
               Điểm kịch bản theo công thức thử nghiệm; chưa có xác suất đạt mục tiêu được hiệu chuẩn từ kết quả thực tế.
@@ -376,20 +392,20 @@ export default function LearningIntelligencePanel({
         <article>
           <div className="student-engine-icon">◇</div>
           <div>
-            <span>ORION Simulation</span>
+            <span>Mô phỏng phương án ORION</span>
             <strong>{scenarioCount}</strong>
-            <p>Intervention scenarios evaluated</p>
+            <p>Số phương án đã được mô phỏng</p>
           </div>
         </article>
 
         <article>
           <div className="student-engine-icon">◈</div>
           <div>
-            <span>CHRONOS Strategy</span>
+            <span>Chiến lược học tập tham khảo</span>
             <strong>
               {optimization?.recommendedStrategy?.name ?? "--"}
             </strong>
-            <p>Current recommended learning strategy</p>
+            <p>Gợi ý theo quy tắc, bạn quyết định có thực hiện hay không.</p>
           </div>
         </article>
       </div>

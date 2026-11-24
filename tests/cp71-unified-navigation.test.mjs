@@ -50,9 +50,21 @@ test('CP71: study abroad uses the same bar and keeps country on nested route lin
   assert.match(abroad,/<ModuleSectionNav moduleKey="atlas"/);
 });
 
-test('CP71: one shared final CSS layer overrides legacy competing tab styles', () => {
-  assert.ok(styles.includes('@import "./styles/48-cla-unified-navigation.css";'));
-  assert.equal(styles.trim().split('\n').at(-1), '@import "./styles/49-cla-product-polish.css";');
+test('CP71: unified navigation CSS loads after legacy tabs, before newer scoped enhancements', () => {
+  // CP87-CP90 legitimately append new scoped CSS layers after CP74.
+  // Keep the important contract: shared navigation styles precede newer scoped modules.
+  const imports = [...styles.matchAll(/^@import "\.\/styles\/([^"]+)";/gm)].map(match => match[1]);
+  const layers = ['48-cla-unified-navigation.css', '49-cla-product-polish.css',
+    '50-cp87-circuit-primary.css', '51-cp89-lumen-clarity.css', '52-cp90-lumen-hero.css'];
+  const positions = layers.map(layer => imports.indexOf(layer));
+  assert.ok(positions.every(position => position >= 0), 'all five CSS layers must be imported');
+  assert.ok(positions.every((position, index) => index === 0 || position > positions[index - 1]),
+    'navigation base/polish must precede CP87-CP90 component overrides');
+  assert.equal(new Set(imports).size, imports.length, 'CSS import must not duplicate a layer');
+  for (const layer of layers.slice(2)) {
+    assert.doesNotMatch(read(`src/styles/${layer}`), /\.cla-unified-(?:bar|tabs)\b/,
+      `later scoped CSS must not globally override unified navigation: ${layer}`);
+  }
   assert.match(css,/\.cla-module-subnav\.cla-focus-nav\.cla-guided-workspace\.cla-unified-bar/);
   assert.match(css,/\.cla-module-subnav-links\.cla-guided-primary\.cla-unified-tabs/);
   assert.match(css,/\.cla-workflow-tabs/);

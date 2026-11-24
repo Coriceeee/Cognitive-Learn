@@ -95,3 +95,12 @@
 
 /* CP74: revised navigation, readable action controls, and public information pages. */
 @import "./styles/49-cla-product-polish.css";
+
+/* CP87: original six-module learning circuit takes primary position on Student home. */
+@import "./styles/50-cp87-circuit-primary.css";
+
+/* CP89: explain seven Lumen proxies in student language; no formula changes. */
+@import "./styles/51-cp89-lumen-clarity.css";
+
+/* CP90: Lumen hero layout repair; no metric or authentication changes. */
+@import "./styles/52-cp90-lumen-hero.css";

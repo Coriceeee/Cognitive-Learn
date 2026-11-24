@@ -16,6 +16,7 @@ import {
   type AccountRole,
 } from "../../lib/accountVerification";
 import appLogo from "../../assets/logo cla.png";
+import { probeFirebaseAuthConnection } from "../../lib/authConnectionDiagnostics";
 import "../../styles.css";
 
 type UserRole = AccountRole;
@@ -59,6 +60,9 @@ export default function LoginPage() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [hasAuthenticatedSession, setHasAuthenticatedSession] = useState(false);
+  const [authNetworkError, setAuthNetworkError] = useState(false);
+  const [authProbeMessage, setAuthProbeMessage] = useState("");
+  const [authProbeLoading, setAuthProbeLoading] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(
@@ -68,6 +72,22 @@ export default function LoginPage() {
     );
     return unsubscribe;
   }, []);
+
+  async function handleAuthNetworkProbe() {
+    setAuthProbeLoading(true);
+    setAuthProbeMessage("Đang kiểm tra kết nối Firebase (không gửi email, mật khẩu hoặc ID token)...");
+    try {
+      const result = await probeFirebaseAuthConnection({
+        projectId: auth.app.options.projectId,
+        apiKey: auth.app.options.apiKey,
+        authEmulator: Boolean(auth.emulatorConfig),
+        browserOnline: navigator.onLine,
+      });
+      setAuthProbeMessage(`${result.code}: ${result.message}`);
+    } finally {
+      setAuthProbeLoading(false);
+    }
+  }
 
   function normalizeEmail(value: string) {
     return value.trim().toLowerCase();
@@ -170,6 +190,8 @@ export default function LoginPage() {
     let authenticated = false;
     try {
       setLoading(true);
+      setAuthNetworkError(false);
+      setAuthProbeMessage("");
       setMessage("Đang xác thực tài khoản với Firebase...");
       const credential = await signInWithEmailAndPassword(
         auth,
@@ -181,6 +203,7 @@ export default function LoginPage() {
       await verifyAndRedirect(credential.user.uid);
     } catch (error) {
       console.error("CLA login failed:", error);
+      setAuthNetworkError(firebaseErrorCode(error) === "auth/network-request-failed");
       setMessage(describeSignInError(error, authenticated));
     } finally {
       setLoading(false);
@@ -443,6 +466,8 @@ export default function LoginPage() {
                 onClick={() => {
                   setMode(mode === "login" ? "register" : "login");
                   setMessage("");
+                  setAuthNetworkError(false);
+                  setAuthProbeMessage("");
                 }}
               >
                 {mode === "login" ? "Tạo tài khoản" : "Đăng nhập"}
@@ -455,6 +480,14 @@ export default function LoginPage() {
               </button>
             )}
             {message && <p className="login-message" role="status" aria-live="polite">{message}</p>}
+            {authNetworkError && (
+              <div className="cla-auth-network-help">
+                <button type="button" onClick={() => void handleAuthNetworkProbe()} disabled={authProbeLoading}>
+                  {authProbeLoading ? "Đang kiểm tra Firebase..." : "Kiểm tra kết nối Firebase (không gửi mật khẩu)"}
+                </button>
+                {authProbeMessage && <p role="status" aria-live="polite">{authProbeMessage}</p>}
+              </div>
+            )}
           </form>
         </section>
       </section>

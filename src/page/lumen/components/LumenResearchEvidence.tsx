@@ -48,13 +48,13 @@ export default function LumenResearchEvidence() {
   const n = (v: number) => v.toFixed(4).replace('.', ',');
   return (
     <section id="lumen-research-evidence" className="lumen-evidence-card" aria-labelledby="lumen-research-title">
-      <span className="lumen-eyebrow">RESEARCH EVIDENCE · OULAD</span>
-      <h2 id="lumen-research-title">Kiểm định mô hình dự báo trên dữ liệu thực</h2>
+      <span className="lumen-eyebrow">BẰNG CHỨNG NGHIÊN CỨU · OULAD</span>
+      <h2 id="lumen-research-title">Kiểm định mô hình dự báo trên bộ dữ liệu nghiên cứu</h2>
       {status !== 'ready' || !result ? (
         <p role="status">{status === 'loading' ? 'Đang kiểm tra hồ sơ nghiên cứu...' : 'Chưa có báo cáo OULAD đã được kiểm toán và xuất bản. Không có kết quả nào được suy đoán hoặc điền mặc định.'}</p>
       ) : (
         <>
-          <p role="status"><strong>Kiểm toán dữ liệu: PASS</strong> · {result.test_count.toLocaleString('vi-VN')} trường hợp test · mốc ngày {result.cutoff_day}</p>
+          <p role="status"><strong>Kiểm toán dữ liệu: PASS</strong> · {result.test_count.toLocaleString('vi-VN')} trường hợp kiểm tra · mốc ngày {result.cutoff_day}</p>
           <p>{result.outcome}. Dữ liệu {result.cohort}. Đây là nghiên cứu tổng hợp, <strong>không phải dự báo cá nhân của học sinh đang đăng nhập</strong>.</p>
           <div className="lumen-evidence-list">
             <div><span>ROC-AUC · chỉ học vụ</span><strong>{n(result.models.academic_only.roc_auc)}</strong></div>

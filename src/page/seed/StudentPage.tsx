@@ -188,7 +188,6 @@ export default function StudentPage() {
           </div>
         )}
 
-        <ModuleSectionNav moduleKey="seed" />
         {view === "/student" && <>
         <section className="student-dash-hero cla-observatory-intro" aria-labelledby="student-dash-title">
           <div className="cla-intro-copy">
@@ -198,6 +197,18 @@ export default function StudentPage() {
           </div>
           <div className="cla-intro-target"><span>MỤC TIÊU CỦA BẠN</span><strong>{targetMajor}</strong><small>{hasProfile && isMeaningfulText(profile.targetUniversity) ? profile.targetUniversity : "Chưa chọn trường mục tiêu"}</small><a href={profilePath}>{hasProfile ? "Cập nhật hồ sơ" : "Tạo hồ sơ"} ↗</a></div>
         </section>
+
+        {/* CP87: keep the original six-node circuit as the PRIMARY navigation,
+            now immediately below the greeting and before analytical widgets. */}
+        <LearningCircuit profilePath={profilePath} />
+        <nav className="student-dash-extra-links" aria-label="Công cụ bổ sung">
+          <a href="/student/modules">Tìm nhanh chức năng <span aria-hidden="true">↗</span></a>
+          <a href="/student/guide">Hướng dẫn sử dụng <span aria-hidden="true">↗</span></a>
+          <a href="/student/companion">Đồng hành mỗi ngày <span aria-hidden="true">↗</span></a>
+        </nav>
+        </>}
+        <ModuleSectionNav moduleKey="seed" />
+        {view === "/student" && <>
         {!isAdminPreview && <ExamHorizon />}
         <StudentDecisionCanvas cognitive={cognitive} gpa={gpaIntegrity.status === "VERIFIED" ? gpaIntegrity.result : null} temporal={!historyLoading && !error ? temporalReport : null} hasProfile={hasProfile} demo={isAdminPreview} />
 
@@ -214,14 +225,6 @@ export default function StudentPage() {
         />
 
         {!isAdminPreview && <StudentJourneyBridge hasProfile={hasProfile} />}
-
-        {/* A connected learning circuit replaces the old six-card module grid. */}
-        <LearningCircuit profilePath={profilePath} />
-        <nav className="student-dash-extra-links" aria-label="Công cụ bổ sung">
-          <a href="/student/modules">Tìm nhanh chức năng <span aria-hidden="true">↗</span></a>
-          <a href="/student/guide">Hướng dẫn sử dụng <span aria-hidden="true">↗</span></a>
-          <a href="/student/companion">Đồng hành mỗi ngày <span aria-hidden="true">↗</span></a>
-        </nav>
 
           {isAdminPreview && (
           <details className="student-dash-disclosure">

@@ -2,7 +2,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDocFromServer, onSnapshot, type Unsubscribe } from "firebase/firestore";
 import { auth, db } from "../../lib/firebase";
-import { checkAccountDocument, readAccountDocumentWithRetry } from "../../lib/accountVerification";
+import { checkAccountDocument, readAccountDocumentWithRetry, explainAccessFailure, type AccessCheckpoint, type AccessFailureInfo } from "../../lib/accountVerification";
 import { readProductConsent } from "../../lib/studentConsentPolicy";
 import { STUDENT_CONSENT_GATE_ENABLED } from "../../lib/studentConsentConfig";
 
@@ -41,6 +41,7 @@ function homeForRole(role: Role | null): string {
 export default function AccessGate({ path, children }: AccessGateProps) {
   const [status, setStatus] = useState<GateStatus>("checking");
   const [role, setRole] = useState<Role | null>(null);
+  const [accessFailure, setAccessFailure] = useState<AccessFailureInfo | null>(null);
 
   // Only revalidate when the authorization boundary changes. Switching between
   // student subpages does not tear down the verified role/consent listeners.
@@ -65,10 +66,12 @@ export default function AccessGate({ path, children }: AccessGateProps) {
         if (!mounted) return;
         setStatus("checking");
         setRole(null);
+        setAccessFailure(null);
         if (!user) {
           setStatus("unauthenticated");
           return;
         }
+        let checkpoint: AccessCheckpoint = "account-read";
         try {
           const snapshot = await readAccountDocumentWithRetry(() =>
             getDocFromServer(doc(db, "users", user.uid)),
@@ -89,6 +92,7 @@ export default function AccessGate({ path, children }: AccessGateProps) {
           // Product consent must be confirmed from the server before loading student-data modules.
           // Keep this route accessible for students who need to accept, review or withdraw.
           if (STUDENT_CONSENT_GATE_ENABLED && actualRole === "student" && path !== "/student/consent") {
+            checkpoint = "consent-read";
             const consentSnapshot = await readAccountDocumentWithRetry(() =>
               getDocFromServer(doc(db, "student_consents", user.uid)),
             );
@@ -164,6 +168,7 @@ export default function AccessGate({ path, children }: AccessGateProps) {
               if (!stillCurrent()) return;
               console.error("Live account authorization failed:", error);
               liveRole = "error";
+              setAccessFailure(explainAccessFailure(error, "account-watch"));
               setRole(null);
               publish();
             },
@@ -188,20 +193,28 @@ export default function AccessGate({ path, children }: AccessGateProps) {
                 if (!stillCurrent()) return;
                 console.error("Live student consent verification failed:", error);
                 liveConsent = "error";
+                setAccessFailure(explainAccessFailure(error, "consent-watch"));
                 publish();
               },
             );
           }
         } catch (error) {
           console.error("Cannot verify CLA account permissions:", error);
-          if (mounted && thisRequest === requestId) setStatus("error");
+          if (mounted && thisRequest === requestId) {
+            setAccessFailure(explainAccessFailure(error, checkpoint));
+            setStatus("error");
+          }
         }
       },
       (error) => {
         console.error("Firebase auth state error:", error);
         requestId += 1;
         stopLiveAccessWatch();
-        if (mounted) { setRole(null); setStatus("error"); }
+        if (mounted) {
+          setAccessFailure(explainAccessFailure(error, "auth-stream"));
+          setRole(null);
+          setStatus("error");
+        }
       }
     );
     return () => {
@@ -243,10 +256,20 @@ export default function AccessGate({ path, children }: AccessGateProps) {
       <section className="cla-access-panel" role="alert">
         <span className="cla-access-eyebrow">COGNITIVE LEARN AI · QUYỀN TRUY CẬP</span>
         <h1>{title}</h1>
-        <p>{description}</p>
+        <p>{displayStatus === "error" && accessFailure ? "CLA đã xác định chính xác bước kiểm tra thất bại. Chưa có quyền dữ liệu nào được cấp tạm." : description}</p>
+        {displayStatus === "error" && accessFailure && (
+          <div className="cla-access-diagnosis" role="status" data-testid="cla-access-diagnosis">
+            <div><strong>Vị trí lỗi:</strong> <code>{accessFailure.location}</code></div>
+            <div><strong>Bước:</strong> <code>{accessFailure.checkpoint}</code></div>
+            <div><strong>Firebase Project:</strong> <code>{auth.app?.options?.projectId ?? "không xác định"}</code></div>
+            <div><strong>Mã Firebase:</strong> <code>{accessFailure.code}</code></div>
+            <p>{accessFailure.guidance}</p>
+            {accessFailure.code === "permission-denied" && <small>Việc đăng nhập thành công không đồng nghĩa Firestore đã cho phép đọc dữ liệu. Chỉ sửa Rules sau khi đối chiếu quyền trên Firebase production.</small>}
+          </div>
+        )}
         <div className="cla-access-actions">
           <a href={displayStatus === "consent-required" ? "/student/consent" : homeForRole(role)}>{displayStatus === "consent-required" ? "Xem và quản lý quyền dữ liệu" : role ? "Về trang của tôi" : "Đăng nhập"}</a>
-          <button type="button" onClick={() => window.location.reload()}>Thử lại</button>
+          <button type="button" onClick={() => window.location.reload()}>{accessFailure && !accessFailure.retryable && displayStatus === "error" ? "Kiểm tra lại sau khi sửa cấu hình" : "Thử lại"}</button>
         </div>
       </section>
     </main>

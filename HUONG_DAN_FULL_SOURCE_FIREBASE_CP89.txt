@@ -1,0 +1,25 @@
+CLA CP89 - FULL SOURCE + FIREBASE HOSTING DEPLOY KIT V2
+==========================================================
+This archive contains the full CP89 Cognitive-Learn source plus the Hosting
+preflight/deploy script and V2 preflight fix. It contains no real Firebase env,
+passwords, Gemini secrets or student data. It has NOT deployed any service.
+
+Usage (PowerShell):
+1. Backup your project, then extract this ZIP into C:\Gạo (the archive contains
+   the Cognitive-Learn/ root folder).
+2. Keep .env.live.local (not bundled) configured for the Firebase LIVE project.
+   Do not copy fake/demo env values. Do not put GEMINI_API_KEY in any VITE_* var.
+3. cd 'C:\Gạo\Cognitive-Learn'
+4. node tools/verify-cp89-snapshot.cjs
+5. node --test tests/hosting-gate-optional-storage.test.cjs
+6. node tools/claHostingDeployGate.cjs
+7. .\CHAY_DEPLOY_FIREBASE_HOSTING_CP89.ps1
+   -> review the Firebase Hosting Preview URL carefully.
+8. .\CHAY_DEPLOY_FIREBASE_HOSTING_CP89.ps1 -Live
+   -> type DEPLOY-CP89 only after verifying preview and production data safety.
+
+IMPORTANT: Scripts deploy Hosting ONLY: do not deploy Firestore Rules, Auth,
+Cloud Functions or Gemini backend. Gemini must be a tested HTTPS backend, and
+CORS must permit the Firebase Hosting domain. Gate requires verified production
+consent permissions; do not toggle Consent Gate just to force a PASS.
+A custom domain must be configured separately in Firebase Hosting console.

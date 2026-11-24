@@ -105,7 +105,13 @@ test('WP16 server dispatch is disabled by default and is separately deployed',()
   assert.match(server,/await claimOnce/);
   assert.match(server,/secrets:\[privateKey\]/);
   assert.match(server,/MAX_ACCOUNTS_PER_TICK/);
-  assert.doesNotMatch(read('../firebase.json'),/"functions"/);
+  // Default Firebase deploy remains Hosting-only; privileged Push is opt-in via its own config.
+  const deployed = JSON.parse(read('../firebase.json'));
+  assert.ok(!('functions' in deployed));
+  const gemini = JSON.parse(read('../firebase.gemini.json'));
+  assert.deepEqual(gemini.functions.map(x => x.codebase), ['cla-gemini']);
+  assert.ok(!gemini.functions.some(x => x.source === 'functions' || x.source === 'functions-admin' || x.source === 'functions-privacy'));
+  assert.match(read('../firebase.push.json'),/"functions"/);
   assert.match(read('../firebase.push.json'),/"functions"/);
 });
 test('WP17 rules restrict subscription ownership and deny client delivery ledger access',()=>{

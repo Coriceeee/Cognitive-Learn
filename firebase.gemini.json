@@ -1,0 +1,17 @@
+{
+  "functions": [
+    {
+      "source": "functions-gemini",
+      "codebase": "cla-gemini",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log"
+      ],
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run build"
+      ]
+    }
+  ]
+}

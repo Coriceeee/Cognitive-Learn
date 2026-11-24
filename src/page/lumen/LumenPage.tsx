@@ -1,6 +1,5 @@
 import { navigateTo } from "../../lib/clientNavigation";
 import LearningIntelligencePanel from "../seed/components/LearningIntelligencePanel";
-import CognitiveScoreGrid from "../seed/components/CognitiveScoreGrid";
 import CognitiveInsightPanel from "../seed/components/CognitiveInsightPanel";
 import { useLearningIntelligence } from "../seed/hooks/useLearningIntelligence";
 import { currentFocusedPath } from "../../lib/focusedModuleRoute";
@@ -19,6 +18,7 @@ import {
 } from "./hooks/useLumenIntelligence";
 
 import LumenOverview from "./components/LumenOverview";
+import LumenIndexGuide from "./components/LumenIndexGuide";
 import LumenInsightPanel from "./components/LumenInsightPanel";
 import LumenDecisionPanel from "./components/LumenDecisionPanel";
 import LumenEvidencePanel from "./components/LumenEvidencePanel";
@@ -93,7 +93,7 @@ export default function LumenPage() {
 
           <div className="lumen-loading-orb" />
 
-          <ModuleStateNotice tone="loading" label="Đang tải Lumen Intelligence" message="Đang nhận hồ sơ và dữ liệu nhận thức để kiểm tra trạng thái." />
+          <ModuleStateNotice tone="loading" label="Đang tải kết quả LUMEN" message="Đang nhận hồ sơ và dữ liệu nhận thức để kiểm tra trạng thái." />
 
         </section>
 
@@ -177,7 +177,7 @@ export default function LumenPage() {
 
               <h1>Chưa có hồ sơ học sinh</h1>
               <ModuleStateNotice tone="neutral" label="Bắt đầu từ Seed"
-                message="Hoàn thiện Seed Profile để bắt đầu quan sát các chỉ số nhận thức. Không suy đoán điểm số khi thiếu dữ liệu.">
+                message="Hoàn thiện hồ sơ SEED để bắt đầu quan sát các chỉ số nhận thức. Không suy đoán điểm số khi thiếu dữ liệu.">
                 <a href="/student/profile" className="lumen-primary-action">Hoàn thiện hồ sơ</a>
               </ModuleStateNotice>
 
@@ -209,6 +209,7 @@ export default function LumenPage() {
                 scoreAvailable={cognitive.scoreAvailable === true}
               /></div>
           <LumenObservationJourney cognitive={cognitive} growth={growthAnalytics} historyLoading={historyLoading} />
+          <LumenIndexGuide cognitive={cognitive} compact />
           <LumenSignalAtlas cognitive={cognitive} growth={growthAnalytics} mode="indices" />
         </>}
 
@@ -223,7 +224,7 @@ export default function LumenPage() {
                 <CognitiveGrowthPanel analytics={growthAnalytics} />
               </div></>}
 
-              {view === "/lumen/indices" && <div id="lumen-indices"><LumenSignalAtlas cognitive={cognitive} growth={growthAnalytics} mode="indices" /><details className="cla-focus-disclosure"><summary>Chi tiết các chỉ số</summary><CognitiveScoreGrid cognitive={cognitive} /></details></div>}
+              {view === "/lumen/indices" && <div id="lumen-indices"><LumenIndexGuide cognitive={cognitive} /><LumenSignalAtlas cognitive={cognitive} growth={growthAnalytics} mode="indices" /></div>}
               {view === "/lumen/history" && <LumenSignalAtlas cognitive={cognitive} growth={growthAnalytics} mode="history" />}
 
         {view === "/lumen/insights" && <>
@@ -234,9 +235,9 @@ export default function LumenPage() {
                 />
               ) : (
                 <section className="lumen-empty-card">
-                  <h2>Đánh giá Cognitive chưa đủ dữ liệu</h2>
+                  <h2>Chưa đủ dữ liệu để tạo nhận xét</h2>
                   <p>
-                    Vui lòng hoàn thiện các phép đo còn thiếu trong Seed Profile.
+                    Vui lòng hoàn thiện các phép đo còn thiếu trong hồ sơ SEED.
                     Lumen không đưa ra kết luận năng lực từ điểm 0 kỹ thuật.
                   </p>
                   <a href="/student/profile" className="lumen-primary-action">
@@ -267,7 +268,7 @@ export default function LumenPage() {
                       <h2 id="lumen-gemini-title">Hiểu rõ hơn kết quả học tập</h2>
                       <p>
                         Nhấn nút bên dưới để yêu cầu Gemini giải thích các chỉ số
-                        Cognitive, Growth hợp lệ và khuyến nghị nội bộ CLA.
+                        chỉ báo học tập và dữ liệu theo dõi hợp lệ và khuyến nghị nội bộ CLA.
                         Không gửi họ tên, lớp hoặc mã tài khoản trong nội dung học tập.
                         Lời giải thích chỉ mang tính tham khảo; Gemini không tự
                         tính lại điểm hoặc xác suất tuyển sinh.
@@ -355,7 +356,7 @@ export default function LumenPage() {
                           </>
                         )}
                         <p className="lumen-gemini-note">
-                          Đối chiếu phần Evidence trước khi sử dụng khuyến nghị.
+                          Đối chiếu mục Bằng chứng trước khi sử dụng khuyến nghị.
                           Kết quả này chưa được lưu thành quyết định học tập.
                         </p>
                       </div>
@@ -393,7 +394,7 @@ export default function LumenPage() {
           </div>
 
           <small>
-            Understand → Predict → Simulate → Decide
+            Hiểu dữ liệu → Xem phương án → Thử nghiệm → Tự quyết định
           </small>
 
         </footer>

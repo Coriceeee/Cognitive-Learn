@@ -30,7 +30,8 @@ test('CP86 active candidate is pinned by current immutable source manifest',()=>
  const active=sha('firestore.rules.CANDIDATE_CP21');
  assert.match(active,/^[a-f0-9]{64}$/);
  assert.equal(active,digestFor('firestore.rules.CANDIDATE_CP21'));
- assert.equal(require('../tools/verify-cp86-snapshot.cjs').verifyRelease(root).ok,true);
+ // CP86/CP87 frozen manifests remain historical; CP89 independently pins the active source.
+ assert.equal(require('../tools/verify-cp89-snapshot.cjs').verifyRelease(root).ok,true);
 });
 
 test('CP86 refuses to re-label current candidate gate as historical CP31 gate',()=>{

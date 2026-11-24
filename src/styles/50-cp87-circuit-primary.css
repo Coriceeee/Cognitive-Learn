@@ -1,0 +1,33 @@
+/* CP87 — Navigation priority only. Preserve the CP46 loop diagram, nodes and detail panel. */
+/* The circular 6-module navigator is now immediately after the student greeting. */
+.student-dash .cla-circuit {
+  margin: 8px 0 10px;
+  border-radius: 20px;
+}
+.student-dash .cla-circuit-heading {
+  padding: 20px clamp(18px, 2.2vw, 27px) 16px;
+}
+.student-dash .cla-circuit-map { min-height: 416px; }
+.student-dash .cla-circuit-detail { padding: clamp(19px, 2vw, 24px); gap: 16px; }
+.student-dash .cla-circuit-detail-core { padding: 20px 0; }
+.student-dash .cla-circuit-foot { padding: 10px 24px; }
+.student-dash .student-dash-extra-links {
+  margin: 10px 0 24px;
+  gap: 10px;
+}
+.student-dash .student-dash-extra-links a { min-height: 40px; }
+/* Let the secondary SEED sub-navigation breathe below the six MAIN destinations. */
+.student-dash .student-dash-extra-links + .cla-module-subnav { margin-top: 5px; }
+@media (max-width: 1020px) and (min-width: 761px) {
+  .student-dash .cla-circuit-map { min-height: 396px; }
+  .student-dash .cla-circuit-detail { padding: 18px; }
+}
+@media (max-width: 760px) {
+  /* Preserve the existing mobile fallback rather than adding a second menu. */
+  .student-dash .cla-circuit { margin: 7px 0 10px; border-radius: 17px; }
+  .student-dash .cla-circuit-heading { padding: 17px 16px 14px; }
+  .student-dash .cla-circuit-mobile > a { padding: 13px 15px; }
+  .student-dash .cla-circuit-foot { padding: 10px 16px; }
+  .student-dash .student-dash-extra-links { gap: 8px; margin: 10px 0 19px; }
+  .student-dash .student-dash-extra-links a { flex: 1 1 145px; justify-content: center; }
+}

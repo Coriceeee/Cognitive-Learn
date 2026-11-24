@@ -22,44 +22,47 @@ export default function LumenOverview({
           LUMEN · DẤU VÂN TAY TRÍ TUỆ
         </span>
 
+        <p className="lumen-overview-greeting">Xin chào, {fullName || "bạn"}.</p>
         <h1>
-          Hi {fullName || "Student"}.
+          Hiểu dữ liệu học tập của bạn,
           <br />
-          Đây là bức tranh hiện tại
-          của bạn.
+          biết nên làm gì tiếp theo.
         </h1>
 
         <p>
-          Lumen kết hợp trạng thái nhận thức,
-          dự đoán, mô phỏng và chiến lược
-          để biến dữ liệu thành những lựa chọn
-          có thể hành động.
+          Lumen đọc thông tin bạn đã cung cấp ở Seed, hiển thị 7 chỉ báo học tập
+          theo quy tắc thử nghiệm và gợi ý việc có thể thử tiếp.
+          Đây không phải bài kiểm tra IQ, chẩn đoán tâm lý hay dự báo chắc chắn.
         </p>
 
-        <div className="lumen-overview-tags">
-          <span>
-            {targetMajor ||
-              "Chưa đặt ngành"}
-          </span>
+        <div className="lumen-overview-next">
+          <a className="lumen-overview-start" href="/lumen/indices">Hiểu 7 chỉ số của tôi <span aria-hidden="true">↗</span></a>
+          <small>Nhập dữ liệu ở SEED → LUMEN tính và giải thích → bạn chọn bước tiếp theo</small>
+        </div>
 
-          <span>
-            {targetUniversity ||
-              "Chưa đặt trường"}
-          </span>
+        <div className="lumen-overview-tags" aria-label="Định hướng hiện tại từ hồ sơ SEED">
+          <div className="lumen-overview-tag">
+            <span>Ngành quan tâm</span>
+            <strong>{targetMajor || "Chưa chọn ngành"}</strong>
+          </div>
+          <div className="lumen-overview-tag">
+            <span>Trường dự kiến</span>
+            <strong>{targetUniversity || "Chưa chọn trường"}</strong>
+          </div>
         </div>
 
       </div>
 
       <div className="lumen-score-orb">
         <small>
-          Cognitive state
+          Tổng hợp thử nghiệm
         </small>
 
         <strong>
           {scoreAvailable ? Math.round(overallScore) : "—"}
         </strong>
 
-        <span>{scoreAvailable ? "/ 100" : "Chưa đủ dữ liệu"}</span>
+        <span>{scoreAvailable ? "/ 100 · Không phải IQ" : "Chưa đủ dữ liệu"}</span>
       </div>
 
     </section>

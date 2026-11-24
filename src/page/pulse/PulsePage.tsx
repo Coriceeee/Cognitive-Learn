@@ -12,15 +12,15 @@ import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
 import {
   getPulseRiskLabel,
-  getPulseTrendLabel,
   runPulseReport,
   type PulseRiskLevel,
-  type PulseTrend,
 } from "../../lib/pulseReportEngine";
 import "../../styles.css";
 import PulseMetricOrbit from "./PulseMetricOrbit";
 import PulseEvidenceCircuit from "./PulseEvidenceCircuit";
 import ClosedLoopPanel from "../../components/journey/ClosedLoopPanel";
+import PulseLinkedPanel from "./PulseLinkedPanel";
+import { usePulseLinkedSources } from "./hooks/usePulseLinkedSources";
 
 function toNumber(value: string) {
   const parsed = Number(value.replace(",", "."));
@@ -36,16 +36,11 @@ function getRiskClass(riskLevel: PulseRiskLevel) {
   return "risk";
 }
 
-function getTrendClass(trend: PulseTrend) {
-  if (trend === "UP") return "up";
-  if (trend === "DOWN") return "down";
-  return "stable";
-}
-
 export default function PulsePage() {
   const view = currentFocusedPath();
   const isAdmin = useIsAdmin();
   const pipelineEvidence = usePipelineEvidence();
+  const linked = usePulseLinkedSources();
   const [cognitiveScore, setCognitiveScore] = useState("");
   const [previousCognitiveScore, setPreviousCognitiveScore] = useState("");
   const [admissionReadiness, setAdmissionReadiness] = useState("");
@@ -198,42 +193,27 @@ export default function PulsePage() {
             <span>PULSE · ĐƯỜNG CONG TIẾN HÓA</span>
             <h1>Báo cáo tiến độ học tập và tuyển sinh</h1>
             <p>
-              Pulse tổng hợp dữ liệu học tập từ Seed, Lumen, Atlas và Orion để
-              học sinh theo dõi tiến độ và báo cáo cá nhân của mình.
+              PULSE tự đọc dữ liệu đã lưu từ SEED, LUMEN, ATLAS và ORION.
+              Bạn không cần nhập lại thông tin ở phân hệ này.
             </p>
           </div>
 
           <aside>
             <span>Tổng quan</span>
-            <strong>{hasInputs ? `${report.overallScore}/100` : "Chưa đủ dữ liệu"}</strong>
-            <em className={`pulse-risk ${getRiskClass(report.riskLevel)}`}>
-              {hasInputs ? getPulseRiskLabel(report.riskLevel) : "Chưa đánh giá"}
-            </em>
-            <em className={`pulse-trend ${getTrendClass(report.trend)}`}>
-              {hasInputs ? getPulseTrendLabel(report.trend) : "Chưa đánh giá"}
-            </em>
+            <strong>{linked.ready}/{linked.signals.length} tín hiệu</strong>
+            <em className="pulse-trend stable">Tự đồng bộ từ Firebase</em>
+            <em className="pulse-trend stable">Không phải điểm năng lực</em>
           </aside>
         </section></>}
 
         <ModuleSectionNav moduleKey="pulse" />
         {view === "/pulse" && <ModuleInputObservatory moduleName="Pulse" editHref="/pulse/inputs"
-          resultHref="/pulse/progress" resultLabel="Mở biểu đồ tiến độ" canSimulate={hasInputs}
-          note="Các giá trị Pulse là chỉ số tự nhập để thử nghiệm báo cáo, không thay thế các phép đo hoặc chứng cứ khoa học từ Seed/Lumen/Atlas/Orion."
+          resultHref="/pulse/progress" resultLabel="Mở biểu đồ liên thông" canSimulate={linked.ready > 0} mode="linked"
+          note="Dữ liệu được đồng bộ từ các phân hệ của chính tài khoản này. Thiếu nguồn không được tự gán 0, các chỉ số quy tắc không chứng minh năng lực học tập."
           groups={[
-            { key: "cognitive", title: "Theo dõi Lumen", fields: [
-              { key: "current", label: "Lumen hiện tại", value: cognitiveScore, min: 0, max: 100 },
-              { key: "previous", label: "Lumen kỳ trước", value: previousCognitiveScore, min: 0, max: 100 },
-            ] },
-            { key: "decision", title: "Tuyển sinh & chiến lược", fields: [
-              { key: "admission", label: "Atlas readiness", value: admissionReadiness, min: 0, max: 100 },
-              { key: "orion", label: "Orion readiness", value: orionReadiness, min: 0, max: 100 },
-              { key: "programs", label: "Số ngành Atlas", value: atlasProgramCount, min: 0, max: 10000, integer: true },
-              { key: "aspirations", label: "Số nguyện vọng", value: aspirationCount, min: 0, max: 10000, integer: true },
-            ] },
-            { key: "time", title: "Thời gian học", fields: [
-              { key: "hours", label: "Giờ học mỗi tuần", value: weeklyStudyHours, min: 0, max: 168 },
-              { key: "targetHours", label: "Mục tiêu giờ học", value: targetWeeklyHours, min: 0, max: 168 },
-            ] },
+            { key: "cognitive", title: "Theo dõi LUMEN", fields: linked.signals.filter(item => item.group === "lumen").map(item => ({key:item.key,label:item.label,value:item.value===null?"":String(item.value),min:0,max:item.max})) },
+            { key: "decision", title: "ATLAS & ORION", fields: linked.signals.filter(item => item.group === "atlas" || item.group === "orion").map(item => ({key:item.key,label:item.label,value:item.value===null?"":String(item.value),min:0,max:item.key.startsWith("atlas")?10000:100})) },
+            { key: "time", title: "Thói quen SEED", fields: linked.signals.filter(item => item.group === "seed").map(item => ({key:item.key,label:item.label,value:item.value===null?"":String(item.value),min:0,max:item.max})) },
           ]} />}
 
 
@@ -282,7 +262,8 @@ export default function PulsePage() {
 
         {view === "/pulse/checkin" && <ClosedLoopPanel mode="pulse" />}
 
-        {view === "/pulse/inputs" && <>
+        {view === "/pulse/inputs" && <PulseLinkedPanel signals={linked.signals} ready={linked.ready} errors={linked.errors} loading={linked.loading} />}
+        {view === "/pulse/inputs" && isAdmin && <>
           <section id="pulse-input" className="pulse-control-panel">
           <div className="pulse-control-head">
             <div>
@@ -370,8 +351,9 @@ export default function PulsePage() {
           </div>
         </section></>}
 
-        {view === "/pulse/progress" && hasInputs && <PulseMetricOrbit metrics={report.metrics} overallScore={report.overallScore} />}
-        {view === "/pulse/progress" && hasInputs && <details className="cla-focus-disclosure"><summary>Xem chi tiết các chỉ số</summary><section id="pulse-risk" className="pulse-metric-grid">
+        {view === "/pulse/progress" && <PulseLinkedPanel signals={linked.signals} ready={linked.ready} errors={linked.errors} loading={linked.loading} />}
+        {view === "/pulse/progress" && isAdmin && hasInputs && <details className="cla-focus-disclosure"><summary>Biểu đồ mô phỏng cũ (quản trị)</summary><PulseMetricOrbit metrics={report.metrics} overallScore={report.overallScore} /></details>}
+        {view === "/pulse/progress" && isAdmin && hasInputs && <details className="cla-focus-disclosure"><summary>Xem chi tiết các chỉ số</summary><section id="pulse-risk" className="pulse-metric-grid">
           {report.metrics.map((metric) => (
             <article className="pulse-metric-card" key={metric.id}>
               <div>
@@ -395,7 +377,19 @@ export default function PulsePage() {
           ))}
         </section></details>}
 
-        {["/pulse/progress", "/pulse/reports", "/pulse/actions"].includes(view) && (hasInputs ? (<>
+        {view === "/pulse/reports" && <section className="pulse-control-panel" aria-label="Báo cáo PULSE từ các phân hệ">
+          <div className="pulse-control-head"><div><span>PULSE · BÁO CÁO TỰ ĐỘNG</span><h2>Tóm tắt nguồn dữ liệu</h2>
+          <p>{linked.ready}/{linked.signals.length} tín hiệu có dữ liệu xác minh từ các phân hệ. Số ô có dữ liệu không phải điểm năng lực.</p></div></div>
+          <div className="pulse-metric-grid">{linked.signals.filter(item=>item.value!==null).map(item=><article className="pulse-metric-card" key={item.key}><strong>{item.label}</strong><p>{item.value}{item.unit} · {item.source}</p><p>{item.note}</p></article>)}</div>
+          {linked.ready===0 && <p role="status">Chưa có nguồn dữ liệu hợp lệ trên Firestore. Hãy hoàn thiện hồ sơ SEED trước.</p>}
+        </section>}
+        {view === "/pulse/actions" && <section className="pulse-control-panel" aria-label="Việc nên làm dựa trên dữ liệu còn thiếu">
+          <div className="pulse-control-head"><div><span>PULSE · GỢI Ý BỔ SUNG</span><h2>Hoàn thiện dữ liệu ở đúng phân hệ</h2>
+          <p>Đề xuất dưới đây chỉ nói về tình trạng dữ liệu; không chẩn đoán năng lực và không dự báo kết quả học tập.</p></div></div>
+          <div className="pulse-action-list">{linked.signals.filter(item=>item.value===null).map(item=><article className="pulse-action-card" key={item.key}><em>{item.source}</em><h3>{item.label}</h3><p>{item.note}</p><a href={item.href}>Bổ sung ở {item.source} ↗</a></article>)}</div>
+          {linked.ready===linked.signals.length && <p role="status">Đã có các nguồn liên thông hiện hỗ trợ. Tiếp tục cập nhật dữ liệu tại các phân hệ khi có thay đổi.</p>}
+        </section>}
+        {isAdmin && ["/pulse/progress", "/pulse/reports", "/pulse/actions"].includes(view) && (hasInputs ? (<>
         {view === "/pulse/reports" && <>
           <section id="pulse-report" className="pulse-summary-grid">
           <article>
@@ -437,8 +431,8 @@ export default function PulsePage() {
           </section>
         )}
         </>) : <section className="cla-transcript-hint" role="status"><span id="pulse-risk" /><span id="pulse-report" />Chưa đủ dữ liệu thực để đưa ra kết quả. Hãy hoàn thiện các ô đầu vào và lưu hồ sơ. Đây là công cụ mô phỏng theo giả định, không phải bằng chứng hiệu quả hoặc xác suất thành công. <a href="/pulse/inputs">Mở dữ liệu báo cáo</a>.</section>)}
-        {view === "/pulse/inputs" && <p className="cla-focus-notice">Lưu dữ liệu trước khi chuyển trang. <a href="/pulse/progress">Xem tiến độ học tập →</a></p>}
-        {view === "/pulse/progress" && hasInputs && <p className="cla-focus-notice"><a href="/pulse/inputs">Cập nhật dữ liệu báo cáo</a> · <a href="/pulse/checkin">Mở nhật ký thực hiện</a></p>}
+        {view === "/pulse/inputs" && <p className="cla-focus-notice">PULSE đang lấy dữ liệu từ các phân hệ, không cần nhấn lưu ở đây. <a href="/pulse/progress">Xem biểu đồ liên thông →</a></p>}
+        {view === "/pulse/progress" && <p className="cla-focus-notice"><a href="/pulse/inputs">Xem nguồn dữ liệu</a> · <a href="/pulse/checkin">Mở nhật ký thực hiện</a></p>}
       </section>
     </main>
   );

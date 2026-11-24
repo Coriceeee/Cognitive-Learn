@@ -33,8 +33,8 @@ export default function LumenObservationJourney({ cognitive, growth, historyLoad
     <section className="cla-lumen-journey" aria-labelledby="cla-lumen-journey-title">
       <header className="cla-lumen-journey-head">
         <div><span className="cla-ux-kicker">LUMEN · HÀNH TRÌNH HIỂU DỮ LIỆU</span>
-          <h2 id="cla-lumen-journey-title">Từ quan sát đến hành động</h2>
-          <p>Thứ tự đọc giúp phân biệt phép đo, diễn giải, biến động và kế hoạch. Không đồng nghĩa bạn đã đạt bốn cấp năng lực.</p>
+          <h2 id="cla-lumen-journey-title">Bắt đầu từ đâu trong LUMEN?</h2>
+          <p>SEED cung cấp dữ liệu → LUMEN tính và giải thích 7 chỉ báo → bạn chọn điều chỉnh → theo dõi lần ghi nhận tiếp theo. Đây là các bước sử dụng, không phải bốn cấp độ năng lực.</p>
         </div>
         <a href="/lumen/indices" className="cla-ux-heading-action">Xem bản đồ chỉ số <span aria-hidden="true">↗</span></a>
       </header>

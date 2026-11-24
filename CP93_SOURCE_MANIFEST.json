@@ -1,0 +1,95 @@
+{
+  "schema": "cla.cp93.modified.immutable.v1",
+  "origin": "CP93 HF02 Windows CMD fix on CP93 HF01 source; SHA256 verifies modified files only.",
+  "mode": "changed_and_added_files_only",
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "531d720268184b5e165ae5300bf39b9561d3ee7914eaeb7c93dd21b773631c6c"
+    },
+    {
+      "path": "BUILD_CLA_CP93_FIREBASE_GEMINI.cmd",
+      "sha256": "33d795b64b198af6816a27d471675f0c69dbe18722e2879143d1dd6d48cc11e9"
+    },
+    {
+      "path": "DEPLOY_CLA_CP93_FIREBASE_GEMINI.cmd",
+      "sha256": "f7cc352201f83975ea2881f2e6483f158a57b476212fc1ad36f71fd033144813"
+    },
+    {
+      "path": "DEPLOY_CLA_CP93_FIREBASE_GEMINI.ps1",
+      "sha256": "415792b051688c305e04729a3367d7f46315c6e9f19e9a6ee90d1a705146aea7"
+    },
+    {
+      "path": "HUONG_DAN_CP93_FIREBASE_GEMINI.md",
+      "sha256": "accd51578319ecc057858689ad805a4139b72bf6da66b9eff26e32820da07c2a"
+    },
+    {
+      "path": "api/gemini-lumen.ts",
+      "sha256": "6438d08f6742043583f833d11d33cd54a985882b92dafb79a9bfbf0341fefc82"
+    },
+    {
+      "path": "firebase.gemini.json",
+      "sha256": "5b9b8523105df56e19885d82cf3d9b423e9b9bf4ccb1624177a79ba3bb025c7c"
+    },
+    {
+      "path": "firebase.json",
+      "sha256": "3757a8416d2b3d297d6b5a148b1c008bdf34e7de4de265d6a39a0f083adb5d48"
+    },
+    {
+      "path": "functions-gemini/.env.example",
+      "sha256": "4a95d7c7e50189f46c04203a5b0e497a1f99c54c3d7fc5211504719426e9a07f"
+    },
+    {
+      "path": "functions-gemini/.gitignore",
+      "sha256": "f735baee67fea65b81a02e5526237a2b48e92e9b706640ee5f4e12f9de84e071"
+    },
+    {
+      "path": "functions-gemini/build.mjs",
+      "sha256": "0d2fc8d9b729caaa00490d3640310f96eb73b01dae511a2049f568946b177ec0"
+    },
+    {
+      "path": "functions-gemini/index.mjs",
+      "sha256": "23f90c20271e93395346bbd554f57115ab8bc07cee34e72928a426725e7cac04"
+    },
+    {
+      "path": "functions-gemini/package.json",
+      "sha256": "d1accd6af88335558e6e2b67981fbb973b07ea5297597c7e127e103b37264378"
+    },
+    {
+      "path": "functions-gemini/src/router.mjs",
+      "sha256": "1dbadcee32c59832d5259431cef76bef70e2511f2bc7a71276289eceafdcba7c"
+    },
+    {
+      "path": "src/components/common/FloatingAdvisorChat.tsx",
+      "sha256": "35528af3eba5e43e3738535039fdaef52e2d16edf9579dd6678a314051680995"
+    },
+    {
+      "path": "src/lib/geminiAdmissionClient.ts",
+      "sha256": "aba7664dddaa571170eae6ad0b7c4a0b856610ce293ac05cd74c3666d44eb4b2"
+    },
+    {
+      "path": "src/lib/geminiLumenClient.ts",
+      "sha256": "ed23538650cc9647eb66d26a0966cbb15599175f1a9ae23b7633d444987051df"
+    },
+    {
+      "path": "tests/cp87-navigation-priority.test.cjs",
+      "sha256": "1da33b9930fd76f863be2e6d05c28c65578c8ae1370d9e8f59f53169b5290d2a"
+    },
+    {
+      "path": "tests/cp93-gemini-firebase-routes.test.mjs",
+      "sha256": "2332e429be09e53471661e12735929bb20fc649ba525384ace1940e37522baa7"
+    },
+    {
+      "path": "tests/cp93-hf01-config-isolation.test.mjs",
+      "sha256": "0f12e3e21a17db52318855d6d875416e0bf612c1ddceb8108d8f70ebf871873b"
+    },
+    {
+      "path": "tests/step15-companion-web-push.test.mjs",
+      "sha256": "49db00b43750e3bd0fe4a08dfdd7a9405334d6613a2c1ab188044e72d8857313"
+    },
+    {
+      "path": "tools/claFirebaseGeminiGate.cjs",
+      "sha256": "504dbe4db73e33bf22913d83f67cffd1b05a44c6a5d996cc9cd8ffb0558e5386"
+    }
+  ]
+}

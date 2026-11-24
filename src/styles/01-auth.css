@@ -616,3 +616,29 @@
 .auth-reset-button { border:0; background:transparent; color:var(--cla-text,rgb(var(--tc-tx-204469))); text-decoration:underline; text-underline-offset:3px; cursor:pointer; text-align:left; padding:8px 2px; font-weight:600; }
 .auth-reset-button:focus-visible { outline:2px solid currentColor; outline-offset:3px; }
 .auth-reset-button:disabled { opacity:.55; cursor:not-allowed; }
+
+/* CP90 – Network diagnostics shown only after Firebase Auth network errors. */
+.cla-auth-network-help {
+  margin-top: 0.6rem;
+  padding: 0.8rem 0.95rem;
+  border: 1px solid #bfd6f3;
+  border-radius: 12px;
+  background: #f4f9ff;
+  color: #193a60;
+  overflow-wrap: anywhere;
+}
+.cla-auth-network-help button {
+  width: 100%;
+  border: 1px solid #94bcec;
+  background: #fff;
+  color: #1e5590;
+  border-radius: 10px;
+  font-weight: 700;
+  padding: 0.6rem;
+  cursor: pointer;
+}
+.cla-auth-network-help p {
+  margin: 0.65rem 0 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+}

@@ -43,7 +43,7 @@ function RadarFigure({ values }: { values: Array<{ code: string; value: number }
   }).join(" ");
 
   return (
-    <svg className="cla-radar-svg" viewBox="0 0 320 270" role="img" aria-label="Biểu đồ radar các chỉ số Cognitive đang có dữ liệu">
+    <svg className="cla-radar-svg" viewBox="0 0 320 270" role="img" aria-label="Biểu đồ 4 chỉ báo học tập đang có dữ liệu, trong đó CRI là giá trị tổng hợp">
       <defs>
         <linearGradient id="claRadarFill" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="#38bdf8" stopOpacity=".34" />
@@ -68,7 +68,7 @@ function RadarFigure({ values }: { values: Array<{ code: string; value: number }
         const p = point(item.value, index);
         return <circle key={item.code} cx={p.x} cy={p.y} r="4.5" className="cla-radar-point"><title>{item.code}: {item.value}/100</title></circle>;
       })}
-      <text x={cx} y="258" textAnchor="middle" className="cla-radar-scale">THANG CHỈ SỐ 0–100 · PROXY THỬ NGHIỆM</text>
+      <text x={cx} y="258" textAnchor="middle" className="cla-radar-scale">THANG 0–100 · CHỈ BÁO THỬ NGHIỆM</text>
     </svg>
   );
 }
@@ -110,18 +110,18 @@ export default function LumenSignalAtlas({ cognitive, growth, mode="all" }: Prop
     <section className="cla-signal-atlas" aria-labelledby="cla-signal-atlas-title">
       <div className="cla-signal-atlas-heading">
         <div>
-          <span className="lumen-eyebrow">LUMEN · SIGNAL ATLAS</span>
+          <span className="lumen-eyebrow">LUMEN · GIẢI THÍCH CÁC CHỈ SỐ</span>
           <h2 id="cla-signal-atlas-title">{mode === "history" ? "Biến động giữa các lần đo" : "Bản đồ tín hiệu người học"}</h2>
-          <p>{mode === "history" ? "So sánh giữa các lần ghi nhận hợp lệ." : "Biểu diễn các phép đo đã có và tín hiệu còn thiếu."}</p>
+          <p>{mode === "history" ? "So sánh giữa các lần ghi nhận hợp lệ." : "Biểu diễn các phép đo đã có và tín hiệu còn thiếu. CRI là chỉ số tổng hợp, không phải một phép đo độc lập với SCI, MAS, CSL."}</p>
         </div>
-        <span className="cla-visual-stamp">OBSERVATION FIRST</span>
+        <span className="cla-visual-stamp">DỰA TRÊN DỮ LIỆU ĐÃ CÓ</span>
       </div>
 
       {mode !== "history" && <div className="cla-signal-grid">
         <article className="cla-visual-card cla-radar-card">
           <div className="cla-visual-card-head">
-            <div><span>01 / PROFILE GEOMETRY</span><h3>Dấu vân tay Cognitive</h3></div>
-            <span className="cla-visual-tag">{coreValues.length}/4 core</span>
+            <div><span>01 / BỐN CHỈ BÁO NỀN TẢNG VÀ TỔNG HỢP</span><h3>Hình dạng bộ chỉ số học tập</h3></div>
+            <span className="cla-visual-tag">{coreValues.length}/4 chỉ báo</span>
           </div>
           {coreValues.length >= 3 ? (
             <>
@@ -137,18 +137,18 @@ export default function LumenSignalAtlas({ cognitive, growth, mode="all" }: Prop
 
         <article className="cla-visual-card cla-signal-quality-card">
           <div className="cla-visual-card-head">
-            <div><span>02 / DATA OBSERVABILITY</span><h3>Độ bao phủ phép đo</h3></div>
+            <div><span>02 / CÓ ĐỦ DỮ LIỆU HAY CHƯA?</span><h3>Mức độ đầy đủ của dữ liệu</h3></div>
             <span className="cla-visual-tag">{cognitive.mappingVersion ?? "UNVERSIONED"}</span>
           </div>
           <div className="cla-coverage-layout">
             <CoverageRing coverage={coverage} observed={observed} />
             <div className="cla-coverage-copy">
               <strong>{observed === 7 ? "Đã ghi nhận đủ 7 chiều" : `Còn thiếu ${Math.max(0, 7 - observed)} chiều`}</strong>
-              <p>Coverage phản ánh số chiều có dữ liệu đầu vào, không phải độ chính xác, độ tin cậy tâm trắc hay mức độ hiểu người học.</p>
+              <p>Ví dụ 7/7 = có số ở cả 7 ô, <strong>không phải AI chính xác 100%</strong>. Dữ liệu có thể tự khai báo hoặc do hệ thống tính; hãy kiểm tra nguồn tại SEED.</p>
             </div>
           </div>
           <div className="cla-signal-bars">
-            <div className="cla-signal-bars-title"><span>RISK / BEHAVIOR PROXIES</span><small>Giá trị cao = cần xem xét thêm</small></div>
+            <div className="cla-signal-bars-title"><span>03 / TÍN HIỆU BIẾN ĐỘNG VÀ HÀNH VI</span><small>Giá trị cao = cần xem xét thêm</small></div>
             {riskSignals.length ? riskSignals.map((item) => (
               <div className="cla-signal-bar-row" key={item.code}>
                 <span>{item.code}</span><div className="cla-signal-track"><i style={{ width: `${Math.max(0, Math.min(100, item.value))}%` }} /></div><strong>{Math.round(item.value)}</strong>
@@ -160,8 +160,8 @@ export default function LumenSignalAtlas({ cognitive, growth, mode="all" }: Prop
 
       {mode !== "indices" && <article className="cla-visual-card cla-change-field">
         <div className="cla-visual-card-head">
-          <div><span>03 / LONGITUDINAL DIFFERENCE</span><h3>Trường biến động giữa hai lần đo</h3></div>
-          <span className={`cla-visual-tag ${hasGrowth ? "is-observed" : ""}`}>{hasGrowth ? `${growth!.observationDays} ngày quan sát` : "CHƯA CÓ CẶP ĐO"}</span>
+          <div><span>04 / THAY ĐỔI QUA CÁC LẦN GHI NHẬN</span><h3>So sánh chỉ số giữa hai lần</h3></div>
+          <span className={`cla-visual-tag ${hasGrowth ? "is-observed" : ""}`}>{hasGrowth ? `${growth!.observationDays} ngày quan sát` : "Chưa có hai lần đo"}</span>
         </div>
         {hasGrowth ? (
           <div className="cla-delta-chart">
@@ -179,21 +179,21 @@ export default function LumenSignalAtlas({ cognitive, growth, mode="all" }: Prop
             })}
           </div>
         ) : (
-          <div className="cla-chart-empty cla-change-empty"><strong>Đang chờ lần đo tiếp theo</strong><p>Biểu đồ chỉ xuất hiện khi có ít nhất hai snapshot hợp lệ cùng phiên bản mapping. Không nội suy xu hướng từ một lần đo.</p></div>
+          <div className="cla-chart-empty cla-change-empty"><strong>Đang chờ lần đo tiếp theo</strong><p>Biểu đồ chỉ xuất hiện khi có hai lần ghi nhận hợp lệ theo cùng phiên bản quy tắc. Một lần ghi nhận không đủ để kết luận xu hướng.</p></div>
         )}
-        <p className="cla-chart-footnote">GVI, BDI và FRI là chỉ báo có chiều diễn giải riêng; thay đổi số dương không mặc định là tốt. So sánh này mô tả biến động quan sát, không chứng minh tác động của CLA.</p>
+        <p className="cla-chart-footnote">GVI, BDI và FRI cần đọc theo bối cảnh; số tăng hay giảm không tự động là tốt hoặc xấu. So sánh này mô tả biến động quan sát, không chứng minh tác động của CLA.</p>
       </article>}
 
       {mode !== "history" && <div className="cla-evidence-path" aria-label="Trạng thái đường đi dữ liệu">
-        <div className="cla-evidence-path-head"><span>04 / EVIDENCE LINEAGE</span><strong>Đường đi từ dữ liệu đến bằng chứng</strong></div>
+        <div className="cla-evidence-path-head"><span>04 / CÁC BƯỚC KIỂM CHỨNG</span><strong>Thông tin đang ở bước nào?</strong></div>
         <div className="cla-evidence-nodes">
-          <div className="is-ready"><i>01</i><strong>Profile</strong><small>Hồ sơ đã tải</small></div>
+          <div className="is-ready"><i>01</i><strong>Hồ sơ</strong><small>Hồ sơ đã tải</small></div>
           <b aria-hidden="true">→</b>
-          <div className={observed > 0 ? "is-ready" : "is-waiting"}><i>02</i><strong>Measurement</strong><small>{observed}/7 chiều có dữ liệu</small></div>
+          <div className={observed > 0 ? "is-ready" : "is-waiting"}><i>02</i><strong>Tính chỉ số</strong><small>{observed}/7 chiều có dữ liệu</small></div>
           <b aria-hidden="true">→</b>
-          <div className={hasGrowth ? "is-ready" : "is-waiting"}><i>03</i><strong>Reassessment</strong><small>{hasGrowth ? "Có cặp snapshot" : "Đang chờ lần đo 2"}</small></div>
+          <div className={hasGrowth ? "is-ready" : "is-waiting"}><i>03</i><strong>Đo lại</strong><small>{hasGrowth ? "Đã có hai lần ghi nhận" : "Đang chờ lần đo 2"}</small></div>
           <b aria-hidden="true">→</b>
-          <div className="is-limited"><i>04</i><strong>Validation</strong><small>Chưa kiểm định thực nghiệm</small></div>
+          <div className="is-limited"><i>04</i><strong>Kiểm định</strong><small>Chưa kiểm định thực nghiệm</small></div>
         </div>
       </div>}
     </section>

@@ -37,10 +37,10 @@ describe('CP62 dashboard data-source signal rail', () => {
     assert.match(full[1].detail,/không phải chẩn đoán/i);
     assert.ok(!full.some(s=>/100\s*điểm|xác suất/i.test(s.status)));
   });
-  it('integrates after the verified-data canvas without reinstating twin cards', () => {
+  it('keeps the verified action rail after its data canvas while six-module primary navigation moves above both', () => {
     assert.match(page,/import StudentActionSignalRail from/);
+    assert.ok(page.indexOf('<LearningCircuit') < page.indexOf('<StudentDecisionCanvas'));
     assert.ok(page.indexOf('<StudentDecisionCanvas') < page.indexOf('<StudentActionSignalRail'));
-    assert.ok(page.indexOf('<StudentActionSignalRail') < page.indexOf('<LearningCircuit'));
     assert.doesNotMatch(page,/className="student-dash-focus"/);
     assert.match(page,/hasComparableGrowth=\{hasComparableGrowth\}/);
   });

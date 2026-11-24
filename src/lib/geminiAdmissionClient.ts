@@ -2,6 +2,13 @@ import { getIdToken } from "firebase/auth";
 import { auth } from "./firebase";
 /** Backend runs on Vercel while the SPA is hosted by Firebase Hosting. */
 function getApiBaseUrl(): string {
+  // CP93: Firebase Hosting is now rewired to same-origin Cloud Functions.
+  if (typeof window !== "undefined" && ["cognitivelearn.ai.vn", "cognitive-learn-ai.web.app", "cognitive-learn-ai.firebaseapp.com"].includes(window.location.hostname)) return "";
+  // CP90: the live Firebase browser on loopback uses the secured local Vite API,
+  // never a placeholder/external VITE_API_BASE_URL that could receive an ID token.
+  if (import.meta.env.DEV && typeof window !== "undefined" &&
+      window.location.protocol === "http:" &&
+      (window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost")) return "";
   const value = (import.meta.env.VITE_API_BASE_URL || "").trim().replace(/\/+$/, "");
   if (!value && import.meta.env.PROD) {
     throw new Error("Chưa cấu hình VITE_API_BASE_URL cho website Firebase trước khi build.");
@@ -107,7 +114,7 @@ export async function extractAdmissionData(
   try {
     data = JSON.parse(text) as GeminiAdmissionReaderResponse;
   } catch {
-    throw new Error("API trả về dữ liệu không phải JSON hợp lệ.");
+    throw new Error("API Gemini trả HTML/văn bản thay vì JSON. Kiểm tra Cloud Functions Gemini và Firebase Hosting rewrite.");
   }
 
   if (!response.ok || !data.ok) {

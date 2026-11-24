@@ -63,7 +63,7 @@ export default function LumenDecisionPanel({
 
         <span className="lumen-eyebrow">
 
-          LUMEN DECISION
+          LUMEN · GỢI Ý HÀNH ĐỘNG
 
         </span>
 
@@ -77,9 +77,7 @@ export default function LumenDecisionPanel({
 
         <p>
 
-          Lumen chuyển đổi dữ liệu nhận thức
-          thành định hướng hành động kết hợp
-          giữa engine phân tích và AI reasoning.
+          LUMEN diễn giải dữ liệu học tập hiện có và gợi ý hành động để bạn tự lựa chọn. Đây không phải quyết định thay bạn.
 
         </p>
 

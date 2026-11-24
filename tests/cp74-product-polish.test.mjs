@@ -42,7 +42,13 @@ test('CP74 navigation is one low-noise bar, responsive and readable in dark mode
   assert.match(navigationCss, /:root\[data-theme="dark"\]/);
   assert.doesNotMatch(navigationCss, /\.cla-guided-journey-grid/);
   assert.match(shell, /48-cla-unified-navigation\.css/);
-  assert.equal(shell.trim().split('\n').at(-1), '@import "./styles/49-cla-product-polish.css";');
+  const imports = [...shell.matchAll(/^@import "\.\/styles\/([^"]+)";/gm)].map(match => match[1]);
+  const base = imports.indexOf('48-cla-unified-navigation.css');
+  const polish = imports.indexOf('49-cla-product-polish.css');
+  assert.ok(base >= 0 && polish > base, 'shared polish layer must follow navigation CSS');
+  for (const layer of ['50-cp87-circuit-primary.css', '51-cp89-lumen-clarity.css', '52-cp90-lumen-hero.css']) {
+    assert.ok(imports.indexOf(layer) > polish, `${layer} must follow the CP74 base polish`);
+  }
 });
 
 test('CP74 retry actions explicitly use the shared visible button design',()=>{

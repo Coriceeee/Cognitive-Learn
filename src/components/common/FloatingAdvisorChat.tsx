@@ -9,6 +9,13 @@ import { answerVerifiedCutoff, safeCutoffSource } from "../../lib/atlasDecisionC
 
 type AdvisorDisplayTurn = AdvisorTurn & { source?: string; destination?: AdvisorRoute["destination"]; linkLabel?: string };
 function apiBase() {
+  // CP93: Firebase Hosting is now rewired to same-origin Cloud Functions.
+  if (typeof window !== "undefined" && ["cognitivelearn.ai.vn", "cognitive-learn-ai.web.app", "cognitive-learn-ai.firebaseapp.com"].includes(window.location.hostname)) return "";
+  // CP90: the live Firebase browser on loopback uses the secured local Vite API,
+  // never a placeholder/external VITE_API_BASE_URL that could receive an ID token.
+  if (import.meta.env.DEV && typeof window !== "undefined" &&
+      window.location.protocol === "http:" &&
+      (window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost")) return "";
   const base = (import.meta.env.VITE_API_BASE_URL || "").trim().replace(/\/+$/, "");
   if (base && !/^https:\/\/[^/?#]+$/.test(base)) throw new Error("VITE_API_BASE_URL phải là URL HTTPS không chứa đường dẫn.");
   // Vercel serverless API is served on the same origin by default.
@@ -76,7 +83,7 @@ export default function FloatingAdvisorChat() {
       const rawResponse = await response.text();
       if (rawResponse.length > 15000) throw new Error("Phản hồi trợ lý vượt giới hạn an toàn.");
       let payload: { ok?: boolean; answer?: string; message?: string; destination?: unknown; linkLabel?: string; source?: unknown };
-      try { payload = JSON.parse(rawResponse); } catch { throw new Error("Máy chủ chưa trả JSON. Kiểm tra cấu hình API Gemini trên Vercel."); }
+      try { payload = JSON.parse(rawResponse); } catch { throw new Error("Máy chủ trả HTML/văn bản thay vì JSON. Hãy triển khai Firebase Functions Gemini và Hosting rewrite trước."); }
       if (!response.ok || !payload.ok || typeof payload.answer !== "string") throw new Error(payload.message || `Chatbot chưa khả dụng (HTTP ${response.status}).`);
       const destination = safeAdvisorDestination(payload.destination);
       setTurns(current => [...current, { role: "model", text: payload.answer!.slice(0, 4000), destination, source: safeCutoffSource(payload.source), linkLabel: destination && typeof payload.linkLabel === "string" ? payload.linkLabel.slice(0, 90) : undefined }]);

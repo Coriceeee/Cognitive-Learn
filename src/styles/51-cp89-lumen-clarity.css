@@ -1,0 +1,57 @@
+/* CP89 | Lumen student-first guide. Scope limited to Lumen; no metric/formula changes. */
+.lumen-overview-greeting { margin: 0 0 6px !important; color: #604a31 !important; font-weight: 750; font-size: 13px !important; }
+.lumen-overview-copy h1 { font-size: clamp(28px,3.2vw,43px); line-height: 1.16; letter-spacing: -.027em; }
+.lumen-overview-next { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 16px; margin-top: 17px; }
+.lumen-overview-next small { color: #67563e; font-size: 12px; line-height: 1.6; }
+.lumen-overview-start { display: inline-flex; align-items: center; gap: 9px; border-radius: 11px; padding: 11px 16px; background: linear-gradient(120deg,#986217,#b87b21); border: 1px solid #875714; color: #fff !important; text-decoration: none; font-size: 13px; font-weight: 750; }
+.lumen-overview-start:hover { background: #825214; }
+.lumen-guide { margin: 0 0 23px; padding: clamp(17px,2.3vw,26px); background: #fffefa; color: #292f37; border: 1px solid #eadfca; border-radius: 15px; box-shadow: 0 7px 23px rgba(87,67,33,.045); }
+.lumen-guide--compact { background: linear-gradient(115deg,#fffefa,#fff9ee); }
+.lumen-guide-header { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+.lumen-guide-header h2 { margin: 6px 0 9px; color: #3f321e; line-height: 1.25; font-size: clamp(21px,2.4vw,27px); }
+.lumen-guide-header p { max-width: 725px; margin: 0; color: #5d5a54; font-size: 13px; line-height: 1.65; }
+.lumen-guide-coverage { flex: 0 0 auto; display: grid; min-width: 98px; border-radius: 12px; background: #fff4da; border: 1px solid #f1dfa9; text-align: center; padding: 11px 16px; }
+.lumen-guide-coverage strong { font-size: 24px; color: #775016; font-variant-numeric: tabular-nums; }
+.lumen-guide-coverage span { color: #685a44; font-size: 11px; }
+.lumen-guide-groups { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 11px; margin: 19px 0 15px; }
+.lumen-guide-group { min-width: 0; padding: 13px 14px; border-radius: 12px; border: 1px solid #ebdfc7; background: #fffaf0; }
+.lumen-guide-group:nth-child(2) { background: #fff5e0; }
+.lumen-guide-group:nth-child(3) { background: #fff9f3; }
+.lumen-guide-group > span { font-size: 11px; font-weight: 750; color: #756047; }
+.lumen-guide-group > strong { display: block; margin: 7px 0; font-size: clamp(14px,1.5vw,18px); color: #694619; letter-spacing: .01em; }
+.lumen-guide-group p { margin: 0; font-size: 12px; line-height: 1.55; color: #645b4e; }
+.lumen-guide-subtitle { margin: 18px 0 12px; font-size: 16px; color: #3b3429; }
+.lumen-guide-glossary { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; margin: 0 0 15px; }
+.lumen-guide-metric { min-width: 0; padding: 14px; border: 1px solid #ebdfce; border-radius: 11px; background: white; }
+.lumen-guide-metric--combined { background: #fffbf1; border-color: #e9d29f; }
+.lumen-guide-metric--signal { border-left: 3px solid #d7a56a; }
+.lumen-guide-metric-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 9px; }
+.lumen-guide-metric-top > div { min-width: 0; }
+.lumen-guide-metric-top strong { display: block; color: #41321e; font-size: 13px; line-height: 1.45; }
+.lumen-guide-metric-top small { display: block; color: #7d7060; font-size: 11px; margin-top: 4px; }
+.lumen-guide-metric-top > span { flex: 0 0 auto; white-space: nowrap; font-size: 11px; font-weight: 800; border-radius: 20px; padding: 5px 8px; }
+.lumen-guide-metric-top .has-data { color: #186148; background: #d9f1e8; }
+.lumen-guide-metric-top .no-data { color: #825719; background: #fff0d0; }
+.lumen-guide-explain { color: #55534d; font-size: 12px; line-height: 1.68; margin: 10px 0 0; }
+.lumen-guide-metric-details { border-top: 1px dashed #e7ddca; margin-top: 11px; padding-top: 10px; }
+.lumen-guide-metric-details summary { font-size: 12px; font-weight: 700; color: #795319; cursor: pointer; }
+.lumen-guide-metric-details p { font-size: 12px; line-height: 1.65; color: #55534d; margin: 7px 0 0; }
+.lumen-guide-interpretation { border-radius: 10px; background: #fff7e4; border: 1px solid #eadbbd; color: #4f4536; padding: 13px 14px; font-size: 12px; line-height: 1.7; }
+.lumen-guide-details { border-top: 1px solid #e8e1d4; margin-top: 12px; padding-top: 12px; }
+.lumen-guide-details summary { cursor: pointer; font-size: 13px; line-height: 1.5; color: #765019; font-weight: 750; }
+.lumen-guide-details p { font-size: 12px; line-height: 1.72; color: #5c584e; margin: 9px 0; }
+.lumen-guide-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px 16px; padding: 12px 14px; border-radius: 10px; background: #fff5df; border: 1px solid #ecd8b2; }
+.lumen-guide-footer p { margin: 0; color: #564934; font-size: 12px; line-height: 1.6; }
+.lumen-guide-footer a { flex: 0 0 auto; color: #80500f; text-decoration: underline; text-underline-offset: 3px; font-weight: 750; font-size: 12px; }
+.lumen-overview-start:focus-visible,.lumen-guide :is(a,summary):focus-visible { outline: 3px solid #b78230; outline-offset: 3px; }
+:root[data-theme="dark"] .lumen-guide, [data-theme="dark"] .lumen-guide { background: #252525; border-color: #67512e; color: #f3eee4; }
+:root[data-theme="dark"] .lumen-guide :is(.lumen-guide-group,.lumen-guide-metric,.lumen-guide-coverage,.lumen-guide-interpretation,.lumen-guide-footer),[data-theme="dark"] .lumen-guide :is(.lumen-guide-group,.lumen-guide-metric,.lumen-guide-coverage,.lumen-guide-interpretation,.lumen-guide-footer) { background: #302b25; border-color: #66543a; }
+:root[data-theme="dark"] .lumen-guide :is(h2,h3,strong,summary,a),[data-theme="dark"] .lumen-guide :is(h2,h3,strong,summary,a) { color: #f9dc9f; }
+:root[data-theme="dark"] .lumen-guide :is(p,small,span),[data-theme="dark"] .lumen-guide :is(p,small,span) { color: #e0d5c4; }
+:root[data-theme="dark"] .lumen-guide .has-data,[data-theme="dark"] .lumen-guide .has-data { background: #245a46; color: #e0ffef; }
+:root[data-theme="dark"] .lumen-overview-next small,[data-theme="dark"] .lumen-overview-next small { color: #eee0cc; }
+@media(max-width:850px){ .lumen-guide-groups { grid-template-columns: 1fr; } }
+@media(max-width:700px){ .lumen-guide-glossary { grid-template-columns: 1fr; } }
+@media(max-width:520px){ .lumen-guide-header { align-items: flex-start; } .lumen-guide-coverage { min-width: 75px; padding: 10px; } .lumen-guide-metric-top { flex-wrap: wrap; } .lumen-overview-next { flex-direction: column; align-items: flex-start; } .lumen-overview-copy h1 { font-size: clamp(27px,7vw,34px); } }
+@media(prefers-reduced-motion:reduce){ .lumen-overview-start { transition: none; } }
+@media print{ .lumen-guide { break-inside: avoid; } }

@@ -1,0 +1,15 @@
+✔ CP92 – exactly eight sourced fields, no fabricated zeros for missing sources (1.4448ms)
+✔ CP92 – valid zero is an observed value, not missing (0.158ms)
+✔ CP92 – do not treat absent fields or placeholder values as observations (0.1136ms)
+✔ CP92 – previous LUMEN requires two real dated observations (0.1706ms)
+✔ CP92 – Orion strategy comes from saved subject pairs, never defaults to 0 (1.1825ms)
+✔ CP92 – ATLAS counts only come from explicit confirmed input, not assumed zero (0.1389ms)
+✔ CP92 – student PULSE shows direct verified sources, simulation limited to admin (1.3554ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 123.9103

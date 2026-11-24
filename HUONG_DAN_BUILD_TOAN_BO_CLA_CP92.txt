@@ -1,0 +1,20 @@
+CLA CP92: BUILD TOAN BO UNG DUNG (KHONG DEPLOY)
+
+1. Tam dung Vite (Ctrl + C) truoc khi chay.
+2. Tai BUILD_TOAN_BO_CLA_CP92.cmd, de trong Downloads cung duoc.
+3. Mo PowerShell trong C:\Gạo\Cognitive-Learn va chay:
+
+Set-Location "C:\Gạo\Cognitive-Learn"
+& (Join-Path $env:USERPROFILE "Downloads\BUILD_TOAN_BO_CLA_CP92.cmd")
+
+4. File .env.live.local can tro toi project 'cognitive-learn-ai',
+   VITE_USE_FIREBASE_EMULATORS=false va VITE_FIREBASE_API_KEY la Web API key that.
+   Khong de Gemini secret trong VITE_.
+5. Neu PASS, output la dist\ va CLA_CP92_DIST_LIVE.zip.
+   Neu FAIL, xem .build-reports\<step>.log va gui 40 dong cuoi.
+
+Scope: Snapshot CP92 -> package dependencies -> LIVE target -> layout ->
+PULSE/rules tests -> full npm test -> Functions source syntax ->
+TypeScript/API typecheck/Vite build -> dist zip.
+KHONG deploy Firebase Hosting, KHONG deploy Rules/Functions,
+KHONG xoa tai khoan hay doi du lieu. Gemini that chua duoc xac minh.

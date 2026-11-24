@@ -82,3 +82,9 @@ research/**/private/
 
 # Reviewed public, fake-only Firebase emulator template (CP73).
 !.env.mvp-qa.example
+
+# CP93 dedicated Gemini Functions secrets and generated build
+functions-gemini/.env
+functions-gemini/.env.*
+!functions-gemini/.env.example
+functions-gemini/node_modules/
