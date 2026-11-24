@@ -66,3 +66,21 @@ test('Seed: validator is called before atomic Firestore transaction', () => {
   const commit = src.indexOf('await runTransaction(db,', start);
   assert.ok(start >= 0 && validation > start && commit > validation);
 });
+
+test('Seed: guided section navigation and self-report copy are present without changing persistence gates', () => {
+  const src = readFileSync(new URL('../src/page/seed/StudentProfilePage.tsx', import.meta.url), 'utf8');
+  const behaviorStart = src.indexOf('id="cla-seed-section-behavior"');
+  const financeStart = src.indexOf('id="cla-seed-section-finance"');
+  const behavior = src.slice(behaviorStart, financeStart);
+  assert.ok(behaviorStart >= 0 && financeStart > behaviorStart);
+  assert.match(src, /href="#cla-seed-section-goals"/);
+  assert.match(src, /href="#cla-seed-section-curriculum"/);
+  assert.match(src, /href="#cla-seed-section-transcript"/);
+  assert.match(src, /href="#cla-seed-section-behavior"/);
+  assert.match(src, /href="#cla-seed-section-finance"/);
+  assert.match(behavior, /Dữ liệu tự đánh giá/);
+  assert.match(behavior, /không tự đổi thành 0/);
+  assert.doesNotMatch(behavior, /\brequired\b/);
+  assert.match(src, /profileReadFailed \|\| !profileReady \|\| !seedBaseline/);
+  assert.match(src, /await runTransaction\(db,/);
+});
