@@ -5,7 +5,7 @@ import { auth } from "../../../lib/firebase";
 import { readExamProjection, consumeExamProjection, clearExamProjection, type ExamProjectionSnapshot } from "../../../lib/examProjectionHandoff";
 import ExamProjectionPanel from "./ExamProjectionPanel";
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { useStudentTranscript } from "../../seed/hooks/useStudentTranscript";
+
 import { chooseSeedAtlasScoreSnapshot, toSeedAtlasScoreSnapshot, SEED_ATLAS_SUBJECT_CODES, type SeedAtlasScoreSnapshot } from "../../../lib/seedAtlasScoreAdapter";
 import { EXAM_ELECTIVES_2026, EXAM_POLICY_2026, optimizeExamChoices2026, type ExamElective2026 } from "../../../lib/examChoiceEngine";
 import { buildNationalPathwayCatalogue, matchNationalPathways2026 } from "../../../lib/nationalAdmissionPathways2026";
@@ -165,8 +165,8 @@ export default function AtlasAdmissionEnginePanel({
     );
 
   // Seed remains the read-only source of school marks; it never supplies THPT marks.
-  const transcript = useStudentTranscript();
   const verifiedProfile = useVerifiedStudentProfile();
+  const transcript = verifiedProfile.transcript;
   const [pendingProjection, setPendingProjection] = useState<ExamProjectionSnapshot|null>(null);
   useEffect(() => {
     const uid = transcript.userId;
