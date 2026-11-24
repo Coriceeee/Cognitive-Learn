@@ -71,7 +71,7 @@ import type { TranscriptView } from '../page/seed/services/transcriptData';
 
 export function isPersonalLearningAdviceQuestion(message: string): boolean {
   const q = norm(message);
-  return /\b(tien bo|cai thien|tap trung mon|mon nao|mon hoc nao|yeu mon|hoc mon nao|uu tien mon|mon nao can|nen tap trung|diem mon nao)\b/.test(q);
+  return /\b(tien bo|cai thien|tap trung mon|tap trung vao|neu tap trung|mon nao|mon nay|mon do|mon hoc nao|yeu mon|hoc mon nao|on mon|uu tien mon|mon nao can|nen tap trung|diem mon nao)\b/.test(q);
 }
 
 type LearningTranscriptState = {
@@ -98,7 +98,7 @@ export function answerPersonalLearningAdvice(state: LearningTranscriptState | nu
   }
 
   const terms = [...state.data.terms].reverse();
-  const term = terms.find(item => item.subjects.filter(row => row.average !== null && Number.isFinite(row.average)).length >= 3);
+  const term = terms.find(item => item.subjects.some(row => row.average !== null || row.provisional !== null));
   if (!term) {
     return {
       answer: 'Bảng điểm hiện chưa có ít nhất 3 môn với điểm trung bình học kỳ hoàn chỉnh trong cùng một học kỳ. Mình không muốn xếp hạng môn học từ dữ liệu tạm tính hoặc thiếu. Bạn hãy hoàn thiện điểm học kỳ trong Seed rồi hỏi lại nhé.',
