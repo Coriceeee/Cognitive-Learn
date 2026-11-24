@@ -242,10 +242,14 @@ export function answerPersonalLearningAdvice(context: PersonalLearningContext | 
   const selectedMax = priorities[priorities.length - 1].score;
   const weights = priorities.map(item => Math.max(0.5, selectedMax - item.score + 0.5));
   const weightTotal = weights.reduce((sum, value) => sum + value, 0);
-  const allocation = priorities.map((item, index) => ({
-    ...item,
-    hours: plannedHours === null ? null : Math.round((plannedHours * weights[index] / weightTotal) * 10) / 10,
-  }));
+  let allocatedHours = 0;
+  const allocation = priorities.map((item, index) => {
+    const hoursForSubject = plannedHours === null ? null : index === priorities.length - 1
+      ? Math.round((plannedHours - allocatedHours) * 10) / 10
+      : Math.round((plannedHours * weights[index] / weightTotal) * 10) / 10;
+    if (hoursForSubject !== null) allocatedHours += hoursForSubject;
+    return { ...item, hours: hoursForSubject };
+  });
 
   const planLines: string[] = [];
   if (hours !== null && hours > 0 && plannedHours !== null) {
