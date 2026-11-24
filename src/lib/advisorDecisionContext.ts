@@ -270,12 +270,12 @@ export function answerPersonalLearningAdvice(context: PersonalLearningContext | 
 
   const nextStep = practice !== null && practice > 0
     ? 'Dùng một trong các bài luyện hiện có để kiểm tra lại ' + priorities[0].subject + ', rồi so sánh điểm với lần gần nhất.'
-    : 'Cuối tuần làm một bài kiểm tra ngắn theo chuyên đề của ' + priorities[0].subject + ' và ghi lại nhóm lỗi.';
+    : 'Sau khi ôn xong mỗi phần của ' + priorities[0].subject + ', làm một bài kiểm tra ngắn theo chuyên đề và ghi lại nhóm lỗi.';
   const trendLine = trendText ? '\n\nDiễn biến so với học kỳ có dữ liệu trước: ' + trendText + '.' : '';
   const profileGoal = profile?.targetMajor && profile.targetMajor !== '--'
     ? ' Mục tiêu ngành đã ghi nhận: ' + profile.targetMajor + '; hiện chưa có dữ liệu trọng số môn xét tuyển đã xác minh trong ngữ cảnh này, nên CLA không tự gán độ quan trọng cho môn.'
     : '';
-  const dataLimit = 'Chưa có dữ liệu điểm theo chương, dạng bài hoặc câu sai; vì vậy CLA chưa thể chỉ định chính xác chương cần ôn. Điểm học kỳ cũng không tự chứng minh nguyên nhân yếu hay dự báo điểm thi.';
+  const dataLimit = 'Chưa có dữ liệu điểm theo chương, dạng bài hoặc câu sai; vì vậy CLA chưa thể chỉ định chính xác chương cần ôn. Hồ sơ cũng chưa có lịch rảnh theo từng ngày/khung giờ, nên kế hoạch chỉ phân bổ quỹ giờ theo môn, chưa tự gán thứ hoặc giờ học. Điểm học kỳ không tự chứng minh nguyên nhân yếu hay dự báo điểm thi.';
   const legacyNote = state.source === 'legacy'
     ? ' Bảng điểm đang lấy từ hồ sơ lịch sử ở chế độ chỉ đọc; hãy chuẩn hóa hồ sơ trong Seed trước khi xem đây là dữ liệu hiện hành.'
     : '';
