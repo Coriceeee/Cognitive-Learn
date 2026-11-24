@@ -61,7 +61,7 @@ export default function FloatingAdvisorChat() {
     // Personal learning guidance uses only this signed-in student's server-confirmed transcript.
     // The transcript is ranked locally and is never included in the Gemini request.
     if (isPersonalLearningAdviceQuestion(message)) {
-      const local = answerPersonalLearningAdvice(studentContext?.transcript ?? null, uid);
+      const local = answerPersonalLearningAdvice(studentContext, uid);
       setTurns(current => [...current, { role: "user", text: message }, { role: "model", text: local.answer, destination: local.destination, linkLabel: local.linkLabel }]);
       setQuestion(""); setNotice(""); return;
     }
