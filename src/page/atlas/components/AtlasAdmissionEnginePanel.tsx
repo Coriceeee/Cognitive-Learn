@@ -817,33 +817,32 @@ export default function AtlasAdmissionEnginePanel({
 
       {projectionBenchmarkReport && (
         <section className="atlas-projection-benchmark" aria-labelledby="atlas-projection-benchmark-title">
-          <span className="atlas-section-eyebrow">ATLAS · ĐỐI CHIẾU LỊCH SỬ CÓ NGUỒN</span>
-          <h2 id="atlas-projection-benchmark-title">Kịch bản thi thử so với điểm chuẩn THPT 2026</h2>
-          <p>Điểm từng môn được ước lượng từ hai bài thi thử. Bảng chỉ giữ các ngành có điểm chuẩn THPT thang 30 và tổ hợp được công bố trong nguồn đề án tương ứng. Đây là khoảng cách với dữ liệu lịch sử, không phải dự báo đỗ cho kỳ tuyển sinh tiếp theo.</p>
+          <span className="atlas-section-eyebrow">ATLAS · NGUỒN THAM CHIẾU CÓ ĐIỀU KIỆN</span>
+          <h2 id="atlas-projection-benchmark-title">Mốc tuyển sinh THPT 2026 theo tổ hợp có đủ điểm dự báo</h2>
+          <p>Atlas chỉ liệt kê những ngành có mốc THPT thang 30, tổ hợp được công bố trong đề án và đủ ba môn dự báo. Bảng không tính chênh lệch với điểm thi thử: điểm chuẩn có thể đã bao gồm điểm cộng, điểm ưu tiên hoặc quy tắc quy đổi riêng của từng trường.</p>
           {projectionBenchmarkReport.rows.length > 0 ? (
             <>
-              <p role="status">{projectionBenchmarkReport.rows.length} đối chiếu đủ điều kiện nguồn · Sắp xếp theo chênh lệch điểm so với mốc 2026.</p>
+              <p role="status">{projectionBenchmarkReport.rows.length} mã ngành có nguồn điểm chuẩn và tổ hợp tương ứng. Chưa đủ căn cứ để so sánh điểm cá nhân với mốc công bố.</p>
               <div className="cla-projection-scroll">
                 <table className="cla-projection-benchmark-table">
-                  <thead><tr><th scope="col">Ngành · trường</th><th scope="col">Tổ hợp</th><th scope="col">Kịch bản</th><th scope="col">Mốc 2026</th><th scope="col">Chênh lệch</th><th scope="col">Nguồn</th></tr></thead>
+                  <thead><tr><th scope="col">Ngành · trường</th><th scope="col">Tổ hợp</th><th scope="col">Mốc THPT 2026</th><th scope="col">Phương thức</th><th scope="col">Nguồn</th></tr></thead>
                   <tbody>
                     {projectionBenchmarkReport.rows.slice(0, 12).map(row => (
                       <tr key={row.id}>
                         <th scope="row"><strong>{row.majorName}</strong><small>{row.universityName} · {row.campus} · {row.majorCode}</small></th>
                         <td>{row.combinationCode}</td>
-                        <td>{row.projectedScore.toFixed(2)}/30</td>
                         <td>{row.cutoff.toFixed(2)}/30</td>
-                        <td><strong>{row.gap > 0 ? "+" : ""}{row.gap.toFixed(2)}</strong><small>{row.relation === "ABOVE" ? "Cao hơn mốc" : row.relation === "EQUAL" ? "Bằng mốc" : "Thấp hơn mốc"}</small></td>
+                        <td>{row.method}<small>Chưa so sánh điểm cá nhân</small></td>
                         <td><a href={row.cutoffSource} target="_blank" rel="noopener noreferrer">Điểm chuẩn ↗</a><small><a href={row.schemeSource} target="_blank" rel="noopener noreferrer">Đề án / tổ hợp ↗</a></small></td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-              {projectionBenchmarkReport.rows.length > 12 && <p>Còn {projectionBenchmarkReport.rows.length - 12} đối chiếu khác trong cùng bộ dữ liệu.</p>}
+              {projectionBenchmarkReport.rows.length > 12 && <p>Còn {projectionBenchmarkReport.rows.length - 12} mã ngành có nguồn trong bộ dữ liệu.</p>}
             </>
           ) : (
-            <p role="status">Chưa có đối chiếu đủ điều kiện. CLA không thay thế điểm thi bằng điểm học bạ, không dùng điểm chuẩn tổng hợp hoặc phương thức khác thang để tạo kết quả THPT.</p>
+            <p role="status">Chưa có mốc THPT 2026 đủ điều kiện nguồn và tổ hợp cho các môn đang nhập. Không thay thế bằng phương thức khác thang hoặc dữ liệu thiếu.</p>
           )}
           <ul>{projectionBenchmarkReport.limitations.map(note => <li key={note}>{note}</li>)}</ul>
         </section>
@@ -858,7 +857,7 @@ export default function AtlasAdmissionEnginePanel({
 
           <p>
             {scoreBasis === "projection"
-              ? "Kịch bản chỉ được đối chiếu tham khảo với điểm chuẩn THPT 2026 cùng thang điểm và tổ hợp có nguồn. CLA không dùng kịch bản thi thử để xác nhận điều kiện, phân nhóm nguyện vọng hoặc tính xác suất trúng tuyển."
+              ? "Kịch bản thi thử chưa được so sánh trực tiếp với điểm chuẩn. Cần có công thức điểm cộng/ưu tiên theo từng trường và hồ sơ ưu tiên đã xác minh trước khi tính chênh lệch hoặc phân nhóm nguyện vọng."
               : completeCombinations.length === 0
                 ? "Hãy nhập đủ ba môn của ít nhất một tổ hợp được hỗ trợ. Bạn có thể khám phá các tổ hợp phía trên mà không cần nhập tất cả môn."
                 : scoreBasis !== "official_thpt_2026"
