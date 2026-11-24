@@ -1,0 +1,117 @@
+/* Phase 2 — clearer Seed profile wayfinding and honest self-report guidance. */
+.cla-seed-form-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 20px;
+  padding: 11px;
+  border: 1px solid #dce6f2;
+  border-radius: 13px;
+  background: #f7faff;
+}
+.cla-seed-form-nav a {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 10px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: #385875;
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+.cla-seed-form-nav a:hover {
+  border-color: #c9d9ed;
+  background: #fff;
+  color: #245ca8;
+}
+.cla-seed-form-nav a:focus-visible {
+  outline: 3px solid #3979cf;
+  outline-offset: 2px;
+}
+.cla-seed-form-nav a > span {
+  color: #2c65ae;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: .05em;
+}
+.cla-seed-form-nav a > small {
+  padding: 2px 5px;
+  border-radius: 5px;
+  background: #eaf0f7;
+  color: #687d93;
+  font-size: 9px;
+  font-weight: 650;
+}
+#cla-seed-section-goals,
+#cla-seed-section-curriculum,
+#cla-seed-section-transcript,
+#cla-seed-section-behavior,
+#cla-seed-section-finance {
+  scroll-margin-top: 96px;
+}
+.cla-seed-measurement-note {
+  margin: 0 0 16px;
+  padding: 13px 15px;
+  border: 1px solid #d6e5f4;
+  border-left: 3px solid #4380c4;
+  border-radius: 10px;
+  background: #f5f9ff;
+}
+.cla-seed-measurement-note strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #244d77;
+  font-size: 12px;
+  font-weight: 800;
+}
+.cla-seed-measurement-note p {
+  margin: 0;
+  color: #526c86;
+  font-size: 12px;
+  line-height: 1.65;
+}
+:root[data-theme="dark"] .cla-seed-form-nav {
+  border-color: #34485f;
+  background: #17283b;
+}
+:root[data-theme="dark"] .cla-seed-form-nav a { color: #c1d3e7; }
+:root[data-theme="dark"] .cla-seed-form-nav a:hover {
+  border-color: #536b86;
+  background: #20354b;
+  color: #d8e8ff;
+}
+:root[data-theme="dark"] .cla-seed-form-nav a > span { color: #9cc3f2; }
+:root[data-theme="dark"] .cla-seed-form-nav a > small {
+  background: #2a3d52;
+  color: #b2c2d3;
+}
+:root[data-theme="dark"] .cla-seed-measurement-note {
+  border-color: #3a536e;
+  border-left-color: #73a9e5;
+  background: #1b3046;
+}
+:root[data-theme="dark"] .cla-seed-measurement-note strong { color: #c4dcf7; }
+:root[data-theme="dark"] .cla-seed-measurement-note p { color: #b1c4d8; }
+@media (max-width: 640px) {
+  .cla-seed-form-nav {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 6px;
+    padding: 8px;
+  }
+  .cla-seed-form-nav a {
+    min-width: 0;
+    justify-content: flex-start;
+    padding: 7px 8px;
+    font-size: 10px;
+  }
+  .cla-seed-form-nav a:last-child { grid-column: 1 / -1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cla-seed-form-nav a { transition: none; }
+}
