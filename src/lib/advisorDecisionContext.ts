@@ -89,11 +89,32 @@ const semesterLabel = (semester: string) => semester === 'semester1' ? 'Học k�
  * No transcript or personal data is sent to Gemini.
  */
 export function answerPersonalLearningAdvice(state: LearningTranscriptState | null, uid: string): AdvisorLocalAnswer {
-  if (!state || state.userId !== uid || state.status !== 'ready' || !state.data) {
+  if (!state || state.userId !== uid) {
     return {
-      answer: 'Mình chưa đọc được bảng điểm đã xác minh của tài khoản này nên chưa thể chỉ ra môn nào cần ưu tiên. Bạn hãy vào Seed → Bảng điểm, kiểm tra dữ liệu đã đồng bộ và có điểm ở ít nhất một học kỳ, rồi hỏi lại mình nhé.',
+      answer: 'Mình đang xác minh dữ liệu của tài khoản hiện tại nên chưa thể đưa ra nhận xét cá nhân. Hãy đợi hồ sơ tải xong rồi hỏi lại nhé.',
+      destination: '/student/transcript',
+      linkLabel: 'Mở bảng điểm',
+    };
+  }
+  if (state.status === 'loading' || state.status === 'syncing') {
+    return {
+      answer: 'Bảng điểm của bạn đang được tải hoặc xác minh với máy chủ. Mình sẽ chưa xếp hạng môn học cho đến khi dữ liệu được xác nhận; bạn thử gửi lại câu hỏi sau ít giây nhé.',
+      destination: '/student/transcript',
+      linkLabel: 'Kiểm tra trạng thái bảng điểm',
+    };
+  }
+  if (state.status === 'error') {
+    return {
+      answer: 'Hiện mình chưa đọc được bảng điểm từ máy chủ nên không muốn đoán môn nào đang yếu. Bạn hãy kiểm tra kết nối và trạng thái đồng bộ trong Seed rồi thử lại.',
       destination: '/student/transcript',
       linkLabel: 'Kiểm tra bảng điểm',
+    };
+  }
+  if (state.status !== 'ready' || !state.data) {
+    return {
+      answer: 'Hồ sơ hiện chưa có bảng điểm đã xác minh với đủ dữ liệu để tư vấn theo từng môn. Bạn có thể nhập hoặc đồng bộ bảng điểm trong Seed; khi có dữ liệu, mình sẽ chỉ ra môn nên ưu tiên.',
+      destination: '/student/transcript',
+      linkLabel: 'Bổ sung bảng điểm',
     };
   }
 
