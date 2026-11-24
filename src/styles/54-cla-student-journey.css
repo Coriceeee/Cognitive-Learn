@@ -1,0 +1,203 @@
+/* Phase 1 — student-facing primary journey. Keeps the existing shell and module routes. */
+.cla-primary-journey {
+  margin: 12px 0 24px;
+  overflow: hidden;
+  color: #17324f;
+  background: #fff;
+  border: 1px solid #dce6f2;
+  border-radius: 20px;
+  box-shadow: 0 16px 42px -38px rgba(25,59,106,.45);
+}
+.cla-primary-journey__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 23px 25px 19px;
+}
+.cla-primary-journey__eyebrow {
+  color: #3566a5;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+.cla-primary-journey__header h2 {
+  margin: 7px 0 5px;
+  color: #183653;
+  font-size: clamp(21px,2.1vw,28px);
+  line-height: 1.22;
+  letter-spacing: -.035em;
+}
+.cla-primary-journey__header p {
+  max-width: 70ch;
+  margin: 0;
+  color: #5b7088;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.cla-primary-journey__count {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: baseline;
+  gap: 8px;
+  color: #285da8;
+  font-size: 35px;
+  font-weight: 780;
+  letter-spacing: -.06em;
+}
+.cla-primary-journey__count small {
+  max-width: 48px;
+  color: #71839a;
+  font-size: 9px;
+  line-height: 1.35;
+  letter-spacing: .08em;
+}
+.cla-primary-journey__steps {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 0;
+  margin: 0;
+  padding: 0 18px 18px;
+  list-style: none;
+}
+.cla-primary-journey__steps li { min-width: 0; position: relative; }
+.cla-primary-journey__steps li:not(:last-child)::after {
+  position: absolute;
+  z-index: 0;
+  top: 29px;
+  right: -1px;
+  width: 2px;
+  height: 1px;
+  content: "";
+  background: #d5e1ef;
+}
+.cla-primary-journey__step {
+  position: relative;
+  display: flex;
+  height: 100%;
+  min-height: 205px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+  margin: 0 6px;
+  padding: 17px 16px 15px;
+  border: 1px solid #e2eaf3;
+  border-radius: 14px;
+  background: #fbfdff;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color .16s ease, background .16s ease, transform .16s ease, box-shadow .16s ease;
+}
+.cla-primary-journey__step:hover {
+  transform: translateY(-2px);
+  border-color: #9dbce5;
+  background: #f5f9ff;
+  box-shadow: 0 12px 25px -22px rgba(34,83,148,.55);
+}
+.cla-primary-journey__step:focus-visible {
+  outline: 3px solid #3979cf;
+  outline-offset: 3px;
+}
+.cla-primary-journey__number {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid #cad9ec;
+  border-radius: 50%;
+  background: #fff;
+  color: #285da8;
+  font-size: 11px;
+  font-weight: 800;
+}
+.cla-primary-journey__code {
+  color: #73849a;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+.cla-primary-journey__step strong {
+  color: #1b3a59;
+  font-size: 15px;
+  line-height: 1.3;
+}
+.cla-primary-journey__description {
+  color: #60748a;
+  font-size: 11px;
+  line-height: 1.55;
+}
+.cla-primary-journey__action {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 7px;
+  color: #245ca8;
+  font-size: 11px;
+  font-weight: 780;
+}
+.cla-primary-journey__step--seed .cla-primary-journey__number { color:#17685f; border-color:#b9ddd5; }
+.cla-primary-journey__step--lumen .cla-primary-journey__number { color:#4e61ba; border-color:#c8d0f0; }
+.cla-primary-journey__step--atlas .cla-primary-journey__number { color:#875a22; border-color:#e8d4b5; }
+.cla-primary-journey__step--orion .cla-primary-journey__number { color:#7551a8; border-color:#d9c9ee; }
+.cla-primary-journey__footer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  padding: 12px 24px;
+  border-top: 1px solid #e8eef5;
+  background: #fbfcfe;
+}
+.cla-primary-journey__footer > span {
+  margin-right: auto;
+  color: #78889b;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .1em;
+}
+.cla-primary-journey__footer a {
+  color: #536d89;
+  font-size: 11px;
+  font-weight: 680;
+  text-decoration: none;
+}
+.cla-primary-journey__footer a:hover { color: #245ca8; text-decoration: underline; }
+.cla-student-analysis-details {
+  margin: 18px 0 24px;
+  overflow: hidden;
+  border: 1px solid #dce6f2;
+  border-radius: 14px;
+  background: #fff;
+}
+.cla-student-analysis-details > summary {
+  display: flex;
+  min-height: 50px;
+  align-items: center;
+  padding: 13px 17px;
+  color: #28517f;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 750;
+  list-style-position: inside;
+}
+.cla-student-analysis-details[open] > summary { border-bottom: 1px solid #e6edf5; }
+.cla-student-analysis-details > .cla-decision-canvas { margin: 0; border: 0; box-shadow: none; }
+@media (max-width: 900px) {
+  .cla-primary-journey__steps { grid-template-columns: repeat(2,minmax(0,1fr)); row-gap: 10px; }
+  .cla-primary-journey__step { min-height: 180px; }
+}
+@media (max-width: 560px) {
+  .cla-primary-journey { border-radius: 16px; }
+  .cla-primary-journey__header { padding: 18px 16px 14px; }
+  .cla-primary-journey__count { font-size: 28px; }
+  .cla-primary-journey__steps { grid-template-columns: 1fr; padding: 0 10px 12px; gap: 8px; }
+  .cla-primary-journey__step { min-height: 0; margin: 0; padding: 13px; }
+  .cla-primary-journey__description { max-width: 54ch; }
+  .cla-primary-journey__footer { padding: 12px 15px; gap: 10px 15px; }
+  .cla-primary-journey__footer > span { flex-basis: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cla-primary-journey__step { transition: none; }
+  .cla-primary-journey__step:hover { transform: none; }
+}
