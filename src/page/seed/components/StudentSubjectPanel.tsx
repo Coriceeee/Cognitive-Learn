@@ -1,10 +1,10 @@
-import { useStudentTranscript } from "../hooks/useStudentTranscript";
+import { useVerifiedStudentProfile } from "../hooks/StudentProfileProvider";
 import { getLatestSubjectGrades } from "../services/transcriptData";
 
 type StudentSubjectPanelProps = { onUpdate: () => void };
 
 export default function StudentSubjectPanel({ onUpdate }: StudentSubjectPanelProps) {
-  const { data, status, error, source } = useStudentTranscript();
+  const { data, status, error, source } = useVerifiedStudentProfile().transcript;
   const rows = data ? getLatestSubjectGrades(data) : [];
   return (
     <article className="student-panel cla-live-transcript-panel">
