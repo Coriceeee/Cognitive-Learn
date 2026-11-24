@@ -48,6 +48,10 @@
   width: 100%;
   min-height: clamp(360px, 41vw, 416px);
 }
+.student-dash .cla-circuit-node {
+  width: 134px;
+  min-height: 86px;
+}
 .student-dash .cla-circuit-detail { display: none; }
 @media (max-width: 760px) {
   .student-dash .cla-circuit-stage { display: none; }
