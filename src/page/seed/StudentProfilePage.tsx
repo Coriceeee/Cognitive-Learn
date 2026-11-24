@@ -828,9 +828,10 @@ export default function TrangNhapHoSoHocTap() {
           <span>HỒ SƠ HỌC TẬP</span>
           <h1>Nhập dữ liệu THPT để Cognitive Learn phân tích</h1>
           <p>
-            Hệ thống lưu bảng điểm lớp 10, 11, 12 theo học kì, theo đúng cấu
-            trúc điểm thường xuyên, giữa kì, cuối kì để tính GPA, xu hướng học
-            tập, SCI/MAS/CSL và dự báo tuyển sinh.
+            Nhập bảng điểm lớp 10–12 và thông tin học tập để hệ thống tính GPA,
+            hiển thị các chỉ báo học tập thử nghiệm, rồi chuyển dữ liệu sang công
+            cụ dự báo và tư vấn tuyển sinh khi đủ điều kiện. Điểm chưa có hãy để
+            trống; hệ thống không tự quy đổi dữ liệu thiếu thành 0.
           </p>
         </header>
 
