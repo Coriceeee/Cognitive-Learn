@@ -66,6 +66,89 @@ export function answerLocalDecision(intent:AdvisorLocalIntent,uid:string,path:st
   return missing[intent];
 }
 /** Do not reuse local personalized turns as remote conversation context. */
+
+import type { TranscriptView } from '../page/seed/services/transcriptData';
+
+export function isPersonalLearningAdviceQuestion(message: string): boolean {
+  const q = norm(message);
+  return /\b(tien bo|cai thien|tap trung mon|mon nao|mon hoc nao|yeu mon|hoc mon nao|uu tien mon|mon nao can|nen tap trung|diem mon nao)\b/.test(q);
+}
+
+type LearningTranscriptState = {
+  data: TranscriptView | null;
+  status: 'loading'|'syncing'|'signed-out'|'empty'|'ready'|'error';
+  source: 'student_transcripts'|'legacy'|null;
+  userId: string|null;
+};
+
+const gradeLabel = (grade: string) => grade === 'grade10' ? 'Lớp 10' : grade === 'grade11' ? 'Lớp 11' : 'Lớp 12';
+const semesterLabel = (semester: string) => semester === 'semester1' ? 'Học kỳ I' : 'Học kỳ II';
+
+/** Deterministic personal advice from the signed-in student's server-confirmed transcript.
+ * Scores are compared only within the same latest term; missing/partial scores are never treated as zero.
+ * No transcript or personal data is sent to Gemini.
+ */
+export function answerPersonalLearningAdvice(state: LearningTranscriptState | null, uid: string): AdvisorLocalAnswer {
+  if (!state || state.userId !== uid || state.status !== 'ready' || !state.data) {
+    return {
+      answer: 'Mình chưa đọc được bảng điểm đã xác minh của tài khoản này nên chưa thể chỉ ra môn nào cần ưu tiên. Bạn hãy vào Seed → Bảng điểm, kiểm tra dữ liệu đã đồng bộ và có điểm ở ít nhất một học kỳ, rồi hỏi lại mình nhé.',
+      destination: '/student/transcript',
+      linkLabel: 'Kiểm tra bảng điểm',
+    };
+  }
+
+  const terms = [...state.data.terms].reverse();
+  const term = terms.find(item => item.subjects.filter(row => row.average !== null && Number.isFinite(row.average)).length >= 3);
+  if (!term) {
+    return {
+      answer: 'Bảng điểm hiện chưa có ít nhất 3 môn với điểm trung bình học kỳ hoàn chỉnh trong cùng một học kỳ. Mình không muốn xếp hạng môn học từ dữ liệu tạm tính hoặc thiếu. Bạn hãy hoàn thiện điểm học kỳ trong Seed rồi hỏi lại nhé.',
+      destination: '/student/transcript',
+      linkLabel: 'Hoàn thiện bảng điểm',
+    };
+  }
+
+  const ranked = term.subjects
+    .filter(row => row.average !== null && Number.isFinite(row.average) && row.average >= 0 && row.average <= 10)
+    .map(row => ({subject: row.subject, score: row.average as number}))
+    .sort((a, b) => a.score - b.score);
+  if (ranked.length < 3) {
+    return {
+      answer: 'Dữ liệu điểm hoàn chỉnh hiện còn quá ít để xác định môn cần ưu tiên một cách đáng tin cậy. Hãy bổ sung bảng điểm rồi mình sẽ so sánh các môn trong cùng học kỳ.',
+      destination: '/student/transcript',
+      linkLabel: 'Xem bảng điểm',
+    };
+  }
+
+  const first = ranked[0];
+  const second = ranked[1];
+  const close = second.score - first.score <= 0.3;
+  const priorities = close ? ranked.slice(0, 2) : [first];
+  const period = `${gradeLabel(term.grade)} · ${semesterLabel(term.semester)}`;
+  const scoreList = priorities.map(item => `${item.subject}: ${item.score.toFixed(1)}/10`).join('; ');
+  const next = ranked.slice(2, 4).map(item => `${item.subject} ${item.score.toFixed(1)}`).join('; ');
+
+  let focusAdvice: string;
+  if (priorities.length === 2) {
+    focusAdvice = `Hai môn nên xem lại trước là ${priorities.map(item => item.subject).join(' và ')}. Điểm của hai môn khá sát nhau, vì vậy chưa nên kết luận một môn yếu hơn rõ rệt; hãy xem bài kiểm tra gần nhất để tìm phần kiến thức mất điểm nhiều nhất.`;
+  } else if (first.score < 6.5) {
+    focusAdvice = `${first.subject} là môn nên ưu tiên trước vì đang có điểm thấp nhất trong các môn đủ dữ liệu. Hãy củng cố phần kiến thức nền và làm lại các câu sai trước khi tăng độ khó.`;
+  } else if (first.score < 7.5) {
+    focusAdvice = `${first.subject} là môn nên ưu tiên cải thiện trước. Hãy phân loại lỗi theo kiến thức, cách làm và thời gian; tập trung sửa nhóm lỗi lặp lại thay vì chỉ làm thêm bài ngẫu nhiên.`;
+  } else {
+    focusAdvice = `Chưa thấy môn nào có điểm thấp rõ rệt trong nhóm dữ liệu này. Nếu muốn nâng kết quả, hãy ưu tiên ${first.subject} trước, nhưng vẫn duy trì các môn còn lại thay vì dồn toàn bộ thời gian vào một môn.`;
+  }
+
+  const legacyNote = state.source === 'legacy'
+    ? ' Lưu ý: đây là bảng điểm lịch sử ở chế độ chỉ đọc, chưa phải hồ sơ mới đã đối soát đầy đủ.'
+    : '';
+
+  return {
+    answer: `Mình đã xem bảng điểm đã đồng bộ của bạn ở ${period}. Trong các môn có điểm trung bình hoàn chỉnh cùng học kỳ, mức thấp nhất là: ${scoreList}. ${focusAdvice}\\n\\nGợi ý thử trong 2 tuần: dành 2 buổi/tuần, mỗi buổi 30–40 phút cho môn ưu tiên; 10 phút ôn đúng phần kiến thức, 20 phút làm bài theo chủ đề, 5–10 phút ghi lại lỗi và cách sửa. Sau 2 tuần, đối chiếu bài kiểm tra mới trước khi đổi ưu tiên.\\n\\nCác môn tiếp theo trong nhóm điểm thấp là: ${next || 'chưa đủ dữ liệu để so sánh thêm'}. Điểm phản ánh kết quả đã nhập trong học kỳ này, không tự cho biết nguyên nhân yếu hay dự báo điểm thi. ${legacyNote}`,
+    destination: '/student/transcript',
+    linkLabel: 'Xem bảng điểm chi tiết',
+  };
+}
+
 export function remoteAdvisorTurns<T extends {remote?:boolean}>(turns:readonly T[]):T[]{
   let start=turns.length;while(start>0&&turns[start-1].remote===true)start--;
   return turns.slice(start);
