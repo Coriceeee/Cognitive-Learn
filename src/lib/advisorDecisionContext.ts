@@ -307,7 +307,7 @@ export function answerPersonalLearningAdvice(
     ? ' Bảng điểm đang lấy từ hồ sơ lịch sử ở chế độ chỉ đọc; hãy chuẩn hóa hồ sơ trong Seed trước khi xem đây là dữ liệu hiện hành.'
     : '';
   const focusScenarioLine = options.focusLowestSubject === true
-    ? '\\n\\nKỊCH BẢN TẬP TRUNG HƠN: Mình hiểu bạn muốn dành thêm trọng tâm cho ' + priorities[0].subject + ' — môn có điểm thấp nhất trong học kỳ mới nhất. ' +
+    ? '\n\nKỊCH BẢN TẬP TRUNG HƠN: Mình hiểu bạn muốn dành thêm trọng tâm cho ' + priorities[0].subject + ' — môn có điểm thấp nhất trong học kỳ mới nhất. ' +
       (plannedHours !== null
         ? 'CLA tăng trọng số phân bổ môn này 1,5 lần trong cùng quỹ ' + plannedHours.toFixed(1) + ' giờ/tuần; thời gian không tự tăng. '
         : 'Chưa có quỹ giờ học/tuần đã xác minh nên chưa thể tính số giờ tăng thêm. ') +
