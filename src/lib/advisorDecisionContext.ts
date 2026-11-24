@@ -42,7 +42,7 @@ export function advisorLocalIntent(message:string):AdvisorLocalIntent|null {
   if(/(phu hop|co hoi|xac suat|kha nang|nen chon|nen hoc|co dau|co do).*(voi (toi|em|minh)|cua (toi|em|minh))|dua (vao|tren) (ho so|diem|hoc ba)|ho so (cua )?(toi|em|minh)|diem (cua )?(toi|em|minh)|\b(toi|em|minh) co (dau|do)\b/.test(q))return 'personal';
   return null;
 }
-export type AdvisorLocalAnswer={answer:string;destination?:'/atlas/subjects'|'/orion/inputs'|'/student/profile';linkLabel?:string};
+export type AdvisorLocalAnswer={answer:string;destination?:'/atlas/subjects'|'/orion/inputs'|'/student/profile'|'/student/transcript';linkLabel?:string};
 const missing:Record<AdvisorLocalIntent,AdvisorLocalAnswer>={
   projection:{answer:'Chưa có kịch bản Lumen đã xác nhận còn hiệu lực trong màn hình Atlas hiện tại. Chuyển kịch bản từ Lumen và bấm “Dùng kịch bản Lumen” để kiểm tra lại. CLA không suy ra điểm từ hồ sơ thiếu.',destination:'/atlas/subjects',linkLabel:'Mở công cụ điểm thi'},
   goal:{answer:'Chưa có nguyện vọng Atlas đã xác nhận còn hiệu lực trong Orion hiện tại. Chọn nguyện vọng tại Atlas và bấm “Dùng mục tiêu này” ở Orion. Lựa chọn không phải xác nhận đủ điều kiện xét tuyển.',destination:'/orion/inputs',linkLabel:'Mở mục tiêu Orion'},
