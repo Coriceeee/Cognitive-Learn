@@ -3,6 +3,7 @@ import { navigateTo } from "../../lib/clientNavigation";
 import { useEffect, useState } from "react";
 import { pushAppNotice } from "../../lib/appNotices";
 import { auth } from "../../lib/firebase";
+import ModuleSectionNav from "../../components/common/ModuleSectionNav";
 
 import ExamReminderBoard from "../../components/student/ExamReminderBoard";
 import "../../styles.css";
@@ -140,8 +141,7 @@ export default function StudentPage() {
           <div className="cla-intro-target"><span>MỤC TIÊU CỦA BẠN</span><strong>{targetMajor}</strong><small>{hasProfile && isMeaningfulText(profile.targetUniversity) ? profile.targetUniversity : "Chưa chọn trường mục tiêu"}</small><a href={profilePath}>{hasProfile ? "Cập nhật hồ sơ" : "Tạo hồ sơ"} ↗</a></div>
         </section>
 
-        {/* CP87: keep the original six-node circuit as the PRIMARY navigation,
-            now immediately below the greeting and before analytical widgets. */}
+        {/* Primary admissions journey: one clear next step per stage. */}
         <LearningCircuit profilePath={profilePath} />
         </>}
         {view !== "/student" && <ModuleSectionNav moduleKey="seed" />}
