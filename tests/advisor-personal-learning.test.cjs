@@ -138,6 +138,14 @@ test('measured cognitive proxies adapt the plan but remain explicitly labelled a
   assert.match(answer,/FRI proxy \(65\/100\)/);
   assert.match(answer,/quy tắc lập kế hoạch thử nghiệm/);
 });
+test('chat offers a personal plan entry point and keeps plan follow-ups local',()=>{
+  const chat=readFileSync(path.join(root,'src/components/common/FloatingAdvisorChat.tsx'),'utf8');
+  const suggestions=readFileSync(path.join(root,'src/lib/advisorChatPolicy.ts'),'utf8');
+  assert.match(suggestions,/Lập kế hoạch học tập theo dữ liệu của tôi/);
+  assert.match(chat,/privateIntent: "learning"/);
+  assert.match(chat,/previousPrivate === "learning" && privateFollowup/);
+  assert.match(chat,/không gửi dữ liệu cá nhân sang Gemini/);
+});
 test('chat reads optional verified context and handles personal advice locally before Gemini',()=>{
   const chat=readFileSync(path.join(root,'src/components/common/FloatingAdvisorChat.tsx'),'utf8');
   const provider=readFileSync(path.join(root,'src/page/seed/hooks/StudentProfileProvider.tsx'),'utf8');
