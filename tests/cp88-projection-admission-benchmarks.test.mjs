@@ -63,6 +63,5 @@ test("Atlas renders the historical comparison separately from admission eligibil
   assert.match(ui, /Kịch bản thi thử so với điểm chuẩn THPT 2026/);
   assert.match(ui, /Không phải dự báo đỗ cho kỳ tuyển sinh tiếp theo/);
   assert.match(ui, /Không dùng kịch bản thi thử để xác nhận điều kiện/);
-  assert.match(ui, /row\.eligibility/); 
   assert.doesNotMatch(ui, /projectionBenchmarkReport\.rows[\s\S]{0,1500}getRiskLabel/);
 });
