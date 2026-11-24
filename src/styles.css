@@ -106,3 +106,6 @@
 @import "./styles/52-cp90-lumen-hero.css";
 
 @import "./styles/53-cla-focused-admission.css";
+
+/* Phase 1: student-first four-step admissions journey. */
+@import "./styles/54-cla-student-journey.css";
