@@ -20,11 +20,13 @@ test('Seed: normal values accept, including missing optional financial fields', 
   assert.equal(validateSeedNumericInput(good()), null);
   assert.equal(validateSeedNumericInput({ ...good(), educationBudget: '', maxTuition: '' }), null);
 });
-test('Seed: all self-reported measures may remain missing without being converted to zero', () => {
+test('Seed: supplemental behavior signals may remain missing without being converted to zero', () => {
   const input = good();
-  for (const key of ['studyHoursPerWeek','practiceTestsPerWeek','planCompletionRate','goalSwitchFrequency',
-    'taskAbandonmentRate','contextSwitchRate','learningStrategy','motivationLevel']) input[key] = '';
+  for (const key of ['goalSwitchFrequency','taskAbandonmentRate','contextSwitchRate']) input[key] = '';
   assert.equal(validateSeedNumericInput(input), null);
+  for (const key of ['studyHoursPerWeek','practiceTestsPerWeek','planCompletionRate','learningStrategy','motivationLevel']) {
+    assert.match(validateSeedNumericInput({ ...input, [key]: '' }), /Vui lòng/, key);
+  }
 });
 test('Seed: zero is observed zero, not missing', () => {
   const input = Object.fromEntries(Object.keys(good()).map(key => [key, '0']));
@@ -49,10 +51,12 @@ test('Seed: negative or malformed finances are rejected', () => {
   assert.match(validateSeedNumericInput({ ...good(), educationBudget: '-42' }), /không âm/);
   assert.match(validateSeedNumericInput({ ...good(), maxTuition: 'Infinity' }), /không âm/);
 });
-test('Seed: missing self-reported values stay optional; explicit invalid values still fail', () => {
-  for (const key of ['studyHoursPerWeek','practiceTestsPerWeek','planCompletionRate','goalSwitchFrequency',
-    'taskAbandonmentRate','contextSwitchRate','learningStrategy','motivationLevel']) {
+test('Seed: supplemental signals stay optional; core inputs remain required and invalid values fail', () => {
+  for (const key of ['goalSwitchFrequency','taskAbandonmentRate','contextSwitchRate']) {
     assert.equal(validateSeedNumericInput({ ...good(), [key]: '' }), null, key);
+  }
+  for (const key of ['studyHoursPerWeek','practiceTestsPerWeek','planCompletionRate','learningStrategy','motivationLevel']) {
+    assert.match(validateSeedNumericInput({ ...good(), [key]: '' }), /Vui lòng/, key);
   }
   assert.match(validateSeedNumericInput({ ...good(), motivationLevel: '101' }), /100/);
 });
@@ -78,9 +82,20 @@ test('Seed: guided section navigation and self-report copy are present without c
   assert.match(src, /href="#cla-seed-section-transcript"/);
   assert.match(src, /href="#cla-seed-section-behavior"/);
   assert.match(src, /href="#cla-seed-section-finance"/);
-  assert.match(behavior, /Dữ liệu tự đánh giá/);
-  assert.match(behavior, /không tự đổi thành 0/);
-  assert.doesNotMatch(behavior, /\brequired\b/);
+  assert.match(behavior, /Chỉ báo hành vi bổ sung/);
+  assert.match(behavior, /thiếu dữ liệu thay vì tự đổi thành 0/);
+  for (const label of ['Số lần đổi mục tiêu/tháng','Tỷ lệ bỏ dở nhiệm vụ %','Tỷ lệ chuyển đổi tác vụ %']) {
+    const at = behavior.indexOf(label);
+    const end = behavior.indexOf('</label>', at);
+    assert.ok(at >= 0 && end > at);
+    assert.doesNotMatch(behavior.slice(at, end), /required/);
+  }
+  for (const label of ['Số giờ học mỗi tuần','Số đề luyện mỗi tuần','Mức hoàn thành kế hoạch %','Mức sử dụng chiến lược học tập %','Mức động lực %']) {
+    const at = behavior.indexOf(label);
+    const end = behavior.indexOf('</label>', at);
+    assert.ok(at >= 0 && end > at);
+    assert.match(behavior.slice(at, end), /required/);
+  }
   assert.match(src, /profileReadFailed \|\| !profileReady \|\| !seedBaseline/);
   assert.match(src, /await runTransaction\(db,/);
 });
