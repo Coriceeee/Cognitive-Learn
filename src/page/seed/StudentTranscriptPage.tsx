@@ -5,14 +5,14 @@ import ModuleStateNotice from "../../components/common/ModuleStateNotice";
 import { useState } from "react";
 import appLogo from "../../assets/logo cla.png";
 import UserMenu from "../../components/common/UserMenu";
-import { useStudentTranscript } from "./hooks/useStudentTranscript";
+import { useVerifiedStudentProfile } from "./hooks/StudentProfileProvider";
 import { useAcademicGpaIntegrity } from "./hooks/useAcademicGpaIntegrity";
 import { GRADES, SEMESTERS, type GradeKey } from "./services/transcriptData";
 import TranscriptResearchView from "./components/TranscriptResearchView";
 import "../../styles.css";
 
 export default function StudentTranscriptPage() {
-  const { data, status, error, source, retry } = useStudentTranscript();
+  const { transcript: { data, status, error, source, retry } } = useVerifiedStudentProfile();
   const integrity = useAcademicGpaIntegrity();
   const [grade, setGrade] = useState<GradeKey>("grade12");
   const gradeName = GRADES.find(g => g.key === grade)!.name;
