@@ -134,9 +134,9 @@ export default function StudentPage() {
         {view === "/student" && <>
         <section className="student-dash-hero cla-observatory-intro" aria-labelledby="student-dash-title">
           <div className="cla-intro-copy">
-            <span className="cla-canvas-index">SEED / BẢN SẮC HỌC TẬP</span>
+            <span className="cla-canvas-index">HỒ SƠ HỌC SINH</span>
             <h1 id="student-dash-title">Xin chào, {displayName}.</h1>
-            <p>Từ hồ sơ học tập đến nguyện vọng đại học: hiểu năng lực, dự báo, chọn ngành và xây dựng chiến lược.</p>
+            <p>Phân tích kết quả học tập, tìm ngành và trường phù hợp, rồi xác định những việc cần làm để đạt nguyện vọng.</p>
           </div>
           <div className="cla-intro-target"><span>MỤC TIÊU CỦA BẠN</span><strong>{targetMajor}</strong><small>{hasProfile && isMeaningfulText(profile.targetUniversity) ? profile.targetUniversity : "Chưa chọn trường mục tiêu"}</small><a href={profilePath}>{hasProfile ? "Cập nhật hồ sơ" : "Tạo hồ sơ"} ↗</a></div>
         </section>
