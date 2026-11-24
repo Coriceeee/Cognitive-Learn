@@ -1179,8 +1179,8 @@ export default function TrangNhapHoSoHocTap() {
             </div>
 
             <div className="cla-seed-measurement-note" role="note">
-              <strong>Dữ liệu tự đánh giá</strong>
-              <p>Các thông tin dưới đây do bạn tự ước lượng. Nếu chưa theo dõi hoặc không chắc con số, hãy để trống. Cognitive Learn sẽ ghi nhận là thiếu dữ liệu, không tự đổi thành 0. Bạn vẫn có thể lưu hồ sơ và sử dụng các chức năng tuyển sinh dựa trên bảng điểm.</p>
+              <strong>Chỉ báo hành vi bổ sung · có thể để trống</strong>
+              <p>Số lần đổi mục tiêu, tỷ lệ bỏ dở nhiệm vụ và tỷ lệ chuyển đổi tác vụ là các thông tin tự đánh giá bổ sung. Nếu chưa theo dõi hoặc không chắc con số, hãy để trống: Lumen sẽ ghi nhận thiếu dữ liệu thay vì tự đổi thành 0. Các thông tin cơ bản còn lại cần được điền để tạo phân tích ban đầu.</p>
             </div>
 
             <div className="profile-field-grid">
@@ -1193,7 +1193,8 @@ export default function TrangNhapHoSoHocTap() {
                   onChange={(event) =>
                     updateField("studyHoursPerWeek", event.target.value)
                   }
-                />
+                required
+                  />
               </label>
 
               <label>
@@ -1205,7 +1206,8 @@ export default function TrangNhapHoSoHocTap() {
                   onChange={(event) =>
                     updateField("practiceTestsPerWeek", event.target.value)
                   }
-                />
+                required
+                  />
               </label>
 
               <label>
@@ -1218,7 +1220,8 @@ export default function TrangNhapHoSoHocTap() {
                   onChange={(event) =>
                     updateField("planCompletionRate", event.target.value)
                   }
-                />
+                required
+                  />
               </label>
 
               <label>
@@ -1269,7 +1272,8 @@ export default function TrangNhapHoSoHocTap() {
                   onChange={(event) =>
                     updateField("learningStrategy", event.target.value)
                   }
-                />
+                required
+                  />
               </label>
 
               <label>
@@ -1282,7 +1286,8 @@ export default function TrangNhapHoSoHocTap() {
                   onChange={(event) =>
                     updateField("motivationLevel", event.target.value)
                   }
-                />
+                required
+                  />
               </label>
             </div>
           </section>
