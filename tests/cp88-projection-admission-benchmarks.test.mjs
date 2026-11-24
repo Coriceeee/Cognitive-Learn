@@ -54,3 +54,15 @@ test("reports the comparison as a historical reference, never admission probabil
   assert.ok(report.limitations.some(note => note.includes("không phải xác suất trúng tuyển")));
   assert.ok(report.limitations.some(note => note.includes("phương thức khác")));
 });
+
+test("Atlas renders the historical comparison separately from admission eligibility", async () => {
+  const { readFile } = await import("node:fs/promises");
+  const ui = await readFile(new URL("../src/page/atlas/components/AtlasAdmissionEnginePanel.tsx", import.meta.url), "utf8");
+  assert.match(ui, /scoreBasis !== "projection"/);
+  assert.match(ui, /compareProjectionToHistoricalCutoffs/);
+  assert.match(ui, /Kịch bản thi thử so với điểm chuẩn THPT 2026/);
+  assert.match(ui, /Không phải dự báo đỗ cho kỳ tuyển sinh tiếp theo/);
+  assert.match(ui, /Không dùng kịch bản thi thử để xác nhận điều kiện/);
+  assert.match(ui, /row\.eligibility/); 
+  assert.doesNotMatch(ui, /projectionBenchmarkReport\.rows[\s\S]{0,1500}getRiskLabel/);
+});
