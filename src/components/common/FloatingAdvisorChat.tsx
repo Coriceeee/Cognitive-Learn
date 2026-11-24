@@ -58,8 +58,8 @@ export default function FloatingAdvisorChat() {
     try { message = prepareAdvisorMessage(raw); } catch (error) { setNotice(error instanceof Error ? error.message : "Câu hỏi chưa hợp lệ."); return; }
     const uid = auth.currentUser?.uid;
     if (!authenticated || !uid || uid !== sessionUid) { setNotice("Bạn cần đăng nhập để trò chuyện với trợ lý CLA."); return; }
-    // Personal learning guidance uses only this signed-in student's server-confirmed transcript.
-    // The transcript is ranked locally and is never included in the Gemini request.
+    // Personal learning guidance uses this account's server-confirmed transcript and observed profile.
+    // Study capacity, cognitive proxies and temporal signals are used locally, never sent to Gemini.
     if (isPersonalLearningAdviceQuestion(message)) {
       const local = answerPersonalLearningAdvice(studentContext, uid);
       setTurns(current => [...current, { role: "user", text: message, privateIntent: "learning" }, { role: "model", text: local.answer, destination: local.destination, linkLabel: local.linkLabel, privateIntent: "learning" }]);
@@ -132,7 +132,7 @@ export default function FloatingAdvisorChat() {
         <button type="button" aria-label="Đóng trò chuyện" onClick={() => setOpen(false)}>×</button>
       </header>
       <div className="cla-chat-messages" role="log" aria-live="polite" aria-relevant="additions text">
-        <p className="cla-chat-intro">Hỏi về ngành học, trường đại học, tuyển sinh, cách sử dụng CLA hoặc môn học nên ưu tiên cải thiện. Với câu hỏi học tập cá nhân, CLA đối chiếu bảng điểm đã đồng bộ của chính tài khoản đang đăng nhập và xử lý ngay trên máy; bảng điểm không được gửi sang Gemini. Khi đã xác nhận kịch bản hoặc mục tiêu tại Atlas/Orion, bạn cũng có thể hỏi “Điểm kịch bản của tôi?” hoặc “Còn thiếu bao nhiêu điểm?”.</p>
+        <p className="cla-chat-intro">Hỏi về ngành học, tuyển sinh, môn nên ưu tiên hoặc yêu cầu lập kế hoạch học tập. CLA đối chiếu bảng điểm, thời lượng học, thói quen và các chỉ báo đã ghi nhận của chính tài khoản đang đăng nhập; việc lập kế hoạch được xử lý trên máy, không gửi dữ liệu cá nhân sang Gemini. Khi đã xác nhận kịch bản hoặc mục tiêu tại Atlas/Orion, bạn cũng có thể hỏi “Điểm kịch bản của tôi?” hoặc “Còn thiếu bao nhiêu điểm?”.</p>
         {(authenticated ? turns : []).map((turn, index) => <div key={index} className={`cla-chat-message ${turn.role === "user" ? "is-user" : "is-model"}`}><span>{turn.role === "user" ? "Bạn" : "CLA"}</span><p>{turn.text}</p>{turn.source && <a className="cla-chat-context-link" href={turn.source} target="_blank" rel="noopener noreferrer">Nguồn công bố chính thức ↗</a>}{turn.destination && <a className="cla-chat-context-link" href={turn.destination}>{turn.linkLabel || "Mở chức năng liên quan"} ↗</a>}</div>)}
         {loading && <p className="cla-chat-thinking" role="status">Đang tạo câu trả lời…</p>}
         <div ref={scrollAnchor} />
