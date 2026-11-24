@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { validateSeedNumericInput } from '../src/page/seed/services/profileInputValidation.ts';
+import { calculateCognitive } from '../src/engines/cognitive/cognitiveEngine.ts';
 
 const good = () => ({
   studyHoursPerWeek: '14',
@@ -98,4 +99,25 @@ test('Seed: guided section navigation and self-report copy are present without c
   }
   assert.match(src, /profileReadFailed \|\| !profileReady \|\| !seedBaseline/);
   assert.match(src, /await runTransaction\(db,/);
+});
+
+test('Cognitive: absent supplemental signals stay missing while the core composite can still be computed', () => {
+  const result = calculateCognitive({ planCompletionRate: 72, motivationLevel: 75, learningStrategy: 68 });
+  assert.equal(result.scoreAvailable, true);
+  assert.ok(result.missingDimensions.includes('GVI'));
+  assert.ok(result.missingDimensions.includes('BDI'));
+  assert.ok(result.missingDimensions.includes('FRI'));
+  assert.ok(!result.vector.availableDimensions.includes('GVI'));
+  assert.ok(!result.vector.availableDimensions.includes('FRI'));
+  assert.equal(result.riskLevel, 'UNKNOWN');
+});
+test('Cognitive: explicit zero for optional behavior is an observed zero, not missing', () => {
+  const result = calculateCognitive({
+    planCompletionRate: 72, motivationLevel: 75, learningStrategy: 68,
+    goalSwitchFrequency: 0, taskAbandonmentRate: 0, contextSwitchRate: 0,
+  });
+  assert.ok(result.vector.availableDimensions.includes('GVI'));
+  assert.ok(result.vector.availableDimensions.includes('FRI'));
+  assert.equal(result.GVI, 0);
+  assert.equal(result.FRI, 0);
 });
