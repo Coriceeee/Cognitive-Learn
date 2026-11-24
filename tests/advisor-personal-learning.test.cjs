@@ -48,6 +48,17 @@ test('refuses to rank incomplete or provisional-only grades',()=>{
   assert.match(answer,/chưa có ít nhất 3 môn/);
   assert.doesNotMatch(answer,/Toán: 6\.1/);
 });
+test('does not fall back to an older semester when the latest semester is incomplete',()=>{
+  const state=makeState([row('Toán',6.1),row('Vật lý',6.3),row('Hóa học',null,'PARTIAL')]);
+  state.data.terms.unshift({grade:'grade11',semester:'semester2',subjects:[row('Toán',5.1),row('Vật lý',5.3),row('Hóa học',6.0)]});
+  const answer=answerPersonalLearningAdvice(state,'student-A').answer;
+  assert.match(answer,/chưa có ít nhất 3 môn/);
+  assert.doesNotMatch(answer,/Lớp 11|Toán: 5\.1/);
+});
+test('legacy transcript is explicitly described as historical read-only data',()=>{
+  const answer=answerPersonalLearningAdvice(makeState([row('Toán',5.8),row('Vật lý',6.2),row('Hóa học',7.4)],{source:'legacy'}),'student-A').answer;
+  assert.match(answer,/bảng điểm lịch sử ở chế độ chỉ đọc/);
+});
 test('blocks stale, unavailable and cross-account transcript context',()=>{
   for(const state of [
     makeState([row('Toán',5),row('Vật lý',6),row('Hóa học',7)],{userId:'student-B'}),
