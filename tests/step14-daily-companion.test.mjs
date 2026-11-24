@@ -70,7 +70,8 @@ test('DC13 recent activity returns seven calendar days',()=>{
 test('DC14 route, protected roles and navigation are integrated',()=>{
   assert.match(file('../src/App.tsx'),/"\/student\/companion"/);
   assert.match(file('../src/components/common/AccessGate.tsx'),/"\/student\/companion"/);
-  assert.match(file('../src/page/seed/StudentPage.tsx'),/Đồng hành mỗi ngày/);
+  assert.match(file('../src/page/seed/StudentPage.tsx'),/<StudentHeader isAdminPreview=/);
+  assert.match(file('../src/page/seed/components/StudentHeader.tsx'),/!isAdminPreview && <a href="\/student\/companion"[^>]*>Đồng hành mỗi ngày/);
 });
 test('DC15 no notification permission requested without user gesture',()=>{
   const src=file('../src/page/companion/DailyCompanionPage.tsx');

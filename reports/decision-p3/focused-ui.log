@@ -1,0 +1,112 @@
+TAP version 13
+# Subtest: CLA chatbot launcher uses the custom mascot and has an accessible toggle
+ok 1 - CLA chatbot launcher uses the custom mascot and has an accessible toggle
+  ---
+  duration_ms: 1.214686
+  type: 'test'
+  ...
+# Subtest: CLA mascot launcher is circular, fixed to the bottom right, and responsive
+ok 2 - CLA mascot launcher is circular, fixed to the bottom right, and responsive
+  ---
+  duration_ms: 0.387934
+  type: 'test'
+  ...
+# Subtest: CP30 chat readability layer loads after the final CP28 theme
+ok 3 - CP30 chat readability layer loads after the final CP28 theme
+  ---
+  duration_ms: 1.047399
+  type: 'test'
+  ...
+# Subtest: CP30 keeps readable chat typography instead of legacy 9–11px labels
+ok 4 - CP30 keeps readable chat typography instead of legacy 9–11px labels
+  ---
+  duration_ms: 0.381454
+  type: 'test'
+  ...
+# Subtest: CP30 brand palette has WCAG AA normal-text contrast on the corresponding solid surface
+ok 5 - CP30 brand palette has WCAG AA normal-text contrast on the corresponding solid surface
+  ---
+  duration_ms: 1.168898
+  type: 'test'
+  ...
+# Subtest: CP30 preserves mascot, assistant routing and accessible keyboard treatment
+ok 6 - CP30 preserves mascot, assistant routing and accessible keyboard treatment
+  ---
+  duration_ms: 1.431361
+  type: 'test'
+  ...
+# Subtest: mean baseline, no extrapolation, decimal comma and valid zero
+ok 7 - mean baseline, no extrapolation, decimal comma and valid zero
+  ---
+  duration_ms: 1.18329
+  type: 'test'
+  ...
+# Subtest: missing, nonfinite and out-of-range observations abstain
+ok 8 - missing, nonfinite and out-of-range observations abstain
+  ---
+  duration_ms: 0.293565
+  type: 'test'
+  ...
+# Subtest: projection is isolated from official admission classification
+ok 9 - projection is isolated from official admission classification
+  ---
+  duration_ms: 0.667918
+  type: 'test'
+  ...
+# Subtest: student path emphasizes assessment, projection, combination, school, strategy and advisor
+ok 10 - student path emphasizes assessment, projection, combination, school, strategy and advisor
+  ---
+  duration_ms: 1.227735
+  type: 'test'
+  ...
+# Subtest: snapshot is calculated from observations, partial subjects are absent, zero is preserved
+ok 11 - snapshot is calculated from observations, partial subjects are absent, zero is preserved
+  ---
+  duration_ms: 0.837318
+  type: 'test'
+  ...
+# Subtest: malformed, absent and out-of-range observations cannot stage an invalid projection
+ok 12 - malformed, absent and out-of-range observations cannot stage an invalid projection
+  ---
+  duration_ms: 0.303549
+  type: 'test'
+  ...
+# Subtest: handoff is isolated by UID, expiry and backward clock
+ok 13 - handoff is isolated by UID, expiry and backward clock
+  ---
+  duration_ms: 0.207967
+  type: 'test'
+  ...
+# Subtest: handoff snapshot is immutable to consumers and can be consumed only once
+ok 14 - handoff snapshot is immutable to consumers and can be consumed only once
+  ---
+  duration_ms: 0.231703
+  type: 'test'
+  ...
+# Subtest: new snapshot replaces old; explicit clear prevents stale navigation
+ok 15 - new snapshot replaces old; explicit clear prevents stale navigation
+  ---
+  duration_ms: 0.381884
+  type: 'test'
+  ...
+# Subtest: Lumen sends real inputs, Atlas explicitly applies isolated scenario and session changes clear handoffs
+ok 16 - Lumen sends real inputs, Atlas explicitly applies isolated scenario and session changes clear handoffs
+  ---
+  duration_ms: 0.656191
+  type: 'test'
+  ...
+# Subtest: Orion changes goal and clears stale target marks only after explicit confirmation
+ok 17 - Orion changes goal and clears stale target marks only after explicit confirmation
+  ---
+  duration_ms: 0.314355
+  type: 'test'
+  ...
+1..17
+# tests 17
+# suites 0
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 408.806396

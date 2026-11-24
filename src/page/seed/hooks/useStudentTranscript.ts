@@ -1,3 +1,4 @@
+import { studentDecisionLedger } from "../../../lib/studentDecisionSnapshot";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, onSnapshot, type Unsubscribe } from "firebase/firestore";
@@ -50,6 +51,7 @@ export function useStudentTranscript() {
           fail({ code: "invalid-owner" }); return;
         }
         const view = buildTranscriptView(raw);
+        studentDecisionLedger.observe(uid,"transcript",JSON.stringify(view));
         const hasScores = view.terms.some(term => term.subjects.some(subject => subject.provisional !== null));
         setSource(origin);
         setData(view);
@@ -58,6 +60,7 @@ export function useStudentTranscript() {
       const fail = (e: { code?: string }) => {
         if (!isCurrent()) return;
         stopLegacy();
+        studentDecisionLedger.observe(uid,"transcript",null);
         clearVisible(); setStatus("error");
         setError(e.code === "permission-denied"
           ? "Không có quyền đọc bảng điểm. Hãy kiểm tra tài khoản hoặc consent."
@@ -74,6 +77,7 @@ export function useStudentTranscript() {
           if (!isServerConfirmedSnapshot(snap.metadata)) {
             // An unverified primary snapshot invalidates its legacy fallback.
             stopLegacy();
+            studentDecisionLedger.observe(uid,"transcript",null);
             clearVisible(); setStatus("syncing"); return;
           }
           if (snap.exists()) {
@@ -92,9 +96,11 @@ export function useStudentTranscript() {
             { includeMetadataChanges: true }, legacy => {
               if (!isCurrent() || capturedLegacyEpoch !== legacyEpoch) return;
               if (!isServerConfirmedSnapshot(legacy.metadata)) {
+                studentDecisionLedger.observe(uid,"transcript",null);
                 clearVisible(); setStatus("syncing"); return;
               }
               if (!legacy.exists() || !legacy.data().transcript) {
+                studentDecisionLedger.observe(uid,"transcript","confirmed-absent");
                 clearVisible(); setStatus("empty"); return;
               }
               const assessment = assessLegacyTranscript(legacy.data(), uid);

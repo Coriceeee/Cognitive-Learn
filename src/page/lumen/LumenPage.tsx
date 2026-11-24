@@ -1,3 +1,9 @@
+import { useStudentTranscript } from "../seed/hooks/useStudentTranscript";
+import { studentDecisionLedger, pinDecisionHandoff } from "../../lib/studentDecisionSnapshot";
+import { auth } from "../../lib/firebase";
+import { EXAM_SUBJECT_LABELS, stageExamProjection, clearExamProjection } from "../../lib/examProjectionHandoff";
+import ExamProjectionPanel from "../atlas/components/ExamProjectionPanel";
+import { useAcademicGpaIntegrity } from "../seed/hooks/useAcademicGpaIntegrity";
 import { navigateTo } from "../../lib/clientNavigation";
 import LearningIntelligencePanel from "../seed/components/LearningIntelligencePanel";
 import CognitiveInsightPanel from "../seed/components/CognitiveInsightPanel";
@@ -62,6 +68,9 @@ export default function LumenPage() {
 
 
   const advanced = useLearningIntelligence(profile, cognitive, growthAnalytics);
+  const gpaIntegrity = useAcademicGpaIntegrity();
+  const decisionTranscript = useStudentTranscript();
+  const canShowGpaScenario = gpaIntegrity.status === "VERIFIED" && typeof gpaIntegrity.result?.derived?.overall === "number" && gpaIntegrity.result.derived.overall === profile.gpaOverall && !error && cognitive.scoreAvailable === true;
 
   if (loading) {
 
@@ -224,7 +233,7 @@ export default function LumenPage() {
                 <CognitiveGrowthPanel analytics={growthAnalytics} />
               </div></>}
 
-              {view === "/lumen/indices" && <div id="lumen-indices"><LumenIndexGuide cognitive={cognitive} /><LumenSignalAtlas cognitive={cognitive} growth={growthAnalytics} mode="indices" /></div>}
+              {view === "/lumen/indices" && <div id="lumen-indices"><LumenIndexGuide cognitive={cognitive} /><LumenSignalAtlas cognitive={cognitive} growth={growthAnalytics} mode="indices" /><p className="cla-focus-notice"><a href="/lumen/advanced">Tiếp theo: xem dự báo học tập →</a></p></div>}
               {view === "/lumen/history" && <LumenSignalAtlas cognitive={cognitive} growth={growthAnalytics} mode="history" />}
 
         {view === "/lumen/insights" && <>
@@ -365,7 +374,16 @@ export default function LumenPage() {
                 </section>
               )}
 
-              {view === "/lumen/advanced" && (cognitive.scoreAvailable === true ? <LearningIntelligencePanel intelligence={advanced} /> : <p className="cla-transcript-hint">Chưa đủ dữ liệu Cognitive hợp lệ. <a href="/student/profile">Bổ sung hồ sơ</a>.</p>)}
+              {view === "/lumen/advanced" && !error && auth.currentUser?.uid && <ExamProjectionPanel key={auth.currentUser.uid} labels={EXAM_SUBJECT_LABELS} initiallyOpen onTransfer={(previous, latest) => {
+                const uid = auth.currentUser?.uid;
+                if (!uid || !stageExamProjection(uid, previous, latest)) return;
+                if (decisionTranscript.userId!==uid || !["ready","empty"].includes(decisionTranscript.status)) { clearExamProjection(); window.alert("Bảng điểm đang đồng bộ. Hãy thử lại sau khi xác minh dữ liệu."); return; }
+                studentDecisionLedger.observe(uid,"projection",JSON.stringify([previous,latest]));
+                if (!pinDecisionHandoff(uid,"projection")) { clearExamProjection(); window.alert("Chưa xác minh được phiên bản hồ sơ. Hãy đợi đồng bộ và thử lại."); return; }
+                navigateTo("/atlas/subjects");
+                if (window.location.pathname !== "/atlas/subjects") clearExamProjection();
+              }} />}
+              {view === "/lumen/advanced" && (canShowGpaScenario ? <><section className="lumen-empty-card"><h2>Dự báo học tập và định hướng tuyển sinh</h2><p>Điểm kịch bản học tập theo công thức: {Number.isFinite(advanced.prediction.predictedScore) ? advanced.prediction.predictedScore : "Chưa có"}/10. Đây là kịch bản từ GPA, không phải dự báo điểm thi THPT đã kiểm định.</p><p><a href="/atlas/subjects#cla-exam-projection">Mở Atlas nếu muốn nhập điểm trực tiếp →</a></p></section><details className="cla-focus-disclosure"><summary>Chi tiết mô hình, hướng nghề và chiến lược tham khảo</summary><LearningIntelligencePanel intelligence={advanced} /></details></> : <p className="cla-transcript-hint">Chưa đủ dữ liệu nhận thức và GPA đã đối soát. <a href="/student/profile">Bổ sung hồ sơ</a> hoặc <a href="/student/transcript">đối soát bảng điểm</a>. Bạn vẫn có thể ước lượng từ hai bài thi thử ở trên hoặc <a href="/atlas/subjects#cla-exam-projection">nhập trực tiếp ở Atlas →</a>.</p>)}
               {view === "/lumen/insights" && cognitive.scoreAvailable === true && (
                 <>
                   <LumenDecisionPanel intelligence={intelligence} />

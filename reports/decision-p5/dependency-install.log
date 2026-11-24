@@ -1,0 +1,1 @@
+npm ci --fetch-retries=0 --fetch-timeout=8000 --ignore-scripts: timed out (exit 124); no dependency installation completed.

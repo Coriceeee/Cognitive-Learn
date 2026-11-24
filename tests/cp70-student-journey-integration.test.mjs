@@ -68,9 +68,9 @@ test('CP70.11 no profile takes student to Seed after a server-confirmed read', (
   const r = handoff({ hasProfile: false });
   assert.equal(r.phase, 'profile'); assert.equal(r.primaryHref, '/student/profile');
 });
-test('CP70.12 empty verified journey starts at Orion without a fake achievement score', () => {
+test('CP70.12 empty verified journey starts at Lumen without a fake achievement score', () => {
   const r = handoff();
-  assert.equal(r.phase, 'new'); assert.equal(r.primaryHref, '/orion/inputs');
+  assert.equal(r.phase, 'new'); assert.equal(r.primaryHref, '/lumen/advanced');
   assert.equal(r.checkIns, null);
 });
 test('CP70.13 active plan links to Pulse with zero observed check-ins', () => {

@@ -1,4 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { advisorDecisionStore, captureAdvisorDecision, type AdvisorDecisionRecord } from "../../../lib/advisorDecisionContext";
+import { studentDecisionLedger, checkDecisionHandoff, clearDecisionHandoff } from "../../../lib/studentDecisionSnapshot";
+import { useVerifiedStudentProfile } from "../../seed/hooks/StudentProfileProvider";
+import { auth } from "../../../lib/firebase";
+import { readExamProjection, consumeExamProjection, clearExamProjection, type ExamProjectionSnapshot } from "../../../lib/examProjectionHandoff";
+import ExamProjectionPanel from "./ExamProjectionPanel";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useStudentTranscript } from "../../seed/hooks/useStudentTranscript";
 import { chooseSeedAtlasScoreSnapshot, toSeedAtlasScoreSnapshot, SEED_ATLAS_SUBJECT_CODES, type SeedAtlasScoreSnapshot } from "../../../lib/seedAtlasScoreAdapter";
 import { EXAM_ELECTIVES_2026, EXAM_POLICY_2026, optimizeExamChoices2026, type ExamElective2026 } from "../../../lib/examChoiceEngine";
@@ -84,7 +90,7 @@ const scoreLabels: Record<
   technology: "Công nghệ",
 };
 
-type ScoreBasis = "practice" | "school" | "official_thpt_2026";
+type ScoreBasis = "practice" | "school" | "official_thpt_2026" | "projection";
 
 function getEngineStatus(
   programs: AtlasProgram[],
@@ -160,12 +166,31 @@ export default function AtlasAdmissionEnginePanel({
 
   // Seed remains the read-only source of school marks; it never supplies THPT marks.
   const transcript = useStudentTranscript();
+  const verifiedProfile = useVerifiedStudentProfile();
+  const [pendingProjection, setPendingProjection] = useState<ExamProjectionSnapshot|null>(null);
+  useEffect(() => {
+    const uid = transcript.userId;
+    const snapshot = uid && auth.currentUser?.uid === uid ? readExamProjection(uid) : null;
+    setPendingProjection(snapshot);
+    if (!snapshot) return;
+    const timer = window.setTimeout(() => setPendingProjection(null), Math.max(0, snapshot.createdAt + 5 * 60_000 - Date.now()));
+    return () => window.clearTimeout(timer);
+  }, [transcript.userId]);
   const [seedTermId, setSeedTermId] = useState("auto");
   const [seedNote, setSeedNote] = useState("");
   const [importedSeedKeys, setImportedSeedKeys] = useState<ScoreInputKey[]>([]);
   const hasEditedScore = useRef(false);
   const previousUserId = useRef<string | null | undefined>(undefined);
   const [scoreBasis, setScoreBasis] = useState<ScoreBasis>("practice");
+  const [advisorProjection,setAdvisorProjection]=useState<AdvisorDecisionRecord|null>(null);
+  useLayoutEffect(()=>{
+    if(!advisorProjection||advisorProjection.data.kind!=="projection")return;
+    const uid=transcript.userId;
+    const expected={...defaultSubjectScores,...advisorProjection.data.value.scores};
+    if(!uid||auth.currentUser?.uid!==uid||advisorProjection.pin.owner!==uid||verifiedProfile.loading||verifiedProfile.syncing||!["ready","empty"].includes(transcript.status)||scoreBasis!=="projection"||JSON.stringify(expected)!==JSON.stringify(subjectScores)) {setAdvisorProjection(null);return;}
+    return advisorDecisionStore.register(advisorProjection);
+  },[advisorProjection,transcript.userId,transcript.status,verifiedProfile.loading,verifiedProfile.syncing,scoreBasis,subjectScores]);
+
   const [selectedCombination, setSelectedCombination] = useState<string>("D01");
   const [showAllCombinations, setShowAllCombinations] = useState(false);
   const [confirmedGrade12Subjects, setConfirmedGrade12Subjects] = useState<ExamElective2026[]>([]);
@@ -311,6 +336,9 @@ export default function AtlasAdmissionEnginePanel({
     confirmedGrade12Subjects, subjectScores: scoreMap, targetMajor, verifiedPrograms: sourceVerifiedPrograms,
   }), [confirmedGrade12Subjects, scoreMap, targetMajor, sourceVerifiedPrograms]);
 
+  // Exact in-memory signature; never treat source presence as verified eligibility.
+  const sourceRevision = useMemo(()=>JSON.stringify([programs,sources]),[programs,sources]);
+  useEffect(()=>{if(transcript.userId && auth.currentUser?.uid===transcript.userId) studentDecisionLedger.observe(transcript.userId,"sources",sourceRevision);},[transcript.userId,sourceRevision]);
   const nationalCatalogue = useMemo(() => buildNationalPathwayCatalogue(programs,sources,universityMap), [programs,sources,universityMap]);
   const nationalByPair = useMemo(() => new Map(examChoiceReport.options.map(option => [option.id,
     matchNationalPathways2026(nationalCatalogue,option.electives,scoreMap,targetMajor),
@@ -345,6 +373,7 @@ export default function AtlasAdmissionEnginePanel({
   ) {
     hasEditedScore.current = true;
     setImportedSeedKeys(current => current.filter(item => item !== key));
+    if (scoreBasis === "projection") setSeedNote("Kịch bản ước lượng đã được chỉnh thủ công; không còn là kết quả nguyên bản từ hai bài thi thử. Không phải điểm thi chính thức.");
     setSubjectScores(
       (current) => ({
         ...current,
@@ -499,6 +528,7 @@ export default function AtlasAdmissionEnginePanel({
           <span>Nguồn điểm đang sử dụng</span>
           <select value={scoreBasis} onChange={(event) => changeScoreBasis(event.target.value as ScoreBasis)}>
             <option value="practice">Điểm thi thử / tự đánh giá</option>
+            <option value="projection">Kịch bản điểm thi thử (ước lượng)</option>
             <option value="school">Điểm học bạ</option>
             <option value="official_thpt_2026">Điểm thi THPT 2026 chính thức (tự khai báo)</option>
           </select>
@@ -526,6 +556,37 @@ export default function AtlasAdmissionEnginePanel({
 
       </div>
 
+      {pendingProjection && transcript.userId && auth.currentUser?.uid === transcript.userId && <div className="cla-focus-notice" role="status">
+        <strong>Kịch bản điểm thi từ Lumen · {Object.keys(pendingProjection.scores).length} môn</strong>
+        <p>{Object.entries(pendingProjection.scores).map(([key,value]) => `${scoreLabels[key as ScoreInputKey]}: ${value}`).join(" · ")}. Nguồn: hai bài thi thử, {pendingProjection.version}. Chỉ dùng để khám phá tổ hợp; không phải điểm chính thức.</p>
+        <button type="button" onClick={() => {
+          if (auth.currentUser?.uid !== transcript.userId || !transcript.userId) { setPendingProjection(null); return; }
+          if (Object.values(subjectScores).some(v=>v.trim()) && !window.confirm("Thay toàn bộ điểm đang nhập bằng kịch bản Lumen? Các môn thiếu sẽ để trống.")) return;
+          if (verifiedProfile.loading || verifiedProfile.syncing || !["ready","empty"].includes(transcript.status) || checkDecisionHandoff(transcript.userId,"projection") !== "CURRENT") {
+            setSeedNote("Hồ sơ hoặc kịch bản chưa được xác minh hoặc đã thay đổi. Hãy chuyển lại từ Lumen sau khi đồng bộ."); return;
+          }
+          const current = readExamProjection(transcript.userId);
+          if (!current || JSON.stringify(current) !== JSON.stringify(pendingProjection)) {
+            setPendingProjection(null); setSeedNote("Kịch bản không còn khớp bản đã xem hoặc đã hết hạn. Hãy chuyển lại từ Lumen."); return;
+          }
+          const accepted = consumeExamProjection(transcript.userId);
+          clearDecisionHandoff("projection");
+          setPendingProjection(null);
+          if (!accepted) { setSeedNote("Kịch bản đã hết hạn. Hãy chuyển lại từ Lumen."); return; }
+          setAdvisorProjection(captureAdvisorDecision(transcript.userId,{kind:"projection",value:accepted}));
+          hasEditedScore.current = true;
+          setSubjectScores({...defaultSubjectScores,...accepted.scores});
+          setImportedSeedKeys([]); setPriorityScore(""); setScoreBasis("projection");
+          setSeedNote(`Kịch bản Lumen · ${accepted.version} · ${Object.keys(accepted.scores).length} môn có hai bài thi thử; không phải điểm chính thức.`);
+        }}>Dùng kịch bản Lumen</button>{" "}
+        <button type="button" onClick={() => { clearExamProjection(); setPendingProjection(null); }}>Bỏ qua</button>
+      </div>}
+      <ExamProjectionPanel key={transcript.userId ?? "signed-out"} labels={scoreLabels} onApply={scores => {
+        hasEditedScore.current = true;
+        setSubjectScores({...defaultSubjectScores,...scores});
+        setImportedSeedKeys([]); setPriorityScore(""); setScoreBasis("projection");
+        setSeedNote("Kịch bản trung bình hai bài thi thử; chưa được kiểm định, không phải điểm thi chính thức.");
+      }} />
       <section className="atlas-seed-bridge" aria-label="Đồng bộ bảng điểm Seed">
         <div className="atlas-seed-bridge-head">
           <div>
@@ -661,7 +722,7 @@ export default function AtlasAdmissionEnginePanel({
           {focusedCombination.missingSubjects.length > 0 || hasInvalidScores ? (
             <p>Còn thiếu hoặc sai: {focusedCombination.missingSubjects.map((subject) => scoreLabels[subject as ScoreInputKey]).join(", ") || "Điểm cần kiểm tra"}. CLA không thay điểm chưa có thành 0 để xếp hạng.</p>
           ) : (
-            <p>{focusedCombination.subjects.map((subject) => `${scoreLabels[subject as ScoreInputKey]} ${scoreMap[subject]}`).join(" + ")} = <b>{focusedCombination.rawScore.toFixed(2)}/30</b>. Đây là tổng học thuật tham khảo của {scoreBasis === "school" ? "điểm học bạ" : scoreBasis === "practice" ? "điểm thi thử/tự đánh giá" : "điểm THPT do người dùng khai báo"}; tính hợp lệ đối với ngành/trường phải đối chiếu đề án chính thức.</p>
+            <p>{focusedCombination.subjects.map((subject) => `${scoreLabels[subject as ScoreInputKey]} ${scoreMap[subject]}`).join(" + ")} = <b>{focusedCombination.rawScore.toFixed(2)}/30</b>. Đây là tổng học thuật tham khảo của {scoreBasis === "school" ? "điểm học bạ" : scoreBasis === "practice" ? "điểm thi thử/tự đánh giá" : scoreBasis === "projection" ? "kịch bản thi thử" : "điểm THPT do người dùng khai báo"}; tính hợp lệ đối với ngành/trường phải đối chiếu đề án chính thức.</p>
           )}
         </div>}
         <p className="atlas-combination-limitation">9 tổ hợp hiện là danh mục hỗ trợ thử nghiệm, <b>chưa phải toàn bộ tổ hợp theo chương trình mới</b>. Các môn GDKT & Pháp luật, Tin học, Công nghệ đã cho phép nhập nhưng sẽ chỉ được xếp tổ hợp sau khi có quy tắc và nguồn kiểm chứng.</p>
@@ -735,7 +796,8 @@ export default function AtlasAdmissionEnginePanel({
           })()}
         </div>
         <AtlasNationalPathways report={selectedNational} scoreBasis={scoreBasis} />
-        <AtlasAspirationDraftEditor entries={selectedNational.entries} />
+        <AtlasAspirationDraftEditor entries={selectedNational.entries} sourceRevision={sourceRevision} />
+        <p className="cla-focus-notice">Chọn “Lập chiến lược cho NV này” trong danh sách để chuyển đúng mục tiêu sang Orion.</p>
         <p className="atlas-exam-choice-source"><b>Nguồn chính sách:</b> <a href={EXAM_POLICY_2026.policySource} target="_blank" rel="noreferrer">{EXAM_POLICY_2026.reference}</a>. Tổ hợp được hiển thị là danh mục mẫu của CLA; tổ hợp trường chấp nhận phải kiểm tra đề án tuyển sinh từng năm.</p>
         {examChoiceReport.warnings.filter(message => !message.startsWith("Điểm học bạ/") && !message.startsWith("Chưa có chương trình đã được duyệt nguồn khớp ngành mục tiêu")).map(warning => <p className="atlas-exam-choice-warning" key={warning}>{warning}</p>)}
       </section>
@@ -751,7 +813,7 @@ export default function AtlasAdmissionEnginePanel({
             {completeCombinations.length === 0
               ? "Hãy nhập đủ ba môn của ít nhất một tổ hợp được hỗ trợ. Bạn có thể khám phá các tổ hợp phía trên mà không cần nhập tất cả môn."
               : scoreBasis !== "official_thpt_2026"
-                ? "Hiện bạn đang dùng điểm thi thử hoặc học bạ: có thể khám phá tổ hợp, nhưng không thể so sánh trực tiếp với mốc điểm chuẩn THPT 2026."
+                ? "Hiện bạn đang dùng kịch bản, điểm thi thử hoặc học bạ: có thể khám phá tổ hợp, nhưng không thể so sánh trực tiếp với mốc điểm chuẩn THPT 2026."
                 : hasInvalidScores || !validPriority || parsedPriority > 0
                   ? "Cần sửa điểm không hợp lệ hoặc bỏ điểm ưu tiên giả định trước khi đối chiếu mốc tham chiếu."
                   : "Atlas chưa có chương trình đủ nguồn điểm chuẩn THPT 2026 và phương thức để xếp nhóm nguyện vọng. Xin kiểm tra thông báo chính thức của trường."}

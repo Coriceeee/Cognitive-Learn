@@ -11,11 +11,29 @@ const moduleLabels: Record<StudentModuleKey, { name: string; home: string; short
   haven: { name: "Hành trang thế giới", home: "/haven", short: "Haven" },
 };
 
+const focusPriority: Record<StudentModuleKey, string[]> = {
+  seed: ["profile", "transcript", "exams"],
+  lumen: ["indices", "advanced", "insight"],
+  atlas: ["subjects", "fit", "vietnam"],
+  orion: ["scenario", "roadmap", "input"],
+  pulse: ["overview", "checkin"],
+  haven: ["scholarships", "finance"],
+};
+const taskNames: Record<string,string> = {
+  "/student/profile": "Nhập hồ sơ", "/student/transcript": "Bảng điểm",
+  "/lumen/indices": "Phân tích 7 chỉ số", "/lumen/advanced": "Dự báo học tập", "/lumen/insights": "Giải thích kết quả",
+  "/atlas/subjects": "Tổ hợp & nguyện vọng", "/atlas/recommendations": "Gợi ý ngành & trường", "/atlas/vietnam": "Tra cứu tuyển sinh",
+  "/orion/scenarios": "Chiến lược học tập", "/orion/roadmap": "Lộ trình thực hiện", "/orion/inputs": "Mục tiêu học tập",
+  "/pulse/progress": "Tiến độ học tập", "/pulse/checkin": "Nhật ký học tập",
+  "/pulse/inputs": "Nguồn dữ liệu", "/pulse/reports": "Báo cáo", "/pulse/actions": "Việc cần bổ sung",
+  "/haven/scholarships": "Học bổng", "/haven/finance": "Chi phí & tài chính",
+};
+
 function SectionLink({ item, active }: { item: GuidedSection; active: boolean }) {
   return <a href={item.href} className={active ? "is-active" : ""}
     aria-current={active ? "page" : undefined}
     title={item.status === "partial" ? `${item.description} (Đang hoàn thiện)` : item.description}>
-    {item.title}
+    {taskNames[item.href ?? ""] ?? item.title}
   </a>;
 }
 
@@ -47,9 +65,11 @@ function studyAbroadSections(): GuidedSection[] {
  * No duplicate cross-module dropdown: the student dashboard owns that journey. */
 export default function ModuleSectionNav({ moduleKey }: { moduleKey: StudentModuleKey }) {
   const items = getStudentSubmodules(moduleKey);
+  const priority = focusPriority[moduleKey];
+  const ordered = [...items].sort((a,b) => (priority.indexOf(a.id) < 0 ? 99 : priority.indexOf(a.id)) - (priority.indexOf(b.id) < 0 ? 99 : priority.indexOf(b.id)));
   const module = moduleLabels[moduleKey];
   const currentPath = currentFocusedPath();
-  const guide = planGuidedNavigation(items, module.home, currentPath);
+  const guide = planGuidedNavigation(ordered, module.home, currentPath, moduleKey === "haven" || moduleKey === "pulse" ? 2 : 3);
   const inStudyAbroad = moduleKey === "atlas" &&
     (currentPath === "/atlas/study-abroad" || currentPath.startsWith("/atlas/study-abroad/"));
   const tabs = inStudyAbroad ? studyAbroadSections() : guide.featured;
@@ -74,8 +94,8 @@ export default function ModuleSectionNav({ moduleKey }: { moduleKey: StudentModu
       </div>
 
       <div className="cla-guided-controls cla-unified-actions">
-        {more.length > 0 && <details className="cla-guided-more">
-          <summary aria-label="Xem các mục chức năng khác">Mục khác <span>{more.length}</span><span aria-hidden="true" className="cla-guided-chevron">⌄</span></summary>
+        {more.length > 0 && <details className="cla-guided-more" key={currentPath}>
+          <summary aria-label="Xem các mục chức năng khác">Mở rộng <span>{more.length}</span><span aria-hidden="true" className="cla-guided-chevron">⌄</span></summary>
           <div className="cla-guided-more-content" role="group" aria-label="Các mục khác trong phân hệ">
             {more.map(item => <SectionLink key={item.id} item={item} active={false} />)}
           </div>

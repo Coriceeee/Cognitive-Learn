@@ -13,7 +13,7 @@ type DataState<T> = {owner:string;value:T|null;status:'loading'|'ready'|'error';
 const empty = <T,>():DataState<T> => ({owner:'',value:null,status:'loading',error:''});
 /** PULSE reads existing, owner-scoped, server-confirmed sources. No writes or fake data. */
 export function usePulseLinkedSources() {
-  const {cognitive,hasProfile,loading:profileLoading,syncing:profileSyncing} = useVerifiedStudentProfile();
+  const {cognitive,hasProfile,loading:profileLoading,syncing:profileSyncing,error:profileError} = useVerifiedStudentProfile();
   const atlas = useAtlasKnowledge();
   const orion = useModuleDraft<{targetMajor:string;weeksLeft:string;scores:Record<string,string>;targets:Record<string,string>}>('orion');
   const [uid,setUid] = useState('');
@@ -64,7 +64,7 @@ export function usePulseLinkedSources() {
     seedRecord:uid && seed.owner===uid && seed.status==='ready'?seed.value:null,
   }),[uid,hasProfile,profileLoading,profileSyncing,cognitive.scoreAvailable,cognitive.overallScore,cognitive.CRI,
     history,atlas.storageStatus,atlas.programs.length,atlas.sources.length,orion.uid,orion.status,orion.draft,seed]);
-  const errors=[seed.error,history.error,atlas.storageError,orion.error].filter(Boolean);
+  const errors=[profileError,seed.error,history.error,atlas.storageError,orion.error].filter(Boolean);
   return {signals,ready:signals.filter(item=>item.value!==null).length,uid,errors,
-    loading:!uid || seed.status==='loading' || history.status==='loading' || atlas.storageStatus==='loading' || atlas.storageStatus==='syncing' || orion.status==='loading' || orion.status==='syncing'};
+    loading:!uid || profileLoading || profileSyncing || seed.status==='loading' || history.status==='loading' || atlas.storageStatus==='loading' || atlas.storageStatus==='syncing' || orion.status==='loading' || orion.status==='syncing'};
 }

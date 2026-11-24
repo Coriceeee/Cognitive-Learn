@@ -1,0 +1,49 @@
+.cla-projection-scroll { overflow-x: auto; margin: 1rem 0; }
+.cla-projection-table { width: 100%; border-collapse: collapse; min-width: 440px; }
+.cla-projection-table th, .cla-projection-table td { padding: .45rem .6rem; text-align: left; border-bottom: 1px solid currentColor; border-bottom-color: color-mix(in srgb, currentColor 16%, transparent); }
+.cla-projection-table input { width: 100%; min-width: 4rem; font: inherit; color: inherit; background: transparent; border: 1px solid currentColor; border-color: color-mix(in srgb, currentColor 35%, transparent); border-radius: .5rem; padding: .4rem; }
+.cla-projection-table td:last-child { font-weight: 650; font-variant-numeric: tabular-nums; }
+
+/* P5 HOTFIX: pair text with the actual surface. Reuse each module's approved
+ * palette, not the old dark-card foreground or a global white-text override. */
+:root:not([data-theme="dark"]) :is(.atlas-page,.lumen-page) .atlas-combination-studio,
+:root:not([data-theme="dark"]) .atlas-page .atlas-official-pathways {
+  color: #142941;
+  background: linear-gradient(135deg,#ffffff,var(--cla-theme-soft,#edf4ff));
+  border: 1px solid var(--cla-theme-border,#bbd4ff);
+}
+:root:not([data-theme="dark"]) :is(.atlas-page,.lumen-page) .atlas-combination-studio :is(h3,h4),
+:root:not([data-theme="dark"]) .atlas-page .atlas-official-pathways :is(h3,h4,.atlas-national-result strong,.atlas-official-pathway-main strong) { color:#142941; }
+:root:not([data-theme="dark"]) :is(.atlas-page,.lumen-page) .atlas-combination-studio :is(p,.atlas-combination-card-bottom),
+:root:not([data-theme="dark"]) .atlas-page .atlas-official-pathways :is(p,small,.atlas-national-legend,.atlas-national-filters label) { color:#405a72; }
+:root:not([data-theme="dark"]) :is(.atlas-page,.lumen-page) .atlas-combination-header span,
+:root:not([data-theme="dark"]) .atlas-page .atlas-official-pathways-head span,
+:root:not([data-theme="dark"]) .atlas-page .atlas-official-pathways-stats strong { color:var(--cla-theme-ink,#1c4f9d); }
+:root:not([data-theme="dark"]) :is(.atlas-page,.lumen-page) :is(.atlas-combination-card,.atlas-combination-explain),
+:root:not([data-theme="dark"]) .atlas-page :is(.atlas-official-pathway-card,.atlas-official-pathways-stats,.atlas-official-pathways-empty) {
+  color:#142941; background:#ffffff; border-color:var(--cla-theme-border,#bbd4ff);
+}
+:root:not([data-theme="dark"]) :is(.atlas-page,.lumen-page) .atlas-combination-card.is-selected,
+:root:not([data-theme="dark"]) .atlas-page .atlas-official-pathway-card.is-target {
+  color:#142941; background:var(--cla-theme-soft,#edf4ff); border-color:var(--cla-theme-ink,#1c4f9d);
+}
+:root:not([data-theme="dark"]) :is(.atlas-page,.lumen-page) .atlas-combination-card-top small {color:#176346;}
+:root:not([data-theme="dark"]) :is(.atlas-page,.lumen-page) .atlas-combination-card.is-incomplete .atlas-combination-card-top small {color:#754216;}
+:root:not([data-theme="dark"]) .atlas-page .atlas-official-pathways a {color:#1c4f9d;}
+:root:not([data-theme="dark"]) .atlas-page .atlas-national-result {border-color:#bbd4ff;}
+:root:not([data-theme="dark"]) .atlas-page .atlas-national-track,
+:root:not([data-theme="dark"]) :is(.atlas-page,.lumen-page) .atlas-combination-meter {background:#dce6f2;}
+:root:not([data-theme="dark"]) :is(.atlas-page,.lumen-page) .atlas-combination-meter i {background:var(--cla-theme-gradient);}
+:root:not([data-theme="dark"]) .atlas-page .atlas-official-pathways-tags span {color:#1c4f9d;background:#edf4ff;border-color:#bbd4ff;}
+:root:not([data-theme="dark"]) :is(.atlas-page,.lumen-page) .atlas-combination-header button,
+:root:not([data-theme="dark"]) .atlas-page .atlas-national-more {color:#fff;background:var(--cla-theme-ink,#1c4f9d);border-color:var(--cla-theme-ink,#1c4f9d);}
+:root:not([data-theme="dark"]) :is(.atlas-page,.lumen-page) .cla-projection-table input,
+:root:not([data-theme="dark"]) .atlas-page .atlas-national-filters :is(select,input:not([type="checkbox"])) {color:#142941;background:#fff;border-color:#829ab5;caret-color:#142941;}
+:root:not([data-theme="dark"]) :is(.atlas-page,.lumen-page) .cla-projection-table input::placeholder {color:#526a81;opacity:1;}
+:root:not([data-theme="dark"]) :is(.atlas-page,.lumen-page) .atlas-combination-studio .cla-study-jump:disabled {color:#526a81;background:#e9eef5;border-color:#c4d1e0;opacity:1;}
+
+/* Light hero sub-surfaces in all modules: only known light boxes, never chart
+ * glyphs, semantic risk labels, active tabs, code panels or dark hero buttons. */
+:root:not([data-theme="dark"]) :is(.atlas-hero-card .atlas-flow strong,.orion-hero aside,.pulse-hero aside,.haven-hero aside) {color:#142941;}
+:root:not([data-theme="dark"]) :is(.orion-hero aside,.pulse-hero aside,.haven-hero aside) :is(h2,h3,strong) {color:#142941;}
+:root:not([data-theme="dark"]) :is(.orion-hero aside,.pulse-hero aside,.haven-hero aside) :is(p,small) {color:#405a72;}

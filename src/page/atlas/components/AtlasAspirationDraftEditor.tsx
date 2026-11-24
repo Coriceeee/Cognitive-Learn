@@ -1,4 +1,8 @@
+import { studentDecisionLedger, pinDecisionHandoff } from "../../../lib/studentDecisionSnapshot";
 import {useMemo, useState} from 'react';
+import {auth} from '../../../lib/firebase';
+import {navigateTo} from '../../../lib/clientNavigation';
+import {stageAdmissionGoal, clearAdmissionGoal} from '../../../lib/admissionGoalHandoff';
 import {filterNationalPathways,officialPathwaySchools,pathwayStatusLabel,type PathwayEntry} from '../../../lib/nationalAdmissionPathways2026';
 import {ADMISSION_POLICY_2026} from '../../../lib/aspirationPlanner';
 import {addDraftChoice, createManualDraftChoice, createNationalDraftChoice,
@@ -6,7 +10,7 @@ import {addDraftChoice, createManualDraftChoice, createNationalDraftChoice,
   type AspirationDraftChoice} from '../../../lib/atlasAspirationDraft2026';
 
 /** Learner-controlled worksheet. Intentionally no automatic storage or submission. */
-export default function AtlasAspirationDraftEditor({entries}:{entries:readonly PathwayEntry[]}) {
+export default function AtlasAspirationDraftEditor({entries,sourceRevision}:{entries:readonly PathwayEntry[];sourceRevision:string}) {
   const [items,setItems]=useState<AspirationDraftChoice[]>([]);
   const [selectedProgramId,setSelectedProgramId]=useState('');
   const [school,setSchool]=useState('');
@@ -98,6 +102,16 @@ export default function AtlasAspirationDraftEditor({entries}:{entries:readonly P
         <div className="atlas-aspiration-editor-controls">
           <button type="button" disabled={index===0} onClick={()=>setItems(current=>moveDraftChoice(current,item.id,-1))} aria-label={`Đưa NV${index+1} lên trên`}>↑</button>
           <button type="button" disabled={index===items.length-1} onClick={()=>setItems(current=>moveDraftChoice(current,item.id,1))} aria-label={`Đưa NV${index+1} xuống dưới`}>↓</button>
+          <button type="button" onClick={()=>{
+            const uid = auth.currentUser?.uid;
+            if (!uid || !stageAdmissionGoal(uid, item)) { setNotice('Chưa thể chuyển mục tiêu. Hãy đăng nhập lại.'); return; }
+            if (!window.confirm('Chuyển mục tiêu sang Orion? Danh sách nháp chưa xuất sẽ không được lưu khi rời Atlas.')) { clearAdmissionGoal(); return; }
+            studentDecisionLedger.observe(uid,"sources",sourceRevision);
+            studentDecisionLedger.observe(uid,"goal",JSON.stringify(item));
+            if (!pinDecisionHandoff(uid,"goal")) { clearAdmissionGoal(); setNotice("Chưa xác minh được phiên bản hồ sơ. Hãy đợi đồng bộ và thử lại."); return; }
+            navigateTo('/orion/inputs');
+            if (window.location.pathname !== '/orion/inputs') clearAdmissionGoal();
+          }}>Lập chiến lược cho NV này</button>
           <button type="button" onClick={()=>setItems(current=>removeDraftChoice(current,item.id))} aria-label={`Xóa NV${index+1}`}>Xóa</button>
         </div>
       </li>)}

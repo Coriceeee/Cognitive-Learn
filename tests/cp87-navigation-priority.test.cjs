@@ -46,14 +46,13 @@ test('CP87 retains compact desktop circle and accessible mobile destinations, wi
  for(const dest of ['/lumen','/atlas','/orion','/pulse','/haven']) assert.ok(component.includes('href:"'+dest+'"'));
 });
 
-test('Current CP93 source verifies against its manifest; CP87 circuit and historical evidence unchanged',()=>{
- // CP89 is a historical release: CP90-CP93 legitimately modify files it pinned.
- // Verify the active checkout against CP92 instead of falsely requiring CP89 hashes.
- const current=spawnSync(process.execPath,[path.join(root,'tools/verify-cp93-snapshot.cjs')],{
+test('Current focused source verifies against its release manifest; CP87 circuit and historical evidence unchanged',()=>{
+ // CP87 and CP93 remain historical releases. Verify the active source against its own manifest.
+ const current=spawnSync(process.execPath,[path.join(root,'tools/verify-focused-release.cjs')],{
    cwd:root,encoding:'utf8',timeout:30000
  });
  assert.equal(current.error,undefined,current.error?.message);
- assert.equal(current.status,0,`CP93 immutable source verification failed:\n${current.stdout}\n${current.stderr}`);
+ assert.equal(current.status,0,`Focused release source verification failed:\n${current.stdout}\n${current.stderr}`);
  for(const rel of ['firestore.rules.CANDIDATE_CP21','src/lib/nexusEvidenceBaseline.ts','CP81_SOURCE_MANIFEST.json','CP86_SOURCE_MANIFEST.json']){
    const historical=cp86.files.find(x=>x.path===rel);
    if(historical)assert.equal(sha(rel),historical.sha256,rel);

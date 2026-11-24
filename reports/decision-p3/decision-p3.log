@@ -1,0 +1,148 @@
+TAP version 13
+# Subtest: personal projection intent with and without Vietnamese diacritics
+ok 1 - personal projection intent with and without Vietnamese diacritics
+  ---
+  duration_ms: 1.98111
+  type: 'test'
+  ...
+# Subtest: explicit goal and gap intent
+ok 2 - explicit goal and gap intent
+  ---
+  duration_ms: 0.580539
+  type: 'test'
+  ...
+# Subtest: personal fit and chance require abstention
+ok 3 - personal fit and chance require abstention
+  ---
+  duration_ms: 0.896565
+  type: 'test'
+  ...
+# Subtest: general sourced questions retain existing path
+ok 4 - general sourced questions retain existing path
+  ---
+  duration_ms: 0.756809
+  type: 'test'
+  ...
+# Subtest: projection uses exact stored values, valid zero and limitation
+ok 5 - projection uses exact stored values, valid zero and limitation
+  ---
+  duration_ms: 1.815755
+  type: 'test'
+  ...
+# Subtest: goal is preference not eligibility
+ok 6 - goal is preference not eligibility
+  ---
+  duration_ms: 0.469294
+  type: 'test'
+  ...
+# Subtest: gap recomputes deterministic optimizer and states no forecast
+ok 7 - gap recomputes deterministic optimizer and states no forecast
+  ---
+  duration_ms: 0.739473
+  type: 'test'
+  ...
+# Subtest: already met gap remains zero
+ok 8 - already met gap remains zero
+  ---
+  duration_ms: 0.201187
+  type: 'test'
+  ...
+# Subtest: invalid gap does not invent numeric answer
+ok 9 - invalid gap does not invent numeric answer
+  ---
+  duration_ms: 0.367994
+  type: 'test'
+  ...
+# Subtest: requires all dependencies observed
+ok 10 - requires all dependencies observed
+  ---
+  duration_ms: 0.375856
+  type: 'test'
+  ...
+# Subtest: account isolation and missing UID
+ok 11 - account isolation and missing UID
+  ---
+  duration_ms: 0.225143
+  type: 'test'
+  ...
+# Subtest: exact route scope blocks unrelated views
+ok 12 - exact route scope blocks unrelated views
+  ---
+  duration_ms: 0.133327
+  type: 'test'
+  ...
+# Subtest: TTL and backward clock
+ok 13 - TTL and backward clock
+  ---
+  duration_ms: 0.181298
+  type: 'test'
+  ...
+# Subtest: profile change invalidates all three contexts
+ok 14 - profile change invalidates all three contexts
+  ---
+  duration_ms: 0.185314
+  type: 'test'
+  ...
+# Subtest: source change invalidates goal only
+ok 15 - source change invalidates goal only
+  ---
+  duration_ms: 1.265551
+  type: 'test'
+  ...
+# Subtest: projection revision invalidates old scenario
+ok 16 - projection revision invalidates old scenario
+  ---
+  duration_ms: 0.20951
+  type: 'test'
+  ...
+# Subtest: temporary unavailable blocks context
+ok 17 - temporary unavailable blocks context
+  ---
+  duration_ms: 0.122051
+  type: 'test'
+  ...
+# Subtest: ABA revision cannot resurrect a stale record
+ok 18 - ABA revision cannot resurrect a stale record
+  ---
+  duration_ms: 0.112166
+  type: 'test'
+  ...
+# Subtest: register, read and cleanup isolate mutation and newer record
+ok 19 - register, read and cleanup isolate mutation and newer record
+  ---
+  duration_ms: 0.285382
+  type: 'test'
+  ...
+# Subtest: session clear removes all published entries
+ok 20 - session clear removes all published entries
+  ---
+  duration_ms: 0.193295
+  type: 'test'
+  ...
+# Subtest: private local turn never included in remote history; old remote segment also excluded
+ok 21 - private local turn never included in remote history; old remote segment also excluded
+  ---
+  duration_ms: 1.128439
+  type: 'test'
+  ...
+# Subtest: chat local policy before public lookup; guard in-flight request and remote history
+ok 22 - chat local policy before public lookup; guard in-flight request and remote history
+  ---
+  duration_ms: 0.498948
+  type: 'test'
+  ...
+# Subtest: actual page integrations check readiness, edit and account changes
+ok 23 - actual page integrations check readiness, edit and account changes
+  ---
+  duration_ms: 1.742026
+  type: 'test'
+  ...
+1..23
+# tests 23
+# suites 0
+# pass 23
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 485.991065

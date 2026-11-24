@@ -2,10 +2,10 @@ import { nationalCutoffs } from "../../../lib/nationalAdmissionRegistry";
 import { summarizeAtlasEvidence } from "../../../lib/atlasEvidenceOverview";
 
 const steps = [
-  { step: "01", name: "Tìm nguồn", note: "Mở cổng tuyển sinh và kiểm tra năm áp dụng", href: "/atlas/sources" },
-  { step: "02", name: "Lọc lựa chọn", note: "Xem ngành, trường và phương thức xét tuyển", href: "/atlas/vietnam" },
+  { step: "01", name: "Chọn tổ hợp", note: "Đối chiếu điểm môn và phương án thi", href: "/atlas/subjects" },
+  { step: "02", name: "Gợi ý ngành & trường", note: "Tìm lựa chọn theo hồ sơ và sở thích", href: "/atlas/recommendations" },
   { step: "03", name: "Đối chiếu", note: "So sánh bản ghi có cùng thang và phương thức", href: "/atlas/compare" },
-  { step: "04", name: "Lập nguyện vọng", note: "Chuẩn bị phương án theo điểm thực tế của bạn", href: "/atlas/subjects" },
+  { step: "04", name: "Lập nguyện vọng", note: "Chuẩn bị phương án theo điểm thực tế của bạn", href: "/atlas/subjects#atlas-nguyen-vong-nhap" },
 ] as const;
 
 /** Display only provenance-based inventory, not an index of every university. */
@@ -19,9 +19,8 @@ export default function AtlasEvidenceJourney() {
         <div>
           <span className="cla-ux-kicker">ATLAS · ĐỌC NGUỒN TRƯỚC KHI QUYẾT ĐỊNH</span>
           <h2 id="cla-atlas-journey-title">Bốn bước để chọn ngành và trường</h2>
-          <p>Đi từ thông báo tuyển sinh đến phương án của bạn; không suy ra xác suất đỗ từ điểm chuẩn.</p>
+          <p>Đi từ tổ hợp và sở thích đến phương án của bạn; không suy ra xác suất đỗ từ điểm chuẩn.</p>
         </div>
-        <a href="/atlas/vietnam" className="cla-ux-heading-action">Bắt đầu tra cứu <span aria-hidden="true">↗</span></a>
       </div>
       <nav aria-label="Hành trình tra cứu Atlas" className="cla-atlas-journey-steps">
         {steps.map(({ step, name, note, href }) => (
@@ -49,7 +48,7 @@ export default function AtlasEvidenceJourney() {
               </div>
             </div>
           ))}
-          <p className="cla-atlas-evidence-note">Dữ liệu theo năm có thể thiếu; từng nguồn phải được mở và kiểm tra lại trước khi sử dụng.</p>
+          <p className="cla-atlas-evidence-note">Dữ liệu theo năm có thể thiếu; từng nguồn phải được mở và kiểm tra lại trước khi sử dụng. <a href="/atlas/sources">Tra cứu nguồn chính thức</a> · <a href="/atlas/vietnam">Tuyển sinh Việt Nam</a>.</p>
         </div>
       </div>
     </section>

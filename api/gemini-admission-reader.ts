@@ -1,3 +1,4 @@
+import { guardedJson, GeminiTransportError, visibleGeminiText } from "./geminiTransport.ts";
 import { resolve } from "node:path";
 import { config as loadEnv } from "dotenv";
 import type { VercelRequest, VercelResponse } from "./vercelTypes";
@@ -599,19 +600,12 @@ async function callGemini({
     body.tools = [{ google_search: {} }];
   }
 
-  const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    }
+  const response = await guardedJson(
+    `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`,
+    { method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey }, body: JSON.stringify(body) }, 45_000
   );
-
-  const data = await response.json();
-
+  // Existing grounding parser uses the Google response shape.
+  const data = response.data as any;
   return { response, data };
 }
 
@@ -798,16 +792,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (!result.response.ok) {
       return res.status(result.response.status).json({
         ok: false,
-        message: getGeminiErrorMessage(result.data),
-        detail: result.data,
+        message: result.response.status === 429 ? "Gemini đã đạt hạn mức. Vui lòng thử lại sau." : `Gemini từ chối yêu cầu (HTTP ${result.response.status}).`,
+        detail: `GEMINI_GENERATE HTTP ${result.response.status}`,
       });
     }
 
-    const rawText =
-      result.data?.candidates?.[0]?.content?.parts
-        ?.map((part: { text?: string }) => part.text || "")
-        .join("\n")
-        .trim() || "";
+    const candidate = result.data?.candidates?.[0];
+    if (candidate?.finishReason && candidate.finishReason !== "STOP") return res.status(502).json({ok:false,message:"Gemini chưa hoàn tất phản hồi.",detail:candidate.finishReason === "MAX_TOKENS" ? "MAX_TOKENS" : "BLOCKED_OR_INCOMPLETE"});
+    const rawText = visibleGeminiText(candidate?.content?.parts);
 
     const draft = safeJsonParse(rawText);
 
@@ -836,10 +828,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         result.data?.candidates?.[0]?.groundingMetadata || null,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(error instanceof GeminiTransportError && error.code === "TIMEOUT" ? 504 : 502).json({
       ok: false,
       message: "Không gọi được Gemini API.",
-      detail: error instanceof Error ? error.message : String(error),
+      detail: error instanceof GeminiTransportError ? `${error.stage}_${error.code}` : "HANDLER_FAILURE",
     });
   }
 }

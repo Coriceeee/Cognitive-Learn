@@ -1,0 +1,628 @@
+TAP version 13
+# Subtest: STATIC ONLY rules v2
+ok 1 - STATIC ONLY rules v2
+  ---
+  duration_ms: 1.58594
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY user doc own-id guard
+ok 2 - STATIC ONLY user doc own-id guard
+  ---
+  duration_ms: 0.208216
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY active role gate
+ok 3 - STATIC ONLY active role gate
+  ---
+  duration_ms: 0.155356
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY prevent self-registration of admin
+ok 4 - STATIC ONLY prevent self-registration of admin
+  ---
+  duration_ms: 0.098251
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY lock elective selection
+ok 5 - STATIC ONLY lock elective selection
+  ---
+  duration_ms: 0.155299
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY four unique electives
+ok 6 - STATIC ONLY four unique electives
+  ---
+  duration_ms: 0.11934
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY foreign language not equal to elective
+ok 7 - STATIC ONLY foreign language not equal to elective
+  ---
+  duration_ms: 0.359738
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY transcript path protected
+ok 8 - STATIC ONLY transcript path protected
+  ---
+  duration_ms: 0.274582
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY scope validation
+ok 9 - STATIC ONLY scope validation
+  ---
+  duration_ms: 0.29093
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY append-only cognitive history
+ok 10 - STATIC ONLY append-only cognitive history
+  ---
+  duration_ms: 0.436153
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY retired shared reports cannot be created or reviewed
+ok 11 - STATIC ONLY retired shared reports cannot be created or reviewed
+  ---
+  duration_ms: 0.176747
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY cp24 append-only provenance collection
+ok 12 - STATIC ONLY cp24 append-only provenance collection
+  ---
+  duration_ms: 0.086005
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY cp24 forbid update and delete provenance
+ok 13 - STATIC ONLY cp24 forbid update and delete provenance
+  ---
+  duration_ms: 0.110193
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY cp24 no PII through schema whitelist
+ok 14 - STATIC ONLY cp24 no PII through schema whitelist
+  ---
+  duration_ms: 0.084202
+  type: 'test'
+  ...
+# Subtest: STATIC ONLY no public system health access
+ok 15 - STATIC ONLY no public system health access
+  ---
+  duration_ms: 0.120355
+  type: 'test'
+  ...
+# Subtest: CP45 navigation: internal links use pushState without document reload
+ok 16 - CP45 navigation: internal links use pushState without document reload
+  ---
+  duration_ms: 145.198925
+  type: 'test'
+  ...
+# Subtest: CP45 navigation: browser Back/Forward notifies React without reload
+ok 17 - CP45 navigation: browser Back/Forward notifies React without reload
+  ---
+  duration_ms: 55.304516
+  type: 'test'
+  ...
+# Subtest: CP45 navigation: native same-page anchors and external links remain native
+ok 18 - CP45 navigation: native same-page anchors and external links remain native
+  ---
+  duration_ms: 28.52633
+  type: 'test'
+  ...
+# Subtest: CP45 navigation: modified clicks, new-tab links and downloads are never hijacked
+ok 19 - CP45 navigation: modified clicks, new-tab links and downloads are never hijacked
+  ---
+  duration_ms: 25.609009
+  type: 'test'
+  ...
+# Subtest: CP45 navigation: pointer and keyboard intent only prefetch the route code
+ok 20 - CP45 navigation: pointer and keyboard intent only prefetch the route code
+  ---
+  duration_ms: 14.720689
+  type: 'test'
+  ...
+# Subtest: CP45 navigation: legacy hash bookmarks are converted to canonical module path
+ok 21 - CP45 navigation: legacy hash bookmarks are converted to canonical module path
+  ---
+  duration_ms: 16.917549
+  type: 'test'
+  ...
+# Subtest: CP45: transition keeps revealed content during lazy import, profile watcher is shared and consent gated
+ok 22 - CP45: transition keeps revealed content during lazy import, profile watcher is shared and consent gated
+  ---
+  duration_ms: 1.453831
+  type: 'test'
+  ...
+# Subtest: CP45: lazy routes have a single shared import table, without eager imports
+ok 23 - CP45: lazy routes have a single shared import table, without eager imports
+  ---
+  duration_ms: 0.384282
+  type: 'test'
+  ...
+# Subtest: CP56: a declined guard blocks a link without unmounting current page
+ok 24 - CP56: a declined guard blocks a link without unmounting current page
+  ---
+  duration_ms: 13.921753
+  type: 'test'
+  ...
+# Subtest: CP56: browser Back rejected by guard restores URL without notifying React
+ok 25 - CP56: browser Back rejected by guard restores URL without notifying React
+  ---
+  duration_ms: 15.438917
+  type: 'test'
+  ...
+# Subtest: CP56: imperative navigation obeys dirty guard, and same route is a no-op
+ok 26 - CP56: imperative navigation obeys dirty guard, and same route is a no-op
+  ---
+  duration_ms: 25.060987
+  type: 'test'
+  ...
+# Subtest: CP58: same-path query navigation notifies React, preserves SPA and supports Back query
+ok 27 - CP58: same-path query navigation notifies React, preserves SPA and supports Back query
+  ---
+  duration_ms: 21.058764
+  type: 'test'
+  ...
+# Subtest: CP87 keeps the exact original loop component, module routes and six nodes
+ok 28 - CP87 keeps the exact original loop component, module routes and six nodes
+  ---
+  duration_ms: 2.883377
+  type: 'test'
+  ...
+# Subtest: CP87 puts the primary six-module circuit directly after the greeting, ahead of secondary content
+ok 29 - CP87 puts the primary six-module circuit directly after the greeting, ahead of secondary content
+  ---
+  duration_ms: 0.299241
+  type: 'test'
+  ...
+# Subtest: CP87 retains compact desktop circle and accessible mobile destinations, without changing routes
+ok 30 - CP87 retains compact desktop circle and accessible mobile destinations, without changing routes
+  ---
+  duration_ms: 0.468526
+  type: 'test'
+  ...
+# Subtest: Current focused source verifies against its release manifest; CP87 circuit and historical evidence unchanged
+ok 31 - Current focused source verifies against its release manifest; CP87 circuit and historical evidence unchanged
+  ---
+  duration_ms: 50.160924
+  type: 'test'
+  ...
+# Subtest: 06.01 zero is a legitimate observed score, absent is not zero
+ok 32 - 06.01 zero is a legitimate observed score, absent is not zero
+  ---
+  duration_ms: 1.141359
+  type: 'test'
+  ...
+# Subtest: 06.02 impossible or malformed subject scores are not silently clamped
+ok 33 - 06.02 impossible or malformed subject scores are not silently clamped
+  ---
+  duration_ms: 0.331998
+  type: 'test'
+  ...
+# Subtest: 06.03 D01 uses exactly its three observed subjects
+ok 34 - 06.03 D01 uses exactly its three observed subjects
+  ---
+  duration_ms: 0.935426
+  type: 'test'
+  ...
+# Subtest: 06.04 genuine zero does not make a complete combination incomplete
+ok 35 - 06.04 genuine zero does not make a complete combination incomplete
+  ---
+  duration_ms: 0.202666
+  type: 'test'
+  ...
+# Subtest: 06.05 blank or invalid remains missing in the exact combination
+ok 36 - 06.05 blank or invalid remains missing in the exact combination
+  ---
+  duration_ms: 0.309878
+  type: 'test'
+  ...
+# Subtest: 06.06 partial sum is never the winning option
+ok 37 - 06.06 partial sum is never the winning option
+  ---
+  duration_ms: 0.925866
+  type: 'test'
+  ...
+# Subtest: 06.07 no external scale is silently ranked against school combinations
+ok 38 - 06.07 no external scale is silently ranked against school combinations
+  ---
+  duration_ms: 0.638423
+  type: 'test'
+  ...
+# Subtest: 06.08 a three-subject zero score remains an eligible combination, not a missing record
+ok 39 - 06.08 a three-subject zero score remains an eligible combination, not a missing record
+  ---
+  duration_ms: 0.645671
+  type: 'test'
+  ...
+# Subtest: 06.09 invalid or missing subjects cannot qualify for a verified benchmark
+ok 40 - 06.09 invalid or missing subjects cannot qualify for a verified benchmark
+  ---
+  duration_ms: 0.57229
+  type: 'test'
+  ...
+# Subtest: 06.10 Studio only admits official self-declared THPT 2026 scores into cutoff comparison
+ok 41 - 06.10 Studio only admits official self-declared THPT 2026 scores into cutoff comparison
+  ---
+  duration_ms: 1.129636
+  type: 'test'
+  ...
+# Subtest: 06.11 visual explanation is based on computed engine combinations, not hardcoded examples
+ok 42 - 06.11 visual explanation is based on computed engine combinations, not hardcoded examples
+  ---
+  duration_ms: 0.548912
+  type: 'test'
+  ...
+# Subtest: 06.12 supported input subjects are visible but extra combinations are not invented
+ok 43 - 06.12 supported input subjects are visible but extra combinations are not invented
+  ---
+  duration_ms: 0.681386
+  type: 'test'
+  ...
+# Subtest: 06.13 Studio styling supports mobile and reduced motion
+ok 44 - 06.13 Studio styling supports mobile and reduced motion
+  ---
+  duration_ms: 2.836448
+  type: 'test'
+  ...
+# Subtest: 07-01: same-term D01 8+7+9 gives 24, no exam or probability label
+ok 45 - 07-01: same-term D01 8+7+9 gives 24, no exam or probability label
+  ---
+  duration_ms: 7.331444
+  type: 'test'
+  ...
+# Subtest: 07-02: zero really is an observed completed score
+ok 46 - 07-02: zero really is an observed completed score
+  ---
+  duration_ms: 1.639351
+  type: 'test'
+  ...
+# Subtest: 07-03: partial scores are never promoted to completed semester averages
+ok 47 - 07-03: partial scores are never promoted to completed semester averages
+  ---
+  duration_ms: 1.588342
+  type: 'test'
+  ...
+# Subtest: 07-04: cannot combine subjects from different semesters to fabricate D01
+ok 48 - 07-04: cannot combine subjects from different semesters to fabricate D01
+  ---
+  duration_ms: 2.866798
+  type: 'test'
+  ...
+# Subtest: 07-05: prefers most recent term with a complete supported combination
+ok 49 - 07-05: prefers most recent term with a complete supported combination
+  ---
+  duration_ms: 2.144568
+  type: 'test'
+  ...
+# Subtest: 07-06: returns null on transcript with no completed subject grades
+ok 50 - 07-06: returns null on transcript with no completed subject grades
+  ---
+  duration_ms: 0.520421
+  type: 'test'
+  ...
+# Subtest: 07-07: mapping covers new-programme electives and excludes unrelated subjects
+ok 51 - 07-07: mapping covers new-programme electives and excludes unrelated subjects
+  ---
+  duration_ms: 0.582024
+  type: 'test'
+  ...
+# Subtest: 07-08: non-English foreign language is not silently mapped to English
+ok 52 - 07-08: non-English foreign language is not silently mapped to English
+  ---
+  duration_ms: 0.452986
+  type: 'test'
+  ...
+# Subtest: 07-09: read-only adapter does not mutate Seed transcript
+ok 53 - 07-09: read-only adapter does not mutate Seed transcript
+  ---
+  duration_ms: 0.93377
+  type: 'test'
+  ...
+# Subtest: 07-10: Atlas reads user-bound Seed hook, only for school marks
+ok 54 - 07-10: Atlas reads user-bound Seed hook, only for school marks
+  ---
+  duration_ms: 1.216145
+  type: 'test'
+  ...
+# Subtest: 07-11: changing score basis clears old marks and never reuses school marks as official THPT
+ok 55 - 07-11: changing score basis clears old marks and never reuses school marks as official THPT
+  ---
+  duration_ms: 0.622227
+  type: 'test'
+  ...
+# Subtest: 07-12: hook clears account-specific data and blocks callbacks from old UID
+ok 56 - 07-12: hook clears account-specific data and blocks callbacks from old UID
+  ---
+  duration_ms: 0.292026
+  type: 'test'
+  ...
+# Subtest: 07-13: delayed Firestore snapshot for a signed-out account cannot overwrite new student
+ok 57 - 07-13: delayed Firestore snapshot for a signed-out account cannot overwrite new student
+  ---
+  duration_ms: 123.005503
+  type: 'test'
+  ...
+# Subtest: PRED-01 three heuristic indices have distinct, explicit semantics
+ok 58 - PRED-01 three heuristic indices have distinct, explicit semantics
+  ---
+  duration_ms: 4.720583
+  type: 'test'
+  ...
+# Subtest: PRED-02 no probability or statistically calibrated confidence in engine output
+ok 59 - PRED-02 no probability or statistically calibrated confidence in engine output
+  ---
+  duration_ms: 2.388163
+  type: 'test'
+  ...
+# Subtest: PRED-03 distance index is a bounded transformation of score gap, not an event probability
+ok 60 - PRED-03 distance index is a bounded transformation of score gap, not an event probability
+  ---
+  duration_ms: 1.03273
+  type: 'test'
+  ...
+# Subtest: PRED-04 a higher target cannot improve the gap index with unchanged prediction inputs
+ok 61 - PRED-04 a higher target cannot improve the gap index with unchanged prediction inputs
+  ---
+  duration_ms: 0.471395
+  type: 'test'
+  ...
+# Subtest: PRED-05 already reached target yields 100 index but NEVER 100% success claim
+ok 62 - PRED-05 already reached target yields 100 index but NEVER 100% success claim
+  ---
+  duration_ms: 0.261007
+  type: 'test'
+  ...
+# Subtest: PRED-06 distance index lower bound remains 0
+ok 63 - PRED-06 distance index lower bound remains 0
+  ---
+  duration_ms: 0.23612
+  type: 'test'
+  ...
+# Subtest: PRED-07 stability/completion weighted index is not an uncertainty interval
+ok 64 - PRED-07 stability/completion weighted index is not an uncertainty interval
+  ---
+  duration_ms: 0.817692
+  type: 'test'
+  ...
+# Subtest: SIM-01 Orion scenario propagates named heuristic gap index only
+ok 65 - SIM-01 Orion scenario propagates named heuristic gap index only
+  ---
+  duration_ms: 0.803049
+  type: 'test'
+  ...
+# Subtest: SIM-02 utility uses descriptive cognitive index, not a probability field
+ok 66 - SIM-02 utility uses descriptive cognitive index, not a probability field
+  ---
+  duration_ms: 0.703718
+  type: 'test'
+  ...
+# Subtest: SIM-03 scenario lists maintain comparative sorting under renamed semantics
+ok 67 - SIM-03 scenario lists maintain comparative sorting under renamed semantics
+  ---
+  duration_ms: 3.53847
+  type: 'test'
+  ...
+# Subtest: CONTRACT-01 TypeScript strict compiles prediction + simulation contract together
+ok 68 - CONTRACT-01 TypeScript strict compiles prediction + simulation contract together
+  ---
+  duration_ms: 1986.036705
+  type: 'test'
+  ...
+# Subtest: CONTRACT-02 UI exposes heuristic semantics and calibrated absence
+ok 69 - CONTRACT-02 UI exposes heuristic semantics and calibrated absence
+  ---
+  duration_ms: 1.235144
+  type: 'test'
+  ...
+# Subtest: CONTRACT-03 result types cannot silently reintroduce probability/confidence fields
+ok 70 - CONTRACT-03 result types cannot silently reintroduce probability/confidence fields
+  ---
+  duration_ms: 1.451193
+  type: 'test'
+  ...
+# Subtest: CONTRACT-04 model version is bumped and terms say scenario, not validated ML
+ok 71 - CONTRACT-04 model version is bumped and terms say scenario, not validated ML
+  ---
+  duration_ms: 3.454097
+  type: 'test'
+  ...
+# Subtest: SIM-04 explanations do not equate an assumed cognitive adjustment with observed benefit
+ok 72 - SIM-04 explanations do not equate an assumed cognitive adjustment with observed benefit
+  ---
+  duration_ms: 0.316535
+  type: 'test'
+  ...
+# Subtest: 16.01 manual choice requires university, major and code
+ok 73 - 16.01 manual choice requires university, major and code
+  ---
+  duration_ms: 11.997134
+  type: 'test'
+  ...
+# Subtest: 16.02 retains user entered data provenance and no source URL
+ok 74 - 16.02 retains user entered data provenance and no source URL
+  ---
+  duration_ms: 2.403162
+  type: 'test'
+  ...
+# Subtest: 16.03 trusted PTIT sample contains official source and 2026 only
+ok 75 - 16.03 trusted PTIT sample contains official source and 2026 only
+  ---
+  duration_ms: 7.628239
+  type: 'test'
+  ...
+# Subtest: 16.04 rejects stale year and invalid campus even with PTIT host
+ok 76 - 16.04 rejects stale year and invalid campus even with PTIT host
+  ---
+  duration_ms: 0.431479
+  type: 'test'
+  ...
+# Subtest: 16.05 rejects foreign and http source
+ok 77 - 16.05 rejects foreign and http source
+  ---
+  duration_ms: 0.280333
+  type: 'test'
+  ...
+# Subtest: 16.06 rejects source bearing credentials or wrong path
+ok 78 - 16.06 rejects source bearing credentials or wrong path
+  ---
+  duration_ms: 0.238514
+  type: 'test'
+  ...
+# Subtest: 16.07 rejects mismatch between PTIT id and major code
+ok 79 - 16.07 rejects mismatch between PTIT id and major code
+  ---
+  duration_ms: 5.979532
+  type: 'test'
+  ...
+# Subtest: 16.08 add appends and NEVER sorts by marks or risk levels
+ok 80 - 16.08 add appends and NEVER sorts by marks or risk levels
+  ---
+  duration_ms: 2.206097
+  type: 'test'
+  ...
+# Subtest: 16.09 duplicate id is rejected
+ok 81 - 16.09 duplicate id is rejected
+  ---
+  duration_ms: 1.001632
+  type: 'test'
+  ...
+# Subtest: 16.10 duplicate school + major code rejected even if ID varies
+ok 82 - 16.10 duplicate school + major code rejected even if ID varies
+  ---
+  duration_ms: 6.210314
+  type: 'test'
+  ...
+# Subtest: 16.11 maximum 15 preferences, 16th rejected without mutation
+ok 83 - 16.11 maximum 15 preferences, 16th rejected without mutation
+  ---
+  duration_ms: 2.220744
+  type: 'test'
+  ...
+# Subtest: 16.12 moving up/down preserves contents and only changes one step
+ok 84 - 16.12 moving up/down preserves contents and only changes one step
+  ---
+  duration_ms: 0.366566
+  type: 'test'
+  ...
+# Subtest: 16.13 boundary and unknown move are no-op
+ok 85 - 16.13 boundary and unknown move are no-op
+  ---
+  duration_ms: 0.416212
+  type: 'test'
+  ...
+# Subtest: 16.14 removal preserves preference ordering
+ok 86 - 16.14 removal preserves preference ordering
+  ---
+  duration_ms: 0.207675
+  type: 'test'
+  ...
+# Subtest: 16.15 teacher NV6 warns, does not move or remove it
+ok 87 - 16.15 teacher NV6 warns, does not move or remove it
+  ---
+  duration_ms: 5.974297
+  type: 'test'
+  ...
+# Subtest: 16.16 teacher NV5 allowed at boundary
+ok 88 - 16.16 teacher NV5 allowed at boundary
+  ---
+  duration_ms: 0.219392
+  type: 'test'
+  ...
+# Subtest: 16.17 teacher-training code and name recognized conservatively
+ok 89 - 16.17 teacher-training code and name recognized conservatively
+  ---
+  duration_ms: 2.363711
+  type: 'test'
+  ...
+# Subtest: 16.18 self-entered schools always show verification caution
+ok 90 - 16.18 self-entered schools always show verification caution
+  ---
+  duration_ms: 0.290758
+  type: 'test'
+  ...
+# Subtest: 16.19 empty draft is explicitly a draft
+ok 91 - 16.19 empty draft is explicitly a draft
+  ---
+  duration_ms: 0.201139
+  type: 'test'
+  ...
+# Subtest: 16.20 export contains no personal scores, UID, or official-submission claim
+ok 92 - 16.20 export contains no personal scores, UID, or official-submission claim
+  ---
+  duration_ms: 0.509004
+  type: 'test'
+  ...
+# Subtest: 16.21 exported orders match reordered user list
+ok 93 - 16.21 exported orders match reordered user list
+  ---
+  duration_ms: 0.302718
+  type: 'test'
+  ...
+# Subtest: 16.22 UI is available without official THPT scores and no auto-selection
+ok 94 - 16.22 UI is available without official THPT scores and no auto-selection
+  ---
+  duration_ms: 7.879119
+  type: 'test'
+  ...
+# Subtest: 16.23 UI displays warnings rather than reordering teacher program
+ok 95 - 16.23 UI displays warnings rather than reordering teacher program
+  ---
+  duration_ms: 0.575665
+  type: 'test'
+  ...
+# Subtest: 16.24 workspace linked to 2026 policy, no direct save to Firebase
+ok 96 - 16.24 workspace linked to 2026 policy, no direct save to Firebase
+  ---
+  duration_ms: 0.454353
+  type: 'test'
+  ...
+# Subtest: 16.25 Vercel serves all explicit React route paths including consent/companion, preserving API functions
+ok 97 - 16.25 Vercel serves all explicit React route paths including consent/companion, preserving API functions
+  ---
+  duration_ms: 1.011021
+  type: 'test'
+  ...
+# Subtest: 16.26 CSS asset and test command present
+ok 98 - 16.26 CSS asset and test command present
+  ---
+  duration_ms: 3.036739
+  type: 'test'
+  ...
+# Subtest: 16.27 import/export preserves ordering but downgrades claims to unverified
+ok 99 - 16.27 import/export preserves ordering but downgrades claims to unverified
+  ---
+  duration_ms: 0.769125
+  type: 'test'
+  ...
+# Subtest: 16.28 import rejects wrong schema, old year, or excessive entries
+ok 100 - 16.28 import rejects wrong schema, old year, or excessive entries
+  ---
+  duration_ms: 0.269581
+  type: 'test'
+  ...
+# Subtest: 16.29 invalid or repeated file entries are rejected atomically
+ok 101 - 16.29 invalid or repeated file entries are rejected atomically
+  ---
+  duration_ms: 0.306925
+  type: 'test'
+  ...
+# Subtest: 16.30 import UI explicitly warns that source claims are not trusted
+ok 102 - 16.30 import UI explicitly warns that source claims are not trusted
+  ---
+  duration_ms: 14.639912
+  type: 'test'
+  ...
+# Subtest: 16.31 national draft uses source registry identity across schools and rejects missing/stale/insecure entries
+ok 103 - 16.31 national draft uses source registry identity across schools and rejects missing/stale/insecure entries
+  ---
+  duration_ms: 4.374929
+  type: 'test'
+  ...
+1..103
+# tests 103
+# suites 0
+# pass 103
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3325.324219

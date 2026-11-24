@@ -193,7 +193,7 @@ export default function StudentPage() {
           <div className="cla-intro-copy">
             <span className="cla-canvas-index">SEED / BẢN SẮC HỌC TẬP</span>
             <h1 id="student-dash-title">Xin chào, {displayName}.</h1>
-            <p>Hiểu năng lực hiện tại, lựa chọn chiến lược và theo dõi kết quả học tập.</p>
+            <p>Từ hồ sơ học tập đến nguyện vọng đại học: hiểu năng lực, dự báo, chọn ngành và xây dựng chiến lược.</p>
           </div>
           <div className="cla-intro-target"><span>MỤC TIÊU CỦA BẠN</span><strong>{targetMajor}</strong><small>{hasProfile && isMeaningfulText(profile.targetUniversity) ? profile.targetUniversity : "Chưa chọn trường mục tiêu"}</small><a href={profilePath}>{hasProfile ? "Cập nhật hồ sơ" : "Tạo hồ sơ"} ↗</a></div>
         </section>
@@ -202,9 +202,9 @@ export default function StudentPage() {
             now immediately below the greeting and before analytical widgets. */}
         <LearningCircuit profilePath={profilePath} />
         <nav className="student-dash-extra-links" aria-label="Công cụ bổ sung">
-          <a href="/student/modules">Tìm nhanh chức năng <span aria-hidden="true">↗</span></a>
+          <a href={hasProfile ? "/lumen/indices" : profilePath}>{hasProfile ? "Bắt đầu phân tích hồ sơ" : "Bắt đầu nhập hồ sơ"} <span aria-hidden="true">↗</span></a>
           <a href="/student/guide">Hướng dẫn sử dụng <span aria-hidden="true">↗</span></a>
-          <a href="/student/companion">Đồng hành mỗi ngày <span aria-hidden="true">↗</span></a>
+          <a href="/atlas/subjects">Tổ hợp & nguyện vọng <span aria-hidden="true">↗</span></a>
         </nav>
         </>}
         <ModuleSectionNav moduleKey="seed" />

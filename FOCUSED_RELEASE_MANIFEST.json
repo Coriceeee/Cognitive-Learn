@@ -1,0 +1,400 @@
+{
+  "schema": "cla.focused.release.v1",
+  "origin": "CLA_DECISION_P5_FINAL_FULL_20261124.zip",
+  "mode": "P5 Gemini and contrast hotfix, not production validation",
+  "changed_or_added": [
+    "BUILD_CLA_FOCUSED.cmd",
+    "HOTFIX_LAYOUT_MIGRATION.txt",
+    "START_HERE_DECISION_P2.md",
+    "START_HERE_DECISION_P3.md",
+    "START_HERE_DECISION_P4.md",
+    "START_HERE_DECISION_P5_FINAL.md",
+    "api/gemini-admission-reader.ts",
+    "api/gemini-chat.ts",
+    "api/gemini-lumen.ts",
+    "api/geminiTransport.ts",
+    "index.html",
+    "package.json",
+    "public/cla-companion-sw.js",
+    "public/cla-icon-192.png",
+    "public/cla-icon-512.png",
+    "public/logo cla.png",
+    "public/manifest.webmanifest",
+    "src/components/common/FloatingAdvisorChat.tsx",
+    "src/components/common/ModuleSectionNav.tsx",
+    "src/components/journey/ClosedLoopPanel.tsx",
+    "src/lib/admissionGoalHandoff.ts",
+    "src/lib/advisorAdmissionAnswers.ts",
+    "src/lib/advisorChatPolicy.ts",
+    "src/lib/advisorDecisionContext.ts",
+    "src/lib/decisionCycleContinuity.ts",
+    "src/lib/examProjection.ts",
+    "src/lib/examProjectionHandoff.ts",
+    "src/lib/goalGapOptimizer.ts",
+    "src/lib/pulseMissingActions.ts",
+    "src/lib/studentDecisionSnapshot.ts",
+    "src/lib/studentJourneyBridge.ts",
+    "src/lib/useClosedLoopJourney.ts",
+    "src/main.tsx",
+    "src/page/atlas/AtlasPage.tsx",
+    "src/page/atlas/components/AtlasAdmissionEnginePanel.tsx",
+    "src/page/atlas/components/AtlasAspirationDraftEditor.tsx",
+    "src/page/atlas/components/AtlasEvidenceJourney.tsx",
+    "src/page/atlas/components/AtlasNationalPathways.tsx",
+    "src/page/atlas/components/ExamProjectionPanel.tsx",
+    "src/page/lumen/LumenPage.tsx",
+    "src/page/orion/OrionPage.tsx",
+    "src/page/pulse/PulsePage.tsx",
+    "src/page/pulse/hooks/usePulseLinkedSources.ts",
+    "src/page/seed/StudentPage.tsx",
+    "src/page/seed/hooks/useStudentProfile.ts",
+    "src/page/seed/hooks/useStudentTranscript.ts",
+    "src/styles.css",
+    "src/styles/53-cla-focused-admission.css",
+    "tests/admission-goal-handoff.test.mjs",
+    "tests/admissions-and-chat.test.mjs",
+    "tests/cp70-student-journey-integration.test.mjs",
+    "tests/cp87-navigation-priority.test.cjs",
+    "tests/decision-p2.test.mjs",
+    "tests/decision-p3.test.cjs",
+    "tests/decision-p4.test.mjs",
+    "tests/decision-p5.test.mjs",
+    "tests/focused-admission.test.cjs",
+    "tests/p5-hotfix.test.mjs",
+    "tests/step14-daily-companion.test.mjs",
+    "tests/step16-atlas-aspiration-editor.test.cjs",
+    "tools/claGeminiDevApi.ts",
+    "tools/verify-focused-release.cjs",
+    "vite.config.ts"
+  ],
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "531d720268184b5e165ae5300bf39b9561d3ee7914eaeb7c93dd21b773631c6c"
+    },
+    {
+      "path": "BUILD_CLA_CP93_FIREBASE_GEMINI.cmd",
+      "sha256": "33d795b64b198af6816a27d471675f0c69dbe18722e2879143d1dd6d48cc11e9"
+    },
+    {
+      "path": "BUILD_CLA_FOCUSED.cmd",
+      "sha256": "84c6d99b4e0ff5f11ace528d7274ad72148203e025084b7644df83e44810a8f8"
+    },
+    {
+      "path": "DEPLOY_CLA_CP93_FIREBASE_GEMINI.cmd",
+      "sha256": "f7cc352201f83975ea2881f2e6483f158a57b476212fc1ad36f71fd033144813"
+    },
+    {
+      "path": "DEPLOY_CLA_CP93_FIREBASE_GEMINI.ps1",
+      "sha256": "415792b051688c305e04729a3367d7f46315c6e9f19e9a6ee90d1a705146aea7"
+    },
+    {
+      "path": "HOTFIX_LAYOUT_MIGRATION.txt",
+      "sha256": "ffcad83b6e897196bbdf5e70cb65b034cb94174934c9215a82bc9aafee239006"
+    },
+    {
+      "path": "HUONG_DAN_CP93_FIREBASE_GEMINI.md",
+      "sha256": "accd51578319ecc057858689ad805a4139b72bf6da66b9eff26e32820da07c2a"
+    },
+    {
+      "path": "START_HERE_DECISION_P2.md",
+      "sha256": "3451d154db89b593b81bba726e30c1cc0e6095f0ac8c83b14a129ffca893c6d5"
+    },
+    {
+      "path": "START_HERE_DECISION_P3.md",
+      "sha256": "becc778f76a23733e97e11df5d7273862d1210c28c30d17e279714235085f8db"
+    },
+    {
+      "path": "START_HERE_DECISION_P4.md",
+      "sha256": "4564c473982b3bd377dc5d1e8349290726c9278776abef4468ec7d5c5c18583f"
+    },
+    {
+      "path": "START_HERE_DECISION_P5_FINAL.md",
+      "sha256": "42206d933afb2377c2b99543923c4a38ab2a4e7f923db3c70a45f0f1fd188fdb"
+    },
+    {
+      "path": "api/gemini-admission-reader.ts",
+      "sha256": "7a3df2b3d67def7df73a6f4c723ee8ad439cff80d188f7d434ad81587fab8106"
+    },
+    {
+      "path": "api/gemini-chat.ts",
+      "sha256": "d20a07047b73c8cb6b2c4de4d1391a6375d4694093216a4efd26eff973c90096"
+    },
+    {
+      "path": "api/gemini-lumen.ts",
+      "sha256": "edb1a248d5f53d4f84aa5c366153082bc52f7004816d3e822b799765126968d1"
+    },
+    {
+      "path": "api/geminiTransport.ts",
+      "sha256": "03b41938bc6b06b6db4b02740cef9962d9fcb421bd5a8fa8685e5ee8d3a8b2e6"
+    },
+    {
+      "path": "firebase.gemini.json",
+      "sha256": "5b9b8523105df56e19885d82cf3d9b423e9b9bf4ccb1624177a79ba3bb025c7c"
+    },
+    {
+      "path": "firebase.json",
+      "sha256": "3757a8416d2b3d297d6b5a148b1c008bdf34e7de4de265d6a39a0f083adb5d48"
+    },
+    {
+      "path": "functions-gemini/.env.example",
+      "sha256": "4a95d7c7e50189f46c04203a5b0e497a1f99c54c3d7fc5211504719426e9a07f"
+    },
+    {
+      "path": "functions-gemini/.gitignore",
+      "sha256": "f735baee67fea65b81a02e5526237a2b48e92e9b706640ee5f4e12f9de84e071"
+    },
+    {
+      "path": "functions-gemini/build.mjs",
+      "sha256": "0d2fc8d9b729caaa00490d3640310f96eb73b01dae511a2049f568946b177ec0"
+    },
+    {
+      "path": "functions-gemini/index.mjs",
+      "sha256": "23f90c20271e93395346bbd554f57115ab8bc07cee34e72928a426725e7cac04"
+    },
+    {
+      "path": "functions-gemini/package.json",
+      "sha256": "d1accd6af88335558e6e2b67981fbb973b07ea5297597c7e127e103b37264378"
+    },
+    {
+      "path": "functions-gemini/src/router.mjs",
+      "sha256": "1dbadcee32c59832d5259431cef76bef70e2511f2bc7a71276289eceafdcba7c"
+    },
+    {
+      "path": "index.html",
+      "sha256": "afe32615f494002e521e2ad12ad856e8b2b720c30bacd487d129eff82d173108"
+    },
+    {
+      "path": "package.json",
+      "sha256": "36ea920c08ff81ba50bd103c7460c59fce9135e9ab31f94d42617bb854421b59"
+    },
+    {
+      "path": "public/cla-companion-sw.js",
+      "sha256": "24a8882e0658c0657b92c07824196b02cf90306f1a2a47c90a2b18e849050ce3"
+    },
+    {
+      "path": "public/cla-icon-192.png",
+      "sha256": "7b24fbdc89f553027ca289f3d089a59ab7b717e2d7a72653500caa752d863ef0"
+    },
+    {
+      "path": "public/cla-icon-512.png",
+      "sha256": "0e35d1dbfe6a6b2291d0bcbbdd2e2f42403065419170e06cd5c1255a8357494e"
+    },
+    {
+      "path": "public/logo cla.png",
+      "sha256": "1e45d5b9c5b8665c8c365b48426c6e8e35b8ef196800f0a2e8e1e7ae76d65446"
+    },
+    {
+      "path": "public/manifest.webmanifest",
+      "sha256": "6371e4d8f5c26ab42fb922a4f207733569af2abc6ceef20189a5e5194fac2fcd"
+    },
+    {
+      "path": "src/components/common/FloatingAdvisorChat.tsx",
+      "sha256": "ad68852263872781d4ece9850df3037dd7ef854644f8a2894c92a61fbfd60d37"
+    },
+    {
+      "path": "src/components/common/ModuleSectionNav.tsx",
+      "sha256": "25a2b247134c6112d9d30e00067f089d47b34f68f046f87523ccd2425a2ffab5"
+    },
+    {
+      "path": "src/components/journey/ClosedLoopPanel.tsx",
+      "sha256": "91b5a7c0fff04727f67022b57d216de24bae50ac56d6f4e9d6511ec7d74ed54c"
+    },
+    {
+      "path": "src/lib/admissionGoalHandoff.ts",
+      "sha256": "a59d8a5ea3ab397403c91684f438f341f6f598f5dd95964d05ec8d6b234d1a78"
+    },
+    {
+      "path": "src/lib/advisorAdmissionAnswers.ts",
+      "sha256": "0e0647f2a193e134371b7abb3c4308fe19aefb164f9496c78be6ba211b81c7eb"
+    },
+    {
+      "path": "src/lib/advisorChatPolicy.ts",
+      "sha256": "b143dba60c41e6547c0d1ab592cfc3e7477f7fa21163d2c9146a377e5b7c0231"
+    },
+    {
+      "path": "src/lib/advisorDecisionContext.ts",
+      "sha256": "d2727c9c418178872a430a7503cda49d0dc9c1b2446db478972f3796fa22030b"
+    },
+    {
+      "path": "src/lib/decisionCycleContinuity.ts",
+      "sha256": "454594c52caacf18cd1e33e8438e5d4ab4de49d5e280f6bcb896557b998a8205"
+    },
+    {
+      "path": "src/lib/examProjection.ts",
+      "sha256": "6fad17f1852b4965f42a1d97b317631633e708773fc8df0fd64dbc8f6ced719c"
+    },
+    {
+      "path": "src/lib/examProjectionHandoff.ts",
+      "sha256": "09cf424cc78eb29d02bf30e1714b940b3fb480015391bbf3a983a04aa76a2f9b"
+    },
+    {
+      "path": "src/lib/geminiAdmissionClient.ts",
+      "sha256": "aba7664dddaa571170eae6ad0b7c4a0b856610ce293ac05cd74c3666d44eb4b2"
+    },
+    {
+      "path": "src/lib/geminiLumenClient.ts",
+      "sha256": "ed23538650cc9647eb66d26a0966cbb15599175f1a9ae23b7633d444987051df"
+    },
+    {
+      "path": "src/lib/goalGapOptimizer.ts",
+      "sha256": "dcffa61b5c8ec95745df1baa8c9ce9e7a045b81252cd16402ff333da5a86ec2f"
+    },
+    {
+      "path": "src/lib/pulseMissingActions.ts",
+      "sha256": "029593ab6ceb17c19b62b41382680aec694dd9a3f7abb3f1660ccdf3a40383ca"
+    },
+    {
+      "path": "src/lib/studentDecisionSnapshot.ts",
+      "sha256": "a7ce971ca9a0bc908d012fb7c27b84cd51750e505f4c3198d0abf4c3fa724d50"
+    },
+    {
+      "path": "src/lib/studentJourneyBridge.ts",
+      "sha256": "166c43daf33fb6a10ed0a39101c61d70b03ba244f20223c5e6a6cab7df799378"
+    },
+    {
+      "path": "src/lib/useClosedLoopJourney.ts",
+      "sha256": "66913ec45d82f0529c9ad3be1bf67098edbb2f2cbce124bac5ffb9168498ae39"
+    },
+    {
+      "path": "src/main.tsx",
+      "sha256": "6674b87219f0ab031f29d339ce45b1ed146ab284572758bed19cf433d48f2c54"
+    },
+    {
+      "path": "src/page/atlas/AtlasPage.tsx",
+      "sha256": "a4983fef1d47e8d48b85c2785712a8f8237d64b8eb754d27e5c8a965ae1a4fe5"
+    },
+    {
+      "path": "src/page/atlas/components/AtlasAdmissionEnginePanel.tsx",
+      "sha256": "8820798c33c78ac1ab32f46508bb99d74ef67abde3f5b0f540b02e5d3ec7db01"
+    },
+    {
+      "path": "src/page/atlas/components/AtlasAspirationDraftEditor.tsx",
+      "sha256": "ca26ecec97e29f08d022198ef4ce736e6cebbf7fda8d2bb366187c8a8a8e7296"
+    },
+    {
+      "path": "src/page/atlas/components/AtlasEvidenceJourney.tsx",
+      "sha256": "0823b869bed4f803aa902c78c4b0ba602479db8c917db4cd039c5c24b0c97946"
+    },
+    {
+      "path": "src/page/atlas/components/AtlasNationalPathways.tsx",
+      "sha256": "91d679d56e23c3b3eb9fec0e706b721a9660d2f9cf226889a1276a82f977fde9"
+    },
+    {
+      "path": "src/page/atlas/components/ExamProjectionPanel.tsx",
+      "sha256": "8c4e001a42d95880123e0f2f5bd4ebf4cd1a8f231602f5337540fc4248936af9"
+    },
+    {
+      "path": "src/page/lumen/LumenPage.tsx",
+      "sha256": "d02f679aee47f5e3f3f962c4fb47703be1a0502417b8ef764237c8cf2d69ea73"
+    },
+    {
+      "path": "src/page/orion/OrionPage.tsx",
+      "sha256": "9c800e6ee0f9d9f5bafedb57217f15efabfbee094ff9bb6e772faf4d7ba8f3ee"
+    },
+    {
+      "path": "src/page/pulse/PulsePage.tsx",
+      "sha256": "e178e14ca8c00b46536fd19e55c3a42e7dbcb4e8904dd1fc7d1694cd0e8369af"
+    },
+    {
+      "path": "src/page/pulse/hooks/usePulseLinkedSources.ts",
+      "sha256": "81ebac37cc73ad518a92c000bda3ff139ccfb5765f3cf9b293058d14ff26a216"
+    },
+    {
+      "path": "src/page/seed/StudentPage.tsx",
+      "sha256": "4b1fced4f3b0720dc7576d6787b52b3c03087b904c87e236905eb424968c3e9b"
+    },
+    {
+      "path": "src/page/seed/hooks/useStudentProfile.ts",
+      "sha256": "ae51a2eeaf55c88c30aa21eab1139327c77d5d6f7eb94f77da1fe26947e15e00"
+    },
+    {
+      "path": "src/page/seed/hooks/useStudentTranscript.ts",
+      "sha256": "dd7ab0c30353b511f1271c799ed5d3ef80957134bffebe6ca2ef22bdf0963fa2"
+    },
+    {
+      "path": "src/styles.css",
+      "sha256": "e912d0e49bed2074d9610c4647a1c7d69507631e6fcfd85a5a43f716e1513199"
+    },
+    {
+      "path": "src/styles/53-cla-focused-admission.css",
+      "sha256": "0019edb1fc2f9d7562a7d79db7b94781160d6b9b9c42fe9f19421ab9395ecfe7"
+    },
+    {
+      "path": "tests/admission-goal-handoff.test.mjs",
+      "sha256": "09dd8dbc8a69a9e961c3e9d61005ffaf57197ef15b37e25956e2245023885fa2"
+    },
+    {
+      "path": "tests/admissions-and-chat.test.mjs",
+      "sha256": "c3d53499ab40d55bc0aefaf4c9da89a9125909bd6849f4d2999e24b4b7d61c16"
+    },
+    {
+      "path": "tests/cp70-student-journey-integration.test.mjs",
+      "sha256": "2a40ec7074a008e40aed84bed1c02f2c81ab4ddbe079aabf560c5eeb71f61394"
+    },
+    {
+      "path": "tests/cp87-navigation-priority.test.cjs",
+      "sha256": "b9123f492262eafe65fa31a5f9b28cc2265520dbb0a0133b837b9a5b8e1ae867"
+    },
+    {
+      "path": "tests/cp93-gemini-firebase-routes.test.mjs",
+      "sha256": "2332e429be09e53471661e12735929bb20fc649ba525384ace1940e37522baa7"
+    },
+    {
+      "path": "tests/cp93-hf01-config-isolation.test.mjs",
+      "sha256": "0f12e3e21a17db52318855d6d875416e0bf612c1ddceb8108d8f70ebf871873b"
+    },
+    {
+      "path": "tests/decision-p2.test.mjs",
+      "sha256": "78b5a2d335a57700ae69cfc12aa450f95829bc45a3007e16af4226249809943e"
+    },
+    {
+      "path": "tests/decision-p3.test.cjs",
+      "sha256": "9621fbc1b7509de0dfa7cf3d7f749875a6e058ec4033ed21eded07b6740e3836"
+    },
+    {
+      "path": "tests/decision-p4.test.mjs",
+      "sha256": "5c194cec3d2def96e0a7fe00cd6cc1b0c0c5c388acb5671c0c508cf3e7b3f9ab"
+    },
+    {
+      "path": "tests/decision-p5.test.mjs",
+      "sha256": "5ad6f1d49c59b14c2aad01303dc9a3814207f4bbed60818d6d5bab4da24df022"
+    },
+    {
+      "path": "tests/focused-admission.test.cjs",
+      "sha256": "2eca390b6b20c8b915ce336bd3586f641dd1150328e3caf1482d1271538fe579"
+    },
+    {
+      "path": "tests/p5-hotfix.test.mjs",
+      "sha256": "1a09bc90a1e919861f3243b3e23b9d82674cfd43281b144bb532e45a9882997e"
+    },
+    {
+      "path": "tests/step14-daily-companion.test.mjs",
+      "sha256": "d0b11dd4013b1cf49efed96bcb1deac25aee2cc9e4e66485dc249768426bcfaf"
+    },
+    {
+      "path": "tests/step15-companion-web-push.test.mjs",
+      "sha256": "49db00b43750e3bd0fe4a08dfdd7a9405334d6613a2c1ab188044e72d8857313"
+    },
+    {
+      "path": "tests/step16-atlas-aspiration-editor.test.cjs",
+      "sha256": "414ee1f161599918876820773984d466d72a35b65e833a4992d03b06da79bbaa"
+    },
+    {
+      "path": "tools/claFirebaseGeminiGate.cjs",
+      "sha256": "504dbe4db73e33bf22913d83f67cffd1b05a44c6a5d996cc9cd8ffb0558e5386"
+    },
+    {
+      "path": "tools/claGeminiDevApi.ts",
+      "sha256": "54358bf7bc1f56d74b9aa8f788125ab82a23e70a3df86f4103a4d924b12d8b37"
+    },
+    {
+      "path": "tools/verify-focused-release.cjs",
+      "sha256": "27b58d3896f2e337afd1550059ba3b84bf5ab7705cd99d9f732bc644dc29f585"
+    },
+    {
+      "path": "vite.config.ts",
+      "sha256": "dc8466892ca11be0f7be5cae00a35fea0e7d4b62f7002689fb55430e49e2b2aa"
+    }
+  ]
+}

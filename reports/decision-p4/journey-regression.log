@@ -1,0 +1,608 @@
+TAP version 13
+# (node:2653) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: low adherence chooses bounded lighter existing option, no automatic assignment
+ok 1 - low adherence chooses bounded lighter existing option, no automatic assignment
+  ---
+  duration_ms: 6.278153
+  type: 'test'
+  ...
+# Subtest: sufficient completion and reported hours retain workload
+ok 2 - sufficient completion and reported hours retain workload
+  ---
+  duration_ms: 3.558201
+  type: 'test'
+  ...
+# Subtest: score change not used to alter workload, even negative
+ok 3 - score change not used to alter workload, even negative
+  ---
+  duration_ms: 1.398218
+  type: 'test'
+  ...
+# Subtest: low hours alone reduces load
+ok 4 - low hours alone reduces load
+  ---
+  duration_ms: 0.979729
+  type: 'test'
+  ...
+# Subtest: zero reported hours yields manual review not fabricated plan
+ok 5 - zero reported hours yields manual review not fabricated plan
+  ---
+  duration_ms: 0.986008
+  type: 'test'
+  ...
+# Subtest: over-budget options are not recommended even with full completion
+ok 6 - over-budget options are not recommended even with full completion
+  ---
+  duration_ms: 1.647395
+  type: 'test'
+  ...
+# Subtest: partial reassessment abstains
+ok 7 - partial reassessment abstains
+  ---
+  duration_ms: 5.386394
+  type: 'test'
+  ...
+# Subtest: one check-in is insufficient
+ok 8 - one check-in is insufficient
+  ---
+  duration_ms: 0.593588
+  type: 'test'
+  ...
+# Subtest: cache and other owners cannot obtain advice
+ok 9 - cache and other owners cannot obtain advice
+  ---
+  duration_ms: 1.005497
+  type: 'test'
+  ...
+# Subtest: modified evidence and T0 fail closed
+ok 10 - modified evidence and T0 fail closed
+  ---
+  duration_ms: 0.646576
+  type: 'test'
+  ...
+# Subtest: legacy cycles remain untraceable
+ok 11 - legacy cycles remain untraceable
+  ---
+  duration_ms: 0.318821
+  type: 'test'
+  ...
+# Subtest: active cycle never gives a new-cycle suggestion
+ok 12 - active cycle never gives a new-cycle suggestion
+  ---
+  duration_ms: 0.235068
+  type: 'test'
+  ...
+# Subtest: invalid, duplicate, and empty options rejected
+ok 13 - invalid, duplicate, and empty options rejected
+  ---
+  duration_ms: 1.597011
+  type: 'test'
+  ...
+# Subtest: replay is deterministic, input remains untouched and changed result is rejected
+ok 14 - replay is deterministic, input remains untouched and changed result is rejected
+  ---
+  duration_ms: 2.253933
+  type: 'test'
+  ...
+# Subtest: Orion integration selects draft only and preserves explicit start
+ok 15 - Orion integration selects draft only and preserves explicit start
+  ---
+  duration_ms: 0.521832
+  type: 'test'
+  ...
+# Subtest: selected advice can start a second frozen cycle without mutating prior review
+ok 16 - selected advice can start a second frozen cycle without mutating prior review
+  ---
+  duration_ms: 0.602801
+  type: 'test'
+  ...
+# Subtest: Firestore listener routes metadata changes through the cache/pending-write gate
+ok 17 - Firestore listener routes metadata changes through the cache/pending-write gate
+  ---
+  duration_ms: 0.204603
+  type: 'test'
+  ...
+# (node:2654) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: explicit acceptance freezes source, options and selection; legacy no trace remains valid
+ok 18 - explicit acceptance freezes source, options and selection; legacy no trace remains valid
+  ---
+  duration_ms: 16.98946
+  type: 'test'
+  ...
+# Subtest: explicit rejection records an alternative without false assignment
+ok 19 - explicit rejection records an alternative without false assignment
+  ---
+  duration_ms: 2.608347
+  type: 'test'
+  ...
+# Subtest: manual choice same as recommendation is not a rejection
+ok 20 - manual choice same as recommendation is not a rejection
+  ---
+  duration_ms: 0.700806
+  type: 'test'
+  ...
+# Subtest: owner, missing server, wrong prior and changed evidence fail closed
+ok 21 - owner, missing server, wrong prior and changed evidence fail closed
+  ---
+  duration_ms: 0.879621
+  type: 'test'
+  ...
+# Subtest: forged refs, options and recommendations rejected
+ok 22 - forged refs, options and recommendations rejected
+  ---
+  duration_ms: 1.774093
+  type: 'test'
+  ...
+# Subtest: replay survives Firestore map key reordering; altered policy options detected when recommendation changes
+ok 23 - replay survives Firestore map key reordering; altered policy options detected when recommendation changes
+  ---
+  duration_ms: 3.583568
+  type: 'test'
+  ...
+# Subtest: chronology enforced and non-server contexts cannot freeze
+ok 24 - chronology enforced and non-server contexts cannot freeze
+  ---
+  duration_ms: 0.479348
+  type: 'test'
+  ...
+# Subtest: transaction reads source before writing; candidate rules only allow frozen lineage on create (static only)
+ok 25 - transaction reads source before writing; candidate rules only allow frozen lineage on create (static only)
+  ---
+  duration_ms: 0.499248
+  type: 'test'
+  ...
+# Subtest: freshness uses exact co-commit server timestamp, not a client clock or cached order
+ok 26 - freshness uses exact co-commit server timestamp, not a client clock or cached order
+  ---
+  duration_ms: 0.558415
+  type: 'test'
+  ...
+# Subtest: equal timestamps and malformed next timestamps cannot freeze a trace
+ok 27 - equal timestamps and malformed next timestamps cannot freeze a trace
+  ---
+  duration_ms: 2.227213
+  type: 'test'
+  ...
+# (node:2655) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: canonical route handles every supported former bookmark
+ok 28 - canonical route handles every supported former bookmark
+  ---
+  duration_ms: 1.394392
+  type: 'test'
+  ...
+# Subtest: study aliases and unknown paths do not expand authorization
+ok 29 - study aliases and unknown paths do not expand authorization
+  ---
+  duration_ms: 0.21615
+  type: 'test'
+  ...
+# Subtest: new focused routes have matching access, app and deploy contracts
+ok 30 - new focused routes have matching access, app and deploy contracts
+  ---
+  duration_ms: 0.925718
+  type: 'test'
+  ...
+# Subtest: admin workspace routes are not student allowlisted and use admin guards
+ok 31 - admin workspace routes are not student allowlisted and use admin guards
+  ---
+  duration_ms: 0.816567
+  type: 'test'
+  ...
+# Subtest: Atlas specialized panels have distinct React route owners
+not ok 32 - Atlas specialized panels have distinct React route owners
+  ---
+  duration_ms: 16.121025
+  type: 'test'
+  location: '/tmp/cla_p4/CLA/tests/cp42-focused-workspaces.test.mjs:12:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The expression evaluated to a falsy value:
+    
+      assert.ok(s.includes(`view === "/atlas/${r}" && <${c}`))
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///tmp/cla_p4/CLA/tests/cp42-focused-workspaces.test.mjs:12:264)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: Lumen separates state, history, advanced analysis, roadmap and evidence
+ok 33 - Lumen separates state, history, advanced analysis, roadmap and evidence
+  ---
+  duration_ms: 0.571005
+  type: 'test'
+  ...
+# Subtest: Orion uses separate workflow steps and retains the shared eligibility restriction
+ok 34 - Orion uses separate workflow steps and retains the shared eligibility restriction
+  ---
+  duration_ms: 0.349917
+  type: 'test'
+  ...
+# Subtest: Pulse owns check-ins and Haven owns budget simulation, both outside overview
+ok 35 - Pulse owns check-ins and Haven owns budget simulation, both outside overview
+  ---
+  duration_ms: 0.229429
+  type: 'test'
+  ...
+# Subtest: Seed keeps exam calendar and transcript on their own pages
+ok 36 - Seed keeps exam calendar and transcript on their own pages
+  ---
+  duration_ms: 0.708627
+  type: 'test'
+  ...
+# Subtest: compact navigation uses current-page semantics, not route-based CSS hiding
+ok 37 - compact navigation uses current-page semantics, not route-based CSS hiding
+  ---
+  duration_ms: 0.873632
+  type: 'test'
+  ...
+# (node:2686) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP70.01 cached snapshots cannot publish cycles, even if all records are otherwise valid
+ok 38 - CP70.01 cached snapshots cannot publish cycles, even if all records are otherwise valid
+  ---
+  duration_ms: 2.154025
+  type: 'test'
+  ...
+# Subtest: CP70.02 pending Firestore local writes cannot publish cycles as server-confirmed
+ok 39 - CP70.02 pending Firestore local writes cannot publish cycles as server-confirmed
+  ---
+  duration_ms: 0.288617
+  type: 'test'
+  ...
+# Subtest: CP70.03 confirmed empty server snapshot is distinguishable from empty cache
+ok 40 - CP70.03 confirmed empty server snapshot is distinguishable from empty cache
+  ---
+  duration_ms: 0.219895
+  type: 'test'
+  ...
+# Subtest: CP70.04 owner mismatch fails closed and drops the full batch
+ok 41 - CP70.04 owner mismatch fails closed and drops the full batch
+  ---
+  duration_ms: 1.10261
+  type: 'test'
+  ...
+# Subtest: CP70.05 document ID and payload ID must agree
+ok 42 - CP70.05 document ID and payload ID must agree
+  ---
+  duration_ms: 0.203571
+  type: 'test'
+  ...
+# Subtest: CP70.06 tampered cycle fields and missing owner do not become a student journey
+ok 43 - CP70.06 tampered cycle fields and missing owner do not become a student journey
+  ---
+  duration_ms: 0.381835
+  type: 'test'
+  ...
+# Subtest: CP70.07 server-confirmed valid document is available without changing observed grades
+ok 44 - CP70.07 server-confirmed valid document is available without changing observed grades
+  ---
+  duration_ms: 0.171072
+  type: 'test'
+  ...
+# Subtest: CP70.08 initial loading does not falsely prompt sign-in or invent progress
+ok 45 - CP70.08 initial loading does not falsely prompt sign-in or invent progress
+  ---
+  duration_ms: 0.266494
+  type: 'test'
+  ...
+# Subtest: CP70.09 waiting from cache and error never present previous student data
+ok 46 - CP70.09 waiting from cache and error never present previous student data
+  ---
+  duration_ms: 0.542362
+  type: 'test'
+  ...
+# Subtest: CP70.10 verified but wrong UID is blocked in navigation handoff as defense-in-depth
+ok 47 - CP70.10 verified but wrong UID is blocked in navigation handoff as defense-in-depth
+  ---
+  duration_ms: 0.433231
+  type: 'test'
+  ...
+# Subtest: CP70.11 no profile takes student to Seed after a server-confirmed read
+ok 48 - CP70.11 no profile takes student to Seed after a server-confirmed read
+  ---
+  duration_ms: 0.193126
+  type: 'test'
+  ...
+# Subtest: CP70.12 empty verified journey starts at Lumen without a fake achievement score
+ok 49 - CP70.12 empty verified journey starts at Lumen without a fake achievement score
+  ---
+  duration_ms: 0.110704
+  type: 'test'
+  ...
+# Subtest: CP70.13 active plan links to Pulse with zero observed check-ins
+ok 50 - CP70.13 active plan links to Pulse with zero observed check-ins
+  ---
+  duration_ms: 0.307956
+  type: 'test'
+  ...
+# Subtest: CP70.14 check-in links to reassessment, without treating self-report as academic progress
+ok 51 - CP70.14 check-in links to reassessment, without treating self-report as academic progress
+  ---
+  duration_ms: 0.308446
+  type: 'test'
+  ...
+# Subtest: CP70.15 reviewed plan links to Lumen evidence, without making a probability claim
+ok 52 - CP70.15 reviewed plan links to Lumen evidence, without making a probability claim
+  ---
+  duration_ms: 0.599586
+  type: 'test'
+  ...
+# Subtest: CP70.16 hook listens for metadata changes and clears stale cycles before server verification
+ok 53 - CP70.16 hook listens for metadata changes and clears stale cycles before server verification
+  ---
+  duration_ms: 0.781265
+  type: 'test'
+  ...
+# Subtest: CP70.17 Orion and Pulse write controls require server-confirmed cycles
+ok 54 - CP70.17 Orion and Pulse write controls require server-confirmed cycles
+  ---
+  duration_ms: 0.392411
+  type: 'test'
+  ...
+# Subtest: CP70.18 student journey has one action, while the LearningCircuit exclusively owns six-module navigation
+ok 55 - CP70.18 student journey has one action, while the LearningCircuit exclusively owns six-module navigation
+  ---
+  duration_ms: 1.317357
+  type: 'test'
+  ...
+# Subtest: CP70.19 a new student can start a Seed profile even if journey read is offline
+ok 56 - CP70.19 a new student can start a Seed profile even if journey read is offline
+  ---
+  duration_ms: 0.135861
+  type: 'test'
+  ...
+# (node:2697) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CL01 creates a versioned cycle and preserves valid baseline zero
+ok 57 - CL01 creates a versioned cycle and preserves valid baseline zero
+  ---
+  duration_ms: 2.36037
+  type: 'test'
+  ...
+# Subtest: CL02 rejects missing/NaN, invalid and duplicate baseline scores
+ok 58 - CL02 rejects missing/NaN, invalid and duplicate baseline scores
+  ---
+  duration_ms: 0.373372
+  type: 'test'
+  ...
+# Subtest: CL03 no outcome is inferred merely from an Orion strategy
+ok 59 - CL03 no outcome is inferred merely from an Orion strategy
+  ---
+  duration_ms: 1.55566
+  type: 'test'
+  ...
+# Subtest: CL04 check-in records self-report but is not an outcome
+ok 60 - CL04 check-in records self-report but is not an outcome
+  ---
+  duration_ms: 0.434473
+  type: 'test'
+  ...
+# Subtest: CL05 zero actual hours and zero completed tasks are observed zeros
+ok 61 - CL05 zero actual hours and zero completed tasks are observed zeros
+  ---
+  duration_ms: 0.172896
+  type: 'test'
+  ...
+# Subtest: CL06 rejects duplicate week and check-in ID
+ok 62 - CL06 rejects duplicate week and check-in ID
+  ---
+  duration_ms: 0.499008
+  type: 'test'
+  ...
+# Subtest: CL07 rejects invalid time and impossible completion
+ok 63 - CL07 rejects invalid time and impossible completion
+  ---
+  duration_ms: 0.357328
+  type: 'test'
+  ...
+# Subtest: CL08 reassessment is blocked until one actual check-in exists
+ok 64 - CL08 reassessment is blocked until one actual check-in exists
+  ---
+  duration_ms: 0.280024
+  type: 'test'
+  ...
+# Subtest: CL09 reassessment only accepts observed subjects, 0 is valid
+ok 65 - CL09 reassessment only accepts observed subjects, 0 is valid
+  ---
+  duration_ms: 0.591364
+  type: 'test'
+  ...
+# Subtest: CL10 prevents unknown subject/NaN, absent score and duplicate score
+ok 66 - CL10 prevents unknown subject/NaN, absent score and duplicate score
+  ---
+  duration_ms: 0.529112
+  type: 'test'
+  ...
+# Subtest: CL11 review calculates matched before-after delta without imputation
+ok 67 - CL11 review calculates matched before-after delta without imputation
+  ---
+  duration_ms: 0.339432
+  type: 'test'
+  ...
+# Subtest: CL12 closed cycles cannot be edited, measured again, or check-in again
+ok 68 - CL12 closed cycles cannot be edited, measured again, or check-in again
+  ---
+  duration_ms: 0.266244
+  type: 'test'
+  ...
+# Subtest: CL13 rejects corrupted documents, does not silently overwrite them
+ok 69 - CL13 rejects corrupted documents, does not silently overwrite them
+  ---
+  duration_ms: 0.106938
+  type: 'test'
+  ...
+# Subtest: CL14 Orion, Pulse and Lumen all mount the same shared journey
+ok 70 - CL14 Orion, Pulse and Lumen all mount the same shared journey
+  ---
+  duration_ms: 0.79767
+  type: 'test'
+  ...
+# Subtest: CL15 Firestore hook uses authenticated ownership and transaction-based updates
+ok 71 - CL15 Firestore hook uses authenticated ownership and transaction-based updates
+  ---
+  duration_ms: 0.216741
+  type: 'test'
+  ...
+# Subtest: CL16 candidate rules restrict student ownership, product consent, and immutable baselines
+ok 72 - CL16 candidate rules restrict student ownership, product consent, and immutable baselines
+  ---
+  duration_ms: 0.735558
+  type: 'test'
+  ...
+# Subtest: CL17 no claim that self-report is externally verified or causal proof
+ok 73 - CL17 no claim that self-report is externally verified or causal proof
+  ---
+  duration_ms: 0.417077
+  type: 'test'
+  ...
+# Subtest: CL18 module never writes its own outcomes into Seed as proven grades
+ok 74 - CL18 module never writes its own outcomes into Seed as proven grades
+  ---
+  duration_ms: 0.206626
+  type: 'test'
+  ...
+# (node:2698) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: JR01 new cycle has no evidence before reassessment
+ok 75 - JR01 new cycle has no evidence before reassessment
+  ---
+  duration_ms: 1.155158
+  type: 'test'
+  ...
+# Subtest: JR02 evidence is persisted as a derived property of reviewed cycle
+ok 76 - JR02 evidence is persisted as a derived property of reviewed cycle
+  ---
+  duration_ms: 2.19834
+  type: 'test'
+  ...
+# Subtest: JR03 scores of zero stay zero, missing outcomes are not imputed
+ok 77 - JR03 scores of zero stay zero, missing outcomes are not imputed
+  ---
+  duration_ms: 0.274856
+  type: 'test'
+  ...
+# Subtest: JR04 evidence discloses provenance and no causal/confidence claim
+ok 78 - JR04 evidence discloses provenance and no causal/confidence claim
+  ---
+  duration_ms: 0.304249
+  type: 'test'
+  ...
+# Subtest: JR05 evidence record matches §26.1 mandatory contract fields
+ok 79 - JR05 evidence record matches §26.1 mandatory contract fields
+  ---
+  duration_ms: 0.814374
+  type: 'test'
+  ...
+# Subtest: JR06 corrupted lineage cannot silently be accepted
+ok 80 - JR06 corrupted lineage cannot silently be accepted
+  ---
+  duration_ms: 0.333724
+  type: 'test'
+  ...
+# Subtest: JR07 old v1 records without evidenceRecord still readable
+ok 81 - JR07 old v1 records without evidenceRecord still readable
+  ---
+  duration_ms: 0.248448
+  type: 'test'
+  ...
+# Subtest: JR08 lock validates ownership and supports released state
+ok 82 - JR08 lock validates ownership and supports released state
+  ---
+  duration_ms: 0.156832
+  type: 'test'
+  ...
+# Subtest: JR09 create uses transaction with fixed lock and server legacy ACTIVE preflight
+ok 83 - JR09 create uses transaction with fixed lock and server legacy ACTIVE preflight
+  ---
+  duration_ms: 0.672604
+  type: 'test'
+  ...
+# Subtest: JR10 review releases state atomically and stores evidence; check-in does not release
+ok 84 - JR10 review releases state atomically and stores evidence; check-in does not release
+  ---
+  duration_ms: 0.542843
+  type: 'test'
+  ...
+# Subtest: JR11 Rules enforce paired cycle+state updates using getAfter
+ok 85 - JR11 Rules enforce paired cycle+state updates using getAfter
+  ---
+  duration_ms: 0.375004
+  type: 'test'
+  ...
+# Subtest: JR12 UI shows limitation and engine lineage, not calibrated probabilities
+ok 86 - JR12 UI shows limitation and engine lineage, not calibrated probabilities
+  ---
+  duration_ms: 0.420351
+  type: 'test'
+  ...
+# Subtest: JR13 evidence cannot be created before review or after malformed observations
+ok 87 - JR13 evidence cannot be created before review or after malformed observations
+  ---
+  duration_ms: 0.42647
+  type: 'test'
+  ...
+# Subtest: JR14 rapid double-click is synchronously guarded in hook
+ok 88 - JR14 rapid double-click is synchronously guarded in hook
+  ---
+  duration_ms: 0.630242
+  type: 'test'
+  ...
+# Subtest: JR15 legacy lock can be claimed after a previous lock is released
+ok 89 - JR15 legacy lock can be claimed after a previous lock is released
+  ---
+  duration_ms: 0.247566
+  type: 'test'
+  ...
+# (node:2719) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: S19-01 incomplete cycle abstains and cannot imply a measured effect
+ok 90 - S19-01 incomplete cycle abstains and cannot imply a measured effect
+  ---
+  duration_ms: 1.028631
+  type: 'test'
+  ...
+# Subtest: S19-02 below engineering completion threshold differs from frozen static policy
+ok 91 - S19-02 below engineering completion threshold differs from frozen static policy
+  ---
+  duration_ms: 1.322796
+  type: 'test'
+  ...
+# Subtest: S19-03 positive delta with completed actions maintains both policies
+ok 92 - S19-03 positive delta with completed actions maintains both policies
+  ---
+  duration_ms: 0.273754
+  type: 'test'
+  ...
+# Subtest: S19-04 nonpositive score delta produces replan, including valid score zero
+ok 93 - S19-04 nonpositive score delta produces replan, including valid score zero
+  ---
+  duration_ms: 1.166705
+  type: 'test'
+  ...
+# Subtest: S19-05 tampering in recorded decisions is detected on replay
+ok 94 - S19-05 tampering in recorded decisions is detected on replay
+  ---
+  duration_ms: 0.247015
+  type: 'test'
+  ...
+1..94
+# tests 94
+# suites 0
+# pass 93
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 456.418829

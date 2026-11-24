@@ -1,3 +1,10 @@
+import type { ContinuityResult } from "../../lib/decisionCycleContinuity";
+import { advisorDecisionStore, captureAdvisorDecision, type AdvisorDecisionRecord } from "../../lib/advisorDecisionContext";
+import { checkDecisionHandoff, clearDecisionHandoff } from "../../lib/studentDecisionSnapshot";
+import { optimizeGoalGap } from "../../lib/goalGapOptimizer";
+import { useVerifiedStudentProfile } from "../seed/hooks/StudentProfileProvider";
+import { auth } from "../../lib/firebase";
+import { readAdmissionGoal, clearAdmissionGoal, formatAdmissionGoal, type AdmissionGoal } from "../../lib/admissionGoalHandoff";
 import { currentFocusedPath } from "../../lib/focusedModuleRoute";
 import ModuleSectionNav from "../../components/common/ModuleSectionNav";
 import ModuleInputObservatory from "../../components/common/ModuleInputObservatory";
@@ -7,7 +14,7 @@ import { readNumber, isBlankOrValid } from "../../lib/inputValidation";
 import { useStudentTranscript } from "../seed/hooks/useStudentTranscript";
 import { getLatestSubjectGrades } from "../seed/services/transcriptData";
 import { canPrefillFromVerifiedTranscript } from "../../lib/transcriptPrefillEligibility";
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { useModuleDraft } from "../../lib/useModuleDraft";
 import { useMemo, useState } from "react";
 import appLogo from "../../assets/logo cla.png";
@@ -74,6 +81,30 @@ export default function OrionPage() {
 
   const { draft: savedDraft, status: saveStatus, error: draftError, uid: draftOwnerUid, conflict: draftConflict, save: saveDraft, markEditing, acceptRemote } = useModuleDraft<{targetMajor:string;weeksLeft:string;scores:Record<ScoreKey,string>;targets:Record<ScoreKey,string>}>("orion");
   const transcript = useStudentTranscript();
+  const verifiedProfile = useVerifiedStudentProfile();
+  const [gapSubjects,setGapSubjects]=useState<ScoreKey[]>([]);
+  const [gapTotal,setGapTotal]=useState("");
+  const [admissionGoal, setAdmissionGoal] = useState<AdmissionGoal | null>(null);
+  const [advisorGoal,setAdvisorGoal]=useState<AdvisorDecisionRecord|null>(null);
+  const [advisorGap,setAdvisorGap]=useState<AdvisorDecisionRecord|null>(null);
+  const advisorReady=Boolean(draftOwnerUid&&auth.currentUser?.uid===draftOwnerUid&&transcript.userId===draftOwnerUid&&!verifiedProfile.loading&&!verifiedProfile.syncing&&["ready","empty"].includes(transcript.status)&&["ready","empty"].includes(saveStatus)&&!draftConflict);
+  useLayoutEffect(()=>{
+    if(!advisorGoal||advisorGoal.data.kind!=="goal")return;
+    if(!advisorReady||advisorGoal.pin.owner!==draftOwnerUid||targetMajor!==formatAdmissionGoal(advisorGoal.data.value)){setAdvisorGoal(null);return;}
+    return advisorDecisionStore.register(advisorGoal);
+  },[advisorGoal,advisorReady,draftOwnerUid,targetMajor]);
+  useLayoutEffect(()=>{
+    if(!advisorGap||advisorGap.data.kind!=="gap")return;
+    const data=advisorGap.data;
+    const result=optimizeGoalGap(data.subjects,data.target);
+    if(!advisorReady||advisorGap.pin.owner!==draftOwnerUid||readNumber(gapTotal,0,30)!==data.target||data.subjects.length!==gapSubjects.length||data.subjects.some(s=>!gapSubjects.includes(s.subject as ScoreKey)||readNumber(scores[s.subject as ScoreKey],0,10)!==s.score||readNumber(targets[s.subject as ScoreKey],0,10)!==result.targets[s.subject])){setAdvisorGap(null);return;}
+    return advisorDecisionStore.register(advisorGap);
+  },[advisorGap,advisorReady,draftOwnerUid,gapTotal,gapSubjects,scores,targets]);
+
+  useEffect(() => {
+    if (!draftOwnerUid || auth.currentUser?.uid !== draftOwnerUid) { setAdmissionGoal(null); return; }
+    setAdmissionGoal(readAdmissionGoal(draftOwnerUid));
+  }, [draftOwnerUid]);
   const seededFromTranscript = useRef<string | null>(null);
   useEffect(() => {
     if (!transcript.data) return;
@@ -121,6 +152,7 @@ export default function OrionPage() {
     if (lastDraftOwner.current === draftOwnerUid) return;
     lastDraftOwner.current = draftOwnerUid;
     setTargetMajor("");
+    setGapSubjects([]); setGapTotal("");
     setWeeksLeft("");
     setScores(defaultScores);
     setTargets(defaultTargets);
@@ -280,6 +312,13 @@ export default function OrionPage() {
   const hasInputs = readNumber(weeksLeft, 1, 104, true) !== null && subjects.length > 0 &&
     [...Object.values(scores), ...Object.values(targets)].every(value => isBlankOrValid(value, 0, 10));
 
+  const gapResult = useMemo(()=>{
+    const total=readNumber(gapTotal,0,30);
+    const selected=gapSubjects.map(subject=>({subject,score:readNumber(scores[subject],0,10)}));
+    if(total===null || selected.length!==3 || selected.some(s=>s.score===null)) return null;
+    return optimizeGoalGap(selected.map(s=>({subject:s.subject,score:s.score!})),total);
+  },[gapTotal,gapSubjects,scores]);
+
   const inputPanel = (<section id="orion-input" className="orion-control-panel">
           <div className="orion-control-head">
             <div>
@@ -300,6 +339,21 @@ export default function OrionPage() {
               saving={saving} notice={saveNotice} noticeTone={saveNoticeTone}
               dirty={hasLocalEdits} autosave={autosaveState} />
           </div>
+          {admissionGoal && draftOwnerUid && auth.currentUser?.uid === draftOwnerUid && <div className="cla-focus-notice" role="status">
+            <strong>Mục tiêu bạn đã chọn tại Atlas: {formatAdmissionGoal(admissionGoal)}</strong>
+            <p>Chỉ chuyển lựa chọn của bạn, không tự đặt điểm mục tiêu hay xác nhận đủ điều kiện xét tuyển. Điểm hiện tại và điểm mục tiêu vẫn cần kiểm tra.</p>
+            <button type="button" disabled={saveStatus !== "ready" && saveStatus !== "empty"} onClick={() => {
+              if (verifiedProfile.loading || verifiedProfile.syncing || !["ready","empty"].includes(transcript.status) || checkDecisionHandoff(draftOwnerUid,"goal") !== "CURRENT") { setAdmissionGoal(null); clearAdmissionGoal(); setSaveNoticeTone("warning"); setSaveNotice("Mục tiêu hoặc hồ sơ chưa còn hiệu lực. Hãy chuyển lại từ Atlas sau khi đồng bộ."); return; }
+              const goal = readAdmissionGoal(draftOwnerUid);
+              if (!goal || JSON.stringify(goal) !== JSON.stringify(admissionGoal) || auth.currentUser?.uid !== draftOwnerUid) { setAdmissionGoal(null); return; }
+              const nextGoal = formatAdmissionGoal(goal);
+              const changed = targetMajor !== nextGoal;
+              if (changed && (targetMajor.trim() || Object.values(targets).some(v=>v.trim())) && !window.confirm("Thay mục tiêu bằng lựa chọn Atlas và xóa điểm mục tiêu cũ? Điểm hiện tại và số tuần được giữ lại.")) return;
+              setAdvisorGoal(captureAdvisorDecision(draftOwnerUid,{kind:"goal",value:goal}));
+              markLocalEdit(); setTargetMajor(nextGoal); if (changed) setTargets({...defaultTargets}); clearAdmissionGoal(); clearDecisionHandoff("goal"); setAdmissionGoal(null);
+            }}>Dùng mục tiêu này</button>{" "}
+            <button type="button" onClick={() => { clearAdmissionGoal(); setAdmissionGoal(null); }}>Bỏ qua</button>
+          </div>}
           <div className="orion-form-grid">
             <label>
               <span>Ngành mục tiêu</span>
@@ -320,6 +374,17 @@ export default function OrionPage() {
             </label>
           </div>
 
+          <details className="cla-focus-disclosure">
+            <summary>Phân bổ điểm mục tiêu theo tổ hợp 3 môn</summary>
+            <p>Chọn đúng 3 môn đã nhập điểm hiện tại và nhập tổng điểm mục tiêu tự đặt (0–30, không cộng ưu tiên). Phân bổ đều phần điểm còn thiếu, tối đa 10/môn; không phải dự báo hay điểm chuẩn.</p>
+            <div role="group" aria-label="Ba môn mục tiêu">{(Object.keys(subjectLabels) as ScoreKey[]).map(key=><label key={key}><input type="checkbox" checked={gapSubjects.includes(key)} disabled={!gapSubjects.includes(key)&&gapSubjects.length>=3} onChange={e=>setGapSubjects(old=>e.target.checked?[...old,key]:old.filter(k=>k!==key))}/>{subjectLabels[key]} </label>)}</div>
+            <label>Tổng mục tiêu /30 <input inputMode="decimal" value={gapTotal} onChange={e=>setGapTotal(e.target.value)} placeholder="VD: 24"/></label>
+            {gapResult && (gapResult.status==="READY" || gapResult.status==="ALREADY_MET") ? <div role="status"><p>Tổng hiện tại: {gapResult.currentTotal} · Khoảng cách: {gapResult.gap} điểm</p><p>{gapSubjects.map(k=>`${subjectLabels[k]}: ${gapResult.targets[k]}`).join(" · ")}</p><button type="button" disabled={saving||draftConflict||(saveStatus!=="ready"&&saveStatus!=="empty")||!draftOwnerUid||auth.currentUser?.uid!==draftOwnerUid} onClick={()=>{
+              if(!window.confirm("Dùng phân bổ này và xóa mục tiêu điểm cũ ngoài tổ hợp?"))return;
+              if(advisorReady&&draftOwnerUid) setAdvisorGap(captureAdvisorDecision(draftOwnerUid,{kind:"gap",subjects:gapSubjects.map(subject=>({subject,score:readNumber(scores[subject],0,10)!})),target:readNumber(gapTotal,0,30)!}));
+              markLocalEdit();setTargets({...defaultTargets,...Object.fromEntries(gapSubjects.map(k=>[k,String(gapResult.targets[k])]))});
+            }}>Dùng phân bổ này</button></div>:<p>Chọn đủ ba môn và kiểm tra các điểm đầu vào. Orion hiện hỗ trợ sáu môn trong bảng bên dưới.</p>}
+          </details>
           <div className="orion-score-table">
             {(Object.keys(subjectLabels) as ScoreKey[]).map((key) => (
               <div key={key}>
@@ -518,7 +583,12 @@ export default function OrionPage() {
         {view === "/orion/scenarios" && scenarioStep === "commit" && <ClosedLoopPanel mode="orion" plan={hasInputs ? { targetMajor,
           weeksLeft: readNumber(weeksLeft, 1, 104, true) ?? 1,
           subjects: subjects.map(s => ({key:s.subject,label:s.label,baseline:s.currentScore,target:s.targetScore})),
-          scenarios: eligibleScenarios } : undefined} />}
+          scenarios: eligibleScenarios, draftReady:advisorReady && !saving,
+          applyReviewedScores:(owner:string,review:ContinuityResult)=>{
+            if(!advisorReady || saving || auth.currentUser?.uid!==owner || draftOwnerUid!==owner || review.status!=="READY_TO_COPY" || !review.rows.length || review.rows.length!==subjects.length || !review.rows.every(r=>Object.prototype.hasOwnProperty.call(subjectLabels,r.key)&&subjects.some(s=>s.subject===r.key&&s.currentScore===r.current&&s.targetScore===r.target)&&Number.isFinite(r.observed)&&r.observed>=0&&r.observed<=10))throw new Error("Bản nháp hoặc tài khoản đã thay đổi. Hãy đồng bộ và thử lại.");
+            markLocalEdit(); setAdvisorGap(null);
+            setScores(current=>{const next={...current}; for(const row of review.rows)next[row.key as ScoreKey]=String(row.observed);return next;});
+          } } : undefined} />}
         {view === "/orion/roadmap" && <p className="cla-focus-notice"><a href="/orion/scenarios#cla-closed-loop">Mô phỏng và chốt chu kỳ học tập →</a></p>}
       </section>
     </main>

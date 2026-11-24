@@ -1,0 +1,469 @@
+TAP version 13
+# (node:3774) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: canonical route handles every supported former bookmark
+ok 1 - canonical route handles every supported former bookmark
+  ---
+  duration_ms: 1.560845
+  type: 'test'
+  ...
+# Subtest: study aliases and unknown paths do not expand authorization
+ok 2 - study aliases and unknown paths do not expand authorization
+  ---
+  duration_ms: 0.279613
+  type: 'test'
+  ...
+# Subtest: new focused routes have matching access, app and deploy contracts
+ok 3 - new focused routes have matching access, app and deploy contracts
+  ---
+  duration_ms: 0.612786
+  type: 'test'
+  ...
+# Subtest: admin workspace routes are not student allowlisted and use admin guards
+ok 4 - admin workspace routes are not student allowlisted and use admin guards
+  ---
+  duration_ms: 0.662619
+  type: 'test'
+  ...
+# Subtest: Atlas specialized panels have distinct React route owners
+ok 5 - Atlas specialized panels have distinct React route owners
+  ---
+  duration_ms: 0.321545
+  type: 'test'
+  ...
+# Subtest: Lumen separates state, history, advanced analysis, roadmap and evidence
+ok 6 - Lumen separates state, history, advanced analysis, roadmap and evidence
+  ---
+  duration_ms: 1.615477
+  type: 'test'
+  ...
+# Subtest: Orion uses separate workflow steps and retains the shared eligibility restriction
+ok 7 - Orion uses separate workflow steps and retains the shared eligibility restriction
+  ---
+  duration_ms: 0.547198
+  type: 'test'
+  ...
+# Subtest: Pulse owns check-ins and Haven owns budget simulation, both outside overview
+ok 8 - Pulse owns check-ins and Haven owns budget simulation, both outside overview
+  ---
+  duration_ms: 0.308666
+  type: 'test'
+  ...
+# Subtest: Seed keeps exam calendar and transcript on their own pages
+ok 9 - Seed keeps exam calendar and transcript on their own pages
+  ---
+  duration_ms: 0.600187
+  type: 'test'
+  ...
+# Subtest: compact navigation uses current-page semantics, not route-based CSS hiding
+ok 10 - compact navigation uses current-page semantics, not route-based CSS hiding
+  ---
+  duration_ms: 0.5621
+  type: 'test'
+  ...
+# (node:3775) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP65 source-backed Atlas overview
+    # Subtest: counts registry rows not inferred national coverage
+    ok 1 - counts registry rows not inferred national coverage
+      ---
+      duration_ms: 4.855622
+      type: 'test'
+      ...
+    # Subtest: keeps missing years explicitly zero without interpolation
+    ok 2 - keeps missing years explicitly zero without interpolation
+      ---
+      duration_ms: 4.491114
+      type: 'test'
+      ...
+    # Subtest: does not invent rows when data is empty
+    ok 3 - does not invent rows when data is empty
+      ---
+      duration_ms: 0.179385
+      type: 'test'
+      ...
+    # Subtest: retains distinction between records, universities, distinct URLs
+    ok 4 - retains distinction between records, universities, distinct URLs
+      ---
+      duration_ms: 0.255177
+      type: 'test'
+      ...
+    # Subtest: reads actual registry instead of hard-coded numbers
+    ok 5 - reads actual registry instead of hard-coded numbers
+      ---
+      duration_ms: 0.332832
+      type: 'test'
+      ...
+    # Subtest: exposes four real active task routes and works with soft links
+    ok 6 - exposes four real active task routes and works with soft links
+      ---
+      duration_ms: 0.253635
+      type: 'test'
+      ...
+    # Subtest: keeps Atlas year-by-year cutoff graph visible on comparison tab
+    ok 7 - keeps Atlas year-by-year cutoff graph visible on comparison tab
+      ---
+      duration_ms: 0.193776
+      type: 'test'
+      ...
+    # Subtest: limits visual pathway to Atlas overview rather than every nested tab
+    ok 8 - limits visual pathway to Atlas overview rather than every nested tab
+      ---
+      duration_ms: 0.234997
+      type: 'test'
+      ...
+    1..8
+ok 11 - CP65 source-backed Atlas overview
+  ---
+  duration_ms: 12.118811
+  type: 'suite'
+  ...
+# Subtest: CP65 Lumen observation-first UX
+    # Subtest: adds evidence journey and chart to the overview only
+    ok 1 - adds evidence journey and chart to the overview only
+      ---
+      duration_ms: 0.374734
+      type: 'test'
+      ...
+    # Subtest: never treats missing dimensions as observed zeros
+    ok 2 - never treats missing dimensions as observed zeros
+      ---
+      duration_ms: 0.319192
+      type: 'test'
+      ...
+    # Subtest: does not claim growth before history verification
+    ok 3 - does not claim growth before history verification
+      ---
+      duration_ms: 0.158164
+      type: 'test'
+      ...
+    # Subtest: routes unavailable insights to Seed completion, not a fake AI result
+    ok 4 - routes unavailable insights to Seed completion, not a fake AI result
+      ---
+      duration_ms: 0.095902
+      type: 'test'
+      ...
+    # Subtest: leaves other Lumen tabs intact
+    ok 5 - leaves other Lumen tabs intact
+      ---
+      duration_ms: 0.126417
+      type: 'test'
+      ...
+    1..5
+ok 12 - CP65 Lumen observation-first UX
+  ---
+  duration_ms: 5.418885
+  type: 'suite'
+  ...
+# Subtest: CP65 usability, release tracking and limitations
+    # Subtest: supports semantic navigation and readable chart numbers
+    ok 1 - supports semantic navigation and readable chart numbers
+      ---
+      duration_ms: 0.170382
+      type: 'test'
+      ...
+    # Subtest: includes mobile, dark, print and reduced-motion rules
+    ok 2 - includes mobile, dark, print and reduced-motion rules
+      ---
+      duration_ms: 0.105185
+      type: 'test'
+      ...
+    # Subtest: fingerprints CSS and logic files for release provenance
+    ok 3 - fingerprints CSS and logic files for release provenance
+      ---
+      duration_ms: 12.633147
+      type: 'test'
+      ...
+    1..3
+ok 13 - CP65 usability, release tracking and limitations
+  ---
+  duration_ms: 13.065695
+  type: 'suite'
+  ...
+# (node:3776) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP74 removes the redundant cross-module dropdown and preserves More
+ok 14 - CP74 removes the redundant cross-module dropdown and preserves More
+  ---
+  duration_ms: 5.175395
+  type: 'test'
+  ...
+# Subtest: CP74 six module navigation still reaches all implemented destinations
+ok 15 - CP74 six module navigation still reaches all implemented destinations
+  ---
+  duration_ms: 1.375351
+  type: 'test'
+  ...
+# Subtest: CP74 navigation is one low-noise bar, responsive and readable in dark mode
+ok 16 - CP74 navigation is one low-noise bar, responsive and readable in dark mode
+  ---
+  duration_ms: 0.3252
+  type: 'test'
+  ...
+# Subtest: CP74 retry actions explicitly use the shared visible button design
+ok 17 - CP74 retry actions explicitly use the shared visible button design
+  ---
+  duration_ms: 0.317168
+  type: 'test'
+  ...
+# Subtest: CP74 about page is honest about data maturity and covers six student modules
+ok 18 - CP74 about page is honest about data maturity and covers six student modules
+  ---
+  duration_ms: 0.258392
+  type: 'test'
+  ...
+# Subtest: CP74 contact page has usable issue selection and a real mail-client handoff
+ok 19 - CP74 contact page has usable issue selection and a real mail-client handoff
+  ---
+  duration_ms: 0.184843
+  type: 'test'
+  ...
+# Subtest: CP74 mailto encodes Unicode and message without pretending to submit
+ok 20 - CP74 mailto encodes Unicode and message without pretending to submit
+  ---
+  duration_ms: 2.050689
+  type: 'test'
+  ...
+# Subtest: CP74 public information pages use one design system and no duplicate nav menu
+ok 21 - CP74 public information pages use one design system and no duplicate nav menu
+  ---
+  duration_ms: 0.23737
+  type: 'test'
+  ...
+# (node:3807) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP76 seed: only tab copy changes; existing destinations and availability stay intact
+ok 22 - CP76 seed: only tab copy changes; existing destinations and availability stay intact
+  ---
+  duration_ms: 1.899877
+  type: 'test'
+  ...
+# Subtest: CP76 lumen: only tab copy changes; existing destinations and availability stay intact
+ok 23 - CP76 lumen: only tab copy changes; existing destinations and availability stay intact
+  ---
+  duration_ms: 0.220716
+  type: 'test'
+  ...
+# Subtest: CP76 atlas: only tab copy changes; existing destinations and availability stay intact
+ok 24 - CP76 atlas: only tab copy changes; existing destinations and availability stay intact
+  ---
+  duration_ms: 0.173476
+  type: 'test'
+  ...
+# Subtest: CP76 orion: only tab copy changes; existing destinations and availability stay intact
+ok 25 - CP76 orion: only tab copy changes; existing destinations and availability stay intact
+  ---
+  duration_ms: 1.372597
+  type: 'test'
+  ...
+# Subtest: CP76 pulse: only tab copy changes; existing destinations and availability stay intact
+ok 26 - CP76 pulse: only tab copy changes; existing destinations and availability stay intact
+  ---
+  duration_ms: 0.194838
+  type: 'test'
+  ...
+# Subtest: CP76 haven: only tab copy changes; existing destinations and availability stay intact
+ok 27 - CP76 haven: only tab copy changes; existing destinations and availability stay intact
+  ---
+  duration_ms: 0.410867
+  type: 'test'
+  ...
+# Subtest: CP76: six clear Vietnamese names appear in shared navigation without changing internal keys
+ok 28 - CP76: six clear Vietnamese names appear in shared navigation without changing internal keys
+  ---
+  duration_ms: 0.73792
+  type: 'test'
+  ...
+# Subtest: CP76: Atlas study-abroad four tasks remain in unified bar and preserve country query
+ok 29 - CP76: Atlas study-abroad four tasks remain in unified bar and preserve country query
+  ---
+  duration_ms: 0.206535
+  type: 'test'
+  ...
+# Subtest: CP76: student-facing map, module catalog, About and guide share the same brand names
+ok 30 - CP76: student-facing map, module catalog, About and guide share the same brand names
+  ---
+  duration_ms: 0.936353
+  type: 'test'
+  ...
+# (node:3813) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP78.01 six agreed Vietnamese labels are visible in the map, bar, public About and guide
+ok 31 - CP78.01 six agreed Vietnamese labels are visible in the map, bar, public About and guide
+  ---
+  duration_ms: 5.029179
+  type: 'test'
+  ...
+# Subtest: CP78.02 no second six-destination strip appears on Seed dashboard
+ok 32 - CP78.02 no second six-destination strip appears on Seed dashboard
+  ---
+  duration_ms: 0.362216
+  type: 'test'
+  ...
+# Subtest: CP78.03 no quick action duplicates the same two Atlas subnav destinations
+ok 33 - CP78.03 no quick action duplicates the same two Atlas subnav destinations
+  ---
+  duration_ms: 0.281175
+  type: 'test'
+  ...
+# Subtest: CP78.04 Haven uses curated scholarships as primary and web search only on demand
+ok 34 - CP78.04 Haven uses curated scholarships as primary and web search only on demand
+  ---
+  duration_ms: 0.360072
+  type: 'test'
+  ...
+# Subtest: CP78.05 Lumen error and empty notice do not repeat identical headings
+ok 35 - CP78.05 Lumen error and empty notice do not repeat identical headings
+  ---
+  duration_ms: 0.367653
+  type: 'test'
+  ...
+# Subtest: CP78.06 saturation uses only the existing theme files; no extra override layer or page rearrangement
+ok 36 - CP78.06 saturation uses only the existing theme files; no extra override layer or page rearrangement
+  ---
+  duration_ms: 1.566534
+  type: 'test'
+  ...
+# Subtest: CP78.07 interaction contracts remain and true duplicate finder does not remove needed work
+ok 37 - CP78.07 interaction contracts remain and true duplicate finder does not remove needed work
+  ---
+  duration_ms: 1.202876
+  type: 'test'
+  ...
+# Subtest: CP87 keeps the exact original loop component, module routes and six nodes
+ok 38 - CP87 keeps the exact original loop component, module routes and six nodes
+  ---
+  duration_ms: 2.028206
+  type: 'test'
+  ...
+# Subtest: CP87 puts the primary six-module circuit directly after the greeting, ahead of secondary content
+ok 39 - CP87 puts the primary six-module circuit directly after the greeting, ahead of secondary content
+  ---
+  duration_ms: 0.35244
+  type: 'test'
+  ...
+# Subtest: CP87 retains compact desktop circle and accessible mobile destinations, without changing routes
+ok 40 - CP87 retains compact desktop circle and accessible mobile destinations, without changing routes
+  ---
+  duration_ms: 0.435994
+  type: 'test'
+  ...
+# Subtest: Current focused source verifies against its release manifest; CP87 circuit and historical evidence unchanged
+ok 41 - Current focused source verifies against its release manifest; CP87 circuit and historical evidence unchanged
+  ---
+  duration_ms: 49.416226
+  type: 'test'
+  ...
+# (node:3843) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP92 – exactly eight sourced fields, no fabricated zeros for missing sources
+ok 42 - CP92 – exactly eight sourced fields, no fabricated zeros for missing sources
+  ---
+  duration_ms: 2.157096
+  type: 'test'
+  ...
+# Subtest: CP92 – valid zero is an observed value, not missing
+ok 43 - CP92 – valid zero is an observed value, not missing
+  ---
+  duration_ms: 0.285222
+  type: 'test'
+  ...
+# Subtest: CP92 – do not treat absent fields or placeholder values as observations
+ok 44 - CP92 – do not treat absent fields or placeholder values as observations
+  ---
+  duration_ms: 0.277179
+  type: 'test'
+  ...
+# Subtest: CP92 – previous LUMEN requires two real dated observations
+ok 45 - CP92 – previous LUMEN requires two real dated observations
+  ---
+  duration_ms: 0.293524
+  type: 'test'
+  ...
+# Subtest: CP92 – Orion strategy comes from saved subject pairs, never defaults to 0
+ok 46 - CP92 – Orion strategy comes from saved subject pairs, never defaults to 0
+  ---
+  duration_ms: 0.989081
+  type: 'test'
+  ...
+# Subtest: CP92 – ATLAS counts only come from explicit confirmed input, not assumed zero
+ok 47 - CP92 – ATLAS counts only come from explicit confirmed input, not assumed zero
+  ---
+  duration_ms: 0.195258
+  type: 'test'
+  ...
+# Subtest: CP92 – student PULSE shows direct verified sources, simulation limited to admin
+ok 48 - CP92 – student PULSE shows direct verified sources, simulation limited to admin
+  ---
+  duration_ms: 1.769864
+  type: 'test'
+  ...
+# Subtest: CP93: default Firebase config is Hosting-only; privileged functions are isolated
+ok 49 - CP93: default Firebase config is Hosting-only; privileged functions are isolated
+  ---
+  duration_ms: 5.682504
+  type: 'test'
+  ...
+# Subtest: CP93: each real Gemini API route is rewritten before index.html
+ok 50 - CP93: each real Gemini API route is rewritten before index.html
+  ---
+  duration_ms: 0.325931
+  type: 'test'
+  ...
+# Subtest: CP93: strict route matching, no catch-all forwarded to Gemini
+ok 51 - CP93: strict route matching, no catch-all forwarded to Gemini
+  ---
+  duration_ms: 0.430146
+  type: 'test'
+  ...
+# Subtest: CP93: Gemini key is stored as server secret and never VITE_
+ok 52 - CP93: Gemini key is stored as server secret and never VITE_
+  ---
+  duration_ms: 0.295987
+  type: 'test'
+  ...
+# Subtest: CP93: frontend targets same-origin on the three verified Hosting domains
+ok 53 - CP93: frontend targets same-origin on the three verified Hosting domains
+  ---
+  duration_ms: 0.574789
+  type: 'test'
+  ...
+# Subtest: HF01: default deploy is Hosting-only (CS11 security boundary)
+ok 54 - HF01: default deploy is Hosting-only (CS11 security boundary)
+  ---
+  duration_ms: 2.238307
+  type: 'test'
+  ...
+# Subtest: HF01: only Gemini Functions can be deployed using explicit config
+ok 55 - HF01: only Gemini Functions can be deployed using explicit config
+  ---
+  duration_ms: 0.193485
+  type: 'test'
+  ...
+# Subtest: HF01: both deployment scripts explicitly select Gemini config for Functions
+ok 56 - HF01: both deployment scripts explicitly select Gemini config for Functions
+  ---
+  duration_ms: 2.554905
+  type: 'test'
+  ...
+# Subtest: HF01: exact Gemini rewrites are ahead of SPA fallback
+ok 57 - HF01: exact Gemini rewrites are ahead of SPA fallback
+  ---
+  duration_ms: 0.247365
+  type: 'test'
+  ...
+# Subtest: HF02: deploy batch is Windows CMD-safe and gates two deployments
+ok 58 - HF02: deploy batch is Windows CMD-safe and gates two deployments
+  ---
+  duration_ms: 0.485737
+  type: 'test'
+  ...
+1..58
+# tests 71
+# suites 3
+# pass 71
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 480.238516

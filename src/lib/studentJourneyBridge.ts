@@ -47,7 +47,7 @@ export function buildStudentJourneyHandoff(input: StudentJourneyInput): StudentJ
     return { ...base, phase: "waiting", title: "Đang xác minh chu kỳ học tập", description: "Chờ Firestore xác nhận dữ liệu trước khi hiện tiến trình hoặc cho phép cập nhật.", primaryLabel: null, primaryHref: null, currentModule: null };
   }
   if (!input.latest) {
-    return { ...base, phase: "new", title: "Tạo chu kỳ học tập đầu tiên", description: "Khám phá ngành/trường ở Atlas, sau đó chọn mục tiêu và chiến lược ở Orion.", primaryLabel: "Lập kế hoạch ở Orion", primaryHref: "/orion/inputs", currentModule: "orion" };
+    return { ...base, phase: "new", title: "Phân tích năng lực trước khi chọn mục tiêu", description: "Xem phân tích và kịch bản dự báo tại Lumen, khám phá tổ hợp/ngành/trường ở Atlas rồi lập chiến lược ở Orion. Bạn vẫn có thể vào trực tiếp bất kỳ phân hệ nào.", primaryLabel: "Xem phân tích ở Lumen", primaryHref: "/lumen/advanced", currentModule: "lumen" };
   }
   if (input.latest.userId !== input.uid) {
     return { ...base, phase: "error", title: "Chu kỳ không khớp tài khoản", description: "Đã ẩn dữ liệu chu kỳ; không trộn hồ sơ giữa các tài khoản.", primaryLabel: null, primaryHref: null, currentModule: null };

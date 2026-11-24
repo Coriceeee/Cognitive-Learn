@@ -1,3 +1,4 @@
+import { groupPulseMissingActions } from "../../lib/pulseMissingActions";
 import { currentFocusedPath } from "../../lib/focusedModuleRoute";
 import ModuleSectionNav from "../../components/common/ModuleSectionNav";
 import ModuleInputObservatory from "../../components/common/ModuleInputObservatory";
@@ -386,8 +387,10 @@ export default function PulsePage() {
         {view === "/pulse/actions" && <section className="pulse-control-panel" aria-label="Việc nên làm dựa trên dữ liệu còn thiếu">
           <div className="pulse-control-head"><div><span>PULSE · GỢI Ý BỔ SUNG</span><h2>Hoàn thiện dữ liệu ở đúng phân hệ</h2>
           <p>Đề xuất dưới đây chỉ nói về tình trạng dữ liệu; không chẩn đoán năng lực và không dự báo kết quả học tập.</p></div></div>
-          <div className="pulse-action-list">{linked.signals.filter(item=>item.value===null).map(item=><article className="pulse-action-card" key={item.key}><em>{item.source}</em><h3>{item.label}</h3><p>{item.note}</p><a href={item.href}>Bổ sung ở {item.source} ↗</a></article>)}</div>
-          {linked.ready===linked.signals.length && <p role="status">Đã có các nguồn liên thông hiện hỗ trợ. Tiếp tục cập nhật dữ liệu tại các phân hệ khi có thay đổi.</p>}
+          {linked.loading && <p role="status">Đang xác minh nguồn dữ liệu. Chưa thể xác định thông tin cần bổ sung.</p>}
+          {linked.errors.length > 0 && <div role="alert"><p>Chưa thể xác minh tất cả nguồn dữ liệu.</p><ul>{linked.errors.map((error,index)=><li key={index}>{error}</li>)}</ul><a href="/pulse/inputs">Kiểm tra nguồn dữ liệu →</a></div>}
+          <div className="pulse-action-list">{groupPulseMissingActions(linked.signals, linked.loading, linked.errors).map(group=><article className="pulse-action-card" key={JSON.stringify([group.source,group.href])}><em>{group.source}</em><h3>{group.items.length} thông tin cần kiểm tra</h3><ul>{group.items.map(item=><li key={item.key}><strong>{item.label}</strong> — {item.note}</li>)}</ul><a href={group.href}>Kiểm tra tại {group.source} ↗</a></article>)}</div>
+          {!linked.loading && linked.errors.length === 0 && linked.ready===linked.signals.length && <p role="status">Đã có các nguồn liên thông hiện hỗ trợ. Tiếp tục cập nhật dữ liệu tại các phân hệ khi có thay đổi.</p>}
         </section>}
         {isAdmin && ["/pulse/progress", "/pulse/reports", "/pulse/actions"].includes(view) && (hasInputs ? (<>
         {view === "/pulse/reports" && <>

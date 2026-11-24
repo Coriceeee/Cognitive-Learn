@@ -58,19 +58,13 @@ export default function AtlasPage() {
           <section className="atlas-hero">
           <div className="atlas-hero-copy">
             <span>ATLAS · BẢN ĐỒ TƯƠNG LAI</span>
-            <h1>Tuyển sinh Việt Nam & du học quốc tế</h1>
+            <h1>Chọn ngành, trường và nguyện vọng</h1>
             <p>
-              Atlas phụ trách tuyển sinh Việt Nam, du học tại mọi quốc gia, chương trình liên kết quốc tế và định hướng ngành, trường, nguyện vọng.
-              Haven phụ trách học bổng, khả năng chi trả và hỗ trợ tài chính. Mọi thông tin tuyển sinh cần nguồn và năm áp dụng.
+              Bắt đầu từ điểm học tập hoặc kịch bản thi thử, đối chiếu tổ hợp, tìm ngành và trường phù hợp. Kiểm tra phương thức, năm và nguồn chính thức trước khi lập nguyện vọng.
             </p>
 
             <div className="atlas-hero-actions">
-              <a className="cla-study-jump" href="/student/exams#cla-exam-reminders">Lịch thi của tôi · Đếm ngược HSA / V-ACT / V-SAT</a>
-              {isAdmin && <a className="cla-study-jump" href="/atlas/library">Kho nhập nguồn · Admin</a>}
-
-
-
-
+              {isAdmin ? <a className="cla-study-jump" href="/atlas/library">Kho nhập nguồn · Admin</a> : <a className="cla-study-jump" href="/student/exams#cla-exam-reminders">Lịch thi &amp; đếm ngược</a>}
             </div>
           </div>
 
@@ -105,6 +99,7 @@ export default function AtlasPage() {
         {view === "/atlas/library" && isAdmin && <p><a href="/admin/diagnostics?view=atlas">Chẩn đoán kho Atlas (Admin)</a></p>}
 
         {view === "/atlas/recommendations" && <AtlasProgramDiscoveryPanel />}
+        {view === "/atlas/recommendations" && <p className="cla-focus-notice"><a href="/atlas/subjects#atlas-nguyen-vong-nhap">Lập nguyện vọng →</a> · <a href="/orion/scenarios">Lập chiến lược đạt mục tiêu →</a></p>}
         {view === "/atlas/compare" && <AtlasDecisionComparisonPanel />}
         {view === "/atlas/vietnam" && <OfficialAdmissionsExplorer />}
         {view === "/atlas/sources" && <><div id="atlas-public-source-search"><NationalSourceDiscoveryPanel /><details className="cla-evidence-sample"><summary>Tra cứu nguồn một năm (nâng cao)</summary><PublicSourceSearchPanel topic="admission" /></details></div><AtlasOfficialSourceRegistry /></>}

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, doc, getDocsFromServer, onSnapshot, orderBy, query, limit, where, startAfter, runTransaction, serverTimestamp, type Unsubscribe, type QueryDocumentSnapshot, type DocumentData } from "firebase/firestore";
 import { auth, db } from "./firebase";
+import { evaluateCycleContinuity } from "./decisionCycleContinuity";
 import { assessJourneySnapshot } from "./journeySnapshotGate";
 import { auditAdaptiveDecisionTrace, sameReviewCommit } from "./adaptiveNextCycle";
 import {auditJourneyArchivePage, HISTORY_MAX_DISPLAY} from "./journeyHistoryArchive";
@@ -162,6 +163,9 @@ export function useClosedLoopJourney() {
             throw new Error("Gợi ý thuộc chu kỳ cũ hoặc thiếu xác nhận máy chủ. Hãy tải lại và chọn lại.");
           if (prior.id !== cycle.decisionTrace.sourceCycleId || auditAdaptiveDecisionTrace(cycle, prior.data(), owner, true) !== "CONSISTENT")
             throw new Error("Nguồn gợi ý không khớp. Không lưu chu kỳ; hãy chọn lại.");
+          // Re-read the prior document in the same transaction before committing new advice.
+          if (evaluateCycleContinuity({owner,serverConfirmed:true,cycles:[prior.data()],plan:cycle}).status !== "ALIGNED")
+            throw new Error("Mục tiêu, môn hoặc điểm đo lại không khớp chu kỳ nguồn. Hãy chọn lại kế hoạch.");
         }
         if (auth.currentUser?.uid !== owner) throw new Error("Tài khoản đã thay đổi.");
         const nextState = { userId: owner, schemaVersion: 1, activeCycleId: cycle.id, updatedAt: serverTimestamp() };

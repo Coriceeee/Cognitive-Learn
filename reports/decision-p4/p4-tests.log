@@ -1,0 +1,132 @@
+TAP version 13
+# (node:2228) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: preview uses reviewed actual values, zero valid, no mutation
+ok 1 - preview uses reviewed actual values, zero valid, no mutation
+  ---
+  duration_ms: 7.04007
+  type: 'test'
+  ...
+# Subtest: aligned baseline permits continuity without rewriting
+ok 2 - aligned baseline permits continuity without rewriting
+  ---
+  duration_ms: 2.328724
+  type: 'test'
+  ...
+# Subtest: decreasing measured scores are copied as-is, never padded
+ok 3 - decreasing measured scores are copied as-is, never padded
+  ---
+  duration_ms: 1.850336
+  type: 'test'
+  ...
+# Subtest: requires server-confirmed snapshot
+ok 4 - requires server-confirmed snapshot
+  ---
+  duration_ms: 0.494982
+  type: 'test'
+  ...
+# Subtest: requires correct UID
+ok 5 - requires correct UID
+  ---
+  duration_ms: 0.466309
+  type: 'test'
+  ...
+# Subtest: no history
+ok 6 - no history
+  ---
+  duration_ms: 0.377989
+  type: 'test'
+  ...
+# Subtest: active cycle blocks even with previous reviewed cycle
+ok 7 - active cycle blocks even with previous reviewed cycle
+  ---
+  duration_ms: 7.936665
+  type: 'test'
+  ...
+# Subtest: partial reassessment never fills missing score with zero
+ok 8 - partial reassessment never fills missing score with zero
+  ---
+  duration_ms: 0.505537
+  type: 'test'
+  ...
+# Subtest: legacy review lacks lineage
+ok 9 - legacy review lacks lineage
+  ---
+  duration_ms: 0.804119
+  type: 'test'
+  ...
+# Subtest: tampered evidence blocked
+ok 10 - tampered evidence blocked
+  ---
+  duration_ms: 0.494962
+  type: 'test'
+  ...
+# Subtest: changed goal prevents old adaptation
+ok 11 - changed goal prevents old adaptation
+  ---
+  duration_ms: 0.54771
+  type: 'test'
+  ...
+# Subtest: changed subjects prevent old adaptation
+ok 12 - changed subjects prevent old adaptation
+  ---
+  duration_ms: 0.568621
+  type: 'test'
+  ...
+# Subtest: changed target prevents old adaptation
+ok 13 - changed target prevents old adaptation
+  ---
+  duration_ms: 0.470716
+  type: 'test'
+  ...
+# Subtest: duplicate or malformed plan is rejected
+ok 14 - duplicate or malformed plan is rejected
+  ---
+  duration_ms: 1.589661
+  type: 'test'
+  ...
+# Subtest: matching is by subject key, not array order
+ok 15 - matching is by subject key, not array order
+  ---
+  duration_ms: 0.793404
+  type: 'test'
+  ...
+# Subtest: new plan selection fingerprint changes with goal, weeks, baseline and options
+ok 16 - new plan selection fingerprint changes with goal, weeks, baseline and options
+  ---
+  duration_ms: 3.419767
+  type: 'test'
+  ...
+# Subtest: most recent reviewed source is used even when history is reordered
+ok 17 - most recent reviewed source is used even when history is reordered
+  ---
+  duration_ms: 1.655608
+  type: 'test'
+  ...
+# Subtest: complete synthetic path: review -> aligned baseline -> reduced option -> frozen next cycle
+ok 18 - complete synthetic path: review -> aligned baseline -> reduced option -> frozen next cycle
+  ---
+  duration_ms: 2.342604
+  type: 'test'
+  ...
+# Subtest: UI integration explicitly confirms review and guards selection
+ok 19 - UI integration explicitly confirms review and guards selection
+  ---
+  duration_ms: 0.589992
+  type: 'test'
+  ...
+# Subtest: Orion only writes explicit draft score change; transaction rechecks source
+ok 20 - Orion only writes explicit draft score change; transaction rechecks source
+  ---
+  duration_ms: 0.637613
+  type: 'test'
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 20
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 180.916995

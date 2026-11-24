@@ -1,3 +1,4 @@
+import { studentDecisionLedger } from "../../../lib/studentDecisionSnapshot";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, onSnapshot, type Unsubscribe } from "firebase/firestore";
@@ -482,6 +483,7 @@ export function useStudentProfile() {
       setTemporalReport(null);
     };
     const reportFailure = (code?: string) => {
+      if (activeUid && auth.currentUser?.uid===activeUid) studentDecisionLedger.observe(activeUid,"profile",null);
       resetView();
       setLoading(false);
       setSyncing(false);
@@ -515,12 +517,14 @@ export function useStudentProfile() {
           // Never promote offline cache or uncommitted local writes into verified
           // cognitive/academic information, even after a previously verified read.
           if (!isServerConfirmedSnapshot(snapshot.metadata)) {
+            studentDecisionLedger.observe(uid,"profile",null);
             resetView(); setError(""); setSyncing(true); setLoading(false);
             return;
           }
           setSyncing(false);
           setError("");
           if (!snapshot.exists()) {
+            studentDecisionLedger.observe(uid,"profile","confirmed-absent");
             resetView(); setLoading(false);
             return;
           }
@@ -539,6 +543,7 @@ export function useStudentProfile() {
               ? storedMeasurement : calculateCognitive(normalizedProfile);
             const normalizedCognitive = normalizeCognitiveResult(cognitiveResult);
             const dynamic = buildDynamicStudentState(rawData, uid, true);
+            studentDecisionLedger.observe(uid,"profile",dynamic?.sourceVersion ?? null);
             setDynamicState(dynamic);
             setTemporalReport(null);
             setProfile(normalizedProfile);

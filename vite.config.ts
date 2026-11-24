@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { claGeminiDevApi } from './tools/claGeminiDevApi';
+import { claGeminiDevApi } from './tools/claGeminiDevApi.ts';
 
 // CLA already lazy-loads page routes. Split only heavy dependency families
 // instead of creating one large vendor bundle for every route.

@@ -1,3 +1,4 @@
+import { answerDomesticAdmission, isDomesticAdmissionQuestion } from "./advisorAdmissionAnswers.ts";
 /** Shared bounded/PII-minimising chat payload normalisation. No persistent history. */
 export type AdvisorTurn = { role: "user" | "model"; text: string };
 export function trimAdvisorText(value: unknown, max: number): string {
@@ -20,12 +21,11 @@ export function prepareAdvisorMessage(value: unknown): string {
 
 
 /**
- * CLA's floating chatbot is an assistant for navigation and general website help.
- * Admission, scholarship and course-specific requirements are exclusively owned
- * by their evidence-backed modules. This deterministic gate is applied on both
- * browser and API; it does not call a language model or invent source facts.
+ * CLA's floating chatbot answers domestic admissions directly and supports general website help.
+ * Domestic admissions facts use evidence-backed answers; other specialist modules
+ * retain navigation. Open-ended domestic guidance can use the authenticated API.
  */
-export type AdvisorRoute = { destination: "/atlas/vietnam" | "/atlas/joint" | "/atlas/study-abroad" | "/haven/scholarships"; label: string; answer: string };
+export type AdvisorRoute = { destination: "/atlas/vietnam" | "/atlas/joint" | "/atlas/study-abroad" | "/haven/scholarships"; label: string; answer: string; source?: string };
 export const ADVISOR_ALLOWED_DESTINATIONS = ["/atlas/vietnam", "/atlas/joint", "/atlas/study-abroad", "/haven/scholarships"] as const;
 
 function normalisedForRouting(value: string): string {
@@ -43,14 +43,12 @@ export function routeAdvisorQuestion(value: string): AdvisorRoute | null {
     destination: "/atlas/joint", label: "Mở chương trình liên kết tại Atlas",
     answer: "Các chương trình liên kết tuyển sinh tại Việt Nam nằm trong Atlas Admission. Hãy mở đúng mục chương trình để kiểm tra phương thức xét tuyển và thông báo từ trường.",
   };
-  if (/du hoc|truong quoc te|nus\b|mit\b|harvard|educationusa|nhap hoc quoc te|visa du hoc|ielts|toefl|sat\b|act\b|jlpt|topik|eju|studienkolleg/.test(text)) return {
+  if (/du hoc|truong quoc te|nus\b|mit\b|harvard|educationusa|nhap hoc quoc te|visa du hoc|jlpt|topik|eju|studienkolleg/.test(text) || (!isDomesticAdmissionQuestion(value) && /ielts|toefl|sat\b|act\b/.test(text))) return {
     destination: "/atlas/study-abroad", label: "Mở lộ trình du học",
     answer: "Atlas phụ trách tra cứu trường, ngành và điều kiện du học theo từng quốc gia. Học bổng và phân tích khả năng chi trả nằm ở Haven; trợ lý chỉ giúp mở đúng chức năng.",
   };
-  if (/tuyen sinh|xet tuyen|ptit\b|hust\b|ftu\b|tdtu\b|hcmut\b|neu\b|ueh\b|hutech\b|bach khoa|ngoai thuong|diem chuan|diem trung tuyen|nguyen vong|to hop|ma nganh|ma truong|chi tieu|hoc ba|danh gia nang luc|hsa\b|tsa\b|chon nganh|chon truong|nganh nao|truong nao|tu van nganh|tu van truong|dai hoc nao|phuong thuc/.test(text)) return {
-    destination: "/atlas/vietnam", label: "Mở Atlas tuyển sinh",
-    answer: "Hãy mở Atlas Admission để tra cứu ngành, trường, phương thức, điểm chuẩn theo năm và liên kết chính thức. Trợ lý nổi không đưa số liệu tuyển sinh hay thay thế công cụ Atlas.",
-  };
+  const admission = answerDomesticAdmission(value);
+  if (admission) return { destination: "/atlas/vietnam", label: "Xem dữ liệu tuyển sinh tại Atlas (tùy chọn)", ...admission };
   return null;
 }
 
@@ -59,7 +57,7 @@ export function safeAdvisorDestination(value: unknown): AdvisorRoute["destinatio
     ? value as AdvisorRoute["destination"] : undefined;
 }
 
-/** Safe, non-personal page context for the assistant's thao tác-only guidance. */
+/** Safe, non-personal page context for the assistant's context-aware guidance. */
 export const ADVISOR_PAGE_CONTEXTS = {
   general: "Trang chung",
   "student-dashboard": "Dashboard học sinh",
@@ -105,16 +103,16 @@ export function advisorPageContextFromPath(pathname: string): AdvisorPageContext
 
 export function advisorSuggestionsFor(context: AdvisorPageContext): string[] {
   const suggestions: Record<AdvisorPageContext, string[]> = {
-    general: ["Hướng dẫn sử dụng CLA", "Tìm một chức năng trong hệ thống", "Báo lỗi thao tác"],
-    "student-dashboard": ["Tôi nên bắt đầu từ đâu?", "Làm sao hoàn thiện hồ sơ?", "Các phân hệ khác nhau thế nào?"],
+    general: ["Tôi nên chọn ngành học như thế nào?", "Điểm chuẩn là gì?", "Hướng dẫn sử dụng CLA"],
+    "student-dashboard": ["Tôi nên chọn ngành học như thế nào?", "Cách sắp xếp nguyện vọng?", "Làm sao hoàn thiện hồ sơ?"],
     "student-profile": ["Cách cập nhật mục tiêu học tập?", "Làm sao lưu hồ sơ?", "Tại sao dữ liệu chưa đồng bộ?"],
     "student-transcript": ["Cách nhập điểm theo học kỳ?", "Sửa một điểm đã nhập thế nào?", "Vì sao điểm còn thiếu?"],
     "student-storage": ["Trạng thái đồng bộ có ý nghĩa gì?", "Khi nào cần thử đồng bộ lại?", "Báo lỗi lưu dữ liệu ở đâu?"],
     "student-modules": ["Mỗi phân hệ dùng để làm gì?", "Tìm chức năng bảng điểm ở đâu?", "Phân hệ nào chứa kế hoạch học tập?"],
     lumen: ["SCI, MAS và CSL là gì?", "Xem lịch sử đo ở đâu?", "Vì sao chưa có phân tích?"],
-    atlas: ["Cách tìm ngành học trong Atlas?", "Lọc trường theo phương thức thế nào?", "Mở nguồn tuyển sinh chính thức ở đâu?"],
+    atlas: ["Điểm kịch bản của tôi?", "Điểm chuẩn là gì?", "Cách sắp xếp nguyện vọng?"],
     "study-abroad": ["Bắt đầu tra cứu quốc gia thế nào?", "Xem checklist hồ sơ ở đâu?", "Chuyển sang mục học bổng thế nào?"],
-    orion: ["Cách tạo kế hoạch học tập?", "Ba kịch bản khác nhau thế nào?", "Xem lộ trình theo tuần ở đâu?"],
+    orion: ["Còn thiếu bao nhiêu điểm?", "Nguyện vọng của tôi?", "Cách tạo kế hoạch học tập?"],
     pulse: ["Đọc báo cáo tiến độ thế nào?", "Vì sao chưa có dữ liệu tăng trưởng?", "Tìm việc cần làm tiếp theo ở đâu?"],
     haven: ["Cách dùng công cụ ngân sách?", "Tìm checklist học bổng ở đâu?", "Vì sao chi phí đang để trống?"],
     admin: ["Tìm công cụ kiểm tra hệ thống ở đâu?", "Phân biệt Admin và Student thế nào?", "Xem trạng thái kiểm thử ở đâu?"],

@@ -1,4 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { auth } from "../../lib/firebase";
+import { evaluateCycleContinuity, continuitySelectionKey, type ContinuityResult } from "../../lib/decisionCycleContinuity";
 import { createJourneyCycle, analyzeJourney, auditJourneyEvidence, auditJourneyT0Snapshot, type JourneyScenarioId, type JourneySubject } from "../../lib/closedLoopJourney";
 import { useClosedLoopJourney } from "../../lib/useClosedLoopJourney";
 import { compareJourneyT0T1 } from "../../lib/journeyT0T1Comparison";
@@ -17,8 +19,13 @@ type OrionPlan = {
   weeksLeft: number;
   subjects: JourneySubject[];
   scenarios: Array<{ id: string; title: string; weeklyHours: number }>;
+  draftReady?: boolean;
+  applyReviewedScores?: (owner:string, review:ContinuityResult) => void;
 };
 type Props = { mode: "orion" | "pulse" | "lumen"; plan?: OrionPlan };
+const continuityReason: Record<string,string> = {
+  SERVER_REQUIRED:"Chưa xác nhận dữ liệu máy chủ", INVALID_HISTORY:"Lịch sử không nhất quán", NO_HISTORY:"Chưa có chu kỳ", ACTIVE_CYCLE:"Đang có chu kỳ hoạt động", REVIEW_REQUIRED:"Chưa tổng kết", UNTRACEABLE_REVIEW:"Thiếu bằng chứng truy vết", PARTIAL_REASSESSMENT:"Thiếu điểm đo lại của một hoặc nhiều môn", PLAN_REQUIRED:"Chưa đủ đầu vào kế hoạch", GOAL_CHANGED:"Nguyện vọng đã thay đổi", SUBJECTS_CHANGED:"Bộ môn đã thay đổi", TARGETS_CHANGED:"Điểm mục tiêu đã thay đổi",
+};
 const stageText: Record<string, string> = {
   NOT_STARTED: "Chưa bắt đầu", CHECK_IN: "Đợi check-in", READY_TO_REASSESS: "Đủ điều kiện đánh giá lại", REVIEWED: "Đã tổng kết",
 };
@@ -31,7 +38,7 @@ const safeNumber = (raw: string, min: number, max: number, integer = false): num
 export default function ClosedLoopPanel({ mode, plan }: Props) {
   const journey = useClosedLoopJourney();
   const [scenarioId, setScenarioId] = useState<JourneyScenarioId | "">("");
-  const [decisionChoice, setDecisionChoice] = useState<{owner:string; advice:string; disposition:"ACCEPTED"|"DECLINED"}|null>(null);
+  const [decisionChoice, setDecisionChoice] = useState<{owner:string; advice:string; planKey:string; disposition:"ACCEPTED"|"DECLINED"}|null>(null);
   const [week, setWeek] = useState("1");
   const [hours, setHours] = useState("");
   const [completed, setCompleted] = useState("");
@@ -47,9 +54,20 @@ export default function ClosedLoopPanel({ mode, plan }: Props) {
   const [scoringProtocolId, setScoringProtocolId] = useState("");
   const [scaleId, setScaleId] = useState<"score-0-to-10" | "score-0-to-10-rounded">("score-0-to-10");
 
-  useEffect(() => { setDecisionChoice(null); setScenarioId(""); }, [journey.uid]);
+  useLayoutEffect(() => { setDecisionChoice(null); setScenarioId(""); setNotice(""); }, [journey.uid]);
   const active = journey.current;
   const latest = active ?? journey.latest;
+  const formScope = useRef<{owner:string;cycle:string|null}>({owner:"",cycle:null});
+  useLayoutEffect(() => {
+    const ownerChanged=formScope.current.owner!==journey.uid;
+    // Preserve unsaved input during a transient cache/pending-write state for the same owner.
+    if(!ownerChanged && !journey.recentFromServer)return;
+    const cycle=active?.id??null;
+    if(!ownerChanged && formScope.current.cycle===cycle)return;
+    formScope.current={owner:journey.uid,cycle};
+    setWeek("1"); setHours(""); setCompleted(""); setPlanned("3"); setCheckNote(""); setScores({}); setReviewNote("");
+    setMeasurementPointId(""); setInstrumentId(""); setInstrumentVersion(""); setFormId(""); setScoringProtocolId(""); setScaleId("score-0-to-10");
+  }, [journey.uid, active?.id, journey.recentFromServer]);
   const analysis = useMemo(() => analyzeJourney(latest), [latest]);
   const t0Audit = useMemo(() => latest ? auditJourneyT0Snapshot(latest) : "LEGACY_NO_T0", [latest]);
   const evidenceAudit = useMemo(() => latest ? auditJourneyEvidence(latest) : "NOT_REVIEWED", [latest]);
@@ -65,9 +83,12 @@ export default function ClosedLoopPanel({ mode, plan }: Props) {
     row.cycleId === selectedMeasurementPoint.cycleId && row.subjectKey === selectedMeasurementPoint.subjectKey &&
     row.timepoint === selectedMeasurementPoint.timepoint);
   const shadow = useMemo(() => latest ? evaluateShadowPolicies(latest) : null, [latest]);
+  const continuity = useMemo(() => evaluateCycleContinuity({owner:journey.uid,serverConfirmed:journey.status === "ready" && journey.recentFromServer && auth.currentUser?.uid === journey.uid,cycles:journey.cycles,plan:plan ?? null}),[journey.uid,journey.status,journey.recentFromServer,journey.cycles,plan]);
+  const planKey = plan ? continuitySelectionKey(journey.uid,plan,continuity) + `:${plan.draftReady === true}` : "";
+  useLayoutEffect(()=>{setDecisionChoice(null); setScenarioId("");},[planKey]);
   const adaptiveContext = useMemo(() => ({cycles: journey.cycles, owner: journey.uid || null,
-    serverConfirmed: journey.status === "ready" && journey.recentFromServer,
-    options: plan?.scenarios ?? []}), [journey.cycles, journey.uid, journey.status, journey.recentFromServer, plan]);
+    serverConfirmed: journey.status === "ready" && journey.recentFromServer && continuity.status === "ALIGNED" && plan?.draftReady === true,
+    options: plan?.scenarios ?? []}), [journey.cycles, journey.uid, journey.status, journey.recentFromServer, plan, continuity.status]);
   const adaptiveAdvice = useMemo(() => evaluateAdaptiveNextCycle(adaptiveContext), [adaptiveContext]);
   const feedbackShadow = useMemo(() => evaluateFeedbackShadow(journey.cycles, journey.uid || null, journey.status === "ready" && journey.recentFromServer), [journey.cycles, journey.uid, journey.status, journey.recentFromServer]);
   const traceSource = latest?.decisionTrace ? [...journey.cycles,...journey.olderCycles].find(c=>c.id===latest.decisionTrace?.sourceCycleId) : undefined;
@@ -76,7 +97,7 @@ export default function ClosedLoopPanel({ mode, plan }: Props) {
   useEffect(() => {
     if (scenarioId && !selectedScenario) { setScenarioId(""); setDecisionChoice(null); }
   }, [scenarioId, selectedScenario]);
-  const canWrite = !journey.busy && journey.recentFromServer && (journey.status === "ready" || journey.status === "empty");
+  const canWrite = !journey.busy && journey.recentFromServer && (journey.status === "ready" || journey.status === "empty") && !!journey.uid && auth.currentUser?.uid === journey.uid;
   const nextWeek = active ? Array.from({length: active.weeksLeft}, (_, i) => i + 1)
     .find(n => !active.checkIns.some(c => c.week === n)) : null;
   useEffect(() => {
@@ -84,9 +105,10 @@ export default function ClosedLoopPanel({ mode, plan }: Props) {
   }, [active?.id, active?.checkIns.length]);
 
   async function perform(action: () => Promise<void>, success: string) {
+    const owner=journey.uid;
     setNotice("");
-    try { await action(); setNotice(success); }
-    catch (error) { setNotice(error instanceof Error ? error.message : "Không thể lưu thay đổi."); }
+    try { await action(); if(auth.currentUser?.uid===owner)setNotice(success); }
+    catch (error) { if(auth.currentUser?.uid===owner)setNotice(error instanceof Error ? error.message : "Không thể lưu thay đổi."); }
   }
   const submitMeasurement = () => {
     if(!selectedMeasurementPoint) return;
@@ -96,22 +118,22 @@ export default function ClosedLoopPanel({ mode, plan }: Props) {
       "Đã ghi nhận khai báo nguồn điểm bất biến (tự báo cáo, chưa kiểm chứng)." );
   };
   const submitStart = () => {
-    if (!plan || !selectedScenario || !scenarioId) return;
+    if (!canWrite || !plan || !plan.draftReady || !selectedScenario || !scenarioId) return;
     const input = {scenarioId, scenarioTitle: selectedScenario.title, targetMajor: plan.targetMajor,
       weeksLeft: plan.weeksLeft, plannedWeeklyHours: selectedScenario.weeklyHours, subjects: plan.subjects};
     void perform(async () => {
       if (decisionChoice) {
-        if (decisionChoice.owner !== journey.uid || decisionChoice.advice !== JSON.stringify(adaptiveAdvice))
+        if (decisionChoice.owner !== journey.uid || decisionChoice.planKey !== planKey || decisionChoice.advice !== JSON.stringify(adaptiveAdvice))
           throw new Error("Gợi ý hoặc tài khoản đã thay đổi. Hãy xác nhận lại hoặc chọn lưu thủ công.");
         const draft=createJourneyCycle({...input,id:"draft_preview_only",startedAt:new Date().toISOString()});
         const decisionTrace=freezeAdaptiveDecision(adaptiveContext,draft,decisionChoice.disposition);
         await journey.start({...input,decisionTrace});
       } else await journey.start(input);
-      setDecisionChoice(null);
+      if(auth.currentUser?.uid===journey.uid)setDecisionChoice(null);
     }, "Đã tạo chu kỳ. Mở Pulse để ghi nhận hành động thực tế.");
   };
   const submitCheckIn = () => {
-    if (!active) return;
+    if (!canWrite || !active) return;
     const parsedWeek = safeNumber(week, 1, active.weeksLeft, true);
     const actual = safeNumber(hours, 0, 168);
     const done = safeNumber(completed, 0, 20, true);
@@ -122,6 +144,7 @@ export default function ClosedLoopPanel({ mode, plan }: Props) {
     void perform(async () => {
       await journey.checkIn(active.id, { week: parsedWeek, actualHours: actual,
         completedActions: done, plannedActions: total, note: checkNote });
+      if(auth.currentUser?.uid!==journey.uid)return;
       setHours(""); setCompleted(""); setCheckNote("");
       const next = Array.from({length: active.weeksLeft}, (_, i) => i + 1)
         .find(n => n !== parsedWeek && !active.checkIns.some(c => c.week === n));
@@ -129,7 +152,7 @@ export default function ClosedLoopPanel({ mode, plan }: Props) {
     }, "Đã lưu check-in dạng tự báo cáo.");
   };
   const submitReassessment = () => {
-    if (!active) return;
+    if (!canWrite || !active) return;
     const observations: Array<{key:string;score:number}> = [];
     for (const subject of active.subjects) {
       const raw = scores[subject.key] ?? "";
@@ -164,18 +187,27 @@ export default function ClosedLoopPanel({ mode, plan }: Props) {
       <h3>1. Chốt chiến lược trong Orion</h3>
       {active ? <p>Đang có chu kỳ <strong>{active.scenarioTitle}</strong>. Hãy ghi tiến độ và đo lại tại <a href="/pulse/checkin#cla-closed-loop">Pulse</a> trước khi tạo chu kỳ khác.</p>
         : !plan || !plan.subjects.length ? <p>Điền điểm hiện tại, mục tiêu và số tuần hợp lệ ở Orion để bắt đầu.</p>
-        : !plan.scenarios.length ? <p role="status">Không có chiến lược phù hợp giới hạn hiện tại. Điều chỉnh bộ lọc Orion trước khi tạo chu kỳ.</p>
-        : <><p>Chụp một bản giá trị đầu vào hiện tại làm mốc so sánh. Không tự đồng bộ lại khi sửa bản nháp Orion.</p>
+        : <>{!plan.scenarios.length && <p role="status">Không có chiến lược phù hợp giới hạn hiện tại. Điều chỉnh bộ lọc Orion trước khi tạo chu kỳ.</p>}<p>Chụp một bản giá trị đầu vào hiện tại làm mốc so sánh. Không tự đồng bộ lại khi sửa bản nháp Orion.</p>
           {latest?.status === "REVIEWED" && <div className="cla-journey__comparison" aria-label="Gợi ý thích ứng cho chu kỳ tiếp">
             <h4>Adaptive Decision · Gợi ý chu kỳ tiếp theo</h4>
             <p>Chính sách thử nghiệm theo check-in tự báo cáo; không tự tăng giờ, không dự báo tác động học tập. Học sinh tự chọn kế hoạch.</p>
+            {continuity.status === "READY_TO_COPY" ? <div>
+              <p>Điểm đo lại ở Pulse khác điểm hiện tại trong bản nháp Orion. Xem trước khi dùng cho chu kỳ mới:</p>
+              <ul>{continuity.rows.map(r=><li key={r.key}>{r.label}: {r.current} → {r.observed}/10 (mục tiêu {r.target})</li>)}</ul>
+              <p>Điểm tự báo cáo ngày {continuity.recordedAt?.slice(0,10)}. Chỉ thay điểm hiện tại trong bản nháp Orion; không sửa bảng điểm Seed hoặc lịch sử Pulse. Bản nháp sẽ được lưu theo cơ chế hiện có.</p>
+              <button type="button" disabled={!canWrite || !plan.draftReady || !plan.applyReviewedScores} onClick={()=>{
+                if(!canWrite || !plan.draftReady || !plan.applyReviewedScores || !window.confirm("Dùng các điểm đo lại đã xem ở trên cho bản nháp Orion? Chỉ thực hiện nếu đây là điểm phù hợp để lập kế hoạch tiếp theo."))return;
+                try { plan.applyReviewedScores(journey.uid,continuity); setDecisionChoice(null); setScenarioId(""); setNotice("Đã cập nhật bản nháp Orion từ điểm tự báo cáo. Hãy xem lại chiến lược trước khi tạo chu kỳ."); }
+                catch(error){setNotice(error instanceof Error?error.message:"Không thể cập nhật bản nháp.");}
+              }}>Dùng điểm đo lại cho bản nháp</button>
+            </div> : continuity.status === "ALIGNED" ? <p>Điểm hiện tại khớp lần đo lại trước (tự báo cáo). Không đồng nghĩa bài đo tương đương.</p> : <p role="status">Chưa nối được chu kỳ ({continuityReason[continuity.reason] ?? "Chưa đủ điều kiện"}). Có thể lập kế hoạch thủ công nếu mục tiêu, môn hoặc điểm đã thay đổi.</p>}
             {adaptiveAdvice.recommendedId ? <>
               <p>Đề xuất {adaptiveAdvice.recommendedHours} giờ/tuần · {adaptiveAdvice.decision === "REDUCE" ? "giảm tải" : "giữ thời lượng"}.</p>
               <button type="button" disabled={!canWrite || !replayAdaptiveAdvice(adaptiveContext, adaptiveAdvice)}
-                onClick={() => { if(adaptiveAdvice.recommendedId && replayAdaptiveAdvice(adaptiveContext, adaptiveAdvice)) { setScenarioId(adaptiveAdvice.recommendedId); setDecisionChoice({owner:journey.uid,advice:JSON.stringify(adaptiveAdvice),disposition:"ACCEPTED"}); } }}>
+                onClick={() => { if(adaptiveAdvice.recommendedId && replayAdaptiveAdvice(adaptiveContext, adaptiveAdvice)) { setScenarioId(adaptiveAdvice.recommendedId); setDecisionChoice({owner:journey.uid,advice:JSON.stringify(adaptiveAdvice),planKey,disposition:"ACCEPTED"}); } }}>
                 Chọn gợi ý vào bản nháp (chưa lưu)
               </button>
-              {selectedScenario && scenarioId!==adaptiveAdvice.recommendedId && <button type="button" disabled={!canWrite || !replayAdaptiveAdvice(adaptiveContext,adaptiveAdvice)} onClick={()=>setDecisionChoice({owner:journey.uid,advice:JSON.stringify(adaptiveAdvice),disposition:"DECLINED"})}>Xác nhận chọn phương án khác</button>}
+              {selectedScenario && scenarioId!==adaptiveAdvice.recommendedId && <button type="button" disabled={!canWrite || !replayAdaptiveAdvice(adaptiveContext,adaptiveAdvice)} onClick={()=>setDecisionChoice({owner:journey.uid,advice:JSON.stringify(adaptiveAdvice),planKey,disposition:"DECLINED"})}>Xác nhận chọn phương án khác</button>}
               {decisionChoice && <p role="status">Đã chọn {decisionChoice.disposition === "ACCEPTED" ? "chấp nhận" : "không chọn gợi ý"} vào bản nháp; chỉ lưu khi bắt đầu chu kỳ. <button type="button" onClick={()=>setDecisionChoice(null)}>Hủy ghi lựa chọn</button></p>}
             </> : <p role="status">Chưa thể đề xuất tự động ({adaptiveAdvice.reason}). Có thể xem lại thời lượng và chọn thủ công.</p>}
             <details className="cla-journey__evidence"><summary>Evidence Record · lý do và nguồn (chỉ đọc)</summary>
@@ -194,7 +226,7 @@ export default function ClosedLoopPanel({ mode, plan }: Props) {
               {plan.scenarios.map(s => <option key={s.id} value={s.id}>{s.title} · {s.weeklyHours} giờ/tuần</option>)}
             </select>
           </label>
-          <button type="button" disabled={!canWrite || !selectedScenario} onClick={submitStart}>
+          <button type="button" disabled={!canWrite || !plan.draftReady || !selectedScenario} onClick={submitStart}>
             {journey.busy ? "Đang tạo…" : "Bắt đầu chu kỳ hành động"}
           </button>
         </>}
@@ -353,6 +385,7 @@ export default function ClosedLoopPanel({ mode, plan }: Props) {
         </>}
       </>}
       <p className="cla-journey__hint">{active?.checkIns.length ?? 0} check-in đã lưu. Sau khi tổng kết, chu kỳ trở thành chỉ-đọc và có thể bắt đầu chu kỳ mới tại Orion.</p>
+      {latest?.status === "REVIEWED" && <p><a href="/lumen/evidence">Xem kết quả và bằng chứng ở Lumen</a> · <a href="/orion/scenarios#cla-closed-loop">Xem lại kế hoạch tại Orion</a></p>}
     </div>}
 
     {mode === "lumen" && shadow && <div className="cla-journey__card" id="cla-decision-evidence-studio">

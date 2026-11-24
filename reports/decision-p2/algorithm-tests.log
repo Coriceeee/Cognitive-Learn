@@ -1,0 +1,186 @@
+TAP version 13
+# (node:932) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: goal gap: balanced
+ok 1 - goal gap: balanced
+  ---
+  duration_ms: 1.310167
+  type: 'test'
+  ...
+# Subtest: goal gap: zero
+ok 2 - goal gap: zero
+  ---
+  duration_ms: 1.047108
+  type: 'test'
+  ...
+# Subtest: goal gap: cap
+ok 3 - goal gap: cap
+  ---
+  duration_ms: 0.131224
+  type: 'test'
+  ...
+# Subtest: goal gap: all max
+ok 4 - goal gap: all max
+  ---
+  duration_ms: 0.109802
+  type: 'test'
+  ...
+# Subtest: goal gap: already
+ok 5 - goal gap: already
+  ---
+  duration_ms: 0.144424
+  type: 'test'
+  ...
+# Subtest: goal gap: above max
+ok 6 - goal gap: above max
+  ---
+  duration_ms: 0.738692
+  type: 'test'
+  ...
+# Subtest: goal gap: missing
+ok 7 - goal gap: missing
+  ---
+  duration_ms: 0.072327
+  type: 'test'
+  ...
+# Subtest: goal gap: nan
+ok 8 - goal gap: nan
+  ---
+  duration_ms: 0.063634
+  type: 'test'
+  ...
+# Subtest: goal gap: duplicate
+ok 9 - goal gap: duplicate
+  ---
+  duration_ms: 0.201629
+  type: 'test'
+  ...
+# Subtest: goal gap: negative
+ok 10 - goal gap: negative
+  ---
+  duration_ms: 0.299153
+  type: 'test'
+  ...
+# Subtest: complete snapshot current
+ok 11 - complete snapshot current
+  ---
+  duration_ms: 0.452549
+  type: 'test'
+  ...
+# Subtest: profile changes invalidate Atlas
+ok 12 - profile changes invalidate Atlas
+  ---
+  duration_ms: 0.175269
+  type: 'test'
+  ...
+# Subtest: transcript changes invalidate Atlas
+ok 13 - transcript changes invalidate Atlas
+  ---
+  duration_ms: 0.06793
+  type: 'test'
+  ...
+# Subtest: goal changes invalidate Atlas
+ok 14 - goal changes invalidate Atlas
+  ---
+  duration_ms: 0.112807
+  type: 'test'
+  ...
+# Subtest: sources changes invalidate Atlas
+ok 15 - sources changes invalidate Atlas
+  ---
+  duration_ms: 0.051066
+  type: 'test'
+  ...
+# Subtest: projection changes invalidate Atlas
+ok 16 - projection changes invalidate Atlas
+  ---
+  duration_ms: 0.038717
+  type: 'test'
+  ...
+# Subtest: unchanged input preserves revision
+ok 17 - unchanged input preserves revision
+  ---
+  duration_ms: 0.071416
+  type: 'test'
+  ...
+# Subtest: ABA cannot revive old snapshot
+ok 18 - ABA cannot revive old snapshot
+  ---
+  duration_ms: 0.062883
+  type: 'test'
+  ...
+# Subtest: missing cannot capture
+ok 19 - missing cannot capture
+  ---
+  duration_ms: 0.057996
+  type: 'test'
+  ...
+# Subtest: unconfirmed revision unavailable
+ok 20 - unconfirmed revision unavailable
+  ---
+  duration_ms: 0.06123
+  type: 'test'
+  ...
+# Subtest: foreign owner invalid
+ok 21 - foreign owner invalid
+  ---
+  duration_ms: 0.05415
+  type: 'test'
+  ...
+# Subtest: switch then switch back invalidates revisions
+ok 22 - switch then switch back invalidates revisions
+  ---
+  duration_ms: 0.106097
+  type: 'test'
+  ...
+# Subtest: wrong schema rejected
+ok 23 - wrong schema rejected
+  ---
+  duration_ms: 0.168069
+  type: 'test'
+  ...
+# Subtest: missing revision rejected
+ok 24 - missing revision rejected
+  ---
+  duration_ms: 0.07383
+  type: 'test'
+  ...
+# Subtest: source/goal change does not invalidate Lumen or history
+ok 25 - source/goal change does not invalidate Lumen or history
+  ---
+  duration_ms: 0.161649
+  type: 'test'
+  ...
+# Subtest: profile change invalidates dependent modules but not Pulse history
+ok 26 - profile change invalidates dependent modules but not Pulse history
+  ---
+  duration_ms: 0.110093
+  type: 'test'
+  ...
+# Subtest: handoff pinned, checked, cleared
+ok 27 - handoff pinned, checked, cleared
+  ---
+  duration_ms: 0.11474
+  type: 'test'
+  ...
+# Subtest: temporary unconfirmed state must block then restore same revision
+ok 28 - temporary unconfirmed state must block then restore same revision
+  ---
+  duration_ms: 0.064386
+  type: 'test'
+  ...
+# Subtest: fractional target is never underallocated
+ok 29 - fractional target is never underallocated
+  ---
+  duration_ms: 0.091806
+  type: 'test'
+  ...
+1..29
+# tests 29
+# suites 0
+# pass 29
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 141.715449

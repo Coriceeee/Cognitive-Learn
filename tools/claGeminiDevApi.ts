@@ -58,7 +58,7 @@ export function claGeminiDevApi(): Plugin {
     configureServer(server) {
       server.middlewares.use(async (req, res, next) => {
         const pathname = (req.url || '').split('?', 1)[0];
-        if (pathname !== '/api/cla-gemini-status' && !(pathname in API_PATHS)) return next();
+        if (pathname !== '/api/cla-gemini-status' && !Object.prototype.hasOwnProperty.call(API_PATHS, pathname)) return next();
         if (!localApiAddressAllowed(req.socket.remoteAddress, req.headers.host, req.headers.origin)) {
           return json(res, 403, { ok:false, message:'API phát triển chỉ dành cho chính localhost, không cho truy cập từ mạng hoặc origin khác.' });
         }
@@ -110,6 +110,7 @@ export function claGeminiDevApi(): Plugin {
           response.send = (data:unknown) => {json(res,res.statusCode,data);return response;};
           await module.default(request, response);
         } catch {
+          console.warn(`[CLA local API] ${pathname}: HANDLER_FAILURE`);
           if (!res.headersSent) json(res, 502, {ok:false,message:'Máy chủ Gemini localhost gặp lỗi. Kiểm tra terminal Vite; không gửi API key hoặc token.'});
           else if (!res.writableEnded) res.end();
         }

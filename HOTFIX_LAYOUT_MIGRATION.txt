@@ -1,0 +1,11 @@
+src/audit_dataset.py -> duplicate of research/src/audit_dataset.py
+src/baseline_next_term.py -> duplicate of research/src/baseline_next_term.py
+benchmarks/cla_llm_120_cases_DRAFT.jsonl -> duplicate of research/benchmarks/cla_llm_120_cases_DRAFT.jsonl
+evidence/CLAIM_EVIDENCE_DAY1.md -> duplicate of research/evidence/CLAIM_EVIDENCE_DAY1.md
+evidence/firebase.emulator.cp21.json -> duplicate of firebase.emulator.cp21.json
+evidence/RESEARCH_SCOPE_DAY1.md -> duplicate of research/protocol/RESEARCH_SCOPE_DAY1.md
+evidence/RUN_RULES_CHECKPOINT21.ps1 -> research/archive/legacy-layout/evidence/RUN_RULES_CHECKPOINT21.ps1
+data/evidence/CLAIM_EVIDENCE_DAY1.md -> duplicate of research/evidence/CLAIM_EVIDENCE_DAY1.md
+data/evidence/firebase.emulator.cp21.json -> duplicate of firebase.emulator.cp21.json
+data/evidence/RESEARCH_SCOPE_DAY1.md -> duplicate of research/protocol/RESEARCH_SCOPE_DAY1.md
+data/evidence/RUN_RULES_CHECKPOINT21.ps1 -> duplicate of research/archive/legacy-layout/evidence/RUN_RULES_CHECKPOINT21.ps1

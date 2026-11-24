@@ -1,0 +1,118 @@
+TAP version 13
+# Subtest: CP79.01 authoritative palette matches all 6 user-approved original colors
+ok 1 - CP79.01 authoritative palette matches all 6 user-approved original colors
+  ---
+  duration_ms: 2.03378
+  type: 'test'
+  ...
+# Subtest: CP79.02 all module label names, routes and menu topology remain unchanged
+ok 2 - CP79.02 all module label names, routes and menu topology remain unchanged
+  ---
+  duration_ms: 0.565146
+  type: 'test'
+  ...
+# Subtest: CP79.03 selected navigation keeps sufficient readable contrast and unique theme
+ok 3 - CP79.03 selected navigation keeps sufficient readable contrast and unique theme
+  ---
+  duration_ms: 2.809223
+  type: 'test'
+  ...
+# Subtest: CP79.04 circuit nodes, focus panel and mobile links share the matching per-module palette
+ok 4 - CP79.04 circuit nodes, focus panel and mobile links share the matching per-module palette
+  ---
+  duration_ms: 0.863685
+  type: 'test'
+  ...
+# Subtest: CP79.05 page accents, charts and public cards remain scoped; no duplicate UX or new layout layer
+ok 5 - CP79.05 page accents, charts and public cards remain scoped; no duplicate UX or new layout layer
+  ---
+  duration_ms: 1.555721
+  type: 'test'
+  ...
+# Subtest: Vite serves the three existing Gemini APIs on localhost only
+ok 6 - Vite serves the three existing Gemini APIs on localhost only
+  ---
+  duration_ms: 1.911992
+  type: 'test'
+  ...
+# Subtest: all three Gemini clients stay same-origin in loopback dev instead of external placeholder URL
+ok 7 - all three Gemini clients stay same-origin in loopback dev instead of external placeholder URL
+  ---
+  duration_ms: 2.457033
+  type: 'test'
+  ...
+# Subtest: local Gemini configuration does not become public in frontend and is ignored by git
+ok 8 - local Gemini configuration does not become public in frontend and is ignored by git
+  ---
+  duration_ms: 0.776034
+  type: 'test'
+  ...
+# Subtest: CP93: default Firebase config is Hosting-only; privileged functions are isolated
+ok 9 - CP93: default Firebase config is Hosting-only; privileged functions are isolated
+  ---
+  duration_ms: 3.524641
+  type: 'test'
+  ...
+# Subtest: CP93: each real Gemini API route is rewritten before index.html
+ok 10 - CP93: each real Gemini API route is rewritten before index.html
+  ---
+  duration_ms: 0.443203
+  type: 'test'
+  ...
+# Subtest: CP93: strict route matching, no catch-all forwarded to Gemini
+ok 11 - CP93: strict route matching, no catch-all forwarded to Gemini
+  ---
+  duration_ms: 0.206066
+  type: 'test'
+  ...
+# Subtest: CP93: Gemini key is stored as server secret and never VITE_
+ok 12 - CP93: Gemini key is stored as server secret and never VITE_
+  ---
+  duration_ms: 0.249883
+  type: 'test'
+  ...
+# Subtest: CP93: frontend targets same-origin on the three verified Hosting domains
+ok 13 - CP93: frontend targets same-origin on the three verified Hosting domains
+  ---
+  duration_ms: 0.603256
+  type: 'test'
+  ...
+# Subtest: HF01: default deploy is Hosting-only (CS11 security boundary)
+ok 14 - HF01: default deploy is Hosting-only (CS11 security boundary)
+  ---
+  duration_ms: 1.441103
+  type: 'test'
+  ...
+# Subtest: HF01: only Gemini Functions can be deployed using explicit config
+ok 15 - HF01: only Gemini Functions can be deployed using explicit config
+  ---
+  duration_ms: 0.178063
+  type: 'test'
+  ...
+# Subtest: HF01: both deployment scripts explicitly select Gemini config for Functions
+ok 16 - HF01: both deployment scripts explicitly select Gemini config for Functions
+  ---
+  duration_ms: 1.594147
+  type: 'test'
+  ...
+# Subtest: HF01: exact Gemini rewrites are ahead of SPA fallback
+ok 17 - HF01: exact Gemini rewrites are ahead of SPA fallback
+  ---
+  duration_ms: 0.236084
+  type: 'test'
+  ...
+# Subtest: HF02: deploy batch is Windows CMD-safe and gates two deployments
+ok 18 - HF02: deploy batch is Windows CMD-safe and gates two deployments
+  ---
+  duration_ms: 0.482666
+  type: 'test'
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 158.344357

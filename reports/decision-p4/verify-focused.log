@@ -1,0 +1,889 @@
+
+> cognitive-learn-ai@0.1.0 verify:focused
+> node tools/verify-focused-release.cjs && npm run test:focused && npm run test:decision-handoff && npm run test:decision-p2 && npm run test:decision-p3 && npm run test:decision-p4
+
+FOCUSED SOURCE PASS: 63 pinned source files; not a production validation.
+
+> cognitive-learn-ai@0.1.0 test:focused
+> node --test tests/focused-admission.test.cjs
+
+TAP version 13
+# Subtest: mean baseline, no extrapolation, decimal comma and valid zero
+ok 1 - mean baseline, no extrapolation, decimal comma and valid zero
+  ---
+  duration_ms: 1.031445
+  type: 'test'
+  ...
+# Subtest: missing, nonfinite and out-of-range observations abstain
+ok 2 - missing, nonfinite and out-of-range observations abstain
+  ---
+  duration_ms: 0.286153
+  type: 'test'
+  ...
+# Subtest: projection is isolated from official admission classification
+ok 3 - projection is isolated from official admission classification
+  ---
+  duration_ms: 0.956033
+  type: 'test'
+  ...
+# Subtest: student path emphasizes assessment, projection, combination, school, strategy and advisor
+ok 4 - student path emphasizes assessment, projection, combination, school, strategy and advisor
+  ---
+  duration_ms: 0.756067
+  type: 'test'
+  ...
+# Subtest: snapshot is calculated from observations, partial subjects are absent, zero is preserved
+ok 5 - snapshot is calculated from observations, partial subjects are absent, zero is preserved
+  ---
+  duration_ms: 0.808876
+  type: 'test'
+  ...
+# Subtest: malformed, absent and out-of-range observations cannot stage an invalid projection
+ok 6 - malformed, absent and out-of-range observations cannot stage an invalid projection
+  ---
+  duration_ms: 0.295026
+  type: 'test'
+  ...
+# Subtest: handoff is isolated by UID, expiry and backward clock
+ok 7 - handoff is isolated by UID, expiry and backward clock
+  ---
+  duration_ms: 0.2028
+  type: 'test'
+  ...
+# Subtest: handoff snapshot is immutable to consumers and can be consumed only once
+ok 8 - handoff snapshot is immutable to consumers and can be consumed only once
+  ---
+  duration_ms: 0.247466
+  type: 'test'
+  ...
+# Subtest: new snapshot replaces old; explicit clear prevents stale navigation
+ok 9 - new snapshot replaces old; explicit clear prevents stale navigation
+  ---
+  duration_ms: 2.742886
+  type: 'test'
+  ...
+# Subtest: Lumen sends real inputs, Atlas explicitly applies isolated scenario and session changes clear handoffs
+ok 10 - Lumen sends real inputs, Atlas explicitly applies isolated scenario and session changes clear handoffs
+  ---
+  duration_ms: 0.862826
+  type: 'test'
+  ...
+# Subtest: Orion changes goal and clears stale target marks only after explicit confirmation
+ok 11 - Orion changes goal and clears stale target marks only after explicit confirmation
+  ---
+  duration_ms: 0.335766
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 329.959061
+
+> cognitive-learn-ai@0.1.0 test:decision-handoff
+> node --experimental-strip-types --test tests/admission-goal-handoff.test.mjs tests/cp70-student-journey-integration.test.mjs tests/admissions-and-chat.test.mjs
+
+TAP version 13
+# (node:2509) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: explicit handoff preserves preference, no invented scores
+ok 1 - explicit handoff preserves preference, no invented scores
+  ---
+  duration_ms: 2.281092
+  type: 'test'
+  ...
+# Subtest: other account cannot read and clears handoff
+ok 2 - other account cannot read and clears handoff
+  ---
+  duration_ms: 0.235759
+  type: 'test'
+  ...
+# Subtest: expiry, invalid owner and missing goal are rejected
+ok 3 - expiry, invalid owner and missing goal are rejected
+  ---
+  duration_ms: 0.271211
+  type: 'test'
+  ...
+# Subtest: formatted goal fits existing journey constraints
+ok 4 - formatted goal fits existing journey constraints
+  ---
+  duration_ms: 0.333232
+  type: 'test'
+  ...
+# Subtest: backward clock invalidates the pending goal
+ok 5 - backward clock invalidates the pending goal
+  ---
+  duration_ms: 0.244792
+  type: 'test'
+  ...
+# (node:2510) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP25-01: Curated universities have sourced years without inventing unverified archives
+ok 6 - CP25-01: Curated universities have sourced years without inventing unverified archives
+  ---
+  duration_ms: 2.183048
+  type: 'test'
+  ...
+# Subtest: CP25-02: Year-specific PTIT pathways do not leak year-specific methods
+ok 7 - CP25-02: Year-specific PTIT pathways do not leak year-specific methods
+  ---
+  duration_ms: 0.197472
+  type: 'test'
+  ...
+# Subtest: CP25-03: Exact campus and method provenance on historical cutoffs
+ok 8 - CP25-03: Exact campus and method provenance on historical cutoffs
+  ---
+  duration_ms: 0.498817
+  type: 'test'
+  ...
+# Subtest: CP25-04: Score conversion accepts actual zero but not missing or invalid inputs
+ok 9 - CP25-04: Score conversion accepts actual zero but not missing or invalid inputs
+  ---
+  duration_ms: 0.27702
+  type: 'test'
+  ...
+# Subtest: CP25-05: Historical gap is arithmetic, never chance-of-admission
+ok 10 - CP25-05: Historical gap is arithmetic, never chance-of-admission
+  ---
+  duration_ms: 4.274901
+  type: 'test'
+  ...
+# Subtest: CP25-06: Discovery matches year/method without inventing unsupported methods
+ok 11 - CP25-06: Discovery matches year/method without inventing unsupported methods
+  ---
+  duration_ms: 1.242688
+  type: 'test'
+  ...
+# Subtest: CP25-07: International requirements have direct official endpoints and certifications
+ok 12 - CP25-07: International requirements have direct official endpoints and certifications
+  ---
+  duration_ms: 0.260415
+  type: 'test'
+  ...
+# Subtest: CP25-08: Chat only keeps last eight bounded turns
+ok 13 - CP25-08: Chat only keeps last eight bounded turns
+  ---
+  duration_ms: 0.514391
+  type: 'test'
+  ...
+# Subtest: CP25-09: Chat rejects invalid content and unauthorized roles in history
+ok 14 - CP25-09: Chat rejects invalid content and unauthorized roles in history
+  ---
+  duration_ms: 0.714266
+  type: 'test'
+  ...
+# Subtest: CP25-10: UI routes and protected chat endpoint exist
+ok 15 - CP25-10: UI routes and protected chat endpoint exist
+  ---
+  duration_ms: 1.019277
+  type: 'test'
+  ...
+# Subtest: CP25-11: Study-abroad refresh uses Vercel SPA rewrite, preserving /api routes
+ok 16 - CP25-11: Study-abroad refresh uses Vercel SPA rewrite, preserving /api routes
+  ---
+  duration_ms: 0.408704
+  type: 'test'
+  ...
+# Subtest: CP25-12: Chat supports same-origin secure deployment and optional CORS origin list
+ok 17 - CP25-12: Chat supports same-origin secure deployment and optional CORS origin list
+  ---
+  duration_ms: 0.446009
+  type: 'test'
+  ...
+# Subtest: ROUND-01: Floating assistant answers domestic questions and routes other specialist questions
+ok 18 - ROUND-01: Floating assistant answers domestic questions and routes other specialist questions
+  ---
+  duration_ms: 7.109772
+  type: 'test'
+  ...
+# Subtest: ROUND-02: Only internal known destinations may appear in chat responses
+ok 19 - ROUND-02: Only internal known destinations may appear in chat responses
+  ---
+  duration_ms: 0.14179
+  type: 'test'
+  ...
+# Subtest: ROUND-03: Backend and frontend share source-backed direct admission answer gate
+ok 20 - ROUND-03: Backend and frontend share source-backed direct admission answer gate
+  ---
+  duration_ms: 0.320414
+  type: 'test'
+  ...
+# Subtest: ROUND-04: Do not show uncalibrated achievement probability on the dashboard
+ok 21 - ROUND-04: Do not show uncalibrated achievement probability on the dashboard
+  ---
+  duration_ms: 0.226845
+  type: 'test'
+  ...
+# Subtest: ROUND-05: United States and domestic international pathways have official links and clear limitations
+ok 22 - ROUND-05: United States and domestic international pathways have official links and clear limitations
+  ---
+  duration_ms: 0.191443
+  type: 'test'
+  ...
+# Subtest: ROUND-06: TDTU three-year schemes distinguish score scales
+ok 23 - ROUND-06: TDTU three-year schemes distinguish score scales
+  ---
+  duration_ms: 0.658834
+  type: 'test'
+  ...
+# Subtest: ROUND-07: Career-fit UI states experimental scores are not admission probabilities
+ok 24 - ROUND-07: Career-fit UI states experimental scores are not admission probabilities
+  ---
+  duration_ms: 0.307404
+  type: 'test'
+  ...
+# Subtest: ROUND-07: Career-fit UI states experimental scores are not admission probabilities
+ok 25 - ROUND-07: Career-fit UI states experimental scores are not admission probabilities
+  ---
+  duration_ms: 0.308406
+  type: 'test'
+  ...
+# Subtest: GLOBAL-01: every ISO 3166-1 alpha-2 country/territory is selectable without fabricated claims
+ok 26 - GLOBAL-01: every ISO 3166-1 alpha-2 country/territory is selectable without fabricated claims
+  ---
+  duration_ms: 9.676282
+  type: 'test'
+  ...
+# Subtest: GLOBAL-02: all-country UI abstains when programme-level evidence is unavailable
+ok 27 - GLOBAL-02: all-country UI abstains when programme-level evidence is unavailable
+  ---
+  duration_ms: 0.415895
+  type: 'test'
+  ...
+# Subtest: GLOBAL-03: Atlas owns domestic and international admissions; Haven owns scholarships and finance
+ok 28 - GLOBAL-03: Atlas owns domestic and international admissions; Haven owns scholarships and finance
+  ---
+  duration_ms: 1.02776
+  type: 'test'
+  ...
+# Subtest: MODULE-01: 7 main modules remain while study abroad is an Atlas submodule
+ok 29 - MODULE-01: 7 main modules remain while study abroad is an Atlas submodule
+  ---
+  duration_ms: 2.291498
+  type: 'test'
+  ...
+# Subtest: UX-V7-01: Assistant receives only allowlisted page context and page-specific prompts
+ok 30 - UX-V7-01: Assistant receives only allowlisted page context and page-specific prompts
+  ---
+  duration_ms: 0.438278
+  type: 'test'
+  ...
+# Subtest: CHAT-DIRECT: source-backed methods and definitions are answered in chat without Gemini
+ok 31 - CHAT-DIRECT: source-backed methods and definitions are answered in chat without Gemini
+  ---
+  duration_ms: 1.636469
+  type: 'test'
+  ...
+# Subtest: CHAT-DIRECT: specific facts abstain when missing, ambiguous or stale
+ok 32 - CHAT-DIRECT: specific facts abstain when missing, ambiguous or stale
+  ---
+  duration_ms: 1.641868
+  type: 'test'
+  ...
+# (node:2511) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CP70.01 cached snapshots cannot publish cycles, even if all records are otherwise valid
+ok 33 - CP70.01 cached snapshots cannot publish cycles, even if all records are otherwise valid
+  ---
+  duration_ms: 2.153644
+  type: 'test'
+  ...
+# Subtest: CP70.02 pending Firestore local writes cannot publish cycles as server-confirmed
+ok 34 - CP70.02 pending Firestore local writes cannot publish cycles as server-confirmed
+  ---
+  duration_ms: 0.217471
+  type: 'test'
+  ...
+# Subtest: CP70.03 confirmed empty server snapshot is distinguishable from empty cache
+ok 35 - CP70.03 confirmed empty server snapshot is distinguishable from empty cache
+  ---
+  duration_ms: 0.347915
+  type: 'test'
+  ...
+# Subtest: CP70.04 owner mismatch fails closed and drops the full batch
+ok 36 - CP70.04 owner mismatch fails closed and drops the full batch
+  ---
+  duration_ms: 0.955513
+  type: 'test'
+  ...
+# Subtest: CP70.05 document ID and payload ID must agree
+ok 37 - CP70.05 document ID and payload ID must agree
+  ---
+  duration_ms: 0.145495
+  type: 'test'
+  ...
+# Subtest: CP70.06 tampered cycle fields and missing owner do not become a student journey
+ok 38 - CP70.06 tampered cycle fields and missing owner do not become a student journey
+  ---
+  duration_ms: 0.278141
+  type: 'test'
+  ...
+# Subtest: CP70.07 server-confirmed valid document is available without changing observed grades
+ok 39 - CP70.07 server-confirmed valid document is available without changing observed grades
+  ---
+  duration_ms: 0.126437
+  type: 'test'
+  ...
+# Subtest: CP70.08 initial loading does not falsely prompt sign-in or invent progress
+ok 40 - CP70.08 initial loading does not falsely prompt sign-in or invent progress
+  ---
+  duration_ms: 0.35217
+  type: 'test'
+  ...
+# Subtest: CP70.09 waiting from cache and error never present previous student data
+ok 41 - CP70.09 waiting from cache and error never present previous student data
+  ---
+  duration_ms: 0.499939
+  type: 'test'
+  ...
+# Subtest: CP70.10 verified but wrong UID is blocked in navigation handoff as defense-in-depth
+ok 42 - CP70.10 verified but wrong UID is blocked in navigation handoff as defense-in-depth
+  ---
+  duration_ms: 0.438929
+  type: 'test'
+  ...
+# Subtest: CP70.11 no profile takes student to Seed after a server-confirmed read
+ok 43 - CP70.11 no profile takes student to Seed after a server-confirmed read
+  ---
+  duration_ms: 0.197102
+  type: 'test'
+  ...
+# Subtest: CP70.12 empty verified journey starts at Lumen without a fake achievement score
+ok 44 - CP70.12 empty verified journey starts at Lumen without a fake achievement score
+  ---
+  duration_ms: 0.108691
+  type: 'test'
+  ...
+# Subtest: CP70.13 active plan links to Pulse with zero observed check-ins
+ok 45 - CP70.13 active plan links to Pulse with zero observed check-ins
+  ---
+  duration_ms: 0.346632
+  type: 'test'
+  ...
+# Subtest: CP70.14 check-in links to reassessment, without treating self-report as academic progress
+ok 46 - CP70.14 check-in links to reassessment, without treating self-report as academic progress
+  ---
+  duration_ms: 0.208949
+  type: 'test'
+  ...
+# Subtest: CP70.15 reviewed plan links to Lumen evidence, without making a probability claim
+ok 47 - CP70.15 reviewed plan links to Lumen evidence, without making a probability claim
+  ---
+  duration_ms: 0.587419
+  type: 'test'
+  ...
+# Subtest: CP70.16 hook listens for metadata changes and clears stale cycles before server verification
+ok 48 - CP70.16 hook listens for metadata changes and clears stale cycles before server verification
+  ---
+  duration_ms: 0.583212
+  type: 'test'
+  ...
+# Subtest: CP70.17 Orion and Pulse write controls require server-confirmed cycles
+ok 49 - CP70.17 Orion and Pulse write controls require server-confirmed cycles
+  ---
+  duration_ms: 0.527289
+  type: 'test'
+  ...
+# Subtest: CP70.18 student journey has one action, while the LearningCircuit exclusively owns six-module navigation
+ok 50 - CP70.18 student journey has one action, while the LearningCircuit exclusively owns six-module navigation
+  ---
+  duration_ms: 1.376675
+  type: 'test'
+  ...
+# Subtest: CP70.19 a new student can start a Seed profile even if journey read is offline
+ok 51 - CP70.19 a new student can start a Seed profile even if journey read is offline
+  ---
+  duration_ms: 0.1286
+  type: 'test'
+  ...
+1..51
+# tests 51
+# suites 0
+# pass 51
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 287.516117
+
+> cognitive-learn-ai@0.1.0 test:decision-p2
+> node --experimental-strip-types --test tests/decision-p2.test.mjs
+
+TAP version 13
+# (node:2560) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: goal gap: balanced
+ok 1 - goal gap: balanced
+  ---
+  duration_ms: 1.401843
+  type: 'test'
+  ...
+# Subtest: goal gap: zero
+ok 2 - goal gap: zero
+  ---
+  duration_ms: 0.246765
+  type: 'test'
+  ...
+# Subtest: goal gap: cap
+ok 3 - goal gap: cap
+  ---
+  duration_ms: 0.769688
+  type: 'test'
+  ...
+# Subtest: goal gap: all max
+ok 4 - goal gap: all max
+  ---
+  duration_ms: 0.123572
+  type: 'test'
+  ...
+# Subtest: goal gap: already
+ok 5 - goal gap: already
+  ---
+  duration_ms: 0.150443
+  type: 'test'
+  ...
+# Subtest: goal gap: above max
+ok 6 - goal gap: above max
+  ---
+  duration_ms: 0.620638
+  type: 'test'
+  ...
+# Subtest: goal gap: missing
+ok 7 - goal gap: missing
+  ---
+  duration_ms: 0.069273
+  type: 'test'
+  ...
+# Subtest: goal gap: nan
+ok 8 - goal gap: nan
+  ---
+  duration_ms: 0.058657
+  type: 'test'
+  ...
+# Subtest: goal gap: duplicate
+ok 9 - goal gap: duplicate
+  ---
+  duration_ms: 0.204442
+  type: 'test'
+  ...
+# Subtest: goal gap: negative
+ok 10 - goal gap: negative
+  ---
+  duration_ms: 0.284681
+  type: 'test'
+  ...
+# Subtest: complete snapshot current
+ok 11 - complete snapshot current
+  ---
+  duration_ms: 0.33776
+  type: 'test'
+  ...
+# Subtest: profile changes invalidate Atlas
+ok 12 - profile changes invalidate Atlas
+  ---
+  duration_ms: 0.111024
+  type: 'test'
+  ...
+# Subtest: transcript changes invalidate Atlas
+ok 13 - transcript changes invalidate Atlas
+  ---
+  duration_ms: 0.055462
+  type: 'test'
+  ...
+# Subtest: goal changes invalidate Atlas
+ok 14 - goal changes invalidate Atlas
+  ---
+  duration_ms: 0.127799
+  type: 'test'
+  ...
+# Subtest: sources changes invalidate Atlas
+ok 15 - sources changes invalidate Atlas
+  ---
+  duration_ms: 0.07437
+  type: 'test'
+  ...
+# Subtest: projection changes invalidate Atlas
+ok 16 - projection changes invalidate Atlas
+  ---
+  duration_ms: 0.077925
+  type: 'test'
+  ...
+# Subtest: unchanged input preserves revision
+ok 17 - unchanged input preserves revision
+  ---
+  duration_ms: 0.081471
+  type: 'test'
+  ...
+# Subtest: ABA cannot revive old snapshot
+ok 18 - ABA cannot revive old snapshot
+  ---
+  duration_ms: 0.065888
+  type: 'test'
+  ...
+# Subtest: missing cannot capture
+ok 19 - missing cannot capture
+  ---
+  duration_ms: 0.058667
+  type: 'test'
+  ...
+# Subtest: unconfirmed revision unavailable
+ok 20 - unconfirmed revision unavailable
+  ---
+  duration_ms: 0.061331
+  type: 'test'
+  ...
+# Subtest: foreign owner invalid
+ok 21 - foreign owner invalid
+  ---
+  duration_ms: 0.055953
+  type: 'test'
+  ...
+# Subtest: switch then switch back invalidates revisions
+ok 22 - switch then switch back invalidates revisions
+  ---
+  duration_ms: 0.093338
+  type: 'test'
+  ...
+# Subtest: wrong schema rejected
+ok 23 - wrong schema rejected
+  ---
+  duration_ms: 0.061952
+  type: 'test'
+  ...
+# Subtest: missing revision rejected
+ok 24 - missing revision rejected
+  ---
+  duration_ms: 0.065076
+  type: 'test'
+  ...
+# Subtest: source/goal change does not invalidate Lumen or history
+ok 25 - source/goal change does not invalidate Lumen or history
+  ---
+  duration_ms: 0.155079
+  type: 'test'
+  ...
+# Subtest: profile change invalidates dependent modules but not Pulse history
+ok 26 - profile change invalidates dependent modules but not Pulse history
+  ---
+  duration_ms: 0.250009
+  type: 'test'
+  ...
+# Subtest: handoff pinned, checked, cleared
+ok 27 - handoff pinned, checked, cleared
+  ---
+  duration_ms: 0.139957
+  type: 'test'
+  ...
+# Subtest: temporary unconfirmed state must block then restore same revision
+ok 28 - temporary unconfirmed state must block then restore same revision
+  ---
+  duration_ms: 0.069102
+  type: 'test'
+  ...
+# Subtest: fractional target is never underallocated
+ok 29 - fractional target is never underallocated
+  ---
+  duration_ms: 0.092156
+  type: 'test'
+  ...
+1..29
+# tests 29
+# suites 0
+# pass 29
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 120.602863
+
+> cognitive-learn-ai@0.1.0 test:decision-p3
+> node --test tests/decision-p3.test.cjs
+
+TAP version 13
+# Subtest: personal projection intent with and without Vietnamese diacritics
+ok 1 - personal projection intent with and without Vietnamese diacritics
+  ---
+  duration_ms: 1.56962
+  type: 'test'
+  ...
+# Subtest: explicit goal and gap intent
+ok 2 - explicit goal and gap intent
+  ---
+  duration_ms: 0.370468
+  type: 'test'
+  ...
+# Subtest: personal fit and chance require abstention
+ok 3 - personal fit and chance require abstention
+  ---
+  duration_ms: 0.877397
+  type: 'test'
+  ...
+# Subtest: general sourced questions retain existing path
+ok 4 - general sourced questions retain existing path
+  ---
+  duration_ms: 0.536463
+  type: 'test'
+  ...
+# Subtest: projection uses exact stored values, valid zero and limitation
+ok 5 - projection uses exact stored values, valid zero and limitation
+  ---
+  duration_ms: 0.921603
+  type: 'test'
+  ...
+# Subtest: goal is preference not eligibility
+ok 6 - goal is preference not eligibility
+  ---
+  duration_ms: 0.356808
+  type: 'test'
+  ...
+# Subtest: gap recomputes deterministic optimizer and states no forecast
+ok 7 - gap recomputes deterministic optimizer and states no forecast
+  ---
+  duration_ms: 0.515862
+  type: 'test'
+  ...
+# Subtest: already met gap remains zero
+ok 8 - already met gap remains zero
+  ---
+  duration_ms: 0.246555
+  type: 'test'
+  ...
+# Subtest: invalid gap does not invent numeric answer
+ok 9 - invalid gap does not invent numeric answer
+  ---
+  duration_ms: 0.255668
+  type: 'test'
+  ...
+# Subtest: requires all dependencies observed
+ok 10 - requires all dependencies observed
+  ---
+  duration_ms: 0.27673
+  type: 'test'
+  ...
+# Subtest: account isolation and missing UID
+ok 11 - account isolation and missing UID
+  ---
+  duration_ms: 0.129842
+  type: 'test'
+  ...
+# Subtest: exact route scope blocks unrelated views
+ok 12 - exact route scope blocks unrelated views
+  ---
+  duration_ms: 0.123943
+  type: 'test'
+  ...
+# Subtest: TTL and backward clock
+ok 13 - TTL and backward clock
+  ---
+  duration_ms: 0.225373
+  type: 'test'
+  ...
+# Subtest: profile change invalidates all three contexts
+ok 14 - profile change invalidates all three contexts
+  ---
+  duration_ms: 0.195669
+  type: 'test'
+  ...
+# Subtest: source change invalidates goal only
+ok 15 - source change invalidates goal only
+  ---
+  duration_ms: 0.244111
+  type: 'test'
+  ...
+# Subtest: projection revision invalidates old scenario
+ok 16 - projection revision invalidates old scenario
+  ---
+  duration_ms: 0.173827
+  type: 'test'
+  ...
+# Subtest: temporary unavailable blocks context
+ok 17 - temporary unavailable blocks context
+  ---
+  duration_ms: 0.113918
+  type: 'test'
+  ...
+# Subtest: ABA revision cannot resurrect a stale record
+ok 18 - ABA revision cannot resurrect a stale record
+  ---
+  duration_ms: 0.106227
+  type: 'test'
+  ...
+# Subtest: register, read and cleanup isolate mutation and newer record
+ok 19 - register, read and cleanup isolate mutation and newer record
+  ---
+  duration_ms: 0.150272
+  type: 'test'
+  ...
+# Subtest: session clear removes all published entries
+ok 20 - session clear removes all published entries
+  ---
+  duration_ms: 0.122511
+  type: 'test'
+  ...
+# Subtest: private local turn never included in remote history; old remote segment also excluded
+ok 21 - private local turn never included in remote history; old remote segment also excluded
+  ---
+  duration_ms: 0.626166
+  type: 'test'
+  ...
+# Subtest: chat local policy before public lookup; guard in-flight request and remote history
+ok 22 - chat local policy before public lookup; guard in-flight request and remote history
+  ---
+  duration_ms: 0.279974
+  type: 'test'
+  ...
+# Subtest: actual page integrations check readiness, edit and account changes
+ok 23 - actual page integrations check readiness, edit and account changes
+  ---
+  duration_ms: 0.429344
+  type: 'test'
+  ...
+1..23
+# tests 23
+# suites 0
+# pass 23
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 457.378267
+
+> cognitive-learn-ai@0.1.0 test:decision-p4
+> node --experimental-strip-types --test tests/decision-p4.test.mjs
+
+TAP version 13
+# (node:2614) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: preview uses reviewed actual values, zero valid, no mutation
+ok 1 - preview uses reviewed actual values, zero valid, no mutation
+  ---
+  duration_ms: 4.809501
+  type: 'test'
+  ...
+# Subtest: aligned baseline permits continuity without rewriting
+ok 2 - aligned baseline permits continuity without rewriting
+  ---
+  duration_ms: 1.632043
+  type: 'test'
+  ...
+# Subtest: decreasing measured scores are copied as-is, never padded
+ok 3 - decreasing measured scores are copied as-is, never padded
+  ---
+  duration_ms: 0.946389
+  type: 'test'
+  ...
+# Subtest: requires server-confirmed snapshot
+ok 4 - requires server-confirmed snapshot
+  ---
+  duration_ms: 0.26367
+  type: 'test'
+  ...
+# Subtest: requires correct UID
+ok 5 - requires correct UID
+  ---
+  duration_ms: 0.295507
+  type: 'test'
+  ...
+# Subtest: no history
+ok 6 - no history
+  ---
+  duration_ms: 0.337449
+  type: 'test'
+  ...
+# Subtest: active cycle blocks even with previous reviewed cycle
+ok 7 - active cycle blocks even with previous reviewed cycle
+  ---
+  duration_ms: 6.646988
+  type: 'test'
+  ...
+# Subtest: partial reassessment never fills missing score with zero
+ok 8 - partial reassessment never fills missing score with zero
+  ---
+  duration_ms: 0.529283
+  type: 'test'
+  ...
+# Subtest: legacy review lacks lineage
+ok 9 - legacy review lacks lineage
+  ---
+  duration_ms: 4.137918
+  type: 'test'
+  ...
+# Subtest: tampered evidence blocked
+ok 10 - tampered evidence blocked
+  ---
+  duration_ms: 0.490566
+  type: 'test'
+  ...
+# Subtest: changed goal prevents old adaptation
+ok 11 - changed goal prevents old adaptation
+  ---
+  duration_ms: 0.53378
+  type: 'test'
+  ...
+# Subtest: changed subjects prevent old adaptation
+ok 12 - changed subjects prevent old adaptation
+  ---
+  duration_ms: 0.498697
+  type: 'test'
+  ...
+# Subtest: changed target prevents old adaptation
+ok 13 - changed target prevents old adaptation
+  ---
+  duration_ms: 0.445028
+  type: 'test'
+  ...
+# Subtest: duplicate or malformed plan is rejected
+ok 14 - duplicate or malformed plan is rejected
+  ---
+  duration_ms: 1.451606
+  type: 'test'
+  ...
+# Subtest: matching is by subject key, not array order
+ok 15 - matching is by subject key, not array order
+  ---
+  duration_ms: 0.904046
+  type: 'test'
+  ...
+# Subtest: new plan selection fingerprint changes with goal, weeks, baseline and options
+ok 16 - new plan selection fingerprint changes with goal, weeks, baseline and options
+  ---
+  duration_ms: 2.992935
+  type: 'test'
+  ...
+# Subtest: most recent reviewed source is used even when history is reordered
+ok 17 - most recent reviewed source is used even when history is reordered
+  ---
+  duration_ms: 5.551628
+  type: 'test'
+  ...
+# Subtest: complete synthetic path: review -> aligned baseline -> reduced option -> frozen next cycle
+ok 18 - complete synthetic path: review -> aligned baseline -> reduced option -> frozen next cycle
+  ---
+  duration_ms: 3.414088
+  type: 'test'
+  ...
+# Subtest: UI integration explicitly confirms review and guards selection
+ok 19 - UI integration explicitly confirms review and guards selection
+  ---
+  duration_ms: 0.594629
+  type: 'test'
+  ...
+# Subtest: Orion only writes explicit draft score change; transaction rechecks source
+ok 20 - Orion only writes explicit draft score change; transaction rechecks source
+  ---
+  duration_ms: 0.716229
+  type: 'test'
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 20
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 182.284055

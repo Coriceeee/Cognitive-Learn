@@ -1,3 +1,4 @@
+import { guardedJson, GeminiTransportError, visibleGeminiText } from "./geminiTransport.ts";
 import type { VercelRequest, VercelResponse } from "./vercelTypes";
 
 type ObjectRecord = Record<string, unknown>;
@@ -216,35 +217,7 @@ function normalizeInput(data: ObjectRecord) {
 
 async function fetchJson(url: string, options: RequestInit, timeoutMs: number): Promise<{ ok: boolean; status: number; data: unknown }> {
 
-  const controller = new AbortController();
-
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-
-  try {
-
-    const response = await fetch(url, { ...options, signal: controller.signal });
-
-    const raw = await response.text();
-
-    if (Buffer.byteLength(raw, "utf8") > MAX_GEMINI_REPLY_BYTES) {
-
-      throw new ApiError(502, "Phản hồi từ dịch vụ quá lớn.");
-
-    }
-
-    let data: unknown;
-
-    try { data = JSON.parse(raw) as unknown; }
-
-    catch { data = null; }
-
-    return { ok: response.ok, status: response.status, data };
-
-  } finally {
-
-    clearTimeout(timer);
-
-  }
+  return guardedJson(url, options, timeoutMs);
 
 }
 
@@ -464,7 +437,7 @@ async function callGemini(apiKey: string, model: string, context: ReturnType<typ
 
           responseSchema: JSON_SCHEMA,
 
-          maxOutputTokens: 4096,
+          maxOutputTokens: 8192,
 
         },
 
@@ -472,7 +445,7 @@ async function callGemini(apiKey: string, model: string, context: ReturnType<typ
 
     },
 
-    25_000
+    45_000
 
   );
 
@@ -494,15 +467,12 @@ async function callGemini(apiKey: string, model: string, context: ReturnType<typ
 
   const finishReason = candidate?.finishReason;
 
-  if (finishReason && finishReason !== "STOP") throw new ApiError(502, "Gemini không hoàn thành phần giải thích.");
+  if (finishReason && finishReason !== "STOP") throw new ApiError(502, `Gemini không hoàn thành phần giải thích (${finishReason === "MAX_TOKENS" ? "MAX_TOKENS" : "BLOCKED_OR_INCOMPLETE"}).`);
 
   const parts = asRecord(candidate?.content)?.parts;
 
-  const raw = Array.isArray(parts)
-
-    ? parts.map(part => text(asRecord(part)?.text, MAX_GEMINI_REPLY_BYTES) ?? "").join("\n").trim()
-
-    : "";
+  const raw = visibleGeminiText(parts);
+  if (Buffer.byteLength(raw, "utf8") > MAX_GEMINI_REPLY_BYTES) throw new ApiError(502, "Nội dung giải thích vượt giới hạn.");
 
   if (!raw) throw new ApiError(502, "Gemini không tạo được lời giải thích hợp lệ.");
 
@@ -629,6 +599,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     }
 
+    if (error instanceof GeminiTransportError) return res.status(error.code === "TIMEOUT" ? 504 : 502).json({ok:false,message:`Không hoàn tất kết nối ${error.stage} (${error.code}).`,diagnosticCode:`${error.stage}_${error.code}`});
     const timedOut = error instanceof Error && error.name === "AbortError";
 
     return res.status(timedOut ? 504 : 502).json({
