@@ -12,20 +12,22 @@ const styleEntry=read('src/styles.css');
 
 test('student home presents the four primary admissions steps in the intended order',()=>{
   const expected=[
-    ['SEED','Hồ sơ học tập','/student/profile'],
-    ['LUMEN','Phân tích năng lực','/lumen'],
-    ['ATLAS','Ngành và trường','/atlas'],
-    ['ORION','Lộ trình nguyện vọng','/orion'],
+    ['01','SEED','Hồ sơ học tập','/student/profile'],
+    ['02','LUMEN','Phân tích năng lực','/lumen'],
+    ['03','ATLAS','Ngành và trường','/atlas'],
+    ['04','ORION','Lộ trình nguyện vọng','/orion'],
   ];
   let cursor=-1;
-  for(const [code,title,href] of expected){
-    const codeAt=journey.indexOf(`code: "${code}"`);
-    const titleAt=journey.indexOf(`title: "${title}"`,codeAt);
-    const hrefAt=journey.indexOf(`href: "${href}"`,titleAt);
-    assert.ok(codeAt>cursor,code);
-    assert.ok(titleAt>codeAt,title);
-    assert.ok(hrefAt>titleAt,href);
-    cursor=hrefAt;
+  for(const [number,code,title,href] of expected){
+    const start=journey.indexOf(`number: "${number}"`);
+    const next=journey.indexOf(`number: "${String(Number(number)+1).padStart(2,'0')}"`,start+1);
+    const end=next<0?journey.length:next;
+    const step=journey.slice(start,end);
+    assert.ok(start>cursor,code);
+    assert.ok(step.includes(`code: "${code}"`),code);
+    assert.ok(step.includes(`title: "${title}"`),title);
+    assert.ok(step.includes(`href: "${href}"`),href);
+    cursor=start;
   }
   assert.equal((journey.match(/number: "0[1-4]"/g)||[]).length,4);
 });
