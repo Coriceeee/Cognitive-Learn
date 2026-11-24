@@ -74,9 +74,14 @@ import type { DynamicStudentState } from './dynamicStudentState';
 import type { TemporalStudentReport } from './temporalStudentIntelligence';
 
 
+export function isFocusLearningAdviceRequest(message: string): boolean {
+  const q = norm(message);
+  return /(mon nay|mon yeu nhat|mon dau tien|mon uu tien).{0,55}(tap trung|danh them thoi gian|tang thoi gian|uu tien hon|hoc ky hon)|(tap trung hon|danh them thoi gian|tang thoi gian).{0,55}(mon nay|mon yeu nhat|mon dau tien|mon uu tien)/.test(q);
+}
+
 export function isPersonalLearningAdviceQuestion(message: string): boolean {
   const q = norm(message);
-  return /\b(tien bo|cai thien|tap trung mon|tap trung vao|neu tap trung|mon nao|mon nay|mon do|mon hoc nao|yeu mon|hoc mon nao|on mon|uu tien mon|mon nao can|nen tap trung|diem mon nao|ke hoach hoc tap|lap ke hoach|lich hoc|thoi khoa bieu|phan bo thoi gian|hoc bao nhieu|ke hoach cua em|ke hoach cho em|ke hoach cho toi|lap lich hoc|lo trinh hoc)\b/.test(q);
+  return /\b(tien bo|cai thien|tap trung mon|tap trung vao|neu tap trung|mon nao|mon nay|mon do|mon hoc nao|yeu mon|hoc mon nao|on mon|uu tien mon|mon nao can|nen tap trung|diem mon nao|ke hoach hoc tap|lap ke hoach|lich hoc|thoi khoa bieu|phan bo thoi gian|hoc bao nhieu|ke hoach cua em|ke hoach cho em|ke hoach cho toi|lap lich hoc|lo trinh hoc)\b/.test(q) || isFocusLearningAdviceRequest(message);
 }
 
 type LearningTranscriptState = {
@@ -113,7 +118,11 @@ const observedCognitive = (result: CognitiveResult | undefined, code: 'SCI'|'CSL
  * Time is never invented: when weekly study hours are missing, the response gives priorities but no hour allocation.
  * Load adjustment thresholds are transparent planning heuristics, not validated intervention effects.
  */
-export function answerPersonalLearningAdvice(context: PersonalLearningContext | null, uid: string): AdvisorLocalAnswer {
+export function answerPersonalLearningAdvice(
+  context: PersonalLearningContext | null,
+  uid: string,
+  options: { focusLowestSubject?: boolean } = {},
+): AdvisorLocalAnswer {
   const state = context?.transcript ?? null;
   if (!state || state.userId !== uid) {
     return {
@@ -243,6 +252,9 @@ export function answerPersonalLearningAdvice(context: PersonalLearningContext | 
   const plannedHours = hours !== null && hours > 0 ? hours * loadFactor : null;
   const selectedMax = priorities[priorities.length - 1].score;
   const weights = priorities.map(item => Math.max(0.5, selectedMax - item.score + 0.5));
+  // Optional conversational scenario: shift more of the same recorded weekly
+  // study capacity to the lowest-scoring subject; never increase total hours.
+  if (options.focusLowestSubject === true && weights.length > 1) weights[0] *= 1.5;
   const weightTotal = weights.reduce((sum, value) => sum + value, 0);
   let allocatedHours = 0;
   const allocation = priorities.map((item, index) => {
@@ -294,9 +306,16 @@ export function answerPersonalLearningAdvice(context: PersonalLearningContext | 
   const legacyNote = state.source === 'legacy'
     ? ' Bảng điểm đang lấy từ hồ sơ lịch sử ở chế độ chỉ đọc; hãy chuẩn hóa hồ sơ trong Seed trước khi xem đây là dữ liệu hiện hành.'
     : '';
+  const focusScenarioLine = options.focusLowestSubject === true
+    ? '\\n\\nKỊCH BẢN TẬP TRUNG HƠN: Mình hiểu bạn muốn dành thêm trọng tâm cho ' + priorities[0].subject + ' — môn có điểm thấp nhất trong học kỳ mới nhất. ' +
+      (plannedHours !== null
+        ? 'CLA tăng trọng số phân bổ môn này 1,5 lần trong cùng quỹ ' + plannedHours.toFixed(1) + ' giờ/tuần; thời gian không tự tăng. '
+        : 'Chưa có quỹ giờ học/tuần đã xác minh nên chưa thể tính số giờ tăng thêm. ') +
+      'Hệ số 1,5 là kịch bản phân bổ thử nghiệm để bạn cân nhắc, không phải hiệu quả can thiệp đã được kiểm định.'
+    : '';
 
   return {
-    answer: 'Mình đã đối chiếu bảng điểm đã đồng bộ ở ' + period + '.\n\nMÔN CẦN ƯU TIÊN\n' + scoreList + '. ' + focusAdvice + trendLine + '\n\nKẾ HOẠCH TUẦN ĐƯỢC TÍNH TỪ DỮ LIỆU CỦA BẠN\n' + planLines.join('\n') + '\n' + allocation.map(item => '- ' + item.subject + ': ' + item.score.toFixed(1) + '/10' + (item.change === null ? '' : ' (' + (item.change > 0 ? '+' : '') + item.change.toFixed(1) + ' so với kỳ có dữ liệu trước)') + (item.hours === null ? '' : ' · khoảng ' + hourLabel(item.hours) + ' mỗi tuần')).join('\n') + '\n\nĐIỀU CHỈNH THEO THÓI QUEN ĐÃ GHI NHẬN\n' + ([...loadReasons, ...adaptation].length ? [...loadReasons, ...adaptation].join('\n') : 'Chưa có đủ dữ liệu hành vi để điều chỉnh thêm; kế hoạch hiện chỉ dựa trên bảng điểm.') + '\n\nCÁCH TRIỂN KHAI: ưu tiên môn có điểm thấp nhất trước; với từng môn, ôn phần đã mất điểm, luyện theo chuyên đề và ghi lại lỗi để kiểm tra lại. ' + nextStep + '\n\n' + dataLimit + profileGoal + legacyNote + '\n\nGiờ phân bổ được tính theo khoảng cách điểm giữa các môn trong nhóm ưu tiên; các hệ số điều chỉnh là quy tắc lập kế hoạch thử nghiệm của CLA, không phải kết quả can thiệp đã được kiểm định.',
+    answer: 'Mình đã đối chiếu bảng điểm đã đồng bộ ở ' + period + '.\n\nMÔN CẦN ƯU TIÊN\n' + scoreList + '. ' + focusAdvice + trendLine + '\n\nKẾ HOẠCH TUẦN ĐƯỢC TÍNH TỪ DỮ LIỆU CỦA BẠN\n' + planLines.join('\n') + '\n' + allocation.map(item => '- ' + item.subject + ': ' + item.score.toFixed(1) + '/10' + (item.change === null ? '' : ' (' + (item.change > 0 ? '+' : '') + item.change.toFixed(1) + ' so với kỳ có dữ liệu trước)') + (item.hours === null ? '' : ' · khoảng ' + hourLabel(item.hours) + ' mỗi tuần')).join('\n') + '\n\nĐIỀU CHỈNH THEO THÓI QUEN ĐÃ GHI NHẬN\n' + ([...loadReasons, ...adaptation].length ? [...loadReasons, ...adaptation].join('\n') : 'Chưa có đủ dữ liệu hành vi để điều chỉnh thêm; kế hoạch hiện chỉ dựa trên bảng điểm.') + '\n\nCÁCH TRIỂN KHAI: ưu tiên môn có điểm thấp nhất trước; với từng môn, ôn phần đã mất điểm, luyện theo chuyên đề và ghi lại lỗi để kiểm tra lại. ' + nextStep + '\n\n' + dataLimit + profileGoal + legacyNote + '\n\nGiờ phân bổ được tính theo khoảng cách điểm giữa các môn trong nhóm ưu tiên; các hệ số điều chỉnh là quy tắc lập kế hoạch thử nghiệm của CLA, không phải kết quả can thiệp đã được kiểm định.' + focusScenarioLine,
     destination: '/student/transcript',
     linkLabel: 'Xem bảng điểm chi tiết',
   };
