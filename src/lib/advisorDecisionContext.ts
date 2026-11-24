@@ -231,6 +231,13 @@ export function answerPersonalLearningAdvice(context: PersonalLearningContext | 
     loadFactor = Math.min(loadFactor, 0.85);
     loadReasons.push('Tỷ lệ bỏ dở nhiệm vụ tự báo cáo là ' + abandonment.toFixed(0) + '%, nên chia nhỏ đầu việc và tránh tăng tải.');
   }
+  const completionTrend = profileReady && context?.temporalReport?.status === 'DESCRIPTIVE'
+    ? context.temporalReport.series.find(item => item.metric === 'planCompletionRate' && item.status === 'DESCRIPTIVE')?.delta ?? null
+    : null;
+  if (completionTrend !== null && finiteIn(completionTrend, -100, 100) && completionTrend <= -10) {
+    loadFactor = Math.min(loadFactor, 0.85);
+    loadReasons.push('Chuỗi quan sát lịch sử ghi nhận tỷ lệ hoàn thành giảm ' + Math.abs(completionTrend).toFixed(1) + ' điểm; CLA giữ khối lượng thận trọng thay vì tăng tải.');
+  }
   const plannedHours = hours !== null && hours > 0 ? hours * loadFactor : null;
   const selectedMax = priorities[priorities.length - 1].score;
   const weights = priorities.map(item => Math.max(0.5, selectedMax - item.score + 0.5));
@@ -242,7 +249,7 @@ export function answerPersonalLearningAdvice(context: PersonalLearningContext | 
 
   const planLines: string[] = [];
   if (hours !== null && hours > 0 && plannedHours !== null) {
-    planLines.push('Quỹ học hiện tại bạn tự báo cáo: ' + hours.toFixed(1) + ' giờ/tuần. CLA đề xuất phân bổ khoảng ' + plannedHours.toFixed(1) + ' giờ/tuần cho nhóm môn ưu tiên' + (loadFactor < 1 ? ' (hệ số điều chỉnh ' + loadFactor.toFixed(2) + ')' : '') + ': ' + allocation.map(item => item.subject + ' ' + hourLabel(item.hours ?? 0)).join('; ') + '.');
+    planLines.push('Quỹ học hiện tại bạn tự báo cáo: ' + hours.toFixed(1) + ' giờ/tuần. CLA đề xuất phân bổ khoảng ' + plannedHours.toFixed(1) + ' giờ/tuần cho nhóm môn ưu tiên' + (loadFactor < 1 ? ' (hệ số điều chỉnh ' + loadFactor.toFixed(2) + ')' : '') + '.');
   } else if (hours === 0) {
     planLines.push('Hồ sơ hiện ghi nhận 0 giờ học/tuần. Mình chưa tự đặt số giờ thay bạn; hãy cập nhật quỹ thời gian học thực tế trong Seed để CLA chia lịch.');
   } else {
@@ -251,6 +258,7 @@ export function answerPersonalLearningAdvice(context: PersonalLearningContext | 
 
   const adaptation: string[] = [];
   if (completion !== null && completion >= 70) adaptation.push('Tỷ lệ hoàn thành kế hoạch đang ở mức ' + completion.toFixed(0) + '%; trước mắt giữ nhịp hiện tại, chưa tự tăng khối lượng.');
+  if (completionTrend !== null && finiteIn(completionTrend, -100, 100) && completionTrend >= 10) adaptation.push('Chuỗi quan sát lịch sử ghi nhận tỷ lệ hoàn thành tăng ' + completionTrend.toFixed(1) + ' điểm; duy trì cách học hiện tại và xác nhận bằng chu kỳ tiếp theo trước khi tăng tải.');
   if (motivation !== null && motivation < 40) adaptation.push('Mức động lực tự báo cáo là ' + motivation.toFixed(0) + '/100; chia mỗi môn thành các đầu việc nhỏ, có điểm kết thúc rõ ràng.');
   if (contextSwitch !== null && contextSwitch >= 50) adaptation.push('Tần suất chuyển ngữ cảnh tự báo cáo là ' + contextSwitch.toFixed(0) + '%; học từng môn trong một phiên riêng, hạn chế đổi môn giữa chừng.');
   if (goalSwitch !== null && goalSwitch >= 3) adaptation.push('Bạn ghi nhận ' + goalSwitch.toFixed(0) + ' lần đổi mục tiêu/tháng; giữ nguyên mục tiêu học trong chu kỳ tuần này và ghi lý do trước khi đổi.');
@@ -281,7 +289,7 @@ export function answerPersonalLearningAdvice(context: PersonalLearningContext | 
     : '';
 
   return {
-    answer: 'Mình đã đối chiếu bảng điểm đã đồng bộ ở ' + period + '.\n\n**Môn cần ưu tiên:** ' + scoreList + '. ' + focusAdvice + trendLine + '\n\n**Kế hoạch tuần được tính từ dữ liệu của bạn:**\n' + planLines.join('\n') + '\n' + allocation.map(item => '- ' + item.subject + ': ' + item.score.toFixed(1) + '/10' + (item.change === null ? '' : ' (' + (item.change > 0 ? '+' : '') + item.change.toFixed(1) + ' so với kỳ có dữ liệu trước)') + (item.hours === null ? '' : ' · khoảng ' + hourLabel(item.hours) + ' mỗi tuần')).join('\n') + '\n\n**Điều chỉnh theo thói quen đã ghi nhận:**\n' + ([...loadReasons, ...adaptation].length ? [...loadReasons, ...adaptation].join('\n') : 'Chưa có đủ dữ liệu hành vi để điều chỉnh thêm; kế hoạch hiện chỉ dựa trên bảng điểm.') + '\n\n**Cách triển khai:** ưu tiên môn có điểm thấp nhất trước; với từng môn, ôn phần đã mất điểm, luyện theo chuyên đề và ghi lại lỗi để kiểm tra lại. ' + nextStep + '\n\n' + dataLimit + profileGoal + legacyNote + '\n\nCác tỷ lệ điều chỉnh khối lượng là quy tắc lập kế hoạch thử nghiệm của CLA, không phải kết quả can thiệp đã được kiểm định.',
+    answer: 'Mình đã đối chiếu bảng điểm đã đồng bộ ở ' + period + '.\n\nMÔN CẦN ƯU TIÊN\n' + scoreList + '. ' + focusAdvice + trendLine + '\n\nKẾ HOẠCH TUẦN ĐƯỢC TÍNH TỪ DỮ LIỆU CỦA BẠN\n' + planLines.join('\n') + '\n' + allocation.map(item => '- ' + item.subject + ': ' + item.score.toFixed(1) + '/10' + (item.change === null ? '' : ' (' + (item.change > 0 ? '+' : '') + item.change.toFixed(1) + ' so với kỳ có dữ liệu trước)') + (item.hours === null ? '' : ' · khoảng ' + hourLabel(item.hours) + ' mỗi tuần')).join('\n') + '\n\nĐIỀU CHỈNH THEO THÓI QUEN ĐÃ GHI NHẬN\n' + ([...loadReasons, ...adaptation].length ? [...loadReasons, ...adaptation].join('\n') : 'Chưa có đủ dữ liệu hành vi để điều chỉnh thêm; kế hoạch hiện chỉ dựa trên bảng điểm.') + '\n\nCÁCH TRIỂN KHAI: ưu tiên môn có điểm thấp nhất trước; với từng môn, ôn phần đã mất điểm, luyện theo chuyên đề và ghi lại lỗi để kiểm tra lại. ' + nextStep + '\n\n' + dataLimit + profileGoal + legacyNote + '\n\nGiờ phân bổ được tính theo khoảng cách điểm giữa các môn trong nhóm ưu tiên; các hệ số điều chỉnh là quy tắc lập kế hoạch thử nghiệm của CLA, không phải kết quả can thiệp đã được kiểm định.',
     destination: '/student/transcript',
     linkLabel: 'Xem bảng điểm chi tiết',
   };
