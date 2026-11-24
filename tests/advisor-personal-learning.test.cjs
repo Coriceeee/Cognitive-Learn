@@ -59,7 +59,7 @@ test('does not fall back to an older semester when the latest semester is incomp
 });
 test('legacy transcript is explicitly described as historical read-only data',()=>{
   const answer=answerPersonalLearningAdvice(makeContext(makeState([row('Toán',5.8),row('Vật lý',6.2),row('Hóa học',7.4)],{source:'legacy'})),'student-A').answer;
-  assert.match(answer,/bảng điểm lịch sử ở chế độ chỉ đọc/);
+  assert.match(answer,/hồ sơ lịch sử ở chế độ chỉ đọc/);
 });
 test('blocks stale, unavailable and cross-account transcript context with specific status guidance',()=>{
   const cases=[
@@ -113,6 +113,18 @@ test('previous-term subject changes are reported from the transcript rather than
   assert.match(answer,/Toán giảm 0\.5 điểm/);
   assert.match(answer,/Vật lý tăng 0\.2 điểm/);
 });
+test('verified temporal completion trend also adjusts the weekly workload',()=>{
+  const context=makeContext(makeState([row('Toán',5.8),row('Vật lý',6.2),row('Hóa học',7.4)]),{
+    hasProfile:true,loading:false,syncing:false,
+    profile:{studyHoursPerWeek:8,practiceTestsPerWeek:0,planCompletionRate:75,motivationLevel:60},
+    dynamicState:{scope:'student',behavior:{hours:8,practice:0,completion:75,motivation:60}},
+    temporalReport:{status:'DESCRIPTIVE',series:[{metric:'planCompletionRate',status:'DESCRIPTIVE',delta:-12.5,spanDays:14}]}
+  });
+  const answer=answerPersonalLearningAdvice(context,'student-A').answer;
+  assert.match(answer,/8\.0 giờ\/tuần/);
+  assert.match(answer,/6\.8 giờ\/tuần/);
+  assert.match(answer,/tỷ lệ hoàn thành giảm 12\.5 điểm/);
+});
 test('measured cognitive proxies adapt the plan but remain explicitly labelled as proxies',()=>{
   const context=makeContext(makeState([row('Toán',5.8),row('Vật lý',6.2)]),{
     cognitive:{scoreAvailable:true,missingDimensions:[],SCI:45,CSL:50,GVI:70,FRI:65,dimensions:[
@@ -130,7 +142,7 @@ test('chat reads optional verified context and handles personal advice locally b
   const chat=readFileSync(path.join(root,'src/components/common/FloatingAdvisorChat.tsx'),'utf8');
   const provider=readFileSync(path.join(root,'src/page/seed/hooks/StudentProfileProvider.tsx'),'utf8');
   assert.match(chat,/useOptionalVerifiedStudentProfile/);
-  assert.match(chat,/answerPersonalLearningAdvice\(studentContext\?\.transcript/);
+  assert.match(chat,/answerPersonalLearningAdvice\(studentContext, uid\)/);
   assert.ok(chat.indexOf('answerPersonalLearningAdvice(studentContext')<chat.indexOf('fetch(`${apiBase()}\/api\/gemini-chat'));
   assert.match(provider,/useStudentTranscript\(\)/);
   assert.match(provider,/useOptionalVerifiedStudentProfile/);
