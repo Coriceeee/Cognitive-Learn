@@ -77,7 +77,7 @@ test('weekly hours and completion rate drive the actual schedule allocation',()=
   const transcript=makeState([row('Toán',5.8),row('Vật lý',6.2),row('Hóa học',7.4),row('Ngữ văn',8.1)]);
   const context=makeContext(transcript,{
     hasProfile:true,loading:false,syncing:false,
-    profile:{studyHoursPerWeek:10,practiceTestsPerWeek:2,planCompletionRate:40,motivationLevel:30,targetMajor:'CNTT'},
+    profile:{studyHoursPerWeek:10,practiceTestsPerWeek:2,planCompletionRate:40,motivationLevel:30,learningStrategy:35,targetMajor:'CNTT'},
     dynamicState:{scope:'student',behavior:{hours:10,practice:2,completion:40,motivation:30}}
   });
   const answer=answerPersonalLearningAdvice(context,'student-A').answer;
@@ -89,6 +89,7 @@ test('weekly hours and completion rate drive the actual schedule allocation',()=
   assert.match(answer,/hoàn thành kế hoạch hiện ghi nhận 40%/);
   assert.match(answer,/2\.0 bài thi thử\/tuần/);
   assert.match(answer,/động lực tự báo cáo là 30\/100/);
+  assert.match(answer,/chiến lược học tập tự báo cáo là 35\/100/);
   assert.match(answer,/CNTT/);
 });
 test('a recorded zero-hour week does not silently create a timetable',()=>{
