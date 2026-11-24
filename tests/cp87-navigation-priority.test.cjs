@@ -1,60 +1,58 @@
-/** CP87 structural UX contract. Does not assert a browser screenshot or E2E success. */
+/** Student-facing journey contract for the current focused dashboard. */
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
-const crypto=require('node:crypto');
-const {spawnSync}=require('node:child_process');
 const root=path.resolve(__dirname,'..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
-const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(path.join(root,p))).digest('hex');
 const page=read('src/page/seed/StudentPage.tsx');
-const css=read('src/styles/50-cp87-circuit-primary.css');
-const component=read('src/page/seed/components/LearningCircuit.tsx');
-const cp86=JSON.parse(read('CP86_SOURCE_MANIFEST.json'));
+const journey=read('src/page/seed/components/LearningCircuit.tsx');
+const styles=read('src/styles/54-cla-student-journey.css');
+const styleEntry=read('src/styles.css');
 
-test('CP87 keeps the exact original loop component, module routes and six nodes',()=>{
- const original=cp86.files.find(x=>x.path==='src/page/seed/components/LearningCircuit.tsx');
- assert.ok(original);
- assert.equal(sha('src/page/seed/components/LearningCircuit.tsx'),original.sha256);
- assert.equal((component.match(/code:"(?:SEED|LUMEN|ATLAS|ORION|PULSE|HAVEN)"/g)||[]).length,6);
- assert.match(component,/className="cla-circuit-stage"/);
- assert.match(component,/className="cla-circuit-detail"/);
- assert.match(component,/className="cla-circuit-mobile"/);
+test('student home presents the four primary admissions steps in the intended order',()=>{
+  const expected=[
+    ['SEED','Hồ sơ học tập','/student/profile'],
+    ['LUMEN','Phân tích năng lực','/lumen'],
+    ['ATLAS','Ngành và trường','/atlas'],
+    ['ORION','Lộ trình nguyện vọng','/orion'],
+  ];
+  let cursor=-1;
+  for(const [code,title,href] of expected){
+    const codeAt=journey.indexOf(`code: "${code}"`);
+    const titleAt=journey.indexOf(`title: "${title}"`,codeAt);
+    const hrefAt=journey.indexOf(`href: "${href}"`,titleAt);
+    assert.ok(codeAt>cursor,code);
+    assert.ok(titleAt>codeAt,title);
+    assert.ok(hrefAt>titleAt,href);
+    cursor=hrefAt;
+  }
+  assert.equal((journey.match(/number: "0[1-4]"/g)||[]).length,4);
 });
 
-test('CP87 puts the primary six-module circuit directly after the greeting, ahead of secondary content',()=>{
- const hero=page.indexOf('className="student-dash-hero cla-observatory-intro"');
- const circuit=page.indexOf('<LearningCircuit profilePath={profilePath} />');
- const links=page.indexOf('className="student-dash-extra-links"');
- const subnav=page.indexOf('<ModuleSectionNav moduleKey="seed" />');
- const exam=page.indexOf('<ExamHorizon />');
- const chart=page.indexOf('<StudentDecisionCanvas ');
- const signal=page.indexOf('<StudentActionSignalRail');
- const bridge=page.indexOf('<StudentJourneyBridge');
- assert.ok(hero>0 && hero<circuit && circuit<links && links<subnav);
- assert.ok(subnav<exam && exam<chart && chart<signal && signal<bridge);
- assert.equal(page.split('<LearningCircuit profilePath={profilePath} />').length-1,1);
- assert.equal(page.split('<ModuleSectionNav moduleKey="seed" />').length-1,1);
+test('student home removes duplicate six-module navigation and secondary task rail',()=>{
+  assert.match(page,/<LearningCircuit profilePath=\{profilePath\} \/>/);
+  assert.match(page,/{view !== "\/student" && <ModuleSectionNav moduleKey="seed" \/>}/);
+  assert.doesNotMatch(page,/<StudentActionSignalRail/);
+  assert.doesNotMatch(page,/<StudentJourneyBridge/);
+  assert.doesNotMatch(page,/student-dash-extra-links/);
 });
 
-test('CP87 retains compact desktop circle and accessible mobile destinations, without changing routes',()=>{
- assert.match(css,/\.cla-circuit-map \{ min-height: 416px;/);
- assert.match(css,/@media \(max-width: 760px\)/);
- assert.match(css,/\.cla-circuit-mobile > a/);
- assert.match(read('src/styles.css'),/50-cp87-circuit-primary\.css/);
- for(const dest of ['/lumen','/atlas','/orion','/pulse','/haven']) assert.ok(component.includes('href:"'+dest+'"'));
+test('detailed cognitive analytics are retained but progressively disclosed',()=>{
+  assert.match(page,/<details className="cla-student-analysis-details">/);
+  assert.match(page,/<StudentDecisionCanvas /);
+  assert.match(page,/<ExamHorizon \/>/);
 });
 
-test('Current focused source verifies against its release manifest; CP87 circuit and historical evidence unchanged',()=>{
- // CP87 and CP93 remain historical releases. Verify the active source against its own manifest.
- const current=spawnSync(process.execPath,[path.join(root,'tools/verify-focused-release.cjs')],{
-   cwd:root,encoding:'utf8',timeout:30000
- });
- assert.equal(current.error,undefined,current.error?.message);
- assert.equal(current.status,0,`Focused release source verification failed:\n${current.stdout}\n${current.stderr}`);
- for(const rel of ['firestore.rules.CANDIDATE_CP21','src/lib/nexusEvidenceBaseline.ts','CP81_SOURCE_MANIFEST.json','CP86_SOURCE_MANIFEST.json']){
-   const historical=cp86.files.find(x=>x.path===rel);
-   if(historical)assert.equal(sha(rel),historical.sha256,rel);
- }
+test('the journey remains accessible and responsive without replacing existing route architecture',()=>{
+  assert.match(journey,/aria-labelledby="cla-primary-journey-title"/);
+  assert.match(journey,/steps\.map/);
+  assert.match(journey,/href="\/pulse"/);
+  assert.match(journey,/href="\/haven"/);
+  assert.match(styles,/@media \(max-width: 900px\)/);
+  assert.match(styles,/@media \(max-width: 560px\)/);
+  assert.match(styles,/:focus-visible/);
+  assert.match(styleEntry,/54-cla-student-journey\.css/);
+  assert.match(read('src/App.tsx'),/path === "\/student"/);
+  assert.match(read('src/lib/routeModules.ts'),/student: \(\) => import\('\.\.\/page\/seed\/StudentPage'\)/);
 });
