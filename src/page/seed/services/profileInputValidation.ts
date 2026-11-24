@@ -1,7 +1,7 @@
 /**
  * Seed profile numeric input boundary: guard against impossible/unparseable
  * values before committing profile, transcript and cognitive snapshot together.
- * Empty self-reported and financial fields remain missing values; only explicit 0 is observed zero.
+ * Empty supplemental behavior and financial fields remain missing values; only explicit 0 is observed zero.
  */
 export type SeedNumericField =
   | "studyHoursPerWeek"
