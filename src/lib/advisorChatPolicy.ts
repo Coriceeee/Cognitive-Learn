@@ -104,15 +104,15 @@ export function advisorPageContextFromPath(pathname: string): AdvisorPageContext
 export function advisorSuggestionsFor(context: AdvisorPageContext): string[] {
   const suggestions: Record<AdvisorPageContext, string[]> = {
     general: ["Tôi nên chọn ngành học như thế nào?", "Điểm chuẩn là gì?", "Hướng dẫn sử dụng CLA"],
-    "student-dashboard": ["Tôi nên chọn ngành học như thế nào?", "Cách sắp xếp nguyện vọng?", "Làm sao hoàn thiện hồ sơ?"],
+    "student-dashboard": ["Lập kế hoạch học tập theo dữ liệu của tôi", "Tôi nên chọn ngành học như thế nào?", "Làm sao hoàn thiện hồ sơ?"],
     "student-profile": ["Cách cập nhật mục tiêu học tập?", "Làm sao lưu hồ sơ?", "Tại sao dữ liệu chưa đồng bộ?"],
-    "student-transcript": ["Cách nhập điểm theo học kỳ?", "Sửa một điểm đã nhập thế nào?", "Vì sao điểm còn thiếu?"],
+    "student-transcript": ["Dựa vào bảng điểm, em nên ưu tiên môn nào?", "Lập kế hoạch học tập theo hồ sơ của tôi", "Cách nhập điểm theo học kỳ?"],
     "student-storage": ["Trạng thái đồng bộ có ý nghĩa gì?", "Khi nào cần thử đồng bộ lại?", "Báo lỗi lưu dữ liệu ở đâu?"],
     "student-modules": ["Mỗi phân hệ dùng để làm gì?", "Tìm chức năng bảng điểm ở đâu?", "Phân hệ nào chứa kế hoạch học tập?"],
     lumen: ["SCI, MAS và CSL là gì?", "Xem lịch sử đo ở đâu?", "Vì sao chưa có phân tích?"],
     atlas: ["Điểm kịch bản của tôi?", "Điểm chuẩn là gì?", "Cách sắp xếp nguyện vọng?"],
     "study-abroad": ["Bắt đầu tra cứu quốc gia thế nào?", "Xem checklist hồ sơ ở đâu?", "Chuyển sang mục học bổng thế nào?"],
-    orion: ["Còn thiếu bao nhiêu điểm?", "Nguyện vọng của tôi?", "Cách tạo kế hoạch học tập?"],
+    orion: ["Lập kế hoạch học tập theo dữ liệu của tôi", "Còn thiếu bao nhiêu điểm?", "Nguyện vọng của tôi?"],
     pulse: ["Đọc báo cáo tiến độ thế nào?", "Vì sao chưa có dữ liệu tăng trưởng?", "Tìm việc cần làm tiếp theo ở đâu?"],
     haven: ["Cách dùng công cụ ngân sách?", "Tìm checklist học bổng ở đâu?", "Vì sao chi phí đang để trống?"],
     admin: ["Tìm công cụ kiểm tra hệ thống ở đâu?", "Phân biệt Admin và Student thế nào?", "Xem trạng thái kiểm thử ở đâu?"],
