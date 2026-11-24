@@ -59,14 +59,15 @@ test('legacy transcript is explicitly described as historical read-only data',()
   const answer=answerPersonalLearningAdvice(makeState([row('Toán',5.8),row('Vật lý',6.2),row('Hóa học',7.4)],{source:'legacy'}),'student-A').answer;
   assert.match(answer,/bảng điểm lịch sử ở chế độ chỉ đọc/);
 });
-test('blocks stale, unavailable and cross-account transcript context',()=>{
-  for(const state of [
-    makeState([row('Toán',5),row('Vật lý',6),row('Hóa học',7)],{userId:'student-B'}),
-    makeState([row('Toán',5),row('Vật lý',6),row('Hóa học',7)],{status:'syncing'}),
-    makeState([row('Toán',5),row('Vật lý',6),row('Hóa học',7)],{status:'error'})
-  ]){
+test('blocks stale, unavailable and cross-account transcript context with specific status guidance',()=>{
+  const cases=[
+    [makeState([row('Toán',5),row('Vật lý',6),row('Hóa học',7)],{userId:'student-B'}),/đang xác minh dữ liệu/],
+    [makeState([row('Toán',5),row('Vật lý',6),row('Hóa học',7)],{status:'syncing'}),/đang được tải hoặc xác minh/],
+    [makeState([row('Toán',5),row('Vật lý',6),row('Hóa học',7)],{status:'error'}),/chưa đọc được bảng điểm từ máy chủ/]
+  ];
+  for(const [state,expected] of cases){
     const answer=answerPersonalLearningAdvice(state,'student-A').answer;
-    assert.match(answer,/chưa đọc được bảng điểm đã xác minh/);
+    assert.match(answer,expected);
     assert.doesNotMatch(answer,/Toán: 5/);
   }
 });
