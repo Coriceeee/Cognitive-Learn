@@ -1194,8 +1194,8 @@ export default function TrangNhapHoSoHocTap() {
                   onChange={(event) =>
                     updateField("studyHoursPerWeek", event.target.value)
                   }
-                required
-                  />
+                  required
+                />
               </label>
 
               <label>
@@ -1207,8 +1207,8 @@ export default function TrangNhapHoSoHocTap() {
                   onChange={(event) =>
                     updateField("practiceTestsPerWeek", event.target.value)
                   }
-                required
-                  />
+                  required
+                />
               </label>
 
               <label>
@@ -1221,8 +1221,8 @@ export default function TrangNhapHoSoHocTap() {
                   onChange={(event) =>
                     updateField("planCompletionRate", event.target.value)
                   }
-                required
-                  />
+                  required
+                />
               </label>
 
               <label>
@@ -1273,8 +1273,8 @@ export default function TrangNhapHoSoHocTap() {
                   onChange={(event) =>
                     updateField("learningStrategy", event.target.value)
                   }
-                required
-                  />
+                  required
+                />
               </label>
 
               <label>
@@ -1287,8 +1287,8 @@ export default function TrangNhapHoSoHocTap() {
                   onChange={(event) =>
                     updateField("motivationLevel", event.target.value)
                   }
-                required
-                  />
+                  required
+                />
               </label>
             </div>
           </section>
