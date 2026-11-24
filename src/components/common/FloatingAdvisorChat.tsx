@@ -10,7 +10,7 @@ import { safeAdmissionAdvisorSource } from "../../lib/advisorAdmissionAnswers";
 import { answerClaKnowledge } from "../../lib/claKnowledgeRetrieval";
 import { answerVerifiedCutoff, safeCutoffSource } from "../../lib/atlasDecisionComparison";
 
-type AdvisorDisplayTurn = AdvisorTurn & { source?: string; destination?: AdvisorRoute["destination"] | AdvisorLocalAnswer["destination"]; linkLabel?: string; remote?: boolean; privateIntent?: AdvisorLocalIntent };
+type AdvisorDisplayTurn = AdvisorTurn & { source?: string; destination?: AdvisorRoute["destination"] | AdvisorLocalAnswer["destination"]; linkLabel?: string; remote?: boolean; privateIntent?: AdvisorLocalIntent | "learning" };
 function apiBase() {
   // CP93: Firebase Hosting is now rewired to same-origin Cloud Functions.
   if (typeof window !== "undefined" && ["cognitivelearn.ai.vn", "cognitive-learn-ai.web.app", "cognitive-learn-ai.firebaseapp.com"].includes(window.location.hostname)) return "";
@@ -62,13 +62,19 @@ export default function FloatingAdvisorChat() {
     // The transcript is ranked locally and is never included in the Gemini request.
     if (isPersonalLearningAdviceQuestion(message)) {
       const local = answerPersonalLearningAdvice(studentContext, uid);
-      setTurns(current => [...current, { role: "user", text: message }, { role: "model", text: local.answer, destination: local.destination, linkLabel: local.linkLabel }]);
+      setTurns(current => [...current, { role: "user", text: message, privateIntent: "learning" }, { role: "model", text: local.answer, destination: local.destination, linkLabel: local.linkLabel, privateIntent: "learning" }]);
       setQuestion(""); setNotice(""); return;
     }
-    // Other personal decisions are handled locally, before public facts or Gemini.
+    // Other personal decisions and follow-ups stay local, before public facts or Gemini.
     const localIntent = advisorLocalIntent(message);
     const previousPrivate = turns[turns.length - 1]?.privateIntent;
-    if (localIntent || (previousPrivate && /^(vay|the|con|tiep|tai sao|vi sao|sao|neu|bao nhieu|lam sao|co nen)\b/i.test(message.normalize("NFD").replace(/[\u0300-\u036f]/g, "")))) {
+    const privateFollowup = Boolean(previousPrivate && /^(vay|the|con|tiep|tai sao|vi sao|sao|neu|bao nhieu|lam sao|co nen|cu the|chi tiet|giai thich)\b/i.test(message.normalize("NFD").replace(/[\u0300-\u036f]/g, "")));
+    if (previousPrivate === "learning" && privateFollowup) {
+      const local = answerPersonalLearningAdvice(studentContext, uid);
+      setTurns(current => [...current, { role: "user", text: message, privateIntent: "learning" }, { role: "model", text: local.answer, destination: local.destination, linkLabel: local.linkLabel, privateIntent: "learning" }]);
+      setQuestion(""); setNotice(""); return;
+    }
+    if (localIntent || (privateFollowup && previousPrivate !== "learning")) {
       const intent = localIntent ?? "personal";
       const local = answerLocalDecision(intent, uid, window.location.pathname);
       setTurns(current => [...current, { role: "user", text: message, privateIntent: intent }, { role: "model", text: local.answer, destination: local.destination, linkLabel: local.linkLabel, privateIntent: intent }]);
