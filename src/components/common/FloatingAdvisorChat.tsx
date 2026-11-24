@@ -5,7 +5,7 @@ import claChatMascot from "../../assets/cla-chat-mascot.webp";
 import { ADVISOR_PAGE_CONTEXTS, advisorPageContextFromPath, advisorSuggestionsFor, normaliseAdvisorHistory, prepareAdvisorMessage, routeAdvisorQuestion, safeAdvisorDestination, type AdvisorTurn, type AdvisorRoute } from "../../lib/advisorChatPolicy";
 
 import { advisorLocalIntent, answerLocalDecision, isPersonalLearningAdviceQuestion, answerPersonalLearningAdvice, remoteAdvisorTurns, type AdvisorLocalIntent, type AdvisorLocalAnswer } from "../../lib/advisorDecisionContext";
-import { useOptionalVerifiedStudentProfile } from "../../page/seed/hooks/StudentProfileProvider";
+import { useOptionalVerifiedStudentProfile } from "../../page/seed/hooks/StudentProfileContext";
 import { safeAdmissionAdvisorSource } from "../../lib/advisorAdmissionAnswers";
 import { answerClaKnowledge } from "../../lib/claKnowledgeRetrieval";
 import { answerVerifiedCutoff, safeCutoffSource } from "../../lib/atlasDecisionComparison";
