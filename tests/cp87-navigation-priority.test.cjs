@@ -50,10 +50,34 @@ test('the map preserves the central CLA Learning Loop, curved route and mobile f
   assert.match(component,/LEARNING LOOP/);
   assert.match(component,/className="cla-circuit-mobile"/);
   assert.match(component,/aria-label="Sáu không gian học tập"/);
-  assert.match(css,/\.student-dash \.cla-circuit-stage\s*\{\s*display: block/);
-  assert.match(css,/\.student-dash \.cla-circuit-detail \{ display: none; \}/);
+  assert.match(css,/\.student-dash \.cla-circuit-stage\s*\{\s*display: grid/);
+  assert.match(css,/\.student-dash \.cla-circuit-detail\s*\{\s*display: flex/);
   assert.match(css,/@media \(max-width: 760px\)/);
   assert.match(styleEntry,/50-cp87-circuit-primary\.css/);
+});
+
+
+test('all six nodes use the original CLA module logos instead of numbered markers',()=>{
+  const assets=[
+    'seed-profile.png','lumen-intelligence.png','atlas-admission.png',
+    'orion-strategy.png','pulse-monitor.png','haven-support.png',
+  ];
+  for(const asset of assets) assert.ok(component.includes(asset),asset);
+  assert.match(component,/cla-circuit-node-logo/);
+  assert.match(component,/cla-circuit-mobile-logo/);
+  assert.doesNotMatch(component,/cla-circuit-node-marker|cla-circuit-mobile-n/);
+});
+
+test('selected-module detail panel and three student shortcuts have real destinations',()=>{
+  assert.match(component,/cla-circuit-detail/);
+  assert.match(component,/aria-live="polite"/);
+  assert.match(component,/onMouseEnter=\{\(\)=>setActive\(i\)\}/);
+  assert.match(component,/onFocus=\{\(\)=>setActive\(i\)\}/);
+  assert.match(component,/MỞ \{selected\.code\}/);
+  assert.match(component,/href:"\/student\/modules"/);
+  assert.match(component,/href:"\/student\/guide"/);
+  assert.match(component,/href:"\/student\/companion"/);
+  assert.match(component,/student-dash-extra-links/);
 });
 
 test('the previous four-step replacement is not rendered as the main menu',()=>{
