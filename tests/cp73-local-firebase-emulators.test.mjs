@@ -41,3 +41,9 @@ test('QA template does not contain a real Firebase key or an application secret'
   for (const value of ['VITE_USE_FIREBASE_EMULATORS=true', 'VITE_FIREBASE_PROJECT_ID=demo-cla-mvp', 'VITE_FIREBASE_API_KEY=fake-api-key']) assert.ok(template.includes(value));
   assert.doesNotMatch(template,/^GEMINI_API_KEY=[^#\s]/m);
 });
+
+test('plain npm run dev uses real Firebase live env; emulator stays opt-in via dev:qa',()=>{
+  const pkg=JSON.parse(readFileSync(new URL('../package.json',import.meta.url),'utf8'));
+  assert.equal(pkg.scripts.dev,'vite --mode live --open');
+  assert.equal(pkg.scripts['dev:qa'],'vite --mode development --open');
+});
