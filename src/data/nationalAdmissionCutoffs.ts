@@ -3,6 +3,7 @@ import { expanded2026Cutoffs } from "./expanded2026Cutoffs.ts";
 import { ctuHistoricalCutoffs } from './ctuHistoricalCutoffs.ts';
 import { HCMUS_CUTOFF_2026 } from './hcmusCombinations2026.ts';
 import { hcmusCutoffs2025 } from './hcmusCutoffs2025.ts';
+import { uitHistoricalCutoffs } from './uitHistoricalCutoffs.ts';
 // Manually transcribed public numerical facts; 2026 main round. No inferred missing rows.
 export type ExternalCutoff = { universityId: string; university: string; campus: string; code: string; major: string; year: 2024|2025|2026; method: string; label: string; scale: number; cutoff: number; source: string; note: string; reviewedAt: string; combinations?: string[] };
 const aguSource = 'https://tuyensinh.agu.edu.vn/tin-tuc/quyet-dinh-ve-viec-cong-bo-diem-chuan-trung-tuyen-dai-hoc-hinh-thuc-giao-duc-chinh-quy-nam-2026';
@@ -1431,5 +1432,6 @@ export const externalCutoffs: ExternalCutoff[] = [
  ...hustRows.flatMap(([code,major,thpt,tsa]) => ([{...common, universityId:'hust',university:'Đại học Bách khoa Hà Nội',campus:'HUST',code,major,cutoff:thpt,method:'HUST_THPT_A00',label:'THPT (tổ hợp gốc A00, gồm ưu tiên)',scale:30,source:hustSource,note:'Chỉ tổ hợp gốc A00; phải áp dụng quy định độ lệch tổ hợp nếu khác A00.'},{...common,universityId:'hust',university:'Đại học Bách khoa Hà Nội',campus:'HUST',code,major,cutoff:tsa,method:'HUST_TSA_A00',label:'TSA tương đương A00',scale:100,source:hustSource,note:'Điểm tương đương theo công bố; không so với thang THPT.'}])),
  ...neuRows.map(([code,major,cutoff]) => ({...common, universityId:'neu',university:'Đại học Kinh tế Quốc dân',campus:'NEU',code,major,cutoff,method:'NEU_COMMON',label:'Điểm tương đương chung đã quy đổi',scale:30,source:neuSource,note:['TT1','TT2','CLC1','CLC2','CLC3'].includes(code)?'Mã nhóm: phân ngành sau nhập học; xem danh sách chương trình ở thông báo gốc. Điểm chung đã quy đổi.':'Điểm chung đã quy đổi cho các phương thức, không nhập điểm thô khác thang. Tên tiếng Việt chuẩn hóa từ bản tiếng Anh của khoa; đối chiếu mã và thông báo gốc.'})),
  ...hcmusCutoffs2025,
+ ...uitHistoricalCutoffs,
  ...hcmusRows.map(([code,major,cutoff]) => ({...common, reviewedAt:'2026-11-25', universityId:'hcmus', university:'Trường Đại học Khoa học tự nhiên – ĐHQG-HCM', campus:'HCMUS', code, major, cutoff, method:'HCMUS_COMPOSITE', label:'Xét tuyển tổng hợp (THPT/ĐGNL + học bạ 3 năm)', scale:30, source:HCMUS_CUTOFF_2026, note:hcmusSourceNote})),
 ];
