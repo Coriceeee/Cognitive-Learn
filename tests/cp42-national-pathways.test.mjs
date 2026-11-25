@@ -3,12 +3,13 @@ import assert from 'node:assert/strict';
 import {buildNationalPathwayCatalogue,matchNationalPathways2026,filterNationalPathways,officialPathwaySchools,safePathwayUrl} from '../src/lib/nationalAdmissionPathways2026.ts';
 import {nationalCutoffs} from '../src/lib/nationalAdmissionRegistry.ts';
 import {ctuCombinations2026,aguCombinations2026} from '../src/data/publishedAdmissionCombinations2026.ts';
+import {hcmusCombinations2026,HCMUS_SCHEME_2026,HCMUS_CUTOFF_2026} from '../src/data/hcmusCombinations2026.ts';
 const catalogue=buildNationalPathwayCatalogue();
 const report=(pair,scores={},target='')=>matchNationalPathways2026(catalogue,pair,scores,target);
-test('catalogue spans all current national records without changing cutoff facts',()=>{assert.equal(nationalCutoffs.length,1372);assert.equal(catalogue.length,579);assert.equal(new Set(catalogue.map(p=>p.universityId)).size,19);assert.equal(new Set(catalogue.map(p=>p.id)).size,579);assert.equal(officialPathwaySchools.length,32);assert.equal(catalogue.filter(p=>p.evidence.length).length,373);});
+test('catalogue spans all current national records without changing cutoff facts',()=>{assert.equal(nationalCutoffs.length,1411);assert.equal(catalogue.length,618);assert.equal(new Set(catalogue.map(p=>p.universityId)).size,20);assert.equal(new Set(catalogue.map(p=>p.id)).size,618);assert.equal(officialPathwaySchools.length,32);assert.equal(catalogue.filter(p=>p.evidence.length).length,412);});
 test('CTU and AGU official code additions exactly reconcile with 2026 inventory',()=>{for(const [school,data,len,kind] of [['ctu',ctuCombinations2026,127,'THPT_PUBLISHED'],['agu',aguCombinations2026,43,'COMPOSITE_PUBLISHED']]){const rows=catalogue.filter(p=>p.universityId===school);assert.equal(rows.length,len);assert.deepEqual(rows.map(p=>p.majorCode).sort(),Object.keys(data).sort());for(const p of rows){assert.deepEqual(p.evidence.map(e=>e.code),data[p.majorCode]);assert.ok(p.evidence.every(e=>e.kind===kind));}}});
-test('physics English returns multiple schools, not PTIT only',()=>{const r=report(['physics','english']);assert.equal(r.matches.length,260);assert.deepEqual(Object.fromEntries(r.schools.filter(s=>s.matched).map(s=>[s.id,s.matched])),{ctu:98,qnu:37,agu:31,usshhn:29,htu:19,ptit:10,tnue:4,dthu:32});assert.equal(r.unconfirmedCount,223);});
-test('social pair can return entirely non-PTIT schools',()=>{const r=report(['history','geography']);assert.equal(r.matches.length,102);assert.ok(r.matches.every(p=>p.universityId!=='ptit'));assert.equal(r.schools.filter(s=>s.matched).length,7);});
+test('physics English returns multiple schools, not PTIT only',()=>{const r=report(['physics','english']);assert.equal(r.matches.length,286);assert.deepEqual(Object.fromEntries(r.schools.filter(s=>s.matched).map(s=>[s.id,s.matched])),{ctu:98,qnu:37,agu:31,usshhn:29,htu:19,ptit:10,tnue:4,dthu:32,hcmus:26});assert.equal(r.unconfirmedCount,223);});
+test('social pair can return entirely non-PTIT schools',()=>{const r=report(['history','geography']);assert.equal(r.matches.length,103);assert.ok(r.matches.every(p=>p.universityId!=='ptit'));assert.equal(r.schools.filter(s=>s.matched).length,8);});
 test('no pair or duplicate electives leaves all sourced programmes selectable',()=>{for(const pair of [[],['physics'],['physics','physics'],['math','english']]){const r=report(pair);assert.equal(r.pair,false);assert.equal(r.entries.length,579);assert.ok(r.entries.every(p=>p.status==='NO_PAIR'));assert.equal(filterNationalPathways(r.entries,'','',false).length,579);}});
 test('zero is a valid observed score; missing is not',()=>{let r=report(['physics','english'],{math:0,physics:0,english:0});const pick=r.matches.flatMap(p=>p.matches).find(m=>m.code==='A01');assert.equal(pick.observedScore,0);r=report(['physics','english'],{math:8,physics:7});assert.equal(r.matches.flatMap(p=>p.matches).find(m=>m.code==='A01').observedScore,null);});
 test('technology streams cannot borrow a generic technology grade',()=>{const r=report(['technologyIndustry','english'],{math:8,english:8,technology:9});const row=r.matches.flatMap(p=>p.matches).find(m=>m.code==='X27');assert.ok(row);assert.equal(row.observedScore,null);});
@@ -19,3 +20,24 @@ const source={id:'s',universityId:'example',sourceYear:2026,status:'verified',so
 const prog={id:'p',universityId:'example',majorName:'Khoa học',majorCode:'9999999',sourceYear:2026,status:'verified',sourceIds:['s'],methods:['THPT'],combinations:['A01']};
 test('reviewed record must have matching school, year, verified source and official host',()=>{const build=(p=prog,s=source,u=uni)=>buildNationalPathwayCatalogue([p],[s],{example:u});assert.equal(build().length,580);for(const s of [{...source,universityId:'wrong'},{...source,sourceYear:2025},{...source,status:'pending'},{...source,sourceType:'manual'},{...source,sourceUrl:'https://evil.example/admission'},{...source,sourceUrl:'https://a:b@example.edu.vn/admission'}])assert.equal(build(prog,s).length,579);assert.equal(build({...prog,sourceYear:2025}).length,579);assert.equal(build(prog,source,{...uni,verified:false}).length,579);});
 test('reviewed programme does not invent THPT evidence for other methods',()=>{const p=buildNationalPathwayCatalogue([{...prog,methods:['HOC_BA']}],[source],{example:uni}).find(p=>p.universityId==='example');assert.equal(p.evidence.length,0);assert.equal(p.campus,'Chưa rõ cơ sở');assert.equal(safePathwayUrl('javascript:alert(1)'),null);});
+
+test('HCMUS 2026 programme list and combined-method cutoffs reconcile with official sources',()=>{
+ const rows=catalogue.filter(p=>p.universityId==='hcmus');
+ assert.equal(Object.keys(hcmusCombinations2026).length,39);
+ assert.equal(rows.length,39);
+ assert.deepEqual(rows.map(p=>p.majorCode).sort(),Object.keys(hcmusCombinations2026).sort());
+ for(const p of rows){
+  assert.deepEqual(p.evidence.map(e=>e.code),hcmusCombinations2026[p.majorCode]);
+  assert.ok(p.evidence.length>0&&p.evidence.every(e=>e.kind==='COMPOSITE_PUBLISHED'));
+  assert.equal(p.sourceUrl,HCMUS_SCHEME_2026);
+  assert.match(p.schemeNote,/không phải điểm THPT thô/);
+ }
+ const ai=rows.find(p=>p.majorCode==='7480107');
+ assert.equal(ai?.majorName,'Trí tuệ nhân tạo');
+ const cutoff=nationalCutoffs.find(row=>row.universityId==='hcmus'&&row.code==='7480107');
+ assert.equal(cutoff?.cutoff,28.68);
+ assert.equal(cutoff?.method,'HCMUS_COMPOSITE');
+ assert.equal(cutoff?.source,HCMUS_CUTOFF_2026);
+ assert.match(cutoff?.note??/,điểm chuẩn công bố đã gồm điểm cộng/);
+ assert.equal(rows.some(p=>p.evidence.some(e=>e.kind==='THPT_PUBLISHED')),false);
+});
