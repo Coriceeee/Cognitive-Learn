@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --open",
+    "dev": "vite --mode live --open",
     "build": "tsc -b && tsc -p tsconfig.api.json && vite build",
     "preview": "vite preview",
     "test:decision-p5": "node --experimental-strip-types --test tests/decision-p5.test.mjs",
@@ -227,7 +227,8 @@
     "test:decision-p4": "node --experimental-strip-types --test tests/decision-p4.test.mjs",
     "test:hotfix": "node --experimental-strip-types --test tests/p5-hotfix.test.mjs",
     "test:advisor:personal-learning": "node --test tests/advisor-personal-learning.test.cjs",
-    "test:cp88:projection-admissions": "node --experimental-strip-types --test tests/cp88-projection-admission-benchmarks.test.mjs"
+    "test:cp88:projection-admissions": "node --experimental-strip-types --test tests/cp88-projection-admission-benchmarks.test.mjs",
+    "dev:qa": "vite --mode development --open"
   },
   "dependencies": {
     "@vitejs/plugin-react": "6.0.2",
