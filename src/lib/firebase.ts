@@ -12,6 +12,15 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
+if (!__CLA_FIREBASE_QA__) {
+  if (firebaseConfig.projectId !== 'cognitive-learn-ai') {
+    throw new Error('CLA Firebase LIVE: sai Firebase Project. Mong đợi cognitive-learn-ai; hãy kiểm tra .env.live.local.');
+  }
+  if (!firebaseConfig.apiKey || !/^AIza[0-9A-Za-z_-]{20,}$/.test(firebaseConfig.apiKey)) {
+    throw new Error('CLA Firebase LIVE: thiếu Web API Key hợp lệ của Firebase Web App. Không thể khởi tạo Auth bằng fake-api-key.');
+  }
+}
+
 // Resolve safety before creating any SDK client. If QA was requested but the
 // origin/identity is unsafe, throw instead of silently using live Firebase.
 const emulator = resolveLocalFirebaseEmulators({
@@ -33,6 +42,9 @@ export const db = getFirestore(app);
 
 // Configure both SDKs before any component attaches auth or Firestore listeners.
 if (emulator) {
+  console.warn('[CLA Firebase] QA Emulator enabled for demo-cla-mvp only.');
   connectAuthEmulator(auth, `http://${emulator.host}:${emulator.authPort}`, {disableWarnings: true});
   connectFirestoreEmulator(db, emulator.host, emulator.firestorePort);
+} else {
+  console.info('[CLA Firebase] LIVE project cognitive-learn-ai; Auth/Firestore Emulator disabled.');
 }
