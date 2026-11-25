@@ -4,6 +4,7 @@ import {nationalCutoffs, normalizeNational} from './nationalAdmissionRegistry.ts
 import {officialUniversities} from '../data/officialAdmissionSources.ts';
 import {verifiedPrograms} from '../data/verifiedAdmissionPrograms.ts';
 import {ctuCombinations2026,aguCombinations2026,CTU_SCHEME_2026,AGU_SCHEME_2026,AGU_CNTT_2026} from '../data/publishedAdmissionCombinations2026.ts';
+import {HCMUS_SCHEME_2026,hcmusCombinations2026} from '../data/hcmusCombinations2026.ts';
 import {officialSchemeRows2026,qnuSubjects} from '../data/officialSchemePrograms2026.ts';
 import type {AtlasProgram,AtlasAdmissionSource,AtlasUniversity} from './atlasKnowledgeBase';
 import type {SubjectCode,SubjectScoreMap} from './admissionTypes';
@@ -23,6 +24,7 @@ const CTU_X:Readonly<Record<string,readonly ExamSubject[]>>={X01:['math','litera
 const AGU_X:Readonly<Record<string,readonly ExamSubject[]>>=Object.fromEntries(['X01','X06','X10','X25','X26','X27','X28'].map(k=>[k,CTU_X[k]]).concat([['X08',['math','technologyAgriculture','physics']]]));
 // B04 (legacy GDCD) is not applied to GDKT&PL without an explicit source.
 const HTU_X:Readonly<Record<string,readonly ExamSubject[]>>={X01:CTU_X.X01,X02:CTU_X.X02,X06:CTU_X.X06,X10:CTU_X.X10,X14:['math','biology','informatics'],X21:['math','geography','civicEducation'],X26:CTU_X.X26,X78:CTU_X.X78};
+const HCMUS_X:Readonly<Record<string,readonly ExamSubject[]>>={X06:CTU_X.X06,X10:CTU_X.X10,X11:CTU_X.X11,X12:CTU_X.X12,X14:HTU_X.X14,X15:['math','technologyIndustry','biology'],X16:['math','biology','technologyAgriculture'],X26:CTU_X.X26};
 const DTHU_X:Readonly<Record<string,readonly ExamSubject[]>>={...Object.fromEntries(['X01','X02','X06','X07','X10','X11','X16','X26','X27','X28','X70','X74','X78'].map(k=>[k,CTU_X[k]])),X03:['math','literature','technologyIndustry'],X04:['math','literature','technologyAgriculture'],X08:['math','physics','technologyAgriculture'],X14:['math','biology','informatics'],D13:['literature','biology','english']};
 export type PathwayEvidenceKind='THPT_PUBLISHED'|'COMPOSITE_PUBLISHED'|'BASE_COMBINATION'|'ATLAS_REVIEWED'|'THPT_WITH_APTITUDE';
 export type PathwayEvidence={code:string;kind:PathwayEvidenceKind;source:string;subjects:readonly ExamSubject[]|null;reviewedAt:string};
@@ -35,7 +37,7 @@ const programId=(school:string,campus:string,code:string)=>JSON.stringify([schoo
 export function safePathwayUrl(raw:string):string|null {try{const url=new URL(raw);return url.protocol==='https:'&&!url.username&&!url.password?url.href:null;}catch{return null;}}
 function subjectsFor(code:string,school:string):readonly ExamSubject[]|null {
  if(code==='B04')return null;
- return STANDARD[code]??(school==='ctu'?CTU_X[code]:school==='agu'?AGU_X[code]:school==='htu'?HTU_X[code]:school==='dthu'?DTHU_X[code]:school==='ptit'&&['X06','X26'].includes(code)?CTU_X[code]:undefined)??null;
+ return STANDARD[code]??(school==='hcmus'?HCMUS_X[code]:school==='ctu'?CTU_X[code]:school==='agu'?AGU_X[code]:school==='htu'?HTU_X[code]:school==='dthu'?DTHU_X[code]:school==='ptit'&&['X06','X26'].includes(code)?CTU_X[code]:undefined)??null;
 }
 function makeEvidence(codes:readonly string[],kind:PathwayEvidenceKind,source:string,school:string,reviewedAt:string):PathwayEvidence[]{return [...new Set(codes)].filter(c=>/^[A-Z][A-Z0-9]{2}$/.test(c)).map(code=>({code,kind,source,subjects:subjectsFor(code,school),reviewedAt}));}
 const baseCatalogue=(()=>{
@@ -68,9 +70,20 @@ const baseCatalogue=(()=>{
     if(p.majorCode==='7480201')p.schemeNote+=' Trang ngành CNTT cũng công bố sáu mã tổ hợp.';
    }else p.schemeNote='Có điểm chuẩn công bố nhưng mã không có trong bảng đề án 2026 đã nhập; cần đối chiếu nguồn cập nhật.';
   }
+  if(p.universityId==='hcmus') {
+   const codes=hcmusCombinations2026[p.majorCode];
+   if(codes) {
+    p.sourceUrl=HCMUS_SCHEME_2026;p.sourceKind='scheme';
+    p.evidence.push(...makeEvidence(codes,'COMPOSITE_PUBLISHED',HCMUS_SCHEME_2026,'hcmus','2026-11-25'));
+    p.methods=[...new Set([...p.methods,'Xét tuyển tổng hợp · THPT/ĐGNL kết hợp học bạ 03 năm'])];
+    p.schemeNote='Đề án HCMUS 2026 công bố tổ hợp theo ngành/nhóm ngành cho phương thức xét tuyển tổng hợp. Điểm chuẩn cùng năm được công bố theo phương thức tổng hợp (THPT hoặc ĐGNL kết hợp học bạ), không phải điểm THPT thô và không được dùng làm kết luận đủ điều kiện.';
+   }
+  }
   if(p.universityId==='ptit') {const v=verifiedPrograms.find(x=>x.campus===p.campus&&x.code===p.majorCode&&x.availableYears.includes(2026));if(v&&safePathwayUrl(v.source2026)){
    p.sourceUrl=v.source2026;p.sourceKind='scheme';p.evidence.push(...makeEvidence(v.combinations2026,'THPT_PUBLISHED',v.source2026,'ptit','2026-11-08'));}}
  }
+ const hcmusCount=[...groups.values()].filter(p=>p.universityId==='hcmus'&&p.evidence.some(e=>e.kind==='COMPOSITE_PUBLISHED')).length;
+ if(hcmusCount!==Object.keys(hcmusCombinations2026).length)throw Error('HCMUS 2026 programme/combinations inventory mismatch');
  if(matchedDthu.size!==dthuSchemeRows2026.length)throw Error('DTHU scheme contains unmatched programme codes: review before joining');
  // Scheme-only programmes do not depend on the existence of a published cutoff.
  for(const row of officialSchemeRows2026){
