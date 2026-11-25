@@ -2,7 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {buildNationalPathwayCatalogue,matchNationalPathways2026,filterNationalPathways,officialPathwaySchools,safePathwayUrl} from '../src/lib/nationalAdmissionPathways2026.ts';
 import {nationalCutoffs,answerNationalCutoff} from '../src/lib/nationalAdmissionRegistry.ts';
-import {ctuCombinations2026,aguCombinations2026} from '../src/data/publishedAdmissionCombinations2026.ts';
+import {ctuCombinations2026,aguCombinations2026,uitCombinations2026,UIT_SCHEME_2026} from '../src/data/publishedAdmissionCombinations2026.ts';
 import {hcmusCombinations2026,HCMUS_SCHEME_2026,HCMUS_CUTOFF_2026} from '../src/data/hcmusCombinations2026.ts';
 import {hcmusCutoffs2025,HCMUS_CUTOFF_2025} from '../src/data/hcmusCutoffs2025.ts';
 import {uitHistoricalCutoffs} from '../src/data/uitHistoricalCutoffs.ts';
