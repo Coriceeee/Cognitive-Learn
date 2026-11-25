@@ -1,14 +1,20 @@
 /** CP46 — accessible, chart-like route diagram; no faux scores or hidden destinations. */
 import { useState } from "react";
+import seedLogo from "../../../assets/modules/seed-profile.png";
+import lumenLogo from "../../../assets/modules/lumen-intelligence.png";
+import atlasLogo from "../../../assets/modules/atlas-admission.png";
+import orionLogo from "../../../assets/modules/orion-strategy.png";
+import pulseLogo from "../../../assets/modules/pulse-monitor.png";
+import havenLogo from "../../../assets/modules/haven-support.png";
 
-type Link = { code: string; short: string; title: string; description: string; href: string; x: number; y: number };
+type Link = { code: string; short: string; title: string; description: string; href: string; icon: string; x: number; y: number };
 const links: Link[] = [
-  { code:"SEED",short:"Dữ liệu",title:"Bản sắc học tập",description:"Điểm số, GPA và mục tiêu — nền tảng cho mọi phân tích tiếp theo.",href:"/student/profile",x:16,y:26 },
-  { code:"LUMEN",short:"Nhận thức",title:"Dấu vân tay trí tuệ",description:"Quan sát SCI, MAS, CSL cùng bằng chứng và giới hạn diễn giải.",href:"/lumen",x:49,y:18 },
-  { code:"ATLAS",short:"Cơ hội",title:"Bản đồ tương lai",description:"Khám phá trường, ngành, phương thức xét tuyển và lộ trình quốc tế.",href:"/atlas",x:81,y:30 },
-  { code:"ORION",short:"Lựa chọn",title:"Kiến trúc tương lai",description:"Đối chiếu các phương án và lên kế hoạch theo mục tiêu.",href:"/orion",x:81,y:73 },
-  { code:"PULSE",short:"Tiến trình",title:"Đường cong tiến hóa",description:"Theo dõi biến động học tập và những việc cần điều chỉnh.",href:"/pulse",x:49,y:84 },
-  { code:"HAVEN",short:"Nguồn lực",title:"Hành trang thế giới",description:"Xem điều kiện học bổng, chi phí và phương án tài chính.",href:"/haven",x:17,y:72 },
+  { code:"SEED",icon:seedLogo,short:"Dữ liệu",title:"Bản sắc học tập",description:"Điểm số, GPA và mục tiêu — nền tảng cho mọi phân tích tiếp theo.",href:"/student/profile",x:16,y:26 },
+  { code:"LUMEN",icon:lumenLogo,short:"Nhận thức",title:"Dấu vân tay trí tuệ",description:"Quan sát SCI, MAS, CSL cùng bằng chứng và giới hạn diễn giải.",href:"/lumen",x:49,y:18 },
+  { code:"ATLAS",icon:atlasLogo,short:"Cơ hội",title:"Bản đồ tương lai",description:"Khám phá trường, ngành, phương thức xét tuyển và lộ trình quốc tế.",href:"/atlas",x:81,y:30 },
+  { code:"ORION",icon:orionLogo,short:"Lựa chọn",title:"Kiến trúc tương lai",description:"Đối chiếu các phương án và lên kế hoạch theo mục tiêu.",href:"/orion",x:81,y:73 },
+  { code:"PULSE",icon:pulseLogo,short:"Tiến trình",title:"Đường cong tiến hóa",description:"Theo dõi biến động học tập và những việc cần điều chỉnh.",href:"/pulse",x:49,y:84 },
+  { code:"HAVEN",icon:havenLogo,short:"Nguồn lực",title:"Hành trang thế giới",description:"Xem điều kiện học bổng, chi phí và phương án tài chính.",href:"/haven",x:17,y:72 },
 ];
 
 export default function LearningCircuit({ profilePath }: { profilePath: string }) {
@@ -33,14 +39,14 @@ export default function LearningCircuit({ profilePath }: { profilePath: string }
         {links.map((item,i)=><a key={item.code} className={`cla-circuit-node${active===i?' is-current':''}`} href={item.code==="SEED"?profilePath:item.href}
           data-module={item.code.toLowerCase()} style={{left:`${item.x}%`,top:`${item.y}%`} as React.CSSProperties}
           onMouseEnter={()=>setActive(i)} onFocus={()=>setActive(i)} aria-label={`${item.code}: ${item.title}`}>
-          <span className="cla-circuit-node-marker">{String(i+1).padStart(2,"0")}</span>
+          <span className="cla-circuit-node-logo"><img src={item.icon} alt="" aria-hidden="true" /></span>
           <strong>{item.code}</strong><small className="cla-circuit-node-name">{item.title}</small>
         </a>)}
       </div>
     </div>
     <div className="cla-circuit-mobile" aria-label="Sáu không gian học tập">
-      {links.map((item,i)=><a href={item.code==="SEED"?profilePath:item.href} key={item.code} data-module={item.code.toLowerCase()}>
-        <span className="cla-circuit-mobile-n">{String(i+1).padStart(2,"0")}</span><span className="cla-circuit-mobile-copy"><small>{item.code} / {item.short}</small><strong>{item.title}</strong><span>{item.description}</span></span><span aria-hidden="true" className="cla-circuit-mobile-arrow">↗</span>
+      {links.map((item)=><a href={item.code==="SEED"?profilePath:item.href} key={item.code} data-module={item.code.toLowerCase()}>
+        <span className="cla-circuit-mobile-logo"><img src={item.icon} alt="" aria-hidden="true" /></span><span className="cla-circuit-mobile-copy"><small>{item.code} / {item.short}</small><strong>{item.title}</strong><span>{item.description}</span></span><span aria-hidden="true" className="cla-circuit-mobile-arrow">↗</span>
       </a>)}
     </div>
     <div className="cla-circuit-foot"><span>SƠ ĐỒ HỌC TẬP · 6 PHÂN HỆ</span><span>Chỉ các chức năng thực tế trong CLA · Không mô phỏng kết quả cá nhân</span></div>
