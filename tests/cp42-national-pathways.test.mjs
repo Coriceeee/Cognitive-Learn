@@ -10,9 +10,9 @@ import {uitCompositeCutoffs2026,UIT_CUTOFF_2026_SOURCE} from '../src/data/uitCut
 import {officialUniversities} from '../src/data/officialAdmissionSources.ts';
 const catalogue=buildNationalPathwayCatalogue();
 const report=(pair,scores={},target='')=>matchNationalPathways2026(catalogue,pair,scores,target);
-test('catalogue spans all current national records without changing cutoff facts',()=>{assert.equal(nationalCutoffs.length,1556);assert.equal(catalogue.length,637);assert.equal(new Set(catalogue.map(p=>p.universityId)).size,21);assert.equal(new Set(catalogue.map(p=>p.id)).size,637);assert.equal(officialPathwaySchools.length,32);assert.equal(catalogue.filter(p=>p.evidence.length).length,412);});
+test('catalogue spans all current national records without changing cutoff facts',()=>{assert.equal(nationalCutoffs.length,1556);assert.equal(catalogue.length,637);assert.equal(new Set(catalogue.map(p=>p.universityId)).size,21);assert.equal(new Set(catalogue.map(p=>p.id)).size,637);assert.equal(officialPathwaySchools.length,32);assert.equal(catalogue.filter(p=>p.evidence.length).length,431);});
 test('CTU and AGU official code additions exactly reconcile with 2026 inventory',()=>{for(const [school,data,len,kind] of [['ctu',ctuCombinations2026,127,'THPT_PUBLISHED'],['agu',aguCombinations2026,43,'COMPOSITE_PUBLISHED']]){const rows=catalogue.filter(p=>p.universityId===school);assert.equal(rows.length,len);assert.deepEqual(rows.map(p=>p.majorCode).sort(),Object.keys(data).sort());for(const p of rows){assert.deepEqual(p.evidence.map(e=>e.code),data[p.majorCode]);assert.ok(p.evidence.every(e=>e.kind===kind));}}});
-test('physics English returns multiple schools, not PTIT only',()=>{const r=report(['physics','english']);assert.equal(r.matches.length,288);assert.deepEqual(Object.fromEntries(r.schools.filter(s=>s.matched).map(s=>[s.id,s.matched])),{ctu:98,qnu:37,agu:31,usshhn:29,htu:19,ptit:10,tnue:4,dthu:32,hcmus:28});assert.equal(r.unconfirmedCount,242);});
+test('physics English returns multiple schools, not PTIT only',()=>{const r=report(['physics','english']);assert.equal(r.matches.length,307);assert.deepEqual(Object.fromEntries(r.schools.filter(s=>s.matched).map(s=>[s.id,s.matched])),{ctu:98,qnu:37,agu:31,usshhn:29,htu:19,ptit:10,tnue:4,dthu:32,hcmus:28,uit:19});assert.equal(r.unconfirmedCount,223);});
 test('social pair can return entirely non-PTIT schools',()=>{const r=report(['history','geography']);assert.equal(r.matches.length,104);assert.ok(r.matches.every(p=>p.universityId!=='ptit'));assert.equal(r.schools.filter(s=>s.matched).length,8);});
 test('no pair or duplicate electives leaves all sourced programmes selectable',()=>{for(const pair of [[],['physics'],['physics','physics'],['math','english']]){const r=report(pair);assert.equal(r.pair,false);assert.equal(r.entries.length,637);assert.ok(r.entries.every(p=>p.status==='NO_PAIR'));assert.equal(filterNationalPathways(r.entries,'','',false).length,637);}});
 test('zero is a valid observed score; missing is not',()=>{let r=report(['physics','english'],{math:0,physics:0,english:0});const pick=r.matches.flatMap(p=>p.matches).find(m=>m.code==='A01');assert.equal(pick.observedScore,0);r=report(['physics','english'],{math:8,physics:7});assert.equal(r.matches.flatMap(p=>p.matches).find(m=>m.code==='A01').observedScore,null);});
@@ -112,4 +112,15 @@ test('UIT method-specific historical lookup never mixes THPT, DGNL and composite
  assert.ok(thpt2025?.source?.includes('tuyensinh.uit.edu.vn'));
  assert.ok(dgnl2025?.source?.includes('tuyensinh.uit.edu.vn'));
  assert.ok(composite2026?.source?.includes('tuyensinh.uit.edu.vn'));
+});
+
+test('UIT 2026 official combinations join only to the exact programme codes and composite method',()=>{
+ assert.equal(Object.keys(uitCombinations2026).length,19);
+ const rows=catalogue.filter(p=>p.universityId==='uit');
+ assert.equal(rows.length,19);
+ assert.ok(rows.every(p=>p.evidence.length>0&&p.evidence.every(e=>e.kind==='COMPOSITE_PUBLISHED'&&e.source===UIT_SCHEME_2026)));
+ assert.ok(rows.every(p=>p.evidence.some(e=>e.code==='A01'&&e.subjects?.includes('physics')&&e.subjects?.includes('english'))));
+ assert.ok(!rows.some(p=>p.majorCode==='7480103QT'));
+ const reportUIT=report(['physics','english']);
+ assert.equal(reportUIT.matches.filter(p=>p.universityId==='uit').length,19);
 });
