@@ -15,7 +15,9 @@ const firebaseConfig = {
 // Resolve safety before creating any SDK client. If QA was requested but the
 // origin/identity is unsafe, throw instead of silently using live Firebase.
 const emulator = resolveLocalFirebaseEmulators({
-  enabled: import.meta.env.VITE_USE_FIREBASE_EMULATORS,
+  // Only the dedicated QA launcher can compile this flag to true.
+  // VITE_* values from stale .env files are deliberately ignored here.
+  enabled: __CLA_FIREBASE_QA__ ? 'true' : 'false',
   mode: import.meta.env.MODE,
   hostname: typeof window === 'undefined' ? '' : window.location.hostname,
   protocol: typeof window === 'undefined' ? '' : window.location.protocol,
