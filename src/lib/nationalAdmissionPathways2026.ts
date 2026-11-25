@@ -24,7 +24,7 @@ const CTU_X:Readonly<Record<string,readonly ExamSubject[]>>={X01:['math','litera
 const AGU_X:Readonly<Record<string,readonly ExamSubject[]>>=Object.fromEntries(['X01','X06','X10','X25','X26','X27','X28'].map(k=>[k,CTU_X[k]]).concat([['X08',['math','technologyAgriculture','physics']]]));
 // B04 (legacy GDCD) is not applied to GDKT&PL without an explicit source.
 const HTU_X:Readonly<Record<string,readonly ExamSubject[]>>={X01:CTU_X.X01,X02:CTU_X.X02,X06:CTU_X.X06,X10:CTU_X.X10,X14:['math','biology','informatics'],X21:['math','geography','civicEducation'],X26:CTU_X.X26,X78:CTU_X.X78};
-const UIT_X:Readonly<Record<string,readonly ExamSubject[]>>={X02:CTU_X.X02,X06:CTU_X.X06,X14:HTU_X.X14,X26:CTU_X.X26};
+const UIT_X:Readonly<Record<string,readonly ExamSubject[]>>={X02:CTU_X.X02,X06:CTU_X.X06,X14:['math','biology','informatics'],X26:CTU_X.X26};
 const HCMUS_X:Readonly<Record<string,readonly ExamSubject[]>>={X06:CTU_X.X06,X10:CTU_X.X10,X11:CTU_X.X11,X12:CTU_X.X12,X14:HTU_X.X14,X15:['math','technologyIndustry','biology'],X16:['math','biology','technologyAgriculture'],X26:CTU_X.X26};
 const DTHU_X:Readonly<Record<string,readonly ExamSubject[]>>={...Object.fromEntries(['X01','X02','X06','X07','X10','X11','X16','X26','X27','X28','X70','X74','X78'].map(k=>[k,CTU_X[k]])),X03:['math','literature','technologyIndustry'],X04:['math','literature','technologyAgriculture'],X08:['math','physics','technologyAgriculture'],X14:['math','biology','informatics'],D13:['literature','biology','english']};
 export type PathwayEvidenceKind='THPT_PUBLISHED'|'COMPOSITE_PUBLISHED'|'BASE_COMBINATION'|'ATLAS_REVIEWED'|'THPT_WITH_APTITUDE';
