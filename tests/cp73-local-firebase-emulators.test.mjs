@@ -82,3 +82,20 @@ test('npm run dev uses guarded LIVE launcher and dev:qa is explicitly separate',
   assert.equal(pkg.scripts.dev,'node tools/cla_vite_dev.mjs');
   assert.equal(pkg.scripts['dev:qa'],'node tools/cla_vite_dev.mjs --qa');
 });
+
+test('Firebase emulator activation is compile-time gated by the dedicated QA launcher, not VITE env files',()=>{
+  const firebase=readFileSync(new URL('../src/lib/firebase.ts',import.meta.url),'utf8');
+  const vite=readFileSync(new URL('../vite.config.ts',import.meta.url),'utf8');
+  const types=readFileSync(new URL('../src/vite-env.d.ts',import.meta.url),'utf8');
+  assert.match(vite,/__CLA_FIREBASE_QA__:\s*JSON\.stringify\(qaOptIn\)/);
+  assert.match(firebase,/enabled:\s*__CLA_FIREBASE_QA__\s*\?\s*'true'\s*:\s*'false'/);
+  assert.doesNotMatch(firebase,/enabled:\s*import\.meta\.env\.VITE_USE_FIREBASE_EMULATORS/);
+  assert.match(types,/declare const __CLA_FIREBASE_QA__:\s*boolean/);
+});
+
+test('normal dev launcher never opts into Firebase Emulator; QA launcher is explicit',()=>{
+  const launcher=readFileSync(new URL('../tools/cla_vite_dev.mjs',import.meta.url),'utf8');
+  assert.match(launcher,/const qa = process\.argv\.includes\('--qa'\)/);
+  assert.match(launcher,/if \(qa\) process\.env\.CLA_FIREBASE_QA = 'true'/);
+  assert.match(launcher,/mode: qa \? 'development' : 'live'/);
+});
