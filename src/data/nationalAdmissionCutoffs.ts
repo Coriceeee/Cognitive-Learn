@@ -1,6 +1,7 @@
 import {dthuHistoricalCutoffs} from './dthuHistoricalCutoffs.ts';
 import { expanded2026Cutoffs } from "./expanded2026Cutoffs.ts";
 import { ctuHistoricalCutoffs } from './ctuHistoricalCutoffs.ts';
+import { HCMUS_CUTOFF_2026 } from './hcmusCombinations2026.ts';
 // Manually transcribed public numerical facts; 2026 main round. No inferred missing rows.
 export type ExternalCutoff = { universityId: string; university: string; campus: string; code: string; major: string; year: 2024|2025|2026; method: string; label: string; scale: number; cutoff: number; source: string; note: string; reviewedAt: string; combinations?: string[] };
 const aguSource = 'https://tuyensinh.agu.edu.vn/tin-tuc/quyet-dinh-ve-viec-cong-bo-diem-chuan-trung-tuyen-dai-hoc-hinh-thuc-giao-duc-chinh-quy-nam-2026';
@@ -1377,6 +1378,48 @@ const neuRows = [
   27.39
  ]
 ] as const;
+const hcmusRows: Array<[string,string,number]> = [
+ ['7140103','Công nghệ giáo dục',23.89],
+ ['7420101','Sinh học',23.50],
+ ['7420101_DKD','Sinh học (CT TCTA)',22.60],
+ ['7420201','Công nghệ Sinh học',24.75],
+ ['7420201_DKD','Công nghệ Sinh học (CT TCTA)',24.10],
+ ['7440102_DKD','Vật lý học (CT TCTA)',24.30],
+ ['7440102_NN','Nhóm ngành Vật lý học, Công nghệ Vật lý điện tử và tin học',25.88],
+ ['7440107_DKD','Công nghệ Vật lý điện tử và tin học (CT TCTA)',24.86],
+ ['74401a1','Công nghệ bán dẫn',27.34],
+ ['7440112','Hóa học',26.15],
+ ['7440112_DKD','Hóa học (CT TCTA)',24.89],
+ ['7440122','Khoa học Vật liệu',25.30],
+ ['7440122_DKD','Khoa học Vật liệu (CT TCTA)',24.25],
+ ['7440201_NN','Nhóm ngành Địa chất học, Kinh tế đất đai',22.60],
+ ['7440228','Hải dương học',23.92],
+ ['7440228_DKD','Hải dương học (CT TCTA)',21.69],
+ ['7440301','Khoa học Môi trường',23.10],
+ ['7440301_DKD','Khoa học Môi trường (CT TCTA)',21.50],
+ ['7460101_NN','Nhóm ngành Toán học (Toán học, Toán ứng dụng, Toán tin)',26.28],
+ ['7460108_DKD','Khoa học dữ liệu (CT TCTA)',27.48],
+ ['7460108_NN','Nhóm ngành Khoa học dữ liệu, Thống kê',27.63],
+ ['7460112_DKD','Toán ứng dụng (CT TCTA)',25.70],
+ ['7460117_DKD','Toán tin (CT TCTA)',25.52],
+ ['7480101_TT','Khoa học máy tính (CT Tiên tiến)',29.32],
+ ['7480107','Trí tuệ nhân tạo',28.68],
+ ['7480201_DKD','Công nghệ thông tin (CT TCTA)',24.70],
+ ['7480201_NN','Nhóm ngành máy tính và Công nghệ thông tin (CNTT, Kỹ thuật phần mềm, Hệ thống thông tin, Khoa học máy tính)',26.30],
+ ['7510401_DKD','Công nghệ kỹ thuật Hóa học (CT TCTA)',24.90],
+ ['7510402','Công nghệ Vật liệu',25.58],
+ ['7510402_DKD','Công nghệ Vật liệu (CT TCTA)',24.50],
+ ['7510406','Công nghệ kỹ thuật Môi trường',23.10],
+ ['7520207','Kỹ thuật điện tử - viễn thông',26.55],
+ ['7520207_DKD','Kỹ thuật điện tử - viễn thông (CT TCTA)',25.60],
+ ['75202a1','Thiết kế vi mạch',27.93],
+ ['7520402','Kỹ thuật hạt nhân',26.21],
+ ['7520403','Vật lý y khoa',26.00],
+ ['7520403_DKD','Vật lý y khoa (CT TCTA)',24.80],
+ ['7520501','Kỹ thuật địa chất',23.85],
+ ['7850101','Quản lý tài nguyên và môi trường',22.30],
+];
+const hcmusSourceNote = 'Điểm chuẩn phương thức xét tuyển tổng hợp năm 2026, thang 30; công bố đã gồm điểm cộng và điểm ưu tiên. Phương thức tổng hợp sử dụng kết quả THPT hoặc ĐGNL ĐHQG-HCM kết hợp học bạ 03 năm; không so trực tiếp với tổng điểm thi THPT thô.';
 const common = { year: 2026 as const, reviewedAt: '2026-11-17' };
 export const externalCutoffs: ExternalCutoff[] = [
  ...ctuHistoricalCutoffs,
@@ -1386,4 +1429,5 @@ export const externalCutoffs: ExternalCutoff[] = [
  ...ctuRows.map(([code,major,cutoff]) => ({...common, universityId:'ctu', university:'Đại học Cần Thơ', campus:code.endsWith('H')?'Hậu Giang':code.endsWith('S')?'Sóc Trăng':'CTU',code,major,cutoff,method:'CTU_COMMON',label:'Điểm xét tuyển chung đã quy đổi',scale:30,source:ctuSource,note:'Đợt 1; học bạ và V-SAT cần quy đổi theo CTU; không nhập điểm thô. Chương trình phân biệt theo mã.'})),
  ...hustRows.flatMap(([code,major,thpt,tsa]) => ([{...common, universityId:'hust',university:'Đại học Bách khoa Hà Nội',campus:'HUST',code,major,cutoff:thpt,method:'HUST_THPT_A00',label:'THPT (tổ hợp gốc A00, gồm ưu tiên)',scale:30,source:hustSource,note:'Chỉ tổ hợp gốc A00; phải áp dụng quy định độ lệch tổ hợp nếu khác A00.'},{...common,universityId:'hust',university:'Đại học Bách khoa Hà Nội',campus:'HUST',code,major,cutoff:tsa,method:'HUST_TSA_A00',label:'TSA tương đương A00',scale:100,source:hustSource,note:'Điểm tương đương theo công bố; không so với thang THPT.'}])),
  ...neuRows.map(([code,major,cutoff]) => ({...common, universityId:'neu',university:'Đại học Kinh tế Quốc dân',campus:'NEU',code,major,cutoff,method:'NEU_COMMON',label:'Điểm tương đương chung đã quy đổi',scale:30,source:neuSource,note:['TT1','TT2','CLC1','CLC2','CLC3'].includes(code)?'Mã nhóm: phân ngành sau nhập học; xem danh sách chương trình ở thông báo gốc. Điểm chung đã quy đổi.':'Điểm chung đã quy đổi cho các phương thức, không nhập điểm thô khác thang. Tên tiếng Việt chuẩn hóa từ bản tiếng Anh của khoa; đối chiếu mã và thông báo gốc.'})),
+ ...hcmusRows.map(([code,major,cutoff]) => ({...common, reviewedAt:'2026-11-25', universityId:'hcmus', university:'Trường Đại học Khoa học tự nhiên – ĐHQG-HCM', campus:'HCMUS', code, major, cutoff, method:'HCMUS_COMPOSITE', label:'Xét tuyển tổng hợp (THPT/ĐGNL + học bạ 3 năm)', scale:30, source:HCMUS_CUTOFF_2026, note:hcmusSourceNote})),
 ];
