@@ -17,6 +17,8 @@ export function compareNationalCutoff(key:string, raw:string) {
 export const normalizeNational=(s:string)=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').trim().replace(/\s+/g,' ');
 export const externalMethodAliases: Readonly<Record<string,string>> = {
  DTHU_THPT:'THPT', DTHU_HB:'học bạ', DTHU_VSAT:'V-SAT', DTHU_DGNL:'ĐGNL',
+ HCMUS_2025_THPT_A00:'THPT A00', HCMUS_2025_DGNL:'ĐGNL', HCMUS_2025_CERT_THPT:'chứng chỉ + học bạ',
+ UIT_2024_THPT:'THPT', UIT_2024_DGNL:'ĐGNL', UIT_2025_THPT:'THPT', UIT_2025_DGNL:'ĐGNL',
  AGU_COMPOSITE:'tổng hợp', CTU_COMMON:'chung', CTU_THPT_2024:'THPT', NEU_COMMON:'chung', HUST_THPT_A00:'THPT A00', HUST_TSA_A00:'TSA A00',
  VNU_COMMON:'chung', TNUE_BASE:'tổ hợp gốc', USSH_THPT_D01:'THPT D01', USSH_THPT_C00:'THPT C00', USSH_HSA_Q21:'HSA Q21', UEB_JOINT_THPT:'liên kết THPT', UEB_JOINT_HB:'liên kết học bạ', UEB_JOINT_HSA:'liên kết HSA',
 };
