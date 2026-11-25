@@ -1,0 +1,45 @@
+name: CLA decision roadmap verification
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/cla-decision-roadmap.yml"
+      - "src/**"
+      - "tests/**"
+      - "package.json"
+      - "package-lock.json"
+      - "tsconfig*.json"
+      - "vite.config.*"
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Check source layout
+        run: npm run check:layout
+      - name: P2 — Goal Gap Optimizer and Decision Snapshot
+        run: npm run test:decision-p2
+      - name: P3 — Personal decision context and admission handoff
+        run: npm run test:decision-p3
+      - name: P4 — Adaptive closed-loop journey
+        run: npm run test:decision-p4
+      - name: P5 — Final decision workflow contracts
+        run: npm run test:decision-p5
+      - name: Personal learning advice follow-up
+        run: npm run test:advisor:personal-learning
+      - name: Six-module Learning Network menu
+        run: npm run test:cp87:nav
+      - name: Atlas projection and historical-source safeguards
+        run: npm run test:cp88:projection-admissions
+      - name: TypeScript API and production build
+        run: npm run build
