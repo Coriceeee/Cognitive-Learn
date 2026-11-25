@@ -38,6 +38,6 @@ test('HCMUS 2026 programme list and combined-method cutoffs reconcile with offic
  assert.equal(cutoff?.cutoff,28.68);
  assert.equal(cutoff?.method,'HCMUS_COMPOSITE');
  assert.equal(cutoff?.source,HCMUS_CUTOFF_2026);
- assert.match(cutoff?.note ?? '',/điểm chuẩn công bố đã gồm điểm cộng/);
+ assert.match(cutoff?.note ?? '',/công bố đã gồm điểm cộng và điểm ưu tiên/);
  assert.equal(rows.some(p=>p.evidence.some(e=>e.kind==='THPT_PUBLISHED')),false);
 });
