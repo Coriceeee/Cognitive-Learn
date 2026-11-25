@@ -36,7 +36,7 @@ test('HCMUS 2026 programme list and combined-method cutoffs reconcile with offic
  }
  const ai=rows.find(p=>p.majorCode==='7480107');
  assert.equal(ai?.majorName,'Trí tuệ nhân tạo');
- const cutoff=nationalCutoffs.find(row=>row.universityId==='hcmus'&&row.code==='7480107');
+ const cutoff=nationalCutoffs.find(row=>row.universityId==='hcmus'&&row.code==='7480107'&&row.year===2026);
  assert.equal(cutoff?.cutoff,28.68);
  assert.equal(cutoff?.method,'HCMUS_COMPOSITE');
  assert.equal(cutoff?.source,HCMUS_CUTOFF_2026);
