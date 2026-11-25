@@ -83,3 +83,153 @@
   height: 42px;
   flex: 0 0 42px;
 }
+
+/* CP91 — Restore the reference Learning Network composition: map + live detail panel. */
+.student-dash .cla-circuit-heading {
+  align-items: center;
+}
+.student-dash .cla-circuit-counter {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.student-dash .cla-circuit-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.85fr) minmax(300px, .8fr);
+  min-width: 0;
+  border-top: 1px solid #E1EAF5;
+  background: #F6F9FE;
+}
+.student-dash .cla-circuit-map {
+  width: 100%;
+  min-width: 0;
+  min-height: clamp(360px, 34vw, 416px);
+}
+.student-dash .cla-circuit-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  min-width: 0;
+  padding: clamp(19px, 2vw, 24px);
+  background: #FFFFFF;
+  border-left: 1px solid #E0E9F4;
+}
+.student-dash .cla-circuit-detail-top {
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  letter-spacing: .1em;
+}
+.student-dash .cla-circuit-detail-core {
+  margin: 0;
+  padding: 19px 0;
+  border-top: 2px solid var(--node-primary, #3977ff);
+  border-bottom: 1px solid #E5ECF4;
+}
+.student-dash .cla-circuit-detail-identity {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-height: 48px;
+}
+.student-dash .cla-circuit-detail-identity img {
+  display: block;
+  width: 48px;
+  height: 48px;
+  padding: 5px;
+  flex: 0 0 48px;
+  object-fit: contain;
+  border: 1px solid var(--node-border, #dce7f7);
+  border-radius: 13px;
+  background: var(--node-soft, #f5f8ff);
+}
+.student-dash .cla-circuit-detail-core h3 {
+  margin: 14px 0 10px;
+  font-size: clamp(23px, 2.4vw, 34px);
+}
+.student-dash .cla-circuit-detail-core p {
+  max-width: 42ch;
+}
+.student-dash .cla-circuit-detail-links {
+  gap: 11px;
+}
+.student-dash .cla-circuit-detail-links > a {
+  min-height: 42px;
+  padding: 12px 15px;
+}
+.student-dash .cla-circuit-detail-links > small {
+  display: block;
+  color: #60758A;
+  font-size: 11px;
+  line-height: 1.55;
+}
+.student-dash .cla-circuit-node-logo {
+  width: 36px;
+  height: 36px;
+  flex-basis: 36px;
+}
+.student-dash .student-dash-extra-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0 24px;
+}
+.student-dash .student-dash-extra-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 40px;
+  padding: 9px 13px;
+  border: 1px solid #D8E3F0;
+  border-radius: 10px;
+  background: #FFFFFF;
+  color: #284D78;
+  font-size: 12px;
+  font-weight: 720;
+  box-shadow: 0 5px 16px -15px rgba(27, 65, 113, .5);
+  transition: background .16s, border-color .16s, transform .16s;
+}
+.student-dash .student-dash-extra-links a:hover,
+.student-dash .student-dash-extra-links a:focus-visible {
+  border-color: #AFC8E8;
+  background: #F4F8FE;
+  transform: translateY(-1px);
+}
+.student-dash .student-dash-extra-links a span {
+  color: #4775B4;
+  font-size: 13px;
+}
+@media (max-width: 1020px) and (min-width: 761px) {
+  .student-dash .cla-circuit-stage {
+    grid-template-columns: minmax(0, 1.35fr) minmax(240px, .8fr);
+  }
+  .student-dash .cla-circuit-map {
+    min-height: 396px;
+  }
+  .student-dash .cla-circuit-node {
+    width: 104px;
+    min-height: 80px;
+  }
+  .student-dash .cla-circuit-detail {
+    padding: 17px;
+  }
+  .student-dash .cla-circuit-detail-core h3 {
+    font-size: 24px;
+  }
+}
+@media (max-width: 760px) {
+  .student-dash .cla-circuit-counter { display: none; }
+  .student-dash .cla-circuit-stage { display: none; }
+  .student-dash .cla-circuit-mobile { display: block; }
+  .student-dash .student-dash-extra-links {
+    gap: 8px;
+    margin: 10px 0 19px;
+  }
+  .student-dash .student-dash-extra-links a {
+    flex: 1 1 145px;
+    justify-content: center;
+  }
+}
