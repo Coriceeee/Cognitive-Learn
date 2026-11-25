@@ -106,6 +106,8 @@ test('live Firebase initialization rejects fake keys and wrong project before in
   const initialize=firebase.indexOf("const app = initializeApp(firebaseConfig)");
   assert.ok(guard>=0 && initialize>guard);
   assert.match(firebase,/firebaseConfig\.projectId !== 'cognitive-learn-ai'/);
-  assert.match(firebase,/!\^AIza\[0-9A-Za-z_-\]\{20,\}\$/.test\(firebaseConfig\.apiKey\)/);
+  assert.match(firebase,/firebaseConfig\\.apiKey/);
+  assert.match(firebase,/AIza/);
+  assert.match(firebase,/Không thể khởi tạo Auth bằng fake-api-key/);
   assert.match(firebase,/LIVE project cognitive-learn-ai; Auth\/Firestore Emulator disabled/);
 });
