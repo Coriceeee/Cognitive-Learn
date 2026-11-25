@@ -41,5 +41,9 @@ jobs:
         run: npm run test:cp87:nav
       - name: Atlas projection and historical-source safeguards
         run: npm run test:cp88:projection-admissions
+      - name: P3 — National university pathways and source coverage
+        run: npm run test:cp42:national
+      - name: P3 — Institution discovery and exact school crosswalk
+        run: node --experimental-strip-types --test tests/cp42-institution-discovery.test.mjs
       - name: TypeScript API and production build
         run: npm run build
