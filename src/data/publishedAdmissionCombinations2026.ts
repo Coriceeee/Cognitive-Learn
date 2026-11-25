@@ -6,6 +6,7 @@
 export const CTU_SCHEME_2026='https://tuyensinh.ctu.edu.vn/tuyensinh/chuong-trinh-dai-tra/177-thong-tin/841-danh-muc-nganh-va-chi-tieu-tuyen-sinh-dhcq.html';
 export const AGU_SCHEME_2026='https://tuyensinh.agu.edu.vn/nganh-dao-tao';
 export const AGU_CNTT_2026='https://tuyensinh.agu.edu.vn/nganh-dao-tao/cong-nghe-thong-tin';
+export const UIT_SCHEME_2026='https://tuyensinh.uit.edu.vn/sites/default/files/uploads/files/202606/deancapnhathp.pdf';
 function index(rows:string):Readonly<Record<string,readonly string[]>> {
  const result:Record<string,string[]> = Object.create(null);
  for(const line of rows.trim().split('\n')){
@@ -99,4 +100,26 @@ export const aguCombinations2026=index(`
 7640101:A00 B00 B03 B08 D07 X12 X28 X65
 7229001:C00 D01 D15 X70
 7310630:C00 C03 D01 D14 D15
+`);
+
+export const uitCombinations2026=index(`
+7320104:A01 D01 X26 D09 D10 X02
+7340122:A00 A01 D01 D07 X06 X26
+7460108:A00 A01 D01 D07 X06 X26 A02
+7460108TA:A01 D01 X26 D07
+7480101:A00 A01 D01 D07 X06 X26
+7480101TA:A01 D01 X26 D07
+7480102:A00 A01 D01 D07 X06 X14 X26
+7480103:A00 A01 D01 D07 X06 X26
+7480103TA:A01 D01 X26 D07
+7480104:A00 A01 D01 D07 D08 X06 X26
+7480104TT:A01 D01 D07 D08 X26
+7480106:A00 A01 X06 X26
+7480107:A00 A01 D01 D07 X06 X26
+7480201:A00 A01 D01 D07 X06 X26
+7480201VN:A00 A01 D01 D06 D07 X06 X26
+7480202:A00 A01 D01 D07 X06 X26
+7480202TA:A01 D01 X26 D07
+75202A1:A00 A01 X06 X26
+75202A1TA:A01 X26
 `);
