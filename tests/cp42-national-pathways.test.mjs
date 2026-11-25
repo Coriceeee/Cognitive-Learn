@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {buildNationalPathwayCatalogue,matchNationalPathways2026,filterNationalPathways,officialPathwaySchools,safePathwayUrl} from '../src/lib/nationalAdmissionPathways2026.ts';
-import {nationalCutoffs} from '../src/lib/nationalAdmissionRegistry.ts';
+import {nationalCutoffs,answerNationalCutoff} from '../src/lib/nationalAdmissionRegistry.ts';
 import {ctuCombinations2026,aguCombinations2026} from '../src/data/publishedAdmissionCombinations2026.ts';
 import {hcmusCombinations2026,HCMUS_SCHEME_2026,HCMUS_CUTOFF_2026} from '../src/data/hcmusCombinations2026.ts';
 import {hcmusCutoffs2025,HCMUS_CUTOFF_2025} from '../src/data/hcmusCutoffs2025.ts';
@@ -100,4 +100,16 @@ test('UIT 2026 composite cutoff table preserves official 100-point scale and pro
  assert.deepEqual(aiHistory.filter(r=>r.year===2026).map(r=>[r.method,r.scale,r.cutoff]),[['UIT_2026_COMPOSITE',100,100]]);
  assert.deepEqual(aiHistory.filter(r=>r.year===2025).map(r=>[r.method,r.scale,r.cutoff]).sort(),[['UIT_2025_DGNL',1200,1098],['UIT_2025_THPT',30,29.6]].sort());
  assert.deepEqual(aiHistory.filter(r=>r.year===2024).map(r=>[r.method,r.scale,r.cutoff]).sort(),[['UIT_2024_DGNL',1200,980],['UIT_2024_THPT',30,28.3]].sort());
+});
+
+test('UIT method-specific historical lookup never mixes THPT, DGNL and composite scales',()=>{
+ const thpt2025=answerNationalCutoff('Điểm chuẩn UIT Trí tuệ nhân tạo 2025 THPT');
+ const dgnl2025=answerNationalCutoff('Điểm chuẩn UIT Trí tuệ nhân tạo 2025 ĐGNL');
+ const composite2026=answerNationalCutoff('Điểm chuẩn UIT Trí tuệ nhân tạo 2026 tổng hợp');
+ assert.match(thpt2025?.answer??'',/29\.60\/30 điểm/);
+ assert.match(dgnl2025?.answer??'',/1098\.00\/1200 điểm/);
+ assert.match(composite2026?.answer??'',/100\.00\/100 điểm/);
+ assert.ok(thpt2025?.source?.includes('tuyensinh.uit.edu.vn'));
+ assert.ok(dgnl2025?.source?.includes('tuyensinh.uit.edu.vn'));
+ assert.ok(composite2026?.source?.includes('tuyensinh.uit.edu.vn'));
 });
