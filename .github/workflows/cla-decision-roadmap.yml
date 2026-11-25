@@ -47,3 +47,12 @@ jobs:
         run: node --experimental-strip-types --test tests/cp42-institution-discovery.test.mjs
       - name: TypeScript API and production build
         run: npm run build
+      - name: Package complete tracked repository source
+        run: git archive --format=zip --output=Cognitive-Learn-FULL.zip HEAD
+      - name: Upload full source ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: Cognitive-Learn-FULL-${{ github.sha }}
+          path: Cognitive-Learn-FULL.zip
+          if-no-files-found: error
+          retention-days: 7
