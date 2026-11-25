@@ -103,7 +103,7 @@ export function compareProjectionToHistoricalCutoffs({
         // A row is relevant only when all three projected subject marks exist.
         // Their sum is deliberately not compared with a published cutoff.
         if (!values.every(observed)) continue;
-        const schemeSource = safePathwayUrl(item.source) ?? safePathwayUrl(program.sourceUrl);
+        const schemeSource = safePathwayUrl(item.source);
         if (!schemeSource) continue;
         const id = [cutoff.universityId, cutoff.campus, cutoff.code, cutoff.method, item.code].join("|");
         if (seen.has(id)) continue;
