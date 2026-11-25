@@ -99,3 +99,13 @@ test('normal dev launcher never opts into Firebase Emulator; QA launcher is expl
   assert.match(launcher,/if \(qa\) process\.env\.CLA_FIREBASE_QA = 'true'/);
   assert.match(launcher,/mode: qa \? 'development' : 'live'/);
 });
+
+test('live Firebase initialization rejects fake keys and wrong project before initializeApp',()=>{
+  const firebase=readFileSync(new URL('../src/lib/firebase.ts',import.meta.url),'utf8');
+  const guard=firebase.indexOf("if (!__CLA_FIREBASE_QA__)");
+  const initialize=firebase.indexOf("const app = initializeApp(firebaseConfig)");
+  assert.ok(guard>=0 && initialize>guard);
+  assert.match(firebase,/firebaseConfig\.projectId !== 'cognitive-learn-ai'/);
+  assert.match(firebase,/!\^AIza\[0-9A-Za-z_-\]\{20,\}\$/.test\(firebaseConfig\.apiKey\)/);
+  assert.match(firebase,/LIVE project cognitive-learn-ai; Auth\/Firestore Emulator disabled/);
+});
