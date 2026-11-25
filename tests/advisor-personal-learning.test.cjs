@@ -33,10 +33,10 @@ test('ranks only complete subjects from the same latest semester and gives concr
   ])),'student-A').answer;
   assert.match(answer,/Lớp 12 · Học kỳ II/);
   assert.match(answer,/Toán: 5\.8\/10/);
-  assert.match(answer,/ưu tiên trước/);
-  assert.match(answer,/Kế hoạch tuần được tính từ dữ liệu của bạn/);
+  assert.match(answer,/ưu tiên rà soát trước/);
+  assert.match(answer,/KẾ HOẠCH TUẦN ĐƯỢC TÍNH TỪ DỮ LIỆU CỦA BẠN/);
   assert.match(answer,/chưa có số giờ học\/tuần đã xác minh/);
-  assert.match(answer,/Cuối tuần làm một bài kiểm tra ngắn/);
+  assert.match(answer,/làm một bài kiểm tra ngắn theo chuyên đề và ghi lại nhóm lỗi/);
   assert.doesNotMatch(answer,/CLA-K08|src\/engines|UNKNOWN/);
   assert.doesNotMatch(answer,/Tiếng Anh: 0/);
 });
@@ -83,9 +83,9 @@ test('weekly hours and completion rate drive the actual schedule allocation',()=
   const answer=answerPersonalLearningAdvice(context,'student-A').answer;
   assert.match(answer,/10\.0 giờ\/tuần/);
   assert.match(answer,/7\.5 giờ\/tuần/);
-  assert.match(answer,/Toán 3\.7 giờ/);
-  assert.match(answer,/Vật lý 3\.0 giờ/);
-  assert.match(answer,/Hóa học 0\.8 giờ/);
+  assert.match(answer,/Toán: 5\.8\/10 · khoảng 3\.7 giờ mỗi tuần/);
+  assert.match(answer,/Vật lý: 6\.2\/10 · khoảng 3\.0 giờ mỗi tuần/);
+  assert.match(answer,/Hóa học: 7\.4\/10 · khoảng 0\.8 giờ mỗi tuần/);
   assert.match(answer,/hoàn thành kế hoạch hiện ghi nhận 40%/);
   assert.match(answer,/2\.0 bài thi thử\/tuần/);
   assert.match(answer,/động lực tự báo cáo là 30\/100/);
@@ -187,6 +187,6 @@ test('focused-subject scenario never invents a timetable when weekly hours are m
   const context=makeContext(makeState([row('Toán',5.8),row('Vật lý',6.2)]));
   const focused=answerPersonalLearningAdvice(context,'student-A',{focusLowestSubject:true}).answer;
   assert.match(focused,/môn có điểm thấp nhất/);
-  assert.match(focused,/chưa có quỹ giờ học\/tuần đã xác minh/);
+  assert.match(focused,/chưa có số giờ học\/tuần đã xác minh/);
   assert.doesNotMatch(focused,/khoảng \d+\.\d giờ mỗi tuần/);
 });
