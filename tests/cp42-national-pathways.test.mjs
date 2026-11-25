@@ -6,10 +6,11 @@ import {ctuCombinations2026,aguCombinations2026} from '../src/data/publishedAdmi
 import {hcmusCombinations2026,HCMUS_SCHEME_2026,HCMUS_CUTOFF_2026} from '../src/data/hcmusCombinations2026.ts';
 import {hcmusCutoffs2025,HCMUS_CUTOFF_2025} from '../src/data/hcmusCutoffs2025.ts';
 import {uitHistoricalCutoffs} from '../src/data/uitHistoricalCutoffs.ts';
+import {uitCompositeCutoffs2026,UIT_CUTOFF_2026_SOURCE} from '../src/data/uitCutoffs2026.ts';
 import {officialUniversities} from '../src/data/officialAdmissionSources.ts';
 const catalogue=buildNationalPathwayCatalogue();
 const report=(pair,scores={},target='')=>matchNationalPathways2026(catalogue,pair,scores,target);
-test('catalogue spans all current national records without changing cutoff facts',()=>{assert.equal(nationalCutoffs.length,1537);assert.equal(catalogue.length,618);assert.equal(new Set(catalogue.map(p=>p.universityId)).size,20);assert.equal(new Set(catalogue.map(p=>p.id)).size,618);assert.equal(officialPathwaySchools.length,32);assert.equal(catalogue.filter(p=>p.evidence.length).length,412);});
+test('catalogue spans all current national records without changing cutoff facts',()=>{assert.equal(nationalCutoffs.length,1556);assert.equal(catalogue.length,618);assert.equal(new Set(catalogue.map(p=>p.universityId)).size,20);assert.equal(new Set(catalogue.map(p=>p.id)).size,618);assert.equal(officialPathwaySchools.length,32);assert.equal(catalogue.filter(p=>p.evidence.length).length,412);});
 test('CTU and AGU official code additions exactly reconcile with 2026 inventory',()=>{for(const [school,data,len,kind] of [['ctu',ctuCombinations2026,127,'THPT_PUBLISHED'],['agu',aguCombinations2026,43,'COMPOSITE_PUBLISHED']]){const rows=catalogue.filter(p=>p.universityId===school);assert.equal(rows.length,len);assert.deepEqual(rows.map(p=>p.majorCode).sort(),Object.keys(data).sort());for(const p of rows){assert.deepEqual(p.evidence.map(e=>e.code),data[p.majorCode]);assert.ok(p.evidence.every(e=>e.kind===kind));}}});
 test('physics English returns multiple schools, not PTIT only',()=>{const r=report(['physics','english']);assert.equal(r.matches.length,288);assert.deepEqual(Object.fromEntries(r.schools.filter(s=>s.matched).map(s=>[s.id,s.matched])),{ctu:98,qnu:37,agu:31,usshhn:29,htu:19,ptit:10,tnue:4,dthu:32,hcmus:28});assert.equal(r.unconfirmedCount,223);});
 test('social pair can return entirely non-PTIT schools',()=>{const r=report(['history','geography']);assert.equal(r.matches.length,104);assert.ok(r.matches.every(p=>p.universityId!=='ptit'));assert.equal(r.schools.filter(s=>s.matched).length,8);});
@@ -86,4 +87,17 @@ test('UIT 2024-2025 published THPT and DGNL cutoffs retain their exact method sc
  const school=officialUniversities.find(u=>u.id==='uit');
  assert.equal(school?.years.find(y=>y.year===2024)?.detailsStatus,'institution_method_verified');
  assert.equal(school?.years.find(y=>y.year===2025)?.detailsStatus,'institution_method_verified');
+});
+
+test('UIT 2026 composite cutoff table preserves official 100-point scale and programme variants',()=>{
+ assert.equal(uitCompositeCutoffs2026.length,19);
+ assert.ok(uitCompositeCutoffs2026.every(r=>r.year===2026&&r.scale===100&&r.source===UIT_CUTOFF_2026_SOURCE));
+ assert.equal(uitCompositeCutoffs2026.find(r=>r.code==='7480107')?.cutoff,100);
+ assert.equal(uitCompositeCutoffs2026.find(r=>r.code==='7480101TA')?.cutoff,85);
+ assert.equal(uitCompositeCutoffs2026.find(r=>r.code==='75202A1TA')?.cutoff,80);
+ assert.ok(uitCompositeCutoffs2026.every(r=>/thang 100/.test(r.note)&&/điểm cộng và điểm ưu tiên/.test(r.note)));
+ const aiHistory=nationalCutoffs.filter(r=>r.universityId==='uit'&&r.code==='7480107');
+ assert.deepEqual(aiHistory.filter(r=>r.year===2026).map(r=>[r.method,r.scale,r.cutoff]),[['UIT_2026_COMPOSITE',100,100]]);
+ assert.deepEqual(aiHistory.filter(r=>r.year===2025).map(r=>[r.method,r.scale,r.cutoff]).sort(),[['UIT_2025_DGNL',1200,1098],['UIT_2025_THPT',30,29.6]].sort());
+ assert.deepEqual(aiHistory.filter(r=>r.year===2024).map(r=>[r.method,r.scale,r.cutoff]).sort(),[['UIT_2024_DGNL',1200,980],['UIT_2024_THPT',30,28.3]].sort());
 });
