@@ -15,7 +15,11 @@ export default defineConfig(({ command }) => {
 
   return {
     plugins: [react(), claGeminiDevApi()],
-    define: firebaseDefines,
+    define: {
+      ...firebaseDefines,
+      // Compile-time gate: stale VITE_* files cannot turn on Auth/Firestore emulators.
+      __CLA_FIREBASE_QA__: JSON.stringify(qaOptIn),
+    },
     build: {
       rolldownOptions: {
         output: {
