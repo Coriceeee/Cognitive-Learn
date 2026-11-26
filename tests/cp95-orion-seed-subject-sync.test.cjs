@@ -11,7 +11,7 @@ test('Orion derives its displayed subject list from the verified Seed transcript
   assert.match(page,/activeSubjectKeys\.map/);
   assert.doesNotMatch(page,/const subjectLabels: Record<ScoreKey/);
   assert.doesNotMatch(page,/Orion hiện hỗ trợ sáu môn/);
-  assert.match(curriculum,/currentSubjects: subjects/);
+  assert.match(curriculum,/const currentSubjects = subjects;/);
 });
 
 test('Orion keeps legacy draft keys while supporting Seed subjects outside the old six-subject list',()=>{
