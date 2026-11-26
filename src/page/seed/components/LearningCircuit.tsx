@@ -55,11 +55,10 @@ export default function LearningCircuit({ profilePath }: { profilePath: string }
       <ol className="cla-primary-journey__steps">
         {primaryLinks.map((item,i) => {
           const isActive = active === i;
-          const href = item.code === "SEED" ? profilePath : item.href;
           return <li key={item.code}>
             <a
               className={`cla-primary-journey__step cla-primary-journey__step--${item.code.toLowerCase()}`}
-              href={href}
+              href={item.code==="SEED"?profilePath:item.href}
               onFocus={() => setActive(i)}
               onMouseEnter={() => setActive(i)}
               aria-current={isActive ? "step" : undefined}
