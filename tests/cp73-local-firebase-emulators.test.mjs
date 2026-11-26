@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {resolveLocalFirebaseEmulators as resolve} from '../src/lib/localFirebaseEmulators.ts';
+import {resolveLiveFirebaseDefines} from '../tools/cla_vite_firebase_env.ts';
 
 const safe = {
   enabled: 'true', mode: 'development', hostname: '127.0.0.1', protocol: 'http:',
@@ -40,4 +41,72 @@ test('QA template does not contain a real Firebase key or an application secret'
   const template=readFileSync(new URL('../.env.mvp-qa.example',import.meta.url),'utf8');
   for (const value of ['VITE_USE_FIREBASE_EMULATORS=true', 'VITE_FIREBASE_PROJECT_ID=demo-cla-mvp', 'VITE_FIREBASE_API_KEY=fake-api-key']) assert.ok(template.includes(value));
   assert.doesNotMatch(template,/^GEMINI_API_KEY=[^#\s]/m);
+});
+
+test('plain npm run dev uses real Firebase live env; emulator stays opt-in via dev:qa',()=>{
+  const pkg=JSON.parse(readFileSync(new URL('../package.json',import.meta.url),'utf8'));
+  assert.equal(pkg.scripts.dev,'vite --mode live --open');
+  assert.equal(pkg.scripts['dev:qa'],'vite --mode development --open');
+});
+
+const liveEnv = {
+  VITE_FIREBASE_API_KEY: 'AIzaSyA123456789012345678901234567890123',
+  VITE_FIREBASE_AUTH_DOMAIN: 'cognitive-learn-ai.firebaseapp.com',
+  VITE_FIREBASE_PROJECT_ID: 'cognitive-learn-ai',
+  VITE_FIREBASE_STORAGE_BUCKET: 'cognitive-learn-ai.appspot.com',
+  VITE_FIREBASE_MESSAGING_SENDER_ID: '123456789',
+  VITE_FIREBASE_APP_ID: '1:123456789:web:abcdef123456',
+  VITE_USE_FIREBASE_EMULATORS: 'true',
+};
+
+test('normal local Vite serve pins all Firebase values to LIVE and disables stale Emulator flags',()=>{
+  const defines=resolveLiveFirebaseDefines('serve',false,liveEnv);
+  assert.equal(JSON.parse(defines['import.meta.env.VITE_FIREBASE_PROJECT_ID']),'cognitive-learn-ai');
+  assert.equal(JSON.parse(defines['import.meta.env.VITE_FIREBASE_API_KEY']),liveEnv.VITE_FIREBASE_API_KEY);
+  assert.equal(JSON.parse(defines['import.meta.env.VITE_USE_FIREBASE_EMULATORS']),'false');
+});
+
+test('Firebase Emulator is available only through explicit QA launcher opt-in',()=>{
+  assert.deepEqual(resolveLiveFirebaseDefines('serve',true,{}),{});
+  assert.deepEqual(resolveLiveFirebaseDefines('build',false,{}),{});
+});
+
+test('normal local Vite serve fails fast instead of using fake or wrong Firebase credentials',()=>{
+  assert.throws(()=>resolveLiveFirebaseDefines('serve',false,{...liveEnv,VITE_FIREBASE_API_KEY:'fake-api-key'}),/Web API key Firebase hợp lệ/);
+  assert.throws(()=>resolveLiveFirebaseDefines('serve',false,{...liveEnv,VITE_FIREBASE_PROJECT_ID:'demo-cla-mvp'}),/cognitive-learn-ai/);
+  assert.throws(()=>resolveLiveFirebaseDefines('serve',false,{...liveEnv,VITE_FIREBASE_APP_ID:''}),/VITE_FIREBASE_AUTH_DOMAIN hoặc VITE_FIREBASE_APP_ID/);
+});
+
+test('npm run dev uses guarded LIVE launcher and dev:qa is explicitly separate',()=>{
+  const pkg=JSON.parse(readFileSync(new URL('../package.json',import.meta.url),'utf8'));
+  assert.equal(pkg.scripts.dev,'node tools/cla_vite_dev.mjs');
+  assert.equal(pkg.scripts['dev:qa'],'node tools/cla_vite_dev.mjs --qa');
+});
+
+test('Firebase emulator activation is compile-time gated by the dedicated QA launcher, not VITE env files',()=>{
+  const firebase=readFileSync(new URL('../src/lib/firebase.ts',import.meta.url),'utf8');
+  const vite=readFileSync(new URL('../vite.config.ts',import.meta.url),'utf8');
+  const types=readFileSync(new URL('../src/vite-env.d.ts',import.meta.url),'utf8');
+  assert.match(vite,/__CLA_FIREBASE_QA__:\s*JSON\.stringify\(qaOptIn\)/);
+  assert.match(firebase,/enabled:\s*__CLA_FIREBASE_QA__\s*\?\s*'true'\s*:\s*'false'/);
+  assert.doesNotMatch(firebase,/enabled:\s*import\.meta\.env\.VITE_USE_FIREBASE_EMULATORS/);
+  assert.match(types,/declare const __CLA_FIREBASE_QA__:\s*boolean/);
+});
+
+test('normal dev launcher never opts into Firebase Emulator; QA launcher is explicit',()=>{
+  const launcher=readFileSync(new URL('../tools/cla_vite_dev.mjs',import.meta.url),'utf8');
+  assert.match(launcher,/const qa = process\.argv\.includes\('--qa'\)/);
+  assert.match(launcher,/if \(qa\) process\.env\.CLA_FIREBASE_QA = 'true'/);
+  assert.match(launcher,/mode: qa \? 'development' : 'live'/);
+});
+
+test('live Firebase initialization rejects fake keys and wrong project before initializeApp',()=>{
+  const firebase=readFileSync(new URL('../src/lib/firebase.ts',import.meta.url),'utf8');
+  const guard=firebase.indexOf("if (!__CLA_FIREBASE_QA__)");
+  const initialize=firebase.indexOf("const app = initializeApp(firebaseConfig)");
+  assert.ok(guard>=0 && initialize>guard);
+  assert.match(firebase,/firebaseConfig\.projectId !== 'cognitive-learn-ai'/);
+  assert.match(firebase,/AIza/);
+  assert.match(firebase,/Không thể khởi tạo Auth bằng fake-api-key/);
+  assert.match(firebase,/LIVE project cognitive-learn-ai; Auth\/Firestore Emulator disabled/);
 });

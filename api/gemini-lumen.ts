@@ -1,3 +1,5 @@
+import { Buffer } from "buffer";
+import process from "process";
 import { guardedJson, GeminiTransportError, visibleGeminiText } from "./geminiTransport.ts";
 import type { VercelRequest, VercelResponse } from "./vercelTypes";
 
@@ -517,7 +519,7 @@ function allowConfiguredOrigin(req: VercelRequest, res: VercelResponse): boolean
   // Match exact origins, including protocol and port (e.g. localhost:5173).
   const allowed = (process.env.CORS_ALLOWED_ORIGINS ?? "")
     .split(",")
-    .map((value) => value.trim().replace(/\/$/, ""))
+    .map((value: string) => value.trim().replace(/\/$/, ""))
     .filter(Boolean);
   if (!allowed.includes(origin)) return false;
   res.setHeader("Access-Control-Allow-Origin", origin);

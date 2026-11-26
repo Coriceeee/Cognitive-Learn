@@ -5,6 +5,8 @@ import { ADVISOR_PAGE_CONTEXTS, normaliseAdvisorHistory, prepareAdvisorMessage, 
 import { isDomesticAdmissionQuestion } from "../src/lib/advisorAdmissionAnswers";
 import { answerClaKnowledge } from "../src/lib/claKnowledgeRetrieval";
 import { answerVerifiedCutoff } from "../src/lib/atlasDecisionComparison";
+import { Buffer } from "buffer";
+import process from "process";
 
 type Plain = Record<string, unknown>;
 const asRecord = (x: unknown): Plain | null => x && typeof x === "object" && !Array.isArray(x) ? x as Plain : null;
