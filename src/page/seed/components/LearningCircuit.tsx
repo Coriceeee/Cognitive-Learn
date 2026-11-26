@@ -26,7 +26,7 @@ const links: Link[] = [
 ];
 
 const quickLinks = [
-  { label:"Trợ lý tư vấn tuyển sinh", href:"/atlas#atlas-assistant" },
+  { label:"Công cụ tư vấn tuyển sinh", href:"/atlas#atlas-engine" },
   { label:"Tìm nhanh chức năng", href:"/student/modules" },
   { label:"Hướng dẫn sử dụng", href:"/student/guide" },
   { label:"Nhật ký học tập", href:"/student/companion" },
