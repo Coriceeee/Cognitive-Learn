@@ -17,10 +17,10 @@ test("CP37-01: student guide route is registered and allowed for students", () =
 });
 
 test("CP37-02: dashboard and task finder link to the practical operating guide", () => {
-  const dashboard = read("src/page/seed/StudentPage.tsx");
+  const dashboard = read("src/page/seed/components/LearningCircuit.tsx");
   const finder = read("src/page/seed/StudentModulesPage.tsx");
-  assert.ok(dashboard.includes('href: "/student/guide"'));
-  assert.ok(dashboard.includes('href="/student/guide"'));
+  assert.ok(dashboard.includes('href:"/student/guide"'));
+  assert.ok(dashboard.includes('label:"Hướng dẫn sử dụng"'));
   assert.ok(finder.includes('href="/student/guide"'));
 });
 
