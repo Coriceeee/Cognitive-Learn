@@ -39,6 +39,8 @@ jobs:
         run: npm run test:advisor:personal-learning
       - name: Six-module Learning Network menu
         run: npm run test:cp87:nav
+      - name: CP94 first-run admissions journey and preserved six-module navigation
+        run: npm run test:cp94:student-first-run
       - name: Atlas projection and historical-source safeguards
         run: npm run test:cp88:projection-admissions
       - name: P3 — National university pathways and source coverage
