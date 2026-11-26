@@ -381,7 +381,7 @@ export default function OrionPage() {
             <p>Chọn đúng 3 môn đã nhập điểm hiện tại và nhập tổng điểm mục tiêu tự đặt (0–30, không cộng ưu tiên). Phân bổ đều phần điểm còn thiếu, tối đa 10/môn; không phải dự báo hay điểm chuẩn.</p>
             <div role="group" aria-label="Ba môn mục tiêu">{activeSubjectKeys.map(key=><label key={key}><input type="checkbox" checked={gapSubjects.includes(key)} disabled={!gapSubjects.includes(key)&&gapSubjects.length>=3} onChange={e=>setGapSubjects(old=>e.target.checked?[...old,key]:old.filter(k=>k!==key))}/>{activeSubjectLabels[key]} </label>)}</div>
             <label>Tổng mục tiêu /30 <input inputMode="decimal" value={gapTotal} onChange={e=>setGapTotal(e.target.value)} placeholder="VD: 24"/></label>
-            {gapResult && (gapResult.status==="READY" || gapResult.status==="ALREADY_MET") ? <div role="status"><p>Tổng hiện tại: {gapResult.currentTotal} · Khoảng cách: {gapResult.gap} điểm</p><p>{gapSubjects.map(k=>`${subjectLabels[k]}: ${gapResult.targets[k]}`).join(" · ")}</p><button type="button" disabled={saving||draftConflict||(saveStatus!=="ready"&&saveStatus!=="empty")||!draftOwnerUid||auth.currentUser?.uid!==draftOwnerUid} onClick={()=>{
+            {gapResult && (gapResult.status==="READY" || gapResult.status==="ALREADY_MET") ? <div role="status"><p>Tổng hiện tại: {gapResult.currentTotal} · Khoảng cách: {gapResult.gap} điểm</p><p>{gapSubjects.map(k=>`${activeSubjectLabels[k]}: ${gapResult.targets[k]}`).join(" · ")}</p><button type="button" disabled={saving||draftConflict||(saveStatus!=="ready"&&saveStatus!=="empty")||!draftOwnerUid||auth.currentUser?.uid!==draftOwnerUid} onClick={()=>{
               if(!window.confirm("Dùng phân bổ này và xóa mục tiêu điểm cũ ngoài tổ hợp?"))return;
               if(advisorReady&&draftOwnerUid) setAdvisorGap(captureAdvisorDecision(draftOwnerUid,{kind:"gap",subjects:gapSubjects.map(subject=>({subject,score:readNumber(scores[subject],0,10)!})),target:readNumber(gapTotal,0,30)!}));
               markLocalEdit();setTargets({...defaultTargets,...Object.fromEntries(gapSubjects.map(k=>[k,String(gapResult.targets[k])]))});
@@ -400,9 +400,9 @@ export default function OrionPage() {
             </p>
           )}
           <div className="orion-score-table">
-            {(Object.keys(subjectLabels) as ScoreKey[]).map((key) => (
+            {(activeSubjectKeys).map((key) => (
               <div key={key}>
-                <strong>{subjectLabels[key]}</strong>
+                <strong>{activeSubjectLabels[key]}</strong>
 
                 <label>
                   <span>Hiện tại</span>
@@ -465,8 +465,8 @@ export default function OrionPage() {
           resultHref="/orion/scenarios" resultLabel="Mở mô phỏng chiến lược" canSimulate={hasInputs}
           note="Cần thời hạn hợp lệ và ít nhất một môn có cả điểm hiện tại lẫn mục tiêu. Các ô còn trống không được diễn giải là điểm 0. Đây không phải thang đo năng lực."
           groups={[
-            { key: "now", title: "Điểm hiện tại (0–10)", fields: (Object.keys(subjectLabels) as ScoreKey[]).map(key => ({ key: `now-${key}`, label: subjectLabels[key], value: scores[key] ?? "", min: 0, max: 10 })) },
-            { key: "target", title: "Điểm mục tiêu (0–10)", fields: (Object.keys(subjectLabels) as ScoreKey[]).map(key => ({ key: `target-${key}`, label: subjectLabels[key], value: targets[key] ?? "", min: 0, max: 10 })) },
+            { key: "now", title: "Điểm hiện tại (0–10)", fields: (activeSubjectKeys).map(key => ({ key: `now-${key}`, label: activeSubjectLabels[key], value: scores[key] ?? "", min: 0, max: 10 })) },
+            { key: "target", title: "Điểm mục tiêu (0–10)", fields: (activeSubjectKeys).map(key => ({ key: `target-${key}`, label: activeSubjectLabels[key], value: targets[key] ?? "", min: 0, max: 10 })) },
             { key: "planning", title: "Thời hạn & ngành định hướng", fields: [
               { key: "weeks", label: "Số tuần còn lại", value: weeksLeft, min: 1, max: 104, integer: true },
               { key: "major", label: "Ngành mục tiêu", value: targetMajor },
@@ -599,7 +599,7 @@ export default function OrionPage() {
           subjects: subjects.map(s => ({key:s.subject,label:s.label,baseline:s.currentScore,target:s.targetScore})),
           scenarios: eligibleScenarios, draftReady:advisorReady && !saving,
           applyReviewedScores:(owner:string,review:ContinuityResult)=>{
-            if(!advisorReady || saving || auth.currentUser?.uid!==owner || draftOwnerUid!==owner || review.status!=="READY_TO_COPY" || !review.rows.length || review.rows.length!==subjects.length || !review.rows.every(r=>Object.prototype.hasOwnProperty.call(subjectLabels,r.key)&&subjects.some(s=>s.subject===r.key&&s.currentScore===r.current&&s.targetScore===r.target)&&Number.isFinite(r.observed)&&r.observed>=0&&r.observed<=10))throw new Error("Bản nháp hoặc tài khoản đã thay đổi. Hãy đồng bộ và thử lại.");
+            if(!advisorReady || saving || auth.currentUser?.uid!==owner || draftOwnerUid!==owner || review.status!=="READY_TO_COPY" || !review.rows.length || review.rows.length!==subjects.length || !review.rows.every(r=>Object.prototype.hasOwnProperty.call(activeSubjectLabels,r.key)&&subjects.some(s=>s.subject===r.key&&s.currentScore===r.current&&s.targetScore===r.target)&&Number.isFinite(r.observed)&&r.observed>=0&&r.observed<=10))throw new Error("Bản nháp hoặc tài khoản đã thay đổi. Hãy đồng bộ và thử lại.");
             markLocalEdit(); setAdvisorGap(null);
             setScores(current=>{const next={...current}; for(const row of review.rows)next[row.key as ScoreKey]=String(row.observed);return next;});
           } } : undefined} />}
