@@ -10,6 +10,12 @@ on:
       - "package-lock.json"
       - "tsconfig*.json"
       - "vite.config.*"
+      - "tools/**"
+      - "functions-gemini/**"
+      - "firebase*.json"
+      - "CP93_SOURCE_MANIFEST.json"
+      - "*.cmd"
+      - "*.ps1"
   workflow_dispatch:
 jobs:
   verify:
@@ -27,6 +33,8 @@ jobs:
         run: npm ci --no-audit --no-fund
       - name: Check source layout
         run: npm run check:layout
+      - name: CP93 source integrity (Windows line-ending safe)
+        run: node tools/verify-cp93-snapshot.cjs
       - name: P2 — Goal Gap Optimizer and Decision Snapshot
         run: npm run test:decision-p2
       - name: P3 — Personal decision context and admission handoff
