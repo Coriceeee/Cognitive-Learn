@@ -10,6 +10,7 @@ test('first-time students see the core Seed → Lumen → Atlas → Orion journe
   const page=read('src/page/seed/StudentPage.tsx');
   const circuit=read('src/page/seed/components/LearningCircuit.tsx');
   const lumenJourney=read('src/page/lumen/components/LumenObservationJourney.tsx');
+  const orion=read('src/page/orion/OrionPage.tsx');
   assert.match(page,/Bắt đầu từ hồ sơ và bảng điểm/);
   assert.match(circuit,/const \[active, setActive\] = useState\(0\)/);
   assert.match(circuit,/Lần đầu sử dụng, hãy bắt đầu từ SEED → LUMEN → ATLAS → ORION/);
@@ -18,6 +19,12 @@ test('first-time students see the core Seed → Lumen → Atlas → Orion journe
   assert.match(circuit,/Không suy ra xác suất đỗ/);
   assert.match(circuit,/trung bình của hai bài thi thử/);
   assert.match(lumenJourney,/href="\/lumen\/advanced" className="cla-ux-heading-action">Ước lượng điểm thi/);
+  assert.match(orion,/getLatestSubjectGrades\(transcript\.data\)/);
+  assert.match(orion,/seedSubjectGrades\.map\(grade => grade\.subject\)/);
+  assert.match(orion,/Danh sách môn lấy theo hồ sơ SEED đã xác minh/);
+  assert.match(orion,/không tự đồng bộ lại hoặc ghi đè chỉnh sửa của bạn/);
+  assert.match(orion,/seedSyncVersion === 1/);
+  assert.doesNotMatch(orion,/keyBySubject: Record<string, ScoreKey>/);
 });
 
 test('the six approved module labels, order and destinations remain unchanged',()=>{
