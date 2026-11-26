@@ -112,33 +112,6 @@ export default function OrionPage() {
     setAdmissionGoal(readAdmissionGoal(draftOwnerUid));
   }, [draftOwnerUid]);
   const seededFromTranscript = useRef<string | null>(null);
-  useEffect(() => {
-    if (!transcript.data) return;
-    const supportedGrades = seedSubjectGrades.filter(grade => grade.provisional !== null);
-    if (!canImportSeedSnapshotOnce({
-      draftOwnerUid, transcriptOwnerUid: transcript.userId,
-      draftStatus: saveStatus, transcriptStatus: transcript.status,
-      seededOwnerUid: seededFromTranscript.current,
-      hasSupportedGrades: supportedGrades.length > 0,
-      hasLocalEdits: dirtyRevision.current,
-      hasSnapshotMarker: savedDraft?.seedSyncVersion === 1,
-    })) return;
-
-    // Snapshot the locked Seed curriculum once. Upgrade legacy drafts by
-    // preserving existing values and filling only subjects that are missing.
-    seededFromTranscript.current = draftOwnerUid;
-    const nextScores = normalizeSubjectValues(savedDraft?.scores);
-    for (const grade of supportedGrades) {
-      if (!nextScores[grade.subject]?.trim()) nextScores[grade.subject] = String(grade.provisional);
-    }
-    setScores(nextScores);
-    setTargets(normalizeSubjectValues(savedDraft?.targets));
-    setSeedSyncVersion(1);
-    setSeedSubjectsSnapshot(seedSubjectNames);
-    markLocalEdit();
-    setSaveNoticeTone("success");
-    setSaveNotice("Đã lấy điểm và danh sách môn từ SEED một lần. ORION lưu bản riêng, không tự đồng bộ lại.");
-  }, [transcript.data, transcript.userId, transcript.status, draftOwnerUid, saveStatus, savedDraft, seedSubjectGrades, seedSubjectNames]);
 
   const [saveNotice, setSaveNotice] = useState("");
   const [saveNoticeTone, setSaveNoticeTone] = useState<"success" | "warning" | "error">("success");
@@ -214,7 +187,7 @@ export default function OrionPage() {
       if (autosaveTimer.current !== null) window.clearTimeout(autosaveTimer.current);
       autosaveTimer.current = null;
     };
-  }, [hasLocalEdits, saveStatus, targetMajor, weeksLeft, scores, targets]);
+  }, [hasLocalEdits, saveStatus, targetMajor, weeksLeft, scores, targets, seedSyncVersion, seedSubjectsSnapshot]);
 
   function markLocalEdit() {
     markEditing();
@@ -225,6 +198,33 @@ export default function OrionPage() {
     setSaveNotice("");
   }
 
+  useEffect(() => {
+    if (!transcript.data) return;
+    const supportedGrades = seedSubjectGrades.filter(grade => grade.provisional !== null);
+    if (!canImportSeedSnapshotOnce({
+      draftOwnerUid, transcriptOwnerUid: transcript.userId,
+      draftStatus: saveStatus, transcriptStatus: transcript.status,
+      seededOwnerUid: seededFromTranscript.current,
+      hasSupportedGrades: supportedGrades.length > 0,
+      hasLocalEdits: dirtyRevision.current,
+      hasSnapshotMarker: savedDraft?.seedSyncVersion === 1,
+    })) return;
+
+    // Snapshot the locked Seed curriculum once. Upgrade legacy drafts by
+    // preserving existing values and filling only subjects that are missing.
+    seededFromTranscript.current = draftOwnerUid;
+    const nextScores = normalizeSubjectValues(savedDraft?.scores);
+    for (const grade of supportedGrades) {
+      if (!nextScores[grade.subject]?.trim()) nextScores[grade.subject] = String(grade.provisional);
+    }
+    setScores(nextScores);
+    setTargets(normalizeSubjectValues(savedDraft?.targets));
+    setSeedSyncVersion(1);
+    setSeedSubjectsSnapshot(seedSubjectNames);
+    markLocalEdit();
+    setSaveNoticeTone("success");
+    setSaveNotice("Đã lấy điểm và danh sách môn từ SEED một lần. ORION lưu bản riêng, không tự đồng bộ lại.");
+  }, [transcript.data, transcript.userId, transcript.status, draftOwnerUid, saveStatus, savedDraft, seedSubjectGrades, seedSubjectNames]);
   async function saveCurrentDraft() {
     if (autosaveTimer.current !== null) window.clearTimeout(autosaveTimer.current);
     autosaveTimer.current = null;
