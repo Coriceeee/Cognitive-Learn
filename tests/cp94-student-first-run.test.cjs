@@ -9,6 +9,7 @@ const read=relative=>fs.readFileSync(path.join(root,relative),'utf8');
 test('first-time students see the core Seed → Lumen → Atlas → Orion journey',()=>{
   const page=read('src/page/seed/StudentPage.tsx');
   const circuit=read('src/page/seed/components/LearningCircuit.tsx');
+  const lumenJourney=read('src/page/lumen/components/LumenObservationJourney.tsx');
   assert.match(page,/Bắt đầu từ hồ sơ và bảng điểm/);
   assert.match(circuit,/const \[active, setActive\] = useState\(0\)/);
   assert.match(circuit,/Lần đầu sử dụng, hãy bắt đầu từ SEED → LUMEN → ATLAS → ORION/);
@@ -16,6 +17,7 @@ test('first-time students see the core Seed → Lumen → Atlas → Orion journe
   assert.match(circuit,/Dùng điểm ước lượng để khám phá tổ hợp xét tuyển; tra cứu ngành và trường theo sở thích, hồ sơ học tập và dữ liệu tuyển sinh có nguồn/);
   assert.match(circuit,/Không suy ra xác suất đỗ/);
   assert.match(circuit,/trung bình của hai bài thi thử/);
+  assert.match(lumenJourney,/href="\/lumen\/advanced" className="cla-ux-heading-action">Ước lượng điểm thi/);
 });
 
 test('the six approved module labels, order and destinations remain unchanged',()=>{
