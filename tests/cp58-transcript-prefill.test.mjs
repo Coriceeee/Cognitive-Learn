@@ -86,8 +86,10 @@ test('CP58.10: Orion snapshots all verified Seed subjects once and preserves exi
   assert.match(orion, /seedSubjectGrades\.filter\(grade => grade\.provisional !== null\)/);
   assert.match(orion, /seedSubjectsSnapshot/);
   assert.match(orion, /seedSyncVersion === 1/);
-  assert.match(orion, /if \(grade\.provisional !== null && !nextScores\[grade\.subject\]\?\.trim\(\)\) nextScores\[grade\.subject\] = String\(grade\.provisional\)/);
+  assert.match(orion, /if \(grade\.provisional !== null && !manuallyEditedSubjects\.current\.has\(grade\.subject\) && !nextScores\[grade\.subject\]\?\.trim\(\)\)/);
   assert.match(orion, /normalizeSubjectValues\(savedDraft\?\.scores\)/);
+  assert.match(orion, /normalizeSubjectValues\(scores\)/);
+  assert.match(orion, /manuallyEditedSubjects\.current\.add\(key\)/);
   assert.doesNotMatch(orion, /keyBySubject: Record<string, ScoreKey>/);
   assert.doesNotMatch(orion, /type ScoreKey =\s*\n\s*\| "math"/);
   assert.match(helper, /state\.draftStatus === 'empty' \|\| state\.draftStatus === 'ready'/);
@@ -100,9 +102,10 @@ test('CP58.11: one-time Seed snapshot requires same-owner server transcript and 
     hasLocalEdits:false, hasSnapshotMarker:false };
   assert.equal(canImportSeedSnapshotOnce(state), true);
   assert.equal(canImportSeedSnapshotOnce({...state,draftStatus:'ready'}), true);
+  assert.equal(canImportSeedSnapshotOnce({...state,hasLocalEdits:true}), true);
   for (const changes of [
     {transcriptOwnerUid:'student-b'}, {transcriptStatus:'syncing'}, {draftStatus:'loading'},
-    {hasSupportedGrades:false}, {hasLocalEdits:true}, {seededOwnerUid:'student-a'},
+    {hasSupportedGrades:false}, {seededOwnerUid:'student-a'},
     {hasSnapshotMarker:true}, {draftOwnerUid:''},
   ]) assert.equal(canImportSeedSnapshotOnce({...state,...changes}), false, JSON.stringify(changes));
 });
