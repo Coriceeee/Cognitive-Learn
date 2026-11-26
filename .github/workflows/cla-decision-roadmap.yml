@@ -80,7 +80,6 @@ jobs:
         run: npm run build
       - name: Production Gemini status smoke check (read-only, no secrets)
         id: production-gemini-smoke
-        continue-on-error: true
         run: |
           node --input-type=module <<'NODE'
           const hosts = [
@@ -91,10 +90,17 @@ jobs:
           for (const url of hosts) {
             try {
               const response = await fetch(url, { signal: AbortSignal.timeout(12000), headers: { 'cache-control': 'no-cache' } });
-              const body = await response.json().catch(() => null);
+              const contentType = response.headers.get('content-type') || '';
+              const raw = await response.text();
+              let body = null;
+              try { body = JSON.parse(raw); } catch {}
               const ok = response.ok && body?.ok === true && body?.configured === true;
-              console.log(JSON.stringify({ url, httpStatus: response.status, ok: body?.ok ?? false, configured: body?.configured ?? false, backend: body?.backend ?? null }));
-              if (!ok) failed = true;
+              const result = { url, httpStatus: response.status, contentType, ok: body?.ok ?? false, configured: body?.configured ?? false, backend: body?.backend ?? null };
+              console.log(JSON.stringify(result));
+              if (!ok) {
+                console.log('GEMINI_STATUS_DIAGNOSTIC: endpoint did not return configured JSON; check Firebase Hosting rewrite and deployed claGeminiApi function.');
+                failed = true;
+              }
             } catch (error) {
               console.log(JSON.stringify({ url, reachable: false, error: error?.name ?? 'unknown' }));
               failed = true;
