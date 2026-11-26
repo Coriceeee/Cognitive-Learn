@@ -19,7 +19,7 @@ type Link = {
 const links: Link[] = [
   { code:"SEED",icon:seedLogo,phase:"BƯỚC 01 · NHẬP DỮ LIỆU",title:"Bản sắc học tập",description:"Nhập hồ sơ, bảng điểm, môn lựa chọn và mục tiêu. Đây là dữ liệu đầu vào cho toàn bộ quá trình phân tích và tư vấn.",href:"/student/profile" },
   { code:"LUMEN",icon:lumenLogo,phase:"BƯỚC 02 · PHÂN TÍCH",title:"Dấu vân tay trí tuệ",description:"Phân tích 7 chỉ số Cognitive thử nghiệm và ước lượng điểm thi từ dữ liệu bài thi thử; kết quả thể hiện rõ dữ liệu còn thiếu và giới hạn dự báo.",href:"/lumen" },
-  { code:"ATLAS",icon:atlasLogo,phase:"BƯỚC 03 · KHÁM PHÁ",title:"Bản đồ tương lai",description:"Từ mức điểm ước lượng, khám phá tổ hợp xét tuyển, nhóm ngành và trường đào tạo; đối chiếu phương thức, năm tuyển sinh và nguồn chính thức.",href:"/atlas" },
+  { code:"ATLAS",icon:atlasLogo,phase:"BƯỚC 03 · KHÁM PHÁ",title:"Bản đồ tương lai",description:"Dùng điểm ước lượng để khám phá tổ hợp xét tuyển, ngành và trường; đối chiếu phương thức, năm tuyển sinh và nguồn chính thức.",href:"/atlas" },
   { code:"ORION",icon:orionLogo,phase:"BƯỚC 04 · HÀNH ĐỘNG",title:"Kiến trúc tương lai",description:"Xây dựng lộ trình học tập theo tuần, xác định khoảng cách tới mục tiêu và những việc cần làm để cải thiện khả năng đạt nguyện vọng.",href:"/orion" },
   { code:"PULSE",icon:pulseLogo,phase:"THEO DÕI",title:"Đường cong tiến hóa",description:"Theo dõi tiến độ và điều chỉnh kế hoạch theo dữ liệu mới.",href:"/pulse" },
   { code:"HAVEN",icon:havenLogo,phase:"HỖ TRỢ",title:"Hành trang thế giới",description:"Tìm hiểu học bổng, chi phí và điều kiện cần chuẩn bị.",href:"/haven" },
