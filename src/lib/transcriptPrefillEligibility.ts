@@ -30,3 +30,26 @@ export function canPrefillFromVerifiedTranscript(state: TranscriptPrefillState):
     !state.hasLocalEdits
   );
 }
+
+/**
+ * ORION takes a one-time snapshot of the verified Seed curriculum and grades.
+ * Existing drafts may be upgraded once: keep their values and fill only
+ * missing subject scores. The persisted marker prevents later Seed changes
+ * from silently overwriting the student's ORION copy.
+ */
+export interface SeedSnapshotImportState extends TranscriptPrefillState {
+  hasSnapshotMarker: boolean;
+}
+
+export function canImportSeedSnapshotOnce(state: SeedSnapshotImportState): boolean {
+  return Boolean(
+    state.draftOwnerUid &&
+    state.transcriptOwnerUid === state.draftOwnerUid &&
+    (state.draftStatus === 'empty' || state.draftStatus === 'ready') &&
+    state.transcriptStatus === 'ready' &&
+    state.seededOwnerUid !== state.draftOwnerUid &&
+    state.hasSupportedGrades &&
+    !state.hasLocalEdits &&
+    !state.hasSnapshotMarker
+  );
+}
