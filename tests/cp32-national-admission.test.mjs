@@ -4,10 +4,10 @@ import { nationalCutoffs, cutoffKey, compareNationalCutoff, nationalProgramHisto
 import { externalCutoffs } from '../src/data/nationalAdmissionCutoffs.ts';
 import { answerVerifiedCutoff,safeCutoffSource } from '../src/lib/atlasDecisionComparison.ts';
 import { officialUniversities } from '../src/data/officialAdmissionSources.ts';
-test('national catalog includes 17 schools and preserves 110 PTIT records, 1262 external numeric facts',()=>{
+test('national catalog includes 19 schools and preserves 110 PTIT records, 1262 external numeric facts',()=>{
  assert.equal(nationalCutoffs.length,1556);assert.equal(new Set(nationalCutoffs.map(cutoffKey)).size,1556);
  assert.equal(externalCutoffs.filter(r=>r.universityId==='ctu').length,357);assert.equal(externalCutoffs.filter(r=>r.universityId==='agu').length,43);assert.equal(externalCutoffs.filter(r=>r.universityId==='hust').length,24);assert.equal(externalCutoffs.filter(r=>r.universityId==='neu').length,88);
- assert.equal(new Set(nationalCutoffs.map(r=>r.universityId)).size,17);
+ assert.equal(new Set(nationalCutoffs.map(r=>r.universityId)).size,19);
  for(const r of nationalCutoffs){ assert.ok(r.source.startsWith('https://'));assert.ok(r.cutoff>=0&&(r.scale===null||r.cutoff<=r.scale));assert.equal(safeCutoffSource(r.source),r.source); }
 });
 test('all known scales compare equal values; unknown scales never compute gaps',()=>{
