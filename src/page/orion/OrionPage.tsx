@@ -379,7 +379,7 @@ export default function OrionPage() {
           <details className="cla-focus-disclosure">
             <summary>Phân bổ điểm mục tiêu theo tổ hợp 3 môn</summary>
             <p>Chọn đúng 3 môn đã nhập điểm hiện tại và nhập tổng điểm mục tiêu tự đặt (0–30, không cộng ưu tiên). Phân bổ đều phần điểm còn thiếu, tối đa 10/môn; không phải dự báo hay điểm chuẩn.</p>
-            <div role="group" aria-label="Ba môn mục tiêu">{(Object.keys(subjectLabels) as ScoreKey[]).map(key=><label key={key}><input type="checkbox" checked={gapSubjects.includes(key)} disabled={!gapSubjects.includes(key)&&gapSubjects.length>=3} onChange={e=>setGapSubjects(old=>e.target.checked?[...old,key]:old.filter(k=>k!==key))}/>{subjectLabels[key]} </label>)}</div>
+            <div role="group" aria-label="Ba môn mục tiêu">{activeSubjectKeys.map(key=><label key={key}><input type="checkbox" checked={gapSubjects.includes(key)} disabled={!gapSubjects.includes(key)&&gapSubjects.length>=3} onChange={e=>setGapSubjects(old=>e.target.checked?[...old,key]:old.filter(k=>k!==key))}/>{activeSubjectLabels[key]} </label>)}</div>
             <label>Tổng mục tiêu /30 <input inputMode="decimal" value={gapTotal} onChange={e=>setGapTotal(e.target.value)} placeholder="VD: 24"/></label>
             {gapResult && (gapResult.status==="READY" || gapResult.status==="ALREADY_MET") ? <div role="status"><p>Tổng hiện tại: {gapResult.currentTotal} · Khoảng cách: {gapResult.gap} điểm</p><p>{gapSubjects.map(k=>`${subjectLabels[k]}: ${gapResult.targets[k]}`).join(" · ")}</p><button type="button" disabled={saving||draftConflict||(saveStatus!=="ready"&&saveStatus!=="empty")||!draftOwnerUid||auth.currentUser?.uid!==draftOwnerUid} onClick={()=>{
               if(!window.confirm("Dùng phân bổ này và xóa mục tiêu điểm cũ ngoài tổ hợp?"))return;
@@ -407,7 +407,7 @@ export default function OrionPage() {
                 <label>
                   <span>Hiện tại</span>
                   <input
-                    value={scores[key]}
+                    value={scores[key] ?? ""}
                     onChange={(event) => updateScore(key, event.target.value)}
                   />
                 </label>
@@ -415,7 +415,7 @@ export default function OrionPage() {
                 <label>
                   <span>Mục tiêu</span>
                   <input
-                    value={targets[key]}
+                    value={targets[key] ?? ""}
                     onChange={(event) => updateTarget(key, event.target.value)}
                   />
                 </label>
@@ -465,8 +465,8 @@ export default function OrionPage() {
           resultHref="/orion/scenarios" resultLabel="Mở mô phỏng chiến lược" canSimulate={hasInputs}
           note="Cần thời hạn hợp lệ và ít nhất một môn có cả điểm hiện tại lẫn mục tiêu. Các ô còn trống không được diễn giải là điểm 0. Đây không phải thang đo năng lực."
           groups={[
-            { key: "now", title: "Điểm hiện tại (0–10)", fields: (Object.keys(subjectLabels) as ScoreKey[]).map(key => ({ key: `now-${key}`, label: subjectLabels[key], value: scores[key], min: 0, max: 10 })) },
-            { key: "target", title: "Điểm mục tiêu (0–10)", fields: (Object.keys(subjectLabels) as ScoreKey[]).map(key => ({ key: `target-${key}`, label: subjectLabels[key], value: targets[key], min: 0, max: 10 })) },
+            { key: "now", title: "Điểm hiện tại (0–10)", fields: (Object.keys(subjectLabels) as ScoreKey[]).map(key => ({ key: `now-${key}`, label: subjectLabels[key], value: scores[key] ?? "", min: 0, max: 10 })) },
+            { key: "target", title: "Điểm mục tiêu (0–10)", fields: (Object.keys(subjectLabels) as ScoreKey[]).map(key => ({ key: `target-${key}`, label: subjectLabels[key], value: targets[key] ?? "", min: 0, max: 10 })) },
             { key: "planning", title: "Thời hạn & ngành định hướng", fields: [
               { key: "weeks", label: "Số tuần còn lại", value: weeksLeft, min: 1, max: 104, integer: true },
               { key: "major", label: "Ngành mục tiêu", value: targetMajor },
