@@ -41,15 +41,28 @@ jobs:
         run: npm run test:cp87:nav
       - name: CP94 first-run admissions journey and preserved six-module navigation
         run: npm run test:cp94:student-first-run
-      - name: CP94 admissions, XAI, student-only and reliability regressions
+      - name: CP94 repaired regressions across profile, handoff, navigation, UX and admissions
         run: |
+          npm run test:cp29:batch4
+          npm run test:cp30:batch4
+          npm run test:cp30:profile
+          npm run test:cp30:realtime
           npm run test:cp32:national
           npm run test:cp34:knowledge-xai
           npm run test:cp40:student-only
           npm run test:cp42:dthu-scheme
           npm run test:cp42:scheme-coverage
           npm run test:cp42:robust-decision
+          npm run test:cp56:navigation:integration
+          npm run test:cp58:integration
+          npm run test:cp60:seed-listener
+          npm run test:cp62:student-rail
+          npm run test:cp64:input-ux
+          npm run test:cp70:journey
           npm run test:cp73:mvp
+          npm run test:cp75:ux-audit
+          npm run test:cp79:theme
+          npm run test:seed-atlas
           npm run test:cp83:ops
       - name: Atlas projection and historical-source safeguards
         run: npm run test:cp88:projection-admissions
