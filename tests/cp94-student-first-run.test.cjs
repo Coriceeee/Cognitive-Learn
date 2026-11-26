@@ -6,14 +6,25 @@ const path=require('node:path');
 const root=path.resolve(__dirname,'..');
 const read=relative=>fs.readFileSync(path.join(root,relative),'utf8');
 
-test('first-time students see the core Seed → Lumen → Atlas journey',()=>{
+test('first-time students see the core Seed → Lumen → Atlas → Orion journey',()=>{
   const page=read('src/page/seed/StudentPage.tsx');
   const circuit=read('src/page/seed/components/LearningCircuit.tsx');
+  const lumenJourney=read('src/page/lumen/components/LumenObservationJourney.tsx');
+  const orion=read('src/page/orion/OrionPage.tsx');
   assert.match(page,/Bắt đầu từ hồ sơ và bảng điểm/);
   assert.match(circuit,/const \[active, setActive\] = useState\(0\)/);
-  assert.match(circuit,/Lần đầu sử dụng, hãy bắt đầu từ SEED → LUMEN → ATLAS/);
+  assert.match(circuit,/Lần đầu sử dụng, hãy bắt đầu từ SEED → LUMEN → ATLAS → ORION/);
   assert.match(circuit,/Phân tích 7 chỉ số Cognitive thử nghiệm/);
-  assert.match(circuit,/Dùng điểm ước lượng để khám phá tổ hợp xét tuyển, ngành và trường/);
+  assert.match(circuit,/Dùng điểm ước lượng để khám phá tổ hợp xét tuyển; tra cứu ngành và trường theo sở thích, hồ sơ học tập và dữ liệu tuyển sinh có nguồn/);
+  assert.match(circuit,/Không suy ra xác suất đỗ/);
+  assert.match(circuit,/trung bình của hai bài thi thử/);
+  assert.match(lumenJourney,/href="\/lumen\/advanced" className="cla-ux-heading-action">Ước lượng điểm thi/);
+  assert.match(orion,/getLatestSubjectGrades\(transcript\.data\)/);
+  assert.match(orion,/seedSubjectGrades\.map\(grade => grade\.subject\)/);
+  assert.match(orion,/Danh sách môn lấy theo hồ sơ SEED đã xác minh/);
+  assert.match(orion,/không tự đồng bộ lại hoặc ghi đè chỉnh sửa của bạn/);
+  assert.match(orion,/seedSyncVersion === 1/);
+  assert.doesNotMatch(orion,/keyBySubject: Record<string, ScoreKey>/);
 });
 
 test('the six approved module labels, order and destinations remain unchanged',()=>{

@@ -13,7 +13,7 @@ import { useRef } from "react";
 import { readNumber, isBlankOrValid } from "../../lib/inputValidation";
 
 import { getLatestSubjectGrades } from "../seed/services/transcriptData";
-import { canPrefillFromVerifiedTranscript } from "../../lib/transcriptPrefillEligibility";
+import { canImportSeedSnapshotOnce } from "../../lib/transcriptPrefillEligibility";
 import { useEffect, useLayoutEffect } from "react";
 import { useModuleDraft } from "../../lib/useModuleDraft";
 import { useMemo, useState } from "react";
@@ -30,26 +30,32 @@ import { evaluateScenarioChoices } from "../../lib/scenarioDecision";
 import OrionDecisionWorkbench from "./OrionDecisionWorkbench";
 import ClosedLoopPanel from "../../components/journey/ClosedLoopPanel";
 
-type ScoreKey =
-  | "math"
-  | "literature"
-  | "english"
-  | "physics"
-  | "chemistry"
-  | "biology";
-
-const subjectLabels: Record<ScoreKey, string> = {
-  math: "Toán",
-  literature: "Văn",
-  english: "Anh",
-  physics: "Lý",
-  chemistry: "Hóa",
-  biology: "Sinh",
+type ScoreKey = string;
+const defaultScores: Record<ScoreKey, string> = {};
+const defaultTargets: Record<ScoreKey, string> = {};
+const legacySubjectNames: Record<string, string> = {
+  math: "Toán", literature: "Ngữ văn", english: "Tiếng Anh",
+  physics: "Vật lý", chemistry: "Hóa học", biology: "Sinh học",
 };
+function normalizeSubjectValues(value: unknown): Record<string, string> {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return {};
+  const result: Record<string, string> = {};
+  for (const [key, raw] of Object.entries(value as Record<string, unknown>)) {
+    const subject = legacySubjectNames[key] ?? key;
+    if (typeof raw === "string") result[subject] = raw;
+    else if (typeof raw === "number" && Number.isFinite(raw)) result[subject] = String(raw);
+  }
+  return result;
+}
+function subjectImportance(subject: string): number {
+  if (subject === "Toán" || subject === "Tiếng Anh") return 1.2;
+  if (subject === "Vật lý" || subject === "Hóa học") return 1.1;
+  return 1;
+}
 
-const defaultScores: Record<ScoreKey, string> = { math: "", literature: "", english: "", physics: "", chemistry: "", biology: "" };
-
-const defaultTargets: Record<ScoreKey, string> = { math: "", literature: "", english: "", physics: "", chemistry: "", biology: "" };
+function canSaveSeedSnapshotWithoutWeeks(weeksLeft: string, syncVersion: number, subjects: string[]): boolean {
+  return weeksLeft.trim() === "" && syncVersion === 1 && subjects.length > 0;
+}
 
 function getRiskLabel(riskLevel: OrionRiskLevel) {
   if (riskLevel === "LOW") return "Ổn định";
@@ -79,10 +85,14 @@ export default function OrionPage() {
   const [targets, setTargets] =
     useState<Record<ScoreKey, string>>(defaultTargets);
 
-  const { draft: savedDraft, status: saveStatus, error: draftError, uid: draftOwnerUid, conflict: draftConflict, save: saveDraft, markEditing, acceptRemote } = useModuleDraft<{targetMajor:string;weeksLeft:string;scores:Record<ScoreKey,string>;targets:Record<ScoreKey,string>}>("orion");
+  const { draft: savedDraft, status: saveStatus, error: draftError, uid: draftOwnerUid, conflict: draftConflict, save: saveDraft, markEditing, acceptRemote } = useModuleDraft<{targetMajor:string;weeksLeft:string;scores:Record<ScoreKey,string>;targets:Record<ScoreKey,string>;seedSyncVersion?:number;seedSubjectsSnapshot?:string[]}>("orion");
   const verifiedProfile = useVerifiedStudentProfile();
   const transcript = verifiedProfile.transcript;
-  const [gapSubjects,setGapSubjects]=useState<ScoreKey[]>([]);
+  const seedSubjectGrades = useMemo(() => transcript.data ? getLatestSubjectGrades(transcript.data) : [], [transcript.data]);
+  const seedSubjectNames = useMemo(() => seedSubjectGrades.map(grade => grade.subject), [seedSubjectGrades]);
+  const [seedSyncVersion, setSeedSyncVersion] = useState(0);
+  const [seedSubjectsSnapshot, setSeedSubjectsSnapshot] = useState<string[]>([]);
+  const [gapSubjects,setGapSubjects]=useState<string[]>([]);
   const [gapTotal,setGapTotal]=useState("");
   const [admissionGoal, setAdmissionGoal] = useState<AdmissionGoal | null>(null);
   const [advisorGoal,setAdvisorGoal]=useState<AdvisorDecisionRecord|null>(null);
@@ -97,7 +107,7 @@ export default function OrionPage() {
     if(!advisorGap||advisorGap.data.kind!=="gap")return;
     const data=advisorGap.data;
     const result=optimizeGoalGap(data.subjects,data.target);
-    if(!advisorReady||advisorGap.pin.owner!==draftOwnerUid||readNumber(gapTotal,0,30)!==data.target||data.subjects.length!==gapSubjects.length||data.subjects.some(s=>!gapSubjects.includes(s.subject as ScoreKey)||readNumber(scores[s.subject as ScoreKey],0,10)!==s.score||readNumber(targets[s.subject as ScoreKey],0,10)!==result.targets[s.subject])){setAdvisorGap(null);return;}
+    if(!advisorReady||advisorGap.pin.owner!==draftOwnerUid||readNumber(gapTotal,0,30)!==data.target||data.subjects.length!==gapSubjects.length||data.subjects.some(s=>!gapSubjects.includes(s.subject)||readNumber(scores[s.subject],0,10)!==s.score||readNumber(targets[s.subject],0,10)!==result.targets[s.subject])){setAdvisorGap(null);return;}
     return advisorDecisionStore.register(advisorGap);
   },[advisorGap,advisorReady,draftOwnerUid,gapTotal,gapSubjects,scores,targets]);
 
@@ -106,33 +116,7 @@ export default function OrionPage() {
     setAdmissionGoal(readAdmissionGoal(draftOwnerUid));
   }, [draftOwnerUid]);
   const seededFromTranscript = useRef<string | null>(null);
-  useEffect(() => {
-    if (!transcript.data) return;
-    const keyBySubject: Record<string, ScoreKey> = {
-      "Toán": "math", "Ngữ văn": "literature", "Tiếng Anh": "english",
-      "Vật lý": "physics", "Hóa học": "chemistry", "Sinh học": "biology",
-    };
-    const grades = getLatestSubjectGrades(transcript.data);
-    // An empty transcript must not consume the one-time prefill.
-    // A later Firestore snapshot with observed grades can still populate Orion.
-    const supportedGrades = grades.filter(grade => keyBySubject[grade.subject] && grade.provisional !== null);
-    if (!canPrefillFromVerifiedTranscript({
-      draftOwnerUid, transcriptOwnerUid: transcript.userId,
-      draftStatus: saveStatus, transcriptStatus: transcript.status,
-      seededOwnerUid: seededFromTranscript.current,
-      hasSupportedGrades: supportedGrades.length > 0,
-      hasLocalEdits: dirtyRevision.current,
-    })) return;
-    seededFromTranscript.current = draftOwnerUid;
-    setScores(current => {
-      const next = { ...current };
-      for (const grade of supportedGrades) {
-        const key = keyBySubject[grade.subject];
-        if (key && !next[key] && grade.provisional !== null) next[key] = String(grade.provisional);
-      }
-      return next;
-    });
-  }, [transcript.data, transcript.userId, transcript.status, draftOwnerUid, saveStatus]);
+  const manuallyEditedSubjects = useRef<Set<string>>(new Set());
 
   const [saveNotice, setSaveNotice] = useState("");
   const [saveNoticeTone, setSaveNoticeTone] = useState<"success" | "warning" | "error">("success");
@@ -156,6 +140,9 @@ export default function OrionPage() {
     setWeeksLeft("");
     setScores(defaultScores);
     setTargets(defaultTargets);
+    setSeedSyncVersion(0);
+    setSeedSubjectsSnapshot([]);
+    manuallyEditedSubjects.current.clear();
     dirtyRevision.current = false;
     editRevision.current += 1;
     setHasLocalEdits(false);
@@ -163,7 +150,7 @@ export default function OrionPage() {
     setSaveNotice("");
   }, [draftOwnerUid]);
 
-  const currentDraft = { targetMajor, weeksLeft, scores, targets };
+  const currentDraft = { targetMajor, weeksLeft, scores, targets, seedSyncVersion, seedSubjectsSnapshot };
   const currentDraftRef = useRef(currentDraft);
   currentDraftRef.current = currentDraft;
 
@@ -172,8 +159,10 @@ export default function OrionPage() {
     if (!savedDraft || dirtyRevision.current) return;
     setTargetMajor(savedDraft.targetMajor);
     setWeeksLeft(savedDraft.weeksLeft);
-    setScores(savedDraft.scores);
-    setTargets(savedDraft.targets);
+    setScores(normalizeSubjectValues(savedDraft.scores));
+    setTargets(normalizeSubjectValues(savedDraft.targets));
+    setSeedSyncVersion(savedDraft.seedSyncVersion === 1 ? 1 : 0);
+    setSeedSubjectsSnapshot(Array.isArray(savedDraft.seedSubjectsSnapshot) ? savedDraft.seedSubjectsSnapshot.filter((item): item is string => typeof item === "string") : []);
   }, [savedDraft]);
 
   // Debounced Firestore draft persistence protects work when students move between modules.
@@ -186,7 +175,8 @@ export default function OrionPage() {
       autosaveTimer.current = null;
       setAutosaveState("saving");
       try {
-        if (!isBlankOrValid(payload.weeksLeft, 1, 104, true) ||
+        if ((!isBlankOrValid(payload.weeksLeft, 1, 104, true) &&
+             !canSaveSeedSnapshotWithoutWeeks(payload.weeksLeft, payload.seedSyncVersion ?? 0, payload.seedSubjectsSnapshot ?? [])) ||
             ![...Object.values(payload.scores), ...Object.values(payload.targets)].every(v => isBlankOrValid(v, 0, 10))) {
           throw new Error("Invalid Orion draft: scores or weeks outside supported range");
         }
@@ -204,7 +194,7 @@ export default function OrionPage() {
       if (autosaveTimer.current !== null) window.clearTimeout(autosaveTimer.current);
       autosaveTimer.current = null;
     };
-  }, [hasLocalEdits, saveStatus, targetMajor, weeksLeft, scores, targets]);
+  }, [hasLocalEdits, saveStatus, targetMajor, weeksLeft, scores, targets, seedSyncVersion, seedSubjectsSnapshot]);
 
   function markLocalEdit() {
     markEditing();
@@ -215,6 +205,35 @@ export default function OrionPage() {
     setSaveNotice("");
   }
 
+  useEffect(() => {
+    if (!transcript.data) return;
+    const supportedGrades = seedSubjectGrades.filter(grade => grade.provisional !== null);
+    if (!canImportSeedSnapshotOnce({
+      draftOwnerUid, transcriptOwnerUid: transcript.userId,
+      draftStatus: saveStatus, transcriptStatus: transcript.status,
+      seededOwnerUid: seededFromTranscript.current,
+      hasSupportedGrades: supportedGrades.length > 0,
+      hasLocalEdits: dirtyRevision.current,
+      hasSnapshotMarker: savedDraft?.seedSyncVersion === 1,
+    })) return;
+
+    // Snapshot the locked Seed curriculum once. Upgrade legacy drafts by
+    // preserving existing values and filling only subjects that are missing.
+    seededFromTranscript.current = draftOwnerUid;
+    const nextScores = { ...normalizeSubjectValues(savedDraft?.scores), ...normalizeSubjectValues(scores) };
+    for (const grade of supportedGrades) {
+      if (grade.provisional !== null && !manuallyEditedSubjects.current.has(grade.subject) && !nextScores[grade.subject]?.trim()) {
+        nextScores[grade.subject] = String(grade.provisional);
+      }
+    }
+    setScores(nextScores);
+    setTargets({ ...normalizeSubjectValues(savedDraft?.targets), ...normalizeSubjectValues(targets) });
+    setSeedSyncVersion(1);
+    setSeedSubjectsSnapshot(seedSubjectNames);
+    markLocalEdit();
+    setSaveNoticeTone("success");
+    setSaveNotice("Đã lấy điểm và danh sách môn từ SEED một lần. ORION lưu bản riêng, không tự đồng bộ lại.");
+  }, [transcript.data, transcript.userId, transcript.status, draftOwnerUid, saveStatus, savedDraft, seedSubjectGrades, seedSubjectNames, hasLocalEdits, scores, targets]);
   async function saveCurrentDraft() {
     if (autosaveTimer.current !== null) window.clearTimeout(autosaveTimer.current);
     autosaveTimer.current = null;
@@ -222,11 +241,12 @@ export default function OrionPage() {
     setSaveNotice("");
     const revision = editRevision.current;
     try {
-      if (!isBlankOrValid(weeksLeft, 1, 104, true) ||
+      if ((!isBlankOrValid(weeksLeft, 1, 104, true) &&
+           !canSaveSeedSnapshotWithoutWeeks(weeksLeft, seedSyncVersion, seedSubjectsSnapshot)) ||
           ![...Object.values(scores), ...Object.values(targets)].every(v => isBlankOrValid(v, 0, 10))) {
         throw new Error("Điểm phải từ 0–10; số tuần phải là số nguyên từ 1–104.");
       }
-      await saveDraft({targetMajor, weeksLeft, scores, targets});
+      await saveDraft({targetMajor, weeksLeft, scores, targets, seedSyncVersion, seedSubjectsSnapshot});
       if (editRevision.current === revision) {
         dirtyRevision.current = false;
         setHasLocalEdits(false);
@@ -254,8 +274,11 @@ export default function OrionPage() {
       setAutosaveState("idle");
       setTargetMajor(remote?.targetMajor ?? "");
       setWeeksLeft(remote?.weeksLeft ?? "");
-      setScores(remote?.scores ?? defaultScores);
-      setTargets(remote?.targets ?? defaultTargets);
+      setScores(normalizeSubjectValues(remote?.scores));
+      setTargets(normalizeSubjectValues(remote?.targets));
+      setSeedSyncVersion(remote?.seedSyncVersion === 1 ? 1 : 0);
+      setSeedSubjectsSnapshot(Array.isArray(remote?.seedSubjectsSnapshot) ? remote.seedSubjectsSnapshot.filter((item): item is string => typeof item === "string") : []);
+      manuallyEditedSubjects.current.clear();
       setSaveNoticeTone("success");
       setSaveNotice("Đã tải bản nháp mới nhất từ máy chủ.");
     } catch (error) {
@@ -264,22 +287,18 @@ export default function OrionPage() {
     }
   }
 
+  const activeSubjectNames = useMemo(
+    () => seedSyncVersion === 1 && seedSubjectsSnapshot.length > 0 ? seedSubjectsSnapshot : seedSubjectNames,
+    [seedSyncVersion, seedSubjectsSnapshot, seedSubjectNames]
+  );
   const subjects: OrionSubjectScore[] = useMemo(() => {
-    return (Object.keys(subjectLabels) as ScoreKey[]).flatMap((key): OrionSubjectScore[] => {
-      const current = readNumber(scores[key], 0, 10);
-      const target = readNumber(targets[key], 0, 10);
-      // Incomplete subjects must NOT enter the engine as observed zeros.
+    return activeSubjectNames.flatMap((subject): OrionSubjectScore[] => {
+      const current = readNumber(scores[subject], 0, 10);
+      const target = readNumber(targets[subject], 0, 10);
       if (current === null || target === null) return [];
-      return [{
-        subject: key,
-        label: subjectLabels[key],
-        currentScore: current,
-        targetScore: target,
-        importance: key === "math" || key === "english" ? 1.2 :
-          key === "physics" || key === "chemistry" ? 1.1 : 1,
-      }];
+      return [{ subject, label: subject, currentScore: current, targetScore: target, importance: subjectImportance(subject) }];
     });
-  }, [scores, targets]);
+  }, [activeSubjectNames, scores, targets]);
 
   const strategy = useMemo(() => {
     return runOrionStrategy({
@@ -293,7 +312,8 @@ export default function OrionPage() {
     decisionHours.trim() === '' ? null : Number(decisionHours), decisionRisk || null).rows
     .filter(row => row.reasons.length === 0).map(row => row.scenario), [strategy.scenarios, decisionHours, decisionRisk]);
 
-  function updateScore(key: ScoreKey, value: string) {
+  function updateScore(key: string, value: string) {
+    manuallyEditedSubjects.current.add(key);
     markLocalEdit();
     setScores((current) => ({
       ...current,
@@ -301,7 +321,7 @@ export default function OrionPage() {
     }));
   }
 
-  function updateTarget(key: ScoreKey, value: string) {
+  function updateTarget(key: string, value: string) {
     markLocalEdit();
     setTargets((current) => ({
       ...current,
@@ -309,8 +329,9 @@ export default function OrionPage() {
     }));
   }
 
+  const activeScoreValues = activeSubjectNames.flatMap(subject => [scores[subject] ?? "", targets[subject] ?? ""]);
   const hasInputs = readNumber(weeksLeft, 1, 104, true) !== null && subjects.length > 0 &&
-    [...Object.values(scores), ...Object.values(targets)].every(value => isBlankOrValid(value, 0, 10));
+    activeScoreValues.every(value => isBlankOrValid(value, 0, 10));
 
   const gapResult = useMemo(()=>{
     const total=readNumber(gapTotal,0,30);
@@ -325,7 +346,7 @@ export default function OrionPage() {
               <span>INPUT</span>
               <h2>Dữ liệu mô phỏng</h2>
               <p>
-                Điểm hiện tại được đề xuất từ bảng điểm đã lưu khi có dữ liệu. Bạn có thể chỉnh mục tiêu, lưu bản nháp vào hồ sơ. Kết quả mô phỏng không mang ý nghĩa nhân quả.
+                Danh sách môn lấy theo hồ sơ SEED đã xác minh. Điểm hiện tại được chụp một lần vào bản nháp ORION; sau đó không tự đồng bộ lại hoặc ghi đè chỉnh sửa của bạn. Bạn tự đặt điểm mục tiêu và thời hạn học. Kết quả mô phỏng không mang ý nghĩa nhân quả.
               </p>
             </div>
           </div>
@@ -377,33 +398,30 @@ export default function OrionPage() {
           <details className="cla-focus-disclosure">
             <summary>Phân bổ điểm mục tiêu theo tổ hợp 3 môn</summary>
             <p>Chọn đúng 3 môn đã nhập điểm hiện tại và nhập tổng điểm mục tiêu tự đặt (0–30, không cộng ưu tiên). Phân bổ đều phần điểm còn thiếu, tối đa 10/môn; không phải dự báo hay điểm chuẩn.</p>
-            <div role="group" aria-label="Ba môn mục tiêu">{(Object.keys(subjectLabels) as ScoreKey[]).map(key=><label key={key}><input type="checkbox" checked={gapSubjects.includes(key)} disabled={!gapSubjects.includes(key)&&gapSubjects.length>=3} onChange={e=>setGapSubjects(old=>e.target.checked?[...old,key]:old.filter(k=>k!==key))}/>{subjectLabels[key]} </label>)}</div>
+            <div role="group" aria-label="Ba môn mục tiêu">{activeSubjectNames.map(subject=><label key={subject}><input type="checkbox" checked={gapSubjects.includes(subject)} disabled={!gapSubjects.includes(subject)&&gapSubjects.length>=3} onChange={e=>setGapSubjects(old=>e.target.checked?[...old,subject]:old.filter(k=>k!==subject))}/>{subject} </label>)}</div>
             <label>Tổng mục tiêu /30 <input inputMode="decimal" value={gapTotal} onChange={e=>setGapTotal(e.target.value)} placeholder="VD: 24"/></label>
-            {gapResult && (gapResult.status==="READY" || gapResult.status==="ALREADY_MET") ? <div role="status"><p>Tổng hiện tại: {gapResult.currentTotal} · Khoảng cách: {gapResult.gap} điểm</p><p>{gapSubjects.map(k=>`${subjectLabels[k]}: ${gapResult.targets[k]}`).join(" · ")}</p><button type="button" disabled={saving||draftConflict||(saveStatus!=="ready"&&saveStatus!=="empty")||!draftOwnerUid||auth.currentUser?.uid!==draftOwnerUid} onClick={()=>{
+            {gapResult && (gapResult.status==="READY" || gapResult.status==="ALREADY_MET") ? <div role="status"><p>Tổng hiện tại: {gapResult.currentTotal} · Khoảng cách: {gapResult.gap} điểm</p><p>{gapSubjects.map(k=>`${k}: ${gapResult.targets[k]}`).join(" · ")}</p><button type="button" disabled={saving||draftConflict||(saveStatus!=="ready"&&saveStatus!=="empty")||!draftOwnerUid||auth.currentUser?.uid!==draftOwnerUid} onClick={()=>{
               if(!window.confirm("Dùng phân bổ này và xóa mục tiêu điểm cũ ngoài tổ hợp?"))return;
               if(advisorReady&&draftOwnerUid) setAdvisorGap(captureAdvisorDecision(draftOwnerUid,{kind:"gap",subjects:gapSubjects.map(subject=>({subject,score:readNumber(scores[subject],0,10)!})),target:readNumber(gapTotal,0,30)!}));
-              markLocalEdit();setTargets({...defaultTargets,...Object.fromEntries(gapSubjects.map(k=>[k,String(gapResult.targets[k])]))});
+              markLocalEdit();setTargets({...targets,...Object.fromEntries(gapSubjects.map(k=>[k,String(gapResult.targets[k])]))});
             }}>Dùng phân bổ này</button></div>:<p>Chọn đủ ba môn và kiểm tra các điểm đầu vào. Orion hiện hỗ trợ sáu môn trong bảng bên dưới.</p>}
           </details>
           <div className="orion-score-table">
-            {(Object.keys(subjectLabels) as ScoreKey[]).map((key) => (
-              <div key={key}>
-                <strong>{subjectLabels[key]}</strong>
-
+            {activeSubjectNames.length === 0 ? (
+              <p role="status">Chưa xác minh được danh sách môn từ SEED. Hãy hoàn thiện và lưu hồ sơ học tập trước khi lập kế hoạch tại ORION.</p>
+            ) : activeSubjectNames.map((subject) => (
+              <div key={subject}>
+                <strong>{subject}</strong>
                 <label>
-                  <span>Hiện tại</span>
-                  <input
-                    value={scores[key]}
-                    onChange={(event) => updateScore(key, event.target.value)}
-                  />
+                  <span>Hiện tại · lấy từ SEED một lần</span>
+                  <input inputMode="decimal" value={scores[subject] ?? ""}
+                    placeholder={seedSyncVersion === 1 ? "Chưa có điểm tại lần đồng bộ" : "Chưa có điểm trong SEED"}
+                    onChange={(event) => updateScore(subject, event.target.value)} />
                 </label>
-
                 <label>
                   <span>Mục tiêu</span>
-                  <input
-                    value={targets[key]}
-                    onChange={(event) => updateTarget(key, event.target.value)}
-                  />
+                  <input inputMode="decimal" value={targets[subject] ?? ""}
+                    onChange={(event) => updateTarget(subject, event.target.value)} />
                 </label>
               </div>
             ))}
@@ -451,8 +469,8 @@ export default function OrionPage() {
           resultHref="/orion/scenarios" resultLabel="Mở mô phỏng chiến lược" canSimulate={hasInputs}
           note="Cần thời hạn hợp lệ và ít nhất một môn có cả điểm hiện tại lẫn mục tiêu. Các ô còn trống không được diễn giải là điểm 0. Đây không phải thang đo năng lực."
           groups={[
-            { key: "now", title: "Điểm hiện tại (0–10)", fields: (Object.keys(subjectLabels) as ScoreKey[]).map(key => ({ key: `now-${key}`, label: subjectLabels[key], value: scores[key], min: 0, max: 10 })) },
-            { key: "target", title: "Điểm mục tiêu (0–10)", fields: (Object.keys(subjectLabels) as ScoreKey[]).map(key => ({ key: `target-${key}`, label: subjectLabels[key], value: targets[key], min: 0, max: 10 })) },
+            { key: "now", title: "Điểm hiện tại (0–10)", fields: activeSubjectNames.map(subject => ({ key: `now-${subject}`, label: subject, value: scores[subject] ?? "", min: 0, max: 10 })) },
+            { key: "target", title: "Điểm mục tiêu (0–10)", fields: activeSubjectNames.map(subject => ({ key: `target-${subject}`, label: subject, value: targets[subject] ?? "", min: 0, max: 10 })) },
             { key: "planning", title: "Thời hạn & ngành định hướng", fields: [
               { key: "weeks", label: "Số tuần còn lại", value: weeksLeft, min: 1, max: 104, integer: true },
               { key: "major", label: "Ngành mục tiêu", value: targetMajor },
@@ -585,9 +603,10 @@ export default function OrionPage() {
           subjects: subjects.map(s => ({key:s.subject,label:s.label,baseline:s.currentScore,target:s.targetScore})),
           scenarios: eligibleScenarios, draftReady:advisorReady && !saving,
           applyReviewedScores:(owner:string,review:ContinuityResult)=>{
-            if(!advisorReady || saving || auth.currentUser?.uid!==owner || draftOwnerUid!==owner || review.status!=="READY_TO_COPY" || !review.rows.length || review.rows.length!==subjects.length || !review.rows.every(r=>Object.prototype.hasOwnProperty.call(subjectLabels,r.key)&&subjects.some(s=>s.subject===r.key&&s.currentScore===r.current&&s.targetScore===r.target)&&Number.isFinite(r.observed)&&r.observed>=0&&r.observed<=10))throw new Error("Bản nháp hoặc tài khoản đã thay đổi. Hãy đồng bộ và thử lại.");
+            if(!advisorReady || saving || auth.currentUser?.uid!==owner || draftOwnerUid!==owner || review.status!=="READY_TO_COPY" || !review.rows.length || review.rows.length!==subjects.length || !review.rows.every(r=>activeSubjectNames.includes(r.key)&&subjects.some(s=>s.subject===r.key&&s.currentScore===r.current&&s.targetScore===r.target)&&Number.isFinite(r.observed)&&r.observed>=0&&r.observed<=10))throw new Error("Bản nháp hoặc tài khoản đã thay đổi. Hãy đồng bộ và thử lại.");
             markLocalEdit(); setAdvisorGap(null);
-            setScores(current=>{const next={...current}; for(const row of review.rows)next[row.key as ScoreKey]=String(row.observed);return next;});
+            for (const row of review.rows) manuallyEditedSubjects.current.add(row.key);
+            setScores(current=>{const next={...current}; for(const row of review.rows)next[row.key]=String(row.observed);return next;});
           } } : undefined} />}
         {view === "/orion/roadmap" && <p className="cla-focus-notice"><a href="/orion/scenarios#cla-closed-loop">Mô phỏng và chốt chu kỳ học tập →</a></p>}
       </section>

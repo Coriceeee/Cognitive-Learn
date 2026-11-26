@@ -6,8 +6,8 @@
  *
  * Empty transcripts and unsupported subjects must not consume the one-time
  * prefill; the next server-confirmed transcript update can still be used.
- * Prefilling is a convenience only: it does not persist data or attest to a
- * new observation. Student edits always take priority.
+ * This helper only evaluates eligibility; the caller controls persistence.
+ * A prefill never attests to a new observation. Student edits take priority.
  */
 export interface TranscriptPrefillState {
   draftOwnerUid: string;
@@ -28,5 +28,27 @@ export function canPrefillFromVerifiedTranscript(state: TranscriptPrefillState):
     state.seededOwnerUid !== state.draftOwnerUid &&
     state.hasSupportedGrades &&
     !state.hasLocalEdits
+  );
+}
+
+/**
+ * ORION takes a one-time snapshot of the verified Seed curriculum and grades.
+ * Existing drafts may be upgraded once: keep their values and fill only
+ * missing subject scores. The persisted marker prevents later Seed changes
+ * from silently overwriting the student's ORION copy.
+ */
+export interface SeedSnapshotImportState extends TranscriptPrefillState {
+  hasSnapshotMarker: boolean;
+}
+
+export function canImportSeedSnapshotOnce(state: SeedSnapshotImportState): boolean {
+  return Boolean(
+    state.draftOwnerUid &&
+    state.transcriptOwnerUid === state.draftOwnerUid &&
+    (state.draftStatus === 'empty' || state.draftStatus === 'ready') &&
+    state.transcriptStatus === 'ready' &&
+    state.seededOwnerUid !== state.draftOwnerUid &&
+    state.hasSupportedGrades &&
+    !state.hasSnapshotMarker
   );
 }
