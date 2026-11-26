@@ -220,7 +220,7 @@ export default function OrionPage() {
     seededFromTranscript.current = draftOwnerUid;
     const nextScores = normalizeSubjectValues(savedDraft?.scores);
     for (const grade of supportedGrades) {
-      if (!nextScores[grade.subject]?.trim()) nextScores[grade.subject] = String(grade.provisional);
+      if (grade.provisional !== null && !nextScores[grade.subject]?.trim()) nextScores[grade.subject] = String(grade.provisional);
     }
     setScores(nextScores);
     setTargets(normalizeSubjectValues(savedDraft?.targets));
