@@ -45,8 +45,8 @@ test('QA template does not contain a real Firebase key or an application secret'
 
 test('plain npm run dev uses real Firebase live env; emulator stays opt-in via dev:qa',()=>{
   const pkg=JSON.parse(readFileSync(new URL('../package.json',import.meta.url),'utf8'));
-  assert.equal(pkg.scripts.dev,'vite --mode live --open');
-  assert.equal(pkg.scripts['dev:qa'],'vite --mode development --open');
+  assert.equal(pkg.scripts.dev,'node tools/cla_vite_dev.mjs');
+  assert.equal(pkg.scripts['dev:qa'],'node tools/cla_vite_dev.mjs --qa');
 });
 
 const liveEnv = {
