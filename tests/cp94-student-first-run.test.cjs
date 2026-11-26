@@ -13,7 +13,7 @@ test('first-time students see the core Seed → Lumen → Atlas journey',()=>{
   assert.match(circuit,/const \[active, setActive\] = useState\(0\)/);
   assert.match(circuit,/Lần đầu sử dụng, hãy bắt đầu từ SEED → LUMEN → ATLAS/);
   assert.match(circuit,/Phân tích 7 chỉ số Cognitive thử nghiệm/);
-  assert.match(circuit,/Dùng điểm ước lượng để khám phá tổ hợp xét tuyển, ngành và trường/);
+  assert.match(circuit,/Dùng điểm ước lượng để khám phá tổ hợp xét tuyển; tra cứu ngành và trường theo sở thích, hồ sơ học tập và dữ liệu tuyển sinh có nguồn/);\n  assert.match(circuit,/Không suy ra xác suất đỗ/);\n  assert.match(circuit,/trung bình của hai bài thi thử/);
 });
 
 test('the six approved module labels, order and destinations remain unchanged',()=>{
