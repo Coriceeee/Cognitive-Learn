@@ -78,6 +78,35 @@ jobs:
         run: node --experimental-strip-types --test tests/cp42-institution-discovery.test.mjs
       - name: TypeScript API and production build
         run: npm run build
+      - name: Production Gemini status smoke check (read-only, no secrets)
+        id: production-gemini-smoke
+        continue-on-error: true
+        run: |
+          node --input-type=module <<'NODE'
+          const hosts = [
+            'https://cognitive-learn-ai.web.app/api/cla-gemini-status',
+            'https://cognitivelearn.ai.vn/api/cla-gemini-status'
+          ];
+          let failed = false;
+          for (const url of hosts) {
+            try {
+              const response = await fetch(url, { signal: AbortSignal.timeout(12000), headers: { 'cache-control': 'no-cache' } });
+              const body = await response.json().catch(() => null);
+              const ok = response.ok && body?.ok === true && body?.configured === true;
+              console.log(JSON.stringify({ url, httpStatus: response.status, ok: body?.ok ?? false, configured: body?.configured ?? false, backend: body?.backend ?? null }));
+              if (!ok) failed = true;
+            } catch (error) {
+              console.log(JSON.stringify({ url, reachable: false, error: error?.name ?? 'unknown' }));
+              failed = true;
+            }
+          }
+          if (failed) {
+            console.log('RUNTIME_SMOKE_WARNING: public Gemini status did not pass on every production host; authenticated Firebase/Gemini calls still require a real student session.');
+            process.exitCode = 1;
+          } else {
+            console.log('RUNTIME_SMOKE_PASS: both public production status endpoints report configured=true.');
+          }
+          NODE
       - name: Package complete tracked repository source
         run: git archive --format=zip --output=Cognitive-Learn-FULL.zip HEAD
       - name: Upload full source ZIP
