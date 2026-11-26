@@ -30,22 +30,20 @@ import { evaluateScenarioChoices } from "../../lib/scenarioDecision";
 import OrionDecisionWorkbench from "./OrionDecisionWorkbench";
 import ClosedLoopPanel from "../../components/journey/ClosedLoopPanel";
 
-type ScoreKey =
-  | "math"
-  | "literature"
-  | "english"
-  | "physics"
-  | "chemistry"
-  | "biology";
-
-const subjectLabels: Record<ScoreKey, string> = {
-  math: "Toán",
-  literature: "Văn",
-  english: "Anh",
-  physics: "Lý",
-  chemistry: "Hóa",
-  biology: "Sinh",
+type ScoreKey = string;
+const LEGACY_SUBJECT_KEYS: Readonly<Record<string, ScoreKey>> = {
+  "Toán": "math", "Ngữ văn": "literature", "Văn": "literature",
+  "Tiếng Anh": "english", "Anh": "english", "Vật lý": "physics", "Lý": "physics",
+  "Hóa học": "chemistry", "Hóa": "chemistry", "Sinh học": "biology", "Sinh": "biology",
 };
+function getOrionSubjectKey(subject: string): ScoreKey {
+  return LEGACY_SUBJECT_KEYS[subject] ?? `seed:${subject}`;
+}
+function getOrionSubjectImportance(label: string): number {
+  if (label === "Toán" || label === "Tiếng Anh") return 1.2;
+  if (label === "Vật lý" || label === "Hóa học") return 1.1;
+  return 1;
+}
 
 const defaultScores: Record<ScoreKey, string> = { math: "", literature: "", english: "", physics: "", chemistry: "", biology: "" };
 
@@ -82,6 +80,12 @@ export default function OrionPage() {
   const { draft: savedDraft, status: saveStatus, error: draftError, uid: draftOwnerUid, conflict: draftConflict, save: saveDraft, markEditing, acceptRemote } = useModuleDraft<{targetMajor:string;weeksLeft:string;scores:Record<ScoreKey,string>;targets:Record<ScoreKey,string>}>("orion");
   const verifiedProfile = useVerifiedStudentProfile();
   const transcript = verifiedProfile.transcript;
+  const transcriptOwnerMatches = Boolean(transcript.data && transcript.userId && transcript.userId === draftOwnerUid);
+  const activeSubjectLabels = useMemo<Record<ScoreKey, string>>(() => {
+    if (!transcriptOwnerMatches || transcript.status !== "ready" || !transcript.data) return {};
+    return Object.fromEntries(transcript.data.currentSubjects.map(subject => [getOrionSubjectKey(subject), subject]));
+  }, [transcriptOwnerMatches, transcript.status, transcript.data]);
+  const activeSubjectKeys = Object.keys(activeSubjectLabels);
   const [gapSubjects,setGapSubjects]=useState<ScoreKey[]>([]);
   const [gapTotal,setGapTotal]=useState("");
   const [admissionGoal, setAdmissionGoal] = useState<AdmissionGoal | null>(null);
@@ -108,10 +112,9 @@ export default function OrionPage() {
   const seededFromTranscript = useRef<string | null>(null);
   useEffect(() => {
     if (!transcript.data) return;
-    const keyBySubject: Record<string, ScoreKey> = {
-      "Toán": "math", "Ngữ văn": "literature", "Tiếng Anh": "english",
-      "Vật lý": "physics", "Hóa học": "chemistry", "Sinh học": "biology",
-    };
+    const keyBySubject: Record<string, ScoreKey> = Object.fromEntries(
+      (transcript.data?.currentSubjects ?? []).map(subject => [subject, getOrionSubjectKey(subject)])
+    );
     const grades = getLatestSubjectGrades(transcript.data);
     // An empty transcript must not consume the one-time prefill.
     // A later Firestore snapshot with observed grades can still populate Orion.
@@ -265,21 +268,20 @@ export default function OrionPage() {
   }
 
   const subjects: OrionSubjectScore[] = useMemo(() => {
-    return (Object.keys(subjectLabels) as ScoreKey[]).flatMap((key): OrionSubjectScore[] => {
+    return (activeSubjectKeys).flatMap((key): OrionSubjectScore[] => {
       const current = readNumber(scores[key], 0, 10);
       const target = readNumber(targets[key], 0, 10);
       // Incomplete subjects must NOT enter the engine as observed zeros.
       if (current === null || target === null) return [];
       return [{
         subject: key,
-        label: subjectLabels[key],
+        label: activeSubjectLabels[key],
         currentScore: current,
         targetScore: target,
-        importance: key === "math" || key === "english" ? 1.2 :
-          key === "physics" || key === "chemistry" ? 1.1 : 1,
+        importance: getOrionSubjectImportance(activeSubjectLabels[key]),
       }];
     });
-  }, [scores, targets]);
+  }, [scores, targets, activeSubjectKeys, activeSubjectLabels]);
 
   const strategy = useMemo(() => {
     return runOrionStrategy({
@@ -383,8 +385,20 @@ export default function OrionPage() {
               if(!window.confirm("Dùng phân bổ này và xóa mục tiêu điểm cũ ngoài tổ hợp?"))return;
               if(advisorReady&&draftOwnerUid) setAdvisorGap(captureAdvisorDecision(draftOwnerUid,{kind:"gap",subjects:gapSubjects.map(subject=>({subject,score:readNumber(scores[subject],0,10)!})),target:readNumber(gapTotal,0,30)!}));
               markLocalEdit();setTargets({...defaultTargets,...Object.fromEntries(gapSubjects.map(k=>[k,String(gapResult.targets[k])]))});
-            }}>Dùng phân bổ này</button></div>:<p>Chọn đủ ba môn và kiểm tra các điểm đầu vào. Orion hiện hỗ trợ sáu môn trong bảng bên dưới.</p>}
+            }}>Dùng phân bổ này</button></div>:<p>Chọn đủ ba môn và kiểm tra các điểm đầu vào. Danh sách môn được đồng bộ từ hồ sơ SEED của bạn.</p>}
           </details>
+          {activeSubjectKeys.length === 0 ? (
+            <p className="cla-transcript-hint" role="status">
+              {transcript.status === "loading" || transcript.status === "syncing"
+                ? "Đang đồng bộ danh sách môn học từ SEED…"
+                : "Chưa có danh sách môn học được xác minh từ SEED. Hãy hoàn thiện hồ sơ học tập trước khi mô phỏng."}
+              {" "}<a href="/student/profile">Mở hồ sơ SEED →</a>
+            </p>
+          ) : (
+            <p className="cla-transcript-hint" role="status">
+              Đang sử dụng {activeSubjectKeys.length} môn học từ hồ sơ SEED. Khi thay đổi môn học tại SEED, danh sách này sẽ tự cập nhật.
+            </p>
+          )}
           <div className="orion-score-table">
             {(Object.keys(subjectLabels) as ScoreKey[]).map((key) => (
               <div key={key}>
