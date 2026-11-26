@@ -1,4 +1,4 @@
-/** CP95 — student-first admissions journey; preserves the six module destinations. */
+/** CP46 — accessible, chart-like route diagram; no faux scores or hidden destinations. */
 import { useState } from "react";
 import seedLogo from "../../../assets/modules/seed-profile.png";
 import lumenLogo from "../../../assets/modules/lumen-intelligence.png";
@@ -9,78 +9,116 @@ import havenLogo from "../../../assets/modules/haven-support.png";
 
 type Link = {
   code: string;
+  short: string;
   phase: string;
   title: string;
   description: string;
   href: string;
   icon: string;
+  x: number;
+  y: number;
 };
 
 const links: Link[] = [
-  { code:"SEED",icon:seedLogo,phase:"BƯỚC 01 · NHẬP DỮ LIỆU",title:"Bản sắc học tập",description:"Nhập hồ sơ, bảng điểm, môn lựa chọn và mục tiêu. Đây là dữ liệu đầu vào cho toàn bộ quá trình phân tích và tư vấn.",href:"/student/profile" },
-  { code:"LUMEN",icon:lumenLogo,phase:"BƯỚC 02 · PHÂN TÍCH",title:"Dấu vân tay trí tuệ",description:"Phân tích 7 chỉ số Cognitive thử nghiệm; ước lượng điểm từng môn bằng trung bình của hai bài thi thử (chưa phải dự báo ML đã kiểm định), đồng thời nêu rõ dữ liệu thiếu và giới hạn.",href:"/lumen" },
-  { code:"ATLAS",icon:atlasLogo,phase:"BƯỚC 03 · KHÁM PHÁ",title:"Bản đồ tương lai",description:"Dùng điểm ước lượng để khám phá tổ hợp xét tuyển; tra cứu ngành và trường theo sở thích, hồ sơ học tập và dữ liệu tuyển sinh có nguồn. Không suy ra xác suất đỗ.",href:"/atlas" },
-  { code:"ORION",icon:orionLogo,phase:"BƯỚC 04 · HÀNH ĐỘNG",title:"Kiến trúc tương lai",description:"Xây dựng lộ trình học tập theo tuần, xác định khoảng cách tới mục tiêu và những việc cần làm để cải thiện khả năng đạt nguyện vọng.",href:"/orion" },
-  { code:"PULSE",icon:pulseLogo,phase:"THEO DÕI",title:"Đường cong tiến hóa",description:"Theo dõi tiến độ và điều chỉnh kế hoạch theo dữ liệu mới.",href:"/pulse" },
-  { code:"HAVEN",icon:havenLogo,phase:"HỖ TRỢ",title:"Hành trang thế giới",description:"Tìm hiểu học bổng, chi phí và điều kiện cần chuẩn bị.",href:"/haven" },
+  { code:"SEED",icon:seedLogo,short:"Dữ liệu",phase:"KHỞI TẠO",title:"Bản sắc học tập",description:"Nhập hồ sơ, bảng điểm, môn lựa chọn và mục tiêu; đây là dữ liệu đầu vào cho phân tích và tư vấn.",href:"/student/profile",x:16,y:26 },
+  { code:"LUMEN",icon:lumenLogo,short:"Nhận thức",phase:"THẤU HIỂU",title:"Dấu vân tay trí tuệ",description:"Phân tích 7 chỉ số Cognitive thử nghiệm; ước lượng điểm từng môn bằng trung bình của hai bài thi thử (chưa phải dự báo ML đã kiểm định), đồng thời nêu rõ dữ liệu thiếu và giới hạn.",href:"/lumen",x:49,y:18 },
+  { code:"ATLAS",icon:atlasLogo,short:"Cơ hội",phase:"KHÁM PHÁ",title:"Bản đồ tương lai",description:"Dùng điểm ước lượng để khám phá tổ hợp xét tuyển; tra cứu ngành và trường theo sở thích, hồ sơ học tập và dữ liệu tuyển sinh có nguồn. Không suy ra xác suất đỗ.",href:"/atlas",x:81,y:30 },
+  { code:"ORION",icon:orionLogo,short:"Lựa chọn",phase:"HOẠCH ĐỊNH",title:"Kiến trúc tương lai",description:"Lập kế hoạch học tập theo tuần và xác định những việc cần làm để tiến gần nguyện vọng.",href:"/orion",x:81,y:73 },
+  { code:"PULSE",icon:pulseLogo,short:"Tiến trình",phase:"THEO DÕI",title:"Đường cong tiến hóa",description:"Theo dõi tiến độ, thay đổi và việc cần điều chỉnh theo dữ liệu mới.",href:"/pulse",x:49,y:84 },
+  { code:"HAVEN",icon:havenLogo,short:"Nguồn lực",phase:"HỖ TRỢ",title:"Hành trang thế giới",description:"Tìm hiểu học bổng, chi phí và điều kiện cần chuẩn bị cho từng cơ hội.",href:"/haven",x:17,y:72 },
 ];
 
 const quickLinks = [
-  { label:"Công cụ tư vấn tuyển sinh", href:"/atlas#atlas-engine" },
   { label:"Tìm nhanh chức năng", href:"/student/modules" },
   { label:"Hướng dẫn sử dụng", href:"/student/guide" },
   { label:"Nhật ký học tập", href:"/student/companion" },
 ];
 
 export default function LearningCircuit({ profilePath }: { profilePath: string }) {
-  // Keep all six destinations accessible; guide first-time students through the core four-step outcome.
+  // Start first-time students at SEED; every other module remains directly accessible.
+  // Hover and keyboard focus update the information panel; activating a node opens that module.
   const [active, setActive] = useState(0);
   const selected = links[active] ?? links[0];
-  const primaryLinks = links.slice(0, 4);
-  const supportLinks = links.slice(4);
+  const selectedHref = selected.code === "SEED" ? profilePath : selected.href;
 
   return <>
-    <section className="cla-primary-journey" data-network-label="LEARNING NETWORK" data-module={selected.code.toLowerCase()} aria-label="Sơ đồ sáu không gian học tập" aria-labelledby="cla-circuit-title">
-      <header className="cla-primary-journey__header">
+    <section className="cla-circuit" aria-labelledby="cla-circuit-title">
+      <div className="cla-circuit-heading">
         <div>
-          <span className="cla-primary-journey__eyebrow">LỘ TRÌNH TƯ VẤN TUYỂN SINH CÁ NHÂN</span>
-          <h2 id="cla-circuit-title">Từ hồ sơ đến nguyện vọng phù hợp</h2>
-          <p>Sáu hệ trí tuệ hỗ trợ toàn hành trình; lần đầu sử dụng, hãy bắt đầu từ SEED → LUMEN → ATLAS. Sau đó dùng ORION để biến mục tiêu thành kế hoạch hành động.</p>
+          <span className="cla-circuit-eyebrow">COGNITIVE LEARN / LEARNING NETWORK</span>
+          <h2 id="cla-circuit-title">Một hành trình. Sáu hệ trí tuệ.</h2>
+          <p>Di chuyển giữa các trạm theo mục tiêu của bạn — không cần đi theo thứ tự cố định. Lần đầu sử dụng, hãy bắt đầu từ SEED → LUMEN → ATLAS → ORION: nhập hồ sơ, phân tích và ước lượng điểm, khám phá ngành/trường rồi lập kế hoạch.</p>
         </div>
-        <div className="cla-primary-journey__count" aria-label="Bốn bước chính">
-          04 <small>BƯỚC CHÍNH</small>
+        <div className="cla-circuit-counter" aria-label="Sáu phân hệ đã kết nối">
+          <span>06</span><small>CONNECTED SPACES</small>
         </div>
-      </header>
+      </div>
 
-      <ol className="cla-primary-journey__steps">
-        {primaryLinks.map((item,i) => {
-          const isActive = active === i;
-          return <li key={item.code}>
-            <a
-              className={`cla-primary-journey__step cla-primary-journey__step--${item.code.toLowerCase()}`}
-              href={item.code==="SEED"?profilePath:item.href}
-              onFocus={() => setActive(i)}
-              onMouseEnter={() => setActive(i)}
-              aria-current={isActive ? "step" : undefined}
-              data-module={item.code.toLowerCase()}
-            >
-              <span className="cla-primary-journey__number">{String(i+1).padStart(2,"0")}</span>
-              <span className="cla-primary-journey__code">{item.code} · {item.phase}</span>
-              <strong className="cla-circuit-node-name">{item.title}</strong>
-              <span className="cla-primary-journey__description">{item.description}</span>
-              <span className="cla-primary-journey__action">{item.code === "SEED" ? "Nhập hồ sơ" : item.code === "LUMEN" ? "Xem phân tích" : item.code === "ATLAS" ? "Khám phá ngành, trường" : "Lập kế hoạch"} <span aria-hidden="true">↗</span></span>
-            </a>
-          </li>;
-        })}
-      </ol>
+      <div className="cla-circuit-stage">
+        <div className="cla-circuit-map" aria-label="Sơ đồ sáu không gian học tập">
+          <svg className="cla-circuit-wires" viewBox="0 0 840 500" preserveAspectRatio="none" aria-hidden="true">
+            <defs><linearGradient id="claRouteInk" x1="0" x2="1"><stop offset="0" stopColor="#74B8FF"/><stop offset=".54" stopColor="#67D3E8"/><stop offset="1" stopColor="#A998FF"/></linearGradient></defs>
+            {[100,210,320,430,540,650,760].map(x=><line key={`x-${x}`} x1={x} x2={x} y1="12" y2="488" stroke="#D9E3F2" strokeWidth=".8" strokeDasharray="2 11"/>)}
+            {[85,170,255,340,425].map(y=><line key={`y-${y}`} x1="12" x2="828" y1={y} y2={y} stroke="#D9E3F2" strokeWidth=".8" strokeDasharray="2 11"/>)}
+            <path d="M134 130 C217 63 301 64 412 90 C513 58 607 70 680 150 C739 217 740 300 680 365 C598 431 520 439 412 420 C298 460 212 423 142 360 C85 289 91 201 134 130Z" fill="none" stroke="#DBE6F2" strokeWidth="17" strokeLinecap="round" opacity=".4"/>
+            <path d="M134 130 C217 63 301 64 412 90 C513 58 607 70 680 150 C739 217 740 300 680 365 C598 431 520 439 412 420 C298 460 212 423 142 360 C85 289 91 201 134 130Z" fill="none" stroke="url(#claRouteInk)" strokeWidth="2.6" strokeLinecap="round"/>
+            <circle cx="415" cy="255" r="88" fill="none" stroke="#D8E5F2" strokeWidth="1" strokeDasharray="3 8"/>
+            <circle cx="415" cy="255" r="60" fill="#F4F8FE" stroke="#DEE9F5"/>
+            <text x="415" y="246" textAnchor="middle" fill="#143959" fontSize="29" fontWeight="700" letterSpacing="-2">CLA</text>
+            <text x="415" y="266" textAnchor="middle" fill="#57718E" fontSize="9" letterSpacing="2">LEARNING LOOP</text>
+          </svg>
 
-      <footer className="cla-primary-journey__footer">
-        <span>KHÔNG GIAN HỖ TRỢ</span>
-        {supportLinks.map(item=><a href={item.href} key={item.code} data-module={item.code.toLowerCase()}>{item.code} · {item.title} ↗</a>)}
-        <span>Trợ giúp nhanh</span>
-        {quickLinks.map(item=><a href={item.href} key={item.href}>{item.label} ↗</a>)}
-      </footer>
-      <span className="cla-route-announcement" aria-live="polite">Đang chọn {selected.code}: {selected.title}</span>
+          {links.map((item,i)=><a
+            key={item.code}
+            className={`cla-circuit-node${active===i?" is-current":""}`}
+            href={item.code==="SEED"?profilePath:item.href}
+            data-module={item.code.toLowerCase()}
+            style={{left:`${item.x}%`,top:`${item.y}%`} as React.CSSProperties}
+            onMouseEnter={()=>setActive(i)}
+            onFocus={()=>setActive(i)}
+            aria-label={`${item.code}: ${item.title}. Mở phân hệ`}
+          >
+            <span className="cla-circuit-node-logo"><img src={item.icon} alt="" aria-hidden="true"/></span>
+            <strong>{item.code}</strong>
+            <small className="cla-circuit-node-name">{item.title}</small>
+          </a>)}
+        </div>
+
+        <aside className="cla-circuit-detail" data-module={selected.code.toLowerCase()} aria-label="Thông tin phân hệ đang chọn" aria-live="polite">
+          <div className="cla-circuit-detail-top">
+            <span>PHÂN HỆ ĐANG CHỌN</span>
+            <span>{String(active+1).padStart(2,"0")} / 06</span>
+          </div>
+          <div className="cla-circuit-detail-core">
+            <div className="cla-circuit-detail-identity">
+              <img src={selected.icon} alt="" aria-hidden="true"/>
+              <span className="cla-circuit-phase">{String(active+1).padStart(2,"0")} · {selected.phase}</span>
+            </div>
+            <h3>{selected.title}</h3>
+            <p>{selected.description}</p>
+          </div>
+          <div className="cla-circuit-detail-links">
+            <a href={selectedHref}>MỞ {selected.code}<span aria-hidden="true">↗</span></a>
+            <small>Chạm vào một phân hệ để mở; đưa chuột hoặc dùng Tab để xem mô tả.</small>
+          </div>
+        </aside>
+      </div>
+
+      <div className="cla-circuit-mobile" aria-label="Sáu không gian học tập">
+        {links.map(item=><a href={item.code==="SEED"?profilePath:item.href} key={item.code} data-module={item.code.toLowerCase()}>
+          <span className="cla-circuit-mobile-logo"><img src={item.icon} alt="" aria-hidden="true"/></span>
+          <span className="cla-circuit-mobile-copy"><small>{item.code} / {item.short}</small><strong>{item.title}</strong><span>{item.description}</span></span>
+          <span aria-hidden="true" className="cla-circuit-mobile-arrow">↗</span>
+        </a>)}
+      </div>
+      <div className="cla-circuit-foot">
+        <span>SƠ ĐỒ HỌC TẬP · 6 PHÂN HỆ</span>
+        <span>Chỉ các chức năng thực tế trong CLA · Không mô phỏng kết quả cá nhân</span>
+      </div>
     </section>
+
+    <nav className="student-dash-extra-links" aria-label="Lối tắt dành cho học sinh">
+      {quickLinks.map(item=><a href={item.href} key={item.href}>{item.label}<span aria-hidden="true">↗</span></a>)}
+    </nav>
   </>;
 }
