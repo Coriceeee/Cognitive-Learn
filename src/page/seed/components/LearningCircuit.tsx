@@ -66,7 +66,7 @@ export default function LearningCircuit({ profilePath }: { profilePath: string }
             >
               <span className="cla-primary-journey__number">{String(i+1).padStart(2,"0")}</span>
               <span className="cla-primary-journey__code">{item.code} · {item.phase}</span>
-              <strong>{item.title}</strong>
+              <strong className="cla-circuit-node-name">{item.title}</strong>
               <span className="cla-primary-journey__description">{item.description}</span>
               <span className="cla-primary-journey__action">{item.code === "SEED" ? "Nhập hồ sơ" : item.code === "LUMEN" ? "Xem phân tích" : item.code === "ATLAS" ? "Khám phá ngành, trường" : "Lập kế hoạch"} <span aria-hidden="true">↗</span></span>
             </a>
