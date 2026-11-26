@@ -11,7 +11,7 @@ test('first-time students see the core Seed → Lumen → Atlas journey',()=>{
   const circuit=read('src/page/seed/components/LearningCircuit.tsx');
   assert.match(page,/Bắt đầu từ hồ sơ và bảng điểm/);
   assert.match(circuit,/const \[active, setActive\] = useState\(0\)/);
-  assert.match(circuit,/Lần đầu sử dụng, hãy bắt đầu từ SEED → LUMEN → ATLAS/);
+  assert.match(circuit,/Lần đầu sử dụng, hãy bắt đầu từ SEED → LUMEN → ATLAS → ORION/);
   assert.match(circuit,/Phân tích 7 chỉ số Cognitive thử nghiệm/);
   assert.match(circuit,/Dùng điểm ước lượng để khám phá tổ hợp xét tuyển; tra cứu ngành và trường theo sở thích, hồ sơ học tập và dữ liệu tuyển sinh có nguồn/);\n  assert.match(circuit,/Không suy ra xác suất đỗ/);\n  assert.match(circuit,/trung bình của hai bài thi thử/);
 });
