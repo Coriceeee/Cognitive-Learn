@@ -334,7 +334,7 @@ export default function OrionPage() {
               <span>INPUT</span>
               <h2>Dữ liệu mô phỏng</h2>
               <p>
-                Danh sách môn lấy theo hồ sơ SEED đã xác minh. Điểm hiện tại được chụp một lần vào bản nháp ORION; sau đó không tự đồng bộ lại hoặc ghi đè chỉnh sửa của bạn. Bạn tự đặt điểm mục tiêu và thời hạn học.
+                Danh sách môn lấy theo hồ sơ SEED đã xác minh. Điểm hiện tại được chụp một lần vào bản nháp ORION; sau đó không tự đồng bộ lại hoặc ghi đè chỉnh sửa của bạn. Bạn tự đặt điểm mục tiêu và thời hạn học. Kết quả mô phỏng không mang ý nghĩa nhân quả.
               </p>
             </div>
           </div>
