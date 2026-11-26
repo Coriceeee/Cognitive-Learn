@@ -36,7 +36,7 @@ export default function LumenObservationJourney({ cognitive, growth, historyLoad
           <h2 id="cla-lumen-journey-title">Bắt đầu từ đâu trong LUMEN?</h2>
           <p>SEED cung cấp dữ liệu → LUMEN tính và giải thích 7 chỉ báo → bạn chọn điều chỉnh → theo dõi lần ghi nhận tiếp theo. Đây là các bước sử dụng, không phải bốn cấp độ năng lực.</p>
         </div>
-        <a href="/lumen/indices" className="cla-ux-heading-action">Xem bản đồ chỉ số <span aria-hidden="true">↗</span></a>
+        <a href="/lumen/advanced" className="cla-ux-heading-action">Ước lượng điểm thi <span aria-hidden="true">↗</span></a>
       </header>
       <ol className="cla-lumen-journey-list">
         {steps.map((step) => <li key={step.index}>
