@@ -53,6 +53,10 @@ function subjectImportance(subject: string): number {
   return 1;
 }
 
+function canSaveSeedSnapshotWithoutWeeks(weeksLeft: string, syncVersion: number, subjects: string[]): boolean {
+  return weeksLeft.trim() === "" && syncVersion === 1 && subjects.length > 0;
+}
+
 function getRiskLabel(riskLevel: OrionRiskLevel) {
   if (riskLevel === "LOW") return "Ổn định";
   if (riskLevel === "MEDIUM") return "Cần tăng tốc";
@@ -169,7 +173,8 @@ export default function OrionPage() {
       autosaveTimer.current = null;
       setAutosaveState("saving");
       try {
-        if (!isBlankOrValid(payload.weeksLeft, 1, 104, true) ||
+        if ((!isBlankOrValid(payload.weeksLeft, 1, 104, true) &&
+             !canSaveSeedSnapshotWithoutWeeks(payload.weeksLeft, payload.seedSyncVersion ?? 0, payload.seedSubjectsSnapshot ?? [])) ||
             ![...Object.values(payload.scores), ...Object.values(payload.targets)].every(v => isBlankOrValid(v, 0, 10))) {
           throw new Error("Invalid Orion draft: scores or weeks outside supported range");
         }
@@ -232,7 +237,8 @@ export default function OrionPage() {
     setSaveNotice("");
     const revision = editRevision.current;
     try {
-      if (!isBlankOrValid(weeksLeft, 1, 104, true) ||
+      if ((!isBlankOrValid(weeksLeft, 1, 104, true) &&
+           !canSaveSeedSnapshotWithoutWeeks(weeksLeft, seedSyncVersion, seedSubjectsSnapshot)) ||
           ![...Object.values(scores), ...Object.values(targets)].every(v => isBlankOrValid(v, 0, 10))) {
         throw new Error("Điểm phải từ 0–10; số tuần phải là số nguyên từ 1–104.");
       }
