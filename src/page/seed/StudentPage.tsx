@@ -136,7 +136,7 @@ export default function StudentPage() {
           <div className="cla-intro-copy">
             <span className="cla-canvas-index">HỒ SƠ HỌC SINH</span>
             <h1 id="student-dash-title">Xin chào, {displayName}.</h1>
-            <p>Phân tích kết quả học tập, tìm ngành và trường phù hợp, rồi xác định những việc cần làm để đạt nguyện vọng.</p>
+            <p>Bắt đầu từ hồ sơ và bảng điểm. CLA phân tích năng lực, hỗ trợ ước lượng điểm thi từ hai bài thi thử, gợi ý tổ hợp xét tuyển, ngành và trường phù hợp; sau đó giúp bạn lập kế hoạch đạt nguyện vọng.</p>
           </div>
           <div className="cla-intro-target"><span>MỤC TIÊU CỦA BẠN</span><strong>{targetMajor}</strong><small>{hasProfile && isMeaningfulText(profile.targetUniversity) ? profile.targetUniversity : "Chưa chọn trường mục tiêu"}</small><a href={profilePath}>{hasProfile ? "Cập nhật hồ sơ" : "Tạo hồ sơ"} ↗</a></div>
         </section>

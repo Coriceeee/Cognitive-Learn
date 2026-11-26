@@ -20,24 +20,24 @@ type Link = {
 };
 
 const links: Link[] = [
-  { code:"SEED",icon:seedLogo,short:"Dữ liệu",phase:"KHỞI TẠO",title:"Bản sắc học tập",description:"Điểm số, GPA và mục tiêu — nền tảng cho mọi phân tích tiếp theo.",href:"/student/profile",x:16,y:26 },
-  { code:"LUMEN",icon:lumenLogo,short:"Nhận thức",phase:"THẤU HIỂU",title:"Dấu vân tay trí tuệ",description:"Quan sát SCI, MAS, CSL cùng bằng chứng và giới hạn diễn giải.",href:"/lumen",x:49,y:18 },
-  { code:"ATLAS",icon:atlasLogo,short:"Cơ hội",phase:"KHÁM PHÁ",title:"Bản đồ tương lai",description:"Khám phá trường, ngành, phương thức xét tuyển và lộ trình quốc tế.",href:"/atlas",x:81,y:30 },
-  { code:"ORION",icon:orionLogo,short:"Lựa chọn",phase:"HOẠCH ĐỊNH",title:"Kiến trúc tương lai",description:"Đối chiếu các phương án và lên kế hoạch theo mục tiêu.",href:"/orion",x:81,y:73 },
-  { code:"PULSE",icon:pulseLogo,short:"Tiến trình",phase:"THEO DÕI",title:"Đường cong tiến hóa",description:"Theo dõi biến động học tập và những việc cần điều chỉnh.",href:"/pulse",x:49,y:84 },
-  { code:"HAVEN",icon:havenLogo,short:"Nguồn lực",phase:"HỖ TRỢ",title:"Hành trang thế giới",description:"Xem điều kiện học bổng, chi phí và phương án tài chính.",href:"/haven",x:17,y:72 },
+  { code:"SEED",icon:seedLogo,short:"Dữ liệu",phase:"KHỞI TẠO",title:"Bản sắc học tập",description:"Nhập hồ sơ, bảng điểm, môn lựa chọn và mục tiêu; đây là dữ liệu đầu vào cho phân tích và tư vấn.",href:"/student/profile",x:16,y:26 },
+  { code:"LUMEN",icon:lumenLogo,short:"Nhận thức",phase:"THẤU HIỂU",title:"Dấu vân tay trí tuệ",description:"Phân tích 7 chỉ số Cognitive thử nghiệm và ước lượng điểm thi từ hai bài thi thử; kết quả luôn kèm giới hạn dữ liệu.",href:"/lumen",x:49,y:18 },
+  { code:"ATLAS",icon:atlasLogo,short:"Cơ hội",phase:"KHÁM PHÁ",title:"Bản đồ tương lai",description:"Dùng điểm ước lượng để khám phá tổ hợp xét tuyển, ngành và trường theo nguồn hiện có; đối chiếu năm và phương thức.",href:"/atlas",x:81,y:30 },
+  { code:"ORION",icon:orionLogo,short:"Lựa chọn",phase:"HOẠCH ĐỊNH",title:"Kiến trúc tương lai",description:"Lập kế hoạch học tập theo tuần và xác định những việc cần làm để tiến gần nguyện vọng.",href:"/orion",x:81,y:73 },
+  { code:"PULSE",icon:pulseLogo,short:"Tiến trình",phase:"THEO DÕI",title:"Đường cong tiến hóa",description:"Theo dõi tiến độ, thay đổi và việc cần điều chỉnh theo dữ liệu mới.",href:"/pulse",x:49,y:84 },
+  { code:"HAVEN",icon:havenLogo,short:"Nguồn lực",phase:"HỖ TRỢ",title:"Hành trang thế giới",description:"Tìm hiểu học bổng, chi phí và điều kiện cần chuẩn bị cho từng cơ hội.",href:"/haven",x:17,y:72 },
 ];
 
 const quickLinks = [
   { label:"Tìm nhanh chức năng", href:"/student/modules" },
   { label:"Hướng dẫn sử dụng", href:"/student/guide" },
-  { label:"Đồng hành mỗi ngày", href:"/student/companion" },
+  { label:"Nhật ký học tập", href:"/student/companion" },
 ];
 
 export default function LearningCircuit({ profilePath }: { profilePath: string }) {
-  // ATLAS is selected initially to mirror the reference menu. Hover and keyboard
-  // focus update the information panel; activating a node opens that module.
-  const [active, setActive] = useState(2);
+  // Start first-time students at SEED; every other module remains directly accessible.
+  // Hover and keyboard focus update the information panel; activating a node opens that module.
+  const [active, setActive] = useState(0);
   const selected = links[active] ?? links[0];
   const selectedHref = selected.code === "SEED" ? profilePath : selected.href;
 
@@ -47,7 +47,7 @@ export default function LearningCircuit({ profilePath }: { profilePath: string }
         <div>
           <span className="cla-circuit-eyebrow">COGNITIVE LEARN / LEARNING NETWORK</span>
           <h2 id="cla-circuit-title">Một hành trình. Sáu hệ trí tuệ.</h2>
-          <p>Di chuyển giữa các trạm theo mục tiêu của bạn — không cần đi theo thứ tự cố định.</p>
+          <p>Di chuyển giữa các trạm theo mục tiêu của bạn — không cần đi theo thứ tự cố định. Lần đầu sử dụng, hãy bắt đầu từ SEED → LUMEN → ATLAS.</p>
         </div>
         <div className="cla-circuit-counter" aria-label="Sáu phân hệ đã kết nối">
           <span>06</span><small>CONNECTED SPACES</small>
