@@ -86,7 +86,7 @@ test('CP58.10: Orion snapshots all verified Seed subjects once and preserves exi
   assert.match(orion, /seedSubjectGrades\.filter\(grade => grade\.provisional !== null\)/);
   assert.match(orion, /seedSubjectsSnapshot/);
   assert.match(orion, /seedSyncVersion === 1/);
-  assert.match(orion, /if \(!nextScores\[grade\.subject\]\?\.trim\(\)\) nextScores\[grade\.subject\] = String\(grade\.provisional\)/);
+  assert.match(orion, /if \(grade\.provisional !== null && !nextScores\[grade\.subject\]\?\.trim\(\)\) nextScores\[grade\.subject\] = String\(grade\.provisional\)/);
   assert.match(orion, /normalizeSubjectValues\(savedDraft\?\.scores\)/);
   assert.doesNotMatch(orion, /keyBySubject: Record<string, ScoreKey>/);
   assert.doesNotMatch(orion, /type ScoreKey =\s*\n\s*\| "math"/);
