@@ -59,7 +59,7 @@ test('CP79.04 circuit nodes, focus panel and mobile links share the matching per
   const map=read('src/page/seed/components/LearningCircuit.tsx');
   const css=read('src/styles/40-cla-exam-horizon-learning-circuit.css');
   assert.match(map,/data-module=\{item\.code\.toLowerCase\(\)\}/);
-  assert.match(map,/data-module=\{chosen\.code\.toLowerCase\(\)\}/);
+  assert.match(map,/data-module=\{selected\.code\.toLowerCase\(\)\}/);
   assert.ok(map.includes('stopColor="#74B8FF"')&&map.includes('stopColor="#67D3E8"')&&map.includes('stopColor="#A998FF"'));
   for(const name of Object.keys(palette)) assert.ok(css.includes(`data-module="${name}"]`),name);
   assert.match(css,/cla-circuit-detail-links > a[\s\S]*?linear-gradient/);

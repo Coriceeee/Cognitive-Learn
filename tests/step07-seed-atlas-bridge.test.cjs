@@ -135,7 +135,8 @@ test('07-09: read-only adapter does not mutate Seed transcript', () => {
 
 test('07-10: Atlas reads user-bound Seed hook, only for school marks', () => {
   const source = fs.readFileSync(path.join(root,'src/page/atlas/components/AtlasAdmissionEnginePanel.tsx'),'utf8');
-  assert.match(source,/useStudentTranscript\(\)/);
+  assert.match(source,/const verifiedProfile = useVerifiedStudentProfile\(\);/);
+  assert.match(source,/const transcript = verifiedProfile\.transcript;/);
   assert.match(source,/loadSeedSchoolMarks\(seedSnapshot\)/);
   assert.match(source,/setScoreBasis\("school"\)/);
   assert.match(source,/importedSeedKeys\.length === 0/);

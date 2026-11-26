@@ -1,5 +1,5 @@
-import { computeCognitiveComposite } from "../../lib/cognitiveCompositeFormula";
-import { createCognitiveVector, type CognitiveVector, type CognitiveCode } from "../../lib/cognitiveAdapter";
+import { computeCognitiveComposite } from "../../lib/cognitiveCompositeFormula.ts";
+import { createCognitiveVector, type CognitiveVector, type CognitiveCode } from "../../lib/cognitiveAdapter.ts";
 
 export type CognitiveRisk = "LOW" | "MEDIUM" | "HIGH" | "UNKNOWN";
 export type CognitiveTrend = "IMPROVING" | "STABLE" | "DECLINING" | "UNKNOWN";

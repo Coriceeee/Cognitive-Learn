@@ -55,6 +55,7 @@ function harness() {
     return [v,n=>{values[i]=typeof n==='function'?n(values[i]):n;}];
   };
   const mocks={
+    '../../../lib/studentDecisionSnapshot': {studentDecisionLedger:{observe:()=>true}},
     react:{useState,useEffect:fn=>{cleanup=fn();}},
     'firebase/auth':{onAuthStateChanged:(_auth,callback)=>{
       authChanged=u=>{auth.currentUser=u;callback(u);};return ()=>{};

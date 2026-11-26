@@ -36,6 +36,7 @@ function harness() {
     return [initial, next => { values[current] = typeof next === 'function' ? next(values[current]) : next; }];
   };
   const mocks = {
+    '../../../lib/studentDecisionSnapshot': {studentDecisionLedger:{observe:()=>true}},
     react:{useState, useEffect:fn=>{cleanup=fn();}},
     'firebase/auth':{onAuthStateChanged:(_auth, cb)=>{authCallback=cb; return ()=>{};}},
     'firebase/firestore':{

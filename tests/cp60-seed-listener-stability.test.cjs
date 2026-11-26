@@ -17,6 +17,7 @@ function harness() {
   const policy = {isServerConfirmedSnapshot:m => m?.fromCache === false && m?.hasPendingWrites === false,
     isMatchingAccountRecord:(v,uid)=>v && (v.userId === undefined || v.userId === uid)};
   const mocks = {
+    '../../../lib/studentDecisionSnapshot': {studentDecisionLedger:{observe:()=>true}},
     react:{useState:initial=>{const i=hookIndex++;state[i]=initial;return [initial,next=>{state[i]=typeof next==='function'?next(state[i]):next;}];},useEffect:fn=>{cleanup=fn();}},
     'firebase/auth':{onAuthStateChanged:(_auth,cb)=>{authChanged=user=>{auth.currentUser=user;cb(user);};return ()=>{};}},
     'firebase/firestore':{doc:(_db,c,uid)=>`${c}:${uid}`,
