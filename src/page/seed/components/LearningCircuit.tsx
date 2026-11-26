@@ -40,7 +40,7 @@ export default function LearningCircuit({ profilePath }: { profilePath: string }
   const supportLinks = links.slice(4);
 
   return <>
-    <section className="cla-primary-journey" aria-label="Sơ đồ sáu không gian học tập" aria-labelledby="cla-circuit-title">
+    <section className="cla-primary-journey" data-network-label="LEARNING NETWORK" aria-label="Sơ đồ sáu không gian học tập" aria-labelledby="cla-circuit-title">
       <header className="cla-primary-journey__header">
         <div>
           <span className="cla-primary-journey__eyebrow">LỘ TRÌNH TƯ VẤN TUYỂN SINH CÁ NHÂN</span>
