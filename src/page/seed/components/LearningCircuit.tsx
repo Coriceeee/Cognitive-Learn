@@ -18,8 +18,8 @@ type Link = {
 
 const links: Link[] = [
   { code:"SEED",icon:seedLogo,phase:"BƯỚC 01 · NHẬP DỮ LIỆU",title:"Bản sắc học tập",description:"Nhập hồ sơ, bảng điểm, môn lựa chọn và mục tiêu. Đây là dữ liệu đầu vào cho toàn bộ quá trình phân tích và tư vấn.",href:"/student/profile" },
-  { code:"LUMEN",icon:lumenLogo,phase:"BƯỚC 02 · PHÂN TÍCH",title:"Dấu vân tay trí tuệ",description:"Phân tích 7 chỉ số Cognitive thử nghiệm và ước lượng điểm thi từ dữ liệu bài thi thử; kết quả thể hiện rõ dữ liệu còn thiếu và giới hạn dự báo.",href:"/lumen" },
-  { code:"ATLAS",icon:atlasLogo,phase:"BƯỚC 03 · KHÁM PHÁ",title:"Bản đồ tương lai",description:"Dùng điểm ước lượng để khám phá tổ hợp xét tuyển, ngành và trường; đối chiếu phương thức, năm tuyển sinh và nguồn chính thức.",href:"/atlas" },
+  { code:"LUMEN",icon:lumenLogo,phase:"BƯỚC 02 · PHÂN TÍCH",title:"Dấu vân tay trí tuệ",description:"Phân tích 7 chỉ số Cognitive thử nghiệm; ước lượng điểm từng môn bằng trung bình của hai bài thi thử (chưa phải dự báo ML đã kiểm định), đồng thời nêu rõ dữ liệu thiếu và giới hạn.",href:"/lumen" },
+  { code:"ATLAS",icon:atlasLogo,phase:"BƯỚC 03 · KHÁM PHÁ",title:"Bản đồ tương lai",description:"Dùng điểm ước lượng để khám phá tổ hợp xét tuyển; tra cứu ngành và trường theo sở thích, hồ sơ học tập và dữ liệu tuyển sinh có nguồn. Không suy ra xác suất đỗ.",href:"/atlas" },
   { code:"ORION",icon:orionLogo,phase:"BƯỚC 04 · HÀNH ĐỘNG",title:"Kiến trúc tương lai",description:"Xây dựng lộ trình học tập theo tuần, xác định khoảng cách tới mục tiêu và những việc cần làm để cải thiện khả năng đạt nguyện vọng.",href:"/orion" },
   { code:"PULSE",icon:pulseLogo,phase:"THEO DÕI",title:"Đường cong tiến hóa",description:"Theo dõi tiến độ và điều chỉnh kế hoạch theo dữ liệu mới.",href:"/pulse" },
   { code:"HAVEN",icon:havenLogo,phase:"HỖ TRỢ",title:"Hành trang thế giới",description:"Tìm hiểu học bổng, chi phí và điều kiện cần chuẩn bị.",href:"/haven" },
@@ -40,7 +40,7 @@ export default function LearningCircuit({ profilePath }: { profilePath: string }
   const supportLinks = links.slice(4);
 
   return <>
-    <section className="cla-primary-journey" data-network-label="LEARNING NETWORK" aria-label="Sơ đồ sáu không gian học tập" aria-labelledby="cla-circuit-title">
+    <section className="cla-primary-journey" data-network-label="LEARNING NETWORK" data-module={selected.code.toLowerCase()} aria-label="Sơ đồ sáu không gian học tập" aria-labelledby="cla-circuit-title">
       <header className="cla-primary-journey__header">
         <div>
           <span className="cla-primary-journey__eyebrow">LỘ TRÌNH TƯ VẤN TUYỂN SINH CÁ NHÂN</span>
