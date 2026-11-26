@@ -41,6 +41,16 @@ jobs:
         run: npm run test:cp87:nav
       - name: CP94 first-run admissions journey and preserved six-module navigation
         run: npm run test:cp94:student-first-run
+      - name: CP94 admissions, XAI, student-only and reliability regressions
+        run: |
+          npm run test:cp32:national
+          npm run test:cp34:knowledge-xai
+          npm run test:cp40:student-only
+          npm run test:cp42:dthu-scheme
+          npm run test:cp42:scheme-coverage
+          npm run test:cp42:robust-decision
+          npm run test:cp73:mvp
+          npm run test:cp83:ops
       - name: Atlas projection and historical-source safeguards
         run: npm run test:cp88:projection-admissions
       - name: P3 — National university pathways and source coverage
