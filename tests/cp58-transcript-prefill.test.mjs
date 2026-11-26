@@ -107,6 +107,15 @@ test('CP58.11: one-time Seed snapshot requires same-owner server transcript and 
   ]) assert.equal(canImportSeedSnapshotOnce({...state,...changes}), false, JSON.stringify(changes));
 });
 
+
+test('CP58.12: Orion can persist the one-time Seed snapshot before a study deadline is entered', () => {
+  const orion = source('src/page/orion/OrionPage.tsx');
+  assert.match(orion, /function canSaveSeedSnapshotWithoutWeeks/);
+  assert.match(orion, /canSaveSeedSnapshotWithoutWeeks\(payload\.weeksLeft, payload\.seedSyncVersion \?\? 0, payload\.seedSubjectsSnapshot \?\? \[\]\)/);
+  assert.match(orion, /canSaveSeedSnapshotWithoutWeeks\(weeksLeft, seedSyncVersion, seedSubjectsSnapshot\)/);
+  assert.match(orion, /Kết quả mô phỏng không mang ý nghĩa nhân quả/);
+});
+
 test('CP58.9: Atlas study-abroad synchronizes Back/Forward country query without losing same-country checklist', () => {
   const atlas = source('src/page/study-abroad/StudyAbroadPage.tsx');
   assert.match(atlas, /navigationHref.*string/);
