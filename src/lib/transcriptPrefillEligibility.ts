@@ -6,8 +6,8 @@
  *
  * Empty transcripts and unsupported subjects must not consume the one-time
  * prefill; the next server-confirmed transcript update can still be used.
- * Prefilling is a convenience only: it does not persist data or attest to a
- * new observation. Student edits always take priority.
+ * This helper only evaluates eligibility; the caller controls persistence.
+ * A prefill never attests to a new observation. Student edits take priority.
  */
 export interface TranscriptPrefillState {
   draftOwnerUid: string;
