@@ -40,12 +40,12 @@ export default function LearningCircuit({ profilePath }: { profilePath: string }
   const supportLinks = links.slice(4);
 
   return <>
-    <section className="cla-primary-journey" aria-labelledby="cla-circuit-title">
+    <section className="cla-primary-journey" aria-label="Sơ đồ sáu không gian học tập" aria-labelledby="cla-circuit-title">
       <header className="cla-primary-journey__header">
         <div>
           <span className="cla-primary-journey__eyebrow">LỘ TRÌNH TƯ VẤN TUYỂN SINH CÁ NHÂN</span>
           <h2 id="cla-circuit-title">Từ hồ sơ đến nguyện vọng phù hợp</h2>
-          <p>Lần đầu sử dụng, hãy bắt đầu từ SEED → LUMEN → ATLAS. Sau đó dùng ORION để biến mục tiêu thành kế hoạch hành động.</p>
+          <p>Sáu hệ trí tuệ hỗ trợ toàn hành trình; lần đầu sử dụng, hãy bắt đầu từ SEED → LUMEN → ATLAS. Sau đó dùng ORION để biến mục tiêu thành kế hoạch hành động.</p>
         </div>
         <div className="cla-primary-journey__count" aria-label="Bốn bước chính">
           04 <small>BƯỚC CHÍNH</small>
