@@ -1,6 +1,6 @@
 {
   "schema": "cla.cp93.modified.immutable.v1",
-  "origin": "CP93 HF02 Windows CMD source manifest; deploy script hash reconciled against the reviewed tracked main-branch file. SHA256 verifies modified files only.",
+  "origin": "CP93 modified-source manifest reconciled against reviewed tracked main-branch content; SHA256 verifies changed/added files only, not a full CP92 rebaseline.",
   "mode": "changed_and_added_files_only",
   "files": [
     {
@@ -25,7 +25,7 @@
     },
     {
       "path": "api/gemini-lumen.ts",
-      "sha256": "6438d08f6742043583f833d11d33cd54a985882b92dafb79a9bfbf0341fefc82"
+      "sha256": "807a903c4bc34536dc3069517d1ed8346e9628216dd77df5d381cd6da7adf7e0"
     },
     {
       "path": "firebase.gemini.json",
@@ -61,7 +61,7 @@
     },
     {
       "path": "src/components/common/FloatingAdvisorChat.tsx",
-      "sha256": "35528af3eba5e43e3738535039fdaef52e2d16edf9579dd6678a314051680995"
+      "sha256": "1aa9d7101438cee37be29d2332e82e865f959c8fe410f7c6a92b045c206695cf"
     },
     {
       "path": "src/lib/geminiAdmissionClient.ts",
@@ -73,7 +73,7 @@
     },
     {
       "path": "tests/cp87-navigation-priority.test.cjs",
-      "sha256": "1da33b9930fd76f863be2e6d05c28c65578c8ae1370d9e8f59f53169b5290d2a"
+      "sha256": "29393a135379ba67ce76382b785366796acae2a5ae334b673c933cb303e45180"
     },
     {
       "path": "tests/cp93-gemini-firebase-routes.test.mjs",
