@@ -49,7 +49,6 @@ export function canImportSeedSnapshotOnce(state: SeedSnapshotImportState): boole
     state.transcriptStatus === 'ready' &&
     state.seededOwnerUid !== state.draftOwnerUid &&
     state.hasSupportedGrades &&
-    !state.hasLocalEdits &&
     !state.hasSnapshotMarker
   );
 }
