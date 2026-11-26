@@ -55,20 +55,14 @@ test('CP79.03 selected navigation keeps sufficient readable contrast and unique 
   assert.ok(css.includes('--unav-badge-gradient: #274664;'),'dark mode badge safeguard');
   assert.ok(css.includes('--unav-gradient: #234669;'),'dark mode active tab safeguard');
 });
-test('CP79.04 primary admissions journey keeps six module links and a responsive four-step layout',()=>{
+test('CP79.04 circuit nodes, focus panel and mobile links share the matching per-module palette',()=>{
   const map=read('src/page/seed/components/LearningCircuit.tsx');
-  const css=read('src/styles/54-cla-student-journey.css');
+  const css=read('src/styles/40-cla-exam-horizon-learning-circuit.css');
   assert.match(map,/data-module=\{item\.code\.toLowerCase\(\)\}/);
   assert.match(map,/data-module=\{selected\.code\.toLowerCase\(\)\}/);
-  assert.match(map,/const primaryLinks = links\.slice\(0, 4\)/);
-  assert.match(map,/const supportLinks = links\.slice\(4\)/);
-  assert.match(map,/cla-primary-journey__step--\$\{item\.code\.toLowerCase\(\)\}/);
-  assert.match(map,/aria-label="Sơ đồ sáu không gian học tập"/);
-  assert.match(map,/KHÔNG GIAN HỖ TRỢ/);
-  for(const name of ['seed','lumen','atlas','orion']) assert.ok(css.includes(`.cla-primary-journey__step--${name}`),name);
-  assert.match(css,/\.cla-primary-journey__step:focus-visible/);
-  assert.match(css,/@media \(max-width: 560px\)/);
-  assert.match(css,/@media \(prefers-reduced-motion: reduce\)/);
+  assert.ok(map.includes('stopColor="#74B8FF"')&&map.includes('stopColor="#67D3E8"')&&map.includes('stopColor="#A998FF"'));
+  for(const name of Object.keys(palette)) assert.ok(css.includes(`data-module="${name}"]`),name);
+  assert.match(css,/cla-circuit-detail-links > a[\s\S]*?linear-gradient/);
 });
 test('CP79.05 page accents, charts and public cards remain scoped; no duplicate UX or new layout layer',()=>{
   const css=read('src/styles/49-cla-product-polish.css');
