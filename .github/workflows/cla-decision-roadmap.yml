@@ -64,6 +64,8 @@ jobs:
           npm run test:rules:static
           npm run test:rules:v5:static
           npm run test:rules:gate-unit
+      - name: Full offline regression suite
+        run: npm test
           npm run test:cp75:ux-audit
           npm run test:cp79:theme
           npm run test:seed-atlas
