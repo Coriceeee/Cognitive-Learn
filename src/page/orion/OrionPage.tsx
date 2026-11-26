@@ -229,7 +229,7 @@ export default function OrionPage() {
     markLocalEdit();
     setSaveNoticeTone("success");
     setSaveNotice("Đã lấy điểm và danh sách môn từ SEED một lần. ORION lưu bản riêng, không tự đồng bộ lại.");
-  }, [transcript.data, transcript.userId, transcript.status, draftOwnerUid, saveStatus, savedDraft, seedSubjectGrades, seedSubjectNames]);
+  }, [transcript.data, transcript.userId, transcript.status, draftOwnerUid, saveStatus, savedDraft, seedSubjectGrades, seedSubjectNames, hasLocalEdits]);
   async function saveCurrentDraft() {
     if (autosaveTimer.current !== null) window.clearTimeout(autosaveTimer.current);
     autosaveTimer.current = null;
