@@ -116,6 +116,7 @@ export default function OrionPage() {
     setAdmissionGoal(readAdmissionGoal(draftOwnerUid));
   }, [draftOwnerUid]);
   const seededFromTranscript = useRef<string | null>(null);
+  const manuallyEditedSubjects = useRef<Set<string>>(new Set());
 
   const [saveNotice, setSaveNotice] = useState("");
   const [saveNoticeTone, setSaveNoticeTone] = useState<"success" | "warning" | "error">("success");
@@ -141,6 +142,7 @@ export default function OrionPage() {
     setTargets(defaultTargets);
     setSeedSyncVersion(0);
     setSeedSubjectsSnapshot([]);
+    manuallyEditedSubjects.current.clear();
     dirtyRevision.current = false;
     editRevision.current += 1;
     setHasLocalEdits(false);
@@ -218,18 +220,20 @@ export default function OrionPage() {
     // Snapshot the locked Seed curriculum once. Upgrade legacy drafts by
     // preserving existing values and filling only subjects that are missing.
     seededFromTranscript.current = draftOwnerUid;
-    const nextScores = normalizeSubjectValues(savedDraft?.scores);
+    const nextScores = { ...normalizeSubjectValues(savedDraft?.scores), ...normalizeSubjectValues(scores) };
     for (const grade of supportedGrades) {
-      if (grade.provisional !== null && !nextScores[grade.subject]?.trim()) nextScores[grade.subject] = String(grade.provisional);
+      if (grade.provisional !== null && !manuallyEditedSubjects.current.has(grade.subject) && !nextScores[grade.subject]?.trim()) {
+        nextScores[grade.subject] = String(grade.provisional);
+      }
     }
     setScores(nextScores);
-    setTargets(normalizeSubjectValues(savedDraft?.targets));
+    setTargets({ ...normalizeSubjectValues(savedDraft?.targets), ...normalizeSubjectValues(targets) });
     setSeedSyncVersion(1);
     setSeedSubjectsSnapshot(seedSubjectNames);
     markLocalEdit();
     setSaveNoticeTone("success");
     setSaveNotice("Đã lấy điểm và danh sách môn từ SEED một lần. ORION lưu bản riêng, không tự đồng bộ lại.");
-  }, [transcript.data, transcript.userId, transcript.status, draftOwnerUid, saveStatus, savedDraft, seedSubjectGrades, seedSubjectNames, hasLocalEdits]);
+  }, [transcript.data, transcript.userId, transcript.status, draftOwnerUid, saveStatus, savedDraft, seedSubjectGrades, seedSubjectNames, hasLocalEdits, scores, targets]);
   async function saveCurrentDraft() {
     if (autosaveTimer.current !== null) window.clearTimeout(autosaveTimer.current);
     autosaveTimer.current = null;
@@ -274,6 +278,7 @@ export default function OrionPage() {
       setTargets(normalizeSubjectValues(remote?.targets));
       setSeedSyncVersion(remote?.seedSyncVersion === 1 ? 1 : 0);
       setSeedSubjectsSnapshot(Array.isArray(remote?.seedSubjectsSnapshot) ? remote.seedSubjectsSnapshot.filter((item): item is string => typeof item === "string") : []);
+      manuallyEditedSubjects.current.clear();
       setSaveNoticeTone("success");
       setSaveNotice("Đã tải bản nháp mới nhất từ máy chủ.");
     } catch (error) {
@@ -308,6 +313,7 @@ export default function OrionPage() {
     .filter(row => row.reasons.length === 0).map(row => row.scenario), [strategy.scenarios, decisionHours, decisionRisk]);
 
   function updateScore(key: string, value: string) {
+    manuallyEditedSubjects.current.add(key);
     markLocalEdit();
     setScores((current) => ({
       ...current,
@@ -599,6 +605,7 @@ export default function OrionPage() {
           applyReviewedScores:(owner:string,review:ContinuityResult)=>{
             if(!advisorReady || saving || auth.currentUser?.uid!==owner || draftOwnerUid!==owner || review.status!=="READY_TO_COPY" || !review.rows.length || review.rows.length!==subjects.length || !review.rows.every(r=>activeSubjectNames.includes(r.key)&&subjects.some(s=>s.subject===r.key&&s.currentScore===r.current&&s.targetScore===r.target)&&Number.isFinite(r.observed)&&r.observed>=0&&r.observed<=10))throw new Error("Bản nháp hoặc tài khoản đã thay đổi. Hãy đồng bộ và thử lại.");
             markLocalEdit(); setAdvisorGap(null);
+            for (const row of review.rows) manuallyEditedSubjects.current.add(row.key);
             setScores(current=>{const next={...current}; for(const row of review.rows)next[row.key]=String(row.observed);return next;});
           } } : undefined} />}
         {view === "/orion/roadmap" && <p className="cla-focus-notice"><a href="/orion/scenarios#cla-closed-loop">Mô phỏng và chốt chu kỳ học tập →</a></p>}
