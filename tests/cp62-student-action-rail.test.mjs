@@ -37,12 +37,12 @@ describe('CP62 dashboard data-source signal rail', () => {
     assert.match(full[1].detail,/không phải chẩn đoán/i);
     assert.ok(!full.some(s=>/100\s*điểm|xác suất/i.test(s.status)));
   });
-  it('keeps the verified action rail after its data canvas while six-module primary navigation moves above both', () => {
-    assert.match(page,/import StudentActionSignalRail from/);
-    assert.ok(page.indexOf('<LearningCircuit') < page.indexOf('<StudentDecisionCanvas'));
-    assert.ok(page.indexOf('<StudentDecisionCanvas') < page.indexOf('<StudentActionSignalRail'));
-    assert.doesNotMatch(page,/className="student-dash-focus"/);
-    assert.match(page,/hasComparableGrowth=\{hasComparableGrowth\}/);
+  it('keeps the six-module circuit primary and detailed analytics collapsed without a duplicate action rail', () => {
+    assert.doesNotMatch(page,/import StudentActionSignalRail from/);
+    assert.ok(page.indexOf('<LearningCircuit') < page.indexOf('<ExamHorizon'));
+    assert.ok(page.indexOf('<ExamHorizon') < page.indexOf('<StudentDecisionCanvas'));
+    assert.match(page,/<details className="cla-student-analysis-details">/);
+    assert.doesNotMatch(page,/hasComparableGrowth=/);
   });
   it('keeps the exam calendar first and the preview isolated', () => {
     assert.ok(page.indexOf('<ExamHorizon') < page.indexOf('<StudentDecisionCanvas'));

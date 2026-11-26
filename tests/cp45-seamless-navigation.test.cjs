@@ -120,7 +120,7 @@ test('CP45: transition keeps revealed content during lazy import, profile watche
   assert.doesNotMatch(app,/useSyncExternalStore\(/);
   assert.match(app,/routePending && <div className="cla-route-progress"/);
   assert.match(app,/path === "\/student\/consent" \|\| path\.startsWith\("\/admin"\)/);
-  assert.match(provider,/Context\.Provider value=\{verified\}/);
+  assert.match(provider,/Context\.Provider value=\{\{\.\.\.verified, transcript\}\}/);
   assert.match(seed,/useVerifiedStudentProfile\(\)/);
   assert.match(lumen,/useVerifiedStudentProfile\(\)/);
   assert.match(read('src/page/seed/hooks/useStudentProfile.ts'),/isServerConfirmedSnapshot\(snapshot\.metadata\)/);

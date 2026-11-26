@@ -114,7 +114,7 @@ test('CP70.18 student journey has one action, while the LearningCircuit exclusiv
   assert.match(map, /href=\{item\.code==="SEED"\?profilePath:item\.href\}/);
   assert.doesNotMatch(component, /cla-journey-handoff__route|nodes\.map/);
   assert.match(component, /handoff\.primaryHref/);
-  assert.match(student,/!isAdminPreview && <StudentJourneyBridge hasProfile=\{hasProfile\} \/>/);
+  assert.doesNotMatch(student,/StudentJourneyBridge/);
   assert.match(student, /<LearningCircuit profilePath=\{profilePath\} \/>/);
 });
 
