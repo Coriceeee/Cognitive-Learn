@@ -1,6 +1,6 @@
 {
   "schema": "cla.cp93.modified.immutable.v1",
-  "origin": "CP93 HF02 Windows CMD fix on CP93 HF01 source; SHA256 verifies modified files only.",
+  "origin": "CP93 HF02 Windows CMD source manifest; deploy script hash reconciled against the reviewed tracked main-branch file. SHA256 verifies modified files only.",
   "mode": "changed_and_added_files_only",
   "files": [
     {
@@ -13,7 +13,7 @@
     },
     {
       "path": "DEPLOY_CLA_CP93_FIREBASE_GEMINI.cmd",
-      "sha256": "f7cc352201f83975ea2881f2e6483f158a57b476212fc1ad36f71fd033144813"
+      "sha256": "163d7c997e7736236c73bb6934ffc00687f6617b7257a067922d2db0fd9094d8"
     },
     {
       "path": "DEPLOY_CLA_CP93_FIREBASE_GEMINI.ps1",
