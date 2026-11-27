@@ -265,8 +265,10 @@ export default function OrionPage() {
 
   const subjects: OrionSubjectScore[] = useMemo(() => {
     return (activeSubjectKeys).flatMap((key): OrionSubjectScore[] => {
-      const current = readNumber(scores[key], 0, 10);
-      const target = readNumber(targets[key], 0, 10);
+      // Seed can supply nine curriculum subjects while older Orion drafts only
+      // contain the six legacy keys. A missing key is an empty input, not an error.
+      const current = readNumber(scores[key] ?? "", 0, 10);
+      const target = readNumber(targets[key] ?? "", 0, 10);
       // Incomplete subjects must NOT enter the engine as observed zeros.
       if (current === null || target === null) return [];
       return [{
