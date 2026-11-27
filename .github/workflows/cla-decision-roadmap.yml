@@ -100,8 +100,11 @@ jobs:
           path: Cognitive-Learn-FULL.zip
           if-no-files-found: error
           retention-days: 7
-      - name: Production Gemini status smoke check (read-only, no secrets)
+      # Production status is a release/deployment check, not a source-CI prerequisite.
+      # The deployment script runs the same strict check immediately after Hosting deploy.
+      - name: Production Gemini status smoke check (manual release verification)
         id: production-gemini-smoke
+        if: github.event_name == 'workflow_dispatch'
         run: |
           node --input-type=module <<'NODE'
           const hosts = [
