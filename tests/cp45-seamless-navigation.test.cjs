@@ -207,8 +207,8 @@ test('CP45 regression: lazy route chunks cannot remount AccessGate or the shared
   const gateEnd=app.indexOf('</AccessGate>',gateStart);
   assert.ok(gateStart>0 && gateEnd>gateStart,'AccessGate remains mounted in the route shell');
   const shellBeforeGate=app.slice(app.indexOf('<RouteErrorBoundary route={path}>'),gateStart);
-  const suspenseOpens=(shellBeforeGate.match(/<Suspense\\b/g)||[]).length;
-  const suspenseCloses=(shellBeforeGate.match(/<\\/Suspense>/g)||[]).length;
+  const suspenseOpens=shellBeforeGate.split('<Suspense').length-1;
+  const suspenseCloses=shellBeforeGate.split('</Suspense>').length-1;
   assert.equal(suspenseOpens,suspenseCloses,'no app-wide Suspense boundary may contain the authorization gate');
   const gate=app.slice(gateStart,gateEnd);
   const provider=gate.indexOf('<StudentProfileProvider>');
