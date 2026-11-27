@@ -15,7 +15,7 @@ function load(file){
   return mod.exports;
 }
 const root=path.resolve(__dirname,'..');
-const {answerPersonalLearningAdvice,isPersonalLearningAdviceQuestion,isFocusLearningAdviceRequest}=load(path.join(root,'src/lib/advisorDecisionContext.ts'));
+const {answerPersonalLearningAdvice,isPersonalLearningAdviceQuestion,isFocusLearningAdviceRequest,additionalDailyStudyHours}=load(path.join(root,'src/lib/advisorDecisionContext.ts'));
 const makeState=(subjects,overrides={})=>({
   data:{terms:[{grade:'grade12',semester:'semester2',subjects}],subjects:[],currentSubjects:[],yearly:{grade10:null,grade11:null,grade12:null},updatedAt:null},
   status:'ready',source:'student_transcripts',userId:'student-A',...overrides
@@ -26,6 +26,15 @@ const row=(subject,average,status='COMPLETE')=>({subject,average,provisional:sta
 test('detects Vietnamese improvement and subject-priority questions with or without accents',()=>{
   for(const q of ['Làm sao để tiến bộ hơn?','Em nên tập trung môn nào?','mon nao can cai thien','Tôi cần ưu tiên môn học nào?','Lập kế hoạch học tập cho em','Cho em lịch học tuần này'])assert.equal(isPersonalLearningAdviceQuestion(q),true);
   assert.equal(isPersonalLearningAdviceQuestion('Điểm chuẩn HUST 2026?'),false);
+});
+
+test('routes explicit daily study-time increases into local learning advice and parses hours',()=>{
+  for (const q of ['Nếu tui tăng 2 tiếng học mỗi ngày?','Nếu tăng thêm 2 giờ mỗi ngày','Mỗi ngày học thêm 1 tiếng']) {
+    assert.equal(isPersonalLearningAdviceQuestion(q),true,q);
+  }
+  assert.equal(additionalDailyStudyHours('Nếu tui tăng 2tieng học mỗi ngày?'),2);
+  assert.equal(additionalDailyStudyHours('Mỗi ngày học thêm 1,5 tiếng'),1.5);
+  assert.equal(additionalDailyStudyHours('Tăng thời gian học một chút'),null);
 });
 test('ranks only complete subjects from the same latest semester and gives concrete next steps',()=>{
   const answer=answerPersonalLearningAdvice(makeContext(makeState([
@@ -92,6 +101,27 @@ test('weekly hours and completion rate drive the actual schedule allocation',()=
   assert.match(answer,/chiến lược học tập tự báo cáo là 35\/100/);
   assert.match(answer,/CNTT/);
 });
+
+test('daily study-time scenario reports the weekly increase without promising score gains',()=>{
+  const context=makeContext(makeState([row('Toán',5.8),row('Vật lý',6.2),row('Hóa học',7.4)]),{
+    hasProfile:true,loading:false,syncing:false,
+    profile:{studyHoursPerWeek:10,practiceTestsPerWeek:2,planCompletionRate:40,motivationLevel:30},
+    dynamicState:{scope:'student',behavior:{hours:10,practice:2,completion:40,motivation:30}}
+  });
+  const answer=answerPersonalLearningAdvice(context,'student-A',{additionalDailyHours:2}).answer;
+  assert.match(answer,/tăng thêm 2\.0 giờ\/ngày tương đương \+14\.0 giờ\/tuần/);
+  assert.match(answer,/quỹ hiện tại là 10\.0 giờ\/tuần, tổng theo giả định sẽ là 24\.0 giờ\/tuần/);
+  assert.match(answer,/không nên tăng ngay toàn bộ mức này/);
+  assert.match(answer,/Không thể kết luận điểm sẽ tăng bao nhiêu chỉ từ số giờ học/);
+  assert.doesNotMatch(answer,/điểm chắc chắn tăng|dự báo điểm tăng/);
+});
+
+test('daily study-time scenario remains useful when transcript or baseline hours are unavailable',()=>{
+  const answer=answerPersonalLearningAdvice(null,'student-A',{additionalDailyHours:2}).answer;
+  assert.match(answer,/\+14\.0 giờ\/tuần/);
+  assert.match(answer,/không dự báo mức tăng điểm/);
+  assert.match(answer,/chưa thể lập kế hoạch cá nhân/);
+});
 test('a recorded zero-hour week does not silently create a timetable',()=>{
   const context=makeContext(makeState([row('Toán',5.8),row('Vật lý',6.2)]),{
     hasProfile:true,loading:false,syncing:false,
@@ -151,7 +181,8 @@ test('chat reads optional verified context and handles personal advice locally b
   const chat=readFileSync(path.join(root,'src/components/common/FloatingAdvisorChat.tsx'),'utf8');
   const provider=readFileSync(path.join(root,'src/page/seed/hooks/StudentProfileProvider.tsx'),'utf8');
   assert.match(chat,/useOptionalVerifiedStudentProfile/);
-  assert.match(chat,/answerPersonalLearningAdvice\(studentContext, uid, \{ focusLowestSubject: isFocusLearningAdviceRequest\(message\) \}\)/);
+  assert.match(chat,/additionalDailyHours: additionalDailyStudyHours\(message\)/);
+  assert.match(chat,/answerPersonalLearningAdvice\(studentContext, uid/);
   const localAdviceIndex = chat.indexOf('answerPersonalLearningAdvice(studentContext');
   const remoteGeminiIndex = chat.indexOf('fetch(`${getClaApiBaseUrl()}/api/gemini-chat');
   assert.ok(localAdviceIndex >= 0 && remoteGeminiIndex >= 0 && localAdviceIndex < remoteGeminiIndex,

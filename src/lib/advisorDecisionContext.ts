@@ -79,9 +79,26 @@ export function isFocusLearningAdviceRequest(message: string): boolean {
   return /(mon nay|mon yeu nhat|mon dau tien|mon uu tien).{0,55}(tap trung|danh them thoi gian|tang thoi gian|uu tien hon|hoc ky hon)|(tap trung hon|danh them thoi gian|tang thoi gian).{0,55}(mon nay|mon yeu nhat|mon dau tien|mon uu tien)/.test(q);
 }
 
+/** Parse an explicit daily study-time increase; vague requests do not get an invented duration. */
+export function additionalDailyStudyHours(message: string): number | null {
+  const q = norm(message);
+  const patterns = [
+    /(?:tang(?: them)?|them|bo sung|danh them)\s+(\d+(?:[.,]\d+)?)\s*(?:tieng|gio)(?:\s+hoc)?\s*(?:moi ngay|hang ngay|\/ngay)\b/,
+    /(?:moi ngay|hang ngay)\s+(?:tang(?: them)?|hoc them|them)\s+(\d+(?:[.,]\d+)?)\s*(?:tieng|gio)\b/,
+  ];
+  for (const pattern of patterns) {
+    const match = q.match(pattern);
+    if (!match) continue;
+    const value = Number(match[1].replace(',', '.'));
+    return Number.isFinite(value) && value > 0 && value <= 12 ? value : null;
+  }
+  return null;
+}
+
 export function isPersonalLearningAdviceQuestion(message: string): boolean {
   const q = norm(message);
-  return /\b(tien bo|cai thien|tap trung mon|tap trung vao|neu tap trung|mon nao|mon nay|mon do|mon hoc nao|yeu mon|hoc mon nao|on mon|uu tien mon|mon nao can|nen tap trung|diem mon nao|ke hoach hoc tap|lap ke hoach|lich hoc|thoi khoa bieu|phan bo thoi gian|hoc bao nhieu|ke hoach cua em|ke hoach cho em|ke hoach cho toi|lap lich hoc|lo trinh hoc)\b/.test(q) || isFocusLearningAdviceRequest(message);
+  return additionalDailyStudyHours(message) !== null ||
+    /\b(tien bo|cai thien|tap trung mon|tap trung vao|neu tap trung|mon nao|mon nay|mon do|mon hoc nao|yeu mon|hoc mon nao|on mon|uu tien mon|mon nao can|nen tap trung|diem mon nao|ke hoach hoc tap|lap ke hoach|lich hoc|thoi khoa bieu|phan bo thoi gian|hoc bao nhieu|ke hoach cua em|ke hoach cho em|ke hoach cho toi|lap lich hoc|lo trinh hoc)\b/.test(q) || isFocusLearningAdviceRequest(message);
 }
 
 type LearningTranscriptState = {
@@ -121,33 +138,40 @@ const observedCognitive = (result: CognitiveResult | undefined, code: 'SCI'|'CSL
 export function answerPersonalLearningAdvice(
   context: PersonalLearningContext | null,
   uid: string,
-  options: { focusLowestSubject?: boolean } = {},
+  options: { focusLowestSubject?: boolean; additionalDailyHours?: number } = {},
 ): AdvisorLocalAnswer {
+  const requestedDailyIncrease = options.additionalDailyHours;
+  const dailyIncrease = finiteIn(requestedDailyIncrease, 0.01, 12) ? requestedDailyIncrease : null;
+  const weeklyIncrease = dailyIncrease === null ? null : Math.round(dailyIncrease * 7 * 10) / 10;
+  const scenarioPrefix = dailyIncrease === null
+    ? ''
+    : 'Kịch bản thời gian: tăng thêm ' + dailyIncrease.toFixed(1) + ' giờ/ngày tương đương +' + weeklyIncrease!.toFixed(1) + ' giờ/tuần. Đây chỉ là phép tính thời gian, không dự báo mức tăng điểm.';
+  const withScenario = (answer: string) => scenarioPrefix ? scenarioPrefix + '\n\n' + answer : answer;
   const state = context?.transcript ?? null;
   if (!state || state.userId !== uid) {
     return {
-      answer: 'Mình đang xác minh dữ liệu của tài khoản hiện tại nên chưa thể lập kế hoạch cá nhân. Hãy đợi hồ sơ tải xong rồi hỏi lại nhé.',
+      answer: withScenario('Mình đang xác minh dữ liệu của tài khoản hiện tại nên chưa thể lập kế hoạch cá nhân. Hãy đợi hồ sơ tải xong rồi hỏi lại nhé.'),
       destination: '/student/transcript',
       linkLabel: 'Mở bảng điểm',
     };
   }
   if (state.status === 'loading' || state.status === 'syncing') {
     return {
-      answer: 'Bảng điểm của bạn đang được tải hoặc xác minh với máy chủ. Mình sẽ chưa xếp hạng môn học hay lập lịch từ dữ liệu chưa xác nhận; bạn thử gửi lại sau khi đồng bộ nhé.',
+      answer: withScenario('Bảng điểm của bạn đang được tải hoặc xác minh với máy chủ. Mình sẽ chưa xếp hạng môn học hay lập lịch từ dữ liệu chưa xác nhận; bạn thử gửi lại sau khi đồng bộ nhé.'),
       destination: '/student/transcript',
       linkLabel: 'Kiểm tra trạng thái bảng điểm',
     };
   }
   if (state.status === 'error') {
     return {
-      answer: 'Hiện mình chưa đọc được bảng điểm từ máy chủ nên không muốn đoán môn nào cần ưu tiên. Bạn hãy kiểm tra kết nối và trạng thái đồng bộ trong Seed rồi thử lại.',
+      answer: withScenario('Hiện mình chưa đọc được bảng điểm từ máy chủ nên không muốn đoán môn nào cần ưu tiên. Bạn hãy kiểm tra kết nối và trạng thái đồng bộ trong Seed rồi thử lại.'),
       destination: '/student/transcript',
       linkLabel: 'Kiểm tra bảng điểm',
     };
   }
   if (state.status !== 'ready' || !state.data) {
     return {
-      answer: 'Hồ sơ hiện chưa có bảng điểm đã xác minh. Bạn hãy nhập hoặc đồng bộ điểm trong Seed; khi có dữ liệu, mình sẽ xác định môn ưu tiên và xây kế hoạch theo quỹ thời gian thực tế.',
+      answer: withScenario('Hồ sơ hiện chưa có bảng điểm đã xác minh. Bạn hãy nhập hoặc đồng bộ điểm trong Seed; khi có dữ liệu, mình sẽ xác định môn ưu tiên và xây kế hoạch theo quỹ thời gian thực tế.'),
       destination: '/student/transcript',
       linkLabel: 'Bổ sung bảng điểm',
     };
@@ -165,7 +189,7 @@ export function answerPersonalLearningAdvice(
   }
   if (termIndex < 0) {
     return {
-      answer: 'Bảng điểm chưa có điểm quan sát được trong học kỳ nào. Mình chưa thể xác định môn ưu tiên; hãy nhập điểm học kỳ trong Seed trước nhé.',
+      answer: withScenario('Bảng điểm chưa có điểm quan sát được trong học kỳ nào. Mình chưa thể xác định môn ưu tiên; hãy nhập điểm học kỳ trong Seed trước nhé.'),
       destination: '/student/transcript',
       linkLabel: 'Hoàn thiện bảng điểm',
     };
@@ -178,7 +202,7 @@ export function answerPersonalLearningAdvice(
     .sort((a, b) => a.score - b.score);
   if (!ranked.length) {
     return {
-      answer: 'Học kỳ mới nhất có dữ liệu là ' + gradeLabel(term.grade) + ' · ' + semesterLabel(term.semester) + ', nhưng hiện chỉ có điểm tạm tính hoặc dữ liệu chưa hoàn chỉnh. Mình sẽ không dùng điểm tạm tính để xếp hạng. Hãy hoàn thiện điểm trung bình học kỳ rồi hỏi lại nhé.',
+      answer: withScenario('Học kỳ mới nhất có dữ liệu là ' + gradeLabel(term.grade) + ' · ' + semesterLabel(term.semester) + ', nhưng hiện chỉ có điểm tạm tính hoặc dữ liệu chưa hoàn chỉnh. Mình sẽ không dùng điểm tạm tính để xếp hạng. Hãy hoàn thiện điểm trung bình học kỳ rồi hỏi lại nhé.'),
       destination: '/student/transcript',
       linkLabel: 'Hoàn thiện bảng điểm',
     };
@@ -314,8 +338,19 @@ export function answerPersonalLearningAdvice(
       'Hệ số 1,5 là kịch bản phân bổ thử nghiệm để bạn cân nhắc, không phải hiệu quả can thiệp đã được kiểm định.'
     : '';
 
+  const additionalTimeScenarioLine = dailyIncrease === null
+    ? ''
+    : '\n\nKỊCH BẢN TĂNG THỜI GIAN: +' + weeklyIncrease!.toFixed(1) + ' giờ/tuần.' +
+      (hours !== null
+        ? ' Nếu quỹ hiện tại là ' + hours.toFixed(1) + ' giờ/tuần, tổng theo giả định sẽ là ' + (hours + weeklyIncrease!).toFixed(1) + ' giờ/tuần.'
+        : ' Hồ sơ chưa có quỹ giờ học hiện tại đã xác minh nên chưa thể tính tổng mới.') +
+      ((loadFactor < 1 || (completion !== null && completion >= 70) || (abandonment !== null && abandonment >= 50))
+        ? ' Dữ liệu thói quen hiện tại có tín hiệu cần thận trọng; không nên tăng ngay toàn bộ mức này. Thử tăng dần 30 phút/ngày trong một tuần, theo dõi mức hoàn thành, khả năng tập trung và thời gian nghỉ.'
+        : ' Hãy tăng dần, theo dõi mức hoàn thành, khả năng tập trung và thời gian nghỉ trước khi duy trì toàn bộ mức tăng.') +
+      ' Không thể kết luận điểm sẽ tăng bao nhiêu chỉ từ số giờ học; hiệu quả còn phụ thuộc chất lượng học, mức tập trung và khả năng duy trì.';
+
   return {
-    answer: 'Mình đã đối chiếu bảng điểm đã đồng bộ ở ' + period + '.\n\nMÔN CẦN ƯU TIÊN\n' + scoreList + '. ' + focusAdvice + trendLine + '\n\nKẾ HOẠCH TUẦN ĐƯỢC TÍNH TỪ DỮ LIỆU CỦA BẠN\n' + planLines.join('\n') + '\n' + allocation.map(item => '- ' + item.subject + ': ' + item.score.toFixed(1) + '/10' + (item.change === null ? '' : ' (' + (item.change > 0 ? '+' : '') + item.change.toFixed(1) + ' so với kỳ có dữ liệu trước)') + (item.hours === null ? '' : ' · khoảng ' + hourLabel(item.hours) + ' mỗi tuần')).join('\n') + '\n\nĐIỀU CHỈNH THEO THÓI QUEN ĐÃ GHI NHẬN\n' + ([...loadReasons, ...adaptation].length ? [...loadReasons, ...adaptation].join('\n') : 'Chưa có đủ dữ liệu hành vi để điều chỉnh thêm; kế hoạch hiện chỉ dựa trên bảng điểm.') + '\n\nCÁCH TRIỂN KHAI: ưu tiên môn có điểm thấp nhất trước; với từng môn, ôn phần đã mất điểm, luyện theo chuyên đề và ghi lại lỗi để kiểm tra lại. ' + nextStep + '\n\n' + dataLimit + profileGoal + legacyNote + '\n\nGiờ phân bổ được tính theo khoảng cách điểm giữa các môn trong nhóm ưu tiên; các hệ số điều chỉnh là quy tắc lập kế hoạch thử nghiệm của CLA, không phải kết quả can thiệp đã được kiểm định.' + focusScenarioLine,
+    answer: 'Mình đã đối chiếu bảng điểm đã đồng bộ ở ' + period + '.\n\nMÔN CẦN ƯU TIÊN\n' + scoreList + '. ' + focusAdvice + trendLine + '\n\nKẾ HOẠCH TUẦN ĐƯỢC TÍNH TỪ DỮ LIỆU CỦA BẠN\n' + planLines.join('\n') + '\n' + allocation.map(item => '- ' + item.subject + ': ' + item.score.toFixed(1) + '/10' + (item.change === null ? '' : ' (' + (item.change > 0 ? '+' : '') + item.change.toFixed(1) + ' so với kỳ có dữ liệu trước)') + (item.hours === null ? '' : ' · khoảng ' + hourLabel(item.hours) + ' mỗi tuần')).join('\n') + '\n\nĐIỀU CHỈNH THEO THÓI QUEN ĐÃ GHI NHẬN\n' + ([...loadReasons, ...adaptation].length ? [...loadReasons, ...adaptation].join('\n') : 'Chưa có đủ dữ liệu hành vi để điều chỉnh thêm; kế hoạch hiện chỉ dựa trên bảng điểm.') + '\n\nCÁCH TRIỂN KHAI: ưu tiên môn có điểm thấp nhất trước; với từng môn, ôn phần đã mất điểm, luyện theo chuyên đề và ghi lại lỗi để kiểm tra lại. ' + nextStep + '\n\n' + dataLimit + profileGoal + legacyNote + '\n\nGiờ phân bổ được tính theo khoảng cách điểm giữa các môn trong nhóm ưu tiên; các hệ số điều chỉnh là quy tắc lập kế hoạch thử nghiệm của CLA, không phải kết quả can thiệp đã được kiểm định.' + focusScenarioLine + additionalTimeScenarioLine,
     destination: '/student/transcript',
     linkLabel: 'Xem bảng điểm chi tiết',
   };

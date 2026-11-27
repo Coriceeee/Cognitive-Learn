@@ -5,7 +5,7 @@ import { getClaApiBaseUrl } from "../../lib/claApiBase";
 import claChatMascot from "../../assets/cla-chat-mascot.webp";
 import { ADVISOR_PAGE_CONTEXTS, advisorPageContextFromPath, advisorSuggestionsFor, normaliseAdvisorHistory, prepareAdvisorMessage, routeAdvisorQuestion, safeAdvisorDestination, type AdvisorTurn, type AdvisorRoute } from "../../lib/advisorChatPolicy";
 
-import { advisorLocalIntent, answerLocalDecision, isPersonalLearningAdviceQuestion, isFocusLearningAdviceRequest, answerPersonalLearningAdvice, remoteAdvisorTurns, type AdvisorLocalIntent, type AdvisorLocalAnswer } from "../../lib/advisorDecisionContext";
+import { advisorLocalIntent, answerLocalDecision, isPersonalLearningAdviceQuestion, isFocusLearningAdviceRequest, additionalDailyStudyHours, answerPersonalLearningAdvice, remoteAdvisorTurns, type AdvisorLocalIntent, type AdvisorLocalAnswer } from "../../lib/advisorDecisionContext";
 import { useOptionalVerifiedStudentProfile } from "../../page/seed/hooks/StudentProfileContext";
 import { safeAdmissionAdvisorSource } from "../../lib/advisorAdmissionAnswers";
 import { answerClaKnowledge } from "../../lib/claKnowledgeRetrieval";
@@ -47,16 +47,16 @@ export default function FloatingAdvisorChat() {
     // Personal learning guidance uses this account's server-confirmed transcript and observed profile.
     // Study capacity, cognitive proxies and temporal signals are used locally, never sent to Gemini.
     if (isPersonalLearningAdviceQuestion(message)) {
-      const local = answerPersonalLearningAdvice(studentContext, uid, { focusLowestSubject: isFocusLearningAdviceRequest(message) });
+      const local = answerPersonalLearningAdvice(studentContext, uid, { focusLowestSubject: isFocusLearningAdviceRequest(message), additionalDailyHours: additionalDailyStudyHours(message) ?? undefined });
       setTurns(current => [...current, { role: "user", text: message, privateIntent: "learning" }, { role: "model", text: local.answer, destination: local.destination, linkLabel: local.linkLabel, privateIntent: "learning" }]);
       setQuestion(""); setNotice(""); return;
     }
     // Other personal decisions and follow-ups stay local, before public facts or Gemini.
     const localIntent = advisorLocalIntent(message);
     const previousPrivate = turns[turns.length - 1]?.privateIntent;
-    const privateFollowup = Boolean(previousPrivate && /^(vay|the|con|tiep|tai sao|vi sao|sao|neu|bao nhieu|lam sao|co nen|cu the|chi tiet|giai thich)\b/i.test(message.normalize("NFD").replace(/[\u0300-\u036f]/g, "")));
+    const privateFollowup = Boolean(previousPrivate && /^(vay|the|con|tiep|tai sao|vi sao|sao|neu|bao nhieu|lam sao|co nen|cu the|chi tiet|giai thich|them|tang)\b/i.test(message.normalize("NFD").replace(/[\u0300-\u036f]/g, "")));
     if (previousPrivate === "learning" && privateFollowup) {
-      const local = answerPersonalLearningAdvice(studentContext, uid, { focusLowestSubject: isFocusLearningAdviceRequest(message) });
+      const local = answerPersonalLearningAdvice(studentContext, uid, { focusLowestSubject: isFocusLearningAdviceRequest(message), additionalDailyHours: additionalDailyStudyHours(message) ?? undefined });
       setTurns(current => [...current, { role: "user", text: message, privateIntent: "learning" }, { role: "model", text: local.answer, destination: local.destination, linkLabel: local.linkLabel, privateIntent: "learning" }]);
       setQuestion(""); setNotice(""); return;
     }
