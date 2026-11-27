@@ -16,7 +16,7 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
   if (!process.env.GEMINI_API_KEY?.trim()) missing.push("GEMINI_API_KEY");
   if (!(process.env.FIREBASE_WEB_API_KEY || process.env.VITE_FIREBASE_API_KEY || "").trim()) missing.push("FIREBASE_WEB_API_KEY");
   const project = (process.env.FIREBASE_PROJECT_ID || process.env.VITE_FIREBASE_PROJECT_ID || "").trim();
-  if (!/^[A-Za-z0-9-]+$/.test(project)) missing.push("FIREBASE_PROJECT_ID");
+  if (project !== "cognitive-learn-ai") missing.push("FIREBASE_PROJECT_ID (expected cognitive-learn-ai)");
   const model = (process.env.GEMINI_MODEL || "gemini-2.5-flash").trim();
   if (!/^[A-Za-z0-9._-]+$/.test(model)) missing.push("GEMINI_MODEL");
   if (!REQUIRED_FIREBASE_ORIGINS.every(origin => origins.includes(origin))) missing.push("CORS_ALLOWED_ORIGINS (Firebase Hosting origins)");

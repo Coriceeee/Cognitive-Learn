@@ -104,33 +104,8 @@ jobs:
           if-no-files-found: error
           retention-days: 7
       # Optional live smoke check. Configure the repository variable after Vercel is deployed.
-      - name: Vercel Gemini production status smoke check (manual release verification)
+      - name: Vercel production status and API preflight smoke check
         if: github.event_name == 'workflow_dispatch' && vars.CLA_GEMINI_API_BASE_URL != ''
         env:
           CLA_GEMINI_API_BASE_URL: ${{ vars.CLA_GEMINI_API_BASE_URL }}
-        run: |
-          node --input-type=module <<'NODE'
-          const base = (process.env.CLA_GEMINI_API_BASE_URL || '').replace(/\\/+$/, '');
-          if (!/^https:\\/\\/[^/?#]+$/.test(base)) throw new Error('CLA_GEMINI_API_BASE_URL must be an HTTPS origin.');
-          const origins = ['https://cognitivelearn.ai.vn','https://cognitive-learn-ai.web.app','https://cognitive-learn-ai.firebaseapp.com'];
-          let failed = false;
-          for (const origin of origins) {
-            try {
-              const response = await fetch(base + '/api/cla-gemini-status', { headers: { origin, 'cache-control': 'no-cache' }, signal: AbortSignal.timeout(12000) });
-              const contentType = response.headers.get('content-type') || '';
-              const raw = await response.text();
-              let body = null;
-              try { body = JSON.parse(raw); } catch {}
-              const cors = response.headers.get('access-control-allow-origin');
-              const passed = response.ok && contentType.toLowerCase().includes('application/json') && cors === origin
-                && body?.ok === true && body?.configured === true && body?.backend === 'Vercel Functions';
-              console.log(JSON.stringify({ origin, httpStatus: response.status, contentType, cors, configured: body?.configured ?? false, backend: body?.backend ?? null, passed }));
-              if (!passed) failed = true;
-            } catch (error) {
-              console.log(JSON.stringify({ origin, reachable: false, error: error?.name ?? 'unknown' }));
-              failed = true;
-            }
-          }
-          if (failed) process.exitCode = 1;
-          else console.log('CP98 VERCEL PRODUCTION SMOKE PASS.');
-          NODE
+        run: node tools/verify-cp93-production.mjs
