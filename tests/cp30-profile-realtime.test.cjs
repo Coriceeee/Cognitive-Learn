@@ -25,7 +25,11 @@ function loadPure(rel, dependencies={}) {
   return mod.exports;
 }
 const dynamic=loadPure('src/lib/dynamicStudentState.ts');
-const temporal=loadPure('src/lib/temporalStudentIntelligence.ts',{'./dynamicStudentState.ts':dynamic});
+const demoTemporal=loadPure('src/lib/demoTemporalSeed.ts',{'./dynamicStudentState.ts':dynamic});
+const temporal=loadPure('src/lib/temporalStudentIntelligence.ts',{
+  './dynamicStudentState.ts':dynamic,
+  './demoTemporalSeed.ts':demoTemporal,
+});
 function harness() {
   let idx = 0, authCallback, cleanup;
   const values = [], watchers = [], requests = [];
