@@ -199,3 +199,29 @@ test('CP45 regression: route changes preserve the authenticated shell and shared
   assert.match(boundary,/props\.route !== state\.route/);
   assert.match(app,/<StudentProfileProvider>/);
 });
+
+
+test('CP45 regression: lazy route chunks cannot remount AccessGate or the shared student provider',()=>{
+  const app=read('src/App.tsx');
+  const gateStart=app.indexOf('<AccessGate path={path}>');
+  const gateEnd=app.indexOf('</AccessGate>',gateStart);
+  assert.ok(gateStart>0 && gateEnd>gateStart,'AccessGate remains mounted in the route shell');
+  const shellBeforeGate=app.slice(app.indexOf('<RouteErrorBoundary route={path}>'),gateStart);
+  assert.doesNotMatch(shellBeforeGate,/<Suspense/,'route Suspense must not wrap AccessGate');
+  const gate=app.slice(gateStart,gateEnd);
+  const provider=gate.indexOf('<StudentProfileProvider>');
+  assert.ok(provider>0,'shared provider remains inside the persistent AccessGate');
+  const studentBranch=gate.slice(provider);
+  assert.match(studentBranch,/<Suspense fallback=\{<AppLoading \/>\}>[\s\S]*?<StudentProfileProvider>/,
+    'only the provider first-load boundary may wrap the lazy provider');
+  assert.match(studentBranch,/<StudentProfileProvider>[\s\S]*?<Suspense fallback=\{null\}>[\s\S]*?\{routeView\}[\s\S]*?<\/Suspense>[\s\S]*?<\/StudentProfileProvider>/,
+    'lazy route content must have a nested boundary inside the persistent provider');
+  assert.doesNotMatch(app,/<Suspense[\s\S]*?<RouteErrorBoundary route=\{path\}>[\s\S]*?<AccessGate/,
+    'no app-wide Suspense may contain the authorization gate');
+});
+
+test('CP45 regression: student route changes keep authorization verification scoped to the student session',()=>{
+  const gate=read('src/components/common/AccessGate.tsx');
+  assert.match(gate,/const accessScope = path === "\\/student\\/consent" \? "consent" : path\.startsWith\("\\/admin"\) \? "admin" : "student"/);
+  assert.match(gate,/\}, \[accessScope\]\);/);
+});
