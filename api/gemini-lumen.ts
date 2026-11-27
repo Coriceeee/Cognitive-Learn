@@ -491,42 +491,6 @@ async function callGemini(apiKey: string, model: string, context: ReturnType<typ
 
 }
 
-/**
-
- * Exact-origin CORS allowlist for Firebase Hosting → Vercel API.
-
- * Configure CORS_ALLOWED_ORIGINS on Vercel as a comma-separated list of
-
- * origins (no paths), e.g. https://your-project.web.app.
-
- * CORS is a browser boundary; it does NOT replace backend authentication
-
- * or rate-limiting for non-browser callers.
-
- */
-
-function allowConfiguredOrigin(req: VercelRequest, res: VercelResponse): boolean {
-  res.setHeader("Vary", "Origin");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.setHeader("Access-Control-Max-Age", "600");
-
-  const origin = req.headers.origin;
-  // Browser OPTIONS calls carry an Origin; server-to-server POST still requires
-  // a valid Firebase ID token. CORS is not an authentication mechanism.
-  if (!origin) return true;
-  if (typeof origin !== "string") return false;
-
-  // Match exact origins, including protocol and port (e.g. localhost:5173).
-  const allowed = (process.env.CORS_ALLOWED_ORIGINS ?? "")
-    .split(",")
-    .map((value: string) => value.trim().replace(/\/$/, ""))
-    .filter(Boolean);
-  if (!allowed.includes(origin)) return false;
-  res.setHeader("Access-Control-Allow-Origin", origin);
-  return true;
-}
-
 export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   res.setHeader("Content-Type", "application/json; charset=utf-8");
