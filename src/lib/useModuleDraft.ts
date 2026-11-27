@@ -263,6 +263,14 @@ export function useModuleDraft<T extends Record<string, unknown>>(moduleName: Mo
           conflictRef.current = true;
           setConflict(true);
         }
+        const errorCode = err && typeof err === "object" && "code" in err
+          ? (err as { code?: unknown }).code
+          : undefined;
+        if (errorCode === "permission-denied") {
+          throw new Error(
+            `Firestore Rules đang từ chối ghi ${collections[moduleName]}. Không mở quyền công khai. Kiểm tra tài khoản đang hoạt động, đúng UID sở hữu bản nháp và quyền đồng ý sử dụng sản phẩm trên máy chủ (student_consents.productAccepted=true, noticeVersion=cla-student-privacy-v1). Nếu các điều kiện đã đúng, Rules Production cần được bổ sung quyền owner-only cho ${collections[moduleName]}.`,
+          );
+        }
         throw err;
       }
     });
