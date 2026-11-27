@@ -340,7 +340,7 @@ export function answerPersonalLearningAdvice(
 
   const additionalTimeScenarioLine = dailyIncrease === null
     ? ''
-    : '\n\nKỊCH BẢN TĂNG THỜI GIAN: +' + weeklyIncrease!.toFixed(1) + ' giờ/tuần.' +
+    : '\n\nKỊCH BẢN TĂNG THỜI GIAN: tăng thêm ' + dailyIncrease.toFixed(1) + ' giờ/ngày tương đương +' + weeklyIncrease!.toFixed(1) + ' giờ/tuần.' +
       (hours !== null
         ? ' Nếu quỹ hiện tại là ' + hours.toFixed(1) + ' giờ/tuần, tổng theo giả định sẽ là ' + (hours + weeklyIncrease!).toFixed(1) + ' giờ/tuần.'
         : ' Hồ sơ chưa có quỹ giờ học hiện tại đã xác minh nên chưa thể tính tổng mới.') +
