@@ -44,3 +44,16 @@ test('rejects invalid UID or non-canonical observation timestamp', () => {
   assert.throws(() => buildDemoTemporalSnapshots('', asOf));
   assert.throws(() => buildDemoTemporalSnapshots(uid, '2026-11-27'));
 });
+
+import { readFileSync } from 'node:fs';
+
+test('UI seeder is visible only in DEMO preview and verifies the current admin-owned profile before writing', () => {
+  const canvas = readFileSync(new URL('../src/page/seed/components/StudentDecisionCanvas.tsx', import.meta.url), 'utf8');
+  assert.match(canvas, /!observed && demo && temporal && temporal\.status !== 'BLOCKED'/);
+  assert.match(canvas, /account\.role !== 'admin'/);
+  assert.match(canvas, /profile\.dataScope !== 'demo'/);
+  assert.match(canvas, /profile\.userId !== user\.uid/);
+  assert.match(canvas, /getDocsFromServer\(historyRef\)/);
+  assert.match(canvas, /batch\.set\(doc\(historyRef, id\)/);
+  assert.match(canvas, /scoreAvailable: false/);
+});
