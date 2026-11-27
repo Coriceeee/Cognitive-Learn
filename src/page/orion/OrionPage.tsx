@@ -195,8 +195,12 @@ export default function OrionPage() {
           setHasLocalEdits(false);
           setAutosaveState("saved");
         }
-      } catch {
+      } catch (error) {
         setAutosaveState("pending");
+        setSaveNoticeTone("error");
+        setSaveNotice(error instanceof Error
+          ? error.message
+          : "Chưa lưu được bản nháp. Dữ liệu đang còn trên màn hình này; không tải lại trang cho đến khi quyền Firestore được khôi phục.");
       }
     }, 700);
     return () => {
