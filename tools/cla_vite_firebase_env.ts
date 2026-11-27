@@ -19,7 +19,7 @@ export function resolveLiveFirebaseDefines(
   qaOptIn: boolean,
   liveEnv: Record<string, string>,
 ): Record<string, string> {
-  if (command !== 'serve' || qaOptIn) return {};
+  if ((command !== 'serve' && command !== 'build') || qaOptIn) return {};
 
   const projectId = liveEnv.VITE_FIREBASE_PROJECT_ID?.trim();
   const apiKey = liveEnv.VITE_FIREBASE_API_KEY?.trim();
@@ -28,7 +28,7 @@ export function resolveLiveFirebaseDefines(
 
   if (projectId !== EXPECTED_PROJECT) {
     throw new Error(
-      'CLA Firebase LIVE: không tìm thấy VITE_FIREBASE_PROJECT_ID=cognitive-learn-ai trong cấu hình LIVE. Hãy kiểm tra .env.live.local; không dùng .env.development.local.',
+      `CLA Firebase LIVE: cấu hình ${projectId || '(trống)'} không khớp project bắt buộc cognitive-learn-ai. Hãy kiểm tra .env.live.local và biến môi trường PowerShell/CI.`,
     );
   }
   if (!apiKey || !/^AIza[0-9A-Za-z_-]{20,}$/.test(apiKey)) {
