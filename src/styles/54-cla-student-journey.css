@@ -201,3 +201,54 @@
   .cla-primary-journey__step { transition: none; }
   .cla-primary-journey__step:hover { transform: none; }
 }
+
+
+/* Admin-only synthetic timeline helper; visually separate from measured history. */
+.cla-canvas-demo-seed {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  border: 1px dashed #8caed4;
+  border-radius: 10px;
+  background: #f4f8ff;
+  color: #49627e;
+  font-size: 11px;
+}
+.cla-canvas-demo-seed > button,
+.cla-canvas-demo-seed p button {
+  border: 1px solid #8caed4;
+  border-radius: 8px;
+  padding: 7px 11px;
+  background: #fff;
+  color: #245ca8;
+  font: inherit;
+  font-weight: 750;
+  cursor: pointer;
+}
+.cla-canvas-demo-seed > button:disabled {
+  cursor: wait;
+  opacity: .65;
+}
+.cla-canvas-demo-seed > span {
+  flex: 1 1 220px;
+  line-height: 1.5;
+}
+.cla-canvas-demo-seed p {
+  flex-basis: 100%;
+  margin: 0;
+  line-height: 1.5;
+}
+.cla-canvas-demo-seed p button { margin-left: 6px; }
+.cla-canvas-demo-note {
+  margin: 9px 0 0;
+  padding: 8px 10px;
+  border-left: 3px solid #8b6ac4;
+  border-radius: 5px;
+  background: #f7f3fc;
+  color: #604d7c;
+  font-size: 11px;
+  line-height: 1.5;
+}
