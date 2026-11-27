@@ -17,7 +17,7 @@ function mockResponse() {
 test("CP98.01 Firebase Hosting resolves Gemini API to an approved HTTPS Vercel origin", () => {
   assert.equal(resolveClaApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "https://cla-api-example.vercel.app" }), "https://cla-api-example.vercel.app");
   assert.throws(() => resolveClaApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "" }), /VITE_API_BASE_URL/i);
-  assert.throws(() => resolveClaApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "https://cognitivelearn.ai.vn" }), /\\.vercel\\.app/i);
+  assert.throws(() => resolveClaApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "https:/vercel/i);
   assert.throws(() => resolveClaApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "http://cla-api-example.vercel.app" }), /HTTPS origin/);
   assert.throws(() => resolveClaApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "https://attacker.example" }), /domain Vercel/);
   assert.throws(() => resolveClaApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "https://cla-api-example.vercel.app/path" }), /không chứa đường dẫn/);
@@ -111,9 +111,9 @@ test("CP98.07 Spark deploy is Hosting-only and preflights Vercel", () => {
   assert.match(guide, /Firebase Spark/);
   assert.match(guide, /CORS_ALLOWED_ORIGINS/);
   assert.match(guide, /VITE_API_BASE_URL/);
-  assert.match(guide, /cognitivelearn\\.ai\\.vn/);
-  assert.match(guide, /project-name.*vercel\\.app/);
-  assert.doesNotMatch(guide, /api\\.cognitivelearn\\.ai\\.vn/);
+  assert.ok(guide.includes("https://cognitivelearn.ai.vn"));
+  assert.ok(guide.includes("https://<project-name>.vercel.app"));
+  assert.equal(guide.includes("api.cognitivelearn.ai.vn"), false);
   assert.match(guide, /GEMINI_API_KEY/);
 });
 
