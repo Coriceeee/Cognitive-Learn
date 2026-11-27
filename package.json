@@ -158,6 +158,7 @@
     "verify:cp36:local": "node tools/cp35_local_release.mjs --cp36",
     "verify:cp36:local-build": "node tools/cp35_local_release.mjs --cp36 --build",
     "test:cp37-38:dynamic": "node --experimental-strip-types --test tests/cp37-38-dynamic-temporal.test.mjs",
+    "test:cp99:demo-temporal": "node --experimental-strip-types --test tests/cp99-demo-temporal-seed.test.mjs",
     "test:cp39-41:bayes": "node --experimental-strip-types --test tests/cp39-41-bayesian-shadow.test.mjs",
     "test:cp39:longitudinal": "python -m unittest research.tests.test_longitudinal_adaptive_ml -v",
     "research:cp39:longitudinal": "python research/src/longitudinal_adaptive_ml.py",
