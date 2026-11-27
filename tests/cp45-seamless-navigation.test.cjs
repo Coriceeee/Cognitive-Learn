@@ -184,3 +184,18 @@ test('CP58: same-path query navigation notifies React, preserves SPA and support
   assert.deepEqual(urls,['/admin?cluster=atlas-admission','/admin?cluster=nexus-core']);
   assert.equal(h.nav.getLastNavigationKind(),'pop');
 });
+
+
+test('CP45 regression: route changes preserve the authenticated shell and shared student provider',()=>{
+  const app=read('src/App.tsx');
+  const boundary=read('src/components/common/RouteErrorBoundary.tsx');
+  assert.match(app,/<RouteErrorBoundary route=\{path\}>/);
+  assert.doesNotMatch(app,/<RouteErrorBoundary key=\{path\}/);
+  assert.match(app,/const routeView = <div ref=\{routeViewRef\} className="cla-route-view"/);
+  assert.match(app,/previousPath && previousPath !== path/);
+  assert.match(app,/view\.animate\(/);
+  assert.match(app,/prefers-reduced-motion/);
+  assert.match(boundary,/static getDerivedStateFromProps/);
+  assert.match(boundary,/props\.route !== state\.route/);
+  assert.match(app,/<StudentProfileProvider>/);
+});
