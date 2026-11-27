@@ -73,7 +73,8 @@ export default function StudentDecisionCanvas({ cognitive, gpa, temporal, hasPro
       const fixtures = buildDemoTemporalSnapshots(user.uid, profile.updatedAt.toDate().toISOString());
       const historyRef = collection(db, 'learning_profiles', user.uid, 'cognitive_history');
       const existing = await getDocsFromServer(historyRef);
-      const existingById = new Map(existing.docs.map(item => [item.id, item.data()]));
+      const existingById = new Map<string, Record<string, unknown>>();
+      for (const item of existing.docs) existingById.set(item.id, item.data());
       for (const fixture of fixtures) {
         const stored = existingById.get(fixture.id);
         if (stored && stored.demoFixtureVersion !== DEMO_TEMPORAL_FIXTURE_VERSION) {
