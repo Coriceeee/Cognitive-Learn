@@ -18,7 +18,8 @@ test("CP98.01 Firebase Hosting resolves Gemini API to an approved HTTPS Vercel o
   assert.throws(() => resolveGeminiApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "" }), /VITE_API_BASE_URL/i);
   assert.throws(() => resolveGeminiApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "http://cla-api-example.vercel.app" }), /HTTPS origin/);
   assert.throws(() => resolveGeminiApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "https://attacker.example" }), /domain Vercel/);
-  assert.throws(() => resolveGeminiApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "https://cla-api-example.vercel.app/path" }), /không chứa đường dẫn/);\n  assert.throws(() => resolveGeminiApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "https://cla-api-example.vercel.app:8443" }), /HTTPS origin/);
+  assert.throws(() => resolveGeminiApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "https://cla-api-example.vercel.app/path" }), /không chứa đường dẫn/);
+  assert.throws(() => resolveGeminiApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "https://cla-api-example.vercel.app:8443" }), /HTTPS origin/);
 });
 
 test("CP98.02 localhost never forwards Firebase ID tokens to a stale remote URL", () => {
