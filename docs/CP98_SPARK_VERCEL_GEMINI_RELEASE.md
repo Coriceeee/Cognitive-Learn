@@ -3,7 +3,7 @@
 ## Mục tiêu
 
 - Firebase tiếp tục giữ Authentication, Firestore và Hosting ở gói Spark.
-- Ba API Gemini chạy bằng Vercel Functions trong thư mục `api/`.
+- Ba API Gemini và API tra cứu nguồn công khai chạy bằng Vercel Functions trong thư mục `api/`.
 - Frontend Firebase gọi Vercel qua HTTPS bằng `VITE_API_BASE_URL`.
 - Không triển khai Firebase Functions, Firestore Rules, Authentication, Admin, Privacy hoặc Push trong đợt này.
 - Không đưa `GEMINI_API_KEY` vào bất kỳ biến `VITE_*` nào.
@@ -33,7 +33,9 @@ Trong **Project → Settings → Environment Variables**, thêm cho **Production
 - Không đặt `GEMINI_API_KEY` dưới tên `VITE_GEMINI_API_KEY`.
 - Không dán key vào GitHub, chat, ảnh chụp hoặc ZIP.
 - Không dùng wildcard `*` cho CORS.
-- Sau khi thêm/sửa biến môi trường, phải redeploy Vercel để Function nhận giá trị mới.\n\n**Tùy chọn cho tra cứu nguồn công khai:** nếu muốn bật tìm kiếm tự động qua Brave, cấu hình thêm \`CLA_PUBLIC_SEARCH_APPROVAL=approved-brave-web-display-v1\` và \`CLA_BRAVE_SEARCH_API_KEY\` (secret) trên Vercel. Hoặc dùng cặp \`CLA_PUBLIC_SEARCH_ENDPOINT\` / \`CLA_PUBLIC_SEARCH_TOKEN\` đã được quản trị viên phê duyệt. Nếu không cấu hình, các liên kết tra cứu trực tiếp và dữ liệu nguồn đã tích hợp vẫn dùng được; status Gemini không đánh dấu nguồn tìm kiếm tự động là đã sẵn sàng.
+- Sau khi thêm/sửa biến môi trường, phải redeploy Vercel để Function nhận giá trị mới.
+
+**Tùy chọn cho tra cứu nguồn công khai:** nếu muốn bật tìm kiếm tự động qua Brave, cấu hình thêm `CLA_PUBLIC_SEARCH_APPROVAL=approved-brave-web-display-v1` và `CLA_BRAVE_SEARCH_API_KEY` (secret) trên Vercel. Hoặc dùng cặp `CLA_PUBLIC_SEARCH_ENDPOINT` / `CLA_PUBLIC_SEARCH_TOKEN` đã được quản trị viên phê duyệt. Nếu không cấu hình, các liên kết tra cứu trực tiếp và dữ liệu nguồn đã tích hợp vẫn dùng được; status Gemini không đánh dấu nguồn tìm kiếm tự động là đã sẵn sàng.
 
 ## 3. Kiểm tra backend Vercel
 
