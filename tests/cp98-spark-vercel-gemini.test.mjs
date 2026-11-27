@@ -184,3 +184,23 @@ test("CP98.11 Firebase Hosting LIVE build explicitly injects the exact Vercel Pr
   assert.match(viteConfig, /resolveLiveApiDefines/);
   assert.match(viteConfig, /\.\.\.apiDefines/);
 });
+
+test("CP98.12 Vercel API routes load CORS from Node-native JavaScript ESM, not a runtime TypeScript import", () => {
+  const routes = [
+    "api/cla-gemini-status.ts",
+    "api/gemini-chat.ts",
+    "api/gemini-lumen.ts",
+    "api/gemini-admission-reader.ts",
+    "api/public-source-search.ts",
+  ];
+  for (const route of routes) {
+    const source = read(route);
+    assert.match(source, /from ["']\.\.\/server\/geminiCors\.js["']/);
+    assert.doesNotMatch(source, /from ["']\.\.\/server\/geminiCors\.ts["']/);
+  }
+  const runtime = read("server/geminiCors.js");
+  assert.match(runtime, /export function allowGeminiOrigin/);
+  assert.doesNotMatch(runtime, /import type|:\\s*Vercel(Request|Response)|\.ts["']/);
+  assert.match(read("server/geminiCors.d.ts"), /allowGeminiOrigin/);
+  assert.match(read("server/geminiCors.ts"), /geminiCors\.js/);
+});
