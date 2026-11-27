@@ -152,7 +152,10 @@ test('chat reads optional verified context and handles personal advice locally b
   const provider=readFileSync(path.join(root,'src/page/seed/hooks/StudentProfileProvider.tsx'),'utf8');
   assert.match(chat,/useOptionalVerifiedStudentProfile/);
   assert.match(chat,/answerPersonalLearningAdvice\(studentContext, uid, \{ focusLowestSubject: isFocusLearningAdviceRequest\(message\) \}\)/);
-  assert.ok(chat.indexOf('answerPersonalLearningAdvice(studentContext')<chat.indexOf('fetch(`${getGeminiApiBaseUrl()}\/api\/gemini-chat'));
+  const localAdviceIndex = chat.indexOf('answerPersonalLearningAdvice(studentContext');
+  const remoteGeminiIndex = chat.indexOf('fetch(`${getClaApiBaseUrl()}/api/gemini-chat');
+  assert.ok(localAdviceIndex >= 0 && remoteGeminiIndex >= 0 && localAdviceIndex < remoteGeminiIndex,
+    "Personal learning advice must be answered locally before any remote Gemini request.");
   assert.match(provider,/useStudentTranscript\(\)/);
   assert.match(provider,/useOptionalVerifiedStudentProfile/);
   const chatStyles=readFileSync(path.join(root,'src/styles/22-cla-chat-readability.css'),'utf8');
