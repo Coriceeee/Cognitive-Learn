@@ -16,6 +16,7 @@ import { getRouteDisplayTitle, planRouteExperience } from "./lib/routeExperience
 import FloatingAdvisorChat from "./components/common/FloatingAdvisorChat";
 import AppFooter from "./components/common/AppFooter";
 import AccessGate from "./components/common/AccessGate";
+import RouteErrorBoundary from "./components/common/RouteErrorBoundary";
 import AppNotificationCenter from "./components/common/AppNotificationCenter";
 
 const StudentProfileProvider = lazy(() => import("./page/seed/hooks/StudentProfileProvider").then(module => ({default: module.StudentProfileProvider})));
@@ -221,6 +222,7 @@ export default function App() {
           <AppLoading />
         }
       >
+        <RouteErrorBoundary key={path} route={path}>
         <div className="app-content" id="cla-page-content" tabIndex={-1} data-cla-route={path}>
           {path === "/" || path === "/about" || path === "/contact" || notFound ? (
             currentPage
@@ -242,6 +244,7 @@ export default function App() {
             </AccessGate>
           )}
         </div>
+        </RouteErrorBoundary>
       </Suspense>
 
       <AppFooter />
