@@ -50,7 +50,7 @@ test('16.25 Vercel serves all explicit React route paths including consent/compa
  const app=src('src/App.tsx');
  const routes=[...app.matchAll(/path === "(\/[^"]*)"/g)].map(m=>m[1]).filter(x=>x!=='/');
  for(const route of routes)assert.equal(sources.get(route),'/index.html',`Missing Vercel rewrite: ${route}`);
- assert.equal(vercel.functions['api/*.ts'].maxDuration,45);
+ assert.equal(vercel.functions['api/*.ts'].maxDuration,60);
  assert.ok(!sources.has('/api/:path*'));
 });
 test('16.26 CSS asset and test command present',()=>{assert.ok(src('src/styles.css').includes('29-atlas-aspiration-editor.css'));const pkg=JSON.parse(src('package.json'));assert.ok(pkg.scripts['test:aspiration-draft'])});
