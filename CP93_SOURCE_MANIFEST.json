@@ -1,6 +1,6 @@
 {
   "schema": "cla.cp93.modified.immutable.v1",
-  "origin": "CP93 modified-source manifest reconciled against reviewed tracked main-branch content; SHA256 verifies changed/added files only, not a full CP92 rebaseline.",
+  "origin": "CP93 modified/added source integrity manifest; SHA256 hashes canonical LF UTF-8 contents. The deployment scripts now require a read-only production smoke check after Hosting deploy.",
   "mode": "changed_and_added_files_only",
   "files": [
     {
@@ -8,24 +8,20 @@
       "sha256": "531d720268184b5e165ae5300bf39b9561d3ee7914eaeb7c93dd21b773631c6c"
     },
     {
+      "path": "api/gemini-lumen.ts",
+      "sha256": "807a903c4bc34536dc3069517d1ed8346e9628216dd77df5d381cd6da7adf7e0"
+    },
+    {
       "path": "BUILD_CLA_CP93_FIREBASE_GEMINI.cmd",
       "sha256": "33d795b64b198af6816a27d471675f0c69dbe18722e2879143d1dd6d48cc11e9"
     },
     {
       "path": "DEPLOY_CLA_CP93_FIREBASE_GEMINI.cmd",
-      "sha256": "163d7c997e7736236c73bb6934ffc00687f6617b7257a067922d2db0fd9094d8"
+      "sha256": "4a76116f4e1037ea806d40fb6e994965ac6d99bee46da99b410e5d91c2fa5b67"
     },
     {
       "path": "DEPLOY_CLA_CP93_FIREBASE_GEMINI.ps1",
-      "sha256": "415792b051688c305e04729a3367d7f46315c6e9f19e9a6ee90d1a705146aea7"
-    },
-    {
-      "path": "HUONG_DAN_CP93_FIREBASE_GEMINI.md",
-      "sha256": "accd51578319ecc057858689ad805a4139b72bf6da66b9eff26e32820da07c2a"
-    },
-    {
-      "path": "api/gemini-lumen.ts",
-      "sha256": "807a903c4bc34536dc3069517d1ed8346e9628216dd77df5d381cd6da7adf7e0"
+      "sha256": "21bd6875641eb10eeee1b616d8e385d3bb5a5679b061a2c7ca41056d5a16970e"
     },
     {
       "path": "firebase.gemini.json",
@@ -60,6 +56,10 @@
       "sha256": "1dbadcee32c59832d5259431cef76bef70e2511f2bc7a71276289eceafdcba7c"
     },
     {
+      "path": "HUONG_DAN_CP93_FIREBASE_GEMINI.md",
+      "sha256": "accd51578319ecc057858689ad805a4139b72bf6da66b9eff26e32820da07c2a"
+    },
+    {
       "path": "src/components/common/FloatingAdvisorChat.tsx",
       "sha256": "1aa9d7101438cee37be29d2332e82e865f959c8fe410f7c6a92b045c206695cf"
     },
@@ -90,6 +90,10 @@
     {
       "path": "tools/claFirebaseGeminiGate.cjs",
       "sha256": "504dbe4db73e33bf22913d83f67cffd1b05a44c6a5d996cc9cd8ffb0558e5386"
+    },
+    {
+      "path": "tools/verify-cp93-production.mjs",
+      "sha256": "8b330c68b3dec1b101efd4419f88f9d3855c5eac3ce87d74b87dcbcc74d6c2e7"
     }
   ]
 }
