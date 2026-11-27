@@ -24,13 +24,16 @@ test("CP37-02: dashboard and task finder link to the practical operating guide",
   assert.match(finder, /href\s*=\s*"\/student\/guide"/);
 });
 
-test("CP37-03: guide distinguishes real student data, Admin synthetic demo, and incomplete integrations", () => {
+test("CP37-03: student guide keeps practical onboarding and hides internal limitation disclosures", () => {
   const guide = read("src/page/seed/StudentGuidePage.tsx");
   for (const phrase of [
-    "Nạp hồ sơ demo 3 năm", "synthetic", "Không có dữ liệu tự sinh cho tài khoản mới",
-    "Chưa có ML dự báo production", "Pulse chưa tự đọc và hợp nhất",
-    "Checklist hiện chỉ giữ trong phiên trang", "không phải dự báo ML đã kiểm định",
-  ]) assert.ok(guide.includes(phrase), `Missing guide explanation: ${phrase}`);
+    "Nạp hồ sơ demo 3 năm", "synthetic", "Luồng sử dụng từng bước",
+    "Dữ liệu đang đi như thế nào?", "Mở bảng điểm của tôi",
+  ]) assert.ok(guide.includes(phrase), `Missing practical guide content: ${phrase}`);
+  for (const phrase of [
+    "cla-ops-warning-grid", "Không có dữ liệu tự sinh cho tài khoản mới",
+    "Chưa có ML dự báo production", "Chưa phải vòng lặp tự động hoàn chỉnh",
+  ]) assert.ok(!guide.includes(phrase), `Internal limitation disclosure must not appear in student guide: ${phrase}`);
 });
 
 test("CP37-04: guide CSS is imported after CP36 styles", () => {
