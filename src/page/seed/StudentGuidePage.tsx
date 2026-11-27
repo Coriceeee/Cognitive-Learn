@@ -166,24 +166,6 @@ export default function StudentGuidePage() {
           </div>
         </section>
 
-        <section className="cla-ops-warning-grid">
-          <article>
-            <span>VÌ SAO BẠN THẤY TRỐNG?</span>
-            <h2>Không có dữ liệu tự sinh cho tài khoản mới</h2>
-            <p>Dashboard học sinh đọc hồ sơ đã lưu theo tài khoản đang đăng nhập. Nếu chưa tạo hồ sơ/bảng điểm, hệ thống hiển thị trạng thái chưa có dữ liệu thay vì lấy điểm mẫu. Đây là cơ chế tránh nhầm dữ liệu demo thành dữ liệu thật.</p>
-          </article>
-          <article>
-            <span>GIỚI HẠN AI/ML</span>
-            <h2>Chưa có ML dự báo production</h2>
-            <p>Lumen/Orion hiện dùng engine quy tắc và công thức thử nghiệm. Gemini chỉ diễn giải bổ sung khi cấu hình API hoạt động. Bộ dữ liệu và baseline trong thư mục research phục vụ nghiên cứu, chưa phải model dự báo cá nhân đã train, hiệu chuẩn và tích hợp vào website.</p>
-          </article>
-          <article>
-            <span>GIỚI HẠN CLOSED-LOOP</span>
-            <h2>Chưa phải vòng lặp tự động hoàn chỉnh</h2>
-            <p>Pulse chưa tự đọc và hợp nhất toàn bộ kết quả Seed, Lumen, Atlas, Orion. Công cụ Data Lineage của Admin chỉ kiểm tra sự tồn tại/trạng thái nguồn dữ liệu; nó không chứng minh khuyến nghị đã tạo ra outcome học tập.</p>
-          </article>
-        </section>
-
         <section className="cla-ops-next-actions">
           <div><span>NEXT ACTION</span><h2>Muốn demo có kết quả ngay?</h2><p>Dùng tài khoản Admin, nạp preset demo 3 năm trong Seed, lưu vào UID Admin, rồi đi theo thứ tự Seed → Lumen → Orion → Atlas → Haven → Pulse. Ghi rõ đây là demo synthetic.</p></div>
           <a href={isAdmin ? "/student/profile?from=admin" : "/student/profile"}>{isAdmin ? "Mở preset demo" : "Tạo hồ sơ của tôi"} ↗</a>
