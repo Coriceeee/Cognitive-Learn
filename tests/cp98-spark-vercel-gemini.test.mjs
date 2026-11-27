@@ -5,6 +5,7 @@ import statusHandler from "../api/cla-gemini-status.ts";
 import { allowGeminiOrigin } from "../server/geminiCors.ts";
 import { resolveClaApiBaseUrl } from "../src/lib/claApiBase.ts";
 import { resolveLiveFirebaseDefines } from "../tools/cla_vite_firebase_env.ts";
+import { resolveLiveApiDefines } from "../tools/cla_vite_api_env.ts";
 const read = path => readFileSync(new URL("../" + path, import.meta.url), "utf8");
 const ORIGINS = ["https://cognitivelearn.ai.vn", "https://cognitive-learn-ai.web.app", "https://cognitive-learn-ai.firebaseapp.com"];
 function mockResponse() {
@@ -158,4 +159,28 @@ test("CP98.10 production build embeds only the validated LIVE Firebase project",
   } finally {
     if (previousCI === undefined) delete process.env.CI; else process.env.CI = previousCI;
   }
+});
+
+test("CP98.11 Firebase Hosting LIVE build explicitly injects the exact Vercel Production API origin", () => {
+  const env = { VITE_API_BASE_URL: "https://cognitive-learn.vercel.app" };
+  const defines = resolveLiveApiDefines("build", "live", false, env);
+  assert.equal(
+    JSON.parse(defines["import.meta.env.VITE_API_BASE_URL"]),
+    "https://cognitive-learn.vercel.app",
+  );
+  for (const invalid of [
+    "",
+    "https://cognitivelearn.ai.vn",
+    "https://preview-cognitive-learn.vercel.app",
+    "http://cognitive-learn.vercel.app",
+    "https://cognitive-learn.vercel.app/api",
+  ]) {
+    assert.throws(
+      () => resolveLiveApiDefines("build", "live", false, { VITE_API_BASE_URL: invalid }),
+      /CLA API LIVE/i,
+    );
+  }
+  const viteConfig = read("vite.config.ts");
+  assert.match(viteConfig, /resolveLiveApiDefines/);
+  assert.match(viteConfig, /\.\.\.apiDefines/);
 });
