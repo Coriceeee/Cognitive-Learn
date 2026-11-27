@@ -1,6 +1,6 @@
 import process from "node:process";
 import type { VercelRequest, VercelResponse } from "../server/vercelTypes.ts";
-import { allowGeminiOrigin } from "../server/geminiCors.ts";
+import { allowGeminiOrigin } from "../server/geminiCors.js";
 const REQUIRED_FIREBASE_ORIGINS = ["https://cognitivelearn.ai.vn", "https://cognitive-learn-ai.web.app", "https://cognitive-learn-ai.firebaseapp.com"] as const;
 /** Public read-only probe. Never returns secret values or calls Gemini. */
 export default function handler(req: VercelRequest, res: VercelResponse) {
