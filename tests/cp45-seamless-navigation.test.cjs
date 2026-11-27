@@ -216,7 +216,7 @@ test('CP45 regression: lazy route chunks cannot remount AccessGate or the shared
   const providerBoundary=gate.lastIndexOf('<Suspense fallback={<AppLoading />}>',provider);
   assert.ok(providerBoundary>=0 && providerBoundary<provider,'provider first-load boundary is inside AccessGate');
   const providerEnd=gate.indexOf('</StudentProfileProvider>',provider);
-  const routeBoundary=gate.indexOf('<Suspense fallback={null}>',provider);
+  const routeBoundary=gate.indexOf('<Suspense fallback={<AppLoading />}>',provider);
   const routeBoundaryEnd=gate.indexOf('</Suspense>',routeBoundary);
   assert.ok(providerEnd>provider && routeBoundary>provider && routeBoundaryEnd>routeBoundary && routeBoundaryEnd<providerEnd,
     'lazy route content has a nested boundary inside the persistent provider');
