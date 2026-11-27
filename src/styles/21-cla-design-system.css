@@ -285,6 +285,22 @@ body {
 .cla-explorer-heading p,
 .cla-study-panel p { color: var(--cla-muted) !important; }
 .cla-study-hero p { color: #e6f2ff !important; }
+/* CP97: the focused Atlas destination hero is a daylight surface, not the
+ * legacy dark study hero. Override the generic white foreground at source. */
+.cla-study-hero.cla-study-focused-hero {
+  color: #142941 !important;
+  border: 1px solid #d7e6f8 !important;
+}
+.cla-study-hero.cla-study-focused-hero :is(h1,h2,h3,strong) {
+  color: #142941 !important;
+}
+.cla-study-hero.cla-study-focused-hero :is(p,small) {
+  color: #405a72 !important;
+}
+.cla-study-hero.cla-study-focused-hero .cla-eyebrow {
+  color: #1e55a4 !important;
+}
+
 .cla-eyebrow { color: rgb(var(--tc-tx-2563eb)) !important; }
 .cla-study-hero .cla-eyebrow { color: #bfe8ff !important; }
 .cla-explorer-filters label { color: var(--cla-ink-soft) !important; }
