@@ -1,0 +1,58 @@
+// ORION DRAFTS — production-safe owner-only rule patch.
+// Paste INSIDE match /databases/{database}/documents.
+// Do not replace the entire production Rules file with this fragment.
+
+function claOrionDraftAccountIsActive(uid) {
+  return request.auth != null
+    && request.auth.uid == uid
+    && exists(/databases/$(database)/documents/users/$(uid))
+    && get(/databases/$(database)/documents/users/$(uid)).data.active == true;
+}
+
+function claOrionDraftCanRead(uid) {
+  return claOrionDraftAccountIsActive(uid)
+    && get(/databases/$(database)/documents/users/$(uid)).data.role in ['student', 'admin'];
+}
+
+function claOrionDraftCanWrite(uid) {
+  return claOrionDraftAccountIsActive(uid)
+    && (
+      get(/databases/$(database)/documents/users/$(uid)).data.role == 'admin'
+      || (
+        get(/databases/$(database)/documents/users/$(uid)).data.role == 'student'
+        && exists(/databases/$(database)/documents/student_consents/$(uid))
+        && get(/databases/$(database)/documents/student_consents/$(uid)).data.userId == uid
+        && get(/databases/$(database)/documents/student_consents/$(uid)).data.productAccepted == true
+        && get(/databases/$(database)/documents/student_consents/$(uid)).data.noticeVersion == 'cla-student-privacy-v1'
+      )
+    );
+}
+
+function claOrionDraftValidPayload(uid) {
+  return request.resource.data.keys().hasOnly([
+      'userId', 'schemaVersion', 'revision', 'data', 'updatedAt'
+    ])
+    && request.resource.data.keys().hasAll([
+      'userId', 'schemaVersion', 'revision', 'data', 'updatedAt'
+    ])
+    && request.resource.data.userId == uid
+    && request.resource.data.schemaVersion == 1
+    && request.resource.data.revision is int
+    && request.resource.data.revision >= 1
+    && request.resource.data.data is map
+    && request.resource.data.updatedAt == request.time;
+}
+
+match /orion_drafts/{uid} {
+  // Owner can read their own draft even after consent is withdrawn.
+  // Consent gates new writes, not access to the student's existing record.
+  allow get: if claOrionDraftCanRead(uid);
+  allow list: if false;
+  allow create: if claOrionDraftCanWrite(uid)
+    && claOrionDraftValidPayload(uid)
+    && request.resource.data.revision == 1;
+  allow update: if claOrionDraftCanWrite(uid)
+    && claOrionDraftValidPayload(uid)
+    && request.resource.data.revision == resource.data.get('revision', 0) + 1;
+  allow delete: if false;
+}
