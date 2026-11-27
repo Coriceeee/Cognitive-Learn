@@ -4,6 +4,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const page=fs.readFileSync('src/page/orion/OrionPage.tsx','utf8');
 const curriculum=fs.readFileSync('src/page/seed/services/transcriptData.ts','utf8');
+const seedPage=fs.readFileSync('src/page/seed/StudentProfilePage.tsx','utf8');
 
 test('Orion derives its displayed subject list from the verified Seed transcript',()=>{
   assert.match(page,/transcript\.data\.currentSubjects\.map\(subject => \[getOrionSubjectKey\(subject\), subject\]\)/);
