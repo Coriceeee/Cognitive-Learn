@@ -222,6 +222,6 @@ test('CP45 regression: lazy route chunks cannot remount AccessGate or the shared
 
 test('CP45 regression: student route changes keep authorization verification scoped to the student session',()=>{
   const gate=read('src/components/common/AccessGate.tsx');
-  assert.match(gate,/const accessScope = path === "\\/student\\/consent" \? "consent" : path\.startsWith\("\\/admin"\) \? "admin" : "student"/);
-  assert.match(gate,/\}, \[accessScope\]\);/);
+  assert.ok(gate.includes('const accessScope = path === "/student/consent" ? "consent" : path.startsWith("/admin") ? "admin" : "student";'));
+  assert.ok(gate.includes("}, [accessScope]);"));
 });
