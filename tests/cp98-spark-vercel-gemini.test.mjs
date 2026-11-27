@@ -61,6 +61,37 @@ test("CP98.04 exact-origin CORS allows configured Firebase origins and same-orig
   }
 });
 
+test("CP98.04A canonical CLA production origins pass preflight even when Vercel CORS env is unset", () => {
+  const old = process.env.CORS_ALLOWED_ORIGINS;
+  const oldNodeEnv = process.env.NODE_ENV;
+  delete process.env.CORS_ALLOWED_ORIGINS;
+  process.env.NODE_ENV = "production";
+  try {
+    for (const origin of ORIGINS) {
+      const res = mockResponse();
+      assert.equal(
+        allowGeminiOrigin({ method: "OPTIONS", headers: { origin, host: "cognitive-learn.vercel.app" } }, res, "POST, OPTIONS"),
+        true,
+        `canonical origin should pass preflight: ${origin}`,
+      );
+      assert.equal(res.headers["access-control-allow-origin"], origin);
+      assert.equal(res.headers["access-control-allow-methods"], "POST, OPTIONS");
+      assert.match(res.headers["access-control-allow-headers"], /Authorization/i);
+      assert.match(res.headers["access-control-allow-headers"], /Content-Type/i);
+      assert.equal(res.headers["vary"], "Origin");
+    }
+    const denied = mockResponse();
+    assert.equal(
+      allowGeminiOrigin({ method: "OPTIONS", headers: { origin: "https://attacker.example", host: "cognitive-learn.vercel.app" } }, denied, "POST, OPTIONS"),
+      false,
+    );
+    assert.equal(denied.headers["access-control-allow-origin"], undefined);
+  } finally {
+    if (old === undefined) delete process.env.CORS_ALLOWED_ORIGINS; else process.env.CORS_ALLOWED_ORIGINS = old;
+    if (oldNodeEnv === undefined) delete process.env.NODE_ENV; else process.env.NODE_ENV = oldNodeEnv;
+  }
+});
+
 test("CP98.05 status endpoint returns configuration flags only and never leaks secrets", () => {
   const keys = ["GEMINI_API_KEY", "FIREBASE_WEB_API_KEY", "FIREBASE_PROJECT_ID", "GEMINI_MODEL", "CORS_ALLOWED_ORIGINS"];
   const previous = Object.fromEntries(keys.map(key => [key, process.env[key]]));
