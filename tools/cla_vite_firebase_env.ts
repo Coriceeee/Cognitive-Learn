@@ -26,6 +26,13 @@ export function resolveLiveFirebaseDefines(
   const authDomain = liveEnv.VITE_FIREBASE_AUTH_DOMAIN?.trim();
   const appId = liveEnv.VITE_FIREBASE_APP_ID?.trim();
 
+  // CI builds validate the helper contract with fixtures but do not receive the
+  // ignored local .env.live.local file. Permit a config-free compile-only build;
+  // any supplied (even partial or wrong) CI config is still validated below.
+  if (command === 'build' && process.env.CI === 'true' && !projectId && !apiKey && !authDomain && !appId) {
+    return {};
+  }
+
   if (projectId !== EXPECTED_PROJECT) {
     throw new Error(
       `CLA Firebase LIVE: cấu hình ${projectId || '(trống)'} không khớp project bắt buộc cognitive-learn-ai. Hãy kiểm tra .env.live.local và biến môi trường PowerShell/CI.`,
