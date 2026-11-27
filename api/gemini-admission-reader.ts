@@ -2,6 +2,7 @@ import { guardedJson, GeminiTransportError, visibleGeminiText } from "./geminiTr
 import { resolve } from "node:path";
 import { config as loadEnv } from "dotenv";
 import type { VercelRequest, VercelResponse } from "./vercelTypes";
+import { allowGeminiOrigin } from "../server/geminiCors.ts";
 
 loadEnv({ path: resolve(process.cwd(), ".env.local") });
 loadEnv({ path: resolve(process.cwd(), ".env") });
@@ -616,25 +617,6 @@ async function callGemini({
  * CORS is a browser boundary; it does NOT replace backend authentication
  * or rate-limiting for non-browser callers.
  */
-function allowConfiguredOrigin(req: VercelRequest, res: VercelResponse): boolean {
-  res.setHeader("Vary", "Origin");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.setHeader("Access-Control-Max-Age", "600");
-
-  const requestOrigin = req.headers.origin;
-  if (!requestOrigin) return true; // e.g. diagnostic curl; not an authorization check.
-  if (typeof requestOrigin !== "string") return false;
-
-  const allowed = (process.env.CORS_ALLOWED_ORIGINS ?? "")
-    .split(",")
-    .map((value) => value.trim().replace(/\/$/, ""))
-    .filter(Boolean);
-  if (!allowed.includes(requestOrigin)) return false;
-  res.setHeader("Access-Control-Allow-Origin", requestOrigin);
-  return true;
-}
-
 /** Authenticated admission source extraction. Mirrors the Lumen trust boundary. */
 class AdmissionApiError extends Error {
   readonly statusCode: number;
@@ -712,7 +694,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader("Content-Type", "application/json; charset=utf-8");
   res.setHeader("Cache-Control", "no-store");
   res.setHeader("X-Content-Type-Options", "nosniff");
-  if (!allowConfiguredOrigin(req, res)) {
+  if (!allowGeminiOrigin(req, res, "POST, OPTIONS")) {
     return res.status(403).json({ ok: false, message: "Domain gọi API chưa được phép. Kiểm tra CORS_ALLOWED_ORIGINS." });
   }
   if (req.method === "OPTIONS") {

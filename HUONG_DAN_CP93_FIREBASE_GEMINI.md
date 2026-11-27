@@ -1,3 +1,5 @@
+> **ĐÃ THAY THẾ:** Tài liệu CP93 mô tả kiến trúc Firebase Functions, không còn là hướng triển khai hiện hành. Dự án giữ Firebase Spark và chuyển ba API Gemini sang Vercel. Làm theo [CP98 Spark + Vercel release guide](docs/CP98_SPARK_VERCEL_GEMINI_RELEASE.md). Không chạy script deploy Firebase Functions trong tài liệu cũ.
+
 # CLA CP93 — Sửa lỗi Gemini JSON trên cognitivelearn.ai.vn
 
 ## Nguyên nhân

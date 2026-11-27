@@ -7,6 +7,7 @@ import { answerClaKnowledge } from "../src/lib/claKnowledgeRetrieval";
 import { answerVerifiedCutoff } from "../src/lib/atlasDecisionComparison";
 import { Buffer } from "buffer";
 import process from "process";
+import { allowGeminiOrigin } from "../server/geminiCors.ts";
 
 type Plain = Record<string, unknown>;
 const asRecord = (x: unknown): Plain | null => x && typeof x === "object" && !Array.isArray(x) ? x as Plain : null;
@@ -16,23 +17,6 @@ class ApiFault extends Error { constructor(readonly status: number, text: string
 async function remoteJson(url: string, init: RequestInit, timeoutMs: number) {
   const result = await guardedJson(url, init, timeoutMs);
   return { status: result.status, ok: result.ok, payload: result.data };
-}
-function setCors(req: VercelRequest, res: VercelResponse) {
-  res.setHeader("Vary", "Origin");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
-  res.setHeader("Access-Control-Max-Age", "600");
-  const origin = req.headers.origin;
-  if (!origin) return true;
-  if (typeof origin !== "string") return false;
-  const allow = (process.env.CORS_ALLOWED_ORIGINS || "").split(",").map(v => v.trim().replace(/\/$/, "")).filter(Boolean);
-  // A same-origin POST includes Origin on many browsers. Permit exact host match,
-  // without allowing wildcard origins or credential-sharing with unrelated hosts.
-  const host = req.headers.host;
-  const sameOrigin = typeof host === "string" && (origin === `https://${host}` || (process.env.NODE_ENV !== "production" && origin === `http://${host}`));
-  if (!sameOrigin && !allow.includes(origin)) return false;
-  res.setHeader("Access-Control-Allow-Origin", origin);
-  return true;
 }
 function limit(uid: string) {
   const now = Date.now();
@@ -65,7 +49,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader("Content-Type", "application/json; charset=utf-8");
   res.setHeader("Cache-Control", "no-store");
   res.setHeader("X-Content-Type-Options", "nosniff");
-  const allowed = setCors(req, res);
+  const allowed = allowGeminiOrigin(req, res, "POST, OPTIONS");
   if (req.method === "OPTIONS") return allowed ? res.status(204).end() : res.status(403).end();
   if (!allowed) return res.status(403).json({ ok: false, message: "Origin không được phép." });
   if (req.method !== "POST") { res.setHeader("Allow", "POST, OPTIONS"); return res.status(405).json({ ok: false, message: "Chỉ hỗ trợ POST." }); }

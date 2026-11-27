@@ -1,25 +1,8 @@
 
 import { getIdToken } from "firebase/auth";
 import { auth } from "./firebase";
+import { getGeminiApiBaseUrl } from "./geminiApiBase";
 import type { AIReasoningResult, AIStudentContext } from "../engines/ai/aiTypes";
-
-function getApiBaseUrl(): string {
-  // CP93: Firebase Hosting is now rewired to same-origin Cloud Functions.
-  if (typeof window !== "undefined" && ["cognitivelearn.ai.vn", "cognitive-learn-ai.web.app", "cognitive-learn-ai.firebaseapp.com"].includes(window.location.hostname)) return "";
-  // CP90: the live Firebase browser on loopback uses the secured local Vite API,
-  // never a placeholder/external VITE_API_BASE_URL that could receive an ID token.
-  if (import.meta.env.DEV && typeof window !== "undefined" &&
-      window.location.protocol === "http:" &&
-      (window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost")) return "";
-  const value = (import.meta.env.VITE_API_BASE_URL || "").trim().replace(/\/+$/, "");
-  if (!value && import.meta.env.PROD) {
-    throw new Error("Chưa cấu hình VITE_API_BASE_URL cho website Firebase trước khi build.");
-  }
-  if (value && !/^https:\/\/[^/?#]+$/i.test(value)) {
-    throw new Error("VITE_API_BASE_URL phải là URL HTTPS dạng https://domain, không kèm đường dẫn.");
-  }
-  return value; // local vercel dev can continue using same-origin /api/...
-}
 
 export type GeminiLumenExplanation = {
   summary: string;
@@ -143,7 +126,7 @@ export async function requestGeminiLumenExplanation(
   const user = auth.currentUser;
   if (!user) throw new Error("Bạn cần đăng nhập để dùng Gemini Lumen.");
   const body = buildGeminiLumenRequest(context, reasoning);
-  const API_BASE_URL = getApiBaseUrl(); // Never send a student's token to a hard-coded deployment.
+  const API_BASE_URL = getGeminiApiBaseUrl();
   const token = await getIdToken(user);
   if (signal?.aborted) throw new DOMException("Yêu cầu đã bị hủy.", "AbortError");
   if (auth.currentUser?.uid !== user.uid) {
@@ -169,7 +152,7 @@ export async function requestGeminiLumenExplanation(
   try {
     data = JSON.parse(responseText) as GeminiLumenServerResponse;
   } catch {
-    if (response.ok) throw new Error("API Gemini trả HTML/văn bản thay vì JSON. Chưa triển khai Firebase Functions Gemini hoặc Hosting rewrite chưa được áp dụng.");
+    if (response.ok) throw new Error("API Gemini trả HTML/văn bản thay vì JSON. Kiểm tra VITE_API_BASE_URL và deployment Vercel Gemini API.");
   }
   if (response.status === 404) {
     throw new Error("API /api/gemini-lumen chưa triển khai trên server.");

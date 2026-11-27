@@ -8,34 +8,6 @@
     ],
     "rewrites": [
       {
-        "source": "/api/gemini-chat",
-        "function": {
-          "functionId": "claGeminiApi",
-          "region": "asia-southeast1"
-        }
-      },
-      {
-        "source": "/api/gemini-lumen",
-        "function": {
-          "functionId": "claGeminiApi",
-          "region": "asia-southeast1"
-        }
-      },
-      {
-        "source": "/api/gemini-admission-reader",
-        "function": {
-          "functionId": "claGeminiApi",
-          "region": "asia-southeast1"
-        }
-      },
-      {
-        "source": "/api/cla-gemini-status",
-        "function": {
-          "functionId": "claGeminiApi",
-          "region": "asia-southeast1"
-        }
-      },
-      {
         "source": "**",
         "destination": "/index.html"
       }

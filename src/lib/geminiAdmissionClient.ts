@@ -1,24 +1,6 @@
 import { getIdToken } from "firebase/auth";
 import { auth } from "./firebase";
-/** Backend runs on Vercel while the SPA is hosted by Firebase Hosting. */
-function getApiBaseUrl(): string {
-  // CP93: Firebase Hosting is now rewired to same-origin Cloud Functions.
-  if (typeof window !== "undefined" && ["cognitivelearn.ai.vn", "cognitive-learn-ai.web.app", "cognitive-learn-ai.firebaseapp.com"].includes(window.location.hostname)) return "";
-  // CP90: the live Firebase browser on loopback uses the secured local Vite API,
-  // never a placeholder/external VITE_API_BASE_URL that could receive an ID token.
-  if (import.meta.env.DEV && typeof window !== "undefined" &&
-      window.location.protocol === "http:" &&
-      (window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost")) return "";
-  const value = (import.meta.env.VITE_API_BASE_URL || "").trim().replace(/\/+$/, "");
-  if (!value && import.meta.env.PROD) {
-    throw new Error("Chưa cấu hình VITE_API_BASE_URL cho website Firebase trước khi build.");
-  }
-  if (value && !/^https:\/\/[^/?#]+$/i.test(value)) {
-    throw new Error("VITE_API_BASE_URL phải là URL HTTPS dạng https://domain, không kèm đường dẫn.");
-  }
-  return value; 
-}
-
+import { getGeminiApiBaseUrl } from "./geminiApiBase";
 export type GeminiAdmissionProgramDraft = {
   majorName?: string;
   majorCode?: string;
@@ -92,7 +74,7 @@ export async function extractAdmissionData(
   const user = auth.currentUser;
   if (!user) throw new Error("Bạn cần đăng nhập để dùng Gemini tuyển sinh.");
   const token = await getIdToken(user);
-  const response = await fetch(`${getApiBaseUrl()}/api/gemini-admission-reader`, {
+  const response = await fetch(`${getGeminiApiBaseUrl()}/api/gemini-admission-reader`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -114,7 +96,7 @@ export async function extractAdmissionData(
   try {
     data = JSON.parse(text) as GeminiAdmissionReaderResponse;
   } catch {
-    throw new Error("API Gemini trả HTML/văn bản thay vì JSON. Kiểm tra Cloud Functions Gemini và Firebase Hosting rewrite.");
+    throw new Error("API Gemini trả HTML/văn bản thay vì JSON. Kiểm tra VITE_API_BASE_URL và Vercel Gemini API.");
   }
 
   if (!response.ok || !data.ok) {

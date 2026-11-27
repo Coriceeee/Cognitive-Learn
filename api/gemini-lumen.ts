@@ -2,6 +2,7 @@ import { Buffer } from "buffer";
 import process from "process";
 import { guardedJson, GeminiTransportError, visibleGeminiText } from "./geminiTransport.ts";
 import type { VercelRequest, VercelResponse } from "./vercelTypes";
+import { allowGeminiOrigin } from "../server/geminiCors.ts";
 
 type ObjectRecord = Record<string, unknown>;
 
@@ -534,7 +535,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   res.setHeader("X-Content-Type-Options", "nosniff");
 
-  const originAllowed = allowConfiguredOrigin(req, res);
+  const originAllowed = allowGeminiOrigin(req, res, "POST, OPTIONS");
   // Preflight never needs a Firebase token or GEMINI_API_KEY.
   if (req.method === "OPTIONS") {
     return originAllowed

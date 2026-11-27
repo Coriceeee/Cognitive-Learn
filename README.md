@@ -6,6 +6,11 @@
 
 # COGNITIVE LEARN AI (CLA) — mã nguồn chuẩn hóa CLA(7)
 
+## Runtime architecture (CP98)
+
+**Current target:** Firebase Spark hosts Authentication, Firestore and the student SPA; Gemini chat, Lumen explanation and admission extraction run as Vercel Serverless Functions in `api/`. The Firebase frontend calls the HTTPS origin in `VITE_API_BASE_URL`. Do not deploy `functions-gemini` to Firebase or upgrade Blaze for this architecture. See [CP98 Spark + Vercel release guide](docs/CP98_SPARK_VERCEL_GEMINI_RELEASE.md).
+
+
 **Trạng thái 08/11/2026:** bản nguồn đã sửa vị trí tệp và loại artifacts/secret khỏi ZIP bàn giao. **Chưa triển khai production.** Quyền Firestore, E2E, kiểm định khoa học chưa được nghiệm thu hoàn chỉnh.
 
 ## Cấu trúc
