@@ -12,11 +12,11 @@ const base = (process.env.CLA_GEMINI_API_BASE_URL || match?.[1] || "")
 let apiUrl = null;
 try { apiUrl = new URL(base); } catch {}
 const approvedHost = apiUrl && (
-  apiUrl.hostname === "api.cognitivelearn.ai.vn" || apiUrl.hostname.endsWith(".vercel.app")
+  apiUrl.hostname.endsWith(".vercel.app")
 );
 if (!apiUrl || apiUrl.protocol !== "https:" || apiUrl.username || apiUrl.password
   || apiUrl.port || apiUrl.pathname !== "/" || apiUrl.search || apiUrl.hash || !approvedHost) {
-  console.error("CP98 CONFIG FAIL: add VITE_API_BASE_URL=https://<your-project>.vercel.app to .env.live.local.");
+  console.error("CP98 CONFIG FAIL: set VITE_API_BASE_URL to the actual Production .vercel.app URL of the CLA Vercel project in .env.live.local. Do not use cognitivelearn.ai.vn here.");
   process.exit(2);
 }
 
