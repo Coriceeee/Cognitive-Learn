@@ -264,7 +264,7 @@ export default function App() {
                 <Suspense fallback={<AppLoading />}>
                   <StudentProfileProvider>
                     <AppNotificationCenter />
-                    <Suspense fallback={null}>
+                    <Suspense fallback={<AppLoading />}>
                       {routeView}
                     </Suspense>
                     <FloatingAdvisorChat />
