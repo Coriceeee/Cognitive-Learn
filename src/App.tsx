@@ -239,35 +239,42 @@ export default function App() {
         {`Đã mở: ${getRouteDisplayTitle(path)}`}
       </span>
       {routePending && <div className="cla-route-progress" role="progressbar" aria-label="Đang mở trang tiếp theo" />}
-      <Suspense
-        fallback={
-          <AppLoading />
-        }
-      >
-        <RouteErrorBoundary route={path}>
+      <RouteErrorBoundary route={path}>
         <div className="app-content" id="cla-page-content" tabIndex={-1} data-cla-route={path}>
           {path === "/" || path === "/about" || path === "/contact" || notFound ? (
-            routeView
+            <Suspense fallback={<AppLoading />}>
+              {routeView}
+            </Suspense>
           ) : (
+            // Keep authorization mounted while an individual lazy route loads.
+            // A route chunk must never suspend/unmount the Firebase access gate.
             <AccessGate path={path}>
               {path === "/student/consent" || path.startsWith("/admin") ? (
-                <>
-                  <AppNotificationCenter />
-                  {routeView}
-                  {path !== "/student/consent" && <FloatingAdvisorChat />}
-                </>
+                <Suspense fallback={<AppLoading />}>
+                  <>
+                    <AppNotificationCenter />
+                    {routeView}
+                    {path !== "/student/consent" && <FloatingAdvisorChat />}
+                  </>
+                </Suspense>
               ) : (
-                <StudentProfileProvider>
-                  <AppNotificationCenter />
-                  {routeView}
-                  <FloatingAdvisorChat />
-                </StudentProfileProvider>
+                // The outer boundary is only for the lazy provider's first load.
+                // Route chunks have their own inner boundary, so they cannot
+                // tear down StudentProfileProvider or its shared Firestore listeners.
+                <Suspense fallback={<AppLoading />}>
+                  <StudentProfileProvider>
+                    <AppNotificationCenter />
+                    <Suspense fallback={null}>
+                      {routeView}
+                    </Suspense>
+                    <FloatingAdvisorChat />
+                  </StudentProfileProvider>
+                </Suspense>
               )}
             </AccessGate>
           )}
         </div>
-        </RouteErrorBoundary>
-      </Suspense>
+      </RouteErrorBoundary>
 
       <AppFooter />
     </div>
