@@ -131,6 +131,9 @@ test("CP98.09 every deployed Vercel route imports shared request types from outs
 
 
 test("CP98.10 production build embeds only the validated LIVE Firebase project", () => {
+  const previousCI = process.env.CI;
+  delete process.env.CI;
+  try {
   const env = {
     VITE_FIREBASE_API_KEY: "AIzaSyAAAAAAAAAAAAAAAAAAAAAAAA",
     VITE_FIREBASE_AUTH_DOMAIN: "cognitive-learn-ai.firebaseapp.com",
@@ -148,4 +151,7 @@ test("CP98.10 production build embeds only the validated LIVE Firebase project",
     /demo-cla-mvp.*cognitive-learn-ai/i,
   );
   assert.deepEqual(resolveLiveFirebaseDefines("serve", true, {}), {});
+  } finally {
+    if (previousCI === undefined) delete process.env.CI; else process.env.CI = previousCI;
+  }
 });
