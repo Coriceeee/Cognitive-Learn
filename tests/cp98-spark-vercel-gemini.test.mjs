@@ -103,7 +103,8 @@ test("CP98.07 Spark deploy is Hosting-only and preflights Vercel", () => {
   assert.match(deploy, /verify-cp93-production\.mjs/);
   assert.match(deploy, /firebase deploy --only hosting/);
   assert.doesNotMatch(deploy, /firebase deploy --only functions/);
-  assert.match(deploy, /vercel_failed/);\n  assert.match(read("tools/verify-cp93-production.mjs"), /approvedHost/);
+  assert.match(deploy, /vercel_failed/);
+  assert.match(read("tools/verify-cp93-production.mjs"), /approvedHost/);
   const guide = read("docs/CP98_SPARK_VERCEL_GEMINI_RELEASE.md");
   assert.match(guide, /Firebase Spark/);
   assert.match(guide, /CORS_ALLOWED_ORIGINS/);
