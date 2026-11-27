@@ -15,7 +15,7 @@ export function resolveGeminiApiBaseUrl(input: GeminiApiBaseInput): string {
   }
   let url: URL;
   try { url = new URL(raw); } catch { throw new Error("VITE_API_BASE_URL không phải URL hợp lệ."); }
-  if (url.protocol !== "https:" || url.username || url.password || (url.pathname !== "" && url.pathname !== "/") || url.search || url.hash) {
+  if (url.protocol !== "https:" || url.username || url.password || url.port || (url.pathname !== "" && url.pathname !== "/") || url.search || url.hash) {
     throw new Error("VITE_API_BASE_URL phải là HTTPS origin, không chứa đường dẫn, thông tin đăng nhập hoặc query.");
   }
   if (!approvedApiHost(url.hostname.toLowerCase())) throw new Error("VITE_API_BASE_URL chỉ được trỏ đến domain Vercel hoặc api.cognitivelearn.ai.vn đã xác minh.");

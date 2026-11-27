@@ -7,7 +7,7 @@ let envFile = "";
 try { envFile = readFileSync(".env.live.local", "utf8"); } catch {}
 const match = envFile.match(/^\s*VITE_API_BASE_URL\s*=\s*(.*?)\s*$/m);
 const base = (process.env.CLA_GEMINI_API_BASE_URL || match?.[1] || "").trim().replace(/^["']|["']$/g, "").replace(/\/+$/, "");
-if (!/^https:\/\/[^/?#]+$/.test(base)) {
+let apiUrl = null;\ntry { apiUrl = new URL(base); } catch {}\nconst approvedHost = apiUrl && (apiUrl.hostname === "api.cognitivelearn.ai.vn" || apiUrl.hostname.endsWith(".vercel.app"));\nif (!apiUrl || apiUrl.protocol !== "https:" || apiUrl.username || apiUrl.password || apiUrl.port || apiUrl.pathname !== "/" || apiUrl.search || apiUrl.hash || !approvedHost) {
   console.error("CP98 CONFIG FAIL: add VITE_API_BASE_URL=https://<your-project>.vercel.app to .env.live.local.");
   process.exit(2);
 }
