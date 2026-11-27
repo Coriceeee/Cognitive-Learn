@@ -66,9 +66,12 @@ test('normal local Vite serve pins all Firebase values to LIVE and disables stal
   assert.equal(JSON.parse(defines['import.meta.env.VITE_USE_FIREBASE_EMULATORS']),'false');
 });
 
-test('Firebase Emulator is available only through explicit QA launcher opt-in',()=>{
+test('Firebase Emulator is available only through explicit QA launcher opt-in; production builds require LIVE config',()=>{
   assert.deepEqual(resolveLiveFirebaseDefines('serve',true,{}),{});
-  assert.deepEqual(resolveLiveFirebaseDefines('build',false,{}),{});
+  assert.throws(()=>resolveLiveFirebaseDefines('build',false,{}),/cognitive-learn-ai/);
+  const buildDefines=resolveLiveFirebaseDefines('build',false,liveEnv);
+  assert.equal(JSON.parse(buildDefines['import.meta.env.VITE_FIREBASE_PROJECT_ID']),'cognitive-learn-ai');
+  assert.equal(JSON.parse(buildDefines['import.meta.env.VITE_USE_FIREBASE_EMULATORS']),'false');
 });
 
 test('normal local Vite serve fails fast instead of using fake or wrong Firebase credentials',()=>{
