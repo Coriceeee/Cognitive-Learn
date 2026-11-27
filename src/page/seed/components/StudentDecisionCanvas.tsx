@@ -155,7 +155,7 @@ export default function StudentDecisionCanvas({ cognitive, gpa, temporal, hasPro
         <div className="cla-canvas-temporal-head"><h3>Nhịp học theo thời gian</h3><div className="cla-canvas-switch" role="group" aria-label="Chọn chỉ số theo thời gian">{metrics.map(m=><button key={m.key} type="button" onClick={()=>setMetric(m.key)} aria-pressed={metric===m.key}>{m.label}</button>)}</div></div>
         {observed ? <TemporalPlot points={series.points} max={selected.max} label={selected.label} unit={selected.unit}/> : <div className="cla-canvas-empty" role="status"><svg viewBox="0 0 660 126" aria-hidden="true" preserveAspectRatio="none">{[13,43,73,103].map(y=><line key={y} x1="0" x2="660" y1={y} y2={y} stroke="#b2c4d6" strokeDasharray="3 6"/>)}{[0,132,264,396,528,660].map(x=><line key={x} x1={x} x2={x} y1="0" y2="126" stroke="#d6e1ee"/> )}</svg><div><strong>Chưa đủ lịch sử để vẽ xu hướng</strong><span>{series?.points.length ?? 0} lần ghi nhận hợp lệ · cần ≥3 ngày đo riêng biệt trải dài ≥7 ngày</span><a href="/student/profile">Cập nhật hồ sơ →</a></div></div>}
         {temporal?.syntheticRows ? <p className="cla-canvas-demo-note" role="note">Biểu đồ đang gồm {temporal.syntheticRows} mốc mô phỏng DEMO. Đây không phải dữ liệu đo thực tế và không được dùng làm bằng chứng nghiên cứu.</p> : null}
-        {!observed && demo && temporal?.status === 'INSUFFICIENT' && <div className="cla-canvas-demo-seed">
+        {!observed && demo && temporal && temporal.status !== 'BLOCKED' && <div className="cla-canvas-demo-seed">
           <button type="button" onClick={() => void createDemoTimeline()} disabled={demoSeedBusy}>
             {demoSeedBusy ? 'Đang tạo dữ liệu DEMO…' : 'Tạo 3 mốc dữ liệu DEMO'}
           </button>
