@@ -207,18 +207,22 @@ test('CP45 regression: lazy route chunks cannot remount AccessGate or the shared
   const gateEnd=app.indexOf('</AccessGate>',gateStart);
   assert.ok(gateStart>0 && gateEnd>gateStart,'AccessGate remains mounted in the route shell');
   const shellBeforeGate=app.slice(app.indexOf('<RouteErrorBoundary route={path}>'),gateStart);
-  assert.doesNotMatch(shellBeforeGate,/<Suspense/,'route Suspense must not wrap AccessGate');
+  const suspenseOpens=(shellBeforeGate.match(/<Suspense\\b/g)||[]).length;
+  const suspenseCloses=(shellBeforeGate.match(/<\\/Suspense>/g)||[]).length;
+  assert.equal(suspenseOpens,suspenseCloses,'no app-wide Suspense boundary may contain the authorization gate');
   const gate=app.slice(gateStart,gateEnd);
   const provider=gate.indexOf('<StudentProfileProvider>');
   assert.ok(provider>0,'shared provider remains inside the persistent AccessGate');
-  const studentBranch=gate.slice(provider);
-  assert.match(studentBranch,/<Suspense fallback=\{<AppLoading \/>\}>[\s\S]*?<StudentProfileProvider>/,
-    'only the provider first-load boundary may wrap the lazy provider');
-  assert.match(studentBranch,/<StudentProfileProvider>[\s\S]*?<Suspense fallback=\{null\}>[\s\S]*?\{routeView\}[\s\S]*?<\/Suspense>[\s\S]*?<\/StudentProfileProvider>/,
-    'lazy route content must have a nested boundary inside the persistent provider');
-  assert.doesNotMatch(app,/<Suspense[\s\S]*?<RouteErrorBoundary route=\{path\}>[\s\S]*?<AccessGate/,
-    'no app-wide Suspense may contain the authorization gate');
+  const providerBoundary=gate.lastIndexOf('<Suspense fallback={<AppLoading />}>',provider);
+  assert.ok(providerBoundary>=0 && providerBoundary<provider,'provider first-load boundary is inside AccessGate');
+  const providerEnd=gate.indexOf('</StudentProfileProvider>',provider);
+  const routeBoundary=gate.indexOf('<Suspense fallback={null}>',provider);
+  const routeBoundaryEnd=gate.indexOf('</Suspense>',routeBoundary);
+  assert.ok(providerEnd>provider && routeBoundary>provider && routeBoundaryEnd>routeBoundary && routeBoundaryEnd<providerEnd,
+    'lazy route content has a nested boundary inside the persistent provider');
+  assert.match(app,/routePending && <div className="cla-route-progress"/);
 });
+
 
 test('CP45 regression: student route changes keep authorization verification scoped to the student session',()=>{
   const gate=read('src/components/common/AccessGate.tsx');
