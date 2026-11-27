@@ -4,7 +4,8 @@
 
 - Firebase tiếp tục giữ Authentication, Firestore và Hosting ở gói Spark.
 - Ba API Gemini và API tra cứu nguồn công khai chạy bằng Vercel Functions trong thư mục `api/`.
-- Frontend Firebase gọi Vercel qua HTTPS bằng `VITE_API_BASE_URL`.
+- Người dùng tiếp tục truy cập website tại `https://cognitivelearn.ai.vn`; frontend gọi Vercel Functions trực tiếp qua HTTPS bằng URL Production mặc định `*.vercel.app` trong `VITE_API_BASE_URL`.
+- Không tạo hoặc sử dụng domain API tùy chỉnh như `api.cognitivelearn.ai.vn`; domain website và origin backend là hai địa chỉ kỹ thuật khác nhau, người dùng không phải đổi địa chỉ website.
 - Không triển khai Firebase Functions, Firestore Rules, Authentication, Admin, Privacy hoặc Push trong đợt này.
 - Không đưa `GEMINI_API_KEY` vào bất kỳ biến `VITE_*` nào.
 
@@ -53,7 +54,7 @@ Mở file hiện có `.env.live.local`. **Giữ nguyên toàn bộ biến Fireba
 VITE_API_BASE_URL=https://<project-name>.vercel.app
 ```
 
-Chỉ dùng HTTPS origin, không thêm `/api`, path, query hay dấu cách. Host phải là domain `.vercel.app` hoặc domain API tùy chỉnh `api.cognitivelearn.ai.vn` đã được cấu hình trên Vercel.
+Chỉ dùng đúng HTTPS Production URL mặc định mà Vercel cấp cho project CLA, dạng `https://<project-name>.vercel.app`; không thêm `/api`, path, query hay dấu cách. **Không nhập `https://cognitivelearn.ai.vn` vào biến này** vì đó là Firebase Hosting domain, không phải Vercel Functions. Không cần tạo `api.cognitivelearn.ai.vn`.
 
 Đây là địa chỉ API công khai, không phải secret. Không thay `VITE_FIREBASE_*` và không đưa Gemini key vào file frontend.
 
@@ -71,7 +72,7 @@ Script kiểm tra Vercel status JSON và preflight CORS cho cả bốn API (chat
 
 ## 6. Kiểm tra thực tế sau deploy
 
-Đăng nhập bằng tài khoản học sinh thử nghiệm đã được cấp quyền và kiểm tra chatbot nổi, Lumen và Atlas. Trong Network, request phải đi đến `https://<project-name>.vercel.app/api/...` và trả `application/json`, không phải HTML.
+Đăng nhập bằng tài khoản học sinh thử nghiệm đã được cấp quyền và kiểm tra chatbot nổi, Lumen và Atlas. Thanh địa chỉ trình duyệt vẫn là `https://cognitivelearn.ai.vn`. Trong Network, riêng các request Gemini phải đi đến `https://<project-name>.vercel.app/api/...` và trả `application/json`, không phải HTML. Đây không phải thay đổi domain website và không cần domain API tùy chỉnh.
 
 - 401/403: kiểm tra Firebase ID token, active/role và quyền đọc document tài khoản.
 - 429: kiểm tra quota Gemini và rate limit.
