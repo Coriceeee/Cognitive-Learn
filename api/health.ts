@@ -1,4 +1,4 @@
-import type { VercelRequest, VercelResponse } from "./vercelTypes";
+import type { VercelRequest, VercelResponse } from "../server/vercelTypes.ts";
 
 export default function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader("Cache-Control", "no-store");

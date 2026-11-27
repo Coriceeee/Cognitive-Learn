@@ -1,4 +1,4 @@
-import type { VercelRequest, VercelResponse } from './vercelTypes';
+import type { VercelRequest, VercelResponse } from '../server/vercelTypes.ts';
 import { parsePublicQuery, parsePublicCandidates, publicSearchText, PUBLIC_SEARCH_VERSION, safePublicUrl } from '../src/lib/publicSourceSearch.ts';
 import type { PublicQuery } from '../src/lib/publicSourceSearch.ts';
 import { parseNationalSourceQuery, nationalYearQueries, emptyNationalYears, NATIONAL_SOURCE_DISCOVERY_VERSION, type NationalSourceQuery, type NationalYearResult } from '../src/lib/nationalSourceDiscovery.ts';

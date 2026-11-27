@@ -118,3 +118,11 @@ test("CP98.08 Vercel API directory contains only real route handlers, shared uti
   assert.ok(readdirSync(new URL("../server/", import.meta.url)).includes("geminiTransport.ts"));
   assert.ok(readdirSync(new URL("../server/", import.meta.url)).includes("vercelTypes.ts"));
 });
+
+test("CP98.09 every deployed Vercel route imports shared request types from outside the api route directory", () => {
+  for (const path of ["api/health.ts", "api/public-source-search.ts", "api/gemini-chat.ts", "api/gemini-lumen.ts", "api/gemini-admission-reader.ts", "api/cla-gemini-status.ts"]) {
+    const source = read(path);
+    assert.doesNotMatch(source, /from ["']\.\/vercelTypes/);
+    assert.match(source, /server\/vercelTypes/);
+  }
+});
