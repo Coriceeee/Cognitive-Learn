@@ -103,7 +103,9 @@ test("CP25-12: Chat supports same-origin secure deployment and optional CORS ori
   assert.ok(cors.includes("const sameOrigin ="));
   assert.ok(cors.includes("CORS_ALLOWED_ORIGINS"));
   assert.ok(client.includes("getClaApiBaseUrl()"));
-  assert.ok(resolver.includes("resolveGeminiApiBaseUrl"));
+  assert.ok(resolver.includes("resolveClaApiBaseUrl"));
+  assert.ok(resolver.includes("getClaApiBaseUrl"));
+  assert.ok(resolver.includes("approvedApiHost"));
   assert.ok(!client.includes("Chưa cấu hình VITE_API_BASE_URL"));
 });
 
