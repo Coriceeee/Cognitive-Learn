@@ -75,7 +75,9 @@ export function useStudentTranscript() {
             ? "Dữ liệu bảng điểm không khớp tài khoản đăng nhập. Đã ngừng hiển thị để bảo vệ dữ liệu."
             : e.code === "legacy-invalid"
               ? "Bảng điểm cũ có tổ hợp môn hoặc điểm không hợp lệ. Cần đối soát trước khi hiển thị; không tự chuyển dữ liệu cũ."
-              : "Không thể xác minh bảng điểm từ Firestore. Hãy kiểm tra mạng và thử lại.");
+              : e.code === "canonical-invalid"
+                ? "Bảng điểm chính thức có tổ hợp 9 môn, cấu trúc hoặc điểm không hợp lệ. Đã ngừng đồng bộ để bảo vệ dữ liệu; hãy đối soát hồ sơ SEED."
+                : "Không thể xác minh bảng điểm từ Firestore. Hãy kiểm tra mạng và thử lại.");
       };
       unsubscribeDoc = onSnapshot(doc(db, "student_transcripts", uid),
         { includeMetadataChanges: true }, snap => {
