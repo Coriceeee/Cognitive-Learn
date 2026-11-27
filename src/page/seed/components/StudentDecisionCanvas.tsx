@@ -1,5 +1,18 @@
 // Daylight scientific canvas: original data semantics, light-adapted SVG and legible labels.
 import { useState } from 'react';
+import {
+  Timestamp,
+  collection,
+  doc,
+  getDocFromServer,
+  getDocsFromServer,
+  writeBatch,
+} from 'firebase/firestore';
+import { auth, db } from '../../../lib/firebase';
+import {
+  buildDemoTemporalSnapshots,
+  DEMO_TEMPORAL_FIXTURE_VERSION,
+} from '../../../lib/demoTemporalSeed';
 import type { CognitiveResult } from '../types';
 import type { GpaIntegrityResult } from '../services/academicGpaIntegrity';
 import type { TemporalStudentReport } from '../../../lib/temporalStudentIntelligence';
@@ -26,6 +39,72 @@ export default function StudentDecisionCanvas({ cognitive, gpa, temporal, hasPro
   demo: boolean;
 }) {
   const [metric, setMetric] = useState<typeof metrics[number]['key']>('planCompletionRate');
+  const [demoSeedBusy, setDemoSeedBusy] = useState(false);
+  const [demoSeedMessage, setDemoSeedMessage] = useState('');
+  const [demoSeedReady, setDemoSeedReady] = useState(false);
+
+  const createDemoTimeline = async () => {
+    if (demoSeedBusy) return;
+    setDemoSeedBusy(true);
+    setDemoSeedMessage('');
+    setDemoSeedReady(false);
+    try {
+      const user = auth.currentUser;
+      if (!demo || !user) {
+        throw new Error('Chức năng này chỉ dành cho phiên quản trị DEMO đã đăng nhập.');
+      }
+
+      const [accountSnap, profileSnap] = await Promise.all([
+        getDocFromServer(doc(db, 'users', user.uid)),
+        getDocFromServer(doc(db, 'learning_profiles', user.uid)),
+      ]);
+      const account = accountSnap.exists() ? accountSnap.data() : null;
+      const profile = profileSnap.exists() ? profileSnap.data() : null;
+      if (!account || account.active !== true || account.role !== 'admin') {
+        throw new Error('Tài khoản hiện tại không có quyền quản trị DEMO.');
+      }
+      if (!profile || profile.userId !== user.uid || profile.schemaVersion !== 1 || profile.dataScope !== 'demo') {
+        throw new Error('Hồ sơ không thuộc vùng dữ liệu DEMO của chính tài khoản này; không tạo dữ liệu.');
+      }
+      if (!(profile.updatedAt instanceof Timestamp)) {
+        throw new Error('Hồ sơ thiếu dấu thời gian máy chủ hợp lệ. Hãy đồng bộ Seed trước khi tạo DEMO.');
+      }
+
+      const fixtures = buildDemoTemporalSnapshots(user.uid, profile.updatedAt.toDate().toISOString());
+      const historyRef = collection(db, 'learning_profiles', user.uid, 'cognitive_history');
+      const existing = await getDocsFromServer(historyRef);
+      const existingById = new Map(existing.docs.map(item => [item.id, item.data()]));
+      for (const fixture of fixtures) {
+        const stored = existingById.get(fixture.id);
+        if (stored && stored.demoFixtureVersion !== DEMO_TEMPORAL_FIXTURE_VERSION) {
+          throw new Error('Phát hiện bản ghi trùng mã nhưng không đúng phiên bản DEMO; đã dừng để bảo toàn lịch sử.');
+        }
+      }
+      const missing = fixtures.filter(item => !existingById.has(item.id));
+      if (missing.length > 0) {
+        const batch = writeBatch(db);
+        for (const fixture of missing) {
+          const { id, createdAt, ...payload } = fixture;
+          batch.set(doc(historyRef, id), {
+            ...payload,
+            createdAt: Timestamp.fromDate(new Date(createdAt)),
+          });
+        }
+        await batch.commit();
+      }
+
+      setDemoSeedMessage(
+        missing.length > 0
+          ? `Đã thêm ${missing.length} mốc lịch sử mô phỏng DEMO. Không thay đổi hồ sơ hoặc bảng điểm.`
+          : 'Ba mốc lịch sử mô phỏng DEMO đã tồn tại; không tạo bản sao.'
+      );
+      setDemoSeedReady(true);
+    } catch (error) {
+      setDemoSeedMessage(error instanceof Error ? error.message : 'Không thể tạo dữ liệu DEMO. Hãy kiểm tra quyền và kết nối.');
+    } finally {
+      setDemoSeedBusy(false);
+    }
+  };
   const selected = metrics.find(m => m.key === metric)!;
   const series = hasProfile && temporal?.status !== 'BLOCKED' ? temporal?.series.find(s => s.metric === metric) : undefined;
   const derived = hasProfile && gpa?.status === 'VERIFIED' ? gpa.derived : null;
@@ -74,6 +153,14 @@ export default function StudentDecisionCanvas({ cognitive, gpa, temporal, hasPro
         <div className="cla-canvas-label"><span>03 / TIẾN TRÌNH</span><a href="/lumen/history">Lịch sử ↗</a></div>
         <div className="cla-canvas-temporal-head"><h3>Nhịp học theo thời gian</h3><div className="cla-canvas-switch" role="group" aria-label="Chọn chỉ số theo thời gian">{metrics.map(m=><button key={m.key} type="button" onClick={()=>setMetric(m.key)} aria-pressed={metric===m.key}>{m.label}</button>)}</div></div>
         {observed ? <TemporalPlot points={series.points} max={selected.max} label={selected.label} unit={selected.unit}/> : <div className="cla-canvas-empty" role="status"><svg viewBox="0 0 660 126" aria-hidden="true" preserveAspectRatio="none">{[13,43,73,103].map(y=><line key={y} x1="0" x2="660" y1={y} y2={y} stroke="#b2c4d6" strokeDasharray="3 6"/>)}{[0,132,264,396,528,660].map(x=><line key={x} x1={x} x2={x} y1="0" y2="126" stroke="#d6e1ee"/> )}</svg><div><strong>Chưa đủ lịch sử để vẽ xu hướng</strong><span>{series?.points.length ?? 0} lần ghi nhận hợp lệ · cần ≥3 ngày đo riêng biệt trải dài ≥7 ngày</span><a href="/student/profile">Cập nhật hồ sơ →</a></div></div>}
+        {temporal?.syntheticRows ? <p className="cla-canvas-demo-note" role="note">Biểu đồ đang gồm {temporal.syntheticRows} mốc mô phỏng DEMO. Đây không phải dữ liệu đo thực tế và không được dùng làm bằng chứng nghiên cứu.</p> : null}
+        {!observed && demo && temporal?.status === 'INSUFFICIENT' && <div className="cla-canvas-demo-seed">
+          <button type="button" onClick={() => void createDemoTimeline()} disabled={demoSeedBusy}>
+            {demoSeedBusy ? 'Đang tạo dữ liệu DEMO…' : 'Tạo 3 mốc dữ liệu DEMO'}
+          </button>
+          <span>Chỉ ghi vào lịch sử của tài khoản quản trị DEMO; không sửa hồ sơ hoặc bảng điểm.</span>
+          {demoSeedMessage && <p role="status">{demoSeedMessage} {demoSeedReady && <button type="button" onClick={() => window.location.reload()}>Tải lại biểu đồ</button>}</p>}
+        </div>}
         <p className="cla-canvas-note">Dữ liệu tự báo cáo, mô tả diễn biến quan sát; không suy ra hiệu quả can thiệp hay dự báo tương lai.</p>
       </article>
     </div>
