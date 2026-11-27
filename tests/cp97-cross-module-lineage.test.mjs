@@ -90,7 +90,8 @@ test("CP97.06: Lumen uses verified Seed profile and blocks GPA scenarios without
   assert.match(lumen, /useVerifiedStudentProfile\(\)/);
   assert.match(lumen, /useAcademicGpaIntegrity\(\)/);
   assert.match(lumen, /gpaIntegrity\.status === "VERIFIED"/);
-  assert.match(lumen, /gpaIntegrity\.result\?\.derived\?\.overall === profile\.gpaOverall/);
+  assert.match(lumen, /gpaIntegrity\.result\.derived\.overall === profile\.gpaOverall/);
+  assert.match(lumen, /typeof gpaIntegrity\.result\?\.derived\?\.overall === "number"/);
   assert.match(lumen, /cognitive\.scoreAvailable === true/);
   assert.match(gpa, /auditAcademicGpa\(uid, values\.learning_profiles, values\.student_transcripts\)/);
   assert.match(gpa, /isServerConfirmedSnapshot\(snapshot\.metadata\)/);
