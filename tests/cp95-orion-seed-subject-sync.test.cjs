@@ -26,3 +26,11 @@ test('Orion score prefill is mapped from Seed transcript subjects, not a fixed s
   assert.match(page,/transcript\.data\?\.currentSubjects \?\? \[\]/);
   assert.match(page,/getOrionSubjectKey\(subject\)/);
 });
+
+test('Seed locks the chosen four electives and foreign language after the first saved curriculum',()=>{
+  assert.match(seedPage,/lockedElectives !== null \|\| !profileReady/);
+  assert.match(seedPage,/lockedForeignLanguage !== null/);
+  assert.match(seedPage,/electiveSelectionLocked:\s*true/);
+  assert.match(seedPage,/setLockedElectives\(\[\.\.\.selectedElectives\]\)/);
+  assert.match(seedPage,/setLockedForeignLanguage\(profile\.foreignLanguage\)/);
+});
