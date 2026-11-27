@@ -1,5 +1,5 @@
-import { guardedJson, GeminiTransportError, visibleGeminiText } from "./geminiTransport.ts";
-import type { VercelRequest, VercelResponse } from "./vercelTypes";
+import { guardedJson, GeminiTransportError, visibleGeminiText } from "../server/geminiTransport.ts";
+import type { VercelRequest, VercelResponse } from "../server/vercelTypes.ts";
 import { ADVISOR_PAGE_CONTEXTS, normaliseAdvisorHistory, prepareAdvisorMessage, routeAdvisorQuestion, safeAdvisorPageContext } from "../src/lib/advisorChatPolicy";
 
 import { isDomesticAdmissionQuestion } from "../src/lib/advisorAdmissionAnswers";

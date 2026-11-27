@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import statusHandler from "../api/cla-gemini-status.ts";
 import { allowGeminiOrigin } from "../server/geminiCors.ts";
 import { resolveGeminiApiBaseUrl } from "../src/lib/geminiApiBase.ts";
@@ -108,4 +108,12 @@ test("CP98.07 Spark deploy is Hosting-only and preflights Vercel", () => {
   assert.match(guide, /CORS_ALLOWED_ORIGINS/);
   assert.match(guide, /VITE_API_BASE_URL/);
   assert.match(guide, /GEMINI_API_KEY/);
+});
+
+test("CP98.08 Vercel API directory contains only real route handlers, shared utilities live outside api", () => {
+  const apiFiles = readdirSync(new URL("../api/", import.meta.url));
+  assert.equal(apiFiles.includes("geminiTransport.ts"), false);
+  assert.equal(apiFiles.includes("vercelTypes.ts"), false);
+  assert.ok(readdirSync(new URL("../server/", import.meta.url)).includes("geminiTransport.ts"));
+  assert.ok(readdirSync(new URL("../server/", import.meta.url)).includes("vercelTypes.ts"));
 });

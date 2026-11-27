@@ -1,4 +1,4 @@
-import type { VercelRequest, VercelResponse } from "../api/vercelTypes.ts";
+import type { VercelRequest, VercelResponse } from "./vercelTypes.ts";
 /** Exact-origin CORS for Firebase Hosting -> Vercel; CORS is not authentication. */
 export function allowGeminiOrigin(req: VercelRequest, res: VercelResponse, methods: string): boolean {
   res.setHeader("Vary", "Origin");
