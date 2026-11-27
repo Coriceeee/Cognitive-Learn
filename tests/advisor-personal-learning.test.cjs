@@ -135,7 +135,7 @@ test('profile-only advice still uses verified Seed behavior when transcript is a
   assert.match(answer,/Tỷ lệ bỏ dở nhiệm vụ tự báo cáo: 60%/);
   assert.match(answer,/Tần suất chuyển ngữ cảnh tự báo cáo: 65%/);
   assert.match(answer,/chia nhiệm vụ thành phiên ngắn/);
-  assert.match(answer,/chưa có bảng điểm đã xác minh/);
+  assert.match(answer,/Chưa có bảng điểm đã xác minh/);
   assert.doesNotMatch(answer,/Toán: 5/);
 });
 
@@ -212,7 +212,7 @@ test('chat offers a personal plan entry point and keeps plan follow-ups local',(
   assert.match(suggestions,/Lập kế hoạch học tập theo dữ liệu của tôi/);
   assert.match(chat,/privateIntent: "learning"/);
   assert.match(chat,/previousPrivate === "learning" && privateFollowup/);
-  assert.match(chat,/không gửi dữ liệu cá nhân sang Gemini/);
+  assert.match(chat,/không gửi sang Gemini/);
 });
 test('chat reads optional verified context and handles personal advice locally before Gemini',()=>{
   const chat=readFileSync(path.join(root,'src/components/common/FloatingAdvisorChat.tsx'),'utf8');
@@ -229,7 +229,7 @@ test('chat reads optional verified context and handles personal advice locally b
     "Personal learning advice must be answered locally before any remote Gemini request.");
   assert.match(provider,/useStudentTranscript\(\)/);
   assert.match(provider,/useOptionalVerifiedStudentProfile/);
-  const api=get('api/gemini-chat.ts');
+  const api=readFileSync(path.join(root,'api/gemini-chat.ts'),'utf8');
   assert.match(api,/trợ lý học tập và định hướng/);
   assert.match(api,/không từ chối chỉ vì câu hỏi không nằm trong kho nguồn tuyển sinh/);
   assert.match(api,/Request này không chứa học bạ hay dữ liệu hành vi/);
