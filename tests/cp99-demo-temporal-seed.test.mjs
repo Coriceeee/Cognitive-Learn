@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { buildDemoTemporalSnapshots, DEMO_TEMPORAL_FIXTURE_VERSION } from '../src/lib/demoTemporalSeed.ts';
 import { analyzeStudentTemporal } from '../src/lib/temporalStudentIntelligence.ts';
 
@@ -45,7 +46,6 @@ test('rejects invalid UID or non-canonical observation timestamp', () => {
   assert.throws(() => buildDemoTemporalSnapshots(uid, '2026-11-27'));
 });
 
-import { readFileSync } from 'node:fs';
 
 test('UI seeder is visible only in DEMO preview and verifies the current admin-owned profile before writing', () => {
   const canvas = readFileSync(new URL('../src/page/seed/components/StudentDecisionCanvas.tsx', import.meta.url), 'utf8');
