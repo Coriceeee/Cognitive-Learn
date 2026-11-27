@@ -48,7 +48,24 @@
 :root:not([data-theme="dark"]) :is(.orion-hero aside,.pulse-hero aside,.haven-hero aside) :is(h2,h3,strong) {color:#142941;}
 :root:not([data-theme="dark"]) :is(.orion-hero aside,.pulse-hero aside,.haven-hero aside) :is(p,small) {color:#405a72;}
 
-/* CP96: the daylight token changes --cla-hero to a pale surface. Keep the
+/* CP96: the daylight token changes --cla-hero to a pale surface.
+/* CP97: unconditional light-surface contract for the actual Atlas hero class.
+ * This intentionally avoids theme-attribute dependence on Firebase LIVE builds. */
+.cla-study-abroad-page .cla-study-hero.cla-study-focused-hero {
+  background: linear-gradient(130deg, #eaf4ff 0%, #f9fbff 60%, #eaf9f5 100%) !important;
+  color: #142941 !important;
+  border: 1px solid #d7e6f8 !important;
+}
+.cla-study-abroad-page .cla-study-hero.cla-study-focused-hero :is(h1,h2,h3,strong) {
+  color: #142941 !important;
+}
+.cla-study-abroad-page .cla-study-hero.cla-study-focused-hero :is(p,small) {
+  color: #405a72 !important;
+}
+.cla-study-abroad-page .cla-study-hero.cla-study-focused-hero .cla-eyebrow {
+  color: #1e55a4 !important;
+}
+ Keep the
  * focused study-abroad hero paired with dark, WCAG-AA foreground colors;
  * the legacy CP28 rule in 21-cla-design-system.css still marks its text white. */
 :root:not([data-theme="dark"]) .cla-study-abroad-page .cla-study-focused-hero {
