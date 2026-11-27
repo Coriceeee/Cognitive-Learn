@@ -158,3 +158,14 @@ test('EX30 unsafe or modified date inputs cannot be persisted via save',()=>{
   assert.match(board,/function saveDraft\(\)/);
   assert.match(board,/window\.localStorage\.setItem/);
 });
+
+test('EX31 valid calendar edits autosave immediately without requiring the manual save button',()=>{
+  const board=src('../src/components/student/ExamReminderBoard.tsx');
+  assert.match(board,/function updateDraft\(nextDraft: ExamReminder\)/);
+  assert.match(board,/window\.localStorage\.setItem\(storageKey\(uid\), serialized\)/);
+  assert.match(board,/window\.dispatchEvent\(new Event\(EXAM_CALENDAR_UPDATED\)\)/);
+  for (const field of ['title','examDate','registrationDeadline','sourceUrl','registrationDone']) {
+    assert.match(board,new RegExp('updateDraft\\(\\{\\.\\.\\.draft,'+field+':'));
+  }
+  assert.match(board,/Các thay đổi hợp lệ được tự động lưu/);
+});
