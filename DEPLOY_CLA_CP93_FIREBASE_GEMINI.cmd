@@ -35,9 +35,19 @@ call firebase deploy --only hosting --project cognitive-learn-ai
 if errorlevel 1 goto :hosting_failed
 
 echo.
-echo [DEPLOY DONE] Verify https://cognitivelearn.ai.vn/api/cla-gemini-status
- echo Expect JSON response, not HTML. Then test real Gemini requests while logged in.
+echo [VERIFY] Checking both production Gemini status endpoints...
+node tools\verify-cp93-production.mjs
+if errorlevel 1 goto :runtime_failed
+
+echo.
+echo [DEPLOY DONE] Gemini status is configured on both Hosting domains.
+echo Next: test authenticated Gemini chat and Lumen with a real student account.
 exit /b 0
+
+:runtime_failed
+echo [FAIL] Hosting deploy command completed, but production Gemini smoke check failed.
+echo Check Functions deployment, Hosting rewrite, and Firebase Secret Manager. Do not mark Gemini ready.
+exit /b 1
 
 :missing_root
 echo [FAIL] Not in the Cognitive-Learn project folder with package.json.
