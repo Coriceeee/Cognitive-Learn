@@ -74,6 +74,7 @@ jobs:
           npm run test:cp73:mvp
           npm run test:rules:static
           npm run test:rules:v5:static
+          npm run test:orion-drafts:emulator
           npm run test:rules:gate-unit
       - name: Full offline regression suite
         run: |
