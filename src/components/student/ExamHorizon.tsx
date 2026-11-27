@@ -83,7 +83,7 @@ export default function ExamHorizon() {
           {undated > 0 && <a href="/student/exams" className="cla-horizon-undated">{undated} kỳ thi chưa có ngày xác nhận · Bổ sung lịch ↗</a>}
         </div>
       </div>
-      <div className="cla-horizon-foot"><span>LOCAL CALENDAR V1</span><span>Lưu trên thiết bị này, chưa đồng bộ đa thiết bị hoặc tự gửi nhắc nền.</span></div>
+      <div className="cla-horizon-foot"><span>LOCAL CALENDAR V1</span><span>Tự động lưu trên trình duyệt này · chưa đồng bộ đa thiết bị hoặc gửi nhắc nền.</span></div>
     </section>
   );
 }
