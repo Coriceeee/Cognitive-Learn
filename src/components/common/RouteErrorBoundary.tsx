@@ -7,6 +7,7 @@ type Props = {
 
 type State = {
   error: Error | null;
+  route: string;
 };
 
 /**
@@ -15,9 +16,16 @@ type State = {
  * it also catches provider/route initialization failures.
  */
 export default class RouteErrorBoundary extends Component<Props, State> {
-  state: State = { error: null };
+  state: State = { error: null, route: this.props.route };
 
-  static getDerivedStateFromError(error: Error): State {
+  // The boundary remains mounted across SPA route changes to preserve the
+  // authenticated app shell. Clear only an error belonging to the old route.
+  static getDerivedStateFromProps(props: Props, state: State): Partial<State> | null {
+    if (props.route !== state.route) return { error: null, route: props.route };
+    return null;
+  }
+
+  static getDerivedStateFromError(error: Error): Partial<State> {
     return { error };
   }
 
