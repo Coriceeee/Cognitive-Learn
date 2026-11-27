@@ -60,7 +60,7 @@
     "research:adaptive:sample": "python research/adaptive_study/study.py --input research/adaptive_study/sample/fixture_SYNTHETIC.csv --out research/adaptive_study/sample/output",
     "research:cp26:rebaseline": "python tools/rebaseline_cp26.py",
     "test:cp26:rebaseline": "python -m unittest discover -s tests_cp26 -v",
-    "test:rules:v5:static": "node --test tests/cp21.rules.contract.test.cjs tests/firestore-security-gate.test.cjs tests/step10-student-consent.test.cjs tests/cp27-firestore-rules-v5.contract.test.cjs",
+    "test:rules:v5:static": "node --test tests/cp21.rules.contract.test.cjs tests/firestore-security-gate.test.cjs tests/step10-student-consent.test.cjs tests/cp27-firestore-rules-v5.contract.test.cjs tests/orion-drafts-production-patch.contract.test.cjs",
     "test:orion-drafts:rules": "node --test tests/orion-drafts-production-patch.test.mjs",
     "test:orion-drafts:patch-contract": "node --test tests/orion-drafts-production-patch.contract.test.cjs",
     "test:consent-share-revocation": "node --experimental-strip-types --test tests/step20-consent-share-revocation.test.mjs",
