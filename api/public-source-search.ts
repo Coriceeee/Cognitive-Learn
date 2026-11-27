@@ -1,3 +1,5 @@
+import process from 'node:process';
+import { Buffer } from 'node:buffer';
 import type { VercelRequest, VercelResponse } from '../server/vercelTypes.ts';
 import { allowGeminiOrigin } from '../server/geminiCors.ts';
 import { parsePublicQuery, parsePublicCandidates, publicSearchText, PUBLIC_SEARCH_VERSION, safePublicUrl } from '../src/lib/publicSourceSearch.ts';
