@@ -2,7 +2,7 @@
 export type ClaApiBaseInput = Readonly<{ hostname: string; protocol: string; isDev: boolean; baseUrl?: string }>; 
 const FIREBASE_HOSTS = new Set(["cognitivelearn.ai.vn", "cognitive-learn-ai.web.app", "cognitive-learn-ai.firebaseapp.com"]);
 const isLoopback = (hostname: string) => hostname === "localhost" || hostname === "127.0.0.1";
-const approvedApiHost = (hostname: string) => hostname === "api.cognitivelearn.ai.vn" || hostname.endsWith(".vercel.app");
+const approvedApiHost = (hostname: string) => hostname.endsWith(".vercel.app");
 
 export function resolveClaApiBaseUrl(input: ClaApiBaseInput): string {
   const hostname = input.hostname.toLowerCase();
@@ -18,7 +18,7 @@ export function resolveClaApiBaseUrl(input: ClaApiBaseInput): string {
   if (url.protocol !== "https:" || url.username || url.password || url.port || (url.pathname !== "" && url.pathname !== "/") || url.search || url.hash) {
     throw new Error("VITE_API_BASE_URL phải là HTTPS origin, không chứa đường dẫn, thông tin đăng nhập hoặc query.");
   }
-  if (!approvedApiHost(url.hostname.toLowerCase())) throw new Error("VITE_API_BASE_URL chỉ được trỏ đến domain Vercel hoặc api.cognitivelearn.ai.vn đã xác minh.");
+  if (!approvedApiHost(url.hostname.toLowerCase())) throw new Error("VITE_API_BASE_URL phải trỏ đến domain Production .vercel.app của dự án CLA trên Vercel; không dùng domain website cognitivelearn.ai.vn.");
   return url.origin;
 }
 
