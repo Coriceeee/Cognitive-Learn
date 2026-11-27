@@ -27,37 +27,64 @@ function validObservedScore(value: unknown): boolean {
     && parseEnteredScore(String(value)) !== null;
 }
 
-export function assessLegacyTranscript(value: unknown, uid: string): LegacyTranscriptAssessment {
+export type TranscriptRecordKind = "canonical" | "legacy";
+
+/** Validate either the canonical student_transcripts record or a read-only legacy record. */
+export function assessTranscriptRecord(
+  value: unknown,
+  uid: string,
+  kind: TranscriptRecordKind,
+): LegacyTranscriptAssessment {
   const deny = (reason: string): LegacyTranscriptAssessment => ({ readable: false, reason });
+  const label = kind === "canonical" ? "Bảng điểm chính thức" : "Bảng điểm cũ";
   if (!isMatchingAccountRecord(value, uid)) {
-    return deny("Bản ghi cũ không đúng tài khoản hoặc phạm vi dữ liệu.");
+    return deny(`${label} không đúng tài khoản hoặc phạm vi dữ liệu.`);
   }
-  const doc = value as Record<string, unknown>;
+  if (!isRecord(value)) return deny(`${label} không có cấu trúc hợp lệ.`);
+  const doc = value;
+  // Canonical documents are written atomically by Seed and must carry exact owner + schema.
+  // Legacy documents retain their existing compatibility rule (UID may be absent).
+  if (kind === "canonical" && (doc.userId !== uid || doc.schemaVersion !== 1)) {
+    return deny("Bảng điểm chính thức thiếu UID hoặc phiên bản schema hợp lệ.");
+  }
   const identity = parseAcademicIdentity(doc.curriculum);
   if (!identity) {
-    return deny("Bản ghi cũ thiếu tổ hợp 9 môn đã xác nhận. Cần đối soát, không tự suy đoán môn học.");
+    return deny(`${label} thiếu tổ hợp 9 môn đã xác nhận. Cần đối soát, không tự suy đoán môn học.`);
   }
   if (!isRecord(doc.transcript)) {
-    return deny("Bảng điểm cũ không có cấu trúc hợp lệ.");
+    return deny(`${label} không có cấu trúc hợp lệ.`);
   }
   const foreign = findForeignTranscriptSubject(doc.transcript, identity);
   if (foreign !== null) {
-    return deny("Bảng điểm cũ có môn hoặc học kỳ ngoài tổ hợp được khóa.");
+    return deny(`${label} có môn hoặc học kỳ ngoài tổ hợp được khóa.`);
   }
   for (const terms of Object.values(doc.transcript)) {
-    if (!isRecord(terms)) return deny("Cấu trúc học kỳ cũ không hợp lệ.");
+    if (!isRecord(terms)) return deny(`${label} có cấu trúc học kỳ không hợp lệ.`);
     for (const rows of Object.values(terms)) {
-      if (!isRecord(rows)) return deny("Cấu trúc môn học cũ không hợp lệ.");
+      if (!isRecord(rows)) return deny(`${label} có cấu trúc môn học không hợp lệ.`);
       for (const row of Object.values(rows)) {
         if (!isRecord(row) || !Array.isArray(row.regular)
           || row.regular.length > 5
           || row.regular.some(score => !validObservedScore(score))
           || !validObservedScore(row.midterm)
           || !validObservedScore(row.final)) {
-          return deny("Bản ghi cũ có điểm không hợp lệ hoặc thiếu cấu trúc điểm; không hiển thị GPA suy đoán.");
+          return deny(`${label} có điểm không hợp lệ hoặc thiếu cấu trúc điểm; không hiển thị GPA suy đoán.`);
         }
       }
     }
   }
-  return { readable: true, reason: "Đã kiểm tra cấu trúc bản ghi cũ; cần đối soát và chuẩn hóa trước khi dùng chính thức." };
+  return {
+    readable: true,
+    reason: kind === "canonical"
+      ? "Bảng điểm chính thức đã qua kiểm tra cấu trúc; điều này không thay thế xác nhận của nhà trường."
+      : "Đã kiểm tra cấu trúc bản ghi cũ; cần đối soát và chuẩn hóa trước khi dùng chính thức.",
+  };
+}
+
+export function assessLegacyTranscript(value: unknown, uid: string): LegacyTranscriptAssessment {
+  return assessTranscriptRecord(value, uid, "legacy");
+}
+
+export function assessCanonicalTranscript(value: unknown, uid: string): LegacyTranscriptAssessment {
+  return assessTranscriptRecord(value, uid, "canonical");
 }
