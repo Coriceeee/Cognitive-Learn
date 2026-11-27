@@ -15,7 +15,8 @@
 3. Chọn branch `main`, Root Directory là repository root.
 4. Framework Preset: **Vite**; Build Command: `npm run build`; Output Directory: `dist`.
 5. Deploy project. Vercel tự nhận diện các API trong `api/*.ts` thành Serverless Functions.
-6. Sao chép Production Deployment URL, ví dụ `https://<project-name>.vercel.app`. Không tự đoán tên domain.
+6. Giữ cấu hình Function timeout 60 giây trong vercel.json; các lời gọi upstream Gemini có deadline 35 giây để chừa thời gian xác thực Firebase và kiểm tra quyền.
+7. Sao chép Production Deployment URL, ví dụ `https://<project-name>.vercel.app`. Không tự đoán tên domain.
 
 ## 2. Environment Variables trên Vercel
 

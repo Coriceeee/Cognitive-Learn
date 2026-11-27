@@ -448,7 +448,7 @@ async function callGemini(apiKey: string, model: string, context: ReturnType<typ
 
     },
 
-    45_000
+    35_000
 
   );
 

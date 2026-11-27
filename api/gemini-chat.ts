@@ -100,7 +100,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const response = await remoteJson(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`, {
       method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": key },
       body: JSON.stringify({ systemInstruction: { parts: [{ text: instruction }] }, contents, generationConfig: { temperature: 0.25, maxOutputTokens: 4096 } }),
-    }, 45000);
+    }, 35000);
     if (!response.ok) throw new ApiFault(response.status === 429 ? 429 : 502, response.status === 429 ? "Gemini đã đạt hạn mức; thử lại sau." : `Gemini chưa tạo được phản hồi (HTTP ${response.status}).`);
     const candidates = asRecord(response.payload)?.candidates;
     const candidate = Array.isArray(candidates) ? asRecord(candidates[0]) : null;

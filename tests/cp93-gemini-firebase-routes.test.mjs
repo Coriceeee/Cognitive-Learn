@@ -11,7 +11,7 @@ test("CP93 migration: Firebase stays Hosting-only and has no Gemini Functions re
   assert.deepEqual(hosting.hosting.rewrites.at(-1), { source: "**", destination: "/index.html" });
   assert.equal(vercel.framework, "vite");
   assert.equal(vercel.outputDirectory, "dist");
-  assert.equal(vercel.functions["api/*.ts"].maxDuration, 45);
+  assert.equal(vercel.functions["api/*.ts"].maxDuration, 60);
 });
 
 test("CP93 migration: Gemini endpoints and status are Vercel function files", () => {
