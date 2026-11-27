@@ -47,3 +47,21 @@
 :root:not([data-theme="dark"]) :is(.atlas-hero-card .atlas-flow strong,.orion-hero aside,.pulse-hero aside,.haven-hero aside) {color:#142941;}
 :root:not([data-theme="dark"]) :is(.orion-hero aside,.pulse-hero aside,.haven-hero aside) :is(h2,h3,strong) {color:#142941;}
 :root:not([data-theme="dark"]) :is(.orion-hero aside,.pulse-hero aside,.haven-hero aside) :is(p,small) {color:#405a72;}
+
+/* CP96: the daylight token changes --cla-hero to a pale surface. Keep the
+ * focused study-abroad hero paired with dark, WCAG-AA foreground colors;
+ * the legacy CP28 rule in 21-cla-design-system.css still marks its text white. */
+:root:not([data-theme="dark"]) .cla-study-abroad-page .cla-study-focused-hero {
+  background: linear-gradient(130deg, #eaf4ff 0%, #f9fbff 60%, #eaf9f5 100%) !important;
+  color: #142941 !important;
+  border: 1px solid #d7e6f8 !important;
+}
+:root:not([data-theme="dark"]) .cla-study-abroad-page .cla-study-focused-hero .cla-eyebrow {
+  color: #1e55a4 !important;
+}
+:root:not([data-theme="dark"]) .cla-study-abroad-page .cla-study-focused-hero h2 {
+  color: #142941 !important;
+}
+:root:not([data-theme="dark"]) .cla-study-abroad-page .cla-study-focused-hero p {
+  color: #405a72 !important;
+}
