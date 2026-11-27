@@ -181,6 +181,14 @@ test('07-13: delayed Firestore snapshot for a signed-out account cannot overwrit
       onSnapshot: (ref, options, cb) => { callbacks.set(ref, cb); return () => {}; },
     },
     '../../../lib/firebase': { auth: {}, db: {} },
+    '../services/realtimeReadPolicy': {
+      isServerConfirmedSnapshot: metadata => metadata?.fromCache === false && metadata?.hasPendingWrites === false,
+      isMatchingAccountRecord: (raw, uid) => Boolean(raw && raw.userId === uid),
+    },
+    '../services/legacyTranscriptPolicy': {
+      assessCanonicalTranscript: () => ({readable:true}),
+      assessLegacyTranscript: () => ({readable:true}),
+    },
     '../services/transcriptData': {
       buildTranscriptView: raw => ({ terms: [{ subjects: [{ provisional: raw.score }] }], marker: raw.marker }),
     },
