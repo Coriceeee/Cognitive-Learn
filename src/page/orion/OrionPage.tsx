@@ -14,6 +14,7 @@ import { readNumber, isBlankOrValid } from "../../lib/inputValidation";
 
 import { getLatestSubjectGrades } from "../seed/services/transcriptData";
 import { canPrefillFromVerifiedTranscript } from "../../lib/transcriptPrefillEligibility";
+import { buildOrionSubjectCatalog, getOrionSubjectKey } from "../../lib/orionSeedSubjectCatalog";
 import { useEffect, useLayoutEffect } from "react";
 import { useModuleDraft } from "../../lib/useModuleDraft";
 import { useMemo, useState } from "react";
@@ -31,14 +32,6 @@ import OrionDecisionWorkbench from "./OrionDecisionWorkbench";
 import ClosedLoopPanel from "../../components/journey/ClosedLoopPanel";
 
 type ScoreKey = string;
-const LEGACY_SUBJECT_KEYS: Readonly<Record<string, ScoreKey>> = {
-  "Toán": "math", "Ngữ văn": "literature", "Văn": "literature",
-  "Tiếng Anh": "english", "Anh": "english", "Vật lý": "physics", "Lý": "physics",
-  "Hóa học": "chemistry", "Hóa": "chemistry", "Sinh học": "biology", "Sinh": "biology",
-};
-function getOrionSubjectKey(subject: string): ScoreKey {
-  return LEGACY_SUBJECT_KEYS[subject] ?? `seed:${subject}`;
-}
 function getOrionSubjectImportance(label: string): number {
   if (label === "Toán" || label === "Tiếng Anh") return 1.2;
   if (label === "Vật lý" || label === "Hóa học") return 1.1;
@@ -80,11 +73,14 @@ export default function OrionPage() {
   const { draft: savedDraft, status: saveStatus, error: draftError, uid: draftOwnerUid, conflict: draftConflict, save: saveDraft, markEditing, acceptRemote } = useModuleDraft<{targetMajor:string;weeksLeft:string;scores:Record<ScoreKey,string>;targets:Record<ScoreKey,string>}>("orion");
   const verifiedProfile = useVerifiedStudentProfile();
   const transcript = verifiedProfile.transcript;
-  const transcriptOwnerMatches = Boolean(transcript.data && transcript.userId && transcript.userId === draftOwnerUid);
-  const activeSubjectLabels = useMemo<Record<ScoreKey, string>>(() => {
-    if (!transcriptOwnerMatches || transcript.status !== "ready" || !transcript.data) return {};
-    return Object.fromEntries(transcript.data.currentSubjects.map(subject => [getOrionSubjectKey(subject), subject]));
-  }, [transcriptOwnerMatches, transcript.status, transcript.data]);
+  // A server-verified empty transcript still carries the student's locked nine-subject curriculum.
+  // Show that catalog so the learner can set targets; score prefill remains gated to status="ready".
+  const activeSubjectLabels = useMemo<Record<ScoreKey, string>>(() => buildOrionSubjectCatalog({
+    draftOwnerUid,
+    transcriptOwnerUid: transcript.userId,
+    transcriptStatus: transcript.status,
+    currentSubjects: transcript.data?.currentSubjects ?? null,
+  }), [draftOwnerUid, transcript.userId, transcript.status, transcript.data]);
   const activeSubjectKeys = Object.keys(activeSubjectLabels);
   const [gapSubjects,setGapSubjects]=useState<ScoreKey[]>([]);
   const [gapTotal,setGapTotal]=useState("");

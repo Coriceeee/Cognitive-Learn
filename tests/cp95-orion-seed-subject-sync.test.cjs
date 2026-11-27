@@ -7,8 +7,11 @@ const curriculum=fs.readFileSync('src/page/seed/services/transcriptData.ts','utf
 const seedPage=fs.readFileSync('src/page/seed/StudentProfilePage.tsx','utf8');
 
 test('Orion derives its displayed subject list from the verified Seed transcript',()=>{
-  assert.match(page,/transcript\.data\.currentSubjects\.map\(subject => \[getOrionSubjectKey\(subject\), subject\]\)/);
-  assert.match(page,/transcript\.status !== "ready"/);
+  assert.match(page,/buildOrionSubjectCatalog\(\{/);
+  assert.match(page,/transcriptOwnerUid: transcript\.userId/);
+  assert.match(page,/transcriptStatus: transcript\.status/);
+  assert.match(page,/currentSubjects: transcript\.data\?\.currentSubjects \?\? null/);
+  assert.doesNotMatch(page,/transcript\.status !== "ready"/);
   assert.match(page,/activeSubjectKeys\.map/);
   assert.doesNotMatch(page,/const subjectLabels: Record<ScoreKey/);
   assert.doesNotMatch(page,/Orion hiện hỗ trợ sáu môn/);
@@ -16,9 +19,10 @@ test('Orion derives its displayed subject list from the verified Seed transcript
 });
 
 test('Orion keeps legacy draft keys while supporting Seed subjects outside the old six-subject list',()=>{
-  assert.match(page,/"Ngữ văn": "literature"/);
-  assert.match(page,/"Tiếng Anh": "english"/);
-  assert.match(page,/return LEGACY_SUBJECT_KEYS\[subject\] \?\? `seed:\$\{subject\}`/);
+  const catalog = fs.readFileSync("src/lib/orionSeedSubjectCatalog.ts","utf8");
+  assert.match(catalog,/"Ngữ văn": "literature"/);
+  assert.match(catalog,/"Tiếng Anh": "english"/);
+  assert.match(catalog,/return LEGACY_SUBJECT_KEYS\[subject\] \?\? `seed:\$\{subject\}`/);
   assert.match(page,/value=\{scores\[key\] \?\? ""\}/);
   assert.match(page,/value=\{targets\[key\] \?\? ""\}/);
 });

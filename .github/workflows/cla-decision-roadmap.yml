@@ -85,6 +85,8 @@ jobs:
         run: node --experimental-strip-types --test tests/cp42-national-pathways.test.mjs
       - name: P3 — Institution discovery and exact school crosswalk
         run: node --experimental-strip-types --test tests/cp42-institution-discovery.test.mjs
+      - name: CP97 — verified cross-module data lineage and empty Seed curriculum
+        run: npm run test:cp97:integration
       - name: TypeScript API and production build
         run: npm run build
       - name: Build isolated Firebase Gemini Functions
