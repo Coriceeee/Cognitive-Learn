@@ -71,7 +71,10 @@ function harness() {
     '../../../lib/firebase':{auth,db:{}},
     '../services/transcriptData':{buildTranscriptView:raw=>({terms:[{subjects:[{provisional:raw.score??null}]}],marker:raw.marker})},
     '../services/realtimeReadPolicy':policy,
-    '../services/legacyTranscriptPolicy':{assessLegacyTranscript:()=>({readable:true})},
+    '../services/legacyTranscriptPolicy':{
+      assessLegacyTranscript:()=>({readable:true}),
+      assessCanonicalTranscript:(raw,uid)=>({readable:raw.userId===uid && raw.marker!=="invalid"}),
+    },
   };
   const filename = path.join(root,'src/page/seed/hooks/useStudentTranscript.ts');
   const output=ts.transpileModule(fs.readFileSync(filename,'utf8'),{fileName:filename,compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
@@ -154,4 +157,15 @@ test('CP30-R10 storage status guard resets rows and rejects stale async results'
   assert.match(ui,/isCurrentAccountInspection/);
   assert.match(ui,/if \(!isCurrent\(\)\) return;/);
   assert.match(ui,/auth\.currentUser\?\.uid/);
+});
+
+test('CP30-R11 malformed canonical curriculum is rejected and never shown as verified',()=>{
+  const h=harness();h.authChanged(uidA);
+  const w=h.latest('student_transcripts:'+uidA);
+  h.emit(w,{userId:uidA,marker:'invalid',score:9});
+  assert.equal(h.values[0],null);
+  assert.equal(h.values[1],'error');
+  assert.match(h.values[2],/Bảng điểm chính thức/);
+  assert.equal(h.latest('learning_profiles:'+uidA),undefined);
+  h.cleanup();
 });
