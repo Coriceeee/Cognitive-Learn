@@ -2,7 +2,7 @@ import { Buffer } from "buffer";
 import process from "process";
 import { guardedJson, GeminiTransportError, visibleGeminiText } from "../server/geminiTransport.ts";
 import type { VercelRequest, VercelResponse } from "../server/vercelTypes.ts";
-import { allowGeminiOrigin } from "../server/geminiCors.ts";
+import { allowGeminiOrigin } from "../server/geminiCors.js";
 
 type ObjectRecord = Record<string, unknown>;
 
