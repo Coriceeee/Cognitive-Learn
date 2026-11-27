@@ -25,6 +25,10 @@ test('Orion keeps legacy draft keys while supporting Seed subjects outside the o
   assert.match(catalog,/return LEGACY_SUBJECT_KEYS\[subject\] \?\? `seed:\$\{subject\}`/);
   assert.match(page,/value=\{scores\[key\] \?\? ""\}/);
   assert.match(page,/value=\{targets\[key\] \?\? ""\}/);
+  assert.match(page,/readNumber\(scores\[key\] \?\? "", 0, 10\)/);
+  assert.match(page,/readNumber\(targets\[key\] \?\? "", 0, 10\)/);
+  const validation = fs.readFileSync("src/lib/inputValidation.ts", "utf8");
+  assert.match(validation,/typeof value !== "string" \|\| value\.trim\(\) === ""/);
 });
 
 test('Orion score prefill is mapped from Seed transcript subjects, not a fixed six-subject map',()=>{
