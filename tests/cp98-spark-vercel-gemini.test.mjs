@@ -87,7 +87,7 @@ test("CP98.05 status endpoint returns configuration flags only and never leaks s
 });
 
 test("CP98.06 all Gemini endpoints share CORS and retain Firebase authentication", () => {
-  for (const path of ["api/gemini-chat.ts", "api/gemini-lumen.ts", "api/gemini-admission-reader.ts", "api/cla-gemini-status.ts"]) assert.match(read(path), /allowGeminiOrigin\(/);
+  for (const path of ["api/gemini-chat.ts", "api/gemini-lumen.ts", "api/gemini-admission-reader.ts", "api/public-source-search.ts", "api/cla-gemini-status.ts"]) assert.match(read(path), /allowGeminiOrigin\(/);
   assert.match(read("api/gemini-chat.ts"), /authenticatedRole\(bearer\[1\], firebaseKey, project\)/);
   assert.match(read("api/gemini-lumen.ts"), /verifyFirebaseUser\(token, firebaseWebKey\)/);
   assert.match(read("api/gemini-admission-reader.ts"), /lookupFirebaseUser\(token, firebaseWebKey\)/);

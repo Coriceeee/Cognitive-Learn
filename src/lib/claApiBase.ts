@@ -10,7 +10,7 @@ export function resolveClaApiBaseUrl(input: ClaApiBaseInput): string {
   if (input.isDev && input.protocol === "http:" && isLoopback(hostname)) return "";
   const raw = (input.baseUrl ?? "").trim();
   if (!raw) {
-    if (FIREBASE_HOSTS.has(hostname)) throw new Error("Website Firebase chưa cấu hình VITE_API_BASE_URL trỏ đến backend Gemini Vercel.");
+    if (FIREBASE_HOSTS.has(hostname)) throw new Error("Website Firebase chưa cấu hình VITE_API_BASE_URL trỏ đến backend Vercel.");
     return "";
   }
   let url: URL;

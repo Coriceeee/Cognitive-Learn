@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from '../server/vercelTypes.ts';
+import { allowGeminiOrigin } from '../server/geminiCors.ts';
 import { parsePublicQuery, parsePublicCandidates, publicSearchText, PUBLIC_SEARCH_VERSION, safePublicUrl } from '../src/lib/publicSourceSearch.ts';
 import type { PublicQuery } from '../src/lib/publicSourceSearch.ts';
 import { parseNationalSourceQuery, nationalYearQueries, emptyNationalYears, NATIONAL_SOURCE_DISCOVERY_VERSION, type NationalSourceQuery, type NationalYearResult } from '../src/lib/nationalSourceDiscovery.ts';
@@ -59,12 +60,9 @@ export async function queryNationalProvider(q:NationalSourceQuery,config:Provide
   }));
 }
 export default async function handler(req:VercelRequest,res:VercelResponse) {
-  res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Vary','Origin');
-  res.setHeader('Access-Control-Allow-Methods','POST, OPTIONS');res.setHeader('Access-Control-Allow-Headers','Authorization, Content-Type');
-  const origin=req.headers.origin; const host=req.headers.host;
-  const allowed=typeof origin==='undefined'||(typeof origin==='string'&&(origin===`https://${host}`||(process.env.NODE_ENV!=='production'&&origin===`http://${host}`)||(process.env.CORS_ALLOWED_ORIGINS||'').split(',').map(x=>x.trim().replace(/\/$/,'')).includes(origin)));
+  res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');
+  const allowed=allowGeminiOrigin(req,res,"POST, OPTIONS");
   if (!allowed) return res.status(403).json({status:'FORBIDDEN'});
-  if (typeof origin==='string') res.setHeader('Access-Control-Allow-Origin',origin);
   if (req.method==='OPTIONS') return res.status(204).end();
   if (req.method!=='POST') return res.status(405).json({status:'METHOD_NOT_ALLOWED'});
   const config=providerConfig(process.env);
