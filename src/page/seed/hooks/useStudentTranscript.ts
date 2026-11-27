@@ -4,8 +4,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { doc, onSnapshot, type Unsubscribe } from "firebase/firestore";
 import { auth, db } from "../../../lib/firebase";
 import { buildTranscriptView, type TranscriptView } from "../services/transcriptData";
-import { isServerConfirmedSnapshot, isMatchingAccountRecord } from "../services/realtimeReadPolicy";
-import { assessLegacyTranscript } from "../services/legacyTranscriptPolicy";
+import { isServerConfirmedSnapshot } from "../services/realtimeReadPolicy";
+import { assessCanonicalTranscript, assessLegacyTranscript } from "../services/legacyTranscriptPolicy";
 
 type Status = "loading" | "syncing" | "signed-out" | "empty" | "ready" | "error";
 type Source = "student_transcripts" | "legacy" | null;
@@ -47,8 +47,12 @@ export function useStudentTranscript() {
         && auth.currentUser?.uid === uid;
       const show = (raw: Record<string, unknown>, origin: Exclude<Source, null>) => {
         if (!isCurrent()) return;
-        if (!isMatchingAccountRecord(raw, uid)) {
-          fail({ code: "invalid-owner" }); return;
+        const assessment = origin === "student_transcripts"
+          ? assessCanonicalTranscript(raw, uid)
+          : assessLegacyTranscript(raw, uid);
+        if (!assessment.readable) {
+          fail({ code: origin === "student_transcripts" ? "canonical-invalid" : "legacy-invalid" });
+          return;
         }
         const view = buildTranscriptView(raw);
         studentDecisionLedger.observe(uid,"transcript",JSON.stringify(view));
