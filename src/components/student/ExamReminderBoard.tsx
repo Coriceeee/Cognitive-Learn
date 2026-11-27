@@ -79,6 +79,26 @@ export default function ExamReminderBoard() {
     setNotice("");
   }
 
+  // Save every valid edit immediately so navigating away never discards a completed field.
+  // Invalid intermediate values stay in the editor and are not written over the last valid record.
+  function updateDraft(nextDraft: ExamReminder) {
+    setDraft(nextDraft);
+    if (!uid || auth.currentUser?.uid !== uid || blockedStorage || !isExamReminder(nextDraft)) return;
+    try {
+      const next = upsertExamReminder(events, nextDraft);
+      const data: ExamCalendarDocument = {schemaVersion: 1, userId: uid, events: next};
+      if (!isExamCalendarDocument(data, uid)) return;
+      const serialized = JSON.stringify(data);
+      if (window.localStorage.getItem(storageKey(uid)) === serialized) return;
+      window.localStorage.setItem(storageKey(uid), serialized);
+      window.dispatchEvent(new Event(EXAM_CALENDAR_UPDATED));
+      setEvents(next);
+      setNotice("Đã tự động lưu thay đổi trên trình duyệt này.");
+    } catch {
+      setNotice("Không thể tự lưu lịch thi. Hãy kiểm tra bộ nhớ trình duyệt và thử lại.");
+    }
+  }
+
   function saveDraft() {
     if (!draft) return;
     if (!isExamReminder(draft)) {
@@ -156,13 +176,13 @@ export default function ExamReminderBoard() {
               {safeExamUrl(item.sourceUrl) && <a href={safeExamUrl(item.sourceUrl)} target="_blank" rel="noopener noreferrer">Mở nguồn bạn lưu</a>}
             </div>
             {active && draft && <div className="cla-exam-editor">
-              <label>Tên đợt thi / tên kỳ thi<input aria-label={`Tên kỳ thi ${item.title}`} value={draft.title} maxLength={100} onChange={e => setDraft(prev => prev ? {...prev,title:e.target.value} : prev)} /></label>
-              <label>Ngày thi theo giấy báo / thông báo<input aria-label={`Ngày thi ${item.title}`} type="date" min="2020-01-01" max="2099-12-31" value={draft.examDate} onChange={e => setDraft(prev => prev ? {...prev,examDate:e.target.value} : prev)}/></label>
-              <label>Hạn đăng ký (nếu có)<input aria-label={`Hạn đăng ký ${item.title}`} type="date" min="2020-01-01" max="2099-12-31" value={draft.registrationDeadline} onChange={e => setDraft(prev => prev ? {...prev,registrationDeadline:e.target.value} : prev)}/></label>
-              <label>Link thông báo (HTTPS, nếu có)<input aria-label={`Nguồn ${item.title}`} type="url" placeholder="https://..." maxLength={600} value={draft.sourceUrl} onChange={e => setDraft(prev => prev ? {...prev,sourceUrl:e.target.value} : prev)}/></label>
-              <label className="cla-exam-done"><input type="checkbox" checked={draft.registrationDone} onChange={e => setDraft(prev => prev ? {...prev,registrationDone:e.target.checked} : prev)}/> Đã hoàn tất đăng ký kỳ thi này</label>
+              <label>Tên đợt thi / tên kỳ thi<input aria-label={`Tên kỳ thi ${item.title}`} value={draft.title} maxLength={100} onChange={e => updateDraft({...draft,title:e.target.value})} /></label>
+              <label>Ngày thi theo giấy báo / thông báo<input aria-label={`Ngày thi ${item.title}`} type="date" min="2020-01-01" max="2099-12-31" value={draft.examDate} onChange={e => updateDraft({...draft,examDate:e.target.value})}/></label>
+              <label>Hạn đăng ký (nếu có)<input aria-label={`Hạn đăng ký ${item.title}`} type="date" min="2020-01-01" max="2099-12-31" value={draft.registrationDeadline} onChange={e => updateDraft({...draft,registrationDeadline:e.target.value})}/></label>
+              <label>Link thông báo (HTTPS, nếu có)<input aria-label={`Nguồn ${item.title}`} type="url" placeholder="https://..." maxLength={600} value={draft.sourceUrl} onChange={e => updateDraft({...draft,sourceUrl:e.target.value})}/></label>
+              <label className="cla-exam-done"><input type="checkbox" checked={draft.registrationDone} onChange={e => updateDraft({...draft,registrationDone:e.target.checked})}/> Đã hoàn tất đăng ký kỳ thi này</label>
               <div className="cla-exam-editor-actions"><button type="button" onClick={saveDraft}>Lưu thay đổi</button><button type="button" className="cancel" onClick={() => {setEditId(null);setDraft(null);}}>Hủy</button></div>
-              <p className="cla-exam-help">Ngày và link do bạn nhập, chưa được CLA xác minh. Nếu thi nhiều đợt, hãy thêm nhiều lần cùng loại kỳ thi.</p>
+              <p className="cla-exam-help">Các thay đổi hợp lệ được tự động lưu trên trình duyệt này. Bạn vẫn có thể bấm “Lưu thay đổi” để hoàn tất chỉnh sửa. Ngày và link do bạn nhập, chưa được CLA xác minh. Nếu thi nhiều đợt, hãy thêm nhiều lần cùng loại kỳ thi.</p>
             </div>}
           </article>;
         })}
