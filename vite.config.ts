@@ -7,10 +7,11 @@ import { resolveLiveFirebaseDefines } from './tools/cla_vite_firebase_env.ts';
 // package.json still starts Vite without --mode live. QA Emulator use requires
 // the dedicated launcher (CLA_FIREBASE_QA=true), never a leftover VITE flag.
 export default defineConfig(({ command }) => {
-  const qaOptIn = process.env.CLA_FIREBASE_QA === 'true';
-  const liveEnv = command === 'serve' && !qaOptIn
-    ? loadEnv('live', process.cwd(), 'VITE_')
-    : {};
+  // QA emulator opt-in is valid only for the local dev server, never for a production build.
+  const qaOptIn = command === 'serve' && process.env.CLA_FIREBASE_QA === 'true';
+  // Load and validate the exact LIVE environment for both local serving and production builds.
+  // This prevents a wrong/missing project ID from being baked into Firebase Hosting assets.
+  const liveEnv = !qaOptIn ? loadEnv('live', process.cwd(), 'VITE_') : {};
   const firebaseDefines = resolveLiveFirebaseDefines(command, qaOptIn, liveEnv);
 
   return {
