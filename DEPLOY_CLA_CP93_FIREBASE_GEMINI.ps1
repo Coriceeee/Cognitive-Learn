@@ -19,4 +19,7 @@ Write-Host 'Function has been deployed. Firebase Hosting rewrite is not active u
 $answer2 = Read-Host 'After Functions deploy, type HOSTING-CP93 to publish Hosting rewrites + new frontend'
 if ($answer2 -cne 'HOSTING-CP93') { throw 'Hosting cancelled. Function is deployed, site unchanged.' }
 Run 'Deploy Firebase Hosting ONLY' @('deploy','--only','hosting','--project','cognitive-learn-ai')
-Write-Host 'Check https://cognitivelearn.ai.vn/api/cla-gemini-status then test real LUMEN/Gemini.'
+Write-Host '== Verify both production Gemini status endpoints =='
+& node tools\verify-cp93-production.mjs
+if ($LASTEXITCODE -ne 0) { throw 'Production Gemini smoke check failed. Hosting deploy ran, but Gemini is NOT ready.' }
+Write-Host 'Gemini status is configured on both Hosting domains. Test authenticated LUMEN/Gemini with a student account.'
