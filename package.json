@@ -231,7 +231,7 @@
     "test:advisor:personal-learning": "node --test tests/advisor-personal-learning.test.cjs",
     "test:cp88:projection-admissions": "node --experimental-strip-types --test tests/cp88-projection-admission-benchmarks.test.mjs",
     "dev:qa": "node tools/cla_vite_dev.mjs --qa",
-    "test:cp95:seed-subject-sync": "node --test tests/cp95-orion-seed-subject-sync.test.cjs"
+    "test:cp95:seed-subject-sync": "node --test tests/cp95-orion-seed-subject-sync.test.cjs && node --experimental-strip-types --test tests/cp95-seed-orion-runtime.test.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "6.0.2",
