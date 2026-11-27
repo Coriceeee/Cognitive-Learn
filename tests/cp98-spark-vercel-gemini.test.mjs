@@ -4,6 +4,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import statusHandler from "../api/cla-gemini-status.ts";
 import { allowGeminiOrigin } from "../server/geminiCors.ts";
 import { resolveClaApiBaseUrl } from "../src/lib/claApiBase.ts";
+import { resolveLiveFirebaseDefines } from "../tools/cla_vite_firebase_env.ts";
 const read = path => readFileSync(new URL("../" + path, import.meta.url), "utf8");
 const ORIGINS = ["https://cognitivelearn.ai.vn", "https://cognitive-learn-ai.web.app", "https://cognitive-learn-ai.firebaseapp.com"];
 function mockResponse() {
@@ -126,4 +127,25 @@ test("CP98.09 every deployed Vercel route imports shared request types from outs
     assert.doesNotMatch(source, /from ["']\.\/vercelTypes/);
     assert.match(source, /server\/vercelTypes/);
   }
+});
+
+
+test("CP98.10 production build embeds only the validated LIVE Firebase project", () => {
+  const env = {
+    VITE_FIREBASE_API_KEY: "AIzaSyAAAAAAAAAAAAAAAAAAAAAAAA",
+    VITE_FIREBASE_AUTH_DOMAIN: "cognitive-learn-ai.firebaseapp.com",
+    VITE_FIREBASE_PROJECT_ID: "cognitive-learn-ai",
+    VITE_FIREBASE_STORAGE_BUCKET: "cognitive-learn-ai.firebasestorage.app",
+    VITE_FIREBASE_MESSAGING_SENDER_ID: "203694464416",
+    VITE_FIREBASE_APP_ID: "1:203694464416:web:733b2758b2dfa0406418c5",
+  };
+  const defines = resolveLiveFirebaseDefines("build", false, env);
+  assert.equal(JSON.parse(defines["import.meta.env.VITE_FIREBASE_PROJECT_ID"]), "cognitive-learn-ai");
+  assert.equal(JSON.parse(defines["import.meta.env.VITE_FIREBASE_API_KEY"]), env.VITE_FIREBASE_API_KEY);
+  assert.equal(JSON.parse(defines["import.meta.env.VITE_USE_FIREBASE_EMULATORS"]), "false");
+  assert.throws(
+    () => resolveLiveFirebaseDefines("build", false, { ...env, VITE_FIREBASE_PROJECT_ID: "demo-cla-mvp" }),
+    /demo-cla-mvp.*cognitive-learn-ai/i,
+  );
+  assert.deepEqual(resolveLiveFirebaseDefines("serve", true, {}), {});
 });
