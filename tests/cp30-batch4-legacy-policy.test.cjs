@@ -20,7 +20,7 @@ function load(relative) {
   });
   return module.exports;
 }
-const {assessLegacyTranscript}=load('page/seed/services/legacyTranscriptPolicy.ts');
+const {assessLegacyTranscript,assessCanonicalTranscript}=load('page/seed/services/legacyTranscriptPolicy.ts');
 const uid='cp30_legacy_student_01';
 const electives=['Vật lý','Hóa học','Sinh học','Tin học'];
 const curriculum={program:'GDPT 2018',foreignLanguage:'Tiếng Anh',selectedElectives:electives,
@@ -83,4 +83,40 @@ test('LEG12 primary and legacy subscriptions remain owner/session/server scoped'
   assert.match(hook,/if \(!isCurrent\(\) \|\| capturedLegacyEpoch !== legacyEpoch\) return/);
   assert.match(hook,/\[retryGeneration\]/);
   assert.match(hook,/setRetryGeneration\(value => value \+ 1\)/);
+});
+
+const canonical=value=>assessCanonicalTranscript(value,uid);
+const canonicalRaw=()=>({...raw(),schemaVersion:1});
+test('CAN01 canonical transcript requires exact UID and schema version',()=>{
+  assert.equal(canonical(canonicalRaw()).readable,true);
+  for(const changes of [{userId:'another_student'},{userId:undefined},{schemaVersion:2},{schemaVersion:undefined}]){
+    assert.equal(canonical({...canonicalRaw(),...changes}).readable,false);
+  }
+});
+test('CAN02 canonical transcript rejects missing or forged nine-subject identity',()=>{
+  for(const bad of [null,{}, {...curriculum,selectedElectives:['Vật lý','Vật lý','Sinh học','Tin học']},
+    {...curriculum,program:'other'}, {...curriculum,gradedSubjects:['Toán'] }]){
+    const data=canonicalRaw();data.curriculum=bad;
+    assert.equal(canonical(data).readable,false);
+  }
+});
+test('CAN03 canonical transcript rejects foreign subjects, malformed rows and impossible scores',()=>{
+  const foreign=canonicalRaw();foreign.transcript.grade10.semester1['Môn lạ']={regular:['9'],midterm:'9',final:'9'};
+  assert.equal(canonical(foreign).readable,false);
+  for(const bad of [{regular:new Array(6).fill('1'),midterm:'1',final:'1'},
+    {regular:['11'],midterm:'1',final:'1'},{regular:['1'],midterm:[],final:''}]){
+    const data=canonicalRaw();data.transcript.grade10.semester1['Toán']=bad;
+    assert.equal(canonical(data).readable,false);
+  }
+});
+test('CAN04 canonical transcript accepts true zero and partial/missing observations',()=>{
+  const data=canonicalRaw();
+  data.transcript.grade10.semester1['Toán']={regular:[0,'8,5',''],midterm:null,final:undefined};
+  assert.equal(canonical(data).readable,true);
+});
+test('CAN05 primary canonical listener validates before building a verified view',()=>{
+  const source=fs.readFileSync(path.join(root,'page/seed/hooks/useStudentTranscript.ts'),'utf8');
+  assert.match(source,/assessCanonicalTranscript\(raw, uid\)/);
+  assert.match(source,/canonical-invalid/);
+  assert.match(source,/assessLegacyTranscript\(raw, uid\)/);
 });
