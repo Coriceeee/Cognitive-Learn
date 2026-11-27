@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
 import statusHandler from "../api/cla-gemini-status.ts";
-import { allowGeminiOrigin } from "../server/geminiCors.ts";
+import { allowGeminiOrigin } from "../server/geminiCors.js";
 import { resolveClaApiBaseUrl } from "../src/lib/claApiBase.ts";
 import { resolveLiveFirebaseDefines } from "../tools/cla_vite_firebase_env.ts";
 import { resolveLiveApiDefines } from "../tools/cla_vite_api_env.ts";
