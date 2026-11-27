@@ -90,7 +90,7 @@ test("CP98.06 all Gemini endpoints share CORS and retain Firebase authentication
   for (const path of ["api/gemini-chat.ts", "api/gemini-lumen.ts", "api/gemini-admission-reader.ts", "api/public-source-search.ts", "api/cla-gemini-status.ts"]) assert.match(read(path), /allowGeminiOrigin\(/);
   assert.match(read("api/gemini-chat.ts"), /authenticatedRole\(bearer\[1\], firebaseKey, project\)/);
   assert.match(read("api/gemini-lumen.ts"), /verifyFirebaseUser\(token, firebaseWebKey\)/);
-  assert.match(read("api/gemini-admission-reader.ts"), /lookupFirebaseUser\(token, firebaseWebKey\)/);
+  assert.match(read("api/gemini-admission-reader.ts"), /lookupFirebaseUser\(bearer\[1\], firebaseWebKey\)/);
   for (const path of ["api/gemini-chat.ts", "api/gemini-lumen.ts", "api/gemini-admission-reader.ts"]) {
     assert.match(read(path), /process\.env\.GEMINI_API_KEY/);
     assert.doesNotMatch(read(path), /VITE_GEMINI_API_KEY/);
