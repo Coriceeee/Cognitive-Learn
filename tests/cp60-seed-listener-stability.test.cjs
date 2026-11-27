@@ -25,7 +25,10 @@ function harness() {
     '../../../lib/firebase':{auth,db:{}},
     '../services/transcriptData':{buildTranscriptView:raw=>({terms:[{subjects:[{provisional:raw.score??null}]}],marker:raw.marker})},
     '../services/realtimeReadPolicy':policy,
-    '../services/legacyTranscriptPolicy':{assessLegacyTranscript:()=>({readable:true})},
+    '../services/legacyTranscriptPolicy':{
+      assessLegacyTranscript:()=>({readable:true}),
+      assessCanonicalTranscript:()=>({readable:true}),
+    },
   };
   const filename=path.join(root,'src/page/seed/hooks/useStudentTranscript.ts');
   const js=ts.transpileModule(fs.readFileSync(filename,'utf8'),{fileName:filename,
