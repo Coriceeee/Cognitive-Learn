@@ -396,7 +396,7 @@ export default function OrionPage() {
             </p>
           ) : (
             <p className="cla-transcript-hint" role="status">
-              Đang sử dụng {activeSubjectKeys.length} môn học từ hồ sơ SEED. Khi thay đổi môn học tại SEED, danh sách này sẽ tự cập nhật.
+              Đang sử dụng {activeSubjectKeys.length} môn học đã được xác minh từ hồ sơ SEED. Tổ hợp môn đã xác nhận sẽ được khóa sau lần lưu hồ sơ đầu tiên.
             </p>
           )}
           <div className="orion-score-table">
