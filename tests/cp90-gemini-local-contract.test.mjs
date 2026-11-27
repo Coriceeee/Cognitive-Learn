@@ -17,14 +17,17 @@ test('Vite serves the three existing Gemini APIs on localhost only',()=>{
   assert.doesNotMatch(src,/VITE_GEMINI_API_KEY/);
 });
 
-test('all three Gemini clients stay same-origin in loopback dev instead of external placeholder URL',()=>{
+test('all three Gemini clients share a resolver that keeps loopback development same-origin',()=>{
+  const helper=get('src/lib/geminiApiBase.ts');
   for (const rel of ['src/components/common/FloatingAdvisorChat.tsx','src/lib/geminiLumenClient.ts','src/lib/geminiAdmissionClient.ts']) {
     const src=get(rel);
-    assert.match(src,/import\.meta\.env\.DEV && typeof window !== "undefined"/);
-    assert.match(src,/window\.location\.hostname === "127\.0\.0\.1"/);
-    assert.match(src,/window\.location\.hostname === "localhost"/);
-    assert.match(src,/return "";/);
+    assert.match(src,/getGeminiApiBaseUrl\(\)/);
+    assert.doesNotMatch(src,/import\.meta\.env\.DEV && typeof window/);
   }
+  assert.match(helper,/input\.isDev && input\.protocol === "http:" && isLoopback\(hostname\)/);
+  assert.match(helper,/hostname === "127\.0\.0\.1"/);
+  assert.match(helper,/hostname === "localhost"/);
+  assert.match(helper,/return "";/);
 });
 
 test('local Gemini configuration does not become public in frontend and is ignored by git',()=>{
