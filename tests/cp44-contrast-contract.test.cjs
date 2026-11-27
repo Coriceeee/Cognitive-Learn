@@ -64,3 +64,18 @@ test('CP44: app cannot silently revert into incomplete dark skin', () => {
   assert.match(html, /r\.setAttribute\("data-theme", "light"\)/);
   assert.match(html, /name="color-scheme" content="light"/);
 });
+
+test('CP96: Atlas study-abroad daylight hero uses readable foreground colors on every gradient stop', () => {
+  const focused = read('src/styles/53-cla-focused-admission.css');
+  const entry = read('src/styles.css');
+  assert.match(entry, /53-cla-focused-admission\.css/);
+  assert.match(focused, /\.cla-study-abroad-page \.cla-study-focused-hero \{/);
+  assert.match(focused, /\.cla-study-focused-hero \.cla-eyebrow[\s\S]*?color: #1e55a4 !important/);
+  assert.match(focused, /\.cla-study-focused-hero h2[\s\S]*?color: #142941 !important/);
+  assert.match(focused, /\.cla-study-focused-hero p[\s\S]*?color: #405a72 !important/);
+  for (const bg of ['#eaf4ff', '#f9fbff', '#eaf9f5']) {
+    for (const fg of ['#142941', '#405a72', '#1e55a4']) {
+      assert.ok(ratio(fg, bg) >= 4.5, `Atlas hero contrast ${fg} on ${bg}: ${ratio(fg,bg).toFixed(2)}:1`);
+    }
+  }
+});
