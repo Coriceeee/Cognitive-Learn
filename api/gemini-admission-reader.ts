@@ -2,7 +2,7 @@ import { guardedJson, GeminiTransportError, visibleGeminiText } from "../server/
 import { resolve } from "node:path";
 import { config as loadEnv } from "dotenv";
 import type { VercelRequest, VercelResponse } from "../server/vercelTypes.ts";
-import { allowGeminiOrigin } from "../server/geminiCors.ts";
+import { allowGeminiOrigin } from "../server/geminiCors.js";
 
 loadEnv({ path: resolve(process.cwd(), ".env.local") });
 loadEnv({ path: resolve(process.cwd(), ".env") });
