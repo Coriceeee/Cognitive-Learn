@@ -118,7 +118,7 @@ test('08.19 previously established Seed and school-score safety gates remain unt
   assert.ok(ui.includes('loadSeedSchoolMarks(seedSnapshot)'));
   assert.ok(ui.includes('scoreBasis === "official_thpt_2026"'));
   assert.ok(ui.includes('setConfirmedGrade12Subjects([])'));
-  assert.match(ui,/useState<string>\("\"\?"\)/);
+  assert.ok(ui.includes('useState<string>("")'));
   assert.doesNotMatch(ui,/useState<string>\("D01"\)|setSelectedCombination\("D01"\)/);
   assert.match(ui,/scoreReport\.combinationOptions\.find\([\s\S]*?\) \?\? rankedCombinations\[0\]/);
 });
