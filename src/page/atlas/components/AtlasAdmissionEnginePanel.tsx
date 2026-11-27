@@ -192,7 +192,7 @@ export default function AtlasAdmissionEnginePanel({
     return advisorDecisionStore.register(advisorProjection);
   },[advisorProjection,transcript.userId,transcript.status,verifiedProfile.loading,verifiedProfile.syncing,scoreBasis,subjectScores]);
 
-  const [selectedCombination, setSelectedCombination] = useState<string>("D01");
+  const [selectedCombination, setSelectedCombination] = useState<string>("");
   const [showAllCombinations, setShowAllCombinations] = useState(false);
   const [confirmedGrade12Subjects, setConfirmedGrade12Subjects] = useState<ExamElective2026[]>([]);
   const [selectedExamPairId, setSelectedExamPairId] = useState("");
@@ -422,7 +422,7 @@ export default function AtlasAdmissionEnginePanel({
       ""
     );
     setScoreBasis("practice");
-    setSelectedCombination("D01");
+    setSelectedCombination("");
     setShowAllCombinations(false);
   }
 
