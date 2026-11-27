@@ -62,7 +62,7 @@
     "test:cp26:rebaseline": "python -m unittest discover -s tests_cp26 -v",
     "test:rules:v5:static": "node --test tests/cp21.rules.contract.test.cjs tests/firestore-security-gate.test.cjs tests/step10-student-consent.test.cjs tests/cp27-firestore-rules-v5.contract.test.cjs tests/orion-drafts-production-patch.contract.test.cjs",
     "test:orion-drafts:rules": "node --test tests/orion-drafts-production-patch.test.mjs",
-    "test:orion-drafts:emulator": "firebase emulators:exec --only firestore --project demo-cla-orion-draft-patch \"npm run test:orion-drafts:rules\"",
+    "test:orion-drafts:emulator": "npx --yes firebase-tools@latest emulators:exec --only firestore --project demo-cla-orion-draft-patch \"npm run test:orion-drafts:rules\"",
     "test:orion-drafts:patch-contract": "node --test tests/orion-drafts-production-patch.contract.test.cjs",
     "test:consent-share-revocation": "node --experimental-strip-types --test tests/step20-consent-share-revocation.test.mjs",
     "verify:cp28:static": "npm run test:rules:v5:static && npm run test:consent-share-revocation && python tools/build_cp28_backlog.py && npm run test:consent-server-cleanup",
