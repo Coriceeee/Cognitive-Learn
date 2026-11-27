@@ -201,7 +201,7 @@ export default function ExamReminderBoard() {
         try {window.localStorage.removeItem(storageKey(uid));window.dispatchEvent(new Event(EXAM_CALENDAR_UPDATED));setBlockedStorage(false);setNotice("Đã xóa bản lịch lỗi. Bạn có thể bắt đầu lại.");}
         catch {setNotice("Không thể xóa dữ liệu lỗi trên trình duyệt này.");}
       }}>Xóa lịch lỗi và bắt đầu lại</button>}
-      <p className="cla-exam-privacy">Lịch cá nhân V1 lưu riêng theo tài khoản <strong>trên trình duyệt này</strong>, chưa đồng bộ nhiều thiết bị. CLA chỉ nhắc khi bạn mở trang; <strong>chưa gửi push nền cho lịch thi</strong>. Ngày thi/hạn đăng ký có thể thay đổi theo đợt và địa điểm — đối chiếu thông báo chính thức trước khi đăng ký.</p>
+      <p className="cla-exam-privacy">Lịch cá nhân V1 tự động lưu riêng theo tài khoản <strong>trên trình duyệt này</strong>, chưa đồng bộ nhiều thiết bị. CLA chỉ nhắc khi bạn mở trang; <strong>chưa gửi push nền cho lịch thi</strong>. Ngày thi/hạn đăng ký có thể thay đổi theo đợt và địa điểm — đối chiếu thông báo chính thức trước khi đăng ký.</p>
     </>}
   </section>;
 }
