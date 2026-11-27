@@ -202,5 +202,5 @@ test("CP98.12 Vercel API routes load CORS from Node-native JavaScript ESM, not a
   assert.match(runtime, /export function allowGeminiOrigin/);
   assert.doesNotMatch(runtime, /import type|:\\s*Vercel(Request|Response)|\.ts["']/);
   assert.match(read("server/geminiCors.d.ts"), /allowGeminiOrigin/);
-  assert.match(read("server/geminiCors.ts"), /geminiCors\.js/);
+  assert.doesNotMatch(runtime, /:\s*boolean|:\s*string/);
 });
