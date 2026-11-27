@@ -26,6 +26,18 @@ const row=(subject,average,status='COMPLETE')=>({subject,average,provisional:sta
 test('detects Vietnamese improvement and subject-priority questions with or without accents',()=>{
   for(const q of ['Làm sao để tiến bộ hơn?','Em nên tập trung môn nào?','mon nao can cai thien','Tôi cần ưu tiên môn học nào?','Lập kế hoạch học tập cho em','Cho em lịch học tuần này'])assert.equal(isPersonalLearningAdviceQuestion(q),true);
   assert.equal(isPersonalLearningAdviceQuestion('Điểm chuẩn HUST 2026?'),false);
+  for(const q of [
+    'Em cần cải thiện điều gì?',
+    'Điểm mạnh của em là gì?',
+    'Em nên thay đổi cách học thế nào?',
+    'Đánh giá tình hình học tập của mình đi',
+    'Em đang tiến bộ không?',
+    'Tại sao kết quả học tập của em chưa tốt?',
+    'Mình cần làm gì để học tốt hơn?'
+  ]) assert.equal(isPersonalLearningAdviceQuestion(q),true,q);
+  for(const q of ['Em nên chọn ngành nào?','Em nên học trường nào?','Phương pháp Pomodoro là gì?']) {
+    assert.equal(isPersonalLearningAdviceQuestion(q),false,q);
+  }
 });
 
 test('routes explicit daily study-time increases into local learning advice and parses hours',()=>{
@@ -100,6 +112,31 @@ test('weekly hours and completion rate drive the actual schedule allocation',()=
   assert.match(answer,/động lực tự báo cáo là 30\/100/);
   assert.match(answer,/chiến lược học tập tự báo cáo là 35\/100/);
   assert.match(answer,/CNTT/);
+});
+
+test('question-aware answers use verified transcript data to identify strengths and improvement priorities',()=>{
+  const context=makeContext(makeState([row('Toán',5.8),row('Vật lý',6.2),row('Hóa học',8.7),row('Ngữ văn',8.1)]));
+  const improve=answerPersonalLearningAdvice(context,'student-A',{question:'Em cần cải thiện điều gì?'}).answer;
+  const strengths=answerPersonalLearningAdvice(context,'student-A',{question:'Điểm mạnh của em là gì?'}).answer;
+  const causes=answerPersonalLearningAdvice(context,'student-A',{question:'Tại sao kết quả học tập của em chưa tốt?'}).answer;
+  assert.match(improve,/ĐIỀU NÊN CẢI THIỆN TRƯỚC: Toán 5\.8\/10 · Vật lý 6\.2\/10/);
+  assert.match(strengths,/ĐIỂM MẠNH THEO BẢNG ĐIỂM: Hóa học 8\.7\/10 · Ngữ văn 8\.1\/10/);
+  assert.match(causes,/không tự chứng minh vì sao kết quả xảy ra/);
+});
+
+test('profile-only advice still uses verified Seed behavior when transcript is absent',()=>{
+  const context=makeContext(null,{
+    hasProfile:true,loading:false,syncing:false,
+    profile:{studyHoursPerWeek:8,practiceTestsPerWeek:1,planCompletionRate:35,motivationLevel:30,taskAbandonmentRate:60,contextSwitchRate:65,learningStrategy:40},
+    dynamicState:{scope:'student',behavior:{hours:8,practice:1,completion:35,motivation:30}}
+  });
+  const answer=answerPersonalLearningAdvice(context,'student-A',{question:'Em cần cải thiện điều gì?'}).answer;
+  assert.match(answer,/Tỷ lệ hoàn thành kế hoạch: 35%/);
+  assert.match(answer,/Tỷ lệ bỏ dở nhiệm vụ tự báo cáo: 60%/);
+  assert.match(answer,/Tần suất chuyển ngữ cảnh tự báo cáo: 65%/);
+  assert.match(answer,/chia nhiệm vụ thành phiên ngắn/);
+  assert.match(answer,/chưa có bảng điểm đã xác minh/);
+  assert.doesNotMatch(answer,/Toán: 5/);
 });
 
 test('daily study-time scenario reports the weekly increase without promising score gains',()=>{
@@ -182,6 +219,9 @@ test('chat reads optional verified context and handles personal advice locally b
   const provider=readFileSync(path.join(root,'src/page/seed/hooks/StudentProfileProvider.tsx'),'utf8');
   assert.match(chat,/useOptionalVerifiedStudentProfile/);
   assert.match(chat,/additionalDailyHours: additionalDailyStudyHours\(message\)/);
+  assert.match(chat,/question: message/);
+  assert.match(chat,/Trợ lý học tập, hướng nghiệp và tuyển sinh/);
+  assert.match(chat,/không gửi sang Gemini/);
   assert.match(chat,/answerPersonalLearningAdvice\(studentContext, uid/);
   const localAdviceIndex = chat.indexOf('answerPersonalLearningAdvice(studentContext');
   const remoteGeminiIndex = chat.indexOf('fetch(`${getClaApiBaseUrl()}/api/gemini-chat');
@@ -189,6 +229,10 @@ test('chat reads optional verified context and handles personal advice locally b
     "Personal learning advice must be answered locally before any remote Gemini request.");
   assert.match(provider,/useStudentTranscript\(\)/);
   assert.match(provider,/useOptionalVerifiedStudentProfile/);
+  const api=get('api/gemini-chat.ts');
+  assert.match(api,/trợ lý học tập và định hướng/);
+  assert.match(api,/không từ chối chỉ vì câu hỏi không nằm trong kho nguồn tuyển sinh/);
+  assert.match(api,/Request này không chứa học bạ hay dữ liệu hành vi/);
   const chatStyles=readFileSync(path.join(root,'src/styles/22-cla-chat-readability.css'),'utf8');
   assert.match(chatStyles,/white-space: pre-wrap/);
   assert.match(chat,/body: JSON\.stringify\(\{ version: 1, message, history: past, pageContext \}\)/);

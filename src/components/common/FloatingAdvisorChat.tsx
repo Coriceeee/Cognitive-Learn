@@ -47,7 +47,7 @@ export default function FloatingAdvisorChat() {
     // Personal learning guidance uses this account's server-confirmed transcript and observed profile.
     // Study capacity, cognitive proxies and temporal signals are used locally, never sent to Gemini.
     if (isPersonalLearningAdviceQuestion(message)) {
-      const local = answerPersonalLearningAdvice(studentContext, uid, { focusLowestSubject: isFocusLearningAdviceRequest(message), additionalDailyHours: additionalDailyStudyHours(message) ?? undefined });
+      const local = answerPersonalLearningAdvice(studentContext, uid, { focusLowestSubject: isFocusLearningAdviceRequest(message), additionalDailyHours: additionalDailyStudyHours(message) ?? undefined, question: message });
       setTurns(current => [...current, { role: "user", text: message, privateIntent: "learning" }, { role: "model", text: local.answer, destination: local.destination, linkLabel: local.linkLabel, privateIntent: "learning" }]);
       setQuestion(""); setNotice(""); return;
     }
@@ -56,7 +56,7 @@ export default function FloatingAdvisorChat() {
     const previousPrivate = turns[turns.length - 1]?.privateIntent;
     const privateFollowup = Boolean(previousPrivate && /^(vay|the|con|tiep|tai sao|vi sao|sao|neu|bao nhieu|lam sao|co nen|cu the|chi tiet|giai thich|them|tang)\b/i.test(message.normalize("NFD").replace(/[\u0300-\u036f]/g, "")));
     if (previousPrivate === "learning" && privateFollowup) {
-      const local = answerPersonalLearningAdvice(studentContext, uid, { focusLowestSubject: isFocusLearningAdviceRequest(message), additionalDailyHours: additionalDailyStudyHours(message) ?? undefined });
+      const local = answerPersonalLearningAdvice(studentContext, uid, { focusLowestSubject: isFocusLearningAdviceRequest(message), additionalDailyHours: additionalDailyStudyHours(message) ?? undefined, question: message });
       setTurns(current => [...current, { role: "user", text: message, privateIntent: "learning" }, { role: "model", text: local.answer, destination: local.destination, linkLabel: local.linkLabel, privateIntent: "learning" }]);
       setQuestion(""); setNotice(""); return;
     }
@@ -114,11 +114,11 @@ export default function FloatingAdvisorChat() {
     {open && <section id="cla-advisor-dialog" className="cla-chat-panel" role="dialog" aria-modal="false" aria-label="Trợ lý CLA — trò chuyện trực tiếp" onKeyDown={e => { if (e.key === "Escape") setOpen(false); }}>
       <header className="cla-chat-header">
         <img className="cla-chat-header-mascot" src={claChatMascot} alt="" aria-hidden="true" />
-        <div className="cla-chat-header-copy"><strong>CLA Assistant</strong><span>Trợ lý hướng nghiệp và tuyển sinh đại học</span><small>Đang ở: {pageContextLabel}</small></div>
+        <div className="cla-chat-header-copy"><strong>CLA Assistant</strong><span>Trợ lý học tập, hướng nghiệp và tuyển sinh</span><small>Đang ở: {pageContextLabel}</small></div>
         <button type="button" aria-label="Đóng trò chuyện" onClick={() => setOpen(false)}>×</button>
       </header>
       <div className="cla-chat-messages" role="log" aria-live="polite" aria-relevant="additions text">
-        <p className="cla-chat-intro">Hỏi về ngành học, tuyển sinh, môn nên ưu tiên hoặc kế hoạch học tập. CLA ưu tiên đối chiếu nguồn tuyển sinh chính thức; thông tin cần được kiểm tra theo năm và phương thức của từng trường. Dữ liệu học tập chỉ được dùng theo quyền của tài khoản đang đăng nhập; việc lập kế hoạch được xử lý trên máy, không gửi dữ liệu cá nhân sang Gemini. Bạn cũng có thể hỏi về kịch bản đã xác nhận tại Atlas/Orion.</p>
+        <p className="cla-chat-intro">Bạn có thể hỏi tự nhiên về điểm mạnh, điều cần cải thiện, phương pháp học, kế hoạch cá nhân, ngành học và tuyển sinh. Với câu hỏi cá nhân, CLA đối chiếu hồ sơ Seed đã xác minh; dữ liệu học tập được xử lý trên máy và không gửi sang Gemini. Kiến thức học tập thông thường được AI giải thích trực tiếp; thông tin tuyển sinh theo năm phải đối chiếu nguồn chính thức. Bạn cũng có thể hỏi về kịch bản đã xác nhận tại Atlas/Orion.</p>
         {(authenticated ? turns : []).map((turn, index) => <div key={index} className={`cla-chat-message ${turn.role === "user" ? "is-user" : "is-model"}`}><span>{turn.role === "user" ? "Bạn" : "CLA"}</span><p>{turn.text}</p>{turn.source && <a className="cla-chat-context-link" href={turn.source} target="_blank" rel="noopener noreferrer">Nguồn công bố chính thức ↗</a>}{turn.destination && <a className="cla-chat-context-link" href={turn.destination}>{turn.linkLabel || "Mở chức năng liên quan"} ↗</a>}</div>)}
         {loading && <p className="cla-chat-thinking" role="status">Đang tạo câu trả lời…</p>}
         <div ref={scrollAnchor} />

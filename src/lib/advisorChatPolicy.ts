@@ -104,9 +104,9 @@ export function advisorPageContextFromPath(pathname: string): AdvisorPageContext
 export function advisorSuggestionsFor(context: AdvisorPageContext): string[] {
   const suggestions: Record<AdvisorPageContext, string[]> = {
     general: ["Tôi nên chọn ngành học như thế nào?", "Điểm chuẩn là gì?", "Hướng dẫn sử dụng CLA"],
-    "student-dashboard": ["Lập kế hoạch học tập theo dữ liệu của tôi", "Tôi nên chọn ngành học như thế nào?", "Làm sao hoàn thiện hồ sơ?"],
-    "student-profile": ["Cách cập nhật mục tiêu học tập?", "Làm sao lưu hồ sơ?", "Tại sao dữ liệu chưa đồng bộ?"],
-    "student-transcript": ["Dựa vào bảng điểm, em nên ưu tiên môn nào?", "Lập kế hoạch học tập theo hồ sơ của tôi", "Cách nhập điểm theo học kỳ?"],
+    "student-dashboard": ["Em cần cải thiện điều gì?", "Lập kế hoạch học tập theo dữ liệu của tôi", "Tôi nên chọn ngành học như thế nào?"],
+    "student-profile": ["Điểm mạnh và điểm cần cải thiện của em?", "Cách cập nhật mục tiêu học tập?", "Tại sao dữ liệu chưa đồng bộ?"],
+    "student-transcript": ["Dựa vào bảng điểm, em nên ưu tiên môn nào?", "Điểm mạnh của em là gì?", "Em cần cải thiện điều gì?"],
     "student-storage": ["Trạng thái đồng bộ có ý nghĩa gì?", "Khi nào cần thử đồng bộ lại?", "Báo lỗi lưu dữ liệu ở đâu?"],
     "student-modules": ["Mỗi phân hệ dùng để làm gì?", "Tìm chức năng bảng điểm ở đâu?", "Phân hệ nào chứa kế hoạch học tập?"],
     lumen: ["SCI, MAS và CSL là gì?", "Xem lịch sử đo ở đâu?", "Vì sao chưa có phân tích?"],
