@@ -95,7 +95,7 @@ test('16 Reasoning engine recognizes only verified measured signal', () => {
 });
 test('17 Gemini endpoint is configured and not hardcoded to an unrelated deployment', () => {
   const source = fs.readFileSync('src/lib/geminiLumenClient.ts', 'utf8');
-  assert.match(source, /const API_BASE_URL = getGeminiApiBaseUrl\(\)/);
+  assert.match(source, /const API_BASE_URL = getClaApiBaseUrl\(\)/);
   assert.doesNotMatch(source, /https:\/\/cognitive-learn\.vercel\.app/);
   assert.match(source, /auth\.currentUser\?\.uid !== user\.uid/);
   assert.match(source, /signal\?\.aborted/);

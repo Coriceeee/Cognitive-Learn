@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
 import statusHandler from "../api/cla-gemini-status.ts";
 import { allowGeminiOrigin } from "../server/geminiCors.ts";
-import { resolveGeminiApiBaseUrl } from "../src/lib/geminiApiBase.ts";
+import { resolveClaApiBaseUrl } from "../src/lib/claApiBase.ts";
 const read = path => readFileSync(new URL("../" + path, import.meta.url), "utf8");
 const ORIGINS = ["https://cognitivelearn.ai.vn", "https://cognitive-learn-ai.web.app", "https://cognitive-learn-ai.firebaseapp.com"];
 function mockResponse() {
@@ -14,24 +14,24 @@ function mockResponse() {
 }
 
 test("CP98.01 Firebase Hosting resolves Gemini API to an approved HTTPS Vercel origin", () => {
-  assert.equal(resolveGeminiApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "https://cla-api-example.vercel.app" }), "https://cla-api-example.vercel.app");
-  assert.throws(() => resolveGeminiApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "" }), /VITE_API_BASE_URL/i);
-  assert.throws(() => resolveGeminiApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "http://cla-api-example.vercel.app" }), /HTTPS origin/);
-  assert.throws(() => resolveGeminiApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "https://attacker.example" }), /domain Vercel/);
-  assert.throws(() => resolveGeminiApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "https://cla-api-example.vercel.app/path" }), /không chứa đường dẫn/);
-  assert.throws(() => resolveGeminiApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "https://cla-api-example.vercel.app:8443" }), /HTTPS origin/);
+  assert.equal(resolveClaApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "https://cla-api-example.vercel.app" }), "https://cla-api-example.vercel.app");
+  assert.throws(() => resolveClaApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "" }), /VITE_API_BASE_URL/i);
+  assert.throws(() => resolveClaApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "http://cla-api-example.vercel.app" }), /HTTPS origin/);
+  assert.throws(() => resolveClaApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "https://attacker.example" }), /domain Vercel/);
+  assert.throws(() => resolveClaApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "https://cla-api-example.vercel.app/path" }), /không chứa đường dẫn/);
+  assert.throws(() => resolveClaApiBaseUrl({ hostname: "cognitivelearn.ai.vn", protocol: "https:", isDev: false, baseUrl: "https://cla-api-example.vercel.app:8443" }), /HTTPS origin/);
 });
 
 test("CP98.02 localhost never forwards Firebase ID tokens to a stale remote URL", () => {
-  assert.equal(resolveGeminiApiBaseUrl({ hostname: "localhost", protocol: "http:", isDev: true, baseUrl: "https://cla-api-example.vercel.app" }), "");
-  assert.equal(resolveGeminiApiBaseUrl({ hostname: "127.0.0.1", protocol: "http:", isDev: true, baseUrl: "" }), "");
+  assert.equal(resolveClaApiBaseUrl({ hostname: "localhost", protocol: "http:", isDev: true, baseUrl: "https://cla-api-example.vercel.app" }), "");
+  assert.equal(resolveClaApiBaseUrl({ hostname: "127.0.0.1", protocol: "http:", isDev: true, baseUrl: "" }), "");
 });
 
 test("CP98.03 Vercel-hosted SPA uses same-origin APIs and all Firebase clients share one resolver", () => {
-  assert.equal(resolveGeminiApiBaseUrl({ hostname: "cla-api-example.vercel.app", protocol: "https:", isDev: false, baseUrl: "" }), "");
-  for (const path of ["src/components/common/FloatingAdvisorChat.tsx", "src/lib/geminiLumenClient.ts", "src/lib/geminiAdmissionClient.ts"]) {
+  assert.equal(resolveClaApiBaseUrl({ hostname: "cla-api-example.vercel.app", protocol: "https:", isDev: false, baseUrl: "" }), "");
+  for (const path of ["src/components/common/FloatingAdvisorChat.tsx", "src/lib/geminiLumenClient.ts", "src/lib/geminiAdmissionClient.ts", "src/components/common/PublicSourceSearchPanel.tsx", "src/components/common/NationalSourceDiscoveryPanel.tsx"]) {
     const source = read(path);
-    assert.match(source, /getGeminiApiBaseUrl\(\)/);
+    assert.match(source, /getClaApiBaseUrl\(\)/);
     assert.doesNotMatch(source, /Cloud Functions Gemini|Firebase Functions Gemini/);
   }
 });

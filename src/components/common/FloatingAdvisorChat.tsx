@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { onAuthStateChanged, getIdToken } from "firebase/auth";
 import { auth } from "../../lib/firebase";
-import { getGeminiApiBaseUrl } from "../../lib/geminiApiBase";
+import { getClaApiBaseUrl } from "../../lib/claApiBase";
 import claChatMascot from "../../assets/cla-chat-mascot.webp";
 import { ADVISOR_PAGE_CONTEXTS, advisorPageContextFromPath, advisorSuggestionsFor, normaliseAdvisorHistory, prepareAdvisorMessage, routeAdvisorQuestion, safeAdvisorDestination, type AdvisorTurn, type AdvisorRoute } from "../../lib/advisorChatPolicy";
 
@@ -92,7 +92,7 @@ export default function FloatingAdvisorChat() {
       if (!user || user.uid !== uid || !isCurrent()) throw new Error("Phiên đăng nhập đã hết hạn.");
       const token = await getIdToken(user);
       if (!isCurrent()) return;
-      const response = await fetch(`${getGeminiApiBaseUrl()}/api/gemini-chat`, {
+      const response = await fetch(`${getClaApiBaseUrl()}/api/gemini-chat`, {
         method: "POST", signal: controller.signal,
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ version: 1, message, history: past, pageContext }),

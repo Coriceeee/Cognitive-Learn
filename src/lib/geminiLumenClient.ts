@@ -1,7 +1,7 @@
 
 import { getIdToken } from "firebase/auth";
 import { auth } from "./firebase";
-import { getGeminiApiBaseUrl } from "./geminiApiBase";
+import { getClaApiBaseUrl } from "./claApiBase";
 import type { AIReasoningResult, AIStudentContext } from "../engines/ai/aiTypes";
 
 export type GeminiLumenExplanation = {
@@ -126,7 +126,7 @@ export async function requestGeminiLumenExplanation(
   const user = auth.currentUser;
   if (!user) throw new Error("Bạn cần đăng nhập để dùng Gemini Lumen.");
   const body = buildGeminiLumenRequest(context, reasoning);
-  const API_BASE_URL = getGeminiApiBaseUrl();
+  const API_BASE_URL = getClaApiBaseUrl();
   const token = await getIdToken(user);
   if (signal?.aborted) throw new DOMException("Yêu cầu đã bị hủy.", "AbortError");
   if (auth.currentUser?.uid !== user.uid) {

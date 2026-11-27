@@ -18,10 +18,10 @@ test('Vite serves the three existing Gemini APIs on localhost only',()=>{
 });
 
 test('all three Gemini clients share a resolver that keeps loopback development same-origin',()=>{
-  const helper=get('src/lib/geminiApiBase.ts');
-  for (const rel of ['src/components/common/FloatingAdvisorChat.tsx','src/lib/geminiLumenClient.ts','src/lib/geminiAdmissionClient.ts']) {
+  const helper=get('src/lib/claApiBase.ts');
+  for (const rel of ['src/components/common/FloatingAdvisorChat.tsx','src/components/common/PublicSourceSearchPanel.tsx','src/components/common/NationalSourceDiscoveryPanel.tsx','src/lib/geminiLumenClient.ts','src/lib/geminiAdmissionClient.ts']) {
     const src=get(rel);
-    assert.match(src,/getGeminiApiBaseUrl\(\)/);
+    assert.match(src,/getClaApiBaseUrl\(\)/);
     assert.doesNotMatch(src,/import\.meta\.env\.DEV && typeof window/);
   }
   assert.match(helper,/input\.isDev && input\.protocol === "http:" && isLoopback\(hostname\)/);

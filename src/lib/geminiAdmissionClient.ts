@@ -1,6 +1,6 @@
 import { getIdToken } from "firebase/auth";
 import { auth } from "./firebase";
-import { getGeminiApiBaseUrl } from "./geminiApiBase";
+import { getClaApiBaseUrl } from "./claApiBase";
 export type GeminiAdmissionProgramDraft = {
   majorName?: string;
   majorCode?: string;
@@ -74,7 +74,7 @@ export async function extractAdmissionData(
   const user = auth.currentUser;
   if (!user) throw new Error("Bạn cần đăng nhập để dùng Gemini tuyển sinh.");
   const token = await getIdToken(user);
-  const response = await fetch(`${getGeminiApiBaseUrl()}/api/gemini-admission-reader`, {
+  const response = await fetch(`${getClaApiBaseUrl()}/api/gemini-admission-reader`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

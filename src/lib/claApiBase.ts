@@ -1,10 +1,10 @@
-/** Resolve the only approved Gemini API destination. */
-export type GeminiApiBaseInput = Readonly<{ hostname: string; protocol: string; isDev: boolean; baseUrl?: string }>; 
+/** Resolve the only approved CLA API destination. */
+export type ClaApiBaseInput = Readonly<{ hostname: string; protocol: string; isDev: boolean; baseUrl?: string }>; 
 const FIREBASE_HOSTS = new Set(["cognitivelearn.ai.vn", "cognitive-learn-ai.web.app", "cognitive-learn-ai.firebaseapp.com"]);
 const isLoopback = (hostname: string) => hostname === "localhost" || hostname === "127.0.0.1";
 const approvedApiHost = (hostname: string) => hostname === "api.cognitivelearn.ai.vn" || hostname.endsWith(".vercel.app");
 
-export function resolveGeminiApiBaseUrl(input: GeminiApiBaseInput): string {
+export function resolveClaApiBaseUrl(input: ClaApiBaseInput): string {
   const hostname = input.hostname.toLowerCase();
   // Never forward local Firebase ID tokens to a remote API because of stale env values.
   if (input.isDev && input.protocol === "http:" && isLoopback(hostname)) return "";
@@ -22,7 +22,7 @@ export function resolveGeminiApiBaseUrl(input: GeminiApiBaseInput): string {
   return url.origin;
 }
 
-export function getGeminiApiBaseUrl(): string {
+export function getClaApiBaseUrl(): string {
   const location = typeof window !== "undefined" ? window.location : null;
-  return resolveGeminiApiBaseUrl({ hostname: location?.hostname ?? "", protocol: location?.protocol ?? "", isDev: import.meta.env.DEV, baseUrl: import.meta.env.VITE_API_BASE_URL });
+  return resolveClaApiBaseUrl({ hostname: location?.hostname ?? "", protocol: location?.protocol ?? "", isDev: import.meta.env.DEV, baseUrl: import.meta.env.VITE_API_BASE_URL });
 }

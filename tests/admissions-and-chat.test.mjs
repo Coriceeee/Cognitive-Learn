@@ -99,10 +99,10 @@ test("CP25-12: Chat supports same-origin secure deployment and optional CORS ori
   const server = readFileSync(new URL("../api/gemini-chat.ts", import.meta.url), "utf8");
   const cors = readFileSync(new URL("../server/geminiCors.ts", import.meta.url), "utf8");
   const client = readFileSync(new URL("../src/components/common/FloatingAdvisorChat.tsx", import.meta.url), "utf8");
-  const resolver = readFileSync(new URL("../src/lib/geminiApiBase.ts", import.meta.url), "utf8");
+  const resolver = readFileSync(new URL("../src/lib/claApiBase.ts", import.meta.url), "utf8");
   assert.ok(cors.includes("const sameOrigin ="));
   assert.ok(cors.includes("CORS_ALLOWED_ORIGINS"));
-  assert.ok(client.includes("getGeminiApiBaseUrl()"));
+  assert.ok(client.includes("getClaApiBaseUrl()"));
   assert.ok(resolver.includes("resolveGeminiApiBaseUrl"));
   assert.ok(!client.includes("Chưa cấu hình VITE_API_BASE_URL"));
 });

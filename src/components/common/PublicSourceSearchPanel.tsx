@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { getClaApiBaseUrl } from "../../lib/claApiBase";
 import { getIdToken } from 'firebase/auth';
 import { auth } from '../../lib/firebase';
 import { externalSourceSearch, parsePublicCandidates, parsePublicQuery, PUBLIC_TOPICS, type PublicCandidate, type PublicTopic, type PublicQuery } from '../../lib/publicSourceSearch';
@@ -13,17 +14,13 @@ function relevantSources(q:PublicQuery) {
   if(q.topic==='study')return internationalRoutes.filter(r=>match(r.country)||match(r.isoCode)||r.targetInstitutions.some(t=>match(t.name))).flatMap(r=>[{title:r.sourceLabel,url:r.governmentSource},...r.targetInstitutions.map(t=>({title:t.name,url:t.admissionsUrl}))]).slice(0,8);
   return officialScholarships.filter(s=>match(s.name)||match(s.provider)||match(s.country)||match(s.countryCode)).map(s=>({title:s.name,url:s.sourceUrl})).slice(0,8);
 }
-function apiBase() {
-  const base=(import.meta.env.VITE_API_BASE_URL||'').trim().replace(/\/+$/,'');
-  if ((!base&&import.meta.env.PROD)||(base&&!/^https:\/\/[^/?#]+$/i.test(base)))throw new Error('API chưa cấu hình.');return base;
-}
 export default function PublicSourceSearchPanel({topic}:{topic:PublicTopic}) {
   const [subject,setSubject]=useState(''); const [year,setYear]=useState(String(new Date().getFullYear()));const [confirmed,setConfirmed]=useState(false);
   const [submitted,setSubmitted]=useState<PublicQuery|null>(null); const [results,setResults]=useState<PublicCandidate[]>([]);const [notice,setNotice]=useState('');const [busy,setBusy]=useState(false);
   const q=parsePublicQuery({version:1,topic,subject,year:year?Number(year):null,confirmedPublic:confirmed});
   async function search(){if(!q||busy)return;setBusy(true);setSubmitted(q);setResults([]);setNotice('Đang tìm nguồn công khai…');try{
     const user=auth.currentUser;if(!user)throw new Error('Yêu cầu đăng nhập.');const token=await getIdToken(user);
-    const res=await fetch(`${apiBase()}/api/public-source-search`,{method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${token}`},body:JSON.stringify(q),cache:'no-store',signal:AbortSignal.timeout(45000)});
+    const res=await fetch(`${getClaApiBaseUrl()}/api/public-source-search`,{method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${token}`},body:JSON.stringify(q),cache:'no-store',signal:AbortSignal.timeout(45000)});
     if(!res.ok)throw new Error('Dịch vụ không khả dụng.');const payload=await res.json();const items=parsePublicCandidates(payload);setResults(items);
     setNotice(items.length?'Nguồn ứng viên — cần mở tài liệu gốc để xác minh.':payload.status==='PROVIDER_NOT_CONFIGURED'?'Nhà cung cấp AI chưa được cấu hình/phê duyệt. Dùng liên kết chính thức hoặc tìm kiếm trực tiếp bên dưới.':'Chưa tìm được nguồn qua nhà cung cấp. Hãy thử mở nguồn trực tiếp.');
   }catch{setNotice('Không thể truy xuất qua AI. Bạn vẫn có thể mở nguồn trực tiếp bên dưới.');}finally{setBusy(false);}}
