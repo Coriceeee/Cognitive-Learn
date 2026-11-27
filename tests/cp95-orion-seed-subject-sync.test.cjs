@@ -35,3 +35,10 @@ test('Seed locks the chosen four electives and foreign language after the first 
   assert.match(seedPage,/setLockedElectives\(\[\.\.\.selectedElectives\]\)/);
   assert.match(seedPage,/setLockedForeignLanguage\(profile\.foreignLanguage\)/);
 });
+
+test("Orion explains the one-time locked Seed curriculum without implying users can change it", () => {
+  const page = fs.readFileSync("src/page/orion/OrionPage.tsx", "utf8");
+  assert.match(page, /môn học đã được xác minh từ hồ sơ SEED/);
+  assert.match(page, /Tổ hợp môn đã xác nhận sẽ được khóa sau lần lưu hồ sơ đầu tiên/);
+  assert.doesNotMatch(page, /Khi thay đổi môn học tại SEED, danh sách này sẽ tự cập nhật/);
+});
