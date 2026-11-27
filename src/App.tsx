@@ -95,6 +95,9 @@ export default function App() {
   }));
   const path = routeSnapshot.path;
   const previousRouteHref = useRef<string | null>(null);
+  const previousRoutePath = useRef<string | null>(null);
+  const routeViewRef = useRef<HTMLDivElement>(null);
+  const routeAnimationRef = useRef<Animation | null>(null);
   const [routePending, startRouteTransition] = useTransition();
   useEffect(() => subscribeNavigation(() => {
     startRouteTransition(() => setRouteSnapshot({
@@ -114,8 +117,25 @@ export default function App() {
   }, [path]);
   useLayoutEffect(() => {
     const previous = previousRouteHref.current;
+    const previousPath = previousRoutePath.current;
     previousRouteHref.current = routeSnapshot.href;
+    previousRoutePath.current = path;
     const experience = planRouteExperience(previous, routeSnapshot.href, routeSnapshot.kind);
+    // Animate only a committed pathname change. The frame is stable, so
+    // route components and the shared auth/profile providers are not remounted.
+    if (previousPath && previousPath !== path) {
+      routeAnimationRef.current?.cancel();
+      const view = routeViewRef.current;
+      if (view && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        routeAnimationRef.current = view.animate(
+          [
+            { opacity: 0.84, transform: 'translateY(6px)' },
+            { opacity: 1, transform: 'translateY(0)' },
+          ],
+          { duration: 180, easing: 'cubic-bezier(0.22, 0.61, 0.36, 1)' },
+        );
+      }
+    }
     document.title = `${getRouteDisplayTitle(path)} | Cognitive Learn AI`;
     if (experience.scroll === 'top') window.scrollTo({top: 0, behavior: 'instant'});
     // React has committed the new route before this effect. Wait a frame for
@@ -210,6 +230,8 @@ export default function App() {
     currentPage = <NotFoundPage />;
   }
 
+  const routeView = <div ref={routeViewRef} className="cla-route-view" data-cla-route-view={path}>{currentPage}</div>;
+
   return (
     <div className="app-root">
       <a className="cla-skip-to-content" href="#cla-page-content">Bỏ qua điều hướng, đến nội dung</a>
@@ -222,22 +244,22 @@ export default function App() {
           <AppLoading />
         }
       >
-        <RouteErrorBoundary key={path} route={path}>
+        <RouteErrorBoundary route={path}>
         <div className="app-content" id="cla-page-content" tabIndex={-1} data-cla-route={path}>
           {path === "/" || path === "/about" || path === "/contact" || notFound ? (
-            currentPage
+            routeView
           ) : (
             <AccessGate path={path}>
               {path === "/student/consent" || path.startsWith("/admin") ? (
                 <>
                   <AppNotificationCenter />
-                  {currentPage}
+                  {routeView}
                   {path !== "/student/consent" && <FloatingAdvisorChat />}
                 </>
               ) : (
                 <StudentProfileProvider>
                   <AppNotificationCenter />
-                  {currentPage}
+                  {routeView}
                   <FloatingAdvisorChat />
                 </StudentProfileProvider>
               )}
