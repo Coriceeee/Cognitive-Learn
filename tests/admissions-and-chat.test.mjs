@@ -83,7 +83,7 @@ test("CP25-10: UI routes and protected chat endpoint exist", () => {
   const chat = readFileSync(new URL("../api/gemini-chat.ts", import.meta.url), "utf8");
   assert.ok(app.includes('path === "/atlas/study-abroad" || path.startsWith("/atlas/study-abroad/") || path === "/study-abroad" || path === "/haven/study-abroad"'));
   assert.ok(app.includes("<FloatingAdvisorChat"));
-  const cors = readFileSync(new URL("../server/geminiCors.ts", import.meta.url), "utf8");
+  const cors = readFileSync(new URL("../server/geminiCors.js", import.meta.url), "utf8");
   assert.ok(chat.includes("authenticatedRole(") && chat.includes("active !== true"));
   assert.ok(cors.includes("CORS_ALLOWED_ORIGINS"));
 });
@@ -97,7 +97,7 @@ test("CP25-11: Study-abroad refresh uses Vercel SPA rewrite, preserving /api rou
 });
 test("CP25-12: Chat supports same-origin secure deployment and optional CORS origin list", () => {
   const server = readFileSync(new URL("../api/gemini-chat.ts", import.meta.url), "utf8");
-  const cors = readFileSync(new URL("../server/geminiCors.ts", import.meta.url), "utf8");
+  const cors = readFileSync(new URL("../server/geminiCors.js", import.meta.url), "utf8");
   const client = readFileSync(new URL("../src/components/common/FloatingAdvisorChat.tsx", import.meta.url), "utf8");
   const resolver = readFileSync(new URL("../src/lib/claApiBase.ts", import.meta.url), "utf8");
   assert.ok(cors.includes("const sameOrigin ="));
