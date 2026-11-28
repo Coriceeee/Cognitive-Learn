@@ -7,13 +7,39 @@ import { createDraftWriteQueue } from "./serializedDraftWrites";
 import { isLeavingDraftWorkspace, registerNavigationGuard } from "./draftNavigationGuard";
 import { assertDraftRefreshUninterrupted, currentDraftListener } from "./draftAsyncGuards";
 import { assertDraftUnchanged, draftPayloadSignature, draftVersion, DraftConflictError, type DraftVersion } from "./draftRevision";
+import { canUseLocalOrionDraftFallback, readLocalOrionDraft, writeLocalOrionDraft, type LocalOrionDraftRecord } from "./localOrionDraftStore";
 
 export type ModuleDraftName = "orion" | "pulse" | "haven";
-type DraftStatus = "loading" | "syncing" | "empty" | "ready" | "signed-out" | "error";
+type DraftStatus = "loading" | "syncing" | "empty" | "ready" | "local" | "signed-out" | "error";
 const collections: Record<ModuleDraftName, string> = {
   orion: "orion_drafts", pulse: "pulse_drafts", haven: "haven_drafts",
 };
 const noDocument: DraftVersion = { exists: false, revision: 0, signature: "" };
+
+function localDraftVersion(record: LocalOrionDraftRecord | null): DraftVersion {
+  if (!record) return noDocument;
+  const signature = draftPayloadSignature(record.data);
+  return { exists: true, revision: record.revision, signature, payloadSignature: signature };
+}
+
+async function hasLocalOrionFallbackConsent(uid: string): Promise<boolean> {
+  try {
+    const account = await getDocFromServer(doc(db, "users", uid));
+    if (!account.exists()) return false;
+    const accountData = account.data();
+    if (accountData.active !== true) return false;
+    if (accountData.role === "admin") return true;
+    if (accountData.role !== "student") return false;
+    const consent = await getDocFromServer(doc(db, "student_consents", uid));
+    if (!consent.exists()) return false;
+    const consentData = consent.data();
+    return consentData.userId === uid
+      && consentData.productAccepted === true
+      && consentData.noticeVersion === "cla-student-privacy-v1";
+  } catch {
+    return false;
+  }
+}
 
 export function useModuleDraft<T extends Record<string, unknown>>(moduleName: ModuleDraftName) {
   const [draft, setDraft] = useState<T | null>(null);
@@ -30,6 +56,7 @@ export function useModuleDraft<T extends Record<string, unknown>>(moduleName: Mo
   const session = useRef(0);
   const observerEpoch = useRef(0);
   const conflictRef = useRef(false);
+  const localOnly = useRef(false);
 
   // CP56: a 700ms Orion autosave timer (or manual Pulse/Haven edits) can be
   // interrupted by immediate SPA navigation. Never silently discard changes.
@@ -76,6 +103,7 @@ export function useModuleDraft<T extends Record<string, unknown>>(moduleName: Mo
         user?.uid ?? "", listenerEpoch, auth.currentUser?.uid, observerEpoch.current, mounted,
       );
       editing.current = false;
+      localOnly.current = false;
       editGeneration.current = 0;
       conflictRef.current = false;
       setConflict(false);
@@ -112,6 +140,40 @@ export function useModuleDraft<T extends Record<string, unknown>>(moduleName: Mo
       const fail = (err: { code?: string }) => {
         if (!currentListener()) return;
         stopLegacyListener();
+        if (err.code === "permission-denied" && moduleName === "orion" && canUseLocalOrionDraftFallback()) {
+          void (async () => {
+            const allowed = await hasLocalOrionFallbackConsent(user.uid);
+            if (!allowed || !currentListener()) return false;
+            const local = await readLocalOrionDraft<T>(user.uid);
+            if (!currentListener()) return false;
+            localOnly.current = true;
+            const value = local?.data ?? null;
+            const version = localDraftVersion(local);
+            latestVersion.current = version;
+            latestRemote.current = value;
+            baseline.current = version;
+            if (local && editing.current) {
+              conflictRef.current = true;
+              setConflict(true);
+            } else if (!editing.current) {
+              setDraft(value);
+            }
+            setStatus("local");
+            setError("");
+            return true;
+          })().then(activated => {
+            if (activated || !currentListener()) return;
+            if (!editing.current) setDraft(null);
+            setStatus("error");
+            setError("Firestore đang từ chối quyền Orion. Chế độ lưu local chỉ bật khi tài khoản còn hoạt động và đã chấp nhận điều khoản sản phẩm.");
+          }).catch(() => {
+            if (!currentListener()) return;
+            if (!editing.current) setDraft(null);
+            setStatus("error");
+            setError("Không mở được kho Orion cục bộ. Hãy bật IndexedDB hoặc dùng trình duyệt hiện đại.");
+          });
+          return;
+        }
         if (!editing.current) setDraft(null);
         setStatus("error");
         setError(err.code === "permission-denied"
@@ -178,6 +240,29 @@ export function useModuleDraft<T extends Record<string, unknown>>(moduleName: Mo
         throw new Error("Phiên đã thay đổi trước khi tải bản nháp.");
       }
       assertDraftRefreshUninterrupted(requestEdits, editGeneration.current);
+      if (localOnly.current) {
+        const allowed = await hasLocalOrionFallbackConsent(ownerUid);
+        if (!allowed) throw new Error("Không còn quyền đồng ý hoặc tài khoản hoạt động để đọc bản nháp local.");
+        const local = await readLocalOrionDraft<T>(ownerUid);
+        if (auth.currentUser?.uid !== ownerUid || requestSession !== session.current) {
+          throw new Error("Phiên đã thay đổi trong khi tải bản nháp cục bộ.");
+        }
+        assertDraftRefreshUninterrupted(requestEdits, editGeneration.current);
+        const value = local?.data ?? null;
+        const version = localDraftVersion(local);
+        session.current += 1;
+        editing.current = false;
+        conflictRef.current = false;
+        setConflict(false);
+        latestRemote.current = value;
+        latestVersion.current = version;
+        baseline.current = version;
+        setDraft(value ? { ...value } : null);
+        setStatus("local");
+        setError("");
+        return value;
+      }
+
       const current = await getDocFromServer(doc(db, collections[moduleName], ownerUid));
       let value: T | null = null;
       let version = noDocument;
@@ -214,7 +299,7 @@ export function useModuleDraft<T extends Record<string, unknown>>(moduleName: Mo
   }
 
   async function save(value: T): Promise<void> {
-    if (!uid || auth.currentUser?.uid !== uid || (status !== "ready" && status !== "empty")) {
+    if (!uid || auth.currentUser?.uid !== uid || (status !== "ready" && status !== "empty" && status !== "local")) {
       throw new Error("Chưa xác minh được tài khoản hoặc dữ liệu hiện tại. Không ghi đè bản nháp.");
     }
     if (conflictRef.current) throw new DraftConflictError();
@@ -229,6 +314,23 @@ export function useModuleDraft<T extends Record<string, unknown>>(moduleName: Mo
         throw new Error("Phiên dữ liệu đã thay đổi; thao tác ghi bị hủy.");
       }
       if (conflictRef.current) throw new DraftConflictError();
+      if (localOnly.current) {
+        const allowed = await hasLocalOrionFallbackConsent(ownerUid);
+        if (!allowed) throw new Error("Không còn quyền đồng ý hoặc tài khoản hoạt động để lưu bản nháp local.");
+        const local = await writeLocalOrionDraft(ownerUid, value, baseline.current.revision);
+        if (auth.currentUser?.uid !== ownerUid || session.current !== queuedSession) return;
+        const version = localDraftVersion(local);
+        baseline.current = version;
+        latestVersion.current = version;
+        latestRemote.current = value;
+        setStatus("local");
+        setError("");
+        if (queuedEdit === editGeneration.current) {
+          editing.current = false;
+          setDraft(value);
+        }
+        return;
+      }
       const ref = doc(db, collections[moduleName], ownerUid);
       const expected = baseline.current;
       try {
@@ -266,6 +368,38 @@ export function useModuleDraft<T extends Record<string, unknown>>(moduleName: Mo
         const errorCode = err && typeof err === "object" && "code" in err
           ? (err as { code?: unknown }).code
           : undefined;
+        if (errorCode === "permission-denied" && moduleName === "orion" && canUseLocalOrionDraftFallback()) {
+          const allowed = await hasLocalOrionFallbackConsent(ownerUid);
+          if (allowed && auth.currentUser?.uid === ownerUid && session.current === queuedSession) {
+            const local = await readLocalOrionDraft<T>(ownerUid);
+            if (auth.currentUser?.uid === ownerUid && session.current === queuedSession) {
+              localOnly.current = true;
+              const localVersion = localDraftVersion(local);
+              baseline.current = localVersion;
+              latestVersion.current = localVersion;
+              latestRemote.current = local?.data ?? null;
+              setStatus("local");
+              setError("");
+              if (local) {
+                if (!editing.current) setDraft(local.data);
+                conflictRef.current = true;
+                setConflict(true);
+                throw new DraftConflictError();
+              }
+              const saved = await writeLocalOrionDraft(ownerUid, value, 0);
+              if (auth.currentUser?.uid !== ownerUid || session.current !== queuedSession) return;
+              const version = localDraftVersion(saved);
+              baseline.current = version;
+              latestVersion.current = version;
+              latestRemote.current = value;
+              if (queuedEdit === editGeneration.current) {
+                editing.current = false;
+                setDraft(value);
+              }
+              return;
+            }
+          }
+        }
         if (errorCode === "permission-denied") {
           throw new Error(
             `Firestore Rules đang từ chối ghi ${collections[moduleName]}. Không mở quyền công khai. Kiểm tra tài khoản đang hoạt động, đúng UID sở hữu bản nháp và quyền đồng ý sử dụng sản phẩm trên máy chủ (student_consents.productAccepted=true, noticeVersion=cla-student-privacy-v1). Nếu các điều kiện đã đúng, Rules Production cần được bổ sung quyền owner-only cho ${collections[moduleName]}.`,
@@ -275,5 +409,5 @@ export function useModuleDraft<T extends Record<string, unknown>>(moduleName: Mo
       }
     });
   }
-  return { draft, status, error, uid, conflict, save, markEditing, acceptRemote };
+  return { draft, status, error, uid, conflict, save, markEditing, acceptRemote, isLocalOnly: () => localOnly.current };
 }

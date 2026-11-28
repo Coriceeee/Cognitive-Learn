@@ -70,7 +70,7 @@ export default function OrionPage() {
   const [targets, setTargets] =
     useState<Record<ScoreKey, string>>(defaultTargets);
 
-  const { draft: savedDraft, status: saveStatus, error: draftError, uid: draftOwnerUid, conflict: draftConflict, save: saveDraft, markEditing, acceptRemote } = useModuleDraft<{targetMajor:string;weeksLeft:string;scores:Record<ScoreKey,string>;targets:Record<ScoreKey,string>}>("orion");
+  const { draft: savedDraft, status: saveStatus, error: draftError, uid: draftOwnerUid, conflict: draftConflict, save: saveDraft, markEditing, acceptRemote, isLocalOnly } = useModuleDraft<{targetMajor:string;weeksLeft:string;scores:Record<ScoreKey,string>;targets:Record<ScoreKey,string>}>("orion");
   const verifiedProfile = useVerifiedStudentProfile();
   const transcript = verifiedProfile.transcript;
   // A server-verified empty transcript still carries the student's locked nine-subject curriculum.
@@ -87,7 +87,7 @@ export default function OrionPage() {
   const [admissionGoal, setAdmissionGoal] = useState<AdmissionGoal | null>(null);
   const [advisorGoal,setAdvisorGoal]=useState<AdvisorDecisionRecord|null>(null);
   const [advisorGap,setAdvisorGap]=useState<AdvisorDecisionRecord|null>(null);
-  const advisorReady=Boolean(draftOwnerUid&&auth.currentUser?.uid===draftOwnerUid&&transcript.userId===draftOwnerUid&&!verifiedProfile.loading&&!verifiedProfile.syncing&&["ready","empty"].includes(transcript.status)&&["ready","empty"].includes(saveStatus)&&!draftConflict);
+  const advisorReady=Boolean(draftOwnerUid&&auth.currentUser?.uid===draftOwnerUid&&transcript.userId===draftOwnerUid&&!verifiedProfile.loading&&!verifiedProfile.syncing&&["ready","empty"].includes(transcript.status)&&["ready","empty","local"].includes(saveStatus)&&!draftConflict);
   useLayoutEffect(()=>{
     if(!advisorGoal||advisorGoal.data.kind!=="goal")return;
     if(!advisorReady||advisorGoal.pin.owner!==draftOwnerUid||targetMajor!==formatAdmissionGoal(advisorGoal.data.value)){setAdvisorGoal(null);return;}
@@ -178,7 +178,7 @@ export default function OrionPage() {
   // Debounced Firestore draft persistence protects work when students move between modules.
   // It only runs after a user edit and after the account's existing draft state is verified.
   useEffect(() => {
-    if (!hasLocalEdits || (saveStatus !== "ready" && saveStatus !== "empty")) return;
+    if (!hasLocalEdits || (saveStatus !== "ready" && saveStatus !== "empty" && saveStatus !== "local")) return;
     const revision = editRevision.current;
     const payload = { ...currentDraftRef.current };
     autosaveTimer.current = window.setTimeout(async () => {
@@ -234,8 +234,8 @@ export default function OrionPage() {
         dirtyRevision.current = false;
         setHasLocalEdits(false);
         setAutosaveState("saved");
-        setSaveNoticeTone("success");
-        setSaveNotice("Đã lưu vào hồ sơ của bạn.");
+        setSaveNoticeTone(isLocalOnly() ? "warning" : "success");
+        setSaveNotice(isLocalOnly() ? "Đã lưu trên thiết bị này; chưa đồng bộ lên máy chủ." : "Đã lưu vào hồ sơ của bạn.");
       } else {
         setSaveNoticeTone("warning");
         setSaveNotice("Đã lưu phiên bản trước; thay đổi mới đang chờ tự lưu.");
@@ -260,7 +260,7 @@ export default function OrionPage() {
       setScores(remote?.scores ?? defaultScores);
       setTargets(remote?.targets ?? defaultTargets);
       setSaveNoticeTone("success");
-      setSaveNotice("Đã tải bản nháp mới nhất từ máy chủ.");
+      setSaveNotice(isLocalOnly() ? "Đã tải bản nháp cục bộ từ thiết bị này." : "Đã tải bản nháp mới nhất từ máy chủ.");
     } catch (error) {
       setSaveNoticeTone("error");
       setSaveNotice(error instanceof Error ? error.message : "Không thể tải bản mới nhất.");
@@ -329,13 +329,13 @@ export default function OrionPage() {
               <span>INPUT</span>
               <h2>Dữ liệu mô phỏng</h2>
               <p>
-                Điểm hiện tại được đề xuất từ bảng điểm đã lưu khi có dữ liệu. Bạn có thể chỉnh mục tiêu, lưu bản nháp vào hồ sơ. Kết quả mô phỏng không mang ý nghĩa nhân quả.
+                Điểm hiện tại được đề xuất từ bảng điểm đã lưu khi có dữ liệu. Bạn có thể chỉnh mục tiêu và lưu bản nháp. Kết quả mô phỏng không mang ý nghĩa nhân quả.
               </p>
             </div>
           </div>
 
           <div className="cla-firestore-save cla-module-save-panel">
-            <button type="button" disabled={saving || (saveStatus !== "ready" && saveStatus !== "empty")} onClick={() => void saveCurrentDraft()}>
+            <button type="button" disabled={saving || (saveStatus !== "ready" && saveStatus !== "empty" && saveStatus !== "local")} onClick={() => void saveCurrentDraft()}>
               {saving ? "Đang lưu…" : "Lưu dữ liệu"}
             </button>
             {draftConflict && <button type="button" onClick={() => void loadLatestDraft()}>Tải bản mới nhất (bỏ thay đổi trên máy này)</button>}
@@ -346,7 +346,7 @@ export default function OrionPage() {
           {admissionGoal && draftOwnerUid && auth.currentUser?.uid === draftOwnerUid && <div className="cla-focus-notice" role="status">
             <strong>Mục tiêu bạn đã chọn tại Atlas: {formatAdmissionGoal(admissionGoal)}</strong>
             <p>Chỉ chuyển lựa chọn của bạn, không tự đặt điểm mục tiêu hay xác nhận đủ điều kiện xét tuyển. Điểm hiện tại và điểm mục tiêu vẫn cần kiểm tra.</p>
-            <button type="button" disabled={saveStatus !== "ready" && saveStatus !== "empty"} onClick={() => {
+            <button type="button" disabled={saveStatus !== "ready" && saveStatus !== "empty" && saveStatus !== "local"} onClick={() => {
               if (verifiedProfile.loading || verifiedProfile.syncing || !["ready","empty"].includes(transcript.status) || checkDecisionHandoff(draftOwnerUid,"goal") !== "CURRENT") { setAdmissionGoal(null); clearAdmissionGoal(); setSaveNoticeTone("warning"); setSaveNotice("Mục tiêu hoặc hồ sơ chưa còn hiệu lực. Hãy chuyển lại từ Atlas sau khi đồng bộ."); return; }
               const goal = readAdmissionGoal(draftOwnerUid);
               if (!goal || JSON.stringify(goal) !== JSON.stringify(admissionGoal) || auth.currentUser?.uid !== draftOwnerUid) { setAdmissionGoal(null); return; }
@@ -383,7 +383,7 @@ export default function OrionPage() {
             <p>Chọn đúng 3 môn đã nhập điểm hiện tại và nhập tổng điểm mục tiêu tự đặt (0–30, không cộng ưu tiên). Phân bổ đều phần điểm còn thiếu, tối đa 10/môn; không phải dự báo hay điểm chuẩn.</p>
             <div role="group" aria-label="Ba môn mục tiêu">{activeSubjectKeys.map(key=><label key={key}><input type="checkbox" checked={gapSubjects.includes(key)} disabled={!gapSubjects.includes(key)&&gapSubjects.length>=3} onChange={e=>setGapSubjects(old=>e.target.checked?[...old,key]:old.filter(k=>k!==key))}/>{activeSubjectLabels[key]} </label>)}</div>
             <label>Tổng mục tiêu /30 <input inputMode="decimal" value={gapTotal} onChange={e=>setGapTotal(e.target.value)} placeholder="VD: 24"/></label>
-            {gapResult && (gapResult.status==="READY" || gapResult.status==="ALREADY_MET") ? <div role="status"><p>Tổng hiện tại: {gapResult.currentTotal} · Khoảng cách: {gapResult.gap} điểm</p><p>{gapSubjects.map(k=>`${activeSubjectLabels[k]}: ${gapResult.targets[k]}`).join(" · ")}</p><button type="button" disabled={saving||draftConflict||(saveStatus!=="ready"&&saveStatus!=="empty")||!draftOwnerUid||auth.currentUser?.uid!==draftOwnerUid} onClick={()=>{
+            {gapResult && (gapResult.status==="READY" || gapResult.status==="ALREADY_MET") ? <div role="status"><p>Tổng hiện tại: {gapResult.currentTotal} · Khoảng cách: {gapResult.gap} điểm</p><p>{gapSubjects.map(k=>`${activeSubjectLabels[k]}: ${gapResult.targets[k]}`).join(" · ")}</p><button type="button" disabled={saving||draftConflict||(saveStatus!=="ready"&&saveStatus!=="empty"&&saveStatus!=="local")||!draftOwnerUid||auth.currentUser?.uid!==draftOwnerUid} onClick={()=>{
               if(!window.confirm("Dùng phân bổ này và xóa mục tiêu điểm cũ ngoài tổ hợp?"))return;
               if(advisorReady&&draftOwnerUid) setAdvisorGap(captureAdvisorDecision(draftOwnerUid,{kind:"gap",subjects:gapSubjects.map(subject=>({subject,score:readNumber(scores[subject],0,10)!})),target:readNumber(gapTotal,0,30)!}));
               markLocalEdit();setTargets({...defaultTargets,...Object.fromEntries(gapSubjects.map(k=>[k,String(gapResult.targets[k])]))});

@@ -23,7 +23,7 @@ export function canPrefillFromVerifiedTranscript(state: TranscriptPrefillState):
   return Boolean(
     state.draftOwnerUid &&
     state.transcriptOwnerUid === state.draftOwnerUid &&
-    state.draftStatus === 'empty' &&
+    (state.draftStatus === 'empty' || state.draftStatus === 'local') &&
     state.transcriptStatus === 'ready' &&
     state.seededOwnerUid !== state.draftOwnerUid &&
     state.hasSupportedGrades &&

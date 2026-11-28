@@ -27,8 +27,10 @@ test('CP47-03: autosave retains the authenticated Firestore ownership guard', ()
   assert.match(draftHook, /isServerConfirmedSnapshot\(snap\.metadata\)/);
 });
 
-test('CP47-04: autosave is a Firestore draft only; no browser storage or outcome claim is introduced', () => {
+test('CP47-04: Orion avoids insecure Web Storage and labels the local fallback honestly', () => {
   assert.doesNotMatch(source, /localStorage|sessionStorage/);
+  assert.match(draftHook, /writeLocalOrionDraft/);
+  assert.ok(draftHook.includes('moduleName === "orion" && canUseLocalOrionDraftFallback()'));
   assert.match(source, /không mang ý nghĩa nhân quả/);
   const sharedStatus = readFileSync(new URL('../src/lib/moduleUiStatus.ts', import.meta.url), 'utf8');
   assert.match(source, /autosave=\{autosaveState\}/);
