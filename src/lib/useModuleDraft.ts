@@ -317,6 +317,9 @@ export function useModuleDraft<T extends Record<string, unknown>>(moduleName: Mo
       if (localOnly.current) {
         const allowed = await hasLocalOrionFallbackConsent(ownerUid);
         if (!allowed) throw new Error("Không còn quyền đồng ý hoặc tài khoản hoạt động để lưu bản nháp local.");
+        if (auth.currentUser?.uid !== ownerUid || session.current !== queuedSession) {
+          throw new Error("Phiên dữ liệu đã thay đổi trước khi lưu bản nháp cục bộ.");
+        }
         const local = await writeLocalOrionDraft(ownerUid, value, baseline.current.revision);
         if (auth.currentUser?.uid !== ownerUid || session.current !== queuedSession) return;
         const version = localDraftVersion(local);

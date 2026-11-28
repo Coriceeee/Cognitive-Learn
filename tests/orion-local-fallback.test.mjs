@@ -56,5 +56,5 @@ test("Verified Seed grades may prefill an empty local-only Orion draft", () => {
 
 test("Orion autosave and explicit save controls accept local-only status", () => {
   assert.ok(page.includes('saveStatus !== "empty" && saveStatus !== "local"'));
-  assert.ok(page.includes('saveStatus !== "empty" && saveStatus !== "local"'));
+  assert.ok(page.includes('disabled={saving || (saveStatus !== "ready" && saveStatus !== "empty" && saveStatus !== "local")}'));
 });

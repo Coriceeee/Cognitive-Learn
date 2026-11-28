@@ -43,7 +43,8 @@ test('CP55.4 listener lifetime and queued-write cancellation use distinct epochs
   assert.match(hook, /if \(!currentListener\(\)\) return;\s*setError\(""\)/);
   const reload = hook.slice(hook.indexOf('async function acceptRemote()'), hook.indexOf('async function save('));
   assert.match(reload, /const requestEdits = editGeneration\.current/);
-  assert.equal((reload.match(/assertDraftRefreshUninterrupted\(requestEdits, editGeneration\.current\)/g) ?? []).length, 2);
+  // The local-only branch also guards its asynchronous IndexedDB refresh.
+  assert.equal((reload.match(/assertDraftRefreshUninterrupted\(requestEdits, editGeneration\.current\)/g) ?? []).length, 3);
   assert.doesNotMatch(reload, /observerEpoch\.current\s*\+=/);
 });
 
