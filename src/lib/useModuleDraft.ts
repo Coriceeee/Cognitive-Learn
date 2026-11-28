@@ -299,7 +299,8 @@ export function useModuleDraft<T extends Record<string, unknown>>(moduleName: Mo
   }
 
   async function save(value: T): Promise<void> {
-    if (!uid || auth.currentUser?.uid !== uid || (status !== "ready" && status !== "empty" && status !== "local")) {
+    const localFallbackReady = moduleName === "orion" && status === "local" && localOnly.current;
+    if (!uid || auth.currentUser?.uid !== uid || (status !== "ready" && status !== "empty" && !localFallbackReady)) {
       throw new Error("Chưa xác minh được tài khoản hoặc dữ liệu hiện tại. Không ghi đè bản nháp.");
     }
     if (conflictRef.current) throw new DraftConflictError();

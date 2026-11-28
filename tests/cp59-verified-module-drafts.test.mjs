@@ -44,8 +44,9 @@ test('CP59.5: primary, legacy and explicit reload validate current UID before di
   assert.match(hook,/if \(legacy\.exists\(\) && !isMatchingAccountRecord\(legacy\.data\(\), ownerUid\)\)/);
 });
 
-test('CP59.6: a save is rejected until verified draft status is ready or empty', () => {
-  assert.match(hook,/\(status !== "ready" && status !== "empty"\)/);
+test('CP59.6: cloud saves require verified status; only an active Orion local fallback may save locally', () => {
+  assert.match(hook,/const localFallbackReady = moduleName === "orion" && status === "local" && localOnly\.current/);
+  assert.match(hook,/status !== "ready" && status !== "empty" && !localFallbackReady/);
   assert.match(hook,/await runTransaction\(db, async transaction => \{/);
   assert.match(hook,/assertDraftUnchanged\(expected, draftVersion\(stored\)\)/);
 });
